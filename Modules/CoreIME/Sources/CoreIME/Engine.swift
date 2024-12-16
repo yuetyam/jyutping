@@ -309,12 +309,24 @@ extension Engine {
                         let shortcuts = segmentation.map({ scheme -> [Candidate] in
                                 let tail = text.dropFirst(scheme.length)
                                 guard let lastAnchor = tail.first else { return [] }
-                                let schemeAnchors = scheme.compactMap(\.text.first)
-                                let anchors: String = String(schemeAnchors + [lastAnchor])
-                                let text2mark: String = scheme.map(\.text).joined(separator: " ") + " " + tail
-                                return shortcutMatch(text: anchors, limit: limit)
-                                        .filter({ $0.romanization.removedTones().hasPrefix(text2mark) })
-                                        .map({ Candidate(text: $0.text, romanization: $0.romanization, input: text, mark: text2mark) })
+                                let schemeAnchors: String = String(scheme.compactMap(\.text.first))
+                                let conjoined: String = schemeAnchors + tail
+                                let anchors: String = schemeAnchors + String(lastAnchor)
+                                let schemeMark: String = scheme.map(\.text).joined(separator: String.space)
+                                let spacedMark: String = schemeMark + String.space + tail.spaceSeparated()
+                                let anchorMark: String = schemeMark + String.space + tail
+                                let conjoinedShortcuts = shortcutMatch(text: conjoined, limit: limit)
+                                        .filter({ item -> Bool in
+                                                let rawRomanization = item.romanization.removedTones()
+                                                guard rawRomanization.hasPrefix(schemeMark) else { return false }
+                                                let tailAnchors = rawRomanization.dropFirst(schemeMark.count).split(separator: Character.space).compactMap(\.first)
+                                                return tailAnchors == tail.map({ $0 })
+                                        })
+                                        .map({ Candidate(text: $0.text, romanization: $0.romanization, input: text, mark: spacedMark, order: $0.order) })
+                                let anchorShortcuts = shortcutMatch(text: anchors, limit: limit)
+                                        .filter({ $0.romanization.removedTones().hasPrefix(anchorMark) })
+                                        .map({ Candidate(text: $0.text, romanization: $0.romanization, input: text, mark: anchorMark, order: $0.order) })
+                                return conjoinedShortcuts + anchorShortcuts
                         })
                         return shortcuts.flatMap({ $0 })
                 }()
@@ -336,11 +348,24 @@ extension Engine {
 
         private static func processVerbatim(text: String, limit: Int? = nil) -> [Candidate] {
                 guard canProcess(text) else { return [] }
-                let rounds = (0..<text.count).map({ number -> [Candidate] in
-                        let leading: String = String(text.dropLast(number))
-                        return pingMatch(text: leading, input: leading, limit: limit) + shortcutMatch(text: leading, limit: limit)
-                })
-                return rounds.flatMap({ $0 }).uniqued()
+                let textCount: Int = text.count
+                return (0..<textCount)
+                        .map({ number -> [Candidate] in
+                                let leading: String = String(text.dropLast(number))
+                                return pingMatch(text: leading, input: leading, limit: limit) + shortcutMatch(text: leading, limit: limit)
+                        })
+                        .flatMap({ $0 })
+                        .map({ item -> Candidate in
+                                let syllables = item.romanization.removedTones().split(separator: Character.space)
+                                guard let lastSyllable = syllables.last else { return item }
+                                guard text.hasSuffix(lastSyllable) else { return item }
+                                let isMatched: Bool = ((syllables.count - 1) + lastSyllable.count) == textCount
+                                guard isMatched else { return item }
+                                let mark: String = syllables.compactMap(\.first).dropLast().spaceSeparated() + String.space + lastSyllable
+                                return Candidate(text: item.text, romanization: item.romanization, input: text, mark: mark, order: item.order)
+                        })
+                        .uniqued()
+                        .sorted()
         }
 
         private static func query(text: String, segmentation: Segmentation, needsSymbols: Bool, limit: Int? = nil) -> [Candidate] {
@@ -419,6 +444,12 @@ extension Engine {
                         }
                 }()
                 guard shortcutCode != 0 else { return [] }
+                var candidates: [Candidate] = []
+                let limit: Int = limit ?? 50
+                let command: String = "SELECT rowid, word, romanization FROM lexicontable WHERE shortcut = \(shortcutCode) LIMIT \(limit);"
+                var statement: OpaquePointer? = nil
+                defer { sqlite3_finalize(statement) }
+                guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return candidates }
                 let input: String = {
                         if let char = code?.convertedCharacter {
                                 return String(char)
@@ -427,17 +458,12 @@ extension Engine {
                                 return String(chars)
                         }
                 }()
-                var candidates: [Candidate] = []
-                let limit: Int = limit ?? 50
-                let command: String = "SELECT rowid, word, romanization FROM lexicontable WHERE shortcut = \(shortcutCode) LIMIT \(limit);"
-                var statement: OpaquePointer? = nil
-                defer { sqlite3_finalize(statement) }
-                guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return candidates }
+                let mark: String = input.spaceSeparated()
                 while sqlite3_step(statement) == SQLITE_ROW {
                         let order: Int = Int(sqlite3_column_int64(statement, 0))
                         let word: String = String(cString: sqlite3_column_text(statement, 1))
                         let romanization: String = String(cString: sqlite3_column_text(statement, 2))
-                        let candidate = Candidate(text: word, romanization: romanization, input: input, mark: input, order: order)
+                        let candidate = Candidate(text: word, romanization: romanization, input: input, mark: mark, order: order)
                         candidates.append(candidate)
                 }
                 return candidates
@@ -450,16 +476,17 @@ extension Engine {
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return candidates }
+                let mark: String = text.spaceSeparated()
                 while sqlite3_step(statement) == SQLITE_ROW {
                         let order: Int = Int(sqlite3_column_int64(statement, 0))
                         let word: String = String(cString: sqlite3_column_text(statement, 1))
                         let romanization: String = String(cString: sqlite3_column_text(statement, 2))
-                        let candidate = Candidate(text: word, romanization: romanization, input: text, mark: text, order: order)
+                        let candidate = Candidate(text: word, romanization: romanization, input: text, mark: mark, order: order)
                         candidates.append(candidate)
                 }
                 return candidates
         }
-        private static func pingMatch(text: String, input: String, mark: String? = nil, limit: Int? = nil) -> [Candidate] {
+        private static func pingMatch<T: StringProtocol>(text: T, input: String, mark: String? = nil, limit: Int? = nil) -> [Candidate] {
                 var candidates: [Candidate] = []
                 let code: Int = text.hash
                 let limit: Int = limit ?? -1
