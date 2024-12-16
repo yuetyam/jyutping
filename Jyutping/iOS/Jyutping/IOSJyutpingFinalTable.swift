@@ -68,7 +68,7 @@ struct IOSJyutpingFinalTable: View {
                         }
                         Section {
                                 IOSFinalLabel(word: "個", syllable: "go3", jyutping: "o", ipa: "[ ɔː ]")
-                                IOSFinalLabel(word: "菜", syllable: "coi3", jyutping: "oi", ipa: "[ ɔːi ]")
+                                IOSFinalLabel(word: "蓋", syllable: "goi3", jyutping: "oi", ipa: "[ ɔːi ]")
                                 IOSFinalLabel(word: "告", syllable: "gou3", jyutping: "ou", ipa: "[ ou ]")
                                 IOSFinalLabel(word: "幹", syllable: "gon3", jyutping: "on", ipa: "[ ɔːn ]")
                                 IOSFinalLabel(word: "鋼", syllable: "gong3", jyutping: "ong", ipa: "[ ɔːŋ ]")

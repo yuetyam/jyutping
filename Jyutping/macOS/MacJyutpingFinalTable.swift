@@ -79,7 +79,7 @@ struct MacJyutpingFinalTable: View {
                                 .block()
                                 VStack {
                                         MacFinalLabel(word: "個", syllable: "go3", jyutping: "o", ipa: "[ ɔː ]")
-                                        MacFinalLabel(word: "菜", syllable: "coi3", jyutping: "oi", ipa: "[ ɔːi ]")
+                                        MacFinalLabel(word: "蓋", syllable: "goi3", jyutping: "oi", ipa: "[ ɔːi ]")
                                         MacFinalLabel(word: "告", syllable: "gou3", jyutping: "ou", ipa: "[ ou ]")
                                         MacFinalLabel(word: "幹", syllable: "gon3", jyutping: "on", ipa: "[ ɔːn ]")
                                         MacFinalLabel(word: "鋼", syllable: "gong3", jyutping: "ong", ipa: "[ ɔːŋ ]")
