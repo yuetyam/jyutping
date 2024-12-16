@@ -52,6 +52,19 @@ extension StringProtocol {
         }
 }
 
+extension Sequence where Element == Character {
+
+        /// Returns a new string by concatenating the elements of the sequence, adding a space between each element.
+        public func spaceSeparated() -> String {
+                return self.reduce(into: String.empty) { partialResult, character in
+                        if partialResult.isNotEmpty {
+                                partialResult.append(String.space)
+                        }
+                        partialResult.append(character)
+                }
+        }
+}
+
 extension String {
 
         /// CJKV && !CJKV
