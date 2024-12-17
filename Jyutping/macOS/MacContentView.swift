@@ -61,6 +61,8 @@ struct MacContentView: View {
                                         Label("MacSidebar.NavigationTitle.ThousandCharacterClassic", systemImage: characterImageName).tag(ViewIdentifier.cinZiMan)
                                         Label("MacSidebar.NavigationTitle.CantonMetro", systemImage: "tram.circle").tag(ViewIdentifier.cantonMetro)
                                         Label("MacSidebar.NavigationTitle.FatshanMetro", systemImage: "tram.circle").tag(ViewIdentifier.fatshanMetro)
+                                        Label("MacSidebar.NavigationTitle.MacauMetro", systemImage: "tram.circle").tag(ViewIdentifier.macauMetro)
+                                        Label("MacSidebar.NavigationTitle.TungkunRailTransit", systemImage: "tram.circle").tag(ViewIdentifier.tungkunRailTransit)
                                         Label("MacSidebar.NavigationTitle.ShamChunMetro", systemImage: "tram.circle").tag(ViewIdentifier.shamchunMetro)
                                         Label("MacSidebar.NavigationTitle.HongKongMTR", systemImage: "tram.circle").tag(ViewIdentifier.hongkongMTR)
                                 } header: {
@@ -111,6 +113,10 @@ struct MacContentView: View {
                                 MacCantonMetroView().applyVisualEffect()
                         case .fatshanMetro:
                                 MacFatshanMetroView().applyVisualEffect()
+                        case .macauMetro:
+                                MacMacauMetroView().applyVisualEffect()
+                        case .tungkunRailTransit:
+                                MacTungkunRailTransitView().applyVisualEffect()
                         case .shamchunMetro:
                                 MacShamChunMetroView().applyVisualEffect()
                         case .hongkongMTR:
@@ -144,6 +150,8 @@ private enum ViewIdentifier: Int, Hashable, Identifiable {
         case cinZiMan
         case cantonMetro
         case fatshanMetro
+        case macauMetro
+        case tungkunRailTransit
         case shamchunMetro
         case hongkongMTR
 

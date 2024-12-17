@@ -287,6 +287,10 @@
 		379CB1A42BDA666D00434190 /* IOSJyutpingFinalTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379CB1A32BDA666D00434190 /* IOSJyutpingFinalTable.swift */; };
 		379CB1A62BDB898700434190 /* MacJyutpingFinalTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379CB1A52BDB898700434190 /* MacJyutpingFinalTable.swift */; };
 		37CC55792B464C78003ED8CE /* ChangeDisplayLanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CC55782B464C78003ED8CE /* ChangeDisplayLanguageView.swift */; };
+		37D00DD22D115045003420EE /* IOSTungkunRailTransitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D00DD12D115044003420EE /* IOSTungkunRailTransitView.swift */; };
+		37D00DD42D11523A003420EE /* IOSMacauMetroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D00DD32D115238003420EE /* IOSMacauMetroView.swift */; };
+		37D00DD62D115A72003420EE /* MacMacauMetroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D00DD52D115A70003420EE /* MacMacauMetroView.swift */; };
+		37D00DD82D115ABA003420EE /* MacTungkunRailTransitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D00DD72D115AB9003420EE /* MacTungkunRailTransitView.swift */; };
 		37D1C9362BBF26A200015FD0 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 37D1C9352BBF26A200015FD0 /* PrivacyInfo.xcprivacy */; };
 		37D1C9382BBF288000015FD0 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 37D1C9372BBF288000015FD0 /* PrivacyInfo.xcprivacy */; };
 		37D1C93A2BBF297000015FD0 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 37D1C9392BBF297000015FD0 /* PrivacyInfo.xcprivacy */; };
@@ -679,6 +683,10 @@
 		379CB1A32BDA666D00434190 /* IOSJyutpingFinalTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSJyutpingFinalTable.swift; sourceTree = "<group>"; };
 		379CB1A52BDB898700434190 /* MacJyutpingFinalTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacJyutpingFinalTable.swift; sourceTree = "<group>"; };
 		37CC55782B464C78003ED8CE /* ChangeDisplayLanguageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeDisplayLanguageView.swift; sourceTree = "<group>"; };
+		37D00DD12D115044003420EE /* IOSTungkunRailTransitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSTungkunRailTransitView.swift; sourceTree = "<group>"; };
+		37D00DD32D115238003420EE /* IOSMacauMetroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSMacauMetroView.swift; sourceTree = "<group>"; };
+		37D00DD52D115A70003420EE /* MacMacauMetroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacMacauMetroView.swift; sourceTree = "<group>"; };
+		37D00DD72D115AB9003420EE /* MacTungkunRailTransitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacTungkunRailTransitView.swift; sourceTree = "<group>"; };
 		37D1C9352BBF26A200015FD0 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		37D1C9372BBF288000015FD0 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		37D1C9392BBF297000015FD0 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
@@ -862,6 +870,8 @@
 				371B6E6D2B3B3107005BB31C /* IOSMetroLineView.swift */,
 				371B6E692B3B3107005BB31C /* IOSCantonMetroView.swift */,
 				371B6E642B3B3107005BB31C /* IOSFatshanMetroView.swift */,
+				37D00DD32D115238003420EE /* IOSMacauMetroView.swift */,
+				37D00DD12D115044003420EE /* IOSTungkunRailTransitView.swift */,
 				371B6E672B3B3107005BB31C /* IOSShamChunMetroView.swift */,
 				371B6E6C2B3B3107005BB31C /* IOSHongKongMTRView.swift */,
 			);
@@ -911,6 +921,8 @@
 				371B6E7D2B3B3108005BB31C /* MacMetroLineView.swift */,
 				371B6E7C2B3B3108005BB31C /* MacCantonMetroView.swift */,
 				371B6E7F2B3B3108005BB31C /* MacFatshanMetroView.swift */,
+				37D00DD52D115A70003420EE /* MacMacauMetroView.swift */,
+				37D00DD72D115AB9003420EE /* MacTungkunRailTransitView.swift */,
 				371B6E802B3B3108005BB31C /* MacShamChunMetroView.swift */,
 				371B6E7E2B3B3108005BB31C /* MacHongKongMTRView.swift */,
 			);
@@ -2053,6 +2065,7 @@
 				3760AA412B4FB9BC0027EC11 /* EnablingKeyboardView.swift in Sources */,
 				371B6ECB2B3B3108005BB31C /* AboutView.swift in Sources */,
 				371B6EC62B3B3108005BB31C /* ChoHokYuetYamCitYiuLabel.swift in Sources */,
+				37D00DD42D11523A003420EE /* IOSMacauMetroView.swift in Sources */,
 				371B6EB32B3B3108005BB31C /* HomeView.swift in Sources */,
 				371B6EE42B3B3108005BB31C /* Speech.swift in Sources */,
 				371B6EA22B3B3108005BB31C /* NumbersView.swift in Sources */,
@@ -2072,6 +2085,9 @@
 				371B6EB72B3B3108005BB31C /* CantoneseView.swift in Sources */,
 				371B6EC92B3B3108005BB31C /* YingWaaFanWanLabel.swift in Sources */,
 				37311A3E2BD9099D00B2D948 /* MacJyutpingInitialTable.swift in Sources */,
+				37D00DD22D115045003420EE /* IOSTungkunRailTransitView.swift in Sources */,
+				37D00DD62D115A72003420EE /* MacMacauMetroView.swift in Sources */,
+				37D00DD82D115ABA003420EE /* MacTungkunRailTransitView.swift in Sources */,
 				3762EDD02B8538A000C4E9F1 /* ClipboardFeaturesView.swift in Sources */,
 				371B6EB22B3B3108005BB31C /* IntroductionsView.swift in Sources */,
 				371B6ED52B3B3108005BB31C /* MacIntroductionsView.swift in Sources */,

@@ -55,6 +55,12 @@ struct CantoneseView: View {
                                         NavigationLink(destination: IOSFatshanMetroView()) {
                                                 Label("IOSCantoneseTab.LabelTitle.FatshanMetro", systemImage: "tram.circle")
                                         }
+                                        NavigationLink(destination: IOSMacauMetroView()) {
+                                                Label("IOSCantoneseTab.LabelTitle.MacauMetro", systemImage: "tram.circle")
+                                        }
+                                        NavigationLink(destination: IOSTungkunRailTransitView()) {
+                                                Label("IOSCantoneseTab.LabelTitle.TungkunRailTransit", systemImage: "tram.circle")
+                                        }
                                         NavigationLink(destination: IOSShamChunMetroView()) {
                                                 Label("IOSCantoneseTab.LabelTitle.ShamChunMetro", systemImage: "tram.circle")
                                         }

@@ -23,6 +23,8 @@ public struct Metro {
 
         public static let cantonMetroLines: [Line] = fetch("CantonMetro")
         public static let fatshanMetroLines: [Line] = fetch("FatshanMetro")
+        public static let macauMetroLines: [Line] = fetch("MacauMetro")
+        public static let tungkunRailTransitLines: [Line] = fetch("TungkunRailTransit")
         public static let shamchunMetroLines: [Line] = fetch("ShamChunMetro")
         public static let hongkongMTRLines: [Line] = fetch("HongKongMTR")
 

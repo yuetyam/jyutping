@@ -100,6 +100,16 @@ struct MacContentViewMonterey: View {
                                                 Label("MacSidebar.NavigationTitle.FatshanMetro", systemImage: "tram.circle")
                                         }
                                         NavigationLink {
+                                                MacMacauMetroView().applyVisualEffect()
+                                        } label: {
+                                                Label("MacSidebar.NavigationTitle.MacauMetro", systemImage: "tram.circle")
+                                        }
+                                        NavigationLink {
+                                                MacTungkunRailTransitView().applyVisualEffect()
+                                        } label: {
+                                                Label("MacSidebar.NavigationTitle.TungkunRailTransit", systemImage: "tram.circle")
+                                        }
+                                        NavigationLink {
                                                 MacShamChunMetroView().applyVisualEffect()
                                         } label: {
                                                 Label("MacSidebar.NavigationTitle.ShamChunMetro", systemImage: "tram.circle")
