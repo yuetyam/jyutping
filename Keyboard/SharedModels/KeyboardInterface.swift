@@ -5,6 +5,12 @@ enum KeyboardInterface: Int {
         case phonePortrait
         case phoneLandscape
 
+        /// Portrait iPhone app running on iPad
+        case phoneOnPadPortrait
+
+        /// Landscape iPhone app running on iPad
+        case phoneOnPadLandscape
+
         /// Keyboard floating on iPad
         case padFloating
 
@@ -20,23 +26,31 @@ enum KeyboardInterface: Int {
 
 extension KeyboardInterface {
 
-        /// .phonePortrait || .phoneLandscape || .padFloating
+        /// Phone, PhoneOnPad, PadFloating
         var isCompact: Bool {
                 switch self {
-                case .phonePortrait, .phoneLandscape, .padFloating:
+                case .phonePortrait, .phoneLandscape, .phoneOnPadPortrait, .phoneOnPadLandscape, .padFloating:
                         return true
                 default:
                         return false
                 }
         }
-
         var isPhonePortrait: Bool {
-                return self == .phonePortrait
+                switch self {
+                case .phonePortrait, .phoneOnPadPortrait:
+                        return true
+                default:
+                        return false
+                }
         }
         var isPhoneLandscape: Bool {
-                return self == .phoneLandscape
+                switch self {
+                case .phoneLandscape, .phoneOnPadLandscape:
+                        return true
+                default:
+                        return false
+                }
         }
-
         var isPadFloating: Bool {
                 return self == .padFloating
         }
@@ -60,7 +74,7 @@ extension KeyboardInterface {
 }
 
 extension KeyboardInterface {
-        func keyHeightUnit(of screen: CGSize) -> CGFloat {
+        func keyHeightUnit(of screenSize: CGSize) -> CGFloat {
                 switch self {
                 case .padPortraitSmall, .padPortraitMedium:
                         return 66
@@ -70,10 +84,15 @@ extension KeyboardInterface {
                         return 76
                 case .padFloating:
                         return 48
+                case .phoneOnPadPortrait:
+                        let isLargeScreenPad: Bool = min(screenSize.width, screenSize.height) > 840
+                        return isLargeScreenPad ? 54 : 53
+                case .phoneOnPadLandscape:
+                        return 36
                 case .phoneLandscape:
                         return 36
                 case .phonePortrait:
-                        let screenWidth = screen.width
+                        let screenWidth = screenSize.width
                         if screenWidth > 300 && screenWidth < 350 {
                                 // iPhone SE1, iPod touch 7 (320 x 480)
                                 return 48
@@ -111,6 +130,10 @@ extension KeyboardInterface {
                 case .phonePortrait:
                         return 10
                 case .phoneLandscape:
+                        return 10
+                case .phoneOnPadPortrait:
+                        return 10
+                case .phoneOnPadLandscape:
                         return 10
                 case .padFloating:
                         return 10

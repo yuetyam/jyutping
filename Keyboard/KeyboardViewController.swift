@@ -503,7 +503,6 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 bufferText = String(tail)
                         }
                 case .tripleStroke:
-                        // TODO: where keyboardInterface.isCompact ?
                         switch bufferText.first {
                         case .none:
                                 return
@@ -806,26 +805,46 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 }
         }
 
-        private(set) lazy var isPhone: Bool = UITraitCollection.current.userInterfaceIdiom == .phone
-        private(set) lazy var isPad: Bool = UITraitCollection.current.userInterfaceIdiom == .pad
+        // TODO: Any better name?
+        private(set) lazy var isPhone: Bool = UIDevice.current.userInterfaceIdiom == .phone
 
-        @Published private(set) var keyboardWidth: CGFloat = 375
-        @Published private(set) var keyboardHeight: CGFloat = 272
-        @Published private(set) var widthUnit: CGFloat = 37.5
-        @Published private(set) var tenKeyWidthUnit: CGFloat = 75
-        @Published private(set) var heightUnit: CGFloat = 53
+        @Published private(set) var keyboardWidth: CGFloat = 440
+        @Published private(set) var keyboardHeight: CGFloat = 284
+        @Published private(set) var widthUnit: CGFloat = 44
+        @Published private(set) var tenKeyWidthUnit: CGFloat = 88
+        @Published private(set) var heightUnit: CGFloat = 56
         private func updateKeyboardSize() {
-                let screen: CGSize = view.window?.windowScene?.screen.bounds.size ?? UIScreen.main.bounds.size
+                let screenSize: CGSize = view.window?.windowScene?.screen.bounds.size ?? UIScreen.main.bounds.size
                 let newKeyboardWidth: CGFloat = {
-                        guard keyboardInterface != .padFloating else { return 320 }
-                        guard keyboardInterface == .phoneLandscape else { return screen.width }
-                        let horizontalInset: CGFloat = needsInputModeSwitchKey ? 0 : 236 // FIXME: Not a good way
-                        return screen.width - horizontalInset
+                        switch keyboardInterface {
+                        case .phoneLandscape:
+                                // Screen Aspect Ratio
+                                // iPhone with Face ID would be 19.5:9
+                                // iPhone with Touch ID would be 16:9
+                                let aspectRatio: CGFloat = UIScreen.main.nativeBounds.height / UIScreen.main.nativeBounds.width
+                                let horizontalInset: CGFloat = (aspectRatio > 2) ? (117 * 2) : 0
+                                return screenSize.width - horizontalInset
+                        case .phoneOnPadPortrait:
+                                let small: CGFloat = 375 // Same as iPhone SE3
+                                let large: CGFloat = 390 // Same as iPhone 14
+                                let isLargeScreenPad: Bool = min(screenSize.width, screenSize.height) > 840
+                                return isLargeScreenPad ? large : small
+                        case .phoneOnPadLandscape:
+                                let small: CGFloat = 667 // Same as iPhone SE3
+                                let large: CGFloat = 844 // Same as iPhone 14
+                                let horizontalInset: CGFloat = 75 * 2
+                                let isLargeScreenPad: Bool = min(screenSize.width, screenSize.height) > 840
+                                return isLargeScreenPad ? (large - horizontalInset) : small
+                        case .padFloating:
+                                return 320 // Same as iPhone SE1
+                        default:
+                                return screenSize.width
+                        }
                 }()
                 keyboardWidth = newKeyboardWidth
                 widthUnit = newKeyboardWidth / keyboardInterface.widthUnitTimes
                 tenKeyWidthUnit = newKeyboardWidth / 5.0
-                heightUnit = keyboardInterface.keyHeightUnit(of: screen)
+                heightUnit = keyboardInterface.keyHeightUnit(of: screenSize)
         }
 
         @Published private(set) var expandedKeyboardHeight: CGFloat = 272 + 150
@@ -852,26 +871,33 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
 
         @Published private(set) var keyboardInterface: KeyboardInterface = .phonePortrait
         private func adoptKeyboardInterface() -> KeyboardInterface {
-                switch traitCollection.userInterfaceIdiom {
-                case .pad:
-                        guard traitCollection.horizontalSizeClass != .compact else { return .padFloating }
-                        let screen: CGSize = view.window?.windowScene?.screen.bounds.size ?? UIScreen.main.bounds.size
-                        let isPortrait: Bool = screen.width < screen.height
-                        let minSide: CGFloat = min(screen.width, screen.height)
-                        if minSide > 840 {
+                let isRunningOnPad: Bool = UIDevice.current.userInterfaceIdiom == .pad
+                let isPadInterface: Bool = traitCollection.userInterfaceIdiom == .pad
+                let isCompactHorizontal: Bool = traitCollection.horizontalSizeClass == .compact
+                let isFloatingOnPad: Bool = isRunningOnPad && isPadInterface && isCompactHorizontal
+                guard isFloatingOnPad.negative else { return .padFloating }
+                switch (isRunningOnPad, isPadInterface) {
+                case (true, true):
+                        // iPad
+                        let screenSize: CGSize = view.window?.windowScene?.screen.bounds.size ?? UIScreen.main.bounds.size
+                        let minDimension: CGFloat = min(screenSize.width, screenSize.height)
+                        let windowSize: CGSize = view.superview?.window?.bounds.size ?? screenSize
+                        let isPortrait: Bool = windowSize.width < (minDimension + 2)
+                        if minDimension > 840 {
                                 return isPortrait ? .padPortraitLarge : .padLandscapeLarge
-                        } else if minSide > 815 {
+                        } else if minDimension > 815 {
                                 return isPortrait ? .padPortraitMedium : .padLandscapeMedium
                         } else {
                                 return isPortrait ? .padPortraitSmall : .padLandscapeSmall
                         }
-                default:
-                        switch traitCollection.verticalSizeClass {
-                        case .compact:
-                                return .phoneLandscape
-                        default:
-                                return .phonePortrait
-                        }
+                case (true, false):
+                        // iPhone app running on iPad
+                        let isCompactVertical: Bool = traitCollection.verticalSizeClass == .compact
+                        return isCompactVertical ? .phoneOnPadLandscape : .phoneOnPadPortrait
+                case (false, _):
+                        // iPhone
+                        let isCompactVertical: Bool = traitCollection.verticalSizeClass == .compact
+                        return isCompactVertical ? .phoneLandscape : .phonePortrait
                 }
         }
 

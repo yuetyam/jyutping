@@ -26,6 +26,10 @@ struct MotherBoard: View {
                                         CantoneseNumericKeyboard()
                                 case .phoneLandscape:
                                         CantoneseNumericKeyboard()
+                                case .phoneOnPadPortrait:
+                                        CantoneseNumericKeyboard()
+                                case .phoneOnPadLandscape:
+                                        CantoneseNumericKeyboard()
                                 case .padFloating:
                                         CantoneseNumericKeyboard()
                                 case .padPortraitSmall:
@@ -46,6 +50,10 @@ struct MotherBoard: View {
                                 case .phonePortrait:
                                         NumericKeyboard()
                                 case .phoneLandscape:
+                                        NumericKeyboard()
+                                case .phoneOnPadPortrait:
+                                        NumericKeyboard()
+                                case .phoneOnPadLandscape:
                                         NumericKeyboard()
                                 case .padFloating:
                                         NumericKeyboard()
@@ -90,6 +98,10 @@ struct MotherBoard: View {
                                 NumberPad(isDecimalPad: false)
                         case .phoneLandscape:
                                 NumberPad(isDecimalPad: false)
+                        case .phoneOnPadPortrait:
+                                NumberPad(isDecimalPad: false)
+                        case .phoneOnPadLandscape:
+                                NumberPad(isDecimalPad: false)
                         case .padFloating:
                                 NumberPad(isDecimalPad: false)
                         case .padPortraitSmall:
@@ -111,6 +123,10 @@ struct MotherBoard: View {
                                 NumberPad(isDecimalPad: true)
                         case .phoneLandscape:
                                 NumberPad(isDecimalPad: true)
+                        case .phoneOnPadPortrait:
+                                NumberPad(isDecimalPad: true)
+                        case .phoneOnPadLandscape:
+                                NumberPad(isDecimalPad: true)
                         case .padFloating:
                                 NumberPad(isDecimalPad: true)
                         case .padPortraitSmall:
@@ -127,7 +143,6 @@ struct MotherBoard: View {
                                 LargePadNumericKeyboard()
                         }
                 case .tenKeyNumeric:
-                        // iPhone only
                         TenKeyNumericKeyboard()
                 default:
                         switch context.inputMethodMode {
@@ -136,6 +151,10 @@ struct MotherBoard: View {
                                 case .phonePortrait:
                                         ABCKeyboard()
                                 case .phoneLandscape:
+                                        ABCKeyboard()
+                                case .phoneOnPadPortrait:
+                                        ABCKeyboard()
+                                case .phoneOnPadLandscape:
                                         ABCKeyboard()
                                 case .padFloating:
                                         ABCKeyboard()
@@ -162,6 +181,10 @@ struct MotherBoard: View {
                                                         CangjieKeyboard()
                                                 case .phoneLandscape:
                                                         CangjieKeyboard()
+                                                case .phoneOnPadPortrait:
+                                                        CangjieKeyboard()
+                                                case .phoneOnPadLandscape:
+                                                        CangjieKeyboard()
                                                 case .padFloating:
                                                         CangjieKeyboard()
                                                 case .padPortraitSmall:
@@ -183,6 +206,10 @@ struct MotherBoard: View {
                                                         StrokeKeyboard()
                                                 case .phoneLandscape:
                                                         StrokeKeyboard()
+                                                case .phoneOnPadPortrait:
+                                                        StrokeKeyboard()
+                                                case .phoneOnPadLandscape:
+                                                        StrokeKeyboard()
                                                 case .padFloating:
                                                         StrokeKeyboard()
                                                 case .padPortraitSmall:
@@ -203,6 +230,10 @@ struct MotherBoard: View {
                                                 case .phonePortrait:
                                                         AlphabeticKeyboard()
                                                 case .phoneLandscape:
+                                                        AlphabeticKeyboard()
+                                                case .phoneOnPadPortrait:
+                                                        AlphabeticKeyboard()
+                                                case .phoneOnPadLandscape:
                                                         AlphabeticKeyboard()
                                                 case .padFloating:
                                                         AlphabeticKeyboard()
@@ -228,6 +259,10 @@ struct MotherBoard: View {
                                                         CangjieKeyboard()
                                                 case .phoneLandscape:
                                                         CangjieKeyboard()
+                                                case .phoneOnPadPortrait:
+                                                        CangjieKeyboard()
+                                                case .phoneOnPadLandscape:
+                                                        CangjieKeyboard()
                                                 case .padFloating:
                                                         CangjieKeyboard()
                                                 case .padPortraitSmall:
@@ -248,6 +283,10 @@ struct MotherBoard: View {
                                                 case .phonePortrait:
                                                         StrokeKeyboard()
                                                 case .phoneLandscape:
+                                                        StrokeKeyboard()
+                                                case .phoneOnPadPortrait:
+                                                        StrokeKeyboard()
+                                                case .phoneOnPadLandscape:
                                                         StrokeKeyboard()
                                                 case .padFloating:
                                                         StrokeKeyboard()
@@ -270,6 +309,10 @@ struct MotherBoard: View {
                                                         TripleStrokeKeyboard()
                                                 case .phoneLandscape:
                                                         TripleStrokeKeyboard()
+                                                case .phoneOnPadPortrait:
+                                                        TripleStrokeKeyboard()
+                                                case .phoneOnPadLandscape:
+                                                        TripleStrokeKeyboard()
                                                 case .padFloating:
                                                         TripleStrokeKeyboard()
                                                 case .padPortraitSmall:
@@ -287,7 +330,6 @@ struct MotherBoard: View {
                                                 }
                                         }
                                 case .tenKey:
-                                        // iPhone Only
                                         TenKeyKeyboard()
                                 }
                         }
