@@ -303,6 +303,31 @@ struct MotherBoard: View {
                                                 case .padLandscapeLarge:
                                                         LargePadStrokeKeyboard()
                                                 }
+                                        case .pinyin:
+                                                switch context.keyboardInterface {
+                                                case .phonePortrait:
+                                                        AlphabeticKeyboard()
+                                                case .phoneLandscape:
+                                                        AlphabeticKeyboard()
+                                                case .phoneOnPadPortrait:
+                                                        AlphabeticKeyboard()
+                                                case .phoneOnPadLandscape:
+                                                        AlphabeticKeyboard()
+                                                case .padFloating:
+                                                        AlphabeticKeyboard()
+                                                case .padPortraitSmall:
+                                                        PadCantoneseKeyboard()
+                                                case .padPortraitMedium:
+                                                        MediumPadCangjieKeyboard()
+                                                case .padPortraitLarge:
+                                                        LargePadCantoneseKeyboard()
+                                                case .padLandscapeSmall:
+                                                        PadCantoneseKeyboard()
+                                                case .padLandscapeMedium:
+                                                        MediumPadCangjieKeyboard()
+                                                case .padLandscapeLarge:
+                                                        LargePadCantoneseKeyboard()
+                                                }
                                         default:
                                                 switch context.keyboardInterface {
                                                 case .phonePortrait:

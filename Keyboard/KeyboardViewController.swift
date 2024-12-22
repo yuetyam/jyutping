@@ -219,6 +219,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 candidates = []
                                 text2mark = String.empty
                         case .some("r"):
+                                ensureQwertyForm(to: .pinyin)
                                 pinyinReverseLookup()
                         case .some("v"):
                                 ensureQwertyForm(to: .cangjie)
