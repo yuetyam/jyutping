@@ -59,6 +59,11 @@ struct MacContentView: View {
                                         Label("MacSidebar.NavigationTitle.SolarTerms", systemImage: "cloud.sun").tag(ViewIdentifier.solarTerms)
                                         Label("MacSidebar.NavigationTitle.HundredFamilySurnames", systemImage: "person").tag(ViewIdentifier.surnames)
                                         Label("MacSidebar.NavigationTitle.ThousandCharacterClassic", systemImage: characterImageName).tag(ViewIdentifier.cinZiMan)
+                                } header: {
+                                        Text("MacSidebar.SectionHeader.Cantonese").textCase(nil).font(.copilot)
+                                }
+                                .font(.master)
+                                Section {
                                         Label("MacSidebar.NavigationTitle.CantonMetro", systemImage: "tram.circle").tag(ViewIdentifier.cantonMetro)
                                         Label("MacSidebar.NavigationTitle.FatshanMetro", systemImage: "tram.circle").tag(ViewIdentifier.fatshanMetro)
                                         Label("MacSidebar.NavigationTitle.MacauMetro", systemImage: "tram.circle").tag(ViewIdentifier.macauMetro)
@@ -66,7 +71,7 @@ struct MacContentView: View {
                                         Label("MacSidebar.NavigationTitle.ShamChunMetro", systemImage: "tram.circle").tag(ViewIdentifier.shamchunMetro)
                                         Label("MacSidebar.NavigationTitle.HongKongMTR", systemImage: "tram.circle").tag(ViewIdentifier.hongkongMTR)
                                 } header: {
-                                        Text("MacSidebar.SectionHeader.Cantonese").textCase(nil).font(.copilot)
+                                        Text("MacSidebar.SectionHeader.Metro").textCase(nil).font(.copilot)
                                 }
                                 .font(.master)
                                 Section {

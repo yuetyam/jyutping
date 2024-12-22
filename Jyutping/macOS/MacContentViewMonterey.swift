@@ -89,6 +89,11 @@ struct MacContentViewMonterey: View {
                                         } label: {
                                                 Label("MacSidebar.NavigationTitle.ThousandCharacterClassic", systemImage: "character")
                                         }
+                                } header: {
+                                        Text("MacSidebar.SectionHeader.Cantonese").textCase(nil).font(.copilot)
+                                }
+                                .font(.master)
+                                Section {
                                         NavigationLink {
                                                 MacCantonMetroView().applyVisualEffect()
                                         } label: {
@@ -120,7 +125,7 @@ struct MacContentViewMonterey: View {
                                                 Label("MacSidebar.NavigationTitle.HongKongMTR", systemImage: "tram.circle")
                                         }
                                 } header: {
-                                        Text("MacSidebar.SectionHeader.Cantonese").textCase(nil).font(.copilot)
+                                        Text("MacSidebar.SectionHeader.Metro").textCase(nil).font(.copilot)
                                 }
                                 .font(.master)
                                 Section {
