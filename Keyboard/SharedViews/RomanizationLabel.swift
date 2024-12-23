@@ -27,7 +27,7 @@ struct RomanizationLabel: View {
                                 return 0
                         }
                 }()
-                let blocks = romanization.components(separatedBy: .decimalDigits).filter({ !$0.isEmpty })
+                let blocks = romanization.components(separatedBy: .decimalDigits).filter(\.isNotEmpty)
                 let tones = romanization.tones.map({ String($0) })
                 var stack: AttributedString = AttributedString()
                 for (index, element) in blocks.enumerated() {

@@ -51,15 +51,17 @@ struct CandidateBarScrollView: View {
                                                                 Color.interactiveClear
                                                                 switch commentStyle {
                                                                 case .aboveCandidates:
-                                                                        VStack(spacing: -2) {
+                                                                        ZStack(alignment: .top) {
+                                                                                Color.clear
                                                                                 RomanizationLabel(candidate: candidate, toneStyle: toneStyle)
-                                                                                Text(text)
-                                                                                        .font(isCompactKeyboard ? .candidate : .iPadCandidate)
-                                                                                        .minimumScaleFactor(0.4)
-                                                                                        .lineLimit(1)
+                                                                                        .padding(.horizontal, 1)
+                                                                                        .padding(.top, isCompactKeyboard ? 5 : 3)
+                                                                                        .frame(height: 20)
                                                                         }
-                                                                        .padding(.horizontal, 1)
-                                                                        .padding(.bottom, 12)
+                                                                        Text(text)
+                                                                                .font(isCompactKeyboard ? .candidate : .iPadCandidate)
+                                                                                .minimumScaleFactor(0.4)
+                                                                                .lineLimit(1)
                                                                 case .belowCandidates:
                                                                         VStack(spacing: -2) {
                                                                                 Text(text)
@@ -75,8 +77,6 @@ struct CandidateBarScrollView: View {
                                                                                 .font(isCompactKeyboard ? .candidate : .iPadCandidate)
                                                                                 .minimumScaleFactor(0.4)
                                                                                 .lineLimit(1)
-                                                                                .padding(.horizontal, 1)
-                                                                                .padding(.bottom, 8)
                                                                 }
                                                         }
                                                         .frame(width: candidate.width)
