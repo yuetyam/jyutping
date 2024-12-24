@@ -33,7 +33,7 @@ struct SettingsView: View {
         @State private var characterStandard: CharacterStandard = Options.characterStandard
         @State private var isAudioFeedbackOn: Bool = Options.isAudioFeedbackOn
         @State private var hapticFeedback: HapticFeedback = HapticFeedback.fetchSavedMode()
-        @State private var keyboardLayout: KeyboardLayout = Options.keyboardLayout
+        @State private var keyboardLayout: KeyboardLayout = KeyboardLayout.fetchSavedLayout()
         @State private var showLowercaseKeys: Bool = Options.showLowercaseKeys
         @State private var keyTextPreview: Bool = Options.keyTextPreview
         @State private var commentStyle: CommentStyle = Options.commentStyle
@@ -150,7 +150,7 @@ struct SettingsView: View {
                                 .onChange(of: keyboardLayout) { newLayout in
                                         AudioFeedback.modified()
                                         context.triggerSelectionHapticFeedback()
-                                        Options.updateKeyboardLayout(to: newLayout)
+                                        context.updateKeyboardLayout(to: newLayout)
                                 }
 
                                 Section {

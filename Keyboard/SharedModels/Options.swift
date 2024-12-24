@@ -43,26 +43,6 @@ struct Options {
                 UserDefaults.standard.set(value, forKey: OptionsKey.AudioFeedback)
         }
 
-        /// Cantonese Keyboard Layout. Qwerty / TripleStroke / TenKey
-        nonisolated(unsafe) private(set) static var keyboardLayout: KeyboardLayout = {
-                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.KeyboardLayout)
-                switch savedValue {
-                case KeyboardLayout.qwerty.rawValue:
-                        return .qwerty
-                case KeyboardLayout.tripleStroke.rawValue:
-                        return .tripleStroke
-                case KeyboardLayout.tenKey.rawValue:
-                        return .tenKey
-                default:
-                        return .qwerty
-                }
-        }()
-        static func updateKeyboardLayout(to layout: KeyboardLayout) {
-                keyboardLayout = layout
-                let value: Int = layout.rawValue
-                UserDefaults.standard.set(value, forKey: OptionsKey.KeyboardLayout)
-        }
-
         nonisolated(unsafe) private(set) static var showLowercaseKeys: Bool = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.KeyCase)
                 switch savedValue {

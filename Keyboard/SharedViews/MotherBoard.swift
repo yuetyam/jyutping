@@ -172,7 +172,7 @@ struct MotherBoard: View {
                                         LargePadABCKeyboard()
                                 }
                         case .cantonese:
-                                switch Options.keyboardLayout {
+                                switch context.keyboardLayout {
                                 case .qwerty:
                                         switch context.qwertyForm {
                                         case .cangjie:

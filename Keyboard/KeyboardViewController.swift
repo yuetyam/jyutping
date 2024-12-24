@@ -294,7 +294,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 return
                         }
                         switch text {
-                        case PresetConstant.kGW where Options.keyboardLayout.isTripleStroke:
+                        case PresetConstant.kGW where keyboardLayout.isTripleStroke:
                                 if tripleStrokeBuffer.last == PresetConstant.kGW {
                                         tripleStrokeBuffer = tripleStrokeBuffer.dropLast()
                                         tripleStrokeBuffer.append(PresetConstant.kKW)
@@ -305,7 +305,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 bufferText = fullText.replacingOccurrences(of: PresetConstant.kDoubleGW, with: PresetConstant.kKW, options: [.anchored, .backwards])
                         case _ where text.isLetters:
                                 appendBufferText(text)
-                        case _ where Options.keyboardLayout.isTripleStroke && (text.first?.isCantoneseToneDigit ?? false):
+                        case _ where keyboardLayout.isTripleStroke && (text.first?.isCantoneseToneDigit ?? false):
                                 appendBufferText(text)
                         case _ where inputStage.isBuffering.negative:
                                 textDocumentProxy.insertText(text)
@@ -380,7 +380,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         textDocumentProxy.insertText(shortcutText)
                 case .backspace:
                         if inputStage.isBuffering {
-                                switch Options.keyboardLayout {
+                                switch keyboardLayout {
                                 case .qwerty:
                                         bufferText = String(bufferText.dropLast())
                                         adjustKeyboard()
@@ -474,7 +474,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 defer {
                         adjustKeyboard()
                 }
-                switch Options.keyboardLayout {
+                switch keyboardLayout {
                 case .qwerty:
                         switch bufferText.first {
                         case .none:
@@ -592,7 +592,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         private func suggest() {
                 suggestionTask?.cancel()
                 let originalText = bufferText
-                let processingText: String = Options.keyboardLayout.isTripleStroke ? bufferText : bufferText.toneConverted()
+                let processingText: String = keyboardLayout.isTripleStroke ? bufferText : bufferText.toneConverted()
                 let needsSymbols: Bool = Options.isEmojiSuggestionsOn && selectedCandidates.isEmpty
                 let isInputMemoryOn: Bool = Options.isInputMemoryOn
                 suggestionTask = Task.detached(priority: .high) {
@@ -900,6 +900,14 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         let isCompactVertical: Bool = traitCollection.verticalSizeClass == .compact
                         return isCompactVertical ? .phoneLandscape : .phonePortrait
                 }
+        }
+
+        /// Cantonese Keyboard Layout. Qwerty / TripleStroke / TenKey
+        @Published private(set) var keyboardLayout: KeyboardLayout = KeyboardLayout.fetchSavedLayout()
+        func updateKeyboardLayout(to layout: KeyboardLayout) {
+                keyboardLayout = layout
+                let value: Int = layout.rawValue
+                UserDefaults.standard.set(value, forKey: OptionsKey.KeyboardLayout)
         }
 
 
