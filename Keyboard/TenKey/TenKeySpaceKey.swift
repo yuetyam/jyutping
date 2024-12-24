@@ -30,7 +30,7 @@ struct TenKeySpaceKey: View {
         @GestureState private var isTouching: Bool = false
         @State private var isLongPressEngaged: Bool = false
         @State private var longPressBuffer: Int = 0
-        @State private var startPoint: CGPoint = .zero
+        private static var previousDraggingDistance: CGFloat = 0
 
         @State private var isInTheMediumOfDoubleTapping: Bool = false
         @State private var doubleTappingBuffer: Int = 0
@@ -55,28 +55,25 @@ struct TenKeySpaceKey: View {
                                         AudioFeedback.modified()
                                         context.triggerHapticFeedback()
                                         touched = true
-                                        startPoint = value.startLocation
+                                        Self.previousDraggingDistance = 0
                                 } else if isLongPressEngaged {
-                                        let distance = value.location.x - startPoint.x
-                                        guard abs(distance) > 10 else { return }
-                                        startPoint = value.location
+                                        let distance = value.translation.width
+                                        let extra = distance - Self.previousDraggingDistance
+                                        guard abs(extra) > 10 else { return }
+                                        Self.previousDraggingDistance = distance
                                         if context.inputStage.isBuffering {
                                                 // TODO: Dragging in markedText
                                                 context.operate(.clearBuffer)
                                         } else {
                                                 AudioFeedback.modified()
                                                 context.triggerHapticFeedback()
-                                                if distance > 0 {
-                                                        context.operate(.moveCursorForward)
-                                                } else {
-                                                        context.operate(.moveCursorBackward)
-                                                }
+                                                context.operate(extra > 0 ? .moveCursorForward : .moveCursorBackward)
                                         }
                                 }
                         }
                         .onEnded { value in
+                                Self.previousDraggingDistance = 0
                                 longPressBuffer = 0
-                                startPoint = .zero
                                 if isLongPressEngaged {
                                         isLongPressEngaged = false
                                 } else {
