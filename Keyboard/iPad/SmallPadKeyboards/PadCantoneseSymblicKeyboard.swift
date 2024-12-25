@@ -31,8 +31,8 @@ struct PadCantoneseSymbolicKeyboard: View {
                                         PadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("*"), members: [KeyElement("*"), KeyElement("＊", header: PresetConstant.fullWidth)]))
                                         PadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("【"), members: [KeyElement("【"), KeyElement("〔"), KeyElement("［"), KeyElement("[", header: PresetConstant.halfWidth)]))
                                         PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("】"), members: [KeyElement("】"), KeyElement("〕"), KeyElement("］"), KeyElement("]", header: PresetConstant.halfWidth)]))
-                                        PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("『"), members: [KeyElement("『"), KeyElement("﹄", header: PresetConstant.verticalText)]))
-                                        PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("』"), members: [KeyElement("』"), KeyElement("﹃", header: PresetConstant.verticalText)]))
+                                        PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("『"), members: [KeyElement("『"), KeyElement("「")]))
+                                        PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("』"), members: [KeyElement("』"), KeyElement("」")]))
                                         PadExpansibleInputKey(
                                                 keyLocale: .trailing,
                                                 keyModel: KeyModel(

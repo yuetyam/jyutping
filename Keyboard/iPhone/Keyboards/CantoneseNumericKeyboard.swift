@@ -212,8 +212,8 @@ struct CantoneseNumericKeyboard: View {
                                                            members: [
                                                                 KeyElement("「"),
                                                                 KeyElement("『"),
-                                                                KeyElement("﹁", header: PresetConstant.verticalText),
-                                                                KeyElement("﹃", header: PresetConstant.verticalText)
+                                                                KeyElement("\u{201C}"),
+                                                                KeyElement("\u{2018}")
                                                            ])
                                 )
                                 ExpansibleInputKey(
@@ -222,8 +222,8 @@ struct CantoneseNumericKeyboard: View {
                                                            members: [
                                                                 KeyElement("」"),
                                                                 KeyElement("』"),
-                                                                KeyElement("﹂", header: PresetConstant.verticalText),
-                                                                KeyElement("﹄", header: PresetConstant.verticalText)
+                                                                KeyElement("\u{201D}"),
+                                                                KeyElement("\u{2019}")
                                                            ])
                                 )
                         }

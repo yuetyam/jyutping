@@ -12,7 +12,6 @@ struct PresetConstant {
 
         static let halfWidth: String = "半寬"
         static let fullWidth: String = "全寬"
-        static let verticalText: String = "縱書"
 
         static let spaceKeyLongPressHint: AttributedString = "← →"
 

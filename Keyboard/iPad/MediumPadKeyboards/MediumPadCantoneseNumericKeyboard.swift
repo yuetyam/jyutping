@@ -174,8 +174,8 @@ struct MediumPadCantoneseNumericKeyboard: View {
                                         PadCompleteInputKey(keyLocale: .leading, upper: "*", keyModel: KeyModel(primary: KeyElement("/"), members: [KeyElement("/"), KeyElement("*"), KeyElement("／", header: PresetConstant.fullWidth)]))
                                         PadCompleteInputKey(keyLocale: .leading, upper: "【", keyModel: KeyModel(primary: KeyElement("（"), members: [KeyElement("（"), KeyElement("【"), KeyElement("(", header: PresetConstant.halfWidth)]))
                                         PadCompleteInputKey(keyLocale: .trailing, upper: "】", keyModel: KeyModel(primary: KeyElement("）"), members: [KeyElement("）"), KeyElement("】"), KeyElement(")", header: PresetConstant.halfWidth)]))
-                                        PadCompleteInputKey(keyLocale: .trailing, upper: "『", keyModel: KeyModel(primary: KeyElement("「"), members: [KeyElement("「"), KeyElement("『"), KeyElement("﹂", header: PresetConstant.verticalText)]))
-                                        PadCompleteInputKey(keyLocale: .trailing, upper: "』", keyModel: KeyModel(primary: KeyElement("」"), members: [KeyElement("」"), KeyElement("』"), KeyElement("﹁", header: PresetConstant.verticalText)]))
+                                        PadCompleteInputKey(keyLocale: .trailing, upper: "『", keyModel: KeyModel(primary: KeyElement("「"), members: [KeyElement("「"), KeyElement("『"), KeyElement("\u{201C}"), KeyElement("\u{2018}")]))
+                                        PadCompleteInputKey(keyLocale: .trailing, upper: "』", keyModel: KeyModel(primary: KeyElement("」"), members: [KeyElement("」"), KeyElement("』"), KeyElement("\u{201D}"), KeyElement("\u{2019}")]))
                                         PadCompleteInputKey(
                                                 keyLocale: .trailing,
                                                 upper: "\"",

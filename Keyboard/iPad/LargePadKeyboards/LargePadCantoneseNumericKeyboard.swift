@@ -572,9 +572,7 @@ struct LargePadCantoneseNumericKeyboard: View {
                                                 primary: KeyElement("「"),
                                                            members: [
                                                                 KeyElement("「"),
-                                                                KeyElement("『"),
-                                                                KeyElement("﹂", header: PresetConstant.verticalText),
-                                                                KeyElement("﹄", header: PresetConstant.verticalText)
+                                                                KeyElement("『")
                                                            ]
                                         )
                                 )
@@ -584,9 +582,7 @@ struct LargePadCantoneseNumericKeyboard: View {
                                                 primary: KeyElement("」"),
                                                            members: [
                                                                 KeyElement("」"),
-                                                                KeyElement("』"),
-                                                                KeyElement("﹁", header: PresetConstant.verticalText),
-                                                                KeyElement("﹃", header: PresetConstant.verticalText)
+                                                                KeyElement("』")
                                                            ]
                                         )
                                 )
