@@ -30,7 +30,7 @@ struct LargePadSpaceKey: View {
         @GestureState private var isTouching: Bool = false
         @State private var isLongPressEngaged: Bool = false
         @State private var longPressBuffer: Int = 0
-        private static var previousDraggingDistance: CGFloat = 0
+        @State private var previousDraggingDistance: CGFloat = 0
 
         @State private var isInTheMediumOfDoubleTapping: Bool = false
         @State private var doubleTappingBuffer: Int = 0
@@ -56,40 +56,39 @@ struct LargePadSpaceKey: View {
                 .frame(maxWidth: .infinity)
                 .contentShape(Rectangle())
                 .gesture(DragGesture(minimumDistance: 0)
-                        .updating($isTouching) { value, touched, transaction in
-                                if touched.negative {
+                        .updating($isTouching) { _, tapped, _ in
+                                guard tapped.negative else { return }
+                                AudioFeedback.modified()
+                                tapped = true
+                        }
+                        .onChanged { value in
+                                guard isTouching else { return }
+                                guard isLongPressEngaged else { return }
+                                let currentDraggingDistance = value.translation.width
+                                let extra = currentDraggingDistance - previousDraggingDistance
+                                guard abs(extra) > 10 else { return }
+                                previousDraggingDistance = currentDraggingDistance
+                                if context.inputStage.isBuffering {
+                                        // TODO: Dragging in markedText
+                                        context.operate(.clearBuffer)
+                                } else {
                                         AudioFeedback.modified()
-                                        touched = true
-                                        Self.previousDraggingDistance = 0
-                                } else if isLongPressEngaged {
-                                        let distance = value.translation.width
-                                        let extra = distance - Self.previousDraggingDistance
-                                        guard abs(extra) > 10 else { return }
-                                        Self.previousDraggingDistance = distance
-                                        if context.inputStage.isBuffering {
-                                                // TODO: Dragging in markedText
-                                                context.operate(.clearBuffer)
-                                        } else {
-                                                AudioFeedback.modified()
-                                                context.operate(extra > 0 ? .moveCursorForward : .moveCursorBackward)
-                                        }
+                                        context.operate(extra > 0 ? .moveCursorForward : .moveCursorBackward)
                                 }
                         }
-                        .onEnded { value in
-                                Self.previousDraggingDistance = 0
+                        .onEnded { _ in
                                 longPressBuffer = 0
+                                previousDraggingDistance = 0
                                 if isLongPressEngaged {
                                         isLongPressEngaged = false
+                                } else if isInTheMediumOfDoubleTapping {
+                                        doubleTappingBuffer = 0
+                                        isInTheMediumOfDoubleTapping = false
+                                        context.operate(.doubleSpace)
                                 } else {
-                                        if isInTheMediumOfDoubleTapping {
-                                                doubleTappingBuffer = 0
-                                                isInTheMediumOfDoubleTapping = false
-                                                context.operate(.doubleSpace)
-                                        } else {
-                                                doubleTappingBuffer = 0
-                                                isInTheMediumOfDoubleTapping = true
-                                                context.operate(.space)
-                                        }
+                                        doubleTappingBuffer = 0
+                                        isInTheMediumOfDoubleTapping = true
+                                        context.operate(.space)
                                 }
                         }
                 )

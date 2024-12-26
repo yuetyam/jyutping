@@ -27,6 +27,14 @@ struct EditingPanelSpaceKey: View {
         }
 
         @GestureState private var isTouching: Bool = false
+        @State private var isLongPressEngaged: Bool = false
+        @State private var longPressBuffer: Int = 0
+        @State private var previousDraggingDistance: CGFloat = 0
+
+        @State private var isInTheMediumOfDoubleTapping: Bool = false
+        @State private var doubleTappingBuffer: Int = 0
+
+        private let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
 
         var body: some View {
                 ZStack {
@@ -35,20 +43,66 @@ struct EditingPanelSpaceKey: View {
                                 .fill(isTouching ? activeKeyColor : keyColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(4)
-                        Text("EditingPanel.Space")
+                        if isLongPressEngaged {
+                                Text(PresetConstant.spaceKeyLongPressHint)
+                        } else {
+                                Text("EditingPanel.Space")
+                        }
                 }
                 .contentShape(Rectangle())
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in
-                                if !tapped {
-                                        AudioFeedback.modified()
-                                        context.triggerHapticFeedback()
-                                        tapped = true
-                                }
+                                guard tapped.negative else { return }
+                                AudioFeedback.modified()
+                                context.triggerHapticFeedback()
+                                tapped = true
+                        }
+                        .onChanged { value in
+                                guard isTouching else { return }
+                                guard isLongPressEngaged else { return }
+                                let currentDraggingDistance = value.translation.width
+                                let extra = currentDraggingDistance - previousDraggingDistance
+                                guard abs(extra) > 10 else { return }
+                                previousDraggingDistance = currentDraggingDistance
+                                AudioFeedback.modified()
+                                context.triggerHapticFeedback()
+                                context.operate(extra > 0 ? .moveCursorForward : .moveCursorBackward)
                         }
                         .onEnded { _ in
-                                context.operate(.space)
+                                longPressBuffer = 0
+                                previousDraggingDistance = 0
+                                if isLongPressEngaged {
+                                        isLongPressEngaged = false
+                                } else if isInTheMediumOfDoubleTapping {
+                                        doubleTappingBuffer = 0
+                                        isInTheMediumOfDoubleTapping = false
+                                        context.operate(.doubleSpace)
+                                } else {
+                                        doubleTappingBuffer = 0
+                                        isInTheMediumOfDoubleTapping = true
+                                        context.operate(.space)
+                                }
                         }
                 )
+                .onReceive(timer) { _ in
+                        if isTouching {
+                                if longPressBuffer > 3 {
+                                        if isLongPressEngaged.negative {
+                                                AudioFeedback.modified()
+                                                context.triggerHapticFeedback()
+                                                isLongPressEngaged = true
+                                        }
+                                } else {
+                                        longPressBuffer += 1
+                                }
+                        } else if isInTheMediumOfDoubleTapping {
+                                if doubleTappingBuffer > 2 {
+                                        doubleTappingBuffer = 0
+                                        isInTheMediumOfDoubleTapping = false
+                                } else {
+                                        doubleTappingBuffer += 1
+                                }
+                        }
+                }
         }
 }
