@@ -113,14 +113,17 @@ private extension DataMaster {
         /// - Parameter text: Cantonese text
         /// - Returns: An Array of Jyutping
         static func fetchRomanizations(for text: String) -> [String] {
-                var romanizations: [String] = []
-                let query = "SELECT romanization FROM jyutpingtable WHERE word = '\(text)';"
+                let command: String = "SELECT romanization FROM jyutpingtable WHERE word = ?;"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
-                guard sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK else { return romanizations }
+                guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return [] }
+                guard sqlite3_bind_text(statement, 1, (text as NSString).utf8String, -1, transientDestructorType) == SQLITE_OK else { return [] }
+                var romanizations: [String] = []
                 while sqlite3_step(statement) == SQLITE_ROW {
-                        let romanization: String = String(cString: sqlite3_column_text(statement, 0))
-                        romanizations.append(romanization)
+                        if let columnText = sqlite3_column_text(statement, 0) {
+                                let romanization = String(cString: columnText)
+                                romanizations.append(romanization)
+                        }
                 }
                 return romanizations
         }

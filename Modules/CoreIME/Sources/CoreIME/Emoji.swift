@@ -128,7 +128,7 @@ extension Engine {
                         guard let character = character(from: codes) else { return nil }
                         return String(character)
                 default:
-                        let characters = blocks.map({ character(from: $0) }).compactMap({ $0 })
+                        let characters = blocks.compactMap({ character(from: $0) })
                         return String(characters)
                 }
         }

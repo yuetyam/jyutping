@@ -9,7 +9,7 @@ public struct ThousandCharacterClassic: Hashable {
                         .trimmingCharacters(in: .whitespacesAndNewlines)
                         .components(separatedBy: .newlines)
                         .map({ $0.trimmingCharacters(in: .whitespaces) })
-                        .filter({ !$0.isEmpty })
+                        .filter(\.isNotEmpty)
                 let entries = sourceLines.compactMap { line -> TextRomanization? in
                         let parts = line.split(separator: "\t").map({ $0.trimmingCharacters(in: .whitespaces) })
                         guard parts.count == 2 else { return nil }

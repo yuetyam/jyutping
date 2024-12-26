@@ -35,21 +35,20 @@ public struct Metro {
                         .trimmingCharacters(in: .whitespacesAndNewlines)
                         .split(separator: "#")
                         .map({ $0.trimmingCharacters(in: .whitespacesAndNewlines) })
-                let lines: [Line?] = blocks.map { block -> Line? in
+                let lines = blocks.compactMap { block -> Line? in
                         let texts: [String] = block
                                 .components(separatedBy: .newlines)
                                 .map({ $0.trimmingCharacters(in: .whitespaces).trimmingCharacters(in: .controlCharacters) })
-                                .filter({ !$0.isEmpty })
+                                .filter(\.isNotEmpty)
                                 .uniqued()
                         guard let lineName: String = texts.first else { return nil }
-                        let stations = texts.dropFirst().map { text -> Station? in
+                        let stations = texts.dropFirst().compactMap { text -> Station? in
                                 let parts = text.split(separator: "\t").map({ $0.trimmingCharacters(in: .whitespaces).trimmingCharacters(in: .controlCharacters) })
                                 guard let name = parts.first, let romanization = parts.last else { return nil }
                                 return Station(lineName: lineName, name: name, romanization: romanization)
                         }
-                        let lineStations = stations.compactMap({ $0 })
-                        return Line(name: lineName, stations: lineStations)
+                        return Line(name: lineName, stations: stations)
                 }
-                return lines.compactMap({ $0 })
+                return lines
         }
 }

@@ -1,3 +1,5 @@
+import CommonExtensions
+
 struct Term: Hashable, Identifiable {
 
         let name: String
@@ -17,8 +19,11 @@ struct Term: Hashable, Identifiable {
         }
 
         static func array(from text: String) -> [Term] {
-                let lines: [String] = text.components(separatedBy: .newlines).map({ $0.trimmingCharacters(in: .whitespaces) }).filter({ !$0.isEmpty })
-                let items: [Term?] = lines.map { line -> Term? in
+                let lines: [String] = text
+                        .components(separatedBy: .newlines)
+                        .map({ $0.trimmingCharacters(in: .whitespaces) })
+                        .filter(\.isNotEmpty)
+                let items = lines.compactMap { line -> Term? in
                         let parts: [String] = line.components(separatedBy: ",")
                         switch parts.count {
                         case 0, 1:
@@ -44,6 +49,6 @@ struct Term: Hashable, Identifiable {
                                 return Term(name: name, romanization: romanization, emoji: emoji, comment: comment)
                         }
                 }
-                return items.compactMap({ $0 })
+                return items
         }
 }
