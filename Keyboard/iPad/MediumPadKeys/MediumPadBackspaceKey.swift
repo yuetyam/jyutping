@@ -64,12 +64,11 @@ struct MediumPadBackspaceKey: View {
                 .contentShape(Rectangle())
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in
-                                if tapped.negative {
-                                        AudioFeedback.deleted()
-                                        context.triggerHapticFeedback()
-                                        context.operate(.backspace)
-                                        tapped = true
-                                }
+                                guard tapped.negative else { return }
+                                AudioFeedback.deleted()
+                                context.triggerHapticFeedback()
+                                context.operate(.backspace)
+                                tapped = true
                         }
                         .onEnded { value in
                                 buffer = 0

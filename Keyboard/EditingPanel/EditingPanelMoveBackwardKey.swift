@@ -1,4 +1,5 @@
 import SwiftUI
+import CommonExtensions
 
 struct EditingPanelMoveBackwardKey: View {
 
@@ -48,12 +49,11 @@ struct EditingPanelMoveBackwardKey: View {
                 .contentShape(Rectangle())
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in
-                                if !tapped {
-                                        AudioFeedback.modified()
-                                        context.triggerHapticFeedback()
-                                        context.operate(.moveCursorBackward)
-                                        tapped = true
-                                }
+                                guard tapped.negative else { return }
+                                AudioFeedback.modified()
+                                context.triggerHapticFeedback()
+                                context.operate(.moveCursorBackward)
+                                tapped = true
                         }
                         .onEnded { _ in
                                 buffer = 0

@@ -1,4 +1,5 @@
 import SwiftUI
+import CommonExtensions
 
 struct EditingPanelForwardDeleteKey: View {
 
@@ -45,12 +46,11 @@ struct EditingPanelForwardDeleteKey: View {
                 .contentShape(Rectangle())
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in
-                                if !tapped {
-                                        AudioFeedback.deleted()
-                                        context.triggerHapticFeedback()
-                                        context.operate(.forwardDelete)
-                                        tapped = true
-                                }
+                                guard tapped.negative else { return }
+                                AudioFeedback.deleted()
+                                context.triggerHapticFeedback()
+                                context.operate(.forwardDelete)
+                                tapped = true
                         }
                         .onEnded { _ in
                                 buffer = 0
