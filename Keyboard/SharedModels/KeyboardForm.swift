@@ -1,3 +1,5 @@
+import SwiftUI
+
 enum KeyboardForm: Int {
         case alphabetic
         case candidateBoard
@@ -11,9 +13,48 @@ enum KeyboardForm: Int {
         case tenKeyNumeric
 }
 
+extension UIKeyboardType {
+        var keyboardForm: KeyboardForm {
+                switch self {
+                case .default:               .alphabetic
+                case .asciiCapable:          .alphabetic
+                case .numbersAndPunctuation: .numeric
+                case .URL:                   .alphabetic
+                case .numberPad:             .numberPad
+                case .phonePad:              .numeric
+                case .namePhonePad:          .alphabetic
+                case .emailAddress:          .alphabetic
+                case .decimalPad:            .decimalPad
+                case .twitter:               .alphabetic
+                case .webSearch:             .alphabetic
+                case .asciiCapableNumberPad: .alphabetic
+                case .alphabet:              .alphabetic
+                @unknown default:            .alphabetic
+                }
+        }
+        var inputMethodMode: InputMethodMode {
+                switch self {
+                case .default:               .cantonese
+                case .asciiCapable:          .cantonese
+                case .numbersAndPunctuation: .abc
+                case .URL:                   .abc
+                case .numberPad:             .abc
+                case .phonePad:              .abc
+                case .namePhonePad:          .abc
+                case .emailAddress:          .abc
+                case .decimalPad:            .abc
+                case .twitter:               .cantonese
+                case .webSearch:             .cantonese
+                case .asciiCapableNumberPad: .abc
+                case .alphabet:              .cantonese
+                @unknown default:            .cantonese
+                }
+        }
+}
+
 extension KeyboardForm {
 
-        /// iPad floating and iPhone
+        /// Phone, PhoneOnPad, PadFloating
         var compactTransformKeyTex: String {
                 return switch self {
                 case .alphabetic:
@@ -60,7 +101,7 @@ enum QwertyForm: Int {
         /// Alphabetic, Cantonese (粵拼全鍵盤)
         case jyutping
 
-        /// Cantonese SaamPing (粵拼三拼)
+        /// Cantonese Triple-Stroke (粵拼三拼)
         case tripleStroke
 
         case pinyin
@@ -68,8 +109,9 @@ enum QwertyForm: Int {
         /// Cangjie or Quick(Sucheng)
         case cangjie
 
+        /// 筆畫
         case stroke
 
-        /// LoengFan Reverse Lookup. 拆字、兩分反查. 例如 木 + 旦 = 查: mukdaan
+        /// 拆字、兩分反查. 例如 木 + 木 = 林: mukmuk
         case structure
 }

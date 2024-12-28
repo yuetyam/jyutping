@@ -59,6 +59,13 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 clearBuffer()
         }
 
+        override func textWillChange(_ textInput: (any UITextInput)?) {
+                super.textWillChange(textInput)
+                guard let keyboardType = (textInput?.keyboardType ?? textDocumentProxy.keyboardType) else { return }
+                inputMethodMode = keyboardType.inputMethodMode
+                updateKeyboardForm(to: keyboardType.keyboardForm)
+        }
+
         private lazy var hasText: Bool? = nil {
                 didSet {
                         guard oldValue != nil else { return }
@@ -669,7 +676,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 }
         }
 
-        /// LoengFan Reverse Lookup. 拆字、兩分反查. 例如 木 + 旦 = 查: mukdaan
+        /// 拆字、兩分反查. 例如 木 + 木 = 林: mukmuk
         private func structureReverseLookup() {
                 guard bufferText.count > 2 else {
                         text2mark = bufferText
