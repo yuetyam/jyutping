@@ -59,11 +59,20 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 clearBuffer()
         }
 
+        private lazy var keyboardType: UIKeyboardType = .default
         override func textWillChange(_ textInput: (any UITextInput)?) {
                 super.textWillChange(textInput)
-                guard let keyboardType = (textInput?.keyboardType ?? textDocumentProxy.keyboardType) else { return }
-                inputMethodMode = keyboardType.inputMethodMode
-                updateKeyboardForm(to: keyboardType.keyboardForm)
+                guard let newKeyboardType = (textInput?.keyboardType ?? textDocumentProxy.keyboardType) else { return }
+                guard keyboardType != newKeyboardType else { return }
+                keyboardType = newKeyboardType
+                let newInputMethodMode = newKeyboardType.inputMethodMode
+                if inputMethodMode != newInputMethodMode {
+                        inputMethodMode = newInputMethodMode
+                }
+                let newKeyboardForm = newKeyboardType.keyboardForm
+                if keyboardForm != newKeyboardForm {
+                        updateKeyboardForm(to: newKeyboardForm)
+                }
         }
 
         private lazy var hasText: Bool? = nil {
