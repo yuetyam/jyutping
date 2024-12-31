@@ -132,6 +132,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 super.activateServer(sender)
                 nonisolated(unsafe) let client: InputClient? = (sender as? InputClient) ?? client()
                 Task { @MainActor in
+                        suggestionTask?.cancel()
                         UserLexicon.prepare()
                         Engine.prepare()
                         if inputStage.isBuffering {
@@ -146,6 +147,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         currentClient = client
                         updateCurrentCursorBlock(to: client?.cursorBlock)
                         prepareWindow()
+                        client?.overrideKeyboard(withKeyboardNamed: PresetConstant.systemABCKeyboardName)
                 }
         }
         override func deactivateServer(_ sender: Any!) {
@@ -170,7 +172,9 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 Task { @MainActor in
                         finishInputSession(client: client)
                 }
-                super.commitComposition(sender)
+
+                // Do NOT use this line or it will freeze the entire IME
+                // super.commitComposition(sender)
         }
         private func finishInputSession(client: InputClient? = nil) {
                 guard inputStage != .idle else { return }
