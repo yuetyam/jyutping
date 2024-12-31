@@ -51,35 +51,19 @@ struct CandidateBarScrollViewIOS17: View {
                                         ) {
                                                 ZStack {
                                                         Color.interactiveClear
-                                                        switch commentStyle {
-                                                        case .aboveCandidates:
-                                                                ZStack(alignment: .top) {
-                                                                        Color.clear
-                                                                        RomanizationLabel(candidate: candidate, toneStyle: toneStyle)
-                                                                                .padding(.horizontal, 1)
-                                                                                .padding(.top, isCompactKeyboard ? 5 : 3)
-                                                                                .frame(height: 20)
-                                                                }
-                                                                Text(text)
-                                                                        .font(isCompactKeyboard ? .candidate : .iPadCandidate)
-                                                                        .minimumScaleFactor(0.4)
-                                                                        .lineLimit(1)
-                                                        case .belowCandidates:
-                                                                VStack(spacing: -2) {
-                                                                        Text(text)
-                                                                                .font(isCompactKeyboard ? .candidate : .iPadCandidate)
-                                                                                .minimumScaleFactor(0.4)
-                                                                                .lineLimit(1)
-                                                                        RomanizationLabel(candidate: candidate, toneStyle: toneStyle)
-                                                                }
-                                                                .padding(.horizontal, 1)
-                                                                .padding(.bottom, 8)
-                                                        case .noComments:
-                                                                Text(text)
-                                                                        .font(isCompactKeyboard ? .candidate : .iPadCandidate)
-                                                                        .minimumScaleFactor(0.4)
-                                                                        .lineLimit(1)
+                                                        ZStack(alignment: commentStyle.isBelow ? .bottom : .top) {
+                                                                Color.clear
+                                                                RomanizationLabel(candidate: candidate, toneStyle: toneStyle)
+                                                                        .frame(height: 20)
+                                                                        .padding(.horizontal, 1)
+                                                                        .padding(.bottom, commentStyle.isBelow ? 6 : 0)
                                                         }
+                                                        .opacity(commentStyle.isHidden ? 0 : 1)
+                                                        Text(text)
+                                                                .font(isCompactKeyboard ? .candidate : .iPadCandidate)
+                                                                .minimumScaleFactor(0.4)
+                                                                .lineLimit(1)
+                                                                .padding(.bottom, commentStyle.isBelow ? 14 : 0)
                                                 }
                                                 .frame(width: candidate.width)
                                                 .frame(maxHeight: .infinity)

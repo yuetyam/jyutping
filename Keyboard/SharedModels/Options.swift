@@ -239,6 +239,9 @@ enum CommentStyle: Int {
         case aboveCandidates = 1
         case belowCandidates = 2
         case noComments = 3
+        var isAbove: Bool { self == .aboveCandidates }
+        var isBelow: Bool { self == .belowCandidates }
+        var isHidden: Bool { self == .noComments }
 }
 enum CommentToneStyle: Int {
         case normal = 1

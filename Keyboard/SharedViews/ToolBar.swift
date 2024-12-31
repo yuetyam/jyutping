@@ -21,7 +21,7 @@ struct ToolBar: View {
                                 imageName: "gear",
                                 width: buttonWidth,
                                 height: buttonHeight,
-                                insets: EdgeInsets(top: 18, leading: 0, bottom: 18, trailing: 0)
+                                insets: EdgeInsets(top: 16, leading: 0, bottom: 16, trailing: 0)
                         ) {
                                 AudioFeedback.modified()
                                 context.triggerHapticFeedback()
@@ -64,7 +64,7 @@ struct ToolBar: View {
                                 imageName: editingButtonImageName,
                                 width: buttonWidth,
                                 height: buttonHeight,
-                                insets: EdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0)
+                                insets: EdgeInsets(top: 18, leading: 0, bottom: 18, trailing: 0)
                         ) {
                                 AudioFeedback.modified()
                                 context.triggerHapticFeedback()
@@ -76,7 +76,7 @@ struct ToolBar: View {
                                 imageName: "keyboard.chevron.compact.down",
                                 width: buttonWidth,
                                 height: buttonHeight,
-                                insets: EdgeInsets(top: 19, leading: 0, bottom: 20, trailing: 0)
+                                insets: EdgeInsets(top: 17, leading: 0, bottom: 18, trailing: 0)
                         ) {
                                 AudioFeedback.modified()
                                 context.triggerHapticFeedback()

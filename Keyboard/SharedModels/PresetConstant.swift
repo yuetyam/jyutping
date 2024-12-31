@@ -2,7 +2,7 @@ import SwiftUI
 
 struct PresetConstant {
 
-        static let toolBarHeight: CGFloat = 60
+        static let toolBarHeight: CGFloat = 56
 
         /// CandidateBoard top-right collapse button
         static let collapseWidth: CGFloat = 44
