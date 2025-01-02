@@ -119,7 +119,7 @@ struct UserLexicon {
         /// Delete one lexicon entry
         static func removeItem(candidate: Candidate) {
                 let id: Int = (candidate.lexiconText + candidate.romanization).hash
-                let command: String = "DELETE FROM lexicon WHERE id = \(id) LIMIT 1;"
+                let command: String = "DELETE FROM lexicon WHERE id = \(id);"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return }
