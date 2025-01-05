@@ -18,9 +18,9 @@ struct GeneralPreferencesView: View {
         @State private var isEmojiSuggestionsOn: Bool = Options.isEmojiSuggestionsOn
         @State private var isInputMemoryOn: Bool = AppSettings.isInputMemoryOn
 
-        @State private var isConfirmDialogPresented: Bool = false
-        @State private var isPerformingClearUserLexicon: Bool = false
-        @State private var clearUserLexiconProgress: Double = 0
+        @State private var isClearInputMemoryConfirmDialogPresented: Bool = false
+        @State private var isPerformingClearInputMemory: Bool = false
+        @State private var clearInputMemoryProgress: Double = 0
         private let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
 
         var body: some View {
@@ -154,64 +154,56 @@ struct GeneralPreferencesView: View {
                                         Spacer()
                                 }
                                 .block()
-                                VStack(spacing: 2) {
+                                VStack(spacing: 20) {
                                         HStack {
-                                                Text("GeneralPreferencesView.SectionHeader.UserLexicon")
+                                                Toggle("GeneralPreferencesView.Toggle.InputMemory", isOn: $isInputMemoryOn)
+                                                        .toggleStyle(.switch)
+                                                        .scaledToFit()
+                                                        .onChange(of: isInputMemoryOn) { newState in
+                                                                AppSettings.updateInputMemory(to: newState)
+                                                        }
                                                 Spacer()
                                         }
-                                        .font(.subheadline)
-                                        .padding(.horizontal, 12)
-                                        VStack(spacing: 20) {
-                                                HStack {
-                                                        Toggle("GeneralPreferencesView.Toggle.InputMemory", isOn: $isInputMemoryOn)
-                                                                .toggleStyle(.switch)
-                                                                .scaledToFit()
-                                                                .onChange(of: isInputMemoryOn) { newState in
-                                                                        AppSettings.updateInputMemory(to: newState)
-                                                                }
-                                                        Spacer()
-                                                }
-                                                HStack {
-                                                        VStack(alignment: .leading, spacing: 1) {
-                                                                Button(role: .destructive) {
-                                                                        isConfirmDialogPresented = true
-                                                                } label: {
-                                                                        Text("GeneralPreferencesView.Button.ClearUserLexicon")
-                                                                }
-                                                                .buttonStyle(.plain)
-                                                                .padding(.horizontal, 8)
-                                                                .padding(.vertical, 4)
-                                                                .foregroundStyle(Color.red)
-                                                                .background(Material.thick, in: RoundedRectangle(cornerRadius: 6, style: .continuous))
-                                                                .confirmationDialog("GeneralPreferencesView.ConfirmationDialog.ClearUserLexicon.Title", isPresented: $isConfirmDialogPresented) {
-                                                                        Button("GeneralPreferencesView.ConfirmationDialog.ClearUserLexicon.Confirm", role: .destructive) {
-                                                                                clearUserLexiconProgress = 0
-                                                                                isPerformingClearUserLexicon = true
-                                                                                UserLexicon.deleteAll()
-                                                                        }
-                                                                        Button("GeneralPreferencesView.ConfirmationDialog.ClearUserLexicon.Cancel", role: .cancel) {
-                                                                                isConfirmDialogPresented = false
-                                                                        }
-                                                                }
-                                                                ProgressView(value: clearUserLexiconProgress).opacity(isPerformingClearUserLexicon ? 1 : 0)
+                                        HStack {
+                                                VStack(alignment: .leading, spacing: 1) {
+                                                        Button(role: .destructive) {
+                                                                isClearInputMemoryConfirmDialogPresented = true
+                                                        } label: {
+                                                                Text("GeneralPreferencesView.Button.ClearInputMemory")
                                                         }
-                                                        .fixedSize()
-                                                        .onReceive(timer) { _ in
-                                                                guard isPerformingClearUserLexicon else { return }
-                                                                if clearUserLexiconProgress > 1 {
-                                                                        isPerformingClearUserLexicon = false
-                                                                } else {
-                                                                        clearUserLexiconProgress += 0.1
+                                                        .buttonStyle(.plain)
+                                                        .padding(.horizontal, 8)
+                                                        .padding(.vertical, 4)
+                                                        .foregroundStyle(Color.red)
+                                                        .background(Material.thick, in: RoundedRectangle(cornerRadius: 6, style: .continuous))
+                                                        .confirmationDialog("GeneralPreferencesView.ConfirmationDialog.ClearInputMemory.Title", isPresented: $isClearInputMemoryConfirmDialogPresented) {
+                                                                Button("GeneralPreferencesView.ConfirmationDialog.ClearInputMemory.Confirm", role: .destructive) {
+                                                                        clearInputMemoryProgress = 0
+                                                                        isPerformingClearInputMemory = true
+                                                                        UserLexicon.deleteAll()
+                                                                }
+                                                                Button("GeneralPreferencesView.ConfirmationDialog.ClearInputMemory.Cancel", role: .cancel) {
+                                                                        isClearInputMemoryConfirmDialogPresented = false
                                                                 }
                                                         }
-                                                        Spacer()
+                                                        ProgressView(value: clearInputMemoryProgress).opacity(isPerformingClearInputMemory ? 1 : 0)
                                                 }
+                                                .fixedSize()
+                                                .onReceive(timer) { _ in
+                                                        guard isPerformingClearInputMemory else { return }
+                                                        if clearInputMemoryProgress > 1 {
+                                                                isPerformingClearInputMemory = false
+                                                        } else {
+                                                                clearInputMemoryProgress += 0.1
+                                                        }
+                                                }
+                                                Spacer()
                                         }
-                                        .padding(.horizontal, 12)
-                                        .padding(.top, 12)
-                                        .padding(.bottom, 1)
-                                        .background(Color.textBackgroundColor, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
                                 }
+                                .padding(.horizontal, 12)
+                                .padding(.top, 12)
+                                .padding(.bottom, 1)
+                                .background(Color.textBackgroundColor, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
                         }
                         .textSelection(.enabled)
                         .padding()

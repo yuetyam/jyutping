@@ -1345,66 +1345,66 @@
         }
       }
     },
-    "GeneralPreferencesView.Button.ClearUserLexicon" : {
+    "GeneralPreferencesView.Button.ClearInputMemory" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Clear User Lexicon"
+            "value" : "Clear Input Memory"
           }
         },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "清空個人詞庫"
+            "value" : "清空輸入記憶"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "清空個人詞庫"
+            "value" : "清空輸入記憶"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "清空個人詞庫"
+            "value" : "清空輸入記憶"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "清空個人詞庫"
+            "value" : "清空輸入記憶"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "清空個人詞庫"
+            "value" : "清空輸入記憶"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "清空個人詞庫"
+            "value" : "清空輸入記憶"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "清空個人詞庫"
+            "value" : "清空輸入記憶"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "清空個人詞庫"
+            "value" : "清空輸入記憶"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "清空個人詞庫"
+            "value" : "清空輸入記憶"
           }
         }
       }
@@ -3009,7 +3009,7 @@
         }
       }
     },
-    "GeneralPreferencesView.ConfirmationDialog.ClearUserLexicon.Cancel" : {
+    "GeneralPreferencesView.ConfirmationDialog.ClearInputMemory.Cancel" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3073,7 +3073,7 @@
         }
       }
     },
-    "GeneralPreferencesView.ConfirmationDialog.ClearUserLexicon.Confirm" : {
+    "GeneralPreferencesView.ConfirmationDialog.ClearInputMemory.Confirm" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3137,66 +3137,66 @@
         }
       }
     },
-    "GeneralPreferencesView.ConfirmationDialog.ClearUserLexicon.Title" : {
+    "GeneralPreferencesView.ConfirmationDialog.ClearInputMemory.Title" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Clear User Lexicon?"
+            "value" : "Clear Input Memory?"
           }
         },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "清空個人詞庫？"
+            "value" : "清空輸入記憶？"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "清空個人詞庫？"
+            "value" : "清空輸入記憶？"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "清空個人詞庫？"
+            "value" : "清空輸入記憶？"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "清空個人詞庫？"
+            "value" : "清空輸入記憶？"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "清空個人詞庫？"
+            "value" : "清空輸入記憶？"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "清空個人詞庫？"
+            "value" : "清空輸入記憶？"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "清空個人詞庫？"
+            "value" : "清空輸入記憶？"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "清空個人詞庫？"
+            "value" : "清空輸入記憶？"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "清空個人詞庫？"
+            "value" : "清空輸入記憶？"
           }
         }
       }
@@ -3325,70 +3325,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "粵拼輸入法"
-          }
-        }
-      }
-    },
-    "GeneralPreferencesView.SectionHeader.UserLexicon" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "User Lexicon"
-          }
-        },
-        "yue" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "個人詞庫"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "個人詞庫"
-          }
-        },
-        "zh-Hans-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "個人詞庫"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "個人詞庫"
-          }
-        },
-        "zh-Hant-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "個人詞庫"
-          }
-        },
-        "zh-Hant-HK" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "個人詞庫"
-          }
-        },
-        "zh-Hant-MO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "個人詞庫"
-          }
-        },
-        "zh-Hant-TW" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "個人詞庫"
-          }
-        },
-        "zh-HK" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "個人詞庫"
           }
         }
       }
@@ -4737,66 +4673,66 @@
         }
       }
     },
-    "HotkeysView.RemoveCurrentCandidateFromUserLexicon" : {
+    "HotkeysView.RemoveCurrentCandidateFromInputMemory" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Remove current Candidate from User Lexicon"
+            "value" : "Remove current Candidate from Input Memory"
           }
         },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "從個人詞庫刪除當前候選詞"
+            "value" : "從輸入記憶刪除當前候選詞"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "從個人詞庫刪除當前候選詞"
+            "value" : "從輸入記憶刪除當前候選詞"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "從個人詞庫刪除當前候選詞"
+            "value" : "從輸入記憶刪除當前候選詞"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "從個人詞庫刪除當前候選詞"
+            "value" : "從輸入記憶刪除當前候選詞"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "從個人詞庫刪除當前候選詞"
+            "value" : "從輸入記憶刪除當前候選詞"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "從個人詞庫刪除當前候選詞"
+            "value" : "從輸入記憶刪除當前候選詞"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "從個人詞庫刪除當前候選詞"
+            "value" : "從輸入記憶刪除當前候選詞"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "從個人詞庫刪除當前候選詞"
+            "value" : "從輸入記憶刪除當前候選詞"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "從個人詞庫刪除當前候選詞"
+            "value" : "從輸入記憶刪除當前候選詞"
           }
         }
       }

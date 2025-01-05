@@ -136,7 +136,7 @@ struct HotkeysView: View {
                                                 Spacer()
                                         }
                                         HStack(spacing: 4) {
-                                                LabelText("HotkeysView.RemoveCurrentCandidateFromUserLexicon")
+                                                LabelText("HotkeysView.RemoveCurrentCandidateFromInputMemory")
                                                 Text.separator
                                                 KeyBlockView.control
                                                 Text.plus
