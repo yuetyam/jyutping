@@ -1,4 +1,4 @@
-enum Direction {
+enum Direction: Int {
         case up
         case down
         case left

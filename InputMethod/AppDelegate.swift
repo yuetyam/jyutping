@@ -7,7 +7,7 @@ import Sparkle
 @main
 final class AppDelegate: NSObject, NSApplicationDelegate {
 
-        static let shared: AppDelegate = AppDelegate()
+        @MainActor static let shared: AppDelegate = AppDelegate()
 
         private lazy var updaterController: SPUStandardUpdaterController? = nil
         func checkForUpdates() {

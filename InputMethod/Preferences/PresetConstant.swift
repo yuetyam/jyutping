@@ -14,4 +14,7 @@ struct PresetConstant {
 
         static let systemABCKeyboardName: String = "com.apple.keylayout.ABC"
         static let preferencesWindowIdentifier: String = "JyutpingInputMethodPreferencesWindow"
+
+        static let halfWidth: String = "半寬"
+        static let fullWidth: String = "全寬"
 }

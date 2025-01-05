@@ -243,7 +243,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                 suggest()
                         default:
                                 mark(text: bufferText)
-                                handlePunctuation()
+                                candidates = PunctuationKey.punctuationCandidates(of: bufferText)
                         }
                 }
         }
@@ -437,34 +437,6 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 mark(text: text2mark)
                 let lookup: [Candidate] = Engine.structureReverseLookup(text: text, input: bufferText, segmentation: segmentation)
                 candidates = lookup.map({ $0.transformed(to: Options.characterStandard) }).uniqued()
-        }
-
-        private func handlePunctuation() {
-                let symbols: [PunctuationSymbol] = switch bufferText {
-                case PunctuationKey.comma.shiftingKeyText:
-                        PunctuationKey.comma.shiftingSymbols
-                case PunctuationKey.period.shiftingKeyText:
-                        PunctuationKey.period.shiftingSymbols
-                case PunctuationKey.slash.keyText:
-                        PunctuationKey.slash.symbols
-                case PunctuationKey.quote.keyText:
-                        PunctuationKey.quote.symbols
-                case PunctuationKey.quote.shiftingKeyText:
-                        PunctuationKey.quote.shiftingSymbols
-                case PunctuationKey.bracketLeft.shiftingKeyText:
-                        PunctuationKey.bracketLeft.shiftingSymbols
-                case PunctuationKey.bracketRight.shiftingKeyText:
-                        PunctuationKey.bracketRight.shiftingSymbols
-                case PunctuationKey.backSlash.shiftingKeyText:
-                        PunctuationKey.backSlash.shiftingSymbols
-                case PunctuationKey.backquote.keyText:
-                        PunctuationKey.backquote.symbols
-                case PunctuationKey.backquote.shiftingKeyText:
-                        PunctuationKey.backquote.shiftingSymbols
-                default:
-                        []
-                }
-                candidates = symbols.map({ Candidate(text: $0.symbol, comment: $0.comment, secondaryComment: $0.secondaryComment, input: bufferText) })
         }
 
 
@@ -759,24 +731,33 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         let index: Int = (number == 0) ? 9 : (number - 1)
                         switch currentInputForm {
                         case .cantonese:
-                                if isBuffering {
-                                        guard let selectedItem = appContext.displayCandidates.fetch(index) else { return }
-                                        let text = selectedItem.candidate.text
-                                        insert(text)
-                                        aftercareSelection(selectedItem)
-                                } else if hasControlShiftModifiers {
+                                if hasControlShiftModifiers {
+                                        guard isBuffering.negative else { return }
                                         handleOptions(index)
+                                } else if isShifting {
+                                        switch Options.punctuationForm {
+                                        case .cantonese:
+                                                if let shiftingBufferText = PunctuationKey.shiftingBufferText(of: number) {
+                                                        insert(bufferText)
+                                                        bufferText = shiftingBufferText
+                                                } else {
+                                                        let symbol: String = PunctuationKey.numberKeyShiftingCantoneseSymbol(of: number) ?? String.empty
+                                                        insert(bufferText + symbol)
+                                                        bufferText = String.empty
+                                                }
+                                        case .english:
+                                                let symbol: String = PunctuationKey.numberKeyShiftingSymbol(of: number) ?? String.empty
+                                                insert(bufferText + symbol)
+                                                bufferText = String.empty
+                                        }
+                                } else if isBuffering {
+                                        guard let selectedItem = appContext.displayCandidates.fetch(index) else { return }
+                                        insert(selectedItem.candidate.text)
+                                        aftercareSelection(selectedItem)
                                 } else {
                                         let text: String = "\(number)"
                                         let convertedText: String = Options.characterForm.isHalfWidth ? text : text.fullWidth()
-                                        switch Options.punctuationForm {
-                                        case .cantonese:
-                                                let insertion: String? = isShifting ? Representative.shiftingCantoneseSymbol(of: number) : convertedText
-                                                insertion.flatMap(insert(_:))
-                                        case .english:
-                                                let insertion: String? = isShifting ? Representative.shiftingSymbol(of: number) : convertedText
-                                                insertion.flatMap(insert(_:))
-                                        }
+                                        insert(convertedText)
                                 }
                         case .transparent:
                                 if hasControlShiftModifiers {
@@ -885,7 +866,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         bufferText = symbolText
                 case .punctuation(let punctuationKey):
                         guard currentInputForm.isCantonese else { return }
-                        guard isBuffering.negative else {
+                        if isBuffering && isShifting.negative {
                                 switch punctuationKey {
                                 case .comma, .minus:
                                         updateDisplayCandidates(.previousPage, highlight: .unchanged)
@@ -904,37 +885,57 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                         insert(String(lastCharacter))
                                         aftercareSelection(displayCandidate, shouldProcessUserLexicon: false)
                                 default:
-                                        return
-                                }
-                                return
-                        }
-                        guard Options.punctuationForm.isCantoneseMode else {
-                                let symbol: String = isShifting ? punctuationKey.shiftingKeyText : punctuationKey.keyText
-                                insert(symbol)
-                                return
-                        }
-                        if isShifting {
-                                if let symbol = punctuationKey.instantShiftingSymbol {
-                                        insert(symbol)
-                                } else {
-                                        bufferText = punctuationKey.shiftingKeyText
+                                        switch Options.punctuationForm {
+                                        case .cantonese:
+                                                if let symbol = punctuationKey.instantSymbol {
+                                                        insert(bufferText + symbol)
+                                                        bufferText = String.empty
+                                                } else {
+                                                        insert(bufferText)
+                                                        bufferText = punctuationKey.keyText
+                                                }
+                                        case .english:
+                                                insert(bufferText + punctuationKey.keyText)
+                                                bufferText = String.empty
+                                        }
                                 }
                         } else {
-                                if let symbol = punctuationKey.instantSymbol {
-                                        insert(symbol)
-                                } else {
-                                        bufferText = punctuationKey.keyText
+                                switch Options.punctuationForm {
+                                case .cantonese:
+                                        let symbol: String? = isShifting ? punctuationKey.instantShiftingSymbol : punctuationKey.instantSymbol
+                                        if let symbol {
+                                                insert(bufferText + symbol)
+                                                bufferText = String.empty
+                                        } else {
+                                                insert(bufferText)
+                                                bufferText = isShifting ? punctuationKey.shiftingKeyText : punctuationKey.keyText
+                                        }
+                                case .english:
+                                        let symbol: String = isShifting ? punctuationKey.shiftingKeyText : punctuationKey.keyText
+                                        insert(bufferText + symbol)
+                                        bufferText = String.empty
                                 }
                         }
                 case .separator:
                         switch currentInputForm {
                         case .cantonese:
-                                if isBuffering {
-                                        bufferText += "'"
+                                let shouldKeepBuffer: Bool = {
+                                        guard isShifting.negative else { return false }
+                                        guard let type = candidates.first?.type else { return false }
+                                        return type != .compose
+                                }()
+                                if shouldKeepBuffer {
+                                        bufferText += String.separator
                                 } else {
-                                        guard Options.punctuationForm.isCantoneseMode else { return }
                                         let text: String = isShifting ? PunctuationKey.quote.shiftingKeyText : PunctuationKey.quote.keyText
-                                        bufferText = text
+                                        switch Options.punctuationForm {
+                                        case .cantonese:
+                                                insert(bufferText)
+                                                bufferText = text
+                                        case .english:
+                                                insert(bufferText + text)
+                                                bufferText = String.empty
+                                        }
                                 }
                         case .transparent:
                                 return
@@ -1187,7 +1188,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         }
                         let inputCount: Int = candidate.input.replacingOccurrences(of: "[456]", with: "RR", options: .regularExpression).count
                         var tail = bufferText.dropFirst(inputCount)
-                        while tail.hasPrefix("'") {
+                        while tail.hasPrefix(String.separator) {
                                 tail = tail.dropFirst()
                         }
                         bufferText = String(tail)
