@@ -39,12 +39,6 @@ struct EditingPanelMoveForwardKey: View {
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(4)
                         Image(systemName: "arrow.forward")
-                        /*
-                        VStack(spacing: 4) {
-                                Image(systemName: "arrow.forward")
-                                Text("EditingPanel.MoveForward").font(.caption2)
-                        }
-                        */
                 }
                 .contentShape(Rectangle())
                 .gesture(DragGesture(minimumDistance: 0)

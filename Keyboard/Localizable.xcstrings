@@ -513,266 +513,6 @@
         }
       }
     },
-    "EditingPanel.JumpToHead" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Jump to Head"
-          }
-        },
-        "yue" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "跳至行首"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "跳至行首"
-          }
-        },
-        "zh-Hans-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "跳至行首"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "跳至行首"
-          }
-        },
-        "zh-Hant-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "跳至行首"
-          }
-        },
-        "zh-Hant-HK" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "跳至行首"
-          }
-        },
-        "zh-Hant-MO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "跳至行首"
-          }
-        },
-        "zh-Hant-TW" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "跳至行首"
-          }
-        },
-        "zh-HK" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "跳至行首"
-          }
-        }
-      }
-    },
-    "EditingPanel.JumpToTail" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Jump to Tail"
-          }
-        },
-        "yue" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "跳至行末"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "跳至行末"
-          }
-        },
-        "zh-Hans-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "跳至行末"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "跳至行末"
-          }
-        },
-        "zh-Hant-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "跳至行末"
-          }
-        },
-        "zh-Hant-HK" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "跳至行末"
-          }
-        },
-        "zh-Hant-MO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "跳至行末"
-          }
-        },
-        "zh-Hant-TW" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "跳至行末"
-          }
-        },
-        "zh-HK" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "跳至行末"
-          }
-        }
-      }
-    },
-    "EditingPanel.MoveBackward" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Move Backward"
-          }
-        },
-        "yue" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "左移一格"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "左移一格"
-          }
-        },
-        "zh-Hans-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "左移一格"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "左移一格"
-          }
-        },
-        "zh-Hant-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "左移一格"
-          }
-        },
-        "zh-Hant-HK" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "左移一格"
-          }
-        },
-        "zh-Hant-MO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "左移一格"
-          }
-        },
-        "zh-Hant-TW" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "左移一格"
-          }
-        },
-        "zh-HK" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "左移一格"
-          }
-        }
-      }
-    },
-    "EditingPanel.MoveForward" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Move Forward"
-          }
-        },
-        "yue" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "右移一格"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "右移一格"
-          }
-        },
-        "zh-Hans-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "右移一格"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "右移一格"
-          }
-        },
-        "zh-Hant-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "右移一格"
-          }
-        },
-        "zh-Hant-HK" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "右移一格"
-          }
-        },
-        "zh-Hant-MO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "右移一格"
-          }
-        },
-        "zh-Hant-TW" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "右移一格"
-          }
-        },
-        "zh-HK" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "右移一格"
-          }
-        }
-      }
-    },
     "EditingPanel.Paste" : {
       "localizations" : {
         "en" : {
@@ -2320,55 +2060,55 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "粵拼顯示"
+            "value" : "粵拼標示"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "粵拼顯示"
+            "value" : "粵拼標示"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "粵拼顯示"
+            "value" : "粵拼標示"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "粵拼顯示"
+            "value" : "粵拼標示"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "粵拼顯示"
+            "value" : "粵拼標示"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "粵拼顯示"
+            "value" : "粵拼標示"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "粵拼顯示"
+            "value" : "粵拼標示"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "粵拼顯示"
+            "value" : "粵拼標示"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "粵拼顯示"
+            "value" : "粵拼標示"
           }
         }
       }
@@ -2378,61 +2118,61 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Normal         :  nei5 hou2"
+            "value" : "Normal        : nei5 hou2"
           }
         },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "正常　 :   nei5 hou2"
+            "value" : "正常: nei5 hou2"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "正常　 :   nei5 hou2"
+            "value" : "正常: nei5 hou2"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "正常　 :   nei5 hou2"
+            "value" : "正常: nei5 hou2"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "正常　 :   nei5 hou2"
+            "value" : "正常: nei5 hou2"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "正常　 :   nei5 hou2"
+            "value" : "正常: nei5 hou2"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "正常　 :   nei5 hou2"
+            "value" : "正常: nei5 hou2"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "正常　 :   nei5 hou2"
+            "value" : "正常: nei5 hou2"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "正常　 :   nei5 hou2"
+            "value" : "正常: nei5 hou2"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "正常　 :   nei5 hou2"
+            "value" : "正常: nei5 hou2"
           }
         }
       }
@@ -2442,61 +2182,61 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No Tones     :  nei hou"
+            "value" : "No Tones    : nei hou"
           }
         },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "無聲調 :   nei hou"
+            "value" : "無調: nei hou"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "無聲調 :   nei hou"
+            "value" : "無調: nei hou"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "無聲調 :   nei hou"
+            "value" : "無調: nei hou"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "無聲調 :   nei hou"
+            "value" : "無調: nei hou"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "無聲調 :   nei hou"
+            "value" : "無調: nei hou"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "無聲調 :   nei hou"
+            "value" : "無調: nei hou"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "無聲調 :   nei hou"
+            "value" : "無調: nei hou"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "無聲調 :   nei hou"
+            "value" : "無調: nei hou"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "無聲調 :   nei hou"
+            "value" : "無調: nei hou"
           }
         }
       }
@@ -2506,61 +2246,61 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Superscript :  nei⁵ hou²"
+            "value" : "Superscript: nei⁵ hou²"
           }
         },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "上標　 :   nei⁵ hou²"
+            "value" : "上標: nei⁵ hou²"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "上標　 :   nei⁵ hou²"
+            "value" : "上標: nei⁵ hou²"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "上標　 :   nei⁵ hou²"
+            "value" : "上標: nei⁵ hou²"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "上標　 :   nei⁵ hou²"
+            "value" : "上標: nei⁵ hou²"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "上標　 :   nei⁵ hou²"
+            "value" : "上標: nei⁵ hou²"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "上標　 :   nei⁵ hou²"
+            "value" : "上標: nei⁵ hou²"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "上標　 :   nei⁵ hou²"
+            "value" : "上標: nei⁵ hou²"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "上標　 :   nei⁵ hou²"
+            "value" : "上標: nei⁵ hou²"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "上標　 :   nei⁵ hou²"
+            "value" : "上標: nei⁵ hou²"
           }
         }
       }
@@ -2570,61 +2310,61 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Subscript    :  nei₅ hou₂"
+            "value" : "Subscript   : nei₅ hou₂"
           }
         },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "下標　 :   nei₅ hou₂"
+            "value" : "下標: nei₅ hou₂"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "下標　 :   nei₅ hou₂"
+            "value" : "下標: nei₅ hou₂"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "下標　 :   nei₅ hou₂"
+            "value" : "下標: nei₅ hou₂"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "下標　 :   nei₅ hou₂"
+            "value" : "下標: nei₅ hou₂"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "下標　 :   nei₅ hou₂"
+            "value" : "下標: nei₅ hou₂"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "下標　 :   nei₅ hou₂"
+            "value" : "下標: nei₅ hou₂"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "下標　 :   nei₅ hou₂"
+            "value" : "下標: nei₅ hou₂"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "下標　 :   nei₅ hou₂"
+            "value" : "下標: nei₅ hou₂"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "下標　 :   nei₅ hou₂"
+            "value" : "下標: nei₅ hou₂"
           }
         }
       }
@@ -2753,6 +2493,134 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "表情符號（Emoji）候選詞"
+          }
+        }
+      }
+    },
+    "SettingsView.InputMemory.ClearInputMemory.ButtonTitle" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clear Input Memory"
+          }
+        },
+        "yue" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "清空輸入記憶"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "清空輸入記憶"
+          }
+        },
+        "zh-Hans-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "清空輸入記憶"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "清空輸入記憶"
+          }
+        },
+        "zh-Hant-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "清空輸入記憶"
+          }
+        },
+        "zh-Hant-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "清空輸入記憶"
+          }
+        },
+        "zh-Hant-MO" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "清空輸入記憶"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "清空輸入記憶"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "清空輸入記憶"
+          }
+        }
+      }
+    },
+    "SettingsView.InputMemory.ToggleTitle" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Input Memory"
+          }
+        },
+        "yue" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "記憶輸入"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "記憶輸入"
+          }
+        },
+        "zh-Hans-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "記憶輸入"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "記憶輸入"
+          }
+        },
+        "zh-Hant-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "記憶輸入"
+          }
+        },
+        "zh-Hant-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "記憶輸入"
+          }
+        },
+        "zh-Hant-MO" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "記憶輸入"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "記憶輸入"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "記憶輸入"
           }
         }
       }
@@ -3466,61 +3334,61 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "QWERTY (全鍵盤)"
+            "value" : "QWERTY (26鍵全鍵盤)"
           }
         },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "全鍵盤 • QWERTY"
+            "value" : "26鍵全鍵盤"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "全鍵盤 • QWERTY"
+            "value" : "26鍵全鍵盤"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "全鍵盤 • QWERTY"
+            "value" : "26鍵全鍵盤"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "全鍵盤 • QWERTY"
+            "value" : "26鍵全鍵盤"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "全鍵盤 • QWERTY"
+            "value" : "26鍵全鍵盤"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "全鍵盤 • QWERTY"
+            "value" : "26鍵全鍵盤"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "全鍵盤 • QWERTY"
+            "value" : "26鍵全鍵盤"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "全鍵盤 • QWERTY"
+            "value" : "26鍵全鍵盤"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "全鍵盤 • QWERTY"
+            "value" : "26鍵全鍵盤"
           }
         }
       }
@@ -3530,61 +3398,61 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Triple-Stroke (三拼)"
+            "value" : "Triple-Stroke (26鍵三拼)"
           }
         },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "三拼"
+            "value" : "26鍵三拼"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "三拼"
+            "value" : "26鍵三拼"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "三拼"
+            "value" : "26鍵三拼"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "三拼"
+            "value" : "26鍵三拼"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "三拼"
+            "value" : "26鍵三拼"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "三拼"
+            "value" : "26鍵三拼"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "三拼"
+            "value" : "26鍵三拼"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "三拼"
+            "value" : "26鍵三拼"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "三拼"
+            "value" : "26鍵三拼"
           }
         }
       }
@@ -4161,198 +4029,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "雙擊空格"
-          }
-        }
-      }
-    },
-    "SettingsView.UserLexicon.ClearUserLexicon.ButtonTitle" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Clear User Lexicon"
-          }
-        },
-        "yue" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "清空個人詞庫"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "清空個人詞庫"
-          }
-        },
-        "zh-Hans-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "清空個人詞庫"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "清空個人詞庫"
-          }
-        },
-        "zh-Hant-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "清空個人詞庫"
-          }
-        },
-        "zh-Hant-HK" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "清空個人詞庫"
-          }
-        },
-        "zh-Hant-MO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "清空個人詞庫"
-          }
-        },
-        "zh-Hant-TW" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "清空個人詞庫"
-          }
-        },
-        "zh-HK" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "清空個人詞庫"
-          }
-        }
-      }
-    },
-    "SettingsView.UserLexicon.InputMemory.ToggleTitle" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Input Memory"
-          }
-        },
-        "yue" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "記憶輸入"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "記憶輸入"
-          }
-        },
-        "zh-Hans-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "記憶輸入"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "記憶輸入"
-          }
-        },
-        "zh-Hant-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "記憶輸入"
-          }
-        },
-        "zh-Hant-HK" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "記憶輸入"
-          }
-        },
-        "zh-Hant-MO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "記憶輸入"
-          }
-        },
-        "zh-Hant-TW" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "記憶輸入"
-          }
-        },
-        "zh-HK" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "記憶輸入"
-          }
-        }
-      }
-    },
-    "SettingsView.UserLexicon.SectionHeader" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "User Lexicon"
-          }
-        },
-        "yue" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "個人詞庫"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "個人詞庫"
-          }
-        },
-        "zh-Hans-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "個人詞庫"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "個人詞庫"
-          }
-        },
-        "zh-Hant-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "個人詞庫"
-          }
-        },
-        "zh-Hant-HK" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "個人詞庫"
-          }
-        },
-        "zh-Hant-MO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "個人詞庫"
-          }
-        },
-        "zh-Hant-TW" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "個人詞庫"
-          }
-        },
-        "zh-HK" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "個人詞庫"
           }
         }
       }

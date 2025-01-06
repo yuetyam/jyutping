@@ -152,7 +152,14 @@ struct CantoneseSymbolicKeyboard: View {
                                                                 KeyElement("＞", header: PresetConstant.fullWidth)
                                                            ])
                                 )
-                                SymbolInputKey("¥")
+                                ExpansibleInputKey(
+                                        keyLocale: .trailing,
+                                        keyModel: KeyModel(primary: KeyElement("¥"),
+                                                           members: [
+                                                                KeyElement("¥"),
+                                                                KeyElement("￥", header: PresetConstant.fullWidth)
+                                                           ])
+                                )
                                 ExpansibleInputKey(
                                         keyLocale: .trailing,
                                         keyModel: KeyModel(primary: KeyElement("&"),

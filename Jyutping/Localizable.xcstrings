@@ -4865,7 +4865,7 @@
         }
       }
     },
-    "IOSHomeTab.IntroductionsView.Body.RemoveCandidateFromUserLexicon" : {
+    "IOSHomeTab.IntroductionsView.Body.ForgetCandidate" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5249,66 +5249,66 @@
         }
       }
     },
-    "IOSHomeTab.IntroductionsView.Heading.RemoveCandidateFromUserLexicon" : {
+    "IOSHomeTab.IntroductionsView.Heading.ForgetCandidate" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Remove a Candidate from User Lexicon"
+            "value" : "Remove a Candidate from Input Memory"
           }
         },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "從個人詞庫刪除某個候選詞"
+            "value" : "從輸入記憶刪除某個候選詞"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "從個人詞庫刪除某個候選詞"
+            "value" : "從輸入記憶刪除某個候選詞"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "從個人詞庫刪除某個候選詞"
+            "value" : "從輸入記憶刪除某個候選詞"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "從個人詞庫刪除某個候選詞"
+            "value" : "從輸入記憶刪除某個候選詞"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "從個人詞庫刪除某個候選詞"
+            "value" : "從輸入記憶刪除某個候選詞"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "從個人詞庫刪除某個候選詞"
+            "value" : "從輸入記憶刪除某個候選詞"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "從個人詞庫刪除某個候選詞"
+            "value" : "從輸入記憶刪除某個候選詞"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "從個人詞庫刪除某個候選詞"
+            "value" : "從輸入記憶刪除某個候選詞"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "從個人詞庫刪除某個候選詞"
+            "value" : "從輸入記憶刪除某個候選詞"
           }
         }
       }

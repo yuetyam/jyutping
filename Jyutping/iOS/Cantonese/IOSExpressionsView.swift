@@ -122,8 +122,8 @@ struct IOSExpressionsView: View {
                                                 Spacer()
                                         }
                                         HStack {
-                                                Text(verbatim: "例：我喺天后站落車。")
-                                                Speaker("我喺天后站落車。")
+                                                Text(verbatim: "例：我喺赤壁遊山玩水。")
+                                                Speaker("我喺赤壁遊山玩水。")
                                                 Spacer()
                                         }
                                 }

@@ -4673,7 +4673,7 @@
         }
       }
     },
-    "HotkeysView.RemoveCurrentCandidateFromInputMemory" : {
+    "HotkeysView.ForgetCurrentCandidate" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {

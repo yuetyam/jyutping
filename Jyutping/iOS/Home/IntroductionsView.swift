@@ -6,20 +6,20 @@ struct IntroductionsView: View {
         var body: some View {
                 List {
                         Section {
-                                Text("IOSHomeTab.IntroductionsView.Heading.SpaceDoubleTapping").font(.headline)
-                                Text("IOSHomeTab.IntroductionsView.Body.SpaceDoubleTapping")
+                                Text("IOSHomeTab.IntroductionsView.Heading.ClearPreEdit").font(.headline)
+                                Text("IOSHomeTab.IntroductionsView.Body.ClearPreEdit")
+                        }
+                        Section {
+                                Text("IOSHomeTab.IntroductionsView.Heading.ForgetCandidate").font(.headline)
+                                Text("IOSHomeTab.IntroductionsView.Body.ForgetCandidate")
                         }
                         Section {
                                 Text("IOSHomeTab.IntroductionsView.Heading.PositionInsertionPoint").font(.headline)
                                 Text("IOSHomeTab.IntroductionsView.Body.PositionInsertionPoint")
                         }
                         Section {
-                                Text("IOSHomeTab.IntroductionsView.Heading.ClearPreEdit").font(.headline)
-                                Text("IOSHomeTab.IntroductionsView.Body.ClearPreEdit")
-                        }
-                        Section {
-                                Text("IOSHomeTab.IntroductionsView.Heading.RemoveCandidateFromUserLexicon").font(.headline)
-                                Text("IOSHomeTab.IntroductionsView.Body.RemoveCandidateFromUserLexicon")
+                                Text("IOSHomeTab.IntroductionsView.Heading.SpaceDoubleTapping").font(.headline)
+                                Text("IOSHomeTab.IntroductionsView.Body.SpaceDoubleTapping")
                         }
                         Section {
                                 Text("IOSHomeTab.IntroductionsView.Heading.TripleStrokeKeyboard").font(.headline)

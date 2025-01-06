@@ -448,7 +448,16 @@ struct LargePadCantoneseNumericKeyboard: View {
                                                 ]
                                         )
                                 )
-                                LargePadInstantInputKey("¥")
+                                LargePadExpansibleInputKey(
+                                        keyLocale: .trailing,
+                                        keyModel: KeyModel(
+                                                primary: KeyElement("¥"),
+                                                members: [
+                                                        KeyElement("¥"),
+                                                        KeyElement("￥", header: PresetConstant.fullWidth)
+                                                ]
+                                        )
+                                )
                                 LargePadReturnKey(widthUnitTimes: 1.75)
                         }
                         HStack(spacing: 0) {

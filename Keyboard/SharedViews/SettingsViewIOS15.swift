@@ -30,8 +30,8 @@ struct SettingsViewIOS15: View {
         @State private var preferredLanguage: PreferredLanguage = Options.preferredLanguage
         @State private var isInputMemoryOn: Bool = Options.isInputMemoryOn
 
-        @State private var isPerformingClearUserLexicon: Bool = false
-        @State private var clearUserLexiconProgress: Double = 0
+        @State private var isPerformingClearInputMemory: Bool = false
+        @State private var clearInputMemoryProgress: Double = 0
         private let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
 
         var body: some View {
@@ -236,7 +236,7 @@ struct SettingsViewIOS15: View {
                                 }
 
                                 Section {
-                                        Toggle("SettingsView.UserLexicon.InputMemory.ToggleTitle", isOn: $isInputMemoryOn)
+                                        Toggle("SettingsView.InputMemory.ToggleTitle", isOn: $isInputMemoryOn)
                                                 .onChange(of: isInputMemoryOn) { newState in
                                                         Options.updateInputMemory(to: newState)
                                                 }
@@ -245,33 +245,31 @@ struct SettingsViewIOS15: View {
                                                         Button(role: .destructive) {
                                                                 AudioFeedback.modified()
                                                                 context.triggerHapticFeedback()
-                                                                clearUserLexiconProgress = 0
-                                                                isPerformingClearUserLexicon = true
+                                                                clearInputMemoryProgress = 0
+                                                                isPerformingClearInputMemory = true
                                                                 UserLexicon.deleteAll()
                                                                 EmojiMaster.clearFrequent()
                                                         } label: {
-                                                                Label("SettingsView.UserLexicon.ClearUserLexicon.ButtonTitle", systemImage: "trash")
+                                                                Label("SettingsView.InputMemory.ClearInputMemory.ButtonTitle", systemImage: "trash")
                                                         }
                                                 } label: {
                                                         HStack {
-                                                                Text("SettingsView.UserLexicon.ClearUserLexicon.ButtonTitle")
+                                                                Text("SettingsView.InputMemory.ClearInputMemory.ButtonTitle")
                                                                 Spacer()
                                                         }
                                                         .foregroundStyle(Color.red)
                                                 }
-                                                .opacity(isPerformingClearUserLexicon ? 0.5 : 1)
-                                                ProgressView(value: clearUserLexiconProgress).opacity(isPerformingClearUserLexicon ? 1 : 0)
+                                                .opacity(isPerformingClearInputMemory ? 0.5 : 1)
+                                                ProgressView(value: clearInputMemoryProgress).opacity(isPerformingClearInputMemory ? 1 : 0)
                                         }
                                         .onReceive(timer) { _ in
-                                                guard isPerformingClearUserLexicon else { return }
-                                                if clearUserLexiconProgress > 1 {
-                                                        isPerformingClearUserLexicon = false
+                                                guard isPerformingClearInputMemory else { return }
+                                                if clearInputMemoryProgress > 1 {
+                                                        isPerformingClearInputMemory = false
                                                 } else {
-                                                        clearUserLexiconProgress += 0.1
+                                                        clearInputMemoryProgress += 0.1
                                                 }
                                         }
-                                } header: {
-                                        Text("SettingsView.UserLexicon.SectionHeader").textCase(nil)
                                 }
 
                                 Section {
@@ -289,8 +287,6 @@ struct SettingsViewIOS15: View {
                                                 }
                                                 .foregroundStyle(Color.primary)
                                         }
-                                } header: {
-                                        Text(verbatim: String.space)
                                 }
                         }
                 }
