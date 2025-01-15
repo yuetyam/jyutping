@@ -259,7 +259,6 @@
 		37942E312CE45017005D6536 /* MediumPadReturnKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37942E302CE45016005D6536 /* MediumPadReturnKey.swift */; };
 		37942E332CE46FAF005D6536 /* MediumPadShiftKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37942E322CE46FAE005D6536 /* MediumPadShiftKey.swift */; };
 		3797F6E32C188F2B00DE6D0E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797F6E22C188F2B00DE6D0E /* AppDelegate.swift */; };
-		3797F6E52C188F4D00DE6D0E /* PrincipalApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797F6E42C188F4D00DE6D0E /* PrincipalApplication.swift */; };
 		379A9E2E2BE4C692001AE79E /* EditingPanelReturnKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379A9E2D2BE4C692001AE79E /* EditingPanelReturnKey.swift */; };
 		379A9E302BE4C86E001AE79E /* EditingPanelCopyKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379A9E2F2BE4C86E001AE79E /* EditingPanelCopyKey.swift */; };
 		379A9E322BE4C9D3001AE79E /* EditingPanelCutKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379A9E312BE4C9D3001AE79E /* EditingPanelCutKey.swift */; };
@@ -335,6 +334,7 @@
 		37EFD73B2B3719C30089D346 /* JyutpingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFD73A2B3719C30089D346 /* JyutpingTests.swift */; };
 		37EFD7452B3719C30089D346 /* JyutpingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFD7442B3719C30089D346 /* JyutpingUITests.swift */; };
 		37EFD7472B3719C30089D346 /* JyutpingUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFD7462B3719C30089D346 /* JyutpingUITestsLaunchTests.swift */; };
+		37F4B0E42D36FB1A0076857E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F4B0E32D36FB1A0076857E /* main.swift */; };
 		37F9C6272BE94F84001B3917 /* UITextDocumentProxyExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F9C6262BE94F84001B3917 /* UITextDocumentProxyExtensions.swift */; };
 /* End PBXBuildFile section */
 
@@ -655,7 +655,6 @@
 		37942E302CE45016005D6536 /* MediumPadReturnKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediumPadReturnKey.swift; sourceTree = "<group>"; };
 		37942E322CE46FAE005D6536 /* MediumPadShiftKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediumPadShiftKey.swift; sourceTree = "<group>"; };
 		3797F6E22C188F2B00DE6D0E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		3797F6E42C188F4D00DE6D0E /* PrincipalApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrincipalApplication.swift; sourceTree = "<group>"; };
 		379A9E2D2BE4C692001AE79E /* EditingPanelReturnKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingPanelReturnKey.swift; sourceTree = "<group>"; };
 		379A9E2F2BE4C86E001AE79E /* EditingPanelCopyKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingPanelCopyKey.swift; sourceTree = "<group>"; };
 		379A9E312BE4C9D3001AE79E /* EditingPanelCutKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingPanelCutKey.swift; sourceTree = "<group>"; };
@@ -738,6 +737,7 @@
 		37EFD7402B3719C30089D346 /* JyutpingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JyutpingUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		37EFD7442B3719C30089D346 /* JyutpingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JyutpingUITests.swift; sourceTree = "<group>"; };
 		37EFD7462B3719C30089D346 /* JyutpingUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JyutpingUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		37F4B0E32D36FB1A0076857E /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		37F9C6262BE94F84001B3917 /* UITextDocumentProxyExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextDocumentProxyExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1107,7 +1107,7 @@
 		371EABCA2B385D370075089B /* InputMethod */ = {
 			isa = PBXGroup;
 			children = (
-				3797F6E42C188F4D00DE6D0E /* PrincipalApplication.swift */,
+				37F4B0E32D36FB1A0076857E /* main.swift */,
 				3797F6E22C188F2B00DE6D0E /* AppDelegate.swift */,
 				37E6AD662B3B381600F02279 /* JyutpingInputController.swift */,
 				3783BB6E2C8DE3560071B892 /* CandidateWindow.swift */,
@@ -1995,7 +1995,6 @@
 				37918A6C2C5B5BBA006C6590 /* ToneInputView.swift in Sources */,
 				37E6AD722B3B381700F02279 /* Representative.swift in Sources */,
 				3797F6E32C188F2B00DE6D0E /* AppDelegate.swift in Sources */,
-				3797F6E52C188F4D00DE6D0E /* PrincipalApplication.swift in Sources */,
 				37E6AD742B3B381700F02279 /* CharacterExtensions.swift in Sources */,
 				37E6AD852B3B381700F02279 /* UserLexicon.swift in Sources */,
 				376B84942BFC2C1C0029A0CF /* BottomCommentStackView.swift in Sources */,
@@ -2007,6 +2006,7 @@
 				37E6AD7A2B3B381700F02279 /* Options.swift in Sources */,
 				37E6AD872B3B381700F02279 /* OptionsView.swift in Sources */,
 				37E6AD7F2B3B381700F02279 /* GeneralPreferencesView.swift in Sources */,
+				37F4B0E42D36FB1A0076857E /* main.swift in Sources */,
 				37E6AD7B2B3B381700F02279 /* DisplayCandidate.swift in Sources */,
 				37E6AD732B3B381700F02279 /* InputForm.swift in Sources */,
 				37E6AD862B3B381700F02279 /* PageTransformation.swift in Sources */,
@@ -2282,7 +2282,6 @@
 				INFOPLIST_KEY_LSBackgroundOnly = NO;
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "CC0 1.0 Public Domain";
-				INFOPLIST_KEY_NSPrincipalClass = "$(PRODUCT_MODULE_NAME).PrincipalApplication";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -2326,7 +2325,6 @@
 				INFOPLIST_KEY_LSBackgroundOnly = NO;
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "CC0 1.0 Public Domain";
-				INFOPLIST_KEY_NSPrincipalClass = "$(PRODUCT_MODULE_NAME).PrincipalApplication";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
