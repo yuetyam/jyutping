@@ -17,4 +17,11 @@ struct PresetConstant {
 
         static let halfWidth: String = "半寬"
         static let fullWidth: String = "全寬"
+
+        static let chromiumBasedBrowserBundleIdentifiers: Set<String> = [
+                "org.chromium.Chromium",
+                "com.google.Chrome",
+                "com.microsoft.edgemac",
+                "com.brave.Browser"
+        ]
 }
