@@ -5,7 +5,7 @@ import SwiftUI
 struct MacJyutpingInitialTable: View {
         var body: some View {
                 ScrollView {
-                        LazyVStack(spacing: 12) {
+                        LazyVStack(alignment: .leading, spacing: 12) {
                                 VStack(spacing: 2) {
                                         HStack(spacing: 44) {
                                                 HStack {
@@ -50,7 +50,7 @@ struct MacJyutpingInitialTable: View {
                                 }
                                 VStack(alignment: .leading, spacing: 2) {
                                         MacInitialLabel(word: "牙", syllable: "ngaa4", jyutping: "ng", ipa: "[ ŋ ]").block()
-                                        Text(verbatim: "聲母 ng 又稱「疑母」，零聲母又稱「影母」。現實中常有疑影不分，例如【我 ngo5】讀成 o5；【愛 oi3】讀成 ngoi3。理論上可依照聲調區分疑影，1、2、3 調通常搭配零聲母；4、5、6 調通常搭配疑母。")
+                                        Text(verbatim: "聲母 ng 又稱「疑母」，零聲母又稱「影母」。現實中常有疑影不分，例如【我 ngo5】讀成 o5；【愛 oi3】讀成 ngoi3。理論上可依照聲調區分疑影，1、2、3 調通常搭配零聲母；4、5、6 調通常搭配疑母 ng。")
                                                 .font(.copilot)
                                                 .foregroundStyle(Color.secondary)
                                                 .padding(.horizontal, 8)
@@ -82,6 +82,9 @@ struct MacJyutpingInitialTable: View {
                                                 .font(.copilot)
                                                 .foregroundStyle(Color.secondary)
                                                 .padding(.horizontal, 8)
+                                }
+                                if #available(macOS 13.0, *) {
+                                        OnsetGridView()
                                 }
                         }
                         .textSelection(.enabled)

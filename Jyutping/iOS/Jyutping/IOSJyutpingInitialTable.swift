@@ -3,6 +3,9 @@
 import SwiftUI
 
 struct IOSJyutpingInitialTable: View {
+
+        @Environment(\.horizontalSizeClass) var horizontalSize
+
         var body: some View {
                 List {
                         Section {
@@ -44,7 +47,7 @@ struct IOSJyutpingInitialTable: View {
                         Section {
                                 IOSInitialLabel(word: "牙", syllable: "ngaa4", jyutping: "ng", ipa: "[ ŋ ]")
                         } footer: {
-                                Text(verbatim: "聲母 ng 又稱「疑母」，零聲母又稱「影母」。現實中常有疑影不分，例如【我 ngo5】讀成 o5；【愛 oi3】讀成 ngoi3。理論上可依照聲調區分疑影，1、2、3 調通常搭配零聲母；4、5、6 調通常搭配疑母。").textCase(nil)
+                                Text(verbatim: "聲母 ng 又稱「疑母」，零聲母又稱「影母」。現實中常有疑影不分，例如【我 ngo5】讀成 o5；【愛 oi3】讀成 ngoi3。理論上可依照聲調區分疑影，1、2、3 調通常搭配零聲母；4、5、6 調通常搭配疑母 ng。").textCase(nil)
                         }
                         Section {
                                 IOSInitialLabel(word: "瓜", syllable: "gwaa1", jyutping: "gw", ipa: "[ kʷ ]")
@@ -62,6 +65,15 @@ struct IOSJyutpingInitialTable: View {
                                 IOSInitialLabel(word: "也", syllable: "jaa5", jyutping: "j", ipa: "[ j ]")
                         } footer: {
                                 Text(verbatim: "聲母 j 相當於其他拼音方案嘅聲母 y。粵拼輸入法兼容 y。 ").textCase(nil)
+                        }
+                        if horizontalSize == .regular {
+                                if #available(iOS 16.0, *) {
+                                        Section {
+                                                OnsetGridView()
+                                        }
+                                        .listRowBackground(Color.clear)
+                                        .listRowInsets(EdgeInsets())
+                                }
                         }
                 }
                 .textSelection(.enabled)
