@@ -89,6 +89,7 @@ private struct IOSToneLabel: View {
 
 @available(iOS 16.0, *)
 private struct IOSToneGridView: View {
+        @Environment(\.colorScheme) private var colorScheme
         var body: some View {
                 Grid(horizontalSpacing: 14, verticalSpacing: 14) {
                         GridRow {
@@ -131,7 +132,7 @@ private struct IOSToneGridView: View {
                                         }
                                 }
                                 .padding(4)
-                                .background(.background, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+                                .background(Color.textBackgroundColor(colorScheme: colorScheme), in: RoundedRectangle(cornerRadius: 8, style: .continuous))
                                 .fixedSize()
                                 IOSToneGridCell(character: "舌", syllable: "sit6", tone: "˨")
                         }
@@ -140,6 +141,7 @@ private struct IOSToneGridView: View {
 }
 
 private struct IOSToneGridCell: View {
+        @Environment(\.colorScheme) private var colorScheme
         let character: String
         let syllable: String
         let tone: String
@@ -152,7 +154,7 @@ private struct IOSToneGridCell: View {
                         Text(verbatim: "調值 :  \(tone)")
                 }
                 .padding(8)
-                .background(.background, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+                .background(Color.textBackgroundColor(colorScheme: colorScheme), in: RoundedRectangle(cornerRadius: 8, style: .continuous))
         }
 }
 

@@ -65,6 +65,11 @@ struct OnsetGridView: View {
 @available(iOS 16.0, *)
 @available(macOS 13.0, *)
 private struct OnsetElementCell: View {
+
+        #if os(iOS)
+        @Environment(\.colorScheme) private var colorScheme
+        #endif
+
         let onset: String
         let ipa: String
         let word: String
@@ -84,7 +89,13 @@ private struct OnsetElementCell: View {
                         }
                 }
                 .frame(width: 90, height: 80)
+                #if os(macOS)
+                .background(Color.textBackgroundColor, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+                #elseif os(iOS)
+                .background(Color.textBackgroundColor(colorScheme: colorScheme), in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+                #else
                 .background(.background, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+                #endif
         }
 }
 

@@ -3,6 +3,16 @@ import SwiftUI
 extension Color {
 
         #if os(iOS)
+        static func textBackgroundColor(colorScheme: ColorScheme) -> Color {
+                switch colorScheme {
+                case .dark:
+                        return Color(uiColor: UIColor.secondarySystemBackground)
+                case .light:
+                        return Color(uiColor: UIColor.systemBackground)
+                @unknown default:
+                        return Color(uiColor: UIColor.systemBackground)
+                }
+        }
         static let separator: Color = Color(uiColor: UIColor.separator)
         #endif
 
