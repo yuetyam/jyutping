@@ -152,27 +152,6 @@ struct Options {
                 UserDefaults.standard.set(value, forKey: OptionsKey.CangjieVariant)
         }
 
-        nonisolated(unsafe) private(set) static var doubleSpaceShortcut: DoubleSpaceShortcut = {
-                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.DoubleSpaceShortcut)
-                switch savedValue {
-                case DoubleSpaceShortcut.insertPeriod.rawValue:
-                        return .insertPeriod
-                case DoubleSpaceShortcut.doNothing.rawValue:
-                        return .doNothing
-                case DoubleSpaceShortcut.insertIdeographicComma.rawValue:
-                        return .insertIdeographicComma
-                case DoubleSpaceShortcut.insertFullWidthSpace.rawValue:
-                        return .insertFullWidthSpace
-                default:
-                        return .insertPeriod
-                }
-        }()
-        static func updateDoubleSpaceShortcut(to shortcut: DoubleSpaceShortcut) {
-                doubleSpaceShortcut = shortcut
-                let value: Int = shortcut.rawValue
-                UserDefaults.standard.set(value, forKey: OptionsKey.DoubleSpaceShortcut)
-        }
-
         nonisolated(unsafe) private(set) static var preferredLanguage: PreferredLanguage = {
                 let languages = Locale.preferredLanguages
                 guard languages.isNotEmpty else { return .english }
@@ -228,10 +207,12 @@ struct OptionsKey {
         static let CommentToneStyle: String = "tone_style"
         static let EmojiSuggestions: String = "emoji"
         static let CangjieVariant: String = "CangjieVariant"
-        static let DoubleSpaceShortcut: String = "double_space_shortcut"
         static let UserLexiconInputMemory: String = "UserLexiconInputMemory"
 
-        // Deprecated
+        // @available(*, deprecated)
+        // static let DoubleSpaceShortcut: String = "double_space_shortcut"
+
+        // @available(*, deprecated)
         // static let PasteButtonStyle: String = "PasteButtonStyle"
 }
 
@@ -249,12 +230,6 @@ enum CommentToneStyle: Int {
         case `subscript` = 3
         case noTones = 4
 }
-enum DoubleSpaceShortcut: Int {
-        case insertPeriod = 1
-        case doNothing = 2
-        case insertIdeographicComma = 3
-        case insertFullWidthSpace = 4
-}
 
 /// Keyboard UI Display Language
 enum PreferredLanguage: Int {
@@ -262,8 +237,16 @@ enum PreferredLanguage: Int {
         case english = 2
 }
 
-// Deprecated
 /*
+@available(*, deprecated)
+enum DoubleSpaceShortcut: Int {
+        case insertPeriod = 1
+        case doNothing = 2
+        case insertIdeographicComma = 3
+        case insertFullWidthSpace = 4
+}
+
+@available(*, deprecated)
 enum PasteButtonStyle: Int {
         case `default` = 1
         case system = 2

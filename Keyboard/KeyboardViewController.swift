@@ -351,7 +351,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 adjustKeyboard()
                         }
                 case .doubleSpace:
-                        guard inputStage.isBuffering.negative else {
+                        if inputStage.isBuffering {
                                 if let candidate = candidates.first {
                                         input(candidate.text)
                                         aftercareSelected(candidate)
@@ -360,40 +360,17 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                         updateReturnKey()
                                         adjustKeyboard()
                                 }
-                                return
-                        }
-                        defer {
+                        } else {
+                                let hasSpaceAhead: Bool = textDocumentProxy.documentContextBeforeInput?.hasSuffix(String.space) ?? false
+                                if hasSpaceAhead {
+                                        textDocumentProxy.deleteBackward()
+                                        let shortcutText: String = inputMethodMode.isABC ? ". " : "。"
+                                        textDocumentProxy.insertText(shortcutText)
+                                } else {
+                                        textDocumentProxy.insertText(String.space)
+                                }
                                 adjustKeyboard()
                         }
-                        let hasSpaceAhead: Bool = textDocumentProxy.documentContextBeforeInput?.hasSuffix(String.space) ?? false
-                        guard hasSpaceAhead else {
-                                textDocumentProxy.insertText(String.space)
-                                return
-                        }
-                        let shortcutText: String? = {
-                                switch (Options.doubleSpaceShortcut, inputMethodMode) {
-                                case (.insertPeriod, .abc):
-                                        return ". "
-                                case (.insertPeriod, .cantonese):
-                                        return "。"
-                                case (.doNothing, _):
-                                        return nil
-                                case (.insertIdeographicComma, .abc):
-                                        return nil
-                                case (.insertIdeographicComma, .cantonese):
-                                        return "、"
-                                case (.insertFullWidthSpace, .abc):
-                                        return nil
-                                case (.insertFullWidthSpace, .cantonese):
-                                        return String.fullWidthSpace
-                                }
-                        }()
-                        guard let shortcutText else {
-                                textDocumentProxy.insertText(String.space)
-                                return
-                        }
-                        textDocumentProxy.deleteBackward()
-                        textDocumentProxy.insertText(shortcutText)
                 case .backspace:
                         if inputStage.isBuffering {
                                 switch keyboardLayout {

@@ -24,9 +24,8 @@ struct SettingsViewIOS15: View {
         @State private var keyTextPreview: Bool = Options.keyTextPreview
         @State private var commentStyle: CommentStyle = Options.commentStyle
         @State private var commentToneStyle: CommentToneStyle = Options.commentToneStyle
-        @State private var isEmojiSuggestionsOn: Bool = Options.isEmojiSuggestionsOn
         @State private var cangjieVariant: CangjieVariant = Options.cangjieVariant
-        @State private var doubleSpaceShortcut: DoubleSpaceShortcut = Options.doubleSpaceShortcut
+        @State private var isEmojiSuggestionsOn: Bool = Options.isEmojiSuggestionsOn
         @State private var preferredLanguage: PreferredLanguage = Options.preferredLanguage
         @State private var isInputMemoryOn: Bool = Options.isInputMemoryOn
 
@@ -177,14 +176,6 @@ struct SettingsViewIOS15: View {
                                         Options.updateCommentToneStyle(to: newStyle)
                                 }
 
-                                Section {
-                                        Toggle("SettingsView.EmojiSuggestions.ToggleTitle", isOn: $isEmojiSuggestionsOn)
-                                                .onChange(of: isEmojiSuggestionsOn) { newState in
-                                                        AudioFeedback.modified()
-                                                        Options.updateEmojiSuggestions(to: newState)
-                                                }
-                                }
-
                                 Picker("SettingsView.CangjieVariant.PickerTitle", selection: $cangjieVariant) {
                                         Text("SettingsView.CangjieVariant.PickerOption1").tag(CangjieVariant.cangjie5)
                                         Text("SettingsView.CangjieVariant.PickerOption2").tag(CangjieVariant.cangjie3)
@@ -200,18 +191,12 @@ struct SettingsViewIOS15: View {
                                         Options.updateCangjieVariant(to: newVariant)
                                 }
 
-                                Picker("SettingsView.SpaceDoubleTapping.PickerTitle", selection: $doubleSpaceShortcut) {
-                                        Text("SettingsView.SpaceDoubleTapping.PickerOption1").tag(DoubleSpaceShortcut.insertPeriod)
-                                        Text("SettingsView.SpaceDoubleTapping.PickerOption3").tag(DoubleSpaceShortcut.insertIdeographicComma)
-                                        Text("SettingsView.SpaceDoubleTapping.PickerOption4").tag(DoubleSpaceShortcut.insertFullWidthSpace)
-                                        Text("SettingsView.SpaceDoubleTapping.PickerOption2").tag(DoubleSpaceShortcut.doNothing)
-                                }
-                                .pickerStyle(.inline)
-                                .textCase(nil)
-                                .onChange(of: doubleSpaceShortcut) { newOption in
-                                        AudioFeedback.modified()
-                                        context.triggerSelectionHapticFeedback()
-                                        Options.updateDoubleSpaceShortcut(to: newOption)
+                                Section {
+                                        Toggle("SettingsView.EmojiSuggestions.ToggleTitle", isOn: $isEmojiSuggestionsOn)
+                                                .onChange(of: isEmojiSuggestionsOn) { newState in
+                                                        AudioFeedback.modified()
+                                                        Options.updateEmojiSuggestions(to: newState)
+                                                }
                                 }
 
                                 Section {
