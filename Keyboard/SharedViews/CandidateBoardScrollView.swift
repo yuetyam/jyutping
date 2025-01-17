@@ -90,7 +90,7 @@ struct CandidateBoardScrollView: View {
                                         }
                                 }
                         }
-                        .onChange(of: context.candidatesState) { _ in
+                        .onChange(of: context.candidateState) { _ in
                                 withAnimation {
                                         proxy.scrollTo(topID, anchor: .top)
                                 }

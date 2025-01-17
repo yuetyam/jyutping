@@ -94,7 +94,7 @@ struct CandidateBoardScrollViewIOS17: View {
                 }
                 .scrollPosition(id: $positionID, anchor: .top)
                 .defaultScrollAnchor(.top)
-                .onChange(of: context.candidatesState) {
+                .onChange(of: context.candidateState) {
                         withAnimation {
                                 positionID = topID
                         }

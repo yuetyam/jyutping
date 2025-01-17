@@ -686,13 +686,13 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 candidates = lookup.map({ $0.transformed(to: Options.characterStandard) }).uniqued()
         }
 
-        /// Cached Candidate sequence for UserLexicon
+        /// Cached Candidate sequence for InputMemory
         private lazy var selectedCandidates: [Candidate] = []
 
-        @Published private(set) var candidatesState: Int = 0
+        @Published private(set) var candidateState: Int = 0
         @Published private(set) var candidates: [Candidate] = [] {
                 didSet {
-                        candidatesState += 1
+                        candidateState += 1
                         updateSpaceKeyForm()
                 }
         }
