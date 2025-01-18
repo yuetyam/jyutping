@@ -1,4 +1,5 @@
 import SwiftUI
+import CommonExtensions
 
 struct EditingPanelClearKey: View {
 
@@ -43,7 +44,7 @@ struct EditingPanelClearKey: View {
                 .contentShape(Rectangle())
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in
-                                if !tapped {
+                                if tapped.negative {
                                         AudioFeedback.deleted()
                                         context.triggerHapticFeedback()
                                         tapped = true

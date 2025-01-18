@@ -1,4 +1,5 @@
 import SwiftUI
+import CommonExtensions
 
 enum ReturnKeyState: Int {
 
@@ -21,13 +22,13 @@ enum ReturnKeyState: Int {
         }
 
         static func state(isAvailable: Bool, isABC: Bool, isSimplified: Bool, isBuffering: Bool) -> ReturnKeyState {
-                guard !isBuffering else {
+                guard isBuffering.negative else {
                         return isSimplified ? .bufferingSimplified : .bufferingTraditional
                 }
-                guard !isABC else {
+                guard isABC.negative else {
                         return isAvailable ? .standbyABC : .unavailableABC
                 }
-                guard !isSimplified else {
+                guard isSimplified.negative else {
                         return isAvailable ? .standbySimplified : .unavailableSimplified
                 }
                 return isAvailable ? .standbyTraditional : .unavailableTraditional

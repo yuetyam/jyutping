@@ -673,7 +673,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let segmentation = Segmentor.segment(text: text)
                 let tailMarkedText: String = {
                         let hasSeparatorsOrTones: Bool = text.contains(where: \.isSeparatorOrTone)
-                        guard !hasSeparatorsOrTones else { return text.formattedForMark() }
+                        guard hasSeparatorsOrTones.negative else { return text.formattedForMark() }
                         guard let bestScheme = segmentation.first else { return text.formattedForMark() }
                         let leadingLength: Int = bestScheme.length
                         let leadingText: String = bestScheme.map(\.text).joined(separator: String.space)

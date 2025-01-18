@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 login_user=$(/usr/bin/stat -f%Su /dev/console)
 

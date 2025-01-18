@@ -1,6 +1,7 @@
 #if os(macOS)
 
 import SwiftUI
+import CommonExtensions
 import AppDataSource
 
 struct MacHundredFamilySurnamesView: View {
@@ -19,7 +20,7 @@ struct MacHundredFamilySurnamesView: View {
                         .padding()
                 }
                 .task {
-                        guard !isSurnamesLoaded else { return }
+                        guard isSurnamesLoaded.negative else { return }
                         defer { isSurnamesLoaded = true }
                         if AppMaster.surnames.isEmpty {
                                 AppMaster.fetchSurnames()

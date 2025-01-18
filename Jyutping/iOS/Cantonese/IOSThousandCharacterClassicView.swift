@@ -1,6 +1,7 @@
 #if os(iOS)
 
 import SwiftUI
+import CommonExtensions
 import AppDataSource
 
 struct IOSThousandCharacterClassicView: View {
@@ -20,7 +21,7 @@ struct IOSThousandCharacterClassicView: View {
                         }
                 }
                 .task {
-                        guard !isEntriesLoaded else { return }
+                        guard isEntriesLoaded.negative else { return }
                         defer { isEntriesLoaded = true }
                         if AppMaster.thousandCharacterClassicEntries.isEmpty {
                                 AppMaster.fetchThousandCharacterClassic()

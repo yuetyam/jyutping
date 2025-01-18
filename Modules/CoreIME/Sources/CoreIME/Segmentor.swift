@@ -55,7 +55,7 @@ extension Segmentation {
         }
 }
 
-public struct Segmentor: Sendable {
+public struct Segmentor {
 
         #if os(iOS)
         static func prepare() {

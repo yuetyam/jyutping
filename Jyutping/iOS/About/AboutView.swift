@@ -1,6 +1,7 @@
 #if os(iOS)
 
 import SwiftUI
+import CommonExtensions
 import AboutKit
 
 struct AboutView: View {
@@ -133,7 +134,7 @@ private struct EmailFeedbackButton: View {
         var body: some View {
                 Button {
                         UIApplication.shared.open(mailtoUrl) { success in
-                                if !success {
+                                if success.negative {
                                         if Device.isPhone {
                                                 UINotificationFeedbackGenerator().notificationOccurred(.warning)
                                                 isMailOnPhoneUnavailable = true

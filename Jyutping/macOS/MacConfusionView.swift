@@ -1,6 +1,7 @@
 #if os(macOS)
 
 import SwiftUI
+import CommonExtensions
 import AppDataSource
 
 struct MacConfusionView: View {
@@ -26,7 +27,7 @@ struct MacConfusionView: View {
                         .padding()
                 }
                 .task {
-                        guard !isDataSourceLoaded else { return }
+                        guard isDataSourceLoaded.negative else { return }
                         defer { isDataSourceLoaded = true }
                         guard entries.isEmpty else { return }
                         if AppMaster.confusionEntries.isEmpty {

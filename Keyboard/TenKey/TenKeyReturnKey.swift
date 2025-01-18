@@ -1,4 +1,5 @@
 import SwiftUI
+import CommonExtensions
 
 struct TenKeyReturnKey: View {
 
@@ -32,7 +33,7 @@ struct TenKeyReturnKey: View {
                 let isDefaultReturn: Bool = context.returnKeyType.isDefaultReturn
                 let keyState: ReturnKeyState = context.returnKeyState
                 let backColor: Color = {
-                        guard !isTouching else { return activeKeyColor }
+                        guard isTouching.negative else { return activeKeyColor }
                         switch keyState {
                         case .bufferingSimplified, .bufferingTraditional:
                                 return keyColor
@@ -43,7 +44,7 @@ struct TenKeyReturnKey: View {
                         }
                 }()
                 let foreColor: Color = {
-                        guard !isTouching else { return Color.primary }
+                        guard isTouching.negative else { return Color.primary }
                         switch keyState {
                         case .bufferingSimplified, .bufferingTraditional:
                                 return Color.primary
@@ -66,7 +67,7 @@ struct TenKeyReturnKey: View {
                 .contentShape(Rectangle())
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in
-                                if !tapped {
+                                if tapped.negative {
                                         AudioFeedback.modified()
                                         context.triggerHapticFeedback()
                                         tapped = true

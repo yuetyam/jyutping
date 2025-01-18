@@ -1,6 +1,7 @@
 #if os(iOS)
 
 import SwiftUI
+import CommonExtensions
 import AppDataSource
 
 struct IOSConfusionView: View {
@@ -29,7 +30,7 @@ struct IOSConfusionView: View {
                 }
                 .textSelection(.enabled)
                 .task {
-                        guard !isDataSourceLoaded else { return }
+                        guard isDataSourceLoaded.negative else { return }
                         defer { isDataSourceLoaded = true }
                         guard entries.isEmpty else { return }
                         if AppMaster.confusionEntries.isEmpty {

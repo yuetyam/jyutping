@@ -1,6 +1,7 @@
 #if os(macOS)
 
 import SwiftUI
+import CommonExtensions
 import AppDataSource
 
 struct MacThousandCharacterClassicView: View {
@@ -19,7 +20,7 @@ struct MacThousandCharacterClassicView: View {
                         .padding()
                 }
                 .task {
-                        guard !isEntriesLoaded else { return }
+                        guard isEntriesLoaded.negative else { return }
                         defer { isEntriesLoaded = true }
                         if AppMaster.thousandCharacterClassicEntries.isEmpty {
                                 AppMaster.fetchThousandCharacterClassic()

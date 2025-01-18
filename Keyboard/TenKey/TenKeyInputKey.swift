@@ -1,5 +1,6 @@
 import SwiftUI
 import CoreIME
+import CommonExtensions
 
 struct TenKeyInputKey: View {
 
@@ -44,7 +45,7 @@ struct TenKeyInputKey: View {
                 .contentShape(Rectangle())
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in
-                                if !tapped {
+                                if tapped.negative {
                                         AudioFeedback.inputed()
                                         context.triggerHapticFeedback()
                                         tapped = true
