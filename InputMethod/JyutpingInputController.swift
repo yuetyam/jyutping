@@ -1,5 +1,6 @@
 import SwiftUI
 import InputMethodKit
+import os.log
 import CommonExtensions
 import CoreIME
 
@@ -8,10 +9,12 @@ final class JyutpingInputController: IMKInputController, Sendable {
 
         // MARK: - Window, InputClient
 
-        /// Window for CandidateBoard and OptionsView
-        private lazy var window: NSPanel = CandidateWindow(level: nil)
+        private lazy var logger = Logger.shared
+
+        /// NSPanel for CandidateBoard and OptionsView
+        private lazy var window = CandidateWindow.shared
+
         private func prepareWindow() {
-                window.contentViewController = nil
                 let idealValue: Int = Int(CGShieldingWindowLevel())
                 let maxValue: Int = idealValue + 2
                 let minValue: Int = NSWindow.Level.floating.rawValue
@@ -25,10 +28,6 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 window.level = NSWindow.Level(levelValue)
                 window.contentViewController = NSHostingController(rootView: MotherBoard().environmentObject(appContext))
                 window.orderFrontRegardless()
-        }
-        private func clearWindow() {
-                window.contentViewController = nil
-                window.setFrame(.zero, display: true)
         }
         private func updateWindowFrame(_ frame: CGRect? = nil) {
                 window.setFrame(frame ?? windowFrame, display: true)
@@ -153,8 +152,9 @@ final class JyutpingInputController: IMKInputController, Sendable {
         override func deactivateServer(_ sender: Any!) {
                 nonisolated(unsafe) let client: InputClient? = (sender as? InputClient) ?? client()
                 Task { @MainActor in
+                        guard inputStage != .idle else { return }
                         suggestionTask?.cancel()
-                        clearWindow()
+                        window.setFrame(.zero, display: true)
                         selectedCandidates = []
                         if inputStage.isBuffering {
                                 let text: String = bufferText
@@ -166,31 +166,25 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         if inputForm.isOptions {
                                 updateInputForm()
                         }
-                        let windowCount = NSApp.windows.count
-                        if windowCount > 20 {
-                                NSRunningApplication.current.terminate()
-                                NSApp.terminate(self)
-                                exit(1)
-                        } else if windowCount > 10 {
-                                _ = NSApp.windows.map({ $0.close() })
-                        } else {
-                                _ = NSApp.windows.filter({ $0.identifier != window.identifier && $0.identifier?.rawValue != PresetConstant.preferencesWindowIdentifier }).map({ $0.close() })
+                        let activatingWindowCount = NSApp.windows.count(where: { $0.windowNumber > 0 })
+                        if activatingWindowCount > 30 {
+                                logger.error("Jyutping Input Method terminated due to it contained more than 30 windows")
+                                fatalError("Jyutping Input Method terminated due to it contained more than 30 windows")
+                        } else if activatingWindowCount > 20 {
+                                logger.warning("Jyutping Input Method containing more than 20 windows")
+                                NSApp.windows.filter({ $0 != window }).forEach({ $0.close() })
+                        } else if activatingWindowCount > 10 {
+                                logger.notice("Jyutping Input Method containing more than 10 windows")
                         }
                 }
                 super.deactivateServer(sender)
         }
         override func commitComposition(_ sender: Any!) {
+                guard inputStage.isBuffering.negative else { return }
                 nonisolated(unsafe) let client: InputClient? = (sender as? InputClient) ?? client()
-                let shouldCommit: Bool = {
-                        guard let clientBundleIdentifier = client?.bundleIdentifier() else { return false }
-                        let isChromiumBased: Bool = PresetConstant.chromiumBasedBrowserBundleIdentifiers.contains(clientBundleIdentifier)
-                        guard isChromiumBased else { return true }
-                        return inputStage.isBuffering.negative
-                }()
-                guard shouldCommit else { return }
                 Task { @MainActor in
                         suggestionTask?.cancel()
-                        updateWindowFrame(.zero)
+                        window.setFrame(.zero, display: true)
                         selectedCandidates = []
                         if inputStage.isBuffering {
                                 let text: String = bufferText
@@ -202,6 +196,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         if inputForm.isOptions {
                                 updateInputForm()
                         }
+                        inputStage = .idle
                 }
 
                 // Do NOT use this line or it will freeze the entire IME
@@ -1252,14 +1247,18 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 displayPreferencesView()
         }
         private func displayPreferencesView() {
-                let shouldOpenNewWindow: Bool = NSApp.windows.compactMap(\.identifier?.rawValue).notContains(PresetConstant.preferencesWindowIdentifier)
-                guard shouldOpenNewWindow else { return }
+                let isSettingsWindowOpen: Bool = NSApp.windows
+                        .filter({ $0.windowNumber > 0 })
+                        .compactMap(\.identifier?.rawValue)
+                        .contains(where: { $0.hasPrefix(PresetConstant.settingsWindowIdentifierPrefix) })
+                guard isSettingsWindowOpen.negative else { return }
                 let frame: CGRect = preferencesWindowFrame()
                 let preferencesWindow = NSWindow(contentRect: frame, styleMask: [.titled, .closable, .resizable, .fullSizeContentView], backing: .buffered, defer: true)
-                preferencesWindow.identifier = NSUserInterfaceItemIdentifier(rawValue: PresetConstant.preferencesWindowIdentifier)
                 preferencesWindow.title = String(localized: "PreferencesView.Window.Title")
                 preferencesWindow.toolbarStyle = .unifiedCompact
                 preferencesWindow.contentViewController = NSHostingController(rootView: PreferencesView())
+                let identifierString: String = PresetConstant.settingsWindowIdentifierPrefix + Date.timeIntervalSinceReferenceDate.description
+                preferencesWindow.identifier = NSUserInterfaceItemIdentifier(rawValue: identifierString)
                 preferencesWindow.orderFrontRegardless()
                 preferencesWindow.setFrame(frame, display: true)
                 NSApp.activate(ignoringOtherApps: true)

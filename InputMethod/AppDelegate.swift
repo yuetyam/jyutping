@@ -1,32 +1,37 @@
 import AppKit
 import InputMethodKit
+import os.log
 import Sparkle
 
 @MainActor
 final class AppDelegate: NSObject, NSApplicationDelegate {
 
         static let shared = AppDelegate()
-        var server: IMKServer? = nil
 
         private override init() {
                 super.init()
         }
 
+        private lazy var imkServer: IMKServer? = nil
+
         func applicationDidFinishLaunching(_ notification: Notification) {
-                Self.shared.prepareUpdaterController()
+                let name: String = (Bundle.main.infoDictionary?["InputMethodConnectionName"] as? String) ?? "org.jyutping.inputmethod.Jyutping_Connection"
+                let identifier: String = Bundle.main.bundleIdentifier ?? "org.jyutping.inputmethod.Jyutping"
+                imkServer = IMKServer(name: name, bundleIdentifier: identifier)
+                prepareUpdaterController()
         }
 
         private lazy var updaterController: SPUStandardUpdaterController? = nil
         private func prepareUpdaterController() {
-                if Self.shared.updaterController == nil {
-                        Self.shared.updaterController = SPUStandardUpdaterController(startingUpdater: true, updaterDelegate: nil, userDriverDelegate: nil)
+                if updaterController == nil {
+                        updaterController = SPUStandardUpdaterController(startingUpdater: true, updaterDelegate: nil, userDriverDelegate: nil)
                 }
         }
         func checkForUpdates() {
-                Self.shared.prepareUpdaterController()
-                let canCheckForUpdates: Bool = Self.shared.updaterController?.updater.canCheckForUpdates ?? false
+                prepareUpdaterController()
+                let canCheckForUpdates: Bool = updaterController?.updater.canCheckForUpdates ?? false
                 guard canCheckForUpdates else { return }
-                Self.shared.updaterController?.updater.checkForUpdates()
+                updaterController?.updater.checkForUpdates()
         }
 }
 
@@ -40,9 +45,9 @@ extension CommandLine {
                 exit(0)
         }
         private static func register() {
-                let url = Bundle.main.bundleURL
-                let cfUrl = url as CFURL
-                TISRegisterInputSource(cfUrl)
+                let path = "/Library/Input Methods/Jyutping.app"
+                let url = FileManager.default.fileExists(atPath: path) ? URL(fileURLWithPath: path) : Bundle.main.bundleURL
+                TISRegisterInputSource(url as CFURL)
         }
         private static func activate() {
                 let kInputSourceID: String = "org.jyutping.inputmethod.Jyutping"
@@ -56,4 +61,8 @@ extension CommandLine {
                         TISSelectInputSource(inputSource)
                 }
         }
+}
+
+extension Logger {
+        static let shared: Logger = Logger(subsystem: "org.jyutping.inputmethod.Jyutping", category: "inputmethod")
 }

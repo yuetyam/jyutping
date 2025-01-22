@@ -13,15 +13,8 @@ struct PresetConstant {
         static let fallbackCJKVList: [String] = ["Plangothic P1", "Plangothic P2", "MiSans L3"]
 
         static let systemABCKeyboardName: String = "com.apple.keylayout.ABC"
-        static let preferencesWindowIdentifier: String = "JyutpingInputMethodPreferencesWindow"
+        static let settingsWindowIdentifierPrefix: String = "JyutpingInputMethodSettingsWindowIdentifierPrefix"
 
         static let halfWidth: String = "半寬"
         static let fullWidth: String = "全寬"
-
-        static let chromiumBasedBrowserBundleIdentifiers: Set<String> = [
-                "org.chromium.Chromium",
-                "com.google.Chrome",
-                "com.microsoft.edgemac",
-                "com.brave.Browser"
-        ]
 }
