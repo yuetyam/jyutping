@@ -157,9 +157,7 @@ struct DatabasePreparer {
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
                 sqlite3_finalize(createStatement)
-                guard let url = Bundle.module.url(forResource: "pinyin", withExtension: "txt") else { return }
-                guard let content = try? String(contentsOf: url, encoding: .utf8) else { return }
-                let sourceLines: [String] = content.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
+                let sourceLines: [String] = Pinyin.generate()
                 func insert(values: String) {
                         let insert: String = "INSERT INTO pinyintable (word, pinyin, shortcut, ping) VALUES \(values);"
                         var insertStatement: OpaquePointer? = nil
