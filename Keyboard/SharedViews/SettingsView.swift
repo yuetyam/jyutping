@@ -142,7 +142,9 @@ struct SettingsView: View {
                                 Picker("SettingsView.KeyboardLayout.PickerTitle", selection: $keyboardLayout) {
                                         Text("SettingsView.KeyboardLayout.PickerOption.QWERTY").tag(KeyboardLayout.qwerty)
                                         Text("SettingsView.KeyboardLayout.PickerOption.TripleStroke").tag(KeyboardLayout.tripleStroke)
+                                        #if DEBUG
                                         Text("SettingsView.KeyboardLayout.PickerOption.10Key").tag(KeyboardLayout.tenKey)
+                                        #endif
                                 }
                                 .pickerStyle(.inline)
                                 .textCase(nil)
