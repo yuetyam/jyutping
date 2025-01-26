@@ -9,6 +9,12 @@
             "value" : "Email Feedback"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Commentaires par courriel"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -68,6 +74,12 @@
     "AboutView.FAQ" : {
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FAQ"
+          }
+        },
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "FAQ"
@@ -137,6 +149,12 @@
             "value" : "Google Forms Feedback"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Commentaires via Google Forms"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -196,6 +214,12 @@
     "AboutView.Instagram" : {
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Instagram"
+          }
+        },
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Instagram"
@@ -265,6 +289,12 @@
             "value" : "Privacy Policy"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Politique de confidentialité"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -327,6 +357,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "QQ Group"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Groupe QQ"
           }
         },
         "yue" : {
@@ -393,6 +429,12 @@
             "value" : "Source Code"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Code source"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -455,6 +497,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Telegram Group"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Groupe Telegram"
           }
         },
         "yue" : {
@@ -521,6 +569,12 @@
             "value" : "Tencent Survey Feedback"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Commentaires via Tencent Survey"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -580,6 +634,12 @@
     "AboutView.Twitter" : {
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "X (Twitter)"
+          }
+        },
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "X (Twitter)"
@@ -649,6 +709,12 @@
             "value" : "Version"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Version"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -711,6 +777,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Website"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Site web"
           }
         },
         "yue" : {
@@ -777,6 +849,12 @@
             "value" : "Candidate Font"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Police des candidats"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -839,6 +917,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Candidate Font Size"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Taille de la police des candidats"
           }
         },
         "yue" : {
@@ -905,6 +989,12 @@
             "value" : "Comment Font"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Police des commentaires"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -967,6 +1057,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Comment Font Size"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Taille de la police des commentaires"
           }
         },
         "yue" : {
@@ -1033,6 +1129,12 @@
             "value" : "Custom"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Personnalisé"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1095,6 +1197,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Default"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Par défaut"
           }
         },
         "yue" : {
@@ -1161,6 +1269,12 @@
             "value" : "Serial Number Font"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Police du numéro de série"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1223,6 +1337,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Serial Number Font Size"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Taille de la police du numéro de série"
           }
         },
         "yue" : {
@@ -1289,6 +1409,12 @@
             "value" : "System"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Système"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1351,6 +1477,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Clear Input Memory"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Effacer la mémoire d’entrée"
           }
         },
         "yue" : {
@@ -1417,6 +1549,12 @@
             "value" : "Candidate Count Per Page"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nombre de candidats par page"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1479,6 +1617,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Candidate Line Spacing"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Espacement des lignes des candidats"
           }
         },
         "yue" : {
@@ -1545,6 +1689,12 @@
             "value" : "Candidate Page Orientation"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Orientation de la page des candidats"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1604,6 +1754,12 @@
     "GeneralPreferencesView.CandidatePageOrientation.Horizontal" : {
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Horizontal"
+          }
+        },
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Horizontal"
@@ -1673,6 +1829,12 @@
             "value" : "Vertical"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vertical"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1735,6 +1897,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "You can use this shortcut to toggle options:"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vous pouvez utiliser ce raccourci pour basculer les options :"
           }
         },
         "yue" : {
@@ -1801,6 +1969,12 @@
             "value" : "(below the esc key)"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "(sous la touche échap)"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1865,6 +2039,12 @@
             "value" : "Simplified"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Simplifié"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1926,7 +2106,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tradiditonal"
+            "value" : "Traditional"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Traditionnel"
           }
         },
         "yue" : {
@@ -1993,6 +2179,12 @@
             "value" : "Traditional, HK"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Traditionnel (Hong Kong)"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2055,6 +2247,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Traditional, TW"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Traditionnel (Taïwan)"
           }
         },
         "yue" : {
@@ -2121,6 +2319,12 @@
             "value" : "Candidate Character Set"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jeu de caractères des candidats"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2183,6 +2387,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Comment(Jyutping) Position"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Position des commentaires (Jyutping)"
           }
         },
         "yue" : {
@@ -2249,6 +2459,12 @@
             "value" : "Bottom"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bas"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2311,6 +2527,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "None"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucun"
           }
         },
         "yue" : {
@@ -2377,6 +2599,12 @@
             "value" : "Right"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Droite"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2439,6 +2667,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Top"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Haut"
           }
         },
         "yue" : {
@@ -2505,6 +2739,12 @@
             "value" : "Comment(Jyutping) Tone Color"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couleur des tons des commentaires (Jyutping)"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2564,6 +2804,12 @@
     "GeneralPreferencesView.CommentToneColor.Normal" : {
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Normal"
+          }
+        },
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Normal"
@@ -2633,6 +2879,12 @@
             "value" : "Shallow"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Peu profond"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2697,6 +2949,12 @@
             "value" : "Comment(Jyutping) Tone Style"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Style des tons des commentaires (Jyutping)"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2756,6 +3014,12 @@
     "GeneralPreferencesView.CommentToneStyle.Normal" : {
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Normal"
+          }
+        },
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Normal"
@@ -2825,6 +3089,12 @@
             "value" : "No Tones"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sans tons"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2887,6 +3157,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Subscript"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Indice"
           }
         },
         "yue" : {
@@ -2953,6 +3229,12 @@
             "value" : "Superscript"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exposant"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3015,6 +3297,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cancel"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Annuler"
           }
         },
         "yue" : {
@@ -3081,6 +3369,12 @@
             "value" : "Clear"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Effacer"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3143,6 +3437,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Clear Input Memory?"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Effacer la mémoire de saisie ?"
           }
         },
         "yue" : {
@@ -3209,6 +3509,12 @@
             "value" : "Emoji Suggestions"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suggestions d’emoji"
+          }
+        },  
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3271,6 +3577,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Jyutping Input Method"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Méthode de saisie Jyutping"
           }
         },
         "yue" : {
@@ -3337,6 +3649,12 @@
             "value" : "Input Memory"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mémoire de saisie"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3399,6 +3717,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Back to the first Candidate page"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retour à la première page de candidats"
           }
         },
         "yue" : {
@@ -3465,6 +3789,12 @@
             "value" : "Backward to previous Candidate page"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retour à la page de candidats précédente"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3527,6 +3857,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Clear current pre-edit text"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Effacer le texte de pré-édition actuel"
           }
         },
         "yue" : {
@@ -3593,6 +3929,12 @@
             "value" : "Directly toggle a specific Option"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Basculer directement une option spécifique"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3655,6 +3997,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Enter/Exit Options View"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entrer/Quitter la vue des options"
           }
         },
         "yue" : {
@@ -3721,6 +4069,12 @@
             "value" : "is located below the esc key"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "est situé sous la touche éch."
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3783,6 +4137,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Forward to next Candidate page"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avancer à la page de candidats suivante"
           }
         },
         "yue" : {
@@ -3849,6 +4209,12 @@
             "value" : "Horizontal Candidate Page Orientation"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Orientation horizontale de la page de candidats"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3911,6 +4277,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vertical Candidate Page Orientation"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Orientation verticale de la page de candidats"
           }
         },
         "yue" : {
@@ -3977,6 +4349,12 @@
             "value" : "Input current pre-edit text"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Saisir le texte de pré-édition actuel"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4039,6 +4417,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Input current Candidate’s Jyutping"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Saisir le Jyutping du candidat actuel"
           }
         },
         "yue" : {
@@ -4105,6 +4489,12 @@
             "value" : "Move to next Candidate"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Passer au candidat suivant"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4167,6 +4557,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Move to previous Candidate"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Passer au candidat précédent"
           }
         },
         "yue" : {
@@ -4233,6 +4629,12 @@
             "value" : "Open Settings Window (This Window)"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvrir la fenêtre des paramètres (cette fenêtre)"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4295,6 +4697,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "is the comma key"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "est la touche virgule"
           }
         },
         "yue" : {
@@ -4361,6 +4769,12 @@
             "value" : "or"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ou"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4423,6 +4837,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Press **Shift** Once To"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Appuyer une fois sur **Shift** pour"
           }
         },
         "yue" : {
@@ -4489,6 +4909,12 @@
             "value" : "Do Nothing"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ne rien faire"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4551,6 +4977,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Press **Shift** + **Space** To"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Appuyer sur **Shift** + **Espace** pour"
           }
         },
         "yue" : {
@@ -4617,6 +5049,12 @@
             "value" : "Input a full-width space"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Saisir un espace pleine largeur"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4679,6 +5117,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Remove current Candidate from Input Memory"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Supprimer le candidat actuel de la mémoire de saisie"
           }
         },
         "yue" : {
@@ -4745,6 +5189,12 @@
             "value" : "Input current Candidate"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Saisir le candidat actuel"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4807,6 +5257,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Input current Candidate’s first character"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Saisir le premier caractère du candidat actuel"
           }
         },
         "yue" : {
@@ -4873,6 +5329,12 @@
             "value" : "Input current Candidate’s last character"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Saisir le dernier caractère du candidat actuel"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4935,6 +5397,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Switch Input Mode"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Changer de mode de saisie"
           }
         },
         "yue" : {
@@ -5001,6 +5469,12 @@
             "value" : "About"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "À propos"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5063,6 +5537,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Check for Updates…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rechercher des mises à jour…"
           }
         },
         "yue" : {
@@ -5129,6 +5609,12 @@
             "value" : "Help"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aide"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5193,6 +5679,12 @@
             "value" : "Settings…"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Préférences…"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5252,6 +5744,12 @@
     "Menu.Title" : {
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jyutping"
+          }
+        },
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Jyutping"
@@ -5321,6 +5819,12 @@
             "value" : "全寬數字 (Full-width)"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chiffres pleine largeur"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5383,6 +5887,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "半寬數字 (Half-width)"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chiffres demi-largeur"
           }
         },
         "yue" : {
@@ -5449,6 +5959,12 @@
             "value" : "简化字 (Simplified)"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Caractères simplifiés"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5511,6 +6027,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "傳統漢字 (Traditional)"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Caractères traditionnels"
           }
         },
         "yue" : {
@@ -5577,6 +6099,12 @@
             "value" : "傳統漢字・香港 (Traditional, HK)"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Caractères traditionnels, Hong Kong"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5639,6 +6167,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "傳統漢字・臺灣 (Traditional, TW)"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Caractères traditionnels, Taïwan"
           }
         },
         "yue" : {
@@ -5705,6 +6239,12 @@
             "value" : "ABC 模式 (ABC Mode)"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mode ABC"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5767,6 +6307,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "粵拼模式 (Jyutping Mode)"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mode Jyutping"
           }
         },
         "yue" : {
@@ -5833,6 +6379,12 @@
             "value" : "粵文句讀 (，、；。)"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ponctuation cantonaise (, ' ; .)"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5895,6 +6447,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "英文標點 (, ' ; .)"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ponctuation occidentale (, ' ; .)"
           }
         },
         "yue" : {
@@ -5961,6 +6519,12 @@
             "value" : "Change…"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Changer…"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6023,6 +6587,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "About"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "À propos"
           }
         },
         "yue" : {
@@ -6089,6 +6659,12 @@
             "value" : "Fonts"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Polices"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6151,6 +6727,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "General"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Général"
           }
         },
         "yue" : {
@@ -6217,6 +6799,12 @@
             "value" : "Hotkeys"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Raccourcis"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6279,6 +6867,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Settings"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Préférences"
           }
         },
         "yue" : {
@@ -6345,6 +6939,12 @@
             "value" : "Reverse Lookup"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recherche inversée"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6407,6 +7007,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tones"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tons"
           }
         },
         "yue" : {
@@ -6473,6 +7079,12 @@
             "value" : "About"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "À propos"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6535,6 +7147,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Candidates"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Candidats"
           }
         },
         "yue" : {
@@ -6601,6 +7219,12 @@
             "value" : "Hotkeys"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Raccourcis clavier"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6663,6 +7287,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Jyutping Input Method Settings"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Préférences de la méthode de saisie Jyutping"
           }
         },
         "yue" : {
@@ -6729,6 +7359,12 @@
             "value" : "Start with “v”, then enter Cangjie or Quick code. For example, enter “vdd”, candidate “林” will appear. Candidates will be displayed with the corresponding Jyutping."
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Commencez par « v », puis entrez le code Cangjie ou Quick. Par exemple, entrez « vdd », le candidat « 林 » apparaîtra. Les candidats seront affichés avec le Jyutping correspondant."
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6793,6 +7429,12 @@
             "value" : "Lookup Jyutping with Cangjie or Quick(Sucheng)"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rechercher Jyutping par Cangjie ou Quick (Sucheng)"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6852,6 +7494,12 @@
     "ReverseLookupView.CangjieVariant.Picker.Option1" : {
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cangjie5"
+          }
+        },
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cangjie5"
@@ -6921,6 +7569,12 @@
             "value" : "Cangjie3"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cangjie3"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6980,6 +7634,12 @@
     "ReverseLookupView.CangjieVariant.Picker.Option3" : {
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quick5"
+          }
+        },
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Quick5"
@@ -7049,6 +7709,12 @@
             "value" : "Quick3"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quick3"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7111,6 +7777,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cangjie / Quick(Sucheng) Version"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Version Cangjie / Quick (Sucheng)"
           }
         },
         "yue" : {
@@ -7177,6 +7849,12 @@
             "value" : "Start with “r”, then enter Pinyin code. For example, enter “rlin”, candidate “林” will appear. Candidates will be displayed with the corresponding Jyutping."
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Commencez par « r », puis entrez le code Pinyin. Par exemple, entrez « rlin », le candidat « 林 » apparaîtra. Les candidats seront affichés avec le Jyutping correspondant."
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7239,6 +7917,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lookup Jyutping with Mandarin Pinyin"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rechercher Jyutping par le pinyin mandarin"
           }
         },
         "yue" : {
@@ -7305,6 +7989,12 @@
             "value" : "Start with “x”, then enter Stroke code. For example, enter “xwsad”, candidate “木” will appear. Candidates will be displayed with the corresponding Jyutping."
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Commencez par « x », puis entrez le code de trait. Par exemple, entrez « xwsad », le candidat « 木 » apparaîtra. Les candidats seront affichés avec le Jyutping correspondant."
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7367,6 +8057,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "w = 橫(waang), Horizontal\ns = 豎(syu), Vertical\na = 撇, Left-falling\nd = 點(dim), Right-falling\nz = 折(zit), Turning"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "w = 橫(waang)\ns = 豎(syu)\na = 撇\nd = 點(dim)\nz = 折(zit)"
           }
         },
         "yue" : {
@@ -7433,6 +8129,12 @@
             "value" : "Lookup Jyutping with Stroke"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rechercher Jyutping par le trait"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7495,6 +8197,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Start with “q”, then enter two components' Jyutping. For example, enter “qmukmuk”, candidate “林” will appear. Candidates will be displayed with the corresponding Jyutping."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Commencez par « q », puis entrez le Jyutping de deux composants. Par exemple, entrez « qmukmuk », le candidat « 林 » apparaîtra. Les candidats seront affichés avec le Jyutping correspondant."
           }
         },
         "yue" : {
@@ -7561,6 +8269,12 @@
             "value" : "Lookup Jyutping with character components"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rechercher Jyutping par les composants des caractères"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7623,6 +8337,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "v = 1, High Level (陰平)\nx = 2, Medium Rising (陰上)\nq = 3, Medium Level (陰去)\nvv = 4, Low Falling (陽平)\nxx = 5, Low Rising (陽上)\nqq = 6, Low Level (陽去)"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "v = 1, Haut (陰平)\nx = 2, Médian montant (陰上)\nq = 3, Médian (陰去)\nvv = 4, Descendant (陽平)\nxx = 5, Légèrement montant (陽上)\nqq = 6, Bas (陽去)"
           }
         },
         "yue" : {
@@ -7689,6 +8409,12 @@
             "value" : "Examples: sinq = sin3(線), sinqq = sin6(羨)"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exemples : sinq = sin3(線), sinqq = sin6(羨)"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7751,6 +8477,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tone Input"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entrée de tonalité"
           }
         },
         "yue" : {

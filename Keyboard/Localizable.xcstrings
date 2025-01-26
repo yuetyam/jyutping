@@ -9,6 +9,12 @@
             "value" : "Back"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retour"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -71,6 +77,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Delete"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Supprimer"
           }
         },
         "yue" : {
@@ -137,6 +149,12 @@
             "value" : "Clear"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Effacer"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -199,6 +217,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Clear System Clipboard"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Effacer le presse-papiers du système"
           }
         },
         "yue" : {
@@ -265,6 +289,12 @@
             "value" : "Copy"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copier"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -329,6 +359,12 @@
             "value" : "Cut"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couper"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -391,6 +427,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Forward Delete"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Supprimer"
           }
         },
         "yue" : {
@@ -521,6 +563,12 @@
             "value" : "Paste"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Coller"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -583,6 +631,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "space"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "espace"
           }
         },
         "yue" : {
@@ -649,6 +703,12 @@
             "value" : "Activity"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activité"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -711,6 +771,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Animals & Nature"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Animaux et nature"
           }
         },
         "yue" : {
@@ -777,6 +843,12 @@
             "value" : "Flags"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Drapeaux"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -839,6 +911,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Food & Drink"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nourriture et boissons"
           }
         },
         "yue" : {
@@ -905,6 +983,12 @@
             "value" : "Frequently Used"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Favoris"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -967,6 +1051,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Objects"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Objets"
           }
         },
         "yue" : {
@@ -1033,6 +1123,12 @@
             "value" : "Smileys & People"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Émoticônes et personnages"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1097,6 +1193,12 @@
             "value" : "Symbols"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Symboles"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1159,6 +1261,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Travel & Places"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voyages et lieux"
           }
         },
         "yue" : {
