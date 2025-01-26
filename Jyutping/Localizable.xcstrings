@@ -9,6 +9,12 @@
             "value" : "Copied"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copié"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -71,6 +77,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Copy"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copier"
           }
         },
         "yue" : {
@@ -137,6 +149,12 @@
             "value" : "Copy Text"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copier le texte"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -201,6 +219,12 @@
             "value" : "Copy Jyutping"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copier le Jyutping"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -260,6 +284,12 @@
     "General.OK" : {
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "OK"
@@ -327,6 +357,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Search"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rechercher"
           }
         },
         "yue" : {
@@ -583,6 +619,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Copy Username"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copier le nom d’utilisateur"
           }
         },
         "yue" : {
@@ -969,6 +1011,12 @@
             "value" : "Cantonese Expressions"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Expressions cantonaises"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1031,6 +1079,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Canton Metro"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Métro de Canton"
           }
         },
         "yue" : {
@@ -1097,6 +1151,12 @@
             "value" : "Chinese Zodiac"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Signes du zodiaque chinois"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1159,6 +1219,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fatshan Metro"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Métro de Fatshan"
           }
         },
         "yue" : {
@@ -1225,6 +1291,12 @@
             "value" : "Hong Kong MTR"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MTR de Hong Kong"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1289,6 +1361,12 @@
             "value" : "Hundred Family Surnames"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cent noms de famille"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1348,6 +1426,12 @@
     "IOSCantoneseTab.LabelTitle.MacauMetro" : {
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Metro Ligeiro de Macau"
+          }
+        },
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Metro Ligeiro de Macau"
@@ -1417,6 +1501,12 @@
             "value" : "Numbers"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nombres"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1479,6 +1569,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sham Chun Metro"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Métro de Sham Chun"
           }
         },
         "yue" : {
@@ -1545,6 +1641,12 @@
             "value" : "Simplified Character Confusion"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confusion de caractères simplifiés"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1607,6 +1709,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Solar Terms"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Termes solaires"
           }
         },
         "yue" : {
@@ -1673,6 +1781,12 @@
             "value" : "Stems & Branches"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tiges et branches"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1735,6 +1849,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Thousand Character Classic"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Classique des mille caractères"
           }
         },
         "yue" : {
