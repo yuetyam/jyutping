@@ -5,7 +5,26 @@ import AppDataSource
 import CommonExtensions
 import Linguistics
 
-struct ChoHokYuetYamCitYiuLabel: View {
+struct ChoHokYuetYamCitYiuLexiconView: View {
+        let lexicon: [ChoHokYuetYamCitYiu]
+        var body: some View {
+                if let firstEntry = lexicon.first {
+                        HStack {
+                                Text(verbatim: "文字").font(.copilot)
+                                Text.separator.font(.copilot)
+                                Text(verbatim: firstEntry.word)
+                                if let unicode = firstEntry.word.first?.codePointsText {
+                                        Text(verbatim: unicode).font(.footnote.monospaced()).foregroundStyle(Color.secondary)
+                                }
+                        }
+                }
+                ForEach(lexicon.indices, id: \.self) { index in
+                        ChoHokYuetYamCitYiuPronunciationView(entry: lexicon[index])
+                }
+        }
+}
+
+private struct ChoHokYuetYamCitYiuPronunciationView: View {
         let entry: ChoHokYuetYamCitYiu
         var body: some View {
                 let homophoneText: String? = entry.homophones.isEmpty ? nil : entry.homophones.joined(separator: String.space)
@@ -13,7 +32,7 @@ struct ChoHokYuetYamCitYiuLabel: View {
                 VStack(alignment: .leading) {
                         HStack(spacing: 16) {
                                 HStack {
-                                        Text(verbatim: "原文")
+                                        Text(verbatim: "讀音")
                                         Text.separator
                                         Text(verbatim: entry.pronunciation).font(.body)
                                 }

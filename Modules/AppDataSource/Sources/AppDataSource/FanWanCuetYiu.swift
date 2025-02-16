@@ -44,6 +44,8 @@ private extension DataMaster {
         }
 }
 
+public typealias FanWanLexicon = Array<FanWanCuetYiu>
+
 public struct FanWanCuetYiu: Hashable {
 
         fileprivate init(word: String, romanization: String, initial: String, final: String, yamyeung: String, tone: String, rhyme: String, interpretation: String) {

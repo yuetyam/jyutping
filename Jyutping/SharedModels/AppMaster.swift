@@ -34,6 +34,15 @@ struct AppMaster {
 
 extension AppMaster {
 
+        static func searchCantoneseLexicons(for text: String) -> [CantoneseLexicon] {
+                let primaryLexicon = AppMaster.lookupCantoneseLexicon(for: text)
+                let characters = text.filter(\.isIdeographic).uniqued()
+                let shouldSearchMoreLexicons: Bool = text.count > 1 && characters.isNotEmpty && characters.count < 4
+                guard shouldSearchMoreLexicons else { return [primaryLexicon] }
+                let subLexicons = characters.map({ CantoneseLexicon.search(text: String($0)) })
+                return [primaryLexicon] + subLexicons
+        }
+
         /// Lookup Cantonese CantoneseLexicon for the given text.
         /// - Parameter text: Cantonese text.
         /// - Returns: CantoneseLexicon.

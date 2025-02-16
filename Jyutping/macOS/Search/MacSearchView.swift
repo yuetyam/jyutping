@@ -7,45 +7,42 @@ import CommonExtensions
 struct MacSearchView: View {
 
         @State private var submittedText: String = String.empty
+        @State private var previousSubmittedText: String = String.empty
         @FocusState private var isTextFieldFocused: Bool
 
-        @State private var cantonese: String = String.empty
-        @State private var lexicon: CantoneseLexicon? = nil
-        @State private var unihanDefinition: UnihanDefinition? = nil
-        @State private var yingWaaEntries: [YingWaaFanWan] = []
-        @State private var choHokEntries: [ChoHokYuetYamCitYiu] = []
-        @State private var fanWanEntries: [FanWanCuetYiu] = []
-        @State private var gwongWanEntries: [GwongWanCharacter] = []
+        @State private var lexicons: [CantoneseLexicon] = []
+        @State private var yingWaaLexicons: [YingWaaLexicon] = []
+        @State private var choHokLexicons: [ChoHokLexicon] = []
+        @State private var fanWanLexicons: [FanWanLexicon] = []
+        @State private var gwongWanLexicons: [GwongWanLexicon] = []
+
         @State private var animationState: Int = 0
         @Namespace private var topID
 
         private func handleSubmission(_ text: String) {
                 let trimmedInput: String = text.trimmed()
-                guard trimmedInput != cantonese else { return }
+                guard trimmedInput != previousSubmittedText else { return }
+                previousSubmittedText = trimmedInput
                 defer { animationState += 1 }
                 guard trimmedInput.isNotEmpty else {
-                        yingWaaEntries = []
-                        choHokEntries = []
-                        fanWanEntries = []
-                        gwongWanEntries = []
-                        lexicon = nil
-                        unihanDefinition = nil
-                        cantonese = String.empty
+                        lexicons = []
+                        yingWaaLexicons = []
+                        choHokLexicons = []
+                        fanWanLexicons = []
+                        gwongWanLexicons = []
                         return
                 }
-                yingWaaEntries = YingWaaFanWan.match(text: trimmedInput)
-                choHokEntries = ChoHokYuetYamCitYiu.match(text: trimmedInput)
-                fanWanEntries = FanWanCuetYiu.match(text: trimmedInput)
-                gwongWanEntries = GwongWan.match(text: trimmedInput)
-                let cantoneseLexicon = AppMaster.lookupCantoneseLexicon(for: trimmedInput)
-                unihanDefinition = UnihanDefinition.match(text: cantoneseLexicon.text)
-                if cantoneseLexicon.pronunciations.isEmpty {
-                        lexicon = nil
-                        cantonese = trimmedInput
-                } else {
-                        lexicon = cantoneseLexicon
-                        cantonese = cantoneseLexicon.text
-                }
+                let ideographicWords: [String] = {
+                        let characters = trimmedInput.filter(\.isIdeographic).uniqued()
+                        let isCharacterCountFine: Bool = characters.isNotEmpty && characters.count < 4
+                        guard isCharacterCountFine else { return [] }
+                        return characters.map({ String($0) })
+                }()
+                lexicons = AppMaster.searchCantoneseLexicons(for: trimmedInput)
+                yingWaaLexicons = ideographicWords.map({ YingWaaFanWan.match(text: $0) }).filter(\.isNotEmpty)
+                choHokLexicons = ideographicWords.map({ ChoHokYuetYamCitYiu.match(text: $0) }).filter(\.isNotEmpty)
+                fanWanLexicons = ideographicWords.map({ FanWanCuetYiu.match(text: $0) }).filter(\.isNotEmpty)
+                gwongWanLexicons = ideographicWords.map({ GwongWan.match(text: $0) }).filter(\.isNotEmpty)
         }
 
         var body: some View {
@@ -70,107 +67,21 @@ struct MacSearchView: View {
                                 }
                         ScrollView {
                                 LazyVStack(spacing: 16) {
-                                        if cantonese.isNotEmpty {
-                                                VStack {
-                                                        CantoneseTextView(cantonese)
-                                                        if let pronunciations = lexicon?.pronunciations {
-                                                                ForEach(pronunciations.indices, id: \.self) { index in
-                                                                        Divider()
-                                                                        PronunciationView(pronunciations[index])
-                                                                }
-                                                        }
-                                                        if let definition = unihanDefinition?.definition {
-                                                                Divider()
-                                                                HStack {
-                                                                        Text(verbatim: "英文")
-                                                                        Text.separator
-                                                                        Text(verbatim: definition).font(.body)
-                                                                        Spacer()
-                                                                }
-                                                        }
-                                                }
-                                                .block()
-                                                .id(topID)
+                                        EmptyView().id(topID)
+                                        ForEach(lexicons.indices, id: \.self) { index in
+                                                CantoneseLexiconView(lexicon: lexicons[index])
                                         }
-                                        if let word = yingWaaEntries.first?.word {
-                                                VStack(spacing: 2) {
-                                                        HStack {
-                                                                Text(verbatim: word)
-                                                                Text(verbatim: "《英華分韻撮要》")
-                                                                Text(verbatim: "衛三畏 (Samuel Wells Williams)　廣州　1856").opacity(0.66)
-                                                                Spacer()
-                                                        }
-                                                        .font(.copilot)
-                                                        VStack {
-                                                                ForEach(yingWaaEntries.indices, id: \.self) { index in
-                                                                        if (index != 0) {
-                                                                                Divider()
-                                                                        }
-                                                                        YingWaaFanWanView(entry: yingWaaEntries[index])
-                                                                }
-                                                        }
-                                                        .block()
-                                                }
+                                        ForEach(yingWaaLexicons.indices, id: \.self) { index in
+                                                YingWaaLexiconView(lexicon: yingWaaLexicons[index])
                                         }
-                                        if let word = choHokEntries.first?.word {
-                                                VStack(spacing: 2) {
-                                                        HStack {
-                                                                Text(verbatim: word)
-                                                                Text(verbatim: "《初學粵音切要》")
-                                                                Text(verbatim: "湛約翰 (John Chalmers)　香港　1855").opacity(0.66)
-                                                                Spacer()
-                                                        }
-                                                        .font(.copilot)
-                                                        VStack {
-                                                                ForEach(choHokEntries.indices, id: \.self) { index in
-                                                                        if (index != 0) {
-                                                                                Divider()
-                                                                        }
-                                                                        ChoHokYuetYamCitYiuView(entry: choHokEntries[index])
-                                                                }
-                                                        }
-                                                        .block()
-                                                }
+                                        ForEach(choHokLexicons.indices, id: \.self) { index in
+                                                ChoHokLexiconView(lexicon: choHokLexicons[index])
                                         }
-                                        if let word = fanWanEntries.first?.word {
-                                                VStack(spacing: 2) {
-                                                        HStack {
-                                                                Text(verbatim: word)
-                                                                Text(verbatim: "《分韻撮要》")
-                                                                Text(verbatim: "佚名　清初　廣州府").opacity(0.66)
-                                                                Spacer()
-                                                        }
-                                                        .font(.copilot)
-                                                        VStack {
-                                                                ForEach(fanWanEntries.indices, id: \.self) { index in
-                                                                        if (index != 0) {
-                                                                                Divider()
-                                                                        }
-                                                                        FanWanCuetYiuView(entry: fanWanEntries[index])
-                                                                }
-                                                        }
-                                                        .block()
-                                                }
+                                        ForEach(fanWanLexicons.indices, id: \.self) { index in
+                                                FanWanLexiconView(lexicon: fanWanLexicons[index])
                                         }
-                                        if let word = gwongWanEntries.first?.word {
-                                                VStack(spacing: 2) {
-                                                        HStack {
-                                                                Text(verbatim: word)
-                                                                Text(verbatim: "《大宋重修廣韻》")
-                                                                Text(verbatim: "陳彭年等　北宋").opacity(0.66)
-                                                                Spacer()
-                                                        }
-                                                        .font(.copilot)
-                                                        VStack {
-                                                                ForEach(gwongWanEntries.indices, id: \.self) { index in
-                                                                        if (index != 0) {
-                                                                                Divider()
-                                                                        }
-                                                                        GwongWanView(entry: gwongWanEntries[index])
-                                                                }
-                                                        }
-                                                        .block()
-                                                }
+                                        ForEach(gwongWanLexicons.indices, id: \.self) { index in
+                                                GwongWanLexiconView(lexicon: gwongWanLexicons[index])
                                         }
                                 }
                                 .font(.master)

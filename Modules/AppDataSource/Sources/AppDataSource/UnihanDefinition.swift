@@ -16,13 +16,13 @@ public struct UnihanDefinition: Hashable {
 }
 
 private extension DataMaster {
-        static func matchDefinition(for code: UInt32) -> String? {
+        static func matchDefinition<T: BinaryInteger>(for code: T) -> String? {
                 let command: String = "SELECT definition FROM definitiontable WHERE code = \(code) LIMIT 1;"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return nil }
                 guard sqlite3_step(statement) == SQLITE_ROW else { return nil }
-                let definition: String = String(cString: sqlite3_column_text(statement, 0))
-                return definition
+                guard let definition = sqlite3_column_text(statement, 0) else { return nil }
+                return String(cString: definition)
         }
 }

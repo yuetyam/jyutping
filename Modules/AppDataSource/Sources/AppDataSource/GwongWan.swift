@@ -42,6 +42,8 @@ public struct GwongWan {
         }
 }
 
+public typealias GwongWanLexicon = Array<GwongWanCharacter>
+
 /// 字頭,韻目,小韻,小韻號,小韻內序,反切上字,反切下字,聲母,呼,等,韻系,重紐,聲調,釋義
 public struct GwongWanCharacter: Hashable {
 

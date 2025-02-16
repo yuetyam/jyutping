@@ -1,4 +1,4 @@
-extension Array where Element: Hashable {
+extension Sequence where Element: Hashable {
 
         /// Returns a new Array with the unique elements of this Array, in the order of the first occurrence of each unique element.
         /// - Returns: A new Array with only the unique elements of this Array.

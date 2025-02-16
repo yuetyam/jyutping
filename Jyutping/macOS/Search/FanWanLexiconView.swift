@@ -5,7 +5,37 @@ import AppDataSource
 import CommonExtensions
 import Linguistics
 
-struct FanWanCuetYiuView: View {
+struct FanWanLexiconView: View {
+        let lexicon: [FanWanCuetYiu]
+        var body: some View {
+                VStack(alignment: .leading, spacing: 2) {
+                        Text(verbatim: "《分韻撮要》　佚名　清初　廣州府")
+                                .font(.copilot)
+                                .opacity(0.66)
+                        VStack(alignment: .leading) {
+                                if let word = lexicon.first?.word {
+                                        HStack(spacing: 16) {
+                                                HStack {
+                                                        Text(verbatim: "文字")
+                                                        Text.separator
+                                                        Text(verbatim: word)
+                                                }
+                                                if let unicode = word.first?.codePointsText {
+                                                        Text(verbatim: unicode).font(.fixedWidth).opacity(0.66)
+                                                }
+                                        }
+                                }
+                                ForEach(lexicon.indices, id: \.self) { index in
+                                        Divider()
+                                        FanWanCuetYiuView(entry: lexicon[index])
+                                }
+                        }
+                        .block()
+                }
+        }
+}
+
+private struct FanWanCuetYiuView: View {
         let entry: FanWanCuetYiu
         var body: some View {
                 let homophoneText: String? = entry.homophones.isEmpty ? nil : entry.homophones.joined(separator: String.space)

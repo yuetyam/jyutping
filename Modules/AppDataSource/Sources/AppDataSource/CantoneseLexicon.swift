@@ -21,11 +21,13 @@ public struct CantoneseLexicon: Hashable {
         public let text: String
         public let pronunciations: [Pronunciation]
         public let note: String?
+        public let unihanDefinition: String?
 
-        public init(text: String, pronunciations: [Pronunciation] = [], note: String? = nil) {
+        public init(text: String, pronunciations: [Pronunciation] = [], note: String? = nil, unihanDefinition: String? = nil) {
                 self.text = text
                 self.pronunciations = pronunciations
                 self.note = note
+                self.unihanDefinition = unihanDefinition
         }
 
         /// Search CantoneseLexicon for the given text.
@@ -36,7 +38,7 @@ public struct CantoneseLexicon: Hashable {
         /// - Returns: Text (converted) and the corresponding CantoneseLexicon.
         public static func search(text: String) -> CantoneseLexicon {
                 let textCount: Int = text.count
-                lazy var fallback: CantoneseLexicon = CantoneseLexicon(text: text)
+                lazy var fallback: CantoneseLexicon = CantoneseLexicon(text: text, unihanDefinition: UnihanDefinition.match(text: text)?.definition)
                 guard textCount > 0 else { return fallback }
                 let matched = DataMaster.fetchRomanizations(for: text)
                 guard matched.isEmpty else {
@@ -46,7 +48,8 @@ public struct CantoneseLexicon: Hashable {
                                 let collocations = DataMaster.fetchCollocations(word: text, romanization: romanization)
                                 return Pronunciation(romanization: romanization, homophones: homophones, collocations: collocations)
                         }
-                        return CantoneseLexicon(text: text, pronunciations: pronunciations)
+                        let unihanDefinition = UnihanDefinition.match(text: text)?.definition
+                        return CantoneseLexicon(text: text, pronunciations: pronunciations, unihanDefinition: unihanDefinition)
                 }
                 let traditionalText: String = text.convertedS2T()
                 let tryMatched = DataMaster.fetchRomanizations(for: traditionalText)
@@ -57,7 +60,8 @@ public struct CantoneseLexicon: Hashable {
                                 let collocations = DataMaster.fetchCollocations(word: traditionalText, romanization: romanization)
                                 return Pronunciation(romanization: romanization, homophones: homophones, collocations: collocations)
                         }
-                        return CantoneseLexicon(text: traditionalText, pronunciations: pronunciations)
+                        let unihanDefinition = UnihanDefinition.match(text: traditionalText)?.definition
+                        return CantoneseLexicon(text: traditionalText, pronunciations: pronunciations, unihanDefinition: unihanDefinition)
                 }
                 guard textCount > 1 else { return fallback }
                 lazy var chars: String = text

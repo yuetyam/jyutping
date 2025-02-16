@@ -58,11 +58,10 @@
 		371B6EC12B3B3108005BB31C /* IOSMetroLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E6D2B3B3107005BB31C /* IOSMetroLineView.swift */; };
 		371B6EC22B3B3108005BB31C /* UIDevice+modelName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E6E2B3B3107005BB31C /* UIDevice+modelName.swift */; };
 		371B6EC32B3B3108005BB31C /* JyutpingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E6F2B3B3107005BB31C /* JyutpingView.swift */; };
-		371B6EC42B3B3108005BB31C /* PronunciationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E712B3B3107005BB31C /* PronunciationLabel.swift */; };
 		371B6EC52B3B3108005BB31C /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E722B3B3107005BB31C /* SearchView.swift */; };
 		371B6EC62B3B3108005BB31C /* ChoHokYuetYamCitYiuLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E732B3B3107005BB31C /* ChoHokYuetYamCitYiuLabel.swift */; };
 		371B6EC72B3B3108005BB31C /* GwongWanLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E742B3B3107005BB31C /* GwongWanLabel.swift */; };
-		371B6EC82B3B3108005BB31C /* CantoneseTextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E752B3B3107005BB31C /* CantoneseTextLabel.swift */; };
+		371B6EC82B3B3108005BB31C /* LexiconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E752B3B3107005BB31C /* LexiconView.swift */; };
 		371B6EC92B3B3108005BB31C /* YingWaaFanWanLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E762B3B3107005BB31C /* YingWaaFanWanLabel.swift */; };
 		371B6ECA2B3B3108005BB31C /* FanWanCuetYiuLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E772B3B3107005BB31C /* FanWanCuetYiuLabel.swift */; };
 		371B6ECB2B3B3108005BB31C /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E782B3B3107005BB31C /* AboutView.swift */; };
@@ -76,14 +75,13 @@
 		371B6ED32B3B3108005BB31C /* MacContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E822B3B3108005BB31C /* MacContentView.swift */; };
 		371B6ED42B3B3108005BB31C /* MacThousandCharacterClassicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E832B3B3108005BB31C /* MacThousandCharacterClassicView.swift */; };
 		371B6ED52B3B3108005BB31C /* MacIntroductionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E842B3B3108005BB31C /* MacIntroductionsView.swift */; };
-		371B6ED62B3B3108005BB31C /* CantoneseTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E862B3B3108005BB31C /* CantoneseTextView.swift */; };
 		371B6ED72B3B3108005BB31C /* SearchField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E872B3B3108005BB31C /* SearchField.swift */; };
-		371B6ED82B3B3108005BB31C /* FanWanCuetYiuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E882B3B3108005BB31C /* FanWanCuetYiuView.swift */; };
-		371B6ED92B3B3108005BB31C /* PronunciationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E892B3B3108005BB31C /* PronunciationView.swift */; };
-		371B6EDA2B3B3108005BB31C /* YingWaaFanWanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E8A2B3B3108005BB31C /* YingWaaFanWanView.swift */; };
-		371B6EDB2B3B3108005BB31C /* GwongWanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E8B2B3B3108005BB31C /* GwongWanView.swift */; };
+		371B6ED82B3B3108005BB31C /* FanWanLexiconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E882B3B3108005BB31C /* FanWanLexiconView.swift */; };
+		371B6ED92B3B3108005BB31C /* CantoneseLexiconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E892B3B3108005BB31C /* CantoneseLexiconView.swift */; };
+		371B6EDA2B3B3108005BB31C /* YingWaaLexiconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E8A2B3B3108005BB31C /* YingWaaLexiconView.swift */; };
+		371B6EDB2B3B3108005BB31C /* GwongWanLexiconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E8B2B3B3108005BB31C /* GwongWanLexiconView.swift */; };
 		371B6EDC2B3B3108005BB31C /* MacSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E8C2B3B3108005BB31C /* MacSearchView.swift */; };
-		371B6EDD2B3B3108005BB31C /* ChoHokYuetYamCitYiuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E8D2B3B3108005BB31C /* ChoHokYuetYamCitYiuView.swift */; };
+		371B6EDD2B3B3108005BB31C /* ChoHokLexiconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E8D2B3B3108005BB31C /* ChoHokLexiconView.swift */; };
 		371B6EDE2B3B3108005BB31C /* MacContentViewMonterey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E8E2B3B3108005BB31C /* MacContentViewMonterey.swift */; };
 		371B6EDF2B3B3108005BB31C /* MacHundredFamilySurnamesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E8F2B3B3108005BB31C /* MacHundredFamilySurnamesView.swift */; };
 		371B6EE02B3B3108005BB31C /* MacInputMethodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E902B3B3108005BB31C /* MacInputMethodView.swift */; };
@@ -450,11 +448,10 @@
 		371B6E6D2B3B3107005BB31C /* IOSMetroLineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IOSMetroLineView.swift; sourceTree = "<group>"; };
 		371B6E6E2B3B3107005BB31C /* UIDevice+modelName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDevice+modelName.swift"; sourceTree = "<group>"; };
 		371B6E6F2B3B3107005BB31C /* JyutpingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JyutpingView.swift; sourceTree = "<group>"; };
-		371B6E712B3B3107005BB31C /* PronunciationLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PronunciationLabel.swift; sourceTree = "<group>"; };
 		371B6E722B3B3107005BB31C /* SearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		371B6E732B3B3107005BB31C /* ChoHokYuetYamCitYiuLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChoHokYuetYamCitYiuLabel.swift; sourceTree = "<group>"; };
 		371B6E742B3B3107005BB31C /* GwongWanLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GwongWanLabel.swift; sourceTree = "<group>"; };
-		371B6E752B3B3107005BB31C /* CantoneseTextLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CantoneseTextLabel.swift; sourceTree = "<group>"; };
+		371B6E752B3B3107005BB31C /* LexiconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LexiconView.swift; sourceTree = "<group>"; };
 		371B6E762B3B3107005BB31C /* YingWaaFanWanLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YingWaaFanWanLabel.swift; sourceTree = "<group>"; };
 		371B6E772B3B3107005BB31C /* FanWanCuetYiuLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FanWanCuetYiuLabel.swift; sourceTree = "<group>"; };
 		371B6E782B3B3107005BB31C /* AboutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
@@ -468,14 +465,13 @@
 		371B6E822B3B3108005BB31C /* MacContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacContentView.swift; sourceTree = "<group>"; };
 		371B6E832B3B3108005BB31C /* MacThousandCharacterClassicView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacThousandCharacterClassicView.swift; sourceTree = "<group>"; };
 		371B6E842B3B3108005BB31C /* MacIntroductionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacIntroductionsView.swift; sourceTree = "<group>"; };
-		371B6E862B3B3108005BB31C /* CantoneseTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CantoneseTextView.swift; sourceTree = "<group>"; };
 		371B6E872B3B3108005BB31C /* SearchField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchField.swift; sourceTree = "<group>"; };
-		371B6E882B3B3108005BB31C /* FanWanCuetYiuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FanWanCuetYiuView.swift; sourceTree = "<group>"; };
-		371B6E892B3B3108005BB31C /* PronunciationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PronunciationView.swift; sourceTree = "<group>"; };
-		371B6E8A2B3B3108005BB31C /* YingWaaFanWanView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YingWaaFanWanView.swift; sourceTree = "<group>"; };
-		371B6E8B2B3B3108005BB31C /* GwongWanView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GwongWanView.swift; sourceTree = "<group>"; };
+		371B6E882B3B3108005BB31C /* FanWanLexiconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FanWanLexiconView.swift; sourceTree = "<group>"; };
+		371B6E892B3B3108005BB31C /* CantoneseLexiconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CantoneseLexiconView.swift; sourceTree = "<group>"; };
+		371B6E8A2B3B3108005BB31C /* YingWaaLexiconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YingWaaLexiconView.swift; sourceTree = "<group>"; };
+		371B6E8B2B3B3108005BB31C /* GwongWanLexiconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GwongWanLexiconView.swift; sourceTree = "<group>"; };
 		371B6E8C2B3B3108005BB31C /* MacSearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacSearchView.swift; sourceTree = "<group>"; };
-		371B6E8D2B3B3108005BB31C /* ChoHokYuetYamCitYiuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChoHokYuetYamCitYiuView.swift; sourceTree = "<group>"; };
+		371B6E8D2B3B3108005BB31C /* ChoHokLexiconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChoHokLexiconView.swift; sourceTree = "<group>"; };
 		371B6E8E2B3B3108005BB31C /* MacContentViewMonterey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacContentViewMonterey.swift; sourceTree = "<group>"; };
 		371B6E8F2B3B3108005BB31C /* MacHundredFamilySurnamesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacHundredFamilySurnamesView.swift; sourceTree = "<group>"; };
 		371B6E902B3B3108005BB31C /* MacInputMethodView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacInputMethodView.swift; sourceTree = "<group>"; };
@@ -884,8 +880,7 @@
 			isa = PBXGroup;
 			children = (
 				371B6E722B3B3107005BB31C /* SearchView.swift */,
-				371B6E752B3B3107005BB31C /* CantoneseTextLabel.swift */,
-				371B6E712B3B3107005BB31C /* PronunciationLabel.swift */,
+				371B6E752B3B3107005BB31C /* LexiconView.swift */,
 				371B6E762B3B3107005BB31C /* YingWaaFanWanLabel.swift */,
 				371B6E732B3B3107005BB31C /* ChoHokYuetYamCitYiuLabel.swift */,
 				371B6E772B3B3107005BB31C /* FanWanCuetYiuLabel.swift */,
@@ -936,12 +931,11 @@
 			children = (
 				371B6E8C2B3B3108005BB31C /* MacSearchView.swift */,
 				371B6E872B3B3108005BB31C /* SearchField.swift */,
-				371B6E862B3B3108005BB31C /* CantoneseTextView.swift */,
-				371B6E892B3B3108005BB31C /* PronunciationView.swift */,
-				371B6E8D2B3B3108005BB31C /* ChoHokYuetYamCitYiuView.swift */,
-				371B6E8A2B3B3108005BB31C /* YingWaaFanWanView.swift */,
-				371B6E882B3B3108005BB31C /* FanWanCuetYiuView.swift */,
-				371B6E8B2B3B3108005BB31C /* GwongWanView.swift */,
+				371B6E892B3B3108005BB31C /* CantoneseLexiconView.swift */,
+				371B6E8A2B3B3108005BB31C /* YingWaaLexiconView.swift */,
+				371B6E8D2B3B3108005BB31C /* ChoHokLexiconView.swift */,
+				371B6E882B3B3108005BB31C /* FanWanLexiconView.swift */,
+				371B6E8B2B3B3108005BB31C /* GwongWanLexiconView.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -1718,7 +1712,6 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
-				Base,
 				"zh-Hans-CN",
 				"zh-Hant-MO",
 				"zh-Hant",
@@ -1728,6 +1721,8 @@
 				yue,
 				"zh-Hant-TW",
 				"zh-Hant-HK",
+				fr,
+				Base,
 			);
 			mainGroup = 37EFD71C2B3719C10089D346;
 			productRefGroup = 37EFD7262B3719C10089D346 /* Products */;
@@ -2058,7 +2053,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				371B6ECE2B3B3108005BB31C /* MacMetroLineView.swift in Sources */,
-				371B6EC82B3B3108005BB31C /* CantoneseTextLabel.swift in Sources */,
+				371B6EC82B3B3108005BB31C /* LexiconView.swift in Sources */,
 				371B6EB92B3B3108005BB31C /* IOSHundredFamilySurnamesView.swift in Sources */,
 				371B6EE52B3B3108005BB31C /* Speaker.swift in Sources */,
 				371B6E982B3B3108005BB31C /* JyutpingApp.swift in Sources */,
@@ -2073,14 +2068,13 @@
 				371B6EE42B3B3108005BB31C /* Speech.swift in Sources */,
 				371B6EA22B3B3108005BB31C /* NumbersView.swift in Sources */,
 				371B6EC72B3B3108005BB31C /* GwongWanLabel.swift in Sources */,
-				371B6EC42B3B3108005BB31C /* PronunciationLabel.swift in Sources */,
 				371B6EB02B3B3108005BB31C /* EnhancedLabel.swift in Sources */,
 				371B6EC12B3B3108005BB31C /* IOSMetroLineView.swift in Sources */,
 				371B6EB52B3B3108005BB31C /* Text2SpeechView.swift in Sources */,
 				371B6EC02B3B3108005BB31C /* IOSHongKongMTRView.swift in Sources */,
 				371B6EAE2B3B3108005BB31C /* ShareSheetView.swift in Sources */,
 				371B6EA92B3B3108005BB31C /* FontExtensions.swift in Sources */,
-				371B6ED82B3B3108005BB31C /* FanWanCuetYiuView.swift in Sources */,
+				371B6ED82B3B3108005BB31C /* FanWanLexiconView.swift in Sources */,
 				371B6EE32B3B3108005BB31C /* MacResourcesView.swift in Sources */,
 				371B6EE22B3B3108005BB31C /* MacConfusionView.swift in Sources */,
 				371B6EB12B3B3108005BB31C /* MenuCopyButton.swift in Sources */,
@@ -2096,7 +2090,7 @@
 				371B6ED52B3B3108005BB31C /* MacIntroductionsView.swift in Sources */,
 				371B6ED12B3B3108005BB31C /* MacShamChunMetroView.swift in Sources */,
 				371B6EA42B3B3108005BB31C /* SolarTermsView.swift in Sources */,
-				371B6EDD2B3B3108005BB31C /* ChoHokYuetYamCitYiuView.swift in Sources */,
+				371B6EDD2B3B3108005BB31C /* ChoHokLexiconView.swift in Sources */,
 				371B6ED42B3B3108005BB31C /* MacThousandCharacterClassicView.swift in Sources */,
 				371B6EB42B3B3108005BB31C /* FAQView.swift in Sources */,
 				371B6EAF2B3B3108005BB31C /* IOSContentView.swift in Sources */,
@@ -2109,7 +2103,7 @@
 				371B6EA72B3B3108005BB31C /* Device.swift in Sources */,
 				371B6EBA2B3B3108005BB31C /* IOSExpressionsView.swift in Sources */,
 				379CB1A22BDA40B900434190 /* IOSJyutpingToneTable.swift in Sources */,
-				371B6EDB2B3B3108005BB31C /* GwongWanView.swift in Sources */,
+				371B6EDB2B3B3108005BB31C /* GwongWanLexiconView.swift in Sources */,
 				371B6EBD2B3B3108005BB31C /* IOSCantonMetroView.swift in Sources */,
 				371B6EBF2B3B3108005BB31C /* IOSThousandCharacterClassicView.swift in Sources */,
 				371B6ED72B3B3108005BB31C /* SearchField.swift in Sources */,
@@ -2119,7 +2113,6 @@
 				371B6EAC2B3B3108005BB31C /* TextExtensions.swift in Sources */,
 				371B6ED22B3B3108005BB31C /* MacAboutView.swift in Sources */,
 				37311A3C2BD8F44C00B2D948 /* IOSJyutpingInitialTable.swift in Sources */,
-				371B6ED62B3B3108005BB31C /* CantoneseTextView.swift in Sources */,
 				371B6EE02B3B3108005BB31C /* MacInputMethodView.swift in Sources */,
 				371B6EB82B3B3108005BB31C /* IOSFatshanMetroView.swift in Sources */,
 				371B6EAD2B3B3108005BB31C /* SafariView.swift in Sources */,
@@ -2140,8 +2133,8 @@
 				371B6EC22B3B3108005BB31C /* UIDevice+modelName.swift in Sources */,
 				371B6ECC2B3B3108005BB31C /* MacMetroStationLabel.swift in Sources */,
 				371B6EC32B3B3108005BB31C /* JyutpingView.swift in Sources */,
-				371B6ED92B3B3108005BB31C /* PronunciationView.swift in Sources */,
-				371B6EDA2B3B3108005BB31C /* YingWaaFanWanView.swift in Sources */,
+				371B6ED92B3B3108005BB31C /* CantoneseLexiconView.swift in Sources */,
+				371B6EDA2B3B3108005BB31C /* YingWaaLexiconView.swift in Sources */,
 				371B6EA82B3B3108005BB31C /* ColorExtensions.swift in Sources */,
 				375D3A3D2B806C88005F13C1 /* TextRomanizationView.swift in Sources */,
 				379CB1A42BDA666D00434190 /* IOSJyutpingFinalTable.swift in Sources */,

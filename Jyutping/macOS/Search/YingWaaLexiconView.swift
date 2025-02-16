@@ -5,7 +5,37 @@ import AppDataSource
 import CommonExtensions
 import Linguistics
 
-struct YingWaaFanWanView: View {
+struct YingWaaLexiconView: View {
+        let lexicon: [YingWaaFanWan]
+        var body: some View {
+                VStack(alignment: .leading, spacing: 2) {
+                        Text(verbatim: "《英華分韻撮要》　衛三畏（Samuel Wells Williams）　廣州　1856")
+                                .font(.copilot)
+                                .opacity(0.66)
+                        VStack(alignment: .leading) {
+                                if let word = lexicon.first?.word {
+                                        HStack(spacing: 16) {
+                                                HStack {
+                                                        Text(verbatim: "文字")
+                                                        Text.separator
+                                                        Text(verbatim: word)
+                                                }
+                                                if let unicode = word.first?.codePointsText {
+                                                        Text(verbatim: unicode).font(.fixedWidth).opacity(0.66)
+                                                }
+                                        }
+                                }
+                                ForEach(lexicon.indices, id: \.self) { index in
+                                        Divider()
+                                        YingWaaFanWanView(entry: lexicon[index])
+                                }
+                        }
+                        .block()
+                }
+        }
+}
+
+private struct YingWaaFanWanView: View {
         let entry: YingWaaFanWan
         var body: some View {
                 let homophoneText: String? = entry.homophones.isEmpty ? nil : entry.homophones.joined(separator: String.space)
@@ -13,7 +43,7 @@ struct YingWaaFanWanView: View {
                 VStack(alignment: .leading) {
                         HStack(spacing: 16) {
                                 HStack {
-                                        Text(verbatim: "原文")
+                                        Text(verbatim: "讀音")
                                         Text.separator
                                         Text(verbatim: entry.pronunciation).font(.title3)
                                 }

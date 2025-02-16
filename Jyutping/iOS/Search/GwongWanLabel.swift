@@ -2,6 +2,26 @@
 
 import SwiftUI
 import AppDataSource
+import CommonExtensions
+
+struct GwongWanLexiconView: View {
+        let lexicon: [GwongWanCharacter]
+        var body: some View {
+                if let firstEntry = lexicon.first {
+                        HStack {
+                                Text(verbatim: "文字").font(.copilot)
+                                Text.separator.font(.copilot)
+                                Text(verbatim: firstEntry.word)
+                                if let unicode = firstEntry.word.first?.codePointsText {
+                                        Text(verbatim: unicode).font(.footnote.monospaced()).foregroundStyle(Color.secondary)
+                                }
+                        }
+                }
+                ForEach(lexicon.indices, id: \.self) { index in
+                        GwongWanLabel(entry: lexicon[index])
+                }
+        }
+}
 
 struct GwongWanLabel: View {
         let entry: GwongWanCharacter

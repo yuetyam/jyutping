@@ -5,7 +5,37 @@ import CommonExtensions
 import AppDataSource
 import Linguistics
 
-struct PronunciationLabel: View {
+struct LexiconView: View {
+        let lexicon: CantoneseLexicon
+        var body: some View {
+                HStack(spacing: 16) {
+                        HStack {
+                                Text(verbatim: "文字").font(.copilot)
+                                Text.separator.font(.copilot)
+                                Text(verbatim: lexicon.text)
+                        }
+                        if lexicon.text.count == 1, let unicode = lexicon.text.first?.codePointsText {
+                                Text(verbatim: unicode).font(.footnote.monospaced()).foregroundStyle(Color.secondary)
+                        }
+                        Spacer()
+                        Speaker {
+                                Speech.speak(lexicon.text, isRomanization: false)
+                        }
+                }
+                ForEach(lexicon.pronunciations.indices, id: \.self) { index in
+                        PronunciationView(lexicon.pronunciations[index])
+                }
+                if let unihanDefinition = lexicon.unihanDefinition {
+                        HStack {
+                                Text(verbatim: "英文").font(.copilot)
+                                Text.separator.font(.copilot)
+                                Text(verbatim: unihanDefinition).font(.subheadline)
+                        }
+                }
+        }
+}
+
+private struct PronunciationView: View {
 
         init(_ pronunciation: Pronunciation) {
                 let romanization: String = pronunciation.romanization

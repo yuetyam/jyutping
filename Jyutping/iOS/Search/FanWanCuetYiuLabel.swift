@@ -5,6 +5,25 @@ import AppDataSource
 import CommonExtensions
 import Linguistics
 
+struct FanWanLexiconView: View {
+        let lexicon: [FanWanCuetYiu]
+        var body: some View {
+                if let firstEntry = lexicon.first {
+                        HStack {
+                                Text(verbatim: "文字").font(.copilot)
+                                Text.separator.font(.copilot)
+                                Text(verbatim: firstEntry.word)
+                                if let unicode = firstEntry.word.first?.codePointsText {
+                                        Text(verbatim: unicode).font(.footnote.monospaced()).foregroundStyle(Color.secondary)
+                                }
+                        }
+                }
+                ForEach(lexicon.indices, id: \.self) { index in
+                        FanWanCuetYiuLabel(entry: lexicon[index])
+                }
+        }
+}
+
 struct FanWanCuetYiuLabel: View {
         let entry: FanWanCuetYiu
         var body: some View {
