@@ -174,7 +174,7 @@ struct GeneralPreferencesView: View {
                                                 Spacer()
                                         }
                                         .font(.subheadline)
-                                        .padding(.horizontal, 12)
+                                        .padding(.horizontal, 8)
                                 }
                                 HStack {
                                         Toggle("GeneralPreferencesView.EmojiSuggestions", isOn: $isEmojiSuggestionsOn)
@@ -186,7 +186,7 @@ struct GeneralPreferencesView: View {
                                         Spacer()
                                 }
                                 .block()
-                                VStack(spacing: 20) {
+                                VStack(alignment: .leading, spacing: 2) {
                                         HStack {
                                                 Toggle("GeneralPreferencesView.Toggle.InputMemory", isOn: $isInputMemoryOn)
                                                         .toggleStyle(.switch)
@@ -196,31 +196,28 @@ struct GeneralPreferencesView: View {
                                                         }
                                                 Spacer()
                                         }
-                                        HStack {
-                                                VStack(alignment: .leading, spacing: 1) {
-                                                        Button(role: .destructive) {
-                                                                isClearInputMemoryConfirmDialogPresented = true
-                                                        } label: {
-                                                                Text("GeneralPreferencesView.Button.ClearInputMemory")
-                                                        }
-                                                        .buttonStyle(.plain)
-                                                        .padding(.horizontal, 8)
-                                                        .padding(.vertical, 4)
-                                                        .foregroundStyle(Color.red)
-                                                        .background(Material.thick, in: RoundedRectangle(cornerRadius: 6, style: .continuous))
-                                                        .confirmationDialog("GeneralPreferencesView.ConfirmationDialog.ClearInputMemory.Title", isPresented: $isClearInputMemoryConfirmDialogPresented) {
-                                                                Button("GeneralPreferencesView.ConfirmationDialog.ClearInputMemory.Confirm", role: .destructive) {
-                                                                        clearInputMemoryProgress = 0
-                                                                        isPerformingClearInputMemory = true
-                                                                        UserLexicon.deleteAll()
-                                                                }
-                                                                Button("GeneralPreferencesView.ConfirmationDialog.ClearInputMemory.Cancel", role: .cancel) {
-                                                                        isClearInputMemoryConfirmDialogPresented = false
-                                                                }
-                                                        }
-                                                        ProgressView(value: clearInputMemoryProgress).opacity(isPerformingClearInputMemory ? 1 : 0)
+                                        VStack(alignment: .leading, spacing: 2) {
+                                                ProgressView(value: clearInputMemoryProgress).opacity(isPerformingClearInputMemory ? 1 : 0)
+                                                Button(role: .destructive) {
+                                                        isClearInputMemoryConfirmDialogPresented = true
+                                                } label: {
+                                                        Text("GeneralPreferencesView.Button.ClearInputMemory")
                                                 }
-                                                .fixedSize()
+                                                .buttonStyle(.plain)
+                                                .padding(.horizontal, 8)
+                                                .padding(.vertical, 4)
+                                                .foregroundStyle(Color.red)
+                                                .background(Material.thick, in: RoundedRectangle(cornerRadius: 6, style: .continuous))
+                                                .confirmationDialog("GeneralPreferencesView.ConfirmationDialog.ClearInputMemory.Title", isPresented: $isClearInputMemoryConfirmDialogPresented) {
+                                                        Button("GeneralPreferencesView.ConfirmationDialog.ClearInputMemory.Confirm", role: .destructive) {
+                                                                clearInputMemoryProgress = 0
+                                                                isPerformingClearInputMemory = true
+                                                                UserLexicon.deleteAll()
+                                                        }
+                                                        Button("GeneralPreferencesView.ConfirmationDialog.ClearInputMemory.Cancel", role: .cancel) {
+                                                                isClearInputMemoryConfirmDialogPresented = false
+                                                        }
+                                                }
                                                 .onReceive(timer) { _ in
                                                         guard isPerformingClearInputMemory else { return }
                                                         if clearInputMemoryProgress > 1 {
@@ -229,13 +226,10 @@ struct GeneralPreferencesView: View {
                                                                 clearInputMemoryProgress += 0.1
                                                         }
                                                 }
-                                                Spacer()
                                         }
+                                        .fixedSize()
                                 }
-                                .padding(.horizontal, 12)
-                                .padding(.top, 12)
-                                .padding(.bottom, 1)
-                                .background(Color.textBackgroundColor, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+                                .block()
                         }
                         .textSelection(.enabled)
                         .padding()

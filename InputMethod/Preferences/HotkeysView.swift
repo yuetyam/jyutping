@@ -50,7 +50,7 @@ struct HotkeysView: View {
                                                 Text("HotkeysView.OpenPreferencesWindow.Footer").font(.subheadline)
                                                 Spacer()
                                         }
-                                        .padding(.horizontal, 12)
+                                        .padding(.horizontal, 8)
                                 }
                                 VStack(spacing: 2) {
                                         HStack(spacing: 4) {
@@ -69,7 +69,7 @@ struct HotkeysView: View {
                                                 Text("HotkeysView.EnterExitOptionsView.Footer").font(.subheadline)
                                                 Spacer()
                                         }
-                                        .padding(.horizontal, 12)
+                                        .padding(.horizontal, 8)
                                 }
                                 VStack(spacing: 2) {
                                         HStack(spacing: 4) {
@@ -88,7 +88,7 @@ struct HotkeysView: View {
                                                 Spacer()
                                         }
                                         .font(.subheadline)
-                                        .padding(.horizontal, 12)
+                                        .padding(.horizontal, 8)
                                 }
                                 VStack(spacing: 8) {
                                         HStack(spacing: 4) {
@@ -153,7 +153,7 @@ struct HotkeysView: View {
                                                 Spacer()
                                         }
                                         .font(.subheadline)
-                                        .padding(.horizontal, 12)
+                                        .padding(.horizontal, 8)
                                         VStack(spacing: 8) {
                                                 HStack(spacing: 4) {
                                                         LabelText("HotkeysView.MoveToPreviousCandidate")
@@ -202,7 +202,7 @@ struct HotkeysView: View {
                                                 Spacer()
                                         }
                                         .font(.subheadline)
-                                        .padding(.horizontal, 12)
+                                        .padding(.horizontal, 8)
                                         VStack(spacing: 8) {
                                                 HStack(spacing: 4) {
                                                         LabelText("HotkeysView.MoveToPreviousCandidate")
