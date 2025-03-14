@@ -101,17 +101,23 @@ enum LabelSet: Int, CaseIterable {
         /// 大寫漢字數字：零壹貳叁肆伍陸柒捌玖拾
         case capitalizedChinese = 4
 
+        /// 算籌數字（直式）：𝍠𝍡𝍢𝍣𝍤𝍥𝍦𝍧𝍨〇
+        case verticalCountingRods = 5
+
+        /// 算籌數字（橫式）：𝍩𝍪𝍫𝍬𝍭𝍮𝍯𝍰𝍱〇
+        case horizontalCountingRods = 6
+
         /// 蘇州碼：〇〡〢〣〤〥〦〧〨〩〸
-        case soochow = 5
+        case soochow = 7
 
         /// 麻雀／麻將：🀙 🀚 🀛 🀜 🀝 🀞 🀟 🀠 🀡 🀆
-        case mahjong = 6
+        case mahjong = 8
 
         /// 大寫羅馬數字: Ⅰ Ⅱ Ⅲ Ⅳ Ⅴ Ⅵ Ⅶ Ⅷ Ⅸ Ⅹ
-        case roman = 7
+        case roman = 9
 
         /// 小寫羅馬數字: ⅰ ⅱ ⅲ ⅳ ⅴ ⅵ ⅶ ⅷ ⅸ ⅹ
-        case smallRoman = 8
+        case smallRoman = 10
 
         static func labelSet(of value: Int) -> LabelSet {
                 return Self.allCases.first(where: { $0.rawValue == value }) ?? Self.arabic
@@ -505,6 +511,8 @@ extension LabelSet {
 
         private static let chineseLabels: [String] = ["一", "二", "三", "四", "五", "六", "七", "八", "九", "十"]
         private static let capitalizedChineseLabels: [String] = ["壹", "貳", "叁", "肆", "伍", "陸", "柒", "捌", "玖", "拾"]
+        private static let verticalCountingRodLabels: [String] = ["𝍠", "𝍡", "𝍢", "𝍣", "𝍤", "𝍥", "𝍦", "𝍧", "𝍨", "〇"]
+        private static let horizontalCountingRodLabels: [String] = ["𝍩", "𝍪", "𝍫", "𝍬", "𝍭", "𝍮", "𝍯", "𝍰", "𝍱", "〇"]
         private static let soochowLabels: [String] = ["〡", "〢", "〣", "〤", "〥", "〦", "〧", "〨", "〩", "〸"]
         private static let mahjongLabels: [String] = ["🀙", "🀚", "🀛", "🀜", "🀝", "🀞", "🀟", "🀠", "🀡", "🀆"]
         private static let romanLabels: [String] = ["Ⅰ", "Ⅱ", "Ⅲ", "Ⅳ", "Ⅴ", "Ⅵ", "Ⅶ", "Ⅷ", "Ⅸ", "Ⅹ"]
@@ -522,6 +530,10 @@ extension LabelSet {
                         return shouldBeZero ? "〇" : (chineseLabels.fetch(index) ?? "?")
                 case .capitalizedChinese:
                         return shouldBeZero ? "零" : (capitalizedChineseLabels.fetch(index) ?? "?")
+                case .verticalCountingRods:
+                        return shouldBeZero ? "〇" : (verticalCountingRodLabels.fetch(index) ?? "?")
+                case .horizontalCountingRods:
+                        return shouldBeZero ? "〇" : (horizontalCountingRodLabels.fetch(index) ?? "?")
                 case .soochow:
                         return shouldBeZero ? "〇" : (soochowLabels.fetch(index) ?? "?")
                 case .mahjong:

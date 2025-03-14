@@ -114,6 +114,8 @@ struct GeneralPreferencesView: View {
                                                         Text("GeneralPreferencesView.LabelSet.FullWidthArabic").tag(LabelSet.fullWidthArabic)
                                                         Text("GeneralPreferencesView.LabelSet.Chinese").tag(LabelSet.chinese)
                                                         Text("GeneralPreferencesView.LabelSet.CapitalizedChinese").tag(LabelSet.capitalizedChinese)
+                                                        Text("GeneralPreferencesView.LabelSet.VerticalCountingRods").tag(LabelSet.verticalCountingRods)
+                                                        Text("GeneralPreferencesView.LabelSet.HorizontalCountingRods").tag(LabelSet.horizontalCountingRods)
                                                         Text("GeneralPreferencesView.LabelSet.Soochow").tag(LabelSet.soochow)
                                                         Text("GeneralPreferencesView.LabelSet.Mahjong").tag(LabelSet.mahjong)
                                                         Text("GeneralPreferencesView.LabelSet.Roman").tag(LabelSet.roman)

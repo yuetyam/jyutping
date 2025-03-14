@@ -139,26 +139,19 @@ extension Font {
                         case .arabic, .fullWidthArabic:
                                 return Font.system(size: size).monospacedDigit()
                         case .chinese, .capitalizedChinese, .soochow:
-                                let preferredFontNameList: [String] = PresetConstant.primaryCJKVQueue + PresetConstant.systemCJKVQueue
-                                if let fontName = preferredFontNameList.first(where: { found(font: $0) }) {
+                                if let fontName = PresetConstant.primaryCJKVQueue.first(where: { found(font: $0) }) {
                                         return Font.custom(fontName, size: size)
                                 } else {
                                         return Font.system(size: size)
                                 }
-                        case .mahjong:
-                                return Font.system(size: size)
-                        case .roman, .smallRoman:
+                        default:
                                 return Font.system(size: size)
                         }
                 case .system:
                         switch AppSettings.labelSet {
                         case .arabic, .fullWidthArabic:
                                 return Font.system(size: size).monospacedDigit()
-                        case .chinese, .capitalizedChinese, .soochow:
-                                return Font.system(size: size)
-                        case .mahjong:
-                                return Font.system(size: size)
-                        case .roman, .smallRoman:
+                        default:
                                 return Font.system(size: size)
                         }
                 case .custom:
