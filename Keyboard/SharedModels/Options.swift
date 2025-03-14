@@ -171,6 +171,7 @@ struct OptionsKey {
         static let AudioFeedback: String = "audio_feedback"
         static let HapticFeedback: String = "haptic_feedback"
         static let KeyboardLayout: String = "keyboard_layout"
+        static let NumericLayout: String = "NumericLayout"
         static let KeyCase: String = "KeyCase"
         static let KeyTextPreview: String = "KeyPreview"
         static let CommentStyle: String = "jyutping_display"

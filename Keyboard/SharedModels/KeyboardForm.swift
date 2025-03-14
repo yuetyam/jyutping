@@ -59,7 +59,7 @@ extension KeyboardForm {
                 return switch self {
                 case .alphabetic:
                         "ABC"
-                case .numeric:
+                case .numeric, .tenKeyNumeric:
                         "123"
                 case .symbolic:
                         "#+="

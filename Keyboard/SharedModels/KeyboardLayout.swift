@@ -1,7 +1,7 @@
 import Foundation
 
 /// Cantonese Keyboard Layout
-enum KeyboardLayout: Int {
+enum KeyboardLayout: Int, CaseIterable {
 
         /// 26鍵全鍵盤
         case qwerty = 1
@@ -15,16 +15,7 @@ enum KeyboardLayout: Int {
         /// Read KeyboardLayout from UserDefaults
         static func fetchSavedLayout() -> KeyboardLayout {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.KeyboardLayout)
-                switch savedValue {
-                case qwerty.rawValue:
-                        return .qwerty
-                case tripleStroke.rawValue:
-                        return .tripleStroke
-                case tenKey.rawValue:
-                        return .tenKey
-                default:
-                        return .qwerty
-                }
+                return Self.allCases.first(where: { $0.rawValue == savedValue }) ?? Self.qwerty
         }
 
         /// 26鍵全鍵盤
@@ -35,4 +26,23 @@ enum KeyboardLayout: Int {
 
         /// 九宮格
         var isTenKey: Bool { self == .tenKey }
+}
+
+/// Numeric keyboard for the Qwerty KeyboardLayout
+enum NumericLayout: Int, CaseIterable {
+
+        /// Normal Numeric Keyboard
+        case `default` = 1
+
+        /// 10-Key KeyPad
+        case numberKeyPad = 2
+
+        /// Read NumericLayout from UserDefaults
+        static func fetchSavedLayout() -> NumericLayout {
+                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.NumericLayout)
+                return Self.allCases.first(where: { $0.rawValue == savedValue }) ?? Self.default
+        }
+
+        // 10-Key KeyPad
+        var isNumberKeyPad: Bool { self == .numberKeyPad }
 }

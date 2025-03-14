@@ -907,6 +907,14 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 UserDefaults.standard.set(value, forKey: OptionsKey.KeyboardLayout)
         }
 
+        /// Numeric keyboard for the Qwerty KeyboardLayout
+        @Published private(set) var numericLayout: NumericLayout = NumericLayout.fetchSavedLayout()
+        func updateNumericLayout(to layout: NumericLayout) {
+                numericLayout = layout
+                let value: Int = layout.rawValue
+                UserDefaults.standard.set(value, forKey: OptionsKey.NumericLayout)
+        }
+
 
         // MARK: - Haptic Feedback
 

@@ -29,25 +29,25 @@ struct TenKeyNumericKeyboard: View {
                                                         }
                                                 }
                                         }
-                                        HStack(spacing: 0) {
-                                                if context.needsInputModeSwitchKey {
+                                        if context.needsInputModeSwitchKey {
+                                                HStack(spacing: 0) {
                                                         TenKeyGlobeKey()
                                                         TenKeyNavigateKey(destination: .alphabetic)
-                                                } else {
-                                                        TenKeyNavigateKey(destination: .alphabetic)
+                                                        TenKeyNumberKey(key: "0")
                                                         TenKeyNumberKey(key: ".")
                                                 }
-                                                TenKeyNumberKey(key: "0")
-                                                TenKeySpaceKey()
+                                        } else {
+                                                HStack(spacing: 0) {
+                                                        TenKeyNavigateKey(destination: .alphabetic)
+                                                        TenKeyNumberKey(key: ".")
+                                                        TenKeyNumberKey(key: "0")
+                                                        TenKeySpaceKey()
+                                                }
                                         }
                                 }
                                 VStack(spacing: 0) {
                                         TenKeyBackspaceKey()
-                                        if context.needsInputModeSwitchKey {
-                                                TenKeyNumberKey(key: ".")
-                                        } else {
-                                                TenKeyNavigateKey(destination: .numeric)
-                                        }
+                                        TenKeyNavigateKey(destination: .numeric)
                                         TenKeyReturnKey()
                                 }
                         }

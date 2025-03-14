@@ -1,11 +1,12 @@
 import SwiftUI
 
-/// Cantonese SaamPing Layout. 粵拼三拼鍵盤佈局
+/// Cantonese Triple-Stroke Layout. 粵拼三拼鍵盤佈局
 struct TripleStrokeKeyboard: View {
 
         @EnvironmentObject private var context: KeyboardViewController
 
         var body: some View {
+                let destination: KeyboardForm = (context.isPhone && context.numericLayout.isNumberKeyPad) ? .tenKeyNumeric : .numeric
                 VStack(spacing: 0) {
                         if context.inputStage.isBuffering {
                                 CandidateBar()
@@ -73,7 +74,7 @@ struct TripleStrokeKeyboard: View {
                                 }
                         case (false, true):
                                 HStack(spacing: 0) {
-                                        TransformKey(destination: .numeric, widthUnitTimes: 2)
+                                        TransformKey(destination: destination, widthUnitTimes: 2)
                                         GlobeKey()
                                         SpaceKey()
                                         RightKey()
@@ -81,7 +82,7 @@ struct TripleStrokeKeyboard: View {
                                 }
                         case (false, false):
                                 HStack(spacing: 0) {
-                                        TransformKey(destination: .numeric, widthUnitTimes: 2)
+                                        TransformKey(destination: destination, widthUnitTimes: 2)
                                         LeftKey()
                                         SpaceKey()
                                         RightKey()
