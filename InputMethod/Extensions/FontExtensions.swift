@@ -1,9 +1,10 @@
 import SwiftUI
 import CommonExtensions
 
+@MainActor
 extension Font {
 
-        nonisolated(unsafe) private(set) static var candidate: Font = candidateFont()
+        private(set) static var candidate: Font = candidateFont()
         static func updateCandidateFont() {
                 candidate = candidateFont()
         }
@@ -58,11 +59,12 @@ extension Font {
         }()
 }
 
+@MainActor
 extension Font {
 
-        nonisolated(unsafe) private(set) static var comment: Font = commentFont(size: AppSettings.commentFontSize)
-        nonisolated(unsafe) private(set) static var commentTone: Font = commentFont(size: AppSettings.commentFontSize - 4)
-        nonisolated(unsafe) private(set) static var annotation: Font = commentFont(size: AppSettings.commentFontSize - 2)
+        private(set) static var comment: Font = commentFont(size: AppSettings.commentFontSize)
+        private(set) static var commentTone: Font = commentFont(size: AppSettings.commentFontSize - 4)
+        private(set) static var annotation: Font = commentFont(size: AppSettings.commentFontSize - 2)
         static func updateCommentFont() {
                 let commentFontSize: CGFloat = AppSettings.commentFontSize
                 let toneFontSize: CGFloat = commentFontSize - 4
@@ -122,23 +124,46 @@ extension Font {
         }()
 }
 
+@MainActor
 extension Font {
 
-        nonisolated(unsafe) private(set) static var label: Font = labelFont(size: AppSettings.labelFontSize)
+        private(set) static var label: Font = labelFont(size: AppSettings.labelFontSize)
         static func updateLabelFont() {
                 let size: CGFloat = AppSettings.labelFontSize
                 label = labelFont(size: size)
         }
         private static func labelFont(size: CGFloat) -> Font {
-                lazy var fallback: Font = Font.system(size: size).monospacedDigit()
                 switch AppSettings.labelFontMode {
                 case .default:
-                        return fallback
+                        switch AppSettings.labelSet {
+                        case .arabic, .fullWidthArabic:
+                                return Font.system(size: size).monospacedDigit()
+                        case .chinese, .capitalizedChinese, .soochow:
+                                let preferredFontNameList: [String] = PresetConstant.primaryCJKVQueue + PresetConstant.systemCJKVQueue
+                                if let fontName = preferredFontNameList.first(where: { found(font: $0) }) {
+                                        return Font.custom(fontName, size: size)
+                                } else {
+                                        return Font.system(size: size)
+                                }
+                        case .mahjong:
+                                return Font.system(size: size)
+                        case .roman, .smallRoman:
+                                return Font.system(size: size)
+                        }
                 case .system:
-                        return fallback
+                        switch AppSettings.labelSet {
+                        case .arabic, .fullWidthArabic:
+                                return Font.system(size: size).monospacedDigit()
+                        case .chinese, .capitalizedChinese, .soochow:
+                                return Font.system(size: size)
+                        case .mahjong:
+                                return Font.system(size: size)
+                        case .roman, .smallRoman:
+                                return Font.system(size: size)
+                        }
                 case .custom:
                         let names: [String] = AppSettings.customLabelFonts
-                        return combine(fonts: names, size: size) ?? fallback
+                        return combine(fonts: names, size: size) ?? Font.system(size: size)
                 }
         }
 }

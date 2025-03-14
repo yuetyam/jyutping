@@ -7,7 +7,7 @@
 /// 3: 傳統漢字・臺灣
 ///
 /// 4: 簡化字
-public enum Logogram: Int {
+public enum CharacterStandard: Int, CaseIterable {
 
         /// Traditional. 傳統漢字
         case traditional = 1
@@ -22,8 +22,6 @@ public enum Logogram: Int {
         case simplified = 4
 }
 
-public typealias CharacterStandard = Logogram
-
 extension CharacterStandard {
 
         /// self == .simplified
@@ -35,9 +33,16 @@ extension CharacterStandard {
         public var isTraditional: Bool {
                 return self != .simplified
         }
+
+        /// Match the CharacterStandard for the given RawValue
+        /// - Parameter value: RawValue
+        /// - Returns: CharacterStandard
+        public static func standard(of value: Int) -> CharacterStandard {
+                return Self.allCases.first(where: { $0.rawValue == value }) ?? Self.traditional
+        }
 }
 
-extension Logogram {
+extension CharacterStandard {
 
         public static func strokeTransform(_ text: String) -> String {
                 // 橫: w, h, t: w = Waang, h = Héng, t = 提 = Tai = Tí

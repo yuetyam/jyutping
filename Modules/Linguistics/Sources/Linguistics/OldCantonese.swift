@@ -132,7 +132,7 @@ public struct OldCantonese {
                 "yu": "yː",
                 "yun": "yːn",
                 "yut": "yːt̚",
-                "ii": "ɿ"
+                "ir": "ɿ"
         ]
         private static let ToneMap: [Character: String] = [
                 "1": "˥",

@@ -11,8 +11,8 @@ extension Engine {
                 guard sqlite3_bind_int64(statement, 1, code) == SQLITE_OK else { return [] }
                 var textMarks: [String] = []
                 while sqlite3_step(statement) == SQLITE_ROW {
-                        let textMark: String = String(cString: sqlite3_column_text(statement, 0))
-                        textMarks.append(textMark)
+                        guard let textMark = sqlite3_column_text(statement, 0) else { continue }
+                        textMarks.append(String(cString: textMark))
                 }
                 return textMarks.map({ Candidate(input: text, text: $0) })
         }

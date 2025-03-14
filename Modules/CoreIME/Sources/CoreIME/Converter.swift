@@ -1,16 +1,46 @@
-extension Candidate {
+import Foundation
+import SQLite3
+
+extension Array where Element == Candidate {
+        public func transformed(with characterStandard: CharacterStandard) -> [Candidate] {
+                return ((self.first?.isUserLexicon ?? false) ? self.filter(\.isCompound.negative) : self).transformed(to: characterStandard).uniqued()
+        }
+}
+
+extension Array where Element == Candidate {
 
         /// Convert Cantonese Candidate text to the specific variant
         /// - Parameter variant: Character variant
-        /// - Returns: Transformed Candidate
-        public func transformed(to variant: CharacterStandard) -> Candidate {
-                guard self.isCantonese else { return self }
+        /// - Returns: Transformed Candidates
+        public func transformed(to variant: CharacterStandard) -> [Candidate] {
                 switch variant {
                 case .traditional:
                         return self
-                default:
-                        let convertedText: String = Converter.convert(text, to: variant)
-                        return Candidate(text: convertedText, lexiconText: lexiconText, romanization: romanization, input: input, mark: mark, order: order)
+                case .hongkong:
+                        return self.map { origin -> Candidate in
+                                guard origin.isCantonese else { return origin }
+                                let convertedText: String = Converter.convert2HongKongVariant(origin.lexiconText)
+                                return Candidate(text: convertedText, lexiconText: origin.lexiconText, romanization: origin.romanization, input: origin.input, mark: origin.mark, order: origin.order)
+                        }
+                case .taiwan:
+                        return self.map { origin -> Candidate in
+                                guard origin.isCantonese else { return origin }
+                                let convertedText: String = Converter.convert2TaiwanVariant(origin.lexiconText)
+                                return Candidate(text: convertedText, lexiconText: origin.lexiconText, romanization: origin.romanization, input: origin.input, mark: origin.mark, order: origin.order)
+                        }
+                case .simplified:
+                        let statement: OpaquePointer? = {
+                                let query: String = "SELECT simplified FROM t2stable WHERE traditional = ?;"
+                                var pointer: OpaquePointer? = nil
+                                guard sqlite3_prepare_v2(Engine.database, query, -1, &pointer, nil) == SQLITE_OK else { return nil }
+                                return pointer
+                        }()
+                        defer { sqlite3_finalize(statement) }
+                        return self.map { origin -> Candidate in
+                                guard origin.isCantonese else { return origin }
+                                let convertedText: String = Simplifier.simplify(origin.lexiconText, statement: statement)
+                                return Candidate(text: convertedText, lexiconText: origin.lexiconText, romanization: origin.romanization, input: origin.input, mark: origin.mark, order: origin.order)
+                        }
                 }
         }
 }
@@ -28,27 +58,41 @@ public struct Converter {
                 case .traditional:
                         return text
                 case .hongkong:
-                        switch text.count {
-                        case 0:
-                                return text
-                        case 1:
-                                return hongkongVariants[text] ?? text
-                        default:
-                                let converted: [Character] = text.map({ hongkongCharacterVariants[$0] ?? $0 })
-                                return String(converted)
-                        }
+                        return convert2HongKongVariant(text)
                 case .taiwan:
-                        switch text.count {
-                        case 0:
-                                return text
-                        case 1:
-                                return taiwanVariants[text] ?? text
-                        default:
-                                let converted: [Character] = text.map({ taiwanCharacterVariants[$0] ?? $0 })
-                                return String(converted)
-                        }
+                        return convert2TaiwanVariant(text)
                 case .simplified:
-                        return Simplifier.convert(text)
+                        let statement: OpaquePointer? = {
+                                let query: String = "SELECT simplified FROM t2stable WHERE traditional = ?;"
+                                var pointer: OpaquePointer? = nil
+                                guard sqlite3_prepare_v2(Engine.database, query, -1, &pointer, nil) == SQLITE_OK else { return nil }
+                                return pointer
+                        }()
+                        defer { sqlite3_finalize(statement) }
+                        return Simplifier.simplify(text, statement: statement)
+                }
+        }
+
+        fileprivate static func convert2HongKongVariant(_ text: String) -> String {
+                switch text.count {
+                case 0:
+                        return text
+                case 1:
+                        return hongkongVariants[text] ?? text
+                default:
+                        let converted = text.map({ hongkongCharacterVariants[$0] ?? $0 })
+                        return String(converted)
+                }
+        }
+        fileprivate static func convert2TaiwanVariant(_ text: String) -> String {
+                switch text.count {
+                case 0:
+                        return text
+                case 1:
+                        return taiwanVariants[text] ?? text
+                default:
+                        let converted: [Character] = text.map({ taiwanCharacterVariants[$0] ?? $0 })
+                        return String(converted)
                 }
         }
 

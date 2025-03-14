@@ -205,14 +205,14 @@ final class JyutpingInputController: IMKInputController, Sendable {
 
         private lazy var appContext: AppContext = AppContext()
 
-        nonisolated(unsafe) private lazy var inputForm: InputForm = InputForm.matchInputMethodMode()
+        nonisolated(unsafe) private var inputForm: InputForm = InputForm.matchInputMethodMode()
         private func updateInputForm(to form: InputForm? = nil) {
                 let newForm: InputForm = form ?? InputForm.matchInputMethodMode()
                 inputForm = newForm
                 appContext.updateInputForm(to: newForm)
         }
 
-        nonisolated(unsafe) private lazy var inputStage: InputStage = .standby
+        nonisolated(unsafe) private var inputStage: InputStage = .standby
 
         private func clearBufferText() { bufferText = String.empty }
         private lazy var bufferText: String = String.empty {
@@ -387,14 +387,14 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         if let firstCandidate = suggestions.first, firstCandidate.input.count == text.count { return firstCandidate.mark }
                         guard let bestScheme = schemes.first else { return text }
                         let leadingLength: Int = bestScheme.summedLength
-                        let leadingText: String = bestScheme.joined(separator: " ")
+                        let leadingText: String = bestScheme.joined(separator: String.space)
                         guard leadingLength != text.count else { return leadingText }
                         let tailText = text.dropFirst(leadingLength)
-                        return leadingText + " " + tailText
+                        return leadingText + String.space + tailText
                 }()
                 let text2mark: String = "r " + tailText2Mark
                 mark(text: text2mark)
-                candidates = suggestions.map({ $0.transformed(to: Options.characterStandard) }).uniqued()
+                candidates = suggestions.transformed(to: Options.characterStandard).uniqued()
         }
         private func cangjieReverseLookup() {
                 let text: String = String(bufferText.dropFirst())
@@ -403,7 +403,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 if isValidSequence {
                         mark(text: String(converted))
                         let lookup: [Candidate] = Engine.cangjieReverseLookup(text: text, variant: AppSettings.cangjieVariant)
-                        candidates = lookup.map({ $0.transformed(to: Options.characterStandard) }).uniqued()
+                        candidates = lookup.transformed(to: Options.characterStandard).uniqued()
                 } else {
                         mark(text: bufferText)
                         candidates = []
@@ -417,7 +417,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 if isValidSequence {
                         mark(text: String(converted))
                         let lookup: [Candidate] = Engine.strokeReverseLookup(text: transformed)
-                        candidates = lookup.map({ $0.transformed(to: Options.characterStandard) }).uniqued()
+                        candidates = lookup.transformed(to: Options.characterStandard).uniqued()
                 } else {
                         mark(text: bufferText)
                         candidates = []
@@ -438,36 +438,36 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         guard hasSeparatorsOrTones.negative else { return text.formattedForMark() }
                         guard let bestScheme = segmentation.first else { return text.formattedForMark() }
                         let leadingLength: Int = bestScheme.length
-                        let leadingText: String = bestScheme.map(\.text).joined(separator: " ")
+                        let leadingText: String = bestScheme.map(\.text).joined(separator: String.space)
                         guard leadingLength != text.count else { return leadingText }
                         let tailText = text.dropFirst(leadingLength)
-                        return leadingText + " " + tailText
+                        return leadingText + String.space + tailText
                 }()
                 let text2mark: String = "q " + tailMarkedText
                 mark(text: text2mark)
                 let lookup: [Candidate] = Engine.structureReverseLookup(text: text, input: bufferText, segmentation: segmentation)
-                candidates = lookup.map({ $0.transformed(to: Options.characterStandard) }).uniqued()
+                candidates = lookup.transformed(to: Options.characterStandard).uniqued()
         }
 
 
         // MARK: - Shift to switch InputMethodMode
 
-        nonisolated(unsafe) private lazy var previousModifiers: NSEvent.ModifierFlags = .init()
-        nonisolated(unsafe) private func updatePreviousModifiers(to modifiers: NSEvent.ModifierFlags) {
+        nonisolated(unsafe) private var previousModifiers: NSEvent.ModifierFlags = .init()
+        nonisolated private func updatePreviousModifiers(to modifiers: NSEvent.ModifierFlags) {
                 previousModifiers = modifiers
         }
 
-        nonisolated(unsafe) private lazy var isModifiersBuffering: Bool = false
-        nonisolated(unsafe) private func triggerModifiersBuffer() {
+        nonisolated(unsafe) private var isModifiersBuffering: Bool = false
+        nonisolated private func triggerModifiersBuffer() {
                 isModifiersBuffering = true
         }
-        nonisolated(unsafe) private func resetModifiersBuffer() {
+        nonisolated private func resetModifiersBuffer() {
                 if isModifiersBuffering {
                         isModifiersBuffering = false
                 }
         }
 
-        nonisolated(unsafe) private func shouldSwitchInputMethodMode(with event: NSEvent) -> Bool {
+        nonisolated private func shouldSwitchInputMethodMode(with event: NSEvent) -> Bool {
                 let currentModifiers: NSEvent.ModifierFlags = event.modifierFlags
                 defer {
                         updatePreviousModifiers(to: currentModifiers)
@@ -703,7 +703,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                 return false
                         }
                 }
-                let client: InputClient? = (sender as? InputClient)
+                nonisolated(unsafe) let client: InputClient? = (sender as? InputClient)
                 if isBuffering.negative && isEventHandled {
                         let attributes: [NSAttributedString.Key: Any] = (mark(forStyle: kTSMHiliteSelectedConvertedText, at: replacementRange()) as? [NSAttributedString.Key: Any]) ?? [.underlineStyle: NSUnderlineStyle.thick.rawValue]
                         let attributedText = NSAttributedString(string: String.zeroWidthSpace, attributes: attributes)

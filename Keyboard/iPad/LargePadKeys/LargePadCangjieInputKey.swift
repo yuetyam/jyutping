@@ -5,7 +5,7 @@ import CommonExtensions
 struct LargePadCangjieInputKey: View {
 
         init(_ letter: Character) {
-                let radical: Character = Logogram.cangjie(of: letter) ?? "?"
+                let radical: Character = CharacterStandard.cangjie(of: letter) ?? "?"
                 self.letter = String(letter)
                 self.radical = String(radical)
         }

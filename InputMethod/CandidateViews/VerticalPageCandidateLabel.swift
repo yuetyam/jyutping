@@ -1,9 +1,10 @@
 import SwiftUI
 import CoreIME
+import CommonExtensions
 
 struct VerticalPageCandidateLabel: View {
-        init(isHighlighted: Bool, index: Int, candidate: DisplayCandidate, commentStyle: CommentDisplayStyle, toneStyle: ToneDisplayStyle, toneColor: ToneDisplayColor) {
-                self.label = (index == 9) ? "0" : "\(index + 1)"
+        init(isHighlighted: Bool, index: Int, candidate: DisplayCandidate, commentStyle: CommentDisplayStyle, toneStyle: ToneDisplayStyle, toneColor: ToneDisplayColor, labelSet: LabelSet, isLabelLastZero: Bool) {
+                self.label = LabelSet.labelText(for: index, labelSet: labelSet, isLabelLastZero: isLabelLastZero)
                 self.labelOpacity = isHighlighted ? 1 : 0.75
                 self.candidate = candidate
                 self.commentStyle = commentStyle

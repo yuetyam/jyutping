@@ -8,6 +8,8 @@ struct CandidateBoard: View {
         private let commentStyle: CommentDisplayStyle = AppSettings.commentDisplayStyle
         private let toneStyle: ToneDisplayStyle = AppSettings.toneDisplayStyle
         private let toneColor: ToneDisplayColor = AppSettings.toneDisplayColor
+        private let labelSet: LabelSet = AppSettings.labelSet
+        private let isLabelLastZero: Bool = AppSettings.isLabelLastZero
         private let lineSpacing: CGFloat = CGFloat(AppSettings.candidateLineSpacing)
 
         var body: some View {
@@ -34,7 +36,9 @@ struct CandidateBoard: View {
                                                 candidate: context.displayCandidates[index],
                                                 commentStyle: commentStyle,
                                                 toneStyle: toneStyle,
-                                                toneColor: toneColor
+                                                toneColor: toneColor,
+                                                labelSet: labelSet,
+                                                isLabelLastZero: isLabelLastZero
                                         )
                                         .padding(.vertical, 4)
                                         .padding(.trailing, 4)
@@ -63,7 +67,9 @@ struct CandidateBoard: View {
                                                         candidate: context.displayCandidates[index],
                                                         commentStyle: commentStyle,
                                                         toneStyle: toneStyle,
-                                                        toneColor: toneColor
+                                                        toneColor: toneColor,
+                                                        labelSet: labelSet,
+                                                        isLabelLastZero: isLabelLastZero
                                                 )
                                                 .padding(.horizontal, 4)
                                                 .padding(.vertical, lineSpacing / 2.0)

@@ -101,8 +101,8 @@ public struct Candidate: Hashable, Comparable, Sendable {
         public init(text: String, comment: String?, secondaryComment: String?, input: String) {
                 self.type = .compose
                 self.text = text
-                self.lexiconText = comment ?? ""
-                self.romanization = secondaryComment ?? ""
+                self.lexiconText = comment ?? String.empty
+                self.romanization = secondaryComment ?? String.empty
                 self.input = input
                 self.mark = input
                 self.order = 0
@@ -123,7 +123,7 @@ public struct Candidate: Hashable, Comparable, Sendable {
                 return self.order > 1_000_000
         }
 
-        /// order < 0
+        /// isInputMemory, order < 0
         public var isUserLexicon: Bool {
                 return self.order < 0
         }
@@ -166,9 +166,9 @@ public struct Candidate: Hashable, Comparable, Sendable {
                 guard lhs.isCantonese && rhs.isCantonese else { return nil }
                 let newText: String = lhs.text + rhs.text
                 let newLexiconText: String = lhs.lexiconText + rhs.lexiconText
-                let newRomanization: String = lhs.romanization + " " + rhs.romanization
+                let newRomanization: String = lhs.romanization + String.space + rhs.romanization
                 let newInput: String = lhs.input + rhs.input
-                let newMark: String = lhs.mark + " " + rhs.mark
+                let newMark: String = lhs.mark + String.space + rhs.mark
                 let step: Int = 1_000_000
                 let newOrder: Int = (lhs.order + step) + (rhs.order + step)
                 return Candidate(text: newText, lexiconText: newLexiconText, romanization: newRomanization, input: newInput, mark: newMark, order: newOrder)
@@ -184,17 +184,11 @@ extension Array where Element == Candidate {
                 guard isAllCantonese else { return nil }
                 let text: String = map(\.text).joined()
                 let lexiconText: String = map(\.lexiconText).joined()
-                let romanization: String = map(\.romanization).joined(separator: " ")
+                let romanization: String = map(\.romanization).joined(separator: String.space)
                 let input: String = map(\.input).joined()
-                let mark: String = map(\.mark).joined(separator: " ")
+                let mark: String = map(\.mark).joined(separator: String.space)
                 let step: Int = 1_000_000
                 let order: Int = map(\.order).reduce(0, { $0 + $1 + step })
                 return Candidate(text: text, lexiconText: lexiconText, romanization: romanization, input: input, mark: mark, order: order)
-        }
-}
-
-extension Array where Element == Candidate {
-        public func transformed(with characterStandard: CharacterStandard) -> [Candidate] {
-                return ((self.first?.isUserLexicon ?? false) ? self.filter(\.isCompound.negative) : self).map({ $0.transformed(to: characterStandard) }).uniqued()
         }
 }

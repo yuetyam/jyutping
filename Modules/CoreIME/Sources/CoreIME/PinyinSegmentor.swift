@@ -3,40 +3,41 @@ import SQLite3
 
 public struct PinyinSegmentor {
 
-        public static func segment(text: String) -> [[String]] {
+        public static func segment<T: StringProtocol>(text: T) -> [[String]] {
                 switch text.count {
                 case 0:
                         return []
                 case 1:
                         switch text {
                         case "a", "o", "e":
-                                return [[text]]
+                                return [[String(text)]]
                         default:
                                 return []
                         }
                 default:
-                        return split(text)
+                        let statement = prepareStatement()
+                        defer { sqlite3_finalize(statement) }
+                        return split(text: text, statement: statement)
                 }
         }
 
-        private static func split(_ text: String) -> [[String]] {
-                let leadingTokens: [String] = splitLeading(text)
+        private static func split<T: StringProtocol>(text: T, statement: OpaquePointer?) -> [[String]] {
+                let leadingTokens: [String] = splitLeading(text: text, statement: statement)
                 guard leadingTokens.isNotEmpty else { return [] }
                 let textCount = text.count
-                var segmentation: [[String]] = leadingTokens.map({ [$0] })
+                var segmentation: Set<Array<String>> = Set(leadingTokens.map({ [$0] }))
                 var previousSubelementCount = segmentation.subelementCount
                 var shouldContinue: Bool = true
                 while shouldContinue {
                         for scheme in segmentation {
                                 let schemeLength = scheme.summedLength
                                 guard schemeLength < textCount else { continue }
-                                let tailText = String(text.dropFirst(schemeLength))
-                                let tailTokens = splitLeading(tailText)
+                                let tailText = text.dropFirst(schemeLength)
+                                let tailTokens = splitLeading(text: tailText, statement: statement)
                                 guard tailTokens.isNotEmpty else { continue }
-                                let newSegmentation: [[String]] = tailTokens.map({ scheme + [$0] })
-                                segmentation += newSegmentation
+                                let newSegmentation = tailTokens.map({ scheme + [$0] })
+                                newSegmentation.forEach({ segmentation.insert($0) })
                         }
-                        segmentation = segmentation.uniqued()
                         let currentSubelementCount = segmentation.subelementCount
                         if currentSubelementCount != previousSubelementCount {
                                 previousSubelementCount = currentSubelementCount
@@ -56,25 +57,30 @@ public struct PinyinSegmentor {
                 return sequences
         }
 
-        private static func splitLeading(_ text: String) -> [String] {
+        private static func splitLeading<T: StringProtocol>(text: T, statement: OpaquePointer?) -> [String] {
                 let maxLength: Int = min(text.count, 6)
                 guard maxLength > 0 else { return [] }
-                let tokens = (1...maxLength).reversed().compactMap({ match(text.prefix($0)) })
+                let tokens = (1...maxLength).reversed().compactMap({ match(text: text.prefix($0), statement: statement) })
                 return tokens
         }
 
-        private static func match<T: StringProtocol>(_ text: T) -> String? {
+        private static func match<T: StringProtocol>(text: T, statement: OpaquePointer?) -> String? {
                 guard let code: Int = text.charcode else { return nil }
-                let command: String = "SELECT syllable FROM pinyinsyllabletable WHERE code = \(code) LIMIT 1;"
-                var statement: OpaquePointer? = nil
-                defer { sqlite3_finalize(statement) }
-                #if os(iOS)
-                guard sqlite3_prepare_v2(Segmentor.database, command, -1, &statement, nil) == SQLITE_OK else { return nil }
-                #else
-                guard sqlite3_prepare_v2(Engine.database, command, -1, &statement, nil) == SQLITE_OK else { return nil }
-                #endif
+                sqlite3_reset(statement)
+                sqlite3_bind_int64(statement, 1, Int64(code))
                 guard sqlite3_step(statement) == SQLITE_ROW else { return nil }
-                let syllable: String = String(cString: sqlite3_column_text(statement, 0))
-                return syllable
+                guard let syllable = sqlite3_column_text(statement, 0) else { return nil }
+                return String(cString: syllable)
+        }
+
+        private static let queryCommand: String = "SELECT syllable FROM pinyinsyllabletable WHERE code = ? LIMIT 1;"
+        private static func prepareStatement() -> OpaquePointer? {
+                var statement: OpaquePointer?
+                #if os(iOS)
+                guard sqlite3_prepare_v2(Segmentor.database, queryCommand, -1, &statement, nil) == SQLITE_OK else { return nil }
+                #else
+                guard sqlite3_prepare_v2(Engine.database, queryCommand, -1, &statement, nil) == SQLITE_OK else { return nil }
+                #endif
+                return statement
         }
 }

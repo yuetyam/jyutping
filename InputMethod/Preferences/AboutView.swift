@@ -28,8 +28,10 @@ struct AboutView: View {
                                 VStack {
                                         LinkLabel(icon: "paperplane", title: "AboutView.TelegramGroup", link: About.TelegramAddress)
                                         LinkLabel(icon: "person.2", title: "AboutView.QQGroup", link: About.QQAddress, message: About.QQGroupID)
-                                        LinkLabel(icon: "at", title: "AboutView.Twitter", link: About.TwitterAddress)
+                                        LinkLabel(icon: "book", title: "AboutView.RedNote", link: About.RedNoteAddress)
                                         LinkLabel(icon: "circle.square", title: "AboutView.Instagram", link: About.InstagramAddress)
+                                        LinkLabel(icon: "at", title: "AboutView.Threads", link: About.ThreadsAddress)
+                                        LinkLabel(icon: "at", title: "AboutView.Twitter", link: About.TwitterAddress)
                                 }
                                 .block()
 

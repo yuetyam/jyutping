@@ -9,7 +9,7 @@ public struct SyllablePreparer {
                 return db
         }()
 
-        public static func prepare() {
+        public static func prepare() async {
                 // guard sqlite3_open_v2(":memory:", &database, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE, nil) == SQLITE_OK else { return }
                 createSyllableTable()
                 createPinyinSyllableTable()

@@ -55,13 +55,12 @@ struct AboutView: View {
                                                 MenuCopyButton(About.QQGroupID, title: "IOSAboutTab.ContextMenu.CopyQQGroupID")
                                         }
 
-                                        // Twitter App supports Universal Links
-                                        Link(destination: URL(string: About.TwitterAddress)!) {
-                                                EnhancedLabel("Shared.About.Twitter", icon: "at", symbol: .arrowUpForward)
+                                        Link(destination: URL(string: About.RedNoteAddress)!) {
+                                                EnhancedLabel("Shared.About.RedNote", icon: "book", symbol: .arrowUpForward)
                                         }
                                         .contextMenu {
-                                                UsernameCopyButton(About.TwitterUsername)
-                                                URLCopyButton(About.TwitterAddress)
+                                                UsernameCopyButton(About.RedNoteUsername)
+                                                URLCopyButton(About.RedNoteAddress)
                                         }
 
                                         Button {
@@ -74,6 +73,27 @@ struct AboutView: View {
                                         .contextMenu {
                                                 UsernameCopyButton(About.InstagramUsername)
                                                 URLCopyButton(About.InstagramAddress)
+                                        }
+
+                                        Button {
+                                                let appUrl: URL = URL(string: About.ThreadsAppScheme)!
+                                                let webUrl: URL = URL(string: About.ThreadsAddress)!
+                                                AppMaster.open(appUrl: appUrl, webUrl: webUrl)
+                                        } label: {
+                                                EnhancedLabel("Shared.About.Threads", icon: "at", symbol: .arrowUpForward)
+                                        }
+                                        .contextMenu {
+                                                UsernameCopyButton(About.ThreadsUsername)
+                                                URLCopyButton(About.ThreadsAddress)
+                                        }
+
+                                        // Twitter App supports Universal Links
+                                        Link(destination: URL(string: About.TwitterAddress)!) {
+                                                EnhancedLabel("Shared.About.Twitter", icon: "at", symbol: .arrowUpForward)
+                                        }
+                                        .contextMenu {
+                                                UsernameCopyButton(About.TwitterUsername)
+                                                URLCopyButton(About.TwitterAddress)
                                         }
                                 }
                                 Section {

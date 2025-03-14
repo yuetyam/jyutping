@@ -166,6 +166,7 @@ fat	fat
 fau	fau
 fei	fei
 fok	fok
+foo	fu
 for	fo
 fui	fui
 fuk	fuk
@@ -440,6 +441,7 @@ war	waa
 wat	wat
 wik	wik
 wok	wok
+woo	wu
 wor	wo
 wui	wui
 wun	wun
@@ -599,6 +601,7 @@ faai	faai
 faan	faan
 faat	faat
 fong	fong
+foon	fun
 fung	fung
 gaai	gaai
 gaak	gaak
@@ -656,6 +659,7 @@ hung	hung
 hyun	hyun
 hyut	hyut
 jaak	jaak
+jeng	jeng
 jeoi	jeoi
 jeok	joek
 jeon	jeon
@@ -739,6 +743,7 @@ meen	min
 meng	meng
 ming	ming
 mong	mong
+moon	mun
 mung	mung
 naai	naai
 naam	naam
@@ -793,6 +798,7 @@ saap	saap
 saat	saat
 saau	saau
 sang	sang
+seem	sim
 seen	sin
 seng	seng
 seoi	seoi
@@ -854,6 +860,8 @@ taan	taan
 taap	taap
 taat	taat
 tang	tang
+team	tim
+teem	tim
 teen	tin
 teng	teng
 teoi	teoi
@@ -882,7 +890,9 @@ waat	waat
 wang	wang
 wing	wing
 wong	wong
+woon	wun
 yaak	jaak
+yeng	jeng
 yeoi	jeoi
 yeok	joek
 yeon	jeon
@@ -898,6 +908,7 @@ yong	jung
 yuen	jyun
 yuet	jyut
 yung	jung
+yurk	joek
 zaai	zaai
 zaak	zaak
 zaam	zaam
@@ -989,6 +1000,7 @@ chong	cong
 chuen	cyun
 chuet	cyut
 chung	cung
+churk	coek
 chyun	cyun
 chyut	cyut
 coeng	coeng
@@ -1043,6 +1055,7 @@ shaap	saap
 shaat	saat
 shaau	saau
 shang	sang
+sheem	sim
 sheen	sin
 sheng	seng
 sheoi	seoi
@@ -1065,6 +1078,7 @@ shong	song
 shuen	syun
 shuet	syut
 shung	sung
+shurk	soek
 shyun	syun
 shyut	syut
 soeng	soeng

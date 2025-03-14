@@ -15,11 +15,16 @@ public struct About {
         public static let QQAddress: String = #"https://jq.qq.com/?k=4PR17m3t"#
         public static let QQGroupID: String = "293148593"
 
-        public static let TwitterAddress: String = "https://x.com/JyutpingApp"
-        public static let TwitterUsername: String = "JyutpingApp"
+        public static let RedNoteAddress: String = "https://www.xiaohongshu.com/user/profile/62ee9df9000000001e01f5d6"
+        public static let RedNoteUsername: String = "jyutping"
         public static let InstagramAppScheme: String = "instagram://user?username=jyutping_app"
         public static let InstagramAddress: String = "https://www.instagram.com/jyutping_app"
         public static let InstagramUsername: String = "jyutping_app"
+        public static let ThreadsAppScheme: String = "barcelona://user?username=jyutping_app"
+        public static let ThreadsAddress: String = "https://www.threads.net/@jyutping_app"
+        public static let ThreadsUsername: String = "@jyutping_app"
+        public static let TwitterAddress: String = "https://x.com/JyutpingApp"
+        public static let TwitterUsername: String = "JyutpingApp"
 
         public static let GoogleFormsAddress: String = "https://forms.gle/4N9zwpL7KwnfaeXu6"
         public static let TencentSurveyAddress: String = "https://wj.qq.com/s2/14037245/fe08"

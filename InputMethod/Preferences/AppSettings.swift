@@ -9,6 +9,8 @@ struct SettingsKey {
         static let CommentDisplayStyle: String = "CommentDisplayStyle"
         static let ToneDisplayStyle: String = "ToneDisplayStyle"
         static let ToneDisplayColor: String = "ToneDisplayColor"
+        static let LabelSet: String = "LabelSet"
+        static let LabelLast: String = "LabelLast"
         static let CangjieVariant: String = "CangjieVariant"
         static let UserLexiconInputMemory: String = "UserLexiconInputMemory"
 
@@ -30,24 +32,17 @@ struct SettingsKey {
         static let ShiftSpaceCombination: String = "ShiftSpaceCombination"
 }
 
-enum CandidatePageOrientation: Int {
+enum CandidatePageOrientation: Int, CaseIterable {
         case horizontal = 1
         case vertical = 2
         var isHorizontal: Bool { self == .horizontal }
         var isVertical: Bool { self == .vertical }
         static func orientation(of value: Int) -> CandidatePageOrientation {
-                switch value {
-                case Self.horizontal.rawValue:
-                        return .horizontal
-                case Self.vertical.rawValue:
-                        return .vertical
-                default:
-                        return .horizontal
-                }
+                return Self.allCases.first(where: { $0.rawValue == value }) ?? Self.horizontal
         }
 }
 
-enum CommentDisplayStyle: Int {
+enum CommentDisplayStyle: Int, CaseIterable {
 
         case top = 1
         case bottom = 2
@@ -56,18 +51,7 @@ enum CommentDisplayStyle: Int {
         case noComments = 5
 
         static func style(of value: Int) -> CommentDisplayStyle {
-                switch value {
-                case Self.top.rawValue:
-                        return .top
-                case Self.bottom.rawValue:
-                        return .bottom
-                case Self.right.rawValue:
-                        return .right
-                case Self.noComments.rawValue:
-                        return .noComments
-                default:
-                        return .top
-                }
+                return Self.allCases.first(where: { $0.rawValue == value }) ?? Self.top
         }
         var isVertical: Bool {
                 switch self {
@@ -79,7 +63,7 @@ enum CommentDisplayStyle: Int {
         }
 }
 
-enum ToneDisplayStyle: Int {
+enum ToneDisplayStyle: Int, CaseIterable {
 
         case normal = 1
         case noTones = 2
@@ -87,21 +71,10 @@ enum ToneDisplayStyle: Int {
         case `subscript` = 4
 
         static func style(of value: Int) -> ToneDisplayStyle {
-                switch value {
-                case Self.normal.rawValue:
-                        return .normal
-                case Self.noTones.rawValue:
-                        return .noTones
-                case Self.superscript.rawValue:
-                        return .superscript
-                case Self.subscript.rawValue:
-                        return .subscript
-                default:
-                        return .normal
-                }
+                return Self.allCases.first(where: { $0.rawValue == value }) ?? Self.normal
         }
 }
-enum ToneDisplayColor: Int {
+enum ToneDisplayColor: Int, CaseIterable {
 
         case normal = 1
 
@@ -109,18 +82,53 @@ enum ToneDisplayColor: Int {
         case shallow = 2
 
         static func color(of value: Int) -> ToneDisplayColor {
-                switch value {
-                case Self.normal.rawValue:
-                        return .normal
-                case Self.shallow.rawValue:
-                        return .shallow
-                default:
-                        return .normal
-                }
+                return Self.allCases.first(where: { $0.rawValue == value }) ?? Self.normal
         }
 }
 
-enum FontMode: Int {
+/// 候選詞編號集
+enum LabelSet: Int, CaseIterable {
+
+        /// 阿拉伯數字（半寬）
+        case arabic = 1
+
+        /// 全寬阿拉伯數字
+        case fullWidthArabic = 2
+
+        /// 漢字數字：〇一二三四五六七八九十
+        case chinese = 3
+
+        /// 大寫漢字數字：零壹貳叁肆伍陸柒捌玖拾
+        case capitalizedChinese = 4
+
+        /// 蘇州碼：〇〡〢〣〤〥〦〧〨〩〸
+        case soochow = 5
+
+        /// 麻雀／麻將：🀙 🀚 🀛 🀜 🀝 🀞 🀟 🀠 🀡 🀆
+        case mahjong = 6
+
+        /// 大寫羅馬數字: Ⅰ Ⅱ Ⅲ Ⅳ Ⅴ Ⅵ Ⅶ Ⅷ Ⅸ Ⅹ
+        case roman = 7
+
+        /// 小寫羅馬數字: ⅰ ⅱ ⅲ ⅳ ⅴ ⅵ ⅶ ⅷ ⅸ ⅹ
+        case smallRoman = 8
+
+        static func labelSet(of value: Int) -> LabelSet {
+                return Self.allCases.first(where: { $0.rawValue == value }) ?? Self.arabic
+        }
+}
+
+/// 候選詞編號第十位
+enum LabelLast: Int, CaseIterable {
+        case zero = 1
+        case ten = 2
+        static func labelLast(of value: Int) -> LabelLast {
+                return Self.allCases.first(where: { $0.rawValue == value }) ?? Self.zero
+        }
+}
+
+
+enum FontMode: Int, CaseIterable {
 
         case `default` = 1
         case system = 2
@@ -131,33 +139,31 @@ enum FontMode: Int {
         }
 
         static func mode(of value: Int) -> FontMode {
-                switch value {
-                case Self.default.rawValue:
-                        return .default
-                case Self.system.rawValue:
-                        return .system
-                case Self.custom.rawValue:
-                        return .custom
-                default:
-                        return .default
-                }
+                return Self.allCases.first(where: { $0.rawValue == value }) ?? Self.default
         }
 }
 
-enum PressShiftOnce: Int {
+enum PressShiftOnce: Int, CaseIterable {
         case doNothing = 1
         case switchInputMethodMode = 2
+        static func action(of value: Int) -> PressShiftOnce {
+                return Self.allCases.first(where: { $0.rawValue == value }) ?? Self.doNothing
+        }
 }
 
-enum ShiftSpaceCombination: Int {
+enum ShiftSpaceCombination: Int, CaseIterable {
         case inputFullWidthSpace = 1
         case switchInputMethodMode = 2
+        static func action(of value: Int) -> ShiftSpaceCombination {
+                return Self.allCases.first(where: { $0.rawValue == value }) ?? Self.inputFullWidthSpace
+        }
 }
 
+@MainActor
 struct AppSettings {
 
         /// Preferences Window
-        nonisolated(unsafe) private(set) static var selectedPreferencesSidebarRow: PreferencesSidebarRow = .general
+        private(set) static var selectedPreferencesSidebarRow: PreferencesSidebarRow = .general
         static func updateSelectedPreferencesSidebarRow(to row: PreferencesSidebarRow) {
                 selectedPreferencesSidebarRow = row
         }
@@ -165,7 +171,7 @@ struct AppSettings {
 
         // MARK: - Page Size
 
-        nonisolated(unsafe) private(set) static var displayCandidatePageSize: Int = {
+        private(set) static var displayCandidatePageSize: Int = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.CandidatePageSize)
                 let isSavedValueValid: Bool = pageSizeValidity(of: savedValue)
                 guard isSavedValueValid else { return defaultCandidatePageSize }
@@ -186,7 +192,7 @@ struct AppSettings {
 
         // MARK: - Line Spacing
 
-        nonisolated(unsafe) private(set) static var candidateLineSpacing: Int = {
+        private(set) static var candidateLineSpacing: Int = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.CandidateLineSpacing)
                 let isSavedValueValid: Bool = lineSpacingValidity(of: savedValue)
                 guard isSavedValueValid else { return defaultCandidateLineSpacing }
@@ -207,7 +213,7 @@ struct AppSettings {
 
         // MARK: - Orientation
 
-        nonisolated(unsafe) private(set) static var candidatePageOrientation: CandidatePageOrientation = {
+        private(set) static var candidatePageOrientation: CandidatePageOrientation = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.CandidatePageOrientation)
                 return CandidatePageOrientation.orientation(of: savedValue)
         }()
@@ -220,7 +226,7 @@ struct AppSettings {
 
         // MARK: - Comment Display Style
 
-        nonisolated(unsafe) private(set) static var commentDisplayStyle: CommentDisplayStyle = {
+        private(set) static var commentDisplayStyle: CommentDisplayStyle = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.CommentDisplayStyle)
                 return CommentDisplayStyle.style(of: savedValue)
         }()
@@ -233,7 +239,7 @@ struct AppSettings {
 
         // MARK: - Tone Display Style
 
-        nonisolated(unsafe) private(set) static var toneDisplayStyle: ToneDisplayStyle = {
+        private(set) static var toneDisplayStyle: ToneDisplayStyle = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.ToneDisplayStyle)
                 return ToneDisplayStyle.style(of: savedValue)
         }()
@@ -243,7 +249,7 @@ struct AppSettings {
                 UserDefaults.standard.set(value, forKey: SettingsKey.ToneDisplayStyle)
         }
 
-        nonisolated(unsafe) private(set) static var toneDisplayColor: ToneDisplayColor = {
+        private(set) static var toneDisplayColor: ToneDisplayColor = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.ToneDisplayColor)
                 return ToneDisplayColor.color(of: savedValue)
         }()
@@ -254,22 +260,35 @@ struct AppSettings {
         }
 
 
+        // MARK: - Label / Serial Number
+
+        private(set) static var labelSet: LabelSet = {
+                let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.LabelSet)
+                return LabelSet.labelSet(of: savedValue)
+        }()
+        static func updateLabelSet(to labels: LabelSet) {
+                labelSet = labels
+                let value: Int = labels.rawValue
+                UserDefaults.standard.set(value, forKey: SettingsKey.LabelSet)
+        }
+
+        private(set) static var isLabelLastZero: Bool = {
+                let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.LabelLast)
+                let option: LabelLast = LabelLast.labelLast(of: savedValue)
+                return option == LabelLast.zero
+        }()
+        static func updateLabelLastState(to isZero: Bool) {
+                isLabelLastZero = isZero
+                let value: Int = isZero ? 1 : 2
+                UserDefaults.standard.set(value, forKey: SettingsKey.LabelLast)
+        }
+
+
         // MARK: - Cangjie / Quick Reverse Lookup
 
-        nonisolated(unsafe) private(set) static var cangjieVariant: CangjieVariant = {
+        private(set) static var cangjieVariant: CangjieVariant = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.CangjieVariant)
-                switch savedValue {
-                case CangjieVariant.cangjie5.rawValue:
-                        return .cangjie5
-                case CangjieVariant.cangjie3.rawValue:
-                        return .cangjie3
-                case CangjieVariant.quick5.rawValue:
-                        return .quick5
-                case CangjieVariant.quick3.rawValue:
-                        return .quick3
-                default:
-                        return .cangjie5
-                }
+                return CangjieVariant.variant(of: savedValue)
         }()
         static func updateCangjieVariant(to variant: CangjieVariant) {
                 cangjieVariant = variant
@@ -280,7 +299,7 @@ struct AppSettings {
 
         // MARK: - User Lexicon
 
-        nonisolated(unsafe) private(set) static var isInputMemoryOn: Bool = {
+        private(set) static var isInputMemoryOn: Bool = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.UserLexiconInputMemory)
                 switch savedValue {
                 case 0, 1:
@@ -291,7 +310,7 @@ struct AppSettings {
                         return true
                 }
         }()
-        static func updateInputMemory(to isOn: Bool) {
+        static func updateInputMemoryState(to isOn: Bool) {
                 isInputMemoryOn = isOn
                 let value: Int = isOn ? 1 : 2
                 UserDefaults.standard.set(value, forKey: SettingsKey.UserLexiconInputMemory)
@@ -300,7 +319,7 @@ struct AppSettings {
 
         // MARK: - Font Size
 
-        nonisolated(unsafe) private(set) static var candidateFontSize: CGFloat = {
+        private(set) static var candidateFontSize: CGFloat = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.CandidateFontSize)
                 let isSavedValueValid: Bool = fontSizeValidity(of: savedValue)
                 let size: Int = isSavedValueValid ? savedValue : defaultCandidateFontSize
@@ -314,7 +333,7 @@ struct AppSettings {
                 Font.updateCandidateFont()
         }
 
-        nonisolated(unsafe) private(set) static var commentFontSize: CGFloat = {
+        private(set) static var commentFontSize: CGFloat = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.CommentFontSize)
                 let isSavedValueValid: Bool = fontSizeValidity(of: savedValue)
                 let size: Int = isSavedValueValid ? savedValue : defaultCommentFontSize
@@ -329,7 +348,7 @@ struct AppSettings {
                 Font.updateCommentFont()
         }
 
-        nonisolated(unsafe) private(set) static var labelFontSize: CGFloat = {
+        private(set) static var labelFontSize: CGFloat = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.LabelFontSize)
                 let isSavedValueValid: Bool = fontSizeValidity(of: savedValue)
                 let size: Int = isSavedValueValid ? savedValue : defaultLabelFontSize
@@ -353,7 +372,7 @@ struct AppSettings {
 
 
         // Candidate StackView syllable text frame
-        nonisolated(unsafe) private(set) static var syllableViewSize: CGSize = computeSyllableViewSize()
+        private(set) static var syllableViewSize: CGSize = computeSyllableViewSize()
         private static func updateSyllableViewSize() {
                 syllableViewSize = computeSyllableViewSize()
         }
@@ -366,7 +385,7 @@ struct AppSettings {
 
         // MARK: - Font Mode
 
-        nonisolated(unsafe) private(set) static var candidateFontMode: FontMode = {
+        private(set) static var candidateFontMode: FontMode = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.CandidateFontMode)
                 return FontMode.mode(of: savedValue)
         }()
@@ -377,7 +396,7 @@ struct AppSettings {
                 Font.updateCandidateFont()
         }
 
-        nonisolated(unsafe) private(set) static var commentFontMode: FontMode = {
+        private(set) static var commentFontMode: FontMode = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.CommentFontMode)
                 return FontMode.mode(of: savedValue)
         }()
@@ -388,7 +407,7 @@ struct AppSettings {
                 Font.updateCommentFont()
         }
 
-        nonisolated(unsafe) private(set) static var labelFontMode: FontMode = {
+        private(set) static var labelFontMode: FontMode = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.LabelFontMode)
                 return FontMode.mode(of: savedValue)
         }()
@@ -402,7 +421,7 @@ struct AppSettings {
 
         // MARK: - Custom Fonts
 
-        nonisolated(unsafe) private(set) static var customCandidateFonts: [String] = {
+        private(set) static var customCandidateFonts: [String] = {
                 let fallback: [String] = [PresetConstant.PingFangHK]
                 let savedNames: String? = UserDefaults.standard.string(forKey: SettingsKey.CustomCandidateFontList)
                 guard let savedNames else { return fallback }
@@ -418,7 +437,7 @@ struct AppSettings {
                 Font.updateCandidateFont()
         }
 
-        nonisolated(unsafe) private(set) static var customCommentFonts: [String] = {
+        private(set) static var customCommentFonts: [String] = {
                 let fallback: [String] = [PresetConstant.HelveticaNeue]
                 let savedNames: String? = UserDefaults.standard.string(forKey: SettingsKey.CustomCommentFontList)
                 guard let savedNames else { return fallback }
@@ -434,7 +453,7 @@ struct AppSettings {
                 Font.updateCommentFont()
         }
 
-        nonisolated(unsafe) private(set) static var customLabelFonts: [String] = {
+        private(set) static var customLabelFonts: [String] = {
                 let fallback: [String] = [PresetConstant.Menlo]
                 let savedNames = UserDefaults.standard.string(forKey: SettingsKey.CustomLabelFontList)
                 guard let savedNames else { return fallback }
@@ -459,21 +478,11 @@ struct AppSettings {
         /// 2. Switch between Cantonese and English
         nonisolated(unsafe) private(set) static var pressShiftOnce: PressShiftOnce = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.PressShiftOnce)
-                switch savedValue {
-                case 0, 1:
-                        return .doNothing
-                case 2:
-                        return .switchInputMethodMode
-                default:
-                        return .doNothing
-                }
+                return PressShiftOnce.action(of: savedValue)
         }()
         static func updatePressShiftOnce(to option: PressShiftOnce) {
                 pressShiftOnce = option
-                let value: Int = switch option {
-                case .doNothing: 1
-                case .switchInputMethodMode: 2
-                }
+                let value: Int = option.rawValue
                 UserDefaults.standard.set(value, forKey: SettingsKey.PressShiftOnce)
         }
 
@@ -483,21 +492,44 @@ struct AppSettings {
         /// 2. Switch between Cantonese and English
         nonisolated(unsafe) private(set) static var shiftSpaceCombination: ShiftSpaceCombination = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.ShiftSpaceCombination)
-                switch savedValue {
-                case 0, 1:
-                        return .inputFullWidthSpace
-                case 2:
-                        return .switchInputMethodMode
-                default:
-                        return .inputFullWidthSpace
-                }
+                return ShiftSpaceCombination.action(of: savedValue)
         }()
         static func updateShiftSpaceCombination(to option: ShiftSpaceCombination) {
                 shiftSpaceCombination = option
-                let value: Int = switch option {
-                case .inputFullWidthSpace: 1
-                case .switchInputMethodMode: 2
-                }
+                let value: Int = option.rawValue
                 UserDefaults.standard.set(value, forKey: SettingsKey.ShiftSpaceCombination)
+        }
+}
+
+extension LabelSet {
+
+        private static let chineseLabels: [String] = ["一", "二", "三", "四", "五", "六", "七", "八", "九", "十"]
+        private static let capitalizedChineseLabels: [String] = ["壹", "貳", "叁", "肆", "伍", "陸", "柒", "捌", "玖", "拾"]
+        private static let soochowLabels: [String] = ["〡", "〢", "〣", "〤", "〥", "〦", "〧", "〨", "〩", "〸"]
+        private static let mahjongLabels: [String] = ["🀙", "🀚", "🀛", "🀜", "🀝", "🀞", "🀟", "🀠", "🀡", "🀆"]
+        private static let romanLabels: [String] = ["Ⅰ", "Ⅱ", "Ⅲ", "Ⅳ", "Ⅴ", "Ⅵ", "Ⅶ", "Ⅷ", "Ⅸ", "Ⅹ"]
+        private static let smallRomanLabels: [String] = ["ⅰ", "ⅱ", "ⅲ", "ⅳ", "ⅴ", "ⅵ", "ⅶ", "ⅷ", "ⅸ", "ⅹ"]
+
+        static func labelText(for index: Int, labelSet: LabelSet, isLabelLastZero: Bool) -> String {
+                let shouldBeZero: Bool = isLabelLastZero && index == 9
+                switch labelSet {
+                case .arabic:
+                        return shouldBeZero ? "0" : "\(index + 1)"
+                case .fullWidthArabic:
+                        let numberText: String = "\(index + 1)"
+                        return shouldBeZero ? "０" : numberText.fullWidth()
+                case .chinese:
+                        return shouldBeZero ? "〇" : (chineseLabels.fetch(index) ?? "?")
+                case .capitalizedChinese:
+                        return shouldBeZero ? "零" : (capitalizedChineseLabels.fetch(index) ?? "?")
+                case .soochow:
+                        return shouldBeZero ? "〇" : (soochowLabels.fetch(index) ?? "?")
+                case .mahjong:
+                        return shouldBeZero ? "🀆" : (mahjongLabels.fetch(index) ?? "?")
+                case .roman:
+                        return shouldBeZero ? "N" : (romanLabels.fetch(index) ?? "?")
+                case .smallRoman:
+                        return shouldBeZero ? "n" : (smallRomanLabels.fetch(index) ?? "?")
+                }
         }
 }

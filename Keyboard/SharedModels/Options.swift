@@ -4,21 +4,9 @@ import CommonExtensions
 
 struct Options {
 
-        /// 字形標準
         nonisolated(unsafe) private(set) static var characterStandard: CharacterStandard = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.CharacterStandard)
-                switch savedValue {
-                case 0, 1:
-                        return .traditional
-                case 2:
-                        return .hongkong
-                case 3:
-                        return .taiwan
-                case 4:
-                        return .simplified
-                default:
-                        return .traditional
-                }
+                return CharacterStandard.standard(of: savedValue)
         }()
         static func updateCharacterStandard(to standard: CharacterStandard) {
                 characterStandard = standard
@@ -28,14 +16,7 @@ struct Options {
 
         nonisolated(unsafe) private(set) static var isAudioFeedbackOn: Bool = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.AudioFeedback)
-                switch savedValue {
-                case 0:
-                        return false
-                case 1:
-                        return true
-                default:
-                        return false
-                }
+                return savedValue == 1
         }()
         static func updateAudioFeedbackStatus(isOn: Bool) {
                 isAudioFeedbackOn = isOn
@@ -133,18 +114,7 @@ struct Options {
 
         nonisolated(unsafe) private(set) static var cangjieVariant: CangjieVariant = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.CangjieVariant)
-                switch savedValue {
-                case CangjieVariant.cangjie5.rawValue:
-                        return .cangjie5
-                case CangjieVariant.cangjie3.rawValue:
-                        return .cangjie3
-                case CangjieVariant.quick5.rawValue:
-                        return .quick5
-                case CangjieVariant.quick3.rawValue:
-                        return .quick3
-                default:
-                        return .cangjie5
-                }
+                return CangjieVariant.variant(of: savedValue)
         }()
         static func updateCangjieVariant(to variant: CangjieVariant) {
                 cangjieVariant = variant

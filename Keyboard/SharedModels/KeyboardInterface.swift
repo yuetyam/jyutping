@@ -101,7 +101,7 @@ extension KeyboardInterface {
                                 // iPhone X, Xs, 11 Pro, 12 mini, 13 mini (375 x 812)
                                 return 53
                         } else if minDimension < 405 {
-                                // iPhone 12, 12 Pro, 13, 13 Pro, 14 (390 x 844)
+                                // iPhone 12, 12 Pro, 13, 13 Pro, 14, 16e (390 x 844)
                                 // iPhone 14 Pro, 15, 15 Pro, 16 (393 x 852)
                                 // iPhone 16 Pro (402 x 874)
                                 return 54

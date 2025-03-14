@@ -499,6 +499,12 @@
             "value" : "简↔繁"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "简↔繁"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1653,6 +1659,12 @@
             "value" : "Simplified"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Caractères simplifiés"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1715,6 +1727,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Traditional"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Caractères traditionnels"
           }
         },
         "yue" : {
@@ -1781,6 +1799,12 @@
             "value" : "Traditional, Hong Kong"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Caractères traditionnels, Hong Kong"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1843,6 +1867,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Traditional, Taiwan"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Caractères traditionnels, Taïwan"
           }
         },
         "yue" : {
@@ -3829,6 +3859,12 @@
             "value" : "Copy"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copier"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3888,6 +3924,12 @@
     "SettingsView.Version.LabelTitle" : {
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Version"
+          }
+        },
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Version"

@@ -1,70 +1,54 @@
 import Foundation
 import SQLite3
 
-private extension Engine {
-        static func t2s(_ character: Character) -> String {
-                guard let code: UInt32 = character.unicodeScalars.first?.value else { return String(character) }
-                let query: String = "SELECT simplified FROM t2stable WHERE traditional = \(code);"
-                var statement: OpaquePointer? = nil
-                defer { sqlite3_finalize(statement) }
-                guard sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK else { return String(character) }
-                guard sqlite3_step(statement) == SQLITE_ROW else { return String(character) }
-                let simplified: String = String(cString: sqlite3_column_text(statement, 0))
-                return simplified
-        }
-        static func charT2S(_ character: Character) -> Character {
-                guard let code: UInt32 = character.unicodeScalars.first?.value else { return character }
-                let query: String = "SELECT simplified FROM t2stable WHERE traditional = \(code);"
-                var statement: OpaquePointer? = nil
-                defer { sqlite3_finalize(statement) }
-                guard sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK else { return character}
-                guard sqlite3_step(statement) == SQLITE_ROW else { return character }
-                let simplified: String = String(cString: sqlite3_column_text(statement, 0))
-                return simplified.first ?? character
-        }
-        static func textT2S(_ text: String) -> String {
-                guard let code: UInt32 = text.first?.unicodeScalars.first?.value else { return text }
-                let query: String = "SELECT simplified FROM t2stable WHERE traditional = \(code);"
-                var statement: OpaquePointer? = nil
-                defer { sqlite3_finalize(statement) }
-                guard sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK else { return text}
-                guard sqlite3_step(statement) == SQLITE_ROW else { return text }
-                let simplified: String = String(cString: sqlite3_column_text(statement, 0))
-                return simplified
-        }
-}
-
 struct Simplifier {
 
-        static func convert(_ text: String) -> String {
+        private static func t2s(character: Character, statement: OpaquePointer?) -> Character {
+                guard let code = character.unicodeScalars.first?.value else { return character }
+                sqlite3_reset(statement)
+                sqlite3_bind_int64(statement, 1, Int64(code))
+                guard sqlite3_step(statement) == SQLITE_ROW else { return character }
+                guard let simplified = sqlite3_column_text(statement, 0) else { return character }
+                return String(cString: simplified).first ?? character
+        }
+        private static func convert(character: Character, statement: OpaquePointer?) -> String {
+                guard let code = character.unicodeScalars.first?.value else { return String(character) }
+                sqlite3_reset(statement)
+                sqlite3_bind_int64(statement, 1, Int64(code))
+                guard sqlite3_step(statement) == SQLITE_ROW else { return String(character) }
+                guard let simplified = sqlite3_column_text(statement, 0) else { return String(character) }
+                return String(cString: simplified)
+        }
+
+        static func simplify(_ text: String, statement: OpaquePointer?) -> String {
                 switch text.count {
                 case 0:
                         return text
                 case 1:
-                        return Engine.textT2S(text)
+                        return String(t2s(character: text.first!, statement: statement))
                 case 2:
-                        return phrases[text] ?? String(text.map(Engine.charT2S(_:)))
+                        return phrases[text] ?? String(text.map({ t2s(character: $0, statement: statement) }))
                 default:
-                        return phrases[text] ?? transform(text)
+                        return phrases[text] ?? transform(text, statement: statement)
                 }
         }
 
-        private static func transform(_ text: String) -> String {
+        private static func transform(_ text: String, statement: OpaquePointer?) -> String {
                 let roundOne = replace(text, replacement: "W")
                 guard roundOne.matched.isNotEmpty else {
-                        return String(text.map(Engine.charT2S(_:)))
+                        return String(text.map({ t2s(character: $0, statement: statement) }))
                 }
 
                 let roundTwo = replace(roundOne.modified, replacement: "X")
                 guard roundTwo.matched.isNotEmpty else {
-                        let transformed: String = roundTwo.modified.map(Engine.t2s(_:)).joined()
+                        let transformed = roundTwo.modified.map({ convert(character: $0, statement: statement) }).joined()
                         let reverted: String = transformed.replacingOccurrences(of: roundOne.replacement, with: roundOne.matched)
                         return reverted
                 }
 
                 let roundThree = replace(roundTwo.modified, replacement: "Y")
                 guard roundThree.matched.isNotEmpty else {
-                        let transformed: String = roundThree.modified.map(Engine.t2s(_:)).joined()
+                        let transformed: String = roundThree.modified.map({ convert(character: $0, statement: statement) }).joined()
                         let reverted: String = transformed
                                 .replacingOccurrences(of: roundOne.replacement, with: roundOne.matched)
                                 .replacingOccurrences(of: roundTwo.replacement, with: roundTwo.matched)
@@ -73,7 +57,7 @@ struct Simplifier {
 
                 let roundFour = replace(roundThree.modified, replacement: "Z")
                 guard roundFour.matched.isNotEmpty else {
-                        let transformed: String = roundFour.modified.map(Engine.t2s(_:)).joined()
+                        let transformed: String = roundFour.modified.map({ convert(character: $0, statement: statement) }).joined()
                         let reverted: String = transformed
                                 .replacingOccurrences(of: roundOne.replacement, with: roundOne.matched)
                                 .replacingOccurrences(of: roundTwo.replacement, with: roundTwo.matched)
@@ -81,7 +65,7 @@ struct Simplifier {
                         return reverted
                 }
 
-                let transformed: String = roundFour.modified.map(Engine.t2s(_:)).joined()
+                let transformed: String = roundFour.modified.map({ convert(character: $0, statement: statement) }).joined()
                 let reverted: String = transformed
                         .replacingOccurrences(of: roundOne.replacement, with: roundOne.matched)
                         .replacingOccurrences(of: roundTwo.replacement, with: roundTwo.matched)
@@ -167,7 +151,6 @@ private static let phrases: [String: String] = [
 "哪吒": "哪吒",
 "回覆": "回复",
 "壺裏乾坤": "壶里乾坤",
-// "大目乾連冥間救母變文": "大目乾连冥间救母变文",
 "宫商角徵羽": "宫商角徵羽",
 "射覆": "射复",
 "尼乾子": "尼乾子",
@@ -176,7 +159,6 @@ private static let phrases: [String: String] = [
 "幺麼小丑": "幺麽小丑",
 "幺麼小醜": "幺麽小丑",
 "康乾": "康乾",
-"張法乾": "张法乾",
 "彷彿": "仿佛",
 "彷徨": "彷徨",
 "徵弦": "徵弦",
@@ -196,27 +178,7 @@ private static let phrases: [String: String] = [
 "拜覆": "拜复",
 "據瞭解": "据了解",
 "文錦覆阱": "文锦复阱",
-"於世成": "於世成",
-"於乎": "於乎",
-"於仲完": "於仲完",
-"於倫": "於伦",
-"於其一": "於其一",
-"於則": "於则",
-"於勇明": "於勇明",
 "於呼哀哉": "於呼哀哉",
-"於單": "於单",
-"於坦": "於坦",
-"於崇文": "於崇文",
-"於忠祥": "於忠祥",
-"於惟一": "於惟一",
-"於戲": "於戏",
-"於敖": "於敖",
-"於梨華": "於梨华",
-"於清言": "於清言",
-"於潛": "於潜",
-"於琳": "於琳",
-"於穆": "於穆",
-"於竹屋": "於竹屋",
 "於菟": "於菟",
 "於邑": "於邑",
 "於陵子": "於陵子",
@@ -225,7 +187,6 @@ private static let phrases: [String: String] = [
 "旋轉乾坤之力": "旋转乾坤之力",
 "明瞭": "明了",
 "明覆": "明复",
-"書中自有千鍾粟": "书中自有千锺粟",
 "有序": "有序",
 "朝乾夕惕": "朝乾夕惕",
 "木吒": "木吒",
@@ -309,7 +270,6 @@ private static let phrases: [String: String] = [
 "藉資": "借资",
 "衹得": "只得",
 "衹見樹木": "只见树木",
-// "衹見樹木不見森林": "只见树木不见森林",
 "袖裏乾坤": "袖里乾坤",
 "覆上": "复上",
 "覆住": "复住",
@@ -354,7 +314,6 @@ private static let phrases: [String: String] = [
 "躪藉": "躏借",
 "郭子乾": "郭子乾",
 "酒逢知己千鍾少": "酒逢知己千锺少",
-// "酒逢知己千鍾少話不投機半句多": "酒逢知己千锺少话不投机半句多",
 "醞藉": "酝借",
 "重覆": "重复",
 "金吒": "金吒",

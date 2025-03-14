@@ -1,4 +1,4 @@
-extension Array where Element == Int {
+extension Sequence where Element == Int {
 
         /// Sum numbers up
         /// - Returns: Summed

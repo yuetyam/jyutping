@@ -17,10 +17,15 @@ struct IntroductionsView: View {
                                 Text("IOSHomeTab.IntroductionsView.Heading.PositionInsertionPoint").font(.headline)
                                 Text("IOSHomeTab.IntroductionsView.Body.PositionInsertionPoint")
                         }
-                        Section {
-                                Text("IOSHomeTab.IntroductionsView.Heading.SpaceDoubleTapping").font(.headline)
-                                Text("IOSHomeTab.IntroductionsView.Body.SpaceDoubleTapping")
+
+                        // TODO: Double-space shortcut
+                        if #available(iOS 20.0, *) {
+                                Section {
+                                        Text("IOSHomeTab.IntroductionsView.Heading.SpaceDoubleTapping").font(.headline)
+                                        Text("IOSHomeTab.IntroductionsView.Body.SpaceDoubleTapping")
+                                }
                         }
+
                         Section {
                                 Text("IOSHomeTab.IntroductionsView.Heading.TripleStrokeKeyboard").font(.headline)
                                 Text("IOSHomeTab.IntroductionsView.Body.TripleStrokeKeyboard.Row1")

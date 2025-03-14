@@ -13,6 +13,8 @@ struct GeneralPreferencesView: View {
         @State private var commentDisplayStyle: CommentDisplayStyle = AppSettings.commentDisplayStyle
         @State private var toneDisplayStyle: ToneDisplayStyle = AppSettings.toneDisplayStyle
         @State private var toneDisplayColor: ToneDisplayColor = AppSettings.toneDisplayColor
+        @State private var labelSet: LabelSet = AppSettings.labelSet
+        @State private var isLabelLastZero: Bool = AppSettings.isLabelLastZero
 
         @State private var characterStandard: CharacterStandard = Options.characterStandard
         @State private var isEmojiSuggestionsOn: Bool = Options.isEmojiSuggestionsOn
@@ -65,21 +67,20 @@ struct GeneralPreferencesView: View {
                                         Spacer()
                                 }
                                 .block()
-                                HStack {
-                                        Picker("GeneralPreferencesView.CommentStyle", selection: $commentDisplayStyle) {
-                                                Text("GeneralPreferencesView.CommentStyle.Top").tag(CommentDisplayStyle.top)
-                                                Text("GeneralPreferencesView.CommentStyle.Bottom").tag(CommentDisplayStyle.bottom)
-                                                Text("GeneralPreferencesView.CommentStyle.Right").tag(CommentDisplayStyle.right)
-                                                Text("GeneralPreferencesView.CommentStyle.NoComments").tag(CommentDisplayStyle.noComments)
-                                        }
-                                        .scaledToFit()
-                                        .onChange(of: commentDisplayStyle) { newStyle in
-                                                AppSettings.updateCommentDisplayStyle(to: newStyle)
-                                        }
-                                        Spacer()
-                                }
-                                .block()
                                 VStack {
+                                        HStack {
+                                                Picker("GeneralPreferencesView.CommentStyle", selection: $commentDisplayStyle) {
+                                                        Text("GeneralPreferencesView.CommentStyle.Top").tag(CommentDisplayStyle.top)
+                                                        Text("GeneralPreferencesView.CommentStyle.Bottom").tag(CommentDisplayStyle.bottom)
+                                                        Text("GeneralPreferencesView.CommentStyle.Right").tag(CommentDisplayStyle.right)
+                                                        Text("GeneralPreferencesView.CommentStyle.NoComments").tag(CommentDisplayStyle.noComments)
+                                                }
+                                                .scaledToFit()
+                                                .onChange(of: commentDisplayStyle) { newStyle in
+                                                        AppSettings.updateCommentDisplayStyle(to: newStyle)
+                                                }
+                                                Spacer()
+                                        }
                                         HStack {
                                                 Picker("GeneralPreferencesView.CommentToneStyle", selection: $toneDisplayStyle) {
                                                         Text("GeneralPreferencesView.CommentToneStyle.Normal").tag(ToneDisplayStyle.normal)
@@ -102,6 +103,35 @@ struct GeneralPreferencesView: View {
                                                 .onChange(of: toneDisplayColor) { newOption in
                                                         AppSettings.updateToneDisplayColor(to: newOption)
                                                 }
+                                                Spacer()
+                                        }
+                                }
+                                .block()
+                                VStack {
+                                        HStack {
+                                                Picker("GeneralPreferencesView.LabelSet", selection: $labelSet) {
+                                                        Text("GeneralPreferencesView.LabelSet.Arabic").tag(LabelSet.arabic)
+                                                        Text("GeneralPreferencesView.LabelSet.FullWidthArabic").tag(LabelSet.fullWidthArabic)
+                                                        Text("GeneralPreferencesView.LabelSet.Chinese").tag(LabelSet.chinese)
+                                                        Text("GeneralPreferencesView.LabelSet.CapitalizedChinese").tag(LabelSet.capitalizedChinese)
+                                                        Text("GeneralPreferencesView.LabelSet.Soochow").tag(LabelSet.soochow)
+                                                        Text("GeneralPreferencesView.LabelSet.Mahjong").tag(LabelSet.mahjong)
+                                                        Text("GeneralPreferencesView.LabelSet.Roman").tag(LabelSet.roman)
+                                                        Text("GeneralPreferencesView.LabelSet.SmallRoman").tag(LabelSet.smallRoman)
+                                                }
+                                                .scaledToFit()
+                                                .onChange(of: labelSet) { newOption in
+                                                        AppSettings.updateLabelSet(to: newOption)
+                                                }
+                                                Spacer()
+                                        }
+                                        HStack {
+                                                Toggle("GeneralPreferencesView.Toggle.LabelLastZero", isOn: $isLabelLastZero)
+                                                        .toggleStyle(.switch)
+                                                        .scaledToFit()
+                                                        .onChange(of: isLabelLastZero) { newState in
+                                                                AppSettings.updateLabelLastState(to: newState)
+                                                        }
                                                 Spacer()
                                         }
                                 }
@@ -160,7 +190,7 @@ struct GeneralPreferencesView: View {
                                                         .toggleStyle(.switch)
                                                         .scaledToFit()
                                                         .onChange(of: isInputMemoryOn) { newState in
-                                                                AppSettings.updateInputMemory(to: newState)
+                                                                AppSettings.updateInputMemoryState(to: newState)
                                                         }
                                                 Spacer()
                                         }

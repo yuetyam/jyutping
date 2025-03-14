@@ -429,6 +429,12 @@
             "value" : "Copy App Store Link"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copier le lien de l'App Store"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -491,6 +497,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Copy Email Address"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copier l'adresse e-mail"
           }
         },
         "yue" : {
@@ -819,6 +831,12 @@
             "value" : "Jyutping for macOS"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jyutping pour macOS"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -883,6 +901,12 @@
             "value" : "Review on the App Store"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Laisser un avis sur l'App Store"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -945,6 +969,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Share this App"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Partager cette application"
           }
         },
         "yue" : {
@@ -1921,6 +1951,12 @@
             "value" : "Tungkun Rail Transit"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Transport ferroviaire de Tungkun"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1983,6 +2019,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Expressions"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Expressions cantonaises"
           }
         },
         "yue" : {
@@ -2049,6 +2091,12 @@
             "value" : "Canton Metro"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Métro de Canton"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2111,6 +2159,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Chinese Zodiac"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Signes du zodiaque chinois"
           }
         },
         "yue" : {
@@ -2177,6 +2231,12 @@
             "value" : "Fatshan Metro"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Métro de Fatshan"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2239,6 +2299,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hong Kong MTR"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MTR de Hong Kong"
           }
         },
         "yue" : {
@@ -2305,6 +2371,12 @@
             "value" : "Surnames"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cent noms de famille"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2364,6 +2436,12 @@
     "IOSCantoneseTab.NavigationTitle.MacauMetro" : {
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Metro Ligeiro de Macau"
+          }
+        },
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Metro Ligeiro de Macau"
@@ -2433,6 +2511,12 @@
             "value" : "Numbers"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nombres"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2497,6 +2581,12 @@
             "value" : "Sham Chun Metro"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Métro de Sham Chun"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2556,6 +2646,12 @@
     "IOSCantoneseTab.NavigationTitle.SimplifiedCharacterConfusion" : {
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confusion"
+          }
+        },
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Confusion"
@@ -2625,6 +2721,12 @@
             "value" : "Solar Terms"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Termes solaires"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2687,6 +2789,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Stems & Branches"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tiges et branches"
           }
         },
         "yue" : {
@@ -2753,6 +2861,12 @@
             "value" : "Characters"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Classique des mille caractères"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2815,6 +2929,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tungkun Rail Transit"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Transport ferroviaire de Tungkun"
           }
         },
         "yue" : {
@@ -3262,7 +3382,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Due to system limitations, the **Paste** button on the Keyboard will only function when the **Allow Full Access** permission is turned on."
+            "value" : "Due to system limitations, the **Paste** button on the keyboard will only function when the **Allow Full Access** permission is turned on."
           }
         },
         "yue" : {
@@ -3326,7 +3446,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "The Keyboard itself would not store any content of the System Clipboard."
+            "value" : "The keyboard itself would not store any content of the system clipboard."
           }
         },
         "yue" : {
@@ -3390,7 +3510,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "When you press the **Paste** button on the Keyboard, the system may prompt you to ask if you want to allow the paste."
+            "value" : "When you press the **Paste** button on the keyboard, the system may prompt you to ask if you want to allow the paste."
           }
         },
         "yue" : {
@@ -4094,7 +4214,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Jyutping Keyboard not showing up in Settings app?"
+            "value" : "Jyutping keyboard not showing up in the Settings app?"
           }
         },
         "yue" : {
@@ -4158,7 +4278,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Jyutping Keyboard not showing up in some other apps?"
+            "value" : "Jyutping keyboard not showing up in some other apps?"
           }
         },
         "yue" : {
@@ -4350,7 +4470,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Paste texts from System Clipboard"
+            "value" : "Paste texts from system clipboard"
           }
         },
         "yue" : {
@@ -4414,7 +4534,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sometimes the Keyboard may trigger some bugs and it needs to be completely restarted. You can go to the Settings app and toggle the Keyboard's “Allow Full Access” setting twice. The system will then restart the Keyboard."
+            "value" : "Sometimes the keyboard may trigger some bugs and it needs to be completely restarted. You can go to the Settings app and toggle the keyboard's “Allow Full Access” setting twice. The system will then restart the keyboard."
           }
         },
         "yue" : {
@@ -4670,7 +4790,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "How to restart the Keyboard?"
+            "value" : "How to restart the keyboard?"
           }
         },
         "yue" : {
@@ -4798,7 +4918,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "How to enable this Keyboard"
+            "value" : "How to enable this keyboard"
           }
         },
         "yue" : {
@@ -4921,70 +5041,6 @@
         }
       }
     },
-    "IOSHomeTab.IntroductionsView.Body.PositionInsertionPoint" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Touch and hold the Space bar until the keyboard triggers sound and haptic feedback; then, slide your finger left or right."
-          }
-        },
-        "yue" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "長按空格鍵(Space)直到觸發鍵盤聲音以及觸感回應，然後向左或者向右滑動手指。"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "長按空格鍵(Space)直到觸發鍵盤聲音以及觸感回應，然後向左或者向右滑動手指。"
-          }
-        },
-        "zh-Hans-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "長按空格鍵(Space)直到觸發鍵盤聲音以及觸感回應，然後向左或者向右滑動手指。"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "長按空格鍵(Space)直到觸發鍵盤聲音以及觸感回應，然後向左或者向右滑動手指。"
-          }
-        },
-        "zh-Hant-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "長按空格鍵(Space)直到觸發鍵盤聲音以及觸感回應，然後向左或者向右滑動手指。"
-          }
-        },
-        "zh-Hant-HK" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "長按空格鍵(Space)直到觸發鍵盤聲音以及觸感回應，然後向左或者向右滑動手指。"
-          }
-        },
-        "zh-Hant-MO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "長按空格鍵(Space)直到觸發鍵盤聲音以及觸感回應，然後向左或者向右滑動手指。"
-          }
-        },
-        "zh-Hant-TW" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "長按空格鍵(Space)直到觸發鍵盤聲音以及觸感回應，然後向左或者向右滑動手指。"
-          }
-        },
-        "zh-HK" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "長按空格鍵(Space)直到觸發鍵盤聲音以及觸感回應，然後向左或者向右滑動手指。"
-          }
-        }
-      }
-    },
     "IOSHomeTab.IntroductionsView.Body.ForgetCandidate" : {
       "localizations" : {
         "en" : {
@@ -5045,6 +5101,70 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "長按某一個候選詞可以將佢從輸入記憶刪除。"
+          }
+        }
+      }
+    },
+    "IOSHomeTab.IntroductionsView.Body.PositionInsertionPoint" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Touch and hold the Space bar until the keyboard triggers sound and haptic feedback; then, slide your finger left or right."
+          }
+        },
+        "yue" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "長按空格鍵(Space)直到觸發鍵盤聲音以及觸感回應，然後向左或者向右滑動手指。"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "長按空格鍵(Space)直到觸發鍵盤聲音以及觸感回應，然後向左或者向右滑動手指。"
+          }
+        },
+        "zh-Hans-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "長按空格鍵(Space)直到觸發鍵盤聲音以及觸感回應，然後向左或者向右滑動手指。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "長按空格鍵(Space)直到觸發鍵盤聲音以及觸感回應，然後向左或者向右滑動手指。"
+          }
+        },
+        "zh-Hant-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "長按空格鍵(Space)直到觸發鍵盤聲音以及觸感回應，然後向左或者向右滑動手指。"
+          }
+        },
+        "zh-Hant-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "長按空格鍵(Space)直到觸發鍵盤聲音以及觸感回應，然後向左或者向右滑動手指。"
+          }
+        },
+        "zh-Hant-MO" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "長按空格鍵(Space)直到觸發鍵盤聲音以及觸感回應，然後向左或者向右滑動手指。"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "長按空格鍵(Space)直到觸發鍵盤聲音以及觸感回應，然後向左或者向右滑動手指。"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "長按空格鍵(Space)直到觸發鍵盤聲音以及觸感回應，然後向左或者向右滑動手指。"
           }
         }
       }
@@ -5305,70 +5425,6 @@
         }
       }
     },
-    "IOSHomeTab.IntroductionsView.Heading.PositionInsertionPoint" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Moving the insertion point"
-          }
-        },
-        "yue" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "移動文字輸入位置"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "移動文字輸入位置"
-          }
-        },
-        "zh-Hans-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "移動文字輸入位置"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "移動文字輸入位置"
-          }
-        },
-        "zh-Hant-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "移動文字輸入位置"
-          }
-        },
-        "zh-Hant-HK" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "移動文字輸入位置"
-          }
-        },
-        "zh-Hant-MO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "移動文字輸入位置"
-          }
-        },
-        "zh-Hant-TW" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "移動文字輸入位置"
-          }
-        },
-        "zh-HK" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "移動文字輸入位置"
-          }
-        }
-      }
-    },
     "IOSHomeTab.IntroductionsView.Heading.ForgetCandidate" : {
       "localizations" : {
         "en" : {
@@ -5429,6 +5485,70 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "從輸入記憶刪除某個候選詞"
+          }
+        }
+      }
+    },
+    "IOSHomeTab.IntroductionsView.Heading.PositionInsertionPoint" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Moving the insertion point"
+          }
+        },
+        "yue" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "移動文字輸入位置"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "移動文字輸入位置"
+          }
+        },
+        "zh-Hans-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "移動文字輸入位置"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "移動文字輸入位置"
+          }
+        },
+        "zh-Hant-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "移動文字輸入位置"
+          }
+        },
+        "zh-Hant-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "移動文字輸入位置"
+          }
+        },
+        "zh-Hant-MO" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "移動文字輸入位置"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "移動文字輸入位置"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "移動文字輸入位置"
           }
         }
       }
@@ -5502,7 +5622,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Triple-Stroke (三拼) Keyboard"
+            "value" : "Triple-stroke (三拼) keyboard"
           }
         },
         "yue" : {
@@ -5697,6 +5817,12 @@
             "value" : "FAQ"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FAQ"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5823,6 +5949,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Privacy Notice"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Politique de confidentialité"
           }
         },
         "yue" : {
@@ -6526,7 +6658,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "The Keyboard will always be offline and never connected to the network."
+            "value" : "The keyboard will always be offline and never connected to the network."
           }
         },
         "yue" : {
@@ -6590,7 +6722,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "There is no communication between the Keyboard and the main app."
+            "value" : "There is no communication between the keyboard and the main app."
           }
         },
         "yue" : {
@@ -6718,7 +6850,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "The Keyboard itself would not store any content of the System Clipboard."
+            "value" : "The keyboard itself would not store any content of the system clipboard."
           }
         },
         "yue" : {
@@ -7105,6 +7237,12 @@
             "value" : "Jyutping Finals"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Finales en jyutping"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7167,6 +7305,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Jyutping Initials"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Initiales en jyutping"
           }
         },
         "yue" : {
@@ -7233,6 +7377,12 @@
             "value" : "Jyutping Tones"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tons du jyutping"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7295,6 +7445,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Finals"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Finales en jyutping"
           }
         },
         "yue" : {
@@ -7361,6 +7517,12 @@
             "value" : "Initials"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Initiales en jyutping"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7423,6 +7585,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tones"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tons du jyutping"
           }
         },
         "yue" : {
@@ -7617,6 +7785,12 @@
             "value" : "About"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "À propos"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7679,6 +7853,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cantonese"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cantonais"
           }
         },
         "yue" : {
@@ -7745,6 +7925,12 @@
             "value" : "Home"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Accueil"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7804,6 +7990,12 @@
     "IOSTabView.NavigationTitle.Jyutping" : {
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jyutping"
+          }
+        },
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Jyutping"
@@ -7873,6 +8065,12 @@
             "value" : "Jyutping"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jyutping"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7935,6 +8133,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "About"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "À propos"
           }
         },
         "yue" : {
@@ -9537,6 +9741,12 @@
             "value" : "Jyutping"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jyutping"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9665,6 +9875,12 @@
             "value" : "Email Feedback"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Commentaires par courriel"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9724,6 +9940,12 @@
     "Shared.About.FAQ" : {
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FAQ"
+          }
+        },
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "FAQ"
@@ -9793,6 +10015,12 @@
             "value" : "Google Forms Feedback"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Commentaires via Google Forms"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9855,6 +10083,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Follow us on Instagram"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Instagram"
           }
         },
         "yue" : {
@@ -9921,6 +10155,12 @@
             "value" : "Privacy Policy"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Politique de confidentialité"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9985,6 +10225,12 @@
             "value" : "Join QQ Group"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Groupe QQ"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10041,12 +10287,88 @@
         }
       }
     },
+    "Shared.About.RedNote" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Follow us on RedNote"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "RedNote"
+          }
+        },
+        "yue" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "關注小紅書"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "關注小紅書"
+          }
+        },
+        "zh-Hans-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "關注小紅書"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "關注小紅書"
+          }
+        },
+        "zh-Hant-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "關注小紅書"
+          }
+        },
+        "zh-Hant-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "關注小紅書"
+          }
+        },
+        "zh-Hant-MO" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "關注小紅書"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "關注小紅書"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "關注小紅書"
+          }
+        }
+      }
+    },
     "Shared.About.SourceCode" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Source Code"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Code source"
           }
         },
         "yue" : {
@@ -10113,6 +10435,12 @@
             "value" : "Join Telegram Group"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Groupe Telegram"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10177,6 +10505,12 @@
             "value" : "Tencent Survey Feedback"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Commentaires via Tencent Survey"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10233,12 +10567,88 @@
         }
       }
     },
+    "Shared.About.Threads" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Follow us on Threads"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Threads"
+          }
+        },
+        "yue" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "關注 Threads"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "關注 Threads"
+          }
+        },
+        "zh-Hans-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "關注 Threads"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "關注 Threads"
+          }
+        },
+        "zh-Hant-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "關注 Threads"
+          }
+        },
+        "zh-Hant-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "關注 Threads"
+          }
+        },
+        "zh-Hant-MO" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "關注 Threads"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "關注 Threads"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "關注 Threads"
+          }
+        }
+      }
+    },
     "Shared.About.Twitter" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Follow us on X (Twitter)"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "X (Twitter)"
           }
         },
         "yue" : {
@@ -10300,6 +10710,12 @@
     "Shared.About.Version" : {
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Version"
+          }
+        },
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Version"
@@ -10367,6 +10783,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Website"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Site web"
           }
         },
         "yue" : {
@@ -10494,7 +10916,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "You can choose Cangjie / Quick version in Input Method / Keyboard's settings page."
+            "value" : "You can choose Cangjie / Quick version in input method / keyboard's settings page."
           }
         },
         "yue" : {

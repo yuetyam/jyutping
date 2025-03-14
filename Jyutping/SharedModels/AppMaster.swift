@@ -35,11 +35,12 @@ struct AppMaster {
 extension AppMaster {
 
         static func searchCantoneseLexicons(for text: String) -> [CantoneseLexicon] {
+                let ideographicCharacters = text.filter(\.isIdeographic).uniqued()
+                guard ideographicCharacters.isNotEmpty else { return [CantoneseLexicon(text: text)] }
                 let primaryLexicon = AppMaster.lookupCantoneseLexicon(for: text)
-                let characters = text.filter(\.isIdeographic).uniqued()
-                let shouldSearchMoreLexicons: Bool = text.count > 1 && characters.isNotEmpty && characters.count < 4
+                let shouldSearchMoreLexicons: Bool = text.count > 1 && ideographicCharacters.count < 4
                 guard shouldSearchMoreLexicons else { return [primaryLexicon] }
-                let subLexicons = characters.map({ CantoneseLexicon.search(text: String($0)) })
+                let subLexicons = ideographicCharacters.map({ CantoneseLexicon.search(text: String($0)) })
                 return [primaryLexicon] + subLexicons
         }
 

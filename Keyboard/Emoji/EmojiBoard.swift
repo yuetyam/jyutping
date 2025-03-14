@@ -40,7 +40,7 @@ struct EmojiBoard: View {
                                                                                 AudioFeedback.inputed()
                                                                                 context.triggerSelectionHapticFeedback()
                                                                                 context.operate(.input(emoji.text))
-                                                                                EmojiMaster.updateFrequent(latest: emoji.text)
+                                                                                EmojiMaster.updateFrequent(latest: emoji)
                                                                         } label: {
                                                                                 Text(verbatim: emoji.text).font(.emoji)
                                                                         }

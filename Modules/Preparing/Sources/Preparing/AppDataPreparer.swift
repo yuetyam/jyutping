@@ -9,7 +9,7 @@ struct AppDataPreparer {
                 return db
         }()
 
-        static func prepare() {
+        static func prepare() async {
                 // guard sqlite3_open_v2(":memory:", &database, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE, nil) == SQLITE_OK else { return }
                 createJyutpingTable()
                 createCollocationTable()

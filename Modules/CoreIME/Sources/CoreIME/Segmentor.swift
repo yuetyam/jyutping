@@ -41,7 +41,7 @@ extension SegmentScheme {
         }
 }
 
-extension Segmentation {
+extension Sequence where Element == SegmentScheme {
         func descended() -> Segmentation {
                 return self.sorted(by: {
                         let lhsLength = $0.length
@@ -58,13 +58,6 @@ extension Segmentation {
 public struct Segmentor {
 
         #if os(iOS)
-        static func prepare() {
-                let command: String = "SELECT rowid FROM syllabletable WHERE code = 20 LIMIT 1;"
-                var statement: OpaquePointer? = nil
-                defer { sqlite3_finalize(statement) }
-                guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return }
-                guard sqlite3_step(statement) == SQLITE_ROW else { return }
-        }
         nonisolated(unsafe) static let database: OpaquePointer? = {
                 var db: OpaquePointer? = nil
                 guard let path: String = Bundle.module.path(forResource: "syllabledb", ofType: "sqlite3") else { return nil }
@@ -79,35 +72,48 @@ public struct Segmentor {
         }()
         #endif
 
-
-        private static func match<T: StringProtocol>(_ text: T) -> SegmentToken? {
-                guard let code: Int = text.charcode else { return nil }
-                let command: String = "SELECT token, origin FROM syllabletable WHERE code = \(code) LIMIT 1;"
-                var statement: OpaquePointer? = nil
+        static func prepare() {
+                let statement = prepareStatement()
                 defer { sqlite3_finalize(statement) }
-                #if os(iOS)
-                guard sqlite3_prepare_v2(Self.database, command, -1, &statement, nil) == SQLITE_OK else { return nil }
-                #else
-                guard sqlite3_prepare_v2(Engine.database, command, -1, &statement, nil) == SQLITE_OK else { return nil }
-                #endif
-                guard sqlite3_step(statement) == SQLITE_ROW else { return nil }
-                let token: String = String(cString: sqlite3_column_text(statement, 0))
-                let origin: String = String(cString: sqlite3_column_text(statement, 1))
-                return SegmentToken(text: token, origin: origin)
+                let testCode: Int64 = 20
+                sqlite3_reset(statement)
+                sqlite3_bind_int64(statement, 1, testCode)
+                guard sqlite3_step(statement) == SQLITE_ROW else { return }
         }
 
-        private static func splitLeading<T: StringProtocol>(_ text: T)-> [SegmentToken] {
+        private static let queryCommand: String = "SELECT token, origin FROM syllabletable WHERE code = ? LIMIT 1;"
+        private static func prepareStatement() -> OpaquePointer? {
+                var statement: OpaquePointer? = nil
+                #if os(iOS)
+                guard sqlite3_prepare_v2(Self.database, queryCommand, -1, &statement, nil) == SQLITE_OK else { return nil }
+                #else
+                guard sqlite3_prepare_v2(Engine.database, queryCommand, -1, &statement, nil) == SQLITE_OK else { return nil }
+                #endif
+                return statement
+        }
+
+        private static func match<T: StringProtocol>(text: T, statement: OpaquePointer?) -> SegmentToken? {
+                guard let code: Int = text.charcode else { return nil }
+                sqlite3_reset(statement)
+                sqlite3_bind_int64(statement, 1, Int64(code))
+                guard sqlite3_step(statement) == SQLITE_ROW else { return nil }
+                guard let token = sqlite3_column_text(statement, 0),
+                      let origin = sqlite3_column_text(statement, 1) else { return nil }
+                return SegmentToken(text: String(cString: token), origin: String(cString: origin))
+        }
+
+        private static func splitLeading<T: StringProtocol>(text: T, statement: OpaquePointer?)-> [SegmentToken] {
                 let maxLength: Int = min(text.count, 6)
                 guard maxLength > 0 else { return [] }
-                let tokens = (1...maxLength).reversed().compactMap({ match(text.prefix($0)) })
+                let tokens = (1...maxLength).reversed().compactMap({ match(text: text.prefix($0), statement: statement) })
                 return tokens
         }
 
-        private static func split(text: String) -> Segmentation {
-                let leadingTokens = splitLeading(text)
+        private static func split<T: StringProtocol>(text: T, statement: OpaquePointer?) -> Segmentation {
+                let leadingTokens = splitLeading(text: text, statement: statement)
                 guard leadingTokens.isNotEmpty else { return [] }
                 let textCount = text.count
-                var segmentation: Segmentation = leadingTokens.map({ [$0] })
+                var segmentation: Set<SegmentScheme> = Set(leadingTokens.map({ [$0] }))
                 var previousSubelementCount = segmentation.subelementCount
                 var shouldContinue: Bool = true
                 while shouldContinue {
@@ -115,12 +121,11 @@ public struct Segmentor {
                                 let schemeLength = scheme.length
                                 guard schemeLength < textCount else { continue }
                                 let tailText = text.dropFirst(schemeLength)
-                                let tailTokens = splitLeading(tailText)
+                                let tailTokens = splitLeading(text: tailText, statement: statement)
                                 guard tailTokens.isNotEmpty else { continue }
-                                let newSegmentation: Segmentation = tailTokens.map({ scheme + [$0] })
-                                segmentation += newSegmentation
+                                let newSegmentation = tailTokens.map({ scheme + [$0] })
+                                newSegmentation.forEach({ segmentation.insert($0) })
                         }
-                        segmentation = segmentation.uniqued()
                         let currentSubelementCount = segmentation.subelementCount
                         if currentSubelementCount != previousSubelementCount {
                                 previousSubelementCount = currentSubelementCount
@@ -131,7 +136,7 @@ public struct Segmentor {
                 return segmentation.filter(\.isValid).descended()
         }
 
-        public static func segment(text: String) -> Segmentation {
+        public static func segment<T: StringProtocol>(text: T) -> Segmentation {
                 switch text.count {
                 case 0:
                         return []
@@ -151,24 +156,16 @@ public struct Segmentor {
                 case 4 where text == "mami":
                         return mami
                 default:
-                        let rawText: String = text.filter(\.isSeparatorOrTone.negative)
-                        let key: Int = rawText.hash
-                        if let cached = cachedSegmentations[key] {
-                                return cached
+                        let statement = prepareStatement()
+                        defer { sqlite3_finalize(statement) }
+                        if let text = text as? String {
+                                let rawText = text.filter(\.isSeparatorOrTone.negative)
+                                return split(text: rawText, statement: statement)
                         } else {
-                                let segmented = split(text: rawText)
-                                cache(key: key, segmentation: segmented)
-                                return segmented
+                                let rawText = text.filter(\.isSeparatorOrTone.negative)
+                                return split(text: String(rawText), statement: statement)
                         }
                 }
-        }
-
-        private static let maxCacheCount: Int = 1000
-        nonisolated(unsafe) private static var cachedSegmentations: [Int: Segmentation] = [:]
-        private static func cache(key: Int, segmentation: Segmentation) {
-                defer { cachedSegmentations[key] = segmentation }
-                guard cachedSegmentations.count > maxCacheCount else { return }
-                cachedSegmentations = [:]
         }
 
         private static let letterA: Segmentation = [[SegmentToken(text: "a", origin: "aa")]]
