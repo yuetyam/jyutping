@@ -24,36 +24,40 @@ struct MacJyutpingToneTable: View {
                         LazyVStack(alignment: .leading, spacing: 16) {
                                 MacToneTipView()
                                 VStack(spacing: 2) {
-                                        HStack(spacing: 40) {
-                                                HStack {
-                                                        ZStack(alignment: .leading) {
-                                                                Text(verbatim: "法 faat3").hidden()
-                                                                Text(verbatim: "例字")
-                                                        }
-                                                        Speaker().hidden()
+                                        HStack(spacing: 32) {
+                                                ZStack(alignment: .leading) {
+                                                        Text(verbatim: "例字").hidden()
+                                                        Text(verbatim: "例字")
                                                 }
                                                 ZStack(alignment: .leading) {
-                                                        Text(verbatim: "55/53").hidden()
-                                                        Text(verbatim: "調值")
+                                                        HStack(spacing: 2) {
+                                                                Text(verbatim: "faat3")
+                                                                Speaker()
+                                                        }
+                                                        .hidden()
+                                                        Text(verbatim: "粵拼")
                                                 }
                                                 ZStack(alignment: .leading) {
                                                         Text(verbatim: "高陰入").hidden()
                                                         Text(verbatim: "聲調")
                                                 }
-                                                Text(verbatim: "粵拼")
+                                                ZStack(alignment: .leading) {
+                                                        Text(verbatim: "55/53").hidden()
+                                                        Text(verbatim: "調值")
+                                                }
                                                 Spacer()
                                         }
                                         .padding(.horizontal, 8)
                                         VStack {
-                                                MacToneLabel(word: "芬", syllable: "fan1", value: "55/53", name: "陰平", jyutping: "1")
-                                                MacToneLabel(word: "粉", syllable: "fan2", value: "35", name: "陰上", jyutping: "2")
-                                                MacToneLabel(word: "訓", syllable: "fan3", value: "33", name: "陰去", jyutping: "3")
-                                                MacToneLabel(word: "焚", syllable: "fan4", value: "21/11", name: "陽平", jyutping: "4")
-                                                MacToneLabel(word: "憤", syllable: "fan5", value: "13/23", name: "陽上", jyutping: "5")
-                                                MacToneLabel(word: "份", syllable: "fan6", value: "22", name: "陽去", jyutping: "6")
-                                                MacToneLabel(word: "忽", syllable: "fat1", value: "5", name: "高陰入", jyutping: "1")
-                                                MacToneLabel(word: "法", syllable: "faat3", value: "3", name: "低陰入", jyutping: "3")
-                                                MacToneLabel(word: "罰", syllable: "fat6", value: "2", name: "陽入", jyutping: "6")
+                                                MacToneLabel(word: "芬", syllable: "fan1", toneName: "陰平", toneValue: "55/53")
+                                                MacToneLabel(word: "粉", syllable: "fan2", toneName: "陰上", toneValue: "35")
+                                                MacToneLabel(word: "訓", syllable: "fan3", toneName: "陰去", toneValue: "33")
+                                                MacToneLabel(word: "焚", syllable: "fan4", toneName: "陽平", toneValue: "21/11")
+                                                MacToneLabel(word: "憤", syllable: "fan5", toneName: "陽上", toneValue: "13/23")
+                                                MacToneLabel(word: "份", syllable: "fan6", toneName: "陽去", toneValue: "22")
+                                                MacToneLabel(word: "忽", syllable: "fat1", toneName: "高陰入", toneValue: "5")
+                                                MacToneLabel(word: "法", syllable: "faat3", toneName: "低陰入", toneValue: "3")
+                                                MacToneLabel(word: "佛", syllable: "fat6", toneName: "陽入", toneValue: "2")
                                         }
                                         .block()
                                 }
@@ -70,31 +74,31 @@ struct MacJyutpingToneTable: View {
 }
 
 private struct MacToneLabel: View {
-
         let word: String
         let syllable: String
-        let value: String
-        let name: String
-        let jyutping: String
-
+        let toneName: String
+        let toneValue: String
         var body: some View {
-                HStack(spacing: 40) {
-                        HStack {
+                HStack(spacing: 32) {
+                        ZStack(alignment: .leading) {
+                                Text(verbatim: "例字").hidden()
+                                Text(verbatim: word)
+                        }
+                        HStack(spacing: 2) {
                                 ZStack(alignment: .leading) {
-                                        Text(verbatim: "法 faat3").hidden()
-                                        Text(verbatim: "\(word) \(syllable)")
+                                        Text(verbatim: "faat3").hidden()
+                                        Text(verbatim: syllable)
                                 }
                                 Speaker(syllable)
                         }
                         ZStack(alignment: .leading) {
-                                Text(verbatim: "55/53").hidden()
-                                Text(verbatim: value)
+                                Text(verbatim: "高陰入").hidden()
+                                Text(verbatim: toneName)
                         }
                         ZStack(alignment: .leading) {
-                                Text(verbatim: "高陰入").hidden()
-                                Text(verbatim: name)
+                                Text(verbatim: "55/53").hidden()
+                                Text(verbatim: toneValue)
                         }
-                        Text(verbatim: jyutping)
                         Spacer()
                 }
         }

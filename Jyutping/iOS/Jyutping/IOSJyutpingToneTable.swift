@@ -7,36 +7,40 @@ struct IOSJyutpingToneTable: View {
         @Environment(\.horizontalSizeClass) var horizontalSize
 
         var body: some View {
-                let spacing: CGFloat = (horizontalSize == .compact) ? 18 : 32
+                let spacing: CGFloat = (horizontalSize == .compact) ? 16 : 32
                 List {
                         Section {
-                                IOSToneLabel(spacing: spacing, word: "芬", syllable: "fan1", value: "55/53", name: "陰平", jyutping: "1")
-                                IOSToneLabel(spacing: spacing, word: "粉", syllable: "fan2", value: "35", name: "陰上", jyutping: "2")
-                                IOSToneLabel(spacing: spacing, word: "訓", syllable: "fan3", value: "33", name: "陰去", jyutping: "3")
-                                IOSToneLabel(spacing: spacing, word: "焚", syllable: "fan4", value: "21/11", name: "陽平", jyutping: "4")
-                                IOSToneLabel(spacing: spacing, word: "憤", syllable: "fan5", value: "13/23", name: "陽上", jyutping: "5")
-                                IOSToneLabel(spacing: spacing, word: "份", syllable: "fan6", value: "22", name: "陽去", jyutping: "6")
-                                IOSToneLabel(spacing: spacing, word: "忽", syllable: "fat1", value: "5", name: "高陰入", jyutping: "1")
-                                IOSToneLabel(spacing: spacing, word: "法", syllable: "faat3", value: "3", name: "低陰入", jyutping: "3")
-                                IOSToneLabel(spacing: spacing, word: "罰", syllable: "fat6", value: "2", name: "陽入", jyutping: "6")      
+                                IOSToneLabel(spacing: spacing, word: "芬", syllable: "fan1", toneName: "陰平", toneValue: "55/53")
+                                IOSToneLabel(spacing: spacing, word: "粉", syllable: "fan2", toneName: "陰上", toneValue: "35")
+                                IOSToneLabel(spacing: spacing, word: "訓", syllable: "fan3", toneName: "陰去", toneValue: "33")
+                                IOSToneLabel(spacing: spacing, word: "焚", syllable: "fan4", toneName: "陽平", toneValue: "21/11")
+                                IOSToneLabel(spacing: spacing, word: "憤", syllable: "fan5", toneName: "陽上", toneValue: "13/23")
+                                IOSToneLabel(spacing: spacing, word: "份", syllable: "fan6", toneName: "陽去", toneValue: "22")
+                                IOSToneLabel(spacing: spacing, word: "忽", syllable: "fat1", toneName: "高陰入", toneValue: "5")
+                                IOSToneLabel(spacing: spacing, word: "法", syllable: "faat3", toneName: "低陰入", toneValue: "3")
+                                IOSToneLabel(spacing: spacing, word: "佛", syllable: "fat6", toneName: "陽入", toneValue: "2")
                         } header: {
                                 HStack(spacing: spacing) {
+                                        ZStack(alignment: .leading) {
+                                                Text(verbatim: "例字").font(.body).hidden()
+                                                Text(verbatim: "例字")
+                                        }
                                         HStack(spacing: 2) {
                                                 ZStack(alignment: .leading) {
-                                                        Text(verbatim: "法 faat3").font(.body).hidden()
-                                                        Text(verbatim: "例字")
+                                                        Text(verbatim: "faat3").font(.body).hidden()
+                                                        Text(verbatim: "粵拼")
                                                 }
                                                 Speaker().hidden()
-                                        }
-                                        ZStack(alignment: .leading) {
-                                                Text(verbatim: "55/53").font(.body).hidden()
-                                                Text(verbatim: "調值")
+                                                Color.clear.frame(width: 8)
                                         }
                                         ZStack(alignment: .leading) {
                                                 Text(verbatim: "高陰入").font(.body).hidden()
                                                 Text(verbatim: "聲調")
                                         }
-                                        Text(verbatim: "粵拼")
+                                        ZStack(alignment: .leading) {
+                                                Text(verbatim: "55/53").font(.body).hidden()
+                                                Text(verbatim: "調值")
+                                        }
                                 }
                                 .textCase(nil)
                         }
@@ -57,32 +61,33 @@ struct IOSJyutpingToneTable: View {
 }
 
 private struct IOSToneLabel: View {
-
         let spacing: CGFloat
         let word: String
         let syllable: String
-        let value: String
-        let name: String
-        let jyutping: String
-
+        let toneName: String
+        let toneValue: String
         var body: some View {
                 HStack(spacing: spacing) {
+                        ZStack(alignment: .leading) {
+                                Text(verbatim: "例字").hidden()
+                                Text(verbatim: word)
+                        }
                         HStack(spacing: 2) {
                                 ZStack(alignment: .leading) {
-                                        Text(verbatim: "法 faat3").hidden()
-                                        Text(verbatim: "\(word) \(syllable)")
+                                        Text(verbatim: "faat3").hidden()
+                                        Text(verbatim: syllable)
                                 }
                                 Speaker(syllable)
-                        }
-                        ZStack(alignment: .leading) {
-                                Text(verbatim: "55/53").hidden()
-                                Text(verbatim: value)
+                                Color.clear.frame(width: 8)
                         }
                         ZStack(alignment: .leading) {
                                 Text(verbatim: "高陰入").hidden()
-                                Text(verbatim: name)
+                                Text(verbatim: toneName)
                         }
-                        Text(verbatim: jyutping)
+                        ZStack(alignment: .leading) {
+                                Text(verbatim: "55/53").hidden()
+                                Text(verbatim: toneValue)
+                        }
                 }
         }
 }
