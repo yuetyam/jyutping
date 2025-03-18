@@ -1756,7 +1756,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Candidate Line Spacing"
+            "value" : "Candidate Line Spacing (Points)"
           }
         },
         "fr" : {
@@ -1768,55 +1768,55 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞行間隔"
+            "value" : "候選詞行間隔(Points)"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞行間隔"
+            "value" : "候選詞行間隔(Points)"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞行間隔"
+            "value" : "候選詞行間隔(Points)"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞行間隔"
+            "value" : "候選詞行間隔(Points)"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞行間隔"
+            "value" : "候選詞行間隔(Points)"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞行間隔"
+            "value" : "候選詞行間隔(Points)"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞行間隔"
+            "value" : "候選詞行間隔(Points)"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞行間隔"
+            "value" : "候選詞行間隔(Points)"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞行間隔"
+            "value" : "候選詞行間隔(Points)"
           }
         }
       }
@@ -2042,61 +2042,61 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vous pouvez utiliser ce raccourci pour basculer les options :"
+            "value" : "Vous pouvez utiliser ce raccourci pour basculer les options :"
           }
         },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "打字時撳組合鍵可以揀字符集以及其他選項："
+            "value" : "打字時按組合鍵可以選字符集以及其他選項："
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "打字時撳組合鍵可以揀字符集以及其他選項："
+            "value" : "打字時按組合鍵可以選字符集以及其他選項："
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "打字時撳組合鍵可以揀字符集以及其他選項："
+            "value" : "打字時按組合鍵可以選字符集以及其他選項："
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "打字時撳組合鍵可以揀字符集以及其他選項："
+            "value" : "打字時按組合鍵可以選字符集以及其他選項："
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "打字時撳組合鍵可以揀字符集以及其他選項："
+            "value" : "打字時按組合鍵可以選字符集以及其他選項："
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "打字時撳組合鍵可以揀字符集以及其他選項："
+            "value" : "打字時按組合鍵可以選字符集以及其他選項："
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "打字時撳組合鍵可以揀字符集以及其他選項："
+            "value" : "打字時按組合鍵可以選字符集以及其他選項："
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "打字時撳組合鍵可以揀字符集以及其他選項："
+            "value" : "打字時按組合鍵可以選字符集以及其他選項："
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "打字時撳組合鍵可以揀字符集以及其他選項："
+            "value" : "打字時按組合鍵可以選字符集以及其他選項："
           }
         }
       }
@@ -5898,55 +5898,55 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "撳一下 **Shift** 鍵"
+            "value" : "按一下 **Shift** 鍵"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "撳一下 **Shift** 鍵"
+            "value" : "按一下 **Shift** 鍵"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "撳一下 **Shift** 鍵"
+            "value" : "按一下 **Shift** 鍵"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "撳一下 **Shift** 鍵"
+            "value" : "按一下 **Shift** 鍵"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "撳一下 **Shift** 鍵"
+            "value" : "按一下 **Shift** 鍵"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "撳一下 **Shift** 鍵"
+            "value" : "按一下 **Shift** 鍵"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "撳一下 **Shift** 鍵"
+            "value" : "按一下 **Shift** 鍵"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "撳一下 **Shift** 鍵"
+            "value" : "按一下 **Shift** 鍵"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "撳一下 **Shift** 鍵"
+            "value" : "按一下 **Shift** 鍵"
           }
         }
       }
@@ -6038,55 +6038,55 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "撳 **Shift** + **Space**"
+            "value" : "按 **Shift** + **Space** 鍵"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "撳 **Shift** + **Space**"
+            "value" : "按 **Shift** + **Space** 鍵"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "撳 **Shift** + **Space**"
+            "value" : "按 **Shift** + **Space** 鍵"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "撳 **Shift** + **Space**"
+            "value" : "按 **Shift** + **Space** 鍵"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "撳 **Shift** + **Space**"
+            "value" : "按 **Shift** + **Space** 鍵"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "撳 **Shift** + **Space**"
+            "value" : "按 **Shift** + **Space** 鍵"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "撳 **Shift** + **Space**"
+            "value" : "按 **Shift** + **Space** 鍵"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "撳 **Shift** + **Space**"
+            "value" : "按 **Shift** + **Space** 鍵"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "撳 **Shift** + **Space**"
+            "value" : "按 **Shift** + **Space** 鍵"
           }
         }
       }
@@ -6388,55 +6388,55 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "切換輸入模式"
+            "value" : "粵英切換"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "切換輸入模式"
+            "value" : "粵英切換"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "切換輸入模式"
+            "value" : "粵英切換"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "切換輸入模式"
+            "value" : "粵英切換"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "切換輸入模式"
+            "value" : "粵英切換"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "切換輸入模式"
+            "value" : "粵英切換"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "切換輸入模式"
+            "value" : "粵英切換"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "切換輸入模式"
+            "value" : "粵英切換"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "切換輸入模式"
+            "value" : "粵英切換"
           }
         }
       }

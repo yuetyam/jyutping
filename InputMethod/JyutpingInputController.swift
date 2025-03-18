@@ -146,7 +146,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         currentClient = client
                         updateCurrentCursorBlock(to: client?.cursorBlock)
                         prepareWindow()
-                        client?.overrideKeyboard(withKeyboardNamed: PresetConstant.systemABCKeyboardName)
+                        client?.overrideKeyboard(withKeyboardNamed: PresetConstant.systemABCKeyboardLayout)
                 }
         }
         override func deactivateServer(_ sender: Any!) {

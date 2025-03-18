@@ -199,6 +199,8 @@ struct AppSettings {
         // MARK: - Line Spacing
 
         private(set) static var candidateLineSpacing: Int = {
+                let hasSavedValue: Bool = UserDefaults.standard.object(forKey: SettingsKey.CandidateLineSpacing) != nil
+                guard hasSavedValue else { return defaultCandidateLineSpacing }
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.CandidateLineSpacing)
                 let isSavedValueValid: Bool = lineSpacingValidity(of: savedValue)
                 guard isSavedValueValid else { return defaultCandidateLineSpacing }
@@ -371,7 +373,7 @@ struct AppSettings {
         private static func fontSizeValidity(of value: Int) -> Bool {
                 return fontSizeRange.contains(value)
         }
-        private static let defaultCandidateFontSize: Int = 17
+        private static let defaultCandidateFontSize: Int = 16
         private static let defaultCommentFontSize: Int = 13
         private static let defaultLabelFontSize: Int = 13
         static let fontSizeRange: Range<Int> = 10..<25
