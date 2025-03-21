@@ -122,30 +122,27 @@ struct Options {
                 UserDefaults.standard.set(value, forKey: OptionsKey.CangjieVariant)
         }
 
-        nonisolated(unsafe) private(set) static var preferredLanguage: PreferredLanguage = {
-                let languages = Locale.preferredLanguages
-                guard languages.isNotEmpty else { return .english }
-                let englishIndex = languages.firstIndex(where: { $0.hasPrefix("en") }) ?? 1000
-                let cantoneseIndex = languages.firstIndex(where: { $0.hasPrefix("yue") || $0.hasPrefix("zh") }) ?? 1000
-                return (englishIndex <= cantoneseIndex) ? .english : .cantonese
+        nonisolated(unsafe) private(set) static var preferredLanguage: KeyboardDisplayLanguage = {
+                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.KeyboardDisplayLanguage)
+                return KeyboardDisplayLanguage.language(of: savedValue)
         }()
-        static func updatePreferredLanguage(to language: PreferredLanguage) {
+        static func updatePreferredLanguage(to language: KeyboardDisplayLanguage) {
                 preferredLanguage = language
-                let codes: [String] = Locale.preferredLanguages
-                let languageCodes: [String] = {
-                        // TODO: This code block needs more tests
-                        switch language {
-                        case .cantonese:
-                                let nonEnglishCodes: [String] = codes.filter({ $0.hasPrefix("en").negative })
-                                let hasChineseCodes: Bool = nonEnglishCodes.contains(where: { $0.hasPrefix("yue") || $0.hasPrefix("zh") })
-                                let insertCodes: [String] = hasChineseCodes ? [] : ["yue"]
-                                return (nonEnglishCodes + insertCodes + codes).uniqued()
-                        case .english:
-                                let firstEnglish: String = codes.first(where: { $0.hasPrefix("en") }) ?? "en"
-                                return ([firstEnglish] + codes).uniqued()
-                        }
-                }()
-                UserDefaults.standard.set(languageCodes, forKey: "AppleLanguages")
+                UserDefaults.standard.set(language.rawValue, forKey: OptionsKey.KeyboardDisplayLanguage)
+                switch language {
+                case .auto:
+                        UserDefaults.standard.removeObject(forKey: OptionsKey.AppleLanguages)
+                case .cantonese:
+                        let chose: [String] = ["yue"]
+                        let oldCodes: [String] = Locale.preferredLanguages
+                        let newCodes: [String] = (chose + oldCodes).uniqued()
+                        UserDefaults.standard.set(newCodes, forKey: OptionsKey.AppleLanguages)
+                case .english:
+                        let chose: [String] = ["en"]
+                        let oldCodes: [String] = Locale.preferredLanguages
+                        let newCodes: [String] = (chose + oldCodes).uniqued()
+                        UserDefaults.standard.set(newCodes, forKey: OptionsKey.AppleLanguages)
+                }
         }
 
         nonisolated(unsafe) private(set) static var isInputMemoryOn: Bool = {
@@ -167,6 +164,10 @@ struct Options {
 }
 
 struct OptionsKey {
+
+        static let AppleLanguages: String = "AppleLanguages"
+        static let KeyboardDisplayLanguage: String = "KeyboardDisplayLanguage"
+
         static let CharacterStandard: String = "logogram"
         static let AudioFeedback: String = "audio_feedback"
         static let HapticFeedback: String = "haptic_feedback"
@@ -202,10 +203,14 @@ enum CommentToneStyle: Int {
         case noTones = 4
 }
 
-/// Keyboard UI Display Language
-enum PreferredLanguage: Int {
-        case cantonese = 1
-        case english = 2
+/// Preferred Keyboard UI Display Language
+enum KeyboardDisplayLanguage: Int, CaseIterable {
+        case auto = 1
+        case cantonese = 2
+        case english = 3
+        static func language(of value: Int) -> KeyboardDisplayLanguage {
+                return self.allCases.first(where: { $0.rawValue == value }) ?? Self.auto
+        }
 }
 
 /*

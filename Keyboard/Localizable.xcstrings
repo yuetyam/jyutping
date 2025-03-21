@@ -1339,6 +1339,12 @@
             "value" : "Cangjie5 (倉頡五代)"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cangjie5 (倉頡五代)"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1398,6 +1404,12 @@
     "SettingsView.CangjieVariant.PickerOption2" : {
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cangjie3 (倉頡三代)"
+          }
+        },
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cangjie3 (倉頡三代)"
@@ -1467,6 +1479,12 @@
             "value" : "Quick5 (速成五代)"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quick5 (速成五代)"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1526,6 +1544,12 @@
     "SettingsView.CangjieVariant.PickerOption4" : {
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quick3 (速成三代)"
+          }
+        },
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Quick3 (速成三代)"
@@ -1593,6 +1617,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cangjie / Quick(Sucheng) Reverse Lookup"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recherche inversée de Cangjie / Quick(Sucheng)"
           }
         },
         "yue" : {
@@ -1939,6 +1969,12 @@
             "value" : "Character Set"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jeu de caractères des candidats"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2001,6 +2037,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Above Candidates"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Haut"
           }
         },
         "yue" : {
@@ -2067,6 +2109,12 @@
             "value" : "Below Candidates"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bas"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2129,6 +2177,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "None"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucun"
           }
         },
         "yue" : {
@@ -2195,6 +2249,12 @@
             "value" : "Jyutping Display"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Affichage Jyutping"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2257,6 +2317,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Normal        : nei5 hou2"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Normal : nei5 hou2"
           }
         },
         "yue" : {
@@ -2323,6 +2389,12 @@
             "value" : "No Tones    : nei hou"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sans tons : nei hou"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2385,6 +2457,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Superscript: nei⁵ hou²"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exposant : nei⁵ hou²"
           }
         },
         "yue" : {
@@ -2451,6 +2529,12 @@
             "value" : "Subscript   : nei₅ hou₂"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Indice : nei₅ hou₂"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2513,6 +2597,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Jyutping Tones"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tons Jyutping"
           }
         },
         "yue" : {
@@ -2579,6 +2669,12 @@
             "value" : "Emoji Suggestions"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suggestions d’emoji"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2641,6 +2737,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Clear Input Memory"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Effacer la mémoire de saisie"
           }
         },
         "yue" : {
@@ -2707,6 +2809,12 @@
             "value" : "Input Memory"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mémoire de saisie"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2763,12 +2871,88 @@
         }
       }
     },
+    "SettingsView.KeyboardDisplayLanguage.Auto" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auto"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auto"
+          }
+        },
+        "yue" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "自動"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "自動"
+          }
+        },
+        "zh-Hans-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "自動"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "自動"
+          }
+        },
+        "zh-Hant-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "自動"
+          }
+        },
+        "zh-Hant-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "自動"
+          }
+        },
+        "zh-Hant-MO" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "自動"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "自動"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "自動"
+          }
+        }
+      }
+    },
     "SettingsView.KeyboardDisplayLanguage.PickerTitle" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Keyboard Display Language"
+            "value" : "Keyboard Language"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Langue du clavier"
           }
         },
         "yue" : {
@@ -2835,6 +3019,12 @@
             "value" : "To apply this change, toggle Full Access in the system Settings to restart this keyboard."
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pour appliquer cette modification, activez l'accès complet dans les paramètres système pour redémarrer ce clavier."
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2897,6 +3087,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Heavy"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lourd"
           }
         },
         "yue" : {
@@ -2963,6 +3159,12 @@
             "value" : "Light"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Léger"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3025,6 +3227,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Medium"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Moyen"
           }
         },
         "yue" : {
@@ -3091,6 +3299,12 @@
             "value" : "None"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucun"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3153,6 +3367,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Haptic"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Haptique"
           }
         },
         "yue" : {
@@ -3219,6 +3439,12 @@
             "value" : "Haptic Feedback requires Full Access"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le retour haptique nécessite un accès complet"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3281,6 +3507,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Keyboard Feedback"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rétroaction du clavier"
           }
         },
         "yue" : {
@@ -3347,6 +3579,12 @@
             "value" : "Sound"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Son"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3411,6 +3649,12 @@
             "value" : "10 Key (九宮格)"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "10 touches (九宮格)"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3470,6 +3714,12 @@
     "SettingsView.KeyboardLayout.PickerOption.QWERTY" : {
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "QWERTY (26鍵全鍵盤)"
+          }
+        },
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "QWERTY (26鍵全鍵盤)"
@@ -3539,6 +3789,12 @@
             "value" : "Triple-Stroke (26鍵三拼)"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Triple-Course (26鍵三拼)"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3601,6 +3857,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Keyboard Layout"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Disposition du clavier"
           }
         },
         "yue" : {
@@ -3667,6 +3929,12 @@
             "value" : "Key Text Preview"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aperçu du texte clé"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3729,6 +3997,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "This page is scrollable"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cette page est déroulante"
           }
         },
         "yue" : {
@@ -3795,6 +4069,12 @@
             "value" : "Use 10 Key Number Pad"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utiliser le pavé numérique à 10 touches"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3857,6 +4137,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Show Lowercase Keys"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Afficher les touches minuscules"
           }
         },
         "yue" : {

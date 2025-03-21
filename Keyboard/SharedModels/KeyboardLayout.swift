@@ -43,6 +43,6 @@ enum NumericLayout: Int, CaseIterable {
                 return Self.allCases.first(where: { $0.rawValue == savedValue }) ?? Self.default
         }
 
-        // 10-Key KeyPad
+        /// 10-Key KeyPad
         var isNumberKeyPad: Bool { self == .numberKeyPad }
 }

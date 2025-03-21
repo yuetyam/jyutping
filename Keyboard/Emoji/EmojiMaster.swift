@@ -43,7 +43,7 @@ struct EmojiMaster {
                         return Engine.fetchEmojiSequence()
                 } else if #available(iOSApplicationExtension 17.4, *) {
                         // Unicode/Emoji version 15.1
-                        return Engine.fetchEmojiSequence().filter({ $0.unicodeVersion <= 151000 })
+                        return Engine.fetchEmojiSequence().filter({ $0.unicodeVersion <= 150100 })
                 } else if #available(iOSApplicationExtension 16.4, *) {
                         // Unicode/Emoji version 15.0
                         return Engine.fetchEmojiSequence().filter({ $0.unicodeVersion <= 150000 })

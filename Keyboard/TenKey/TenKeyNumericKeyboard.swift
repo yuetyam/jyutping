@@ -1,9 +1,6 @@
 import SwiftUI
 
 struct TenKeyNumericKeyboard: View {
-
-        @EnvironmentObject private var context: KeyboardViewController
-
         var body: some View {
                 VStack(spacing: 0) {
                         ToolBar()
@@ -29,20 +26,11 @@ struct TenKeyNumericKeyboard: View {
                                                         }
                                                 }
                                         }
-                                        if context.needsInputModeSwitchKey {
-                                                HStack(spacing: 0) {
-                                                        TenKeyGlobeKey()
-                                                        TenKeyNavigateKey(destination: .alphabetic)
-                                                        TenKeyNumberKey(key: "0")
-                                                        TenKeyNumberKey(key: ".")
-                                                }
-                                        } else {
-                                                HStack(spacing: 0) {
-                                                        TenKeyNavigateKey(destination: .alphabetic)
-                                                        TenKeyNumberKey(key: ".")
-                                                        TenKeyNumberKey(key: "0")
-                                                        TenKeySpaceKey()
-                                                }
+                                        HStack(spacing: 0) {
+                                                TenKeyNavigateKey(destination: .alphabetic)
+                                                TenKeyNumberKey(key: ".")
+                                                TenKeyNumberKey(key: "0")
+                                                TenKeySpaceKey()
                                         }
                                 }
                                 VStack(spacing: 0) {

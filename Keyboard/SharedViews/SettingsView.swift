@@ -41,7 +41,7 @@ struct SettingsView: View {
         @State private var commentToneStyle: CommentToneStyle = Options.commentToneStyle
         @State private var cangjieVariant: CangjieVariant = Options.cangjieVariant
         @State private var isEmojiSuggestionsOn: Bool = Options.isEmojiSuggestionsOn
-        @State private var preferredLanguage: PreferredLanguage = Options.preferredLanguage
+        @State private var preferredLanguage: KeyboardDisplayLanguage = Options.preferredLanguage
         @State private var isInputMemoryOn: Bool = Options.isInputMemoryOn
 
         @State private var isTryingToClearInputMemory: Bool = false
@@ -233,8 +233,9 @@ struct SettingsView: View {
                                                 Text("SettingsView.KeyboardDisplayLanguage.PickerTitle").minimumScaleFactor(0.5).lineLimit(1)
                                                 Spacer()
                                                 Picker("SettingsView.KeyboardDisplayLanguage.PickerTitle", selection: $preferredLanguage) {
-                                                        Text(verbatim: "粵語").tag(PreferredLanguage.cantonese)
-                                                        Text(verbatim: "English").tag(PreferredLanguage.english)
+                                                        Text("SettingsView.KeyboardDisplayLanguage.Auto").tag(KeyboardDisplayLanguage.auto)
+                                                        Text(verbatim: "粵語").tag(KeyboardDisplayLanguage.cantonese)
+                                                        Text(verbatim: "English").tag(KeyboardDisplayLanguage.english)
                                                 }
                                                 .pickerStyle(.segmented)
                                                 .labelsHidden()
