@@ -569,6 +569,12 @@
             "value" : "Copy QQ Group ID"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copier l’ID du groupe QQ"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -703,6 +709,12 @@
             "value" : "Mail unavailable"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Courrier indisponible"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -765,6 +777,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Unable to compose mail"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossible de rédiger le courrier"
           }
         },
         "yue" : {
@@ -3001,6 +3019,12 @@
             "value" : "Tap the gear button in the top of the keyboard to open settings panel, then select a language from the Keyboard Display Language section."
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Appuyez sur le bouton d'engrenage en haut du clavier pour ouvrir le panneau des paramètres, puis sélectionnez une langue dans la section Langue d'affichage du clavier."
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3063,6 +3087,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Jump to Settings app, then toggle Full Access for the keyboard. This will restart the keyboard and complete the language switch."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Accédez à l'application Réglages, puis activez l'option Accès complet pour le clavier. Cela redémarrera le clavier et terminera le changement de langue."
           }
         },
         "yue" : {
@@ -3129,6 +3159,12 @@
             "value" : "Make sure you have multiple languages enabled on your device."
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Assurez-vous que plusieurs langues sont activées sur votre appareil."
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3191,6 +3227,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Jump to Settings app, then select the language you preferred for Jyutping app."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Accédez à l'application Réglages, puis sélectionnez la langue que vous préférez pour l'application Jyutping."
           }
         },
         "yue" : {
@@ -3257,6 +3299,12 @@
             "value" : "Keyboard Display Language"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Langue d'affichage du clavier"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3319,6 +3367,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Main App Display Language"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Langue d'affichage de l'application principale"
           }
         },
         "yue" : {
@@ -3385,6 +3439,12 @@
             "value" : "Due to system limitations, the **Paste** button on the keyboard will only function when the **Allow Full Access** permission is turned on."
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En raison des limitations du système, le bouton **Coller** du clavier ne fonctionnera que lorsque l'autorisation **Autoriser l'accès complet** est activée."
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3447,6 +3507,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "The keyboard itself would not store any content of the system clipboard."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le clavier lui-même ne stockera aucun contenu du presse-papiers système."
           }
         },
         "yue" : {
@@ -3513,6 +3579,12 @@
             "value" : "When you press the **Paste** button on the keyboard, the system may prompt you to ask if you want to allow the paste."
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lorsque vous appuyez sur le bouton **Coller** du clavier, le système peut vous demander si vous souhaitez autoriser le collage."
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3575,6 +3647,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "If you find it annoying to have these prompts, you can go to the **Jyutping** in the **Settings** app, and change the setting **Paste from Other Apps** from **Ask** to **Allow**."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Si vous trouvez ennuyeux d'avoir ces invites, vous pouvez aller dans **Jyutping** dans l'application **Réglages** et modifier le paramètre **Coller à partir d'autres applications** de **Demander** à **Autoriser**."
           }
         },
         "yue" : {
@@ -3641,6 +3719,12 @@
             "value" : "Haptic Feedback requires Full Access"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le retour haptique nécessite un accès complet"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3703,6 +3787,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Jump to **Settings**"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Accéder aux **Réglages**"
           }
         },
         "yue" : {
@@ -3769,6 +3859,12 @@
             "value" : "Tap **Keyboards**"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Appuyez sur **Claviers**"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3831,6 +3927,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Turn on **Jyutping**"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activez **Jyutping**"
           }
         },
         "yue" : {
@@ -3897,6 +3999,12 @@
             "value" : "Turn on **Allow Full Access**"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activez **Autoriser l'accès complet**"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3959,6 +4067,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "You may need to close the Settings app, then try again."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vous devrez peut-être fermer l'application Réglages, puis réessayer."
           }
         },
         "yue" : {
@@ -4025,6 +4139,12 @@
             "value" : "This is a system bug, you may need to restart this device."
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il s'agit d'un bogue système, vous devrez peut-être redémarrer cet appareil."
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4089,6 +4209,12 @@
             "value" : "How to close an app?"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comment fermer une application ?"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4150,7 +4276,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "How to restart device?"
+            "value" : "How to restart a device?"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comment redémarrer un appareil ?"
           }
         },
         "yue" : {
@@ -4217,6 +4349,12 @@
             "value" : "Jyutping keyboard not showing up in the Settings app?"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le clavier Jyutping n'apparaît pas dans l'application Réglages ?"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4279,6 +4417,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Jyutping keyboard not showing up in some other apps?"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le clavier Jyutping ne s'affiche pas dans certaines autres applications ?"
           }
         },
         "yue" : {
@@ -4345,6 +4489,12 @@
             "value" : "Unfortunately not. Third-party keyboard apps can't communicate with external keyboards due to system limitations."
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Malheureusement non. Les applications de clavier tierces ne peuvent pas communiquer avec les claviers externes en raison des limitations du système."
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4409,6 +4559,12 @@
             "value" : "Haptic Feedback"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retour haptique"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4470,7 +4626,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Paste texts from system clipboard"
+            "value" : "Paste texts from the system clipboard"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Coller les textes depuis le presse-papiers du système"
           }
         },
         "yue" : {
@@ -4537,6 +4699,12 @@
             "value" : "Sometimes the keyboard may trigger some bugs and it needs to be completely restarted. You can go to the Settings app and toggle the keyboard's “Allow Full Access” setting twice. The system will then restart the keyboard."
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Parfois, le clavier peut déclencher des bogues et il doit être complètement redémarré. Vous pouvez aller dans l'application Réglages et basculer deux fois le paramètre « Autoriser l'accès complet » du clavier. Le système redémarrera alors le clavier."
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4599,6 +4767,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "All other features don't require Full Access"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toutes les autres fonctionnalités ne nécessitent pas d'accès complet"
           }
         },
         "yue" : {
@@ -4665,6 +4839,12 @@
             "value" : "Can I use with external keyboards?"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Puis-je l'utiliser avec des claviers externes ?"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4727,6 +4907,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "What does “Allow Full Access” do?"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "À quoi sert « Autoriser l’accès complet » ?"
           }
         },
         "yue" : {
@@ -4793,6 +4979,12 @@
             "value" : "How to restart the keyboard?"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comment redémarrer le clavier ?"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4855,6 +5047,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Why is the TTS on my device not working?"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pourquoi le TTS sur mon appareil ne fonctionne-t-il pas ?"
           }
         },
         "yue" : {
@@ -4921,6 +5119,12 @@
             "value" : "How to enable this keyboard"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comment activer ce clavier"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4983,6 +5187,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Swipe from right to left on the Delete key will clear current pre-edit syllables."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Balayer de droite à gauche sur la touche Suppr effacera les syllabes de pré-édition actuelles."
           }
         },
         "yue" : {
@@ -5049,6 +5259,12 @@
             "value" : "Long-press on a Candidate can delete it from Input Memory."
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un appui long sur un candidat peut le supprimer de la mémoire d'entrée."
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5110,7 +5326,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Touch and hold the Space bar until the keyboard triggers sound and haptic feedback; then, slide your finger left or right."
+            "value" : "Touch and hold the Space bar until the keyboard triggers sound and haptic feedbacks; then, slide your finger left or right."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Touchez et maintenez la barre d'espacement jusqu'à ce que le clavier déclenche des retours sonores et haptiques ; ensuite, faites glisser votre doigt vers la gauche ou vers la droite."
           }
         },
         "yue" : {
@@ -5177,6 +5399,12 @@
             "value" : "Double tapping the Space bar will insert a period followed by a space."
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Appuyer deux fois sur la barre d'espace insérera un point suivi d'un espace."
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5239,6 +5467,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Double tapping the “gw” key will input “kw”."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Appuyer deux fois sur la touche « gw » saisira « kw »."
           }
         },
         "yue" : {
@@ -5305,6 +5539,12 @@
             "value" : "Because the nucleus sounds “oe” and “eo” are complementary in most cases, they share the same key and you don't need to tell them apart."
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Parce que les sons de noyau « oe » et « eo » sont complémentaires dans la plupart des cas, ils partagent la même touche et vous n'avez pas besoin de les distinguer."
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5367,6 +5607,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Clear current pre-edit text"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Effacer le texte de pré-édition actuel"
           }
         },
         "yue" : {
@@ -5433,6 +5679,12 @@
             "value" : "Remove a Candidate from Input Memory"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Supprimer un candidat de la mémoire d'entrée"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5495,6 +5747,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Moving the insertion point"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Déplacement du point d’insertion"
           }
         },
         "yue" : {
@@ -5561,6 +5819,12 @@
             "value" : "Period (Full Stop) shortcut"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Raccourci pour le point (point final)"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5623,6 +5887,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Triple-stroke (三拼) keyboard"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clavier à triple frappe (三拼)"
           }
         },
         "yue" : {
@@ -5689,6 +5959,12 @@
             "value" : "Change Display Language"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Changer la langue d’affichage"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5751,6 +6027,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Clipboard Features"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fonctionnalités du presse-papiers"
           }
         },
         "yue" : {
@@ -5887,6 +6169,12 @@
             "value" : "More Introductions"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Plus d’introductions"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6021,6 +6309,12 @@
             "value" : "Problems with enabling keyboard?"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Problèmes avec l'activation du clavier ?"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6083,6 +6377,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Text to Speech"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Synthèse vocale"
           }
         },
         "yue" : {
@@ -6149,6 +6449,12 @@
             "value" : "Display Language"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Langue d'affichage"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6211,6 +6517,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Clipboard Features"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fonctionnalités du presse-papiers"
           }
         },
         "yue" : {
@@ -6277,6 +6589,12 @@
             "value" : "Enable Keyboard"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activer le clavier"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6336,6 +6654,12 @@
     "IOSHomeTab.NavigationTitle.FAQ" : {
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FAQ"
+          }
+        },
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "FAQ"
@@ -6405,6 +6729,12 @@
             "value" : "Introductions"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Introductions"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6467,6 +6797,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Privacy Notice"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avis de confidentialité"
           }
         },
         "yue" : {
@@ -6533,6 +6869,12 @@
             "value" : "Text to Speech"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Synthèse vocale"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6595,6 +6937,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "TLDR: We do NOT collect or share personal information."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "TLDR : Nous ne collectons ni ne partageons d'informations personnelles."
           }
         },
         "yue" : {
@@ -6661,6 +7009,12 @@
             "value" : "The keyboard will always be offline and never connected to the network."
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le clavier sera toujours hors ligne et ne sera jamais connecté au réseau."
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6723,6 +7077,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "There is no communication between the keyboard and the main app."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il n'y a aucune communication entre le clavier et l'application principale."
           }
         },
         "yue" : {
@@ -6789,6 +7149,12 @@
             "value" : "Enabling Haptic Feedback needs Allow Full Access."
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L'activation du retour haptique nécessite l'option Autoriser l'accès complet."
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6851,6 +7217,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "The keyboard itself would not store any content of the system clipboard."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le clavier lui-même ne stockera aucun contenu du presse-papiers système."
           }
         },
         "yue" : {
@@ -6917,6 +7289,12 @@
             "value" : "This app uses system built-in Text-to-Speech (TTS) service to speak texts."
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cette application utilise le service de synthèse vocale (TTS) intégré au système pour prononcer les textes."
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6979,6 +7357,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Text-to-Speech (TTS) may not work if this device is in silent mode."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La synthèse vocale (TTS) peut ne pas fonctionner si cet appareil est en mode silencieux."
           }
         },
         "yue" : {
@@ -7045,6 +7429,12 @@
             "value" : "To ensure TTS functional, please go to **Settings** → **General** → **Language & Region**, then add **Chinese, Traditional (Hong Kong)** language."
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pour garantir le fonctionnement de la synthèse vocale (TTS), veuillez aller dans **Réglages** → **Général** → **Langue et région**, puis ajouter la langue **Chinois, traditionnel (Hong Kong)**."
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7109,6 +7499,12 @@
             "value" : "To improve TTS quality, please go to **Settings** → **Accessibility** → **VioceOver** → **Speech**, then add **Chinese (Hong Kong)** language voice."
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pour améliorer la qualité de la synthèse vocale (TTS), veuillez aller dans **Réglages** → **Accessibilité** → **VoiceOver** → **Parole**, puis ajouter la voix de la langue **Chinois (Hong Kong)**."
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7171,6 +7567,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "If there is occasionally no sound, try to close the this app completely, or restart this device."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "S'il n'y a occasionnellement aucun son, essayez de fermer complètement cette application ou de redémarrer cet appareil."
           }
         },
         "yue" : {
@@ -7657,6 +8059,12 @@
             "value" : "Go to **Settings**"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aller dans les **Réglages**"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7719,6 +8127,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Copy URL"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copier l’URL"
           }
         },
         "yue" : {
@@ -8205,6 +8619,12 @@
             "value" : "Cantonese Expressions"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Expressions cantonaises"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8267,6 +8687,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Canton Metro"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Métro de Canton"
           }
         },
         "yue" : {
@@ -8333,6 +8759,12 @@
             "value" : "Chinese Zodiac"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Signes du zodiaque chinois"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8395,6 +8827,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fatshan Metro"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Métro de Fatshan"
           }
         },
         "yue" : {
@@ -8461,6 +8899,12 @@
             "value" : "Hong Kong MTR"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MTR de Hong Kong"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8523,6 +8967,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hundred Family Surnames"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cent noms de famille"
           }
         },
         "yue" : {
@@ -8589,6 +9039,12 @@
             "value" : "Input Method"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Méthode de saisie"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8648,6 +9104,12 @@
     "MacSidebar.NavigationTitle.Introductions" : {
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Introductions"
+          }
+        },
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Introductions"
@@ -8717,6 +9179,12 @@
             "value" : "Finals"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Finales en jyutping"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8779,6 +9247,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Initials"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Finales en jyutping"
           }
         },
         "yue" : {
@@ -8845,6 +9319,12 @@
             "value" : "Tones"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tons du jyutping"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8904,6 +9384,12 @@
     "MacSidebar.NavigationTitle.MacauMetro" : {
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Metro Ligeiro de Macau"
+          }
+        },
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Metro Ligeiro de Macau"
@@ -8973,6 +9459,12 @@
             "value" : "Numbers"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nombres"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9035,6 +9527,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Resources"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ressources"
           }
         },
         "yue" : {
@@ -9101,6 +9599,12 @@
             "value" : "Search"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recherche"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9163,6 +9667,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sham Chun Metro"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Métro de Sham Chun"
           }
         },
         "yue" : {
@@ -9229,6 +9739,12 @@
             "value" : "Simplified Character Confusion"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confusion des caractères simplifiés"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9291,6 +9807,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Solar Terms"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Termes solaires"
           }
         },
         "yue" : {
@@ -9357,6 +9879,12 @@
             "value" : "Stems & Branches"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tiges et branches"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9419,6 +9947,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Thousand Character Classic"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Classique des mille caractères"
           }
         },
         "yue" : {
@@ -9485,6 +10019,12 @@
             "value" : "Tungkun Rail Transit"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Transport ferroviaire de Tungkun"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9547,6 +10087,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "About"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "À propos"
           }
         },
         "yue" : {
@@ -9613,6 +10159,12 @@
             "value" : "Cantonese"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cantonais"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9675,6 +10227,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Input Method"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Méthode de saisie"
           }
         },
         "yue" : {
@@ -9809,6 +10367,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Metro"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Métro"
           }
         },
         "yue" : {
@@ -10855,6 +11419,12 @@
             "value" : "Start with “v”, then enter Cangjie or Quick code. For example, enter “vdd”, candidate “林” will appear. Candidates will be displayed with the corresponding Jyutping."
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Commencez par « v », puis entrez le code Cangjie ou Quick. Par exemple, entrez « vdd », le candidat « 林 » apparaîtra. Les candidats seront affichés avec le Jyutping correspondant."
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10917,6 +11487,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "You can choose Cangjie / Quick version in input method / keyboard's settings page."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vous pouvez choisir la version Cangjie / Quick dans la page des paramètres de la méthode de saisie / du clavier."
           }
         },
         "yue" : {
@@ -10983,6 +11559,12 @@
             "value" : "Start with “r”, then enter Pinyin code. For example, enter “rlin”, candidate “林” will appear. Candidates will be displayed with the corresponding Jyutping."
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Commencez par « r », puis entrez le code Pinyin. Par exemple, entrez « rlin », le candidat « 林 » apparaîtra. Les candidats seront affichés avec le Jyutping correspondant."
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11045,6 +11627,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Start with “x”, then enter Stroke code. For example, enter “xwsad”, candidate “木” will appear. Candidates will be displayed with the corresponding Jyutping."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Commencez par « x », puis entrez le code des traits. Par exemple, entrez « xwsad », le candidat « 木 » apparaîtra. Les candidats seront affichés avec le Jyutping correspondant."
           }
         },
         "yue" : {
@@ -11111,6 +11699,12 @@
             "value" : "Start with “q”, then enter two components' Jyutping. For example, enter “qmukmuk”, candidate “林” will appear. Candidates will be displayed with the corresponding Jyutping."
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Commencez par « q », puis entrez le Jyutping de deux composants. Par exemple, entrez « qmukmuk », le candidat « 林 » apparaîtra. Les candidats seront affichés avec le Jyutping correspondant."
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11170,6 +11764,12 @@
     "Shared.Guide.Body.ToneInput" : {
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "v = 1, High Level (陰平)\nx = 2, Medium Rising (陰上)\nq = 3, Medium Level (陰去)\nvv = 4, Low Falling (陽平)\nxx = 5, Low Rising (陽上)\nqq = 6, Low Level (陽去)"
+          }
+        },
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "v = 1, High Level (陰平)\nx = 2, Medium Rising (陰上)\nq = 3, Medium Level (陰去)\nvv = 4, Low Falling (陽平)\nxx = 5, Low Rising (陽上)\nqq = 6, Low Level (陽去)"
@@ -11239,6 +11839,12 @@
             "value" : "w = 橫(waang), Horizontal\ns = 豎(syu), Vertical\na = 撇, Left-falling\nd = 點(dim), Right-falling\nz = 折(zit), Turning"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "w = 橫(waang), Horizontal\ns = 豎(syu), Vertical\na = 撇, Left-falling\nd = 點(dim), Right-falling\nz = 折(zit), Turning"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11301,6 +11907,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Examples: sinq = sin3(線), sinqq = sin6(羨)"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exemples : sinq = sin3(線), sinqq = sin6(羨)"
           }
         },
         "yue" : {
@@ -11367,6 +11979,12 @@
             "value" : "Lookup Jyutping with Cangjie or Quick(Sucheng)"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rechercher le Jyutping avec Cangjie ou Quick (Sucheng)"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11429,6 +12047,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lookup Jyutping with Mandarin Pinyin"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rechercher le Jyutping avec le Pinyin mandarin"
           }
         },
         "yue" : {
@@ -11495,6 +12119,12 @@
             "value" : "Lookup Jyutping with Stroke"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rechercher le Jyutping avec les Stroke"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11557,6 +12187,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lookup Jyutping with character components"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rechercher le Jyutping avec les composants de caractère"
           }
         },
         "yue" : {
@@ -11623,6 +12259,12 @@
             "value" : "Tone Input"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Saisir les tons"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11687,6 +12329,12 @@
             "value" : "Input"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Saisie"
+          }
+        },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11749,6 +12397,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Search Pronunciation"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rechercher la prononciation"
           }
         },
         "yue" : {
