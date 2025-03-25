@@ -131,9 +131,6 @@ struct HomeView: View {
                                         NavigationLink(destination: ChangeDisplayLanguageView()) {
                                                 Label("IOSHomeTab.LabelTitle.ChangeDisplayLanguage", systemImage: "globe.asia.australia")
                                         }
-                                        NavigationLink(destination: PrivacyNoticeView()) {
-                                                Label("IOSHomeTab.LabelTitle.PrivacyNotice", systemImage: "lock.circle")
-                                        }
                                         NavigationLink(destination: FAQView()) {
                                                 Label("IOSHomeTab.LabelTitle.FAQ", systemImage: "questionmark.circle")
                                         }

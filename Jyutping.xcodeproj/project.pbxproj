@@ -44,7 +44,6 @@
 		371B6EB32B3B3108005BB31C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E5E2B3B3107005BB31C /* HomeView.swift */; };
 		371B6EB42B3B3108005BB31C /* FAQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E5F2B3B3107005BB31C /* FAQView.swift */; };
 		371B6EB52B3B3108005BB31C /* Text2SpeechView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E602B3B3107005BB31C /* Text2SpeechView.swift */; };
-		371B6EB62B3B3108005BB31C /* PrivacyNoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E612B3B3107005BB31C /* PrivacyNoticeView.swift */; };
 		371B6EB72B3B3108005BB31C /* CantoneseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E632B3B3107005BB31C /* CantoneseView.swift */; };
 		371B6EB82B3B3108005BB31C /* IOSFatshanMetroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E642B3B3107005BB31C /* IOSFatshanMetroView.swift */; };
 		371B6EB92B3B3108005BB31C /* IOSHundredFamilySurnamesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E652B3B3107005BB31C /* IOSHundredFamilySurnamesView.swift */; };
@@ -434,7 +433,6 @@
 		371B6E5E2B3B3107005BB31C /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		371B6E5F2B3B3107005BB31C /* FAQView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FAQView.swift; sourceTree = "<group>"; };
 		371B6E602B3B3107005BB31C /* Text2SpeechView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Text2SpeechView.swift; sourceTree = "<group>"; };
-		371B6E612B3B3107005BB31C /* PrivacyNoticeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacyNoticeView.swift; sourceTree = "<group>"; };
 		371B6E632B3B3107005BB31C /* CantoneseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CantoneseView.swift; sourceTree = "<group>"; };
 		371B6E642B3B3107005BB31C /* IOSFatshanMetroView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IOSFatshanMetroView.swift; sourceTree = "<group>"; };
 		371B6E652B3B3107005BB31C /* IOSHundredFamilySurnamesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IOSHundredFamilySurnamesView.swift; sourceTree = "<group>"; };
@@ -850,7 +848,6 @@
 				371B6E602B3B3107005BB31C /* Text2SpeechView.swift */,
 				3762EDCF2B8538A000C4E9F1 /* ClipboardFeaturesView.swift */,
 				37CC55782B464C78003ED8CE /* ChangeDisplayLanguageView.swift */,
-				371B6E612B3B3107005BB31C /* PrivacyNoticeView.swift */,
 				371B6E5F2B3B3107005BB31C /* FAQView.swift */,
 			);
 			path = Home;
@@ -2127,7 +2124,6 @@
 				371B6ED32B3B3108005BB31C /* MacContentView.swift in Sources */,
 				371B6EAB2B3B3108005BB31C /* ImageExtensions.swift in Sources */,
 				37CC55792B464C78003ED8CE /* ChangeDisplayLanguageView.swift in Sources */,
-				371B6EB62B3B3108005BB31C /* PrivacyNoticeView.swift in Sources */,
 				379CB1A62BDB898700434190 /* MacJyutpingFinalTable.swift in Sources */,
 				371B6EA52B3B3108005BB31C /* Term.swift in Sources */,
 				371B6EC22B3B3108005BB31C /* UIDevice+modelName.swift in Sources */,
