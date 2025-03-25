@@ -117,12 +117,12 @@ struct DatabasePreparer {
         }
 
         private static func createT2STable() async {
-                let createTable: String = "CREATE TABLE t2stable(traditional INTEGER NOT NULL PRIMARY KEY, simplified TEXT NOT NULL);"
+                let createTable: String = "CREATE TABLE t2stable(traditional INTEGER NOT NULL PRIMARY KEY, simplified INTEGER NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
                 sqlite3_finalize(createStatement)
-                let entries: [String] = Hant2Hans.generate().map({ "(\($0.traditional), '\($0.simplified)')" })
+                let entries: [String] = Hant2Hans.generate().map({ "(\($0.traditional), \($0.simplified))" })
                 let values: String = entries.joined(separator: ", ")
                 let insert: String = "INSERT INTO t2stable (traditional, simplified) VALUES \(values);"
                 var insertStatement: OpaquePointer? = nil

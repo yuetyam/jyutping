@@ -8,16 +8,22 @@ struct Simplifier {
                 sqlite3_reset(statement)
                 sqlite3_bind_int64(statement, 1, Int64(code))
                 guard sqlite3_step(statement) == SQLITE_ROW else { return character }
-                guard let simplified = sqlite3_column_text(statement, 0) else { return character }
-                return String(cString: simplified).first ?? character
+                let simplifiedCode = Int(sqlite3_column_int64(statement, 0))
+                guard let simplifiedCharacter = transfromCharacter(from: simplifiedCode) else { return character }
+                return simplifiedCharacter
         }
         private static func convert(character: Character, statement: OpaquePointer?) -> String {
                 guard let code = character.unicodeScalars.first?.value else { return String(character) }
                 sqlite3_reset(statement)
                 sqlite3_bind_int64(statement, 1, Int64(code))
                 guard sqlite3_step(statement) == SQLITE_ROW else { return String(character) }
-                guard let simplified = sqlite3_column_text(statement, 0) else { return String(character) }
-                return String(cString: simplified)
+                let simplifiedCode = Int(sqlite3_column_int64(statement, 0))
+                guard let simplifiedCharacter = transfromCharacter(from: simplifiedCode) else { return String(character) }
+                return String(simplifiedCharacter)
+        }
+        private static func transfromCharacter(from code: Int) -> Character? {
+                guard let scalar = Unicode.Scalar(code) else { return nil }
+                return Character(scalar)
         }
 
         static func simplify(_ text: String, statement: OpaquePointer?) -> String {
