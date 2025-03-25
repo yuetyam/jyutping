@@ -229,22 +229,18 @@ struct SettingsView: View {
                                 }
 
                                 Section {
-                                        HStack(spacing: 0) {
-                                                Text("SettingsView.KeyboardDisplayLanguage.PickerTitle").minimumScaleFactor(0.5).lineLimit(1)
-                                                Spacer()
-                                                Picker("SettingsView.KeyboardDisplayLanguage.PickerTitle", selection: $preferredLanguage) {
-                                                        Text("SettingsView.KeyboardDisplayLanguage.Auto").tag(KeyboardDisplayLanguage.auto)
-                                                        Text(verbatim: "粵語").tag(KeyboardDisplayLanguage.cantonese)
-                                                        Text(verbatim: "English").tag(KeyboardDisplayLanguage.english)
-                                                }
-                                                .pickerStyle(.segmented)
-                                                .labelsHidden()
-                                                .fixedSize()
-                                                .onChange(of: preferredLanguage) { newOption in
-                                                        AudioFeedback.modified()
-                                                        context.triggerSelectionHapticFeedback()
-                                                        Options.updatePreferredLanguage(to: newOption)
-                                                }
+                                        Picker("SettingsView.KeyboardDisplayLanguage.PickerTitle", selection: $preferredLanguage) {
+                                                Text("SettingsView.KeyboardDisplayLanguage.Auto").tag(KeyboardDisplayLanguage.auto)
+                                                Text(verbatim: "粵語").tag(KeyboardDisplayLanguage.cantonese)
+                                                Text(verbatim: "English").tag(KeyboardDisplayLanguage.english)
+                                                Text(verbatim: "Français").tag(KeyboardDisplayLanguage.french)
+                                        }
+                                        .pickerStyle(.menu)
+                                        .textCase(nil)
+                                        .onChange(of: preferredLanguage) { newOption in
+                                                AudioFeedback.modified()
+                                                context.triggerSelectionHapticFeedback()
+                                                Options.updatePreferredLanguage(to: newOption)
                                         }
                                 } footer: {
                                         Text("SettingsView.KeyboardDisplayLanguage.SectionFooter").textCase(nil)

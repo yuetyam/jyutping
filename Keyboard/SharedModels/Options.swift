@@ -129,20 +129,13 @@ struct Options {
         static func updatePreferredLanguage(to language: KeyboardDisplayLanguage) {
                 preferredLanguage = language
                 UserDefaults.standard.set(language.rawValue, forKey: OptionsKey.KeyboardDisplayLanguage)
-                switch language {
-                case .auto:
+                guard let languageCode = language.languageCode else {
                         UserDefaults.standard.removeObject(forKey: OptionsKey.AppleLanguages)
-                case .cantonese:
-                        let chose: [String] = ["yue"]
-                        let oldCodes: [String] = Locale.preferredLanguages
-                        let newCodes: [String] = (chose + oldCodes).uniqued()
-                        UserDefaults.standard.set(newCodes, forKey: OptionsKey.AppleLanguages)
-                case .english:
-                        let chose: [String] = ["en"]
-                        let oldCodes: [String] = Locale.preferredLanguages
-                        let newCodes: [String] = (chose + oldCodes).uniqued()
-                        UserDefaults.standard.set(newCodes, forKey: OptionsKey.AppleLanguages)
+                        return
                 }
+                let oldCodes: [String] = Locale.preferredLanguages
+                let newCodes: [String] = ([languageCode] + oldCodes).uniqued()
+                UserDefaults.standard.set(newCodes, forKey: OptionsKey.AppleLanguages)
         }
 
         nonisolated(unsafe) private(set) static var isInputMemoryOn: Bool = {
@@ -205,11 +198,30 @@ enum CommentToneStyle: Int {
 
 /// Preferred Keyboard UI Display Language
 enum KeyboardDisplayLanguage: Int, CaseIterable {
+
         case auto = 1
         case cantonese = 2
-        case english = 3
+        case chineseHongKong = 3
+        case english = 4
+        case french = 5
+
         static func language(of value: Int) -> KeyboardDisplayLanguage {
                 return self.allCases.first(where: { $0.rawValue == value }) ?? Self.auto
+        }
+
+        var languageCode: String? {
+                switch self {
+                case .auto:
+                        nil
+                case .cantonese:
+                        "yue"
+                case .chineseHongKong:
+                        "zh-Hant-HK"
+                case .english:
+                        "en"
+                case .french:
+                        "fr"
+                }
         }
 }
 
