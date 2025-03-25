@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 BUNDLE_IDENTIFIER='org.jyutping.inputmethod.Jyutping'
 APP_VERSION='0.54.0'

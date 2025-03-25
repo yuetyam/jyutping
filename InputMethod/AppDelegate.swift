@@ -45,20 +45,18 @@ extension CommandLine {
                 exit(0)
         }
         private static func register() {
-                let path = "/Library/Input Methods/Jyutping.app"
-                let url = FileManager.default.fileExists(atPath: path) ? URL(fileURLWithPath: path) : Bundle.main.bundleURL
+                let url = Bundle.main.bundleURL
                 TISRegisterInputSource(url as CFURL)
         }
         private static func activate() {
-                let kInputSourceID: String = "org.jyutping.inputmethod.Jyutping"
-                let kInputModeID: String = "org.jyutping.inputmethod.Jyutping.JyutpingIM"
-                guard let inputSourceList = TISCreateInputSourceList(nil, true).takeRetainedValue() as? [TISInputSource] else { return }
+                let bundleID: String = Bundle.main.bundleIdentifier ?? "org.jyutping.inputmethod.Jyutping"
+                let inputSourceID: String = bundleID
+                let properties = NSMutableDictionary()
+                properties.setValue(bundleID, forKey: kTISPropertyBundleID as String)
+                properties.setValue(inputSourceID, forKey: kTISPropertyInputSourceID as String)
+                guard let inputSourceList = TISCreateInputSourceList(properties, true)?.takeRetainedValue() as? [TISInputSource] else { return }
                 for inputSource in inputSourceList {
-                        guard let pointer = TISGetInputSourceProperty(inputSource, kTISPropertyInputSourceID) else { continue }
-                        let inputSourceID = Unmanaged<CFString>.fromOpaque(pointer).takeUnretainedValue() as String
-                        guard inputSourceID == kInputSourceID || inputSourceID == kInputModeID else { continue }
                         TISEnableInputSource(inputSource)
-                        TISSelectInputSource(inputSource)
                 }
         }
 }
