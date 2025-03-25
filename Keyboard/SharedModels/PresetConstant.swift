@@ -20,8 +20,8 @@ struct PresetConstant {
         static let kKW: String = "kw"
 
         /// 10-Key Keyboard
-        static let defaultSidebarTexts: [String] = ["，", "。", "？", "！", "…", "……", "、", "~", "～"]
+        static let defaultSidebarTexts: [String] = ["，", "。", "？", "！", "、", "：", "／", "…", "……", "~", "～"]
 
         /// 10-Key Numeric Keyboard
-        static let symbolSidebarTexts: [String] = ["+", "-", "*", "/", "%", "=", ":", "@", "#", "~", "≈"]
+        static let symbolSidebarTexts: [String] = ["+", "-", "*", "/", "=", "%", ":", "@", "#", ",", "~", "≈"]
 }

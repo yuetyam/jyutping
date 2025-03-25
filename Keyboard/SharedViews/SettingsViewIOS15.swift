@@ -128,9 +128,7 @@ struct SettingsViewIOS15: View {
                                 Picker("SettingsView.KeyboardLayout.PickerTitle", selection: $keyboardLayout) {
                                         Text("SettingsView.KeyboardLayout.PickerOption.QWERTY").tag(KeyboardLayout.qwerty)
                                         Text("SettingsView.KeyboardLayout.PickerOption.TripleStroke").tag(KeyboardLayout.tripleStroke)
-                                        #if DEBUG
                                         Text("SettingsView.KeyboardLayout.PickerOption.10Key").tag(KeyboardLayout.tenKey)
-                                        #endif
                                 }
                                 .pickerStyle(.inline)
                                 .textCase(nil)
@@ -140,7 +138,7 @@ struct SettingsViewIOS15: View {
                                         context.updateKeyboardLayout(to: newLayout)
                                 }
 
-                                if context.isPhone && keyboardLayout.isTenKey.negative {
+                                if context.isPhone {
                                         Section {
                                                 Toggle("SettingsView.NumericLayout.ToggleTitle", isOn: $isKeyPadNumericLayout)
                                                         .onChange(of: isKeyPadNumericLayout) { isOn in
@@ -148,6 +146,8 @@ struct SettingsViewIOS15: View {
                                                                 let newLayout: NumericLayout = isOn ? .numberKeyPad : .default
                                                                 context.updateNumericLayout(to: newLayout)
                                                         }
+                                        } footer: {
+                                                Text("SettingsView.NumericLayout.SectionFooter").textCase(nil)
                                         }
                                 }
 

@@ -27,7 +27,7 @@ struct TenKeySymbolSidebarScrollViewIOS17: View {
                                         } label: {
                                                 ZStack {
                                                         Color.interactiveClear
-                                                        Text(verbatim: symbol)
+                                                        Text(verbatim: symbol).font(.title3)
                                                 }
                                                 .frame(height: buttonHeight)
                                                 .frame(maxWidth: .infinity)
