@@ -165,67 +165,6 @@ extension Character {
         }
 }
 
-extension Int {
-        var convertedCharacter: Character? {
-                switch self {
-                case 20:
-                        return Character.letterA
-                case 21:
-                        return Character.letterB
-                case 22:
-                        return Character.letterC
-                case 23:
-                        return Character.letterD
-                case 24:
-                        return Character.letterE
-                case 25:
-                        return Character.letterF
-                case 26:
-                        return Character.letterG
-                case 27:
-                        return Character.letterH
-                case 28:
-                        return Character.letterI
-                case 29:
-                        return Character.letterJ
-                case 30:
-                        return Character.letterK
-                case 31:
-                        return Character.letterL
-                case 32:
-                        return Character.letterM
-                case 33:
-                        return Character.letterN
-                case 34:
-                        return Character.letterO
-                case 35:
-                        return Character.letterP
-                case 36:
-                        return Character.letterQ
-                case 37:
-                        return Character.letterR
-                case 38:
-                        return Character.letterS
-                case 39:
-                        return Character.letterT
-                case 40:
-                        return Character.letterU
-                case 41:
-                        return Character.letterV
-                case 42:
-                        return Character.letterW
-                case 43:
-                        return Character.letterX
-                case 44:
-                        return Character.letterY
-                case 45:
-                        return Character.letterZ
-                default:
-                        return nil
-                }
-        }
-}
-
 extension Character {
         var tenKeyIntercode: Int? {
                 switch self {

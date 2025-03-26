@@ -154,6 +154,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 textDocumentProxy.insertText(text)
         }
         private func inputBufferText(followedBy text2insert: String? = nil) {
+                bufferCombos = []
                 guard bufferText.isNotEmpty else {
                         guard let text2insert, text2insert.isNotEmpty else { return }
                         textDocumentProxy.insertText(text2insert)
@@ -566,19 +567,18 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let combos = bufferCombos
                 let isInputMemoryOn: Bool = Options.isInputMemoryOn
                 suggestionTask = Task.detached(priority: .high) {
-                        let segmentation = Segmentor.segment(combos: combos)
-                        async let userLexiconCandidates: [Candidate] = isInputMemoryOn ? UserLexicon.tenKeySuggest(combos: combos, segmentation: segmentation) : []
-                        async let engineCandidates: [Candidate] = Engine.tenKeySuggest(combos: combos, segmentation: segmentation)
+                        async let userLexiconCandidates: [Candidate] = isInputMemoryOn ? UserLexicon.tenKeySuggest(combos: combos) : []
+                        async let engineCandidates: [Candidate] = Engine.tenKeySuggest(combos: combos)
                         let suggestions = await (userLexiconCandidates + engineCandidates).transformed(with: Options.characterStandard)
                         if Task.isCancelled.negative {
                                 await MainActor.run { [weak self] in
                                         self?.text2mark = {
-                                                guard let firstCandidate = suggestions.first else { return String(combos.compactMap(\.letters.first)) }
+                                                guard let firstCandidate = suggestions.first else { return combos.compactMap(\.letters.first).joined() }
                                                 let userInputCount = combos.count
                                                 let firstInputCount = firstCandidate.input.count
                                                 guard firstInputCount < userInputCount else { return firstCandidate.mark }
                                                 let tailCombos = combos.suffix(userInputCount - firstInputCount)
-                                                let tailText = tailCombos.compactMap(\.letters.first)
+                                                let tailText = tailCombos.compactMap(\.letters.first).joined()
                                                 return firstCandidate.mark + String.space + tailText
                                         }()
                                         self?.candidates = suggestions

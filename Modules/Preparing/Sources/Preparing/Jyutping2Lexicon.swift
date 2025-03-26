@@ -1,42 +1,42 @@
 import Foundation
 
+struct LexiconEntry: Hashable {
+        let word: String
+        let romanization: String
+        let anchors: Int
+        let ping: Int
+        let tenKeyAnchors: Int
+        let tenKeyCode: Int
+}
+
 struct Jyutping2Lexicon {
 
-        static func convert() -> [String] {
-                guard let url = Bundle.module.url(forResource: "jyutping", withExtension: "txt") else { return [] }
-                guard let sourceContent = try? String(contentsOf: url, encoding: .utf8) else { return [] }
+        static func convert() -> [LexiconEntry] {
+                guard let url = Bundle.module.url(forResource: "jyutping", withExtension: "txt") else { fatalError("jyutping.txt not found") }
+                guard let sourceContent = try? String(contentsOf: url, encoding: .utf8) else { fatalError("Failed to read jyutping.txt") }
                 let sourceLines: [String] = sourceContent.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
                 let entries = sourceLines.compactMap({ generateEntry(from: $0) })
                 return entries
         }
 
-        private static func generateEntry(from text: String) -> String? {
+        private static func generateEntry(from text: String) -> LexiconEntry? {
                 let text = text.trimmingCharacters(in: .whitespaces).trimmingCharacters(in: .controlCharacters)
                 let parts = text.split(separator: "\t").map({ $0.trimmingCharacters(in: .whitespaces).trimmingCharacters(in: .controlCharacters) })
-                guard parts.count == 2 else { return nil }
+                guard parts.count == 2 else { fatalError("bad line format: \(text)") }
                 let word: String = parts[0]
                 let romanization: String = parts[1]
-                guard let shortcut: Int = shortcutCode(of: romanization) else { return nil }
-                guard let ping: Int = pingCode(of: romanization) else { return nil }
-                let entry: String = "\(word)\t\(romanization)\t\(shortcut)\t\(ping)"
+                let anchors = romanization.split(separator: " ").compactMap(\.first)
+                guard !(anchors.isEmpty) else { fatalError("bad line format: \(text)") }
+                let syllableText = romanization.filter({ $0.isASCII && $0.isLetter })
+                guard !(syllableText.isEmpty) else { fatalError("bad line format: \(text)") }
+                let anchorText = String(anchors)
+                guard let anchorCode: Int = anchorText.charcode else { fatalError("bad line format: \(text)") }
+                let ping: Int = syllableText.hash
+                guard let tenKeyAnchorCode: Int = anchorText.tenKeyCharcode else { fatalError("bad line format: \(text)") }
+                let tenKeyCode: Int = syllableText.tenKeyCharcode ?? 0
+                let entry: LexiconEntry = LexiconEntry(word: word, romanization: romanization, anchors: anchorCode, ping: ping, tenKeyAnchors: tenKeyAnchorCode, tenKeyCode: tenKeyCode)
                 return entry
         }
-
-        private static func shortcutCode(of text: String) -> Int? {
-                let syllables = text.split(separator: " ").map({ $0.trimmingCharacters(in: .controlCharacters) })
-                let anchors = syllables.compactMap(\.first)
-                let anchorText = String(anchors)
-                guard !(anchorText.isEmpty) else { return nil }
-                return anchorText.charcode
-        }
-
-        private static func pingCode(of text: String) -> Int? {
-                let filtered = text.filter({ !(spaceAndTones.contains($0)) })
-                guard !(filtered.isEmpty) else { return nil }
-                return filtered.hash
-        }
-
-        private static let spaceAndTones: Set<Character> = Set("123 456")
 }
 
 struct TextMarkLexicon {

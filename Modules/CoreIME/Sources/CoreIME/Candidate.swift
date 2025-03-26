@@ -157,9 +157,14 @@ public struct Candidate: Hashable, Comparable, Sendable {
 
         // Comparable
         public static func < (lhs: Candidate, rhs: Candidate) -> Bool {
-                guard lhs.input.count == rhs.input.count else { return lhs.input.count > rhs.input.count }
-                guard lhs.text.count == rhs.text.count else { return lhs.text.count < rhs.text.count }
-                return lhs.order < rhs.order
+                switch lhs.input.count - rhs.input.count {
+                case ..<0:
+                        return false
+                case 0:
+                        return lhs.order < rhs.order
+                default:
+                        return true
+                }
         }
 
         public static func +(lhs: Candidate, rhs: Candidate) -> Candidate? {

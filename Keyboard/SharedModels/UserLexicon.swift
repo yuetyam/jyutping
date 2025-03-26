@@ -135,60 +135,48 @@ struct UserLexicon {
                 return candidates
         }
 
-        static func tenKeySuggest(combos: [Combo], segmentation: Segmentation) async -> [Candidate] {
-                let comboCount = combos.count
-                guard comboCount > 0 else { return [] }
-                async let shortcuts: [TenKeyLexicon] = {
-                        guard comboCount < 6 else { return [] }
-                        guard var sequences: [String] = combos.first?.letters.map({ String($0) }) else { return [] }
-                        for combo in combos.dropFirst() {
-                                let appended = combo.letters.compactMap { letter -> [String] in
-                                        return sequences.map({ $0 + [letter] })
-                                }
-                                sequences = appended.flatMap({ $0 })
-                        }
-                        return sequences.map({ tenKeyQuery(text: $0, input: $0, mark: $0.spaceSeparated(), isShortcut: true) }).flatMap({ $0 })
-                }()
-                async let matches: [TenKeyLexicon] = {
-                        let schemes = segmentation.filter({ $0.length == comboCount })
-                        guard schemes.isNotEmpty else { return [] }
-                        return schemes.map({ scheme -> [TenKeyLexicon] in
-                                let pingText = scheme.map(\.origin).joined()
-                                let inputText = scheme.map(\.text).joined()
-                                let matched = tenKeyQuery(text: pingText, input: inputText, isShortcut: false)
-                                guard matched.isNotEmpty else { return [] }
-                                let text2mark = scheme.map(\.text).joined(separator: String.space)
-                                let syllables = scheme.map(\.origin).joined(separator: String.space)
-                                return matched.compactMap({ item -> TenKeyLexicon? in
-                                        guard item.candidate.mark == syllables else { return nil }
-                                        let newCandidate = Candidate(text: item.candidate.text, romanization: item.candidate.romanization, input: inputText, mark: text2mark, order: -1)
-                                        return TenKeyLexicon(frequency: item.frequency, candidate: newCandidate)
-                                })
-                        }).flatMap({ $0 })
-                }()
-                return await (shortcuts + matches).sorted(by: { $0.frequency > $1.frequency }).prefix(8).map(\.candidate)
-        }
-        private static func tenKeyQuery(text: String, input: String, mark: String? = nil, isShortcut: Bool) -> [TenKeyLexicon] {
-                var items: [TenKeyLexicon] = []
-                let code: Int = isShortcut ? text.replacingOccurrences(of: "y", with: "j").hash : text.hash
-                let column: String = isShortcut ? "shortcut" : "ping"
-                let command: String = "SELECT frequency, word, jyutping FROM lexicon WHERE \(column) = \(code) ORDER BY frequency DESC LIMIT 5;"
-                var statement: OpaquePointer? = nil
-                defer { sqlite3_finalize(statement) }
-                guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return items }
-                while sqlite3_step(statement) == SQLITE_ROW {
-                        let frequency: Int64 = sqlite3_column_int64(statement, 0)
-                        let word: String = String(cString: sqlite3_column_text(statement, 1))
-                        let jyutping: String = String(cString: sqlite3_column_text(statement, 2))
-                        let mark: String = mark ?? jyutping.removedTones()
-                        let candidate: Candidate = Candidate(text: word, romanization: jyutping, input: input, mark: mark, order: -1)
-                        items.append(TenKeyLexicon(frequency: frequency, candidate: candidate))
-                }
-                return items
-        }
         private struct TenKeyLexicon: Hashable {
                 let frequency: Int64
                 let candidate: Candidate
+        }
+
+        static func tenKeySuggest(combos: [Combo]) async -> [Candidate] {
+                let comboCount: Int = combos.count
+                guard comboCount > 0 && comboCount < 6 else { return [] }
+                var sequences: [String] = [String.empty]
+                for combo in combos {
+                        let letters = combo.letters
+                        var nextSequences: [String] = []
+                        nextSequences.reserveCapacity(sequences.count * letters.count)
+                        for sequence in sequences {
+                                for letter in letters {
+                                        nextSequences.append(sequence + letter)
+                                }
+                        }
+                       sequences = nextSequences
+                }
+                return sequences
+                        .map({ tenKeyMatch(text: $0) })
+                        .flatMap({ $0 })
+                        .sorted(by: { $0.frequency > $1.frequency })
+                        .prefix(8)
+                        .map(\.candidate)
+        }
+        private static func tenKeyMatch(text: String) -> [TenKeyLexicon] {
+                var items: [TenKeyLexicon] = []
+                let code: Int = text.hash
+                let command: String = "SELECT frequency, word, jyutping FROM lexicon WHERE shortcut = \(code) OR ping = \(code) ORDER BY frequency DESC LIMIT 5;"
+                var statement: OpaquePointer? = nil
+                defer { sqlite3_finalize(statement) }
+                guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return [] }
+                while sqlite3_step(statement) == SQLITE_ROW {
+                        let frequency = sqlite3_column_int64(statement, 0)
+                        let word: String = String(cString: sqlite3_column_text(statement, 1))
+                        let jyutping: String = String(cString: sqlite3_column_text(statement, 2))
+                        let candidate: Candidate = Candidate(text: word, romanization: jyutping, input: text, mark: text, order: -1)
+                        items.append(TenKeyLexicon(frequency: frequency, candidate: candidate))
+                }
+                return items
         }
 }
 
@@ -197,6 +185,7 @@ private struct LexiconEntry {
         /// (Candidate.lexiconText + Candidate.jyutping).hash
         let id: Int
 
+        // (deprecated)
         /// input.hash
         let input: Int
 
@@ -215,4 +204,38 @@ private struct LexiconEntry {
         let word: String
 
         let jyutping: String
+}
+
+// TODO: Refactor UserLexicon to InputMemory
+private struct MemoryLexicon: Hashable {
+
+        /// (Candidate.lexiconText + "." + Candidate.romanization).hash
+        let id: Int
+
+        /// Cantonese text
+        let word: String
+
+        /// Jyutping
+        let romanization: String
+
+        /// Count of selected to input
+        let frequency: Int
+
+        /// Most recent updated timestamp
+        let latest: Int
+
+        /// romanization.anchorText.CharCode
+        let anchors: Int
+
+        /// romanization.anchorText.hash
+        let shortcut: Int
+
+        /// romanization.removedTonesAndSpaces.hash
+        let ping: Int
+
+        /// romanization.anchorText.TenKeyCharCode
+        let tenKeyAnchors: Int
+
+        /// romanization.removedTonesAndSpaces.TenKeyCharCode
+        let tenKeyCode: Int
 }

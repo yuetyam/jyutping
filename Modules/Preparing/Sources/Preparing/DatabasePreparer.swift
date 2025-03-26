@@ -45,8 +45,10 @@ struct DatabasePreparer {
         private static func createIndies() {
                 let commands: [String] = [
                         "CREATE INDEX lexiconpingindex ON lexicontable(ping);",
-                        "CREATE INDEX lexiconshortcutindex ON lexicontable(shortcut);",
-                        "CREATE INDEX lexiconstrictindex ON lexicontable(ping, shortcut);",
+                        "CREATE INDEX lexiconanchorsindex ON lexicontable(anchors);",
+                        "CREATE INDEX lexiconstrictindex ON lexicontable(ping, anchors);",
+                        "CREATE INDEX lexicontenkeycodeindex ON lexicontable(tenkeycode);",
+                        "CREATE INDEX lexicontenkeyanchorsindex ON lexicontable(tenkeyanchors);",
                         "CREATE INDEX lexiconwordindex ON lexicontable(word);",
 
                         "CREATE INDEX structurepingindex ON structuretable(ping);",
@@ -84,32 +86,26 @@ struct DatabasePreparer {
         }
 
         private static func createLexiconTable() async {
-                let createTable: String = "CREATE TABLE lexicontable(word TEXT NOT NULL, romanization TEXT NOT NULL, shortcut INTEGER NOT NULL, ping INTEGER NOT NULL);"
+                let createTable: String = "CREATE TABLE lexicontable(word TEXT NOT NULL, romanization TEXT NOT NULL, anchors INTEGER NOT NULL, ping INTEGER NOT NULL, tenkeyanchors INTEGER NOT NULL, tenkeycode INTEGER NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
                 sqlite3_finalize(createStatement)
-                let sourceLines: [String] = Jyutping2Lexicon.convert()
+                let sourceEntries: [LexiconEntry] = Jyutping2Lexicon.convert()
                 func insert(values: String) {
-                        let insert: String = "INSERT INTO lexicontable (word, romanization, shortcut, ping) VALUES \(values);"
+                        let insert: String = "INSERT INTO lexicontable (word, romanization, anchors, ping, tenkeyanchors, tenkeycode) VALUES \(values);"
                         var insertStatement: OpaquePointer? = nil
                         defer { sqlite3_finalize(insertStatement) }
                         guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }
                         guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
                 }
                 let range: Range<Int> = 0..<2000
-                let distance: Int = sourceLines.count / 2000
+                let distance: Int = sourceEntries.count / 2000
                 for number in range {
-                        let bound: Int = number == 1999 ? sourceLines.count : ((number + 1) * distance)
-                        let part = sourceLines[(number * distance)..<bound]
-                        let entries = part.compactMap { line -> String? in
-                                let parts = line.split(separator: "\t")
-                                guard parts.count == 4 else { return nil }
-                                let word = parts[0]
-                                let romanization = parts[1]
-                                let shortcut = parts[2]
-                                let ping = parts[3]
-                                return "('\(word)', '\(romanization)', \(shortcut), \(ping))"
+                        let bound: Int = (number == 1999) ? sourceEntries.count : ((number + 1) * distance)
+                        let part = sourceEntries[(number * distance)..<bound]
+                        let entries = part.map { entry -> String in
+                                return "('\(entry.word)', '\(entry.romanization)', \(entry.anchors), \(entry.ping), \(entry.tenKeyAnchors), \(entry.tenKeyCode))"
                         }
                         let values: String = entries.joined(separator: ", ")
                         insert(values: values)

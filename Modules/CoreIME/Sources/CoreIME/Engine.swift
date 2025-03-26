@@ -6,7 +6,7 @@ import SQLite3
 public struct Engine {
         public static func prepare() {
                 Segmentor.prepare()
-                let statement = prepareShortcutStatement()
+                let statement = prepareAnchorsStatement()
                 defer { sqlite3_finalize(statement) }
                 let testCode: Int64 = 20
                 sqlite3_reset(statement)
@@ -40,106 +40,6 @@ public struct Engine {
 }
 
 
-// MARK: - TenKey Suggestions
-
-extension Engine {
-
-        public static func tenKeySuggest(combos: [Combo], segmentation: Segmentation) async -> [Candidate] {
-                lazy var shortcutStatement = prepareShortcutStatement()
-                lazy var pingStatement = preparePingStatement()
-                lazy var strictStatement = prepareStrictStatement()
-                defer {
-                        sqlite3_finalize(shortcutStatement)
-                        sqlite3_finalize(pingStatement)
-                        sqlite3_finalize(strictStatement)
-                }
-                guard segmentation.maxSchemeLength > 0 else { return tenKeyDeepProcess(combos: combos, shortcutStatement: shortcutStatement) }
-                async let search = tenKeySearch(combos: combos, segmentation: segmentation, strictStatement: strictStatement)
-                async let fullShortcuts = tenKeyProcess(combos: combos, shortcutStatement: shortcutStatement)
-                return await (search + fullShortcuts).sorted()
-
-                /*
-                guard segmentation.maxSchemeLength > 0 else { return tenKeyDeepProcess(combos: combos, shortcutStatement: shortcutStatement) }
-                let search = tenKeySearch(combos: combos, segmentation: segmentation, strictStatement: strictStatement)
-                guard search.isNotEmpty else { return tenKeyDeepProcess(combos: combos, shortcutStatement: shortcutStatement) }
-                return (search + tenKeyProcess(combos: combos, shortcutStatement: shortcutStatement)).sorted()
-                */
-                /*
-                guard segmentation.maxSchemeLength > 0 else { return tenKeyDeepProcess(combos: combos, shortcutStatement: shortcutStatement) }
-                let search = tenKeySearch(combos: combos, segmentation: segmentation, strictStatement: strictStatement)
-                let comboCount = combos.count
-                let hasFullMatch: Bool = search.contains(where: { $0.input.count == comboCount })
-                let fullShortcuts = tenKeyProcess(combos: combos, shortcutStatement: shortcutStatement)
-                if (hasFullMatch.negative && fullShortcuts.isEmpty) {
-                        return (search + tenKeyDeepProcess(combos: combos, shortcutStatement: shortcutStatement)).sorted()
-                } else {
-                        return (search + fullShortcuts).sorted()
-                }
-                */
-        }
-        private static func tenKeySearch(combos: [Combo], segmentation: Segmentation, limit: Int64? = nil, strictStatement: OpaquePointer?) -> [Candidate] {
-                let textCount: Int = combos.count
-                let perfectSchemes = segmentation.filter({ $0.length == textCount })
-                if perfectSchemes.isNotEmpty {
-                        let matches = perfectSchemes.map({ scheme -> [Candidate] in
-                                var queries: [[Candidate]] = []
-                                for number in (0..<scheme.count) {
-                                        let slice = scheme.dropLast(number)
-                                        guard let shortcutCode = slice.compactMap(\.text.first).shortcutCode else { continue }
-                                        let pingCode = slice.map(\.origin).joined().hash
-                                        let input = slice.map(\.text).joined()
-                                        let mark = slice.map(\.text).joined(separator: String.space)
-                                        let matched = strictMatch(shortcut: shortcutCode, ping: pingCode, input: input, mark: mark, limit: limit, statement: strictStatement)
-                                        queries.append(matched)
-                                }
-                                return queries.flatMap({ $0 })
-                        })
-                        return matches.flatMap({ $0 })
-                } else {
-                        let matches = segmentation.map({ scheme -> [Candidate] in
-                                guard let shortcutCode = scheme.compactMap(\.text.first).shortcutCode else { return [] }
-                                let pingCode = scheme.map(\.origin).joined().hash
-                                let input = scheme.map(\.text).joined()
-                                let mark = scheme.map(\.text).joined(separator: String.space)
-                                return strictMatch(shortcut: shortcutCode, ping: pingCode, input: input, mark: mark, limit: limit, statement: strictStatement)
-                        })
-                        return matches.flatMap({ $0 })
-                }
-        }
-        private static func tenKeyProcess(combos: [Combo], shortcutStatement: OpaquePointer?) -> [Candidate] {
-                guard combos.count > 0 && combos.count < 9 else { return [] }
-                let firstCodes = combos.first!.letters.compactMap(\.intercode)
-                guard combos.count > 1 else { return firstCodes.map({ shortcut(code: $0, statement: shortcutStatement) }).flatMap({ $0 }) }
-                typealias CodeSequence = [Int]
-                var sequences: [CodeSequence] = firstCodes.map({ [$0] })
-                for combo in combos.dropFirst() {
-                        let appended = combo.letters.compactMap(\.intercode).map { code -> [CodeSequence] in
-                                return sequences.map({ $0 + [code] })
-                        }
-                        sequences = appended.flatMap({ $0 })
-                }
-                return sequences.map({ shortcut(codes: $0, statement: shortcutStatement) }).flatMap({ $0 }).sorted(by: { $0.order < $1.order })
-        }
-        private static func tenKeyDeepProcess(combos: [Combo], shortcutStatement: OpaquePointer?) -> [Candidate] {
-                guard let firstCodes = combos.first?.letters.compactMap(\.intercode) else { return [] }
-                guard combos.count > 1 else { return firstCodes.map({ shortcut(code: $0, statement: shortcutStatement) }).flatMap({ $0 }) }
-                typealias CodeSequence = [Int]
-                var sequences: [CodeSequence] = firstCodes.map({ [$0] })
-                var candidates: [Candidate] = sequences.map({ shortcut(codes: $0, statement: shortcutStatement) }).flatMap({ $0 })
-                for combo in combos.dropFirst().prefix(8) {
-                        let appended = combo.letters.compactMap(\.intercode).map { code -> [CodeSequence] in
-                                let newSequences: [CodeSequence] = sequences.map({ $0 + [code] })
-                                let newCandidates: [Candidate] = newSequences.map({ shortcut(codes: $0, statement: shortcutStatement) }).flatMap({ $0 })
-                                candidates.append(contentsOf: newCandidates)
-                                return newSequences
-                        }
-                        sequences = appended.flatMap({ $0 })
-                }
-                return candidates.sorted()
-        }
-}
-
-
 // MARK: - Suggestions
 
 extension Engine {
@@ -153,7 +53,7 @@ extension Engine {
         ///   - asap: Should be fast, shouldn't go deep.
         /// - Returns: Candidates
         public static func suggest(origin: String, text: String, segmentation: Segmentation, needsSymbols: Bool, asap: Bool = false) -> [Candidate] {
-                lazy var shortcutStatement = prepareShortcutStatement()
+                lazy var shortcutStatement = prepareAnchorsStatement()
                 lazy var pingStatement = preparePingStatement()
                 lazy var strictStatement = prepareStrictStatement()
                 defer {
@@ -244,13 +144,13 @@ extension Engine {
                         return qualified.sorted(by: { $0.input.count > $1.input.count })
                 case (true, false):
                         let textSeparators = text.filter(\.isSeparator)
-                        let textParts = text.split(separator: "'")
+                        let textParts = text.split(separator: Character.separator)
                         let isHeadingSeparator: Bool = text.first?.isSeparator ?? false
                         let isTrailingSeparator: Bool = text.last?.isSeparator ?? false
                         let rawText: String = text.removedSeparators()
                         let candidates: [Candidate] = query(text: rawText, segmentation: segmentation, needsSymbols: false, shortcutStatement: shortcutStatement, pingStatement: pingStatement, strictStatement: strictStatement)
                         let qualified = candidates.compactMap({ item -> Candidate? in
-                                let syllables = item.romanization.removedTones().split(separator: " ")
+                                let syllables = item.romanization.removedTones().split(separator: Character.space)
                                 guard syllables != textParts else { return Candidate(text: item.text, romanization: item.romanization, input: text) }
                                 guard isHeadingSeparator.negative else { return nil }
                                 switch textSeparators.count {
@@ -263,11 +163,11 @@ extension Engine {
                                         switch syllables.count {
                                         case 1:
                                                 guard item.input == textParts.first! else { return nil }
-                                                let combinedInput: String = item.input + "'"
+                                                let combinedInput: String = item.input + String.separator
                                                 return Candidate(text: item.text, romanization: item.romanization, input: combinedInput)
                                         case 2:
                                                 guard syllables.first == textParts.first else { return nil }
-                                                let combinedInput: String = item.input + "'"
+                                                let combinedInput: String = item.input + String.separator
                                                 return Candidate(text: item.text, romanization: item.romanization, input: combinedInput)
                                         default:
                                                 return nil
@@ -276,7 +176,7 @@ extension Engine {
                                         switch syllables.count {
                                         case 1:
                                                 guard item.input == textParts.first! else { return nil }
-                                                let combinedInput: String = item.input + "'"
+                                                let combinedInput: String = item.input + String.separator
                                                 return Candidate(text: item.text, romanization: item.romanization, input: combinedInput)
                                         case 2:
                                                 let isLengthMatched: Bool = item.input.count == (text.count - 2)
@@ -396,19 +296,17 @@ extension Engine {
                 let fullPing = pingMatch(text: text, input: text, limit: limit, statement: pingStatement)
                 let fullShortcut = shortcutMatch(text: text, limit: limit, statement: shortcutStatement)
                 let searches = search(text: text, segmentation: segmentation, limit: limit, strictStatement: strictStatement)
-                let preferredSearches = searches.filter({ $0.input.count == textCount })
-                lazy var fallback = (fullPing + preferredSearches + fullShortcut + searches).uniqued()
-                let shouldContinue: Bool = needsSymbols && (limit == nil) && (fullPing.isNotEmpty || preferredSearches.isNotEmpty)
-                guard shouldContinue else { return fallback }
+                lazy var queried = (fullPing + fullShortcut + searches).ordered(with: textCount)
+                let shouldContinue: Bool = needsSymbols && (limit == nil)
+                guard shouldContinue else { return queried }
                 let symbols: [Candidate] = Engine.searchSymbols(text: text, segmentation: segmentation)
-                guard symbols.isNotEmpty else { return fallback }
-                var regular = fullPing + preferredSearches
+                guard symbols.isNotEmpty else { return queried }
                 for symbol in symbols.reversed() {
-                        if let index = regular.firstIndex(where: { $0.lexiconText == symbol.lexiconText && $0.romanization == symbol.romanization }) {
-                                regular.insert(symbol, at: index + 1)
+                        if let index = queried.firstIndex(where: { $0.lexiconText == symbol.lexiconText && $0.romanization == symbol.romanization }) {
+                                queried.insert(symbol, at: index + 1)
                         }
                 }
-                return (regular + fullShortcut + searches).uniqued()
+                return queried
         }
 
         private static func search(text: String, segmentation: Segmentation, limit: Int64? = nil, strictStatement: OpaquePointer?) -> [Candidate] {
@@ -428,7 +326,7 @@ extension Engine {
                                 }
                                 return queries.flatMap({ $0 })
                         })
-                        return matches.flatMap({ $0 }).ordered(with: textCount)
+                        return matches.flatMap({ $0 })
                 } else {
                         let matches = segmentation.map({ scheme -> [Candidate] in
                                 guard let shortcutCode = scheme.compactMap(\.text.first).shortcutCode else { return [] }
@@ -437,50 +335,22 @@ extension Engine {
                                 let mark = scheme.map(\.text).joined(separator: String.space)
                                 return strictMatch(shortcut: shortcutCode, ping: pingCode, input: input, mark: mark, limit: limit, statement: strictStatement)
                         })
-                        return matches.flatMap({ $0 }).ordered(with: textCount)
+                        return matches.flatMap({ $0 })
                 }
         }
 }
 
-private extension Array where Element == Candidate {
-
-        /// Sort Candidates with UserInputTextCount and Candidate.order
-        /// - Parameter textCount: User input text count
-        /// - Returns: Sorted Candidates
+extension Array where Element == Candidate {
+        /// Sort Candidates for Qwerty and Triple-Stroke layouts
         func ordered(with textCount: Int) -> [Candidate] {
-                return self.sorted { (lhs, rhs) -> Bool in
-                        switch (lhs.input.count - rhs.input.count) {
-                        case ..<0:
-                                return lhs.order < (rhs.order - 50000) && lhs.text.count == rhs.text.count
-                        case 0:
-                                return lhs.order < rhs.order
-                        default:
-                                return lhs.text.count >= rhs.text.count
-                        }
-                }
+                let matched = filter({ $0.input.count == textCount }).sorted(by: { $0.order < $1.order }).uniqued()
+                let others = filter({ $0.input.count != textCount }).uniqued().sorted()
+                let primary = matched.prefix(15)
+                let secondary = others.prefix(10)
+                let tertiary = others.sorted(by: { $0.order < $1.order }).prefix(5)
+                return (primary + secondary + tertiary + matched + others).uniqued()
         }
 }
-
-// deprecated
-/*
-private extension Array where Element == Candidate {
-        func ordered(with textCount: Int) -> [Candidate] {
-                return self.sorted { (lhs, rhs) -> Bool in
-                        let lhsInputCount: Int = lhs.input.count
-                        let rhsInputCount: Int = rhs.input.count
-                        if lhsInputCount == textCount && rhsInputCount != textCount {
-                                return true
-                        } else if lhsInputCount == rhsInputCount || lhs.text.count == rhs.text.count {
-                                return lhs.order < rhs.order
-                        } else if lhs.order < (rhs.order - 50000) {
-                                return true
-                        } else {
-                                return lhsInputCount > rhsInputCount
-                        }
-                }
-        }
-}
-*/
 
 
 // MARK: - SQLite Statement Preparing
@@ -488,10 +358,10 @@ private extension Array where Element == Candidate {
 // CREATE TABLE lexicontable(word TEXT NOT NULL, romanization TEXT NOT NULL, shortcut INTEGER NOT NULL, ping INTEGER NOT NULL);
 
 private extension Engine {
-        private static let shortcutQuery: String = "SELECT rowid, word, romanization FROM lexicontable WHERE shortcut = ? LIMIT ?;"
-        static func prepareShortcutStatement() -> OpaquePointer? {
+        private static let anchorsQuery: String = "SELECT rowid, word, romanization FROM lexicontable WHERE anchors = ? LIMIT ?;"
+        static func prepareAnchorsStatement() -> OpaquePointer? {
                 var statement: OpaquePointer?
-                guard sqlite3_prepare_v2(database, shortcutQuery, -1, &statement, nil) == SQLITE_OK else { return nil }
+                guard sqlite3_prepare_v2(database, anchorsQuery, -1, &statement, nil) == SQLITE_OK else { return nil }
                 return statement
         }
 
@@ -502,10 +372,24 @@ private extension Engine {
                 return statement
         }
 
-        private static let strictQuery: String = "SELECT rowid, word, romanization FROM lexicontable WHERE ping = ? AND shortcut = ? LIMIT ?;"
+        private static let strictQuery: String = "SELECT rowid, word, romanization FROM lexicontable WHERE ping = ? AND anchors = ? LIMIT ?;"
         static func prepareStrictStatement() -> OpaquePointer? {
                 var statement: OpaquePointer?
                 guard sqlite3_prepare_v2(database, strictQuery, -1, &statement, nil) == SQLITE_OK else { return nil }
+                return statement
+        }
+
+        private static let tenKeyAnchorsQuery: String = "SELECT rowid, word, romanization FROM lexicontable WHERE tenkeyanchors = ? LIMIT ?;"
+        static func prepareTenKeyAnchorsStatement() -> OpaquePointer? {
+                var statement: OpaquePointer?
+                guard sqlite3_prepare_v2(database, tenKeyAnchorsQuery, -1, &statement, nil) == SQLITE_OK else { return nil }
+                return statement
+        }
+
+        private static let tenKeyCodeQuery: String = "SELECT rowid, word, romanization FROM lexicontable WHERE tenkeycode = ? LIMIT ?;"
+        static func prepareTenKeyCodeStatement() -> OpaquePointer? {
+                var statement: OpaquePointer?
+                guard sqlite3_prepare_v2(database, tenKeyCodeQuery, -1, &statement, nil) == SQLITE_OK else { return nil }
                 return statement
         }
 }
@@ -521,39 +405,6 @@ private extension Engine {
                 sqlite3_bind_int64(statement, 1, Int64(shortcutCode))
                 sqlite3_bind_int64(statement, 2, 1)
                 return sqlite3_step(statement) == SQLITE_ROW
-        }
-        static func shortcut(code: Int? = nil, codes: [Int] = [], limit: Int64? = nil, statement: OpaquePointer?) -> [Candidate] {
-                let shortcutCode: Int = {
-                        if let code {
-                                return code == 44 ? 29 : code  // Replace 'y' with 'j'
-                        } else if codes.isEmpty {
-                                return 0
-                        } else {
-                                return codes.map({ $0 == 44 ? 29 : $0 }).combined()  // Replace 'y' with 'j'
-                        }
-                }()
-                guard shortcutCode != 0 else { return [] }
-                sqlite3_reset(statement)
-                sqlite3_bind_int64(statement, 1, Int64(shortcutCode))
-                sqlite3_bind_int64(statement, 2, (limit ?? 50))
-                let input: String = {
-                        if let char = code?.convertedCharacter {
-                                return String(char)
-                        } else {
-                                let chars = codes.compactMap(\.convertedCharacter)
-                                return String(chars)
-                        }
-                }()
-                let mark: String = input.spaceSeparated()
-                var candidates: [Candidate] = []
-                while sqlite3_step(statement) == SQLITE_ROW {
-                        let order: Int = Int(sqlite3_column_int64(statement, 0))
-                        let word: String = String(cString: sqlite3_column_text(statement, 1))
-                        let romanization: String = String(cString: sqlite3_column_text(statement, 2))
-                        let candidate = Candidate(text: word, romanization: romanization, input: input, mark: mark, order: order)
-                        candidates.append(candidate)
-                }
-                return candidates
         }
         static func shortcutMatch(text: String, limit: Int64? = nil, statement: OpaquePointer?) -> [Candidate] {
                 guard let shortcutCode = text.shortcutCode else { return [] }
@@ -598,6 +449,59 @@ private extension Engine {
                         let romanization: String = String(cString: sqlite3_column_text(statement, 2))
                         let mark: String = mark ?? romanization.removedTones()
                         let candidate = Candidate(text: word, romanization: romanization, input: input, mark: mark, order: order)
+                        candidates.append(candidate)
+                }
+                return candidates
+        }
+}
+
+
+// MARK: - TenKey Suggestions
+
+extension Engine {
+        public static func tenKeySuggest(combos: [Combo]) async -> [Candidate] {
+                lazy var tenKeyAnchorsStatement = prepareTenKeyAnchorsStatement()
+                lazy var tenKeyCodeStatement = prepareTenKeyCodeStatement()
+                defer {
+                        sqlite3_finalize(tenKeyAnchorsStatement)
+                        sqlite3_finalize(tenKeyCodeStatement)
+                }
+                return (0..<combos.count)
+                        .map { number -> [Candidate] in
+                                let tenKeyCode = combos.dropLast(number).map(\.rawValue).tenKeyCombined()
+                                guard tenKeyCode > 0 else { return [] }
+                                return tenKeyCodeMatch(code: tenKeyCode, statement: tenKeyCodeStatement) + tenKeyAnchorsMatch(code: tenKeyCode, statement: tenKeyAnchorsStatement)
+                        }
+                        .flatMap({ $0 })
+                        .sorted()
+        }
+        private static func tenKeyAnchorsMatch(code: Int, limit: Int64? = nil, statement: OpaquePointer?) -> [Candidate] {
+                sqlite3_reset(statement)
+                sqlite3_bind_int64(statement, 1, Int64(code))
+                sqlite3_bind_int64(statement, 2, (limit ?? 50))
+                var candidates: [Candidate] = []
+                while sqlite3_step(statement) == SQLITE_ROW {
+                        let order: Int = Int(sqlite3_column_int64(statement, 0))
+                        let word: String = String(cString: sqlite3_column_text(statement, 1))
+                        let romanization: String = String(cString: sqlite3_column_text(statement, 2))
+                        let anchors = romanization.split(separator: Character.space).compactMap(\.first)
+                        let anchorText = String(anchors)
+                        let candidate = Candidate(text: word, romanization: romanization, input: anchorText, mark: anchorText, order: order)
+                        candidates.append(candidate)
+                }
+                return candidates
+        }
+        private static func tenKeyCodeMatch(code: Int, limit: Int64? = nil, statement: OpaquePointer?) -> [Candidate] {
+                sqlite3_reset(statement)
+                sqlite3_bind_int64(statement, 1, Int64(code))
+                sqlite3_bind_int64(statement, 2, (limit ?? -1))
+                var candidates: [Candidate] = []
+                while sqlite3_step(statement) == SQLITE_ROW {
+                        let order: Int = Int(sqlite3_column_int64(statement, 0))
+                        let word: String = String(cString: sqlite3_column_text(statement, 1))
+                        let romanization: String = String(cString: sqlite3_column_text(statement, 2))
+                        let mark: String = romanization.removedTones()
+                        let candidate = Candidate(text: word, romanization: romanization, input: mark.removedSpaces(), mark: mark, order: order)
                         candidates.append(candidate)
                 }
                 return candidates

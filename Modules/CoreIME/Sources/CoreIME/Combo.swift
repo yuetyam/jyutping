@@ -10,7 +10,6 @@ public enum Combo: Int, Sendable {
         case TUV = 8
         case WXYZ = 9
 
-        /// Key text
         public var text: String {
                 switch self {
                 case .ABC:
@@ -32,8 +31,7 @@ public enum Combo: Int, Sendable {
                 }
         }
 
-        /// Valid key characters
-        public var letters: [Character] {
+        public var characters: [Character] {
                 switch self {
                 case .ABC:
                         return ["a", "b", "c"]
@@ -53,4 +51,18 @@ public enum Combo: Int, Sendable {
                         return ["w", "y", "z"]
                 }
         }
+
+        public var letters: [String] {
+                return Self.letterMap[self]!
+        }
+        private static let letterMap: [Combo: [String]] = [
+                Combo.ABC  : ["a", "b", "c"],
+                Combo.DEF  : ["d", "e", "f"],
+                Combo.GHI  : ["g", "h", "i"],
+                Combo.JKL  : ["j", "k", "l"],
+                Combo.MNO  : ["m", "n", "o"],
+                Combo.PQRS : ["p", "s"],
+                Combo.TUV  : ["t", "u"],
+                Combo.WXYZ : ["w", "y", "z"]
+        ]
 }

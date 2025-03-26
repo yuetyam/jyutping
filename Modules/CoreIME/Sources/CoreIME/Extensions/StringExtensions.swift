@@ -3,7 +3,12 @@ import Foundation
 extension String {
 
         static let empty: String = ""
+
+        /// U+0020
         static let space: String = "\u{20}"
+
+        /// U+0027 ( ' ) apostrophe
+        static let separator: String = "\u{27}"
 
         /// A subsequence that only contains tones (1-6)
         var tones: String {
