@@ -120,7 +120,7 @@ extension Engine {
                 return statement
         }
         private static func shortcut(pinyin text: String, statement: OpaquePointer?, limit: Int64? = nil) -> [PinyinLexicon] {
-                guard let code: Int = text.charcode else { return [] }
+                guard let code = text.charcode else { return [] }
                 let limit: Int64 = limit ?? 50
                 sqlite3_reset(statement)
                 sqlite3_bind_int64(statement, 1, Int64(code))

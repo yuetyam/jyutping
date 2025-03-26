@@ -317,7 +317,7 @@ extension Engine {
                                 var queries: [[Candidate]] = []
                                 for number in (0..<scheme.count) {
                                         let slice = scheme.dropLast(number)
-                                        guard let shortcutCode = slice.compactMap(\.text.first).shortcutCode else { continue }
+                                        guard let shortcutCode = slice.compactMap(\.text.first).anchorsCode else { continue }
                                         let pingCode = slice.map(\.origin).joined().hash
                                         let input = slice.map(\.text).joined()
                                         let mark = slice.map(\.text).joined(separator: String.space)
@@ -329,7 +329,7 @@ extension Engine {
                         return matches.flatMap({ $0 })
                 } else {
                         let matches = segmentation.map({ scheme -> [Candidate] in
-                                guard let shortcutCode = scheme.compactMap(\.text.first).shortcutCode else { return [] }
+                                guard let shortcutCode = scheme.compactMap(\.text.first).anchorsCode else { return [] }
                                 let pingCode = scheme.map(\.origin).joined().hash
                                 let input = scheme.map(\.text).joined()
                                 let mark = scheme.map(\.text).joined(separator: String.space)
@@ -399,15 +399,15 @@ private extension Engine {
 
 private extension Engine {
         static func canProcess<T: StringProtocol>(_ text: T, statement: OpaquePointer?) -> Bool {
-                guard let value: Int = text.first?.intercode else { return false }
-                let shortcutCode: Int = (value == 44) ? 29 : value // Replace 'y' with 'j'
+                guard let value = text.first?.intercode else { return false }
+                let shortcutCode = (value == 44) ? 29 : value // Replace 'y' with 'j'
                 sqlite3_reset(statement)
                 sqlite3_bind_int64(statement, 1, Int64(shortcutCode))
                 sqlite3_bind_int64(statement, 2, 1)
                 return sqlite3_step(statement) == SQLITE_ROW
         }
         static func shortcutMatch(text: String, limit: Int64? = nil, statement: OpaquePointer?) -> [Candidate] {
-                guard let shortcutCode = text.shortcutCode else { return [] }
+                guard let shortcutCode = text.anchorsCode else { return [] }
                 sqlite3_reset(statement)
                 sqlite3_bind_int64(statement, 1, Int64(shortcutCode))
                 sqlite3_bind_int64(statement, 2, (limit ?? 50))
@@ -468,7 +468,7 @@ extension Engine {
                 }
                 return (0..<combos.count)
                         .map { number -> [Candidate] in
-                                let tenKeyCode = combos.dropLast(number).map(\.rawValue).tenKeyCombined()
+                                let tenKeyCode = combos.dropLast(number).map(\.rawValue).decimalCombined()
                                 guard tenKeyCode > 0 else { return [] }
                                 return tenKeyCodeMatch(code: tenKeyCode, statement: tenKeyCodeStatement) + tenKeyAnchorsMatch(code: tenKeyCode, statement: tenKeyAnchorsStatement)
                         }

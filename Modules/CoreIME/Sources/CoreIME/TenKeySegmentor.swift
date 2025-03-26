@@ -7,7 +7,7 @@ extension Segmentor {
                 case 0:
                         return []
                 case 1:
-                        let code: Int = combos.first?.rawValue ?? 0
+                        let code = combos.first?.rawValue ?? 0
                         let tokens = tenKeyMatch(tenKeyCode: code)
                         return [tokens]
                 default:
@@ -46,7 +46,7 @@ extension Segmentor {
                 guard maxLength > 0 else { return [] }
                 let sequences = (1...maxLength).reversed().map({ combos.prefix($0) })
                 let matches = sequences.map { sequence -> [SegmentToken] in
-                        let code: Int = sequence.map(\.rawValue).tenKeyCombined()
+                        let code = sequence.map(\.rawValue).decimalCombined()
                         return tenKeyMatch(tenKeyCode: code)
                 }
                 return matches.flatMap({ $0 }).uniqued()
