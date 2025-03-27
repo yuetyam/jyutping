@@ -459,14 +459,15 @@ private extension Engine {
 // MARK: - TenKey Suggestions
 
 extension Engine {
-        public static func tenKeySuggest(combos: [Combo]) async -> [Candidate] {
+        public static func tenKeySuggest(combos: [Combo], needsSymbols: Bool) async -> [Candidate] {
                 lazy var tenKeyAnchorsStatement = prepareTenKeyAnchorsStatement()
                 lazy var tenKeyCodeStatement = prepareTenKeyCodeStatement()
                 defer {
                         sqlite3_finalize(tenKeyAnchorsStatement)
                         sqlite3_finalize(tenKeyCodeStatement)
                 }
-                return (0..<combos.count)
+                let textMarkCandidates = fetchTextMark(combos: combos)
+                lazy var queried = (0..<combos.count)
                         .map { number -> [Candidate] in
                                 let tenKeyCode = combos.dropLast(number).map(\.rawValue).decimalCombined()
                                 guard tenKeyCode > 0 else { return [] }
@@ -474,6 +475,15 @@ extension Engine {
                         }
                         .flatMap({ $0 })
                         .sorted()
+                guard needsSymbols else { return textMarkCandidates + queried }
+                let symbols = tenKeySearchSymbols(combos: combos)
+                guard symbols.isNotEmpty else { return textMarkCandidates + queried }
+                for symbol in symbols.reversed() {
+                        if let index = queried.firstIndex(where: { $0.lexiconText == symbol.lexiconText && $0.romanization == symbol.romanization }) {
+                                queried.insert(symbol, at: index + 1)
+                        }
+                }
+                return textMarkCandidates + queried
         }
         private static func tenKeyAnchorsMatch(code: Int, limit: Int64? = nil, statement: OpaquePointer?) -> [Candidate] {
                 sqlite3_reset(statement)

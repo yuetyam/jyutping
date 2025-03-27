@@ -35,4 +35,9 @@ extension Character {
         var isSpaceOrToneOrSeparator: Bool {
                 return self.isSpace || self.isTone || self.isSeparator
         }
+
+        /// a-z or A-Z
+        var isBasicLatinLetter: Bool {
+                return ("a"..."z") ~= self || ("A"..."Z") ~= self
+        }
 }

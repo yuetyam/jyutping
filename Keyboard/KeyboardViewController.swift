@@ -565,10 +565,11 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         private func tenKeySuggest() {
                 suggestionTask?.cancel()
                 let combos = bufferCombos
+                let needsSymbols: Bool = Options.isEmojiSuggestionsOn && selectedCandidates.isEmpty
                 let isInputMemoryOn: Bool = Options.isInputMemoryOn
                 suggestionTask = Task.detached(priority: .high) {
                         async let userLexiconCandidates: [Candidate] = isInputMemoryOn ? UserLexicon.tenKeySuggest(combos: combos) : []
-                        async let engineCandidates: [Candidate] = Engine.tenKeySuggest(combos: combos)
+                        async let engineCandidates: [Candidate] = Engine.tenKeySuggest(combos: combos, needsSymbols: needsSymbols)
                         let suggestions = await (userLexiconCandidates + engineCandidates).transformed(with: Options.characterStandard)
                         if Task.isCancelled.negative {
                                 await MainActor.run { [weak self] in
