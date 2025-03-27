@@ -6,6 +6,8 @@ struct OptionsView: View {
         @EnvironmentObject private var context: AppContext
 
         private let verticalPadding: CGFloat = CGFloat(AppSettings.candidateLineSpacing) / 2.0
+        private let labelSet: LabelSet = AppSettings.labelSet
+        private let isLabelLastZero: Bool = AppSettings.isLabelLastZero
 
         private let options: [String] = [
                 String(localized: "OptionsView.CharacterStandard.Traditional"),
@@ -29,25 +31,25 @@ struct OptionsView: View {
                 let highlightedIndex = context.optionsHighlightedIndex
                 VStack(alignment: .leading, spacing: 0) {
                         Group {
-                                OptionLabel(verticalPadding: verticalPadding, index: 0, highlightedIndex: highlightedIndex, text: options[0], checked: characterStandard == .traditional)
-                                OptionLabel(verticalPadding: verticalPadding, index: 1, highlightedIndex: highlightedIndex, text: options[1], checked: characterStandard == .hongkong)
-                                OptionLabel(verticalPadding: verticalPadding, index: 2, highlightedIndex: highlightedIndex, text: options[2], checked: characterStandard == .taiwan)
-                                OptionLabel(verticalPadding: verticalPadding, index: 3, highlightedIndex: highlightedIndex, text: options[3], checked: characterStandard == .simplified)
+                                OptionLabel(verticalPadding: verticalPadding, labelSet: labelSet, isLabelLastZero: isLabelLastZero, index: 0, highlightedIndex: highlightedIndex, text: options[0], checked: characterStandard == .traditional)
+                                OptionLabel(verticalPadding: verticalPadding, labelSet: labelSet, isLabelLastZero: isLabelLastZero, index: 1, highlightedIndex: highlightedIndex, text: options[1], checked: characterStandard == .hongkong)
+                                OptionLabel(verticalPadding: verticalPadding, labelSet: labelSet, isLabelLastZero: isLabelLastZero, index: 2, highlightedIndex: highlightedIndex, text: options[2], checked: characterStandard == .taiwan)
+                                OptionLabel(verticalPadding: verticalPadding, labelSet: labelSet, isLabelLastZero: isLabelLastZero, index: 3, highlightedIndex: highlightedIndex, text: options[3], checked: characterStandard == .simplified)
                         }
                         Divider()
                         Group {
-                                OptionLabel(verticalPadding: verticalPadding, index: 4, highlightedIndex: highlightedIndex, text: options[4], checked: characterForm.isHalfWidth)
-                                OptionLabel(verticalPadding: verticalPadding, index: 5, highlightedIndex: highlightedIndex, text: options[5], checked: characterForm.isFullWidth)
+                                OptionLabel(verticalPadding: verticalPadding, labelSet: labelSet, isLabelLastZero: isLabelLastZero, index: 4, highlightedIndex: highlightedIndex, text: options[4], checked: characterForm.isHalfWidth)
+                                OptionLabel(verticalPadding: verticalPadding, labelSet: labelSet, isLabelLastZero: isLabelLastZero, index: 5, highlightedIndex: highlightedIndex, text: options[5], checked: characterForm.isFullWidth)
                         }
                         Divider()
                         Group {
-                                OptionLabel(verticalPadding: verticalPadding, index: 6, highlightedIndex: highlightedIndex, text: options[6], checked: punctuationForm.isCantoneseMode)
-                                OptionLabel(verticalPadding: verticalPadding, index: 7, highlightedIndex: highlightedIndex, text: options[7], checked: punctuationForm.isEnglishMode)
+                                OptionLabel(verticalPadding: verticalPadding, labelSet: labelSet, isLabelLastZero: isLabelLastZero, index: 6, highlightedIndex: highlightedIndex, text: options[6], checked: punctuationForm.isCantoneseMode)
+                                OptionLabel(verticalPadding: verticalPadding, labelSet: labelSet, isLabelLastZero: isLabelLastZero, index: 7, highlightedIndex: highlightedIndex, text: options[7], checked: punctuationForm.isEnglishMode)
                         }
                         Divider()
                         Group {
-                                OptionLabel(verticalPadding: verticalPadding, index: 8, highlightedIndex: highlightedIndex, text: options[8], checked: inputMethodMode.isCantonese)
-                                OptionLabel(verticalPadding: verticalPadding, index: 9, highlightedIndex: highlightedIndex, text: options[9], checked: inputMethodMode.isABC)
+                                OptionLabel(verticalPadding: verticalPadding, labelSet: labelSet, isLabelLastZero: isLabelLastZero, index: 8, highlightedIndex: highlightedIndex, text: options[8], checked: inputMethodMode.isCantonese)
+                                OptionLabel(verticalPadding: verticalPadding, labelSet: labelSet, isLabelLastZero: isLabelLastZero, index: 9, highlightedIndex: highlightedIndex, text: options[9], checked: inputMethodMode.isABC)
                         }
                 }
                 .padding(4)
@@ -59,18 +61,24 @@ struct OptionsView: View {
 
 private struct OptionLabel: View {
 
-        let verticalPadding: CGFloat
-        let index: Int
-        let highlightedIndex: Int
-        let text: String
-        let checked: Bool
+        init(verticalPadding: CGFloat, labelSet: LabelSet, isLabelLastZero: Bool, index: Int, highlightedIndex: Int, text: String, checked: Bool) {
+                self.verticalPadding = verticalPadding
+                self.labelText = LabelSet.labelText(for: index, labelSet: labelSet, isLabelLastZero: isLabelLastZero)
+                self.isHighlighted = index == highlightedIndex
+                self.text = text
+                self.checked = checked
+        }
+
+        private let verticalPadding: CGFloat
+        private let isHighlighted: Bool
+        private let labelText: String
+        private let text: String
+        private let checked: Bool
 
         var body: some View {
-                let serialNumber: String = (index == 9) ? "0" : "\(index + 1)"
-                let isHighlighted: Bool = index == highlightedIndex
                 HStack(spacing: 0) {
                         HStack(spacing: 8) {
-                                Text(verbatim: serialNumber).font(.label).opacity(isHighlighted ? 1 : 0.66)
+                                Text(verbatim: labelText).font(.label).opacity(isHighlighted ? 1 : 0.66)
                                 Text(verbatim: text).font(.candidate)
                         }
                         Spacer()
