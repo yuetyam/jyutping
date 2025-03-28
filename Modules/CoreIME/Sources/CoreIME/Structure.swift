@@ -3,7 +3,7 @@ import SQLite3
 
 extension Engine {
 
-        /// LoengFan Reverse Lookup. 拆字、兩分反查. 例如 木 + 旦 = 查: mukdaan
+        /// Character Components Reverse Lookup. 拆字反查. 例如 木 + 木 = 林
         /// - Parameters:
         ///   - text: Text to process
         ///   - input: User input for candidates

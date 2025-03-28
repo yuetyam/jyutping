@@ -163,17 +163,19 @@ struct UserLexicon {
                         .map(\.candidate)
         }
         private static func tenKeyMatch(text: String) -> [TenKeyLexicon] {
-                var items: [TenKeyLexicon] = []
                 let code: Int = text.hash
                 let command: String = "SELECT frequency, word, jyutping FROM lexicon WHERE shortcut = \(code) OR ping = \(code) ORDER BY frequency DESC LIMIT 5;"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return [] }
+                let textCount = text.count
+                var items: [TenKeyLexicon] = []
                 while sqlite3_step(statement) == SQLITE_ROW {
                         let frequency = sqlite3_column_int64(statement, 0)
                         let word: String = String(cString: sqlite3_column_text(statement, 1))
                         let jyutping: String = String(cString: sqlite3_column_text(statement, 2))
-                        let candidate: Candidate = Candidate(text: word, romanization: jyutping, input: text, mark: text, order: -1)
+                        let mark: String = jyutping.count(where: \.isLowercaseBasicLatinLetter) == textCount ? jyutping.removedTones() : text
+                        let candidate: Candidate = Candidate(text: word, romanization: jyutping, input: text, mark: mark, order: -1)
                         items.append(TenKeyLexicon(frequency: frequency, candidate: candidate))
                 }
                 return items

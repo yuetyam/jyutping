@@ -2,7 +2,7 @@ import Foundation
 import SQLite3
 
 extension Engine {
-        static func fetchTextMark(text: String) -> [Candidate] {
+        static func fetchTextMarks(text: String) -> [Candidate] {
                 let command: String = "SELECT mark FROM marktable WHERE ping = ?;"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
@@ -16,7 +16,7 @@ extension Engine {
                 }
                 return textMarks.map({ Candidate(input: text, text: $0) })
         }
-        static func fetchTextMark(combos: [Combo]) -> [Candidate] {
+        static func fetchTextMarks(combos: [Combo]) -> [Candidate] {
                 let tenKeyCode = combos.map(\.rawValue).decimalCombined()
                 guard tenKeyCode > 0 else { return [] }
                 let command: String = "SELECT mark FROM marktable WHERE tenkeycode = ?;"

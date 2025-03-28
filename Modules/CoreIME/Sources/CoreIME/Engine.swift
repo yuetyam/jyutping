@@ -74,7 +74,7 @@ extension Engine {
                                 return shortcutMatch(text: text, limit: 100, statement: shortcutStatement)
                         }
                 default:
-                        let textMarkCandidates = fetchTextMark(text: origin)
+                        let textMarkCandidates = fetchTextMarks(text: origin)
                         guard asap else { return textMarkCandidates + dispatch(text: text, segmentation: segmentation, needsSymbols: needsSymbols, shortcutStatement: shortcutStatement, pingStatement: pingStatement, strictStatement: strictStatement) }
                         guard segmentation.maxSchemeLength > 0 else { return textMarkCandidates + processVerbatim(text: text, shortcutStatement: shortcutStatement, pingStatement: pingStatement) }
                         let candidates = query(text: text, segmentation: segmentation, needsSymbols: needsSymbols, shortcutStatement: shortcutStatement, pingStatement: pingStatement, strictStatement: strictStatement)
@@ -297,7 +297,7 @@ extension Engine {
                 let fullShortcut = shortcutMatch(text: text, limit: limit, statement: shortcutStatement)
                 let searches = search(text: text, segmentation: segmentation, limit: limit, strictStatement: strictStatement)
                 lazy var queried = (fullPing + fullShortcut + searches).ordered(with: textCount)
-                let shouldContinue: Bool = needsSymbols && (limit == nil)
+                let shouldContinue: Bool = needsSymbols && (limit == nil) && queried.isNotEmpty
                 guard shouldContinue else { return queried }
                 let symbols: [Candidate] = Engine.searchSymbols(text: text, segmentation: segmentation)
                 guard symbols.isNotEmpty else { return queried }
@@ -466,7 +466,7 @@ extension Engine {
                         sqlite3_finalize(tenKeyAnchorsStatement)
                         sqlite3_finalize(tenKeyCodeStatement)
                 }
-                let textMarkCandidates = fetchTextMark(combos: combos)
+                let textMarkCandidates = fetchTextMarks(combos: combos)
                 lazy var queried = (0..<combos.count)
                         .map { number -> [Candidate] in
                                 let tenKeyCode = combos.dropLast(number).map(\.rawValue).decimalCombined()
@@ -475,7 +475,8 @@ extension Engine {
                         }
                         .flatMap({ $0 })
                         .sorted()
-                guard needsSymbols else { return textMarkCandidates + queried }
+                let shouldContinue: Bool = needsSymbols && queried.isNotEmpty
+                guard shouldContinue else { return textMarkCandidates + queried }
                 let symbols = tenKeySearchSymbols(combos: combos)
                 guard symbols.isNotEmpty else { return textMarkCandidates + queried }
                 for symbol in symbols.reversed() {
