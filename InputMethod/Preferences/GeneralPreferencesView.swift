@@ -44,7 +44,7 @@ struct GeneralPreferencesView: View {
                                         HStack {
                                                 Picker("GeneralPreferencesView.CandidateLineSpacing", selection: $lineSpacing) {
                                                         ForEach(lineSpacingRange, id: \.self) {
-                                                                Text(verbatim: "\($0)").tag($0)
+                                                                Text(verbatim: "\($0) pt").tag($0)
                                                         }
                                                 }
                                                 .scaledToFit()

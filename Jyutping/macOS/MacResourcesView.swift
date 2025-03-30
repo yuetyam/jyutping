@@ -33,7 +33,7 @@ struct MacResourcesView: View {
                                         LinkView(icon: globeIcon, title: "CANTONESE.com.hk", url: "https://www.cantonese.com.hk")
                                         LinkView(icon: globeIcon, title: "中國古詩文精讀", url: "https://www.classicalchineseliterature.org")
                                         LinkView(icon: globeIcon, title: "冚唪唥粵文", url: "https://hambaanglaang.hk")
-                                        LinkView(icon: globeIcon, title: "迴響", url: "https://resonate.hk")
+                                        LinkView(icon: globeIcon, title: "迴響", url: "https://www.resonatehk.com")
                                 }
                                 .block()
                         }

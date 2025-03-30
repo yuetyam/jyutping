@@ -58,7 +58,7 @@ struct IOSJyutpingInitialTable: View {
                                 IOSInitialLabel(word: "叉", syllable: "caa1", jyutping: "c", ipa: "t͡sʰ~t͡ʃʰ")
                                 IOSInitialLabel(word: "沙", syllable: "saa1", jyutping: "s", ipa: "s~ʃ")
                         } footer: {
-                                Text(verbatim: "粵拼毋區分平翹舌，現實中粵語人羣存在較爲複雜、混亂嘅舌尖／舌葉音發音情況。").textCase(nil)
+                                Text(verbatim: "粵拼不分平翹舌，現實中粵語人羣存在較爲複雜、混亂嘅舌尖／舌葉音發音情況。").textCase(nil)
                         }
                         Section {
                                 IOSInitialLabel(word: "蛙", syllable: "waa1", jyutping: "w", ipa: "[ w ]")

@@ -67,7 +67,7 @@ struct MacJyutpingInitialTable: View {
                                                 MacInitialLabel(word: "沙", syllable: "saa1", jyutping: "s", ipa: "s ~ ʃ")
                                         }
                                         .block()
-                                        Text(verbatim: "粵拼毋區分平翹舌，現實中粵語人羣存在較爲複雜、混亂嘅舌尖／舌葉音發音情況。")
+                                        Text(verbatim: "粵拼不分平翹舌，現實中粵語人羣存在較爲複雜、混亂嘅舌尖／舌葉音發音情況。")
                                                 .font(.copilot)
                                                 .foregroundStyle(Color.secondary)
                                                 .padding(.horizontal, 8)

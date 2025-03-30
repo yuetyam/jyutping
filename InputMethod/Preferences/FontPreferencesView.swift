@@ -31,7 +31,7 @@ struct FontPreferencesView: View {
                                         HStack {
                                                 Picker("FontPreferencesView.CandidateFontSize", selection: $candidateFontSize) {
                                                         ForEach(fontSizeRange, id: \.self) {
-                                                                Text(verbatim: "\($0)").tag($0)
+                                                                Text(verbatim: "\($0) pt").tag($0)
                                                         }
                                                 }
                                                 .scaledToFit()
@@ -87,7 +87,7 @@ struct FontPreferencesView: View {
                                         HStack {
                                                 Picker("FontPreferencesView.CommentFontSize", selection: $commentFontSize) {
                                                         ForEach(fontSizeRange, id: \.self) {
-                                                                Text(verbatim: "\($0)").tag($0)
+                                                                Text(verbatim: "\($0) pt").tag($0)
                                                         }
                                                 }
                                                 .scaledToFit()
@@ -143,7 +143,7 @@ struct FontPreferencesView: View {
                                         HStack {
                                                 Picker("FontPreferencesView.SerialNumberFontSize", selection: $labelFontSize) {
                                                         ForEach(fontSizeRange, id: \.self) {
-                                                                Text(verbatim: "\($0)").tag($0)
+                                                                Text(verbatim: "\($0) pt").tag($0)
                                                         }
                                                 }
                                                 .scaledToFit()

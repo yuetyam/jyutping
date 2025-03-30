@@ -3518,55 +3518,55 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "鍵盤自身並毋會儲存系統剪貼板或者輸入框嘅任何內容。"
+            "value" : "鍵盤自身冇儲存系統剪貼板或者輸入框嘅任何內容。"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "鍵盤自身並毋會儲存系統剪貼板或者輸入框嘅任何內容。"
+            "value" : "鍵盤自身冇儲存系統剪貼板或者輸入框嘅任何內容。"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "鍵盤自身並毋會儲存系統剪貼板或者輸入框嘅任何內容。"
+            "value" : "鍵盤自身冇儲存系統剪貼板或者輸入框嘅任何內容。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "鍵盤自身並毋會儲存系統剪貼板或者輸入框嘅任何內容。"
+            "value" : "鍵盤自身冇儲存系統剪貼板或者輸入框嘅任何內容。"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "鍵盤自身並毋會儲存系統剪貼板或者輸入框嘅任何內容。"
+            "value" : "鍵盤自身冇儲存系統剪貼板或者輸入框嘅任何內容。"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "鍵盤自身並毋會儲存系統剪貼板或者輸入框嘅任何內容。"
+            "value" : "鍵盤自身冇儲存系統剪貼板或者輸入框嘅任何內容。"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "鍵盤自身並毋會儲存系統剪貼板或者輸入框嘅任何內容。"
+            "value" : "鍵盤自身冇儲存系統剪貼板或者輸入框嘅任何內容。"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "鍵盤自身並毋會儲存系統剪貼板或者輸入框嘅任何內容。"
+            "value" : "鍵盤自身冇儲存系統剪貼板或者輸入框嘅任何內容。"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "鍵盤自身並毋會儲存系統剪貼板或者輸入框嘅任何內容。"
+            "value" : "鍵盤自身冇儲存系統剪貼板或者輸入框嘅任何內容。"
           }
         }
       }
@@ -4778,55 +4778,55 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "毋開啓「全權取用」毋會影響使用其他功能"
+            "value" : "其他功能無需「全權取用」"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "毋開啓「完全訪問」毋會影響使用其他功能"
+            "value" : "其他功能無需「完全訪問」"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "毋開啓「完全訪問」毋會影響使用其他功能"
+            "value" : "其他功能無需「完全訪問」"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "毋開啓「完整取用」毋會影響使用其他功能"
+            "value" : "其他功能無需「完整取用」"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "毋開啓「完全訪問」毋會影響使用其他功能"
+            "value" : "其他功能無需「完全訪問」"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "毋開啓「全權取用」毋會影響使用其他功能"
+            "value" : "其他功能無需「全權取用」"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "毋開啓「全權取用」毋會影響使用其他功能"
+            "value" : "其他功能無需「全權取用」"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "毋開啓「完整取用」毋會影響使用其他功能"
+            "value" : "其他功能無需「完整取用」"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "毋開啓「全權取用」毋會影響使用其他功能"
+            "value" : "其他功能無需「全權取用」"
           }
         }
       }
@@ -4848,55 +4848,55 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "點解用毋到外置鍵盤？"
+            "value" : "如何使用外置鍵盤？"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "點解用毋到外置鍵盤？"
+            "value" : "如何使用外置鍵盤？"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "點解用毋到外置鍵盤？"
+            "value" : "如何使用外置鍵盤？"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "點解用毋到外置鍵盤？"
+            "value" : "如何使用外置鍵盤？"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "點解用毋到外置鍵盤？"
+            "value" : "如何使用外置鍵盤？"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "點解用毋到外置鍵盤？"
+            "value" : "如何使用外置鍵盤？"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "點解用毋到外置鍵盤？"
+            "value" : "如何使用外置鍵盤？"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "點解用毋到外置鍵盤？"
+            "value" : "如何使用外置鍵盤？"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "點解用毋到外置鍵盤？"
+            "value" : "如何使用外置鍵盤？"
           }
         }
       }
@@ -5058,55 +5058,55 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "點解我部機嘅文字語音朗讀毋正常？"
+            "value" : "點解我部機文字語音朗讀冇聲音？"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "點解我部機嘅文字語音朗讀毋正常？"
+            "value" : "點解我部機文字語音朗讀冇聲音？"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "點解我部機嘅文字語音朗讀毋正常？"
+            "value" : "點解我部機文字語音朗讀冇聲音？"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "點解我部機嘅文字語音朗讀毋正常？"
+            "value" : "點解我部機文字語音朗讀冇聲音？"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "點解我部機嘅文字語音朗讀毋正常？"
+            "value" : "點解我部機文字語音朗讀冇聲音？"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "點解我部機嘅文字語音朗讀毋正常？"
+            "value" : "點解我部機文字語音朗讀冇聲音？"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "點解我部機嘅文字語音朗讀毋正常？"
+            "value" : "點解我部機文字語音朗讀冇聲音？"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "點解我部機嘅文字語音朗讀毋正常？"
+            "value" : "點解我部機文字語音朗讀冇聲音？"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "點解我部機嘅文字語音朗讀毋正常？"
+            "value" : "點解我部機文字語音朗讀冇聲音？"
           }
         }
       }

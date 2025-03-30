@@ -133,7 +133,7 @@ struct MacJyutpingFinalTable: View {
                                                 .foregroundStyle(Color.secondary)
                                                 .padding(.horizontal, 8)
                                         VStack {
-                                                MacFinalLabel(word: "毋", syllable: "m4", jyutping: "m", ipa: "[ \u{6D}\u{329} ]") // { m̩ }
+                                                MacFinalLabel(word: "唔", syllable: "m4", jyutping: "m", ipa: "[ \u{6D}\u{329} ]") // { m̩ }
                                                 MacFinalLabel(word: "吳", syllable: "ng4", jyutping: "ng", ipa: "[ \u{14B}\u{329} ]") // { ŋ̩ }
                                         }
                                         .block()

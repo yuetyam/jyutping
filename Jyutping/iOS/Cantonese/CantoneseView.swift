@@ -75,7 +75,7 @@ struct CantoneseView: View {
                                         ExtendedLinkLabel(title: "CANTONESE.com.hk", footnote: "cantonese.com.hk", address: "https://www.cantonese.com.hk")
                                         ExtendedLinkLabel(title: "中國古詩文精讀", footnote: "classicalchineseliterature.org", address: "https://www.classicalchineseliterature.org")
                                         ExtendedLinkLabel(title: "冚唪唥粵文", footnote: "hambaanglaang.hk", address: "https://hambaanglaang.hk")
-                                        ExtendedLinkLabel(title: "迴響", footnote: "resonate.hk", address: "https://resonate.hk")
+                                        ExtendedLinkLabel(title: "迴響", footnote: "resonatehk.com", address: "https://www.resonatehk.com")
                                 }
                         }
                         .animation(.default, value: animationState)

@@ -1756,7 +1756,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Candidate Line Spacing (Points)"
+            "value" : "Candidate Line Spacing"
           }
         },
         "fr" : {
@@ -1768,55 +1768,55 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞行間隔(Points)"
+            "value" : "候選詞行間隔"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞行間隔(Points)"
+            "value" : "候選詞行間隔"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞行間隔(Points)"
+            "value" : "候選詞行間隔"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞行間隔(Points)"
+            "value" : "候選詞行間隔"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞行間隔(Points)"
+            "value" : "候選詞行間隔"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞行間隔(Points)"
+            "value" : "候選詞行間隔"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞行間隔(Points)"
+            "value" : "候選詞行間隔"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞行間隔(Points)"
+            "value" : "候選詞行間隔"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞行間隔(Points)"
+            "value" : "候選詞行間隔"
           }
         }
       }
