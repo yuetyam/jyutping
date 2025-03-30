@@ -11,25 +11,19 @@ struct MacExpressionsView: View {
                                                 VStack(alignment: .leading, spacing: 10) {
                                                         Text(verbatim: "第一人稱代詞").font(.significant)
                                                         Label {
-                                                                HStack(spacing: 8) {
-                                                                        Text(verbatim: "單數：我")
-                                                                        Speaker("我")
-                                                                }
+                                                                Text(verbatim: "單數：我")
                                                         } icon: {
                                                                 Image.checkmark.foregroundStyle(Color.green)
                                                         }
                                                         Label {
-                                                                HStack(spacing: 8) {
-                                                                        Text(verbatim: "複數：我哋")
-                                                                        Speaker("我哋")
-                                                                }
+                                                                Text(verbatim: "複數：我哋")
                                                         } icon: {
                                                                 Image.checkmark.foregroundStyle(Color.green)
                                                         }
                                                         Label {
-                                                                Text(verbatim: "毋用「咱」、「咱們」")
+                                                                Text(verbatim: "咱、咱們")
                                                         } icon: {
-                                                                Image.warning.foregroundStyle(Color.orange)
+                                                                Image.xmark.foregroundStyle(Color.red)
                                                         }
                                                 }
                                                 Spacer()
@@ -39,28 +33,22 @@ struct MacExpressionsView: View {
                                                 VStack(alignment: .leading, spacing: 10) {
                                                         Text(verbatim: "第二人稱代詞").font(.significant)
                                                         Label {
-                                                                HStack(spacing: 8) {
-                                                                        Text(verbatim: "單數：你")
-                                                                        Speaker("你")
-                                                                }
+                                                                Text(verbatim: "單數：你")
                                                         } icon: {
                                                                 Image.checkmark.foregroundStyle(Color.green)
                                                         }
                                                         Label {
-                                                                HStack(spacing: 8) {
-                                                                        Text(verbatim: "複數：你哋")
-                                                                        Speaker("你哋")
-                                                                }
+                                                                Text(verbatim: "複數：你哋")
                                                         } icon: {
                                                                 Image.checkmark.foregroundStyle(Color.green)
                                                         }
                                                         Label {
-                                                                Text(verbatim: "毋用「您」。「您」係北京方言用字，好少見於其他漢語。如果要用敬詞，粵語一般用「閣下」。")
+                                                                Text(verbatim: "「您」係北京方言用字，好少見於其他漢語。如果要用敬詞，粵語一般用「閣下」。")
                                                         } icon: {
                                                                 Image.warning.foregroundStyle(Color.orange)
                                                         }
                                                         Label {
-                                                                Text(verbatim: "毋推薦用「妳」，冇必要畫蛇添足。")
+                                                                Text(verbatim: "冇必要畫蛇添足用「妳」。")
                                                         } icon: {
                                                                 Image.warning.foregroundStyle(Color.orange)
                                                         }
@@ -72,23 +60,17 @@ struct MacExpressionsView: View {
                                                 VStack(alignment: .leading, spacing: 10) {
                                                         Text(verbatim: "第三人稱代詞").font(.significant)
                                                         Label {
-                                                                HStack(spacing: 8) {
-                                                                        Text(verbatim: "單數：佢")
-                                                                        Speaker("佢")
-                                                                }
+                                                                Text(verbatim: "單數：佢")
                                                         } icon: {
                                                                 Image.checkmark.foregroundStyle(Color.green)
                                                         }
                                                         Label {
-                                                                HStack(spacing: 8) {
-                                                                        Text(verbatim: "複數：佢哋")
-                                                                        Speaker("佢哋")
-                                                                }
+                                                                Text(verbatim: "複數：佢哋")
                                                         } icon: {
                                                                 Image.checkmark.foregroundStyle(Color.green)
                                                         }
                                                         Label {
-                                                                Text(verbatim: "無論性別，人、神、物，一律用 佢。")
+                                                                Text(verbatim: "無論性別、人、物，一律用 佢。")
                                                         } icon: {
                                                                 Image.info.foregroundStyle(Color.primary)
                                                         }
@@ -199,6 +181,18 @@ struct MacExpressionsView: View {
 
                                 HStack {
                                         VStack(alignment: .leading, spacing: 10) {
+                                                Text(verbatim: "區分【會】以及【識】").font(.significant).padding(.bottom, 2)
+                                                Text(verbatim: "會：（接下來）將會；（接下來）將要")
+                                                Text(verbatim: "識：識得；曉得；懂得；明白")
+                                                Text(verbatim: "例：我會煮飯。（我將要煮飯）")
+                                                Text(verbatim: "例：我識煮飯。（我懂得如何煮飯）")
+                                        }
+                                        Spacer()
+                                }
+                                .block()
+
+                                HStack {
+                                        VStack(alignment: .leading, spacing: 10) {
                                                 Text(verbatim: "推薦【嘅／個、得、噉】 避免【的、得、地】").font(.significant).padding(.bottom, 2)
                                                 Text(verbatim: "例：我嘅細佬／我個細佬。")
                                                 Text(verbatim: "例：講得好！")
@@ -217,7 +211,7 @@ struct MacExpressionsView: View {
                                                         Image.checkmark.foregroundStyle(Color.green)
                                                 }
                                                 Label {
-                                                        Text(verbatim: "毋係啊嘛，真係冇？")
+                                                        Text(verbatim: "唔係啊嘛，真係冇？")
                                                 } icon: {
                                                         Image.checkmark.foregroundStyle(Color.green)
                                                 }
@@ -227,7 +221,7 @@ struct MacExpressionsView: View {
                                                         Image.xmark.foregroundStyle(Color.red)
                                                 }
                                                 Label {
-                                                        Text(verbatim: "毋係吧，真係冇？")
+                                                        Text(verbatim: "唔係吧，真係冇？")
                                                 } icon: {
                                                         Image.xmark.foregroundStyle(Color.red)
                                                 }
@@ -240,22 +234,22 @@ struct MacExpressionsView: View {
                                         VStack(alignment: .leading, spacing: 10) {
                                                 Text(verbatim: "推薦【啦、嘞】 避免【了】").font(.significant).padding(.bottom, 2)
                                                 Label {
-                                                        Text(verbatim: "各位，我毋客氣啦。")
+                                                        Text(verbatim: "我識用粵拼打字啦！")
                                                 } icon: {
                                                         Image.checkmark.foregroundStyle(Color.green)
                                                 }
                                                 Label {
-                                                        Text(verbatim: "係嘞，你試過箇間餐廳未啊？")
+                                                        Text(verbatim: "係嘞，你試過招牌菜未啊？")
                                                 } icon: {
                                                         Image.checkmark.foregroundStyle(Color.green)
                                                 }
                                                 Label {
-                                                        Text(verbatim: "各位，我毋客氣了。")
+                                                        Text(verbatim: "我識用粵拼打字了！")
                                                 } icon: {
                                                         Image.xmark.foregroundStyle(Color.red)
                                                 }
                                                 Label {
-                                                        Text(verbatim: "係了，你試過箇間餐廳未啊？")
+                                                        Text(verbatim: "係了，你試過招牌菜未啊？")
                                                 } icon: {
                                                         Image.xmark.foregroundStyle(Color.red)
                                                 }
@@ -268,17 +262,17 @@ struct MacExpressionsView: View {
                                         VStack(alignment: .leading, spacing: 10) {
                                                 Text(verbatim: "推薦【使】 避免【駛、洗】").font(.significant).padding(.bottom, 2)
                                                 Label {
-                                                        Text(verbatim: "毋使驚")
+                                                        Text(verbatim: "唔使驚")
                                                 } icon: {
                                                         Image.checkmark.foregroundStyle(Color.green)
                                                 }
                                                 Label {
-                                                        Text(verbatim: "毋駛驚")
+                                                        Text(verbatim: "唔駛驚")
                                                 } icon: {
                                                         Image.xmark.foregroundStyle(Color.red)
                                                 }
                                                 Label {
-                                                        Text(verbatim: "毋洗驚")
+                                                        Text(verbatim: "唔洗驚")
                                                 } icon: {
                                                         Image.xmark.foregroundStyle(Color.red)
                                                 }
