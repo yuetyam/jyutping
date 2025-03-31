@@ -5,7 +5,6 @@ struct ABCKeyboard: View {
         @EnvironmentObject private var context: KeyboardViewController
 
         var body: some View {
-                let destination: KeyboardForm = (context.isPhone && context.numericLayout.isNumberKeyPad) ? .tenKeyNumeric : .numeric
                 VStack(spacing: 0) {
                         ToolBar()
                         HStack(spacing: 0 ) {
@@ -153,7 +152,7 @@ struct ABCKeyboard: View {
                                 }
                         case (false, true):
                                 HStack(spacing: 0) {
-                                        TransformKey(destination: destination, widthUnitTimes: 2)
+                                        TransformKey(destination: context.preferredNumericForm, widthUnitTimes: 2)
                                         GlobeKey()
                                         SpaceKey()
                                         RightKey()
@@ -161,7 +160,7 @@ struct ABCKeyboard: View {
                                 }
                         case (false, false):
                                 HStack(spacing: 0) {
-                                        TransformKey(destination: destination, widthUnitTimes: 2)
+                                        TransformKey(destination: context.preferredNumericForm, widthUnitTimes: 2)
                                         LeftKey()
                                         SpaceKey()
                                         RightKey()

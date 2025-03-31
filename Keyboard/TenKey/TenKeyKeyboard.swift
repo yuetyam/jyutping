@@ -35,10 +35,10 @@ struct TenKeyKeyboard: View {
                                                 }
                                         }
                                         HStack(spacing: 0) {
+                                                TenKeyNavigateKey(destination: .tenKeyNumeric)
                                                 if context.needsInputModeSwitchKey {
                                                         TenKeyGlobeKey()
                                                 }
-                                                TenKeyNavigateKey(destination: .tenKeyNumeric)
                                                 TenKeySpaceKey()
                                         }
                                 }

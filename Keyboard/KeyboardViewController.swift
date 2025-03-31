@@ -912,9 +912,11 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         @Published private(set) var numericLayout: NumericLayout = NumericLayout.fetchSavedLayout()
         func updateNumericLayout(to layout: NumericLayout) {
                 numericLayout = layout
+                preferredNumericForm = layout.isNumberKeyPad ? .tenKeyNumeric : .numeric
                 let value: Int = layout.rawValue
                 UserDefaults.standard.set(value, forKey: OptionsKey.NumericLayout)
         }
+        @Published private(set) var preferredNumericForm: KeyboardForm = NumericLayout.fetchSavedLayout().isNumberKeyPad ? .tenKeyNumeric : .numeric
 
 
         // MARK: - Haptic Feedback

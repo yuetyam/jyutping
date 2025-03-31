@@ -205,13 +205,11 @@ struct SettingsViewIOS15: View {
                                         Options.updateCangjieVariant(to: newVariant)
                                 }
 
-                                Section {
-                                        Toggle("SettingsView.EmojiSuggestions.ToggleTitle", isOn: $isEmojiSuggestionsOn)
-                                                .onChange(of: isEmojiSuggestionsOn) { newState in
-                                                        AudioFeedback.modified()
-                                                        Options.updateEmojiSuggestions(to: newState)
-                                                }
-                                }
+                                Toggle("SettingsView.EmojiSuggestions.ToggleTitle", isOn: $isEmojiSuggestionsOn)
+                                        .onChange(of: isEmojiSuggestionsOn) { newState in
+                                                AudioFeedback.modified()
+                                                Options.updateEmojiSuggestions(to: newState)
+                                        }
 
                                 Section {
                                         Picker("SettingsView.KeyboardDisplayLanguage.PickerTitle", selection: $preferredLanguage) {

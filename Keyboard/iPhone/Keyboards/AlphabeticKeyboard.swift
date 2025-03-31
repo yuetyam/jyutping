@@ -5,7 +5,6 @@ struct AlphabeticKeyboard: View {
         @EnvironmentObject private var context: KeyboardViewController
 
         var body: some View {
-                let destination: KeyboardForm = (context.isPhone && context.numericLayout.isNumberKeyPad) ? .tenKeyNumeric : .numeric
                 VStack(spacing: 0) {
                         if context.inputStage.isBuffering {
                                 CandidateBar()
@@ -73,7 +72,7 @@ struct AlphabeticKeyboard: View {
                                 }
                         case (false, true):
                                 HStack(spacing: 0) {
-                                        TransformKey(destination: destination, widthUnitTimes: 2)
+                                        TransformKey(destination: context.preferredNumericForm, widthUnitTimes: 2)
                                         GlobeKey()
                                         SpaceKey()
                                         RightKey()
@@ -81,7 +80,7 @@ struct AlphabeticKeyboard: View {
                                 }
                         case (false, false):
                                 HStack(spacing: 0) {
-                                        TransformKey(destination: destination, widthUnitTimes: 2)
+                                        TransformKey(destination: context.preferredNumericForm, widthUnitTimes: 2)
                                         LeftKey()
                                         SpaceKey()
                                         RightKey()
