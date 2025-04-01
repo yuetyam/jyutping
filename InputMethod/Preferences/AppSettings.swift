@@ -276,6 +276,7 @@ struct AppSettings {
         }()
         static func updateLabelSet(to labels: LabelSet) {
                 labelSet = labels
+                Font.updateLabelFont()
                 let value: Int = labels.rawValue
                 UserDefaults.standard.set(value, forKey: SettingsKey.LabelSet)
         }

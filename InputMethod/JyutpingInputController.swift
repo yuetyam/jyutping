@@ -168,13 +168,15 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         }
                         let activatingWindowCount = NSApp.windows.count(where: { $0.windowNumber > 0 })
                         if activatingWindowCount > 30 {
-                                logger.error("Jyutping Input Method terminated due to it contained more than 30 windows")
+                                logger.fault("Jyutping Input Method terminated due to it contained more than 30 windows")
                                 fatalError("Jyutping Input Method terminated due to it contained more than 30 windows")
                         } else if activatingWindowCount > 20 {
                                 logger.warning("Jyutping Input Method containing more than 20 windows")
                                 NSApp.windows.filter({ $0 != window }).forEach({ $0.close() })
                         } else if activatingWindowCount > 10 {
                                 logger.notice("Jyutping Input Method containing more than 10 windows")
+                        } else {
+                                logger.info("ActivatingWindowCount: \(activatingWindowCount)")
                         }
                 }
                 super.deactivateServer(sender)
@@ -1247,30 +1249,21 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 displayPreferencesView()
         }
         private func displayPreferencesView() {
-                let isSettingsWindowOpen: Bool = NSApp.windows
-                        .filter({ $0.windowNumber > 0 })
-                        .compactMap(\.identifier?.rawValue)
-                        .contains(where: { $0.hasPrefix(PresetConstant.settingsWindowIdentifierPrefix) })
-                guard isSettingsWindowOpen.negative else { return }
-                let frame: CGRect = preferencesWindowFrame()
-                let preferencesWindow = NSWindow(contentRect: frame, styleMask: [.titled, .closable, .resizable, .fullSizeContentView], backing: .buffered, defer: true)
-                preferencesWindow.title = String(localized: "PreferencesView.Window.Title")
-                preferencesWindow.toolbarStyle = .unifiedCompact
-                preferencesWindow.contentViewController = NSHostingController(rootView: PreferencesView())
-                let identifierString: String = PresetConstant.settingsWindowIdentifierPrefix + Date.timeIntervalSinceReferenceDate.description
-                preferencesWindow.identifier = NSUserInterfaceItemIdentifier(rawValue: identifierString)
-                preferencesWindow.orderFrontRegardless()
-                preferencesWindow.setFrame(frame, display: true)
-                NSApp.activate(ignoringOtherApps: true)
+                guard inputStage.isBuffering.negative else { return }
+                guard SettingsWindow.shared.isVisible.negative else { return }
+                SettingsWindow.shared.level = window.level
+                SettingsWindow.shared.setFrame(preferencesWindowFrame(), display: true)
+                SettingsWindow.shared.orderFrontRegardless()
         }
         private func preferencesWindowFrame() -> CGRect {
-                let screenOrigin: CGPoint = NSScreen.main?.visibleFrame.origin ?? .zero
-                let screenWidth: CGFloat = NSScreen.main?.visibleFrame.size.width ?? 1280
-                let screenHeight: CGFloat = NSScreen.main?.visibleFrame.size.height ?? 800
-                let x: CGFloat = screenOrigin.x + (screenWidth / 4.0)
-                let y: CGFloat = screenOrigin.y + (screenHeight / 5.0)
-                let width: CGFloat = screenWidth / 2.0
-                let height: CGFloat = (screenHeight / 5.0) * 3.0
+                let originPoint: CGPoint = NSScreen.main?.visibleFrame.origin ?? window.screen?.visibleFrame.origin ?? .zero
+                let maxSize: CGSize = NSScreen.main?.visibleFrame.size ?? window.screen?.visibleFrame.size ?? CGSize(width: 1280, height: 800)
+                let maxWidth: CGFloat = maxSize.width
+                let maxHeight: CGFloat = maxSize.height
+                let x: CGFloat = originPoint.x + (maxWidth / 4.0)
+                let y: CGFloat = originPoint.y + (maxHeight / 5.0)
+                let width: CGFloat = maxWidth / 2.0
+                let height: CGFloat = (maxHeight / 5.0) * 3.0
                 return CGRect(x: x, y: y, width: width, height: height)
         }
 }

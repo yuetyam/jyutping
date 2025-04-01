@@ -23,3 +23,21 @@ final class CandidateWindow: NSPanel {
         /// Primary NSPanel for CandidateBoard and OptionsView
         static let shared: CandidateWindow = CandidateWindow(level: nil)
 }
+
+@MainActor
+final class SettingsWindow: NSPanel {
+        private init(frame: CGRect? = nil, level: NSWindow.Level?) {
+                super.init(contentRect: frame ?? .zero, styleMask: [.titled, .closable, .resizable, .fullSizeContentView], backing: .buffered, defer: true)
+                isFloatingPanel = true
+                worksWhenModal = true
+                hidesOnDeactivate = false
+                isReleasedWhenClosed = false
+                collectionBehavior = .moveToActiveSpace
+                isMovable = true
+                isMovableByWindowBackground = true
+                title = String(localized: "PreferencesView.Window.Title")
+                toolbarStyle = .unifiedCompact
+                contentViewController = NSHostingController(rootView: PreferencesView())
+        }
+        static let shared: SettingsWindow = SettingsWindow(level: nil)
+}

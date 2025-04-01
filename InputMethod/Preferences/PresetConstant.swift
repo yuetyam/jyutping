@@ -12,9 +12,8 @@ struct PresetConstant {
         static let supplementaryCJKVQueue: [String] = ["Chiron Hei HK", "Source Han Sans HC", "Noto Sans CJK HK", "Noto Sans HK"]
         static let fallbackCJKVList: [String] = ["Plangothic P1", "Plangothic P2", "MiSans L3"]
 
-        static let systemABCKeyboardLayout: String = "com.apple.keylayout.ABC"
-        static let settingsWindowIdentifierPrefix: String = "JyutpingInputMethodSettingsWindowIdentifierPrefix"
-
         static let halfWidth: String = "半寬"
         static let fullWidth: String = "全寬"
+
+        static let systemABCKeyboardLayout: String = "com.apple.keylayout.ABC"
 }
