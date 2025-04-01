@@ -97,7 +97,7 @@ extension Engine {
                                 switch (textTones.count, continuousTones.count) {
                                 case (1, 1):
                                         guard textTones == continuousTones else { return nil }
-                                        let isCorrectPosition: Bool = text.dropFirst(item.input.count).first?.isTone ?? false
+                                        let isCorrectPosition: Bool = text.dropFirst(item.inputCount).first?.isTone ?? false
                                         guard isCorrectPosition else { return nil }
                                         let combinedInput = item.input + textTones
                                         return Candidate(text: item.text, romanization: item.romanization, input: combinedInput)
@@ -105,7 +105,7 @@ extension Engine {
                                         let isToneLast: Bool = text.last?.isTone ?? false
                                         if isToneLast {
                                                 guard continuousTones.hasSuffix(textTones) else { return nil }
-                                                let isCorrectPosition: Bool = text.dropFirst(item.input.count).first?.isTone ?? false
+                                                let isCorrectPosition: Bool = text.dropFirst(item.inputCount).first?.isTone ?? false
                                                 guard isCorrectPosition else { return nil }
                                                 return Candidate(text: item.text, romanization: item.romanization, input: text)
                                         } else {
@@ -114,7 +114,7 @@ extension Engine {
                                         }
                                 case (2, 1):
                                         guard textTones.hasPrefix(continuousTones) else { return nil }
-                                        let isCorrectPosition: Bool = text.dropFirst(item.input.count).first?.isTone ?? false
+                                        let isCorrectPosition: Bool = text.dropFirst(item.inputCount).first?.isTone ?? false
                                         guard isCorrectPosition else { return nil }
                                         let combinedInput = item.input + continuousTones
                                         return Candidate(text: item.text, romanization: item.romanization, input: combinedInput)
@@ -122,10 +122,10 @@ extension Engine {
                                         guard textTones == continuousTones else { return nil }
                                         let isToneLast: Bool = text.last?.isTone ?? false
                                         if isToneLast {
-                                                guard item.input.count == (text.count - 2) else { return nil }
+                                                guard item.inputCount == (text.count - 2) else { return nil }
                                                 return Candidate(text: item.text, romanization: item.romanization, input: text)
                                         } else {
-                                                let tail = text.dropFirst(item.input.count + 1)
+                                                let tail = text.dropFirst(item.inputCount + 1)
                                                 let isCorrectPosition: Bool = tail.first == textTones.last
                                                 guard isCorrectPosition else { return nil }
                                                 let combinedInput = item.input + textTones
@@ -141,7 +141,7 @@ extension Engine {
                                         }
                                 }
                         })
-                        return qualified.sorted(by: { $0.input.count > $1.input.count })
+                        return qualified.sorted()
                 case (true, false):
                         let textSeparators = text.filter(\.isSeparator)
                         let textParts = text.split(separator: Character.separator)
@@ -156,7 +156,7 @@ extension Engine {
                                 switch textSeparators.count {
                                 case 1 where isTrailingSeparator:
                                         guard syllables.count == 1 else { return nil }
-                                        let isLengthMatched: Bool = item.input.count == (text.count - 1)
+                                        let isLengthMatched: Bool = item.inputCount == (text.count - 1)
                                         guard isLengthMatched else { return nil }
                                         return Candidate(text: item.text, romanization: item.romanization, input: text)
                                 case 1:
@@ -179,7 +179,7 @@ extension Engine {
                                                 let combinedInput: String = item.input + String.separator
                                                 return Candidate(text: item.text, romanization: item.romanization, input: combinedInput)
                                         case 2:
-                                                let isLengthMatched: Bool = item.input.count == (text.count - 2)
+                                                let isLengthMatched: Bool = item.inputCount == (text.count - 2)
                                                 guard isLengthMatched else { return nil }
                                                 guard syllables.first == textParts.first else { return nil }
                                                 return Candidate(text: item.text, romanization: item.romanization, input: text)
@@ -200,7 +200,7 @@ extension Engine {
                                         return Candidate(text: item.text, romanization: item.romanization, input: combinedInput)
                                 }
                         })
-                        guard qualified.isEmpty else { return qualified.sorted(by: { $0.input.count > $1.input.count }) }
+                        guard qualified.isEmpty else { return qualified.sorted() }
                         let anchors = textParts.compactMap(\.first)
                         let anchorCount = anchors.count
                         return anchorsMatch(text: String(anchors), statement: anchorsStatement)
@@ -225,7 +225,7 @@ extension Engine {
                 guard canProcess(text, statement: anchorsStatement) else { return [] }
                 let textCount = text.count
                 let primary: [Candidate] = query(text: text, segmentation: segmentation, needsSymbols: needsSymbols, limit: limit, anchorsStatement: anchorsStatement, pingStatement: pingStatement, strictStatement: strictStatement)
-                guard let firstInputCount = primary.first?.input.count else { return processVerbatim(text: text, limit: limit, anchorsStatement: anchorsStatement, pingStatement: pingStatement) }
+                guard let firstInputCount = primary.first?.inputCount else { return processVerbatim(text: text, limit: limit, anchorsStatement: anchorsStatement, pingStatement: pingStatement) }
                 guard firstInputCount != textCount else { return primary }
                 let prefixes: [Candidate] = {
                         guard segmentation.maxSchemeLength < textCount else { return [] }
@@ -343,11 +343,11 @@ extension Engine {
 extension Array where Element == Candidate {
         /// Sort Candidates for Qwerty and Triple-Stroke layouts
         func ordered(with textCount: Int) -> [Candidate] {
-                let matched = filter({ $0.input.count == textCount }).sorted(by: { $0.order < $1.order }).uniqued()
-                let others = filter({ $0.input.count != textCount }).uniqued().sorted()
+                let matched = filter({ $0.inputCount == textCount }).sorted(by: { $0.order < $1.order }).uniqued()
+                let others = filter({ $0.inputCount != textCount }).sorted().uniqued()
                 let primary = matched.prefix(15)
                 let secondary = others.prefix(10)
-                let tertiary = others.sorted(by: { $0.order < $1.order }).prefix(5)
+                let tertiary = others.sorted(by: { $0.order < $1.order }).prefix(7)
                 return (primary + secondary + tertiary + matched + others).uniqued()
         }
 }

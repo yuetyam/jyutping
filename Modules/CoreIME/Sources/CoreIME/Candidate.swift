@@ -36,6 +36,9 @@ public struct Candidate: Hashable, Comparable, Sendable {
         /// User input
         public let input: String
 
+        /// Character count of self.input
+        public let inputCount: Int
+
         /// Formatted user input for pre-edit display
         public let mark: String
 
@@ -57,6 +60,7 @@ public struct Candidate: Hashable, Comparable, Sendable {
                 self.lexiconText = lexiconText ?? text
                 self.romanization = romanization
                 self.input = input
+                self.inputCount = input.count
                 self.mark = mark ?? input
                 self.order = order
         }
@@ -71,6 +75,7 @@ public struct Candidate: Hashable, Comparable, Sendable {
                 self.lexiconText = text
                 self.romanization = input
                 self.input = input
+                self.inputCount = input.count
                 self.mark = input
                 self.order = 0
         }
@@ -88,6 +93,7 @@ public struct Candidate: Hashable, Comparable, Sendable {
                 self.lexiconText = cantonese
                 self.romanization = romanization
                 self.input = input
+                self.inputCount = input.count
                 self.mark = input
                 self.order = 0
         }
@@ -104,6 +110,7 @@ public struct Candidate: Hashable, Comparable, Sendable {
                 self.lexiconText = comment ?? String.empty
                 self.romanization = secondaryComment ?? String.empty
                 self.input = input
+                self.inputCount = input.count
                 self.mark = input
                 self.order = 0
         }
@@ -157,14 +164,8 @@ public struct Candidate: Hashable, Comparable, Sendable {
 
         // Comparable
         public static func < (lhs: Candidate, rhs: Candidate) -> Bool {
-                switch lhs.input.count - rhs.input.count {
-                case ..<0:
-                        return false
-                case 0:
-                        return lhs.order < rhs.order
-                default:
-                        return true
-                }
+                guard lhs.inputCount == rhs.inputCount else { return lhs.inputCount > rhs.inputCount }
+                return lhs.order < rhs.order
         }
 
         public static func +(lhs: Candidate, rhs: Candidate) -> Candidate? {

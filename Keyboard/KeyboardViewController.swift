@@ -479,7 +479,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 return
                         case .some(let character) where character.isReverseLookupTrigger:
                                 selectedCandidates = []
-                                let inputCount: Int = candidate.input.count
+                                let inputCount: Int = candidate.inputCount
                                 let leadingCount: Int = inputCount + 1
                                 if bufferText.count > leadingCount {
                                         let tail = bufferText.dropFirst(leadingCount)
@@ -507,7 +507,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 return
                         case .some(let character) where character.isReverseLookupTrigger:
                                 selectedCandidates = []
-                                let inputCount: Int = candidate.input.count
+                                let inputCount: Int = candidate.inputCount
                                 let leadingCount: Int = inputCount + 1
                                 if bufferText.count > leadingCount {
                                         let tripleStrokeTail = tripleStrokeBuffer.dropFirst(leadingCount)
@@ -524,7 +524,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                         return
                                 }
                                 selectedCandidates.append(candidate)
-                                let inputCount: Int = candidate.input.count
+                                let inputCount: Int = candidate.inputCount
                                 var tail = bufferText.dropFirst(inputCount)
                                 while tail.hasPrefix("'") {
                                         tail = tail.dropFirst()
@@ -534,7 +534,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         }
                 case .tenKey:
                         selectedCandidates.append(candidate)
-                        let inputCount = candidate.input.count
+                        let inputCount = candidate.inputCount
                         let tailCount: Int = bufferCombos.count - inputCount
                         let suffixLength: Int = max(0, tailCount)
                         bufferCombos = bufferCombos.suffix(suffixLength)
@@ -576,7 +576,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                         self?.text2mark = {
                                                 guard let firstCandidate = suggestions.first else { return combos.compactMap(\.letters.first).joined() }
                                                 let userInputCount = combos.count
-                                                let firstInputCount = firstCandidate.input.count
+                                                let firstInputCount = firstCandidate.inputCount
                                                 guard firstInputCount < userInputCount else { return firstCandidate.mark }
                                                 let tailCombos = combos.suffix(userInputCount - firstInputCount)
                                                 let tailText = tailCombos.compactMap(\.letters.first).joined()
@@ -605,7 +605,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                                 let hasSeparatorsOrTones: Bool = processingText.contains(where: \.isSeparatorOrTone)
                                                 guard hasSeparatorsOrTones.negative else { return processingText.formattedForMark() }
                                                 let userInputTextCount: Int = processingText.count
-                                                if let firstCandidate = suggestions.first, firstCandidate.input.count == userInputTextCount { return firstCandidate.mark }
+                                                if let firstCandidate = suggestions.first, firstCandidate.inputCount == userInputTextCount { return firstCandidate.mark }
                                                 guard let bestScheme else { return processingText.formattedForMark() }
                                                 let leadingLength: Int = bestScheme.length
                                                 let leadingText: String = bestScheme.map(\.text).joined(separator: String.space)
@@ -628,7 +628,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let schemes: [[String]] = PinyinSegmentor.segment(text: text)
                 let suggestions: [Candidate] = Engine.pinyinReverseLookup(text: text, schemes: schemes)
                 let tailText2Mark: String = {
-                        if let firstCandidate = suggestions.first, firstCandidate.input.count == text.count { return firstCandidate.mark }
+                        if let firstCandidate = suggestions.first, firstCandidate.inputCount == text.count { return firstCandidate.mark }
                         guard let bestScheme = schemes.first else { return text }
                         let leadingLength: Int = bestScheme.summedLength
                         let leadingText: String = bestScheme.joined(separator: String.space)

@@ -32,7 +32,7 @@ extension Engine {
         private static func process(pinyin text: String, schemes: [[String]], shortcutStatement: OpaquePointer?, matchStatement: OpaquePointer?, limit: Int64? = nil) -> [PinyinLexicon] {
                 let textCount = text.count
                 let primary = query(pinyin: text, schemes: schemes, shortcutStatement: shortcutStatement, matchStatement: matchStatement, limit: limit)
-                guard let firstInputCount = primary.first?.input.count else { return processVerbatim(pinyin: text, shortcutStatement: shortcutStatement, matchStatement: matchStatement, limit: limit) }
+                guard let firstInputCount = primary.first?.inputCount else { return processVerbatim(pinyin: text, shortcutStatement: shortcutStatement, matchStatement: matchStatement, limit: limit) }
                 guard firstInputCount != textCount else { return primary }
                 let prefixes: [PinyinLexicon] = {
                         let hasPrefectSchemes: Bool = schemes.contains(where: { $0.summedLength == textCount })
@@ -66,10 +66,10 @@ extension Engine {
 
         private static func query(pinyin text: String, schemes: [[String]], shortcutStatement: OpaquePointer?, matchStatement: OpaquePointer?, limit: Int64? = nil) -> [PinyinLexicon] {
                 let textCount = text.count
+                let pinyinMatched = match(pinyin: text, statement: matchStatement, limit: limit)
+                let anchorsMatch = shortcut(pinyin: text, statement: shortcutStatement, limit: limit)
                 let searches = search(pinyin: text, schemes: schemes, matchStatement: matchStatement, limit: limit)
-                let preferredSearches = searches.filter({ $0.input.count == textCount })
-                let matched = match(pinyin: text, statement: matchStatement, limit: limit)
-                return (matched + preferredSearches + shortcut(pinyin: text, statement: shortcutStatement, limit: limit) + searches).uniqued()
+                return (pinyinMatched + anchorsMatch + searches).ordered(with: textCount)
         }
 
         private static func search(pinyin text: String, schemes: [[String]], matchStatement: OpaquePointer?, limit: Int64? = nil) -> [PinyinLexicon] {
@@ -85,9 +85,9 @@ extension Engine {
                                 }
                                 return queries.flatMap({ $0 })
                         })
-                        return matches.flatMap({ $0 }).ordered(with: textCount)
+                        return matches.flatMap({ $0 })
                 } else {
-                        return schemes.map({ match(pinyin: $0.joined(), statement: matchStatement, limit: limit) }).flatMap({ $0 }).ordered(with: textCount)
+                        return schemes.map({ match(pinyin: $0.joined(), statement: matchStatement, limit: limit) }).flatMap({ $0 })
                 }
         }
 
@@ -139,16 +139,12 @@ extension Engine {
 
 private extension Array where Element == PinyinLexicon {
         func ordered(with textCount: Int) -> [PinyinLexicon] {
-                return self.sorted { (lhs, rhs) -> Bool in
-                        switch (lhs.input.count - rhs.input.count) {
-                        case ..<0:
-                                return lhs.order < (rhs.order - 50000) && lhs.text.count == rhs.text.count
-                        case 0:
-                                return lhs.order < rhs.order
-                        default:
-                                return lhs.text.count >= rhs.text.count
-                        }
-                }
+                let matched = filter({ $0.inputCount == textCount }).sorted(by: { $0.order < $1.order }).uniqued()
+                let others = filter({ $0.inputCount != textCount }).sorted().uniqued()
+                let primary = matched.prefix(15)
+                let secondary = others.prefix(10)
+                let tertiary = others.sorted(by: { $0.order < $1.order }).prefix(7)
+                return (primary + secondary + tertiary + matched + others).uniqued()
         }
 }
 
@@ -162,6 +158,9 @@ private struct PinyinLexicon: Hashable, Comparable {
 
         /// User input.
         let input: String
+
+        /// Character count of self.input
+        let inputCount: Int
 
         /// Formatted user input for pre-edit display
         let mark: String
@@ -179,6 +178,7 @@ private struct PinyinLexicon: Hashable, Comparable {
                 self.text = text
                 self.pinyin = pinyin ?? input
                 self.input = input
+                self.inputCount = input.count
                 self.mark = mark ?? input
                 self.order = order ?? 0
         }
@@ -196,8 +196,8 @@ private struct PinyinLexicon: Hashable, Comparable {
 
         // Comparable
         static func < (lhs: PinyinLexicon, rhs: PinyinLexicon) -> Bool {
-                guard lhs.input.count == rhs.input.count else { return lhs.input.count > rhs.input.count }
-                return lhs.text.count < rhs.text.count
+                guard lhs.inputCount == rhs.inputCount else { return lhs.inputCount > rhs.inputCount }
+                return lhs.order < rhs.order
         }
 
         static func + (lhs: PinyinLexicon, rhs: PinyinLexicon) -> PinyinLexicon {

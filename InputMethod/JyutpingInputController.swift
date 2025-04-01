@@ -361,7 +361,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                                 let hasSeparatorsOrTones: Bool = processingText.contains(where: \.isSeparatorOrTone)
                                                 guard hasSeparatorsOrTones.negative else { return processingText.formattedForMark() }
                                                 let userInputTextCount: Int = processingText.count
-                                                if let firstCandidate = suggestions.first, firstCandidate.input.count == userInputTextCount { return firstCandidate.mark }
+                                                if let firstCandidate = suggestions.first, firstCandidate.inputCount == userInputTextCount { return firstCandidate.mark }
                                                 guard let bestScheme else { return processingText.formattedForMark() }
                                                 let leadingLength: Int = bestScheme.length
                                                 let leadingText: String = bestScheme.map(\.text).joined(separator: String.space)
@@ -384,7 +384,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 let schemes: [[String]] = PinyinSegmentor.segment(text: text)
                 let suggestions: [Candidate] = Engine.pinyinReverseLookup(text: text, schemes: schemes)
                 let tailText2Mark: String = {
-                        if let firstCandidate = suggestions.first, firstCandidate.input.count == text.count { return firstCandidate.mark }
+                        if let firstCandidate = suggestions.first, firstCandidate.inputCount == text.count { return firstCandidate.mark }
                         guard let bestScheme = schemes.first else { return text }
                         let leadingLength: Int = bestScheme.summedLength
                         let leadingText: String = bestScheme.joined(separator: String.space)
@@ -1183,7 +1183,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         clearBufferText()
                 case .some(let character) where character.isReverseLookupTrigger:
                         selectedCandidates = []
-                        let leadingCount: Int = candidate.input.count + 1
+                        let leadingCount: Int = candidate.inputCount + 1
                         if bufferText.count > leadingCount {
                                 let tail = bufferText.dropFirst(leadingCount)
                                 bufferText = String(character) + tail
