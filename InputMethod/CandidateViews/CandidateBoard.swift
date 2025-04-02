@@ -1,4 +1,5 @@
 import SwiftUI
+import CommonExtensions
 
 struct CandidateBoard: View {
 
@@ -49,6 +50,7 @@ struct CandidateBoard: View {
                                         .onHover { isHovering in
                                                 guard isHovering else { return }
                                                 guard index != highlightedIndex else { return }
+                                                guard NSEvent.mouseLocation != context.mouseLocation else { return }
                                                 NotificationCenter.default.post(name: .highlightIndex, object: nil, userInfo: [NotificationKey.highlightIndex : index])
                                         }
                                         .onTapGesture {
@@ -89,6 +91,7 @@ struct CandidateBoard: View {
                                         .onHover { isHovering in
                                                 guard isHovering else { return }
                                                 guard index != highlightedIndex else { return }
+                                                guard NSEvent.mouseLocation != context.mouseLocation else { return }
                                                 NotificationCenter.default.post(name: .highlightIndex, object: nil, userInfo: [NotificationKey.highlightIndex : index])
                                         }
                                         .onTapGesture {

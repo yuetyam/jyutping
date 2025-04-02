@@ -1,5 +1,6 @@
-import Combine
+import SwiftUI
 import CoreIME
+import CommonExtensions
 
 final class AppContext: ObservableObject {
 
@@ -9,6 +10,7 @@ final class AppContext: ObservableObject {
         @Published private(set) var optionsHighlightedIndex: Int = 0
         @Published private(set) var inputForm: InputForm = InputForm.matchInputMethodMode()
         @Published private(set) var quadrant: Quadrant = .upperRight
+        @Published private(set) var mouseLocation: CGPoint = .zero
 
         private let minIndex: Int = 0
         private var maxIndex: Int = 0
@@ -25,6 +27,7 @@ final class AppContext: ObservableObject {
         }
 
         func update(with newDisplayCandidates: [DisplayCandidate], highlight: Highlight) {
+                mouseLocation = NSEvent.mouseLocation
                 guard newDisplayCandidates.isNotEmpty else {
                         resetDisplayContext()
                         return
