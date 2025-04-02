@@ -1,5 +1,6 @@
 import SwiftUI
 import CoreIME
+import CommonExtensions
 
 struct OptionsView: View {
 
@@ -64,12 +65,14 @@ private struct OptionLabel: View {
         init(verticalPadding: CGFloat, labelSet: LabelSet, isLabelLastZero: Bool, index: Int, highlightedIndex: Int, text: String, checked: Bool) {
                 self.verticalPadding = verticalPadding
                 self.labelText = LabelSet.labelText(for: index, labelSet: labelSet, isLabelLastZero: isLabelLastZero)
+                self.index = index
                 self.isHighlighted = index == highlightedIndex
                 self.text = text
                 self.checked = checked
         }
 
         private let verticalPadding: CGFloat
+        private let index: Int
         private let isHighlighted: Bool
         private let labelText: String
         private let text: String
@@ -88,5 +91,14 @@ private struct OptionLabel: View {
                 .padding(.vertical, verticalPadding)
                 .foregroundStyle(isHighlighted ? Color.white : Color.primary)
                 .background(isHighlighted ? Color.accentColor : Color.clear, in: RoundedRectangle(cornerRadius: 4, style: .continuous))
+                .contentShape(Rectangle())
+                .onHover { isHovering in
+                        guard isHovering else { return }
+                        guard isHighlighted.negative else { return }
+                        NotificationCenter.default.post(name: .highlightIndex, object: nil, userInfo: [NotificationKey.highlightIndex : index])
+                }
+                .onTapGesture {
+                        NotificationCenter.default.post(name: .selectIndex, object: nil, userInfo: [NotificationKey.selectIndex : index])
+                }
         }
 }

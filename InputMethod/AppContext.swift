@@ -74,21 +74,30 @@ final class AppContext: ObservableObject {
         func resetHighlightedIndex() {
                 highlightedIndex = minIndex
         }
+        func updateHighlightedIndex(to newIndex: Int) {
+                guard newIndex >= minIndex && newIndex <= maxIndex else { return }
+                highlightedIndex = newIndex
+        }
 
 
         // MARK: - OptionsView highlighted index
 
+        private let optionsMinIndex: Int = 0
+        private let optionsMaxIndex: Int = 9
         func increaseOptionsHighlightedIndex() {
-                let optionsMaxIndex: Int = 9
                 guard optionsHighlightedIndex < optionsMaxIndex else { return }
                 optionsHighlightedIndex += 1
         }
         func decreaseOptionsHighlightedIndex() {
-                guard optionsHighlightedIndex > minIndex else { return }
+                guard optionsHighlightedIndex > optionsMinIndex else { return }
                 optionsHighlightedIndex -= 1
         }
         func resetOptionsHighlightedIndex() {
                 optionsHighlightedIndex = minIndex
+        }
+        func updateOptionsHighlightedIndex(to newIndex: Int) {
+                guard newIndex >= optionsMinIndex && newIndex <= optionsMaxIndex else { return }
+                optionsHighlightedIndex = newIndex
         }
 }
 

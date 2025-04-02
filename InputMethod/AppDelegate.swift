@@ -1,3 +1,4 @@
+import Foundation
 import AppKit
 import InputMethodKit
 import os.log
@@ -63,4 +64,13 @@ extension CommandLine {
 
 extension Logger {
         static let shared: Logger = Logger(subsystem: "org.jyutping.inputmethod.Jyutping", category: "inputmethod")
+}
+
+extension Notification.Name {
+        static let highlightIndex = Notification.Name("org.jyutping.inputmethod.Jyutping.Notification.highlightIndex")
+        static let selectIndex = Notification.Name("org.jyutping.inputmethod.Jyutping.Notification.selectIndex")
+}
+struct NotificationKey {
+        static let highlightIndex: String = "NotificationKey.highlightIndex"
+        static let selectIndex: String = "NotificationKey.selectIndex"
 }

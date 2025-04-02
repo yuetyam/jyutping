@@ -45,6 +45,15 @@ struct CandidateBoard: View {
                                         .padding(.horizontal, lineSpacing / 2.0)
                                         .foregroundStyle(index == highlightedIndex ? Color.white : Color.primary)
                                         .background(index == highlightedIndex ? Color.accentColor : Color.clear, in: RoundedRectangle(cornerRadius: 5, style: .continuous))
+                                        .contentShape(Rectangle())
+                                        .onHover { isHovering in
+                                                guard isHovering else { return }
+                                                guard index != highlightedIndex else { return }
+                                                NotificationCenter.default.post(name: .highlightIndex, object: nil, userInfo: [NotificationKey.highlightIndex : index])
+                                        }
+                                        .onTapGesture {
+                                                NotificationCenter.default.post(name: .selectIndex, object: nil, userInfo: [NotificationKey.selectIndex : index])
+                                        }
                                 }
                         }
                         .padding(4)
@@ -75,6 +84,15 @@ struct CandidateBoard: View {
                                                 .padding(.vertical, lineSpacing / 2.0)
                                                 .foregroundStyle(index == highlightedIndex ? Color.white : Color.primary)
                                                 .fixedSize()
+                                        }
+                                        .contentShape(Rectangle())
+                                        .onHover { isHovering in
+                                                guard isHovering else { return }
+                                                guard index != highlightedIndex else { return }
+                                                NotificationCenter.default.post(name: .highlightIndex, object: nil, userInfo: [NotificationKey.highlightIndex : index])
+                                        }
+                                        .onTapGesture {
+                                                NotificationCenter.default.post(name: .selectIndex, object: nil, userInfo: [NotificationKey.selectIndex : index])
                                         }
                                 }
                         }

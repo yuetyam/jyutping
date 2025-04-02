@@ -129,6 +129,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
         }
         override func activateServer(_ sender: Any!) {
                 super.activateServer(sender)
+                NotificationCenter.default.removeObserver(self)
                 nonisolated(unsafe) let client: InputClient? = (sender as? InputClient) ?? client()
                 Task { @MainActor in
                         suggestionTask?.cancel()
@@ -148,6 +149,8 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         prepareWindow()
                         client?.overrideKeyboard(withKeyboardNamed: PresetConstant.systemABCKeyboardLayout)
                 }
+                NotificationCenter.default.addObserver(self, selector: #selector(highlightIndex(_:)), name: .highlightIndex, object: nil)
+                NotificationCenter.default.addObserver(self, selector: #selector(selectIndex(_:)), name: .selectIndex, object: nil)
         }
         override func deactivateServer(_ sender: Any!) {
                 nonisolated(unsafe) let client: InputClient? = (sender as? InputClient) ?? client()
@@ -179,6 +182,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                 logger.info("ActivatingWindowCount: \(activatingWindowCount)")
                         }
                 }
+                NotificationCenter.default.removeObserver(self)
                 super.deactivateServer(sender)
         }
         override func commitComposition(_ sender: Any!) {
@@ -203,6 +207,37 @@ final class JyutpingInputController: IMKInputController, Sendable {
 
                 // Do NOT use this line or it will freeze the entire IME
                 // super.commitComposition(sender)
+        }
+
+        @objc private func highlightIndex(_ notification: Notification) {
+                guard let userInfo = notification.userInfo else { return }
+                guard let newIndex = userInfo[NotificationKey.highlightIndex] as? Int else { return }
+                Task { @MainActor in
+                        switch inputForm {
+                        case .cantonese:
+                                appContext.updateHighlightedIndex(to: newIndex)
+                        case .transparent:
+                                break
+                        case .options:
+                                appContext.updateOptionsHighlightedIndex(to: newIndex)
+                        }
+                }
+        }
+        @objc private func selectIndex(_ notification: Notification) {
+                guard let userInfo = notification.userInfo else { return }
+                guard let selectedIndex = userInfo[NotificationKey.selectIndex] as? Int else { return }
+                Task { @MainActor in
+                        switch inputForm {
+                        case .cantonese:
+                                guard let selected = appContext.displayCandidates.fetch(selectedIndex) else { return }
+                                insert(selected.text)
+                                aftercareSelection(selected)
+                        case .transparent:
+                                break
+                        case .options:
+                                handleOptions(selectedIndex)
+                        }
+                }
         }
 
         private lazy var appContext: AppContext = AppContext()
