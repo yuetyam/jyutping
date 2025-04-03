@@ -260,7 +260,6 @@ struct HotkeysView: View {
         }
 }
 
-
 private struct LabelText: View {
         init(_ title: LocalizedStringKey) {
                 self.title = title
@@ -270,10 +269,9 @@ private struct LabelText: View {
                 Text(title)
                         .lineLimit(1)
                         .minimumScaleFactor(0.5)
-                        .frame(width: 270, alignment: .leading)
+                        .frame(width: 256, alignment: .leading)
         }
 }
-
 
 private struct KeyBlockView: View {
 
@@ -286,7 +284,7 @@ private struct KeyBlockView: View {
         var body: some View {
                 Text(verbatim: keyText)
                         .lineLimit(1)
-                        .minimumScaleFactor(0.4)
+                        .minimumScaleFactor(0.5)
                         .frame(width: 72, height: 24)
                         .background(Material.regular, in: RoundedRectangle(cornerRadius: 4, style: .continuous))
         }

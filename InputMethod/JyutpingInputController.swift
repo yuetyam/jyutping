@@ -571,10 +571,10 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 lazy var hasControlShiftModifiers: Bool = false
                 lazy var isEventHandled: Bool = true
                 switch modifiers {
+                case [.control, .shift] where (code == KeyCode.Symbol.VK_COMMA) || KeyCode.numberSet.contains(code):
+                        return false // NSMenu Shortcuts
                 case [.control, .shift], .control:
                         switch code {
-                        case KeyCode.Symbol.VK_COMMA:
-                                return false // Should be handled by NSMenu
                         case KeyCode.Symbol.VK_BACKQUOTE:
                                 hasControlShiftModifiers = true
                                 isEventHandled = true
@@ -583,10 +583,10 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                 hasControlShiftModifiers = true
                                 isEventHandled = true
                         case KeyCode.Alphabet.VK_U:
-                                guard isBuffering || inputForm.isOptions else { return false }
+                                guard isBuffering else { return false }
                                 hasControlShiftModifiers = true
                                 isEventHandled = true
-                        case let value where KeyCode.numberSet.contains(value):
+                        case _ where KeyCode.numberSet.contains(code):
                                 hasControlShiftModifiers = true
                                 isEventHandled = true
                         default:
@@ -613,6 +613,8 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 case .number(_):
                         switch inputForm {
                         case .cantonese:
+                                isEventHandled = true
+                        case .transparent where hasControlShiftModifiers:
                                 isEventHandled = true
                         case .transparent:
                                 return false
@@ -1246,51 +1248,105 @@ final class JyutpingInputController: IMKInputController, Sendable {
         // MARK: - macOS Menu
 
         override func menu() -> NSMenu! {
-                let menuTitle: String = String(localized: "Menu.Title")
-                let menu = NSMenu(title: menuTitle)
+                let menu = NSMenu(title: String(localized: "Menu.MenuTitle"))
 
-                let preferencesTitle: String = String(localized: "Menu.Preferences")
-                let preferences = NSMenuItem(title: preferencesTitle, action: #selector(openPreferencesWindow), keyEquivalent: ",")
-                preferences.keyEquivalentModifierMask = [.control, .shift]
-                menu.addItem(preferences)
+                let settings = NSMenuItem(title: String(localized: "Menu.General.Settings"), action: #selector(openSettingsWindow), keyEquivalent: ",")
+                settings.keyEquivalentModifierMask = [.control, .shift]
+                menu.addItem(settings)
 
-                let check4updatesTitle: String = String(localized: "Menu.CheckForUpdates")
-                let check4updates = NSMenuItem(title: check4updatesTitle, action: #selector(checkForUpdates), keyEquivalent: "")
+                let check4updates = NSMenuItem(title: String(localized: "Menu.General.CheckForUpdates"), action: #selector(checkForUpdates), keyEquivalent: String.empty)
                 menu.addItem(check4updates)
 
-                let helpTitle: String = String(localized: "Menu.Help")
-                let help = NSMenuItem(title: helpTitle, action: #selector(openHelpWindow), keyEquivalent: "")
+                let help = NSMenuItem(title: String(localized: "Menu.General.Help"), action: #selector(openHelpWindow), keyEquivalent: String.empty)
                 menu.addItem(help)
 
-                let aboutTitle: String = String(localized: "Menu.About")
-                let about = NSMenuItem(title: aboutTitle, action: #selector(openAboutWindow), keyEquivalent: "")
+                let about = NSMenuItem(title: String(localized: "Menu.General.About"), action: #selector(openAboutWindow), keyEquivalent: String.empty)
                 menu.addItem(about)
+
+                menu.addItem(.separator())
+
+                let traditional = NSMenuItem(title: String(localized: "Menu.CharacterStandard.Traditional"), action: #selector(toggleTraditionalCharacterStandard), keyEquivalent: "1")
+                traditional.keyEquivalentModifierMask = [.control, .shift]
+                traditional.state = (Options.characterStandard == .traditional) ? .on : .off
+                menu.addItem(traditional)
+
+                let hongkong = NSMenuItem(title: String(localized: "Menu.CharacterStandard.TraditionalHongKong"), action: #selector(toggleHongKongCharacterStandard), keyEquivalent: "2")
+                hongkong.keyEquivalentModifierMask = [.control, .shift]
+                hongkong.state = (Options.characterStandard == .hongkong) ? .on : .off
+                menu.addItem(hongkong)
+
+                let taiwan = NSMenuItem(title: String(localized: "Menu.CharacterStandard.TraditionalTaiwan"), action: #selector(toggleTaiwanCharacterStandard), keyEquivalent: "3")
+                taiwan.keyEquivalentModifierMask = [.control, .shift]
+                taiwan.state = (Options.characterStandard == .taiwan) ? .on : .off
+                menu.addItem(taiwan)
+
+                let simplified = NSMenuItem(title: String(localized: "Menu.CharacterStandard.Simplified"), action: #selector(toggleSimplifiedCharacterStandard), keyEquivalent: "4")
+                simplified.keyEquivalentModifierMask = [.control, .shift]
+                simplified.state = Options.characterStandard.isSimplified ? .on : .off
+                menu.addItem(simplified)
+
+                menu.addItem(.separator())
+
+                let halfWidth = NSMenuItem(title: String(localized: "Menu.CharacterForm.HalfWidth"), action: #selector(toggleHalfWidthCharacterForm), keyEquivalent: "5")
+                halfWidth.keyEquivalentModifierMask = [.control, .shift]
+                halfWidth.state = Options.characterForm.isHalfWidth ? .on : .off
+                menu.addItem(halfWidth)
+
+                let fullWidth = NSMenuItem(title: String(localized: "Menu.CharacterForm.FullWidth"), action: #selector(toggleFullWidthCharacterForm), keyEquivalent: "6")
+                fullWidth.keyEquivalentModifierMask = [.control, .shift]
+                fullWidth.state = Options.characterForm.isFullWidth ? .on : .off
+                menu.addItem(fullWidth)
+
+                menu.addItem(.separator())
+
+                let cantonesePunctuationForm = NSMenuItem(title: String(localized: "Menu.PunctuationForm.Cantonese"), action: #selector(toggleCantonesePunctuationForm), keyEquivalent: "7")
+                cantonesePunctuationForm.keyEquivalentModifierMask = [.control, .shift]
+                cantonesePunctuationForm.state = Options.punctuationForm.isCantoneseMode ? .on : .off
+                menu.addItem(cantonesePunctuationForm)
+
+                let englishPunctuationForm = NSMenuItem(title: String(localized: "Menu.PunctuationForm.English"), action: #selector(toggleEnglishPunctuationForm), keyEquivalent: "8")
+                englishPunctuationForm.keyEquivalentModifierMask = [.control, .shift]
+                englishPunctuationForm.state = Options.punctuationForm.isEnglishMode ? .on : .off
+                menu.addItem(englishPunctuationForm)
+
+                menu.addItem(.separator())
+
+                let cantoneseInputMethodMode = NSMenuItem(title: String(localized: "Menu.InputMethodMode.Cantonese"), action: #selector(toggleCantoneseInputMethodMode), keyEquivalent: "9")
+                cantoneseInputMethodMode.keyEquivalentModifierMask = [.control, .shift]
+                cantoneseInputMethodMode.state = Options.inputMethodMode.isCantonese ? .on : .off
+                menu.addItem(cantoneseInputMethodMode)
+
+                let abcInputMethodMode = NSMenuItem(title: String(localized: "Menu.InputMethodMode.ABC"), action: #selector(toggleABCInputMethodMode), keyEquivalent: "0")
+                abcInputMethodMode.keyEquivalentModifierMask = [.control, .shift]
+                abcInputMethodMode.state = Options.inputMethodMode.isABC ? .on : .off
+                menu.addItem(abcInputMethodMode)
 
                 return menu
         }
-        @objc private func openPreferencesWindow() {
+
+        @objc private func openSettingsWindow() {
                 AppSettings.updateSelectedPreferencesSidebarRow(to: .general)
-                displayPreferencesView()
+                displaySettingsView()
         }
         @objc func checkForUpdates() {
                 AppDelegate.shared.checkForUpdates()
         }
         @objc private func openHelpWindow() {
                 AppSettings.updateSelectedPreferencesSidebarRow(to: .hotkeys)
-                displayPreferencesView()
+                displaySettingsView()
         }
         @objc private func openAboutWindow() {
                 AppSettings.updateSelectedPreferencesSidebarRow(to: .about)
-                displayPreferencesView()
+                displaySettingsView()
         }
-        private func displayPreferencesView() {
+        private func displaySettingsView() {
                 guard inputStage.isBuffering.negative else { return }
                 guard SettingsWindow.shared.isVisible.negative else { return }
                 SettingsWindow.shared.level = window.level
-                SettingsWindow.shared.setFrame(preferencesWindowFrame(), display: true)
+                SettingsWindow.shared.setFrame(settingsWindowFrame(), display: true)
                 SettingsWindow.shared.orderFrontRegardless()
         }
-        private func preferencesWindowFrame() -> CGRect {
+        private func settingsWindowFrame() -> CGRect {
                 let originPoint: CGPoint = NSScreen.main?.visibleFrame.origin ?? window.screen?.visibleFrame.origin ?? .zero
                 let maxSize: CGSize = NSScreen.main?.visibleFrame.size ?? window.screen?.visibleFrame.size ?? CGSize(width: 1280, height: 800)
                 let maxWidth: CGFloat = maxSize.width
@@ -1301,4 +1357,15 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 let height: CGFloat = (maxHeight / 5.0) * 3.0
                 return CGRect(x: x, y: y, width: width, height: height)
         }
+
+        @objc private func toggleTraditionalCharacterStandard() { handleOptions(0) }
+        @objc private func toggleHongKongCharacterStandard()    { handleOptions(1) }
+        @objc private func toggleTaiwanCharacterStandard()      { handleOptions(2) }
+        @objc private func toggleSimplifiedCharacterStandard()  { handleOptions(3) }
+        @objc private func toggleHalfWidthCharacterForm()       { handleOptions(4) }
+        @objc private func toggleFullWidthCharacterForm()       { handleOptions(5) }
+        @objc private func toggleCantonesePunctuationForm()     { handleOptions(6) }
+        @objc private func toggleEnglishPunctuationForm()       { handleOptions(7) }
+        @objc private func toggleCantoneseInputMethodMode()     { handleOptions(8) }
+        @objc private func toggleABCInputMethodMode()           { handleOptions(9) }
 }

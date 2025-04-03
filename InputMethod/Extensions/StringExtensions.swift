@@ -42,13 +42,11 @@ extension String {
 }
 
 
-extension String {
+extension StringProtocol {
 
-        /// Transform to Full Width characters
-        /// - Returns: Full Width characters
+        /// Transform to Full-width characters
+        /// - Returns: A new String with Full-width characters
         func fullWidth() -> String {
-                let transformed: String? = self.applyingTransform(.fullwidthToHalfwidth, reverse: true)
-                return transformed ?? self
+                return self.applyingTransform(.fullwidthToHalfwidth, reverse: true) ?? (self as? String) ?? String(self)
         }
 }
-
