@@ -32,18 +32,23 @@ extension String {
         public static let separator: String = "\u{27}"
 }
 
+extension StringTransform {
+        /// A constant containing the transformation of a string from simplified Chinese characters to traditional forms.
+        public static let simplifiedToTraditional: StringTransform = StringTransform("Simplified-Traditional")
+}
+
 extension StringProtocol {
 
         /// Convert simplified CJKV characters to traditional
         /// - Returns: Traditional CJKV characters
         public func convertedS2T() -> String {
-                return self.applyingTransform(StringTransform("Simplified-Traditional"), reverse: false) ?? (self as? String) ?? String(self)
+                return self.applyingTransform(.simplifiedToTraditional, reverse: false) ?? (self as? String) ?? String(self)
         }
 
         /// Convert traditional CJKV characters to simplified
         /// - Returns: Simplified CJKV characters
         public func convertedT2S() -> String {
-                return self.applyingTransform(StringTransform("Simplified-Traditional"), reverse: true) ?? (self as? String) ?? String(self)
+                return self.applyingTransform(.simplifiedToTraditional, reverse: true) ?? (self as? String) ?? String(self)
         }
 
         /// Returns a new String made by removing `.whitespacesAndNewlines` & `.controlCharacters` from both ends of the String.

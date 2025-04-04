@@ -178,8 +178,6 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                 NSApp.windows.filter({ $0 != window }).forEach({ $0.close() })
                         } else if activatingWindowCount > 10 {
                                 logger.notice("Jyutping Input Method containing more than 10 windows")
-                        } else {
-                                logger.info("ActivatingWindowCount: \(activatingWindowCount)")
                         }
                 }
                 NotificationCenter.default.removeObserver(self)
