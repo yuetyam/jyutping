@@ -33,7 +33,7 @@ struct PreferencesView: View {
                                                 Label("PreferencesView.NavigationTitle.General", systemImage: "gear").tag(PreferencesSidebarRow.general)
                                                 Label("PreferencesView.NavigationTitle.ToneInput", systemImage: "bell").tag(PreferencesSidebarRow.toneInput)
                                                 Label("PreferencesView.NavigationTitle.ReverseLookup", systemImage: "doc.text.magnifyingglass").tag(PreferencesSidebarRow.reverseLookup)
-                                                Label("PreferencesView.NavigationTitle.Fonts", systemImage: "textformat").tag(PreferencesSidebarRow.fonts)
+                                                Label("PreferencesView.NavigationTitle.Fonts", systemImage: "character.square").tag(PreferencesSidebarRow.fonts)
                                         } header: {
                                                 Text("PreferencesView.SectionHeader.Candidates").textCase(nil)
                                         }
@@ -86,7 +86,7 @@ struct PreferencesView: View {
                                                 NavigationLink {
                                                         FontPreferencesView().applyVisualEffect()
                                                 } label: {
-                                                        Label("PreferencesView.NavigationTitle.Fonts", systemImage: "textformat")
+                                                        Label("PreferencesView.NavigationTitle.Fonts", systemImage: "character.square")
                                                 }
                                         } header: {
                                                 Text("PreferencesView.SectionHeader.Candidates").textCase(nil)
