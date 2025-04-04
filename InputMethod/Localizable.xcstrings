@@ -981,7 +981,7 @@
         }
       }
     },
-    "FontPreferencesView.CandidateFont" : {
+    "FontPreferencesView.FontModePicker.Candidate" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1051,7 +1051,7 @@
         }
       }
     },
-    "FontPreferencesView.CandidateFontSize" : {
+    "FontPreferencesView.FontSizePicker.Candidate" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1121,7 +1121,7 @@
         }
       }
     },
-    "FontPreferencesView.CommentFont" : {
+    "FontPreferencesView.FontModePicker.Comment" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1191,7 +1191,7 @@
         }
       }
     },
-    "FontPreferencesView.CommentFontSize" : {
+    "FontPreferencesView.FontSizePicker.Comment" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1261,7 +1261,7 @@
         }
       }
     },
-    "FontPreferencesView.Custom" : {
+    "FontPreferencesView.FontMode.Custom" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1331,7 +1331,7 @@
         }
       }
     },
-    "FontPreferencesView.Default" : {
+    "FontPreferencesView.FontMode.Default" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1401,7 +1401,7 @@
         }
       }
     },
-    "FontPreferencesView.SerialNumberFont" : {
+    "FontPreferencesView.FontModePicker.SerialNumber" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1471,7 +1471,7 @@
         }
       }
     },
-    "FontPreferencesView.SerialNumberFontSize" : {
+    "FontPreferencesView.FontSizePicker.SerialNumber" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1541,7 +1541,7 @@
         }
       }
     },
-    "FontPreferencesView.System" : {
+    "FontPreferencesView.FontMode.System" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {

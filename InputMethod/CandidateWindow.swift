@@ -37,7 +37,6 @@ final class SettingsWindow: NSPanel {
                 isMovableByWindowBackground = true
                 title = String(localized: "PreferencesView.Window.Title")
                 toolbarStyle = .unifiedCompact
-                contentViewController = NSHostingController(rootView: PreferencesView())
         }
         static let shared: SettingsWindow = SettingsWindow(level: nil)
 }
