@@ -29,10 +29,18 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 window.contentViewController = NSHostingController(rootView: MotherBoard().environmentObject(appContext))
                 window.orderFrontRegardless()
         }
-        private func updateWindowFrame(_ frame: CGRect? = nil) {
-                window.setFrame(frame ?? windowFrame, display: true)
+        @objc private func handleContentSizeChanged(_ notification: Notification) {
+                guard let useInfo = notification.userInfo else { return }
+                guard let contentSize = useInfo[NotificationKey.contentSize] as? CGSize else { return }
+                guard contentSize.width > 2 else { return }
+                Task.detached { @MainActor in
+                        self.window.setFrame(self.computeWindowFrame(size: contentSize), display: true)
+                }
         }
-        private var windowFrame: CGRect {
+        private func updateWindowFrame(_ frame: CGRect? = nil) {
+                window.setFrame(frame ?? computeWindowFrame(), display: true)
+        }
+        private func computeWindowFrame(size: CGSize? = nil) -> CGRect {
                 let quadrant = appContext.quadrant
                 let position: CGPoint = {
                         guard let cursorBlock = currentCursorBlock ?? currentClient?.cursorBlock else { return screenOrigin }
@@ -45,9 +53,9 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 case .upperRight:
                         CGFloat.zero
                 case .upperLeft:
-                        800
+                        size?.width ?? 800
                 case .bottomLeft:
-                        800
+                        size?.width ?? 800
                 case .bottomRight:
                         44
                 }
@@ -149,6 +157,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         prepareWindow()
                         client?.overrideKeyboard(withKeyboardNamed: PresetConstant.systemABCKeyboardLayout)
                 }
+                NotificationCenter.default.addObserver(self, selector: #selector(handleContentSizeChanged(_:)), name: .contentSize, object: nil)
                 NotificationCenter.default.addObserver(self, selector: #selector(highlightIndex(_:)), name: .highlightIndex, object: nil)
                 NotificationCenter.default.addObserver(self, selector: #selector(selectIndex(_:)), name: .selectIndex, object: nil)
         }
@@ -1158,15 +1167,19 @@ final class JyutpingInputController: IMKInputController, Sendable {
 
         private func handleOptions(_ index: Int? = nil) {
                 let selectedIndex: Int = index ?? appContext.optionsHighlightedIndex
+                var didCharacterStandardChanged: Bool = false
                 defer {
                         clearOptionsViewHintText()
                         updateInputForm()
                         if Options.inputMethodMode.isABC {
                                 passBuffer()
                                 updateWindowFrame(.zero)
+                        } else if candidates.isEmpty {
+                                updateWindowFrame(.zero)
+                        } else if didCharacterStandardChanged {
+                                bufferText += String.empty
                         } else {
-                                let frame: CGRect? = candidates.isEmpty ? .zero : nil
-                                updateWindowFrame(frame)
+                                updateWindowFrame()
                         }
                 }
                 switch selectedIndex {
@@ -1187,22 +1200,16 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 default:
                         break
                 }
-                let newVariant: CharacterStandard? = {
-                        switch selectedIndex {
-                        case 0:
-                                return .traditional
-                        case 1:
-                                return .hongkong
-                        case 2:
-                                return .taiwan
-                        case 3:
-                                return .simplified
-                        default:
-                                return nil
-                        }
-                }()
+                let newVariant: CharacterStandard? = switch selectedIndex {
+                case 0: .traditional
+                case 1: .hongkong
+                case 2: .taiwan
+                case 3: .simplified
+                default: nil
+                }
                 guard let newVariant, newVariant != Options.characterStandard else { return }
                 Options.updateCharacterStandard(to: newVariant)
+                didCharacterStandardChanged = true
         }
 
         private func aftercareSelection(_ selected: DisplayCandidate, shouldProcessUserLexicon: Bool = true) {

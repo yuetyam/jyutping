@@ -67,10 +67,12 @@ extension Logger {
 }
 
 extension Notification.Name {
+        static let contentSize = Notification.Name("org.jyutping.inputmethod.Jyutping.Notification.contentSize")
         static let highlightIndex = Notification.Name("org.jyutping.inputmethod.Jyutping.Notification.highlightIndex")
         static let selectIndex = Notification.Name("org.jyutping.inputmethod.Jyutping.Notification.selectIndex")
 }
 struct NotificationKey {
+        static let contentSize: String = "NotificationKey.contentSize"
         static let highlightIndex: String = "NotificationKey.highlightIndex"
         static let selectIndex: String = "NotificationKey.selectIndex"
 }

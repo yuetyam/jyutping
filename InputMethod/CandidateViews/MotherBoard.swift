@@ -11,9 +11,18 @@ struct MotherBoard: View {
                         if context.inputForm.isOptions {
                                 OptionsView()
                         } else if context.isClean {
-                                EmptyView()
+                                Color.clear
                         } else {
                                 CandidateBoard()
+                                        .background(
+                                                // TODO: Replace this with onGeometryChange modifier when dropping macOS 12 support
+                                                GeometryReader { proxy in
+                                                        Color.clear.task(id: proxy.size) {
+                                                                guard context.quadrant.isNegativeHorizontal else { return }
+                                                                NotificationCenter.default.post(name: .contentSize, object: nil, userInfo: [NotificationKey.contentSize : proxy.size])
+                                                        }
+                                                }
+                                        )
                         }
                 }
         }
