@@ -79,18 +79,6 @@ extension KeyboardForm {
                         "???"
                 }
         }
-        var tenKeyTransformKeyText: String {
-                return switch self {
-                case .alphabetic:
-                        "ABC"
-                case .numeric:
-                        "#@$"
-                case .tenKeyNumeric:
-                        "123"
-                default:
-                        "???"
-                }
-        }
 }
 
 enum QwertyForm: Int {

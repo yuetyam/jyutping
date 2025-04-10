@@ -35,7 +35,7 @@ struct TenKeyKeyboard: View {
                                                 }
                                         }
                                         HStack(spacing: 0) {
-                                                TenKeyNavigateKey(destination: .tenKeyNumeric)
+                                                TenKeyNavigateKey(destination: context.numericLayout.isNumberKeyPad ? .tenKeyNumeric : .numeric)
                                                 if context.needsInputModeSwitchKey {
                                                         TenKeyGlobeKey()
                                                 }
@@ -44,7 +44,7 @@ struct TenKeyKeyboard: View {
                                 }
                                 VStack(spacing: 0) {
                                         TenKeyBackspaceKey()
-                                        TenKeyNavigateKey(destination: .numeric)
+                                        TenKeyNavigateKey(destination: context.numericLayout.isNumberKeyPad ? .numeric : .symbolic)
                                         TenKeyReturnKey()
                                 }
                         }

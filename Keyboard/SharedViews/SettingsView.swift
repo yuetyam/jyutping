@@ -161,8 +161,6 @@ struct SettingsView: View {
                                                                 let newLayout: NumericLayout = isOn ? .numberKeyPad : .default
                                                                 context.updateNumericLayout(to: newLayout)
                                                         }
-                                        } footer: {
-                                                Text("SettingsView.NumericLayout.SectionFooter").textCase(nil)
                                         }
                                 }
 
