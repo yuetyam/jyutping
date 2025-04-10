@@ -18,9 +18,8 @@ struct EmojiBoard: View {
 
         @State private var currentCategory: Emoji.Category = .frequent
 
-        private let rows: [GridItem] = Array(repeating: GridItem(.flexible()), count: 5)
-
         var body: some View {
+                let rows: [GridItem] = Array(repeating: GridItem(.flexible()), count: context.keyboardInterface.isPhoneLandscape ? 3 : 5)
                 ScrollViewReader { proxy in
                         HStack {
                                 Text(currentCategory.title)

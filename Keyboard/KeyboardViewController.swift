@@ -724,11 +724,6 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 if inputStage.isBuffering && shouldStayBuffering.negative {
                         inputBufferText()
                 }
-                let currentHeight = view.frame.size.height
-                if currentHeight > 200 {
-                        keyboardHeight = currentHeight
-                        expandedKeyboardHeight = currentHeight + 150
-                }
                 let shouldAdjustKeyboardCase: Bool = (keyboardForm == .alphabetic) && (keyboardCase != .lowercased)
                 if shouldAdjustKeyboardCase {
                         keyboardCase = .lowercased
@@ -844,9 +839,11 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 widthUnit = newKeyboardWidth / keyboardInterface.widthUnitTimes
                 tenKeyWidthUnit = newKeyboardWidth / 5.0
                 heightUnit = keyboardInterface.keyHeightUnit(of: screenSize)
+                keyboardHeight = heightUnit * (keyboardInterface.isLargePad ? 5 : 4) + PresetConstant.toolBarHeight
+                expandedKeyboardHeight = keyboardHeight + 150
         }
 
-        @Published private(set) var expandedKeyboardHeight: CGFloat = 272 + 150
+        @Published private(set) var expandedKeyboardHeight: CGFloat = 284 + 150
         @Published private(set) var isKeyboardHeightExpanded: Bool = false
         func toggleKeyboardHeight() {
                 isKeyboardHeightExpanded.toggle()

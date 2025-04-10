@@ -71,6 +71,9 @@ extension KeyboardInterface {
                         return false
                 }
         }
+
+        /// 13-inch iPad
+        var isLargePad: Bool { self == .padPortraitLarge || self == .padLandscapeLarge }
 }
 
 extension KeyboardInterface {
