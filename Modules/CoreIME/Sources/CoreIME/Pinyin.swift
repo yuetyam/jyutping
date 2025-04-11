@@ -3,51 +3,51 @@ import SQLite3
 
 extension Engine {
         public static func pinyinReverseLookup(text: String, schemes: [[String]]) -> [Candidate] {
-                let shortcutStatement: OpaquePointer? = prepareShortcutStatement()
-                let matchStatement: OpaquePointer? = prepareMatchStatement()
+                let anchorsStatement: OpaquePointer? = prepareAnchorsStatement()
+                let pingStatement: OpaquePointer? = preparePingStatement()
                 defer {
-                        sqlite3_finalize(shortcutStatement)
-                        sqlite3_finalize(matchStatement)
+                        sqlite3_finalize(anchorsStatement)
+                        sqlite3_finalize(pingStatement)
                 }
                 let canSegment: Bool = schemes.subelementCount > 0
                 if canSegment {
-                        return process(pinyin: text, schemes: schemes, shortcutStatement: shortcutStatement, matchStatement: matchStatement)
+                        return process(pinyin: text, schemes: schemes, anchorsStatement: anchorsStatement, pingStatement: pingStatement)
                                 .map({ Engine.reveresLookup(text: $0.text, input: $0.input, mark: $0.mark) })
                                 .flatMap({ $0 })
                 } else {
-                        return processVerbatim(pinyin: text, shortcutStatement: shortcutStatement, matchStatement: matchStatement)
+                        return processVerbatim(pinyin: text, anchorsStatement: anchorsStatement, pingStatement: pingStatement)
                                 .map({ Engine.reveresLookup(text: $0.text, input: $0.input, mark: $0.mark) })
                                 .flatMap({ $0 })
                 }
         }
 
-        private static func processVerbatim(pinyin text: String, shortcutStatement: OpaquePointer?, matchStatement: OpaquePointer?, limit: Int64? = nil) -> [PinyinLexicon] {
+        private static func processVerbatim(pinyin text: String, anchorsStatement: OpaquePointer?, pingStatement: OpaquePointer?, limit: Int64? = nil) -> [PinyinLexicon] {
                 let rounds = (0..<text.count).map({ number -> [PinyinLexicon] in
                         let leading: String = String(text.dropLast(number))
-                        return match(pinyin: leading, statement: matchStatement, limit: limit) + shortcut(pinyin: leading, statement: shortcutStatement, limit: limit)
+                        return pingMatch(pinyin: leading, statement: pingStatement, limit: limit) + anchorMatch(pinyin: leading, statement: anchorsStatement, limit: limit)
                 })
                 return rounds.flatMap({ $0 }).uniqued()
         }
 
-        private static func process(pinyin text: String, schemes: [[String]], shortcutStatement: OpaquePointer?, matchStatement: OpaquePointer?, limit: Int64? = nil) -> [PinyinLexicon] {
+        private static func process(pinyin text: String, schemes: [[String]], anchorsStatement: OpaquePointer?, pingStatement: OpaquePointer?, limit: Int64? = nil) -> [PinyinLexicon] {
                 let textCount = text.count
-                let primary = query(pinyin: text, schemes: schemes, shortcutStatement: shortcutStatement, matchStatement: matchStatement, limit: limit)
-                guard let firstInputCount = primary.first?.inputCount else { return processVerbatim(pinyin: text, shortcutStatement: shortcutStatement, matchStatement: matchStatement, limit: limit) }
+                let primary = query(pinyin: text, schemes: schemes, anchorsStatement: anchorsStatement, pingStatement: pingStatement, limit: limit)
+                guard let firstInputCount = primary.first?.inputCount else { return processVerbatim(pinyin: text, anchorsStatement: anchorsStatement, pingStatement: pingStatement, limit: limit) }
                 guard firstInputCount != textCount else { return primary }
                 let prefixes: [PinyinLexicon] = {
                         let hasPrefectSchemes: Bool = schemes.contains(where: { $0.summedLength == textCount })
                         guard hasPrefectSchemes.negative else { return [] }
-                        let shortcuts = schemes.map({ scheme -> [PinyinLexicon] in
+                        let matches = schemes.map({ scheme -> [PinyinLexicon] in
                                 let tail = text.dropFirst(scheme.summedLength)
                                 guard let lastAnchor = tail.first else { return [] }
                                 let schemeAnchors = scheme.compactMap(\.first)
                                 let anchors: String = String(schemeAnchors + [lastAnchor])
                                 let text2mark: String = scheme.joined(separator: String.space) + String.space + tail
-                                return shortcut(pinyin: anchors, statement: shortcutStatement, limit: limit)
+                                return anchorMatch(pinyin: anchors, statement: anchorsStatement, limit: limit)
                                         .filter({ $0.pinyin.hasPrefix(text2mark) })
                                         .map({ PinyinLexicon(text: $0.text, pinyin: $0.pinyin, input: text, mark: text2mark) })
                         })
-                        return shortcuts.flatMap({ $0 })
+                        return matches.flatMap({ $0 })
                 }()
                 guard prefixes.isEmpty else { return prefixes + primary }
                 let headTexts = primary.map(\.input).uniqued()
@@ -55,7 +55,7 @@ extension Engine {
                         let headInputCount = headText.count
                         let tailText = String(text.dropFirst(headInputCount))
                         let tailSegmentation = PinyinSegmentor.segment(text: tailText)
-                        guard let tail = process(pinyin: tailText, schemes: tailSegmentation, shortcutStatement: shortcutStatement, matchStatement: matchStatement, limit: 50).sorted().first else { return nil }
+                        guard let tail = process(pinyin: tailText, schemes: tailSegmentation, anchorsStatement: anchorsStatement, pingStatement: pingStatement, limit: 50).sorted().first else { return nil }
                         guard let head = primary.filter({ $0.input == headText }).sorted().first else { return nil }
                         let conjoined = head + tail
                         return conjoined
@@ -64,15 +64,15 @@ extension Engine {
                 return preferredConcatenated + primary
         }
 
-        private static func query(pinyin text: String, schemes: [[String]], shortcutStatement: OpaquePointer?, matchStatement: OpaquePointer?, limit: Int64? = nil) -> [PinyinLexicon] {
+        private static func query(pinyin text: String, schemes: [[String]], anchorsStatement: OpaquePointer?, pingStatement: OpaquePointer?, limit: Int64? = nil) -> [PinyinLexicon] {
                 let textCount = text.count
-                let pinyinMatched = match(pinyin: text, statement: matchStatement, limit: limit)
-                let anchorsMatch = shortcut(pinyin: text, statement: shortcutStatement, limit: limit)
-                let searches = search(pinyin: text, schemes: schemes, matchStatement: matchStatement, limit: limit)
+                let pinyinMatched = pingMatch(pinyin: text, statement: pingStatement, limit: limit)
+                let anchorsMatch = anchorMatch(pinyin: text, statement: anchorsStatement, limit: limit)
+                let searches = search(pinyin: text, schemes: schemes, pingStatement: pingStatement, limit: limit)
                 return (pinyinMatched + anchorsMatch + searches).ordered(with: textCount)
         }
 
-        private static func search(pinyin text: String, schemes: [[String]], matchStatement: OpaquePointer?, limit: Int64? = nil) -> [PinyinLexicon] {
+        private static func search(pinyin text: String, schemes: [[String]], pingStatement: OpaquePointer?, limit: Int64? = nil) -> [PinyinLexicon] {
                 let textCount: Int = text.count
                 let perfectSchemes = schemes.filter({ $0.summedLength == textCount })
                 if perfectSchemes.isNotEmpty {
@@ -80,24 +80,24 @@ extension Engine {
                                 var queries: [[PinyinLexicon]] = []
                                 for number in (0..<scheme.count) {
                                         let pingText = scheme.dropLast(number).joined()
-                                        let matched = match(pinyin: pingText, statement: matchStatement, limit: limit)
+                                        let matched = pingMatch(pinyin: pingText, statement: pingStatement, limit: limit)
                                         queries.append(matched)
                                 }
                                 return queries.flatMap({ $0 })
                         })
                         return matches.flatMap({ $0 })
                 } else {
-                        return schemes.map({ match(pinyin: $0.joined(), statement: matchStatement, limit: limit) }).flatMap({ $0 })
+                        return schemes.map({ pingMatch(pinyin: $0.joined(), statement: pingStatement, limit: limit) }).flatMap({ $0 })
                 }
         }
 
-        private static func prepareMatchStatement() -> OpaquePointer? {
-                let command: String = "SELECT rowid, word, pinyin FROM pinyintable WHERE ping = ? LIMIT ?;"
+        private static func preparePingStatement() -> OpaquePointer? {
+                let command: String = "SELECT rowid, word, romanization FROM pinyintable WHERE ping = ? LIMIT ?;"
                 var statement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(Engine.database, command, -1, &statement, nil) == SQLITE_OK else { return nil }
                 return statement
         }
-        private static func match(pinyin text: String, statement: OpaquePointer?, limit: Int64? = nil) -> [PinyinLexicon] {
+        private static func pingMatch(pinyin text: String, statement: OpaquePointer?, limit: Int64? = nil) -> [PinyinLexicon] {
                 let limit: Int64 = limit ?? -1
                 sqlite3_reset(statement)
                 sqlite3_bind_int64(statement, 1, Int64(text.hash))
@@ -113,13 +113,13 @@ extension Engine {
                 }
                 return items
         }
-        private static func prepareShortcutStatement() -> OpaquePointer? {
-                let command: String = "SELECT rowid, word, pinyin FROM pinyintable WHERE shortcut = ? LIMIT ?;"
+        private static func prepareAnchorsStatement() -> OpaquePointer? {
+                let command: String = "SELECT rowid, word, romanization FROM pinyintable WHERE anchors = ? LIMIT ?;"
                 var statement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(Engine.database, command, -1, &statement, nil) == SQLITE_OK else { return nil }
                 return statement
         }
-        private static func shortcut(pinyin text: String, statement: OpaquePointer?, limit: Int64? = nil) -> [PinyinLexicon] {
+        private static func anchorMatch(pinyin text: String, statement: OpaquePointer?, limit: Int64? = nil) -> [PinyinLexicon] {
                 guard let code = text.charcode else { return [] }
                 let limit: Int64 = limit ?? 50
                 sqlite3_reset(statement)

@@ -54,8 +54,11 @@ struct DatabasePreparer {
                         "CREATE INDEX structurepingindex ON structuretable(ping);",
                         "CREATE INDEX structuretenkeycodeindex ON structuretable(tenkeycode);",
 
-                        "CREATE INDEX pinyinshortcutindex ON pinyintable(shortcut);",
                         "CREATE INDEX pinyinpingindex ON pinyintable(ping);",
+                        "CREATE INDEX pinyinanchorsindex ON pinyintable(anchors);",
+                        "CREATE INDEX pinyinstrictindex ON pinyintable(ping, anchors);",
+                        "CREATE INDEX pinyintenkeycodeindex ON pinyintable(tenkeycode);",
+                        "CREATE INDEX pinyintenkeyanchorsindex ON pinyintable(tenkeyanchors);",
 
                         "CREATE INDEX cangjiecangjie5index ON cangjietable(cangjie5);",
                         "CREATE INDEX cangjiecj5codeindex ON cangjietable(cj5code);",
@@ -155,32 +158,26 @@ struct DatabasePreparer {
                 guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
         }
         private static func createPinyinTable() async {
-                let createTable: String = "CREATE TABLE pinyintable(word TEXT NOT NULL, pinyin TEXT NOT NULL, shortcut INTEGER NOT NULL, ping INTEGER NOT NULL);"
+                let createTable: String = "CREATE TABLE pinyintable(word TEXT NOT NULL, romanization TEXT NOT NULL, anchors INTEGER NOT NULL, ping INTEGER NOT NULL, tenkeyanchors INTEGER NOT NULL, tenkeycode INTEGER NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
                 sqlite3_finalize(createStatement)
-                let sourceLines: [String] = Pinyin.generate()
+                let sourceEntries: [LexiconEntry] = Pinyin.process()
                 func insert(values: String) {
-                        let insert: String = "INSERT INTO pinyintable (word, pinyin, shortcut, ping) VALUES \(values);"
+                        let insert: String = "INSERT INTO pinyintable (word, romanization, anchors, ping, tenkeyanchors, tenkeycode) VALUES \(values);"
                         var insertStatement: OpaquePointer? = nil
                         defer { sqlite3_finalize(insertStatement) }
                         guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }
                         guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
                 }
                 let range: Range<Int> = 0..<2000
-                let distance: Int = sourceLines.count / 2000
+                let distance: Int = sourceEntries.count / 2000
                 for number in range {
-                        let bound: Int = number == 1999 ? sourceLines.count : ((number + 1) * distance)
-                        let part = sourceLines[(number * distance)..<bound]
-                        let entries = part.compactMap { line -> String? in
-                                let parts = line.split(separator: "\t")
-                                guard parts.count == 4 else { return nil }
-                                let word = parts[0]
-                                let pinyin = parts[1]
-                                let shortcut = parts[2]
-                                let ping = parts[3]
-                                return "('\(word)', '\(pinyin)', \(shortcut), \(ping))"
+                        let bound: Int = (number == 1999) ? sourceEntries.count : ((number + 1) * distance)
+                        let part = sourceEntries[(number * distance)..<bound]
+                        let entries = part.map { entry -> String in
+                                return "('\(entry.word)', '\(entry.romanization)', \(entry.anchors), \(entry.ping), \(entry.tenKeyAnchors), \(entry.tenKeyCode))"
                         }
                         let values: String = entries.joined(separator: ", ")
                         insert(values: values)
