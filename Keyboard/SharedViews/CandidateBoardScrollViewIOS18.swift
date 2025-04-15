@@ -17,6 +17,7 @@ struct CandidateBoardScrollViewIOS18: View {
                 let characterStandard: CharacterStandard = Options.characterStandard
                 let commentStyle: CommentStyle = Options.commentStyle
                 let toneStyle: CommentToneStyle = Options.commentToneStyle
+                let isCompatibleModeOn: Bool = Options.isCompatibleModeOn
                 let isCompactKeyboard: Bool = context.keyboardInterface.isCompact
                 let rows = context.candidates.boardRows(keyboardWidth: context.keyboardWidth)
                 ScrollView(.vertical) {
@@ -55,7 +56,7 @@ struct CandidateBoardScrollViewIOS18: View {
                                                                         switch commentStyle {
                                                                         case .aboveCandidates:
                                                                                 VStack(spacing: -2) {
-                                                                                        RomanizationLabel(candidate: candidate, toneStyle: toneStyle)
+                                                                                        RomanizationLabel(candidate: candidate, toneStyle: toneStyle, compatibleMode: isCompatibleModeOn)
                                                                                         Text(text)
                                                                                                 .font(isCompactKeyboard ? .candidate : .iPadCandidate)
                                                                                                 .minimumScaleFactor(0.4)
@@ -68,7 +69,7 @@ struct CandidateBoardScrollViewIOS18: View {
                                                                                                 .font(isCompactKeyboard ? .candidate : .iPadCandidate)
                                                                                                 .minimumScaleFactor(0.4)
                                                                                                 .lineLimit(1)
-                                                                                        RomanizationLabel(candidate: candidate, toneStyle: toneStyle)
+                                                                                        RomanizationLabel(candidate: candidate, toneStyle: toneStyle, compatibleMode: isCompatibleModeOn)
                                                                                 }
                                                                                 .padding(2)
                                                                         case .noComments:

@@ -3,20 +3,22 @@ import CoreIME
 import CommonExtensions
 
 struct VerticalPageCandidateLabel: View {
-        init(isHighlighted: Bool, index: Int, candidate: DisplayCandidate, commentStyle: CommentDisplayStyle, toneStyle: ToneDisplayStyle, toneColor: ToneDisplayColor, labelSet: LabelSet, isLabelLastZero: Bool) {
+        init(isHighlighted: Bool, index: Int, candidate: DisplayCandidate, commentStyle: CommentDisplayStyle, toneStyle: ToneDisplayStyle, toneColor: ToneDisplayColor, labelSet: LabelSet, isLabelLastZero: Bool, compatibleMode: Bool) {
                 self.label = LabelSet.labelText(for: index, labelSet: labelSet, isLabelLastZero: isLabelLastZero)
                 self.labelOpacity = isHighlighted ? 1 : 0.75
                 self.candidate = candidate
                 self.commentStyle = commentStyle
                 self.toneStyle = toneStyle
-                self.shouldModifyToneColor = toneColor != .normal
+                self.shallowTone = toneColor.isShallow
+                self.compatibleMode = compatibleMode
         }
         private let label: String
         private let labelOpacity: Double
         private let candidate: DisplayCandidate
         private let commentStyle: CommentDisplayStyle
         private let toneStyle: ToneDisplayStyle
-        private let shouldModifyToneColor: Bool
+        private let shallowTone: Bool
+        private let compatibleMode: Bool
         var body: some View {
                 switch candidate.candidate.type {
                 case .cantonese:
@@ -24,20 +26,18 @@ struct VerticalPageCandidateLabel: View {
                         case .top:
                                 HStack(alignment: .lastTextBaseline, spacing: 4) {
                                         Text(verbatim: label).font(.label).opacity(labelOpacity)
-                                        TopCommentStackView(text: candidate.text, romanization: candidate.comment!, toneStyle: toneStyle, shouldModifyToneColor: shouldModifyToneColor)
+                                        TopCommentStackView(text: candidate.text, romanization: candidate.comment ?? String.space, toneStyle: toneStyle, shallowTone: shallowTone, compatibleMode: compatibleMode)
                                 }
                         case .bottom:
                                 HStack(alignment: .firstTextBaseline, spacing: 4) {
                                         Text(verbatim: label).font(.label).opacity(labelOpacity)
-                                        BottomCommentStackView(text: candidate.text, romanization: candidate.comment!, toneStyle: toneStyle, shouldModifyToneColor: shouldModifyToneColor)
+                                        BottomCommentStackView(text: candidate.text, romanization: candidate.comment ?? String.space, toneStyle: toneStyle, shallowTone: shallowTone, compatibleMode: compatibleMode)
                                 }
                         case .right:
                                 HStack(spacing: 8) {
                                         Text(verbatim: label).font(.label).opacity(labelOpacity)
                                         Text(verbatim: candidate.text).font(.candidate)
-                                        if let comment = candidate.comment {
-                                                RightCommentLabel(comment: comment, toneStyle: toneStyle, shouldModifyToneColor: shouldModifyToneColor)
-                                        }
+                                        RightStackRomanizationLabel(romanization: candidate.comment ?? String.space, toneStyle: toneStyle, shallowTone: shallowTone, compatibleMode: compatibleMode)
                                 }
                         case .noComments:
                                 HStack(spacing: 8) {
@@ -56,9 +56,7 @@ struct VerticalPageCandidateLabel: View {
                                 Text(verbatim: label).font(.label).opacity(labelOpacity)
                                 HStack(spacing: commentStyle.isVertical ? 2 : 10) {
                                         Text(verbatim: candidate.text).font(.candidate)
-                                        if let comment = candidate.comment {
-                                                Text(verbatim: comment).font(.annotation)
-                                        }
+                                        Text(verbatim: candidate.comment ?? String.empty).font(.annotation)
                                 }
                         }
                         .padding(.vertical, commentStyle.isVertical ? 4 : 0)

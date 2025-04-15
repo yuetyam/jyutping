@@ -78,16 +78,7 @@ struct Options {
 
         nonisolated(unsafe) private(set) static var commentToneStyle: CommentToneStyle = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.CommentToneStyle)
-                switch savedValue {
-                case CommentToneStyle.normal.rawValue:
-                        return .normal
-                case CommentToneStyle.superscript.rawValue:
-                        return .superscript
-                case CommentToneStyle.subscript.rawValue:
-                        return .subscript
-                default:
-                        return .normal
-                }
+                return CommentToneStyle.style(of: savedValue)
         }()
         static func updateCommentToneStyle(to style: CommentToneStyle) {
                 commentToneStyle = style
@@ -120,6 +111,16 @@ struct Options {
                 cangjieVariant = variant
                 let value: Int = variant.rawValue
                 UserDefaults.standard.set(value, forKey: OptionsKey.CangjieVariant)
+        }
+
+        nonisolated(unsafe) private(set) static var isCompatibleModeOn: Bool = {
+                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.SchemeRules)
+                return savedValue == 1
+        }()
+        static func updateCompatibleMode(to isOn: Bool) {
+                isCompatibleModeOn = isOn
+                let value: Int = isOn ? 1 : 0
+                UserDefaults.standard.set(value, forKey: OptionsKey.SchemeRules)
         }
 
         nonisolated(unsafe) private(set) static var preferredLanguage: KeyboardDisplayLanguage = {
@@ -170,8 +171,9 @@ struct OptionsKey {
         static let KeyTextPreview: String = "KeyPreview"
         static let CommentStyle: String = "jyutping_display"
         static let CommentToneStyle: String = "tone_style"
-        static let EmojiSuggestions: String = "emoji"
         static let CangjieVariant: String = "CangjieVariant"
+        static let EmojiSuggestions: String = "emoji"
+        static let SchemeRules: String = "SchemeRules"
         static let UserLexiconInputMemory: String = "UserLexiconInputMemory"
 
         // @available(*, deprecated)
@@ -189,11 +191,14 @@ enum CommentStyle: Int {
         var isBelow: Bool { self == .belowCandidates }
         var isHidden: Bool { self == .noComments }
 }
-enum CommentToneStyle: Int {
+enum CommentToneStyle: Int, CaseIterable {
         case normal = 1
         case superscript = 2
         case `subscript` = 3
         case noTones = 4
+        static func style(of value: Int) -> CommentToneStyle {
+                return Self.allCases.first(where: { $0.rawValue == value }) ?? Self.normal
+        }
 }
 
 /// Preferred Keyboard UI Display Language

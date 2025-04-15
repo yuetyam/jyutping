@@ -12,6 +12,7 @@ struct SettingsKey {
         static let LabelSet: String = "LabelSet"
         static let LabelLast: String = "LabelLast"
         static let CangjieVariant: String = "CangjieVariant"
+        static let SchemeRules: String = "SchemeRules"
         static let UserLexiconInputMemory: String = "UserLexiconInputMemory"
 
 
@@ -84,6 +85,8 @@ enum ToneDisplayColor: Int, CaseIterable {
         static func color(of value: Int) -> ToneDisplayColor {
                 return Self.allCases.first(where: { $0.rawValue == value }) ?? Self.normal
         }
+
+        var isShallow: Bool { self == .shallow}
 }
 
 /// 候選詞編號集
@@ -303,6 +306,16 @@ struct AppSettings {
                 cangjieVariant = variant
                 let value: Int = variant.rawValue
                 UserDefaults.standard.set(value, forKey: SettingsKey.CangjieVariant)
+        }
+
+        private(set) static var isCompatibleModeOn: Bool = {
+                let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.SchemeRules)
+                return savedValue == 1
+        }()
+        static func updateCompatibleMode(to isOn: Bool) {
+                isCompatibleModeOn = isOn
+                let value: Int = isOn ? 1 : 0
+                UserDefaults.standard.set(value, forKey: SettingsKey.SchemeRules)
         }
 
 

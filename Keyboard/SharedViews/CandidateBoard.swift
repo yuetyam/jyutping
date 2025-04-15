@@ -6,9 +6,10 @@ extension Candidate {
                 let textCount: Int = self.text.count
                 switch self.type {
                 case .cantonese:
-                        return CGFloat(textCount * 20 + 28)
+                        return CGFloat(textCount * 20 + 32)
+                case _ where textCount == 1:
+                        return 48
                 default:
-                        guard textCount > 1 else { return 48 }
                         return CGFloat(textCount * 12)
                 }
         }

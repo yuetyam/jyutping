@@ -11,25 +11,14 @@ struct CandidateBoard: View {
         private let toneColor: ToneDisplayColor = AppSettings.toneDisplayColor
         private let labelSet: LabelSet = AppSettings.labelSet
         private let isLabelLastZero: Bool = AppSettings.isLabelLastZero
+        private let isCompatibleModeOn: Bool = AppSettings.isCompatibleModeOn
         private let lineSpacing: CGFloat = CGFloat(AppSettings.candidateLineSpacing)
 
         var body: some View {
                 let highlightedIndex: Int = context.highlightedIndex
-                let horizontalPageAlignment: VerticalAlignment = {
-                        switch commentStyle {
-                        case .top:
-                                return .lastTextBaseline
-                        case .bottom:
-                                return .firstTextBaseline
-                        case .right:
-                                return .center
-                        case .noComments:
-                                return .center
-                        }
-                }()
                 switch pageOrientation {
                 case .horizontal:
-                        HStack(alignment: horizontalPageAlignment, spacing: 0) {
+                        HStack(alignment: commentStyle.horizontalPageAlignment, spacing: 0) {
                                 ForEach(context.displayCandidates.indices, id: \.self) { index in
                                         HorizontalPageCandidateLabel(
                                                 isHighlighted: index == highlightedIndex,
@@ -39,7 +28,8 @@ struct CandidateBoard: View {
                                                 toneStyle: toneStyle,
                                                 toneColor: toneColor,
                                                 labelSet: labelSet,
-                                                isLabelLastZero: isLabelLastZero
+                                                isLabelLastZero: isLabelLastZero,
+                                                compatibleMode: isCompatibleModeOn
                                         )
                                         .padding(.vertical, 4)
                                         .padding(.trailing, 4)
@@ -80,7 +70,8 @@ struct CandidateBoard: View {
                                                         toneStyle: toneStyle,
                                                         toneColor: toneColor,
                                                         labelSet: labelSet,
-                                                        isLabelLastZero: isLabelLastZero
+                                                        isLabelLastZero: isLabelLastZero,
+                                                        compatibleMode: isCompatibleModeOn
                                                 )
                                                 .padding(.horizontal, 4)
                                                 .padding(.vertical, lineSpacing / 2.0)
@@ -103,6 +94,17 @@ struct CandidateBoard: View {
                         .roundedHUDVisualEffect()
                         .padding(10)
                         .fixedSize()
+                }
+        }
+}
+
+private extension CommentDisplayStyle {
+        var horizontalPageAlignment: VerticalAlignment {
+                switch self {
+                case .top: .lastTextBaseline
+                case .bottom: .firstTextBaseline
+                case .right: .center
+                case .noComments: .center
                 }
         }
 }

@@ -15,6 +15,7 @@ struct CandidateBarScrollView: View {
                 let characterStandard: CharacterStandard = Options.characterStandard
                 let commentStyle: CommentStyle = Options.commentStyle
                 let toneStyle: CommentToneStyle = Options.commentToneStyle
+                let isCompatibleModeOn: Bool = Options.isCompatibleModeOn
                 let isCompactKeyboard: Bool = context.keyboardInterface.isCompact
                 ScrollViewReader { proxy in
                         ScrollView(.horizontal) {
@@ -51,7 +52,7 @@ struct CandidateBarScrollView: View {
                                                                 Color.interactiveClear
                                                                 ZStack(alignment: commentStyle.isBelow ? .bottom : .top) {
                                                                         Color.clear
-                                                                        RomanizationLabel(candidate: candidate, toneStyle: toneStyle)
+                                                                        RomanizationLabel(candidate: candidate, toneStyle: toneStyle, compatibleMode: isCompatibleModeOn)
                                                                                 .frame(height: 20)
                                                                                 .padding(.horizontal, 1)
                                                                                 .padding(.bottom, commentStyle.isBelow ? 6 : 0)

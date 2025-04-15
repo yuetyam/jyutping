@@ -18,6 +18,7 @@ struct GeneralPreferencesView: View {
 
         @State private var characterStandard: CharacterStandard = Options.characterStandard
         @State private var isEmojiSuggestionsOn: Bool = Options.isEmojiSuggestionsOn
+        @State private var isCompatibleModeOn: Bool = AppSettings.isCompatibleModeOn
         @State private var isInputMemoryOn: Bool = AppSettings.isInputMemoryOn
 
         @State private var isClearInputMemoryConfirmDialogPresented: Bool = false
@@ -35,7 +36,7 @@ struct GeneralPreferencesView: View {
                                                                 Text(verbatim: "\($0)").tag($0)
                                                         }
                                                 }
-                                                .scaledToFit()
+                                                .fixedSize()
                                                 .onChange(of: pageSize) { newPageSize in
                                                         AppSettings.updateDisplayCandidatePageSize(to: newPageSize)
                                                 }
@@ -47,7 +48,7 @@ struct GeneralPreferencesView: View {
                                                                 Text(verbatim: "\($0) pt").tag($0)
                                                         }
                                                 }
-                                                .scaledToFit()
+                                                .fixedSize()
                                                 .onChange(of: lineSpacing) { newLineSpacing in
                                                         AppSettings.updateCandidateLineSpacing(to: newLineSpacing)
                                                 }
@@ -60,7 +61,7 @@ struct GeneralPreferencesView: View {
                                                 Text("GeneralPreferencesView.CandidatePageOrientation.Horizontal").tag(CandidatePageOrientation.horizontal)
                                                 Text("GeneralPreferencesView.CandidatePageOrientation.Vertical").tag(CandidatePageOrientation.vertical)
                                         }
-                                        .scaledToFit()
+                                        .fixedSize()
                                         .onChange(of: orientation) { newOption in
                                                 AppSettings.updateCandidatePageOrientation(to: newOption)
                                         }
@@ -75,7 +76,7 @@ struct GeneralPreferencesView: View {
                                                         Text("GeneralPreferencesView.CommentStyle.Right").tag(CommentDisplayStyle.right)
                                                         Text("GeneralPreferencesView.CommentStyle.NoComments").tag(CommentDisplayStyle.noComments)
                                                 }
-                                                .scaledToFit()
+                                                .fixedSize()
                                                 .onChange(of: commentDisplayStyle) { newStyle in
                                                         AppSettings.updateCommentDisplayStyle(to: newStyle)
                                                 }
@@ -88,7 +89,7 @@ struct GeneralPreferencesView: View {
                                                         Text("GeneralPreferencesView.CommentToneStyle.Superscript").tag(ToneDisplayStyle.superscript)
                                                         Text("GeneralPreferencesView.CommentToneStyle.Subscript").tag(ToneDisplayStyle.subscript)
                                                 }
-                                                .scaledToFit()
+                                                .fixedSize()
                                                 .onChange(of: toneDisplayStyle) { newStyle in
                                                         AppSettings.updateToneDisplayStyle(to: newStyle)
                                                 }
@@ -99,7 +100,7 @@ struct GeneralPreferencesView: View {
                                                         Text("GeneralPreferencesView.CommentToneColor.Normal").tag(ToneDisplayColor.normal)
                                                         Text("GeneralPreferencesView.CommentToneColor.Shallow").tag(ToneDisplayColor.shallow)
                                                 }
-                                                .scaledToFit()
+                                                .fixedSize()
                                                 .onChange(of: toneDisplayColor) { newOption in
                                                         AppSettings.updateToneDisplayColor(to: newOption)
                                                 }
@@ -121,7 +122,7 @@ struct GeneralPreferencesView: View {
                                                         Text("GeneralPreferencesView.LabelSet.Roman").tag(LabelSet.roman)
                                                         Text("GeneralPreferencesView.LabelSet.SmallRoman").tag(LabelSet.smallRoman)
                                                 }
-                                                .scaledToFit()
+                                                .fixedSize()
                                                 .onChange(of: labelSet) { newOption in
                                                         AppSettings.updateLabelSet(to: newOption)
                                                 }
@@ -130,7 +131,7 @@ struct GeneralPreferencesView: View {
                                         HStack {
                                                 Toggle("GeneralPreferencesView.Toggle.LabelLastZero", isOn: $isLabelLastZero)
                                                         .toggleStyle(.switch)
-                                                        .scaledToFit()
+                                                        .fixedSize()
                                                         .onChange(of: isLabelLastZero) { newState in
                                                                 AppSettings.updateLabelLastState(to: newState)
                                                         }
@@ -146,7 +147,7 @@ struct GeneralPreferencesView: View {
                                                         Text("GeneralPreferencesView.CharacterStandard.PickerOption.TraditionalTaiwan").tag(CharacterStandard.taiwan)
                                                         Text("GeneralPreferencesView.CharacterStandard.PickerOption.Simplified").tag(CharacterStandard.simplified)
                                                 }
-                                                .scaledToFit()
+                                                .fixedSize()
                                                 .onChange(of: characterStandard) { newStandard in
                                                         Options.updateCharacterStandard(to: newStandard)
                                                 }
@@ -179,9 +180,19 @@ struct GeneralPreferencesView: View {
                                 HStack {
                                         Toggle("GeneralPreferencesView.EmojiSuggestions", isOn: $isEmojiSuggestionsOn)
                                                 .toggleStyle(.switch)
-                                                .scaledToFit()
+                                                .fixedSize()
                                                 .onChange(of: isEmojiSuggestionsOn) { newState in
                                                         Options.updateEmojiSuggestions(to: newState)
+                                                }
+                                        Spacer()
+                                }
+                                .block()
+                                HStack {
+                                        Toggle("GeneralPreferencesView.SchemeRules.CompatibleMode", isOn: $isCompatibleModeOn)
+                                                .toggleStyle(.switch)
+                                                .fixedSize()
+                                                .onChange(of: isCompatibleModeOn) { newState in
+                                                        AppSettings.updateCompatibleMode(to: newState)
                                                 }
                                         Spacer()
                                 }
@@ -190,7 +201,7 @@ struct GeneralPreferencesView: View {
                                         HStack {
                                                 Toggle("GeneralPreferencesView.Toggle.InputMemory", isOn: $isInputMemoryOn)
                                                         .toggleStyle(.switch)
-                                                        .scaledToFit()
+                                                        .fixedSize()
                                                         .onChange(of: isInputMemoryOn) { newState in
                                                                 AppSettings.updateInputMemoryState(to: newState)
                                                         }

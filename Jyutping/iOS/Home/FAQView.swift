@@ -25,8 +25,6 @@ struct FAQView: View {
                                                 Spacer()
                                         }
                                 }
-                        } footer: {
-                                Text("IOSHomeTab.FAQ.Footer.FullAccess").textCase(nil)
                         }
 
                         Section {

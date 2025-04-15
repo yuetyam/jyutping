@@ -4,65 +4,94 @@ import CommonExtensions
 
 struct RomanizationLabel: View {
 
-        init(candidate: Candidate, toneStyle: CommentToneStyle) {
-                self.shouldDisplayRomanization = candidate.isCantonese
-                self.romanization = candidate.romanization
-                self.toneStyle = toneStyle
+        var body: some View {
+                Text(attributed(hasRomanization))
+                        .minimumScaleFactor(0.2)
+                        .lineLimit(1)
         }
 
-        private let shouldDisplayRomanization: Bool
+        // TODO: Maybe use {romanization: String?} instead?
+        init(candidate: Candidate, toneStyle: CommentToneStyle, compatibleMode: Bool) {
+                self.hasRomanization = candidate.isCantonese
+                self.romanization = candidate.romanization
+                self.toneStyle = toneStyle
+                self.compatibleMode = compatibleMode
+        }
+
+        private let hasRomanization: Bool
         private let romanization: String
         private let toneStyle: CommentToneStyle
+        private let compatibleMode: Bool
 
-        private func attributed() -> AttributedString {
-                let offset: CGFloat = {
-                        switch toneStyle {
-                        case .normal:
-                                return 0
-                        case .superscript:
-                                return 2
-                        case .subscript:
-                                return -2
-                        case .noTones:
-                                return 0
-                        }
-                }()
-                let blocks = romanization.components(separatedBy: .decimalDigits).filter(\.isNotEmpty)
-                let tones = romanization.tones.map({ String($0) })
+        private func attributed(_ hasRomanization: Bool) -> AttributedString {
+                guard hasRomanization else { return AttributedString.space }
+                let syllables = romanization.split(separator: Character.space)
+                let phones = syllables.map({ $0.filter(\.isLowercaseBasicLatinLetter) })
+                let tones = syllables.map({ $0.filter(\.isCantoneseToneDigit) })
+                let toneOffset = toneStyle.toneOffset
                 var stack: AttributedString = AttributedString()
-                for (index, element) in blocks.enumerated() {
-                        var phone = AttributedString(element)
-                        let toneText: String = tones.fetch(index) ?? "?"
-                        var tone = AttributedString(toneText)
+                for (index, element) in phones.enumerated() {
+                        if index != 0 {
+                                stack += AttributedString.space
+                        }
+                        var phone = AttributedString(compatibleMode ? element.compatibleTransformed : element)
                         phone.font = .romanization
-                        tone.font = .tone
-                        tone.baselineOffset = offset
                         stack += phone
-                        stack += tone
+                        if (toneStyle != .noTones), let toneText = tones.fetch(index) {
+                                var tone = AttributedString(toneText)
+                                tone.font = .tone
+                                tone.baselineOffset = toneOffset
+                                stack += tone
+                        }
                 }
                 return stack
         }
+}
 
-        var body: some View {
-                switch toneStyle {
-                case .normal:
-                        Text(verbatim: shouldDisplayRomanization ? romanization : String.space)
-                                .font(.romanization)
-                                .minimumScaleFactor(0.2)
-                                .lineLimit(1)
-                case .superscript, .subscript:
-                        if shouldDisplayRomanization {
-                                Text(attributed())
-                                        .minimumScaleFactor(0.2)
-                                        .lineLimit(1)
-                        } else {
-                                Text(verbatim: String.space).font(.romanization)
-                        }
-                case .noTones:
-                        Text(verbatim: shouldDisplayRomanization ? romanization.removedTones() : String.space)
-                                .font(.romanization)
-                                .minimumScaleFactor(0.2)
-                                .lineLimit(1)
+private extension AttributedString {
+        static let space: AttributedString = AttributedString(String.space)
+}
+
+private extension CommentToneStyle {
+        var toneOffset: CGFloat {
+                switch self {
+                case .normal: 0
+                case .superscript: 2
+                case .subscript: -2
+                case .noTones: 0
                 }
         }
 }
+
+// TODO: Maybe we should use a database or a dictionary to query it
+private extension String {
+        var compatibleTransformed: String {
+                guard self != "jyu" else { return "yu" }
+                guard !hasPrefix("jyu") else { return "yue" + dropFirst(3) }
+                var modified: String = hasSuffix("oeng") ? (dropLast(4) + "eung") : self
+                guard !hasPrefix("j") else { return "y" + modified.dropFirst() }
+                modified = modified.replacingOccurrences(of: "^(.+)yu", with: "$1ue", options: .regularExpression)
+                if modified.hasPrefix("z") {
+                        return "zh" + modified.dropFirst()
+                } else if modified.hasPrefix("c") {
+                        return "ch" + modified.dropFirst()
+                } else if modified.hasPrefix("s") {
+                        return "sh" + modified.dropFirst()
+                } else {
+                        return modified
+                }
+        }
+}
+
+/*
+private extension StringProtocol {
+        var altTransformed: String {
+                replacingOccurrences(of: "^jyu$", with: "yu", options: .regularExpression)
+                .replacingOccurrences(of: "jyu", with: "yue", options: .anchored)
+                .replacingOccurrences(of: "(.+)yu", with: "$1ue", options: .regularExpression)
+                .replacingOccurrences(of: "j", with: "y", options: .anchored)
+                .replacingOccurrences(of: "^(z|c|s)", with: "$1h", options: .regularExpression)
+                .replacingOccurrences(of: "oeng", with: "eung", options: [.anchored, .backwards])
+        }
+}
+*/

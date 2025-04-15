@@ -17,6 +17,7 @@ struct CandidateBarScrollViewIOS18: View {
                 let characterStandard: CharacterStandard = Options.characterStandard
                 let commentStyle: CommentStyle = Options.commentStyle
                 let toneStyle: CommentToneStyle = Options.commentToneStyle
+                let isCompatibleModeOn: Bool = Options.isCompatibleModeOn
                 let isCompactKeyboard: Bool = context.keyboardInterface.isCompact
                 ScrollView(.horizontal) {
                         LazyHStack(spacing: 0) {
@@ -51,7 +52,7 @@ struct CandidateBarScrollViewIOS18: View {
                                                         Color.interactiveClear
                                                         ZStack(alignment: commentStyle.isBelow ? .bottom : .top) {
                                                                 Color.clear
-                                                                RomanizationLabel(candidate: candidate, toneStyle: toneStyle)
+                                                                RomanizationLabel(candidate: candidate, toneStyle: toneStyle, compatibleMode: isCompatibleModeOn)
                                                                         .frame(height: 20)
                                                                         .padding(.horizontal, 1)
                                                                         .padding(.bottom, commentStyle.isBelow ? 6 : 0)
