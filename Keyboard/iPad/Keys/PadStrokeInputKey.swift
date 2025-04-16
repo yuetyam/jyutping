@@ -4,11 +4,9 @@ import CommonExtensions
 
 struct PadStrokeInputKey: View {
 
-        private let strokeMap: [String: String] = ["w": "⼀", "s": "⼁", "a": "⼃", "d": "⼂", "z": "⼄"]
-
         init(_ letter: String) {
                 self.letter = letter
-                self.stroke = strokeMap[letter]
+                self.stroke = PresetConstant.strokeKeyMap[letter]
         }
 
         private let letter: String

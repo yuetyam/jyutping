@@ -1,5 +1,5 @@
 /// For Cangjie/Quick/Stroke Reverse Lookup
-struct ShapeLexicon: Hashable {
+struct ShapeLexicon: Hashable, Comparable {
 
         /// Cantonese word
         let text: String
@@ -21,5 +21,11 @@ struct ShapeLexicon: Hashable {
         // Hashable
         func hash(into hasher: inout Hasher) {
                 hasher.combine(text)
+        }
+
+        // Comparable
+        static func < (lhs: ShapeLexicon, rhs: ShapeLexicon) -> Bool {
+                guard lhs.complex == rhs.complex else { return lhs.complex < rhs.complex }
+                return lhs.order < rhs.order
         }
 }

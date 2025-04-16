@@ -53,7 +53,7 @@ public struct Candidate: Hashable, Comparable, Sendable {
         ///   - romanization: Jyutping.
         ///   - input: User input for this Candidate.
         ///   - mark: Formatted user input for pre-edit display.
-        ///   - Order: Rank. Smaller is preferred.
+        ///   - order: Rank. Smaller is preferred.
         public init(type: CandidateType = .cantonese, text: String, lexiconText: String? = nil, romanization: String, input: String, mark: String? = nil, order: Int = 0) {
                 self.type = type
                 self.text = text

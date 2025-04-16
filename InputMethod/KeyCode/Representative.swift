@@ -110,6 +110,8 @@ extension UInt16 {
                         return .number(8)
                 case KeyCode.Number.VK_KEY_9:
                         return .number(9)
+                case KeyCode.Keypad.VK_KEYPAD_0:
+                        return .keypadNumber(0)
                 case KeyCode.Keypad.VK_KEYPAD_1:
                         return .keypadNumber(1)
                 case KeyCode.Keypad.VK_KEYPAD_2:
@@ -120,6 +122,14 @@ extension UInt16 {
                         return .keypadNumber(4)
                 case KeyCode.Keypad.VK_KEYPAD_5:
                         return .keypadNumber(5)
+                case KeyCode.Keypad.VK_KEYPAD_6:
+                        return .keypadNumber(6)
+                case KeyCode.Keypad.VK_KEYPAD_7:
+                        return .keypadNumber(7)
+                case KeyCode.Keypad.VK_KEYPAD_8:
+                        return .keypadNumber(8)
+                case KeyCode.Keypad.VK_KEYPAD_9:
+                        return .keypadNumber(9)
                 case KeyCode.Special.VK_SPACE:
                         return .space
                 case KeyCode.Special.VK_RETURN, KeyCode.Keypad.VK_KEYPAD_ENTER:

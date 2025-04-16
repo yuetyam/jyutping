@@ -1611,7 +1611,7 @@
         }
       }
     },
-    "GeneralPreferencesView.Button.ClearInputMemory" : {
+    "GeneralPreferencesView.InputMemory.Clear.ButtonTitle" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2171,7 +2171,7 @@
         }
       }
     },
-    "GeneralPreferencesView.CharacterStandard.PickerOption.Simplified" : {
+    "GeneralPreferencesView.CharacterStandard.Simplified" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2241,7 +2241,7 @@
         }
       }
     },
-    "GeneralPreferencesView.CharacterStandard.PickerOption.Traditional" : {
+    "GeneralPreferencesView.CharacterStandard.Traditional" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2311,7 +2311,7 @@
         }
       }
     },
-    "GeneralPreferencesView.CharacterStandard.PickerOption.TraditionalKongKong" : {
+    "GeneralPreferencesView.CharacterStandard.TraditionalKongKong" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2381,7 +2381,7 @@
         }
       }
     },
-    "GeneralPreferencesView.CharacterStandard.PickerOption.TraditionalTaiwan" : {
+    "GeneralPreferencesView.CharacterStandard.TraditionalTaiwan" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2451,7 +2451,7 @@
         }
       }
     },
-    "GeneralPreferencesView.CharacterStandard.PickerTitleKey" : {
+    "GeneralPreferencesView.CharacterStandard.PickerTitle" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3431,7 +3431,7 @@
         }
       }
     },
-    "GeneralPreferencesView.ConfirmationDialog.ClearInputMemory.Cancel" : {
+    "GeneralPreferencesView.InputMemory.Clear.ConfirmationDialog.Cancel" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3501,7 +3501,7 @@
         }
       }
     },
-    "GeneralPreferencesView.ConfirmationDialog.ClearInputMemory.Confirm" : {
+    "GeneralPreferencesView.InputMemory.Clear.ConfirmationDialog.Confirm" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3571,7 +3571,7 @@
         }
       }
     },
-    "GeneralPreferencesView.ConfirmationDialog.ClearInputMemory.Title" : {
+    "GeneralPreferencesView.InputMemory.Clear.ConfirmationDialog.Title" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3641,7 +3641,7 @@
         }
       }
     },
-    "GeneralPreferencesView.EmojiSuggestions" : {
+    "GeneralPreferencesView.EmojiSuggestions.ToggleTitle" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4621,7 +4621,7 @@
         }
       }
     },
-    "GeneralPreferencesView.Toggle.InputMemory" : {
+    "GeneralPreferencesView.InputMemory.ToggleTitle" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4691,7 +4691,7 @@
         }
       }
     },
-    "GeneralPreferencesView.Toggle.LabelLastZero" : {
+    "GeneralPreferencesView.LabelLastZero.ToggleTitle" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {

@@ -24,4 +24,20 @@ struct PresetConstant {
 
         /// 10-Key Numeric Keyboard
         static let symbolSidebarTexts: [String] = ["+", "-", "*", "/", "=", "%", ":", "@", "#", ",", "~", "≈"]
+
+        /// Display KeyText
+        static let strokeKeyMap: [String: String] = [
+                "w": "⼀",
+                "s": "⼁",
+                "a": "⼃",
+                "d": "⼂",
+                "z": "乛",
+                "x": "＊",
+                "j": "⼀",
+                "k": "⼁",
+                "l": "⼃",
+                "u": "⼂",
+                "i": "乛",
+                "o": "＊"
+        ]
 }

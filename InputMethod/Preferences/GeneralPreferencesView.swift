@@ -129,7 +129,7 @@ struct GeneralPreferencesView: View {
                                                 Spacer()
                                         }
                                         HStack {
-                                                Toggle("GeneralPreferencesView.Toggle.LabelLastZero", isOn: $isLabelLastZero)
+                                                Toggle("GeneralPreferencesView.LabelLastZero.ToggleTitle", isOn: $isLabelLastZero)
                                                         .toggleStyle(.switch)
                                                         .fixedSize()
                                                         .onChange(of: isLabelLastZero) { newState in
@@ -141,11 +141,11 @@ struct GeneralPreferencesView: View {
                                 .block()
                                 VStack(spacing: 2) {
                                         HStack {
-                                                Picker("GeneralPreferencesView.CharacterStandard.PickerTitleKey", selection: $characterStandard) {
-                                                        Text("GeneralPreferencesView.CharacterStandard.PickerOption.Traditional").tag(CharacterStandard.traditional)
-                                                        Text("GeneralPreferencesView.CharacterStandard.PickerOption.TraditionalKongKong").tag(CharacterStandard.hongkong)
-                                                        Text("GeneralPreferencesView.CharacterStandard.PickerOption.TraditionalTaiwan").tag(CharacterStandard.taiwan)
-                                                        Text("GeneralPreferencesView.CharacterStandard.PickerOption.Simplified").tag(CharacterStandard.simplified)
+                                                Picker("GeneralPreferencesView.CharacterStandard.PickerTitle", selection: $characterStandard) {
+                                                        Text("GeneralPreferencesView.CharacterStandard.Traditional").tag(CharacterStandard.traditional)
+                                                        Text("GeneralPreferencesView.CharacterStandard.TraditionalKongKong").tag(CharacterStandard.hongkong)
+                                                        Text("GeneralPreferencesView.CharacterStandard.TraditionalTaiwan").tag(CharacterStandard.taiwan)
+                                                        Text("GeneralPreferencesView.CharacterStandard.Simplified").tag(CharacterStandard.simplified)
                                                 }
                                                 .fixedSize()
                                                 .onChange(of: characterStandard) { newStandard in
@@ -178,7 +178,7 @@ struct GeneralPreferencesView: View {
                                         .padding(.horizontal, 8)
                                 }
                                 HStack {
-                                        Toggle("GeneralPreferencesView.EmojiSuggestions", isOn: $isEmojiSuggestionsOn)
+                                        Toggle("GeneralPreferencesView.EmojiSuggestions.ToggleTitle", isOn: $isEmojiSuggestionsOn)
                                                 .toggleStyle(.switch)
                                                 .fixedSize()
                                                 .onChange(of: isEmojiSuggestionsOn) { newState in
@@ -199,7 +199,7 @@ struct GeneralPreferencesView: View {
                                 .block()
                                 VStack(alignment: .leading, spacing: 2) {
                                         HStack {
-                                                Toggle("GeneralPreferencesView.Toggle.InputMemory", isOn: $isInputMemoryOn)
+                                                Toggle("GeneralPreferencesView.InputMemory.ToggleTitle", isOn: $isInputMemoryOn)
                                                         .toggleStyle(.switch)
                                                         .fixedSize()
                                                         .onChange(of: isInputMemoryOn) { newState in
@@ -212,20 +212,20 @@ struct GeneralPreferencesView: View {
                                                 Button(role: .destructive) {
                                                         isClearInputMemoryConfirmDialogPresented = true
                                                 } label: {
-                                                        Text("GeneralPreferencesView.Button.ClearInputMemory")
+                                                        Text("GeneralPreferencesView.InputMemory.Clear.ButtonTitle")
                                                 }
                                                 .buttonStyle(.plain)
                                                 .padding(.horizontal, 8)
                                                 .padding(.vertical, 4)
                                                 .foregroundStyle(Color.red)
                                                 .background(Material.thick, in: RoundedRectangle(cornerRadius: 6, style: .continuous))
-                                                .confirmationDialog("GeneralPreferencesView.ConfirmationDialog.ClearInputMemory.Title", isPresented: $isClearInputMemoryConfirmDialogPresented) {
-                                                        Button("GeneralPreferencesView.ConfirmationDialog.ClearInputMemory.Confirm", role: .destructive) {
+                                                .confirmationDialog("GeneralPreferencesView.InputMemory.Clear.ConfirmationDialog.Title", isPresented: $isClearInputMemoryConfirmDialogPresented) {
+                                                        Button("GeneralPreferencesView.InputMemory.Clear.ConfirmationDialog.Confirm", role: .destructive) {
                                                                 clearInputMemoryProgress = 0
                                                                 isPerformingClearInputMemory = true
                                                                 UserLexicon.deleteAll()
                                                         }
-                                                        Button("GeneralPreferencesView.ConfirmationDialog.ClearInputMemory.Cancel", role: .cancel) {
+                                                        Button("GeneralPreferencesView.InputMemory.Clear.ConfirmationDialog.Cancel", role: .cancel) {
                                                                 isClearInputMemoryConfirmDialogPresented = false
                                                         }
                                                 }

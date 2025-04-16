@@ -45,24 +45,7 @@ extension CharacterStandard {
 extension CharacterStandard {
 
         public static func strokeTransform(_ text: String) -> String {
-                // 橫: w, h, t: w = Waang, h = Héng, t = 提 = Tai = Tí
-                // 豎: s      : s = Syu = Shù
-                // 撇: a, p   : p = Pit = Piě
-                // 點: d, n   : d = Dim = Diǎn, n = 捺 = Naat = Nà
-                // 折: z      : z = Zit = Zhé
-                //
-                // macOS built-in Stroke: https://support.apple.com/zh-hk/guide/chinese-input-method/cimskt12969/mac
-                // 橫: j, KP_1
-                // 豎: k, KP_2
-                // 撇: l, KP_3
-                // 點: u, KP_4
-                // 折: i, KP_5
-                return text
-                        .replacingOccurrences(of: "[htj1]", with: "w", options: .regularExpression)
-                        .replacingOccurrences(of: "[k2]", with: "s", options: .regularExpression)
-                        .replacingOccurrences(of: "[pl3]", with: "a", options: .regularExpression)
-                        .replacingOccurrences(of: "[nu4]", with: "d", options: .regularExpression)
-                        .replacingOccurrences(of: "[i5]", with: "z", options: .regularExpression)
+                return String(text.compactMap({ mapStrokeKey[$0] }))
         }
 
         public static func stroke(of letter: Character) -> Character? {
@@ -73,7 +56,49 @@ extension CharacterStandard {
                 return cangjieMap[letter]
         }
 
-        private static let strokeMap: [Character: Character] = ["w": "⼀", "s": "⼁", "a": "⼃", "d": "⼂", "z": "⼄"]
+        private static let strokeMap: [Character: Character] = ["w": "⼀", "s": "⼁", "a": "⼃", "d": "⼂", "z": "乛", "x": "＊"]
+
+        // 橫: w, h, t: w = Waang, h = Héng, t = 提 = Tai = Tí
+        // 豎: s      : s = Syu = Shù
+        // 撇: a, p   : p = Pit = Piě
+        // 點: d, n   : d = Dim = Diǎn, n = 捺 = Naat = Nà
+        // 折: z      : z = Zit = Zhé
+        // 通: x, *   : x = wildcard match
+        //
+        // macOS built-in Stroke: https://support.apple.com/zh-hk/guide/chinese-input-method/cim4f6882a80/mac
+        // 橫: j, KP_1
+        // 豎: k, KP_2
+        // 撇: l, KP_3
+        // 點: u, KP_4
+        // 折: i, KP_5
+        // 通: o, KP_6
+        private static let mapStrokeKey: [Character : Character] = [
+                "w" : "w",
+                "h" : "w",
+                "t" : "w",
+                "s" : "s",
+                "a" : "a",
+                "p" : "a",
+                "d" : "d",
+                "n" : "d",
+                "z" : "z",
+                "x" : "x",
+                "*" : "x",
+
+                "j" : "w",
+                "k" : "s",
+                "l" : "a",
+                "u" : "d",
+                "i" : "z",
+                "o" : "x",
+
+                "1" : "w",
+                "2" : "s",
+                "3" : "a",
+                "4" : "d",
+                "5" : "z",
+                "6" : "x"
+        ]
 
         private static let cangjieMap: [Character: Character] = [
                 "a": "日",
