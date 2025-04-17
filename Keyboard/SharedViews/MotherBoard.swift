@@ -144,6 +144,8 @@ struct MotherBoard: View {
                         }
                 case .tenKeyNumeric:
                         TenKeyNumericKeyboard()
+                case .tenKeyStroke:
+                        TenKeyStrokeKeyboard()
                 default:
                         switch context.inputMethodMode {
                         case .abc:

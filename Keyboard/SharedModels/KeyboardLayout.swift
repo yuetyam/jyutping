@@ -34,7 +34,7 @@ enum NumericLayout: Int, CaseIterable {
         /// Normal Numeric Keyboard
         case `default` = 1
 
-        /// 10-Key KeyPad
+        /// 10 Key KeyPad
         case numberKeyPad = 2
 
         /// Read NumericLayout from UserDefaults
@@ -43,6 +43,25 @@ enum NumericLayout: Int, CaseIterable {
                 return Self.allCases.first(where: { $0.rawValue == savedValue }) ?? Self.default
         }
 
-        /// 10-Key KeyPad
+        /// 10 Key KeyPad
         var isNumberKeyPad: Bool { self == .numberKeyPad }
+}
+
+/// Keyboard Layout for Stroke Reverse Lookup
+enum StrokeLayout: Int, CaseIterable {
+
+        /// QWERTY layout
+        case `default` = 1
+
+        /// 10 Key KeyPad
+        case tenKey = 2
+
+        /// Read StrokeLayout from UserDefaults
+        static func fetchSavedLayout() -> StrokeLayout {
+                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.StrokeLayout)
+                return Self.allCases.first(where: { $0.rawValue == savedValue }) ?? Self.default
+        }
+
+        /// 10 Key KeyPad
+        var isTenKey: Bool { self == .tenKey }
 }

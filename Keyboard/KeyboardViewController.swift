@@ -233,6 +233,9 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         case .none:
                                 suggestionTask?.cancel()
                                 ensureQwertyForm(to: .jyutping)
+                                if keyboardForm == .tenKeyStroke {
+                                        updateKeyboardForm(to: .alphabetic)
+                                }
                                 candidates = []
                                 text2mark = String.empty
                         case .some("r"):
@@ -242,7 +245,11 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 ensureQwertyForm(to: .cangjie)
                                 cangjieReverseLookup()
                         case .some("x"):
-                                ensureQwertyForm(to: .stroke)
+                                if strokeLayout.isTenKey && keyboardForm != .tenKeyStroke {
+                                        updateKeyboardForm(to: .tenKeyStroke)
+                                } else {
+                                        ensureQwertyForm(to: .stroke)
+                                }
                                 strokeReverseLookup()
                         case .some("q"):
                                 structureReverseLookup()
@@ -299,13 +306,13 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         textDocumentProxy.insertText(text)
                         adjustKeyboard()
                 case .separate:
-                        appendBufferText("'")
+                        appendBufferText(String.separator)
                         adjustKeyboard()
                 case .process(let text):
                         defer {
                                 adjustKeyboard()
                         }
-                        let isCantoneseComposeMode: Bool = inputMethodMode.isCantonese && (keyboardForm == .alphabetic)
+                        let isCantoneseComposeMode: Bool = inputMethodMode.isCantonese && keyboardForm.isBufferrable
                         guard isCantoneseComposeMode else {
                                 textDocumentProxy.insertText(text)
                                 return
@@ -396,13 +403,17 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 case .clearBuffer:
                         clearBuffer()
                 case .return:
-                        if inputStage.isBuffering {
+                        if keyboardForm == .tenKeyStroke, let candidate = candidates.first {
+                                input(candidate.text)
+                                aftercareSelected(candidate)
+                        } else if inputStage.isBuffering {
                                 inputBufferText()
                                 updateReturnKey()
+                                adjustKeyboard()
                         } else {
                                 textDocumentProxy.insertText(String.newLine)
+                                adjustKeyboard()
                         }
-                        adjustKeyboard()
                 case .shift:
                         let newCase: KeyboardCase = {
                                 switch keyboardCase {
@@ -720,7 +731,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         @Published private(set) var previousKeyboardForm: KeyboardForm = .alphabetic
         @Published private(set) var keyboardForm: KeyboardForm = .alphabetic
         func updateKeyboardForm(to form: KeyboardForm) {
-                let shouldStayBuffering: Bool = inputMethodMode.isCantonese && (form == .alphabetic || form == .candidateBoard)
+                let shouldStayBuffering: Bool = inputMethodMode.isCantonese && form.isBufferrable
                 if inputStage.isBuffering && shouldStayBuffering.negative {
                         inputBufferText()
                 }
@@ -914,6 +925,14 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 UserDefaults.standard.set(value, forKey: OptionsKey.NumericLayout)
         }
         @Published private(set) var preferredNumericForm: KeyboardForm = NumericLayout.fetchSavedLayout().isNumberKeyPad ? .tenKeyNumeric : .numeric
+
+        /// Keyboard Layout for Stroke Reverse Lookup
+        @Published private(set) var strokeLayout: StrokeLayout = StrokeLayout.fetchSavedLayout()
+        func updateStrokeLayout(to layout: StrokeLayout) {
+                strokeLayout = layout
+                let value: Int = layout.rawValue
+                UserDefaults.standard.set(value, forKey: OptionsKey.StrokeLayout)
+        }
 
 
         // MARK: - Haptic Feedback

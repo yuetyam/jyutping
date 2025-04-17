@@ -11,6 +11,7 @@ enum KeyboardForm: Int {
         case settings
         case symbolic
         case tenKeyNumeric
+        case tenKeyStroke
 }
 
 extension UIKeyboardType {
@@ -54,29 +55,30 @@ extension UIKeyboardType {
 
 extension KeyboardForm {
 
+        /// Should stay buffering, should keep the bufferText
+        var isBufferrable: Bool {
+                switch self {
+                case .alphabetic, .candidateBoard, .tenKeyStroke: true
+                default: false
+                }
+        }
+
         /// Phone, PhoneOnPad, PadFloating
         var compactTransformKeyTex: String {
-                return switch self {
-                case .alphabetic:
-                        "ABC"
-                case .numeric, .tenKeyNumeric:
-                        "123"
-                case .symbolic:
-                        "#+="
-                default:
-                        "???"
+                switch self {
+                case .alphabetic: "ABC"
+                case .numeric,
+                .tenKeyNumeric  : "123"
+                case .symbolic  : "#+="
+                default         : "???"
                 }
         }
         var padTransformKeyText: String {
-                return switch self {
-                case .alphabetic:
-                        "ABC"
-                case .numeric:
-                        ".?123"
-                case .symbolic:
-                        "#+="
-                default:
-                        "???"
+                switch self {
+                case .alphabetic: "ABC"
+                case .numeric   : ".?123"
+                case .symbolic  : "#+="
+                default         : "???"
                 }
         }
 }

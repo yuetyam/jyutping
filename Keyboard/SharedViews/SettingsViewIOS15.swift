@@ -21,6 +21,7 @@ struct SettingsViewIOS15: View {
         @State private var hapticFeedback: HapticFeedback = HapticFeedback.fetchSavedMode()
         @State private var keyboardLayout: KeyboardLayout = KeyboardLayout.fetchSavedLayout()
         @State private var isKeyPadNumericLayout: Bool = NumericLayout.fetchSavedLayout().isNumberKeyPad
+        @State private var isTenKeyStrokeLayout: Bool = StrokeLayout.fetchSavedLayout().isTenKey
         @State private var showLowercaseKeys: Bool = Options.showLowercaseKeys
         @State private var keyTextPreview: Bool = Options.keyTextPreview
         @State private var commentStyle: CommentStyle = Options.commentStyle
@@ -146,6 +147,12 @@ struct SettingsViewIOS15: View {
                                                                 AudioFeedback.modified()
                                                                 let newLayout: NumericLayout = isOn ? .numberKeyPad : .default
                                                                 context.updateNumericLayout(to: newLayout)
+                                                        }
+                                                Toggle("SettingsView.StrokeLayout.ToggleTitle", isOn: $isTenKeyStrokeLayout)
+                                                        .onChange(of: isTenKeyStrokeLayout) { isOn in
+                                                                AudioFeedback.modified()
+                                                                let newLayout: StrokeLayout = isOn ? .tenKey : .default
+                                                                context.updateStrokeLayout(to: newLayout)
                                                         }
                                         }
                                 }
