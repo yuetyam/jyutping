@@ -46,7 +46,11 @@ struct IOSJyutpingToneTable: View {
                         }
                         if #available(iOS 16.0, *) {
                                 Section {
-                                        IOSToneGridView()
+                                        if horizontalSize == .compact {
+                                                IOSToneCompactGridView()
+                                        } else {
+                                                IOSToneGridView()
+                                        }
                                 }
                                 .listRowBackground(Color.clear)
                         }
@@ -56,7 +60,11 @@ struct IOSJyutpingToneTable: View {
                                         .frame(height: 234)
                         }
                         Section {
-                                IOSToneTipView()
+                                if horizontalSize == .compact {
+                                        IOSToneCompactTipView()
+                                } else {
+                                        IOSToneTipView()
+                                }
                         }
                 }
                 .textSelection(.enabled)
@@ -98,10 +106,10 @@ private struct IOSToneLabel: View {
 }
 
 @available(iOS 16.0, *)
-private struct IOSToneGridView: View {
+private struct IOSToneCompactGridView: View {
         @Environment(\.colorScheme) private var colorScheme
         var body: some View {
-                Grid(horizontalSpacing: 14, verticalSpacing: 14) {
+                Grid(horizontalSpacing: 8, verticalSpacing: 8) {
                         GridRow {
                                 Text(verbatim: "空").hidden()
                                 Text(verbatim: "陰")
@@ -150,6 +158,51 @@ private struct IOSToneGridView: View {
         }
 }
 
+@available(iOS 16.0, *)
+private struct IOSToneGridView: View {
+        @Environment(\.colorScheme) private var colorScheme
+        var body: some View {
+                Grid(horizontalSpacing: 8, verticalSpacing: 8) {
+                        GridRow {
+                                Text(verbatim: "空").hidden()
+                                Text(verbatim: "平")
+                                Text(verbatim: "上")
+                                Text(verbatim: "去")
+                                Text(verbatim: "入")
+                        }
+                        GridRow {
+                                Text(verbatim: "陰")
+                                IOSToneGridCell(character: "詩", syllable: "si1", tone: "˥")
+                                IOSToneGridCell(character: "史", syllable: "si2", tone: "˧˥")
+                                IOSToneGridCell(character: "試", syllable: "si3", tone: "˧")
+                                VStack(spacing: 2) {
+                                        HStack {
+                                                Text(verbatim: "識 sik1")
+                                                Speaker("sik1")
+                                                Text(verbatim: "調值: ˥")
+                                        }
+                                        Divider()
+                                        HStack {
+                                                Text(verbatim: "涉 sip3")
+                                                Speaker("sip3")
+                                                Text(verbatim: "調值: ˧")
+                                        }
+                                }
+                                .padding(4)
+                                .background(Color.textBackgroundColor(colorScheme: colorScheme), in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+                                .fixedSize()
+                        }
+                        GridRow {
+                                Text(verbatim: "陽")
+                                IOSToneGridCell(character: "時", syllable: "si4", tone: "˨˩")
+                                IOSToneGridCell(character: "市", syllable: "si5", tone: "˩˧")
+                                IOSToneGridCell(character: "事", syllable: "si6", tone: "˨")
+                                IOSToneGridCell(character: "舌", syllable: "sit6", tone: "˨")
+                        }
+                }
+        }
+}
+
 private struct IOSToneGridCell: View {
         @Environment(\.colorScheme) private var colorScheme
         let character: String
@@ -168,7 +221,7 @@ private struct IOSToneGridCell: View {
         }
 }
 
-private struct IOSToneTipView: View {
+private struct IOSToneCompactTipView: View {
         var body: some View {
                 VStack(spacing: 0) {
                         HStack {
@@ -181,6 +234,18 @@ private struct IOSToneTipView: View {
                                 Speaker("soeng6")
                                 Spacer()
                         }
+                }
+        }
+}
+
+private struct IOSToneTipView: View {
+        var body: some View {
+                HStack {
+                        Text(verbatim: "聲調之「上」應讀上聲 soeng5")
+                        Speaker("soeng5")
+                        Text(verbatim: "而非去聲 soeng6")
+                        Speaker("soeng6")
+                        Spacer()
                 }
         }
 }
