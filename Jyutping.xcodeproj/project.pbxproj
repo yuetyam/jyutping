@@ -229,6 +229,7 @@
 		3742824E2B3CB70C00B687D3 /* AboutKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3742824D2B3CB70C00B687D3 /* AboutKit */; };
 		374282502B3CB71400B687D3 /* AboutKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3742824F2B3CB71400B687D3 /* AboutKit */; };
 		374326092CF44C3900AE8B0B /* ABCKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374326082CF44C3900AE8B0B /* ABCKeyboard.swift */; };
+		37433A662DB0F283007075D8 /* ToneChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37433A652DB0F283007075D8 /* ToneChartView.swift */; };
 		375A90B32BD0797B009784BB /* TenKeyGlobeKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375A90B22BD0797B009784BB /* TenKeyGlobeKey.swift */; };
 		375B855D2CB8FBEB000E124E /* CandidateBarScrollViewIOS17.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375B855C2CB8FBEB000E124E /* CandidateBarScrollViewIOS17.swift */; };
 		375B855F2CB8FC1B000E124E /* CandidateBarScrollViewIOS18.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375B855E2CB8FC1B000E124E /* CandidateBarScrollViewIOS18.swift */; };
@@ -623,6 +624,7 @@
 		3742192A2BD4B63200FCB170 /* EnhancedReturnKeyType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnhancedReturnKeyType.swift; sourceTree = "<group>"; };
 		3742824C2B3CB6FD00B687D3 /* AboutKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = AboutKit; path = Modules/AboutKit; sourceTree = "<group>"; };
 		374326082CF44C3900AE8B0B /* ABCKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ABCKeyboard.swift; sourceTree = "<group>"; };
+		37433A652DB0F283007075D8 /* ToneChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToneChartView.swift; sourceTree = "<group>"; };
 		375A90B22BD0797B009784BB /* TenKeyGlobeKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TenKeyGlobeKey.swift; sourceTree = "<group>"; };
 		375B855C2CB8FBEB000E124E /* CandidateBarScrollViewIOS17.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateBarScrollViewIOS17.swift; sourceTree = "<group>"; };
 		375B855E2CB8FC1B000E124E /* CandidateBarScrollViewIOS18.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateBarScrollViewIOS18.swift; sourceTree = "<group>"; };
@@ -1170,6 +1172,7 @@
 			children = (
 				375D3A3C2B806C88005F13C1 /* TextRomanizationView.swift */,
 				377072772D384786007DC04D /* OnsetGridView.swift */,
+				37433A652DB0F283007075D8 /* ToneChartView.swift */,
 			);
 			path = SharedViews;
 			sourceTree = "<group>";
@@ -2130,6 +2133,7 @@
 				371B6ECC2B3B3108005BB31C /* MacMetroStationLabel.swift in Sources */,
 				371B6EC32B3B3108005BB31C /* JyutpingView.swift in Sources */,
 				371B6ED92B3B3108005BB31C /* CantoneseLexiconView.swift in Sources */,
+				37433A662DB0F283007075D8 /* ToneChartView.swift in Sources */,
 				371B6EDA2B3B3108005BB31C /* YingWaaLexiconView.swift in Sources */,
 				371B6EA82B3B3108005BB31C /* ColorExtensions.swift in Sources */,
 				375D3A3D2B806C88005F13C1 /* TextRomanizationView.swift in Sources */,

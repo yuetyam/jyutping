@@ -51,11 +51,11 @@ struct MacJyutpingToneTable: View {
                                         VStack {
                                                 MacToneLabel(word: "芬", syllable: "fan1", toneName: "陰平", toneValue: "55/53")
                                                 MacToneLabel(word: "粉", syllable: "fan2", toneName: "陰上", toneValue: "35")
-                                                MacToneLabel(word: "訓", syllable: "fan3", toneName: "陰去", toneValue: "33")
+                                                MacToneLabel(word: "糞", syllable: "fan3", toneName: "陰去", toneValue: "33")
                                                 MacToneLabel(word: "焚", syllable: "fan4", toneName: "陽平", toneValue: "21/11")
                                                 MacToneLabel(word: "憤", syllable: "fan5", toneName: "陽上", toneValue: "13/23")
                                                 MacToneLabel(word: "份", syllable: "fan6", toneName: "陽去", toneValue: "22")
-                                                MacToneLabel(word: "忽", syllable: "fat1", toneName: "高陰入", toneValue: "5")
+                                                MacToneLabel(word: "弗", syllable: "fat1", toneName: "高陰入", toneValue: "5")
                                                 MacToneLabel(word: "法", syllable: "faat3", toneName: "低陰入", toneValue: "3")
                                                 MacToneLabel(word: "佛", syllable: "fat6", toneName: "陽入", toneValue: "2")
                                         }
@@ -66,6 +66,12 @@ struct MacJyutpingToneTable: View {
                                 if #available(macOS 13.0, *) {
                                         MacToneGridView()
                                 }
+                                ToneChartView()
+                                        .padding(.vertical, 8)
+                                        .frame(height: 216)
+                                        .padding(.horizontal, 8)
+                                        .block()
+                                        .padding(.vertical)
                         }
                         .padding()
                 }
