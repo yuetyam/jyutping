@@ -113,7 +113,7 @@ struct SettingsView: View {
                                                 .onChange(of: isAudioFeedbackOn) { newState in
                                                         Options.updateAudioFeedbackStatus(isOn: newState)
                                                 }
-                                        if context.isPhone {
+                                        if context.isRunningOnPhone {
                                                 HStack(spacing: 0) {
                                                         Text("SettingsView.KeyboardFeedback.Haptic.PickerTitle").minimumScaleFactor(0.5).lineLimit(1)
                                                         Spacer()
@@ -137,7 +137,7 @@ struct SettingsView: View {
                                 } header: {
                                         Text("SettingsView.KeyboardFeedback.SectionHeader").textCase(nil)
                                 } footer: {
-                                        if context.isPhone && context.hasFullAccess.negative {
+                                        if context.isRunningOnPhone && context.hasFullAccess.negative {
                                                 Text("SettingsView.KeyboardFeedback.SectionFooter").textCase(nil)
                                         }
                                 }
@@ -155,7 +155,7 @@ struct SettingsView: View {
                                         context.updateKeyboardLayout(to: newLayout)
                                 }
 
-                                if context.isPhone {
+                                if context.isRunningOnPhone {
                                         Section {
                                                 Toggle("SettingsView.NumericLayout.ToggleTitle", isOn: $isKeyPadNumericLayout)
                                                         .onChange(of: isKeyPadNumericLayout) { isOn in

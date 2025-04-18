@@ -34,12 +34,29 @@ struct TenKeyKeyboard: View {
                                                         }
                                                 }
                                         }
-                                        HStack(spacing: 0) {
-                                                TenKeyNavigateKey(destination: context.numericLayout.isNumberKeyPad ? .tenKeyNumeric : .numeric)
-                                                if context.needsInputModeSwitchKey {
+                                        switch (context.isRunningOnPhone, context.needsInputModeSwitchKey) {
+                                        case (true, true):
+                                                HStack(spacing: 0) {
+                                                        TenKeyNavigateKey(destination: context.numericLayout.isNumberKeyPad ? .tenKeyNumeric : .numeric)
                                                         TenKeyGlobeKey()
+                                                        TenKeySpaceKey()
                                                 }
-                                                TenKeySpaceKey()
+                                        case (true, false):
+                                                HStack(spacing: 0) {
+                                                        TenKeyNavigateKey(destination: context.numericLayout.isNumberKeyPad ? .tenKeyNumeric : .numeric)
+                                                        TenKeySpaceKey()
+                                                }
+                                        case (false, true):
+                                                HStack(spacing: 0) {
+                                                        TenKeyGlobeKey()
+                                                        TenKeyNavigateKey(destination: context.numericLayout.isNumberKeyPad ? .tenKeyNumeric : .numeric)
+                                                        TenKeySpaceKey()
+                                                }
+                                        case (false, false):
+                                                HStack(spacing: 0) {
+                                                        TenKeyNavigateKey(destination: context.numericLayout.isNumberKeyPad ? .tenKeyNumeric : .numeric)
+                                                        TenKeySpaceKey()
+                                                }
                                         }
                                 }
                                 VStack(spacing: 0) {

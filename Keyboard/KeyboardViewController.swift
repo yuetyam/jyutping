@@ -810,8 +810,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 }
         }
 
-        // TODO: Any better name?
-        private(set) lazy var isPhone: Bool = UIDevice.current.userInterfaceIdiom == .phone
+        private(set) lazy var isRunningOnPhone: Bool = UIDevice.current.userInterfaceIdiom == .phone
 
         @Published private(set) var keyboardWidth: CGFloat = 440
         @Published private(set) var keyboardHeight: CGFloat = 284
