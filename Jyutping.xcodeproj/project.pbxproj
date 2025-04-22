@@ -285,6 +285,7 @@
 		379CB1A22BDA40B900434190 /* IOSJyutpingToneTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379CB1A12BDA40B900434190 /* IOSJyutpingToneTable.swift */; };
 		379CB1A42BDA666D00434190 /* IOSJyutpingFinalTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379CB1A32BDA666D00434190 /* IOSJyutpingFinalTable.swift */; };
 		379CB1A62BDB898700434190 /* MacJyutpingFinalTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379CB1A52BDB898700434190 /* MacJyutpingFinalTable.swift */; };
+		37B0D1CF2DB7788900B6DEFF /* GeneralSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B0D1CE2DB7788900B6DEFF /* GeneralSettingsView.swift */; };
 		37CC55792B464C78003ED8CE /* ChangeDisplayLanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CC55782B464C78003ED8CE /* ChangeDisplayLanguageView.swift */; };
 		37D00DD22D115045003420EE /* IOSTungkunRailTransitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D00DD12D115044003420EE /* IOSTungkunRailTransitView.swift */; };
 		37D00DD42D11523A003420EE /* IOSMacauMetroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D00DD32D115238003420EE /* IOSMacauMetroView.swift */; };
@@ -680,6 +681,7 @@
 		379CB1A12BDA40B900434190 /* IOSJyutpingToneTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSJyutpingToneTable.swift; sourceTree = "<group>"; };
 		379CB1A32BDA666D00434190 /* IOSJyutpingFinalTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSJyutpingFinalTable.swift; sourceTree = "<group>"; };
 		379CB1A52BDB898700434190 /* MacJyutpingFinalTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacJyutpingFinalTable.swift; sourceTree = "<group>"; };
+		37B0D1CE2DB7788900B6DEFF /* GeneralSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsView.swift; sourceTree = "<group>"; };
 		37CC55782B464C78003ED8CE /* ChangeDisplayLanguageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeDisplayLanguageView.swift; sourceTree = "<group>"; };
 		37D00DD12D115044003420EE /* IOSTungkunRailTransitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSTungkunRailTransitView.swift; sourceTree = "<group>"; };
 		37D00DD32D115238003420EE /* IOSMacauMetroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSMacauMetroView.swift; sourceTree = "<group>"; };
@@ -1424,6 +1426,7 @@
 			isa = PBXGroup;
 			children = (
 				37E6AD5E2B3B381600F02279 /* PreferencesView.swift */,
+				37B0D1CE2DB7788900B6DEFF /* GeneralSettingsView.swift */,
 				37E6AD5B2B3B381600F02279 /* GeneralPreferencesView.swift */,
 				37918A6B2C5B5BBA006C6590 /* ToneInputView.swift */,
 				375FA76C2C0D5227001ABA39 /* ReverseLookupView.swift */,
@@ -1993,6 +1996,7 @@
 				37E6AD7E2B3B381700F02279 /* FontPicker.swift in Sources */,
 				37918A6C2C5B5BBA006C6590 /* ToneInputView.swift in Sources */,
 				37E6AD722B3B381700F02279 /* Representative.swift in Sources */,
+				37B0D1CF2DB7788900B6DEFF /* GeneralSettingsView.swift in Sources */,
 				3797F6E32C188F2B00DE6D0E /* AppDelegate.swift in Sources */,
 				37E6AD742B3B381700F02279 /* CharacterExtensions.swift in Sources */,
 				37E6AD852B3B381700F02279 /* UserLexicon.swift in Sources */,

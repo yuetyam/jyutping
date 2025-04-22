@@ -1611,76 +1611,6 @@
         }
       }
     },
-    "GeneralPreferencesView.InputMemory.Clear.ButtonTitle" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Clear Input Memory"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Effacer la mémoire d’entrée"
-          }
-        },
-        "yue" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "清空輸入記憶"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "清空輸入記憶"
-          }
-        },
-        "zh-Hans-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "清空輸入記憶"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "清空輸入記憶"
-          }
-        },
-        "zh-Hant-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "清空輸入記憶"
-          }
-        },
-        "zh-Hant-HK" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "清空輸入記憶"
-          }
-        },
-        "zh-Hant-MO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "清空輸入記憶"
-          }
-        },
-        "zh-Hant-TW" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "清空輸入記憶"
-          }
-        },
-        "zh-HK" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "清空輸入記憶"
-          }
-        }
-      }
-    },
     "GeneralPreferencesView.CandidateCountPerPage" : {
       "localizations" : {
         "en" : {
@@ -2031,142 +1961,72 @@
         }
       }
     },
-    "GeneralPreferencesView.CharacterStandard.PickerFooter.LeadingText" : {
+    "GeneralPreferencesView.CharacterStandard.PickerTitle" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "You can use this shortcut to toggle options:"
+            "value" : "Candidate Character Set"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vous pouvez utiliser ce raccourci pour basculer les options :"
+            "value" : "Jeu de caractères des candidats"
           }
         },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "打字時按組合鍵可以選字符集以及其他選項："
+            "value" : "候選詞字符集"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "打字時按組合鍵可以選字符集以及其他選項："
+            "value" : "候選詞字符集"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "打字時按組合鍵可以選字符集以及其他選項："
+            "value" : "候選詞字符集"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "打字時按組合鍵可以選字符集以及其他選項："
+            "value" : "候選詞字符集"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "打字時按組合鍵可以選字符集以及其他選項："
+            "value" : "候選詞字符集"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "打字時按組合鍵可以選字符集以及其他選項："
+            "value" : "候選詞字符集"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "打字時按組合鍵可以選字符集以及其他選項："
+            "value" : "候選詞字符集"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "打字時按組合鍵可以選字符集以及其他選項："
+            "value" : "候選詞字符集"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "打字時按組合鍵可以選字符集以及其他選項："
-          }
-        }
-      }
-    },
-    "GeneralPreferencesView.CharacterStandard.PickerFooter.TrailingText" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(below the esc key)"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(sous la touche échap)"
-          }
-        },
-        "yue" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(位於 esc 鍵下方)"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(位於 esc 鍵下方)"
-          }
-        },
-        "zh-Hans-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(位於 esc 鍵下方)"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(位於 esc 鍵下方)"
-          }
-        },
-        "zh-Hant-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(位於 esc 鍵下方)"
-          }
-        },
-        "zh-Hant-HK" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(位於 esc 鍵下方)"
-          }
-        },
-        "zh-Hant-MO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(位於 esc 鍵下方)"
-          }
-        },
-        "zh-Hant-TW" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(位於 esc 鍵下方)"
-          }
-        },
-        "zh-HK" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(位於 esc 鍵下方)"
+            "value" : "候選詞字符集"
           }
         }
       }
@@ -2447,76 +2307,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "傳統漢字・臺灣"
-          }
-        }
-      }
-    },
-    "GeneralPreferencesView.CharacterStandard.PickerTitle" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Candidate Character Set"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Jeu de caractères des candidats"
-          }
-        },
-        "yue" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "候選詞字符集"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "候選詞字符集"
-          }
-        },
-        "zh-Hans-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "候選詞字符集"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "候選詞字符集"
-          }
-        },
-        "zh-Hant-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "候選詞字符集"
-          }
-        },
-        "zh-Hant-HK" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "候選詞字符集"
-          }
-        },
-        "zh-Hant-MO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "候選詞字符集"
-          }
-        },
-        "zh-Hant-TW" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "候選詞字符集"
-          }
-        },
-        "zh-HK" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "候選詞字符集"
           }
         }
       }
@@ -3431,6 +3221,146 @@
         }
       }
     },
+    "GeneralPreferencesView.EmojiSuggestions.ToggleTitle" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Emoji Suggestions"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suggestions d’emoji"
+          }
+        },
+        "yue" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "表情符號(Emoji)候選詞"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "表情符號(Emoji)候選詞"
+          }
+        },
+        "zh-Hans-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "表情符號(Emoji)候選詞"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "表情符號(Emoji)候選詞"
+          }
+        },
+        "zh-Hant-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "表情符號(Emoji)候選詞"
+          }
+        },
+        "zh-Hant-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "表情符號(Emoji)候選詞"
+          }
+        },
+        "zh-Hant-MO" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "表情符號(Emoji)候選詞"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "表情符號(Emoji)候選詞"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "表情符號(Emoji)候選詞"
+          }
+        }
+      }
+    },
+    "GeneralPreferencesView.InputMemory.Clear.ButtonTitle" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clear Input Memory"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Effacer la mémoire d’entrée"
+          }
+        },
+        "yue" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "清空輸入記憶"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "清空輸入記憶"
+          }
+        },
+        "zh-Hans-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "清空輸入記憶"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "清空輸入記憶"
+          }
+        },
+        "zh-Hant-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "清空輸入記憶"
+          }
+        },
+        "zh-Hant-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "清空輸入記憶"
+          }
+        },
+        "zh-Hant-MO" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "清空輸入記憶"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "清空輸入記憶"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "清空輸入記憶"
+          }
+        }
+      }
+    },
     "GeneralPreferencesView.InputMemory.Clear.ConfirmationDialog.Cancel" : {
       "localizations" : {
         "en" : {
@@ -3641,72 +3571,142 @@
         }
       }
     },
-    "GeneralPreferencesView.EmojiSuggestions.ToggleTitle" : {
+    "GeneralPreferencesView.InputMemory.ToggleTitle" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Emoji Suggestions"
+            "value" : "Input Memory"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Suggestions d’emoji"
+            "value" : "Mémoire de saisie"
           }
         },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "表情符號(Emoji)候選詞"
+            "value" : "記憶輸入"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "表情符號(Emoji)候選詞"
+            "value" : "記憶輸入"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "表情符號(Emoji)候選詞"
+            "value" : "記憶輸入"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "表情符號(Emoji)候選詞"
+            "value" : "記憶輸入"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "表情符號(Emoji)候選詞"
+            "value" : "記憶輸入"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "表情符號(Emoji)候選詞"
+            "value" : "記憶輸入"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "表情符號(Emoji)候選詞"
+            "value" : "記憶輸入"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "表情符號(Emoji)候選詞"
+            "value" : "記憶輸入"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "表情符號(Emoji)候選詞"
+            "value" : "記憶輸入"
+          }
+        }
+      }
+    },
+    "GeneralPreferencesView.LabelLastZero.ToggleTitle" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "10th Serial Number as Zero"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Afficher le 10e numéro de série comme zéro"
+          }
+        },
+        "yue" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "候選詞編號第十位爲零"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "候選詞編號第十位爲零"
+          }
+        },
+        "zh-Hans-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "候選詞編號第十位爲零"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "候選詞編號第十位爲零"
+          }
+        },
+        "zh-Hant-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "候選詞編號第十位爲零"
+          }
+        },
+        "zh-Hant-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "候選詞編號第十位爲零"
+          }
+        },
+        "zh-Hant-MO" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "候選詞編號第十位爲零"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "候選詞編號第十位爲零"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "候選詞編號第十位爲零"
           }
         }
       }
@@ -4617,146 +4617,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "融合部分習慣拼法"
-          }
-        }
-      }
-    },
-    "GeneralPreferencesView.InputMemory.ToggleTitle" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Input Memory"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mémoire de saisie"
-          }
-        },
-        "yue" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "記憶輸入"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "記憶輸入"
-          }
-        },
-        "zh-Hans-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "記憶輸入"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "記憶輸入"
-          }
-        },
-        "zh-Hant-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "記憶輸入"
-          }
-        },
-        "zh-Hant-HK" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "記憶輸入"
-          }
-        },
-        "zh-Hant-MO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "記憶輸入"
-          }
-        },
-        "zh-Hant-TW" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "記憶輸入"
-          }
-        },
-        "zh-HK" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "記憶輸入"
-          }
-        }
-      }
-    },
-    "GeneralPreferencesView.LabelLastZero.ToggleTitle" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "10th Serial Number as Zero"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Afficher le 10e numéro de série comme zéro"
-          }
-        },
-        "yue" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "候選詞編號第十位爲零"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "候選詞編號第十位爲零"
-          }
-        },
-        "zh-Hans-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "候選詞編號第十位爲零"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "候選詞編號第十位爲零"
-          }
-        },
-        "zh-Hant-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "候選詞編號第十位爲零"
-          }
-        },
-        "zh-Hant-HK" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "候選詞編號第十位爲零"
-          }
-        },
-        "zh-Hant-MO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "候選詞編號第十位爲零"
-          }
-        },
-        "zh-Hant-TW" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "候選詞編號第十位爲零"
-          }
-        },
-        "zh-HK" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "候選詞編號第十位爲零"
           }
         }
       }

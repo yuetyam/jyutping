@@ -9,23 +9,31 @@ struct HotkeysView: View {
                 ScrollView {
                         LazyVStack(spacing: 16) {
                                 VStack {
-                                        HStack {
+                                        HStack(spacing: 4) {
+                                                LabelText("HotkeysView.PressShiftOnceTo")
+                                                Text.separator
                                                 Picker("HotkeysView.PressShiftOnceTo", selection: $pressShiftOnce) {
                                                         Text("HotkeysView.PressShiftOnceTo.DoNothing").tag(PressShiftOnce.doNothing)
                                                         Text("HotkeysView.SwitchInputMethodMode").tag(PressShiftOnce.switchInputMethodMode)
                                                 }
-                                                .scaledToFit()
+                                                .pickerStyle(.menu)
+                                                .labelsHidden()
+                                                .fixedSize()
                                                 .onChange(of: pressShiftOnce) { newOption in
                                                         AppSettings.updatePressShiftOnce(to: newOption)
                                                 }
                                                 Spacer()
                                         }
-                                        HStack {
+                                        HStack(spacing: 4) {
+                                                LabelText("HotkeysView.PressShiftSpaceTo")
+                                                Text.separator
                                                 Picker("HotkeysView.PressShiftSpaceTo", selection: $shiftSpaceCombination) {
                                                         Text("HotkeysView.PressShiftSpaceTo.InputFullWidthSpace").tag(ShiftSpaceCombination.inputFullWidthSpace)
                                                         Text("HotkeysView.SwitchInputMethodMode").tag(ShiftSpaceCombination.switchInputMethodMode)
                                                 }
-                                                .scaledToFit()
+                                                .pickerStyle(.menu)
+                                                .labelsHidden()
+                                                .fixedSize()
                                                 .onChange(of: shiftSpaceCombination) { newOption in
                                                         AppSettings.updateShiftSpaceCombination(to: newOption)
                                                 }
@@ -269,7 +277,7 @@ private struct LabelText: View {
                 Text(title)
                         .lineLimit(1)
                         .minimumScaleFactor(0.5)
-                        .frame(width: 256, alignment: .leading)
+                        .frame(width: 240, alignment: .leading)
         }
 }
 
@@ -285,7 +293,7 @@ private struct KeyBlockView: View {
                 Text(verbatim: keyText)
                         .lineLimit(1)
                         .minimumScaleFactor(0.5)
-                        .frame(width: 72, height: 24)
+                        .frame(width: 64, height: 24)
                         .background(Material.regular, in: RoundedRectangle(cornerRadius: 4, style: .continuous))
         }
 

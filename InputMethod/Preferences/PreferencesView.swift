@@ -53,7 +53,7 @@ struct PreferencesView: View {
                         } detail: {
                                 switch selection {
                                 case .general:
-                                        GeneralPreferencesView().applyVisualEffect()
+                                        GeneralSettingsView().applyVisualEffect()
                                 case .toneInput:
                                         ToneInputView().applyVisualEffect()
                                 case .reverseLookup:
