@@ -39,7 +39,7 @@ struct ReverseLookupView: View {
                                                         Text("ReverseLookupView.CangjieVariant.Picker.Option4").tag(CangjieVariant.quick3)
                                                 }
                                                 .pickerStyle(.menu)
-                                                .scaledToFit()
+                                                .fixedSize()
                                                 .onChange(of: cangjieVariant) { newVariant in
                                                         AppSettings.updateCangjieVariant(to: newVariant)
                                                 }

@@ -59,7 +59,7 @@ struct PreferencesView: View {
                                 case .reverseLookup:
                                         ReverseLookupView().applyVisualEffect()
                                 case .fonts:
-                                        FontPreferencesView().applyVisualEffect()
+                                        FontSettingsView().applyVisualEffect()
                                 case .hotkeys:
                                         HotkeysView().applyVisualEffect()
                                 case .about:

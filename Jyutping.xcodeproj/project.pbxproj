@@ -286,6 +286,7 @@
 		379CB1A42BDA666D00434190 /* IOSJyutpingFinalTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379CB1A32BDA666D00434190 /* IOSJyutpingFinalTable.swift */; };
 		379CB1A62BDB898700434190 /* MacJyutpingFinalTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379CB1A52BDB898700434190 /* MacJyutpingFinalTable.swift */; };
 		37B0D1CF2DB7788900B6DEFF /* GeneralSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B0D1CE2DB7788900B6DEFF /* GeneralSettingsView.swift */; };
+		37B0D1D12DB7ECCE00B6DEFF /* FontSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B0D1D02DB7ECCE00B6DEFF /* FontSettingsView.swift */; };
 		37CC55792B464C78003ED8CE /* ChangeDisplayLanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CC55782B464C78003ED8CE /* ChangeDisplayLanguageView.swift */; };
 		37D00DD22D115045003420EE /* IOSTungkunRailTransitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D00DD12D115044003420EE /* IOSTungkunRailTransitView.swift */; };
 		37D00DD42D11523A003420EE /* IOSMacauMetroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D00DD32D115238003420EE /* IOSMacauMetroView.swift */; };
@@ -682,6 +683,7 @@
 		379CB1A32BDA666D00434190 /* IOSJyutpingFinalTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSJyutpingFinalTable.swift; sourceTree = "<group>"; };
 		379CB1A52BDB898700434190 /* MacJyutpingFinalTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacJyutpingFinalTable.swift; sourceTree = "<group>"; };
 		37B0D1CE2DB7788900B6DEFF /* GeneralSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsView.swift; sourceTree = "<group>"; };
+		37B0D1D02DB7ECCE00B6DEFF /* FontSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontSettingsView.swift; sourceTree = "<group>"; };
 		37CC55782B464C78003ED8CE /* ChangeDisplayLanguageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeDisplayLanguageView.swift; sourceTree = "<group>"; };
 		37D00DD12D115044003420EE /* IOSTungkunRailTransitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSTungkunRailTransitView.swift; sourceTree = "<group>"; };
 		37D00DD32D115238003420EE /* IOSMacauMetroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSMacauMetroView.swift; sourceTree = "<group>"; };
@@ -1430,6 +1432,7 @@
 				37E6AD5B2B3B381600F02279 /* GeneralPreferencesView.swift */,
 				37918A6B2C5B5BBA006C6590 /* ToneInputView.swift */,
 				375FA76C2C0D5227001ABA39 /* ReverseLookupView.swift */,
+				37B0D1D02DB7ECCE00B6DEFF /* FontSettingsView.swift */,
 				37E6AD5C2B3B381600F02279 /* FontPreferencesView.swift */,
 				37E6AD592B3B381600F02279 /* HotkeysView.swift */,
 				37E6AD5F2B3B381600F02279 /* AboutView.swift */,
@@ -2007,6 +2010,7 @@
 				37E6AD6D2B3B381700F02279 /* HorizontalPageCandidateLabel.swift in Sources */,
 				375FA76D2C0D5227001ABA39 /* ReverseLookupView.swift in Sources */,
 				37E6AD7A2B3B381700F02279 /* Options.swift in Sources */,
+				37B0D1D12DB7ECCE00B6DEFF /* FontSettingsView.swift in Sources */,
 				37E6AD872B3B381700F02279 /* OptionsView.swift in Sources */,
 				37E6AD7F2B3B381700F02279 /* GeneralPreferencesView.swift in Sources */,
 				37F4B0E42D36FB1A0076857E /* main.swift in Sources */,

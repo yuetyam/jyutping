@@ -21,11 +21,13 @@ struct FontPicker: View {
         @Binding private var name: String
         private let size: CGFloat
         private let fallback: String
+        private let adoptFormStyle: Bool
 
-        init(_ name: Binding<String>, size: Int, fallback: String) {
+        init(_ name: Binding<String>, size: Int, fallback: String, adoptFormStyle: Bool = false) {
                 self._name = name
                 self.size = CGFloat(size)
                 self.fallback = fallback
+                self.adoptFormStyle = adoptFormStyle
         }
 
         private var font: NSFont {
@@ -39,10 +41,18 @@ struct FontPicker: View {
 
         var body: some View {
                 HStack {
-                        Text(verbatim: name)
-                                .lineLimit(1)
-                                .minimumScaleFactor(0.4)
-                                .frame(width: 160, alignment: .leading)
+                        // TODO: Remove adoptFormStyle when dropping support for macOS 12
+                        if adoptFormStyle {
+                                Text(verbatim: name)
+                                        .lineLimit(1)
+                                        .minimumScaleFactor(0.4)
+                                Spacer()
+                        } else {
+                                Text(verbatim: name)
+                                        .lineLimit(1)
+                                        .minimumScaleFactor(0.4)
+                                        .frame(width: 160, alignment: .leading)
+                        }
                         Button {
                                 guard !(NSFontPanel.shared.isVisible) else {
                                         NSFontPanel.shared.orderOut(nil)

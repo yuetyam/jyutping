@@ -1,9 +1,8 @@
 import SwiftUI
 import CommonExtensions
 
-@available(macOS, introduced: 12.0, deprecated: 13.0, message: "Use FontSettingsView instead")
-struct FontPreferencesView: View {
-
+@available(macOS 13.0, *)
+struct FontSettingsView: View {
         private let minusImage: Image = Image(systemName: "minus")
         private let plusImage: Image = Image(systemName: "plus")
 
@@ -27,31 +26,29 @@ struct FontPreferencesView: View {
 
         var body: some View {
                 ScrollView {
-                        LazyVStack(spacing: 16) {
-                                VStack(alignment: .leading) {
-                                        HStack {
+                        LazyVStack(alignment: .leading) {
+                                Form {
+                                        Section {
                                                 Picker("FontPreferencesView.FontSizePicker.Candidate", selection: $candidateFontSize) {
                                                         ForEach(fontSizeRange, id: \.self) {
                                                                 Text(verbatim: "\($0) pt").tag($0)
                                                         }
                                                 }
-                                                .fixedSize()
+                                                .pickerStyle(.menu)
                                                 .onChange(of: candidateFontSize) { newFontSize in
                                                         AppSettings.updateCandidateFontSize(to: newFontSize)
                                                 }
-                                                Spacer()
-                                        }
-                                        Picker("FontPreferencesView.FontModePicker.Candidate", selection: $candidateFontMode) {
-                                                Text("FontPreferencesView.FontMode.Default").tag(FontMode.default)
-                                                Text("FontPreferencesView.FontMode.System").tag(FontMode.system)
-                                                Text("FontPreferencesView.FontMode.Custom").tag(FontMode.custom)
-                                        }
-                                        .fixedSize()
-                                        .onChange(of: candidateFontMode) { newMode in
-                                                AppSettings.updateCandidateFontMode(to: newMode)
-                                        }
-                                        if candidateFontMode.isCustom {
-                                                VStack(alignment: .leading) {
+                                                Picker("FontPreferencesView.FontModePicker.Candidate", selection: $candidateFontMode) {
+                                                        Text("FontPreferencesView.FontMode.Default").tag(FontMode.default)
+                                                        Text("FontPreferencesView.FontMode.System").tag(FontMode.system)
+                                                        Text("FontPreferencesView.FontMode.Custom").tag(FontMode.custom)
+                                                }
+                                                .pickerStyle(.menu)
+                                                .onChange(of: candidateFontMode) { newMode in
+                                                        AppSettings.updateCandidateFontMode(to: newMode)
+                                                        triggerAnimation()
+                                                }
+                                                if candidateFontMode.isCustom {
                                                         ForEach(customCandidateFonts.indices, id: \.self) { index in
                                                                 HStack {
                                                                         Button(role: .destructive) {
@@ -60,7 +57,7 @@ struct FontPreferencesView: View {
                                                                         } label: {
                                                                                 minusImage
                                                                         }
-                                                                        FontPicker($customCandidateFonts[index], size: candidateFontSize, fallback: PresetConstant.PingFangHK)
+                                                                        FontPicker($customCandidateFonts[index], size: candidateFontSize, fallback: PresetConstant.PingFangHK, adoptFormStyle: true)
                                                                 }
                                                         }
                                                         Button {
@@ -69,37 +66,32 @@ struct FontPreferencesView: View {
                                                         } label: {
                                                                 plusImage
                                                         }
-                                                }
-                                                .onChange(of: customCandidateFonts) { newFontNames in
-                                                        AppSettings.updateCustomCandidateFonts(to: newFontNames)
+                                                        .onChange(of: customCandidateFonts) { newFontNames in
+                                                                AppSettings.updateCustomCandidateFonts(to: newFontNames)
+                                                        }
                                                 }
                                         }
-                                }
-                                .block()
-                                VStack(alignment: .leading) {
-                                        HStack {
+                                        Section {
                                                 Picker("FontPreferencesView.FontSizePicker.Comment", selection: $commentFontSize) {
                                                         ForEach(fontSizeRange, id: \.self) {
                                                                 Text(verbatim: "\($0) pt").tag($0)
                                                         }
                                                 }
-                                                .fixedSize()
+                                                .pickerStyle(.menu)
                                                 .onChange(of: commentFontSize) { newFontSize in
                                                         AppSettings.updateCommentFontSize(to: newFontSize)
                                                 }
-                                                Spacer()
-                                        }
-                                        Picker("FontPreferencesView.FontModePicker.Comment", selection: $commentFontMode) {
-                                                Text("FontPreferencesView.FontMode.Default").tag(FontMode.default)
-                                                Text("FontPreferencesView.FontMode.System").tag(FontMode.system)
-                                                Text("FontPreferencesView.FontMode.Custom").tag(FontMode.custom)
-                                        }
-                                        .fixedSize()
-                                        .onChange(of: commentFontMode) { newMode in
-                                                AppSettings.updateCommentFontMode(to: newMode)
-                                        }
-                                        if commentFontMode.isCustom {
-                                                VStack(alignment: .leading) {
+                                                Picker("FontPreferencesView.FontModePicker.Comment", selection: $commentFontMode) {
+                                                        Text("FontPreferencesView.FontMode.Default").tag(FontMode.default)
+                                                        Text("FontPreferencesView.FontMode.System").tag(FontMode.system)
+                                                        Text("FontPreferencesView.FontMode.Custom").tag(FontMode.custom)
+                                                }
+                                                .pickerStyle(.menu)
+                                                .onChange(of: commentFontMode) { newMode in
+                                                        AppSettings.updateCommentFontMode(to: newMode)
+                                                        triggerAnimation()
+                                                }
+                                                if commentFontMode.isCustom {
                                                         ForEach(customCommentFonts.indices, id: \.self) { index in
                                                                 HStack {
                                                                         Button(role: .destructive) {
@@ -108,7 +100,7 @@ struct FontPreferencesView: View {
                                                                         } label: {
                                                                                 minusImage
                                                                         }
-                                                                        FontPicker($customCommentFonts[index], size: commentFontSize, fallback: PresetConstant.HelveticaNeue)
+                                                                        FontPicker($customCommentFonts[index], size: commentFontSize, fallback: PresetConstant.HelveticaNeue, adoptFormStyle: true)
                                                                 }
                                                         }
                                                         Button {
@@ -117,37 +109,32 @@ struct FontPreferencesView: View {
                                                         } label: {
                                                                 plusImage
                                                         }
-                                                }
-                                                .onChange(of: customCommentFonts) { newFontNames in
-                                                        AppSettings.updateCustomCommentFonts(to: newFontNames)
+                                                        .onChange(of: customCommentFonts) { newFontNames in
+                                                                AppSettings.updateCustomCommentFonts(to: newFontNames)
+                                                        }
                                                 }
                                         }
-                                }
-                                .block()
-                                VStack(alignment: .leading) {
-                                        HStack {
+                                        Section {
                                                 Picker("FontPreferencesView.FontSizePicker.SerialNumber", selection: $labelFontSize) {
                                                         ForEach(fontSizeRange, id: \.self) {
                                                                 Text(verbatim: "\($0) pt").tag($0)
                                                         }
                                                 }
-                                                .fixedSize()
+                                                .pickerStyle(.menu)
                                                 .onChange(of: labelFontSize) { newFontSize in
                                                         AppSettings.updateLabelFontSize(to: newFontSize)
                                                 }
-                                                Spacer()
-                                        }
-                                        Picker("FontPreferencesView.FontModePicker.SerialNumber", selection: $labelFontMode) {
-                                                Text("FontPreferencesView.FontMode.Default").tag(FontMode.default)
-                                                Text("FontPreferencesView.FontMode.System").tag(FontMode.system)
-                                                Text("FontPreferencesView.FontMode.Custom").tag(FontMode.custom)
-                                        }
-                                        .fixedSize()
-                                        .onChange(of: labelFontMode) { newMode in
-                                                AppSettings.updateLabelFontMode(to: newMode)
-                                        }
-                                        if labelFontMode.isCustom {
-                                                VStack(alignment: .leading) {
+                                                Picker("FontPreferencesView.FontModePicker.SerialNumber", selection: $labelFontMode) {
+                                                        Text("FontPreferencesView.FontMode.Default").tag(FontMode.default)
+                                                        Text("FontPreferencesView.FontMode.System").tag(FontMode.system)
+                                                        Text("FontPreferencesView.FontMode.Custom").tag(FontMode.custom)
+                                                }
+                                                .pickerStyle(.menu)
+                                                .onChange(of: labelFontMode) { newMode in
+                                                        AppSettings.updateLabelFontMode(to: newMode)
+                                                        triggerAnimation()
+                                                }
+                                                if labelFontMode.isCustom {
                                                         ForEach(customLabelFonts.indices, id: \.self) { index in
                                                                 HStack {
                                                                         Button(role: .destructive) {
@@ -156,7 +143,7 @@ struct FontPreferencesView: View {
                                                                         } label: {
                                                                                 minusImage
                                                                         }
-                                                                        FontPicker($customLabelFonts[index], size: labelFontSize, fallback: PresetConstant.Menlo)
+                                                                        FontPicker($customLabelFonts[index], size: labelFontSize, fallback: PresetConstant.Menlo, adoptFormStyle: true)
                                                                 }
                                                         }
                                                         Button {
@@ -165,16 +152,16 @@ struct FontPreferencesView: View {
                                                         } label: {
                                                                 plusImage
                                                         }
-                                                }
-                                                .onChange(of: customLabelFonts) { newFontNames in
-                                                        AppSettings.updateCustomLabelFonts(to: newFontNames)
+                                                        .onChange(of: customLabelFonts) { newFontNames in
+                                                                AppSettings.updateCustomLabelFonts(to: newFontNames)
+                                                        }
                                                 }
                                         }
                                 }
-                                .block()
+                                .formStyle(.grouped)
+                                .scrollContentBackground(.hidden)
+                                .frame(maxWidth: 480)
                         }
-                        .textSelection(.enabled)
-                        .padding()
                 }
                 .animation(.default, value: animationState)
                 .navigationTitle("PreferencesView.NavigationTitle.Fonts")
