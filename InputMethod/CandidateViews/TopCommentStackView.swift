@@ -47,8 +47,7 @@ private struct TopCommentUnitView: View {
                 switch toneStyle {
                 case .normal:
                         VStack(spacing: 2) {
-                                RomanizationLabel(syllable: unit.syllable, toneStyle: toneStyle, shallowTone: shallowTone, compatibleMode: compatibleMode)
-                                        .frame(width: syllableViewSize.width, height: syllableViewSize.height)
+                                RomanizationLabel(syllable: unit.syllable, toneStyle: toneStyle, shallowTone: shallowTone, compatibleMode: compatibleMode, size: syllableViewSize)
                                 Text(verbatim: unit.character)
                                         .font(.candidate)
                                         .padding(.trailing, 2)
@@ -56,16 +55,14 @@ private struct TopCommentUnitView: View {
                         }
                 case .noTones:
                         VStack(spacing: 2) {
-                                RomanizationLabel(syllable: unit.syllable, toneStyle: toneStyle, shallowTone: shallowTone, compatibleMode: compatibleMode)
-                                        .frame(width: syllableViewSize.width, height: syllableViewSize.height)
+                                RomanizationLabel(syllable: unit.syllable, toneStyle: toneStyle, shallowTone: shallowTone, compatibleMode: compatibleMode, size: syllableViewSize)
                                 Text(verbatim: unit.character)
                                         .font(.candidate)
                                         .frame(maxWidth: .infinity)
                         }
                 case .superscript:
                         VStack(spacing: 2) {
-                                RomanizationLabel(syllable: unit.syllable, toneStyle: toneStyle, shallowTone: shallowTone, compatibleMode: compatibleMode)
-                                        .frame(width: syllableViewSize.width, height: syllableViewSize.height)
+                                RomanizationLabel(syllable: unit.syllable, toneStyle: toneStyle, shallowTone: shallowTone, compatibleMode: compatibleMode, size: syllableViewSize)
                                 Text(verbatim: unit.character)
                                         .font(.candidate)
                                         .padding(.trailing, 2)
@@ -73,8 +70,7 @@ private struct TopCommentUnitView: View {
                         }
                 case .subscript:
                         VStack(spacing: 2) {
-                                RomanizationLabel(syllable: unit.syllable, toneStyle: toneStyle, shallowTone: shallowTone, compatibleMode: compatibleMode)
-                                        .frame(width: syllableViewSize.width, height: syllableViewSize.height)
+                                RomanizationLabel(syllable: unit.syllable, toneStyle: toneStyle, shallowTone: shallowTone, compatibleMode: compatibleMode, size: syllableViewSize)
                                 Text(verbatim: unit.character)
                                         .font(.candidate)
                                         .padding(.trailing, 2)

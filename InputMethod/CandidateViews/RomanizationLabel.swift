@@ -26,25 +26,47 @@ struct RightStackRomanizationLabel: View {
 }
 
 struct RomanizationLabel: View {
-        let syllable: String
-        let toneStyle: ToneDisplayStyle
-        let shallowTone: Bool
-        let compatibleMode: Bool
+        init(syllable: String, toneStyle: ToneDisplayStyle, shallowTone: Bool, compatibleMode: Bool, size: CGSize) {
+                let phoneText = syllable.filter(\.isLowercaseBasicLatinLetter)
+                self.phone = compatibleMode ? phoneText.compatibleTransformed : phoneText
+                self.tone = (toneStyle == .noTones) ? String.empty : syllable.filter(\.isCantoneseToneDigit)
+                self.toneStyle = toneStyle
+                self.shallowTone = shallowTone
+                self.compatibleMode = compatibleMode
+                self.size = size
+        }
+        private let phone: String
+        private let tone: String
+        private let toneStyle: ToneDisplayStyle
+        private let shallowTone: Bool
+        private let compatibleMode: Bool
+        private let size: CGSize
+        @State private var scaleFactor: CGFloat = 1
         var body: some View {
-                let phone: String = syllable.filter(\.isLowercaseBasicLatinLetter)
-                let phoneText: String = compatibleMode ? phone.compatibleTransformed : phone
-                let toneText: String = (toneStyle == .noTones) ? String.empty : syllable.filter(\.isCantoneseToneDigit)
                 HStack(alignment: toneStyle.commentAlignment, spacing: 0) {
-                        Text(verbatim: phoneText)
-                                .layoutPriority(1)
-                        Text(verbatim: toneText)
+                        Text(verbatim: phone)
+                        Text(verbatim: tone)
                                 .scaleEffect(toneStyle.toneScale, anchor: toneStyle.scaleAnchor)
                                 .opacity(shallowTone ? 0.66 : 1)
-                                .layoutPriority(1)
                 }
                 .font(.romanization)
-                .minimumScaleFactor(0.4)
-                .lineLimit(1)
+                .fixedSize(horizontal: true, vertical: false)
+                .background(
+                        GeometryReader { proxy in
+                                Color.clear.preference(key: RomanizationWidthKey.self, value: proxy.size.width)
+                        }
+                )
+                .onPreferenceChange(RomanizationWidthKey.self) { intrinsicWidth in
+                        scaleFactor = min(1, size.width / (intrinsicWidth + 1))
+                }
+                .scaleEffect(scaleFactor)
+                .frame(width: size.width, height: size.height)
+        }
+}
+private struct RomanizationWidthKey: PreferenceKey {
+        nonisolated(unsafe) static var defaultValue: CGFloat = 0
+        static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+                value = nextValue()
         }
 }
 
