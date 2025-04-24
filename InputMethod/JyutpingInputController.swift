@@ -1353,14 +1353,18 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 SettingsWindow.shared.orderFrontRegardless()
         }
         private func settingsWindowFrame() -> CGRect {
-                let originPoint: CGPoint = NSScreen.main?.visibleFrame.origin ?? window.screen?.visibleFrame.origin ?? .zero
+                let origin: CGPoint = NSScreen.main?.visibleFrame.origin ?? window.screen?.visibleFrame.origin ?? .zero
                 let maxSize: CGSize = NSScreen.main?.visibleFrame.size ?? window.screen?.visibleFrame.size ?? CGSize(width: 1280, height: 800)
                 let maxWidth: CGFloat = maxSize.width
                 let maxHeight: CGFloat = maxSize.height
-                let x: CGFloat = originPoint.x + (maxWidth / 4.0)
-                let y: CGFloat = originPoint.y + (maxHeight / 5.0)
-                let width: CGFloat = maxWidth / 2.0
-                let height: CGFloat = (maxHeight / 5.0) * 3.0
+                let halfWidth: CGFloat = maxWidth / 2.0
+                let halfHeight: CGFloat = maxHeight / 2.0
+                let idealWidth: CGFloat = 720
+                let width: CGFloat = min(maxWidth - 16, max(idealWidth, halfWidth))
+                let idealHeight: CGFloat = (maxHeight / 3.0) * 2.0
+                let height: CGFloat = (maxWidth > maxHeight) ? idealHeight : halfHeight
+                let x: CGFloat = origin.x + ((maxWidth - width) / 2.0)
+                let y: CGFloat = origin.y + ((maxHeight - height) / 2.0)
                 return CGRect(x: x, y: y, width: width, height: height)
         }
 
