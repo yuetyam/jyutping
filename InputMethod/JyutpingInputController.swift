@@ -520,7 +520,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         resetModifiersBuffer()
                         return false
                 }
-                guard (event.keyCode == KeyCode.Modifier.VK_SHIFT_LEFT) || (event.keyCode == KeyCode.Modifier.VK_SHIFT_RIGHT) else {
+                guard (event.keyCode == KeyCode.Modifier.shiftLeft) || (event.keyCode == KeyCode.Modifier.shiftRight) else {
                         resetModifiersBuffer()
                         return false
                 }
@@ -578,18 +578,18 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 lazy var hasControlShiftModifiers: Bool = false
                 lazy var isEventHandled: Bool = true
                 switch modifiers {
-                case [.control, .shift] where (code == KeyCode.Symbol.VK_COMMA) || KeyCode.numberSet.contains(code):
+                case [.control, .shift] where (code == KeyCode.Symbol.comma) || KeyCode.numberSet.contains(code):
                         return false // NSMenu Shortcuts
                 case [.control, .shift], .control:
                         switch code {
-                        case KeyCode.Symbol.VK_BACKQUOTE:
+                        case KeyCode.Symbol.grave:
                                 hasControlShiftModifiers = true
                                 isEventHandled = true
-                        case KeyCode.Special.VK_BACKWARD_DELETE, KeyCode.Special.VK_FORWARD_DELETE:
+                        case KeyCode.Special.backwardDelete, KeyCode.Special.forwardDelete:
                                 guard isBuffering else { return false }
                                 hasControlShiftModifiers = true
                                 isEventHandled = true
-                        case KeyCode.Alphabet.VK_U:
+                        case KeyCode.Alphabet.letterU:
                                 guard isBuffering else { return false }
                                 hasControlShiftModifiers = true
                                 isEventHandled = true
@@ -743,7 +743,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         }
                 case .other:
                         switch code {
-                        case KeyCode.Special.VK_HOME where isBuffering:
+                        case KeyCode.Special.home where isBuffering:
                                 isEventHandled = true
                         default:
                                 return false
@@ -771,7 +771,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 let currentInputForm: InputForm = inputForm
                 let isBuffering = inputStage.isBuffering
                 switch keyCode.representative {
-                case .alphabet(_) where hasControlShiftModifiers && isBuffering && (keyCode == KeyCode.Alphabet.VK_U):
+                case .alphabet(_) where hasControlShiftModifiers && isBuffering && (keyCode == KeyCode.Alphabet.letterU):
                         clearBufferText()
                 case .alphabet(let letter):
                         switch currentInputForm {
@@ -1148,7 +1148,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         }
                 case .other:
                         switch keyCode {
-                        case KeyCode.Special.VK_HOME:
+                        case KeyCode.Special.home:
                                 let shouldJump2FirstPage: Bool = currentInputForm.isCantonese && candidates.isNotEmpty
                                 guard shouldJump2FirstPage else { return }
                                 updateDisplayCandidates(.establish, highlight: .start)

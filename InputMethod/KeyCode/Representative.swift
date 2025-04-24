@@ -1,19 +1,3 @@
-/*
-/// Corresponding to [NSEvent.ModifierFlags](https://developer.apple.com/documentation/appkit/nsevent/modifierflags)
-enum Modifier {
-        case capsLock
-        case command
-        case control
-        case function
-        case help
-        case numericPad
-        case option
-        case shift
-        case unknown
-}
-*/
-
-
 enum Representative: Hashable {
         case alphabet(String)
         case number(Int)
@@ -34,149 +18,148 @@ enum Representative: Hashable {
         case other
 }
 
-
 extension UInt16 {
         var representative: Representative {
                 switch self {
-                case KeyCode.Alphabet.VK_A:
+                case KeyCode.Alphabet.letterA:
                         return .alphabet("a")
-                case KeyCode.Alphabet.VK_B:
+                case KeyCode.Alphabet.letterB:
                         return .alphabet("b")
-                case KeyCode.Alphabet.VK_C:
+                case KeyCode.Alphabet.letterC:
                         return .alphabet("c")
-                case KeyCode.Alphabet.VK_D:
+                case KeyCode.Alphabet.letterD:
                         return .alphabet("d")
-                case KeyCode.Alphabet.VK_E:
+                case KeyCode.Alphabet.letterE:
                         return .alphabet("e")
-                case KeyCode.Alphabet.VK_F:
+                case KeyCode.Alphabet.letterF:
                         return .alphabet("f")
-                case KeyCode.Alphabet.VK_G:
+                case KeyCode.Alphabet.letterG:
                         return .alphabet("g")
-                case KeyCode.Alphabet.VK_H:
+                case KeyCode.Alphabet.letterH:
                         return .alphabet("h")
-                case KeyCode.Alphabet.VK_I:
+                case KeyCode.Alphabet.letterI:
                         return .alphabet("i")
-                case KeyCode.Alphabet.VK_J:
+                case KeyCode.Alphabet.letterJ:
                         return .alphabet("j")
-                case KeyCode.Alphabet.VK_K:
+                case KeyCode.Alphabet.letterK:
                         return .alphabet("k")
-                case KeyCode.Alphabet.VK_L:
+                case KeyCode.Alphabet.letterL:
                         return .alphabet("l")
-                case KeyCode.Alphabet.VK_M:
+                case KeyCode.Alphabet.letterM:
                         return .alphabet("m")
-                case KeyCode.Alphabet.VK_N:
+                case KeyCode.Alphabet.letterN:
                         return .alphabet("n")
-                case KeyCode.Alphabet.VK_O:
+                case KeyCode.Alphabet.letterO:
                         return .alphabet("o")
-                case KeyCode.Alphabet.VK_P:
+                case KeyCode.Alphabet.letterP:
                         return .alphabet("p")
-                case KeyCode.Alphabet.VK_Q:
+                case KeyCode.Alphabet.letterQ:
                         return .alphabet("q")
-                case KeyCode.Alphabet.VK_R:
+                case KeyCode.Alphabet.letterR:
                         return .alphabet("r")
-                case KeyCode.Alphabet.VK_S:
+                case KeyCode.Alphabet.letterS:
                         return .alphabet("s")
-                case KeyCode.Alphabet.VK_T:
+                case KeyCode.Alphabet.letterT:
                         return .alphabet("t")
-                case KeyCode.Alphabet.VK_U:
+                case KeyCode.Alphabet.letterU:
                         return .alphabet("u")
-                case KeyCode.Alphabet.VK_V:
+                case KeyCode.Alphabet.letterV:
                         return .alphabet("v")
-                case KeyCode.Alphabet.VK_W:
+                case KeyCode.Alphabet.letterW:
                         return .alphabet("w")
-                case KeyCode.Alphabet.VK_X:
+                case KeyCode.Alphabet.letterX:
                         return .alphabet("x")
-                case KeyCode.Alphabet.VK_Y:
+                case KeyCode.Alphabet.letterY:
                         return .alphabet("y")
-                case KeyCode.Alphabet.VK_Z:
+                case KeyCode.Alphabet.letterZ:
                         return .alphabet("z")
-                case KeyCode.Number.VK_KEY_0:
+                case KeyCode.Number.number0:
                         return .number(0)
-                case KeyCode.Number.VK_KEY_1:
+                case KeyCode.Number.number1:
                         return .number(1)
-                case KeyCode.Number.VK_KEY_2:
+                case KeyCode.Number.number2:
                         return .number(2)
-                case KeyCode.Number.VK_KEY_3:
+                case KeyCode.Number.number3:
                         return .number(3)
-                case KeyCode.Number.VK_KEY_4:
+                case KeyCode.Number.number4:
                         return .number(4)
-                case KeyCode.Number.VK_KEY_5:
+                case KeyCode.Number.number5:
                         return .number(5)
-                case KeyCode.Number.VK_KEY_6:
+                case KeyCode.Number.number6:
                         return .number(6)
-                case KeyCode.Number.VK_KEY_7:
+                case KeyCode.Number.number7:
                         return .number(7)
-                case KeyCode.Number.VK_KEY_8:
+                case KeyCode.Number.number8:
                         return .number(8)
-                case KeyCode.Number.VK_KEY_9:
+                case KeyCode.Number.number9:
                         return .number(9)
-                case KeyCode.Keypad.VK_KEYPAD_0:
+                case KeyCode.Keypad.keypad0:
                         return .keypadNumber(0)
-                case KeyCode.Keypad.VK_KEYPAD_1:
+                case KeyCode.Keypad.keypad1:
                         return .keypadNumber(1)
-                case KeyCode.Keypad.VK_KEYPAD_2:
+                case KeyCode.Keypad.keypad2:
                         return .keypadNumber(2)
-                case KeyCode.Keypad.VK_KEYPAD_3:
+                case KeyCode.Keypad.keypad3:
                         return .keypadNumber(3)
-                case KeyCode.Keypad.VK_KEYPAD_4:
+                case KeyCode.Keypad.keypad4:
                         return .keypadNumber(4)
-                case KeyCode.Keypad.VK_KEYPAD_5:
+                case KeyCode.Keypad.keypad5:
                         return .keypadNumber(5)
-                case KeyCode.Keypad.VK_KEYPAD_6:
+                case KeyCode.Keypad.keypad6:
                         return .keypadNumber(6)
-                case KeyCode.Keypad.VK_KEYPAD_7:
+                case KeyCode.Keypad.keypad7:
                         return .keypadNumber(7)
-                case KeyCode.Keypad.VK_KEYPAD_8:
+                case KeyCode.Keypad.keypad8:
                         return .keypadNumber(8)
-                case KeyCode.Keypad.VK_KEYPAD_9:
+                case KeyCode.Keypad.keypad9:
                         return .keypadNumber(9)
-                case KeyCode.Special.VK_SPACE:
+                case KeyCode.Special.space:
                         return .space
-                case KeyCode.Special.VK_RETURN, KeyCode.Keypad.VK_KEYPAD_ENTER:
+                case KeyCode.Special.return, KeyCode.Keypad.keypadEnter:
                         return .return
-                case KeyCode.Special.VK_BACKWARD_DELETE:
+                case KeyCode.Special.backwardDelete:
                         return .backspace
-                case KeyCode.Special.VK_FORWARD_DELETE:
+                case KeyCode.Special.forwardDelete:
                         return .forwardDelete
-                case KeyCode.Arrow.VK_UP:
+                case KeyCode.Arrow.up:
                         return .arrow(.up)
-                case KeyCode.Arrow.VK_DOWN:
+                case KeyCode.Arrow.down:
                         return .arrow(.down)
-                case KeyCode.Arrow.VK_LEFT:
+                case KeyCode.Arrow.left:
                         return .arrow(.left)
-                case KeyCode.Arrow.VK_RIGHT:
+                case KeyCode.Arrow.right:
                         return .arrow(.right)
-                case KeyCode.Symbol.VK_BACKQUOTE:
+                case KeyCode.Symbol.grave:
                         return .backquote
-                case KeyCode.Symbol.VK_COMMA:
+                case KeyCode.Symbol.comma:
                         return .punctuation(.comma)
-                case KeyCode.Symbol.VK_DOT:
+                case KeyCode.Symbol.period:
                         return .punctuation(.period)
-                case KeyCode.Symbol.VK_SLASH:
+                case KeyCode.Symbol.slash:
                         return .punctuation(.slash)
-                case KeyCode.Symbol.VK_SEMICOLON:
+                case KeyCode.Symbol.semicolon:
                         return .punctuation(.semicolon)
-                case KeyCode.Symbol.VK_BRACKET_LEFT:
+                case KeyCode.Symbol.bracketLeft:
                         return .punctuation(.bracketLeft)
-                case KeyCode.Symbol.VK_BRACKET_RIGHT:
+                case KeyCode.Symbol.bracketRight:
                         return .punctuation(.bracketRight)
-                case KeyCode.Symbol.VK_BACKSLASH:
+                case KeyCode.Symbol.backslash:
                         return .punctuation(.backSlash)
-                case KeyCode.Symbol.VK_MINUS:
+                case KeyCode.Symbol.minus:
                         return .punctuation(.minus)
-                case KeyCode.Symbol.VK_EQUAL:
+                case KeyCode.Symbol.equal:
                         return .punctuation(.equal)
-                case KeyCode.Symbol.VK_QUOTE:
+                case KeyCode.Symbol.quote:
                         return .separator
-                case KeyCode.Special.VK_ESCAPE:
+                case KeyCode.Special.escape:
                         return .escape
-                case KeyCode.Keypad.VK_KEYPAD_CLEAR:
+                case KeyCode.Keypad.keypadClear:
                         return .clear
-                case KeyCode.Special.VK_TAB:
+                case KeyCode.Special.tab:
                         return .tab
-                case KeyCode.Special.VK_PAGEUP:
+                case KeyCode.Special.pageUp:
                         return .previousPage
-                case KeyCode.Special.VK_PAGEDOWN:
+                case KeyCode.Special.pageDown:
                         return .nextPage
                 default:
                         return .other

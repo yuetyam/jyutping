@@ -3,305 +3,296 @@ struct KeyCode {
 
         /// Letter [a-z]
         struct Alphabet {
-                static let VK_A: UInt16 = 0x0
-                static let VK_B: UInt16 = 0xb
-                static let VK_C: UInt16 = 0x8
-                static let VK_D: UInt16 = 0x2
-                static let VK_E: UInt16 = 0xe
-                static let VK_F: UInt16 = 0x3
-                static let VK_G: UInt16 = 0x5
-                static let VK_H: UInt16 = 0x4
-                static let VK_I: UInt16 = 0x22
-                static let VK_J: UInt16 = 0x26
-                static let VK_K: UInt16 = 0x28
-                static let VK_L: UInt16 = 0x25
-                static let VK_M: UInt16 = 0x2e
-                static let VK_N: UInt16 = 0x2d
-                static let VK_O: UInt16 = 0x1f
-                static let VK_P: UInt16 = 0x23
-                static let VK_Q: UInt16 = 0xc
-                static let VK_R: UInt16 = 0xf
-                static let VK_S: UInt16 = 0x1
-                static let VK_T: UInt16 = 0x11
-                static let VK_U: UInt16 = 0x20
-                static let VK_V: UInt16 = 0x9
-                static let VK_W: UInt16 = 0xd
-                static let VK_X: UInt16 = 0x7
-                static let VK_Y: UInt16 = 0x10
-                static let VK_Z: UInt16 = 0x6
+                static let letterA: UInt16 = 0x0
+                static let letterB: UInt16 = 0xb
+                static let letterC: UInt16 = 0x8
+                static let letterD: UInt16 = 0x2
+                static let letterE: UInt16 = 0xe
+                static let letterF: UInt16 = 0x3
+                static let letterG: UInt16 = 0x5
+                static let letterH: UInt16 = 0x4
+                static let letterI: UInt16 = 0x22
+                static let letterJ: UInt16 = 0x26
+                static let letterK: UInt16 = 0x28
+                static let letterL: UInt16 = 0x25
+                static let letterM: UInt16 = 0x2e
+                static let letterN: UInt16 = 0x2d
+                static let letterO: UInt16 = 0x1f
+                static let letterP: UInt16 = 0x23
+                static let letterQ: UInt16 = 0xc
+                static let letterR: UInt16 = 0xf
+                static let letterS: UInt16 = 0x1
+                static let letterT: UInt16 = 0x11
+                static let letterU: UInt16 = 0x20
+                static let letterV: UInt16 = 0x9
+                static let letterW: UInt16 = 0xd
+                static let letterX: UInt16 = 0x7
+                static let letterY: UInt16 = 0x10
+                static let letterZ: UInt16 = 0x6
         }
 
         /// Letter [a-z]
         static let alphabetSet: Set<UInt16> = [
-                Alphabet.VK_A,
-                Alphabet.VK_B,
-                Alphabet.VK_C,
-                Alphabet.VK_D,
-                Alphabet.VK_E,
-                Alphabet.VK_F,
-                Alphabet.VK_G,
-                Alphabet.VK_H,
-                Alphabet.VK_I,
-                Alphabet.VK_J,
-                Alphabet.VK_K,
-                Alphabet.VK_L,
-                Alphabet.VK_M,
-                Alphabet.VK_N,
-                Alphabet.VK_O,
-                Alphabet.VK_P,
-                Alphabet.VK_Q,
-                Alphabet.VK_R,
-                Alphabet.VK_S,
-                Alphabet.VK_T,
-                Alphabet.VK_U,
-                Alphabet.VK_V,
-                Alphabet.VK_W,
-                Alphabet.VK_X,
-                Alphabet.VK_Y,
-                Alphabet.VK_Z,
+                Alphabet.letterA,
+                Alphabet.letterB,
+                Alphabet.letterC,
+                Alphabet.letterD,
+                Alphabet.letterE,
+                Alphabet.letterF,
+                Alphabet.letterG,
+                Alphabet.letterH,
+                Alphabet.letterI,
+                Alphabet.letterJ,
+                Alphabet.letterK,
+                Alphabet.letterL,
+                Alphabet.letterM,
+                Alphabet.letterN,
+                Alphabet.letterO,
+                Alphabet.letterP,
+                Alphabet.letterQ,
+                Alphabet.letterR,
+                Alphabet.letterS,
+                Alphabet.letterT,
+                Alphabet.letterU,
+                Alphabet.letterV,
+                Alphabet.letterW,
+                Alphabet.letterX,
+                Alphabet.letterY,
+                Alphabet.letterZ,
         ]
 
-        /// [0-9]
+        /// Digit [0-9]
         struct Number {
-                static let VK_KEY_0: UInt16 = 0x1d
-                static let VK_KEY_1: UInt16 = 0x12
-                static let VK_KEY_2: UInt16 = 0x13
-                static let VK_KEY_3: UInt16 = 0x14
-                static let VK_KEY_4: UInt16 = 0x15
-                static let VK_KEY_5: UInt16 = 0x17
-                static let VK_KEY_6: UInt16 = 0x16
-                static let VK_KEY_7: UInt16 = 0x1a
-                static let VK_KEY_8: UInt16 = 0x1c
-                static let VK_KEY_9: UInt16 = 0x19
+                static let number0: UInt16 = 0x1d
+                static let number1: UInt16 = 0x12
+                static let number2: UInt16 = 0x13
+                static let number3: UInt16 = 0x14
+                static let number4: UInt16 = 0x15
+                static let number5: UInt16 = 0x17
+                static let number6: UInt16 = 0x16
+                static let number7: UInt16 = 0x1a
+                static let number8: UInt16 = 0x1c
+                static let number9: UInt16 = 0x19
         }
 
-        /// [0-9]
+        /// Digit [0-9]
         static let numberSet: Set<UInt16> = [
-                Number.VK_KEY_0,
-                Number.VK_KEY_1,
-                Number.VK_KEY_2,
-                Number.VK_KEY_3,
-                Number.VK_KEY_4,
-                Number.VK_KEY_5,
-                Number.VK_KEY_6,
-                Number.VK_KEY_7,
-                Number.VK_KEY_8,
-                Number.VK_KEY_9,
+                Number.number0,
+                Number.number1,
+                Number.number2,
+                Number.number3,
+                Number.number4,
+                Number.number5,
+                Number.number6,
+                Number.number7,
+                Number.number8,
+                Number.number9,
         ]
 
         struct Symbol {
-                /// aka. grave accent, backtick. Below ESC.
-                static let VK_BACKQUOTE    : UInt16 = 0x32
-
-                /// \
-                static let VK_BACKSLASH    : UInt16 = 0x2a
-                static let VK_BRACKET_LEFT : UInt16 = 0x21
-                static let VK_BRACKET_RIGHT: UInt16 = 0x1e
-                static let VK_COMMA        : UInt16 = 0x2b
-                static let VK_DOT          : UInt16 = 0x2f
-                static let VK_EQUAL        : UInt16 = 0x18
-                static let VK_MINUS        : UInt16 = 0x1b
-                static let VK_QUOTE        : UInt16 = 0x27
-                static let VK_SEMICOLON    : UInt16 = 0x29
-
-                /// /
-                static let VK_SLASH        : UInt16 = 0x2c
+                static let backslash   : UInt16 = 0x2a
+                static let bracketLeft : UInt16 = 0x21
+                static let bracketRight: UInt16 = 0x1e
+                static let comma       : UInt16 = 0x2b
+                static let equal       : UInt16 = 0x18
+                /// Grave accent; Backtick; Backquote
+                static let grave       : UInt16 = 0x32
+                static let minus       : UInt16 = 0x1b
+                static let period      : UInt16 = 0x2f
+                static let quote       : UInt16 = 0x27
+                static let semicolon   : UInt16 = 0x29
+                static let slash       : UInt16 = 0x2c
         }
         static let symbolSet: Set<UInt16> = [
-                Symbol.VK_BACKQUOTE,
-                Symbol.VK_BACKSLASH,
-                Symbol.VK_BRACKET_LEFT,
-                Symbol.VK_BRACKET_RIGHT,
-                Symbol.VK_COMMA,
-                Symbol.VK_DOT,
-                Symbol.VK_EQUAL,
-                Symbol.VK_MINUS,
-                Symbol.VK_QUOTE,
-                Symbol.VK_SEMICOLON,
-                Symbol.VK_SLASH,
+                Symbol.backslash,
+                Symbol.bracketLeft,
+                Symbol.bracketRight,
+                Symbol.comma,
+                Symbol.equal,
+                Symbol.minus,
+                Symbol.grave,
+                Symbol.period,
+                Symbol.quote,
+                Symbol.semicolon,
+                Symbol.slash,
         ]
 
         struct Keypad {
-                static let VK_KEYPAD_0       : UInt16 = 0x52
-                static let VK_KEYPAD_1       : UInt16 = 0x53
-                static let VK_KEYPAD_2       : UInt16 = 0x54
-                static let VK_KEYPAD_3       : UInt16 = 0x55
-                static let VK_KEYPAD_4       : UInt16 = 0x56
-                static let VK_KEYPAD_5       : UInt16 = 0x57
-                static let VK_KEYPAD_6       : UInt16 = 0x58
-                static let VK_KEYPAD_7       : UInt16 = 0x59
-                static let VK_KEYPAD_8       : UInt16 = 0x5b
-                static let VK_KEYPAD_9       : UInt16 = 0x5c
-                static let VK_KEYPAD_CLEAR   : UInt16 = 0x47
-
-                /// Unknown
-                static let VK_KEYPAD_COMMA   : UInt16 = 0x5f
-
-                static let VK_KEYPAD_DOT     : UInt16 = 0x41
-                static let VK_KEYPAD_ENTER   : UInt16 = 0x4c
-                static let VK_KEYPAD_EQUAL   : UInt16 = 0x51
-                static let VK_KEYPAD_MINUS   : UInt16 = 0x4e
-                static let VK_KEYPAD_MULTIPLY: UInt16 = 0x43
-                static let VK_KEYPAD_PLUS    : UInt16 = 0x45
-                static let VK_KEYPAD_SLASH   : UInt16 = 0x4b
+                static let keypad0       : UInt16 = 0x52
+                static let keypad1       : UInt16 = 0x53
+                static let keypad2       : UInt16 = 0x54
+                static let keypad3       : UInt16 = 0x55
+                static let keypad4       : UInt16 = 0x56
+                static let keypad5       : UInt16 = 0x57
+                static let keypad6       : UInt16 = 0x58
+                static let keypad7       : UInt16 = 0x59
+                static let keypad8       : UInt16 = 0x5b
+                static let keypad9       : UInt16 = 0x5c
+                static let keypadClear   : UInt16 = 0x47
+                /// Dot; Period; Full-stop
+                static let keypadDecimal : UInt16 = 0x41
+                static let keypadEnter   : UInt16 = 0x4c
+                static let keypadEqual   : UInt16 = 0x51
+                static let keypadMinus   : UInt16 = 0x4e
+                static let keypadMultiply: UInt16 = 0x43
+                static let keypadPlus    : UInt16 = 0x45
+                static let keypadSlash   : UInt16 = 0x4b
         }
         static let keypadSet: Set<UInt16> = [
-                Keypad.VK_KEYPAD_0,
-                Keypad.VK_KEYPAD_1,
-                Keypad.VK_KEYPAD_2,
-                Keypad.VK_KEYPAD_3,
-                Keypad.VK_KEYPAD_4,
-                Keypad.VK_KEYPAD_5,
-                Keypad.VK_KEYPAD_6,
-                Keypad.VK_KEYPAD_7,
-                Keypad.VK_KEYPAD_8,
-                Keypad.VK_KEYPAD_9,
-                Keypad.VK_KEYPAD_CLEAR,
-                Keypad.VK_KEYPAD_COMMA,
-                Keypad.VK_KEYPAD_DOT,
-                Keypad.VK_KEYPAD_ENTER,
-                Keypad.VK_KEYPAD_EQUAL,
-                Keypad.VK_KEYPAD_MINUS,
-                Keypad.VK_KEYPAD_MULTIPLY,
-                Keypad.VK_KEYPAD_PLUS,
-                Keypad.VK_KEYPAD_SLASH,
+                Keypad.keypad0,
+                Keypad.keypad1,
+                Keypad.keypad2,
+                Keypad.keypad3,
+                Keypad.keypad4,
+                Keypad.keypad5,
+                Keypad.keypad6,
+                Keypad.keypad7,
+                Keypad.keypad8,
+                Keypad.keypad9,
+                Keypad.keypadClear,
+                Keypad.keypadDecimal,
+                Keypad.keypadEnter,
+                Keypad.keypadEqual,
+                Keypad.keypadMinus,
+                Keypad.keypadMultiply,
+                Keypad.keypadPlus,
+                Keypad.keypadSlash,
         ]
 
         struct Special {
                 /// Backspace
-                static let VK_BACKWARD_DELETE: UInt16 = 0x33
-                static let VK_ENTER_POWERBOOK: UInt16 = 0x34
-                static let VK_ESCAPE         : UInt16 = 0x35
-                static let VK_FORWARD_DELETE : UInt16 = 0x75
-                static let VK_HELP           : UInt16 = 0x72
-                static let VK_RETURN         : UInt16 = 0x24
-                static let VK_SPACE          : UInt16 = 0x31
-                static let VK_TAB            : UInt16 = 0x30
-                static let VK_PAGEUP  : UInt16 = 0x74
-                static let VK_PAGEDOWN: UInt16 = 0x79
-                static let VK_HOME    : UInt16 = 0x73
-                static let VK_END     : UInt16 = 0x77
+                static let backwardDelete: UInt16 = 0x33
+                static let end           : UInt16 = 0x77
+                static let escape        : UInt16 = 0x35
+                static let forwardDelete : UInt16 = 0x75
+                static let help          : UInt16 = 0x72
+                static let home          : UInt16 = 0x73
+                static let pageDown      : UInt16 = 0x79
+                static let pageUp        : UInt16 = 0x74
+                static let `return`      : UInt16 = 0x24
+                static let space         : UInt16 = 0x31
+                static let tab           : UInt16 = 0x30
         }
         static let specialSet: Set<UInt16> = [
-                Special.VK_BACKWARD_DELETE,
-                Special.VK_ENTER_POWERBOOK,
-                Special.VK_ESCAPE,
-                Special.VK_FORWARD_DELETE,
-                Special.VK_HELP,
-                Special.VK_RETURN,
-                Special.VK_SPACE,
-                Special.VK_TAB,
-                Special.VK_PAGEUP,
-                Special.VK_PAGEDOWN,
-                Special.VK_HOME,
-                Special.VK_END,
+                Special.backwardDelete,
+                Special.end,
+                Special.escape,
+                Special.forwardDelete,
+                Special.home,
+                Special.help,
+                Special.pageDown,
+                Special.pageUp,
+                Special.return,
+                Special.space,
+                Special.tab,
         ]
 
         struct Arrow {
-                static let VK_UP   : UInt16 = 0x7e
-                static let VK_DOWN : UInt16 = 0x7d
-                static let VK_LEFT : UInt16 = 0x7b
-                static let VK_RIGHT: UInt16 = 0x7c
+                static let down : UInt16 = 0x7d
+                static let left : UInt16 = 0x7b
+                static let right: UInt16 = 0x7c
+                static let up   : UInt16 = 0x7e
         }
         static let arrowSet: Set<UInt16> = [
-                Arrow.VK_UP,
-                Arrow.VK_DOWN,
-                Arrow.VK_LEFT,
-                Arrow.VK_RIGHT,
+                Arrow.down,
+                Arrow.left,
+                Arrow.right,
+                Arrow.up,
         ]
 
         struct Modifier {
-                static let VK_CAPS_LOCK    : UInt16 = 0x39
-                static let VK_COMMAND_LEFT : UInt16 = 0x37
-                static let VK_COMMAND_RIGHT: UInt16 = 0x36
-                static let VK_CONTROL_LEFT : UInt16 = 0x3b
-                static let VK_CONTROL_RIGHT: UInt16 = 0x3e
-
-                /// Function / Globe
-                static let VK_FN           : UInt16 = 0x3f
-                static let VK_OPTION_LEFT  : UInt16 = 0x3a
-                static let VK_OPTION_RIGHT : UInt16 = 0x3d
-                static let VK_SHIFT_LEFT   : UInt16 = 0x38
-                static let VK_SHIFT_RIGHT  : UInt16 = 0x3c
+                static let capsLock    : UInt16 = 0x39
+                static let commandLeft : UInt16 = 0x37
+                static let commandRight: UInt16 = 0x36
+                static let controlLeft : UInt16 = 0x3b
+                static let controlRight: UInt16 = 0x3e
+                /// Fn; Globe
+                static let function    : UInt16 = 0x3f
+                static let optionLeft  : UInt16 = 0x3a
+                static let optionRight : UInt16 = 0x3d
+                static let shiftLeft   : UInt16 = 0x38
+                static let shiftRight  : UInt16 = 0x3c
         }
         static let modifierSet: Set<UInt16> = [
-                Modifier.VK_CAPS_LOCK,
-                Modifier.VK_COMMAND_LEFT,
-                Modifier.VK_COMMAND_RIGHT,
-                Modifier.VK_CONTROL_LEFT,
-                Modifier.VK_CONTROL_RIGHT,
-                Modifier.VK_FN,
-                Modifier.VK_OPTION_LEFT,
-                Modifier.VK_OPTION_RIGHT,
-                Modifier.VK_SHIFT_LEFT,
-                Modifier.VK_SHIFT_RIGHT,
+                Modifier.capsLock,
+                Modifier.commandLeft,
+                Modifier.commandRight,
+                Modifier.controlLeft,
+                Modifier.controlRight,
+                Modifier.function,
+                Modifier.optionLeft,
+                Modifier.optionRight,
+                Modifier.shiftLeft,
+                Modifier.shiftRight,
         ]
 
         struct Function {
                 /// Display brightness down
-                static let VK_F1 : UInt16 = 0x7a
+                static let f1 : UInt16 = 0x7a
 
                 /// Display brightness up
-                static let VK_F2 : UInt16 = 0x78
+                static let f2 : UInt16 = 0x78
 
                 /// Mission Control
-                static let VK_F3 : UInt16 = 0x63
+                static let f3 : UInt16 = 0x63
 
-                /// Spotlight / Launchpad
-                static let VK_F4 : UInt16 = 0x76
+                /// Spotlight; Launchpad
+                static let f4 : UInt16 = 0x76
 
-                /// Dictation / Keyboard backlight down / None
-                static let VK_F5 : UInt16 = 0x60
+                /// Dictation; Keyboard backlight down
+                static let f5 : UInt16 = 0x60
 
-                /// Focus / Keyboard backlight up / None
-                static let VK_F6 : UInt16 = 0x61
+                /// Focus; Keyboard backlight up
+                static let f6 : UInt16 = 0x61
 
                 /// Rewind
-                static let VK_F7 : UInt16 = 0x62
+                static let f7 : UInt16 = 0x62
 
-                /// Play-Pause
-                static let VK_F8 : UInt16 = 0x64
+                /// Play-pause
+                static let f8 : UInt16 = 0x64
 
                 /// Fast forward
-                static let VK_F9 : UInt16 = 0x65
+                static let f9 : UInt16 = 0x65
 
                 /// Mute
-                static let VK_F10: UInt16 = 0x6d
+                static let f10: UInt16 = 0x6d
 
                 /// Volume down
-                static let VK_F11: UInt16 = 0x67
+                static let f11: UInt16 = 0x67
 
                 /// Volume up
-                static let VK_F12: UInt16 = 0x6f
+                static let f12: UInt16 = 0x6f
 
-                static let VK_F13: UInt16 = 0x69
-                static let VK_F14: UInt16 = 0x6b
-                static let VK_F15: UInt16 = 0x71
-                static let VK_F16: UInt16 = 0x6a
-                static let VK_F17: UInt16 = 0x40
-                static let VK_F18: UInt16 = 0x4f
-                static let VK_F19: UInt16 = 0x50
+                static let f13: UInt16 = 0x69
+                static let f14: UInt16 = 0x6b
+                static let f15: UInt16 = 0x71
+                static let f16: UInt16 = 0x6a
+                static let f17: UInt16 = 0x40
+                static let f18: UInt16 = 0x4f
+                static let f19: UInt16 = 0x50
+                static let f20: UInt16 = 0x5a
         }
         static let functionSet: Set<UInt16> = [
-                Function.VK_F1,
-                Function.VK_F2,
-                Function.VK_F3,
-                Function.VK_F4,
-                Function.VK_F5,
-                Function.VK_F6,
-                Function.VK_F7,
-                Function.VK_F8,
-                Function.VK_F9,
-                Function.VK_F10,
-                Function.VK_F11,
-                Function.VK_F12,
-                Function.VK_F13,
-                Function.VK_F14,
-                Function.VK_F15,
-                Function.VK_F16,
-                Function.VK_F17,
-                Function.VK_F18,
-                Function.VK_F19,
+                Function.f1,
+                Function.f2,
+                Function.f3,
+                Function.f4,
+                Function.f5,
+                Function.f6,
+                Function.f7,
+                Function.f8,
+                Function.f9,
+                Function.f10,
+                Function.f11,
+                Function.f12,
+                Function.f13,
+                Function.f14,
+                Function.f15,
+                Function.f16,
+                Function.f17,
+                Function.f18,
+                Function.f19,
+                Function.f20,
         ]
 
         @available(*, unavailable, message: "Unknown")
@@ -318,13 +309,6 @@ struct KeyCode {
         @available(*, unavailable)
         struct PCKey {
                 static let VK_PC_APPLICATION   : UInt16 = 0x6e
-
-                // is backspace?
-                static let VK_PC_BS            : UInt16 = 0x33
-
-                // Keypad DOT
-                static let VK_PC_DEL           : UInt16 = 0x75
-
                 static let VK_PC_INSERT        : UInt16 = 0x72
                 static let VK_PC_KEYPAD_NUMLOCK: UInt16 = 0x47
                 static let VK_PC_PAUSE         : UInt16 = 0x71
@@ -364,6 +348,7 @@ struct KeyCode {
                 static let VK_JIS_HANDAKUON    : UInt16 = 0x1e
                 static let VK_JIS_HAT          : UInt16 = 0x18
                 static let VK_JIS_KANA         : UInt16 = 0x68
+                static let VK_JIS_KEYPAD_COMMA : UInt16 = 0x5f
                 static let VK_JIS_PC_HAN_ZEN   : UInt16 = 0x32
                 static let VK_JIS_UNDERSCORE   : UInt16 = 0x5e
                 static let VK_JIS_YEN          : UInt16 = 0x5d
@@ -383,4 +368,3 @@ struct KeyCode {
                 static let VK_UK_SECTION: UInt16 = 0xa
         }
 }
-
