@@ -138,7 +138,11 @@ private struct IOSToneCompactGridView: View {
                                                         Text(verbatim: "識 sik1")
                                                         Speaker("sik1")
                                                 }
-                                                Text(verbatim: "調值: ˥")
+                                                HStack(spacing: 2) {
+                                                        Text(verbatim: "調值")
+                                                        Text.separator
+                                                        Text(verbatim: "˥").font(.ipa)
+                                                }
                                         }
                                         Divider()
                                         VStack(alignment: .leading, spacing: 0) {
@@ -146,7 +150,11 @@ private struct IOSToneCompactGridView: View {
                                                         Text(verbatim: "涉 sip3")
                                                         Speaker("sip3")
                                                 }
-                                                Text(verbatim: "調值: ˧")
+                                                HStack(spacing: 2) {
+                                                        Text(verbatim: "調值")
+                                                        Text.separator
+                                                        Text(verbatim: "˧").font(.ipa)
+                                                }
                                         }
                                 }
                                 .padding(4)
@@ -179,13 +187,21 @@ private struct IOSToneGridView: View {
                                         HStack {
                                                 Text(verbatim: "識 sik1")
                                                 Speaker("sik1")
-                                                Text(verbatim: "調值: ˥")
+                                                HStack(spacing: 2) {
+                                                        Text(verbatim: "調值")
+                                                        Text.separator
+                                                        Text(verbatim: "˥").font(.ipa)
+                                                }
                                         }
                                         Divider()
                                         HStack {
                                                 Text(verbatim: "涉 sip3")
                                                 Speaker("sip3")
-                                                Text(verbatim: "調值: ˧")
+                                                HStack(spacing: 2) {
+                                                        Text(verbatim: "調值")
+                                                        Text.separator
+                                                        Text(verbatim: "˧").font(.ipa)
+                                                }
                                         }
                                 }
                                 .padding(4)
@@ -214,7 +230,11 @@ private struct IOSToneGridCell: View {
                                 Text(verbatim: "\(character) \(syllable)")
                                 Speaker(syllable)
                         }
-                        Text(verbatim: "調值 :  \(tone)")
+                        HStack(spacing: 2) {
+                                Text(verbatim: "調值")
+                                Text.separator
+                                Text(verbatim: tone).font(.ipa)
+                        }
                 }
                 .padding(8)
                 .background(Color.textBackgroundColor(colorScheme: colorScheme), in: RoundedRectangle(cornerRadius: 8, style: .continuous))

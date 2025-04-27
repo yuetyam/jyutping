@@ -45,7 +45,7 @@ private struct ChoHokYuetYamCitYiuPronunciationView: View {
                                         Text.separator
                                         Text(verbatim: entry.romanization).font(.fixedWidth)
                                 }
-                                Text(verbatim: ipaText).font(.body).foregroundStyle(Color.secondary)
+                                Text(verbatim: ipaText).font(.ipa).foregroundStyle(Color.secondary)
                                 Spacer()
                                 Speaker(entry.romanization).opacity(entry.romanization.isValidJyutpingSyllable ? 1 : 0)
                         }

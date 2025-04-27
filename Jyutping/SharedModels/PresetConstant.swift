@@ -4,6 +4,7 @@ struct PresetConstant {
         static let KeyboardIdentifier: String = "im.cantonese.CantoneseIM.Keyboard"
 
         static let SFPro: String = "SF Pro"
+        static let Arial: String = "Arial"
         static let Inter: String = "Inter"
         static let Roboto: String = "Roboto"
         static let HelveticaNeue: String = "Helvetica Neue"

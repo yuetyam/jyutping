@@ -9,29 +9,29 @@ extension Font {
         static let master: Font = enhancedFont(size: 14)
         static let significant: Font = enhancedFont(size: 16)
         static let copilot: Font = enhancedFont(size: 12)
+        static let ipa: Font = enhancedFont(size: 15)
         #else
         static let master: Font = Font.body
         static let significant: Font = Font.headline
         static let copilot: Font = Font.subheadline
+        static let ipa: Font = enhancedFont(size: 17)
         #endif
 }
 
 private extension Font {
 
         static func enhancedFont(size: CGFloat) -> Font {
-                return combine(fonts: fontNames, size: size)
+                return combine(fonts: preferredFontNames, size: size)
         }
 
-        private static let fontNames: [String] = {
+        private static let preferredFontNames: [String] = {
                 var names: [String] = []
-                let primaryQueue: [String] = [PresetConstant.SFPro, PresetConstant.Inter, PresetConstant.Roboto]
-                for name in primaryQueue {
+                let primaryList: [String] = [PresetConstant.SFPro, PresetConstant.Roboto, PresetConstant.Arial, PresetConstant.Inter, PresetConstant.HelveticaNeue]
+                for name in primaryList {
                         if found(font: name) {
                                 names.append(name)
-                                break
                         }
                 }
-                names.append(PresetConstant.HelveticaNeue)
                 var shouldConsiderSupplementaryFonts: Bool = true
                 for name in PresetConstant.primaryCJKVQueue {
                         if found(font: name) {

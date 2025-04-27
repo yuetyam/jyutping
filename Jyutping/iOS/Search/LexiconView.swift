@@ -68,7 +68,7 @@ private struct PronunciationView: View {
                                         Text(verbatim: romanization).font(isSingular ? .fixedWidth : .body)
                                 }
                                 if let ipa {
-                                        Text(verbatim: ipa).font(.body).foregroundStyle(Color.secondary)
+                                        Text(verbatim: ipa).font(.ipa).foregroundStyle(Color.secondary)
                                 }
                                 Spacer()
                                 Speaker(romanization)
