@@ -144,7 +144,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         UserLexicon.prepare()
                         Engine.prepare()
                         if inputStage.isBuffering {
-                                clearBufferText()
+                                clearBuffer()
                         }
                         inputStage = .standby
                         if inputForm.isOptions {
@@ -169,8 +169,8 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         window.setFrame(.zero, display: true)
                         selectedCandidates = []
                         if inputStage.isBuffering {
-                                let text: String = bufferText
-                                clearBufferText()
+                                let text: String = joinedBufferTexts()
+                                clearBuffer()
                                 client?.insertText(text as NSString, replacementRange: replacementRange())
                         } else {
                                 clearMarkedText()
@@ -200,8 +200,8 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         window.setFrame(.zero, display: true)
                         selectedCandidates = []
                         if inputStage.isBuffering {
-                                let text: String = bufferText
-                                clearBufferText()
+                                let text: String = joinedBufferTexts()
+                                clearBuffer()
                                 client?.insertText(text as NSString, replacementRange: replacementRange())
                         } else {
                                 clearMarkedText()
@@ -258,24 +258,28 @@ final class JyutpingInputController: IMKInputController, Sendable {
 
         nonisolated(unsafe) private var inputStage: InputStage = .standby
 
-        private func clearBufferText() { bufferText = String.empty }
-        private lazy var bufferText: String = String.empty {
-                willSet {
-                        switch (bufferText.isEmpty, newValue.isEmpty) {
+        private func clearBuffer() {
+                bufferEvents = []
+                capitals = []
+                placeholderText = nil
+        }
+        private lazy var bufferEvents: [InputEvent] = [] {
+                willSet{
+                        switch (bufferEvents.isEmpty, newValue.isEmpty) {
                         case (true, true):
                                 inputStage = .standby
                         case (true, false):
                                 inputStage = .starting
                                 UserLexicon.prepare()
                                 Engine.prepare()
-                        case (false, true):
-                                inputStage = .ending
                         case (false, false):
                                 inputStage = .ongoing
+                        case (false, true):
+                                inputStage = .standby
                         }
                 }
                 didSet {
-                        switch bufferText.first {
+                        switch bufferEvents.first {
                         case .none:
                                 suggestionTask?.cancel()
                                 if AppSettings.isInputMemoryOn && selectedCandidates.isNotEmpty {
@@ -285,21 +289,46 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                 selectedCandidates = []
                                 clearMarkedText()
                                 candidates = []
-                        case .some("r"):
+                        case InputEvent.letterR:
                                 pinyinReverseLookup()
-                        case .some("v"):
+                        case InputEvent.letterV:
                                 cangjieReverseLookup()
-                        case .some("x"):
+                        case InputEvent.letterX:
                                 strokeReverseLookup()
-                        case .some("q"):
+                        case InputEvent.letterQ:
                                 structureReverseLookup()
-                        case .some(let character) where character.isBasicLatinLetter:
+                        case .some(let inputEvent) where inputEvent.isLetter:
                                 suggest()
                         default:
-                                mark(text: bufferText)
-                                candidates = PunctuationKey.punctuationCandidates(of: bufferText)
+                                mark(text: joinedBufferTexts())
                         }
                 }
+        }
+        private lazy var capitals: [Bool] = []
+        private func joinedBufferTexts() -> String {
+                guard capitals.contains(where: { $0 }) else { return bufferEvents.map(\.text).joined() }
+                guard bufferEvents.count == capitals.count else { return bufferEvents.map(\.text).joined() }
+                return zip(capitals, bufferEvents).map({ $0 ? $1.text.uppercased() : $1.text }).joined()
+        }
+        private lazy var placeholderText: String? = nil {
+                didSet {
+                        let shouldClearUp: Bool = placeholderText?.isEmpty ?? true
+                        guard shouldClearUp else {
+                                mark(text: placeholderText ?? String.empty)
+                                return
+                        }
+                        guard inputStage == .composing else { return }
+                        clearMarkedText()
+                        candidates = []
+                        inputStage = .standby
+                }
+        }
+        private func punctuation(_ key: PunctuationKey, isShifting: Bool) {
+                inputStage = .composing
+                let text: String = isShifting ? key.shiftingKeyText : key.keyText
+                placeholderText = text
+                let symbols = isShifting ? key.shiftingSymbols : key.symbols
+                candidates = symbols.map({ Candidate(text: $0.symbol, comment: $0.comment, secondaryComment: $0.secondaryComment, input: text) })
         }
 
         private func insert(_ text: String) {
@@ -389,8 +418,8 @@ final class JyutpingInputController: IMKInputController, Sendable {
         private lazy var suggestionTask: Task<Void, Never>? = nil
         private func suggest() {
                 suggestionTask?.cancel()
-                let originalText = bufferText
-                let processingText: String = bufferText.toneConverted()
+                let originalText = joinedBufferTexts()
+                let processingText: String = originalText.toneConverted()
                 let needsSymbols: Bool = Options.isEmojiSuggestionsOn && selectedCandidates.isEmpty
                 let isInputMemoryOn: Bool = AppSettings.isInputMemoryOn
                 suggestionTask = Task.detached(priority: .high) { [weak self] in
@@ -419,6 +448,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 }
         }
         private func pinyinReverseLookup() {
+                let bufferText = joinedBufferTexts()
                 let text: String = String(bufferText.dropFirst())
                 guard text.isNotEmpty else {
                         mark(text: bufferText)
@@ -441,6 +471,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 candidates = suggestions.transformed(to: Options.characterStandard).uniqued()
         }
         private func cangjieReverseLookup() {
+                let bufferText = joinedBufferTexts()
                 let text: String = String(bufferText.dropFirst())
                 let converted = text.compactMap({ CharacterStandard.cangjie(of: $0) })
                 let isValidSequence: Bool = converted.isNotEmpty && (converted.count == text.count)
@@ -454,6 +485,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 }
         }
         private func strokeReverseLookup() {
+                let bufferText = joinedBufferTexts()
                 let text: String = String(bufferText.dropFirst())
                 let transformed: String = CharacterStandard.strokeTransform(text)
                 let converted = transformed.compactMap({ CharacterStandard.stroke(of: $0) })
@@ -470,6 +502,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
 
         /// 拆字反查. 例如 木 + 木 = 林: mukmuk
         private func structureReverseLookup() {
+                let bufferText = joinedBufferTexts()
                 guard bufferText.count > 2 else {
                         mark(text: bufferText)
                         candidates = []
@@ -608,7 +641,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 }
                 let isShifting: Bool = (modifiers == .shift)
                 switch code.representative {
-                case .alphabet(_):
+                case .letter:
                         switch inputForm {
                         case .cantonese:
                                 isEventHandled = true
@@ -617,7 +650,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         case .options:
                                 isEventHandled = true
                         }
-                case .number(_):
+                case .number:
                         switch inputForm {
                         case .cantonese:
                                 isEventHandled = true
@@ -628,7 +661,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         case .options:
                                 isEventHandled = true
                         }
-                case .keypadNumber(_):
+                case .keypadNumber:
                         switch inputForm {
                         case .cantonese:
                                 guard isBuffering else { return false }
@@ -638,7 +671,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         case .options:
                                 isEventHandled = true
                         }
-                case .arrow(_):
+                case .arrow:
                         switch inputForm {
                         case .cantonese:
                                 guard isBuffering else { return false }
@@ -648,18 +681,9 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         case .options:
                                 isEventHandled = true
                         }
-                case .backquote where hasControlShiftModifiers:
+                case .grave where hasControlShiftModifiers:
                         isEventHandled = true
-                case .backquote, .punctuation(_):
-                        switch inputForm {
-                        case .cantonese:
-                                isEventHandled = true
-                        case .transparent:
-                                return false
-                        case .options:
-                                isEventHandled = true
-                        }
-                case .separator:
+                case .grave, .quote, .punctuation:
                         switch inputForm {
                         case .cantonese:
                                 isEventHandled = true
@@ -721,7 +745,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         case .options:
                                 isEventHandled = true
                         }
-                case .previousPage:
+                case .pageUp:
                         switch inputForm {
                         case .cantonese:
                                 guard isBuffering else { return false }
@@ -731,7 +755,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         case .options:
                                 isEventHandled = true
                         }
-                case .nextPage:
+                case .pageDown:
                         switch inputForm {
                         case .cantonese:
                                 guard isBuffering else { return false }
@@ -771,61 +795,62 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 let currentInputForm: InputForm = inputForm
                 let isBuffering = inputStage.isBuffering
                 switch keyCode.representative {
-                case .alphabet(_) where hasControlShiftModifiers && isBuffering && (keyCode == KeyCode.Alphabet.letterU):
-                        clearBufferText()
-                case .alphabet(let letter):
+                case .letter where hasControlShiftModifiers && isBuffering && (keyCode == KeyCode.Alphabet.letterU):
+                        clearBuffer()
+                case .letter(let letterEvent):
                         switch currentInputForm {
                         case .cantonese:
-                                let text: String = isShifting ? letter.uppercased() : letter
-                                bufferText += text
+                                bufferEvents.append(letterEvent)
+                                capitals.append(isShifting)
                         case .transparent:
                                 return
                         case .options:
                                 return
                         }
-                case .number(let number):
+                case .number(let numberEvent):
+                        guard let number = numberEvent.digit else { return }
                         let index: Int = (number == 0) ? 9 : (number - 1)
                         switch currentInputForm {
                         case .cantonese:
-                                if hasControlShiftModifiers {
-                                        guard isBuffering.negative else { return }
-                                        handleOptions(index)
-                                } else if isShifting {
+                                guard hasControlShiftModifiers.negative else { return } // NSMenu Shortcuts
+                                if isShifting {
                                         switch Options.punctuationForm {
                                         case .cantonese:
-                                                if let shiftingBufferText = PunctuationKey.shiftingBufferText(of: number) {
-                                                        insert(bufferText)
-                                                        bufferText = shiftingBufferText
+                                                passBuffer()
+                                                if let key = PunctuationKey.numberKeyPunctuation(of: number) {
+                                                        punctuation(key, isShifting: isShifting)
                                                 } else {
                                                         let symbol: String = PunctuationKey.numberKeyShiftingCantoneseSymbol(of: number) ?? String.empty
-                                                        insert(bufferText + symbol)
-                                                        bufferText = String.empty
+                                                        insert(symbol)
                                                 }
                                         case .english:
+                                                passBuffer()
                                                 let symbol: String = PunctuationKey.numberKeyShiftingSymbol(of: number) ?? String.empty
-                                                insert(bufferText + symbol)
-                                                bufferText = String.empty
+                                                insert(symbol)
                                         }
                                 } else if isBuffering {
                                         guard let selectedItem = appContext.displayCandidates.fetch(index) else { return }
                                         insert(selectedItem.candidate.text)
                                         aftercareSelection(selectedItem)
                                 } else {
-                                        let text: String = "\(number)"
-                                        let convertedText: String = Options.characterForm.isHalfWidth ? text : text.fullWidth()
-                                        insert(convertedText)
+                                        let keyText: String = numberEvent.text
+                                        let inputText: String = Options.characterForm.isHalfWidth ? keyText : keyText.fullWidth()
+                                        insert(inputText)
                                 }
                         case .transparent:
                                 if hasControlShiftModifiers {
-                                        handleOptions(index)
+                                        return // NSMenu Shortcuts
+                                } else {
+                                        return // transparent
                                 }
                         case .options:
                                 handleOptions(index)
                         }
-                case .keypadNumber(let number):
-                        let isStrokeReverseLookup: Bool = currentInputForm.isCantonese && bufferText.hasPrefix("x")
+                case .keypadNumber(_):
+                        let isStrokeReverseLookup: Bool = currentInputForm.isCantonese && (bufferEvents.first == .letterX)
                         guard isStrokeReverseLookup else { return }
-                        bufferText += "\(number)"
+                        guard let event = InputEvent.matchEvent(for: keyCode) else { return }
+                        bufferEvents.append(event)
                 case .arrow(let direction):
                         switch direction {
                         case .up:
@@ -905,7 +930,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                         return
                                 }
                         }
-                case .backquote where hasControlShiftModifiers:
+                case .grave where hasControlShiftModifiers:
                         switch currentInputForm {
                         case .cantonese, .transparent:
                                 markOptionsViewHintText()
@@ -914,12 +939,11 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         case .options:
                                 handleOptions(-1)
                         }
-                case .backquote:
+                case .grave:
                         guard currentInputForm.isCantonese else { return }
                         guard isBuffering.negative else { return }
                         guard Options.punctuationForm.isCantoneseMode else { return }
-                        let symbolText: String = isShifting ? PunctuationKey.backquote.shiftingKeyText : PunctuationKey.backquote.keyText
-                        bufferText = symbolText
+                        punctuation(.grave, isShifting: isShifting)
                 case .punctuation(let punctuationKey):
                         guard currentInputForm.isCantonese else { return }
                         if isBuffering && isShifting.negative {
@@ -943,36 +967,34 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                 default:
                                         switch Options.punctuationForm {
                                         case .cantonese:
-                                                if let symbol = punctuationKey.instantSymbol {
-                                                        insert(bufferText + symbol)
-                                                        bufferText = String.empty
+                                                passBuffer()
+                                                if let instantSymbol = punctuationKey.instantSymbol {
+                                                        insert(instantSymbol)
                                                 } else {
-                                                        insert(bufferText)
-                                                        bufferText = punctuationKey.keyText
+                                                        punctuation(punctuationKey, isShifting: isShifting)
                                                 }
                                         case .english:
-                                                insert(bufferText + punctuationKey.keyText)
-                                                bufferText = String.empty
+                                                passBuffer()
+                                                insert(punctuationKey.keyText)
                                         }
                                 }
                         } else {
                                 switch Options.punctuationForm {
                                 case .cantonese:
-                                        let symbol: String? = isShifting ? punctuationKey.instantShiftingSymbol : punctuationKey.instantSymbol
-                                        if let symbol {
-                                                insert(bufferText + symbol)
-                                                bufferText = String.empty
+                                        passBuffer()
+                                        let instantSymbol: String? = isShifting ? punctuationKey.instantShiftingSymbol : punctuationKey.instantSymbol
+                                        if let instantSymbol {
+                                                insert(instantSymbol)
                                         } else {
-                                                insert(bufferText)
-                                                bufferText = isShifting ? punctuationKey.shiftingKeyText : punctuationKey.keyText
+                                                punctuation(punctuationKey, isShifting: isShifting)
                                         }
                                 case .english:
-                                        let symbol: String = isShifting ? punctuationKey.shiftingKeyText : punctuationKey.keyText
-                                        insert(bufferText + symbol)
-                                        bufferText = String.empty
+                                        passBuffer()
+                                        let text: String = isShifting ? punctuationKey.shiftingKeyText : punctuationKey.keyText
+                                        insert(text)
                                 }
                         }
-                case .separator:
+                case .quote:
                         switch currentInputForm {
                         case .cantonese:
                                 let shouldKeepBuffer: Bool = {
@@ -981,16 +1003,16 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                         return type != .compose
                                 }()
                                 if shouldKeepBuffer {
-                                        bufferText += String.separator
+                                        bufferEvents.append(InputEvent.quote)
                                 } else {
-                                        let text: String = isShifting ? PunctuationKey.quote.shiftingKeyText : PunctuationKey.quote.keyText
                                         switch Options.punctuationForm {
                                         case .cantonese:
-                                                insert(bufferText)
-                                                bufferText = text
+                                                passBuffer()
+                                                punctuation(.quote, isShifting: isShifting)
                                         case .english:
-                                                insert(bufferText + text)
-                                                bufferText = String.empty
+                                                passBuffer()
+                                                let text: String = isShifting ? PunctuationKey.quote.shiftingKeyText : PunctuationKey.quote.keyText
+                                                insert(text)
                                         }
                                 }
                         case .transparent:
@@ -1011,7 +1033,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                 }()
                                 if let romanization {
                                         insert(romanization)
-                                        clearBufferText()
+                                        clearBuffer()
                                 } else {
                                         passBuffer()
                                 }
@@ -1025,7 +1047,9 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         case .cantonese:
                                 guard isBuffering else { return }
                                 guard hasControlShiftModifiers else {
-                                        bufferText = String(bufferText.dropLast())
+                                        bufferEvents = bufferEvents.dropLast()
+                                        capitals = capitals.dropLast()
+                                        placeholderText = nil
                                         return
                                 }
                                 guard candidates.isNotEmpty else { return }
@@ -1057,7 +1081,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         switch currentInputForm {
                         case .cantonese:
                                 guard isBuffering else { return }
-                                clearBufferText()
+                                clearBuffer()
                         case .transparent:
                                 return
                         case .options:
@@ -1126,7 +1150,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                         appContext.increaseOptionsHighlightedIndex()
                                 }
                         }
-                case .previousPage:
+                case .pageUp:
                         switch currentInputForm {
                         case .cantonese:
                                 guard isBuffering else { return }
@@ -1136,7 +1160,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         case .options:
                                 return
                         }
-                case .nextPage:
+                case .pageDown:
                         switch currentInputForm {
                         case .cantonese:
                                 guard isBuffering else { return }
@@ -1160,9 +1184,12 @@ final class JyutpingInputController: IMKInputController, Sendable {
 
         private func passBuffer() {
                 guard inputStage.isBuffering else { return }
-                let text: String = Options.characterForm.isHalfWidth ? bufferText : bufferText.fullWidth()
+                defer { clearBuffer() }
+                placeholderText.flatMap(insert(_:))
+                guard bufferEvents.isNotEmpty else { return }
+                let joinedTexts: String = joinedBufferTexts()
+                let text: String = Options.characterForm.isHalfWidth ? joinedTexts : joinedTexts.fullWidth()
                 insert(text)
-                clearBufferText()
         }
 
         private func handleOptions(_ index: Int? = nil) {
@@ -1177,7 +1204,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         } else if candidates.isEmpty {
                                 updateWindowFrame(.zero)
                         } else if didCharacterStandardChanged {
-                                bufferText += String.empty
+                                bufferEvents += []
                         } else {
                                 updateWindowFrame()
                         }
@@ -1216,23 +1243,24 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 let candidate = candidates.fetch(selected.candidateIndex) ?? candidates.first(where: { $0 == selected.candidate })
                 guard let candidate, candidate.isCantonese else {
                         selectedCandidates = []
-                        clearBufferText()
+                        clearBuffer()
                         return
                 }
-                switch bufferText.first {
-                case .none:
-                        return
-                case .some(let character) where character.isBasicLatinLetter.negative:
+                switch bufferEvents.first {
+                case .none: return
+                case .some(let event) where event.isLetter.negative:
                         selectedCandidates = []
-                        clearBufferText()
-                case .some(let character) where character.isReverseLookupTrigger:
+                        clearBuffer()
+                case .some(let event) where event.isReverseLookupTrigger:
                         selectedCandidates = []
                         let leadingCount: Int = candidate.inputCount + 1
-                        if bufferText.count > leadingCount {
-                                let tail = bufferText.dropFirst(leadingCount)
-                                bufferText = String(character) + tail
+                        if bufferEvents.count > leadingCount {
+                                let tail = bufferEvents.dropFirst(leadingCount)
+                                bufferEvents = [event] + tail
+                                guard let firstUppercased = capitals.first else { return }
+                                capitals = [firstUppercased] + capitals.suffix(tail.count)
                         } else {
-                                clearBufferText()
+                                clearBuffer()
                         }
                 default:
                         if shouldProcessUserLexicon {
@@ -1241,11 +1269,12 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                 selectedCandidates = []
                         }
                         let inputCount: Int = candidate.input.replacingOccurrences(of: "[456]", with: "RR", options: .regularExpression).count
-                        var tail = bufferText.dropFirst(inputCount)
-                        while tail.hasPrefix(String.separator) {
+                        var tail = bufferEvents.dropFirst(inputCount)
+                        while (tail.first?.isQuote ?? false) {
                                 tail = tail.dropFirst()
                         }
-                        bufferText = String(tail)
+                        bufferEvents = Array<InputEvent>(tail)
+                        capitals = capitals.suffix(tail.count)
                 }
         }
 

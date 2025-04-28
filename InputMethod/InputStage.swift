@@ -6,28 +6,23 @@ enum InputStage: Int {
         /// Ready to buffer
         case standby
 
+        /// Composing PunctuationKey
+        case composing
+
         /// Start buffering
         case starting
 
         /// Continue buffering
         case ongoing
 
-        /// BufferText become empty
-        case ending
-
-        /// bufferText.isNotEmpty
+        /// Inputing
         var isBuffering: Bool {
                 switch self {
-                case .idle:
-                        return false
-                case .standby:
-                        return false
-                case .starting:
-                        return true
-                case .ongoing:
-                        return true
-                case .ending:
-                        return false
+                case .idle: false
+                case .standby: false
+                case .composing: true
+                case .starting: true
+                case .ongoing: true
                 }
         }
 }

@@ -1,11 +1,14 @@
+import CoreIME
+import CommonExtensions
+
 enum Representative: Hashable {
-        case alphabet(String)
-        case number(Int)
+        case letter(InputEvent)
+        case number(InputEvent)
         case keypadNumber(Int)
         case arrow(Direction)
-        case backquote
         case punctuation(PunctuationKey)
-        case separator
+        case grave
+        case quote
         case `return`
         case backspace
         case forwardDelete
@@ -13,86 +16,14 @@ enum Representative: Hashable {
         case clear
         case space
         case tab
-        case previousPage
-        case nextPage
+        case pageUp
+        case pageDown
         case other
 }
 
 extension UInt16 {
         var representative: Representative {
                 switch self {
-                case KeyCode.Alphabet.letterA:
-                        return .alphabet("a")
-                case KeyCode.Alphabet.letterB:
-                        return .alphabet("b")
-                case KeyCode.Alphabet.letterC:
-                        return .alphabet("c")
-                case KeyCode.Alphabet.letterD:
-                        return .alphabet("d")
-                case KeyCode.Alphabet.letterE:
-                        return .alphabet("e")
-                case KeyCode.Alphabet.letterF:
-                        return .alphabet("f")
-                case KeyCode.Alphabet.letterG:
-                        return .alphabet("g")
-                case KeyCode.Alphabet.letterH:
-                        return .alphabet("h")
-                case KeyCode.Alphabet.letterI:
-                        return .alphabet("i")
-                case KeyCode.Alphabet.letterJ:
-                        return .alphabet("j")
-                case KeyCode.Alphabet.letterK:
-                        return .alphabet("k")
-                case KeyCode.Alphabet.letterL:
-                        return .alphabet("l")
-                case KeyCode.Alphabet.letterM:
-                        return .alphabet("m")
-                case KeyCode.Alphabet.letterN:
-                        return .alphabet("n")
-                case KeyCode.Alphabet.letterO:
-                        return .alphabet("o")
-                case KeyCode.Alphabet.letterP:
-                        return .alphabet("p")
-                case KeyCode.Alphabet.letterQ:
-                        return .alphabet("q")
-                case KeyCode.Alphabet.letterR:
-                        return .alphabet("r")
-                case KeyCode.Alphabet.letterS:
-                        return .alphabet("s")
-                case KeyCode.Alphabet.letterT:
-                        return .alphabet("t")
-                case KeyCode.Alphabet.letterU:
-                        return .alphabet("u")
-                case KeyCode.Alphabet.letterV:
-                        return .alphabet("v")
-                case KeyCode.Alphabet.letterW:
-                        return .alphabet("w")
-                case KeyCode.Alphabet.letterX:
-                        return .alphabet("x")
-                case KeyCode.Alphabet.letterY:
-                        return .alphabet("y")
-                case KeyCode.Alphabet.letterZ:
-                        return .alphabet("z")
-                case KeyCode.Number.number0:
-                        return .number(0)
-                case KeyCode.Number.number1:
-                        return .number(1)
-                case KeyCode.Number.number2:
-                        return .number(2)
-                case KeyCode.Number.number3:
-                        return .number(3)
-                case KeyCode.Number.number4:
-                        return .number(4)
-                case KeyCode.Number.number5:
-                        return .number(5)
-                case KeyCode.Number.number6:
-                        return .number(6)
-                case KeyCode.Number.number7:
-                        return .number(7)
-                case KeyCode.Number.number8:
-                        return .number(8)
-                case KeyCode.Number.number9:
-                        return .number(9)
                 case KeyCode.Keypad.keypad0:
                         return .keypadNumber(0)
                 case KeyCode.Keypad.keypad1:
@@ -130,7 +61,7 @@ extension UInt16 {
                 case KeyCode.Arrow.right:
                         return .arrow(.right)
                 case KeyCode.Symbol.grave:
-                        return .backquote
+                        return .grave
                 case KeyCode.Symbol.comma:
                         return .punctuation(.comma)
                 case KeyCode.Symbol.period:
@@ -150,7 +81,7 @@ extension UInt16 {
                 case KeyCode.Symbol.equal:
                         return .punctuation(.equal)
                 case KeyCode.Symbol.quote:
-                        return .separator
+                        return .quote
                 case KeyCode.Special.escape:
                         return .escape
                 case KeyCode.Keypad.keypadClear:
@@ -158,9 +89,15 @@ extension UInt16 {
                 case KeyCode.Special.tab:
                         return .tab
                 case KeyCode.Special.pageUp:
-                        return .previousPage
+                        return .pageUp
                 case KeyCode.Special.pageDown:
-                        return .nextPage
+                        return .pageDown
+                case _ where InputEvent.isMatchedNumber(keyCode: self):
+                        guard let numberEvent = InputEvent.matchEvent(for: self) else { return .other }
+                        return .number(numberEvent)
+                case _ where InputEvent.isMatchedLetter(keyCode: self):
+                        guard let letterEvent = InputEvent.matchEvent(for: self) else { return .other }
+                        return .letter(letterEvent)
                 default:
                         return .other
                 }

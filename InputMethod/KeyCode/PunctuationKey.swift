@@ -24,65 +24,6 @@ struct PunctuationKey: Hashable {
 }
 
 extension PunctuationKey {
-        static func punctuationCandidates(of text: String) -> [Candidate] {
-                let symbols: [PunctuationSymbol] = switch text {
-                case PunctuationKey.comma.shiftingKeyText:
-                        PunctuationKey.comma.shiftingSymbols
-                case PunctuationKey.period.shiftingKeyText:
-                        PunctuationKey.period.shiftingSymbols
-                case PunctuationKey.slash.keyText:
-                        PunctuationKey.slash.symbols
-                case PunctuationKey.quote.keyText:
-                        PunctuationKey.quote.symbols
-                case PunctuationKey.quote.shiftingKeyText:
-                        PunctuationKey.quote.shiftingSymbols
-                case PunctuationKey.bracketLeft.shiftingKeyText:
-                        PunctuationKey.bracketLeft.shiftingSymbols
-                case PunctuationKey.bracketRight.shiftingKeyText:
-                        PunctuationKey.bracketRight.shiftingSymbols
-                case PunctuationKey.backSlash.shiftingKeyText:
-                        PunctuationKey.backSlash.shiftingSymbols
-                case PunctuationKey.backquote.keyText:
-                        PunctuationKey.backquote.symbols
-                case PunctuationKey.backquote.shiftingKeyText:
-                        PunctuationKey.backquote.shiftingSymbols
-
-                case PunctuationKey.number2Two.shiftingKeyText:
-                        PunctuationKey.number2Two.shiftingSymbols
-                case PunctuationKey.number3Three.shiftingKeyText:
-                        PunctuationKey.number3Three.shiftingSymbols
-                case PunctuationKey.number4Four.shiftingKeyText:
-                        PunctuationKey.number4Four.shiftingSymbols
-                case PunctuationKey.number5Five.shiftingKeyText:
-                        PunctuationKey.number5Five.shiftingSymbols
-                case PunctuationKey.number6Six.shiftingKeyText:
-                        PunctuationKey.number6Six.shiftingSymbols
-                case PunctuationKey.number7Seven.shiftingKeyText:
-                        PunctuationKey.number7Seven.shiftingSymbols
-                case PunctuationKey.number8Eight.shiftingKeyText:
-                        PunctuationKey.number8Eight.shiftingSymbols
-                default:
-                        []
-                }
-                let candidates = symbols.map({ Candidate(text: $0.symbol, comment: $0.comment, secondaryComment: $0.secondaryComment, input: text) })
-                return candidates
-        }
-
-        static func shiftingBufferText(of number: Int) -> String? {
-                return switch number {
-                case 2: PunctuationKey.number2Two.shiftingKeyText
-                case 3: PunctuationKey.number3Three.shiftingKeyText
-                case 4: PunctuationKey.number4Four.shiftingKeyText
-                case 5: PunctuationKey.number5Five.shiftingKeyText
-                case 6: PunctuationKey.number6Six.shiftingKeyText
-                case 7: PunctuationKey.number7Seven.shiftingKeyText
-                case 8: PunctuationKey.number8Eight.shiftingKeyText
-                default: nil
-                }
-        }
-}
-
-extension PunctuationKey {
         static let comma: PunctuationKey = {
                 let shiftingSymbols: [PunctuationSymbol] = [
                         PunctuationSymbol("《"),
@@ -173,7 +114,7 @@ extension PunctuationKey {
                 ]
                 return PunctuationKey(keyText: "\\", shiftingKeyText: "|", instantSymbol: "、", instantShiftingSymbol: nil, symbols: [.init("、")], shiftingSymbols: shiftingSymbols)
         }()
-        static let backquote: PunctuationKey = {
+        static let grave: PunctuationKey = {
                 let symbols: [PunctuationSymbol] = [
                         PunctuationSymbol("`", comment: "重音符", secondaryComment: "U+0060"),
                         PunctuationSymbol("｀", comment: "全寬重音符", secondaryComment: "U+FF40"),
@@ -269,59 +210,51 @@ extension PunctuationKey {
 
 extension PunctuationKey {
 
-        /// Number key symbol in English PunctuationForm
-        static func numberKeyShiftingSymbol(of number: Int) -> String? {
+        /// Shifting number key Cantonese PunctuationForm
+        static func numberKeyPunctuation(of number: Int) -> PunctuationKey? {
                 switch number {
-                case 0:
-                        return ")"
-                case 1:
-                        return "!"
-                case 2:
-                        return "@"
-                case 3:
-                        return "#"
-                case 4:
-                        return "$"
-                case 5:
-                        return "%"
-                case 6:
-                        return "^"
-                case 7:
-                        return "&"
-                case 8:
-                        return "*"
-                case 9:
-                        return "("
-                default:
-                        return nil
+                case 2: PunctuationKey.number2Two
+                case 3: PunctuationKey.number3Three
+                case 4: PunctuationKey.number4Four
+                case 5: PunctuationKey.number5Five
+                case 6: PunctuationKey.number6Six
+                case 7: PunctuationKey.number7Seven
+                case 8: PunctuationKey.number8Eight
+                default: nil
                 }
         }
 
-        /// Number key symbol in Cantonese PunctuationForm
+        /// Shifting number key symbol in English PunctuationForm
+        static func numberKeyShiftingSymbol(of number: Int) -> String? {
+                switch number {
+                case 0: ")"
+                case 1: "!"
+                case 2: "@"
+                case 3: "#"
+                case 4: "$"
+                case 5: "%"
+                case 6: "^"
+                case 7: "&"
+                case 8: "*"
+                case 9: "("
+                default: nil
+                }
+        }
+
+        /// Shifting number key symbol in Cantonese PunctuationForm
         static func numberKeyShiftingCantoneseSymbol(of number: Int) -> String? {
                 switch number {
-                case 0:
-                        return "）"
-                case 1:
-                        return "！"
-                case 2:
-                        return "@"
-                case 3:
-                        return "#"
-                case 4:
-                        return "$"
-                case 5:
-                        return "%"
-                case 6:
-                        return "……"
-                case 7:
-                        return "&"
-                case 8:
-                        return "*"
-                case 9:
-                        return "（"
-                default:
-                        return nil
+                case 0: "）"
+                case 1: "！"
+                case 2: "@"
+                case 3: "#"
+                case 4: "$"
+                case 5: "%"
+                case 6: "……"
+                case 7: "&"
+                case 8: "*"
+                case 9: "（"
+                default: nil
                 }
         }
 }
