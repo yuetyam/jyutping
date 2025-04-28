@@ -953,17 +953,27 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                 case .period, .equal:
                                         updateDisplayCandidates(.nextPage, highlight: .unchanged)
                                 case .bracketLeft:
-                                        let index = appContext.highlightedIndex
-                                        guard let displayCandidate = appContext.displayCandidates.fetch(index) else { return }
-                                        guard let firstCharacter = displayCandidate.candidate.text.first else { return }
-                                        insert(String(firstCharacter))
-                                        aftercareSelection(displayCandidate, shouldProcessUserLexicon: false)
+                                        switch AppSettings.bracketKeysMode {
+                                        case .characterSelection:
+                                                let index = appContext.highlightedIndex
+                                                guard let displayCandidate = appContext.displayCandidates.fetch(index) else { return }
+                                                guard let firstCharacter = displayCandidate.candidate.text.first else { return }
+                                                insert(String(firstCharacter))
+                                                aftercareSelection(displayCandidate, shouldProcessUserLexicon: false)
+                                        case .candidatePaging:
+                                                updateDisplayCandidates(.previousPage, highlight: .unchanged)
+                                        }
                                 case .bracketRight:
-                                        let index = appContext.highlightedIndex
-                                        guard let displayCandidate = appContext.displayCandidates.fetch(index) else { return }
-                                        guard let lastCharacter = displayCandidate.candidate.text.last else { return }
-                                        insert(String(lastCharacter))
-                                        aftercareSelection(displayCandidate, shouldProcessUserLexicon: false)
+                                        switch AppSettings.bracketKeysMode {
+                                        case .characterSelection:
+                                                let index = appContext.highlightedIndex
+                                                guard let displayCandidate = appContext.displayCandidates.fetch(index) else { return }
+                                                guard let lastCharacter = displayCandidate.candidate.text.last else { return }
+                                                insert(String(lastCharacter))
+                                                aftercareSelection(displayCandidate, shouldProcessUserLexicon: false)
+                                        case .candidatePaging:
+                                                updateDisplayCandidates(.nextPage, highlight: .unchanged)
+                                        }
                                 default:
                                         switch Options.punctuationForm {
                                         case .cantonese:

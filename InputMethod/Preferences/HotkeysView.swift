@@ -4,6 +4,7 @@ struct HotkeysView: View {
 
         @State private var pressShiftOnce: PressShiftOnce = AppSettings.pressShiftOnce
         @State private var shiftSpaceCombination: ShiftSpaceCombination = AppSettings.shiftSpaceCombination
+        @State private var bracketKeysMode: BracketKeysMode = AppSettings.bracketKeysMode
 
         var body: some View {
                 ScrollView {
@@ -39,6 +40,22 @@ struct HotkeysView: View {
                                                 }
                                                 Spacer()
                                         }
+                                }
+                                .block()
+                                HStack(spacing: 4) {
+                                        LabelText("HotkeysView.BracketKeysMode")
+                                        Text.separator
+                                        Picker("HotkeysView.BracketKeysMode", selection: $bracketKeysMode) {
+                                                Text("HotkeysView.BracketKeysMode.CharacterSelection").tag(BracketKeysMode.characterSelection)
+                                                Text("HotkeysView.BracketKeysMode.CandidatePaging").tag(BracketKeysMode.candidatePaging)
+                                        }
+                                        .pickerStyle(.menu)
+                                        .labelsHidden()
+                                        .fixedSize()
+                                        .onChange(of: bracketKeysMode) { newOption in
+                                                AppSettings.updateBracketKeysMode(to: newOption)
+                                        }
+                                        Spacer()
                                 }
                                 .block()
                                 VStack(spacing: 2) {

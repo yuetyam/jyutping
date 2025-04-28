@@ -31,6 +31,7 @@ struct SettingsKey {
 
         static let PressShiftOnce: String = "PressShiftOnce"
         static let ShiftSpaceCombination: String = "ShiftSpaceCombination"
+        static let BracketKeys: String = "BracketKeys"
 }
 
 enum CandidatePageOrientation: Int, CaseIterable {
@@ -165,6 +166,16 @@ enum ShiftSpaceCombination: Int, CaseIterable {
         case switchInputMethodMode = 2
         static func action(of value: Int) -> ShiftSpaceCombination {
                 return Self.allCases.first(where: { $0.rawValue == value }) ?? Self.inputFullWidthSpace
+        }
+}
+
+enum BracketKeysMode: Int, CaseIterable {
+        /// 輸入候選詞首字、末字
+        case characterSelection = 1
+        /// 候選詞翻䈎
+        case candidatePaging = 2
+        static func mode(of value: Int) -> BracketKeysMode {
+                return Self.allCases.first(where: { $0.rawValue == value }) ?? Self.characterSelection
         }
 }
 
@@ -520,6 +531,17 @@ struct AppSettings {
                 shiftSpaceCombination = option
                 let value: Int = option.rawValue
                 UserDefaults.standard.set(value, forKey: SettingsKey.ShiftSpaceCombination)
+        }
+
+        /// Use [ ] keys for
+        private(set) static var bracketKeysMode: BracketKeysMode = {
+                let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.BracketKeys)
+                return BracketKeysMode.mode(of: savedValue)
+        }()
+        static func updateBracketKeysMode(to mode: BracketKeysMode) {
+                bracketKeysMode = mode
+                let value: Int = mode.rawValue
+                UserDefaults.standard.set(value, forKey: SettingsKey.BracketKeys)
         }
 }
 
