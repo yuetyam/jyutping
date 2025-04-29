@@ -5,7 +5,6 @@ import SQLite3
 
 public struct Engine {
         public static func prepare() {
-                Segmentor.prepare()
                 let statement = prepareAnchorsStatement()
                 defer { sqlite3_finalize(statement) }
                 let testCode: Int64 = 20

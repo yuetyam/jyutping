@@ -1,0 +1,231 @@
+activitykit	ActivityKit
+airdrop	AirDrop
+airplay	AirPlay
+airpods	AirPods
+airpodsmax	AirPods Max
+airpodspro	AirPods Pro
+airtag	AirTag
+android	Android
+appkit	AppKit
+appletv	Apple TV
+appstore	App Store
+audioos	audioOS
+bigsur	Big Sur
+bridgeos	bridgeOS
+callkit	CallKit
+capslock	Caps Lock
+capslock	CapsLock
+carplay	CarPlay
+chatgpt	ChatGPT
+chromeos	ChromeOS
+clockkit	ClockKit
+cloudkit	CloudKit
+coloros	ColorOS
+coretext	Core Text
+deepl	DeepL
+deepseek	DeepSeek
+digitalocean	DigitalOcean
+directx	DirectX
+dockkit	DockKit
+duckduckgo	DuckDuckGo
+egpu	eGPU
+esim	eSIM
+facetime	FaceTime
+fcp	Final Cut Pro
+ffmpeg	FFmpeg
+finalcutpro	Final Cut Pro
+freebsd	FreeBSD
+gboard	Gboard
+github	GitHub
+gitlib	GitLib
+gnupg	GnuPG
+grapheneos	GrapheneOS
+harmonyos	HarmonyOS
+healthkit	HealthKit
+hifi	Hi-Fi
+hires	Hi-Res
+homekit	HomeKit
+homepod	HomePod
+homepodmini	HomePod mini
+hyperos	HyperOS
+icloud	iCloud
+imac	iMac
+imacpro	iMac Pro
+imessage	iMessage
+inputmethodkit	InputMethodKit
+ios	iOS
+ipad	iPad
+ipadair	iPad Air
+ipadmini	iPad mini
+ipados	iPadOS
+ipadpro	iPad Pro
+iphone	iPhone
+iphonemini	iPhone mini
+iphoneplus	iPhone Plus
+iphonepro	iPhone Pro
+iphonepromax	iPhone Pro Max
+iphonese	iPhone SE
+ipod	iPod
+itunes	iTunes
+jetbrains	JetBrains
+latex	LaTeX
+lineageos	LineageOS
+macappstore	Mac App Store
+macbook	MacBook
+macbookair	MacBook Air
+macbookpro	MacBook Pro
+macmini	Mac mini
+macos	macOS
+macosx	Mac OS X
+macpro	Mac Pro
+magicos	MagicOS
+mapkit	MapKit
+mas	Mac App Store
+mba	MacBook Air
+mbp	MacBook Pro
+misans	MiSans
+miui	MIUI
+monterey	Monterey
+musickit	MusicKit
+myos	MyOS
+netbsd	NetBSD
+objectivec	Objective-C
+oneui	One UI
+openai	OpenAI
+openbsd	OpenBSD
+opencc	OpenCC
+opencl	OpenCL
+opencv	OpenCV
+opengl	OpenGL
+opensuse	openSUSE
+originos	OriginOS
+osx	OS X
+paypal	PayPal
+passkit	PassKit
+pencilkit	PencilKit
+photokit	PhotoKit
+promotion	ProMotion
+pushkit	PushKit
+realmeui	realme UI
+replaykit	ReplayKit
+researchkit	ResearchKit
+sequoia	Sequoia
+shareplay	SharePlay
+sirikit	SiriKit
+sonoma	Sonoma
+spacex	SpaceX
+steamos	SteamOS
+storekit	StoreKit
+swiftui	SwiftUI
+testflight	TestFlight
+tiktok	TikTok
+tipkit	TipKit
+tvos	tvOS
+typec	Type-C
+typeduck	TypeDuck
+uikit	UIKit
+usb	USB
+usbc	USB-C
+ventura	Ventura
+visionkit	VisionKit
+visionos	visionOS
+visionpro	Vision Pro
+watchkit	WatchKit
+watchos	watchOS
+webkit	WebKit
+wechat	WeChat
+whatsapp	WhatsApp
+widgetkit	WidgetKit
+wifi	Wi-Fi
+windows	Windows
+winui	WinUI
+xcode	Xcode
+youtube	YouTube
+alpha	Α
+beta	Β
+gamma	Γ
+delta	Δ
+epsilon	Ε
+zeta	Ζ
+eta	Η
+theta	Θ
+iota	Ι
+kappa	Κ
+lambda	Λ
+mu	Μ
+nu	Ν
+xi	Ξ
+omicron	Ο
+pi	Π
+rho	Ρ
+sigma	Σ
+tau	Τ
+upsilon	Υ
+phi	Φ
+chi	Χ
+psi	Ψ
+omega	Ω
+alpha	α
+beta	β
+gamma	γ
+delta	δ
+epsilon	ε
+zeta	ζ
+eta	η
+theta	θ
+iota	ι
+kappa	κ
+lambda	λ
+mu	μ
+nu	ν
+xi	ξ
+omicron	ο
+pi	π
+rho	ρ
+sigma	σ
+sigma	ς
+tau	τ
+upsilon	υ
+phi	φ
+chi	χ
+psi	ψ
+omega	ω
+mgei	M記
+kgei	K記
+ajing	A型
+bjing	B型
+ojing	O型
+abjing	AB型
+aying	A型
+bying	B型
+oying	O型
+abying	AB型
+ajing	🅰️
+bjing	🅱️
+ojing	🅾️
+abjing	🆎
+aying	🅰️
+bying	🅱️
+oying	🅾️
+abying	🆎
+bciu	B超
+bchiu	B超
+ok	OK
+ok	👌
+ok	🆗
+atm	ATM
+atm	🏧
+bb	👶🏻
+baby	👶🏻
+dna	DNA
+dna	🧬
+sos	SOS
+sos	🆘
+wifi	Wi-Fi
+wlan	WLAN
+wifi	🛜
+wlan	🛜
+wc	WC
+wc	🚾
+tm	™
+sm	℠

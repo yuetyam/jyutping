@@ -57,38 +57,10 @@ extension Sequence where Element == SegmentScheme {
 
 public struct Segmentor {
 
-        #if os(iOS)
-        nonisolated(unsafe) static let database: OpaquePointer? = {
-                var db: OpaquePointer? = nil
-                guard let path: String = Bundle.module.path(forResource: "syllabledb", ofType: "sqlite3") else { return nil }
-                var storageDatabase: OpaquePointer? = nil
-                defer { sqlite3_close_v2(storageDatabase) }
-                guard sqlite3_open_v2(path, &storageDatabase, SQLITE_OPEN_READONLY | SQLITE_OPEN_FULLMUTEX, nil) == SQLITE_OK else { return nil }
-                guard sqlite3_open_v2(":memory:", &db, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE | SQLITE_OPEN_FULLMUTEX, nil) == SQLITE_OK else { return nil }
-                let backup = sqlite3_backup_init(db, "main", storageDatabase, "main")
-                guard sqlite3_backup_step(backup, -1) == SQLITE_DONE else { return nil }
-                guard sqlite3_backup_finish(backup) == SQLITE_OK else { return nil }
-                return db
-        }()
-        #endif
-
-        static func prepare() {
-                let statement = prepareStatement()
-                defer { sqlite3_finalize(statement) }
-                let testCode: Int64 = 20
-                sqlite3_reset(statement)
-                sqlite3_bind_int64(statement, 1, testCode)
-                guard sqlite3_step(statement) == SQLITE_ROW else { return }
-        }
-
-        private static let queryCommand: String = "SELECT token, origin FROM syllabletable WHERE code = ? LIMIT 1;"
+        private static let queryCommand: String = "SELECT alias, origin FROM syllabletable WHERE aliascode = ? LIMIT 1;"
         private static func prepareStatement() -> OpaquePointer? {
                 var statement: OpaquePointer? = nil
-                #if os(iOS)
-                guard sqlite3_prepare_v2(Self.database, queryCommand, -1, &statement, nil) == SQLITE_OK else { return nil }
-                #else
                 guard sqlite3_prepare_v2(Engine.database, queryCommand, -1, &statement, nil) == SQLITE_OK else { return nil }
-                #endif
                 return statement
         }
 

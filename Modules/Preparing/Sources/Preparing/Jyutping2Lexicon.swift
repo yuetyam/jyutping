@@ -44,7 +44,7 @@ struct TextMarkLexicon: Hashable {
         let ping: Int
         let tenKeyCode: Int
         static func convert() -> [TextMarkLexicon] {
-                guard let url = Bundle.module.url(forResource: "mark", withExtension: "yaml") else { return [] }
+                guard let url = Bundle.module.url(forResource: "mark", withExtension: "txt") else { return [] }
                 guard let sourceContent = try? String(contentsOf: url, encoding: .utf8) else { return [] }
                 let sourceLines: [String] = sourceContent
                         .trimmingCharacters(in: .whitespacesAndNewlines)

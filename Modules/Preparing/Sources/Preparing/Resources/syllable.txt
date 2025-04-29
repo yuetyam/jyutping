@@ -198,10 +198,12 @@ gor	go
 got	got
 gou	gou
 goy	goi
+gua	gwaa
 gui	gui
 guk	guk
 gum	gam
 gun	gun
+guo	gwo
 gup	gap
 gwa	gwaa
 gwo	gwo
@@ -274,6 +276,7 @@ kiu	kiu
 koi	koi
 kok	kok
 koy	koi
+kua	kwaa
 kui	kui
 kuk	kuk
 kum	kam
@@ -508,6 +511,7 @@ been	bin
 beng	beng
 bing	bing
 bong	bong
+book	buk
 bung	bung
 caai	caai
 caak	caak
@@ -602,6 +606,7 @@ faan	faan
 faat	faat
 fong	fong
 foon	fun
+foot	fut
 fung	fung
 gaai	gaai
 gaak	gaak
@@ -653,6 +658,7 @@ hing	hing
 hoei	heoi
 hoey	heoi
 hong	hong
+hook	huk
 huen	hyun
 huet	hyut
 hung	hung
@@ -727,6 +733,7 @@ loen	leon
 loet	leot
 loey	leoi
 long	long
+look	luk
 luen	lyun
 luet	lyut
 lung	lung
@@ -878,6 +885,7 @@ toen	teon
 toet	teot
 toey	teoi
 tong	tong
+took	tuk
 tuen	tyun
 tuet	tyut
 tung	tung

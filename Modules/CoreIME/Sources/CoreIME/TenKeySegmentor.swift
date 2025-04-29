@@ -53,14 +53,10 @@ extension Segmentor {
         }
         private static func tenKeyMatch(tenKeyCode: Int) -> [SegmentToken] {
                 var tokens: [SegmentToken] = []
-                let command: String = "SELECT token, origin FROM syllabletable WHERE tenkey = \(tenKeyCode);"
+                let command: String = "SELECT alias, origin FROM syllabletable WHERE tenkeycode = \(tenKeyCode);"
                 var pointer: OpaquePointer? = nil
                 defer { sqlite3_finalize(pointer) }
-                #if os(iOS)
-                guard sqlite3_prepare_v2(Self.database, command, -1, &pointer, nil) == SQLITE_OK else { return tokens }
-                #else
                 guard sqlite3_prepare_v2(Engine.database, command, -1, &pointer, nil) == SQLITE_OK else { return tokens }
-                #endif
                 while sqlite3_step(pointer) == SQLITE_ROW {
                         let token: String = String(cString: sqlite3_column_text(pointer, 0))
                         let origin: String = String(cString: sqlite3_column_text(pointer, 1))
