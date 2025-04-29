@@ -4,6 +4,7 @@
 *.gif binary
 *.heic binary
 *.heif binary
+*.ico binary
 *.jpeg binary
 *.jpg binary
 *.pdf binary
@@ -27,6 +28,15 @@
 /Sparkle.framework/** binary
 
 # Swift Package Resources
-/Modules/AppDataSource/Sources/AppDataSource/Resources/** binary
-/Modules/CoreIME/Sources/CoreIME/Resources/** binary
-/Modules/Preparing/Sources/Preparing/Resources/** binary
+/Modules/Preparing/Sources/Preparing/Resources/cangjie3.txt     binary
+/Modules/Preparing/Sources/Preparing/Resources/cangjie5.txt     binary
+/Modules/Preparing/Sources/Preparing/Resources/chohok.txt       binary
+/Modules/Preparing/Sources/Preparing/Resources/collocation.txt  binary
+/Modules/Preparing/Sources/Preparing/Resources/definition.txt   binary
+/Modules/Preparing/Sources/Preparing/Resources/fanwan.txt       binary
+/Modules/Preparing/Sources/Preparing/Resources/gwongwan.txt     binary
+/Modules/Preparing/Sources/Preparing/Resources/jyutping.txt     binary
+/Modules/Preparing/Sources/Preparing/Resources/pinyin.txt       binary
+/Modules/Preparing/Sources/Preparing/Resources/stroke.txt       binary
+/Modules/Preparing/Sources/Preparing/Resources/structure.txt    binary
+/Modules/Preparing/Sources/Preparing/Resources/yingwaa.txt      binary
