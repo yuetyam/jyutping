@@ -2,28 +2,11 @@
 
 import SwiftUI
 
-private struct MacToneTipView: View {
-        var body: some View {
-                HStack {
-                        Text(verbatim: "聲調之「上」應讀上聲 soeng5")
-                        Speaker("soeng5")
-                        Text(verbatim: "而非去聲 soeng6")
-                        Speaker("soeng6")
-                        Spacer()
-                }
-                .font(.master)
-                .textSelection(.enabled)
-                .padding(8)
-                .background(Color.textBackgroundColor, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
-        }
-}
-
 struct MacJyutpingToneTable: View {
         var body: some View {
                 ScrollView {
                         LazyVStack(alignment: .leading, spacing: 16) {
-                                MacToneTipView()
-                                VStack(spacing: 2) {
+                                VStack(alignment: .leading, spacing: 2) {
                                         HStack(spacing: 32) {
                                                 ZStack(alignment: .leading) {
                                                         Text(verbatim: "例字").hidden()
@@ -48,7 +31,7 @@ struct MacJyutpingToneTable: View {
                                                 Spacer()
                                         }
                                         .padding(.horizontal, 8)
-                                        VStack {
+                                        VStack(alignment: .leading) {
                                                 MacToneLabel(word: "芬", syllable: "fan1", toneName: "陰平", toneValue: "55/53")
                                                 MacToneLabel(word: "粉", syllable: "fan2", toneName: "陰上", toneValue: "35")
                                                 MacToneLabel(word: "糞", syllable: "fan3", toneName: "陰去", toneValue: "33")
@@ -67,9 +50,8 @@ struct MacJyutpingToneTable: View {
                                         MacToneGridView()
                                 }
                                 ToneChartView()
-                                        .padding(.vertical, 8)
-                                        .frame(height: 216)
-                                        .padding(.horizontal, 8)
+                                        .frame(height: 200)
+                                        .padding(8)
                                         .block()
                                         .padding(.vertical)
                         }

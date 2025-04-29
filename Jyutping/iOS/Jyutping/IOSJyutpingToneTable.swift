@@ -59,13 +59,6 @@ struct IOSJyutpingToneTable: View {
                                         .padding(.vertical, 8)
                                         .frame(height: 234)
                         }
-                        Section {
-                                if horizontalSize == .compact {
-                                        IOSToneCompactTipView()
-                                } else {
-                                        IOSToneTipView()
-                                }
-                        }
                 }
                 .textSelection(.enabled)
                 .navigationTitle("IOSJyutpingTab.NavigationTitle.JyutpingTones")
@@ -238,35 +231,6 @@ private struct IOSToneGridCell: View {
                 }
                 .padding(8)
                 .background(Color.textBackgroundColor(colorScheme: colorScheme), in: RoundedRectangle(cornerRadius: 8, style: .continuous))
-        }
-}
-
-private struct IOSToneCompactTipView: View {
-        var body: some View {
-                VStack(spacing: 0) {
-                        HStack {
-                                Text(verbatim: "聲調之「上」應讀上聲 soeng5")
-                                Speaker("soeng5")
-                                Spacer()
-                        }
-                        HStack {
-                                Text(verbatim: "而非去聲 soeng6")
-                                Speaker("soeng6")
-                                Spacer()
-                        }
-                }
-        }
-}
-
-private struct IOSToneTipView: View {
-        var body: some View {
-                HStack {
-                        Text(verbatim: "聲調之「上」應讀上聲 soeng5")
-                        Speaker("soeng5")
-                        Text(verbatim: "而非去聲 soeng6")
-                        Speaker("soeng6")
-                        Spacer()
-                }
         }
 }
 
