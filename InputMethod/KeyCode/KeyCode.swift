@@ -1,4 +1,4 @@
-/// Virtual KeyCode
+/// Virtual KeyCode from Mac OS X Carbon HIToolbox/Events.h
 struct KeyCode {
 
         /// Letter [a-z]

@@ -418,12 +418,13 @@ final class JyutpingInputController: IMKInputController, Sendable {
         private lazy var suggestionTask: Task<Void, Never>? = nil
         private func suggest() {
                 suggestionTask?.cancel()
+                let events = bufferEvents
                 let originalText = joinedBufferTexts()
                 let processingText: String = originalText.toneConverted()
                 let needsSymbols: Bool = Options.isEmojiSuggestionsOn && selectedCandidates.isEmpty
                 let isInputMemoryOn: Bool = AppSettings.isInputMemoryOn
                 suggestionTask = Task.detached(priority: .high) { [weak self] in
-                        let segmentation = Segmentor.segment(text: processingText)
+                        let segmentation = Segmentor.segment(events: events)
                         let bestScheme = segmentation.first
                         async let userLexiconCandidates: [Candidate] = isInputMemoryOn ? UserLexicon.suggest(text: processingText, segmentation: segmentation) : []
                         async let engineCandidates: [Candidate] = Engine.suggest(origin: originalText, text: processingText, segmentation: segmentation, needsSymbols: needsSymbols)

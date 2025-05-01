@@ -121,14 +121,6 @@ extension InputEvent {
         }
 }
 
-extension RandomAccessCollection where Element == InputEvent {
-        /// Radix100Combined codes
-        var combinedCode: Int {
-                guard count < 10 else { return 0 }
-                return reduce(0, { $0 * 100 + $1.code })
-        }
-}
-
 extension InputEvent {
         public static func isMatchedNumber(keyCode: UInt16) -> Bool {
                 return digitSet.contains(where: { $0.keyCode == keyCode })
