@@ -275,7 +275,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         case (false, false):
                                 inputStage = .ongoing
                         case (false, true):
-                                inputStage = .standby
+                                inputStage = .ending
                         }
                 }
                 didSet {

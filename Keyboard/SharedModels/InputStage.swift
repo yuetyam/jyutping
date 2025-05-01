@@ -6,16 +6,16 @@ enum InputStage: Int {
         /// Ready to buffer
         case standby
 
-        /// Start buffering
+        /// Started buffering
         case starting
 
         /// Continue buffering
         case ongoing
 
-        /// BufferText become empty
+        /// Stopped buffering
         case ending
 
-        /// bufferText.isNotEmpty
+        /// Inputing
         var isBuffering: Bool {
                 switch self {
                 case .idle:

@@ -9,11 +9,14 @@ enum InputStage: Int {
         /// Composing PunctuationKey
         case composing
 
-        /// Start buffering
+        /// Started buffering
         case starting
 
         /// Continue buffering
         case ongoing
+
+        /// Stopped buffering
+        case ending
 
         /// Inputing
         var isBuffering: Bool {
@@ -23,6 +26,7 @@ enum InputStage: Int {
                 case .composing: true
                 case .starting: true
                 case .ongoing: true
+                case .ending: false
                 }
         }
 }

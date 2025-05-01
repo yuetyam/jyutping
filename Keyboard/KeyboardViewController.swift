@@ -218,6 +218,8 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         case (true, false):
                                 inputStage = .starting
                                 updateReturnKey()
+                        case (false, false):
+                                inputStage = .ongoing
                         case (false, true):
                                 inputStage = .ending
                                 if Options.isInputMemoryOn && selectedCandidates.isNotEmpty {
@@ -226,8 +228,6 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 }
                                 selectedCandidates = []
                                 updateReturnKey()
-                        case (false, false):
-                                inputStage = .ongoing
                         }
                         switch bufferText.first {
                         case .none:
@@ -272,6 +272,9 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 inputStage = .starting
                                 updateReturnKey()
                                 tenKeySuggest()
+                        case (false, false):
+                                inputStage = .ongoing
+                                tenKeySuggest()
                         case (false, true):
                                 inputStage = .ending
                                 suggestionTask?.cancel()
@@ -283,9 +286,6 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 candidates = []
                                 text2mark = String.empty
                                 updateReturnKey()
-                        case (false, false):
-                                inputStage = .ongoing
-                                tenKeySuggest()
                         }
                 }
         }
