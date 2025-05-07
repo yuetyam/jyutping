@@ -4,11 +4,20 @@ import SwiftUI
 import AppDataSource
 import CommonExtensions
 
+extension Notification.Name {
+        static let focusSearch = Notification.Name("JyutpingApp.Notification.Name.focusSearch")
+}
+
+private enum FocusableField: Int, Hashable {
+        case searchField
+}
+
 struct MacSearchView: View {
+
+        @FocusState private var focusedField: FocusableField?
 
         @State private var submittedText: String = String.empty
         @State private var previousSubmittedText: String = String.empty
-        @FocusState private var isTextFieldFocused: Bool
 
         @State private var lexicons: [CantoneseLexiconWithId] = []
         @State private var yingWaaLexicons: [YingWaaLexiconWithId] = []
@@ -48,14 +57,26 @@ struct MacSearchView: View {
         var body: some View {
                 ScrollViewReader { proxy in
                         SearchField("TextField.SearchPronunciation", submittedText: $submittedText)
-                                .focused($isTextFieldFocused)
+                                .focused($focusedField, equals: .searchField)
                                 .font(.master)
                                 .padding(8)
                                 .background(Color.textBackgroundColor, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
                                 .padding(.horizontal)
                                 .padding(.vertical, 8)
+                                .background {
+                                        Button {
+                                                focusedField = .searchField
+                                        } label: {
+                                                EmptyView()
+                                        }
+                                        .buttonStyle(.plain)
+                                        .keyboardShortcut("l", modifiers: .command)
+                                }
                                 .onAppear {
-                                        isTextFieldFocused = true
+                                        focusedField = .searchField
+                                }
+                                .onReceive(NotificationCenter.default.publisher(for: .focusSearch)) { _ in
+                                        focusedField = .searchField
                                 }
                                 .onChange(of: submittedText) { newText in
                                         withAnimation {

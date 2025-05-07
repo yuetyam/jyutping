@@ -155,6 +155,9 @@ struct MacContentViewMonterey: View {
                         }
                         .listStyle(.sidebar)
                         .navigationTitle("MacContentView.NavigationTitle.Jyutping")
+                        .onReceive(NotificationCenter.default.publisher(for: .focusSearch)) { _ in
+                                isMacSearchViewActive = true
+                        }
                 }
         }
 }

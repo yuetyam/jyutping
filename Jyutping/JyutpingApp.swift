@@ -32,6 +32,12 @@ struct JyutpingApp: App {
                 .windowToolbarStyle(.unifiedCompact)
                 .commands {
                         CommandGroup(replacing: .newItem, addition: {})
+                        CommandGroup(after: .windowArrangement) {
+                                Button("MacSidebar.NavigationTitle.Search") {
+                                        NotificationCenter.default.post(name: .focusSearch, object: nil)
+                                }
+                                .keyboardShortcut("k", modifiers: .command)
+                        }
                 }
         }
 }

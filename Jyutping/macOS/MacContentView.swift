@@ -84,6 +84,9 @@ struct MacContentView: View {
                         }
                         .toolbarBackground(Material.ultraThin, for: .windowToolbar)
                         .navigationTitle("MacContentView.NavigationTitle.Jyutping")
+                        .onReceive(NotificationCenter.default.publisher(for: .focusSearch)) { _ in
+                                selection = .search
+                        }
                 } detail: {
                         switch selection {
                         case .installation:
