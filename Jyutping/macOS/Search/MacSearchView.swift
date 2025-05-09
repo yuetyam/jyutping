@@ -4,10 +4,6 @@ import SwiftUI
 import AppDataSource
 import CommonExtensions
 
-extension Notification.Name {
-        static let focusSearch = Notification.Name("JyutpingApp.Notification.Name.focusSearch")
-}
-
 private enum FocusableField: Int, Hashable {
         case searchField
 }

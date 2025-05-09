@@ -140,9 +140,9 @@ struct HomeView: View {
                         .animation(.default, value: isGuideViewExpanded)
                         .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
                                 guard let keyboards: [String] = UserDefaults.standard.object(forKey: "AppleKeyboards") as? [String] else { return }
-                                let isContained: Bool = keyboards.contains(PresetConstant.KeyboardIdentifier)
-                                if isKeyboardEnabled != isContained {
-                                        isKeyboardEnabled = isContained
+                                let isContaining: Bool = keyboards.contains(PresetConstant.KeyboardIdentifier)
+                                if isKeyboardEnabled != isContaining {
+                                        isKeyboardEnabled = isContaining
                                 }
                         }
                         .navigationTitle("IOSTabView.NavigationTitle.Home")

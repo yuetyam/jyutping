@@ -87,6 +87,9 @@ struct MacContentView: View {
                         .onReceive(NotificationCenter.default.publisher(for: .focusSearch)) { _ in
                                 selection = .search
                         }
+                        .onReceive(NotificationCenter.default.publisher(for: .openAbout)) { _ in
+                                selection = .about
+                        }
                 } detail: {
                         switch selection {
                         case .installation:

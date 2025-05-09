@@ -31,15 +31,25 @@ struct JyutpingApp: App {
                 }
                 .windowToolbarStyle(.unifiedCompact)
                 .commands {
+                        CommandGroup(replacing: .appInfo) {
+                                Button("MacMenu.App.About") {
+                                        NotificationCenter.default.post(name: .openAbout, object: nil)
+                                }
+                        }
                         CommandGroup(replacing: .newItem, addition: {})
                         CommandGroup(after: .windowArrangement) {
-                                Button("MacSidebar.NavigationTitle.Search") {
+                                Button("MacMenu.Window.Search") {
                                         NotificationCenter.default.post(name: .focusSearch, object: nil)
                                 }
                                 .keyboardShortcut("k", modifiers: .command)
                         }
                 }
         }
+}
+
+extension Notification.Name {
+        static let openAbout = Notification.Name("JyutpingApp.Mac.Notification.Name.openAbout")
+        static let focusSearch = Notification.Name("JyutpingApp.Mac.Notification.Name.focusSearch")
 }
 
 #else

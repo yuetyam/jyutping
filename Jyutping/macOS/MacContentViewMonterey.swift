@@ -6,6 +6,7 @@ import SwiftUI
 struct MacContentViewMonterey: View {
 
         @State private var isMacSearchViewActive: Bool = true
+        @State private var isMacAboutViewActive: Bool = false
 
         var body: some View {
                 NavigationView {
@@ -134,9 +135,7 @@ struct MacContentViewMonterey: View {
                                         } label: {
                                                 Label("MacSidebar.NavigationTitle.Resources", systemImage: "globe.asia.australia")
                                         }
-                                        NavigationLink {
-                                                MacAboutView().applyVisualEffect()
-                                        } label: {
+                                        NavigationLink(destination: MacAboutView().applyVisualEffect(), isActive: $isMacAboutViewActive) {
                                                 Label("MacSidebar.NavigationTitle.About", systemImage: "info.circle")
                                         }
                                 } header: {
@@ -157,6 +156,11 @@ struct MacContentViewMonterey: View {
                         .navigationTitle("MacContentView.NavigationTitle.Jyutping")
                         .onReceive(NotificationCenter.default.publisher(for: .focusSearch)) { _ in
                                 isMacSearchViewActive = true
+                                isMacAboutViewActive = false
+                        }
+                        .onReceive(NotificationCenter.default.publisher(for: .openAbout)) { _ in
+                                isMacSearchViewActive = false
+                                isMacAboutViewActive = true
                         }
                 }
         }

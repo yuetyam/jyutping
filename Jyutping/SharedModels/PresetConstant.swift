@@ -1,8 +1,5 @@
 struct PresetConstant {
-
-        static let AppIdentifier: String = "im.cantonese.CantoneseIM"
         static let KeyboardIdentifier: String = "im.cantonese.CantoneseIM.Keyboard"
-
         static let SFPro: String = "SF Pro"
         static let Arial: String = "Arial"
         static let Inter: String = "Inter"
