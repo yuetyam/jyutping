@@ -14,6 +14,11 @@ struct CandidateBoardScrollView: View {
         var body: some View {
                 let characterStandard: CharacterStandard = Options.characterStandard
                 let commentStyle: CommentStyle = Options.commentStyle
+                let rowAlignment: VerticalAlignment = switch commentStyle {
+                case .aboveCandidates: .lastTextBaseline
+                case .belowCandidates: .firstTextBaseline
+                case .noComments: .center
+                }
                 let toneStyle: CommentToneStyle = Options.commentToneStyle
                 let isCompatibleModeOn: Bool = Options.isCompatibleModeOn
                 let isCompactKeyboard: Bool = context.keyboardInterface.isCompact
@@ -23,7 +28,7 @@ struct CandidateBoardScrollView: View {
                                 LazyVStack(spacing: 0) {
                                         EmptyView().id(topID)
                                         ForEach(rows) { row in
-                                                HStack(spacing: 0) {
+                                                HStack(alignment: rowAlignment, spacing: 0) {
                                                         ForEach(row.elements) { element in
                                                                 let candidate = element.candidate
                                                                 let text: AttributedString = candidate.text.attributed(for: characterStandard)
@@ -62,7 +67,7 @@ struct CandidateBoardScrollView: View {
                                                                                                         .minimumScaleFactor(0.4)
                                                                                                         .lineLimit(1)
                                                                                         }
-                                                                                        .padding(2)
+                                                                                        .padding(.bottom, 1)
                                                                                 case .belowCandidates:
                                                                                         VStack(spacing: -2) {
                                                                                                 Text(text)
@@ -71,22 +76,18 @@ struct CandidateBoardScrollView: View {
                                                                                                         .lineLimit(1)
                                                                                                 RomanizationLabel(candidate: candidate, toneStyle: toneStyle, compatibleMode: isCompatibleModeOn)
                                                                                         }
-                                                                                        .padding(2)
                                                                                 case .noComments:
                                                                                         Text(text)
                                                                                                 .font(isCompactKeyboard ? .candidate : .iPadCandidate)
                                                                                                 .minimumScaleFactor(0.4)
                                                                                                 .lineLimit(1)
-                                                                                                .padding(4)
                                                                                 }
                                                                         }
                                                                         .frame(minWidth: candidate.width, maxWidth: .infinity, minHeight: PresetConstant.collapseHeight)
                                                                 }
                                                         }
-                                                        if row.identifier == CandidateBoardRow.minIdentifier {
-                                                                Color.clear.frame(width: PresetConstant.collapseWidth)
-                                                        }
                                                 }
+                                                .padding(.trailing, row.identifier == CandidateBoardRow.minIdentifier ? PresetConstant.collapseWidth : 0)
                                                 Divider()
                                         }
                                 }

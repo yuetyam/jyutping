@@ -78,15 +78,15 @@ struct CandidateBoard: View {
                         } label: {
                                 ZStack {
                                         Color.interactiveClear
+                                        RoundedRectangle(cornerRadius: 4, style: .continuous).fill(Material.ultraThin)
                                         Image.chevronUp
                                                 .resizable()
                                                 .scaledToFit()
                                                 .padding(12)
                                 }
+                                .frame(width: PresetConstant.collapseWidth, height: PresetConstant.collapseHeight)
                         }
                         .buttonStyle(.plain)
-                        .background(Material.ultraThin, in: RoundedRectangle(cornerRadius: 4, style: .continuous))
-                        .frame(width: PresetConstant.collapseWidth, height: PresetConstant.collapseHeight)
                 }
         }
 }
