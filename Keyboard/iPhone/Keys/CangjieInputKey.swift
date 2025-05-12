@@ -4,12 +4,14 @@ import CommonExtensions
 
 struct CangjieInputKey: View {
 
-        init(_ letter: Character) {
-                let radical: Character = CharacterStandard.cangjie(of: letter) ?? "?"
-                self.letter = String(letter)
+        init(_ event: InputEvent) {
+                self.event = event
+                self.letter = event.text
+                let radical: Character = event.text.first.flatMap(CharacterStandard.cangjie(of:)) ?? "?"
                 self.radical = String(radical)
         }
 
+        private let event: InputEvent
         private let letter: String
         private let radical: String
 
@@ -106,8 +108,7 @@ struct CangjieInputKey: View {
                                 }
                         }
                         .onEnded { _ in
-                                let text: String = context.keyboardCase.isLowercased ? letter : letter.uppercased()
-                                context.operate(.process(text))
+                                context.process(event, isCapitalized: context.keyboardCase.isLowercased.negative)
                          }
                 )
         }

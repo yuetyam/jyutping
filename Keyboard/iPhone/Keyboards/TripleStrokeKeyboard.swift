@@ -1,4 +1,5 @@
 import SwiftUI
+import CoreIME
 
 /// Cantonese Triple-Stroke Layout. 粵拼三拼鍵盤佈局
 struct TripleStrokeKeyboard: View {
@@ -14,28 +15,28 @@ struct TripleStrokeKeyboard: View {
                         }
                         HStack(spacing: 0 ) {
                                 ExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("aa"), members: [KeyElement("aa"), KeyElement("q")]))
-                                LetterInputKey("w")
-                                LetterInputKey("e")
+                                LetterInputKey(.letterW)
+                                LetterInputKey(.letterE)
                                 ExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("oe", header: "eo"), members: [KeyElement("oe"), KeyElement("r"), KeyElement("eo")]))
-                                LetterInputKey("t")
+                                LetterInputKey(.letterT)
                                 ExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("yu"), members: [KeyElement("yu"), KeyElement("y")]))
-                                LetterInputKey("u")
-                                LetterInputKey("i")
-                                LetterInputKey("o")
-                                LetterInputKey("p")
+                                LetterInputKey(.letterU)
+                                LetterInputKey(.letterI)
+                                LetterInputKey(.letterO)
+                                LetterInputKey(.letterP)
                         }
                         HStack(spacing: 0) {
                                 HiddenKey(key: .letterA)
                                 Group {
-                                        LetterInputKey("a")
-                                        LetterInputKey("s")
-                                        LetterInputKey("d")
-                                        LetterInputKey("f")
+                                        LetterInputKey(.letterA)
+                                        LetterInputKey(.letterS)
+                                        LetterInputKey(.letterD)
+                                        LetterInputKey(.letterF)
                                         ExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("g"), members: [KeyElement("g"), KeyElement("gw")]))
-                                        LetterInputKey("h")
-                                        LetterInputKey("j")
+                                        LetterInputKey(.letterH)
+                                        LetterInputKey(.letterJ)
                                         ExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("k"), members: [KeyElement("k"), KeyElement("kw")]))
-                                        LetterInputKey("l")
+                                        LetterInputKey(.letterL)
                                 }
                                 HiddenKey(key: .letterL)
                         }

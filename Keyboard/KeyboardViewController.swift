@@ -151,11 +151,13 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let currentLength: Int = currentContext.count
                 guard currentLength == previousLength else { return }
                 guard currentContext == previousContext else { return }
+                textDocumentProxy.setMarkedText(String.empty, selectedRange: NSRange(location: 0, length: 0))
+                textDocumentProxy.unmarkText()
                 textDocumentProxy.insertText(text)
         }
         private func inputBufferText(followedBy text2insert: String? = nil) {
                 bufferCombos = []
-                guard bufferText.isNotEmpty else {
+                guard bufferEvents.isNotEmpty else {
                         guard let text2insert, text2insert.isNotEmpty else { return }
                         textDocumentProxy.insertText(text2insert)
                         clearBuffer()
@@ -163,8 +165,8 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 }
                 canMarkText = false
                 let text: String = {
-                        guard let text2insert, text2insert.isNotEmpty else { return bufferText }
-                        return bufferText + text2insert
+                        guard let text2insert, text2insert.isNotEmpty else { return joinedBufferTexts() }
+                        return joinedBufferTexts() + text2insert
                 }()
                 clearBuffer()
                 let previousContext: String = textDocumentProxy.documentContextBeforeInput ?? String.empty
@@ -191,6 +193,8 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let currentLength: Int = currentContext.count
                 guard currentLength == previousLength else { return }
                 guard currentContext == previousContext else { return }
+                textDocumentProxy.setMarkedText(String.empty, selectedRange: NSRange(location: 0, length: 0))
+                textDocumentProxy.unmarkText()
                 textDocumentProxy.insertText(text)
         }
 
@@ -199,20 +203,9 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
 
         @Published private(set) var inputStage: InputStage = .standby
 
-        func clearBuffer() {
-                bufferCombos = []
-                tripleStrokeBuffer = []
-                bufferText = String.empty
-        }
-        private func appendBufferText(_ text: String) {
-                tripleStrokeBuffer.append(text)
-                bufferText += text
-        }
-
-        /// Cantonese Qwerty and TripleStroke layouts
-        private lazy var bufferText: String = String.empty {
+        private lazy var bufferEvents: [InputEvent] = [] {
                 didSet {
-                        switch (oldValue.isEmpty, bufferText.isEmpty) {
+                        switch (oldValue.isEmpty, bufferEvents.isEmpty) {
                         case (true, true):
                                 inputStage = .standby
                         case (true, false):
@@ -229,7 +222,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 selectedCandidates = []
                                 updateReturnKey()
                         }
-                        switch bufferText.first {
+                        switch bufferEvents.first {
                         case .none:
                                 suggestionTask?.cancel()
                                 ensureQwertyForm(to: .jyutping)
@@ -238,29 +231,87 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 }
                                 candidates = []
                                 text2mark = String.empty
-                        case .some("r"):
+                        case InputEvent.letterR:
                                 ensureQwertyForm(to: .pinyin)
                                 pinyinReverseLookup()
-                        case .some("v"):
+                        case InputEvent.letterV:
                                 ensureQwertyForm(to: .cangjie)
                                 cangjieReverseLookup()
-                        case .some("x"):
+                        case InputEvent.letterX:
                                 if strokeLayout.isTenKey && keyboardForm != .tenKeyStroke {
                                         updateKeyboardForm(to: .tenKeyStroke)
                                 } else {
                                         ensureQwertyForm(to: .stroke)
                                 }
                                 strokeReverseLookup()
-                        case .some("q"):
+                        case InputEvent.letterQ:
                                 structureReverseLookup()
                         default:
                                 suggest()
                         }
                 }
         }
+        private lazy var capitals: [Bool] = []
+        private lazy var inputLengthSequence: [Int] = []
 
-        /// Cantonese TripleStroke layout
-        private lazy var tripleStrokeBuffer: [String] = []
+        private func joinedBufferTexts() -> String {
+                guard capitals.contains(where: { $0 }) else { return bufferEvents.map(\.text).joined() }
+                guard bufferEvents.count == capitals.count else { return bufferEvents.map(\.text).joined() }
+                return zip(capitals, bufferEvents).map({ $0 ? $1.text.uppercased() : $1.text }).joined()
+        }
+
+        func process(_ event: InputEvent, isCapitalized: Bool) {
+                let isCantoneseComposeMode: Bool = inputMethodMode.isCantonese && keyboardForm.isBufferrable
+                if isCantoneseComposeMode {
+                        bufferEvents.append(event)
+                        capitals.append(isCapitalized)
+                        inputLengthSequence.append(1)
+                        adjustKeyboard()
+                } else {
+                        let text: String = isCapitalized ? event.text.uppercased() : event.text
+                        textDocumentProxy.insertText(text)
+                        adjustKeyboard()
+                }
+        }
+        func process(events: [InputEvent], isCapitalized: Bool) {
+                defer {
+                        adjustKeyboard()
+                }
+                let isCantoneseComposeMode: Bool = inputMethodMode.isCantonese && keyboardForm.isBufferrable
+                guard isCantoneseComposeMode else {
+                        let text: String = isCapitalized ? events.map(\.text).joined().uppercased() : events.map(\.text).joined()
+                        textDocumentProxy.insertText(text)
+                        return
+                }
+                let shouldConvertEvents: Bool = keyboardLayout.isTripleStroke && (events == InputEvent.GWEvents) && (inputLengthSequence.last == 2) && (bufferEvents.last == .letterW)
+                if shouldConvertEvents {
+                        bufferEvents = bufferEvents.dropLast(2)
+                        bufferEvents += events
+                } else {
+                        bufferEvents += events
+                        capitals.append(isCapitalized)
+                        inputLengthSequence.append(events.count)
+                }
+        }
+        private func appendBufferText(_ text: String) {
+                switch text.count {
+                case 0: return
+                case 1:
+                        guard let event = InputEvent.matchLetterEvent(for: text.lowercased().first!) else { return }
+                        process(event, isCapitalized: text.first!.isUppercase)
+                default:
+                        let events = text.lowercased().compactMap(InputEvent.matchLetterEvent(for:))
+                        guard events.isNotEmpty else { return }
+                        process(events: events, isCapitalized: text.first!.isUppercase)
+                }
+        }
+
+        private func clearBuffer() {
+                bufferCombos = []
+                capitals = []
+                bufferEvents = []
+                inputLengthSequence = []
+        }
 
         /// Cantonese TenKey layout
         private lazy var bufferCombos: [Combo] = [] {
@@ -306,7 +357,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         textDocumentProxy.insertText(text)
                         adjustKeyboard()
                 case .separate:
-                        appendBufferText(String.separator)
+                        process(.quote, isCapitalized: false)
                         adjustKeyboard()
                 case .process(let text):
                         defer {
@@ -319,14 +370,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         }
                         switch text {
                         case PresetConstant.kGW where keyboardLayout.isTripleStroke:
-                                if tripleStrokeBuffer.last == PresetConstant.kGW {
-                                        tripleStrokeBuffer = tripleStrokeBuffer.dropLast()
-                                        tripleStrokeBuffer.append(PresetConstant.kKW)
-                                } else {
-                                        tripleStrokeBuffer.append(text)
-                                }
-                                let fullText: String = bufferText + text
-                                bufferText = fullText.replacingOccurrences(of: PresetConstant.kDoubleGW, with: PresetConstant.kKW, options: [.anchored, .backwards])
+                                appendBufferText(text)
                         case _ where text.isLetters:
                                 appendBufferText(text)
                         case _ where keyboardLayout.isTripleStroke && (text.first?.isCantoneseToneDigit ?? false):
@@ -387,11 +431,15 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         if inputStage.isBuffering {
                                 switch keyboardLayout {
                                 case .qwerty:
-                                        bufferText = String(bufferText.dropLast())
+                                        bufferEvents = bufferEvents.dropLast()
+                                        capitals = capitals.dropLast()
+                                        inputLengthSequence = inputLengthSequence.dropLast()
                                         adjustKeyboard()
                                 case .tripleStroke:
-                                        tripleStrokeBuffer = tripleStrokeBuffer.dropLast()
-                                        bufferText = tripleStrokeBuffer.joined()
+                                        guard let lastInputLength = inputLengthSequence.last else { return }
+                                        bufferEvents = bufferEvents.dropLast(lastInputLength)
+                                        capitals = capitals.dropLast(lastInputLength)
+                                        inputLengthSequence = inputLengthSequence.dropLast()
                                         adjustKeyboard()
                                 case .tenKey:
                                         bufferCombos = bufferCombos.dropLast()
@@ -485,16 +533,19 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 }
                 switch keyboardLayout {
                 case .qwerty:
-                        switch bufferText.first {
-                        case .none:
-                                return
-                        case .some(let character) where character.isReverseLookupTrigger:
+                        switch bufferEvents.first {
+                        case .none: return
+                        case .some(let event) where event.isReverseLookupTrigger:
                                 selectedCandidates = []
                                 let inputCount: Int = candidate.inputCount
                                 let leadingCount: Int = inputCount + 1
-                                if bufferText.count > leadingCount {
-                                        let tail = bufferText.dropFirst(leadingCount)
-                                        bufferText = String(character) + tail
+                                if bufferEvents.count > leadingCount {
+                                        let tail = bufferEvents.dropFirst(leadingCount)
+                                        bufferEvents = [event] + tail
+                                        let altTail = inputLengthSequence.dropFirst(leadingCount)
+                                        inputLengthSequence = [1] + altTail
+                                        guard let firstUppercased = capitals.first else { return }
+                                        capitals = [firstUppercased] + capitals.suffix(tail.count)
                                 } else {
                                         clearBuffer()
                                 }
@@ -506,25 +557,28 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 }
                                 selectedCandidates.append(candidate)
                                 let inputCount: Int = candidate.input.replacingOccurrences(of: "[456]", with: "RR", options: .regularExpression).count
-                                var tail = bufferText.dropFirst(inputCount)
-                                while tail.hasPrefix("'") {
+                                var tail = bufferEvents.dropFirst(inputCount)
+                                while (tail.first?.isQuote ?? false) {
                                         tail = tail.dropFirst()
                                 }
-                                bufferText = String(tail)
+                                bufferEvents = Array<InputEvent>(tail)
+                                capitals = capitals.suffix(tail.count)
+                                inputLengthSequence = inputLengthSequence.suffix(tail.count)
                         }
                 case .tripleStroke:
-                        switch bufferText.first {
-                        case .none:
-                                return
-                        case .some(let character) where character.isReverseLookupTrigger:
+                        switch bufferEvents.first {
+                        case .none: return
+                        case .some(let event) where event.isReverseLookupTrigger:
                                 selectedCandidates = []
                                 let inputCount: Int = candidate.inputCount
                                 let leadingCount: Int = inputCount + 1
-                                if bufferText.count > leadingCount {
-                                        let tripleStrokeTail = tripleStrokeBuffer.dropFirst(leadingCount)
-                                        let tail = bufferText.dropFirst(leadingCount)
-                                        tripleStrokeBuffer = [String(character)] + tripleStrokeTail
-                                        bufferText = String(character) + tail
+                                if bufferEvents.count > leadingCount {
+                                        let tail = bufferEvents.dropFirst(leadingCount)
+                                        bufferEvents = [event] + tail
+                                        let altTail = inputLengthSequence.dropFirst(leadingCount)
+                                        inputLengthSequence = [1] + altTail
+                                        guard let firstUppercased = capitals.first else { return }
+                                        capitals = [firstUppercased] + capitals.suffix(tail.count)
                                 } else {
                                         clearBuffer()
                                 }
@@ -536,12 +590,13 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 }
                                 selectedCandidates.append(candidate)
                                 let inputCount: Int = candidate.inputCount
-                                var tail = bufferText.dropFirst(inputCount)
-                                while tail.hasPrefix("'") {
+                                var tail = bufferEvents.dropFirst(inputCount)
+                                while (tail.first?.isQuote ?? false) {
                                         tail = tail.dropFirst()
                                 }
-                                tripleStrokeBuffer = tripleStrokeBuffer.suffix(tail.count)
-                                bufferText = String(tail)
+                                bufferEvents = Array<InputEvent>(tail)
+                                capitals = capitals.suffix(tail.count)
+                                inputLengthSequence = inputLengthSequence.suffix(tail.count)
                         }
                 case .tenKey:
                         selectedCandidates.append(candidate)
@@ -600,12 +655,13 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         }
         private func suggest() {
                 suggestionTask?.cancel()
-                let originalText = bufferText
-                let processingText: String = keyboardLayout.isTripleStroke ? bufferText : bufferText.toneConverted()
+                let events = bufferEvents
+                let originalText = joinedBufferTexts()
+                let processingText: String = keyboardLayout.isTripleStroke ? originalText : originalText.toneConverted()
                 let needsSymbols: Bool = Options.isEmojiSuggestionsOn && selectedCandidates.isEmpty
                 let isInputMemoryOn: Bool = Options.isInputMemoryOn
                 suggestionTask = Task.detached(priority: .high) {
-                        let segmentation = Segmentor.segment(text: processingText)
+                        let segmentation = Segmentor.segment(events: events)
                         let bestScheme = segmentation.first
                         async let userLexiconCandidates: [Candidate] = isInputMemoryOn ? UserLexicon.suggest(text: processingText, segmentation: segmentation) : []
                         async let engineCandidates: [Candidate] = Engine.suggest(origin: originalText, text: processingText, segmentation: segmentation, needsSymbols: needsSymbols)
@@ -630,6 +686,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 }
         }
         private func pinyinReverseLookup() {
+                let bufferText = joinedBufferTexts()
                 let text: String = String(bufferText.dropFirst())
                 guard text.isNotEmpty else {
                         text2mark = bufferText
@@ -651,6 +708,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 candidates = suggestions.transformed(to: Options.characterStandard).uniqued()
         }
         private func cangjieReverseLookup() {
+                let bufferText = joinedBufferTexts()
                 let text: String = String(bufferText.dropFirst())
                 let converted = text.compactMap({ CharacterStandard.cangjie(of: $0) })
                 let isValidSequence: Bool = converted.isNotEmpty && (converted.count == text.count)
@@ -664,6 +722,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 }
         }
         private func strokeReverseLookup() {
+                let bufferText = joinedBufferTexts()
                 let text: String = String(bufferText.dropFirst())
                 let transformed: String = CharacterStandard.strokeTransform(text)
                 let converted = transformed.compactMap({ CharacterStandard.stroke(of: $0) })
@@ -680,6 +739,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
 
         /// 拆字、兩分反查. 例如 木 + 木 = 林: mukmuk
         private func structureReverseLookup() {
+                let bufferText = joinedBufferTexts()
                 guard bufferText.count > 2 else {
                         text2mark = bufferText
                         candidates = []

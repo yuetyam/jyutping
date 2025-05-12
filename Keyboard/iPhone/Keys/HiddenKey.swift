@@ -1,4 +1,6 @@
 import SwiftUI
+import CoreIME
+import CommonExtensions
 
 struct HiddenKey: View {
 
@@ -15,11 +17,10 @@ struct HiddenKey: View {
                                         AudioFeedback.deleted()
                                         context.triggerHapticFeedback()
                                         context.operate(.backspace)
-                                } else if let letter = key.letter {
+                                } else if let inputEvent = key.inputEvent {
                                         AudioFeedback.inputed()
                                         context.triggerHapticFeedback()
-                                        let text: String = context.keyboardCase.isLowercased ? letter : letter.uppercased()
-                                        context.operate(.process(text))
+                                        context.process(inputEvent, isCapitalized: context.keyboardCase.isLowercased.negative)
                                 }
                         }
         }
@@ -32,16 +33,12 @@ enum HiddenEvent: Int {
         case letterZ
         case backspace
 
-        var letter: String? {
+        var inputEvent: InputEvent? {
                 switch self {
-                case .letterA:
-                        return "a"
-                case .letterL:
-                        return "l"
-                case .letterZ:
-                        return "z"
-                case .backspace:
-                        return nil
+                case .letterA: .letterA
+                case .letterL: .letterL
+                case .letterZ: .letterZ
+                case .backspace: nil
                 }
         }
 }

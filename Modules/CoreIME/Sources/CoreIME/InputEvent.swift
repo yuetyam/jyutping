@@ -142,23 +142,13 @@ extension InputEvent {
                         return nil
                 }
         }
-        public static func matchInputEvent(for code: Int) -> InputEvent? {
-                switch code {
-                case InputEvent.quote.code:
-                        return .quote
-                case InputEvent.grave.code:
-                        return .grave
-                case _ where digitSet.contains(where: { $0.code == code }):
-                        return digitSet.first(where: { $0.code == code })
-                case _ where alphabetSet.contains(where: { $0.code == code }):
-                        return alphabetSet.first(where: { $0.code == code })
-                default:
-                        return nil
-                }
-        }
-        public static func matchLetter(for code: Int) -> InputEvent? {
+        public static func matchLetterEvent(for character: Character) -> InputEvent? {
+                guard let code = character.intercode else { return nil }
                 return alphabetSet.first(where: { $0.code == code })
         }
+
+        public static let GWEvents: [InputEvent] = [letterG, letterW]
+        public static let KWEvents: [InputEvent] = [letterK, letterW]
 }
 
 extension InputEvent {

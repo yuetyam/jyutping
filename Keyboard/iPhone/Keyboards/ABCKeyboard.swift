@@ -1,4 +1,5 @@
 import SwiftUI
+import CoreIME
 
 struct ABCKeyboard: View {
 
@@ -8,8 +9,8 @@ struct ABCKeyboard: View {
                 VStack(spacing: 0) {
                         ToolBar()
                         HStack(spacing: 0 ) {
-                                LetterInputKey("q")
-                                LetterInputKey("w")
+                                LetterInputKey(.letterQ)
+                                LetterInputKey(.letterW)
                                 ExpansibleInputKey(
                                         keyLocale: .leading,
                                         keyModel:
@@ -25,9 +26,9 @@ struct ABCKeyboard: View {
                                                         ]
                                                 )
                                 )
-                                LetterInputKey("r")
-                                LetterInputKey("t")
-                                LetterInputKey("y")
+                                LetterInputKey(.letterR)
+                                LetterInputKey(.letterT)
+                                LetterInputKey(.letterY)
                                 ExpansibleInputKey(
                                         keyLocale: .trailing,
                                         keyModel:
@@ -73,7 +74,7 @@ struct ABCKeyboard: View {
                                                         ]
                                                 )
                                 )
-                                LetterInputKey("p")
+                                LetterInputKey(.letterP)
                         }
                         HStack(spacing: 0) {
                                 HiddenKey(key: .letterA)
@@ -93,14 +94,14 @@ struct ABCKeyboard: View {
                                                                 ]
                                                         )
                                         )
-                                        LetterInputKey("s")
-                                        LetterInputKey("d")
-                                        LetterInputKey("f")
-                                        LetterInputKey("g")
-                                        LetterInputKey("h")
-                                        LetterInputKey("j")
-                                        LetterInputKey("k")
-                                        LetterInputKey("l")
+                                        LetterInputKey(.letterS)
+                                        LetterInputKey(.letterD)
+                                        LetterInputKey(.letterF)
+                                        LetterInputKey(.letterG)
+                                        LetterInputKey(.letterH)
+                                        LetterInputKey(.letterJ)
+                                        LetterInputKey(.letterK)
+                                        LetterInputKey(.letterL)
                                 }
                                 HiddenKey(key: .letterL)
                         }
@@ -108,9 +109,9 @@ struct ABCKeyboard: View {
                                 ShiftKey()
                                 HiddenKey(key: .letterZ)
                                 Group {
-                                        LetterInputKey("z")
-                                        LetterInputKey("x")
-                                        LetterInputKey("c")
+                                        LetterInputKey(.letterZ)
+                                        LetterInputKey(.letterX)
+                                        LetterInputKey(.letterC)
                                         ExpansibleInputKey(
                                                 keyLocale: .leading,
                                                 keyModel:
@@ -126,9 +127,9 @@ struct ABCKeyboard: View {
                                                                 ]
                                                         )
                                         )
-                                        LetterInputKey("b")
-                                        LetterInputKey("n")
-                                        LetterInputKey("m")
+                                        LetterInputKey(.letterB)
+                                        LetterInputKey(.letterN)
+                                        LetterInputKey(.letterM)
                                 }
                                 HiddenKey(key: .backspace)
                                 BackspaceKey()

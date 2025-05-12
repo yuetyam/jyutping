@@ -1,4 +1,5 @@
 import SwiftUI
+import CoreIME
 
 struct StrokeKeyboard: View {
 
@@ -12,29 +13,29 @@ struct StrokeKeyboard: View {
                                 ToolBar()
                         }
                         HStack(spacing: 0 ) {
-                                StrokeInputKey("q")
-                                StrokeInputKey("w")
-                                StrokeInputKey("e")
-                                StrokeInputKey("r")
-                                StrokeInputKey("t")
-                                StrokeInputKey("y")
-                                StrokeInputKey("u")
-                                StrokeInputKey("i")
-                                StrokeInputKey("o")
-                                StrokeInputKey("p")
+                                StrokeInputKey(.letterQ)
+                                StrokeInputKey(.letterW)
+                                StrokeInputKey(.letterE)
+                                StrokeInputKey(.letterR)
+                                StrokeInputKey(.letterT)
+                                StrokeInputKey(.letterY)
+                                StrokeInputKey(.letterU)
+                                StrokeInputKey(.letterI)
+                                StrokeInputKey(.letterO)
+                                StrokeInputKey(.letterP)
                         }
                         HStack(spacing: 0) {
                                 HiddenKey(key: .letterA)
                                 Group {
-                                        StrokeInputKey("a")
-                                        StrokeInputKey("s")
-                                        StrokeInputKey("d")
-                                        StrokeInputKey("f")
-                                        StrokeInputKey("g")
-                                        StrokeInputKey("h")
-                                        StrokeInputKey("j")
-                                        StrokeInputKey("k")
-                                        StrokeInputKey("l")
+                                        StrokeInputKey(.letterA)
+                                        StrokeInputKey(.letterS)
+                                        StrokeInputKey(.letterD)
+                                        StrokeInputKey(.letterF)
+                                        StrokeInputKey(.letterG)
+                                        StrokeInputKey(.letterH)
+                                        StrokeInputKey(.letterJ)
+                                        StrokeInputKey(.letterK)
+                                        StrokeInputKey(.letterL)
                                 }
                                 HiddenKey(key: .letterL)
                         }
@@ -42,13 +43,13 @@ struct StrokeKeyboard: View {
                                 ShiftKey()
                                 HiddenKey(key: .letterZ)
                                 Group {
-                                        StrokeInputKey("z")
-                                        StrokeInputKey("x")
-                                        StrokeInputKey("c")
-                                        StrokeInputKey("v")
-                                        StrokeInputKey("b")
-                                        StrokeInputKey("n")
-                                        StrokeInputKey("m")
+                                        StrokeInputKey(.letterZ)
+                                        StrokeInputKey(.letterX)
+                                        StrokeInputKey(.letterC)
+                                        StrokeInputKey(.letterV)
+                                        StrokeInputKey(.letterB)
+                                        StrokeInputKey(.letterN)
+                                        StrokeInputKey(.letterM)
                                 }
                                 HiddenKey(key: .backspace)
                                 BackspaceKey()

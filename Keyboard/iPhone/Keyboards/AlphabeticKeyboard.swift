@@ -1,5 +1,7 @@
 import SwiftUI
+import CoreIME
 
+// TODO: Rename to CantoneseKeyboard
 struct AlphabeticKeyboard: View {
 
         @EnvironmentObject private var context: KeyboardViewController
@@ -12,29 +14,29 @@ struct AlphabeticKeyboard: View {
                                 ToolBar()
                         }
                         HStack(spacing: 0 ) {
-                                LetterInputKey("q")
-                                LetterInputKey("w")
-                                LetterInputKey("e")
-                                LetterInputKey("r")
-                                LetterInputKey("t")
-                                LetterInputKey("y")
-                                LetterInputKey("u")
-                                LetterInputKey("i")
-                                LetterInputKey("o")
-                                LetterInputKey("p")
+                                LetterInputKey(.letterQ)
+                                LetterInputKey(.letterW)
+                                LetterInputKey(.letterE)
+                                LetterInputKey(.letterR)
+                                LetterInputKey(.letterT)
+                                LetterInputKey(.letterY)
+                                LetterInputKey(.letterU)
+                                LetterInputKey(.letterI)
+                                LetterInputKey(.letterO)
+                                LetterInputKey(.letterP)
                         }
                         HStack(spacing: 0) {
                                 HiddenKey(key: .letterA)
                                 Group {
-                                        LetterInputKey("a")
-                                        LetterInputKey("s")
-                                        LetterInputKey("d")
-                                        LetterInputKey("f")
-                                        LetterInputKey("g")
-                                        LetterInputKey("h")
-                                        LetterInputKey("j")
-                                        LetterInputKey("k")
-                                        LetterInputKey("l")
+                                        LetterInputKey(.letterA)
+                                        LetterInputKey(.letterS)
+                                        LetterInputKey(.letterD)
+                                        LetterInputKey(.letterF)
+                                        LetterInputKey(.letterG)
+                                        LetterInputKey(.letterH)
+                                        LetterInputKey(.letterJ)
+                                        LetterInputKey(.letterK)
+                                        LetterInputKey(.letterL)
                                 }
                                 HiddenKey(key: .letterL)
                         }
@@ -42,13 +44,13 @@ struct AlphabeticKeyboard: View {
                                 ShiftKey()
                                 HiddenKey(key: .letterZ)
                                 Group {
-                                        LetterInputKey("z")
-                                        LetterInputKey("x")
-                                        LetterInputKey("c")
-                                        LetterInputKey("v")
-                                        LetterInputKey("b")
-                                        LetterInputKey("n")
-                                        LetterInputKey("m")
+                                        LetterInputKey(.letterZ)
+                                        LetterInputKey(.letterX)
+                                        LetterInputKey(.letterC)
+                                        LetterInputKey(.letterV)
+                                        LetterInputKey(.letterB)
+                                        LetterInputKey(.letterN)
+                                        LetterInputKey(.letterM)
                                 }
                                 HiddenKey(key: .backspace)
                                 BackspaceKey()

@@ -1,4 +1,5 @@
 import SwiftUI
+import CoreIME
 
 struct CangjieKeyboard: View {
 
@@ -12,29 +13,29 @@ struct CangjieKeyboard: View {
                                 ToolBar()
                         }
                         HStack(spacing: 0 ) {
-                                CangjieInputKey("q")
-                                CangjieInputKey("w")
-                                CangjieInputKey("e")
-                                CangjieInputKey("r")
-                                CangjieInputKey("t")
-                                CangjieInputKey("y")
-                                CangjieInputKey("u")
-                                CangjieInputKey("i")
-                                CangjieInputKey("o")
-                                CangjieInputKey("p")
+                                CangjieInputKey(.letterQ)
+                                CangjieInputKey(.letterW)
+                                CangjieInputKey(.letterE)
+                                CangjieInputKey(.letterR)
+                                CangjieInputKey(.letterT)
+                                CangjieInputKey(.letterY)
+                                CangjieInputKey(.letterU)
+                                CangjieInputKey(.letterI)
+                                CangjieInputKey(.letterO)
+                                CangjieInputKey(.letterP)
                         }
                         HStack(spacing: 0) {
                                 HiddenKey(key: .letterA)
                                 Group {
-                                        CangjieInputKey("a")
-                                        CangjieInputKey("s")
-                                        CangjieInputKey("d")
-                                        CangjieInputKey("f")
-                                        CangjieInputKey("g")
-                                        CangjieInputKey("h")
-                                        CangjieInputKey("j")
-                                        CangjieInputKey("k")
-                                        CangjieInputKey("l")
+                                        CangjieInputKey(.letterA)
+                                        CangjieInputKey(.letterS)
+                                        CangjieInputKey(.letterD)
+                                        CangjieInputKey(.letterF)
+                                        CangjieInputKey(.letterG)
+                                        CangjieInputKey(.letterH)
+                                        CangjieInputKey(.letterJ)
+                                        CangjieInputKey(.letterK)
+                                        CangjieInputKey(.letterL)
                                 }
                                 HiddenKey(key: .letterL)
                         }
@@ -42,13 +43,13 @@ struct CangjieKeyboard: View {
                                 ShiftKey()
                                 HiddenKey(key: .letterZ)
                                 Group {
-                                        CangjieInputKey("z")
-                                        CangjieInputKey("x")
-                                        CangjieInputKey("c")
-                                        CangjieInputKey("v")
-                                        CangjieInputKey("b")
-                                        CangjieInputKey("n")
-                                        CangjieInputKey("m")
+                                        CangjieInputKey(.letterZ)
+                                        CangjieInputKey(.letterX)
+                                        CangjieInputKey(.letterC)
+                                        CangjieInputKey(.letterV)
+                                        CangjieInputKey(.letterB)
+                                        CangjieInputKey(.letterN)
+                                        CangjieInputKey(.letterM)
                                 }
                                 HiddenKey(key: .backspace)
                                 BackspaceKey()

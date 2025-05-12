@@ -1,12 +1,16 @@
 import SwiftUI
+import CoreIME
 import CommonExtensions
 
 struct LetterInputKey: View {
 
-        private let keyText: String
-        init(_ keyText: String) {
-                self.keyText = keyText
+        init(_ event: InputEvent) {
+                self.event = event
+                self.keyText = event.text
         }
+
+        private let event: InputEvent
+        private let keyText: String
 
         @EnvironmentObject private var context: KeyboardViewController
 
@@ -98,8 +102,7 @@ struct LetterInputKey: View {
                                 }
                         }
                         .onEnded { _ in
-                                let text: String = context.keyboardCase.isLowercased ? keyText : keyText.uppercased()
-                                context.operate(.process(text))
+                                context.process(event, isCapitalized: context.keyboardCase.isLowercased.negative)
                          }
                 )
         }

@@ -264,8 +264,8 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 placeholderText = nil
         }
         private lazy var bufferEvents: [InputEvent] = [] {
-                willSet{
-                        switch (bufferEvents.isEmpty, newValue.isEmpty) {
+                didSet {
+                        switch (oldValue.isEmpty, bufferEvents.isEmpty) {
                         case (true, true):
                                 inputStage = .standby
                         case (true, false):
@@ -277,8 +277,6 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         case (false, true):
                                 inputStage = .ending
                         }
-                }
-                didSet {
                         switch bufferEvents.first {
                         case .none:
                                 suggestionTask?.cancel()
