@@ -134,17 +134,13 @@ extension InputEvent {
                         return .quote
                 case InputEvent.grave.keyCode:
                         return .grave
-                case _ where digitSet.contains(where: { $0.keyCode == keyCode }):
-                        return digitSet.first(where: { $0.keyCode == keyCode })
-                case _ where alphabetSet.contains(where: { $0.keyCode == keyCode }):
-                        return alphabetSet.first(where: { $0.keyCode == keyCode })
                 default:
-                        return nil
+                        return alphabetSet.first(where: { $0.keyCode == keyCode }) ?? digitSet.first(where: { $0.keyCode == keyCode })
                 }
         }
-        public static func matchLetterEvent(for character: Character) -> InputEvent? {
-                guard let code = character.intercode else { return nil }
-                return alphabetSet.first(where: { $0.code == code })
+        public static func matchInputEvent(for character: Character) -> InputEvent? {
+                guard let code = character.inputEventCode else { return nil }
+                return alphabetSet.first(where: { $0.code == code }) ?? digitSet.first(where: { $0.code == code })
         }
 
         public static let GWEvents: [InputEvent] = [letterG, letterW]

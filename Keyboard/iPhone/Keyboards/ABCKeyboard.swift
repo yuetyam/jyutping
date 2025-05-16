@@ -13,6 +13,7 @@ struct ABCKeyboard: View {
                                 LetterInputKey(.letterW)
                                 ExpansibleInputKey(
                                         keyLocale: .leading,
+                                        event: .letterE,
                                         keyModel:
                                                 KeyModel(
                                                         primary: KeyElement("e"),
@@ -31,6 +32,7 @@ struct ABCKeyboard: View {
                                 LetterInputKey(.letterY)
                                 ExpansibleInputKey(
                                         keyLocale: .trailing,
+                                        event: .letterU,
                                         keyModel:
                                                 KeyModel(
                                                         primary: KeyElement("u"),
@@ -46,6 +48,7 @@ struct ABCKeyboard: View {
                                 )
                                 ExpansibleInputKey(
                                         keyLocale: .trailing,
+                                        event: .letterI,
                                         keyModel:
                                                 KeyModel(
                                                         primary: KeyElement("i"),
@@ -61,6 +64,7 @@ struct ABCKeyboard: View {
                                 )
                                 ExpansibleInputKey(
                                         keyLocale: .trailing,
+                                        event: .letterO,
                                         keyModel:
                                                 KeyModel(
                                                         primary: KeyElement("o"),
@@ -81,6 +85,7 @@ struct ABCKeyboard: View {
                                 Group {
                                         ExpansibleInputKey(
                                                 keyLocale: .leading,
+                                                event: .letterA,
                                                 keyModel:
                                                         KeyModel(
                                                                 primary: KeyElement("a"),
@@ -114,6 +119,7 @@ struct ABCKeyboard: View {
                                         LetterInputKey(.letterC)
                                         ExpansibleInputKey(
                                                 keyLocale: .leading,
+                                                event: .letterV,
                                                 keyModel:
                                                         KeyModel(
                                                                 primary: KeyElement("v"),

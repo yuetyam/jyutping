@@ -39,10 +39,14 @@ extension RandomAccessCollection where Element == Int {
 extension Character {
 
         var intercode: Int? {
-                return Self.codeMap[self]
+                return Self.letterCodeMap[self]
         }
 
-        private static let codeMap: [Character : Int] = [
+        var inputEventCode: Int? {
+                return Self.letterCodeMap[self] ?? Self.numberCodeMap[self]
+        }
+
+        private static let letterCodeMap: [Character : Int] = [
                 Self.letterA : 20,
                 Self.letterB : 21,
                 Self.letterC : 22,
@@ -69,6 +73,18 @@ extension Character {
                 Self.letterX : 43,
                 Self.letterY : 44,
                 Self.letterZ : 45,
+        ]
+        private static let numberCodeMap: [Character : Int] = [
+                Self.number0 : 10,
+                Self.number1 : 11,
+                Self.number2 : 12,
+                Self.number3 : 13,
+                Self.number4 : 14,
+                Self.number5 : 15,
+                Self.number6 : 16,
+                Self.number7 : 17,
+                Self.number8 : 18,
+                Self.number9 : 19,
         ]
 }
 
@@ -109,6 +125,16 @@ extension Character {
 }
 
 private extension Character {
+        static let number0: Character = "0"
+        static let number1: Character = "1"
+        static let number2: Character = "2"
+        static let number3: Character = "3"
+        static let number4: Character = "4"
+        static let number5: Character = "5"
+        static let number6: Character = "6"
+        static let number7: Character = "7"
+        static let number8: Character = "8"
+        static let number9: Character = "9"
         static let letterA: Character = "a"
         static let letterB: Character = "b"
         static let letterC: Character = "c"

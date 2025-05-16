@@ -286,7 +286,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let shouldConvertEvents: Bool = keyboardLayout.isTripleStroke && (events == InputEvent.GWEvents) && (inputLengthSequence.last == 2) && (bufferEvents.last == .letterW)
                 if shouldConvertEvents {
                         bufferEvents = bufferEvents.dropLast(2)
-                        bufferEvents += events
+                        bufferEvents += InputEvent.KWEvents
                 } else {
                         bufferEvents += events
                         capitals.append(isCapitalized)
@@ -297,10 +297,10 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 switch text.count {
                 case 0: return
                 case 1:
-                        guard let event = InputEvent.matchLetterEvent(for: text.lowercased().first!) else { return }
+                        guard let event = InputEvent.matchInputEvent(for: text.lowercased().first!) else { return }
                         process(event, isCapitalized: text.first!.isUppercase)
                 default:
-                        let events = text.lowercased().compactMap(InputEvent.matchLetterEvent(for:))
+                        let events = text.lowercased().compactMap(InputEvent.matchInputEvent(for:))
                         guard events.isNotEmpty else { return }
                         process(events: events, isCapitalized: text.first!.isUppercase)
                 }
@@ -368,16 +368,12 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 textDocumentProxy.insertText(text)
                                 return
                         }
-                        switch text {
-                        case PresetConstant.kGW where keyboardLayout.isTripleStroke:
+                        let shouldAppendText: Bool = text.isLetters || (inputStage.isBuffering && (text.first?.isCantoneseToneDigit ?? false))
+                        if shouldAppendText {
                                 appendBufferText(text)
-                        case _ where text.isLetters:
-                                appendBufferText(text)
-                        case _ where keyboardLayout.isTripleStroke && (text.first?.isCantoneseToneDigit ?? false):
-                                appendBufferText(text)
-                        case _ where inputStage.isBuffering.negative:
+                        } else if inputStage.isBuffering.negative {
                                 textDocumentProxy.insertText(text)
-                        default:
+                        } else {
                                 inputBufferText(followedBy: text)
                         }
                 case .combine(let combo):
@@ -656,8 +652,8 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         private func suggest() {
                 suggestionTask?.cancel()
                 let events = bufferEvents
-                let originalText = joinedBufferTexts()
-                let processingText: String = keyboardLayout.isTripleStroke ? originalText : originalText.toneConverted()
+                let originalText: String = joinedBufferTexts()
+                let processingText: String = originalText.toneConverted()
                 let needsSymbols: Bool = Options.isEmojiSuggestionsOn && selectedCandidates.isEmpty
                 let isInputMemoryOn: Bool = Options.isInputMemoryOn
                 suggestionTask = Task.detached(priority: .high) {

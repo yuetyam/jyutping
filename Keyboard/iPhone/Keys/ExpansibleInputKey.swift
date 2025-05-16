@@ -1,5 +1,6 @@
 import SwiftUI
 import CommonExtensions
+import CoreIME
 
 struct ExpansibleInputKey: View {
 
@@ -7,15 +8,18 @@ struct ExpansibleInputKey: View {
         /// - Parameters:
         ///   - keyLocale: Key location, left half (leading) or right half (trailing).
         ///   - widthUnitTimes: Times of widthUnit
-        ///   - keyModel: keyModel
-        init(keyLocale: HorizontalEdge, widthUnitTimes: CGFloat = 1, keyModel: KeyModel) {
+        ///   - event: InputEvent
+        ///   - keyModel: KeyModel
+        init(keyLocale: HorizontalEdge, widthUnitTimes: CGFloat = 1, event: InputEvent? = nil, keyModel: KeyModel) {
                 self.keyLocale = keyLocale
                 self.widthUnitTimes = widthUnitTimes
+                self.event = event
                 self.keyModel = keyModel
         }
 
         private let keyLocale: HorizontalEdge
         private let widthUnitTimes: CGFloat
+        private let event: InputEvent?
         private let keyModel: KeyModel
 
         @EnvironmentObject private var context: KeyboardViewController
@@ -205,6 +209,8 @@ struct ExpansibleInputKey: View {
                                         context.triggerSelectionHapticFeedback()
                                         let text: String = context.keyboardCase.isLowercased ? selectedElement.text : selectedElement.text.uppercased()
                                         context.operate(.process(text))
+                                } else if let event {
+                                        context.process(event, isCapitalized: context.keyboardCase.isLowercased.negative)
                                 } else {
                                         let text: String = context.keyboardCase.isLowercased ? keyModel.primary.text : keyModel.primary.text.uppercased()
                                         context.operate(.process(text))

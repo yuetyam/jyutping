@@ -34,7 +34,7 @@ extension String {
                 return self.filter({ !$0.isSpaceOrSeparatorOrTone })
         }
 
-        /// check if the first character is letter
+        /// Check if the first character is letter
         var isLetters: Bool {
                 return self.first?.isBasicLatinLetter ?? false
         }
