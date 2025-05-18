@@ -249,13 +249,73 @@ struct LargePadABCKeyboard: View {
                                 Group {
                                         LargePadLetterInputKey(.letterQ)
                                         LargePadLetterInputKey(.letterW)
-                                        LargePadLetterInputKey(.letterE)
+                                        LargePadExpansibleInputKey(
+                                                keyLocale: .leading,
+                                                event: .letterE,
+                                                keyModel:
+                                                        KeyModel(
+                                                                primary: KeyElement("e"),
+                                                                members: [
+                                                                        KeyElement("e"),
+                                                                        KeyElement("ē"),
+                                                                        KeyElement("é"),
+                                                                        KeyElement("ě"),
+                                                                        KeyElement("è"),
+                                                                        KeyElement("ë")
+                                                                ]
+                                                        )
+                                        )
                                         LargePadLetterInputKey(.letterR)
                                         LargePadLetterInputKey(.letterT)
                                         LargePadLetterInputKey(.letterY)
-                                        LargePadLetterInputKey(.letterU)
-                                        LargePadLetterInputKey(.letterI)
-                                        LargePadLetterInputKey(.letterO)
+                                        LargePadExpansibleInputKey(
+                                                keyLocale: .trailing,
+                                                event: .letterU,
+                                                keyModel:
+                                                        KeyModel(
+                                                                primary: KeyElement("u"),
+                                                                members: [
+                                                                        KeyElement("u"),
+                                                                        KeyElement("ū"),
+                                                                        KeyElement("ú"),
+                                                                        KeyElement("ǔ"),
+                                                                        KeyElement("ù"),
+                                                                        KeyElement("ü")
+                                                                ]
+                                                        )
+                                        )
+                                        LargePadExpansibleInputKey(
+                                                keyLocale: .trailing,
+                                                event: .letterI,
+                                                keyModel:
+                                                        KeyModel(
+                                                                primary: KeyElement("i"),
+                                                                members: [
+                                                                        KeyElement("i"),
+                                                                        KeyElement("ī"),
+                                                                        KeyElement("í"),
+                                                                        KeyElement("ǐ"),
+                                                                        KeyElement("ì"),
+                                                                        KeyElement("ï")
+                                                                ]
+                                                        )
+                                        )
+                                        LargePadExpansibleInputKey(
+                                                keyLocale: .trailing,
+                                                event: .letterO,
+                                                keyModel:
+                                                        KeyModel(
+                                                                primary: KeyElement("o"),
+                                                                members: [
+                                                                        KeyElement("o"),
+                                                                        KeyElement("ō"),
+                                                                        KeyElement("ó"),
+                                                                        KeyElement("ǒ"),
+                                                                        KeyElement("ò"),
+                                                                        KeyElement("ö")
+                                                                ]
+                                                        )
+                                        )
                                         LargePadLetterInputKey(.letterP)
                                 }
                                 if context.keyboardCase.isUppercased {
@@ -271,7 +331,22 @@ struct LargePadABCKeyboard: View {
                         HStack(spacing: 0) {
                                 LargePadCapsLockKey(widthUnitTimes: 1.75)
                                 Group {
-                                        LargePadLetterInputKey(.letterA)
+                                        LargePadExpansibleInputKey(
+                                                keyLocale: .leading,
+                                                event: .letterA,
+                                                keyModel:
+                                                        KeyModel(
+                                                                primary: KeyElement("a"),
+                                                                members: [
+                                                                        KeyElement("a"),
+                                                                        KeyElement("ā"),
+                                                                        KeyElement("á"),
+                                                                        KeyElement("ǎ"),
+                                                                        KeyElement("à"),
+                                                                        KeyElement("ä")
+                                                                ]
+                                                        )
+                                        )
                                         LargePadLetterInputKey(.letterS)
                                         LargePadLetterInputKey(.letterD)
                                         LargePadLetterInputKey(.letterF)
@@ -309,7 +384,22 @@ struct LargePadABCKeyboard: View {
                                         LargePadLetterInputKey(.letterZ)
                                         LargePadLetterInputKey(.letterX)
                                         LargePadLetterInputKey(.letterC)
-                                        LargePadLetterInputKey(.letterV)
+                                        LargePadExpansibleInputKey(
+                                                keyLocale: .leading,
+                                                event: .letterV,
+                                                keyModel:
+                                                        KeyModel(
+                                                                primary: KeyElement("v"),
+                                                                members: [
+                                                                        KeyElement("v"),
+                                                                        KeyElement("ǖ"),
+                                                                        KeyElement("ǘ"),
+                                                                        KeyElement("ǚ"),
+                                                                        KeyElement("ǜ"),
+                                                                        KeyElement("ü")
+                                                                ]
+                                                        )
+                                        )
                                         LargePadLetterInputKey(.letterB)
                                         LargePadLetterInputKey(.letterN)
                                         LargePadLetterInputKey(.letterM)

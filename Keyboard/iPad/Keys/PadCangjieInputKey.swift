@@ -77,7 +77,7 @@ struct PadCangjieInputKey: View {
                                 }
                         }
                         .onEnded { _ in
-                                context.process(event, isCapitalized: context.keyboardCase.isCapitalied)
+                                context.process(event, isCapitalized: context.keyboardCase.isCapitalized)
                          }
                 )
         }

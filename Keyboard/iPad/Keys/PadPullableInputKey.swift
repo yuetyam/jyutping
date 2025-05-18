@@ -111,7 +111,7 @@ struct PadPullableInputKey: View {
                                         context.operate(.process(text))
                                         isPullingDown = false
                                 } else if let event {
-                                        context.process(event, isCapitalized: context.keyboardCase.isCapitalied)
+                                        context.process(event, isCapitalized: context.keyboardCase.isCapitalized)
                                 } else {
                                         let text: String = context.keyboardCase.isLowercased ? lower : lower.uppercased()
                                         context.operate(.process(text))

@@ -15,7 +15,7 @@ enum KeyboardCase: Int {
         }
 
         /// Is not lowercased
-        var isCapitalied: Bool {
+        var isCapitalized: Bool {
                 switch self {
                 case .lowercased: false
                 case .uppercased: true

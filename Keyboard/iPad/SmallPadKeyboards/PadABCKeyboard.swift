@@ -12,13 +12,77 @@ struct PadABCKeyboard: View {
                                 Group {
                                         PadPullableInputKey(event: .letterQ, upper: "1", lower: "q")
                                         PadPullableInputKey(event: .letterW, upper: "2", lower: "w")
-                                        PadPullableInputKey(event: .letterE, upper: "3", lower: "e")
+                                        PadCompleteInputKey(
+                                                keyLocale: .leading,
+                                                event: .letterE,
+                                                upper: "3",
+                                                keyModel:
+                                                        KeyModel(
+                                                                primary: KeyElement("e"),
+                                                                members: [
+                                                                        KeyElement("e"),
+                                                                        KeyElement("ē"),
+                                                                        KeyElement("é"),
+                                                                        KeyElement("ě"),
+                                                                        KeyElement("è"),
+                                                                        KeyElement("ë")
+                                                                ]
+                                                        )
+                                        )
                                         PadPullableInputKey(event: .letterR, upper: "4", lower: "r")
                                         PadPullableInputKey(event: .letterT, upper: "5", lower: "t")
                                         PadPullableInputKey(event: .letterY, upper: "6", lower: "y")
-                                        PadPullableInputKey(event: .letterU, upper: "7", lower: "u")
-                                        PadPullableInputKey(event: .letterI, upper: "8", lower: "i")
-                                        PadPullableInputKey(event: .letterO, upper: "9", lower: "o")
+                                        PadCompleteInputKey(
+                                                keyLocale: .trailing,
+                                                event: .letterU,
+                                                upper: "7",
+                                                keyModel:
+                                                        KeyModel(
+                                                                primary: KeyElement("u"),
+                                                                members: [
+                                                                        KeyElement("u"),
+                                                                        KeyElement("ū"),
+                                                                        KeyElement("ú"),
+                                                                        KeyElement("ǔ"),
+                                                                        KeyElement("ù"),
+                                                                        KeyElement("ü")
+                                                                ]
+                                                        )
+                                        )
+                                        PadCompleteInputKey(
+                                                keyLocale: .trailing,
+                                                event: .letterI,
+                                                upper: "8",
+                                                keyModel:
+                                                        KeyModel(
+                                                                primary: KeyElement("i"),
+                                                                members: [
+                                                                        KeyElement("i"),
+                                                                        KeyElement("ī"),
+                                                                        KeyElement("í"),
+                                                                        KeyElement("ǐ"),
+                                                                        KeyElement("ì"),
+                                                                        KeyElement("ï")
+                                                                ]
+                                                        )
+                                        )
+                                        PadCompleteInputKey(
+                                                keyLocale: .trailing,
+                                                event: .letterO,
+                                                upper: "9",
+                                                keyModel:
+                                                        KeyModel(
+                                                                primary: KeyElement("o"),
+                                                                members: [
+                                                                        KeyElement("o"),
+                                                                        KeyElement("ō"),
+                                                                        KeyElement("ó"),
+                                                                        KeyElement("ǒ"),
+                                                                        KeyElement("ò"),
+                                                                        KeyElement("ö")
+                                                                ]
+                                                        )
+                                        )
                                         PadPullableInputKey(event: .letterP, upper: "0", lower: "p")
                                 }
                                 PadBackspaceKey(widthUnitTimes: 1)
@@ -26,7 +90,23 @@ struct PadABCKeyboard: View {
                         HStack(spacing: 0) {
                                 PlaceholderKey()
                                 Group {
-                                        PadPullableInputKey(event: .letterA, upper: "@", lower: "a")
+                                        PadCompleteInputKey(
+                                                keyLocale: .leading,
+                                                event: .letterA,
+                                                upper: "@",
+                                                keyModel:
+                                                        KeyModel(
+                                                                primary: KeyElement("a"),
+                                                                members: [
+                                                                        KeyElement("a"),
+                                                                        KeyElement("ā"),
+                                                                        KeyElement("á"),
+                                                                        KeyElement("ǎ"),
+                                                                        KeyElement("à"),
+                                                                        KeyElement("ä")
+                                                                ]
+                                                        )
+                                        )
                                         PadPullableInputKey(event: .letterS, upper: "#", lower: "s")
                                         PadPullableInputKey(event: .letterD, upper: "$", lower: "d")
                                         PadPullableInputKey(event: .letterF, upper: "&", lower: "f")
@@ -44,7 +124,23 @@ struct PadABCKeyboard: View {
                                         PadPullableInputKey(event: .letterZ, upper: "%", lower: "z")
                                         PadPullableInputKey(event: .letterX, upper: "-", lower: "x")
                                         PadPullableInputKey(event: .letterC, upper: "+", lower: "c")
-                                        PadPullableInputKey(event: .letterV, upper: "=", lower: "v")
+                                        PadCompleteInputKey(
+                                                keyLocale: .leading,
+                                                event: .letterV,
+                                                upper: "=",
+                                                keyModel:
+                                                        KeyModel(
+                                                                primary: KeyElement("v"),
+                                                                members: [
+                                                                        KeyElement("v"),
+                                                                        KeyElement("ǖ"),
+                                                                        KeyElement("ǘ"),
+                                                                        KeyElement("ǚ"),
+                                                                        KeyElement("ǜ"),
+                                                                        KeyElement("ü")
+                                                                ]
+                                                        )
+                                        )
                                         PadPullableInputKey(event: .letterB, upper: "/", lower: "b")
                                         PadPullableInputKey(event: .letterN, upper: ";", lower: "n")
                                         PadPullableInputKey(event: .letterM, upper: ":", lower: "m")

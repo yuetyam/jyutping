@@ -3,10 +3,10 @@ import CommonExtensions
 
 struct PadExpansibleInputKey: View {
 
-        /// Create an ExpansibleInputKey
+        /// Create a PadExpansibleInputKey
         /// - Parameters:
         ///   - keyLocale: Key location, left half (leading) or right half (trailing).
-        ///   - keyModel: keyModel
+        ///   - keyModel: KeyModel
         init(keyLocale: HorizontalEdge, keyModel: KeyModel) {
                 self.keyLocale = keyLocale
                 self.keyModel = keyModel
