@@ -1,4 +1,5 @@
 import SwiftUI
+import CoreIME
 
 struct LargePadStrokeKeyboard: View {
 
@@ -341,16 +342,16 @@ struct LargePadStrokeKeyboard: View {
                         HStack(spacing: 0 ) {
                                 LargePadTabKey(widthUnitTimes: 1.5)
                                 Group {
-                                        LargePadStrokeInputKey("q")
-                                        LargePadStrokeInputKey("w")
-                                        LargePadStrokeInputKey("e")
-                                        LargePadStrokeInputKey("r")
-                                        LargePadStrokeInputKey("t")
-                                        LargePadStrokeInputKey("y")
-                                        LargePadStrokeInputKey("u")
-                                        LargePadStrokeInputKey("i")
-                                        LargePadStrokeInputKey("o")
-                                        LargePadStrokeInputKey("p")
+                                        LargePadStrokeInputKey(.letterQ)
+                                        LargePadStrokeInputKey(.letterW)
+                                        LargePadStrokeInputKey(.letterE)
+                                        LargePadStrokeInputKey(.letterR)
+                                        LargePadStrokeInputKey(.letterT)
+                                        LargePadStrokeInputKey(.letterY)
+                                        LargePadStrokeInputKey(.letterU)
+                                        LargePadStrokeInputKey(.letterI)
+                                        LargePadStrokeInputKey(.letterO)
+                                        LargePadStrokeInputKey(.letterP)
                                 }
                                 if context.keyboardCase.isUppercased {
                                         LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("『"), members: [KeyElement("『"), KeyElement("「")]))
@@ -365,15 +366,15 @@ struct LargePadStrokeKeyboard: View {
                         HStack(spacing: 0) {
                                 LargePadCapsLockKey(widthUnitTimes: 1.75)
                                 Group {
-                                        LargePadStrokeInputKey("a")
-                                        LargePadStrokeInputKey("s")
-                                        LargePadStrokeInputKey("d")
-                                        LargePadStrokeInputKey("f")
-                                        LargePadStrokeInputKey("g")
-                                        LargePadStrokeInputKey("h")
-                                        LargePadStrokeInputKey("j")
-                                        LargePadStrokeInputKey("k")
-                                        LargePadStrokeInputKey("l")
+                                        LargePadStrokeInputKey(.letterA)
+                                        LargePadStrokeInputKey(.letterS)
+                                        LargePadStrokeInputKey(.letterD)
+                                        LargePadStrokeInputKey(.letterF)
+                                        LargePadStrokeInputKey(.letterG)
+                                        LargePadStrokeInputKey(.letterH)
+                                        LargePadStrokeInputKey(.letterJ)
+                                        LargePadStrokeInputKey(.letterK)
+                                        LargePadStrokeInputKey(.letterL)
                                 }
                                 if context.keyboardCase.isUppercased {
                                         LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("："), members: [KeyElement("："), KeyElement(":", header: PresetConstant.halfWidth)]))
@@ -400,13 +401,13 @@ struct LargePadStrokeKeyboard: View {
                         HStack(spacing: 0) {
                                 LargePadShiftKey(keyLocale: .leading, widthUnitTimes: 2.25)
                                 Group {
-                                        LargePadStrokeInputKey("z")
-                                        LargePadStrokeInputKey("x")
-                                        LargePadStrokeInputKey("c")
-                                        LargePadStrokeInputKey("v")
-                                        LargePadStrokeInputKey("b")
-                                        LargePadStrokeInputKey("n")
-                                        LargePadStrokeInputKey("m")
+                                        LargePadStrokeInputKey(.letterZ)
+                                        LargePadStrokeInputKey(.letterX)
+                                        LargePadStrokeInputKey(.letterC)
+                                        LargePadStrokeInputKey(.letterV)
+                                        LargePadStrokeInputKey(.letterB)
+                                        LargePadStrokeInputKey(.letterN)
+                                        LargePadStrokeInputKey(.letterM)
                                 }
                                 if context.keyboardCase.isUppercased {
                                         LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("《"), members: [KeyElement("《"), KeyElement("〈"), KeyElement("<"), KeyElement("＜", header: PresetConstant.fullWidth)]))

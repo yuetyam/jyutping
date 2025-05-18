@@ -20,7 +20,7 @@ struct HiddenKey: View {
                                 } else if let inputEvent = key.inputEvent {
                                         AudioFeedback.inputed()
                                         context.triggerHapticFeedback()
-                                        context.process(inputEvent, isCapitalized: context.keyboardCase.isLowercased.negative)
+                                        context.process(inputEvent, isCapitalized: context.keyboardCase.isCapitalied)
                                 }
                         }
         }

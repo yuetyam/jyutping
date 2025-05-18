@@ -1,4 +1,5 @@
 import SwiftUI
+import CoreIME
 
 struct LargePadABCKeyboard: View {
 
@@ -246,16 +247,16 @@ struct LargePadABCKeyboard: View {
                         HStack(spacing: 0 ) {
                                 LargePadTabKey(widthUnitTimes: 1.5)
                                 Group {
-                                        LargePadLetterInputKey("q")
-                                        LargePadLetterInputKey("w")
-                                        LargePadLetterInputKey("e")
-                                        LargePadLetterInputKey("r")
-                                        LargePadLetterInputKey("t")
-                                        LargePadLetterInputKey("y")
-                                        LargePadLetterInputKey("u")
-                                        LargePadLetterInputKey("i")
-                                        LargePadLetterInputKey("o")
-                                        LargePadLetterInputKey("p")
+                                        LargePadLetterInputKey(.letterQ)
+                                        LargePadLetterInputKey(.letterW)
+                                        LargePadLetterInputKey(.letterE)
+                                        LargePadLetterInputKey(.letterR)
+                                        LargePadLetterInputKey(.letterT)
+                                        LargePadLetterInputKey(.letterY)
+                                        LargePadLetterInputKey(.letterU)
+                                        LargePadLetterInputKey(.letterI)
+                                        LargePadLetterInputKey(.letterO)
+                                        LargePadLetterInputKey(.letterP)
                                 }
                                 if context.keyboardCase.isUppercased {
                                         LargePadInstantInputKey("{")
@@ -270,15 +271,15 @@ struct LargePadABCKeyboard: View {
                         HStack(spacing: 0) {
                                 LargePadCapsLockKey(widthUnitTimes: 1.75)
                                 Group {
-                                        LargePadLetterInputKey("a")
-                                        LargePadLetterInputKey("s")
-                                        LargePadLetterInputKey("d")
-                                        LargePadLetterInputKey("f")
-                                        LargePadLetterInputKey("g")
-                                        LargePadLetterInputKey("h")
-                                        LargePadLetterInputKey("j")
-                                        LargePadLetterInputKey("k")
-                                        LargePadLetterInputKey("l")
+                                        LargePadLetterInputKey(.letterA)
+                                        LargePadLetterInputKey(.letterS)
+                                        LargePadLetterInputKey(.letterD)
+                                        LargePadLetterInputKey(.letterF)
+                                        LargePadLetterInputKey(.letterG)
+                                        LargePadLetterInputKey(.letterH)
+                                        LargePadLetterInputKey(.letterJ)
+                                        LargePadLetterInputKey(.letterK)
+                                        LargePadLetterInputKey(.letterL)
                                 }
                                 if context.keyboardCase.isUppercased {
                                         LargePadInstantInputKey(":")
@@ -305,13 +306,13 @@ struct LargePadABCKeyboard: View {
                         HStack(spacing: 0) {
                                 LargePadShiftKey(keyLocale: .leading, widthUnitTimes: 2.25)
                                 Group {
-                                        LargePadLetterInputKey("z")
-                                        LargePadLetterInputKey("x")
-                                        LargePadLetterInputKey("c")
-                                        LargePadLetterInputKey("v")
-                                        LargePadLetterInputKey("b")
-                                        LargePadLetterInputKey("n")
-                                        LargePadLetterInputKey("m")
+                                        LargePadLetterInputKey(.letterZ)
+                                        LargePadLetterInputKey(.letterX)
+                                        LargePadLetterInputKey(.letterC)
+                                        LargePadLetterInputKey(.letterV)
+                                        LargePadLetterInputKey(.letterB)
+                                        LargePadLetterInputKey(.letterN)
+                                        LargePadLetterInputKey(.letterM)
                                 }
                                 if context.keyboardCase.isUppercased {
                                         LargePadInstantInputKey("<")

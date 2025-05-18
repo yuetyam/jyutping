@@ -13,4 +13,13 @@ enum KeyboardCase: Int {
         var isCapsLocked: Bool {
                 return self == .capsLocked
         }
+
+        /// Is not lowercased
+        var isCapitalied: Bool {
+                switch self {
+                case .lowercased: false
+                case .uppercased: true
+                case .capsLocked: true
+                }
+        }
 }

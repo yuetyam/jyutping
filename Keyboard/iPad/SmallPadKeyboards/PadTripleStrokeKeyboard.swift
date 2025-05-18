@@ -1,6 +1,7 @@
 import SwiftUI
+import CoreIME
+import CommonExtensions
 
-/// Cantonese SaamPing Layout. 粵拼三拼鍵盤佈局
 struct PadTripleStrokeKeyboard: View {
 
         @EnvironmentObject private var context: KeyboardViewController
@@ -15,43 +16,43 @@ struct PadTripleStrokeKeyboard: View {
                         HStack(spacing: 0 ) {
                                 Group {
                                         PadCompleteInputKey(keyLocale: .leading, upper: "1", keyModel: KeyModel(primary: KeyElement("aa"), members: [KeyElement("aa"), KeyElement("q")]))
-                                        PadPullableInputKey(upper: "2", lower: "w")
-                                        PadPullableInputKey(upper: "3", lower: "e")
-                                        PadCompleteInputKey(keyLocale: .leading, upper: "4", keyModel: KeyModel(primary: KeyElement("oe", header: "eo"), members: [KeyElement("oe"), KeyElement("r"), KeyElement("eo")]))
-                                        PadPullableInputKey(upper: "5", lower: "t")
+                                        PadPullableInputKey(event: .letterW, upper: "2", lower: "w")
+                                        PadPullableInputKey(event: .letterE, upper: "3", lower: "e")
+                                        PadCompleteInputKey(keyLocale: .leading, upper: "4", keyModel: KeyModel(primary: KeyElement("oe", footer: "eo"), members: [KeyElement("oe"), KeyElement("r"), KeyElement("eo")]))
+                                        PadPullableInputKey(event: .letterT, upper: "5", lower: "t")
                                         PadCompleteInputKey(keyLocale: .leading, upper: "6", keyModel: KeyModel(primary: KeyElement("yu"), members: [KeyElement("yu"), KeyElement("y")]))
-                                        PadPullableInputKey(upper: "7", lower: "u")
-                                        PadPullableInputKey(upper: "8", lower: "i")
-                                        PadPullableInputKey(upper: "9", lower: "o")
-                                        PadPullableInputKey(upper: "0", lower: "p")
+                                        PadPullableInputKey(event: .letterU, upper: "7", lower: "u")
+                                        PadPullableInputKey(event: .letterI, upper: "8", lower: "i")
+                                        PadPullableInputKey(event: .letterO, upper: "9", lower: "o")
+                                        PadPullableInputKey(event: .letterP, upper: "0", lower: "p")
                                 }
                                 PadBackspaceKey(widthUnitTimes: 1)
                         }
                         HStack(spacing: 0) {
                                 PlaceholderKey()
                                 Group {
-                                        PadPullableInputKey(upper: "@", lower: "a")
-                                        PadPullableInputKey(upper: "#", lower: "s")
-                                        PadPullableInputKey(upper: "$", lower: "d")
-                                        PadPullableInputKey(upper: "/", lower: "f")
-                                        PadCompleteInputKey(keyLocale: .leading, upper: "（", keyModel: KeyModel(primary: KeyElement("g"), members: [KeyElement("g"), KeyElement("gw")]))
-                                        PadPullableInputKey(upper: "）", lower: "h")
-                                        PadPullableInputKey(upper: "「", lower: "j")
-                                        PadCompleteInputKey(keyLocale: .trailing, upper: "」", keyModel: KeyModel(primary: KeyElement("k"), members: [KeyElement("k"), KeyElement("kw")]))
-                                        PadPullableInputKey(upper: "'", lower: "l")
+                                        PadPullableInputKey(event: .letterA, upper: "@", lower: "a")
+                                        PadPullableInputKey(event: .letterS, upper: "#", lower: "s")
+                                        PadPullableInputKey(event: .letterD, upper: "$", lower: "d")
+                                        PadPullableInputKey(event: .letterF, upper: "/", lower: "f")
+                                        PadCompleteInputKey(keyLocale: .leading, event: .letterG, upper: "（", keyModel: KeyModel(primary: KeyElement("g"), members: [KeyElement("g"), KeyElement("gw")]))
+                                        PadPullableInputKey(event: .letterH, upper: "）", lower: "h")
+                                        PadPullableInputKey(event: .letterJ, upper: "「", lower: "j")
+                                        PadCompleteInputKey(keyLocale: .trailing, event: .letterK, upper: "」", keyModel: KeyModel(primary: KeyElement("k"), members: [KeyElement("k"), KeyElement("kw")]))
+                                        PadPullableInputKey(event: .letterL, upper: "'", lower: "l")
                                 }
                                 PadReturnKey(widthUnitTimes: 1.5)
                         }
                         HStack(spacing: 0) {
                                 PadShiftKey(widthUnitTimes: 1)
                                 Group {
-                                        PadCompleteInputKey(keyLocale: .leading, upper: "%", keyModel: KeyModel(primary: KeyElement("z", header: "1"), members: [KeyElement("z"), KeyElement("1", footer: "陰平")]))
-                                        PadCompleteInputKey(keyLocale: .leading, upper: "-", keyModel: KeyModel(primary: KeyElement("gw", header: "2"), members: [KeyElement("gw"), KeyElement("2", footer: "陰上"), KeyElement("x"), KeyElement("kw")]))
-                                        PadCompleteInputKey(keyLocale: .leading, upper: "～", keyModel: KeyModel(primary: KeyElement("c", header: "3"), members: [KeyElement("c"), KeyElement("3", footer: "陰去")]))
-                                        PadCompleteInputKey(keyLocale: .leading, upper: "…", keyModel: KeyModel(primary: KeyElement("ng", header: "4"), members: [KeyElement("ng"), KeyElement("4", footer: "陽平"), KeyElement("v")]))
-                                        PadCompleteInputKey(keyLocale: .trailing, upper: "、", keyModel: KeyModel(primary: KeyElement("b", header: "5"), members: [KeyElement("b"), KeyElement("5", footer: "陽上")]))
-                                        PadCompleteInputKey(keyLocale: .trailing, upper: "：", keyModel: KeyModel(primary: KeyElement("n", header: "6"), members: [KeyElement("n"), KeyElement("6", footer: "陽去")]))
-                                        PadCompleteInputKey(keyLocale: .trailing, upper: "：", keyModel: KeyModel(primary: KeyElement("m"), members: [KeyElement("m"), KeyElement("kw")]))
+                                        PadPullableInputKey(event: .letterZ, upper: "%", lower: "z")
+                                        PadCompleteInputKey(keyLocale: .leading, upper: "-", keyModel: KeyModel(primary: KeyElement("gw", footer: "kw"), members: [KeyElement("gw"), KeyElement("x"), KeyElement("kw")]))
+                                        PadPullableInputKey(event: .letterC, upper: "～", lower: "c")
+                                        PadCompleteInputKey(keyLocale: .leading, upper: "…", keyModel: KeyModel(primary: KeyElement("ng"), members: [KeyElement("ng"), KeyElement("v")]))
+                                        PadPullableInputKey(event: .letterB, upper: "、", lower: "b")
+                                        PadPullableInputKey(event: .letterN, upper: "：", lower: "n")
+                                        PadCompleteInputKey(keyLocale: .trailing, event: .letterM, upper: "：", keyModel: KeyModel(primary: KeyElement("m"), members: [KeyElement("m"), KeyElement("kw")]))
                                 }
                                 if context.keyboardCase.isUppercased {
                                         PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("！"), members: [KeyElement("！"), KeyElement("!", header: PresetConstant.halfWidth)]))

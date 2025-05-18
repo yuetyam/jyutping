@@ -1,10 +1,18 @@
 import SwiftUI
 import CommonExtensions
+import CoreIME
 
 struct PadPullableInputKey: View {
 
-        let upper: String
-        let lower: String
+        init(event: InputEvent? = nil, upper: String, lower: String) {
+                self.event = event
+                self.upper = upper
+                self.lower = lower
+        }
+
+        private let event: InputEvent?
+        private let upper: String
+        private let lower: String
 
         @EnvironmentObject private var context: KeyboardViewController
 
@@ -102,6 +110,8 @@ struct PadPullableInputKey: View {
                                         let text: String = context.keyboardCase.isLowercased ? upper : upper.uppercased()
                                         context.operate(.process(text))
                                         isPullingDown = false
+                                } else if let event {
+                                        context.process(event, isCapitalized: context.keyboardCase.isCapitalied)
                                 } else {
                                         let text: String = context.keyboardCase.isLowercased ? lower : lower.uppercased()
                                         context.operate(.process(text))

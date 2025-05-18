@@ -1,21 +1,25 @@
 import SwiftUI
 import CommonExtensions
+import CoreIME
 
-/// Pullable & expansible
+/// Pullable & Expansible
 struct PadCompleteInputKey: View {
 
         /// Create a PadCompleteInputKey
         /// - Parameters:
         ///   - keyLocale: Key location, left half (leading) or right half (trailing).
-        ///   - upper: Key upper text
-        ///   - keyModel: KeyElements
-        init(keyLocale: HorizontalEdge, upper: String, keyModel: KeyModel) {
+        ///   - event: InputEvent
+        ///   - upper: Key upper text for pulling down
+        ///   - keyModel: KeyModel
+        init(keyLocale: HorizontalEdge, event: InputEvent? = nil, upper: String, keyModel: KeyModel) {
                 self.keyLocale = keyLocale
+                self.event = event
                 self.upper = upper
                 self.keyModel = keyModel
         }
 
         private let keyLocale: HorizontalEdge
+        private let event: InputEvent?
         private let upper: String
         private let keyModel: KeyModel
 
@@ -137,7 +141,7 @@ struct PadCompleteInputKey: View {
                                                 Text(verbatim: keyModel.primary.header ?? String.space)
                                                         .textCase(textCase)
                                                         .font(.keyFooter)
-                                                        .opacity(0.8)
+                                                        .opacity(0.3)
                                         }
                                         .padding(.vertical, verticalPadding + 3)
                                         .padding(.horizontal, horizontalPadding + 3)
@@ -146,7 +150,7 @@ struct PadCompleteInputKey: View {
                                                 Text(verbatim: keyModel.primary.footer ?? String.space)
                                                         .textCase(textCase)
                                                         .font(.keyFooter)
-                                                        .opacity(0.8)
+                                                        .opacity(0.3)
                                         }
                                         .padding(.vertical, verticalPadding + 3)
                                         .padding(.horizontal, horizontalPadding + 3)
@@ -220,6 +224,8 @@ struct PadCompleteInputKey: View {
                                         let text: String = upper
                                         context.operate(.process(text))
                                         isPullingDown = false
+                                } else if let event {
+                                        context.process(event, isCapitalized: context.keyboardCase.isCapitalied)
                                 } else {
                                         let text: String = context.keyboardCase.isLowercased ? keyModel.primary.text : keyModel.primary.text.uppercased()
                                         context.operate(.process(text))

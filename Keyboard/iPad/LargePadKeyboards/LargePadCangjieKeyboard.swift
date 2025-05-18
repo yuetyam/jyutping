@@ -1,4 +1,5 @@
 import SwiftUI
+import CoreIME
 
 struct LargePadCangjieKeyboard: View {
 
@@ -341,16 +342,16 @@ struct LargePadCangjieKeyboard: View {
                         HStack(spacing: 0 ) {
                                 LargePadTabKey(widthUnitTimes: 1.5)
                                 Group {
-                                        LargePadCangjieInputKey("q")
-                                        LargePadCangjieInputKey("w")
-                                        LargePadCangjieInputKey("e")
-                                        LargePadCangjieInputKey("r")
-                                        LargePadCangjieInputKey("t")
-                                        LargePadCangjieInputKey("y")
-                                        LargePadCangjieInputKey("u")
-                                        LargePadCangjieInputKey("i")
-                                        LargePadCangjieInputKey("o")
-                                        LargePadCangjieInputKey("p")
+                                        LargePadCangjieInputKey(.letterQ)
+                                        LargePadCangjieInputKey(.letterW)
+                                        LargePadCangjieInputKey(.letterE)
+                                        LargePadCangjieInputKey(.letterR)
+                                        LargePadCangjieInputKey(.letterT)
+                                        LargePadCangjieInputKey(.letterY)
+                                        LargePadCangjieInputKey(.letterU)
+                                        LargePadCangjieInputKey(.letterI)
+                                        LargePadCangjieInputKey(.letterO)
+                                        LargePadCangjieInputKey(.letterP)
                                 }
                                 if context.keyboardCase.isUppercased {
                                         LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("『"), members: [KeyElement("『"), KeyElement("「")]))
@@ -365,15 +366,15 @@ struct LargePadCangjieKeyboard: View {
                         HStack(spacing: 0) {
                                 LargePadCapsLockKey(widthUnitTimes: 1.75)
                                 Group {
-                                        LargePadCangjieInputKey("a")
-                                        LargePadCangjieInputKey("s")
-                                        LargePadCangjieInputKey("d")
-                                        LargePadCangjieInputKey("f")
-                                        LargePadCangjieInputKey("g")
-                                        LargePadCangjieInputKey("h")
-                                        LargePadCangjieInputKey("j")
-                                        LargePadCangjieInputKey("k")
-                                        LargePadCangjieInputKey("l")
+                                        LargePadCangjieInputKey(.letterA)
+                                        LargePadCangjieInputKey(.letterS)
+                                        LargePadCangjieInputKey(.letterD)
+                                        LargePadCangjieInputKey(.letterF)
+                                        LargePadCangjieInputKey(.letterG)
+                                        LargePadCangjieInputKey(.letterH)
+                                        LargePadCangjieInputKey(.letterJ)
+                                        LargePadCangjieInputKey(.letterK)
+                                        LargePadCangjieInputKey(.letterL)
                                 }
                                 if context.keyboardCase.isUppercased {
                                         LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("："), members: [KeyElement("："), KeyElement(":", header: PresetConstant.halfWidth)]))
@@ -400,13 +401,13 @@ struct LargePadCangjieKeyboard: View {
                         HStack(spacing: 0) {
                                 LargePadShiftKey(keyLocale: .leading, widthUnitTimes: 2.25)
                                 Group {
-                                        LargePadCangjieInputKey("z")
-                                        LargePadCangjieInputKey("x")
-                                        LargePadCangjieInputKey("c")
-                                        LargePadCangjieInputKey("v")
-                                        LargePadCangjieInputKey("b")
-                                        LargePadCangjieInputKey("n")
-                                        LargePadCangjieInputKey("m")
+                                        LargePadCangjieInputKey(.letterZ)
+                                        LargePadCangjieInputKey(.letterX)
+                                        LargePadCangjieInputKey(.letterC)
+                                        LargePadCangjieInputKey(.letterV)
+                                        LargePadCangjieInputKey(.letterB)
+                                        LargePadCangjieInputKey(.letterN)
+                                        LargePadCangjieInputKey(.letterM)
                                 }
                                 if context.keyboardCase.isUppercased {
                                         LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("《"), members: [KeyElement("《"), KeyElement("〈"), KeyElement("<"), KeyElement("＜", header: PresetConstant.fullWidth)]))

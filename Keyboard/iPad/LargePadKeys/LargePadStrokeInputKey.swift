@@ -4,11 +4,13 @@ import CommonExtensions
 
 struct LargePadStrokeInputKey: View {
 
-        init(_ letter: String) {
-                self.letter = letter
+        init(_ event: InputEvent) {
+                self.event = event
+                self.letter = event.text
                 self.stroke = PresetConstant.strokeKeyMap[letter]
         }
 
+        private let event: InputEvent
         private let letter: String
         private let stroke: String?
 
@@ -80,8 +82,7 @@ struct LargePadStrokeInputKey: View {
                                 }
                         }
                         .onEnded { _ in
-                                let text: String = context.keyboardCase.isLowercased ? letter : letter.uppercased()
-                                context.operate(.process(text))
+                                context.process(event, isCapitalized: context.keyboardCase.isCapitalied)
                         }
                 )
         }

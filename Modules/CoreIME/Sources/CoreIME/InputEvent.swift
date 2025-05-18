@@ -13,7 +13,7 @@ public struct InputEvent: Hashable, Identifiable, Comparable, Sendable {
         /// Identifiable. Same value as the `code`
         public let id: Int
 
-        fileprivate init(text: String, code: Int, keyCode: UInt16) {
+        private init(text: String, code: Int, keyCode: UInt16) {
                 self.text = text
                 self.code = code
                 self.keyCode = keyCode
@@ -34,9 +34,7 @@ public struct InputEvent: Hashable, Identifiable, Comparable, Sendable {
         public static func < (lhs: InputEvent, rhs: InputEvent) -> Bool {
                 return lhs.code < rhs.code
         }
-}
 
-extension InputEvent {
         public static let number0 = InputEvent(text: "0", code: 10, keyCode: 0x1D)
         public static let number1 = InputEvent(text: "1", code: 11, keyCode: 0x12)
         public static let number2 = InputEvent(text: "2", code: 12, keyCode: 0x13)

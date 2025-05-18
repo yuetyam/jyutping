@@ -1,4 +1,5 @@
 import SwiftUI
+import CoreIME
 
 struct MediumPadCangjieKeyboard: View {
 
@@ -10,44 +11,44 @@ struct MediumPadCangjieKeyboard: View {
                         HStack(spacing: 0 ) {
                                 MediumPadTabKey(widthUnitTimes: 1)
                                 Group {
-                                        PadCangjieInputKey("q")
-                                        PadCangjieInputKey("w")
-                                        PadCangjieInputKey("e")
-                                        PadCangjieInputKey("r")
-                                        PadCangjieInputKey("t")
-                                        PadCangjieInputKey("y")
-                                        PadCangjieInputKey("u")
-                                        PadCangjieInputKey("i")
-                                        PadCangjieInputKey("o")
-                                        PadCangjieInputKey("p")
+                                        PadCangjieInputKey(.letterQ)
+                                        PadCangjieInputKey(.letterW)
+                                        PadCangjieInputKey(.letterE)
+                                        PadCangjieInputKey(.letterR)
+                                        PadCangjieInputKey(.letterT)
+                                        PadCangjieInputKey(.letterY)
+                                        PadCangjieInputKey(.letterU)
+                                        PadCangjieInputKey(.letterI)
+                                        PadCangjieInputKey(.letterO)
+                                        PadCangjieInputKey(.letterP)
                                 }
                                 MediumPadBackspaceKey(widthUnitTimes: 1)
                         }
                         HStack(spacing: 0) {
                                 MediumPadCapsLockKey(widthUnitTimes: 1.5)
                                 Group {
-                                        PadCangjieInputKey("a")
-                                        PadCangjieInputKey("s")
-                                        PadCangjieInputKey("d")
-                                        PadCangjieInputKey("f")
-                                        PadCangjieInputKey("g")
-                                        PadCangjieInputKey("h")
-                                        PadCangjieInputKey("j")
-                                        PadCangjieInputKey("k")
-                                        PadCangjieInputKey("l")
+                                        PadCangjieInputKey(.letterA)
+                                        PadCangjieInputKey(.letterS)
+                                        PadCangjieInputKey(.letterD)
+                                        PadCangjieInputKey(.letterF)
+                                        PadCangjieInputKey(.letterG)
+                                        PadCangjieInputKey(.letterH)
+                                        PadCangjieInputKey(.letterJ)
+                                        PadCangjieInputKey(.letterK)
+                                        PadCangjieInputKey(.letterL)
                                 }
                                 MediumPadReturnKey(widthUnitTimes: 1.5)
                         }
                         HStack(spacing: 0) {
                                 MediumPadShiftKey(keyLocale: .leading, widthUnitTimes: 1.75)
                                 Group {
-                                        PadCangjieInputKey("z")
-                                        PadCangjieInputKey("x")
-                                        PadCangjieInputKey("c")
-                                        PadCangjieInputKey("v")
-                                        PadCangjieInputKey("b")
-                                        PadCangjieInputKey("n")
-                                        PadCangjieInputKey("m")
+                                        PadCangjieInputKey(.letterZ)
+                                        PadCangjieInputKey(.letterX)
+                                        PadCangjieInputKey(.letterC)
+                                        PadCangjieInputKey(.letterV)
+                                        PadCangjieInputKey(.letterB)
+                                        PadCangjieInputKey(.letterN)
+                                        PadCangjieInputKey(.letterM)
                                 }
                                 if context.keyboardCase.isUppercased {
                                         PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("！"), members: [KeyElement("！"), KeyElement("!", header: PresetConstant.halfWidth)]))

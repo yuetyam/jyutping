@@ -108,7 +108,7 @@ struct CangjieInputKey: View {
                                 }
                         }
                         .onEnded { _ in
-                                context.process(event, isCapitalized: context.keyboardCase.isLowercased.negative)
+                                context.process(event, isCapitalized: context.keyboardCase.isCapitalied)
                          }
                 )
         }

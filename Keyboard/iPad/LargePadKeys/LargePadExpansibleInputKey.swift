@@ -1,5 +1,6 @@
 import SwiftUI
 import CommonExtensions
+import CoreIME
 
 struct LargePadExpansibleInputKey: View {
 
@@ -7,12 +8,14 @@ struct LargePadExpansibleInputKey: View {
         /// - Parameters:
         ///   - keyLocale: Key location, left half (leading) or right half (trailing).
         ///   - keyModel: KeyElements
-        init(keyLocale: HorizontalEdge, keyModel: KeyModel) {
+        init(keyLocale: HorizontalEdge ,event: InputEvent? = nil, keyModel: KeyModel) {
                 self.keyLocale = keyLocale
+                self.event = event
                 self.keyModel = keyModel
         }
 
         private let keyLocale: HorizontalEdge
+        private let event: InputEvent?
         private let keyModel: KeyModel
 
         @EnvironmentObject private var context: KeyboardViewController
@@ -127,7 +130,7 @@ struct LargePadExpansibleInputKey: View {
                                         Text(verbatim: keyModel.primary.header ?? String.space)
                                                 .textCase(textCase)
                                                 .font(.keyFooter)
-                                                .opacity(0.8)
+                                                .opacity(0.3)
                                 }
                                 .padding(.vertical, verticalPadding)
                                 .padding(.horizontal, horizontalPadding + 2)
@@ -136,7 +139,7 @@ struct LargePadExpansibleInputKey: View {
                                         Text(verbatim: keyModel.primary.footer ?? String.space)
                                                 .textCase(textCase)
                                                 .font(.keyFooter)
-                                                .opacity(0.8)
+                                                .opacity(0.3)
                                 }
                                 .padding(.vertical, verticalPadding)
                                 .padding(.horizontal, horizontalPadding + 2)
@@ -185,6 +188,8 @@ struct LargePadExpansibleInputKey: View {
                                         let text: String = context.keyboardCase.isLowercased ? selectedElement.text : selectedElement.text.uppercased()
                                         AudioFeedback.inputed()
                                         context.operate(.process(text))
+                                } else if let event {
+                                        context.process(event, isCapitalized: context.keyboardCase.isCapitalied)
                                 } else {
                                         let text: String = context.keyboardCase.isLowercased ? keyModel.primary.text : keyModel.primary.text.uppercased()
                                         context.operate(.process(text))

@@ -1,6 +1,6 @@
 import SwiftUI
+import CoreIME
 
-/// Cantonese SaamPing Layout. 粵拼三拼鍵盤佈局
 struct LargePadTripleStrokeKeyboard: View {
 
         @EnvironmentObject private var context: KeyboardViewController
@@ -343,15 +343,15 @@ struct LargePadTripleStrokeKeyboard: View {
                                 LargePadTabKey(widthUnitTimes: 1.5)
                                 Group {
                                         LargePadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("aa"), members: [KeyElement("aa"), KeyElement("q")]))
-                                        LargePadLetterInputKey("w")
-                                        LargePadLetterInputKey("e")
+                                        LargePadLetterInputKey(.letterW)
+                                        LargePadLetterInputKey(.letterE)
                                         LargePadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("oe", header: "eo"), members: [KeyElement("oe"), KeyElement("r"), KeyElement("eo")]))
-                                        LargePadLetterInputKey("t")
+                                        LargePadLetterInputKey(.letterT)
                                         LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("yu"), members: [KeyElement("yu"), KeyElement("y")]))
-                                        LargePadLetterInputKey("u")
-                                        LargePadLetterInputKey("i")
-                                        LargePadLetterInputKey("o")
-                                        LargePadLetterInputKey("p")
+                                        LargePadLetterInputKey(.letterU)
+                                        LargePadLetterInputKey(.letterI)
+                                        LargePadLetterInputKey(.letterO)
+                                        LargePadLetterInputKey(.letterP)
                                 }
                                 if context.keyboardCase.isUppercased {
                                         LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("『"), members: [KeyElement("『"), KeyElement("「")]))
@@ -366,15 +366,15 @@ struct LargePadTripleStrokeKeyboard: View {
                         HStack(spacing: 0) {
                                 LargePadCapsLockKey(widthUnitTimes: 1.75)
                                 Group {
-                                        LargePadLetterInputKey("a")
-                                        LargePadLetterInputKey("s")
-                                        LargePadLetterInputKey("d")
-                                        LargePadLetterInputKey("f")
-                                        LargePadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("g"), members: [KeyElement("g"), KeyElement("gw")]))
-                                        LargePadLetterInputKey("h")
-                                        LargePadLetterInputKey("j")
-                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("k"), members: [KeyElement("k"), KeyElement("kw")]))
-                                        LargePadLetterInputKey("l")
+                                        LargePadLetterInputKey(.letterA)
+                                        LargePadLetterInputKey(.letterS)
+                                        LargePadLetterInputKey(.letterD)
+                                        LargePadLetterInputKey(.letterF)
+                                        LargePadExpansibleInputKey(keyLocale: .leading, event: .letterG, keyModel: KeyModel(primary: KeyElement("g"), members: [KeyElement("g"), KeyElement("gw")]))
+                                        LargePadLetterInputKey(.letterH)
+                                        LargePadLetterInputKey(.letterJ)
+                                        LargePadExpansibleInputKey(keyLocale: .trailing, event: .letterK, keyModel: KeyModel(primary: KeyElement("k"), members: [KeyElement("k"), KeyElement("kw")]))
+                                        LargePadLetterInputKey(.letterL)
                                 }
                                 if context.keyboardCase.isUppercased {
                                         LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("："), members: [KeyElement("："), KeyElement(":", header: PresetConstant.halfWidth)]))
@@ -401,13 +401,13 @@ struct LargePadTripleStrokeKeyboard: View {
                         HStack(spacing: 0) {
                                 LargePadShiftKey(keyLocale: .leading, widthUnitTimes: 2.25)
                                 Group {
-                                        LargePadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("z", header: "1"), members: [KeyElement("z"), KeyElement("1", footer: "陰平")]))
+                                        LargePadLetterInputKey(.letterZ)
                                         LargePadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("gw", header: "2"), members: [KeyElement("gw"), KeyElement("2", footer: "陰上"), KeyElement("x"), KeyElement("kw")]))
-                                        LargePadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("c", header: "3"), members: [KeyElement("c"), KeyElement("3", footer: "陰去")]))
+                                        LargePadLetterInputKey(.letterC)
                                         LargePadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("ng", header: "4"), members: [KeyElement("ng"), KeyElement("4", footer: "陽平"), KeyElement("v")]))
-                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("b", header: "5"), members: [KeyElement("b"), KeyElement("5", footer: "陽上")]))
-                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("n", header: "6"), members: [KeyElement("n"), KeyElement("6", footer: "陽去")]))
-                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("m"), members: [KeyElement("m"), KeyElement("kw")]))
+                                        LargePadLetterInputKey(.letterB)
+                                        LargePadLetterInputKey(.letterN)
+                                        LargePadExpansibleInputKey(keyLocale: .trailing, event: .letterM, keyModel: KeyModel(primary: KeyElement("m"), members: [KeyElement("m"), KeyElement("kw")]))
                                 }
                                 if context.keyboardCase.isUppercased {
                                         LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("《"), members: [KeyElement("《"), KeyElement("〈"), KeyElement("<"), KeyElement("＜", header: PresetConstant.fullWidth)]))
