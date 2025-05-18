@@ -6,14 +6,14 @@ README in [English](README-en.md) | [普通話(Mandarin)](README-cmn.md)
 <a href="https://t.me/jyutping">
         <img src="images/badge-telegram.png" alt="Telegram" width="150"/>
 </a>
-<a href="https://x.com/JyutpingApp">
-        <img src="images/badge-twitter.png" alt="X (formerly Twitter)" width="150"/>
+<a href="https://www.instagram.com/jyutping_app">
+        <img src="images/badge-instagram.png" alt="Instagram" width="150"/>
 </a>
 <a href="https://www.threads.net/@jyutping_app">
         <img src="images/badge-threads.png" alt="Threads" width="150"/>
 </a>
-<a href="https://www.instagram.com/jyutping_app">
-        <img src="images/badge-instagram.png" alt="Instagram" width="150"/>
+<a href="https://x.com/JyutpingApp">
+        <img src="images/badge-twitter.png" alt="X (formerly Twitter)" width="150"/>
 </a>
 <a href="https://jq.qq.com/?k=4PR17m3t">
         <img src="images/badge-qq.png" alt="QQ" width="150"/>

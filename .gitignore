@@ -34,7 +34,7 @@ xcshareddata/
 DerivedData/
 
 ## GCC Patch
-/*.gcno
+*.gcno
 
 ## Obj-C/Swift specific
 *.hmap
@@ -75,7 +75,7 @@ Package.resolved
 
 ### Mac IME Packaging ###
 /packaging/app/
+/packaging/**/*.dmg
 /packaging/**/*.pkg
-/packaging/**/*.zip
-/packaging/**/*.gz
 /packaging/**/*.xz
+/packaging/**/*.zip
