@@ -79,6 +79,8 @@ struct MotherBoard: View {
                                         PadCantoneseSymbolicKeyboard()
                                 case .padPortraitMedium, .padLandscapeMedium:
                                         MediumPadCantoneseSymbolicKeyboard()
+                                case .padPortraitLarge, .padLandscapeLarge:
+                                        LargePadCantoneseNumericKeyboard()
                                 default:
                                         CantoneseSymbolicKeyboard()
                                 }
@@ -88,6 +90,8 @@ struct MotherBoard: View {
                                         PadSymbolicKeyboard()
                                 case .padPortraitMedium, .padLandscapeMedium:
                                         MediumPadSymbolicKeyboard()
+                                case .padPortraitLarge, .padLandscapeLarge:
+                                        LargePadNumericKeyboard()
                                 default:
                                         SymbolicKeyboard()
                                 }
