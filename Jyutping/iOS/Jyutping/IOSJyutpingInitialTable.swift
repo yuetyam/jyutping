@@ -3,9 +3,6 @@
 import SwiftUI
 
 struct IOSJyutpingInitialTable: View {
-
-        @Environment(\.horizontalSizeClass) var horizontalSize
-
         var body: some View {
                 List {
                         Section {
@@ -66,14 +63,12 @@ struct IOSJyutpingInitialTable: View {
                         } footer: {
                                 Text(verbatim: "聲母 j 相當於其他拼音方案嘅聲母 y。粵拼輸入法兼容 y。 ").textCase(nil)
                         }
-                        if horizontalSize == .regular {
-                                if #available(iOS 16.0, *) {
-                                        Section {
-                                                OnsetGridView()
-                                        }
-                                        .listRowBackground(Color.clear)
-                                        .listRowInsets(EdgeInsets())
+                        if #available(iOS 16.0, *) {
+                                Section {
+                                        OnsetGridView()
                                 }
+                                .listRowBackground(Color.clear)
+                                .listRowInsets(EdgeInsets(top: 32, leading: 0, bottom: 32, trailing: 0))
                         }
                 }
                 .textSelection(.enabled)
