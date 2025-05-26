@@ -1,31 +1,41 @@
 import Foundation
 import SQLite3
 
+struct CangjieEntry: Hashable {
+        let word: String
+        let cangjie5: String
+        let cangjie3: String
+        let c5complex: Int
+        let c3complex: Int
+        let c5code: Int
+        let c3code: Int
+}
+
 struct Cangjie {
-        static func generate() -> [String] {
+        static func generate() -> [CangjieEntry] {
                 prepare()
                 guard let url = Bundle.module.url(forResource: "jyutping", withExtension: "txt") else { return [] }
                 guard let sourceContent = try? String(contentsOf: url, encoding: .utf8) else { return [] }
                 let sourceLines: [String] = sourceContent.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
-                let characters = sourceLines.compactMap { line -> String.SubSequence? in
+                let characters = sourceLines.compactMap { line -> String? in
                         guard let word = line.split(separator: "\t").first else { return nil }
                         guard word.count == 1 else { return nil }
-                        return word
+                        return word.trimmingCharacters(in: .whitespaces)
                 }
-                let entries = characters.uniqued().map { item -> [String] in
+                let entries = characters.uniqued().map { item -> [CangjieEntry] in
                         let cangjie5Matches = match(cangjie5: item)
                         let cangjie3Matches = match(cangjie3: item)
                         guard !(cangjie5Matches.isEmpty && cangjie3Matches.isEmpty) else { return [] }
-                        var instances: [String] = []
+                        var instances: [CangjieEntry] = []
                         let upperBound: Int = max(cangjie5Matches.count, cangjie3Matches.count)
                         for index in 0..<upperBound {
                                 let cangjie5: String = cangjie5Matches.fetch(index) ?? "X"
                                 let cangjie3: String = cangjie3Matches.fetch(index) ?? "X"
-                                let cj5code = cangjie5.charcode ?? 47
-                                let cj3code: Int = cangjie3.charcode ?? 47
-                                let cj5complex = cangjie5.count
-                                let cj3conplex = cangjie3.count
-                                let instance: String = "\(item)\t\(cangjie5)\t\(cj5complex)\t\(cj5code)\t\(cangjie3)\t\(cj3conplex)\t\(cj3code)"
+                                let c5code = cangjie5.charcode ?? 0
+                                let c3code: Int = cangjie3.charcode ?? 0
+                                let c5complex = cangjie5.count
+                                let c3complex = cangjie3.count
+                                let instance = CangjieEntry(word: item, cangjie5: cangjie5, cangjie3: cangjie3, c5complex: c5complex, c3complex: c3complex, c5code: c5code, c3code: c3code)
                                 instances.append(instance)
                         }
                         return instances

@@ -1,23 +1,33 @@
 import Foundation
 import SQLite3
 
+struct QuickEntry: Hashable {
+        let word: String
+        let quick5: String
+        let quick3: String
+        let q5complex: Int
+        let q3complex: Int
+        let q5code: Int
+        let q3code: Int
+}
+
 struct Quick {
-        static func generate() -> [String] {
+        static func generate() -> [QuickEntry] {
                 prepare()
                 guard let url = Bundle.module.url(forResource: "jyutping", withExtension: "txt") else { return [] }
                 guard let sourceContent = try? String(contentsOf: url, encoding: .utf8) else { return [] }
                 let sourceLines: [String] = sourceContent.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
-                let words = sourceLines.compactMap { line -> String.SubSequence? in
+                let words = sourceLines.compactMap { line -> String? in
                         guard let word = line.split(separator: "\t").first else { return nil }
-                        return word
+                        return word.trimmingCharacters(in: .whitespaces)
                 }
-                let entries = words.uniqued().map { word -> [String] in
+                let entries = words.uniqued().map { word -> [QuickEntry] in
                         switch word.count {
                         case 1:
                                 let cangjie5Matches = match(cangjie5: word)
                                 let cangjie3Matches = match(cangjie3: word)
                                 guard !(cangjie5Matches.isEmpty && cangjie3Matches.isEmpty) else { return [] }
-                                var instances: [String] = []
+                                var instances: [QuickEntry] = []
                                 let upperBound: Int = max(cangjie5Matches.count, cangjie3Matches.count)
                                 for index in 0..<upperBound {
                                         let cangjie5: String = cangjie5Matches.fetch(index) ?? "X"
@@ -26,9 +36,9 @@ struct Quick {
                                         let quick3: String = (cangjie3.count > 2) ? "\(cangjie3.first!)\(cangjie3.last!)" : cangjie3
                                         let q5complex: Int = quick5.count
                                         let q3complex: Int = quick3.count
-                                        let q5code: Int = quick5.charcode ?? 47
-                                        let q3code: Int = quick3.charcode ?? 47
-                                        let instance: String = "\(word)\t\(quick5)\t\(q5complex)\t\(q5code)\t\(quick3)\t\(q3complex)\t\(q3code)"
+                                        let q5code: Int = quick5.charcode ?? 0
+                                        let q3code: Int = quick3.charcode ?? 0
+                                        let instance = QuickEntry(word: word, quick5: quick5, quick3: quick3, q5complex: q5complex, q3complex: q3complex, q5code: q5code, q3code: q3code)
                                         instances.append(instance)
                                 }
                                 return instances
@@ -42,9 +52,9 @@ struct Quick {
                                 let quick3 = quick3Sequence.joined()
                                 let q5complex = quick5.count
                                 let q3complex = quick3.count
-                                let q5code: Int = quick5.charcode ?? 47
-                                let q3code: Int = quick3.charcode ?? 47
-                                let instance: String = "\(word)\t\(quick5)\t\(q5complex)\t\(q5code)\t\(quick3)\t\(q3complex)\t\(q3code)"
+                                let q5code: Int = quick5.charcode ?? 0
+                                let q3code: Int = quick3.charcode ?? 0
+                                let instance = QuickEntry(word: word, quick5: quick5, quick3: quick3, q5complex: q5complex, q3complex: q3complex, q5code: q5code, q3code: q3code)
                                 return [instance]
                         }
                 }

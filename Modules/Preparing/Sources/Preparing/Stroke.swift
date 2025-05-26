@@ -1,24 +1,29 @@
 import Foundation
 import SQLite3
 
+struct StrokeEntry: Hashable {
+        let word: String
+        let stroke: String
+        let complex: Int
+        let code: Int
+}
+
 struct Stroke {
-        static func generate() -> [String] {
+        static func generate() -> [StrokeEntry] {
                 prepare()
                 guard let url = Bundle.module.url(forResource: "jyutping", withExtension: "txt") else { return [] }
                 guard let sourceContent = try? String(contentsOf: url, encoding: .utf8) else { return [] }
                 let sourceLines: [String] = sourceContent.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
-                let characters = sourceLines.compactMap { line -> String.SubSequence? in
+                let characters = sourceLines.compactMap { line -> String? in
                         guard let word = line.split(separator: "\t").first else { return nil }
                         guard word.count == 1 else { return nil }
-                        return word
+                        return word.trimmingCharacters(in: .whitespaces)
                 }
-                let items = characters.uniqued().map { item -> [String] in
+                let items = characters.uniqued().map { item -> [StrokeEntry] in
                         let strokeMatches = match(text: item)
                         guard !(strokeMatches.isEmpty) else { return [] }
-                        let entries = strokeMatches.compactMap { stroke -> String? in
-                                let complex = stroke.count
-                                let code = stroke.hash
-                                return "\(item)\t\(stroke)\t\(complex)\t\(code)"
+                        let entries = strokeMatches.map { stroke -> StrokeEntry in
+                                return StrokeEntry(word: item, stroke: stroke, complex: stroke.count, code: stroke.hash)
                         }
                         return entries
                 }

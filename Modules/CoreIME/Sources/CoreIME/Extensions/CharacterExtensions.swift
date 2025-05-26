@@ -3,7 +3,7 @@ extension Character {
         /// U+0020
         static let space: Character = "\u{20}"
 
-        /// U+0020.
+        /// U+0020
         var isSpace: Bool {
                 return self == Self.space
         }

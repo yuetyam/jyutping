@@ -1,8 +1,6 @@
 import Foundation
 import SQLite3
 
-// MARK: - Segmentation
-
 public struct SegmentToken: Hashable, Sendable {
         /// Token
         public let text: String
