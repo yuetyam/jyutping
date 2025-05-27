@@ -255,7 +255,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         private lazy var inputLengthSequence: [Int] = []
 
         private func joinedBufferTexts() -> String {
-                guard capitals.contains(where: { $0 }) else { return bufferEvents.map(\.text).joined() }
+                guard capitals.contains(true) else { return bufferEvents.map(\.text).joined() }
                 guard bufferEvents.count == capitals.count else { return bufferEvents.map(\.text).joined() }
                 return zip(capitals, bufferEvents).map({ $0 ? $1.text.uppercased() : $1.text }).joined()
         }
@@ -629,7 +629,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let combos = bufferCombos
                 let needsSymbols: Bool = Options.isEmojiSuggestionsOn && selectedCandidates.isEmpty
                 let isInputMemoryOn: Bool = Options.isInputMemoryOn
-                suggestionTask = Task.detached(priority: .high) {
+                suggestionTask = Task.detached(priority: .high) { [weak self] in
                         async let userLexiconCandidates: [Candidate] = isInputMemoryOn ? UserLexicon.tenKeySuggest(combos: combos) : []
                         async let engineCandidates: [Candidate] = Engine.tenKeySuggest(combos: combos, needsSymbols: needsSymbols)
                         let suggestions = await (userLexiconCandidates + engineCandidates).transformed(with: Options.characterStandard)
@@ -651,28 +651,29 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         }
         private func suggest() {
                 suggestionTask?.cancel()
-                let events = bufferEvents
-                let originalText: String = joinedBufferTexts()
-                let processingText: String = originalText.toneConverted()
                 let needsSymbols: Bool = Options.isEmojiSuggestionsOn && selectedCandidates.isEmpty
                 let isInputMemoryOn: Bool = Options.isInputMemoryOn
-                suggestionTask = Task.detached(priority: .high) {
-                        let segmentation = Segmentor.segment(events: events)
-                        let bestScheme = segmentation.first
+                suggestionTask = Task.detached(priority: .high) { [weak self] in
+                        guard let self else { return }
+                        let containsDelimiters: Bool = await bufferEvents.contains(where: \.isSyllableLetter.negative)
+                        let containsCapitalized: Bool = await capitals.contains(true)
+                        let isPeculiar: Bool = containsDelimiters || containsCapitalized
+                        let originalText: String = await joinedBufferTexts()
+                        let processingText: String = isPeculiar ? originalText.toneConverted() : originalText
+                        let segmentation = await Segmentor.segment(events: bufferEvents)
                         async let userLexiconCandidates: [Candidate] = isInputMemoryOn ? UserLexicon.suggest(text: processingText, segmentation: segmentation) : []
                         async let engineCandidates: [Candidate] = Engine.suggest(origin: originalText, text: processingText, segmentation: segmentation, needsSymbols: needsSymbols)
                         let suggestions = await (userLexiconCandidates + engineCandidates).transformed(with: Options.characterStandard)
                         if Task.isCancelled.negative {
                                 await MainActor.run { [weak self] in
                                         self?.text2mark = {
-                                                let hasSeparatorsOrTones: Bool = processingText.contains(where: \.isSeparatorOrTone)
-                                                guard hasSeparatorsOrTones.negative else { return processingText.formattedForMark() }
-                                                let userInputTextCount: Int = processingText.count
-                                                if let firstCandidate = suggestions.first, firstCandidate.inputCount == userInputTextCount { return firstCandidate.mark }
-                                                guard let bestScheme else { return processingText.formattedForMark() }
+                                                guard isPeculiar.negative else { return processingText.formattedForMark() }
+                                                let userInputCount: Int = processingText.count
+                                                if let firstCandidate = suggestions.first, firstCandidate.inputCount == userInputCount { return firstCandidate.mark }
+                                                guard let bestScheme = segmentation.first else { return processingText.formattedForMark() }
                                                 let leadingLength: Int = bestScheme.length
                                                 let leadingText: String = bestScheme.map(\.text).joined(separator: String.space)
-                                                guard leadingLength != userInputTextCount else { return leadingText }
+                                                guard leadingLength != userInputCount else { return leadingText }
                                                 let tailText = processingText.dropFirst(leadingLength)
                                                 return leadingText + String.space + tailText
                                         }()

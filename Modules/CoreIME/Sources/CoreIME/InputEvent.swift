@@ -97,6 +97,14 @@ extension InputEvent {
                 return Self.alphabetSet.contains(self)
         }
 
+        /// Letters [a-z] excluded tone letters [vxq]
+        public var isSyllableLetter: Bool {
+                switch self {
+                case .letterV, .letterX, .letterQ: false
+                default: isLetter
+                }
+        }
+
         /// r, v, x, q
         public var isReverseLookupTrigger: Bool {
                 return Self.reverseLookupTriggers.contains(self)
