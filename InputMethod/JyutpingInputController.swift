@@ -281,7 +281,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         case .none:
                                 suggestionTask?.cancel()
                                 if AppSettings.isInputMemoryOn && selectedCandidates.isNotEmpty {
-                                        let concatenated = selectedCandidates.joined()
+                                        let concatenated = selectedCandidates.filter(\.isCantonese).joined()
                                         UserLexicon.handle(concatenated)
                                 }
                                 selectedCandidates = []
@@ -364,7 +364,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
 
         // MARK: - Candidates
 
-        /// Cached Candidate sequence for UserLexicon
+        /// Cached Candidate sequence for InputMemory
         private lazy var selectedCandidates: [Candidate] = []
 
         private lazy var candidates: [Candidate] = [] {
@@ -416,7 +416,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
         private lazy var suggestionTask: Task<Void, Never>? = nil
         private func suggest() {
                 suggestionTask?.cancel()
-                let needsSymbols: Bool = Options.isEmojiSuggestionsOn && selectedCandidates.isEmpty
+                let isEmojiSuggestionsOn: Bool = Options.isEmojiSuggestionsOn
                 let isInputMemoryOn: Bool = AppSettings.isInputMemoryOn
                 suggestionTask = Task.detached(priority: .high) { [weak self] in
                         guard let self else { return }
@@ -427,8 +427,8 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         let processingText: String = isPeculiar ? originalText.toneConverted() : originalText
                         let segmentation = await Segmentor.segment(events: bufferEvents)
                         async let userLexiconCandidates: [Candidate] = isInputMemoryOn ? UserLexicon.suggest(text: processingText, segmentation: segmentation) : []
-                        async let engineCandidates: [Candidate] = Engine.suggest(origin: originalText, text: processingText, segmentation: segmentation, needsSymbols: needsSymbols)
-                        let suggestions = await (userLexiconCandidates + engineCandidates).transformed(with: Options.characterStandard)
+                        async let engineCandidates: [Candidate] = Engine.suggest(origin: originalText, text: processingText, segmentation: segmentation)
+                        let suggestions = await (userLexiconCandidates + engineCandidates).transformed(with: Options.characterStandard, isEmojiSuggestionsOn: isEmojiSuggestionsOn)
                         if Task.isCancelled.negative {
                                 await MainActor.run { [weak self] in
                                         self?.mark(text: {

@@ -11,7 +11,7 @@ public enum CandidateType: Int, Sendable {
         /// Note that `Candidate.text.count == 1` not always true
         case symbol
 
-        /// macOS Keyboard composed text. Mainly for PunctuationKey.
+        /// Mac keyboard composed text. Mainly for PunctuationKey.
         case compose
 }
 
@@ -115,14 +115,22 @@ public struct Candidate: Hashable, Comparable, Sendable {
                 self.order = 0
         }
 
-        /// type == .cantonese
+        /// `type == .cantonese`
         public var isCantonese: Bool {
                 return self.type == .cantonese
         }
 
-        /// type != .cantonese
+        /// `type != .cantonese`
         public var isNotCantonese: Bool {
                 return self.type != .cantonese
+        }
+
+        /// `type == .emoji || type ==.symbol`
+        public var isEmojiOrSymbol: Bool {
+                switch type {
+                case .emoji, .symbol: true
+                default: false
+                }
         }
 
         /// isConcatenated. order > 1_000_000

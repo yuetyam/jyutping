@@ -2,8 +2,18 @@ import Foundation
 import SQLite3
 
 extension Array where Element == Candidate {
-        public func transformed(with characterStandard: CharacterStandard) -> [Candidate] {
-                return ((self.first?.isUserLexicon ?? false) ? self.filter(\.isCompound.negative) : self).transformed(to: characterStandard).uniqued()
+        public func transformed(with characterStandard: CharacterStandard, isEmojiSuggestionsOn: Bool) -> [Candidate] {
+                let containsUserLexicon: Bool = first?.isUserLexicon ?? false
+                switch (containsUserLexicon, isEmojiSuggestionsOn) {
+                case (true, true):
+                        return filter(\.isCompound.negative).transformed(to: characterStandard).uniqued()
+                case (false, true):
+                        return transformed(to: characterStandard).uniqued()
+                case (true, false):
+                        return filter({ $0.isCompound.negative && $0.isEmojiOrSymbol.negative }).transformed(to: characterStandard).uniqued()
+                case (false, false):
+                        return filter(\.isEmojiOrSymbol.negative).transformed(to: characterStandard).uniqued()
+                }
         }
 }
 

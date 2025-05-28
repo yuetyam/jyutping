@@ -216,7 +216,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         case (false, true):
                                 inputStage = .ending
                                 if Options.isInputMemoryOn && selectedCandidates.isNotEmpty {
-                                        let concatenated = selectedCandidates.joined()
+                                        let concatenated = selectedCandidates.filter(\.isCantonese).joined()
                                         UserLexicon.handle(concatenated)
                                 }
                                 selectedCandidates = []
@@ -595,7 +595,9 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 inputLengthSequence = inputLengthSequence.suffix(tail.count)
                         }
                 case .tenKey:
-                        selectedCandidates.append(candidate)
+                        if candidate.isCantonese {
+                                selectedCandidates.append(candidate)
+                        }
                         let inputCount = candidate.inputCount
                         let tailCount: Int = bufferCombos.count - inputCount
                         let suffixLength: Int = max(0, tailCount)
@@ -626,13 +628,14 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         private lazy var suggestionTask: Task<Void, Never>? = nil
         private func tenKeySuggest() {
                 suggestionTask?.cancel()
-                let combos = bufferCombos
-                let needsSymbols: Bool = Options.isEmojiSuggestionsOn && selectedCandidates.isEmpty
+                let isEmojiSuggestionsOn: Bool = Options.isEmojiSuggestionsOn
                 let isInputMemoryOn: Bool = Options.isInputMemoryOn
                 suggestionTask = Task.detached(priority: .high) { [weak self] in
+                        guard let self else { return }
+                        let combos = await bufferCombos
                         async let userLexiconCandidates: [Candidate] = isInputMemoryOn ? UserLexicon.tenKeySuggest(combos: combos) : []
-                        async let engineCandidates: [Candidate] = Engine.tenKeySuggest(combos: combos, needsSymbols: needsSymbols)
-                        let suggestions = await (userLexiconCandidates + engineCandidates).transformed(with: Options.characterStandard)
+                        async let engineCandidates: [Candidate] = Engine.tenKeySuggest(combos: combos)
+                        let suggestions = await (userLexiconCandidates + engineCandidates).transformed(with: Options.characterStandard, isEmojiSuggestionsOn: isEmojiSuggestionsOn)
                         if Task.isCancelled.negative {
                                 await MainActor.run { [weak self] in
                                         self?.text2mark = {
@@ -651,7 +654,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         }
         private func suggest() {
                 suggestionTask?.cancel()
-                let needsSymbols: Bool = Options.isEmojiSuggestionsOn && selectedCandidates.isEmpty
+                let isEmojiSuggestionsOn: Bool = Options.isEmojiSuggestionsOn
                 let isInputMemoryOn: Bool = Options.isInputMemoryOn
                 suggestionTask = Task.detached(priority: .high) { [weak self] in
                         guard let self else { return }
@@ -662,8 +665,8 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         let processingText: String = isPeculiar ? originalText.toneConverted() : originalText
                         let segmentation = await Segmentor.segment(events: bufferEvents)
                         async let userLexiconCandidates: [Candidate] = isInputMemoryOn ? UserLexicon.suggest(text: processingText, segmentation: segmentation) : []
-                        async let engineCandidates: [Candidate] = Engine.suggest(origin: originalText, text: processingText, segmentation: segmentation, needsSymbols: needsSymbols)
-                        let suggestions = await (userLexiconCandidates + engineCandidates).transformed(with: Options.characterStandard)
+                        async let engineCandidates: [Candidate] = Engine.suggest(origin: originalText, text: processingText, segmentation: segmentation)
+                        let suggestions = await (userLexiconCandidates + engineCandidates).transformed(with: Options.characterStandard, isEmojiSuggestionsOn: isEmojiSuggestionsOn)
                         if Task.isCancelled.negative {
                                 await MainActor.run { [weak self] in
                                         self?.text2mark = {

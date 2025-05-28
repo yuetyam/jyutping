@@ -28,7 +28,7 @@ struct CompactOnsetGridView: View {
                                 OnsetElementCell(onset: "gw", ipa: "[ kʷ ]", word: "龜", syllable: "gwai1")
                                 OnsetElementCell(onset: "kw", ipa: "[ kʷʰ ]", word: "虧", syllable: "kwai1")
                                 OnsetElementCell(onset: "w", ipa: "[ w ]", word: "威", syllable: "wai1")
-                                OnsetElementCell(onset: "∅", ipa: "[   ]", word: "翳", syllable: "ai3")
+                                OnsetElementCell(onset: "∅", ipa: "[ ʔ ]", word: "翳", syllable: "ai3")
                         }
                         GridRow {
                                 OnsetElementCell(onset: "z", ipa: "t͡s~t͡ʃ", word: "擠", syllable: "zai1")

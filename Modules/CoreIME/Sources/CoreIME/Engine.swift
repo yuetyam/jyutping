@@ -48,10 +48,8 @@ extension Engine {
         ///   - origin: Original user input text.
         ///   - text: Formatted user input text.
         ///   - segmentation: Segmentation of user input text.
-        ///   - needsSymbols: Needs Emoji/Symbol Candidates.
-        ///   - asap: Should be fast, shouldn't go deep.
         /// - Returns: Candidates
-        public static func suggest(origin: String, text: String, segmentation: Segmentation, needsSymbols: Bool, asap: Bool = false) -> [Candidate] {
+        public static func suggest(origin: String, text: String, segmentation: Segmentation) -> [Candidate] {
                 lazy var anchorsStatement = prepareAnchorsStatement()
                 lazy var pingStatement = preparePingStatement()
                 lazy var strictStatement = prepareStrictStatement()
@@ -73,15 +71,11 @@ extension Engine {
                                 return anchorsMatch(text: text, limit: 100, statement: anchorsStatement)
                         }
                 default:
-                        let textMarkCandidates = fetchTextMarks(text: origin)
-                        guard asap else { return textMarkCandidates + dispatch(text: text, segmentation: segmentation, needsSymbols: needsSymbols, anchorsStatement: anchorsStatement, pingStatement: pingStatement, strictStatement: strictStatement) }
-                        guard segmentation.maxSchemeLength > 0 else { return textMarkCandidates + processVerbatim(text: text, anchorsStatement: anchorsStatement, pingStatement: pingStatement) }
-                        let candidates = query(text: text, segmentation: segmentation, needsSymbols: needsSymbols, anchorsStatement: anchorsStatement, pingStatement: pingStatement, strictStatement: strictStatement)
-                        return candidates.isEmpty ? (textMarkCandidates + processVerbatim(text: text, anchorsStatement: anchorsStatement, pingStatement: pingStatement)) : (textMarkCandidates + candidates)
+                        return fetchTextMarks(text: origin) + dispatch(text: text, segmentation: segmentation, anchorsStatement: anchorsStatement, pingStatement: pingStatement, strictStatement: strictStatement)
                 }
         }
 
-        private static func dispatch(text: String, segmentation: Segmentation, needsSymbols: Bool, anchorsStatement: OpaquePointer?, pingStatement: OpaquePointer?, strictStatement: OpaquePointer?) -> [Candidate] {
+        private static func dispatch(text: String, segmentation: Segmentation, anchorsStatement: OpaquePointer?, pingStatement: OpaquePointer?, strictStatement: OpaquePointer?) -> [Candidate] {
                 switch (text.hasSeparators, text.hasTones) {
                 case (true, true):
                         let syllable = text.removedSeparatorsTones()
@@ -89,7 +83,7 @@ extension Engine {
                 case (false, true):
                         let textTones = text.tones
                         let rawText: String = text.removedTones()
-                        let candidates: [Candidate] = query(text: rawText, segmentation: segmentation, needsSymbols: false, anchorsStatement: anchorsStatement, pingStatement: pingStatement, strictStatement: strictStatement)
+                        let candidates: [Candidate] = query(text: rawText, segmentation: segmentation, anchorsStatement: anchorsStatement, pingStatement: pingStatement, strictStatement: strictStatement)
                         let qualified = candidates.compactMap({ item -> Candidate? in
                                 let continuous = item.romanization.removedSpaces()
                                 let continuousTones = continuous.tones
@@ -147,7 +141,7 @@ extension Engine {
                         let isHeadingSeparator: Bool = text.first?.isSeparator ?? false
                         let isTrailingSeparator: Bool = text.last?.isSeparator ?? false
                         let rawText: String = text.removedSeparators()
-                        let candidates: [Candidate] = query(text: rawText, segmentation: segmentation, needsSymbols: false, anchorsStatement: anchorsStatement, pingStatement: pingStatement, strictStatement: strictStatement)
+                        let candidates: [Candidate] = query(text: rawText, segmentation: segmentation, anchorsStatement: anchorsStatement, pingStatement: pingStatement, strictStatement: strictStatement)
                         let qualified = candidates.compactMap({ item -> Candidate? in
                                 let syllables = item.romanization.removedTones().split(separator: Character.space)
                                 guard syllables != textParts else { return Candidate(text: item.text, romanization: item.romanization, input: text) }
@@ -216,14 +210,14 @@ extension Engine {
                                 .map { Candidate(text: $0.text, romanization: $0.romanization, input: text) }
                 case (false, false):
                         guard segmentation.maxSchemeLength > 0 else { return processVerbatim(text: text, anchorsStatement: anchorsStatement, pingStatement: pingStatement) }
-                        return process(text: text, segmentation: segmentation, needsSymbols: needsSymbols, anchorsStatement: anchorsStatement, pingStatement: pingStatement, strictStatement: strictStatement)
+                        return process(text: text, segmentation: segmentation, anchorsStatement: anchorsStatement, pingStatement: pingStatement, strictStatement: strictStatement)
                 }
         }
 
-        private static func process(text: String, segmentation: Segmentation, needsSymbols: Bool, limit: Int64? = nil, anchorsStatement: OpaquePointer?, pingStatement: OpaquePointer?, strictStatement: OpaquePointer?) -> [Candidate] {
+        private static func process(text: String, segmentation: Segmentation, limit: Int64? = nil, anchorsStatement: OpaquePointer?, pingStatement: OpaquePointer?, strictStatement: OpaquePointer?) -> [Candidate] {
                 guard canProcess(text, statement: anchorsStatement) else { return [] }
                 let textCount = text.count
-                let primary: [Candidate] = query(text: text, segmentation: segmentation, needsSymbols: needsSymbols, limit: limit, anchorsStatement: anchorsStatement, pingStatement: pingStatement, strictStatement: strictStatement)
+                let primary: [Candidate] = query(text: text, segmentation: segmentation, limit: limit, anchorsStatement: anchorsStatement, pingStatement: pingStatement, strictStatement: strictStatement)
                 guard let firstInputCount = primary.first?.inputCount else { return processVerbatim(text: text, limit: limit, anchorsStatement: anchorsStatement, pingStatement: pingStatement) }
                 guard firstInputCount != textCount else { return primary }
                 let prefixes: [Candidate] = {
@@ -259,7 +253,7 @@ extension Engine {
                         let tailText = text.dropFirst(headInputCount)
                         guard canProcess(tailText, statement: anchorsStatement) else { return nil }
                         let tailSegmentation = Segmentor.segment(text: tailText)
-                        guard let tailCandidate = process(text: String(tailText), segmentation: tailSegmentation, needsSymbols: false, limit: 50, anchorsStatement: anchorsStatement, pingStatement: pingStatement, strictStatement: strictStatement).sorted().first else { return nil }
+                        guard let tailCandidate = process(text: String(tailText), segmentation: tailSegmentation, limit: 50, anchorsStatement: anchorsStatement, pingStatement: pingStatement, strictStatement: strictStatement).sorted().first else { return nil }
                         guard let headCandidate = primary.filter({ $0.input == headText }).sorted().first else { return nil }
                         let conjoined = headCandidate + tailCandidate
                         return conjoined
@@ -290,13 +284,13 @@ extension Engine {
                         .sorted()
         }
 
-        private static func query(text: String, segmentation: Segmentation, needsSymbols: Bool, limit: Int64? = nil, anchorsStatement: OpaquePointer?, pingStatement: OpaquePointer?, strictStatement: OpaquePointer?) -> [Candidate] {
+        private static func query(text: String, segmentation: Segmentation, limit: Int64? = nil, anchorsStatement: OpaquePointer?, pingStatement: OpaquePointer?, strictStatement: OpaquePointer?) -> [Candidate] {
                 let textCount = text.count
                 let pingMatched = pingMatch(text: text, input: text, limit: limit, statement: pingStatement)
                 let anchorsMatched = anchorsMatch(text: text, limit: limit, statement: anchorsStatement)
                 let searches = search(text: text, segmentation: segmentation, limit: limit, strictStatement: strictStatement)
                 lazy var queried = (pingMatched + anchorsMatched + searches).ordered(with: textCount)
-                let shouldContinue: Bool = needsSymbols && (limit == nil) && queried.isNotEmpty
+                let shouldContinue: Bool = (limit == nil) && queried.isNotEmpty
                 guard shouldContinue else { return queried }
                 let symbols: [Candidate] = Engine.searchSymbols(text: text, segmentation: segmentation)
                 guard symbols.isNotEmpty else { return queried }
@@ -458,7 +452,7 @@ private extension Engine {
 // MARK: - TenKey Suggestions
 
 extension Engine {
-        public static func tenKeySuggest(combos: [Combo], needsSymbols: Bool) async -> [Candidate] {
+        public static func tenKeySuggest(combos: [Combo]) async -> [Candidate] {
                 lazy var tenKeyAnchorsStatement = prepareTenKeyAnchorsStatement()
                 lazy var tenKeyCodeStatement = prepareTenKeyCodeStatement()
                 defer {
@@ -474,8 +468,7 @@ extension Engine {
                         }
                         .flatMap({ $0 })
                         .sorted()
-                let shouldContinue: Bool = needsSymbols && queried.isNotEmpty
-                guard shouldContinue else { return textMarkCandidates + queried }
+                guard queried.isNotEmpty else { return textMarkCandidates + queried }
                 let symbols = tenKeySearchSymbols(combos: combos)
                 guard symbols.isNotEmpty else { return textMarkCandidates + queried }
                 for symbol in symbols.reversed() {
