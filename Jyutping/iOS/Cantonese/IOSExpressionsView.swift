@@ -175,14 +175,14 @@ struct IOSExpressionsView: View {
                         }
                         Group {
                                 Section {
-                                        Text(verbatim: "推薦【嘅/個得噉】 避免【的得地】").font(.headline)
+                                        Text(verbatim: "推薦【嘅/個得噉】　避免【的得地】").font(.headline)
                                         Text(verbatim: "例：我嘅細佬／我個細佬。")
                                         Text(verbatim: "例：講得好！")
                                         Text(verbatim: "例：細細聲噉講話。")
                                 }
 
                                 Section {
-                                        Text(verbatim: "推薦【啩、啊嘛】 避免【吧】").font(.headline)
+                                        Text(verbatim: "推薦【啩、啊嘛】　避免【吧】").font(.headline)
                                         Label {
                                                 Text(verbatim: "下個禮拜會出啩。")
                                         } icon: {
@@ -205,7 +205,7 @@ struct IOSExpressionsView: View {
                                         }
                                 }
                                 Section {
-                                        Text(verbatim: "推薦【啦、嘞】 避免【了】").font(.headline)
+                                        Text(verbatim: "推薦【啦、嘞】　避免【了】").font(.headline)
                                         Label {
                                                 Text(verbatim: "我識用粵拼打字啦！")
                                         } icon: {
@@ -228,7 +228,7 @@ struct IOSExpressionsView: View {
                                         }
                                 }
                                 Section {
-                                        Text(verbatim: "推薦【使】 避免【駛、洗】").font(.headline)
+                                        Text(verbatim: "推薦【使】　避免【駛、洗】").font(.headline)
                                         Label {
                                                 Text(verbatim: "唔使驚")
                                         } icon: {
@@ -246,7 +246,7 @@ struct IOSExpressionsView: View {
                                         }
                                 }
                                 Section {
-                                        Text(verbatim: "推薦【而家】 避免【宜家】").font(.headline)
+                                        Text(verbatim: "推薦【而家】　避免【宜家】").font(.headline)
                                         Label {
                                                 Text(verbatim: "我而家食緊飯。")
                                         } icon: {
@@ -254,6 +254,57 @@ struct IOSExpressionsView: View {
                                         }
                                         Label {
                                                 Text(verbatim: "我宜家食緊飯。")
+                                        } icon: {
+                                                Image.xmark.foregroundStyle(Color.red)
+                                        }
+                                }
+                                Section {
+                                        Text(verbatim: "推薦【甲Ｘ過乙】　避免【甲比乙更Ｘ】").font(.headline)
+                                        Label {
+                                                Text(verbatim: "甜過初戀。")
+                                        } icon: {
+                                                Image.checkmark.foregroundStyle(Color.green)
+                                        }
+                                        Label {
+                                                Text(verbatim: "靚過關之琳。")
+                                        } icon: {
+                                                Image.checkmark.foregroundStyle(Color.green)
+                                        }
+                                        Label {
+                                                Text(verbatim: "紅過黎明。")
+                                        } icon: {
+                                                Image.checkmark.foregroundStyle(Color.green)
+                                        }
+                                        Label {
+                                                Text(verbatim: "比初戀更甜。")
+                                        } icon: {
+                                                Image.xmark.foregroundStyle(Color.red)
+                                        }
+                                        Label {
+                                                Text(verbatim: "比關之琳更靚。")
+                                        } icon: {
+                                                Image.xmark.foregroundStyle(Color.red)
+                                        }
+                                        Label {
+                                                Text(verbatim: "比黎明更紅。")
+                                        } icon: {
+                                                Image.xmark.foregroundStyle(Color.red)
+                                        }
+                                }
+                                Section {
+                                        Text(verbatim: "推薦【兩樣都得】　避免【都得】").font(.headline)
+                                        Label {
+                                                Text(verbatim: "甲：「你飲茶定係飲咖啡？」")
+                                        } icon: {
+                                                Image.info.foregroundStyle(Color.primary)
+                                        }
+                                        Label {
+                                                Text(verbatim: "乙：「兩樣都得。」")
+                                        } icon: {
+                                                Image.checkmark.foregroundStyle(Color.green)
+                                        }
+                                        Label {
+                                                Text(verbatim: "乙：「都得。」")
                                         } icon: {
                                                 Image.xmark.foregroundStyle(Color.red)
                                         }
