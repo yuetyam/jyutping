@@ -7,7 +7,7 @@ extension Font {
 
         #if os(macOS)
         static let master: Font = enhancedFont(size: 14)
-        static let significant: Font = enhancedFont(size: 16)
+        static let significant: Font = bolderEnhancedFont(size: 14)
         static let copilot: Font = enhancedFont(size: 12)
         static let ipa: Font = enhancedFont(size: 15)
         #else
@@ -22,6 +22,9 @@ private extension Font {
 
         static func enhancedFont(size: CGFloat) -> Font {
                 return combine(fonts: preferredFontNames, size: size)
+        }
+        static func bolderEnhancedFont(size: CGFloat) -> Font {
+                return combine(fonts: bolderFonts, size: size)
         }
 
         private static let preferredFontNames: [String] = {
@@ -55,6 +58,40 @@ private extension Font {
                         }
                 }
                 names.append(contentsOf: PresetConstant.fallbackCJKVList)
+                return names
+        }()
+
+        private static let bolderFonts: [String] = {
+                var names: [String] = []
+                let primaryList: [String] = [BolderFont.SFPro, BolderFont.Inter, BolderFont.Roboto, BolderFont.HelveticaNeue]
+                for name in primaryList {
+                        if found(font: name) {
+                                names.append(name)
+                                break
+                        }
+                }
+                var shouldConsiderSupplementaryFonts: Bool = true
+                for name in BolderFont.primaryCJKVQueue {
+                        if found(font: name) {
+                                names.append(name)
+                                shouldConsiderSupplementaryFonts = false
+                                break
+                        }
+                }
+                for name in BolderFont.systemCJKVQueue {
+                        if found(font: name) {
+                                names.append(name)
+                                break
+                        }
+                }
+                if shouldConsiderSupplementaryFonts {
+                        for name in BolderFont.supplementaryCJKVQueue {
+                                if found(font: name) {
+                                        names.append(name)
+                                        break
+                                }
+                        }
+                }
                 return names
         }()
 

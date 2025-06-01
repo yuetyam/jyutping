@@ -5,8 +5,18 @@ struct PresetConstant {
         static let Inter: String = "Inter"
         static let Roboto: String = "Roboto"
         static let HelveticaNeue: String = "Helvetica Neue"
-        static let primaryCJKVQueue: [String] = ["Shanggu Sans", "ChiuKong Gothic CL", "Chocolate Classical Sans", "LXGW XiHei CL", "Source Han Sans K", "Noto Sans CJK KR", "Sarasa Gothic CL"]
+        static let primaryCJKVQueue: [String] = ["Shanggu Sans", "ChiuKong Gothic CL", "LXGW XiHei CL", "Source Han Sans K", "Noto Sans CJK KR", "Sarasa Gothic CL"]
         static let systemCJKVQueue: [String] = ["PingFang HK", "PingFang MO", "PingFang SC", "PingFang TC"]
         static let supplementaryCJKVQueue: [String] = ["Chiron Hei HK", "Source Han Sans HC", "Noto Sans CJK HK", "Noto Sans HK"]
         static let fallbackCJKVList: [String] = ["Plangothic P1", "Plangothic P2", "MiSans L3"]
+}
+
+struct BolderFont {
+        static let SFPro: String = "SFPro-Medium"
+        static let Inter: String = "Inter-Medium"
+        static let Roboto: String = "Roboto-Medium"
+        static let HelveticaNeue: String = "HelveticaNeue-Medium"
+        static let primaryCJKVQueue: [String] = ["ShangguSans-Medium", "ChiuKongGothicCL-Medium", "SourceHanSansK-Medium", "NotoSerifCJKkr-Medium", "SarasaGothicCL-Medium"]
+        static let systemCJKVQueue: [String] = ["PingFangHK-Medium", "PingFangMO-Medium", "PingFangSC-Medium", "PingFangTC-Medium"]
+        static let supplementaryCJKVQueue: [String] = ["ChironHeiHK-Medium", "SourceHanSansHC-Medium", "NotoSansCJKhk-Medium", "NotoSansHK-Medium"]
 }
