@@ -175,14 +175,7 @@ struct IOSExpressionsView: View {
                         }
                         Group {
                                 Section {
-                                        Text(verbatim: "推薦【嘅/個得噉】　避免【的得地】").font(.headline)
-                                        Text(verbatim: "例：我嘅細佬／我個細佬。")
-                                        Text(verbatim: "例：講得好！")
-                                        Text(verbatim: "例：細細聲噉講話。")
-                                }
-
-                                Section {
-                                        Text(verbatim: "推薦【啩、啊嘛】　避免【吧】").font(.headline)
+                                        Text(verbatim: "啩、啊嘛").font(.headline)
                                         Label {
                                                 Text(verbatim: "下個禮拜會出啩。")
                                         } icon: {
@@ -205,14 +198,14 @@ struct IOSExpressionsView: View {
                                         }
                                 }
                                 Section {
-                                        Text(verbatim: "推薦【啦、嘞】　避免【了】").font(.headline)
+                                        Text(verbatim: "啦、嘞").font(.headline)
                                         Label {
                                                 Text(verbatim: "我識用粵拼打字啦！")
                                         } icon: {
                                                 Image.checkmark.foregroundStyle(Color.green)
                                         }
                                         Label {
-                                                Text(verbatim: "係嘞，你試過招牌菜未啊？")
+                                                Text(verbatim: "係嘞，你試過粵拼輸入法未啊？")
                                         } icon: {
                                                 Image.checkmark.foregroundStyle(Color.green)
                                         }
@@ -222,13 +215,13 @@ struct IOSExpressionsView: View {
                                                 Image.xmark.foregroundStyle(Color.red)
                                         }
                                         Label {
-                                                Text(verbatim: "係了，你試過招牌菜未啊？")
+                                                Text(verbatim: "係了，你試過粵拼輸入法未啊？")
                                         } icon: {
                                                 Image.xmark.foregroundStyle(Color.red)
                                         }
                                 }
                                 Section {
-                                        Text(verbatim: "推薦【使】　避免【駛、洗】").font(.headline)
+                                        Text(verbatim: "使").font(.headline)
                                         Label {
                                                 Text(verbatim: "唔使驚")
                                         } icon: {
@@ -246,7 +239,7 @@ struct IOSExpressionsView: View {
                                         }
                                 }
                                 Section {
-                                        Text(verbatim: "推薦【而家】　避免【宜家】").font(.headline)
+                                        Text(verbatim: "而家").font(.headline)
                                         Label {
                                                 Text(verbatim: "我而家食緊飯。")
                                         } icon: {
@@ -259,40 +252,30 @@ struct IOSExpressionsView: View {
                                         }
                                 }
                                 Section {
-                                        Text(verbatim: "推薦【甲Ｘ過乙】　避免【甲比乙更Ｘ】").font(.headline)
+                                        Text(verbatim: "甲（形容詞）過乙").font(.headline)
                                         Label {
-                                                Text(verbatim: "甜過初戀。")
+                                                Text(verbatim: "苦過黃連。")
                                         } icon: {
                                                 Image.checkmark.foregroundStyle(Color.green)
                                         }
                                         Label {
-                                                Text(verbatim: "靚過關之琳。")
+                                                Text(verbatim: "狼過華秀隻狗。")
                                         } icon: {
                                                 Image.checkmark.foregroundStyle(Color.green)
                                         }
                                         Label {
-                                                Text(verbatim: "紅過黎明。")
-                                        } icon: {
-                                                Image.checkmark.foregroundStyle(Color.green)
-                                        }
-                                        Label {
-                                                Text(verbatim: "比初戀更甜。")
+                                                Text(verbatim: "比黃連更苦。")
                                         } icon: {
                                                 Image.xmark.foregroundStyle(Color.red)
                                         }
                                         Label {
-                                                Text(verbatim: "比關之琳更靚。")
-                                        } icon: {
-                                                Image.xmark.foregroundStyle(Color.red)
-                                        }
-                                        Label {
-                                                Text(verbatim: "比黎明更紅。")
+                                                Text(verbatim: "比華秀隻狗更狼。")
                                         } icon: {
                                                 Image.xmark.foregroundStyle(Color.red)
                                         }
                                 }
                                 Section {
-                                        Text(verbatim: "推薦【兩樣都得】　避免【都得】").font(.headline)
+                                        Text(verbatim: "兩樣都得").font(.headline)
                                         Label {
                                                 Text(verbatim: "甲：「你飲茶定係飲咖啡？」")
                                         } icon: {
