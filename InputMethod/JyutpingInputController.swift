@@ -433,14 +433,13 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                 await MainActor.run { [weak self] in
                                         self?.mark(text: {
                                                 guard isPeculiar.negative else { return processingText.formattedForMark() }
-                                                let userInputCount: Int = processingText.count
-                                                if let firstCandidate = suggestions.first, firstCandidate.inputCount == userInputCount { return firstCandidate.mark }
-                                                guard let bestScheme = segmentation.first else { return processingText.formattedForMark() }
-                                                let leadingLength: Int = bestScheme.length
+                                                guard let firstCandidate = suggestions.first else { return processingText }
+                                                guard firstCandidate.inputCount != processingText.count else { return firstCandidate.mark }
+                                                guard let bestScheme = segmentation.first else { return processingText }
                                                 let leadingText: String = bestScheme.map(\.text).joined(separator: String.space)
-                                                guard leadingLength != userInputCount else { return leadingText }
-                                                let tailText = processingText.dropFirst(leadingLength)
-                                                return leadingText + String.space + tailText
+                                                let leadingLength: Int = bestScheme.length
+                                                guard leadingLength != processingText.count else { return leadingText }
+                                                return leadingText + String.space + processingText.dropFirst(leadingLength)
                                         }())
                                         self?.candidates = suggestions
                                 }
