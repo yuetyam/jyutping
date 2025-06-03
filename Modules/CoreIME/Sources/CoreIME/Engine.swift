@@ -229,7 +229,7 @@ extension Engine {
                                 let conjoined: String = schemeAnchors + tail
                                 let anchors: String = schemeAnchors + String(lastAnchor)
                                 let schemeMark: String = scheme.map(\.text).joined(separator: String.space)
-                                let spacedMark: String = schemeMark + String.space + tail.spaceSeparated()
+                                // let spacedMark: String = schemeMark + String.space + tail.spaceSeparated()
                                 let anchorMark: String = schemeMark + String.space + tail
                                 let conjoinedMatches = anchorsMatch(text: conjoined, limit: limit, statement: anchorsStatement)
                                         .filter({ item -> Bool in
@@ -238,7 +238,7 @@ extension Engine {
                                                 let tailAnchors = rawRomanization.dropFirst(schemeMark.count).split(separator: Character.space).compactMap(\.first)
                                                 return tailAnchors == tail.map({ $0 })
                                         })
-                                        .map({ Candidate(text: $0.text, romanization: $0.romanization, input: text, mark: spacedMark, order: $0.order) })
+                                        .map({ Candidate(text: $0.text, romanization: $0.romanization, input: text, mark: anchorMark, order: $0.order) })
                                 let anchorMatches = anchorsMatch(text: anchors, limit: limit, statement: anchorsStatement)
                                         .filter({ $0.romanization.removedTones().hasPrefix(anchorMark) })
                                         .map({ Candidate(text: $0.text, romanization: $0.romanization, input: text, mark: anchorMark, order: $0.order) })
@@ -277,8 +277,8 @@ extension Engine {
                                 guard text.hasSuffix(lastSyllable) else { return item }
                                 let isMatched: Bool = ((syllables.count - 1) + lastSyllable.count) == textCount
                                 guard isMatched else { return item }
-                                let mark: String = syllables.compactMap(\.first).dropLast().spaceSeparated() + String.space + lastSyllable
-                                return Candidate(text: item.text, romanization: item.romanization, input: text, mark: mark, order: item.order)
+                                // let mark: String = syllables.compactMap(\.first).dropLast().spaceSeparated() + String.space + lastSyllable
+                                return Candidate(text: item.text, romanization: item.romanization, input: text, mark: text, order: item.order)
                         })
                         .uniqued()
                         .sorted()
@@ -405,12 +405,12 @@ private extension Engine {
                 sqlite3_bind_int64(statement, 1, Int64(code))
                 sqlite3_bind_int64(statement, 2, (limit ?? 50))
                 var candidates: [Candidate] = []
-                let mark: String = text.spaceSeparated()
+                // let mark: String = text.spaceSeparated()
                 while sqlite3_step(statement) == SQLITE_ROW {
                         let order: Int = Int(sqlite3_column_int64(statement, 0))
                         let word: String = String(cString: sqlite3_column_text(statement, 1))
                         let romanization: String = String(cString: sqlite3_column_text(statement, 2))
-                        let candidate = Candidate(text: word, romanization: romanization, input: text, mark: mark, order: order)
+                        let candidate = Candidate(text: word, romanization: romanization, input: text, mark: text, order: order)
                         candidates.append(candidate)
                 }
                 return candidates
