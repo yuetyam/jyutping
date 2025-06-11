@@ -21,7 +21,10 @@ struct Quick {
                         guard let word = line.split(separator: "\t").first else { return nil }
                         return word.trimmingCharacters(in: .whitespaces)
                 }
-                let entries = words.uniqued().map { word -> [QuickEntry] in
+                defer {
+                        sqlite3_close_v2(database)
+                }
+                return words.uniqued().flatMap({ word -> [QuickEntry] in
                         switch word.count {
                         case 1:
                                 let cangjie5Matches = match(cangjie5: word)
@@ -57,9 +60,7 @@ struct Quick {
                                 let instance = QuickEntry(word: word, quick5: quick5, quick3: quick3, q5complex: q5complex, q3complex: q3complex, q5code: q5code, q3code: q3code)
                                 return [instance]
                         }
-                }
-                sqlite3_close_v2(database)
-                return entries.flatMap({ $0 }).uniqued()
+                }).uniqued()
         }
 
         private static func match<T: StringProtocol>(cangjie5 text: T) -> [String] {

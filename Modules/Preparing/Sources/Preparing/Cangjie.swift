@@ -22,7 +22,10 @@ struct Cangjie {
                         guard word.count == 1 else { return nil }
                         return word.trimmingCharacters(in: .whitespaces)
                 }
-                let entries = characters.uniqued().map { item -> [CangjieEntry] in
+                defer {
+                        sqlite3_close_v2(database)
+                }
+                return characters.uniqued().flatMap({ item -> [CangjieEntry] in
                         let cangjie5Matches = match(cangjie5: item)
                         let cangjie3Matches = match(cangjie3: item)
                         guard !(cangjie5Matches.isEmpty && cangjie3Matches.isEmpty) else { return [] }
@@ -39,9 +42,7 @@ struct Cangjie {
                                 instances.append(instance)
                         }
                         return instances
-                }
-                sqlite3_close_v2(database)
-                return entries.flatMap({ $0 }).uniqued()
+                }).uniqued()
         }
 
         private static func match<T: StringProtocol>(cangjie5 text: T) -> [String] {
