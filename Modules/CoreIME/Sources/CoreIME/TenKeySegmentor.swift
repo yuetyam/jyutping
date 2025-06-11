@@ -2,7 +2,7 @@ import Foundation
 import SQLite3
 
 extension Segmentor {
-        public static func segment(combos: [Combo]) -> Segmentation {
+        public static func segment(combos: [Combo]) -> OldSegmentation {
                 switch combos.count {
                 case 0:
                         return []
@@ -14,11 +14,11 @@ extension Segmentor {
                         return split(combos: combos)
                 }
         }
-        private static func split(combos: [Combo]) -> Segmentation {
+        private static func split(combos: [Combo]) -> OldSegmentation {
                 let leadingTokens = splitLeading(combos: combos)
                 guard leadingTokens.isNotEmpty else { return [] }
                 let textCount = combos.count
-                var segmentation: Segmentation = leadingTokens.map({ [$0] })
+                var segmentation: OldSegmentation = leadingTokens.map({ [$0] })
                 var previousSubelementCount = segmentation.subelementCount
                 var shouldContinue: Bool = true
                 while shouldContinue {
@@ -28,7 +28,7 @@ extension Segmentor {
                                 let tailCombos = combos.dropFirst(schemeLength)
                                 let tailTokens = splitLeading(combos: tailCombos)
                                 guard tailTokens.isNotEmpty else { continue }
-                                let newSegmentation: Segmentation = tailTokens.map({ scheme + [$0] })
+                                let newSegmentation: OldSegmentation = tailTokens.map({ scheme + [$0] })
                                 segmentation += newSegmentation
                         }
                         segmentation = segmentation.uniqued()
@@ -45,11 +45,10 @@ extension Segmentor {
                 let maxLength: Int = min(combos.count, 6)
                 guard maxLength > 0 else { return [] }
                 let sequences = (1...maxLength).reversed().map({ combos.prefix($0) })
-                let matches = sequences.map { sequence -> [SegmentToken] in
+                return sequences.flatMap({ sequence -> [SegmentToken] in
                         let code = sequence.map(\.rawValue).decimalCombined()
                         return tenKeyMatch(tenKeyCode: code)
-                }
-                return matches.flatMap({ $0 }).uniqued()
+                }).uniqued()
         }
         private static func tenKeyMatch(tenKeyCode: Int) -> [SegmentToken] {
                 var tokens: [SegmentToken] = []

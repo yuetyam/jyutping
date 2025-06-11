@@ -96,24 +96,24 @@ struct UserLexicon {
                 guard sqlite3_step(statement) == SQLITE_DONE else { return }
         }
 
-        static func suggest(text: String, segmentation: Segmentation) -> [Candidate] {
+        static func suggest<T: RandomAccessCollection<InputEvent>>(events: T, segmentation: Segmentation) -> [Candidate] {
+                let text = events.map(\.text).joined()
                 let matches = query(text: text, input: text, isShortcut: false)
                 let shortcuts = query(text: text, input: text, mark: text, isShortcut: true)
                 let searches: [Candidate] = {
                         let textCount = text.count
                         let schemes = segmentation.filter({ $0.length == textCount })
                         guard schemes.isNotEmpty else { return [] }
-                        return schemes.map({ scheme -> [Candidate] in
-                                let pingText = scheme.map(\.origin).joined()
-                                let matched = query(text: pingText, input: text, isShortcut: false)
+                        return schemes.flatMap({ scheme -> [Candidate] in
+                                let matched = query(text: scheme.originText, input: text, isShortcut: false)
                                 guard matched.isNotEmpty else { return [] }
-                                let text2mark = scheme.map(\.text).joined(separator: String.space)
-                                let syllables = scheme.map(\.origin).joined(separator: String.space)
+                                let mark = scheme.mark
+                                let syllables = scheme.syllableText
                                 return matched.compactMap({ item -> Candidate? in
                                         guard item.mark == syllables else { return nil }
-                                        return Candidate(text: item.text, romanization: item.romanization, input: item.input, mark: text2mark, order: -1)
+                                        return Candidate(text: item.text, romanization: item.romanization, input: text, mark: mark, order: -1)
                                 })
-                        }).flatMap({ $0 })
+                        })
                 }()
                 return matches + shortcuts + searches
         }
@@ -156,8 +156,7 @@ struct UserLexicon {
                        sequences = nextSequences
                 }
                 return sequences
-                        .map({ tenKeyMatch(text: $0) })
-                        .flatMap({ $0 })
+                        .flatMap({ tenKeyMatch(text: $0) })
                         .sorted(by: { $0.frequency > $1.frequency })
                         .prefix(8)
                         .map(\.candidate)

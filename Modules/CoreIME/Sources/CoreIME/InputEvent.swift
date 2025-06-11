@@ -99,15 +99,23 @@ extension InputEvent {
 
         /// Letters [a-z] excluded tone letters [vxq]
         public var isSyllableLetter: Bool {
+                return isLetter && !(isToneLetter)
+        }
+
+        /// v, x, q
+        public var isToneLetter: Bool {
                 switch self {
-                case .letterV, .letterX, .letterQ: false
-                default: isLetter
+                case .letterV, .letterX, .letterQ: true
+                default: false
                 }
         }
 
         /// r, v, x, q
         public var isReverseLookupTrigger: Bool {
-                return Self.reverseLookupTriggers.contains(self)
+                switch self {
+                case .letterR, .letterV, .letterX, .letterQ: true
+                default: false
+                }
         }
 
         /// Separator; Delimiter; Apostrophe
@@ -144,6 +152,9 @@ extension InputEvent {
                         return alphabetSet.first(where: { $0.keyCode == keyCode }) ?? digitSet.first(where: { $0.keyCode == keyCode })
                 }
         }
+        public static func matchInputEvent(for code: Int) -> InputEvent? {
+                return alphabetSet.first(where: { $0.code == code }) ?? digitSet.first(where: { $0.code == code })
+        }
         public static func matchInputEvent(for character: Character) -> InputEvent? {
                 guard let code = character.inputEventCode else { return nil }
                 return alphabetSet.first(where: { $0.code == code }) ?? digitSet.first(where: { $0.code == code })
@@ -151,6 +162,28 @@ extension InputEvent {
 
         public static let GWEvents: [InputEvent] = [letterG, letterW]
         public static let KWEvents: [InputEvent] = [letterK, letterW]
+}
+
+extension RandomAccessCollection where Element == InputEvent {
+        var combinedCode: Int {
+                guard self.count < 10 else { return 0 }
+                return reduce(0, { $0 * 100 + $1.code })
+        }
+        var anchorsCode: Int {
+                return map({ $0 == InputEvent.letterY ? InputEvent.letterJ : $0 }).combinedCode
+        }
+}
+
+extension Int {
+        var matchedInputEvents: [InputEvent] {
+                var number = self
+                var codes: [Int] = []
+                while number > 0 {
+                        codes.append(number % 100)
+                        number /= 100
+                }
+                return codes.reversed().compactMap(InputEvent.matchInputEvent(for:))
+        }
 }
 
 extension InputEvent {
@@ -207,13 +240,5 @@ extension InputEvent {
                 letterX,
                 letterY,
                 letterZ
-        ]
-
-        /// r, v, x, q
-        public static let reverseLookupTriggers: Set<InputEvent> = [
-                letterR,
-                letterV,
-                letterX,
-                letterQ
         ]
 }

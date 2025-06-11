@@ -8,8 +8,7 @@ extension Engine {
                 let matched: [ShapeLexicon] = isWildcardSearch ? wildcardMatch(strokeText: keyText) : match(strokeText: keyText)
                 return (matched + glob(strokeText: keyText))
                         .uniqued()
-                        .map({ Engine.reveresLookup(text: $0.text, input: $0.input) })
-                        .flatMap({ $0 })
+                        .flatMap({ Engine.reveresLookup(text: $0.text, input: $0.input) })
         }
         private static func match(strokeText: String) -> [ShapeLexicon] {
                 let code = strokeText.hash

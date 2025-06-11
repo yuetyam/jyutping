@@ -5,8 +5,7 @@ extension Engine {
         static func quick5ReverseLookup(text: String) -> [Candidate] {
                 return (match(quick5: text) + glob(quick5: text))
                         .uniqued()
-                        .map({ Engine.reveresLookup(text: $0.text, input: $0.input) })
-                        .flatMap({ $0 })
+                        .flatMap({ Engine.reveresLookup(text: $0.text, input: $0.input) })
         }
         private static func match(quick5 text: String) -> [ShapeLexicon] {
                 guard let code = text.charcode else { return [] }
@@ -44,8 +43,7 @@ extension Engine {
         static func quick3ReverseLookup(text: String) -> [Candidate] {
                 return (match(quick3: text) + glob(quick3: text))
                         .uniqued()
-                        .map({ Engine.reveresLookup(text: $0.text, input: $0.input) })
-                        .flatMap({ $0 })
+                        .flatMap({ Engine.reveresLookup(text: $0.text, input: $0.input) })
         }
         private static func match(quick3 text: String) -> [ShapeLexicon] {
                 guard let code = text.charcode else { return [] }

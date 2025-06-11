@@ -7,8 +7,7 @@ extension Engine {
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return [] }
-                let ping = text.lowercased().hash
-                guard sqlite3_bind_int64(statement, 1, Int64(ping)) == SQLITE_OK else { return [] }
+                guard sqlite3_bind_int64(statement, 1, Int64(text.hash)) == SQLITE_OK else { return [] }
                 var textMarks: [String] = []
                 while sqlite3_step(statement) == SQLITE_ROW {
                         guard let textMark = sqlite3_column_text(statement, 0) else { continue }

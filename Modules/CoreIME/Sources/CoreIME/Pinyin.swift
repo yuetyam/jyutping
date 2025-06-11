@@ -12,21 +12,18 @@ extension Engine {
                 let canSegment: Bool = schemes.subelementCount > 0
                 if canSegment {
                         return process(pinyin: text, schemes: schemes, anchorsStatement: anchorsStatement, pingStatement: pingStatement)
-                                .map({ Engine.reveresLookup(text: $0.text, input: $0.input, mark: $0.mark) })
-                                .flatMap({ $0 })
+                                .flatMap({ Engine.reveresLookup(text: $0.text, input: $0.input, mark: $0.mark) })
                 } else {
                         return processVerbatim(pinyin: text, anchorsStatement: anchorsStatement, pingStatement: pingStatement)
-                                .map({ Engine.reveresLookup(text: $0.text, input: $0.input, mark: $0.mark) })
-                                .flatMap({ $0 })
+                                .flatMap({ Engine.reveresLookup(text: $0.text, input: $0.input, mark: $0.mark) })
                 }
         }
 
         private static func processVerbatim(pinyin text: String, anchorsStatement: OpaquePointer?, pingStatement: OpaquePointer?, limit: Int64? = nil) -> [PinyinLexicon] {
-                let rounds = (0..<text.count).map({ number -> [PinyinLexicon] in
+                return (0..<text.count).flatMap({ number -> [PinyinLexicon] in
                         let leading: String = String(text.dropLast(number))
                         return pingMatch(pinyin: leading, statement: pingStatement, limit: limit) + anchorMatch(pinyin: leading, statement: anchorsStatement, limit: limit)
-                })
-                return rounds.flatMap({ $0 }).uniqued()
+                }).uniqued()
         }
 
         private static func process(pinyin text: String, schemes: [[String]], anchorsStatement: OpaquePointer?, pingStatement: OpaquePointer?, limit: Int64? = nil) -> [PinyinLexicon] {
@@ -37,7 +34,7 @@ extension Engine {
                 let prefixes: [PinyinLexicon] = {
                         let hasPrefectSchemes: Bool = schemes.contains(where: { $0.summedLength == textCount })
                         guard hasPrefectSchemes.negative else { return [] }
-                        let matches = schemes.map({ scheme -> [PinyinLexicon] in
+                        return schemes.flatMap({ scheme -> [PinyinLexicon] in
                                 let tail = text.dropFirst(scheme.summedLength)
                                 guard let lastAnchor = tail.first else { return [] }
                                 let schemeAnchors = scheme.compactMap(\.first)
@@ -47,7 +44,6 @@ extension Engine {
                                         .filter({ $0.pinyin.hasPrefix(text2mark) })
                                         .map({ PinyinLexicon(text: $0.text, pinyin: $0.pinyin, input: text, mark: text2mark) })
                         })
-                        return matches.flatMap({ $0 })
                 }()
                 guard prefixes.isEmpty else { return prefixes + primary }
                 let headTexts = primary.map(\.input).uniqued()
@@ -76,7 +72,7 @@ extension Engine {
                 let textCount: Int = text.count
                 let perfectSchemes = schemes.filter({ $0.summedLength == textCount })
                 if perfectSchemes.isNotEmpty {
-                        let matches = perfectSchemes.map({ scheme -> [PinyinLexicon] in
+                        return perfectSchemes.flatMap({ scheme -> [PinyinLexicon] in
                                 var queries: [[PinyinLexicon]] = []
                                 for number in (0..<scheme.count) {
                                         let pingText = scheme.dropLast(number).joined()
@@ -85,9 +81,8 @@ extension Engine {
                                 }
                                 return queries.flatMap({ $0 })
                         })
-                        return matches.flatMap({ $0 })
                 } else {
-                        return schemes.map({ pingMatch(pinyin: $0.joined(), statement: pingStatement, limit: limit) }).flatMap({ $0 })
+                        return schemes.flatMap({ pingMatch(pinyin: $0.joined(), statement: pingStatement, limit: limit) })
                 }
         }
 

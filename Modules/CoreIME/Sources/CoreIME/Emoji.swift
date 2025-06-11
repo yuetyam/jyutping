@@ -123,11 +123,11 @@ extension Engine {
                 let textCount = text.count
                 let schemes = segmentation.filter({ $0.length == textCount })
                 guard schemes.isNotEmpty else { return regular }
-                let matches = schemes.map({ scheme -> [Candidate] in
-                        let pingText = scheme.map(\.origin).joined()
+                let matches = schemes.flatMap({ scheme -> [Candidate] in
+                        let pingText = scheme.flatMap(\.origin).map(\.text).joined()
                         return match(text: pingText, input: text, statement: statement)
                 })
-                return regular + matches.flatMap({ $0 })
+                return regular + matches
         }
         private static func match<T: StringProtocol>(text: T, input: String, statement: OpaquePointer?) -> [Candidate] {
                 sqlite3_reset(statement)
@@ -139,7 +139,7 @@ extension Engine {
                         guard let codepoint = sqlite3_column_text(statement, 2) else { continue }
                         guard let cantonese = sqlite3_column_text(statement, 3) else { continue }
                         guard let romanization = sqlite3_column_text(statement, 4) else { continue }
-                        let category = Emoji.Category(rawValue: Int(categoryCode)) ?? .frequent
+                        let category = Emoji.Category(rawValue: Int(categoryCode)) ?? Emoji.Category.frequent
                         let instance = Emoji(category: category, uniqueNumber: Int(categoryCode), unicodeVersion: Int(unicodeVersion), text: String(cString: codepoint), cantonese: String(cString: cantonese), romanization: String(cString: romanization))
                         emojis.append(instance)
                 }
@@ -181,7 +181,7 @@ extension Engine {
                         guard let codepoint = sqlite3_column_text(statement, 2) else { continue }
                         guard let cantonese = sqlite3_column_text(statement, 3) else { continue }
                         guard let romanization = sqlite3_column_text(statement, 4) else { continue }
-                        let category = Emoji.Category(rawValue: Int(categoryCode)) ?? .frequent
+                        let category = Emoji.Category(rawValue: Int(categoryCode)) ?? Emoji.Category.frequent
                         let instance = Emoji(category: category, uniqueNumber: Int(categoryCode), unicodeVersion: Int(unicodeVersion), text: String(cString: codepoint), cantonese: String(cString: cantonese), romanization: String(cString: romanization))
                         emojis.append(instance)
                 }

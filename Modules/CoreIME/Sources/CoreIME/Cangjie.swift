@@ -24,10 +24,7 @@ extension Engine {
 
 private extension Engine {
         static func cangjie5ReverseLookup(text: String) -> [Candidate] {
-                return (match(cangjie5: text) + glob(cangjie5: text))
-                        .uniqued()
-                        .map({ Engine.reveresLookup(text: $0.text, input: $0.input) })
-                        .flatMap({ $0 })
+                return (match(cangjie5: text) + glob(cangjie5: text)).uniqued().flatMap({ Engine.reveresLookup(text: $0.text, input: $0.input) })
         }
         private static func match(cangjie5 text: String) -> [ShapeLexicon] {
                 guard let code = text.charcode else { return [] }
@@ -64,8 +61,7 @@ private extension Engine {
         static func cangjie3ReverseLookup(text: String) -> [Candidate] {
                 return (match(cangjie3: text) + glob(cangjie3: text))
                         .uniqued()
-                        .map({ Engine.reveresLookup(text: $0.text, input: $0.input) })
-                        .flatMap({ $0 })
+                        .flatMap({ Engine.reveresLookup(text: $0.text, input: $0.input) })
         }
         private static func match(cangjie3 text: String) -> [ShapeLexicon] {
                 guard let code = text.charcode else { return [] }

@@ -9,7 +9,7 @@ public struct SegmentToken: Hashable, Sendable {
 }
 
 public typealias SegmentScheme = Array<SegmentToken>
-public typealias Segmentation = Array<SegmentScheme>
+public typealias OldSegmentation = Array<SegmentScheme>
 
 extension SegmentScheme {
         /// All token text character count
@@ -17,7 +17,7 @@ extension SegmentScheme {
                 return self.map(\.text).summedLength
         }
 }
-extension Segmentation {
+extension OldSegmentation {
         /// Longest scheme token text character count
         public var maxSchemeLength: Int {
                 return self.first?.length ?? 0
@@ -40,7 +40,7 @@ extension SegmentScheme {
 }
 
 extension Sequence where Element == SegmentScheme {
-        func descended() -> Segmentation {
+        func descended() -> OldSegmentation {
                 return self.sorted(by: {
                         let lhsLength = $0.length
                         let rhsLength = $1.length
@@ -93,7 +93,7 @@ public struct Segmentor {
                 return (1...maxLength).reversed().compactMap({ match(events: events.prefix($0), statement: statement) })
         }
 
-        private static func split<T: StringProtocol>(text: T, statement: OpaquePointer?) -> Segmentation {
+        private static func split<T: StringProtocol>(text: T, statement: OpaquePointer?) -> OldSegmentation {
                 let leadingTokens = splitLeading(text: text, statement: statement)
                 guard leadingTokens.isNotEmpty else { return [] }
                 let textCount = text.count
@@ -119,7 +119,7 @@ public struct Segmentor {
                 }
                 return segmentation.filter(\.isValid).descended()
         }
-        private static func split<T: RandomAccessCollection<InputEvent>>(events: T, statement: OpaquePointer?) -> Segmentation {
+        private static func split<T: RandomAccessCollection<InputEvent>>(events: T, statement: OpaquePointer?) -> OldSegmentation {
                 let leadingTokens = splitLeading(events: events, statement: statement)
                 guard leadingTokens.isNotEmpty else { return [] }
                 let eventCount = events.count
@@ -146,7 +146,7 @@ public struct Segmentor {
                 return segmentation.filter(\.isValid).descended()
         }
 
-        public static func segment<T: StringProtocol>(text: T) -> Segmentation {
+        public static func segment<T: StringProtocol>(text: T) -> OldSegmentation {
                 switch text.count {
                 case 0:
                         return []
@@ -177,7 +177,7 @@ public struct Segmentor {
                         }
                 }
         }
-        public static func segment<T: RandomAccessCollection<InputEvent>>(events: T) -> Segmentation {
+        public static func segment<T: RandomAccessCollection<InputEvent>>(events: T) -> OldSegmentation {
                 switch events.count {
                 case 0: return []
                 case 1:
@@ -199,9 +199,9 @@ public struct Segmentor {
                 }
         }
 
-        private static let letterA: Segmentation = [[SegmentToken(text: "a", origin: "aa")]]
-        private static let letterO: Segmentation = [[SegmentToken(text: "o", origin: "o")]]
-        private static let letterM: Segmentation = [[SegmentToken(text: "m", origin: "m")]]
-        private static let mama: Segmentation = [[SegmentToken(text: "ma", origin: "maa"), SegmentToken(text: "ma", origin: "maa")]]
-        private static let mami: Segmentation = [[SegmentToken(text: "ma", origin: "maa"), SegmentToken(text: "mi", origin: "mi")]]
+        private static let letterA: OldSegmentation = [[SegmentToken(text: "a", origin: "aa")]]
+        private static let letterO: OldSegmentation = [[SegmentToken(text: "o", origin: "o")]]
+        private static let letterM: OldSegmentation = [[SegmentToken(text: "m", origin: "m")]]
+        private static let mama: OldSegmentation = [[SegmentToken(text: "ma", origin: "maa"), SegmentToken(text: "ma", origin: "maa")]]
+        private static let mami: OldSegmentation = [[SegmentToken(text: "ma", origin: "maa"), SegmentToken(text: "mi", origin: "mi")]]
 }

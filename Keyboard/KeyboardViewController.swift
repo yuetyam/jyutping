@@ -528,78 +528,48 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         adjustKeyboard()
                 }
                 switch keyboardLayout {
-                case .qwerty:
+                case .qwerty, .tripleStroke:
                         switch bufferEvents.first {
                         case .none: return
                         case .some(let event) where event.isReverseLookupTrigger:
                                 selectedCandidates = []
-                                let inputCount: Int = candidate.inputCount
-                                let leadingCount: Int = inputCount + 1
-                                if bufferEvents.count > leadingCount {
-                                        let tail = bufferEvents.dropFirst(leadingCount)
-                                        bufferEvents = [event] + tail
-                                        let altTail = inputLengthSequence.dropFirst(leadingCount)
-                                        inputLengthSequence = [1] + altTail
-                                        guard let firstUppercased = capitals.first else { return }
-                                        capitals = [firstUppercased] + capitals.suffix(tail.count)
-                                } else {
-                                        clearBuffer()
-                                }
-                        default:
-                                guard candidate.isCantonese else {
-                                        selectedCandidates = []
+                                let leadingCount: Int = candidate.inputCount + 1
+                                guard bufferEvents.count > leadingCount else {
                                         clearBuffer()
                                         return
                                 }
-                                selectedCandidates.append(candidate)
-                                let inputCount: Int = candidate.input.replacingOccurrences(of: "[456]", with: "RR", options: .regularExpression).count
-                                var tail = bufferEvents.dropFirst(inputCount)
-                                while (tail.first?.isQuote ?? false) {
-                                        tail = tail.dropFirst()
-                                }
-                                bufferEvents = Array<InputEvent>(tail)
-                                capitals = capitals.suffix(tail.count)
-                                inputLengthSequence = inputLengthSequence.suffix(tail.count)
-                        }
-                case .tripleStroke:
-                        switch bufferEvents.first {
-                        case .none: return
-                        case .some(let event) where event.isReverseLookupTrigger:
-                                selectedCandidates = []
-                                let inputCount: Int = candidate.inputCount
-                                let leadingCount: Int = inputCount + 1
-                                if bufferEvents.count > leadingCount {
-                                        let tail = bufferEvents.dropFirst(leadingCount)
-                                        bufferEvents = [event] + tail
-                                        let altTail = inputLengthSequence.dropFirst(leadingCount)
-                                        inputLengthSequence = [1] + altTail
-                                        guard let firstUppercased = capitals.first else { return }
-                                        capitals = [firstUppercased] + capitals.suffix(tail.count)
-                                } else {
-                                        clearBuffer()
-                                }
+                                let tail = bufferEvents.dropFirst(leadingCount)
+                                bufferEvents = [event] + tail
+                                let altTail = inputLengthSequence.dropFirst(leadingCount)
+                                inputLengthSequence = [1] + altTail
+                                guard let firstCapital = capitals.first else { return }
+                                capitals = [firstCapital] + capitals.suffix(tail.count)
                         default:
-                                guard candidate.isCantonese else {
+                                if candidate.isCantonese {
+                                        selectedCandidates.append(candidate)
+                                } else {
                                         selectedCandidates = []
+                                }
+                                guard candidate.inputCount < bufferEvents.count else {
                                         clearBuffer()
                                         return
                                 }
-                                selectedCandidates.append(candidate)
-                                let inputCount: Int = candidate.inputCount
-                                var tail = bufferEvents.dropFirst(inputCount)
+                                var tail = bufferEvents.dropFirst(candidate.inputCount)
                                 while (tail.first?.isQuote ?? false) {
                                         tail = tail.dropFirst()
                                 }
-                                bufferEvents = Array<InputEvent>(tail)
-                                capitals = capitals.suffix(tail.count)
-                                inputLengthSequence = inputLengthSequence.suffix(tail.count)
+                                let tailLength = tail.count
+                                bufferEvents = bufferEvents.suffix(tailLength)
+                                capitals = capitals.suffix(tailLength)
+                                inputLengthSequence = inputLengthSequence.suffix(tailLength)
                         }
                 case .tenKey:
                         if candidate.isCantonese {
                                 selectedCandidates.append(candidate)
+                        } else {
+                                selectedCandidates = []
                         }
-                        let inputCount = candidate.inputCount
-                        let tailCount: Int = bufferCombos.count - inputCount
+                        let tailCount: Int = bufferCombos.count - candidate.inputCount
                         let suffixLength: Int = max(0, tailCount)
                         bufferCombos = bufferCombos.suffix(suffixLength)
                 }
@@ -658,28 +628,25 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let isInputMemoryOn: Bool = Options.isInputMemoryOn
                 suggestionTask = Task.detached(priority: .high) { [weak self] in
                         guard let self else { return }
-                        let containsDelimiters: Bool = await bufferEvents.contains(where: \.isSyllableLetter.negative)
-                        let containsCapitalized: Bool = await capitals.contains(true)
-                        let isPeculiar: Bool = containsDelimiters || containsCapitalized
-                        let originalText: String = await joinedBufferTexts()
-                        let processingText: String = isPeculiar ? originalText.toneConverted() : originalText
-                        let segmentation = await Segmentor.segment(events: bufferEvents)
-                        async let userLexiconCandidates: [Candidate] = isInputMemoryOn ? UserLexicon.suggest(text: processingText, segmentation: segmentation) : []
-                        async let engineCandidates: [Candidate] = Engine.suggest(origin: originalText, text: processingText, segmentation: segmentation)
+                        let segmentation = await Segmenter.segment(events: bufferEvents)
+                        async let userLexiconCandidates: [Candidate] = isInputMemoryOn ? UserLexicon.suggest(events: bufferEvents, segmentation: segmentation) : []
+                        async let engineCandidates: [Candidate] = Engine.suggest(events: bufferEvents, segmentation: segmentation)
                         let suggestions = await (userLexiconCandidates + engineCandidates).transformed(with: Options.characterStandard, isEmojiSuggestionsOn: isEmojiSuggestionsOn)
                         if Task.isCancelled.negative {
                                 await MainActor.run { [weak self] in
-                                        self?.text2mark = {
-                                                guard isPeculiar.negative else { return processingText.formattedForMark() }
-                                                guard let firstCandidate = suggestions.first else { return processingText }
-                                                guard firstCandidate.inputCount != processingText.count else { return firstCandidate.mark }
-                                                guard let bestScheme = segmentation.first else { return processingText }
-                                                let leadingText: String = bestScheme.map(\.text).joined(separator: String.space)
+                                        guard let self else { return }
+                                        self.text2mark = {
+                                                lazy var text: String = joinedBufferTexts()
+                                                let isPeculiar: Bool = capitals.contains(true) || bufferEvents.contains(where: \.isSyllableLetter.negative)
+                                                guard isPeculiar.negative else { return text.toneConverted().formattedForMark() }
+                                                guard let firstCandidate = suggestions.first else { return text }
+                                                guard firstCandidate.inputCount != bufferEvents.count else { return firstCandidate.mark }
+                                                guard let bestScheme = segmentation.first else { return text }
                                                 let leadingLength: Int = bestScheme.length
-                                                guard leadingLength != processingText.count else { return leadingText }
-                                                return leadingText + String.space + processingText.dropFirst(leadingLength)
+                                                guard leadingLength < bufferEvents.count else { return bestScheme.mark }
+                                                return bestScheme.mark + String.space + text.dropFirst(leadingLength)
                                         }()
-                                        self?.candidates = suggestions
+                                        self.candidates = suggestions
                                 }
                         }
                 }
@@ -744,20 +711,18 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         candidates = []
                         return
                 }
-                let text = bufferText.dropFirst().toneConverted()
-                let segmentation = Segmentor.segment(text: text)
-                let tailMarkedText: String = {
-                        let hasSeparatorsOrTones: Bool = text.contains(where: \.isSeparatorOrTone)
-                        guard hasSeparatorsOrTones.negative else { return text.formattedForMark() }
-                        guard let bestScheme = segmentation.first else { return text.formattedForMark() }
+                let segmentation = Segmenter.segment(events: bufferEvents)
+                let tailMark: String = {
+                        let isPeculiar: Bool = bufferEvents.contains(where: \.isLetter.negative)
+                        guard isPeculiar.negative else { return bufferText.dropFirst().toneConverted() }
+                        guard let bestScheme = segmentation.first else { return bufferText.dropFirst().toneConverted() }
                         let leadingLength: Int = bestScheme.length
-                        let leadingText: String = bestScheme.map(\.text).joined(separator: String.space)
-                        guard leadingLength != text.count else { return leadingText }
-                        let tailText = text.dropFirst(leadingLength)
-                        return leadingText + String.space + tailText
+                        guard leadingLength < (bufferEvents.count - 1) else { return bestScheme.mark }
+                        let tailText = bufferEvents.dropFirst(leadingLength + 1).map(\.text).joined()
+                        return bestScheme.mark + String.space + tailText
                 }()
-                text2mark = "q " + tailMarkedText
-                let lookup: [Candidate] = Engine.structureReverseLookup(text: text, input: bufferText, segmentation: segmentation)
+                text2mark = "q " + tailMark
+                let lookup: [Candidate] = Engine.structureReverseLookup(events: bufferEvents, input: bufferText, segmentation: segmentation)
                 candidates = lookup.transformed(to: Options.characterStandard).uniqued()
         }
 
