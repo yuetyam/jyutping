@@ -53,7 +53,11 @@ struct ToolBar: View {
                         } label: {
                                 ZStack {
                                         Color.interactiveClear
-                                        CantoneseABCSwitch(isSwitched: context.inputMethodMode.isABC)
+                                        if #available(iOSApplicationExtension 26.0, *) {
+                                                InputModeSwitch(isSwitched: context.inputMethodMode.isABC)
+                                        } else {
+                                                CantoneseABCSwitch(isSwitched: context.inputMethodMode.isABC)
+                                        }
                                 }
                         }
                         .buttonStyle(.plain)
