@@ -22,7 +22,7 @@ struct AboutView: View {
                                                 EnhancedLabel("IOSAboutTab.LabelTitle.JyutpingForMac", icon: "command.square", symbol: .safari)
                                         }
                                         SafariLink(About.SourceCodeAddress) {
-                                                EnhancedLabel("Shared.About.SourceCode", icon: "chevron.left.forwardslash.chevron.right", symbol: .safari)
+                                                EnhancedLabel("Shared.About.SourceCode", icon: "curlybraces.square", symbol: .safari)
                                         }
                                         SafariLink(About.PrivacyPolicyAddress) {
                                                 EnhancedLabel("Shared.About.PrivacyPolicy", icon: "lock.circle", symbol: .safari)

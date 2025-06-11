@@ -19,7 +19,7 @@ struct AboutView: View {
 
                                 VStack {
                                         LinkLabel(icon: "globe.asia.australia", title: "AboutView.Website", link: About.WebsiteAddress)
-                                        LinkLabel(icon: "chevron.left.forwardslash.chevron.right", title: "AboutView.SourceCode", link: About.SourceCodeAddress)
+                                        LinkLabel(icon: "curlybraces.square", title: "AboutView.SourceCode", link: About.SourceCodeAddress)
                                         LinkLabel(icon: "lock.circle", title: "AboutView.PrivacyPolicy", link: About.PrivacyPolicyAddress)
                                         LinkLabel(icon: "questionmark.circle", title: "AboutView.FAQ", link: About.FAQAddress)
                                 }

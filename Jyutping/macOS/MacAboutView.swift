@@ -20,7 +20,7 @@ struct MacAboutView: View {
                                 .block()
                                 VStack {
                                         LinkLabel(icon: "globe.asia.australia", title: "Shared.About.Website", link: About.WebsiteAddress)
-                                        LinkLabel(icon: "chevron.left.forwardslash.chevron.right", title: "Shared.About.SourceCode", link: About.SourceCodeAddress)
+                                        LinkLabel(icon: "curlybraces.square", title: "Shared.About.SourceCode", link: About.SourceCodeAddress)
                                         LinkLabel(icon: "lock.circle", title: "Shared.About.PrivacyPolicy", link: About.PrivacyPolicyAddress)
                                         LinkLabel(icon: "questionmark.circle", title: "Shared.About.FAQ", link: About.FAQAddress)
                                 }
