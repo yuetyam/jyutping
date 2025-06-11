@@ -10,14 +10,16 @@ struct PresetConstant {
         /// CandidateBoard top-right collapse button
         static let collapseHeight: CGFloat = 44
 
+        /// KeyView corner radius
+        static let keyCornerRadius: CGFloat = 7
+
+        /// Large size KeyView corner radius
+        static let largeKeyCornerRadius: CGFloat = 7
+
         static let halfWidth: String = "半寬"
         static let fullWidth: String = "全寬"
 
         static let spaceKeyLongPressHint: AttributedString = "← →"
-
-        static let kGW: String = "gw"
-        static let kDoubleGW: String = "gwgw"
-        static let kKW: String = "kw"
 
         /// 10-Key Keyboard
         static let defaultSidebarTexts: [String] = ["，", "。", "？", "！", "、", "：", "／", "…", "……", "~", "～"]

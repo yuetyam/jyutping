@@ -80,7 +80,7 @@ struct CangjieInputKey: View {
                                         .padding(.vertical, verticalPadding)
                                         .padding(.horizontal, horizontalPadding)
                         } else {
-                                RoundedRectangle(cornerRadius: 5, style: .continuous)
+                                RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius, style: .continuous)
                                         .fill(isTouching ? activeColor : keyColor)
                                         .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                         .padding(.vertical, verticalPadding)

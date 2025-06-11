@@ -11,23 +11,23 @@ extension HorizontalEdge {
 
 struct ExpansiveBubbleShape: Shape {
         
-        /// Description
+        /// Create an expansive bubble Shape
         /// - Parameters:
         ///   - keyLocale: Key location, left half (leading) or right half (trailing).
-        ///   - expansionCount: Count of the extras blocks
-        ///   - keyCornerRadius: keyCornerRadius description
-        ///   - previewCornerRadius: previewCornerRadius description
-        init(keyLocale: HorizontalEdge, expansionCount: Int, keyCornerRadius: CGFloat = 5, previewCornerRadius: CGFloat = 10) {
+        ///   - expansionCount: Count of the extra blocks
+        ///   - keyCornerRadius: Base view corner radius
+        ///   - previewCornerRadius: Bubble preview corner radius
+        init(keyLocale: HorizontalEdge, expansionCount: Int, keyCornerRadius: CGFloat = PresetConstant.keyCornerRadius, previewCornerRadius: CGFloat = PresetConstant.keyCornerRadius * 2) {
                 self.keyLocale = keyLocale
                 self.expansionCount = expansionCount
                 self.keyCornerRadius = keyCornerRadius
                 self.previewCornerRadius = previewCornerRadius
         }
 
-        let keyLocale: HorizontalEdge
-        let expansionCount: Int
-        let keyCornerRadius: CGFloat
-        let previewCornerRadius: CGFloat
+        private let keyLocale: HorizontalEdge
+        private let expansionCount: Int
+        private let keyCornerRadius: CGFloat
+        private let previewCornerRadius: CGFloat
 
         func path(in rect: CGRect) -> Path {
                 let origin: CGPoint = CGPoint(x: rect.midX, y: rect.maxY)

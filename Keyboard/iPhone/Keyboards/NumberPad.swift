@@ -71,7 +71,7 @@ private struct NumberPadKey: View {
         var body: some View {
                 ZStack {
                         Color.interactiveClear
-                        RoundedRectangle(cornerRadius: 5, style: .continuous)
+                        RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius, style: .continuous)
                                 .fill(isTouching ? activeKeyColor : keyColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(4)

@@ -91,7 +91,6 @@ struct SettingsView: View {
                                         .frame(maxHeight: .infinity)
                                 }
                         }
-                        .background(Material.ultraThin)
                         .frame(height: 44)
                         List {
                                 Picker("SettingsView.CharacterStandard.PickerTitle", selection: $characterStandard) {

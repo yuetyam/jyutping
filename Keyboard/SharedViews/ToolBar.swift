@@ -53,11 +53,11 @@ struct ToolBar: View {
                         } label: {
                                 ZStack {
                                         Color.interactiveClear
-                                        CantoneseABCSwitch(isCantoneseSelected: context.inputMethodMode.isCantonese)
+                                        CantoneseABCSwitch(isSwitched: context.inputMethodMode.isABC)
                                 }
                         }
                         .buttonStyle(.plain)
-                        .frame(width: 80, height: buttonHeight)
+                        .frame(width: 75, height: buttonHeight)
 
                         Spacer()
                         ToolBarButton(

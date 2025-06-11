@@ -2,10 +2,10 @@ import SwiftUI
 
 struct PadExpansiveBubbleShape: Shape {
 
-        /// Description
+        /// Create an expansive bubble Shape
         /// - Parameters:
         ///   - keyLocale: Key location, left half (leading) or right half (trailing).
-        ///   - expansionCount: Count of the extras blocks.
+        ///   - expansionCount: Count of the extra blocks.
         ///   - cornerRadius: Arc CornerRadius.
         init(keyLocale: HorizontalEdge, expansionCount: Int, cornerRadius: CGFloat = 5) {
                 self.keyLocale = keyLocale

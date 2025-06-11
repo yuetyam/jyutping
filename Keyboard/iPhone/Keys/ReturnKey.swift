@@ -70,7 +70,7 @@ struct ReturnKey: View {
                 }()
                 ZStack {
                         Color.interactiveClear
-                        RoundedRectangle(cornerRadius: 5, style: .continuous)
+                        RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius, style: .continuous)
                                 .fill(backColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(.vertical, verticalPadding)
