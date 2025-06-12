@@ -19,16 +19,17 @@ struct Stroke {
                         guard word.count == 1 else { return nil }
                         return word.trimmingCharacters(in: .whitespaces)
                 }
-                let items = characters.uniqued().map { item -> [StrokeEntry] in
+                defer {
+                        sqlite3_close_v2(database)
+                }
+                return characters.uniqued().flatMap({ item -> [StrokeEntry] in
                         let strokeMatches = match(text: item)
                         guard !(strokeMatches.isEmpty) else { return [] }
                         let entries = strokeMatches.map { stroke -> StrokeEntry in
                                 return StrokeEntry(word: item, stroke: stroke, complex: stroke.count, code: stroke.hash)
                         }
                         return entries
-                }
-                sqlite3_close_v2(database)
-                return items.flatMap({ $0 })
+                }).uniqued()
         }
 
         private static func match<T: StringProtocol>(text: T) -> [String] {

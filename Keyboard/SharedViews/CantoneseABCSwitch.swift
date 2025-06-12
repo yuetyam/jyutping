@@ -16,14 +16,14 @@ struct CantoneseABCSwitch: View {
 
         var body: some View {
                 let selectedColor: Color = switch colorScheme {
-                case .light: .light
-                case .dark: .dark
-                @unknown default: .light
+                case .light: .lightInput
+                case .dark: .darkInput
+                @unknown default: .lightInput
                 }
                 let backColor: Color = switch colorScheme {
-                case .light: .lightEmphatic
-                case .dark: .darkEmphatic
-                @unknown default: .lightEmphatic
+                case .light: .activeLightInput
+                case .dark: .activeDarkInput
+                @unknown default: .activeLightInput
                 }
                 HStack(spacing: 0) {
                         Text(verbatim: Options.characterStandard.isSimplified ? "粤" : "粵")
@@ -54,9 +54,9 @@ struct InputModeSwitch: View {
 
         var body: some View {
                 let selectedColor: Color = switch colorScheme {
-                case .light: .light
-                case .dark: .darkEmphatic
-                @unknown default: .light
+                case .light: .lightInput
+                case .dark: .darkInput
+                @unknown default: .lightInput
                 }
                 HStack(spacing: 0) {
                         Text(verbatim: Options.characterStandard.isSimplified ? "粤" : "粵")
