@@ -6,24 +6,25 @@ struct EditingPanelCopyKey: View {
         @EnvironmentObject private var context: KeyboardViewController
 
         @Environment(\.colorScheme) private var colorScheme
+
         private var keyColor: Color {
                 switch colorScheme {
                 case .light:
-                        return .lightEmphatic
+                        return .lightAction
                 case .dark:
-                        return .darkEmphatic
+                        return .darkAction
                 @unknown default:
-                        return .lightEmphatic
+                        return .lightAction
                 }
         }
-        private var activeKeyColor: Color {
+        private var keyActiveColor: Color {
                 switch colorScheme {
                 case .light:
-                        return .light
+                        return .activeLightAction
                 case .dark:
-                        return .dark
+                        return .activeDarkAction
                 @unknown default:
-                        return .light
+                        return .activeLightAction
                 }
         }
 
@@ -32,8 +33,8 @@ struct EditingPanelCopyKey: View {
         var body: some View {
                 ZStack {
                         Color.interactiveClear
-                        RoundedRectangle(cornerRadius: 6, style: .continuous)
-                                .fill(isTouching ? activeKeyColor : keyColor)
+                        RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous)
+                                .fill(isTouching ? keyActiveColor : keyColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(4)
                         VStack(spacing: 4) {

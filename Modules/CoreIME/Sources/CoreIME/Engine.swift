@@ -71,10 +71,10 @@ extension Engine {
 
         private static func dispatch<T: RandomAccessCollection<InputEvent>>(events: T, segmentation: Segmentation, anchorsStatement: OpaquePointer?, pingStatement: OpaquePointer?, strictStatement: OpaquePointer?) -> [Candidate] {
                 let syllableEvents = events.filter(\.isSyllableLetter)
-                let candidates: [Candidate] =  switch (segmentation.first?.length ?? 0) {
+                let candidates: [Candidate] =  switch (segmentation.first?.first?.alias.count ?? 0) {
                 case 0:
                         processVerbatim(events: syllableEvents, text: syllableEvents.map(\.text).joined(), anchorsStatement: anchorsStatement, pingStatement: pingStatement)
-                case 1 where (segmentation.count == 1) && (syllableEvents.count > 1):
+                case 1 where syllableEvents.count > 1:
                         process(events: syllableEvents, segmentation: segmentation, anchorsStatement: anchorsStatement, pingStatement: pingStatement, strictStatement: strictStatement) + processVerbatim(events: syllableEvents, text: syllableEvents.map(\.text).joined(), anchorsStatement: anchorsStatement, pingStatement: pingStatement)
                 default:
                         process(events: syllableEvents, segmentation: segmentation, anchorsStatement: anchorsStatement, pingStatement: pingStatement, strictStatement: strictStatement)

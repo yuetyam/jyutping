@@ -15,34 +15,35 @@ struct SymbolInputKey: View {
         @EnvironmentObject private var context: KeyboardViewController
 
         @Environment(\.colorScheme) private var colorScheme
+
         private var keyColor: Color {
                 switch colorScheme {
                 case .light:
-                        return .light
+                        return .lightInput
                 case .dark:
-                        return .dark
+                        return .darkInput
                 @unknown default:
-                        return .light
+                        return .lightInput
                 }
         }
         private var keyPreviewColor: Color {
                 switch colorScheme {
                 case .light:
-                        return .light
+                        return .lightInput
                 case .dark:
-                        return .darkOpacity
+                        return .solidDarkInput
                 @unknown default:
-                        return .light
+                        return .lightInput
                 }
         }
         private var keyActiveColor: Color {
                 switch colorScheme {
                 case .light:
-                        return .lightEmphatic
+                        return .activeLightInput
                 case .dark:
-                        return .darkEmphatic
+                        return .activeDarkInput
                 @unknown default:
-                        return .lightEmphatic
+                        return .activeLightInput
                 }
         }
 

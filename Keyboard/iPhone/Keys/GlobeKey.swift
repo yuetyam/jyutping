@@ -5,14 +5,15 @@ struct GlobeKey: View {
         @EnvironmentObject private var context: KeyboardViewController
 
         @Environment(\.colorScheme) private var colorScheme
+
         private var keyColor: Color {
                 switch colorScheme {
                 case .light:
-                        return .lightEmphatic
+                        return .lightAction
                 case .dark:
-                        return .darkEmphatic
+                        return .darkAction
                 @unknown default:
-                        return .lightEmphatic
+                        return .lightAction
                 }
         }
 

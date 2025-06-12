@@ -6,24 +6,25 @@ struct SpaceKey: View {
         @EnvironmentObject private var context: KeyboardViewController
 
         @Environment(\.colorScheme) private var colorScheme
+
         private var keyColor: Color {
                 switch colorScheme {
                 case .light:
-                        return .light
+                        return .lightInput
                 case .dark:
-                        return .dark
+                        return .darkInput
                 @unknown default:
-                        return .light
+                        return .lightInput
                 }
         }
-        private var activeKeyColor: Color {
+        private var keyActiveColor: Color {
                 switch colorScheme {
                 case .light:
-                        return .lightEmphatic
+                        return .activeLightInput
                 case .dark:
-                        return .darkEmphatic
+                        return .activeDarkInput
                 @unknown default:
-                        return .lightEmphatic
+                        return .activeLightInput
                 }
         }
 
@@ -46,7 +47,7 @@ struct SpaceKey: View {
                 ZStack {
                         Color.interactiveClear
                         RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius, style: .continuous)
-                                .fill(isTouching ? activeKeyColor : keyColor)
+                                .fill(isTouching ? keyActiveColor : keyColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(.vertical, verticalPadding)
                                 .padding(.horizontal, horizontalPadding)
