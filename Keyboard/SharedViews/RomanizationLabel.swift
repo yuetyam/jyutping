@@ -5,26 +5,23 @@ import CommonExtensions
 struct RomanizationLabel: View {
 
         var body: some View {
-                Text(attributed(hasRomanization))
+                Text(attributed())
                         .minimumScaleFactor(0.2)
                         .lineLimit(1)
         }
 
-        // TODO: Maybe use {romanization: String?} instead?
-        init(candidate: Candidate, toneStyle: CommentToneStyle, compatibleMode: Bool) {
-                self.hasRomanization = candidate.isCantonese
-                self.romanization = candidate.romanization
+        init(romanization: String?, toneStyle: CommentToneStyle, compatibleMode: Bool) {
+                self.romanization = romanization
                 self.toneStyle = toneStyle
                 self.compatibleMode = compatibleMode
         }
 
-        private let hasRomanization: Bool
-        private let romanization: String
+        private let romanization: String?
         private let toneStyle: CommentToneStyle
         private let compatibleMode: Bool
 
-        private func attributed(_ hasRomanization: Bool) -> AttributedString {
-                guard hasRomanization else { return AttributedString.space }
+        private func attributed() -> AttributedString {
+                guard let romanization else { return AttributedString.space }
                 let syllables = romanization.split(separator: Character.space)
                 let phones = syllables.map({ $0.filter(\.isLowercaseBasicLatinLetter) })
                 let tones = syllables.map({ $0.filter(\.isCantoneseToneDigit) })

@@ -24,6 +24,7 @@ struct CandidateBarScrollViewIOS18: View {
                                 ForEach(context.candidates.indices, id: \.self) { index in
                                         let candidate = context.candidates[index]
                                         let text: AttributedString = candidate.text.attributed(for: characterStandard)
+                                        let romanization: String? = candidate.isCantonese ? candidate.romanization : nil
                                         ScrollViewButton(
                                                 longPressTime: 400_000_000, // 0.4s
                                                 longPressAction: {
@@ -52,7 +53,7 @@ struct CandidateBarScrollViewIOS18: View {
                                                         Color.interactiveClear
                                                         ZStack(alignment: commentStyle.isBelow ? .bottom : .top) {
                                                                 Color.clear
-                                                                RomanizationLabel(candidate: candidate, toneStyle: toneStyle, compatibleMode: isCompatibleModeOn)
+                                                                RomanizationLabel(romanization: romanization, toneStyle: toneStyle, compatibleMode: isCompatibleModeOn)
                                                                         .frame(height: 20)
                                                                         .padding(.horizontal, 1)
                                                                         .padding(.bottom, commentStyle.isBelow ? 6 : 0)

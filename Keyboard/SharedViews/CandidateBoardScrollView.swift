@@ -32,6 +32,7 @@ struct CandidateBoardScrollView: View {
                                                         ForEach(row.elements) { element in
                                                                 let candidate = element.candidate
                                                                 let text: AttributedString = candidate.text.attributed(for: characterStandard)
+                                                                let romanization: String? = candidate.isCantonese ? candidate.romanization : nil
                                                                 ScrollViewButton(
                                                                         longPressTime: 400_000_000, // 0.4s
                                                                         longPressAction: {
@@ -61,7 +62,7 @@ struct CandidateBoardScrollView: View {
                                                                                 switch commentStyle {
                                                                                 case .aboveCandidates:
                                                                                         VStack(spacing: -2) {
-                                                                                                RomanizationLabel(candidate: candidate, toneStyle: toneStyle, compatibleMode: isCompatibleModeOn)
+                                                                                                RomanizationLabel(romanization: romanization, toneStyle: toneStyle, compatibleMode: isCompatibleModeOn)
                                                                                                 Text(text)
                                                                                                         .font(isCompactKeyboard ? .candidate : .iPadCandidate)
                                                                                                         .minimumScaleFactor(0.4)
@@ -74,7 +75,7 @@ struct CandidateBoardScrollView: View {
                                                                                                         .font(isCompactKeyboard ? .candidate : .iPadCandidate)
                                                                                                         .minimumScaleFactor(0.4)
                                                                                                         .lineLimit(1)
-                                                                                                RomanizationLabel(candidate: candidate, toneStyle: toneStyle, compatibleMode: isCompatibleModeOn)
+                                                                                                RomanizationLabel(romanization: romanization, toneStyle: toneStyle, compatibleMode: isCompatibleModeOn)
                                                                                         }
                                                                                 case .noComments:
                                                                                         Text(text)
