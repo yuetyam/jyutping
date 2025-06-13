@@ -124,77 +124,39 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 }
         }
 
-        /// Compose text
-        /// - Parameter text: Text to insert
-        ///
-        /// Some Flutter apps can't be compatible with `setMarkedText() & insertText()`
-        ///
-        /// So we use `setMarkedText() & unmarkText()`
-        ///
-        /// In iOS 17, we may still need to use `insertText()` and do some hacks.
         private func input(_ text: String) {
                 guard text.isNotEmpty else { return }
                 canMarkText = false
-                let previousContext: String = textDocumentProxy.documentContextBeforeInput ?? String.empty
-                let previousLength: Int = previousContext.count
-                let location: Int = text.utf16.count
-                let range: NSRange = NSRange(location: location, length: 0)
-                textDocumentProxy.setMarkedText(text, selectedRange: range)
-                textDocumentProxy.unmarkText()
-                defer {
-                        Task {
-                                try await Task.sleep(nanoseconds: 40_000_000) // 0.04s
-                                canMarkText = true
-                        }
-                }
-                let currentContext: String = textDocumentProxy.documentContextBeforeInput ?? String.empty
-                let currentLength: Int = currentContext.count
-                guard currentLength == previousLength else { return }
-                guard currentContext == previousContext else { return }
-                textDocumentProxy.setMarkedText(String.empty, selectedRange: NSRange(location: 0, length: 0))
-                textDocumentProxy.unmarkText()
-                textDocumentProxy.insertText(text)
+                performInput(text)
         }
         private func inputBufferText(followedBy text2insert: String? = nil) {
                 bufferCombos = []
-                guard bufferEvents.isNotEmpty else {
-                        guard let text2insert, text2insert.isNotEmpty else { return }
-                        textDocumentProxy.insertText(text2insert)
-                        clearBuffer()
-                        return
-                }
-                canMarkText = false
                 let text: String = {
                         guard let text2insert, text2insert.isNotEmpty else { return joinedBufferTexts() }
                         return joinedBufferTexts() + text2insert
                 }()
+                guard text.isNotEmpty else { return }
+                canMarkText = false
                 clearBuffer()
+                performInput(text)
+        }
+        private func performInput(_ text: String) {
+                textDocumentProxy.setMarkedText(String.empty, selectedRange: NSRange(location: 0, length: 0))
+                textDocumentProxy.unmarkText()
                 let previousContext: String = textDocumentProxy.documentContextBeforeInput ?? String.empty
                 let previousLength: Int = previousContext.count
+                textDocumentProxy.insertText(text)
+                defer { canMarkText = true }
+                let modifiedContext: String = textDocumentProxy.documentContextBeforeInput ?? String.empty
+                guard modifiedContext.count == previousLength else { return }
+                guard modifiedContext == previousContext else { return }
                 let location: Int = text.utf16.count
                 let range: NSRange = NSRange(location: location, length: 0)
                 textDocumentProxy.setMarkedText(text, selectedRange: range)
                 textDocumentProxy.unmarkText()
-                defer {
-                        Task {
-                                try await Task.sleep(nanoseconds: 80_000_000) // 0.08s
-                                canMarkText = true
-                        }
-                }
-                defer {
-                        Task {
-                                try await Task.sleep(nanoseconds: 40_000_000) // 0.04s
-                                let location: Int = String.zeroWidthSpace.utf16.count
-                                let range: NSRange = NSRange(location: location, length: 0)
-                                textDocumentProxy.setMarkedText(String.zeroWidthSpace, selectedRange: range)
-                        }
-                }
                 let currentContext: String = textDocumentProxy.documentContextBeforeInput ?? String.empty
-                let currentLength: Int = currentContext.count
-                guard currentLength == previousLength else { return }
+                guard currentContext.count == previousLength else { return }
                 guard currentContext == previousContext else { return }
-                textDocumentProxy.setMarkedText(String.empty, selectedRange: NSRange(location: 0, length: 0))
-                textDocumentProxy.unmarkText()
                 textDocumentProxy.insertText(text)
         }
 
