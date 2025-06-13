@@ -6,24 +6,25 @@ struct TenKeyReturnKey: View {
         @EnvironmentObject private var context: KeyboardViewController
 
         @Environment(\.colorScheme) private var colorScheme
+
         private var keyColor: Color {
                 switch colorScheme {
                 case .light:
-                        return .lightEmphatic
+                        return .lightAction
                 case .dark:
-                        return .darkEmphatic
+                        return .darkAction
                 @unknown default:
-                        return .lightEmphatic
+                        return .lightAction
                 }
         }
-        private var activeKeyColor: Color {
+        private var keyActiveColor: Color {
                 switch colorScheme {
                 case .light:
-                        return .light
+                        return .activeLightAction
                 case .dark:
-                        return .dark
+                        return .activeDarkAction
                 @unknown default:
-                        return .light
+                        return .activeLightAction
                 }
         }
 
@@ -33,7 +34,7 @@ struct TenKeyReturnKey: View {
                 let isDefaultReturn: Bool = context.returnKeyType.isDefaultReturn
                 let keyState: ReturnKeyState = context.returnKeyState
                 let backColor: Color = {
-                        guard isTouching.negative else { return activeKeyColor }
+                        guard isTouching.negative else { return keyActiveColor }
                         switch keyState {
                         case .bufferingSimplified, .bufferingTraditional:
                                 return keyColor
@@ -56,7 +57,7 @@ struct TenKeyReturnKey: View {
                 }()
                 ZStack {
                         Color.interactiveClear
-                        RoundedRectangle(cornerRadius: 5, style: .continuous)
+                        RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous)
                                 .fill(backColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(3)
