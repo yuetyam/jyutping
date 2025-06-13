@@ -9,7 +9,7 @@ struct TenKeyStrokeKeyboard: View {
                         HStack(spacing: 0) {
                                 VStack(spacing: 0) {
                                         HStack(spacing: 0) {
-                                                StrokePlaceholderActionKey(heightUnitTimes: 3).disabled(true)
+                                                StrokePlaceholderKey(heightUnitTimes: 3).disabled(true)
                                                 VStack(spacing: 0) {
                                                         HStack(spacing: 0) {
                                                                 TenKeyStrokeKey(1)
@@ -22,20 +22,20 @@ struct TenKeyStrokeKeyboard: View {
                                                                 TenKeyStrokeKey(6)
                                                         }
                                                         HStack(spacing: 0) {
-                                                                StrokePlaceholderInputKey().disabled(true)
-                                                                StrokePlaceholderInputKey().disabled(true)
-                                                                StrokePlaceholderInputKey().disabled(true)
+                                                                StrokePlaceholderKey().disabled(true)
+                                                                StrokePlaceholderKey().disabled(true)
+                                                                StrokePlaceholderKey().disabled(true)
                                                         }
                                                 }
                                         }
                                         HStack(spacing: 0) {
-                                                StrokePlaceholderActionKey(heightUnitTimes: 1).disabled(true)
+                                                StrokePlaceholderKey().disabled(true)
                                                 TenKeySpaceKey()
                                         }
                                 }
                                 VStack(spacing: 0) {
                                         TenKeyBackspaceKey()
-                                        StrokePlaceholderActionKey(heightUnitTimes: 1).disabled(true)
+                                        StrokePlaceholderKey().disabled(true)
                                         TenKeyReturnKey()
                                 }
                         }
@@ -57,24 +57,25 @@ private struct TenKeyStrokeKey: View {
         @EnvironmentObject private var context: KeyboardViewController
 
         @Environment(\.colorScheme) private var colorScheme
+
         private var keyColor: Color {
                 switch colorScheme {
                 case .light:
-                        return .light
+                        return .lightInput
                 case .dark:
-                        return .dark
+                        return .darkInput
                 @unknown default:
-                        return .light
+                        return .lightInput
                 }
         }
-        private var activeKeyColor: Color {
+        private var keyActiveColor: Color {
                 switch colorScheme {
                 case .light:
-                        return .lightEmphatic
+                        return .activeLightInput
                 case .dark:
-                        return .darkEmphatic
+                        return .activeDarkInput
                 @unknown default:
-                        return .lightEmphatic
+                        return .activeLightInput
                 }
         }
 
@@ -83,8 +84,8 @@ private struct TenKeyStrokeKey: View {
         var body: some View {
                 ZStack {
                         Color.interactiveClear
-                        RoundedRectangle(cornerRadius: 5, style: .continuous)
-                                .fill(isTouching ? activeKeyColor : keyColor)
+                        RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous)
+                                .fill(isTouching ? keyActiveColor : keyColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(3)
                         Text(verbatim: keyText).font(.letterInputKeyCompact)
@@ -106,44 +107,15 @@ private struct TenKeyStrokeKey: View {
         }
 }
 
-private struct StrokePlaceholderInputKey: View {
+private struct StrokePlaceholderKey: View {
         @EnvironmentObject private var context: KeyboardViewController
-        @Environment(\.colorScheme) private var colorScheme
-        private var keyColor: Color {
-                switch colorScheme {
-                case .light:
-                        return .light
-                case .dark:
-                        return .dark
-                @unknown default:
-                        return .light
-                }
+        init(heightUnitTimes: CGFloat = 1) {
+                self.heightUnitTimes = heightUnitTimes
         }
+        private let heightUnitTimes: CGFloat
         var body: some View {
-                RoundedRectangle(cornerRadius: 5, style: .continuous)
-                        .fill(keyColor)
-                        .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                        .padding(3)
-                        .frame(width: context.tenKeyWidthUnit, height: context.heightUnit)
-        }
-}
-private struct StrokePlaceholderActionKey: View {
-        let heightUnitTimes: CGFloat
-        @EnvironmentObject private var context: KeyboardViewController
-        @Environment(\.colorScheme) private var colorScheme
-        private var keyColor: Color {
-                switch colorScheme {
-                case .light:
-                        return .lightEmphatic
-                case .dark:
-                        return .darkEmphatic
-                @unknown default:
-                        return .lightEmphatic
-                }
-        }
-        var body: some View {
-                RoundedRectangle(cornerRadius: 5, style: .continuous)
-                        .fill(keyColor)
+                RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous)
+                        .fill(Material.regular)
                         .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                         .padding(3)
                         .frame(width: context.tenKeyWidthUnit, height: context.heightUnit * heightUnitTimes)
