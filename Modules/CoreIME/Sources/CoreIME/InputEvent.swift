@@ -110,6 +110,11 @@ extension InputEvent {
                 }
         }
 
+        /// v, x, q, [1-6]
+        public var isToneEvent: Bool {
+                return isToneLetter || isToneNumber
+        }
+
         /// r, v, x, q
         public var isReverseLookupTrigger: Bool {
                 switch self {

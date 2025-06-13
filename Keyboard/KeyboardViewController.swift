@@ -261,26 +261,45 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         }
 
         func process(_ event: InputEvent, isCapitalized: Bool) {
-                let isCantoneseComposeMode: Bool = inputMethodMode.isCantonese && keyboardForm.isBufferrable
-                if isCantoneseComposeMode {
-                        bufferEvents.append(event)
-                        capitals.append(isCapitalized)
-                        inputLengthSequence.append(1)
-                        adjustKeyboard()
-                } else {
-                        let text: String = isCapitalized ? event.text.uppercased() : event.text
-                        textDocumentProxy.insertText(text)
+                defer {
                         adjustKeyboard()
                 }
+                lazy var text: String = isCapitalized ? event.text.uppercased() : event.text
+                let isCantoneseComposeMode: Bool = inputMethodMode.isCantonese && keyboardForm.isBufferrable
+                guard isCantoneseComposeMode else {
+                        textDocumentProxy.insertText(text)
+                        return
+                }
+                let shouldAppendEvent: Bool = event.isLetter || event.isToneNumber
+                guard shouldAppendEvent else {
+                        if inputStage.isBuffering {
+                                inputBufferText(followedBy: text)
+                        } else {
+                                textDocumentProxy.insertText(text)
+                        }
+                        return
+                }
+                bufferEvents.append(event)
+                capitals.append(isCapitalized)
+                inputLengthSequence.append(1)
         }
         func process(events: [InputEvent], isCapitalized: Bool) {
                 defer {
                         adjustKeyboard()
                 }
+                lazy var text: String = isCapitalized ? events.map(\.text).joined().uppercased() : events.map(\.text).joined()
                 let isCantoneseComposeMode: Bool = inputMethodMode.isCantonese && keyboardForm.isBufferrable
                 guard isCantoneseComposeMode else {
-                        let text: String = isCapitalized ? events.map(\.text).joined().uppercased() : events.map(\.text).joined()
                         textDocumentProxy.insertText(text)
+                        return
+                }
+                let shouldAppendEvent: Bool = (events.first?.isLetter ?? false) || (events.first?.isToneNumber ?? false)
+                guard shouldAppendEvent else {
+                        if inputStage.isBuffering {
+                                inputBufferText(followedBy: text)
+                        } else {
+                                textDocumentProxy.insertText(text)
+                        }
                         return
                 }
                 let shouldConvertEvents: Bool = keyboardLayout.isTripleStroke && (events == InputEvent.GWEvents) && (inputLengthSequence.last == 2) && (bufferEvents.last == .letterW)

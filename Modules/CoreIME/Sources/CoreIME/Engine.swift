@@ -79,7 +79,7 @@ extension Engine {
                 default:
                         process(events: syllableEvents, segmentation: segmentation, anchorsStatement: anchorsStatement, pingStatement: pingStatement, strictStatement: strictStatement)
                 }
-                switch (events.contains(where: \.isQuote), events.contains(where: \.isToneLetter)) {
+                switch (events.contains(where: \.isQuote), events.contains(where: \.isToneEvent)) {
                 case (false, false):
                         return candidates
                 case (true, true):
