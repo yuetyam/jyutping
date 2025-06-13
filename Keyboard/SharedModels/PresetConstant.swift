@@ -14,7 +14,7 @@ struct PresetConstant {
         static let keyCornerRadius: CGFloat = 7
 
         /// Large size KeyView corner radius
-        static let largeKeyCornerRadius: CGFloat = 7
+        static let largeKeyCornerRadius: CGFloat = 8
 
         static let halfWidth: String = "半寬"
         static let fullWidth: String = "全寬"

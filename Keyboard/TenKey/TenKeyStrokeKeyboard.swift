@@ -6,6 +6,9 @@ struct TenKeyStrokeKeyboard: View {
         var body: some View {
                 VStack(spacing: 0) {
                         CandidateBar()
+                        if Options.needsNumberRow {
+                                NumberRow()
+                        }
                         HStack(spacing: 0) {
                                 VStack(spacing: 0) {
                                         HStack(spacing: 0) {

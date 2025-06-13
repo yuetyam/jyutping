@@ -13,6 +13,9 @@ struct TripleStrokeKeyboard: View {
                         } else {
                                 ToolBar()
                         }
+                        if Options.needsNumberRow {
+                                NumberRow()
+                        }
                         HStack(spacing: 0 ) {
                                 ExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("aa", header: "1"), members: [KeyElement("aa"), KeyElement("1"), KeyElement("q")]))
                                 ExpansibleInputKey(keyLocale: .leading, event: .letterW, keyModel: KeyModel(primary: KeyElement("w", header: "2"), members: [KeyElement("w"), KeyElement("2")]))

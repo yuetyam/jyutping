@@ -36,6 +36,7 @@ struct SettingsView: View {
         @State private var keyboardLayout: KeyboardLayout = KeyboardLayout.fetchSavedLayout()
         @State private var isKeyPadNumericLayout: Bool = NumericLayout.fetchSavedLayout().isNumberKeyPad
         @State private var isTenKeyStrokeLayout: Bool = StrokeLayout.fetchSavedLayout().isTenKey
+        @State private var needsNumberRow: Bool = Options.needsNumberRow
         @State private var showLowercaseKeys: Bool = Options.showLowercaseKeys
         @State private var keyTextPreview: Bool = Options.keyTextPreview
         @State private var commentStyle: CommentStyle = Options.commentStyle
@@ -154,8 +155,8 @@ struct SettingsView: View {
                                         context.updateKeyboardLayout(to: newLayout)
                                 }
 
-                                if context.isRunningOnPhone {
-                                        Section {
+                                Section {
+                                        if context.isRunningOnPhone {
                                                 Toggle("SettingsView.NumericLayout.ToggleTitle", isOn: $isKeyPadNumericLayout)
                                                         .onChange(of: isKeyPadNumericLayout) { isOn in
                                                                 AudioFeedback.modified()
@@ -168,10 +169,12 @@ struct SettingsView: View {
                                                                 let newLayout: StrokeLayout = isOn ? .tenKey : .default
                                                                 context.updateStrokeLayout(to: newLayout)
                                                         }
+                                                Toggle("SettingsView.NumberRow.ToggleTitle", isOn: $needsNumberRow)
+                                                        .onChange(of: needsNumberRow) { isOn in
+                                                                AudioFeedback.modified()
+                                                                context.updateNumberRowState(to: isOn)
+                                                        }
                                         }
-                                }
-
-                                Section {
                                         Toggle("SettingsView.ShowLowercaseKeys.ToggleTitle", isOn: $showLowercaseKeys)
                                                 .onChange(of: showLowercaseKeys) { newState in
                                                         AudioFeedback.modified()

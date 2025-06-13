@@ -24,6 +24,16 @@ struct Options {
                 UserDefaults.standard.set(value, forKey: OptionsKey.AudioFeedback)
         }
 
+        nonisolated(unsafe) private(set) static var needsNumberRow: Bool = {
+                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.NumberRow)
+                return savedValue == 1
+        }()
+        static func updateNumberRowState(to isOn: Bool) {
+                needsNumberRow = isOn
+                let value: Int = isOn ? 1 : 2
+                UserDefaults.standard.set(value, forKey: OptionsKey.NumberRow)
+        }
+
         nonisolated(unsafe) private(set) static var showLowercaseKeys: Bool = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.KeyCase)
                 switch savedValue {
@@ -168,6 +178,7 @@ struct OptionsKey {
         static let KeyboardLayout: String = "keyboard_layout"
         static let NumericLayout: String = "NumericLayout"
         static let StrokeLayout: String = "StrokeLayout"
+        static let NumberRow: String = "NumberRow"
         static let KeyCase: String = "KeyCase"
         static let KeyTextPreview: String = "KeyPreview"
         static let CommentStyle: String = "jyutping_display"

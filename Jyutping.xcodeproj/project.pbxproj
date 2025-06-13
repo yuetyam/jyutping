@@ -106,7 +106,7 @@
 		371B6F952B3B342F005BB31C /* ShiftKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F112B3B342E005BB31C /* ShiftKey.swift */; };
 		371B6F962B3B342F005BB31C /* CantoneseSymbolicKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F122B3B342E005BB31C /* CantoneseSymbolicKeyboard.swift */; };
 		371B6F982B3B342F005BB31C /* CangjieKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F142B3B342E005BB31C /* CangjieKeyboard.swift */; };
-		371B6F992B3B342F005BB31C /* AlphabeticKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F152B3B342E005BB31C /* AlphabeticKeyboard.swift */; };
+		371B6F992B3B342F005BB31C /* CantoneseKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F152B3B342E005BB31C /* CantoneseKeyboard.swift */; };
 		371B6F9A2B3B342F005BB31C /* BackspaceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F162B3B342E005BB31C /* BackspaceKey.swift */; };
 		371B6F9B2B3B342F005BB31C /* SpaceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F172B3B342E005BB31C /* SpaceKey.swift */; };
 		371B6F9C2B3B342F005BB31C /* ReturnKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F182B3B342E005BB31C /* ReturnKey.swift */; };
@@ -246,6 +246,7 @@
 		376B84942BFC2C1C0029A0CF /* BottomCommentStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376B84932BFC2C1C0029A0CF /* BottomCommentStackView.swift */; };
 		376B84962BFC2CB50029A0CF /* RomanizationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376B84952BFC2CB50029A0CF /* RomanizationLabel.swift */; };
 		377072782D384786007DC04D /* OnsetGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377072772D384786007DC04D /* OnsetGridView.swift */; };
+		377486F42DFCB039000FBE0A /* NumberInputKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377486F32DFCB039000FBE0A /* NumberInputKey.swift */; };
 		3783BB6F2C8DE3600071B892 /* CandidateWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3783BB6E2C8DE3560071B892 /* CandidateWindow.swift */; };
 		37918A6C2C5B5BBA006C6590 /* ToneInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37918A6B2C5B5BBA006C6590 /* ToneInputView.swift */; };
 		37942E1F2CE2EC57005D6536 /* MediumPadTabKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37942E1E2CE2EC55005D6536 /* MediumPadTabKey.swift */; };
@@ -499,7 +500,7 @@
 		371B6F112B3B342E005BB31C /* ShiftKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShiftKey.swift; sourceTree = "<group>"; };
 		371B6F122B3B342E005BB31C /* CantoneseSymbolicKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CantoneseSymbolicKeyboard.swift; sourceTree = "<group>"; };
 		371B6F142B3B342E005BB31C /* CangjieKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CangjieKeyboard.swift; sourceTree = "<group>"; };
-		371B6F152B3B342E005BB31C /* AlphabeticKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlphabeticKeyboard.swift; sourceTree = "<group>"; };
+		371B6F152B3B342E005BB31C /* CantoneseKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CantoneseKeyboard.swift; sourceTree = "<group>"; };
 		371B6F162B3B342E005BB31C /* BackspaceKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackspaceKey.swift; sourceTree = "<group>"; };
 		371B6F172B3B342E005BB31C /* SpaceKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpaceKey.swift; sourceTree = "<group>"; };
 		371B6F182B3B342E005BB31C /* ReturnKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReturnKey.swift; sourceTree = "<group>"; };
@@ -643,6 +644,7 @@
 		376B84932BFC2C1C0029A0CF /* BottomCommentStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomCommentStackView.swift; sourceTree = "<group>"; };
 		376B84952BFC2CB50029A0CF /* RomanizationLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RomanizationLabel.swift; sourceTree = "<group>"; };
 		377072772D384786007DC04D /* OnsetGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnsetGridView.swift; sourceTree = "<group>"; };
+		377486F32DFCB039000FBE0A /* NumberInputKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberInputKey.swift; sourceTree = "<group>"; };
 		3783BB6E2C8DE3560071B892 /* CandidateWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateWindow.swift; sourceTree = "<group>"; };
 		37918A6B2C5B5BBA006C6590 /* ToneInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToneInputView.swift; sourceTree = "<group>"; };
 		37942E1E2CE2EC55005D6536 /* MediumPadTabKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediumPadTabKey.swift; sourceTree = "<group>"; };
@@ -1245,7 +1247,7 @@
 		375D3A412B810253005F13C1 /* Keyboards */ = {
 			isa = PBXGroup;
 			children = (
-				371B6F152B3B342E005BB31C /* AlphabeticKeyboard.swift */,
+				371B6F152B3B342E005BB31C /* CantoneseKeyboard.swift */,
 				374326082CF44C3900AE8B0B /* ABCKeyboard.swift */,
 				371B6F062B3B342E005BB31C /* NumericKeyboard.swift */,
 				371B6F092B3B342E005BB31C /* SymbolicKeyboard.swift */,
@@ -1275,6 +1277,7 @@
 				371B6F1A2B3B342E005BB31C /* RightKey.swift */,
 				371B6F1B2B3B342E005BB31C /* LeftKey.swift */,
 				371B6F292B3B342E005BB31C /* LetterInputKey.swift */,
+				377486F32DFCB039000FBE0A /* NumberInputKey.swift */,
 				371B6F2A2B3B342E005BB31C /* HiddenKey.swift */,
 			);
 			path = Keys;
@@ -1837,7 +1840,7 @@
 				379A9E342BE4CA40001AE79E /* EditingPanelClearKey.swift in Sources */,
 				371B6FD82B3B342F005BB31C /* LargePadCangjieInputKey.swift in Sources */,
 				379A9E322BE4C9D3001AE79E /* EditingPanelCutKey.swift in Sources */,
-				371B6F992B3B342F005BB31C /* AlphabeticKeyboard.swift in Sources */,
+				371B6F992B3B342F005BB31C /* CantoneseKeyboard.swift in Sources */,
 				371B6FCC2B3B342F005BB31C /* PresetConstant.swift in Sources */,
 				371D70872CE5FA9E00508860 /* LargePadSpaceKey.swift in Sources */,
 				371B6FE02B3B342F005BB31C /* LargePadTabKey.swift in Sources */,
@@ -1865,6 +1868,7 @@
 				371B6FD02B3B342F005BB31C /* KeyboardForm.swift in Sources */,
 				371B6FE42B3B342F005BB31C /* LargePadCantoneseKeyboard.swift in Sources */,
 				379A9E482BE4DB6A001AE79E /* EditingPanelBackspaceKey.swift in Sources */,
+				377486F42DFCB039000FBE0A /* NumberInputKey.swift in Sources */,
 				371B6FD62B3B342F005BB31C /* PadSymbolInputKey.swift in Sources */,
 				371B6FCB2B3B342F005BB31C /* AudioFeedback.swift in Sources */,
 				37942E262CE2FB39005D6536 /* MediumPadCantoneseNumericKeyboard.swift in Sources */,
@@ -2203,7 +2207,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 137;
+				CURRENT_PROJECT_VERSION = 139;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Keyboard/Info.plist;
@@ -2216,7 +2220,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 0.57.0;
+				MARKETING_VERSION = 0.58.0;
 				PRODUCT_BUNDLE_IDENTIFIER = im.cantonese.CantoneseIM.Keyboard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -2234,7 +2238,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 137;
+				CURRENT_PROJECT_VERSION = 139;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Keyboard/Info.plist;
@@ -2247,7 +2251,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 0.57.0;
+				MARKETING_VERSION = 0.58.0;
 				PRODUCT_BUNDLE_IDENTIFIER = im.cantonese.CantoneseIM.Keyboard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -2271,7 +2275,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 137;
+				CURRENT_PROJECT_VERSION = 139;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"InputMethod/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
@@ -2292,7 +2296,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 0.57.0;
+				MARKETING_VERSION = 0.58.0;
 				PRODUCT_BUNDLE_IDENTIFIER = org.jyutping.inputmethod.Jyutping;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -2314,7 +2318,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 137;
+				CURRENT_PROJECT_VERSION = 139;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"InputMethod/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
@@ -2335,7 +2339,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 0.57.0;
+				MARKETING_VERSION = 0.58.0;
 				PRODUCT_BUNDLE_IDENTIFIER = org.jyutping.inputmethod.Jyutping;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -2552,7 +2556,7 @@
 				CODE_SIGN_ENTITLEMENTS = Jyutping/Jyutping.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 137;
+				CURRENT_PROJECT_VERSION = 139;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Jyutping/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
@@ -2575,7 +2579,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 0.57.0;
+				MARKETING_VERSION = 0.58.0;
 				PRODUCT_BUNDLE_IDENTIFIER = im.cantonese.CantoneseIM;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -2597,7 +2601,7 @@
 				CODE_SIGN_ENTITLEMENTS = Jyutping/Jyutping.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 137;
+				CURRENT_PROJECT_VERSION = 139;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Jyutping/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
@@ -2620,7 +2624,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 0.57.0;
+				MARKETING_VERSION = 0.58.0;
 				PRODUCT_BUNDLE_IDENTIFIER = im.cantonese.CantoneseIM;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;

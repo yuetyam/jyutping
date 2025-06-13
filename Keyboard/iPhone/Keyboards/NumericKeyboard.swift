@@ -8,6 +8,9 @@ struct NumericKeyboard: View {
         var body: some View {
                 VStack(spacing: 0) {
                         ToolBar()
+                        if Options.needsNumberRow {
+                                NumberRow()
+                        }
                         HStack(spacing: 0) {
                                 SymbolInputKey("1")
                                 SymbolInputKey("2")

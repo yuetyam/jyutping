@@ -270,7 +270,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         textDocumentProxy.insertText(text)
                         return
                 }
-                let shouldAppendEvent: Bool = event.isLetter || event.isToneNumber
+                let shouldAppendEvent: Bool = event.isLetter || (inputStage.isBuffering && event.isToneNumber)
                 guard shouldAppendEvent else {
                         if inputStage.isBuffering {
                                 inputBufferText(followedBy: text)
@@ -293,7 +293,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         textDocumentProxy.insertText(text)
                         return
                 }
-                let shouldAppendEvent: Bool = (events.first?.isLetter ?? false) || (events.first?.isToneNumber ?? false)
+                let shouldAppendEvent: Bool = (events.first?.isLetter ?? false) || (inputStage.isBuffering && (events.first?.isToneNumber ?? false))
                 guard shouldAppendEvent else {
                         if inputStage.isBuffering {
                                 inputBufferText(followedBy: text)
@@ -390,10 +390,10 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         let shouldAppendText: Bool = text.isLetters || (inputStage.isBuffering && (text.first?.isCantoneseToneDigit ?? false))
                         if shouldAppendText {
                                 appendBufferText(text)
-                        } else if inputStage.isBuffering.negative {
-                                textDocumentProxy.insertText(text)
-                        } else {
+                        } else if inputStage.isBuffering {
                                 inputBufferText(followedBy: text)
+                        } else {
+                                textDocumentProxy.insertText(text)
                         }
                 case .combine(let combo):
                         bufferCombos.append(combo)
@@ -892,7 +892,8 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 widthUnit = newKeyboardWidth / keyboardInterface.widthUnitTimes
                 tenKeyWidthUnit = newKeyboardWidth / 5.0
                 heightUnit = keyboardInterface.keyHeightUnit(of: screenSize)
-                keyboardHeight = heightUnit * (keyboardInterface.isLargePad ? 5 : 4) + PresetConstant.toolBarHeight
+                let rowCount: CGFloat = (keyboardInterface.isLargePad || Options.needsNumberRow) ? 5 : 4
+                keyboardHeight = (heightUnit * rowCount) + PresetConstant.toolBarHeight
                 expandedKeyboardHeight = keyboardHeight + 150
         }
 
@@ -974,6 +975,12 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 strokeLayout = layout
                 let value: Int = layout.rawValue
                 UserDefaults.standard.set(value, forKey: OptionsKey.StrokeLayout)
+        }
+
+        func updateNumberRowState(to isOn: Bool) {
+                Options.updateNumberRowState(to: isOn)
+                updateKeyboardSize()
+                reloadKeyboard()
         }
 
 

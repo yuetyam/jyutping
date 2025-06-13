@@ -12,6 +12,9 @@ struct CangjieKeyboard: View {
                         } else {
                                 ToolBar()
                         }
+                        if Options.needsNumberRow {
+                                NumberRow()
+                        }
                         HStack(spacing: 0 ) {
                                 CangjieInputKey(.letterQ)
                                 CangjieInputKey(.letterW)

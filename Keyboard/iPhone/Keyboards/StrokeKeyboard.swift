@@ -12,6 +12,9 @@ struct StrokeKeyboard: View {
                         } else {
                                 ToolBar()
                         }
+                        if Options.needsNumberRow {
+                                NumberRow()
+                        }
                         HStack(spacing: 0 ) {
                                 StrokeInputKey(.letterQ)
                                 StrokeInputKey(.letterW)

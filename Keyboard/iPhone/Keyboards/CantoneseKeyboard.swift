@@ -2,7 +2,7 @@ import SwiftUI
 import CoreIME
 
 // TODO: Rename to CantoneseKeyboard
-struct AlphabeticKeyboard: View {
+struct CantoneseKeyboard: View {
 
         @EnvironmentObject private var context: KeyboardViewController
 
@@ -12,6 +12,9 @@ struct AlphabeticKeyboard: View {
                                 CandidateBar()
                         } else {
                                 ToolBar()
+                        }
+                        if Options.needsNumberRow {
+                                NumberRow()
                         }
                         HStack(spacing: 0 ) {
                                 LetterInputKey(.letterQ)

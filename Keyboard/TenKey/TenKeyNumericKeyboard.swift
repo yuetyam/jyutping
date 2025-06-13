@@ -4,6 +4,9 @@ struct TenKeyNumericKeyboard: View {
         var body: some View {
                 VStack(spacing: 0) {
                         ToolBar()
+                        if Options.needsNumberRow {
+                                NumberRow()
+                        }
                         HStack(spacing: 0) {
                                 VStack(spacing: 0) {
                                         HStack(spacing: 0) {

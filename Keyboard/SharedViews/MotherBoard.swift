@@ -234,15 +234,15 @@ struct MotherBoard: View {
                                         default:
                                                 switch context.keyboardInterface {
                                                 case .phonePortrait:
-                                                        AlphabeticKeyboard()
+                                                        CantoneseKeyboard()
                                                 case .phoneLandscape:
-                                                        AlphabeticKeyboard()
+                                                        CantoneseKeyboard()
                                                 case .phoneOnPadPortrait:
-                                                        AlphabeticKeyboard()
+                                                        CantoneseKeyboard()
                                                 case .phoneOnPadLandscape:
-                                                        AlphabeticKeyboard()
+                                                        CantoneseKeyboard()
                                                 case .padFloating:
-                                                        AlphabeticKeyboard()
+                                                        CantoneseKeyboard()
                                                 case .padPortraitSmall:
                                                         PadCantoneseKeyboard()
                                                 case .padPortraitMedium:
@@ -312,15 +312,15 @@ struct MotherBoard: View {
                                         case .pinyin:
                                                 switch context.keyboardInterface {
                                                 case .phonePortrait:
-                                                        AlphabeticKeyboard()
+                                                        CantoneseKeyboard()
                                                 case .phoneLandscape:
-                                                        AlphabeticKeyboard()
+                                                        CantoneseKeyboard()
                                                 case .phoneOnPadPortrait:
-                                                        AlphabeticKeyboard()
+                                                        CantoneseKeyboard()
                                                 case .phoneOnPadLandscape:
-                                                        AlphabeticKeyboard()
+                                                        CantoneseKeyboard()
                                                 case .padFloating:
-                                                        AlphabeticKeyboard()
+                                                        CantoneseKeyboard()
                                                 case .padPortraitSmall:
                                                         PadCantoneseKeyboard()
                                                 case .padPortraitMedium:
