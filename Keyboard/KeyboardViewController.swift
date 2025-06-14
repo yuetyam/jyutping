@@ -112,9 +112,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         textDocumentProxy.setMarkedText(String.empty, selectedRange: NSRange(location: 0, length: 0))
                         textDocumentProxy.unmarkText()
                 } else {
-                        let location: Int = text2mark.utf16.count
-                        let range: NSRange = NSRange(location: location, length: 0)
-                        textDocumentProxy.setMarkedText(text2mark, selectedRange: range)
+                        textDocumentProxy.setMarkedText(text2mark, selectedRange: NSRange(location: text2mark.utf16.count, length: 0))
                 }
         }
         private lazy var canMarkText: Bool = true {
@@ -141,18 +139,17 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 performInput(text)
         }
         private func performInput(_ text: String) {
-                textDocumentProxy.setMarkedText(String.empty, selectedRange: NSRange(location: 0, length: 0))
-                textDocumentProxy.unmarkText()
+                defer {
+                        Task {
+                                try await Task.sleep(nanoseconds: 10_000_000) // 0.01s
+                                textDocumentProxy.setMarkedText(String.zeroWidthSpace, selectedRange: NSRange(location: String.zeroWidthSpace.utf16.count, length: 0))
+                                try await Task.sleep(nanoseconds: 10_000_000) // 0.01s
+                                canMarkText = true
+                        }
+                }
                 let previousContext: String = textDocumentProxy.documentContextBeforeInput ?? String.empty
                 let previousLength: Int = previousContext.count
-                textDocumentProxy.insertText(text)
-                defer { canMarkText = true }
-                let modifiedContext: String = textDocumentProxy.documentContextBeforeInput ?? String.empty
-                guard modifiedContext.count == previousLength else { return }
-                guard modifiedContext == previousContext else { return }
-                let location: Int = text.utf16.count
-                let range: NSRange = NSRange(location: location, length: 0)
-                textDocumentProxy.setMarkedText(text, selectedRange: range)
+                textDocumentProxy.setMarkedText(text, selectedRange: NSRange(location: text.utf16.count, length: 0))
                 textDocumentProxy.unmarkText()
                 let currentContext: String = textDocumentProxy.documentContextBeforeInput ?? String.empty
                 guard currentContext.count == previousLength else { return }
@@ -232,7 +229,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         textDocumentProxy.insertText(text)
                         return
                 }
-                let shouldAppendEvent: Bool = event.isLetter || (inputStage.isBuffering && event.isToneNumber)
+                let shouldAppendEvent: Bool = event.isLetter || (inputStage.isBuffering && (event.isToneNumber || event.isQuote))
                 guard shouldAppendEvent else {
                         if inputStage.isBuffering {
                                 inputBufferText(followedBy: text)
@@ -246,6 +243,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 inputLengthSequence.append(1)
         }
         func process(events: [InputEvent], isCapitalized: Bool) {
+                guard let firstEvent = events.first else { return }
                 defer {
                         adjustKeyboard()
                 }
@@ -255,7 +253,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         textDocumentProxy.insertText(text)
                         return
                 }
-                let shouldAppendEvent: Bool = (events.first?.isLetter ?? false) || (inputStage.isBuffering && (events.first?.isToneNumber ?? false))
+                let shouldAppendEvent: Bool = firstEvent.isLetter || (inputStage.isBuffering && (firstEvent.isToneNumber || firstEvent.isQuote))
                 guard shouldAppendEvent else {
                         if inputStage.isBuffering {
                                 inputBufferText(followedBy: text)
