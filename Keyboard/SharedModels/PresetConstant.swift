@@ -21,12 +21,6 @@ struct PresetConstant {
 
         static let spaceKeyLongPressHint: AttributedString = "← →"
 
-        /// 10-Key Keyboard
-        static let defaultSidebarTexts: [String] = ["，", "。", "？", "！", "、", "：", "／", "…", "……", "~", "～"]
-
-        /// 10-Key Numeric Keyboard
-        static let symbolSidebarTexts: [String] = ["+", "-", "*", "/", "=", "%", ":", "@", "#", ",", "~", "≈"]
-
         /// Display KeyText
         static let strokeKeyMap: [String: String] = [
                 "w": "⼀",

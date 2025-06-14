@@ -1,8 +1,8 @@
 import SwiftUI
 
-@available(iOS 17.0, *)
-@available(iOSApplicationExtension 17.0, *)
-struct TenKeySymbolSidebarScrollViewIOS17: View {
+@available(iOS, introduced: 17.0, deprecated: 18.0)
+@available(iOSApplicationExtension, introduced: 17.0, deprecated: 18.0)
+struct SidebarScrollViewIOS17: View {
 
         @EnvironmentObject private var context: KeyboardViewController
 
@@ -10,26 +10,30 @@ struct TenKeySymbolSidebarScrollViewIOS17: View {
         @State private var positionID: Int? = nil
 
         var body: some View {
-                let sidebarTexts: [String] = PresetConstant.symbolSidebarTexts
-                let buttonHeight: CGFloat = context.heightUnit * 3.0 / 4.0 - 1.0
+                let items = context.sidebarSyllables
+                let idealHeight: CGFloat = ((context.heightUnit * 3.0) / 4.0) - 1.0
+                let compactHeight: CGFloat = idealHeight / 2.0
                 ScrollView(.vertical) {
                         LazyVStack(spacing: 0) {
                                 EmptyView().id(topID)
-                                ForEach(sidebarTexts.indices, id: \.self) { index in
-                                        let symbol: String = sidebarTexts[index]
+                                ForEach(items.indices, id: \.self) { index in
+                                        let item = items[index]
                                         ScrollViewButton {
                                                 AudioFeedback.inputed()
-                                                context.triggerHapticFeedback()
-                                                context.operate(.input(symbol))
+                                                context.triggerSelectionHapticFeedback()
+                                                context.handleSidebarTapping(at: index)
                                                 withAnimation {
                                                         positionID = topID
                                                 }
                                         } label: {
                                                 ZStack {
                                                         Color.interactiveClear
-                                                        Text(verbatim: symbol).font(.title3)
+                                                        Rectangle()
+                                                                .fill(Material.regular)
+                                                                .opacity(item.isSelected ? 1 : 0)
+                                                        Text(verbatim: item.text)
                                                 }
-                                                .frame(height: buttonHeight)
+                                                .frame(height: item.isSelected ? compactHeight : idealHeight)
                                                 .frame(maxWidth: .infinity)
                                         }
                                         Divider()

@@ -10,7 +10,7 @@ struct TenKeyNumericKeyboard: View {
                         HStack(spacing: 0) {
                                 VStack(spacing: 0) {
                                         HStack(spacing: 0) {
-                                                TenKeySymbolSidebar()
+                                                SidebarPanel()
                                                 VStack(spacing: 0) {
                                                         HStack(spacing: 0) {
                                                                 TenKeyNumberKey(key: "1")

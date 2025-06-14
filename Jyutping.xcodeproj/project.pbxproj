@@ -120,7 +120,7 @@
 		371B6FA42B3B342F005BB31C /* TenKeyInputKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F212B3B342E005BB31C /* TenKeyInputKey.swift */; };
 		371B6FA62B3B342F005BB31C /* TenKeySpaceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F232B3B342E005BB31C /* TenKeySpaceKey.swift */; };
 		371B6FA72B3B342F005BB31C /* TenKeyKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F242B3B342E005BB31C /* TenKeyKeyboard.swift */; };
-		371B6FA92B3B342F005BB31C /* TenKeySidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F262B3B342E005BB31C /* TenKeySidebar.swift */; };
+		371B6FA92B3B342F005BB31C /* SidebarPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F262B3B342E005BB31C /* SidebarPanel.swift */; };
 		371B6FAA2B3B342F005BB31C /* TenKeyNumericKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F272B3B342E005BB31C /* TenKeyNumericKeyboard.swift */; };
 		371B6FAB2B3B342F005BB31C /* TenKeyNavigateKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F282B3B342E005BB31C /* TenKeyNavigateKey.swift */; };
 		371B6FAC2B3B342F005BB31C /* LetterInputKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F292B3B342E005BB31C /* LetterInputKey.swift */; };
@@ -275,13 +275,12 @@
 		379A9E462BE4DACE001AE79E /* EditingPanelSpaceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379A9E452BE4DACE001AE79E /* EditingPanelSpaceKey.swift */; };
 		379A9E482BE4DB6A001AE79E /* EditingPanelBackspaceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379A9E472BE4DB6A001AE79E /* EditingPanelBackspaceKey.swift */; };
 		379A9E4A2BE4DBE2001AE79E /* EditingPanelForwardDeleteKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379A9E492BE4DBE2001AE79E /* EditingPanelForwardDeleteKey.swift */; };
-		379C51652CB9DE7900AAB1A3 /* TenKeySymbolSidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C51642CB9DE7900AAB1A3 /* TenKeySymbolSidebar.swift */; };
-		379C51672CB9DE9900AAB1A3 /* TenKeySymbolSidebarScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C51662CB9DE9900AAB1A3 /* TenKeySymbolSidebarScrollView.swift */; };
-		379C51692CB9DEBA00AAB1A3 /* TenKeySymbolSidebarScrollViewIOS17.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C51682CB9DEBA00AAB1A3 /* TenKeySymbolSidebarScrollViewIOS17.swift */; };
-		379C516B2CB9DECE00AAB1A3 /* TenKeySymbolSidebarScrollViewIOS18.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C516A2CB9DECE00AAB1A3 /* TenKeySymbolSidebarScrollViewIOS18.swift */; };
-		379C516D2CB9DEF500AAB1A3 /* TenKeySidebarScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C516C2CB9DEF500AAB1A3 /* TenKeySidebarScrollView.swift */; };
-		379C516F2CB9DF1600AAB1A3 /* TenKeySidebarScrollViewIOS17.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C516E2CB9DF1600AAB1A3 /* TenKeySidebarScrollViewIOS17.swift */; };
-		379C51712CB9DF3500AAB1A3 /* TenKeySidebarScrollViewIOS18.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C51702CB9DF3500AAB1A3 /* TenKeySidebarScrollViewIOS18.swift */; };
+		379C51672CB9DE9900AAB1A3 /* SymbolSidebarScrollViewIOS16.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C51662CB9DE9900AAB1A3 /* SymbolSidebarScrollViewIOS16.swift */; };
+		379C51692CB9DEBA00AAB1A3 /* SymbolSidebarScrollViewIOS17.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C51682CB9DEBA00AAB1A3 /* SymbolSidebarScrollViewIOS17.swift */; };
+		379C516B2CB9DECE00AAB1A3 /* SymbolSidebarScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C516A2CB9DECE00AAB1A3 /* SymbolSidebarScrollView.swift */; };
+		379C516D2CB9DEF500AAB1A3 /* SidebarScrollViewIOS16.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C516C2CB9DEF500AAB1A3 /* SidebarScrollViewIOS16.swift */; };
+		379C516F2CB9DF1600AAB1A3 /* SidebarScrollViewIOS17.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C516E2CB9DF1600AAB1A3 /* SidebarScrollViewIOS17.swift */; };
+		379C51712CB9DF3500AAB1A3 /* SidebarScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379C51702CB9DF3500AAB1A3 /* SidebarScrollView.swift */; };
 		379CB1A02BD9FE2A00434190 /* MacJyutpingToneTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379CB19F2BD9FE2A00434190 /* MacJyutpingToneTable.swift */; };
 		379CB1A22BDA40B900434190 /* IOSJyutpingToneTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379CB1A12BDA40B900434190 /* IOSJyutpingToneTable.swift */; };
 		379CB1A42BDA666D00434190 /* IOSJyutpingFinalTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379CB1A32BDA666D00434190 /* IOSJyutpingFinalTable.swift */; };
@@ -514,7 +513,7 @@
 		371B6F212B3B342E005BB31C /* TenKeyInputKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TenKeyInputKey.swift; sourceTree = "<group>"; };
 		371B6F232B3B342E005BB31C /* TenKeySpaceKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TenKeySpaceKey.swift; sourceTree = "<group>"; };
 		371B6F242B3B342E005BB31C /* TenKeyKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TenKeyKeyboard.swift; sourceTree = "<group>"; };
-		371B6F262B3B342E005BB31C /* TenKeySidebar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TenKeySidebar.swift; sourceTree = "<group>"; };
+		371B6F262B3B342E005BB31C /* SidebarPanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidebarPanel.swift; sourceTree = "<group>"; };
 		371B6F272B3B342E005BB31C /* TenKeyNumericKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TenKeyNumericKeyboard.swift; sourceTree = "<group>"; };
 		371B6F282B3B342E005BB31C /* TenKeyNavigateKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TenKeyNavigateKey.swift; sourceTree = "<group>"; };
 		371B6F292B3B342E005BB31C /* LetterInputKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LetterInputKey.swift; sourceTree = "<group>"; };
@@ -673,13 +672,12 @@
 		379A9E452BE4DACE001AE79E /* EditingPanelSpaceKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingPanelSpaceKey.swift; sourceTree = "<group>"; };
 		379A9E472BE4DB6A001AE79E /* EditingPanelBackspaceKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingPanelBackspaceKey.swift; sourceTree = "<group>"; };
 		379A9E492BE4DBE2001AE79E /* EditingPanelForwardDeleteKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingPanelForwardDeleteKey.swift; sourceTree = "<group>"; };
-		379C51642CB9DE7900AAB1A3 /* TenKeySymbolSidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TenKeySymbolSidebar.swift; sourceTree = "<group>"; };
-		379C51662CB9DE9900AAB1A3 /* TenKeySymbolSidebarScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TenKeySymbolSidebarScrollView.swift; sourceTree = "<group>"; };
-		379C51682CB9DEBA00AAB1A3 /* TenKeySymbolSidebarScrollViewIOS17.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TenKeySymbolSidebarScrollViewIOS17.swift; sourceTree = "<group>"; };
-		379C516A2CB9DECE00AAB1A3 /* TenKeySymbolSidebarScrollViewIOS18.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TenKeySymbolSidebarScrollViewIOS18.swift; sourceTree = "<group>"; };
-		379C516C2CB9DEF500AAB1A3 /* TenKeySidebarScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TenKeySidebarScrollView.swift; sourceTree = "<group>"; };
-		379C516E2CB9DF1600AAB1A3 /* TenKeySidebarScrollViewIOS17.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TenKeySidebarScrollViewIOS17.swift; sourceTree = "<group>"; };
-		379C51702CB9DF3500AAB1A3 /* TenKeySidebarScrollViewIOS18.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TenKeySidebarScrollViewIOS18.swift; sourceTree = "<group>"; };
+		379C51662CB9DE9900AAB1A3 /* SymbolSidebarScrollViewIOS16.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolSidebarScrollViewIOS16.swift; sourceTree = "<group>"; };
+		379C51682CB9DEBA00AAB1A3 /* SymbolSidebarScrollViewIOS17.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolSidebarScrollViewIOS17.swift; sourceTree = "<group>"; };
+		379C516A2CB9DECE00AAB1A3 /* SymbolSidebarScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolSidebarScrollView.swift; sourceTree = "<group>"; };
+		379C516C2CB9DEF500AAB1A3 /* SidebarScrollViewIOS16.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarScrollViewIOS16.swift; sourceTree = "<group>"; };
+		379C516E2CB9DF1600AAB1A3 /* SidebarScrollViewIOS17.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarScrollViewIOS17.swift; sourceTree = "<group>"; };
+		379C51702CB9DF3500AAB1A3 /* SidebarScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarScrollView.swift; sourceTree = "<group>"; };
 		379CB19F2BD9FE2A00434190 /* MacJyutpingToneTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacJyutpingToneTable.swift; sourceTree = "<group>"; };
 		379CB1A12BDA40B900434190 /* IOSJyutpingToneTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSJyutpingToneTable.swift; sourceTree = "<group>"; };
 		379CB1A32BDA666D00434190 /* IOSJyutpingFinalTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSJyutpingFinalTable.swift; sourceTree = "<group>"; };
@@ -974,14 +972,13 @@
 				371B6F1F2B3B342E005BB31C /* TenKeySpecialKey.swift */,
 				371B6F202B3B342E005BB31C /* TenKeyBackspaceKey.swift */,
 				371B6F232B3B342E005BB31C /* TenKeySpaceKey.swift */,
-				379C51642CB9DE7900AAB1A3 /* TenKeySymbolSidebar.swift */,
-				379C51662CB9DE9900AAB1A3 /* TenKeySymbolSidebarScrollView.swift */,
-				379C51682CB9DEBA00AAB1A3 /* TenKeySymbolSidebarScrollViewIOS17.swift */,
-				379C516A2CB9DECE00AAB1A3 /* TenKeySymbolSidebarScrollViewIOS18.swift */,
-				371B6F262B3B342E005BB31C /* TenKeySidebar.swift */,
-				379C516C2CB9DEF500AAB1A3 /* TenKeySidebarScrollView.swift */,
-				379C516E2CB9DF1600AAB1A3 /* TenKeySidebarScrollViewIOS17.swift */,
-				379C51702CB9DF3500AAB1A3 /* TenKeySidebarScrollViewIOS18.swift */,
+				379C51662CB9DE9900AAB1A3 /* SymbolSidebarScrollViewIOS16.swift */,
+				379C51682CB9DEBA00AAB1A3 /* SymbolSidebarScrollViewIOS17.swift */,
+				379C516A2CB9DECE00AAB1A3 /* SymbolSidebarScrollView.swift */,
+				371B6F262B3B342E005BB31C /* SidebarPanel.swift */,
+				379C516C2CB9DEF500AAB1A3 /* SidebarScrollViewIOS16.swift */,
+				379C516E2CB9DF1600AAB1A3 /* SidebarScrollViewIOS17.swift */,
+				379C51702CB9DF3500AAB1A3 /* SidebarScrollView.swift */,
 				371B6F282B3B342E005BB31C /* TenKeyNavigateKey.swift */,
 				375A90B22BD0797B009784BB /* TenKeyGlobeKey.swift */,
 				3739048D2DB0B49100D97241 /* TenKeyStrokeKeyboard.swift */,
@@ -1824,7 +1821,7 @@
 			files = (
 				371B6FE92B3B342F005BB31C /* LargePadStrokeKeyboard.swift in Sources */,
 				371B6FF02B3B342F005BB31C /* PadCangjieKeyboard.swift in Sources */,
-				379C516D2CB9DEF500AAB1A3 /* TenKeySidebarScrollView.swift in Sources */,
+				379C516D2CB9DEF500AAB1A3 /* SidebarScrollViewIOS16.swift in Sources */,
 				379A9E302BE4C86E001AE79E /* EditingPanelCopyKey.swift in Sources */,
 				371B6FDF2B3B342F005BB31C /* LargePadNumericKeyboard.swift in Sources */,
 				37F9C6272BE94F84001B3917 /* UITextDocumentProxyExtensions.swift in Sources */,
@@ -1848,7 +1845,6 @@
 				371B6FF22B3B342F005BB31C /* PadSymbolicKeyboard.swift in Sources */,
 				371B6FAB2B3B342F005BB31C /* TenKeyNavigateKey.swift in Sources */,
 				374326092CF44C3900AE8B0B /* ABCKeyboard.swift in Sources */,
-				379C51652CB9DE7900AAB1A3 /* TenKeySymbolSidebar.swift in Sources */,
 				371B6F8D2B3B342F005BB31C /* SymbolicKeyboard.swift in Sources */,
 				37942E282CE420C5005D6536 /* MediumPadABCKeyboard.swift in Sources */,
 				371B6FA42B3B342F005BB31C /* TenKeyInputKey.swift in Sources */,
@@ -1856,7 +1852,7 @@
 				371B6FEB2B3B342F005BB31C /* LargePadCangjieKeyboard.swift in Sources */,
 				371D70832CE59F4500508860 /* MediumPadStrokeKeyboard.swift in Sources */,
 				371B6F9F2B3B342F005BB31C /* LeftKey.swift in Sources */,
-				379C51712CB9DF3500AAB1A3 /* TenKeySidebarScrollViewIOS18.swift in Sources */,
+				379C51712CB9DF3500AAB1A3 /* SidebarScrollView.swift in Sources */,
 				379A9E362BE4CB6C001AE79E /* EditingPanelConversionKey.swift in Sources */,
 				371B6FA32B3B342F005BB31C /* TenKeyBackspaceKey.swift in Sources */,
 				371B6FED2B3B342F005BB31C /* LargePadTripleStrokeKeyboard.swift in Sources */,
@@ -1884,7 +1880,7 @@
 				371B6F912B3B342F005BB31C /* GlobeKey.swift in Sources */,
 				371B6FCA2B3B342F005BB31C /* UserLexicon.swift in Sources */,
 				371D70812CE59CFD00508860 /* MediumPadCangjieKeyboard.swift in Sources */,
-				379C51672CB9DE9900AAB1A3 /* TenKeySymbolSidebarScrollView.swift in Sources */,
+				379C51672CB9DE9900AAB1A3 /* SymbolSidebarScrollViewIOS16.swift in Sources */,
 				375B85672CB906A7000E124E /* CandidateBoardScrollViewIOS17.swift in Sources */,
 				371B6FFD2B3B342F005BB31C /* PadTransformKey.swift in Sources */,
 				371B6FD42B3B342F005BB31C /* PadGlobeKey.swift in Sources */,
@@ -1896,7 +1892,7 @@
 				371B6FBA2B3B342F005BB31C /* KeyboardViewController.swift in Sources */,
 				371B6FCD2B3B342F005BB31C /* KeyboardInterface.swift in Sources */,
 				371B6FA62B3B342F005BB31C /* TenKeySpaceKey.swift in Sources */,
-				379C51692CB9DEBA00AAB1A3 /* TenKeySymbolSidebarScrollViewIOS17.swift in Sources */,
+				379C51692CB9DEBA00AAB1A3 /* SymbolSidebarScrollViewIOS17.swift in Sources */,
 				371B6FF82B3B342F005BB31C /* PadCantoneseSymblicKeyboard.swift in Sources */,
 				371B6FDA2B3B342F005BB31C /* LargePadShiftKey.swift in Sources */,
 				3716A7E52BC135CF001F6679 /* SpaceKeyForm.swift in Sources */,
@@ -1920,7 +1916,7 @@
 				379A9E4A2BE4DBE2001AE79E /* EditingPanelForwardDeleteKey.swift in Sources */,
 				371B6FB52B3B342F005BB31C /* ScrollViewGestureButton.swift in Sources */,
 				371B6FCF2B3B342F005BB31C /* KeyModel.swift in Sources */,
-				379C516F2CB9DF1600AAB1A3 /* TenKeySidebarScrollViewIOS17.swift in Sources */,
+				379C516F2CB9DF1600AAB1A3 /* SidebarScrollViewIOS17.swift in Sources */,
 				375B85632CB90409000E124E /* CandidateBoardScrollView.swift in Sources */,
 				371B6FCE2B3B342F005BB31C /* Options.swift in Sources */,
 				379A9E402BE4D486001AE79E /* EditingPanelMoveForwardKey.swift in Sources */,
@@ -1946,8 +1942,8 @@
 				375B855F2CB8FC1B000E124E /* CandidateBarScrollViewIOS18.swift in Sources */,
 				371B6F8A2B3B342F005BB31C /* NumericKeyboard.swift in Sources */,
 				37942E312CE45017005D6536 /* MediumPadReturnKey.swift in Sources */,
-				371B6FA92B3B342F005BB31C /* TenKeySidebar.swift in Sources */,
-				379C516B2CB9DECE00AAB1A3 /* TenKeySymbolSidebarScrollViewIOS18.swift in Sources */,
+				371B6FA92B3B342F005BB31C /* SidebarPanel.swift in Sources */,
+				379C516B2CB9DECE00AAB1A3 /* SymbolSidebarScrollView.swift in Sources */,
 				371B6FAA2B3B342F005BB31C /* TenKeyNumericKeyboard.swift in Sources */,
 				371B6F9C2B3B342F005BB31C /* ReturnKey.swift in Sources */,
 				371B6FF72B3B342F005BB31C /* PadSpaceKey.swift in Sources */,

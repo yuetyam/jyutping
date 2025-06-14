@@ -1,26 +1,33 @@
 import SwiftUI
 
-@available(iOS 18.0, *)
-@available(iOSApplicationExtension 18.0, *)
-struct TenKeySymbolSidebarScrollViewIOS18: View {
+@available(iOS, introduced: 17.0, deprecated: 18.0)
+@available(iOSApplicationExtension, introduced: 17.0, deprecated: 18.0)
+struct SymbolSidebarScrollViewIOS17: View {
+
+        init(texts: [String]) {
+                self.texts = texts
+        }
+
+        private let texts: [String]
 
         @EnvironmentObject private var context: KeyboardViewController
 
-        @State private var scrollPosition = ScrollPosition()
+        private var topID: Int = -1000
+        @State private var positionID: Int? = nil
 
         var body: some View {
-                let sidebarTexts: [String] = PresetConstant.symbolSidebarTexts
                 let buttonHeight: CGFloat = context.heightUnit * 3.0 / 4.0 - 1.0
                 ScrollView(.vertical) {
                         LazyVStack(spacing: 0) {
-                                ForEach(sidebarTexts.indices, id: \.self) { index in
-                                        let symbol: String = sidebarTexts[index]
+                                EmptyView().id(topID)
+                                ForEach(texts.indices, id: \.self) { index in
+                                        let symbol: String = texts[index]
                                         ScrollViewButton {
                                                 AudioFeedback.inputed()
                                                 context.triggerHapticFeedback()
                                                 context.operate(.input(symbol))
                                                 withAnimation {
-                                                        scrollPosition.scrollTo(edge: .top)
+                                                        positionID = topID
                                                 }
                                         } label: {
                                                 ZStack {
@@ -34,10 +41,7 @@ struct TenKeySymbolSidebarScrollViewIOS18: View {
                                 }
                         }
                 }
-                .scrollPosition($scrollPosition, anchor: .top)
+                .scrollPosition(id: $positionID, anchor: .top)
                 .defaultScrollAnchor(.top)
-                .defaultScrollAnchor(.top, for: .initialOffset)
-                .defaultScrollAnchor(.top, for: .alignment)
-                .defaultScrollAnchor(.top, for: .sizeChanges)
         }
 }

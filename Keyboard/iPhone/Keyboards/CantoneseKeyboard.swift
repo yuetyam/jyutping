@@ -1,7 +1,6 @@
 import SwiftUI
 import CoreIME
 
-// TODO: Rename to CantoneseKeyboard
 struct CantoneseKeyboard: View {
 
         @EnvironmentObject private var context: KeyboardViewController

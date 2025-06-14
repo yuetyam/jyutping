@@ -318,14 +318,42 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 candidates = []
                                 text2mark = String.empty
                                 updateReturnKey()
+                                clearSidebarSyllables()
                         }
                 }
         }
 
-        // TenKey layout
-        @Published private(set) var sidebarTexts: [String] = PresetConstant.defaultSidebarTexts
-        private func resetSidebarTexts() {
-                sidebarTexts = PresetConstant.defaultSidebarTexts
+        @Published private(set) var sidebarSyllables: [SidebarSyllable] = []
+        private lazy var selectedSyllables: [SidebarSyllable] = []
+        func handleSidebarTapping(at index: Int) {
+                guard let item = sidebarSyllables.fetch(index) else { return }
+                sidebarSyllables.remove(at: index)
+                let newSyllable = SidebarSyllable(text: item.text, isSelected: item.isSelected.negative)
+                sidebarSyllables.insert(newSyllable, at: index)
+                sidebarSyllables.sort(by: { $0.isSelected && $1.isSelected.negative })
+                selectedSyllables = sidebarSyllables.filter(\.isSelected)
+                updateSidebarSyllables()
+        }
+        private func updateSidebarSyllables(){
+                let selected = selectedSyllables.map(\.text)
+                candidates = candidates.filter({ item -> Bool in
+                        let syllables = item.romanization.removedTones().split(separator: Character.space).map({ String($0) })
+                        return syllables.starts(with: selected)
+                })
+                let leadingLength = selected.isEmpty ? 0 : selected.reduce(0, { $0 + $1.count + 2 })
+                guard leadingLength < bufferCombos.count else {
+                        sidebarSyllables = selectedSyllables
+                        return
+                }
+                let newSyllables = candidates.compactMap({ $0.romanization.dropFirst(leadingLength).split(separator: Character.space).first?.dropLast() })
+                        .uniqued()
+                        .map({ String($0) })
+                        .map({ SidebarSyllable(text: $0, isSelected: false) })
+                sidebarSyllables = selectedSyllables + newSyllables
+        }
+        private func clearSidebarSyllables() {
+                sidebarSyllables = []
+                selectedSyllables = []
         }
 
 
@@ -341,12 +369,10 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         process(.quote, isCapitalized: false)
                         adjustKeyboard()
                 case .process(let text):
-                        defer {
-                                adjustKeyboard()
-                        }
                         let isCantoneseComposeMode: Bool = inputMethodMode.isCantonese && keyboardForm.isBufferrable
                         guard isCantoneseComposeMode else {
                                 textDocumentProxy.insertText(text)
+                                adjustKeyboard()
                                 return
                         }
                         let shouldAppendText: Bool = text.isLetters || (inputStage.isBuffering && (text.first?.isCantoneseToneDigit ?? false))
@@ -354,8 +380,10 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 appendBufferText(text)
                         } else if inputStage.isBuffering {
                                 inputBufferText(followedBy: text)
+                                adjustKeyboard()
                         } else {
                                 textDocumentProxy.insertText(text)
+                                adjustKeyboard()
                         }
                 case .combine(let combo):
                         bufferCombos.append(combo)
@@ -589,7 +617,8 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         let suggestions = await (userLexiconCandidates + engineCandidates).transformed(with: Options.characterStandard, isEmojiSuggestionsOn: isEmojiSuggestionsOn)
                         if Task.isCancelled.negative {
                                 await MainActor.run { [weak self] in
-                                        self?.text2mark = {
+                                        guard let self else { return }
+                                        self.text2mark = {
                                                 guard let firstCandidate = suggestions.first else { return combos.compactMap(\.letters.first).joined() }
                                                 let userInputCount = combos.count
                                                 let firstInputCount = firstCandidate.inputCount
@@ -598,7 +627,8 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                                 let tailText = tailCombos.compactMap(\.letters.first).joined()
                                                 return firstCandidate.mark + String.space + tailText
                                         }()
-                                        self?.candidates = suggestions
+                                        self.candidates = suggestions
+                                        self.updateSidebarSyllables()
                                 }
                         }
                 }
