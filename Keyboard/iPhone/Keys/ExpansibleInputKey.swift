@@ -103,13 +103,13 @@ struct ExpansibleInputKey: View {
                                                                                 Color.interactiveClear
                                                                                 Text(verbatim: element.header ?? String.space)
                                                                                         .font(.keyFootnote)
-                                                                                        .opacity(0.66)
+                                                                                        .shallow()
                                                                         }
                                                                         ZStack(alignment: .bottom) {
                                                                                 Color.interactiveClear
                                                                                 Text(verbatim: element.footer ?? String.space)
                                                                                         .font(.keyFootnote)
-                                                                                        .opacity(0.66)
+                                                                                        .shallow()
                                                                         }
                                                                         Text(verbatim: element.text)
                                                                                 .textCase(textCase)
@@ -149,7 +149,7 @@ struct ExpansibleInputKey: View {
                                         Text(verbatim: keyModel.primary.header ?? String.space)
                                                 .textCase(textCase)
                                                 .font(.keyFootnote)
-                                                .opacity(0.66)
+                                                .shallow()
                                 }
                                 .padding(.vertical, verticalPadding)
                                 .padding(.horizontal, horizontalPadding + 2)
@@ -158,7 +158,7 @@ struct ExpansibleInputKey: View {
                                         Text(verbatim: keyModel.primary.footer ?? String.space)
                                                 .textCase(textCase)
                                                 .font(.keyFootnote)
-                                                .opacity(0.66)
+                                                .shallow()
                                 }
                                 .padding(.vertical, verticalPadding)
                                 .padding(.horizontal, horizontalPadding + 2)

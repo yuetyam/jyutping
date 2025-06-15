@@ -55,7 +55,9 @@ struct SettingsView: View {
         var body: some View {
                 VStack(spacing: 0) {
                         ZStack {
-                                Text("SettingsView.NavigationBar.HintText").font(.footnote).opacity(0.66)
+                                Text("SettingsView.NavigationBar.HintText")
+                                        .font(.footnote)
+                                        .shallow()
                                 HStack {
                                         Button {
                                                 AudioFeedback.modified()

@@ -93,7 +93,7 @@ struct StrokeInputKey: View {
                                                 Text(verbatim: letter)
                                                         .textCase(textCase)
                                                         .font(.footnote)
-                                                        .opacity(0.66)
+                                                        .shallow()
                                         }
                                         .padding(.vertical, verticalPadding)
                                         .padding(.horizontal, horizontalPadding + 2)
@@ -101,7 +101,7 @@ struct StrokeInputKey: View {
                                 } else {
                                         Text(verbatim: letter)
                                                 .textCase(textCase)
-                                                .opacity(0.66)
+                                                .shallow()
                                                 .padding(.bottom, shouldAdjustKeyTextPosition ? 3 : 0)
                                 }
                         }

@@ -2,6 +2,8 @@ import SwiftUI
 import CoreIME
 import CommonExtensions
 
+@available(iOS, introduced: 15.0, deprecated: 16.0, message: "Use SettingsView instead")
+@available(iOSApplicationExtension, introduced: 15.0, deprecated: 16.0, message: "Use SettingsView instead")
 struct SettingsViewIOS15: View {
 
         @EnvironmentObject private var context: KeyboardViewController
@@ -22,6 +24,7 @@ struct SettingsViewIOS15: View {
         @State private var keyboardLayout: KeyboardLayout = KeyboardLayout.fetchSavedLayout()
         @State private var isKeyPadNumericLayout: Bool = NumericLayout.fetchSavedLayout().isNumberKeyPad
         @State private var isTenKeyStrokeLayout: Bool = StrokeLayout.fetchSavedLayout().isTenKey
+        @State private var needsNumberRow: Bool = Options.needsNumberRow
         @State private var showLowercaseKeys: Bool = Options.showLowercaseKeys
         @State private var keyTextPreview: Bool = Options.keyTextPreview
         @State private var commentStyle: CommentStyle = Options.commentStyle
@@ -39,7 +42,9 @@ struct SettingsViewIOS15: View {
         var body: some View {
                 VStack(spacing: 0) {
                         ZStack {
-                                Text("SettingsView.NavigationBar.HintText").font(.footnote).opacity(0.66)
+                                Text("SettingsView.NavigationBar.HintText")
+                                        .font(.footnote)
+                                        .shallow()
                                 HStack {
                                         Button {
                                                 AudioFeedback.modified()
@@ -140,8 +145,8 @@ struct SettingsViewIOS15: View {
                                         context.updateKeyboardLayout(to: newLayout)
                                 }
 
-                                if context.isRunningOnPhone {
-                                        Section {
+                                Section {
+                                        if context.isRunningOnPhone {
                                                 Toggle("SettingsView.NumericLayout.ToggleTitle", isOn: $isKeyPadNumericLayout)
                                                         .onChange(of: isKeyPadNumericLayout) { isOn in
                                                                 AudioFeedback.modified()
@@ -154,10 +159,12 @@ struct SettingsViewIOS15: View {
                                                                 let newLayout: StrokeLayout = isOn ? .tenKey : .default
                                                                 context.updateStrokeLayout(to: newLayout)
                                                         }
+                                                Toggle("SettingsView.NumberRow.ToggleTitle", isOn: $needsNumberRow)
+                                                        .onChange(of: needsNumberRow) { isOn in
+                                                                AudioFeedback.modified()
+                                                                context.updateNumberRowState(to: isOn)
+                                                        }
                                         }
-                                }
-
-                                Section {
                                         Toggle("SettingsView.ShowLowercaseKeys.ToggleTitle", isOn: $showLowercaseKeys)
                                                 .onChange(of: showLowercaseKeys) { newState in
                                                         AudioFeedback.modified()
