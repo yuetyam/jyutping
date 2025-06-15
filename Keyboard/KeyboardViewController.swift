@@ -490,7 +490,12 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         }()
                         updateKeyboardCase(to: newCase)
                 case .tab:
-                        textDocumentProxy.insertText(String.tab)
+                        if inputStage.isBuffering {
+                                inputBufferText(followedBy: String.tab)
+                        } else {
+                                textDocumentProxy.insertText(String.tab)
+                        }
+                        adjustKeyboard()
                 case .dismiss:
                         dismissKeyboard()
                 case .select(let candidate):

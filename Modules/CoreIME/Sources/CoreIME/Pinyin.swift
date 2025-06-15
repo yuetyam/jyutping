@@ -34,13 +34,14 @@ extension Engine {
                 let prefixes: [PinyinLexicon] = {
                         let hasPrefectSchemes: Bool = schemes.contains(where: { $0.summedLength == textCount })
                         guard hasPrefectSchemes.negative else { return [] }
+                        let anchorLimit: Int64 = (limit == nil) ? 500 : 200
                         return schemes.flatMap({ scheme -> [PinyinLexicon] in
                                 let tail = text.dropFirst(scheme.summedLength)
                                 guard let lastAnchor = tail.first else { return [] }
                                 let schemeAnchors = scheme.compactMap(\.first)
                                 let anchors: String = String(schemeAnchors + [lastAnchor])
                                 let text2mark: String = scheme.joined(separator: String.space) + String.space + tail
-                                return anchorMatch(pinyin: anchors, statement: anchorsStatement, limit: limit)
+                                return anchorMatch(pinyin: anchors, statement: anchorsStatement, limit: anchorLimit)
                                         .filter({ $0.pinyin.hasPrefix(text2mark) })
                                         .map({ PinyinLexicon(text: $0.text, pinyin: $0.pinyin, input: text, mark: text2mark) })
                         })

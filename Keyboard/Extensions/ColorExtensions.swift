@@ -44,3 +44,11 @@ extension Color {
         static let solidDarkInput   : Color = isLiquidGlassPreferred ? solidEmphaticDark : solidShallowDark
         static let solidDarkAction  : Color = solidEmphaticDark
 }
+
+extension View {
+
+        /// Apply 0.66 opacity
+        nonisolated func shallow() -> some View {
+                return opacity(0.66)
+        }
+}

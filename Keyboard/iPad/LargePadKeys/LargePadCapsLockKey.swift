@@ -8,24 +8,25 @@ struct LargePadCapsLockKey: View {
         @EnvironmentObject private var context: KeyboardViewController
 
         @Environment(\.colorScheme) private var colorScheme
+
         private var keyColor: Color {
                 switch colorScheme {
                 case .light:
-                        return .lightEmphatic
+                        return .lightAction
                 case .dark:
-                        return .darkEmphatic
+                        return .darkAction
                 @unknown default:
-                        return .lightEmphatic
+                        return .lightAction
                 }
         }
-        private var activeKeyColor: Color {
+        private var keyActiveColor: Color {
                 switch colorScheme {
                 case .light:
-                        return .light
+                        return .activeLightAction
                 case .dark:
-                        return .dark
+                        return .activeDarkAction
                 @unknown default:
-                        return .light
+                        return .activeLightAction
                 }
         }
 
@@ -37,15 +38,15 @@ struct LargePadCapsLockKey: View {
                 let horizontalPadding: CGFloat = isLandscape ? 5 : 4
                 ZStack {
                         Color.interactiveClear
-                        RoundedRectangle(cornerRadius: 5, style: .continuous)
-                                .fill(context.keyboardCase.isCapsLocked ? activeKeyColor : keyColor)
+                        RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous)
+                                .fill(context.keyboardCase.isCapsLocked ? keyActiveColor : keyColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(.vertical, verticalPadding)
                                 .padding(.horizontal, horizontalPadding)
                         ZStack(alignment: .topLeading) {
                                 Color.clear
                                 Circle()
-                                        .fill(context.keyboardCase.isCapsLocked ? Color.green : activeKeyColor.opacity(0.8))
+                                        .fill(context.keyboardCase.isCapsLocked ? Color.green : keyActiveColor.opacity(0.66))
                                         .frame(width: 4, height: 4)
                         }
                         .padding(.vertical, verticalPadding + 8)

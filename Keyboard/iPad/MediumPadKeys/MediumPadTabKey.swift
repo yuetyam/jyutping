@@ -68,7 +68,7 @@ struct MediumPadTabKey: View {
                                 }
                         }
                         .onEnded { _ in
-                                context.operate(.process("\t"))
+                                context.operate(.tab)
                          }
                 )
         }
