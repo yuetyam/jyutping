@@ -56,12 +56,8 @@ struct CandidateBoard: View {
                         VStack(alignment: .leading, spacing: 0) {
                                 ForEach(context.displayCandidates.indices, id: \.self) { index in
                                         ZStack(alignment: .leading) {
-                                                HStack {
-                                                        Color.clear
-                                                        Spacer()
-                                                        Color.clear
-                                                }
-                                                .background(index == highlightedIndex ? Color.accentColor : Color.clear, in: RoundedRectangle(cornerRadius: 5, style: .continuous))
+                                                RoundedRectangle(cornerRadius: 5, style: .continuous)
+                                                        .fill(index == highlightedIndex ? Color.accentColor : Color.clear)
                                                 VerticalPageCandidateLabel(
                                                         isHighlighted: index == highlightedIndex,
                                                         index: index,
