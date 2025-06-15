@@ -83,7 +83,7 @@ struct NumberInputKey: View {
                                         .padding(.vertical, verticalPadding)
                                         .padding(.horizontal, horizontalPadding)
                                 Text(verbatim: keyText)
-                                        .font(.letterInputKeyCompact)
+                                        .font(.letterCompact)
                         }
                 }
                 .frame(width: keyWidth, height: keyHeight)

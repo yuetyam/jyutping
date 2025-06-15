@@ -88,7 +88,7 @@ struct LetterInputKey: View {
                                         .padding(.horizontal, horizontalPadding)
                                 Text(verbatim: keyText)
                                         .textCase(textCase)
-                                        .font(.letterInputKeyCompact)
+                                        .font(.letterCompact)
                                         .padding(.bottom, keyTextBottomInset)
                         }
                 }

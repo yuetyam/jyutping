@@ -82,7 +82,7 @@ struct SymbolInputKey: View {
                                         .padding(.vertical, verticalPadding)
                                         .padding(.horizontal, horizontalPadding)
                                 Text(verbatim: text)
-                                        .font(.letterInputKeyCompact)
+                                        .font(.letterCompact)
                         }
                 }
                 .frame(width: keyWidth, height: keyHeight)

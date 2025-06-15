@@ -39,7 +39,7 @@ struct TenKeyNumberKey: View {
                                 .fill(isTouching ? keyActiveColor : keyColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(3)
-                        Text(verbatim: key).font(.letterInputKeyCompact)
+                        Text(verbatim: key).font(.letterCompact)
                 }
                 .frame(width: context.tenKeyWidthUnit, height: context.heightUnit)
                 .contentShape(Rectangle())

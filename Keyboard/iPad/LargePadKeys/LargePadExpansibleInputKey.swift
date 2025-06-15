@@ -131,7 +131,7 @@ struct LargePadExpansibleInputKey: View {
                                         Text(verbatim: keyModel.primary.header ?? String.space)
                                                 .textCase(textCase)
                                                 .font(.keyFooter)
-                                                .opacity(0.3)
+                                                .opacity(0.5)
                                 }
                                 .padding(.vertical, verticalPadding)
                                 .padding(.horizontal, horizontalPadding + 2)
@@ -140,7 +140,7 @@ struct LargePadExpansibleInputKey: View {
                                         Text(verbatim: keyModel.primary.footer ?? String.space)
                                                 .textCase(textCase)
                                                 .font(.keyFooter)
-                                                .opacity(0.3)
+                                                .opacity(0.5)
                                 }
                                 .padding(.vertical, verticalPadding)
                                 .padding(.horizontal, horizontalPadding + 2)

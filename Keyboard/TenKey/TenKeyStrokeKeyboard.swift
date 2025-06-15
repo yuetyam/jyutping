@@ -91,7 +91,7 @@ private struct TenKeyStrokeKey: View {
                                 .fill(isTouching ? keyActiveColor : keyColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(3)
-                        Text(verbatim: keyText).font(.letterInputKeyCompact)
+                        Text(verbatim: keyText).font(.letterCompact)
                 }
                 .frame(width: context.tenKeyWidthUnit, height: context.heightUnit)
                 .contentShape(Rectangle())

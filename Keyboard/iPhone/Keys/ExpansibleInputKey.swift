@@ -164,7 +164,7 @@ struct ExpansibleInputKey: View {
                                 .padding(.horizontal, horizontalPadding + 2)
                                 Text(verbatim: keyModel.primary.text)
                                         .textCase(textCase)
-                                        .font(keyModel.primary.isTextSingular ? .letterInputKeyCompact : .dualLettersInputKeyCompact)
+                                        .font(keyModel.primary.isTextSingular ? .letterCompact : .dualLettersCompact)
                                         .padding(.bottom, keyTextBottomInset)
                         }
                 }

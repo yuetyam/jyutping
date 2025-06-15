@@ -291,9 +291,9 @@ struct CantoneseNumericKeyboard: View {
                                         keyModel: KeyModel(primary: KeyElement("\u{0022}"),
                                                            members: [
                                                                 KeyElement("\u{0022}", footer: "0022"),
-                                                                KeyElement("\u{FF02}", header: PresetConstant.fullWidth, footer: "U+FF02"),
-                                                                KeyElement("\u{201D}", header: "右", footer: "U+201D"),
-                                                                KeyElement("\u{201C}", header: "左", footer: "U+201C")
+                                                                KeyElement("\u{FF02}", header: PresetConstant.fullWidth, footer: "FF02"),
+                                                                KeyElement("\u{201D}", header: "右", footer: "201D"),
+                                                                KeyElement("\u{201C}", header: "左", footer: "201C")
                                                            ])
                                 )
                                 PlaceholderKey()
