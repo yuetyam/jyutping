@@ -10,7 +10,7 @@ extension Font {
 
         static let letterCompact: Font = Font.system(size: 24)
         static let dualLettersCompact: Font = Font.system(size: 17)
-        static let keyFooter: Font = Font.system(size: 10)
+        static let keyFootnote: Font = Font.system(size: 10)
 
         /// EmojiBoard emoji view
         static let emoji: Font = Font.system(size: 34)

@@ -48,7 +48,7 @@ struct MediumPadRightKey: View {
                                 ZStack(alignment: .bottom) {
                                         Color.clear
                                         Text(verbatim: "分隔")
-                                                .font(.keyFooter)
+                                                .font(.keyFootnote)
                                                 .opacity(0.8)
                                 }
                                 .padding(.vertical, verticalPadding + 5)

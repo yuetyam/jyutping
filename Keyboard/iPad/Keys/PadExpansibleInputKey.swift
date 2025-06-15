@@ -89,14 +89,14 @@ struct PadExpansibleInputKey: View {
                                                                         ZStack(alignment: .top) {
                                                                                 Color.clear
                                                                                 Text(verbatim: element.header ?? String.space)
-                                                                                        .font(.keyFooter)
+                                                                                        .font(.keyFootnote)
                                                                                         .opacity(0.8)
                                                                         }
                                                                         .padding(2)
                                                                         ZStack(alignment: .bottom) {
                                                                                 Color.clear
                                                                                 Text(verbatim: element.footer ?? String.space)
-                                                                                        .font(.keyFooter)
+                                                                                        .font(.keyFootnote)
                                                                                         .opacity(0.8)
                                                                         }
                                                                         .padding(2)
@@ -126,7 +126,7 @@ struct PadExpansibleInputKey: View {
                                         Color.clear
                                         Text(verbatim: keyModel.primary.header ?? String.space)
                                                 .textCase(textCase)
-                                                .font(.keyFooter)
+                                                .font(.keyFootnote)
                                                 .opacity(0.8)
                                 }
                                 .padding(.vertical, verticalPadding + 3)
@@ -135,7 +135,7 @@ struct PadExpansibleInputKey: View {
                                         Color.clear
                                         Text(verbatim: keyModel.primary.footer ?? String.space)
                                                 .textCase(textCase)
-                                                .font(.keyFooter)
+                                                .font(.keyFootnote)
                                                 .opacity(0.8)
                                 }
                                 .padding(.vertical, verticalPadding + 3)

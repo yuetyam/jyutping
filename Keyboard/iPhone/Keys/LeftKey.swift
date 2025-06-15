@@ -115,7 +115,7 @@ struct LeftKey: View {
                                 ZStack(alignment: .bottom) {
                                         Color.clear
                                         Text(verbatim: "分隔")
-                                                .font(.keyFooter)
+                                                .font(.keyFootnote)
                                                 .opacity(context.inputStage.isBuffering ? 0.66 : 0)
                                 }
                                 .padding(.vertical, verticalPadding + 2)

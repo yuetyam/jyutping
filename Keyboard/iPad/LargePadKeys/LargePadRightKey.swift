@@ -49,7 +49,7 @@ struct LargePadRightKey: View {
                                 ZStack(alignment: .bottom) {
                                         Color.clear
                                         Text(verbatim: "分隔")
-                                                .font(.keyFooter)
+                                                .font(.keyFootnote)
                                                 .shallow()
                                 }
                                 .padding(.vertical, verticalPadding + 7)
