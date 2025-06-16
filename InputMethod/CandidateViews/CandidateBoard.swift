@@ -31,8 +31,8 @@ struct CandidateBoard: View {
                                                 isLabelLastZero: isLabelLastZero,
                                                 compatibleMode: isCompatibleModeOn
                                         )
-                                        .padding(.vertical, 4)
-                                        .padding(.trailing, 4)
+                                        .padding(.vertical, 3)
+                                        .padding(.trailing, 3)
                                         .padding(.horizontal, lineSpacing / 2.0)
                                         .foregroundStyle(index == highlightedIndex ? Color.white : Color.primary)
                                         .background(index == highlightedIndex ? Color.accentColor : Color.clear, in: RoundedRectangle(cornerRadius: 5, style: .continuous))
@@ -48,7 +48,7 @@ struct CandidateBoard: View {
                                         }
                                 }
                         }
-                        .padding(4)
+                        .padding(3)
                         .roundedHUDVisualEffect()
                         .padding(10)
                         .fixedSize()
@@ -69,7 +69,7 @@ struct CandidateBoard: View {
                                                         isLabelLastZero: isLabelLastZero,
                                                         compatibleMode: isCompatibleModeOn
                                                 )
-                                                .padding(.horizontal, 4)
+                                                .padding(.horizontal, 3)
                                                 .padding(.vertical, lineSpacing / 2.0)
                                                 .foregroundStyle(index == highlightedIndex ? Color.white : Color.primary)
                                                 .fixedSize()
@@ -86,7 +86,7 @@ struct CandidateBoard: View {
                                         }
                                 }
                         }
-                        .padding(4)
+                        .padding(3)
                         .roundedHUDVisualEffect()
                         .padding(10)
                         .fixedSize()

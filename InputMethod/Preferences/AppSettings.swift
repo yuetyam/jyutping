@@ -55,12 +55,14 @@ enum CommentDisplayStyle: Int, CaseIterable {
         static func style(of value: Int) -> CommentDisplayStyle {
                 return Self.allCases.first(where: { $0.rawValue == value }) ?? Self.top
         }
+        var isTop: Bool { self == .top }
+        var isBottom: Bool { self == .bottom }
+        var isRight: Bool { self == .right }
+        var isCommentFree: Bool { self == .noComments }
         var isVertical: Bool {
                 switch self {
-                case .top, .bottom:
-                        return true
-                default:
-                        return false
+                case .top, .bottom: true
+                default: false
                 }
         }
 }

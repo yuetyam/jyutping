@@ -53,7 +53,7 @@ struct OptionsView: View {
                                 OptionLabel(verticalPadding: verticalPadding, labelSet: labelSet, isLabelLastZero: isLabelLastZero, index: 9, highlightedIndex: highlightedIndex, text: options[9], checked: inputMethodMode.isABC)
                         }
                 }
-                .padding(4)
+                .padding(3)
                 .roundedHUDVisualEffect()
                 .padding(10)
                 .fixedSize()
@@ -80,14 +80,14 @@ private struct OptionLabel: View {
 
         var body: some View {
                 HStack(spacing: 0) {
-                        HStack(spacing: 8) {
-                                Text(verbatim: labelText).font(.label).opacity(isHighlighted ? 1 : 0.66)
+                        HStack(spacing: 6) {
+                                Text(verbatim: labelText).font(.label).opacity(isHighlighted ? 1 : 0.75)
                                 Text(verbatim: text).font(.candidate)
                         }
                         Spacer()
                         Image(systemName: "checkmark").font(.title3).opacity(checked ? 1 : 0)
                 }
-                .padding(.horizontal, 4)
+                .padding(.horizontal, 3)
                 .padding(.vertical, verticalPadding)
                 .foregroundStyle(isHighlighted ? Color.white : Color.primary)
                 .background(isHighlighted ? Color.accentColor : Color.clear, in: RoundedRectangle(cornerRadius: 5, style: .continuous))

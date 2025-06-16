@@ -20,6 +20,11 @@ extension View {
                         }
                 }
         }
+
+        /// Apply 0.75 opacity
+        func shallow() -> some View {
+                return opacity(0.75)
+        }
 }
 
 extension Color {

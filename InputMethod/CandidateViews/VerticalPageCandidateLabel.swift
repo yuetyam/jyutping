@@ -24,51 +24,51 @@ struct VerticalPageCandidateLabel: View {
                 case .cantonese:
                         switch commentStyle {
                         case .top:
-                                HStack(alignment: .lastTextBaseline, spacing: 4) {
+                                HStack(alignment: .lastTextBaseline, spacing: 3) {
                                         Text(verbatim: label).font(.label).opacity(labelOpacity)
                                         TopCommentStackView(text: candidate.text, romanization: candidate.comment ?? String.space, toneStyle: toneStyle, shallowTone: shallowTone, compatibleMode: compatibleMode)
                                 }
                         case .bottom:
-                                HStack(alignment: .firstTextBaseline, spacing: 4) {
+                                HStack(alignment: .firstTextBaseline, spacing: 3) {
                                         Text(verbatim: label).font(.label).opacity(labelOpacity)
                                         BottomCommentStackView(text: candidate.text, romanization: candidate.comment ?? String.space, toneStyle: toneStyle, shallowTone: shallowTone, compatibleMode: compatibleMode)
                                 }
                         case .right:
-                                HStack(spacing: 8) {
+                                HStack(spacing: 6) {
                                         Text(verbatim: label).font(.label).opacity(labelOpacity)
                                         Text(verbatim: candidate.text).font(.candidate)
                                         RightStackRomanizationLabel(romanization: candidate.comment ?? String.space, toneStyle: toneStyle, shallowTone: shallowTone, compatibleMode: compatibleMode)
                                 }
                         case .noComments:
-                                HStack(spacing: 8) {
+                                HStack(spacing: 6) {
                                         Text(verbatim: label).font(.label).opacity(labelOpacity)
                                         Text(verbatim: candidate.text).font(.candidate)
                                 }
                         }
                 case .text:
-                        HStack(spacing: 8) {
+                        HStack(spacing: 6) {
                                 Text(verbatim: label).font(.label).opacity(labelOpacity)
                                 Text(verbatim: candidate.text).font(.candidate)
                         }
                         .padding(.vertical, commentStyle.isVertical ? 4 : 0)
                 case .emoji, .symbol:
-                        HStack(spacing: 8) {
+                        HStack(spacing: 6) {
                                 Text(verbatim: label).font(.label).opacity(labelOpacity)
-                                HStack(spacing: commentStyle.isVertical ? 2 : 10) {
+                                HStack(spacing: commentStyle.isRight ? 4 : 2) {
                                         Text(verbatim: candidate.text).font(.candidate)
-                                        Text(verbatim: candidate.comment ?? String.empty).font(.annotation)
+                                        Text(verbatim: candidate.comment ?? String.empty).font(.annotation).shallow()
                                 }
                         }
                         .padding(.vertical, commentStyle.isVertical ? 4 : 0)
                 case .compose:
-                        HStack(spacing: 8) {
+                        HStack(spacing: 6) {
                                 Text(verbatim: label).font(.label).opacity(labelOpacity)
                                 Text(verbatim: candidate.text).font(.candidate)
                                 if let comment = candidate.comment {
-                                        Text(verbatim: comment).font(.annotation)
+                                        Text(verbatim: comment).font(.annotation).shallow()
                                 }
                                 if let secondaryComment = candidate.secondaryComment {
-                                        Text(verbatim: secondaryComment).font(.annotation)
+                                        Text(verbatim: secondaryComment).font(.annotation).shallow()
                                 }
                         }
                 }
