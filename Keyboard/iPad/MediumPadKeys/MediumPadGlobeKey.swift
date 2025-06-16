@@ -7,14 +7,15 @@ struct MediumPadGlobeKey: View {
         @EnvironmentObject private var context: KeyboardViewController
 
         @Environment(\.colorScheme) private var colorScheme
+
         private var keyColor: Color {
                 switch colorScheme {
                 case .light:
-                        return .lightEmphatic
+                        return .lightAction
                 case .dark:
-                        return .darkEmphatic
+                        return .darkAction
                 @unknown default:
-                        return .lightEmphatic
+                        return .lightAction
                 }
         }
 
@@ -26,7 +27,7 @@ struct MediumPadGlobeKey: View {
                 let horizontalPadding: CGFloat = isLandscape ? 7 : 5
                 ZStack {
                         Color.interactiveClear
-                        RoundedRectangle(cornerRadius: 5, style: .continuous)
+                        RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous)
                                 .fill(keyColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(.vertical, verticalPadding)

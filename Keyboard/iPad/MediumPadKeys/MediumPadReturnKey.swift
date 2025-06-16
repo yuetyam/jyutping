@@ -8,24 +8,25 @@ struct MediumPadReturnKey: View {
         @EnvironmentObject private var context: KeyboardViewController
 
         @Environment(\.colorScheme) private var colorScheme
+
         private var keyColor: Color {
                 switch colorScheme {
                 case .light:
-                        return .lightEmphatic
+                        return .lightAction
                 case .dark:
-                        return .darkEmphatic
+                        return .darkAction
                 @unknown default:
-                        return .lightEmphatic
+                        return .lightAction
                 }
         }
-        private var activeKeyColor: Color {
+        private var keyActiveColor: Color {
                 switch colorScheme {
                 case .light:
-                        return .light
+                        return .activeLightAction
                 case .dark:
-                        return .dark
+                        return .activeDarkAction
                 @unknown default:
-                        return .light
+                        return .activeLightAction
                 }
         }
 
@@ -58,7 +59,7 @@ struct MediumPadReturnKey: View {
                         }
                 }()
                 let backColor: Color = {
-                        guard isTouching.negative else { return activeKeyColor }
+                        guard isTouching.negative else { return keyActiveColor }
                         switch keyState {
                         case .bufferingSimplified, .bufferingTraditional:
                                 return keyColor
@@ -81,7 +82,7 @@ struct MediumPadReturnKey: View {
                 }()
                 ZStack {
                         Color.interactiveClear
-                        RoundedRectangle(cornerRadius: 5, style: .continuous)
+                        RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous)
                                 .fill(backColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(.vertical, verticalPadding)
@@ -101,8 +102,7 @@ struct MediumPadReturnKey: View {
                                 .padding(.horizontal, horizontalPadding + 5)
                                 ZStack(alignment: .bottomTrailing) {
                                         Color.clear
-                                        Text(context.returnKeyText)
-                                                .font(.footnote)
+                                        Text(context.returnKeyText).font(.footnote)
                                 }
                                 .foregroundStyle(foreColor)
                                 .padding(.vertical, verticalPadding + 5)
@@ -122,8 +122,7 @@ struct MediumPadReturnKey: View {
                         case (false, true), (false, false):
                                 ZStack(alignment: .bottomTrailing) {
                                         Color.clear
-                                        Text(context.returnKeyText)
-                                                .font(.footnote)
+                                        Text(context.returnKeyText).font(.footnote)
                                 }
                                 .foregroundStyle(foreColor)
                                 .padding(.vertical, verticalPadding + 5)

@@ -8,26 +8,36 @@ struct MediumPadCapsLockKey: View {
         @EnvironmentObject private var context: KeyboardViewController
 
         @Environment(\.colorScheme) private var colorScheme
+
         private var keyColor: Color {
                 switch colorScheme {
                 case .light:
-                        return .lightEmphatic
+                        return .lightAction
                 case .dark:
-                        return .darkEmphatic
+                        return .darkAction
                 @unknown default:
-                        return .lightEmphatic
+                        return .lightAction
                 }
         }
-        private var activeKeyColor: Color {
+        private var keyActiveColor: Color {
                 switch colorScheme {
                 case .light:
-                        return .light
+                        return .activeLightAction
                 case .dark:
-                        return .dark
+                        return .activeDarkAction
                 @unknown default:
-                        return .light
+                        return .activeLightAction
                 }
         }
+        private var backColor: Color {
+                if #available(iOSApplicationExtension 26.0, *) {
+                        return isTouching ? keyActiveColor : keyColor
+                } else {
+                        return context.keyboardCase.isCapsLocked ? keyActiveColor : keyColor
+                }
+        }
+
+        @GestureState private var isTouching: Bool = false
 
         var body: some View {
                 let keyWidth: CGFloat = context.widthUnit * widthUnitTimes
@@ -37,32 +47,38 @@ struct MediumPadCapsLockKey: View {
                 let horizontalPadding: CGFloat = isLandscape ? 7 : 5
                 ZStack {
                         Color.interactiveClear
-                        RoundedRectangle(cornerRadius: 5, style: .continuous)
-                                .fill(context.keyboardCase.isCapsLocked ? activeKeyColor : keyColor)
+                        RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous)
+                                .fill(backColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(.vertical, verticalPadding)
                                 .padding(.horizontal, horizontalPadding)
                         ZStack(alignment: .topLeading) {
                                 Color.clear
                                 Circle()
-                                        .fill(context.keyboardCase.isCapsLocked ? Color.green : activeKeyColor.opacity(0.8))
-                                        .frame(width: 4, height: 4)
+                                        .fill(context.keyboardCase.isCapsLocked ? Color.green : keyActiveColor.opacity(0.66))
+                                        .frame(width: 5, height: 5)
                         }
-                        .padding(.vertical, verticalPadding + 5)
-                        .padding(.horizontal, horizontalPadding + 5)
+                        .padding(.vertical, verticalPadding + 6)
+                        .padding(.horizontal, horizontalPadding + 6)
                         ZStack(alignment: .bottomLeading) {
                                 Color.clear
-                                Text(verbatim: "caps lock")
-                                        .font(.footnote)
+                                Text(verbatim: "caps lock").font(.footnote)
                         }
                         .padding(.vertical, verticalPadding + 5)
                         .padding(.horizontal, horizontalPadding + 5)
                 }
                 .frame(width: keyWidth, height: keyHeight)
                 .contentShape(Rectangle())
-                .onTapGesture {
-                        AudioFeedback.modified()
-                        context.operate(.doubleShift)
-                }
+                .gesture(DragGesture(minimumDistance: 0)
+                        .updating($isTouching) { _, tapped, _ in
+                                if tapped.negative {
+                                        AudioFeedback.modified()
+                                        tapped = true
+                                }
+                        }
+                        .onEnded { _ in
+                                context.operate(.doubleShift)
+                         }
+                )
         }
 }

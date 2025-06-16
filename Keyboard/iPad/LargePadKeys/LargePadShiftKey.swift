@@ -30,6 +30,13 @@ struct LargePadShiftKey: View {
                         return .activeLightAction
                 }
         }
+        private var backColor: Color {
+                if #available(iOSApplicationExtension 26.0, *) {
+                        return isTouching ? keyActiveColor : keyColor
+                } else {
+                        return context.keyboardCase.isLowercased ? keyColor : keyActiveColor
+                }
+        }
 
         @GestureState private var isTouching: Bool = false
         @State private var previousKeyboardCase: KeyboardCase = .lowercased
@@ -46,7 +53,7 @@ struct LargePadShiftKey: View {
                 ZStack {
                         Color.interactiveClear
                         RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous)
-                                .fill(context.keyboardCase.isLowercased ? keyColor : keyActiveColor)
+                                .fill(backColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(.vertical, verticalPadding)
                                 .padding(.horizontal, horizontalPadding)
