@@ -32,21 +32,8 @@ struct PadGlobeKey: View {
                                 .padding(.vertical, verticalPadding)
                                 .padding(.horizontal, horizontalPadding)
                         Image.globe
-                        PadGlobeButton()
+                        UIGlobeButton()
                 }
                 .frame(width: keyWidth, height: keyHeight)
         }
-}
-
-private struct PadGlobeButton: UIViewRepresentable {
-
-        @EnvironmentObject private var controller: KeyboardViewController
-
-        func makeUIView(context: Context) -> UIButton {
-                let button = UIButton()
-                button.addTarget(controller, action: #selector(controller.handleInputModeList(from:with:)), for: .allTouchEvents)
-                button.addTarget(controller, action: #selector(controller.globeKeyFeedback), for: .touchDown)
-                return button
-        }
-        func updateUIView(_ uiView: UIViewType, context: Context) {}
 }

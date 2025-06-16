@@ -27,21 +27,8 @@ struct TenKeyGlobeKey: View {
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(3)
                         Image(systemName: "globe")
-                        TenKeyGlobeButton()
+                        UIGlobeButton()
                 }
                 .frame(width: width, height: height)
         }
-}
-
-private struct TenKeyGlobeButton: UIViewRepresentable {
-
-        @EnvironmentObject private var controller: KeyboardViewController
-
-        func makeUIView(context: Context) -> UIButton {
-                let button = UIButton()
-                button.addTarget(controller, action: #selector(controller.handleInputModeList(from:with:)), for: .allTouchEvents)
-                button.addTarget(controller, action: #selector(controller.globeKeyFeedback), for: .touchDown)
-                return button
-        }
-        func updateUIView(_ uiView: UIViewType, context: Context) {}
 }
