@@ -66,8 +66,8 @@ struct MediumPadCangjieKeyboard: View {
                                                                 KeyElement("？"),
                                                                 KeyElement("｡", header: PresetConstant.halfWidth),
                                                                 KeyElement("?", header: PresetConstant.halfWidth),
-                                                                KeyElement(".", header: "英文半寬"),
-                                                                KeyElement("．", header: "英文全寬")
+                                                                KeyElement("."),
+                                                                KeyElement("．", header: PresetConstant.fullWidth),
                                                         ]
                                                 )
                                         )

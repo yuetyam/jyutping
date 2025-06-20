@@ -17,7 +17,7 @@ struct ExpansiveBubbleShape: Shape {
         ///   - expansionCount: Count of the extra blocks
         ///   - keyCornerRadius: Base view corner radius
         ///   - previewCornerRadius: Bubble preview corner radius
-        init(keyLocale: HorizontalEdge, expansionCount: Int, keyCornerRadius: CGFloat = PresetConstant.keyCornerRadius, previewCornerRadius: CGFloat = PresetConstant.keyCornerRadius * 2) {
+        init(keyLocale: HorizontalEdge, expansionCount: Int, keyCornerRadius: CGFloat = PresetConstant.keyCornerRadius, previewCornerRadius: CGFloat = PresetConstant.keyCornerRadius * 1.62) {
                 self.keyLocale = keyLocale
                 self.expansionCount = expansionCount
                 self.keyCornerRadius = keyCornerRadius

@@ -1616,13 +1616,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cangjie / Quick(Sucheng) Reverse Lookup"
+            "value" : "Cangjie / Sucheng Reverse Lookup"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Recherche inversée de Cangjie / Quick(Sucheng)"
+            "value" : "Recherche inversée de Cangjie / Sucheng"
           }
         },
         "yue" : {

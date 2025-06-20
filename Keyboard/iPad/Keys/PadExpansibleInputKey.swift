@@ -18,34 +18,35 @@ struct PadExpansibleInputKey: View {
         @EnvironmentObject private var context: KeyboardViewController
 
         @Environment(\.colorScheme) private var colorScheme
+
         private var keyColor: Color {
                 switch colorScheme {
                 case .light:
-                        return .light
+                        return .lightInput
                 case .dark:
-                        return .dark
+                        return .darkInput
                 @unknown default:
-                        return .light
+                        return .lightInput
                 }
         }
-        private var activeKeyColor: Color {
+        private var keyActiveColor: Color {
                 switch colorScheme {
                 case .light:
-                        return .lightEmphatic
+                        return .activeLightInput
                 case .dark:
-                        return .darkEmphatic
+                        return .activeDarkInput
                 @unknown default:
-                        return .lightEmphatic
+                        return .activeLightInput
                 }
         }
         private var keyPreviewColor: Color {
                 switch colorScheme {
                 case .light:
-                        return .light
+                        return .lightInput
                 case .dark:
-                        return .darkOpacity
+                        return .solidDarkInput
                 @unknown default:
-                        return .light
+                        return .lightInput
                 }
         }
 
@@ -84,20 +85,20 @@ struct PadExpansibleInputKey: View {
                                                                 let elementIndex: Int = keyLocale.isLeading ? index : ((memberCount - 1) - index)
                                                                 let element: KeyElement = keyModel.members[elementIndex]
                                                                 ZStack {
-                                                                        RoundedRectangle(cornerRadius: 5, style: .continuous)
+                                                                        RoundedRectangle(cornerRadius: PresetConstant.innerLargeKeyCornerRadius, style: .continuous)
                                                                                 .fill(selectedIndex == elementIndex ? Color.accentColor : Color.clear)
                                                                         ZStack(alignment: .top) {
                                                                                 Color.clear
                                                                                 Text(verbatim: element.header ?? String.space)
                                                                                         .font(.keyFootnote)
-                                                                                        .opacity(0.8)
+                                                                                        .shallow()
                                                                         }
                                                                         .padding(2)
                                                                         ZStack(alignment: .bottom) {
                                                                                 Color.clear
                                                                                 Text(verbatim: element.footer ?? String.space)
                                                                                         .font(.keyFootnote)
-                                                                                        .opacity(0.8)
+                                                                                        .shallow()
                                                                         }
                                                                         .padding(2)
                                                                         Text(verbatim: element.text)
@@ -117,8 +118,8 @@ struct PadExpansibleInputKey: View {
                                         .padding(.vertical, verticalPadding)
                                         .padding(.horizontal, horizontalPadding)
                         } else {
-                                RoundedRectangle(cornerRadius: 5, style: .continuous)
-                                        .fill(isTouching ? activeKeyColor : keyColor)
+                                RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous)
+                                        .fill(isTouching ? keyActiveColor : keyColor)
                                         .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                         .padding(.vertical, verticalPadding)
                                         .padding(.horizontal, horizontalPadding)
@@ -127,18 +128,18 @@ struct PadExpansibleInputKey: View {
                                         Text(verbatim: keyModel.primary.header ?? String.space)
                                                 .textCase(textCase)
                                                 .font(.keyFootnote)
-                                                .opacity(0.8)
+                                                .shallow()
                                 }
-                                .padding(.vertical, verticalPadding + 3)
+                                .padding(.vertical, verticalPadding + 1)
                                 .padding(.horizontal, horizontalPadding + 3)
                                 ZStack(alignment: .bottomTrailing) {
                                         Color.clear
                                         Text(verbatim: keyModel.primary.footer ?? String.space)
                                                 .textCase(textCase)
                                                 .font(.keyFootnote)
-                                                .opacity(0.8)
+                                                .shallow()
                                 }
-                                .padding(.vertical, verticalPadding + 3)
+                                .padding(.vertical, verticalPadding + 1)
                                 .padding(.horizontal, horizontalPadding + 3)
                                 Text(verbatim: keyModel.primary.text)
                                         .textCase(textCase)

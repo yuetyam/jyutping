@@ -6,8 +6,8 @@ struct PadExpansiveBubbleShape: Shape {
         /// - Parameters:
         ///   - keyLocale: Key location, left half (leading) or right half (trailing).
         ///   - expansionCount: Count of the extra blocks.
-        ///   - cornerRadius: Arc CornerRadius.
-        init(keyLocale: HorizontalEdge, expansionCount: Int, cornerRadius: CGFloat = 5) {
+        ///   - cornerRadius: Arc corner radius.
+        init(keyLocale: HorizontalEdge, expansionCount: Int, cornerRadius: CGFloat = PresetConstant.largeKeyCornerRadius) {
                 self.keyLocale = keyLocale
                 self.expansionCount = expansionCount
                 self.cornerRadius = cornerRadius

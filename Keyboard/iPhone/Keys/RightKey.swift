@@ -131,12 +131,10 @@ struct RightKey: View {
                                         .padding(.horizontal, horizontalPadding)
                                 ZStack(alignment: .bottom) {
                                         Color.clear
-                                        Text(verbatim: "分隔")
-                                                .font(.keyFootnote)
-                                                .opacity(context.inputStage.isBuffering ? 0.66 : 0)
+                                        Text(verbatim: PresetConstant.separate).font(.keyFootnote)
                                 }
                                 .padding(.vertical, verticalPadding + 2)
-                                .padding(.horizontal, horizontalPadding + 2)
+                                .opacity(context.inputStage.isBuffering ? 0.5 : 0)
                                 Text(verbatim: keyText(isABCMode: context.inputMethodMode.isABC, isBuffering: context.inputStage.isBuffering, needsInputModeSwitchKey: needsInputModeSwitchKey))
                         }
                 }

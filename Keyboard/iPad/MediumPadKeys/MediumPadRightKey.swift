@@ -48,12 +48,11 @@ struct MediumPadRightKey: View {
                         if context.inputStage.isBuffering {
                                 ZStack(alignment: .bottom) {
                                         Color.clear
-                                        Text(verbatim: "分隔")
+                                        Text(verbatim: PresetConstant.separate)
                                                 .font(.keyFootnote)
                                                 .shallow()
                                 }
                                 .padding(.vertical, verticalPadding + 5)
-                                .padding(.horizontal, horizontalPadding + 5)
                                 Text(verbatim: String.separator)
                         } else {
                                 ZStack(alignment: .bottomTrailing) {

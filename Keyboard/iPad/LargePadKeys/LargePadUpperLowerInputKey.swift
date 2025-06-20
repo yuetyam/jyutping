@@ -91,7 +91,7 @@ struct LargePadUpperLowerInputKey: View {
                                                                 let element: KeyElement = keyModel.members[elementIndex]
                                                                 let isHighlighted: Bool = (selectedIndex == elementIndex)
                                                                 ZStack {
-                                                                        RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous)
+                                                                        RoundedRectangle(cornerRadius: PresetConstant.innerLargeKeyCornerRadius, style: .continuous)
                                                                                 .fill(isHighlighted ? Color.accentColor : Color.clear)
                                                                         ZStack(alignment: .top) {
                                                                                 Color.clear

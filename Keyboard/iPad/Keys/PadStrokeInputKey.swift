@@ -17,24 +17,25 @@ struct PadStrokeInputKey: View {
         @EnvironmentObject private var context: KeyboardViewController
 
         @Environment(\.colorScheme) private var colorScheme
+
         private var keyColor: Color {
                 switch colorScheme {
                 case .light:
-                        return .light
+                        return .lightInput
                 case .dark:
-                        return .dark
+                        return .darkInput
                 @unknown default:
-                        return .light
+                        return .lightInput
                 }
         }
-        private var activeKeyColor: Color {
+        private var keyActiveColor: Color {
                 switch colorScheme {
                 case .light:
-                        return .lightEmphatic
+                        return .activeLightInput
                 case .dark:
-                        return .darkEmphatic
+                        return .activeDarkInput
                 @unknown default:
-                        return .lightEmphatic
+                        return .activeLightInput
                 }
         }
 
@@ -50,8 +51,8 @@ struct PadStrokeInputKey: View {
                 let textCase: Text.Case = shouldShowLowercaseKeys ? .lowercase : .uppercase
                 ZStack {
                         Color.interactiveClear
-                        RoundedRectangle(cornerRadius: 5, style: .continuous)
-                                .fill(isTouching ? activeKeyColor : keyColor)
+                        RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous)
+                                .fill(isTouching ? keyActiveColor : keyColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(.vertical, verticalPadding)
                                 .padding(.horizontal, horizontalPadding)
@@ -61,15 +62,15 @@ struct PadStrokeInputKey: View {
                                         Text(verbatim: letter)
                                                 .textCase(textCase)
                                                 .font(.footnote)
-                                                .opacity(0.8)
+                                                .shallow()
                                 }
-                                .padding(.vertical, verticalPadding + 3)
+                                .padding(.vertical, verticalPadding + 1)
                                 .padding(.horizontal, horizontalPadding + 3)
                                 Text(verbatim: stroke)
                         } else {
                                 Text(verbatim: letter)
                                         .textCase(textCase)
-                                        .opacity(0.8)
+                                        .shallow()
                         }
                 }
                 .frame(width: keyWidth, height: keyHeight)

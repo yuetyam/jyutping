@@ -4,7 +4,6 @@ import CommonExtensions
 struct TenKeySpecialKey: View {
 
         @EnvironmentObject private var context: KeyboardViewController
-
         @Environment(\.colorScheme) private var colorScheme
 
         private var keyColor: Color {
@@ -37,21 +36,25 @@ struct TenKeySpecialKey: View {
                                 .fill(isTouching ? keyActiveColor : keyColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(3)
-                        /*
+                        #if DEBUG
                         if context.inputStage.isBuffering {
                                 VStack {
-                                        Text(verbatim: "'")
-                                        Text(verbatim: "分隔").font(.keyFootnote).foregroundStyle(Color.secondary)
+                                        Text(verbatim: String.separator)
+                                        Text(verbatim: PresetConstant.separate)
+                                                .font(.keyFootnote)
+                                                .shallow()
                                 }
                                 .padding(.top, 8)
                         } else {
                                 VStack(spacing: 0) {
                                         Text(verbatim: "rvxq")
-                                        Text(verbatim: "反查").font(.keyFootnote).foregroundStyle(Color.secondary)
+                                        Text(verbatim: "反查")
+                                                .font(.keyFootnote)
+                                                .shallow()
                                 }
                                 .padding(.top, 8)
                         }
-                        */
+                        #endif
                 }
                 .frame(width: context.tenKeyWidthUnit, height: context.heightUnit)
                 .contentShape(Rectangle())
@@ -64,8 +67,12 @@ struct TenKeySpecialKey: View {
                                 }
                         }
                         .onEnded { _ in
-                                let text: String = context.inputStage.isBuffering ? "'" : "r"
-                                context.operate(.process(text))
+                                if context.inputStage.isBuffering {
+                                        context.operate(.separate)
+                                } else {
+                                        let text: String = "r"
+                                        context.operate(.process(text))
+                                }
                          }
                 )
                 .disabled(true)

@@ -4,7 +4,7 @@ import SwiftUI
 struct BubbleShape: Shape {
         func path(in rect: CGRect) -> Path {
                 let origin: CGPoint = CGPoint(x: rect.midX, y: rect.maxY)
-                return Self.bubblePath(origin: origin, baseWidth: rect.size.width, baseHeight: rect.size.height, keyCornerRadius: PresetConstant.keyCornerRadius, previewCornerRadius: PresetConstant.keyCornerRadius * 2)
+                return Self.bubblePath(origin: origin, baseWidth: rect.size.width, baseHeight: rect.size.height, keyCornerRadius: PresetConstant.keyCornerRadius, previewCornerRadius: PresetConstant.keyCornerRadius * 1.62)
         }
 }
 

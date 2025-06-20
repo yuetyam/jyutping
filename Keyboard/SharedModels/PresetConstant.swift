@@ -16,12 +16,16 @@ struct PresetConstant {
         /// Large size KeyView corner radius
         static let largeKeyCornerRadius: CGFloat = 8
 
+        /// Highlighted selection view inside the key bubble preview
+        static let innerLargeKeyCornerRadius: CGFloat = 5
+
         static let halfWidth: String = "半寬"
         static let fullWidth: String = "全寬"
+        static let separate: String = "分隔"
 
         static let spaceKeyLongPressHint: AttributedString = "← →"
 
-        /// Display KeyText
+        /// Display KeyText for Stroke keyboards
         static let strokeKeyMap: [String: String] = [
                 "w": "⼀",
                 "s": "⼁",
