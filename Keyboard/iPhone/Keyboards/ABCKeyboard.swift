@@ -290,8 +290,32 @@ private struct SecondEnhancedInputKeyRow: View {
                         EnhancedInputKey(keyLocale: .leading, event: .letterG, keyModel: KeyModel(primary: KeyElement("g", header: "*"), members: [KeyElement("g"), KeyElement("*")]))
                         EnhancedInputKey(keyLocale: .trailing, event: .letterH, keyModel: KeyModel(primary: KeyElement("h", header: "("), members: [KeyElement("h"), KeyElement("(")]))
                         EnhancedInputKey(keyLocale: .trailing, event: .letterJ, keyModel: KeyModel(primary: KeyElement("j", header: ")"), members: [KeyElement("j"), KeyElement(")")]))
-                        EnhancedInputKey(keyLocale: .trailing, event: .letterK, keyModel: KeyModel(primary: KeyElement("k", header: "'"), members: [KeyElement("k"), KeyElement("'")]))
-                        EnhancedInputKey(keyLocale: .trailing, event: .letterL, keyModel: KeyModel(primary: KeyElement("l", header: "\""), members: [KeyElement("l"), KeyElement("\"")]))
+                        EnhancedInputKey(
+                                keyLocale: .trailing,
+                                event: .letterK,
+                                keyModel: KeyModel(
+                                        primary: KeyElement("k", header: "'"),
+                                        members: [
+                                                KeyElement("k"),
+                                                KeyElement("'", footer: "0027"),
+                                                KeyElement("’", footer: "2019"),
+                                                KeyElement("‘", footer: "2018")
+                                        ]
+                                )
+                        )
+                        EnhancedInputKey(
+                                keyLocale: .trailing,
+                                event: .letterK,
+                                keyModel: KeyModel(
+                                        primary: KeyElement("l", header: "\""),
+                                        members: [
+                                                KeyElement("l"),
+                                                KeyElement("\"", footer: "0022"),
+                                                KeyElement("”", footer: "201D"),
+                                                KeyElement("“", footer: "201C")
+                                        ]
+                                )
+                        )
                 }
         }
 }

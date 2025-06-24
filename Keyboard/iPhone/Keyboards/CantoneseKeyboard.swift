@@ -134,13 +134,41 @@ private struct SecondEnhancedLetterRow: View {
                 HStack(spacing: 0 ) {
                         EnhancedInputKey(keyLocale: .leading, event: .letterA, keyModel: KeyModel(primary: KeyElement("a", header: "@"), members: [KeyElement("a"), KeyElement("@")]))
                         EnhancedInputKey(keyLocale: .leading, event: .letterS, keyModel: KeyModel(primary: KeyElement("s", header: "#"), members: [KeyElement("s"), KeyElement("#")]))
-                        EnhancedInputKey(keyLocale: .leading, event: .letterD, keyModel: KeyModel(primary: KeyElement("d", header: "$"), members: [KeyElement("d"), KeyElement("$")]))
-                        EnhancedInputKey(keyLocale: .leading, event: .letterF, keyModel: KeyModel(primary: KeyElement("f", header: "/"), members: [KeyElement("f"), KeyElement("/")]))
+                        EnhancedInputKey(keyLocale: .leading, event: .letterD, keyModel: KeyModel(primary: KeyElement("d", header: "$"), members: [KeyElement("d"), KeyElement("$"), KeyElement("¥")]))
+                        EnhancedInputKey(
+                                keyLocale: .leading,
+                                event: .letterF,
+                                keyModel: KeyModel(
+                                        primary: KeyElement("f", header: "/"),
+                                        members: [
+                                                KeyElement("f"),
+                                                KeyElement("/"),
+                                                KeyElement("／", header: PresetConstant.fullWidth),
+                                                KeyElement("\\"),
+                                                KeyElement("＼", header: PresetConstant.fullWidth)
+                                        ]
+                                )
+                        )
                         EnhancedInputKey(keyLocale: .leading, event: .letterG, keyModel: KeyModel(primary: KeyElement("g", header: "（"), members: [KeyElement("g"), KeyElement("（")]))
                         EnhancedInputKey(keyLocale: .trailing, event: .letterH, keyModel: KeyModel(primary: KeyElement("h", header: "）"), members: [KeyElement("h"), KeyElement("）")]))
                         EnhancedInputKey(keyLocale: .trailing, event: .letterJ, keyModel: KeyModel(primary: KeyElement("j", header: "「"), members: [KeyElement("j"), KeyElement("「")]))
                         EnhancedInputKey(keyLocale: .trailing, event: .letterK, keyModel: KeyModel(primary: KeyElement("k", header: "」"), members: [KeyElement("k"), KeyElement("」")]))
-                        EnhancedInputKey(keyLocale: .trailing, event: .letterL, keyModel: KeyModel(primary: KeyElement("l", header: "'"), members: [KeyElement("l"), KeyElement("'")]))
+                        EnhancedInputKey(
+                                keyLocale: .trailing,
+                                event: .letterL,
+                                keyModel: KeyModel(
+                                        primary: KeyElement("l", header: "'"),
+                                        members: [
+                                                KeyElement("l"),
+                                                KeyElement("'", footer: "0027"),
+                                                KeyElement("’", header: "右", footer: "2019"),
+                                                KeyElement("‘", header: "左", footer: "2018"),
+                                                KeyElement("\"", footer: "0022"),
+                                                KeyElement("”", header: "右", footer: "201D"),
+                                                KeyElement("“", header: "左", footer: "201C")
+                                        ]
+                                )
+                        )
                 }
         }
 }
@@ -161,9 +189,21 @@ private struct ThirdLetterRow: View {
 private struct ThirdEnhancedLetterRow: View {
         var body: some View {
                 HStack(spacing: 0 ) {
-                        EnhancedInputKey(keyLocale: .leading, event: .letterZ, keyModel: KeyModel(primary: KeyElement("z", header: "%"), members: [KeyElement("z"), KeyElement("%")]))
+                        EnhancedInputKey(
+                                keyLocale: .leading,
+                                event: .letterZ,
+                                keyModel: KeyModel(
+                                        primary: KeyElement("z", header: "%"),
+                                        members: [
+                                                KeyElement("z"),
+                                                KeyElement("%"),
+                                                KeyElement("％", header: PresetConstant.fullWidth),
+                                                KeyElement("‰")
+                                        ]
+                                )
+                        )
                         EnhancedInputKey(keyLocale: .leading, event: .letterX, keyModel: KeyModel(primary: KeyElement("x", header: "-"), members: [KeyElement("x"), KeyElement("-")]))
-                        EnhancedInputKey(keyLocale: .leading, event: .letterC, keyModel: KeyModel(primary: KeyElement("c", header: "～"), members: [KeyElement("c"), KeyElement("～")]))
+                        EnhancedInputKey(keyLocale: .leading, event: .letterC, keyModel: KeyModel(primary: KeyElement("c", header: "～"), members: [KeyElement("c"), KeyElement("～"), KeyElement("~", header: PresetConstant.halfWidth)]))
                         EnhancedInputKey(keyLocale: .leading, event: .letterV, keyModel: KeyModel(primary: KeyElement("v", header: "…"), members: [KeyElement("v"), KeyElement("…")]))
                         EnhancedInputKey(keyLocale: .leading, event: .letterB, keyModel: KeyModel(primary: KeyElement("b", header: "、"), members: [KeyElement("b"), KeyElement("、")]))
                         EnhancedInputKey(keyLocale: .trailing, event: .letterN, keyModel: KeyModel(primary: KeyElement("n", header: "；"), members: [KeyElement("n"), KeyElement("；")]))
