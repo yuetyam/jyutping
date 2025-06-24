@@ -1681,7 +1681,7 @@
         }
       }
     },
-    "SettingsView.CharacterStandard.PickerOption.Simplified" : {
+    "SettingsView.CharacterStandard.Option.Simplified" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1751,7 +1751,7 @@
         }
       }
     },
-    "SettingsView.CharacterStandard.PickerOption.Traditional" : {
+    "SettingsView.CharacterStandard.Option.Traditional" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1821,7 +1821,7 @@
         }
       }
     },
-    "SettingsView.CharacterStandard.PickerOption.TraditionalHongKong" : {
+    "SettingsView.CharacterStandard.Option.TraditionalHongKong" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1891,7 +1891,7 @@
         }
       }
     },
-    "SettingsView.CharacterStandard.PickerOption.TraditionalTaiwan" : {
+    "SettingsView.CharacterStandard.Option.TraditionalTaiwan" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2031,7 +2031,7 @@
         }
       }
     },
-    "SettingsView.CommentStyle.PickerOption.Above" : {
+    "SettingsView.CommentStyle.Option.Above" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2101,7 +2101,7 @@
         }
       }
     },
-    "SettingsView.CommentStyle.PickerOption.Below" : {
+    "SettingsView.CommentStyle.Option.Below" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2171,7 +2171,7 @@
         }
       }
     },
-    "SettingsView.CommentStyle.PickerOption.None" : {
+    "SettingsView.CommentStyle.Option.None" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2731,6 +2731,286 @@
         }
       }
     },
+    "SettingsView.InputKeyStyle.Option.None" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "None"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucun"
+          }
+        },
+        "yue" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "無"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "無"
+          }
+        },
+        "zh-Hans-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "無"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "無"
+          }
+        },
+        "zh-Hant-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "無"
+          }
+        },
+        "zh-Hant-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "無"
+          }
+        },
+        "zh-Hant-MO" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "無"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "無"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "無"
+          }
+        }
+      }
+    },
+    "SettingsView.InputKeyStyle.Option.Numbers" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Numbers"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chiffres"
+          }
+        },
+        "yue" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "數字"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "數字"
+          }
+        },
+        "zh-Hans-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "數字"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "數字"
+          }
+        },
+        "zh-Hant-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "數字"
+          }
+        },
+        "zh-Hant-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "數字"
+          }
+        },
+        "zh-Hant-MO" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "數字"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "數字"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "數字"
+          }
+        }
+      }
+    },
+    "SettingsView.InputKeyStyle.Option.NumbersAndSymbols" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Numbers and Symbols"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chiffres et symboles"
+          }
+        },
+        "yue" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "數字與標點"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "數字與標點"
+          }
+        },
+        "zh-Hans-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "數字與標點"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "數字與標點"
+          }
+        },
+        "zh-Hant-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "數字與標點"
+          }
+        },
+        "zh-Hant-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "數字與標點"
+          }
+        },
+        "zh-Hant-MO" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "數字與標點"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "數字與標點"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "數字與標點"
+          }
+        }
+      }
+    },
+    "SettingsView.InputKeyStyle.PickerTitle" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Letter Key Extra Symbols"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Symboles lettres"
+          }
+        },
+        "yue" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "字母鍵附加符號"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "字母鍵附加符號"
+          }
+        },
+        "zh-Hans-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "字母鍵附加符號"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "字母鍵附加符號"
+          }
+        },
+        "zh-Hant-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "字母鍵附加符號"
+          }
+        },
+        "zh-Hant-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "字母鍵附加符號"
+          }
+        },
+        "zh-Hant-MO" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "字母鍵附加符號"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "字母鍵附加符號"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "字母鍵附加符號"
+          }
+        }
+      }
+    },
     "SettingsView.InputMemory.ClearInputMemory.ButtonTitle" : {
       "localizations" : {
         "en" : {
@@ -3081,7 +3361,7 @@
         }
       }
     },
-    "SettingsView.KeyboardFeedback.Haptic.PickerOption.Heavy" : {
+    "SettingsView.KeyboardFeedback.Haptic.Option.Heavy" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3151,7 +3431,7 @@
         }
       }
     },
-    "SettingsView.KeyboardFeedback.Haptic.PickerOption.Light" : {
+    "SettingsView.KeyboardFeedback.Haptic.Option.Light" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3221,7 +3501,7 @@
         }
       }
     },
-    "SettingsView.KeyboardFeedback.Haptic.PickerOption.Medium" : {
+    "SettingsView.KeyboardFeedback.Haptic.Option.Medium" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3291,7 +3571,7 @@
         }
       }
     },
-    "SettingsView.KeyboardFeedback.Haptic.PickerOption.None" : {
+    "SettingsView.KeyboardFeedback.Haptic.Option.None" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3641,7 +3921,7 @@
         }
       }
     },
-    "SettingsView.KeyboardLayout.PickerOption.10Key" : {
+    "SettingsView.KeyboardLayout.Option.10Key" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3711,7 +3991,7 @@
         }
       }
     },
-    "SettingsView.KeyboardLayout.PickerOption.QWERTY" : {
+    "SettingsView.KeyboardLayout.Option.QWERTY" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3781,7 +4061,7 @@
         }
       }
     },
-    "SettingsView.KeyboardLayout.PickerOption.TripleStroke" : {
+    "SettingsView.KeyboardLayout.Option.TripleStroke" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {

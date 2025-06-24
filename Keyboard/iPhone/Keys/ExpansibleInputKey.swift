@@ -2,6 +2,9 @@ import SwiftUI
 import CommonExtensions
 import CoreIME
 
+typealias EnhancedInputKey = ExpansibleInputKey
+
+// TODO: Rename to EnhancedInputKey
 struct ExpansibleInputKey: View {
 
         /// Create an ExpansibleInputKey
@@ -62,6 +65,7 @@ struct ExpansibleInputKey: View {
         @State private var buffer: Int = 0
         @State private var isLongPressing: Bool = false
         @State private var selectedIndex: Int = 0
+        @State private var pulled: String? = nil
 
         var body: some View {
                 let keyWidth: CGFloat = context.widthUnit * widthUnitTimes
@@ -131,7 +135,7 @@ struct ExpansibleInputKey: View {
                                         .fill(keyPreviewColor)
                                         .shadow(color: .shadowGray, radius: 1)
                                         .overlay {
-                                                Text(verbatim: keyModel.primary.text)
+                                                Text(verbatim: pulled ?? keyModel.primary.text)
                                                         .textCase(textCase)
                                                         .font(keyModel.primary.isTextSingular ? .title : .title3)
                                                         .padding(.bottom, previewBottomOffset)
@@ -179,22 +183,32 @@ struct ExpansibleInputKey: View {
                                 }
                         }
                         .onChanged { state in
-                                guard isLongPressing else { return }
-                                let memberCount: Int = keyModel.members.count
-                                guard memberCount > 1 else { return }
-                                let distance: CGFloat = keyLocale.isLeading ? state.translation.width : -(state.translation.width)
-                                guard distance > 0 else { return }
-                                let step: CGFloat = baseWidth
-                                for index in keyModel.members.indices {
-                                        let lowPoint: CGFloat = step * CGFloat(index)
-                                        let heightPoint: CGFloat = step * CGFloat(index + 1)
-                                        let maxLowPoint: CGFloat = step * CGFloat(memberCount)
-                                        if distance > lowPoint && distance < heightPoint {
-                                                selectedIndex = index
-                                                break
-                                        } else if distance > maxLowPoint {
-                                                selectedIndex = memberCount - 1
-                                                break
+                                if isLongPressing {
+                                        let memberCount: Int = keyModel.members.count
+                                        guard memberCount > 1 else { return }
+                                        let distance: CGFloat = keyLocale.isLeading ? state.translation.width : -(state.translation.width)
+                                        guard distance > 10 else { return }
+                                        let step: CGFloat = baseWidth
+                                        let maxHighPoint: CGFloat = step * CGFloat(memberCount)
+                                        for index in keyModel.members.indices {
+                                                let lowPoint: CGFloat = step * CGFloat(index)
+                                                let highPoint: CGFloat = step * CGFloat(index + 1)
+                                                if distance > lowPoint && distance < highPoint {
+                                                        selectedIndex = index
+                                                        break
+                                                } else if distance > maxHighPoint {
+                                                        selectedIndex = memberCount - 1
+                                                        break
+                                                }
+                                        }
+                                } else if pulled == nil {
+                                        let distance: CGFloat = state.translation.height
+                                        if distance > 25 {
+                                                // swipe from top to bottom
+                                                pulled = keyModel.primary.header ?? keyModel.primary.footer
+                                        } else if distance < -25 {
+                                                // swipe from bottom to top
+                                                pulled = keyModel.primary.footer ?? keyModel.primary.header
                                         }
                                 }
                         }
@@ -210,6 +224,10 @@ struct ExpansibleInputKey: View {
                                         context.triggerSelectionHapticFeedback()
                                         let text: String = context.keyboardCase.isLowercased ? selectedElement.text : selectedElement.text.uppercased()
                                         context.operate(.process(text))
+                                } else if let pulledText = pulled {
+                                        let text: String = context.keyboardCase.isLowercased ? pulledText : pulledText.uppercased()
+                                        context.operate(.process(text))
+                                        pulled = nil
                                 } else if let event {
                                         context.process(event, isCapitalized: context.keyboardCase.isCapitalized)
                                 } else {
@@ -221,7 +239,8 @@ struct ExpansibleInputKey: View {
                 .onReceive(timer) { _ in
                         guard isTouching else { return }
                         guard isLongPressing.negative else { return }
-                        if buffer > 3 {
+                        let shouldTriggerLongPress: Bool = buffer > 5 || (buffer > 3 && pulled == nil)
+                        if shouldTriggerLongPress {
                                 isLongPressing = true
                         } else {
                                 buffer += 1

@@ -67,18 +67,19 @@ struct Options {
                 UserDefaults.standard.set(value, forKey: OptionsKey.KeyTextPreview)
         }
 
+        nonisolated(unsafe) private(set) static var inputKeyStyle: InputKeyStyle = {
+                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.InputKeyStyle)
+                return InputKeyStyle.style(of: savedValue)
+        }()
+        static func updateInputKeyStyle(to style: InputKeyStyle) {
+                inputKeyStyle = style
+                let value: Int = style.rawValue
+                UserDefaults.standard.set(value, forKey: OptionsKey.InputKeyStyle)
+        }
+
         nonisolated(unsafe) private(set) static var commentStyle: CommentStyle = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.CommentStyle)
-                switch savedValue {
-                case CommentStyle.aboveCandidates.rawValue:
-                        return .aboveCandidates
-                case CommentStyle.belowCandidates.rawValue:
-                        return .belowCandidates
-                case CommentStyle.noComments.rawValue:
-                        return .noComments
-                default:
-                        return .aboveCandidates
-                }
+                return CommentStyle.style(of: savedValue)
         }()
         static func updateCommentStyle(to style: CommentStyle) {
                 commentStyle = style
@@ -181,6 +182,7 @@ struct OptionsKey {
         static let NumberRow: String = "NumberRow"
         static let KeyCase: String = "KeyCase"
         static let KeyTextPreview: String = "KeyPreview"
+        static let InputKeyStyle: String = "InputKeyStyle"
         static let CommentStyle: String = "jyutping_display"
         static let CommentToneStyle: String = "tone_style"
         static let CangjieVariant: String = "CangjieVariant"
@@ -195,10 +197,37 @@ struct OptionsKey {
         // static let PasteButtonStyle: String = "PasteButtonStyle"
 }
 
-enum CommentStyle: Int {
+/// Letter input key style
+enum InputKeyStyle: Int, CaseIterable {
+
+        /// Letters only
+        case clear = 1
+
+        /// Letters with extra digits (number row)
+        case numbers = 2
+
+        /// Letters with extra digits and symbols
+        case numbersAndSymbols = 3
+
+        /// Letters with extra symbols
+        // Not implement yet
+        // case symbols = 4
+
+        static func style(of value: Int) -> InputKeyStyle {
+                return Self.allCases.first(where: { $0.rawValue == value }) ?? Self.clear
+        }
+
+        /// Letters only
+        var isClear: Bool { self == .clear }
+}
+
+enum CommentStyle: Int, CaseIterable {
         case aboveCandidates = 1
         case belowCandidates = 2
         case noComments = 3
+        static func style(of value: Int) -> CommentStyle {
+                return Self.allCases.first(where: { $0.rawValue == value }) ?? Self.aboveCandidates
+        }
         var isAbove: Bool { self == .aboveCandidates }
         var isBelow: Bool { self == .belowCandidates }
         var isHidden: Bool { self == .noComments }

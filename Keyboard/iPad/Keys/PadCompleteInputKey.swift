@@ -2,6 +2,8 @@ import SwiftUI
 import CommonExtensions
 import CoreIME
 
+// TODO: Rename to PadAdvancedInputKey
+
 /// Pullable & Expansible
 struct PadCompleteInputKey: View {
 
@@ -205,7 +207,7 @@ struct PadCompleteInputKey: View {
                                 } else {
                                         guard isPullingDown.negative else { return }
                                         let distance: CGFloat = state.translation.height
-                                        guard distance > 20 else { return }
+                                        guard distance > 25 else { return }
                                         isPullingDown = true
                                 }
                         }
