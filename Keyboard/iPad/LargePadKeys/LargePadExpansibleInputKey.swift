@@ -164,19 +164,15 @@ struct LargePadExpansibleInputKey: View {
                                 let memberCount: Int = keyModel.members.count
                                 guard memberCount > 1 else { return }
                                 let distance: CGFloat = keyLocale.isLeading ? state.translation.width : -(state.translation.width)
-                                guard distance > 10 else { return }
-                                let step: CGFloat = baseWidth
-                                for index in keyModel.members.indices {
-                                        let lowPoint: CGFloat = step * CGFloat(index)
-                                        let heightPoint: CGFloat = step * CGFloat(index + 1)
-                                        let maxLowPoint: CGFloat = step * CGFloat(memberCount)
-                                        if distance > lowPoint && distance < heightPoint {
-                                                selectedIndex = index
-                                                break
-                                        } else if distance > maxLowPoint {
-                                                selectedIndex = memberCount - 1
-                                                break
+                                if distance < (baseWidth / 2.0) {
+                                        if selectedIndex != 0 {
+                                                selectedIndex = 0
                                         }
+                                } else {
+                                        let maxPoint: CGFloat = baseWidth * CGFloat(memberCount)
+                                        let endIndex: Int = memberCount - 1
+                                        let index = memberCount - Int((maxPoint - distance) / baseWidth)
+                                        selectedIndex = min(endIndex, max(0, index))
                                 }
                         }
                         .onEnded { _ in

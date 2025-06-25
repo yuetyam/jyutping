@@ -187,26 +187,22 @@ struct ExpansibleInputKey: View {
                                         let memberCount: Int = keyModel.members.count
                                         guard memberCount > 1 else { return }
                                         let distance: CGFloat = keyLocale.isLeading ? state.translation.width : -(state.translation.width)
-                                        guard distance > 10 else { return }
-                                        let step: CGFloat = baseWidth
-                                        let maxHighPoint: CGFloat = step * CGFloat(memberCount)
-                                        for index in keyModel.members.indices {
-                                                let lowPoint: CGFloat = step * CGFloat(index)
-                                                let highPoint: CGFloat = step * CGFloat(index + 1)
-                                                if distance > lowPoint && distance < highPoint {
-                                                        selectedIndex = index
-                                                        break
-                                                } else if distance > maxHighPoint {
-                                                        selectedIndex = memberCount - 1
-                                                        break
+                                        if distance < (baseWidth / 2.0) {
+                                                if selectedIndex != 0 {
+                                                        selectedIndex = 0
                                                 }
+                                        } else {
+                                                let maxPoint: CGFloat = baseWidth * CGFloat(memberCount)
+                                                let endIndex: Int = memberCount - 1
+                                                let index = memberCount - Int((maxPoint - distance) / baseWidth)
+                                                selectedIndex = min(endIndex, max(0, index))
                                         }
                                 } else if pulled == nil {
                                         let distance: CGFloat = state.translation.height
-                                        if distance > 25 {
+                                        if distance > 30 {
                                                 // swipe from top to bottom
                                                 pulled = keyModel.primary.header ?? keyModel.primary.footer
-                                        } else if distance < -25 {
+                                        } else if distance < -30 {
                                                 // swipe from bottom to top
                                                 pulled = keyModel.primary.footer ?? keyModel.primary.header
                                         }

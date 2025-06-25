@@ -151,16 +151,16 @@ struct RightKey: View {
                         .onChanged { state in
                                 guard isLongPressing else { return }
                                 let distance: CGFloat = -(state.translation.width)
-                                guard distance > 0 else { return }
-                                let step: CGFloat = baseWidth
-                                if distance < step {
-                                        selectedIndex = 0
-                                } else if distance < (step * 2) {
-                                        selectedIndex = 1
-                                } else if distance < (step * 3) {
-                                        selectedIndex = 2
+                                if distance < (baseWidth / 2.0) {
+                                        if selectedIndex != 0 {
+                                                selectedIndex = 0
+                                        }
                                 } else {
-                                        selectedIndex = 3
+                                        let memberCount: Int = 4
+                                        let maxPoint: CGFloat = baseWidth * CGFloat(memberCount)
+                                        let endIndex: Int = memberCount - 1
+                                        let index = memberCount - Int((maxPoint - distance) / baseWidth)
+                                        selectedIndex = min(endIndex, max(0, index))
                                 }
                         }
                         .onEnded { _ in
