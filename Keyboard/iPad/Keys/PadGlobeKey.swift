@@ -8,14 +8,7 @@ struct PadGlobeKey: View {
         @Environment(\.colorScheme) private var colorScheme
 
         private var keyColor: Color {
-                switch colorScheme {
-                case .light:
-                        return .lightAction
-                case .dark:
-                        return .darkAction
-                @unknown default:
-                        return .lightAction
-                }
+                return colorScheme.isDark ? .darkAction : .lightAction
         }
 
         var body: some View {
@@ -31,7 +24,7 @@ struct PadGlobeKey: View {
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(.vertical, verticalPadding)
                                 .padding(.horizontal, horizontalPadding)
-                        Image.globe
+                        Image.globe.font(.title3)
                         UIGlobeButton()
                 }
                 .frame(width: keyWidth, height: keyHeight)

@@ -9,24 +9,10 @@ struct PadShiftKey: View {
         @Environment(\.colorScheme) private var colorScheme
 
         private var keyColor: Color {
-                switch colorScheme {
-                case .light:
-                        return .lightAction
-                case .dark:
-                        return .darkAction
-                @unknown default:
-                        return .lightAction
-                }
+                return colorScheme.isDark ? .darkAction : .lightAction
         }
         private var keyActiveColor: Color {
-                switch colorScheme {
-                case .light:
-                        return .activeLightAction
-                case .dark:
-                        return .activeDarkAction
-                @unknown default:
-                        return .activeLightAction
-                }
+                return colorScheme.isDark ? .activeDarkAction : .activeLightAction
         }
         private var backColor: Color {
                 if #available(iOSApplicationExtension 26.0, *) {
@@ -57,11 +43,11 @@ struct PadShiftKey: View {
                                 .padding(.horizontal, horizontalPadding)
                         switch context.keyboardCase {
                         case .lowercased:
-                                Image.shiftLowercased
+                                Image.shiftLowercased.font(.title3)
                         case .uppercased:
-                                Image.shiftUppercased
+                                Image.shiftUppercased.font(.title3)
                         case .capsLocked:
-                                Image.shiftCapsLocked
+                                Image.shiftCapsLocked.font(.title3)
                         }
                 }
                 .frame(width: keyWidth, height: keyHeight)

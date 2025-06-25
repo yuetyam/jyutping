@@ -9,24 +9,10 @@ struct PadBackspaceKey: View {
         @Environment(\.colorScheme) private var colorScheme
 
         private var keyColor: Color {
-                switch colorScheme {
-                case .light:
-                        return .lightAction
-                case .dark:
-                        return .darkAction
-                @unknown default:
-                        return .lightAction
-                }
+                return colorScheme.isDark ? .darkAction : .lightAction
         }
         private var keyActiveColor: Color {
-                switch colorScheme {
-                case .light:
-                        return .activeLightAction
-                case .dark:
-                        return .activeDarkAction
-                @unknown default:
-                        return .activeLightAction
-                }
+                return colorScheme.isDark ? .activeDarkAction : .activeLightAction
         }
 
         @GestureState private var isTouching: Bool = false
@@ -46,7 +32,9 @@ struct PadBackspaceKey: View {
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(.vertical, verticalPadding)
                                 .padding(.horizontal, horizontalPadding)
-                        Image.backspace.symbolVariant(isTouching ? .fill : .none)
+                        Image.backspace
+                                .symbolVariant(isTouching ? .fill : .none)
+                                .font(.title3)
                 }
                 .frame(width: keyWidth, height: keyHeight)
                 .contentShape(Rectangle())
