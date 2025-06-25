@@ -15,38 +15,16 @@ struct StrokeInputKey: View {
         private let stroke: String?
 
         @EnvironmentObject private var context: KeyboardViewController
-
         @Environment(\.colorScheme) private var colorScheme
 
         private var keyColor: Color {
-                switch colorScheme {
-                case .light:
-                        return .lightInput
-                case .dark:
-                        return .darkInput
-                @unknown default:
-                        return .lightInput
-                }
-        }
-        private var keyPreviewColor: Color {
-                switch colorScheme {
-                case .light:
-                        return .lightInput
-                case .dark:
-                        return .solidDarkInput
-                @unknown default:
-                        return .lightInput
-                }
+                return colorScheme.isDark ? .darkInput : .lightInput
         }
         private var keyActiveColor: Color {
-                switch colorScheme {
-                case .light:
-                        return .activeLightInput
-                case .dark:
-                        return .activeDarkInput
-                @unknown default:
-                        return .activeLightInput
-                }
+                return colorScheme.isDark ? .activeDarkInput : .activeLightInput
+        }
+        private var keyPreviewColor: Color {
+                return colorScheme.isDark ? .solidDarkInput : .lightInput
         }
 
         @GestureState private var isTouching: Bool = false

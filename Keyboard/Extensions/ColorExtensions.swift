@@ -44,3 +44,9 @@ extension Color {
         static let solidDarkInput   : Color = isLiquidGlassPreferred ? solidEmphaticDark : solidShallowDark
         static let solidDarkAction  : Color = solidEmphaticDark
 }
+
+extension ColorScheme {
+        var isDark: Bool {
+                return self == .dark
+        }
+}

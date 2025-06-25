@@ -3,18 +3,10 @@ import SwiftUI
 struct GlobeKey: View {
 
         @EnvironmentObject private var context: KeyboardViewController
-
         @Environment(\.colorScheme) private var colorScheme
 
         private var keyColor: Color {
-                switch colorScheme {
-                case .light:
-                        return .lightAction
-                case .dark:
-                        return .darkAction
-                @unknown default:
-                        return .lightAction
-                }
+                return colorScheme.isDark ? .darkAction : .lightAction
         }
 
         var body: some View {

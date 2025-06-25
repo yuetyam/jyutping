@@ -7,28 +7,13 @@ struct TransformKey: View {
         let widthUnitTimes: CGFloat
 
         @EnvironmentObject private var context: KeyboardViewController
-
         @Environment(\.colorScheme) private var colorScheme
 
         private var keyColor: Color {
-                switch colorScheme {
-                case .light:
-                        return .lightAction
-                case .dark:
-                        return .darkAction
-                @unknown default:
-                        return .lightAction
-                }
+                return colorScheme.isDark ? .darkAction : .lightAction
         }
         private var keyActiveColor: Color {
-                switch colorScheme {
-                case .light:
-                        return .activeLightAction
-                case .dark:
-                        return .activeDarkAction
-                @unknown default:
-                        return .activeLightAction
-                }
+                return colorScheme.isDark ? .activeDarkAction : .activeLightAction
         }
 
         @GestureState private var isTouching: Bool = false
