@@ -5,7 +5,7 @@ import SwiftUI
 struct MacExpressionsView: View {
         var body: some View {
                 ScrollView {
-                        LazyVStack(spacing: 12) {
+                        LazyVStack(alignment: .leading, spacing: 12) {
                                 Group {
                                         HStack {
                                                 VStack(alignment: .leading, spacing: 10) {
@@ -75,7 +75,7 @@ struct MacExpressionsView: View {
                                                                 Image.info.foregroundStyle(Color.primary)
                                                         }
                                                         Label {
-                                                                Text(verbatim: "佢 亦作 渠、𠍲{⿰亻渠}。")
+                                                                Text(verbatim: "佢 亦作 渠 𠍲。")
                                                         } icon: {
                                                                 Image.info.foregroundStyle(Color.primary)
                                                         }
@@ -338,6 +338,13 @@ struct MacExpressionsView: View {
                                         Spacer()
                                 }
                                 .block()
+
+                                Text(verbatim: PresetConstant.etymologyNote)
+                                        .font(.copilot)
+                                        .lineLimit(nil)
+                                        .lineSpacing(6)
+                                        .padding(.horizontal, 8)
+                                        .padding(.vertical)
                         }
                         .font(.master)
                         .textSelection(.enabled)

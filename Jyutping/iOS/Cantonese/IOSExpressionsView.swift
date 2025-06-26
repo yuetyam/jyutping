@@ -292,6 +292,13 @@ struct IOSExpressionsView: View {
                                                 Image.xmark.foregroundStyle(Color.red)
                                         }
                                 }
+                                Section {
+                                        Text(verbatim: PresetConstant.etymologyNote)
+                                                .font(.copilot)
+                                                .lineLimit(nil)
+                                                .lineSpacing(6)
+                                }
+                                .listRowBackground(Color.clear)
                         }
                 }
                 .textSelection(.enabled)

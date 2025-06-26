@@ -20,3 +20,12 @@ struct BolderFont {
         static let systemCJKVQueue: [String] = ["PingFangHK-Medium", "PingFangMO-Medium", "PingFangSC-Medium", "PingFangTC-Medium"]
         static let supplementaryCJKVQueue: [String] = ["ChironHeiHK-Medium", "SourceHanSansHC-Medium", "NotoSansCJKhk-Medium", "NotoSansHK-Medium"]
 }
+
+extension PresetConstant {
+
+static let etymologyNote: String = """
+當前市面上盛傳嘅各種「粵語正字、本字」，大多數係穿鑿附會、郢書燕說、阿茂整餅，係錯嘅。
+用字從衆、從俗更好，利於交流。唔好理會嗰啲老作。
+"""
+
+}
