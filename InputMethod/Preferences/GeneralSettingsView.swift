@@ -103,6 +103,8 @@ struct GeneralSettingsView: View {
                                                         Text("GeneralPreferencesView.LabelSet.Mahjong").tag(LabelSet.mahjong)
                                                         Text("GeneralPreferencesView.LabelSet.Roman").tag(LabelSet.roman)
                                                         Text("GeneralPreferencesView.LabelSet.SmallRoman").tag(LabelSet.smallRoman)
+                                                        Text("GeneralPreferencesView.LabelSet.Stems").tag(LabelSet.stems)
+                                                        Text("GeneralPreferencesView.LabelSet.Branches").tag(LabelSet.branches)
                                                 }
                                                 .pickerStyle(.menu)
                                                 .onChange(of: labelSet) { newOption in

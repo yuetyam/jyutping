@@ -141,7 +141,7 @@ extension Font {
                         switch AppSettings.labelSet {
                         case .arabic, .fullWidthArabic:
                                 return Font.system(size: size).monospacedDigit()
-                        case .chinese, .capitalizedChinese, .soochow:
+                        case .chinese, .capitalizedChinese, .soochow, .stems, .branches:
                                 if let fontName = PresetConstant.primaryCJKVQueue.first(where: { found(font: $0) }) {
                                         return Font.custom(fontName, size: size)
                                 } else {

@@ -102,29 +102,35 @@ enum LabelSet: Int, CaseIterable {
         /// 全寬阿拉伯數字
         case fullWidthArabic = 2
 
-        /// 漢字數字：〇一二三四五六七八九十
+        /// 漢字數字： 〇一二三四五六七八九十
         case chinese = 3
 
-        /// 大寫漢字數字：零壹貳叁肆伍陸柒捌玖拾
+        /// 大寫漢字數字： 零壹貳叁肆伍陸柒捌玖拾
         case capitalizedChinese = 4
 
-        /// 算籌數字（直式）：𝍠𝍡𝍢𝍣𝍤𝍥𝍦𝍧𝍨〇
+        /// 算籌數字（直式）： 𝍠𝍡𝍢𝍣𝍤𝍥𝍦𝍧𝍨〇
         case verticalCountingRods = 5
 
-        /// 算籌數字（橫式）：𝍩𝍪𝍫𝍬𝍭𝍮𝍯𝍰𝍱〇
+        /// 算籌數字（橫式）： 𝍩𝍪𝍫𝍬𝍭𝍮𝍯𝍰𝍱〇
         case horizontalCountingRods = 6
 
-        /// 蘇州碼：〇〡〢〣〤〥〦〧〨〩〸
+        /// 蘇州碼： 〇〡〢〣〤〥〦〧〨〩〸
         case soochow = 7
 
-        /// 麻雀／麻將：🀙 🀚 🀛 🀜 🀝 🀞 🀟 🀠 🀡 🀆
+        /// 麻雀／麻將： 🀙 🀚 🀛 🀜 🀝 🀞 🀟 🀠 🀡 🀆
         case mahjong = 8
 
-        /// 大寫羅馬數字: Ⅰ Ⅱ Ⅲ Ⅳ Ⅴ Ⅵ Ⅶ Ⅷ Ⅸ Ⅹ
+        /// 大寫羅馬數字： Ⅰ Ⅱ Ⅲ Ⅳ Ⅴ Ⅵ Ⅶ Ⅷ Ⅸ Ⅹ
         case roman = 9
 
-        /// 小寫羅馬數字: ⅰ ⅱ ⅲ ⅳ ⅴ ⅵ ⅶ ⅷ ⅸ ⅹ
+        /// 小寫羅馬數字： ⅰ ⅱ ⅲ ⅳ ⅴ ⅵ ⅶ ⅷ ⅸ ⅹ
         case smallRoman = 10
+
+        /// Heavenly Stems. 天干： 甲乙丙丁戊己庚辛壬癸
+        case stems = 11
+
+        /// Earthly Branches. 地支： 子丑寅卯辰巳午未申酉
+        case branches = 12
 
         static func labelSet(of value: Int) -> LabelSet {
                 return Self.allCases.first(where: { $0.rawValue == value }) ?? Self.arabic
@@ -357,14 +363,7 @@ struct AppSettings {
 
         private(set) static var isInputMemoryOn: Bool = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.UserLexiconInputMemory)
-                switch savedValue {
-                case 0, 1:
-                        return true
-                case 2:
-                        return false
-                default:
-                        return true
-                }
+                return savedValue != 2
         }()
         static func updateInputMemoryState(to isOn: Bool) {
                 isInputMemoryOn = isOn
@@ -589,6 +588,9 @@ extension LabelSet {
         private static let mahjongLabels: [String] = ["🀙", "🀚", "🀛", "🀜", "🀝", "🀞", "🀟", "🀠", "🀡", "🀆"]
         private static let romanLabels: [String] = ["Ⅰ", "Ⅱ", "Ⅲ", "Ⅳ", "Ⅴ", "Ⅵ", "Ⅶ", "Ⅷ", "Ⅸ", "Ⅹ"]
         private static let smallRomanLabels: [String] = ["ⅰ", "ⅱ", "ⅲ", "ⅳ", "ⅴ", "ⅵ", "ⅶ", "ⅷ", "ⅸ", "ⅹ"]
+        private static let stemsLabels: [String] = ["甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"]
+        private static let branchesLabels: [String] = ["子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉"]
+        private static let fallbackText: String = "?"
 
         static func labelText(for index: Int, labelSet: LabelSet, isLabelLastZero: Bool) -> String {
                 let shouldBeZero: Bool = isLabelLastZero && index == 9
@@ -599,21 +601,25 @@ extension LabelSet {
                         let numberText: String = "\(index + 1)"
                         return shouldBeZero ? "０" : numberText.fullWidth()
                 case .chinese:
-                        return shouldBeZero ? "〇" : (chineseLabels.fetch(index) ?? "?")
+                        return shouldBeZero ? "〇" : (chineseLabels.fetch(index) ?? fallbackText)
                 case .capitalizedChinese:
-                        return shouldBeZero ? "零" : (capitalizedChineseLabels.fetch(index) ?? "?")
+                        return shouldBeZero ? "零" : (capitalizedChineseLabels.fetch(index) ?? fallbackText)
                 case .verticalCountingRods:
-                        return shouldBeZero ? "〇" : (verticalCountingRodLabels.fetch(index) ?? "?")
+                        return verticalCountingRodLabels.fetch(index) ?? fallbackText
                 case .horizontalCountingRods:
-                        return shouldBeZero ? "〇" : (horizontalCountingRodLabels.fetch(index) ?? "?")
+                        return horizontalCountingRodLabels.fetch(index) ?? fallbackText
                 case .soochow:
-                        return shouldBeZero ? "〇" : (soochowLabels.fetch(index) ?? "?")
+                        return shouldBeZero ? "〇" : (soochowLabels.fetch(index) ?? fallbackText)
                 case .mahjong:
-                        return shouldBeZero ? "🀆" : (mahjongLabels.fetch(index) ?? "?")
+                        return mahjongLabels.fetch(index) ?? fallbackText
                 case .roman:
-                        return shouldBeZero ? "N" : (romanLabels.fetch(index) ?? "?")
+                        return shouldBeZero ? "N" : (romanLabels.fetch(index) ?? fallbackText)
                 case .smallRoman:
-                        return shouldBeZero ? "n" : (smallRomanLabels.fetch(index) ?? "?")
+                        return shouldBeZero ? "n" : (smallRomanLabels.fetch(index) ?? fallbackText)
+                case .stems:
+                        return stemsLabels.fetch(index) ?? fallbackText
+                case .branches:
+                        return branchesLabels.fetch(index) ?? fallbackText
                 }
         }
 }
