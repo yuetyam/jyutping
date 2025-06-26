@@ -4766,67 +4766,67 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Use [ ] keys for"
+            "value" : "Use bracket [ ] keys for"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Utilisez les touches [ ] pour"
+            "value" : "Utiliser les touches crochets [ ] pour"
           }
         },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "按鍵 [ ] 用作"
+            "value" : "括號鍵 [ ] 用作"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "按鍵 [ ] 用作"
+            "value" : "括號鍵 [ ] 用作"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "按鍵 [ ] 用作"
+            "value" : "括號鍵 [ ] 用作"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "按鍵 [ ] 用作"
+            "value" : "括號鍵 [ ] 用作"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "按鍵 [ ] 用作"
+            "value" : "括號鍵 [ ] 用作"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "按鍵 [ ] 用作"
+            "value" : "括號鍵 [ ] 用作"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "按鍵 [ ] 用作"
+            "value" : "括號鍵 [ ] 用作"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "按鍵 [ ] 用作"
+            "value" : "括號鍵 [ ] 用作"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "按鍵 [ ] 用作"
+            "value" : "括號鍵 [ ] 用作"
           }
         }
       }
@@ -4971,6 +4971,76 @@
         }
       }
     },
+    "HotkeysView.BracketKeysMode.NoOperation" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "None"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucun"
+          }
+        },
+        "yue" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "無"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "無"
+          }
+        },
+        "zh-Hans-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "無"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "無"
+          }
+        },
+        "zh-Hant-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "無"
+          }
+        },
+        "zh-Hant-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "無"
+          }
+        },
+        "zh-Hant-MO" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "無"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "無"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "無"
+          }
+        }
+      }
+    },
     "HotkeysView.ClearCurrentPreEditText" : {
       "localizations" : {
         "en" : {
@@ -5037,6 +5107,286 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "清除當前預輸入音節"
+          }
+        }
+      }
+    },
+    "HotkeysView.CommaPeriodKeysMode" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Use comma and period keys for"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utiliser les touches virgule et point pour"
+          }
+        },
+        "yue" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "逗號句號鍵用作"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "逗號句號鍵用作"
+          }
+        },
+        "zh-Hans-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "逗號句號鍵用作"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "逗號句號鍵用作"
+          }
+        },
+        "zh-Hant-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "逗號句號鍵用作"
+          }
+        },
+        "zh-Hant-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "逗號句號鍵用作"
+          }
+        },
+        "zh-Hant-MO" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "逗號句號鍵用作"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "逗號句號鍵用作"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "逗號句號鍵用作"
+          }
+        }
+      }
+    },
+    "HotkeysView.CommaPeriodKeysMode.CandidatePaging" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Candidate Paging"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pagination"
+          }
+        },
+        "yue" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "翻䈎"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "翻䈎"
+          }
+        },
+        "zh-Hans-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "翻䈎"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "翻䈎"
+          }
+        },
+        "zh-Hant-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "翻䈎"
+          }
+        },
+        "zh-Hant-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "翻䈎"
+          }
+        },
+        "zh-Hant-MO" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "翻䈎"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "翻䈎"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "翻䈎"
+          }
+        }
+      }
+    },
+    "HotkeysView.CommaPeriodKeysMode.CharacterSelection" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Character Selection"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sélection de caractères"
+          }
+        },
+        "yue" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "輸入首字末字"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "輸入首字末字"
+          }
+        },
+        "zh-Hans-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "輸入首字末字"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "輸入首字末字"
+          }
+        },
+        "zh-Hant-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "輸入首字末字"
+          }
+        },
+        "zh-Hant-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "輸入首字末字"
+          }
+        },
+        "zh-Hant-MO" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "輸入首字末字"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "輸入首字末字"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "輸入首字末字"
+          }
+        }
+      }
+    },
+    "HotkeysView.CommaPeriodKeysMode.NoOperation" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "None"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucun"
+          }
+        },
+        "yue" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "無"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "無"
+          }
+        },
+        "zh-Hans-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "無"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "無"
+          }
+        },
+        "zh-Hant-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "無"
+          }
+        },
+        "zh-Hant-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "無"
+          }
+        },
+        "zh-Hant-MO" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "無"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "無"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "無"
           }
         }
       }

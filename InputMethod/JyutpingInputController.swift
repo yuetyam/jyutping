@@ -15,7 +15,10 @@ final class JyutpingInputController: IMKInputController, Sendable {
         private lazy var window = CandidateWindow.shared
 
         private func prepareWindow() {
-                let idealValue: Int = Int(CGShieldingWindowLevel())
+                let idealValue: Int = Int(max(
+                        CGShieldingWindowLevel(),
+                        CGWindowLevelForKey(CGWindowLevelKey.popUpMenuWindow)
+                ))
                 let maxValue: Int = idealValue + 2
                 let minValue: Int = NSWindow.Level.floating.rawValue
                 let levelValue: Int = {
@@ -366,6 +369,10 @@ final class JyutpingInputController: IMKInputController, Sendable {
 
         /// Cached Candidate sequence for InputMemory
         private lazy var selectedCandidates: [Candidate] = []
+        private func appendSelectedCandidate(_ candidate: Candidate) {
+                guard candidate.isCantonese else { return }
+                selectedCandidates.append(candidate)
+        }
 
         private lazy var candidates: [Candidate] = [] {
                 didSet {
@@ -809,9 +816,15 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         case .cantonese:
                                 guard hasControlShiftModifiers.negative else { return } // NSMenu Shortcuts
                                 if isShifting {
+                                        if let highlighted = appContext.displayCandidates.fetch(appContext.highlightedIndex) {
+                                                insert(highlighted.text)
+                                                appendSelectedCandidate(highlighted.candidate)
+                                                clearBuffer()
+                                        } else {
+                                                passBuffer()
+                                        }
                                         switch Options.punctuationForm {
                                         case .cantonese:
-                                                passBuffer()
                                                 if let key = PunctuationKey.numberKeyPunctuation(of: number) {
                                                         punctuation(key, isShifting: isShifting)
                                                 } else {
@@ -819,13 +832,12 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                                         insert(symbol)
                                                 }
                                         case .english:
-                                                passBuffer()
                                                 let symbol: String = PunctuationKey.numberKeyShiftingSymbol(of: number) ?? String.empty
                                                 insert(symbol)
                                         }
                                 } else if isBuffering {
                                         guard let selectedItem = appContext.displayCandidates.fetch(index) else { return }
-                                        insert(selectedItem.candidate.text)
+                                        insert(selectedItem.text)
                                         aftercareSelection(selectedItem)
                                 } else {
                                         let keyText: String = numberEvent.text
@@ -936,57 +948,75 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         }
                 case .grave:
                         guard currentInputForm.isCantonese else { return }
-                        guard isBuffering.negative else { return }
-                        guard Options.punctuationForm.isCantoneseMode else { return }
-                        punctuation(.grave, isShifting: isShifting)
+                        if let highlighted = appContext.displayCandidates.fetch(appContext.highlightedIndex) {
+                                insert(highlighted.text)
+                                appendSelectedCandidate(highlighted.candidate)
+                                clearBuffer()
+                        } else {
+                                passBuffer()
+                        }
+                        switch Options.punctuationForm {
+                        case .cantonese:
+                                punctuation(.grave, isShifting: isShifting)
+                        case .english:
+                                let text: String = isShifting ? PunctuationKey.grave.shiftingKeyText : PunctuationKey.grave.keyText
+                                insert(text)
+                        }
                 case .punctuation(let punctuationKey):
                         guard currentInputForm.isCantonese else { return }
+                        let highlighted = appContext.displayCandidates.fetch(appContext.highlightedIndex)
                         if isBuffering && isShifting.negative {
+                                let hasHighlighted: Bool = (highlighted != nil)
+                                let bracketKeysMode = AppSettings.bracketKeysMode
+                                let commaPeriodKeysMode = AppSettings.commaPeriodKeysMode
                                 switch punctuationKey {
-                                case .comma, .minus:
+                                case .minus where hasHighlighted,
+                                .bracketLeft where hasHighlighted && bracketKeysMode.isPaging,
+                                .comma where hasHighlighted && commaPeriodKeysMode.isPaging:
                                         updateDisplayCandidates(.previousPage, highlight: .unchanged)
-                                case .period, .equal:
+                                case .equal where hasHighlighted,
+                                .bracketRight where hasHighlighted && bracketKeysMode.isPaging,
+                                .period where hasHighlighted && commaPeriodKeysMode.isPaging:
                                         updateDisplayCandidates(.nextPage, highlight: .unchanged)
-                                case .bracketLeft:
-                                        switch AppSettings.bracketKeysMode {
-                                        case .characterSelection:
-                                                let index = appContext.highlightedIndex
-                                                guard let displayCandidate = appContext.displayCandidates.fetch(index) else { return }
-                                                guard let firstCharacter = displayCandidate.candidate.text.first else { return }
-                                                insert(String(firstCharacter))
-                                                aftercareSelection(displayCandidate, shouldProcessUserLexicon: false)
-                                        case .candidatePaging:
-                                                updateDisplayCandidates(.previousPage, highlight: .unchanged)
-                                        }
-                                case .bracketRight:
-                                        switch AppSettings.bracketKeysMode {
-                                        case .characterSelection:
-                                                let index = appContext.highlightedIndex
-                                                guard let displayCandidate = appContext.displayCandidates.fetch(index) else { return }
-                                                guard let lastCharacter = displayCandidate.candidate.text.last else { return }
-                                                insert(String(lastCharacter))
-                                                aftercareSelection(displayCandidate, shouldProcessUserLexicon: false)
-                                        case .candidatePaging:
-                                                updateDisplayCandidates(.nextPage, highlight: .unchanged)
-                                        }
+                                case .bracketLeft where hasHighlighted && bracketKeysMode.isCharacterSelection,
+                                .comma where hasHighlighted && commaPeriodKeysMode.isCharacterSelection:
+                                        guard let highlighted, let firstCharacter = highlighted.text.first else { return }
+                                        insert(String(firstCharacter))
+                                        aftercareSelection(highlighted, shouldProcessUserLexicon: false)
+                                case .bracketRight where hasHighlighted && bracketKeysMode.isCharacterSelection,
+                                .period where hasHighlighted && commaPeriodKeysMode.isCharacterSelection:
+                                        guard let highlighted, let lastCharacter = highlighted.text.last else { return }
+                                        insert(String(lastCharacter))
+                                        aftercareSelection(highlighted, shouldProcessUserLexicon: false)
                                 default:
+                                        if let highlighted {
+                                                insert(highlighted.text)
+                                                appendSelectedCandidate(highlighted.candidate)
+                                                clearBuffer()
+                                        } else {
+                                                passBuffer()
+                                        }
                                         switch Options.punctuationForm {
                                         case .cantonese:
-                                                passBuffer()
                                                 if let instantSymbol = punctuationKey.instantSymbol {
                                                         insert(instantSymbol)
                                                 } else {
                                                         punctuation(punctuationKey, isShifting: isShifting)
                                                 }
                                         case .english:
-                                                passBuffer()
                                                 insert(punctuationKey.keyText)
                                         }
                                 }
                         } else {
+                                if let highlighted {
+                                        insert(highlighted.text)
+                                        appendSelectedCandidate(highlighted.candidate)
+                                        clearBuffer()
+                                } else {
+                                        passBuffer()
+                                }
                                 switch Options.punctuationForm {
                                 case .cantonese:
-                                        passBuffer()
                                         let instantSymbol: String? = isShifting ? punctuationKey.instantShiftingSymbol : punctuationKey.instantSymbol
                                         if let instantSymbol {
                                                 insert(instantSymbol)
@@ -994,7 +1024,6 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                                 punctuation(punctuationKey, isShifting: isShifting)
                                         }
                                 case .english:
-                                        passBuffer()
                                         let text: String = isShifting ? punctuationKey.shiftingKeyText : punctuationKey.keyText
                                         insert(text)
                                 }
@@ -1269,7 +1298,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         capitals = [firstCapital] + capitals.suffix(tail.count)
                 default:
                         if shouldProcessUserLexicon {
-                                selectedCandidates.append(candidate)
+                                appendSelectedCandidate(candidate)
                         } else {
                                 selectedCandidates = []
                         }

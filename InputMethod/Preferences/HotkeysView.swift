@@ -5,6 +5,7 @@ struct HotkeysView: View {
         @State private var pressShiftOnce: PressShiftOnce = AppSettings.pressShiftOnce
         @State private var shiftSpaceCombination: ShiftSpaceCombination = AppSettings.shiftSpaceCombination
         @State private var bracketKeysMode: BracketKeysMode = AppSettings.bracketKeysMode
+        @State private var commaPeriodKeysMode: CommaPeriodKeysMode = AppSettings.commaPeriodKeysMode
 
         var body: some View {
                 ScrollView {
@@ -42,22 +43,42 @@ struct HotkeysView: View {
                                         }
                                 }
                                 .block()
-                                HStack(spacing: 4) {
-                                        LabelText("HotkeysView.BracketKeysMode")
-                                        Text.separator
-                                        Picker("HotkeysView.BracketKeysMode", selection: $bracketKeysMode) {
-                                                Text("HotkeysView.BracketKeysMode.CharacterSelection").tag(BracketKeysMode.characterSelection)
-                                                Text("HotkeysView.BracketKeysMode.CandidatePaging").tag(BracketKeysMode.candidatePaging)
+                                VStack {
+                                        HStack(spacing: 4) {
+                                                LabelText("HotkeysView.BracketKeysMode")
+                                                Text.separator
+                                                Picker("HotkeysView.BracketKeysMode", selection: $bracketKeysMode) {
+                                                        Text("HotkeysView.BracketKeysMode.CharacterSelection").tag(BracketKeysMode.characterSelection)
+                                                        Text("HotkeysView.BracketKeysMode.CandidatePaging").tag(BracketKeysMode.candidatePaging)
+                                                        Text("HotkeysView.BracketKeysMode.NoOperation").tag(BracketKeysMode.noOperation)
+                                                }
+                                                .pickerStyle(.menu)
+                                                .labelsHidden()
+                                                .fixedSize()
+                                                .onChange(of: bracketKeysMode) { newOption in
+                                                        AppSettings.updateBracketKeysMode(to: newOption)
+                                                }
+                                                Spacer()
                                         }
-                                        .pickerStyle(.menu)
-                                        .labelsHidden()
-                                        .fixedSize()
-                                        .onChange(of: bracketKeysMode) { newOption in
-                                                AppSettings.updateBracketKeysMode(to: newOption)
+                                        HStack(spacing: 4) {
+                                                LabelText("HotkeysView.CommaPeriodKeysMode")
+                                                Text.separator
+                                                Picker("HotkeysView.CommaPeriodKeysMode", selection: $commaPeriodKeysMode) {
+                                                        Text("HotkeysView.CommaPeriodKeysMode.CandidatePaging").tag(CommaPeriodKeysMode.candidatePaging)
+                                                        Text("HotkeysView.CommaPeriodKeysMode.CharacterSelection").tag(CommaPeriodKeysMode.characterSelection)
+                                                        Text("HotkeysView.CommaPeriodKeysMode.NoOperation").tag(CommaPeriodKeysMode.noOperation)
+                                                }
+                                                .pickerStyle(.menu)
+                                                .labelsHidden()
+                                                .fixedSize()
+                                                .onChange(of: commaPeriodKeysMode) { newOption in
+                                                        AppSettings.updateCommaPeriodKeysMode(to: newOption)
+                                                }
+                                                Spacer()
                                         }
-                                        Spacer()
                                 }
                                 .block()
+
                                 VStack(spacing: 2) {
                                         HStack(spacing: 4) {
                                                 LabelText("HotkeysView.OpenPreferencesWindow")

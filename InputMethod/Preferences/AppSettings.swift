@@ -32,6 +32,7 @@ struct SettingsKey {
         static let PressShiftOnce: String = "PressShiftOnce"
         static let ShiftSpaceCombination: String = "ShiftSpaceCombination"
         static let BracketKeys: String = "BracketKeys"
+        static let CommaPeriodKeys: String = "CommaPeriodKeys"
 }
 
 enum CandidatePageOrientation: Int, CaseIterable {
@@ -171,14 +172,34 @@ enum ShiftSpaceCombination: Int, CaseIterable {
         }
 }
 
+/// 括號鍵 [ ] 額外功能
 enum BracketKeysMode: Int, CaseIterable {
         /// 輸入候選詞首字、末字
         case characterSelection = 1
         /// 候選詞翻䈎
         case candidatePaging = 2
+        /// 無額外功能
+        case noOperation = 3
         static func mode(of value: Int) -> BracketKeysMode {
                 return Self.allCases.first(where: { $0.rawValue == value }) ?? Self.characterSelection
         }
+        var isCharacterSelection: Bool { self == .characterSelection }
+        var isPaging: Bool { self == .candidatePaging }
+}
+
+/// 逗號、句號鍵額外功能
+enum CommaPeriodKeysMode: Int, CaseIterable {
+        /// 候選詞翻䈎
+        case candidatePaging = 1
+        /// 輸入候選詞首字、末字
+        case characterSelection = 2
+        /// 無額外功能
+        case noOperation = 3
+        static func mode(of value: Int) -> CommaPeriodKeysMode {
+                return Self.allCases.first(where: { $0.rawValue == value }) ?? Self.candidatePaging
+        }
+        var isPaging: Bool { self == .candidatePaging }
+        var isCharacterSelection: Bool { self == .characterSelection }
 }
 
 @MainActor
@@ -544,6 +565,17 @@ struct AppSettings {
                 bracketKeysMode = mode
                 let value: Int = mode.rawValue
                 UserDefaults.standard.set(value, forKey: SettingsKey.BracketKeys)
+        }
+
+        /// Use , . keys for
+        private(set) static var commaPeriodKeysMode: CommaPeriodKeysMode = {
+                let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.CommaPeriodKeys)
+                return CommaPeriodKeysMode.mode(of: savedValue)
+        }()
+        static func updateCommaPeriodKeysMode(to mode: CommaPeriodKeysMode) {
+                commaPeriodKeysMode = mode
+                let value: Int = mode.rawValue
+                UserDefaults.standard.set(value, forKey: SettingsKey.CommaPeriodKeys)
         }
 }
 
