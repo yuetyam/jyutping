@@ -37,7 +37,7 @@ struct SymbolicKeyboard: View {
                         }
                         HStack(spacing: 0) {
                                 TransformKey(destination: .numeric, widthUnitTimes: 1.3)
-                                PlaceholderKey()
+                                Spacer()
                                 SymbolInputKey("…")
                                 SymbolInputKey("©")
                                 SymbolInputKey("®")
@@ -54,7 +54,7 @@ struct SymbolicKeyboard: View {
                                                                 KeyElement("\u{0060}", footer: "0060")
                                                            ])
                                 )
-                                PlaceholderKey()
+                                Spacer()
                                 BackspaceKey()
                         }
                         switch (context.keyboardInterface.isPadFloating, context.needsInputModeSwitchKey) {

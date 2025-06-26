@@ -24,7 +24,7 @@ struct PadSymbolicKeyboard: View {
                                 PadBackspaceKey(widthUnitTimes: 1)
                         }
                         HStack(spacing: 0) {
-                                PlaceholderKey()
+                                Spacer()
                                 Group {
                                         PadSymbolInputKey("¥")
                                         PadSymbolInputKey("€")

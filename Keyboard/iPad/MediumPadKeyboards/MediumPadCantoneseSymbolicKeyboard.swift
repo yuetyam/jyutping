@@ -24,7 +24,7 @@ struct MediumPadCantoneseSymbolicKeyboard: View {
                                 MediumPadBackspaceKey(widthUnitTimes: 1)
                         }
                         HStack(spacing: 0) {
-                                PlaceholderKey()
+                                Spacer()
                                 Group {
                                         PadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("&"), members: [KeyElement("&"), KeyElement("＆", header: PresetConstant.fullWidth), KeyElement("§")]))
                                         PadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("¥"), members: [KeyElement("¥"), KeyElement("￥", header: PresetConstant.fullWidth)]))

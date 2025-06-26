@@ -28,7 +28,7 @@ struct PadCangjieKeyboard: View {
                                 PadBackspaceKey(widthUnitTimes: 1)
                         }
                         HStack(spacing: 0) {
-                                PlaceholderKey()
+                                Spacer()
                                 Group {
                                         PadCangjieInputKey(.letterA)
                                         PadCangjieInputKey(.letterS)

@@ -232,7 +232,7 @@ struct CantoneseNumericKeyboard: View {
                         }
                         HStack(spacing: 0) {
                                 TransformKey(destination: .symbolic, widthUnitTimes: 1.3)
-                                PlaceholderKey()
+                                Spacer()
                                 ExpansibleInputKey(
                                         keyLocale: .leading,
                                         keyModel: KeyModel(primary: KeyElement("。"),
@@ -296,7 +296,7 @@ struct CantoneseNumericKeyboard: View {
                                                                 KeyElement("\u{201C}", header: "左", footer: "201C")
                                                            ])
                                 )
-                                PlaceholderKey()
+                                Spacer()
                                 BackspaceKey()
                         }
                         switch (context.keyboardInterface.isPadFloating, context.needsInputModeSwitchKey) {

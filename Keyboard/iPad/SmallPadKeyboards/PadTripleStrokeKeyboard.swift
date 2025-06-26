@@ -29,7 +29,7 @@ struct PadTripleStrokeKeyboard: View {
                                 PadBackspaceKey(widthUnitTimes: 1)
                         }
                         HStack(spacing: 0) {
-                                PlaceholderKey()
+                                Spacer()
                                 Group {
                                         PadPullableInputKey(event: .letterA, upper: "@", lower: "a")
                                         PadPullableInputKey(event: .letterS, upper: "#", lower: "s")

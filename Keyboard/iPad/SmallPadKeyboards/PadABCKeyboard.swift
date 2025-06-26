@@ -88,7 +88,7 @@ struct PadABCKeyboard: View {
                                 PadBackspaceKey(widthUnitTimes: 1)
                         }
                         HStack(spacing: 0) {
-                                PlaceholderKey()
+                                Spacer()
                                 Group {
                                         PadCompleteInputKey(
                                                 keyLocale: .leading,

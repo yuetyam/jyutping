@@ -28,7 +28,7 @@ struct PadStrokeKeyboard: View {
                                 PadBackspaceKey(widthUnitTimes: 1)
                         }
                         HStack(spacing: 0) {
-                                PlaceholderKey()
+                                Spacer()
                                 Group {
                                         PadStrokeInputKey(.letterA)
                                         PadStrokeInputKey(.letterS)

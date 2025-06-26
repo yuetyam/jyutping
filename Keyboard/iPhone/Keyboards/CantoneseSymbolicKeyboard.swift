@@ -187,7 +187,7 @@ struct CantoneseSymbolicKeyboard: View {
                         }
                         HStack(spacing: 0) {
                                 TransformKey(destination: .numeric, widthUnitTimes: 1.3)
-                                PlaceholderKey()
+                                Spacer()
                                 ExpansibleInputKey(
                                         keyLocale: .leading,
                                         keyModel: KeyModel(primary: KeyElement("\u{2026}"),
@@ -214,7 +214,7 @@ struct CantoneseSymbolicKeyboard: View {
                                                                 KeyElement("\u{0060}", header: "重音符", footer: "0060")
                                                            ])
                                 )
-                                PlaceholderKey()
+                                Spacer()
                                 BackspaceKey()
                         }
                         switch (context.keyboardInterface.isPadFloating, context.needsInputModeSwitchKey) {

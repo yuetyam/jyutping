@@ -42,9 +42,3 @@ enum HiddenEvent: Int {
                 }
         }
 }
-
-struct PlaceholderKey: View {
-        var body: some View {
-                Color.clear.frame(maxWidth: .infinity)
-        }
-}

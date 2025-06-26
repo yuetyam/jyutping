@@ -69,7 +69,7 @@ struct NumericKeyboard: View {
                         }
                         HStack(spacing: 0) {
                                 TransformKey(destination: .symbolic, widthUnitTimes: 1.3)
-                                PlaceholderKey()
+                                Spacer()
                                 ExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("."), members: [KeyElement("."), KeyElement("…")]))
                                 SymbolInputKey(",")
                                 ExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("?"), members: [KeyElement("?"), KeyElement("¿")]))
@@ -86,7 +86,7 @@ struct NumericKeyboard: View {
                                                                 KeyElement("\u{0060}", footer: "0060")
                                                            ])
                                 )
-                                PlaceholderKey()
+                                Spacer()
                                 BackspaceKey()
                         }
                         switch (context.keyboardInterface.isPadFloating, context.needsInputModeSwitchKey) {

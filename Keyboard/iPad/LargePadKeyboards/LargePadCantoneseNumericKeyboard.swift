@@ -595,7 +595,7 @@ struct LargePadCantoneseNumericKeyboard: View {
                                                            ]
                                         )
                                 )
-                                PlaceholderKey()
+                                Spacer()
                         }
                         HStack(spacing: 0) {
                                 if context.needsInputModeSwitchKey {

@@ -24,7 +24,7 @@ struct MediumPadNumericKeyboard: View {
                                 MediumPadBackspaceKey(widthUnitTimes: 1)
                         }
                         HStack(spacing: 0) {
-                                PlaceholderKey()
+                                Spacer()
                                 Group {
                                         PadCompleteInputKey(keyLocale: .leading, upper: "¥", keyModel: KeyModel(primary: KeyElement("@"), members: [KeyElement("@"), KeyElement("¥")]))
                                         PadCompleteInputKey(keyLocale: .leading, upper: "€", keyModel: KeyModel(primary: KeyElement("#"), members: [KeyElement("#"), KeyElement("€")]))
