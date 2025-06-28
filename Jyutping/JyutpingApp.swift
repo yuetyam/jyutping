@@ -32,13 +32,13 @@ struct JyutpingApp: App {
                 .windowToolbarStyle(.unifiedCompact)
                 .commands {
                         CommandGroup(replacing: .appInfo) {
-                                Button("MacMenu.App.About") {
+                                Button("MacMenu.App.About", systemImage: "info.circle") {
                                         NotificationCenter.default.post(name: .openAbout, object: nil)
                                 }
                         }
                         CommandGroup(replacing: .newItem, addition: {})
                         CommandGroup(after: .windowArrangement) {
-                                Button("MacMenu.Window.Search") {
+                                Button("MacMenu.Window.Search", systemImage: "magnifyingglass") {
                                         NotificationCenter.default.post(name: .focusSearch, object: nil)
                                 }
                                 .keyboardShortcut("k", modifiers: .command)
