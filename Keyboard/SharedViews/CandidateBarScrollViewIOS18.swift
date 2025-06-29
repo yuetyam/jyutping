@@ -32,7 +32,7 @@ struct CandidateBarScrollViewIOS18: View {
                                                         defer { isLongPressActionTriggered = true }
                                                         AudioFeedback.deleted()
                                                         // context.triggerHapticFeedback()
-                                                        UserLexicon.removeItem(candidate: candidate)
+                                                        InputMemory.remove(candidate: candidate)
                                                 },
                                                 endAction: {
                                                         Task {

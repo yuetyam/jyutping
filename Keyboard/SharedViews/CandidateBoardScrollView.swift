@@ -2,6 +2,8 @@ import SwiftUI
 import CommonExtensions
 import CoreIME
 
+@available(iOS, introduced: 15.0, deprecated: 17.0, message: "Use newer versions instead")
+@available(iOSApplicationExtension, introduced: 15.0, deprecated: 17.0, message: "Use newer versions instead")
 struct CandidateBoardScrollView: View {
 
         @EnvironmentObject private var context: KeyboardViewController
@@ -40,7 +42,7 @@ struct CandidateBoardScrollView: View {
                                                                                 defer { isLongPressActionTriggered = true }
                                                                                 AudioFeedback.deleted()
                                                                                 context.triggerHapticFeedback()
-                                                                                UserLexicon.removeItem(candidate: candidate)
+                                                                                InputMemory.remove(candidate: candidate)
                                                                         },
                                                                         endAction: {
                                                                                 Task {

@@ -281,7 +281,7 @@ struct SettingsViewIOS15: View {
                                                                 context.triggerHapticFeedback()
                                                                 clearInputMemoryProgress = 0
                                                                 isPerformingClearInputMemory = true
-                                                                UserLexicon.deleteAll()
+                                                                InputMemory.deleteAll()
                                                                 EmojiMaster.clearFrequent()
                                                         } label: {
                                                                 Label("SettingsView.InputMemory.ClearInputMemory.ButtonTitle", systemImage: "trash")

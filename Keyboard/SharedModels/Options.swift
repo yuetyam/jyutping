@@ -36,14 +36,7 @@ struct Options {
 
         nonisolated(unsafe) private(set) static var showLowercaseKeys: Bool = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.KeyCase)
-                switch savedValue {
-                case 0, 1:
-                        return true
-                case 2:
-                        return false
-                default:
-                        return true
-                }
+                return savedValue != 2
         }()
         static func updateShowLowercaseKeys(to state: Bool) {
                 showLowercaseKeys = state
@@ -52,14 +45,7 @@ struct Options {
         }
         nonisolated(unsafe) private(set) static var keyTextPreview: Bool = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.KeyTextPreview)
-                switch savedValue {
-                case 0, 1:
-                        return true
-                case 2:
-                        return false
-                default:
-                        return true
-                }
+                return savedValue != 2
         }()
         static func updateKeyTextPreview(to state: Bool) {
                 keyTextPreview = state
@@ -99,14 +85,7 @@ struct Options {
 
         nonisolated(unsafe) private(set) static var isEmojiSuggestionsOn: Bool = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.EmojiSuggestions)
-                switch savedValue {
-                case 0, 1:
-                        return true
-                case 2:
-                        return false
-                default:
-                        return true
-                }
+                return savedValue != 2
         }()
         static func updateEmojiSuggestions(to isOn: Bool) {
                 isEmojiSuggestionsOn = isOn
@@ -152,14 +131,7 @@ struct Options {
 
         nonisolated(unsafe) private(set) static var isInputMemoryOn: Bool = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.UserLexiconInputMemory)
-                switch savedValue {
-                case 0, 1:
-                        return true
-                case 2:
-                        return false
-                default:
-                        return true
-                }
+                return savedValue != 2
         }()
         static func updateInputMemory(to isOn: Bool) {
                 isInputMemoryOn = isOn
@@ -209,9 +181,14 @@ enum InputKeyStyle: Int, CaseIterable {
         /// Letters with extra digits and symbols
         case numbersAndSymbols = 3
 
+        /// Letters with extra digits and symbols,
+        /// compatible with other common third-party keyboards.
+        // case compatibleNumbersAndSymbols = 4
+
         /// Letters with extra symbols
         // Not implement yet
-        // case symbols = 4
+        // case symbols = 5
+        // case compatibleSymbols = 6
 
         static func style(of value: Int) -> InputKeyStyle {
                 return Self.allCases.first(where: { $0.rawValue == value }) ?? Self.clear

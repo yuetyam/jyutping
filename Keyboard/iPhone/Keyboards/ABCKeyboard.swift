@@ -305,7 +305,7 @@ private struct SecondEnhancedInputKeyRow: View {
                         )
                         EnhancedInputKey(
                                 keyLocale: .trailing,
-                                event: .letterK,
+                                event: .letterL,
                                 keyModel: KeyModel(
                                         primary: KeyElement("l", header: "\""),
                                         members: [

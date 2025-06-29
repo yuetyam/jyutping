@@ -8,7 +8,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         private func prepareKeyboard() {
                 _ = view.subviews.map({ $0.removeFromSuperview() })
                 _ = children.map({ $0.removeFromParent() })
-                UserLexicon.prepare()
+                InputMemory.prepare()
                 Engine.prepare()
                 instantiateHapticFeedbacks()
                 keyboardInterface = adoptKeyboardInterface()
@@ -176,7 +176,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 inputStage = .ending
                                 if Options.isInputMemoryOn && selectedCandidates.isNotEmpty {
                                         let concatenated = selectedCandidates.filter(\.isCantonese).joined()
-                                        UserLexicon.handle(concatenated)
+                                        concatenated.flatMap(InputMemory.handle(_:))
                                 }
                                 selectedCandidates = []
                                 updateReturnKey()
@@ -310,7 +310,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 suggestionTask?.cancel()
                                 if Options.isInputMemoryOn && selectedCandidates.isNotEmpty {
                                         let concatenated = selectedCandidates.filter(\.isCantonese).joined()
-                                        UserLexicon.handle(concatenated)
+                                        concatenated.flatMap(InputMemory.handle(_:))
                                 }
                                 selectedCandidates = []
                                 candidates = []
@@ -345,8 +345,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 }
                 let newSyllables = candidates.compactMap({ $0.romanization.dropFirst(leadingLength).split(separator: Character.space).first?.dropLast() })
                         .uniqued()
-                        .map({ String($0) })
-                        .map({ SidebarSyllable(text: $0, isSelected: false) })
+                        .map({ SidebarSyllable(text: String($0), isSelected: false) })
                 sidebarSyllables = selectedSyllables + newSyllables
         }
         private func clearSidebarSyllables() {
@@ -615,9 +614,9 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 suggestionTask = Task.detached(priority: .high) { [weak self] in
                         guard let self else { return }
                         let combos = await bufferCombos
-                        async let userLexiconCandidates: [Candidate] = isInputMemoryOn ? UserLexicon.tenKeySuggest(combos: combos) : []
+                        async let memoryCandidates: [Candidate] = isInputMemoryOn ? InputMemory.tenKeySuggest(combos: combos) : []
                         async let engineCandidates: [Candidate] = Engine.tenKeySuggest(combos: combos)
-                        let suggestions = await (userLexiconCandidates + engineCandidates).transformed(with: Options.characterStandard, isEmojiSuggestionsOn: isEmojiSuggestionsOn)
+                        let suggestions = await (memoryCandidates + engineCandidates).transformed(with: Options.characterStandard, isEmojiSuggestionsOn: isEmojiSuggestionsOn)
                         if Task.isCancelled.negative {
                                 await MainActor.run { [weak self] in
                                         guard let self else { return }
@@ -643,9 +642,9 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 suggestionTask = Task.detached(priority: .high) { [weak self] in
                         guard let self else { return }
                         let segmentation = await Segmenter.segment(events: bufferEvents)
-                        async let userLexiconCandidates: [Candidate] = isInputMemoryOn ? UserLexicon.suggest(events: bufferEvents, segmentation: segmentation) : []
+                        async let memoryCandidates: [Candidate] = isInputMemoryOn ? InputMemory.suggest(events: bufferEvents, segmentation: segmentation) : []
                         async let engineCandidates: [Candidate] = Engine.suggest(events: bufferEvents, segmentation: segmentation)
-                        let suggestions = await (userLexiconCandidates + engineCandidates).transformed(with: Options.characterStandard, isEmojiSuggestionsOn: isEmojiSuggestionsOn)
+                        let suggestions = await (memoryCandidates + engineCandidates).transformed(with: Options.characterStandard, isEmojiSuggestionsOn: isEmojiSuggestionsOn)
                         if Task.isCancelled.negative {
                                 await MainActor.run { [weak self] in
                                         guard let self else { return }
