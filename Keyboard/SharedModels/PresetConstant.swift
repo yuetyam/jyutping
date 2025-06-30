@@ -22,6 +22,7 @@ struct PresetConstant {
         static let halfWidth: String = "半寬"
         static let fullWidth: String = "全寬"
         static let separate: String = "分隔"
+        static let reverseLookup: String = "反查"
 
         static let spaceKeyLongPressHint: AttributedString = "← →"
 

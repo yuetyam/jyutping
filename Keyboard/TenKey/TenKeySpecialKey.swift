@@ -37,23 +37,14 @@ struct TenKeySpecialKey: View {
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(3)
                         #if DEBUG
-                        if context.inputStage.isBuffering {
-                                VStack {
-                                        Text(verbatim: String.separator)
-                                        Text(verbatim: PresetConstant.separate)
-                                                .font(.keyFootnote)
-                                                .shallow()
-                                }
-                                .padding(.top, 8)
-                        } else {
-                                VStack(spacing: 0) {
-                                        Text(verbatim: "rvxq")
-                                        Text(verbatim: "反查")
-                                                .font(.keyFootnote)
-                                                .shallow()
-                                }
-                                .padding(.top, 8)
+                        ZStack(alignment: .bottom) {
+                                Color.clear
+                                Text(verbatim: context.inputStage.isBuffering ? PresetConstant.separate : PresetConstant.reverseLookup)
+                                        .font(.keyFootnote)
+                                        .opacity(0.35)
                         }
+                        .padding(.bottom, 5)
+                        Text(verbatim: context.inputStage.isBuffering ? String.separator : "R")
                         #endif
                 }
                 .frame(width: context.tenKeyWidthUnit, height: context.heightUnit)
@@ -69,9 +60,6 @@ struct TenKeySpecialKey: View {
                         .onEnded { _ in
                                 if context.inputStage.isBuffering {
                                         context.operate(.separate)
-                                } else {
-                                        let text: String = "r"
-                                        context.operate(.process(text))
                                 }
                          }
                 )
