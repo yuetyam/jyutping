@@ -481,9 +481,7 @@ struct LargePadCantoneseNumericKeyboard: View {
                                                         primary: KeyElement("…"),
                                                         members: [
                                                                 KeyElement("…", footer: "2026"),
-                                                                KeyElement("……", footer: "2026*2"),
-                                                                KeyElement("⋯", footer: "22EF"),
-                                                                KeyElement("⋯⋯", footer: "22EF*2"),
+                                                                KeyElement("⋯", footer: "22EF")
                                                         ]
                                                 )
                                         )
@@ -493,8 +491,7 @@ struct LargePadCantoneseNumericKeyboard: View {
                                                         primary: KeyElement("。"),
                                                         members: [
                                                                 KeyElement("。"),
-                                                                KeyElement("｡", header: PresetConstant.halfWidth),
-                                                                KeyElement("……", footer: "2026*2")
+                                                                KeyElement("｡", header: PresetConstant.halfWidth)
                                                         ]
                                                 )
                                         )

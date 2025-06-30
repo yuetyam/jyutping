@@ -14,9 +14,9 @@ struct SidebarPanel: View {
                 }
         }
 
-        private let punctuation: [String] = ["，", "。", "？", "！", "、", "：", "／", "…", "……", "~", "～"]
+        private let punctuation: [String] = ["，", "。", "？", "！", "、", "：", "；", "／", "…", "~", "～"]
 
-        private let symbols: [String] = ["+", "-", "*", "/", "=", "%", ":", "@", "#", ",", "~", "≈"]
+        private let symbols: [String] = ["+", "-", "*", "/", "=", "%", ":", "@", "#", ",", "$", "~", "≈"]
 
         var body: some View {
                 let texts: [String] = (context.keyboardForm == .tenKeyNumeric) ? symbols : punctuation

@@ -240,9 +240,7 @@ struct CantoneseNumericKeyboard: View {
                                                                 KeyElement("。"),
                                                                 KeyElement("｡", header: PresetConstant.halfWidth),
                                                                 KeyElement("\u{2026}", footer: "2026"),
-                                                                KeyElement("\u{2026}\u{2026}", footer: "2026*2"),
-                                                                KeyElement("\u{22EF}", footer: "22EF"),
-                                                                KeyElement("\u{22EF}\u{22EF}", footer: "22EF*2")
+                                                                KeyElement("\u{22EF}", footer: "22EF")
                                                            ])
                                 )
                                 ExpansibleInputKey(
