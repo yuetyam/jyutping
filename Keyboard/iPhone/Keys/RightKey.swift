@@ -21,33 +21,12 @@ struct RightKey: View {
         @State private var buffer: Int = 0
         @State private var isLongPressing: Bool = false
         @State private var selectedIndex: Int = 0
+        @State private var pulled: String? = nil
 
-        private func keyText(isABCMode: Bool, isBuffering: Bool, needsInputModeSwitchKey: Bool) -> String {
-                if isABCMode {
-                        return "."
-                } else if isBuffering {
-                        return "'"
-                } else if needsInputModeSwitchKey {
-                        return "，"
-                } else {
-                        return "。"
-                }
-        }
-        private func symbols(isABCMode: Bool, needsInputModeSwitchKey: Bool) -> [String] {
-                switch (isABCMode, needsInputModeSwitchKey) {
-                case (true, true):
-                        return [".", ",", "?", "!"]
-                case (true, false):
-                        return [".", ",", "?", "!"]
-                case (false, true):
-                        return ["，", "。", "？", "！"]
-                case (false, false):
-                        return ["。", ".", "？", "！"]
-                }
-        }
+        private let symbols: [String] = ["。", "！", "？", "."]
+        let headerText: String = "！"
 
         var body: some View {
-                let needsInputModeSwitchKey: Bool = context.needsInputModeSwitchKey
                 let keyWidth: CGFloat = context.widthUnit
                 let keyHeight: CGFloat = context.heightUnit
                 let isPhoneLandscape: Bool = context.keyboardInterface.isPhoneLandscape
@@ -60,10 +39,11 @@ struct RightKey: View {
                 let previewBottomOffset: CGFloat = (baseHeight * 2) + (curveHeight * 1.5)
                 let shouldPreviewKey: Bool = Options.keyTextPreview
                 let activeColor: Color = shouldPreviewKey ? keyColor : keyActiveColor
+                let shouldShowExtraHeader: Bool = (Options.inputKeyStyle == .numbersAndSymbols)
+                let headerText: String = context.inputMethodMode.isABC ? "!" : "！"
                 ZStack {
                         Color.interactiveClear
                         if isLongPressing {
-                                let symbols: [String] = symbols(isABCMode: context.inputMethodMode.isABC, needsInputModeSwitchKey: needsInputModeSwitchKey)
                                 let symbolCount: Int = symbols.count
                                 let expansionCount: Int = symbolCount - 1
                                 let trailingOffset: CGFloat = baseWidth * CGFloat(expansionCount)
@@ -95,7 +75,7 @@ struct RightKey: View {
                                         .fill(keyPreviewColor)
                                         .shadow(color: .shadowGray, radius: 1)
                                         .overlay {
-                                                Text(verbatim: keyText(isABCMode: context.inputMethodMode.isABC, isBuffering: context.inputStage.isBuffering, needsInputModeSwitchKey: needsInputModeSwitchKey))
+                                                Text(verbatim: pulled ?? (context.inputStage.isBuffering ? String.separator : String.cantonesePeriod))
                                                         .font(.largeTitle)
                                                         .padding(.bottom, previewBottomOffset)
                                         }
@@ -107,13 +87,20 @@ struct RightKey: View {
                                         .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                         .padding(.vertical, verticalPadding)
                                         .padding(.horizontal, horizontalPadding)
+                                ZStack(alignment: .topTrailing) {
+                                        Color.clear
+                                        Text(verbatim: headerText).font(.keyFootnote)
+                                }
+                                .padding(.vertical, verticalPadding)
+                                .padding(.horizontal, horizontalPadding + 2)
+                                .opacity((shouldShowExtraHeader && context.inputStage.isBuffering.negative) ? 0.5 : 0)
                                 ZStack(alignment: .bottom) {
                                         Color.clear
                                         Text(verbatim: PresetConstant.separate).font(.keyFootnote)
                                 }
                                 .padding(.vertical, verticalPadding + 2)
                                 .opacity(context.inputStage.isBuffering ? 0.5 : 0)
-                                Text(verbatim: keyText(isABCMode: context.inputMethodMode.isABC, isBuffering: context.inputStage.isBuffering, needsInputModeSwitchKey: needsInputModeSwitchKey))
+                                Text(verbatim: context.inputStage.isBuffering ? String.separator : String.cantonesePeriod).font(.letterCompact)
                         }
                 }
                 .frame(width: keyWidth, height: keyHeight)
@@ -127,51 +114,58 @@ struct RightKey: View {
                                 }
                         }
                         .onChanged { state in
-                                guard isLongPressing else { return }
-                                let distance: CGFloat = -(state.translation.width)
-                                if distance < (baseWidth / 2.0) {
-                                        if selectedIndex != 0 {
-                                                selectedIndex = 0
+                                if isLongPressing {
+                                        let memberCount: Int = symbols.count
+                                        let distance: CGFloat = -(state.translation.width)
+                                        if distance < (baseWidth / 2.0) {
+                                                if selectedIndex != 0 {
+                                                        selectedIndex = 0
+                                                }
+                                        } else {
+                                                let maxPoint: CGFloat = baseWidth * CGFloat(memberCount)
+                                                let endIndex: Int = memberCount - 1
+                                                let index = memberCount - Int((maxPoint - distance) / baseWidth)
+                                                let newSelectedIndex = min(endIndex, max(0, index))
+                                                if selectedIndex != newSelectedIndex {
+                                                        selectedIndex = newSelectedIndex
+                                                }
                                         }
                                 } else {
-                                        let memberCount: Int = 4
-                                        let maxPoint: CGFloat = baseWidth * CGFloat(memberCount)
-                                        let endIndex: Int = memberCount - 1
-                                        let index = memberCount - Int((maxPoint - distance) / baseWidth)
-                                        selectedIndex = min(endIndex, max(0, index))
+                                        guard shouldShowExtraHeader else { return }
+                                        guard pulled == nil else { return }
+                                        guard context.inputStage.isBuffering.negative else { return }
+                                        let distance: CGFloat = state.translation.height
+                                        guard abs(distance) > 30 else { return }
+                                        pulled = headerText
                                 }
                         }
                         .onEnded { _ in
                                 buffer = 0
+                                defer {
+                                        selectedIndex = 0
+                                        isLongPressing = false
+                                        pulled = nil
+                                }
                                 if isLongPressing {
-                                        defer {
-                                                selectedIndex = 0
-                                                isLongPressing = false
-                                        }
-                                        let symbols: [String] = symbols(isABCMode: context.inputMethodMode.isABC, needsInputModeSwitchKey: needsInputModeSwitchKey)
                                         guard let selectedSymbol: String = symbols.fetch(selectedIndex) else { return }
                                         AudioFeedback.inputed()
                                         context.triggerSelectionHapticFeedback()
                                         context.operate(.input(selectedSymbol))
+                                } else if let pulledText = pulled {
+                                        context.operate(.input(pulledText))
+                                } else if context.inputStage.isBuffering {
+                                        context.operate(.separate)
                                 } else {
-                                        if context.inputMethodMode.isABC {
-                                                context.operate(.input("."))
-                                        } else {
-                                                if context.inputStage.isBuffering {
-                                                        context.operate(.separate)
-                                                } else {
-                                                        let symbol: String = needsInputModeSwitchKey ? "，" : "。"
-                                                        context.operate(.input(symbol))
-                                                }
-                                        }
+                                        context.operate(.input(String.cantonesePeriod))
                                 }
                          }
                 )
                 .onReceive(timer) { _ in
                         guard isTouching else { return }
-                        if buffer > 3 {
-                                let shouldPerformLongPress: Bool = isLongPressing.negative && context.inputStage.isBuffering.negative
-                                if shouldPerformLongPress {
+                        guard isLongPressing.negative else { return }
+                        let shouldTriggerLongPress: Bool = buffer > 6 || (buffer > 3 && pulled == nil)
+                        if shouldTriggerLongPress {
+                                if context.inputStage.isBuffering.negative {
                                         isLongPressing = true
                                 }
                         } else {

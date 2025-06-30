@@ -223,15 +223,15 @@ struct CantoneseSymbolicKeyboard: View {
                                         GlobeKey()
                                         TransformKey(destination: .alphabetic, widthUnitTimes: 2)
                                         SpaceKey()
-                                        RightKey()
+                                        SharedBottomKeys.altCantoneseComma
                                         ReturnKey()
                                 }
                         case (true, false):
                                 HStack(spacing: 0) {
                                         TransformKey(destination: .alphabetic, widthUnitTimes: 2)
-                                        LeftKey()
+                                        SharedBottomKeys.cantoneseComma
                                         SpaceKey()
-                                        RightKey()
+                                        SharedBottomKeys.cantonesePeriod
                                         ReturnKey()
                                 }
                         case (false, true):
@@ -239,15 +239,15 @@ struct CantoneseSymbolicKeyboard: View {
                                         TransformKey(destination: .alphabetic, widthUnitTimes: 2)
                                         GlobeKey()
                                         SpaceKey()
-                                        RightKey()
+                                        SharedBottomKeys.altCantoneseComma
                                         ReturnKey()
                                 }
                         case (false, false):
                                 HStack(spacing: 0) {
                                         TransformKey(destination: .alphabetic, widthUnitTimes: 2)
-                                        LeftKey()
+                                        SharedBottomKeys.cantoneseComma
                                         SpaceKey()
-                                        RightKey()
+                                        SharedBottomKeys.cantonesePeriod
                                         ReturnKey()
                                 }
                         }

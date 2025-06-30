@@ -45,15 +45,15 @@ struct ABCKeyboard: View {
                                         GlobeKey()
                                         TransformKey(destination: .numeric, widthUnitTimes: 2)
                                         SpaceKey()
-                                        RightKey()
+                                        ABCRightAlternativeKey()
                                         ReturnKey()
                                 }
                         case (true, false):
                                 HStack(spacing: 0) {
                                         TransformKey(destination: .numeric, widthUnitTimes: 2)
-                                        LeftKey()
+                                        ABCLeftKey()
                                         SpaceKey()
-                                        RightKey()
+                                        ABCRightKey()
                                         ReturnKey()
                                 }
                         case (false, true):
@@ -61,15 +61,15 @@ struct ABCKeyboard: View {
                                         TransformKey(destination: context.preferredNumericForm, widthUnitTimes: 2)
                                         GlobeKey()
                                         SpaceKey()
-                                        RightKey()
+                                        ABCRightAlternativeKey()
                                         ReturnKey()
                                 }
                         case (false, false):
                                 HStack(spacing: 0) {
                                         TransformKey(destination: context.preferredNumericForm, widthUnitTimes: 2)
-                                        LeftKey()
+                                        ABCLeftKey()
                                         SpaceKey()
-                                        RightKey()
+                                        ABCRightKey()
                                         ReturnKey()
                                 }
                         }

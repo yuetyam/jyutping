@@ -1,7 +1,7 @@
 import SwiftUI
 import CommonExtensions
 
-struct LeftKey: View {
+struct ABCRightAlternativeKey: View {
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
@@ -23,8 +23,7 @@ struct LeftKey: View {
         @State private var selectedIndex: Int = 0
         @State private var pulled: String? = nil
 
-        private let symbols: [String] = ["，", "？", "！", "、"]
-        private let headerText: String = "？"
+        private let symbols: [String] = [".", ",", "?", "!"]
 
         var body: some View {
                 let keyWidth: CGFloat = context.widthUnit
@@ -45,26 +44,27 @@ struct LeftKey: View {
                         if isLongPressing {
                                 let symbolCount: Int = symbols.count
                                 let expansionCount: Int = symbolCount - 1
-                                let leadingOffset: CGFloat = baseWidth * CGFloat(expansionCount)
-                                ExpansiveBubbleShape(keyLocale: .leading, expansionCount: expansionCount)
+                                let trailingOffset: CGFloat = baseWidth * CGFloat(expansionCount)
+                                ExpansiveBubbleShape(keyLocale: .trailing, expansionCount: expansionCount)
                                         .fill(keyPreviewColor)
                                         .shadow(color: .shadowGray, radius: 1)
                                         .overlay {
                                                 HStack(spacing: 0) {
                                                         ForEach(symbols.indices, id: \.self) { index in
+                                                                let reversedIndex = (symbolCount - 1) - index
                                                                 ZStack {
                                                                         RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius, style: .continuous)
-                                                                                .fill(selectedIndex == index ? Color.accentColor : Color.clear)
-                                                                        Text(verbatim: symbols[index])
+                                                                                .fill(selectedIndex == reversedIndex ? Color.accentColor : Color.clear)
+                                                                        Text(verbatim: symbols[reversedIndex])
                                                                                 .font(.title2)
-                                                                                .foregroundStyle(selectedIndex == index ? Color.white : Color.primary)
+                                                                                .foregroundStyle(selectedIndex == reversedIndex ? Color.white : Color.primary)
                                                                 }
                                                                 .frame(maxWidth: .infinity)
                                                         }
                                                 }
                                                 .frame(width: baseWidth * CGFloat(symbolCount), height: baseHeight)
                                                 .padding(.bottom, previewBottomOffset)
-                                                .padding(.leading, leadingOffset)
+                                                .padding(.trailing, trailingOffset)
                                         }
                                         .padding(.vertical, verticalPadding)
                                         .padding(.horizontal, horizontalPadding)
@@ -73,7 +73,7 @@ struct LeftKey: View {
                                         .fill(keyPreviewColor)
                                         .shadow(color: .shadowGray, radius: 1)
                                         .overlay {
-                                                Text(verbatim: pulled ?? (context.inputStage.isBuffering ? String.separator : String.cantoneseComma))
+                                                Text(verbatim: pulled ?? String.period)
                                                         .font(.largeTitle)
                                                         .padding(.bottom, previewBottomOffset)
                                         }
@@ -85,20 +85,14 @@ struct LeftKey: View {
                                         .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                         .padding(.vertical, verticalPadding)
                                         .padding(.horizontal, horizontalPadding)
-                                ZStack(alignment: .topTrailing) {
+                                ZStack(alignment: .bottomLeading) {
                                         Color.clear
-                                        Text(verbatim: headerText).font(.keyFootnote)
+                                        Text(verbatim: String.comma).font(.keyFootnote)
                                 }
-                                .padding(.vertical, verticalPadding)
-                                .padding(.horizontal, horizontalPadding + 2)
-                                .opacity((shouldShowExtraHeader && context.inputStage.isBuffering.negative) ? 0.5 : 0)
-                                ZStack(alignment: .bottom) {
-                                        Color.clear
-                                        Text(verbatim: PresetConstant.separate).font(.keyFootnote)
-                                }
-                                .padding(.vertical, verticalPadding + 2)
-                                .opacity(context.inputStage.isBuffering ? 0.5 : 0)
-                                Text(verbatim: context.inputStage.isBuffering ? String.separator : String.cantoneseComma).font(.letterCompact)
+                                .padding(.vertical, verticalPadding + 5)
+                                .padding(.horizontal, horizontalPadding + 6)
+                                .opacity(shouldShowExtraHeader ? 0.66 : 0)
+                                Text(verbatim: String.period).font(.letterCompact)
                         }
                 }
                 .frame(width: keyWidth, height: keyHeight)
@@ -114,7 +108,7 @@ struct LeftKey: View {
                         .onChanged { state in
                                 if isLongPressing {
                                         let memberCount: Int = symbols.count
-                                        let distance: CGFloat = state.translation.width
+                                        let distance: CGFloat = -(state.translation.width)
                                         if distance < (baseWidth / 2.0) {
                                                 if selectedIndex != 0 {
                                                         selectedIndex = 0
@@ -131,10 +125,9 @@ struct LeftKey: View {
                                 } else {
                                         guard shouldShowExtraHeader else { return }
                                         guard pulled == nil else { return }
-                                        guard context.inputStage.isBuffering.negative else { return }
                                         let distance: CGFloat = state.translation.height
                                         guard abs(distance) > 30 else { return }
-                                        pulled = headerText
+                                        pulled = String.comma
                                 }
                         }
                         .onEnded { _ in
@@ -151,21 +144,17 @@ struct LeftKey: View {
                                         context.operate(.input(selectedSymbol))
                                 } else if let pulledText = pulled {
                                         context.operate(.input(pulledText))
-                                } else if context.inputStage.isBuffering {
-                                        context.operate(.separate)
                                 } else {
-                                        context.operate(.input(String.cantoneseComma))
+                                        context.operate(.input(String.period))
                                 }
-                         }
+                        }
                 )
                 .onReceive(timer) { _ in
                         guard isTouching else { return }
                         guard isLongPressing.negative else { return }
                         let shouldTriggerLongPress: Bool = buffer > 6 || (buffer > 3 && pulled == nil)
                         if shouldTriggerLongPress {
-                                if context.inputStage.isBuffering.negative {
-                                        isLongPressing = true
-                                }
+                                isLongPressing = true
                         } else {
                                 buffer += 1
                         }

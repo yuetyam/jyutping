@@ -173,7 +173,10 @@ struct ExpansibleInputKey: View {
                                                 let maxPoint: CGFloat = baseWidth * CGFloat(memberCount)
                                                 let endIndex: Int = memberCount - 1
                                                 let index = memberCount - Int((maxPoint - distance) / baseWidth)
-                                                selectedIndex = min(endIndex, max(0, index))
+                                                let newSelectedIndex = min(endIndex, max(0, index))
+                                                if selectedIndex != newSelectedIndex {
+                                                        selectedIndex = newSelectedIndex
+                                                }
                                         }
                                 } else if pulled == nil {
                                         let distance: CGFloat = state.translation.height
@@ -188,11 +191,12 @@ struct ExpansibleInputKey: View {
                         }
                         .onEnded { _ in
                                 buffer = 0
+                                defer {
+                                        selectedIndex = 0
+                                        isLongPressing = false
+                                        pulled = nil
+                                }
                                 if isLongPressing {
-                                        defer {
-                                                selectedIndex = 0
-                                                isLongPressing = false
-                                        }
                                         guard let selectedElement = keyModel.members.fetch(selectedIndex) else { return }
                                         AudioFeedback.inputed()
                                         context.triggerSelectionHapticFeedback()
@@ -201,7 +205,6 @@ struct ExpansibleInputKey: View {
                                 } else if let pulledText = pulled {
                                         let text: String = context.keyboardCase.isLowercased ? pulledText : pulledText.uppercased()
                                         context.operate(.process(text))
-                                        pulled = nil
                                 } else if let event {
                                         context.process(event, isCapitalized: context.keyboardCase.isCapitalized)
                                 } else {
@@ -213,7 +216,7 @@ struct ExpansibleInputKey: View {
                 .onReceive(timer) { _ in
                         guard isTouching else { return }
                         guard isLongPressing.negative else { return }
-                        let shouldTriggerLongPress: Bool = buffer > 5 || (buffer > 3 && pulled == nil)
+                        let shouldTriggerLongPress: Bool = buffer > 6 || (buffer > 3 && pulled == nil)
                         if shouldTriggerLongPress {
                                 isLongPressing = true
                         } else {

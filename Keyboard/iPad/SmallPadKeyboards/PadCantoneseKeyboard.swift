@@ -34,7 +34,7 @@ struct PadCantoneseKeyboard: View {
                                         PadPullableInputKey(event: .letterS, upper: "#", lower: "s")
                                         PadPullableInputKey(event: .letterD, upper: "$", lower: "d")
                                         PadPullableInputKey(event: .letterF, upper: "/", lower: "f")
-                                        PadPullableInputKey(event: .letterH, upper: "（", lower: "g")
+                                        PadPullableInputKey(event: .letterG, upper: "（", lower: "g")
                                         PadPullableInputKey(event: .letterH, upper: "）", lower: "h")
                                         PadPullableInputKey(event: .letterJ, upper: "「", lower: "j")
                                         PadPullableInputKey(event: .letterK, upper: "」", lower: "k")

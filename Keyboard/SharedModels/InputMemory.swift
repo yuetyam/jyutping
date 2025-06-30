@@ -34,7 +34,7 @@ struct InputMemory {
                         fetchLegacy(lower: 0, upper: 1).forEach(migrate(_:))
                         missionAccomplished()
                 default:
-                        fetchLegacy(lower: 20, upper: 1000).forEach(migrate(_:))
+                        fetchLegacy(lower: 20, upper: 50_000).forEach(migrate(_:))
                         UserDefaults.standard.set(20, forKey: kInputMemoryVersion)
 
                         fetchLegacy(lower: 5, upper: 20).forEach(migrate(_:))

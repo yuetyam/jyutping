@@ -95,15 +95,15 @@ struct NumericKeyboard: View {
                                         GlobeKey()
                                         TransformKey(destination: .alphabetic, widthUnitTimes: 2)
                                         SpaceKey()
-                                        RightKey()
+                                        SharedBottomKeys.altPeriod
                                         ReturnKey()
                                 }
                         case (true, false):
                                 HStack(spacing: 0) {
                                         TransformKey(destination: .alphabetic, widthUnitTimes: 2)
-                                        LeftKey()
+                                        SharedBottomKeys.comma
                                         SpaceKey()
-                                        RightKey()
+                                        SharedBottomKeys.period
                                         ReturnKey()
                                 }
                         case (false, true):
@@ -111,15 +111,15 @@ struct NumericKeyboard: View {
                                         TransformKey(destination: .alphabetic, widthUnitTimes: 2)
                                         GlobeKey()
                                         SpaceKey()
-                                        RightKey()
+                                        SharedBottomKeys.altPeriod
                                         ReturnKey()
                                 }
                         case (false, false):
                                 HStack(spacing: 0) {
                                         TransformKey(destination: .alphabetic, widthUnitTimes: 2)
-                                        LeftKey()
+                                        SharedBottomKeys.comma
                                         SpaceKey()
-                                        RightKey()
+                                        SharedBottomKeys.period
                                         ReturnKey()
                                 }
                         }

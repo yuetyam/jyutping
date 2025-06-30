@@ -178,17 +178,8 @@ enum InputKeyStyle: Int, CaseIterable {
         /// Letters with extra digits (number row)
         case numbers = 2
 
-        /// Letters with extra digits and symbols
+        /// Letters with extra digits (number row) and symbols
         case numbersAndSymbols = 3
-
-        /// Letters with extra digits and symbols,
-        /// compatible with other common third-party keyboards.
-        // case compatibleNumbersAndSymbols = 4
-
-        /// Letters with extra symbols
-        // Not implement yet
-        // case symbols = 5
-        // case compatibleSymbols = 6
 
         static func style(of value: Int) -> InputKeyStyle {
                 return Self.allCases.first(where: { $0.rawValue == value }) ?? Self.clear

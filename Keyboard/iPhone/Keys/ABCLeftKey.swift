@@ -1,7 +1,7 @@
 import SwiftUI
 import CommonExtensions
 
-struct LeftKey: View {
+struct ABCLeftKey: View {
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
@@ -23,8 +23,8 @@ struct LeftKey: View {
         @State private var selectedIndex: Int = 0
         @State private var pulled: String? = nil
 
-        private let symbols: [String] = ["，", "？", "！", "、"]
-        private let headerText: String = "？"
+        private let symbols: [String] = [",", "?", "!", ";"]
+        private let headerText: String = "?"
 
         var body: some View {
                 let keyWidth: CGFloat = context.widthUnit
@@ -73,7 +73,7 @@ struct LeftKey: View {
                                         .fill(keyPreviewColor)
                                         .shadow(color: .shadowGray, radius: 1)
                                         .overlay {
-                                                Text(verbatim: pulled ?? (context.inputStage.isBuffering ? String.separator : String.cantoneseComma))
+                                                Text(verbatim: pulled ?? String.comma)
                                                         .font(.largeTitle)
                                                         .padding(.bottom, previewBottomOffset)
                                         }
@@ -91,14 +91,8 @@ struct LeftKey: View {
                                 }
                                 .padding(.vertical, verticalPadding)
                                 .padding(.horizontal, horizontalPadding + 2)
-                                .opacity((shouldShowExtraHeader && context.inputStage.isBuffering.negative) ? 0.5 : 0)
-                                ZStack(alignment: .bottom) {
-                                        Color.clear
-                                        Text(verbatim: PresetConstant.separate).font(.keyFootnote)
-                                }
-                                .padding(.vertical, verticalPadding + 2)
-                                .opacity(context.inputStage.isBuffering ? 0.5 : 0)
-                                Text(verbatim: context.inputStage.isBuffering ? String.separator : String.cantoneseComma).font(.letterCompact)
+                                .opacity(shouldShowExtraHeader ? 0.5 : 0)
+                                Text(verbatim: String.comma).font(.letterCompact)
                         }
                 }
                 .frame(width: keyWidth, height: keyHeight)
@@ -131,7 +125,6 @@ struct LeftKey: View {
                                 } else {
                                         guard shouldShowExtraHeader else { return }
                                         guard pulled == nil else { return }
-                                        guard context.inputStage.isBuffering.negative else { return }
                                         let distance: CGFloat = state.translation.height
                                         guard abs(distance) > 30 else { return }
                                         pulled = headerText
@@ -151,21 +144,17 @@ struct LeftKey: View {
                                         context.operate(.input(selectedSymbol))
                                 } else if let pulledText = pulled {
                                         context.operate(.input(pulledText))
-                                } else if context.inputStage.isBuffering {
-                                        context.operate(.separate)
                                 } else {
-                                        context.operate(.input(String.cantoneseComma))
+                                        context.operate(.input(String.comma))
                                 }
-                         }
+                        }
                 )
                 .onReceive(timer) { _ in
                         guard isTouching else { return }
                         guard isLongPressing.negative else { return }
                         let shouldTriggerLongPress: Bool = buffer > 6 || (buffer > 3 && pulled == nil)
                         if shouldTriggerLongPress {
-                                if context.inputStage.isBuffering.negative {
-                                        isLongPressing = true
-                                }
+                                isLongPressing = true
                         } else {
                                 buffer += 1
                         }

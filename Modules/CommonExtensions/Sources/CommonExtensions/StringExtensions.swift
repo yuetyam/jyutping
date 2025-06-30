@@ -30,6 +30,18 @@ extension String {
 
         /// U+0027 ( ' ) apostrophe
         public static let separator: String = "\u{27}"
+
+        /// U+002C. English comma mark.
+        public static let comma: String = "\u{2C}"
+
+        /// U+002E. English period (full-stop) mark.
+        public static let period: String = "\u{2E}"
+
+        /// U+FF0C. Chinese comma mark.
+        public static let cantoneseComma: String = "\u{FF0C}"
+
+        /// U+3002. Chinese period (full-stop) mark.
+        public static let cantonesePeriod: String = "\u{3002}"
 }
 
 extension StringTransform {

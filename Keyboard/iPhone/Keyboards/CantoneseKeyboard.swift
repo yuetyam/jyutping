@@ -49,7 +49,7 @@ struct CantoneseKeyboard: View {
                                         GlobeKey()
                                         TransformKey(destination: .numeric, widthUnitTimes: 2)
                                         SpaceKey()
-                                        RightKey()
+                                        RightAlternativeKey()
                                         ReturnKey()
                                 }
                         case (true, false):
@@ -65,7 +65,7 @@ struct CantoneseKeyboard: View {
                                         TransformKey(destination: context.preferredNumericForm, widthUnitTimes: 2)
                                         GlobeKey()
                                         SpaceKey()
-                                        RightKey()
+                                        RightAlternativeKey()
                                         ReturnKey()
                                 }
                         case (false, false):
