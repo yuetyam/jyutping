@@ -295,6 +295,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         /// Cantonese TenKey layout
         private lazy var bufferCombos: [Combo] = [] {
                 didSet {
+                        clearSidebarSyllables()
                         switch (oldValue.isEmpty, bufferCombos.isEmpty) {
                         case (true, true):
                                 inputStage = .standby
@@ -316,7 +317,6 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 candidates = []
                                 text2mark = String.empty
                                 updateReturnKey()
-                                clearSidebarSyllables()
                         }
                 }
         }
@@ -332,9 +332,9 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 selectedSyllables = sidebarSyllables.filter(\.isSelected)
                 updateSidebarSyllables()
         }
-        private func updateSidebarSyllables(){
+        private func updateSidebarSyllables() {
                 let selected = selectedSyllables.map(\.text)
-                candidates = candidates.filter({ item -> Bool in
+                candidates = selected.isEmpty ? tenKeyCachedCandidates : tenKeyCachedCandidates.filter({ item -> Bool in
                         let syllables = item.romanization.removedTones().split(separator: Character.space).map({ String($0) })
                         return syllables.starts(with: selected)
                 })
@@ -629,7 +629,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                                 let tailText = tailCombos.compactMap(\.letters.first).joined()
                                                 return firstCandidate.mark + String.space + tailText
                                         }()
-                                        self.candidates = suggestions
+                                        self.tenKeyCachedCandidates = suggestions
                                         self.updateSidebarSyllables()
                                 }
                         }
@@ -749,6 +749,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         updateSpaceKeyForm()
                 }
         }
+        private lazy var tenKeyCachedCandidates: [Candidate] = []
 
 
         // MARK: - Properties

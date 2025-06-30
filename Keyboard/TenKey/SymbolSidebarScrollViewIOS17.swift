@@ -32,7 +32,7 @@ struct SymbolSidebarScrollViewIOS17: View {
                                         } label: {
                                                 ZStack {
                                                         Color.interactiveClear
-                                                        Text(verbatim: symbol).font(.title3)
+                                                        Text(verbatim: symbol)
                                                 }
                                                 .frame(height: buttonHeight)
                                                 .frame(maxWidth: .infinity)
