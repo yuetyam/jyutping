@@ -24,7 +24,6 @@ struct SpaceKey: View {
         private let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
 
         var body: some View {
-                let keyWidth: CGFloat = context.widthUnit * 4
                 let keyHeight: CGFloat = context.heightUnit
                 let isPhoneLandscape: Bool = context.keyboardInterface.isPhoneLandscape
                 let verticalPadding: CGFloat = isPhoneLandscape ? 3 : 6
@@ -38,7 +37,8 @@ struct SpaceKey: View {
                                 .padding(.horizontal, horizontalPadding)
                         Text(isLongPressEngaged ? PresetConstant.spaceKeyLongPressHint : context.spaceKeyForm.attributedText)
                 }
-                .frame(width: keyWidth, height: keyHeight)
+                .frame(height: keyHeight)
+                .frame(maxWidth: .infinity)
                 .contentShape(Rectangle())
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in

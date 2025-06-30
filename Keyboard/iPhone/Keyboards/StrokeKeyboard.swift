@@ -63,15 +63,12 @@ struct StrokeKeyboard: View {
                                         GlobeKey()
                                         TransformKey(destination: .numeric, widthUnitTimes: 2)
                                         SpaceKey()
-                                        RightKey()
                                         ReturnKey()
                                 }
                         case (true, false):
                                 HStack(spacing: 0) {
                                         TransformKey(destination: .numeric, widthUnitTimes: 2)
-                                        LeftKey()
                                         SpaceKey()
-                                        RightKey()
                                         ReturnKey()
                                 }
                         case (false, true):
@@ -79,15 +76,12 @@ struct StrokeKeyboard: View {
                                         TransformKey(destination: context.preferredNumericForm, widthUnitTimes: 2)
                                         GlobeKey()
                                         SpaceKey()
-                                        RightKey()
                                         ReturnKey()
                                 }
                         case (false, false):
                                 HStack(spacing: 0) {
                                         TransformKey(destination: context.preferredNumericForm, widthUnitTimes: 2)
-                                        LeftKey()
                                         SpaceKey()
-                                        RightKey()
                                         ReturnKey()
                                 }
                         }
