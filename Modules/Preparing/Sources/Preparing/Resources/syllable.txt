@@ -119,6 +119,7 @@ cik	cik
 cim	cim
 cin	cin
 cip	cip
+cir	ci
 cit	cit
 ciu	ciu
 coi	coi
@@ -402,6 +403,7 @@ sik	sik
 sim	sim
 sin	sin
 sip	sip
+sir	si
 sit	sit
 siu	siu
 soe	soe
@@ -489,6 +491,7 @@ zik	zik
 zim	zim
 zin	zin
 zip	zip
+zir	zi
 zit	zit
 ziu	ziu
 zoi	zoi
@@ -916,7 +919,6 @@ yong	jung
 yuen	jyun
 yuet	jyut
 yung	jung
-yurk	joek
 zaai	zaai
 zaak	zaak
 zaam	zaam
@@ -1008,7 +1010,6 @@ chong	cong
 chuen	cyun
 chuet	cyut
 chung	cung
-churk	coek
 chyun	cyun
 chyut	cyut
 coeng	coeng
@@ -1086,7 +1087,6 @@ shong	song
 shuen	syun
 shuet	syut
 shung	sung
-shurk	soek
 shyun	syun
 shyut	syut
 soeng	soeng

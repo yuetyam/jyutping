@@ -12,19 +12,24 @@ appstore	App Store
 audioos	audioOS
 bigsur	Big Sur
 bridgeos	bridgeOS
+cafe	Café
 callkit	CallKit
+cantonese	Cantonese
 capslock	Caps Lock
 capslock	CapsLock
 carplay	CarPlay
 chatgpt	ChatGPT
+chinese	Chinese
 chromeos	ChromeOS
 clockkit	ClockKit
 cloudkit	CloudKit
+cmake	CMake
 coloros	ColorOS
 coretext	Core Text
 deepl	DeepL
 deepseek	DeepSeek
 digitalocean	DigitalOcean
+dimsum	Dim Sum
 directx	DirectX
 dockkit	DockKit
 duckduckgo	DuckDuckGo
@@ -42,6 +47,7 @@ gnupg	GnuPG
 grapheneos	GrapheneOS
 harmonyos	HarmonyOS
 healthkit	HealthKit
+heisenberg	Heisenberg
 hifi	Hi-Fi
 hires	Hi-Res
 homekit	HomeKit
@@ -67,6 +73,8 @@ iphonepromax	iPhone Pro Max
 iphonese	iPhone SE
 ipod	iPod
 itunes	iTunes
+javafx	JavaFX
+javascript	JavaScript
 jetbrains	JetBrains
 latex	LaTeX
 lineageos	LineageOS
@@ -109,6 +117,7 @@ pushkit	PushKit
 realmeui	realme UI
 replaykit	ReplayKit
 researchkit	ResearchKit
+schrodinger	Schrödinger
 sequoia	Sequoia
 shareplay	SharePlay
 sirikit	SiriKit
@@ -117,12 +126,14 @@ spacex	SpaceX
 steamos	SteamOS
 storekit	StoreKit
 swiftui	SwiftUI
+tahoe	Tahoe
 testflight	TestFlight
 tiktok	TikTok
 tipkit	TipKit
 tvos	tvOS
 typec	Type-C
 typeduck	TypeDuck
+typescript	TypeScript
 uikit	UIKit
 usb	USB
 usbc	USB-C
@@ -132,6 +143,8 @@ visionos	visionOS
 visionpro	Vision Pro
 watchkit	WatchKit
 watchos	watchOS
+webassembly	WebAssembly
+webgl	WebGL
 webkit	WebKit
 wechat	WeChat
 whatsapp	WhatsApp
@@ -141,6 +154,7 @@ windows	Windows
 winui	WinUI
 xcode	Xcode
 youtube	YouTube
+yumcha	Yum Cha
 alpha	Α
 beta	Β
 gamma	Γ
@@ -190,8 +204,6 @@ phi	φ
 chi	χ
 psi	ψ
 omega	ω
-mgei	M記
-kgei	K記
 ajing	A型
 bjing	B型
 ojing	O型
@@ -208,17 +220,20 @@ aying	🅰️
 bying	🅱️
 oying	🅾️
 abying	🆎
+atm	ATM
+atm	🏧
+baby	👶🏻
+bb	👶🏻
 bciu	B超
 bchiu	B超
+dna	DNA
+dna	🧬
+goat	GOAT
+goat	🐐
+mgei	M記
 ok	OK
 ok	👌
 ok	🆗
-atm	ATM
-atm	🏧
-bb	👶🏻
-baby	👶🏻
-dna	DNA
-dna	🧬
 sos	SOS
 sos	🆘
 wifi	Wi-Fi
