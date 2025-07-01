@@ -117,10 +117,9 @@ extension Engine {
         }
         private static func anchorMatch(pinyin text: String, statement: OpaquePointer?, limit: Int64? = nil) -> [PinyinLexicon] {
                 guard let code = text.charcode else { return [] }
-                let limit: Int64 = limit ?? 50
                 sqlite3_reset(statement)
                 sqlite3_bind_int64(statement, 1, Int64(code))
-                sqlite3_bind_int64(statement, 2, limit)
+                sqlite3_bind_int64(statement, 2, (limit ?? 100))
                 var items: [PinyinLexicon] = []
                 while sqlite3_step(statement) == SQLITE_ROW {
                         let rowID = sqlite3_column_int64(statement, 0)

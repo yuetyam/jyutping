@@ -57,12 +57,12 @@ extension Engine {
                         switch events.first {
                         case .letterA:
                                 let text = InputEvent.letterA.text
-                                return pingMatch(text: text, input: text, mark: text, statement: pingStatement) + pingMatch(text: text + text, input: text, mark: text, statement: pingStatement) + anchorsMatch(events: events, input: text, limit: 100, statement: anchorsStatement)
+                                return pingMatch(text: text, input: text, mark: text, statement: pingStatement) + pingMatch(text: text + text, input: text, mark: text, statement: pingStatement) + anchorsMatch(events: events, input: text, statement: anchorsStatement)
                         case .letterO, .letterM:
                                 guard let text = events.first?.text else { return [] }
-                                return pingMatch(text: text, input: text, mark: text, statement: pingStatement) + anchorsMatch(events: events, input: text, limit: 100, statement: anchorsStatement)
+                                return pingMatch(text: text, input: text, mark: text, statement: pingStatement) + anchorsMatch(events: events, input: text, statement: anchorsStatement)
                         default:
-                                return anchorsMatch(events: events, limit: 100, statement: anchorsStatement)
+                                return anchorsMatch(events: events, statement: anchorsStatement)
                         }
                 default:
                         return fetchTextMarks(text: events.map(\.text).joined()) + dispatch(events: events, segmentation: segmentation, anchorsStatement: anchorsStatement, pingStatement: pingStatement, strictStatement: strictStatement)
@@ -276,12 +276,13 @@ extension Engine {
         }
 
         private static func processVerbatim<T: RandomAccessCollection<InputEvent>>(events: T, text: String, limit: Int64? = nil, anchorsStatement: OpaquePointer?, pingStatement: OpaquePointer?) -> [Candidate] {
+                let anchorLimit: Int64 = (limit == nil) ? 300 : 100
                 let inputLength: Int = events.count
                 return (0..<inputLength)
                         .flatMap({ number -> [Candidate] in
                                 let leadingEvents = events.dropLast(number)
                                 let leadingText = leadingEvents.map(\.text).joined()
-                                return pingMatch(text: leadingText, input: leadingText, limit: limit, statement: pingStatement) + anchorsMatch(events: leadingEvents, input: leadingText, limit: limit, statement: anchorsStatement)
+                                return pingMatch(text: leadingText, input: leadingText, limit: limit, statement: pingStatement) + anchorsMatch(events: leadingEvents, input: leadingText, limit: anchorLimit, statement: anchorsStatement)
                         })
                         .map({ item -> Candidate in
                                 let syllables = item.romanization.removedTones().split(separator: Character.space)
@@ -399,7 +400,7 @@ private extension Engine {
                 guard code > 0 else { return [] }
                 sqlite3_reset(statement)
                 sqlite3_bind_int64(statement, 1, Int64(code))
-                sqlite3_bind_int64(statement, 2, (limit ?? 50))
+                sqlite3_bind_int64(statement, 2, (limit ?? 100))
                 let text: String = input ?? events.map(\.text).joined()
                 var candidates: [Candidate] = []
                 while sqlite3_step(statement) == SQLITE_ROW {
@@ -476,7 +477,7 @@ extension Engine {
         private static func tenKeyAnchorsMatch(code: Int, limit: Int64? = nil, statement: OpaquePointer?) -> [Candidate] {
                 sqlite3_reset(statement)
                 sqlite3_bind_int64(statement, 1, Int64(code))
-                sqlite3_bind_int64(statement, 2, (limit ?? 50))
+                sqlite3_bind_int64(statement, 2, (limit ?? 100))
                 var candidates: [Candidate] = []
                 while sqlite3_step(statement) == SQLITE_ROW {
                         let order: Int = Int(sqlite3_column_int64(statement, 0))
