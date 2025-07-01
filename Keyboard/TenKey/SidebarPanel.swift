@@ -3,15 +3,10 @@ import SwiftUI
 struct SidebarPanel: View {
 
         @EnvironmentObject private var context: KeyboardViewController
-
         @Environment(\.colorScheme) private var colorScheme
 
         private var backColor: Color {
-                switch colorScheme {
-                case .light: .lightAction
-                case .dark: .darkAction
-                @unknown default: .lightAction
-                }
+                return colorScheme.isDark ? .darkAction : .lightAction
         }
 
         private let punctuation: [String] = ["，", "。", "？", "！", "、", "：", "；", "／", "…", "~", "～"]
