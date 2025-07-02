@@ -197,7 +197,7 @@ struct GeneralPreferencesView: View {
                                                 .padding(.horizontal, 8)
                                                 .padding(.vertical, 4)
                                                 .foregroundStyle(Color.red)
-                                                .background(Material.thick, in: RoundedRectangle(cornerRadius: 6, style: .continuous))
+                                                .background(Material.thick, in: RoundedRectangle(cornerRadius: 5, style: .continuous))
                                                 .confirmationDialog("GeneralPreferencesView.InputMemory.Clear.ConfirmationDialog.Title", isPresented: $isClearInputMemoryConfirmDialogPresented) {
                                                         Button("GeneralPreferencesView.InputMemory.Clear.ConfirmationDialog.Confirm", role: .destructive) {
                                                                 clearInputMemoryProgress = 0

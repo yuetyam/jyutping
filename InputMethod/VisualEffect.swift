@@ -32,15 +32,15 @@ extension View {
         func roundedVisualEffect() -> some View {
                 return self.background(
                         VisualEffectView()
-                                .cornerRadius(8)
-                                .shadow(radius: 4)
+                                .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+                                .shadow(radius: 3)
                 )
         }
         func roundedHUDVisualEffect() -> some View {
                 return self.background(
                         HUDVisualEffect()
-                                .cornerRadius(8)
-                                .shadow(radius: 4)
+                                .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+                                .shadow(radius: 3)
                 )
         }
 }
