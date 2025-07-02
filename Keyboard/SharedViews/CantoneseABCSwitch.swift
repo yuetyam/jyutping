@@ -29,13 +29,13 @@ struct CantoneseABCSwitch: View {
                         Text(verbatim: Options.characterStandard.isSimplified ? "粤" : "粵")
                                 .font(isSwitched ? .footnote : .body)
                                 .frame(width: partialWidth, height: height)
-                                .background(isSwitched ? Color.clear : selectedColor, in: Capsule())
+                                .background(isSwitched ? Color.clear : selectedColor, in: .capsule)
                         Text(verbatim: "A")
                                 .font(isSwitched ? .body : .footnote)
                                 .frame(width: partialWidth, height: height)
-                                .background(isSwitched ? selectedColor : Color.clear, in: Capsule())
+                                .background(isSwitched ? selectedColor : Color.clear, in: .capsule)
                 }
-                .background(backColor, in: Capsule())
+                .background(backColor, in: .capsule)
         }
 }
 
@@ -62,14 +62,14 @@ struct InputModeSwitch: View {
                         Text(verbatim: Options.characterStandard.isSimplified ? "粤" : "粵")
                                 .font(isSwitched ? .footnote : .body)
                                 .frame(width: partialWidth, height: height)
-                                .background(isSwitched ? Color.clear : selectedColor, in: Capsule())
+                                .background(isSwitched ? Color.clear : selectedColor, in: .capsule)
                                 .shadow(color: isSwitched ? Color.clear : Color.shadowGray, radius: 0.5)
                         Text(verbatim: "A")
                                 .font(isSwitched ? .body : .footnote)
                                 .frame(width: partialWidth, height: height)
-                                .background(isSwitched ? selectedColor : Color.clear, in: Capsule())
+                                .background(isSwitched ? selectedColor : Color.clear, in: .capsule)
                                 .shadow(color: isSwitched ? Color.shadowGray : Color.clear, radius: 0.5)
                 }
-                .background(Material.thin, in: Capsule())
+                .background(Material.thin, in: .capsule)
         }
 }
