@@ -91,11 +91,11 @@ swift run -c release
 ~~~
 Then use Xcode to open `Jyutping.xcodeproj` .
 
-This project contains three tergets, `Jyutping` (Main App), `Keyboard` (iOS) and `InputMethod` (macOS).
+This project contains three tergets, `Jyutping` (App), `Keyboard` (iOS) and `InputMethod` (macOS).
 
 **Note**: Do not *Run* `InputMethod` , it can only be *Build* or [Archive](https://developer.apple.com/documentation/xcode/distributing-your-app-for-beta-testing-and-releases#Create-an-archive-of-your-app)
 
-If you want to use your Mac to test the input method, you need to place the *Archive & Export* Jyutping.app to `/Library/Input\ Methods/` .
+If you want to use your Mac to test the input method, you need to place the *Archive & Export* Jyutping.app to `/Library/Input Methods/` .
 
 When replacing the old Jyutping.app, Finder may prompt a message indicating that it's running. You can terminate it using this command:
 ~~~bash

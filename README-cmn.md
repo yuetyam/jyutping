@@ -86,11 +86,11 @@ swift run -c release
 接着用 Xcode 開啓 `Jyutping.xcodeproj` 即可。
 
 整個工程(project)包含 `Jyutping`, `Keyboard`, `InputMethod` 三個目標(target)。  
-`Jyutping` 是正常App，`Keyboard` 是 iOS Keyboard Extension，`InputMethod` 是 macOS 輸入法。
+`Jyutping` 是 iOS & macOS App，`Keyboard` 是 iOS Keyboard Extension，`InputMethod` 是 macOS 輸入法。
 
 注意事項: 不要直接 Run `InputMethod`，只可以 Build 或 [Archive](https://developer.apple.com/documentation/xcode/distributing-your-app-for-beta-testing-and-releases#Create-an-archive-of-your-app)
 
-如果要自己本機測試 Mac 輸入法，請將 Archive & Export 出來的 Jyutping.app 輸入法程序放入 `/Library/Input\ Methods/` 文件夾。  
+如果要自己本機測試 Mac 輸入法，請將 Archive & Export 出來的 Jyutping.app 輸入法程序放入 `/Library/Input Methods/` 文件夾。  
 如果替換舊有 Jyutping.app 輸入法的時候，彈出提示說它正在運行、無法替換，可以去 Terminal（終端） 用以下命令將它結束運行：
 ~~~bash
 osascript -e 'tell application id "org.jyutping.inputmethod.Jyutping" to quit'
