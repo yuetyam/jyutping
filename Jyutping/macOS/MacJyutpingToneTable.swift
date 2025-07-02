@@ -122,7 +122,7 @@ private struct MacToneGridView: View {
                                         }
                                 }
                                 .padding(8)
-                                .background(Color.textBackgroundColor, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+                                .background(Color.textBackgroundColor, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
                                 .fixedSize()
                         }
                         GridRow {
@@ -151,7 +151,7 @@ private struct MacToneGridCell: View {
                         Text(verbatim: "調值 :  \(tone)")
                 }
                 .padding(8)
-                .background(Color.textBackgroundColor, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+                .background(Color.textBackgroundColor, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
         }
 }
 

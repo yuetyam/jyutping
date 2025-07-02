@@ -31,7 +31,7 @@ struct MacMetroLineView: View {
                         }
                         .padding(.horizontal, 8)
                         .padding(.bottom, 12)
-                        .background(Color.textBackgroundColor, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+                        .background(Color.textBackgroundColor, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
                 } else {
                         HStack {
                                 Text(verbatim: line.name)

@@ -56,7 +56,7 @@ struct MacSearchView: View {
                                 .focused($focusedField, equals: .searchField)
                                 .font(.master)
                                 .padding(8)
-                                .background(Color.textBackgroundColor, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+                                .background(Color.textBackgroundColor, in: .capsule)
                                 .padding(.horizontal)
                                 .padding(.vertical, 8)
                                 .background {

@@ -151,7 +151,7 @@ private struct IOSToneCompactGridView: View {
                                         }
                                 }
                                 .padding(4)
-                                .background(Color.textBackgroundColor(colorScheme: colorScheme), in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+                                .background(Color.textBackgroundColor(colorScheme: colorScheme), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
                                 .fixedSize()
                                 IOSToneGridCell(character: "舌", syllable: "sit6", tone: "˨")
                         }
@@ -198,7 +198,7 @@ private struct IOSToneGridView: View {
                                         }
                                 }
                                 .padding(4)
-                                .background(Color.textBackgroundColor(colorScheme: colorScheme), in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+                                .background(Color.textBackgroundColor(colorScheme: colorScheme), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
                                 .fixedSize()
                         }
                         GridRow {
@@ -230,7 +230,7 @@ private struct IOSToneGridCell: View {
                         }
                 }
                 .padding(8)
-                .background(Color.textBackgroundColor(colorScheme: colorScheme), in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+                .background(Color.textBackgroundColor(colorScheme: colorScheme), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
         }
 }
 

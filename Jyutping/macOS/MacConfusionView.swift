@@ -69,7 +69,7 @@ private struct EntryView: View {
                 .font(.master)
                 .textSelection(.enabled)
                 .padding(.vertical, 8)
-                .background(Color.textBackgroundColor, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+                .background(Color.textBackgroundColor, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
         }
 }
 

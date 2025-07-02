@@ -1,13 +1,12 @@
+#if os(macOS)
+
 import SwiftUI
 
 extension View {
-
-        @available(iOS, unavailable)
+        /// Apply rounded rectangle background color
         func block() -> some View {
-                #if os(macOS)
-                return self.padding(8).background(Color.textBackgroundColor, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
-                #else
-                return self
-                #endif
+                return self.padding(8).background(Color.textBackgroundColor, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
         }
 }
+
+#endif

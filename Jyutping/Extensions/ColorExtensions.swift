@@ -4,14 +4,7 @@ extension Color {
 
         #if os(iOS)
         static func textBackgroundColor(colorScheme: ColorScheme) -> Color {
-                switch colorScheme {
-                case .dark:
-                        return Color(uiColor: UIColor.secondarySystemBackground)
-                case .light:
-                        return Color(uiColor: UIColor.systemBackground)
-                @unknown default:
-                        return Color(uiColor: UIColor.systemBackground)
-                }
+                return Color(uiColor: colorScheme.isDark ? UIColor.secondarySystemBackground : UIColor.systemBackground)
         }
         static let separator: Color = Color(uiColor: UIColor.separator)
         #endif
@@ -20,4 +13,10 @@ extension Color {
         static let textBackgroundColor: Color = Color(nsColor: NSColor.textBackgroundColor).opacity(0.66)
         static let separator: Color = Color(nsColor: NSColor.separatorColor)
         #endif
+}
+
+extension ColorScheme {
+        var isDark: Bool {
+                return self == .dark
+        }
 }

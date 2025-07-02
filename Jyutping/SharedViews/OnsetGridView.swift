@@ -81,11 +81,11 @@ private struct OnsetElementCell: View {
                 .frame(height: 80)
                 .frame(minWidth: 64, idealWidth: 90, maxWidth: 100)
                 #if os(macOS)
-                .background(Color.textBackgroundColor, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+                .background(Color.textBackgroundColor, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
                 #elseif os(iOS)
-                .background(Color.textBackgroundColor(colorScheme: colorScheme), in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+                .background(Color.textBackgroundColor(colorScheme: colorScheme), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
                 #else
-                .background(.background, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+                .background(.background, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
                 #endif
         }
 }
