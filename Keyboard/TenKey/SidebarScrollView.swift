@@ -12,6 +12,7 @@ struct SidebarScrollView: View {
         @EnvironmentObject private var context: KeyboardViewController
 
         @State private var scrollPosition = ScrollPosition()
+        @State private var sensoryFeedbackTrigger: Bool = false
 
         var body: some View {
                 let idealHeight: CGFloat = ((context.heightUnit * 3.0) / 4.0) - 1.0
@@ -22,7 +23,7 @@ struct SidebarScrollView: View {
                                         let item = context.sidebarSyllables[index]
                                         ScrollViewButton {
                                                 AudioFeedback.inputed()
-                                                context.triggerSelectionHapticFeedback()
+                                                sensoryFeedbackTrigger.toggle()
                                                 context.handleSidebarTapping(at: index)
                                         } label: {
                                                 ZStack {
@@ -41,11 +42,11 @@ struct SidebarScrollView: View {
                 }
                 .scrollPosition($scrollPosition, anchor: .top)
                 .defaultScrollAnchor(.top)
-                .onChange(of: context.candidateState) { oldValue, newValue in
-                        guard newValue != oldValue else { return }
+                .onChange(of: context.candidateState) {
                         withAnimation {
                                 scrollPosition.scrollTo(edge: .top)
                         }
                 }
+                .sensoryFeedback(.selection, trigger: sensoryFeedbackTrigger)
         }
 }

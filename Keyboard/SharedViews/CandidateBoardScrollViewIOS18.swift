@@ -95,9 +95,6 @@ struct CandidateBoardScrollViewIOS18: View {
                 }
                 .scrollPosition($scrollPosition, anchor: .top)
                 .defaultScrollAnchor(.top)
-                .defaultScrollAnchor(.top, for: .initialOffset)
-                .defaultScrollAnchor(.top, for: .alignment)
-                .defaultScrollAnchor(.top, for: .sizeChanges)
                 .onChange(of: context.candidateState) {
                         withAnimation {
                                 scrollPosition.scrollTo(edge: .top)

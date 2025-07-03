@@ -8,6 +8,7 @@ struct SidebarScrollViewIOS17: View {
 
         private var topID: Int = -1000
         @State private var positionID: Int? = nil
+        @State private var sensoryFeedbackTrigger: Bool = false
 
         var body: some View {
                 let idealHeight: CGFloat = ((context.heightUnit * 3.0) / 4.0) - 1.0
@@ -19,7 +20,7 @@ struct SidebarScrollViewIOS17: View {
                                         let item = context.sidebarSyllables[index]
                                         ScrollViewButton {
                                                 AudioFeedback.inputed()
-                                                context.triggerSelectionHapticFeedback()
+                                                sensoryFeedbackTrigger.toggle()
                                                 context.handleSidebarTapping(at: index)
                                         } label: {
                                                 ZStack {
@@ -38,11 +39,11 @@ struct SidebarScrollViewIOS17: View {
                 }
                 .scrollPosition(id: $positionID, anchor: .top)
                 .defaultScrollAnchor(.top)
-                .onChange(of: context.candidateState) { oldValue, newValue in
-                        guard newValue != oldValue else { return }
+                .onChange(of: context.candidateState) {
                         withAnimation {
                                 positionID = topID
                         }
                 }
+                .sensoryFeedback(.selection, trigger: sensoryFeedbackTrigger)
         }
 }

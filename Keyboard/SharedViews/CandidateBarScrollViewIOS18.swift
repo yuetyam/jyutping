@@ -73,9 +73,6 @@ struct CandidateBarScrollViewIOS18: View {
                 }
                 .scrollPosition($scrollPosition, anchor: .leading)
                 .defaultScrollAnchor(.leading)
-                .defaultScrollAnchor(.leading, for: .initialOffset)
-                .defaultScrollAnchor(.leading, for: .alignment)
-                .defaultScrollAnchor(.leading, for: .sizeChanges)
                 .onChange(of: context.candidateState) {
                         withAnimation {
                                 scrollPosition.scrollTo(edge: .leading)
