@@ -10,21 +10,17 @@ struct SidebarScrollViewIOS17: View {
         @State private var positionID: Int? = nil
 
         var body: some View {
-                let items = context.sidebarSyllables
                 let idealHeight: CGFloat = ((context.heightUnit * 3.0) / 4.0) - 1.0
                 let compactHeight: CGFloat = idealHeight / 2.0
                 ScrollView(.vertical) {
                         LazyVStack(spacing: 0) {
                                 EmptyView().id(topID)
-                                ForEach(items.indices, id: \.self) { index in
-                                        let item = items[index]
+                                ForEach(context.sidebarSyllables.indices, id: \.self) { index in
+                                        let item = context.sidebarSyllables[index]
                                         ScrollViewButton {
                                                 AudioFeedback.inputed()
                                                 context.triggerSelectionHapticFeedback()
                                                 context.handleSidebarTapping(at: index)
-                                                withAnimation {
-                                                        positionID = topID
-                                                }
                                         } label: {
                                                 ZStack {
                                                         Color.interactiveClear
@@ -42,5 +38,11 @@ struct SidebarScrollViewIOS17: View {
                 }
                 .scrollPosition(id: $positionID, anchor: .top)
                 .defaultScrollAnchor(.top)
+                .onChange(of: context.candidateState) { oldValue, newValue in
+                        guard newValue != oldValue else { return }
+                        withAnimation {
+                                positionID = topID
+                        }
+                }
         }
 }

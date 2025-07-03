@@ -8,22 +8,18 @@ struct SidebarScrollViewIOS16: View {
         @Namespace private var topID
 
         var body: some View {
-                let items = context.sidebarSyllables
                 let idealHeight: CGFloat = ((context.heightUnit * 3.0) / 4.0) - 1.0
                 let compactHeight: CGFloat = idealHeight / 2.0
                 ScrollViewReader { proxy in
                         ScrollView(.vertical) {
                                 LazyVStack(spacing: 0) {
                                         EmptyView().id(topID)
-                                        ForEach(items.indices, id: \.self) { index in
-                                                let item = items[index]
+                                        ForEach(context.sidebarSyllables.indices, id: \.self) { index in
+                                                let item = context.sidebarSyllables[index]
                                                 ScrollViewButton {
                                                         AudioFeedback.inputed()
                                                         context.triggerSelectionHapticFeedback()
                                                         context.handleSidebarTapping(at: index)
-                                                        withAnimation {
-                                                                proxy.scrollTo(topID)
-                                                        }
                                                 } label: {
                                                         ZStack {
                                                                 Color.interactiveClear
@@ -37,6 +33,11 @@ struct SidebarScrollViewIOS16: View {
                                                 }
                                                 Divider()
                                         }
+                                }
+                        }
+                        .onChange(of: context.candidateState) { _ in
+                                withAnimation {
+                                        proxy.scrollTo(topID)
                                 }
                         }
                 }

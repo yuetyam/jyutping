@@ -37,8 +37,5 @@ struct SymbolSidebarScrollView: View {
                 }
                 .scrollPosition($scrollPosition, anchor: .top)
                 .defaultScrollAnchor(.top)
-                .defaultScrollAnchor(.top, for: .initialOffset)
-                .defaultScrollAnchor(.top, for: .alignment)
-                .defaultScrollAnchor(.top, for: .sizeChanges)
         }
 }

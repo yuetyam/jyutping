@@ -5,10 +5,6 @@ struct SidebarPanel: View {
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
 
-        private var backColor: Color {
-                return colorScheme.isDark ? .darkAction : .lightAction
-        }
-
         private let punctuation: [String] = ["，", "。", "？", "！", "、", "：", "；", "／", "…", "~", "～"]
 
         private let symbols: [String] = ["+", "-", "*", "/", "=", "%", ":", "@", "#", ",", "$", "~", "≈"]
@@ -16,7 +12,9 @@ struct SidebarPanel: View {
         var body: some View {
                 let texts: [String] = (context.keyboardForm == .tenKeyNumeric) ? symbols : punctuation
                 ZStack {
-                        backColor
+                        RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous)
+                                .fill(colorScheme.actionKeyColor)
+                                .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                         if #available(iOSApplicationExtension 18.0, *) {
                                 if context.inputStage.isBuffering {
                                         SidebarScrollView()
@@ -38,7 +36,6 @@ struct SidebarPanel: View {
                         }
                 }
                 .clipShape(RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous))
-                .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                 .padding(3)
                 .frame(width: context.tenKeyWidthUnit, height: context.heightUnit * 3)
         }
