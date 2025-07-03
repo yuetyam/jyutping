@@ -5,10 +5,6 @@ struct GlobeKey: View {
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
 
-        private var keyColor: Color {
-                return colorScheme.isDark ? .darkAction : .lightAction
-        }
-
         var body: some View {
                 let width: CGFloat = context.widthUnit
                 let height: CGFloat = context.heightUnit
@@ -18,7 +14,7 @@ struct GlobeKey: View {
                 ZStack {
                         Color.interactiveClear
                         RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius, style: .continuous)
-                                .fill(keyColor)
+                                .fill(colorScheme.isDark ? Color.darkAction : Color.lightAction)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(.vertical, verticalPadding)
                                 .padding(.horizontal, horizontalPadding)
