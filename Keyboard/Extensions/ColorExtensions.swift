@@ -4,6 +4,18 @@ extension ColorScheme {
         var isDark: Bool {
                 return self == .dark
         }
+        var inputKeyColor: Color {
+                return isDark ? .darkInput : .lightInput
+        }
+        var activeInputKeyColor: Color {
+                return isDark ? .activeDarkInput : .activeLightInput
+        }
+        var actionKeyColor: Color {
+                return isDark ? .darkAction : .lightAction
+        }
+        var activeActionKeyColor: Color {
+                return isDark ? .activeDarkAction : .activeLightAction
+        }
 }
 
 extension Color {
