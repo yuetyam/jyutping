@@ -295,7 +295,6 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         /// Cantonese TenKey layout
         private lazy var bufferCombos: [Combo] = [] {
                 didSet {
-                        clearSidebarSyllables()
                         switch (oldValue.isEmpty, bufferCombos.isEmpty) {
                         case (true, true):
                                 inputStage = .standby
@@ -305,6 +304,9 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 tenKeySuggest()
                         case (false, false):
                                 inputStage = .ongoing
+                                if bufferCombos.count == (oldValue.count - 1) {
+                                        selectedSyllables = []
+                                }
                                 tenKeySuggest()
                         case (false, true):
                                 inputStage = .ending
@@ -316,6 +318,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 selectedCandidates = []
                                 candidates = []
                                 text2mark = String.empty
+                                clearSidebarSyllables()
                                 updateReturnKey()
                         }
                 }
