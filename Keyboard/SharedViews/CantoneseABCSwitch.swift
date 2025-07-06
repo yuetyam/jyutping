@@ -15,27 +15,18 @@ struct CantoneseABCSwitch: View {
         private let height: CGFloat = 26
 
         var body: some View {
-                let selectedColor: Color = switch colorScheme {
-                case .light: .lightInput
-                case .dark: .darkInput
-                @unknown default: .lightInput
-                }
-                let backColor: Color = switch colorScheme {
-                case .light: .activeLightInput
-                case .dark: .activeDarkInput
-                @unknown default: .activeLightInput
-                }
                 HStack(spacing: 0) {
                         Text(verbatim: Options.characterStandard.isSimplified ? "粤" : "粵")
                                 .font(isSwitched ? .footnote : .body)
                                 .frame(width: partialWidth, height: height)
-                                .background(isSwitched ? Color.clear : selectedColor, in: .capsule)
+                                .background(isSwitched ? Color.clear : colorScheme.inputKeyColor, in: .capsule)
                         Text(verbatim: "A")
                                 .font(isSwitched ? .body : .footnote)
                                 .frame(width: partialWidth, height: height)
-                                .background(isSwitched ? selectedColor : Color.clear, in: .capsule)
+                                .background(isSwitched ? colorScheme.inputKeyColor : Color.clear, in: .capsule)
                 }
-                .background(backColor, in: .capsule)
+                .frame(width: partialWidth * 2, height: height)
+                .background(colorScheme.activeInputKeyColor, in: .capsule)
         }
 }
 
@@ -53,23 +44,25 @@ struct InputModeSwitch: View {
         private let height: CGFloat = 26
 
         var body: some View {
-                let selectedColor: Color = switch colorScheme {
-                case .light: .lightInput
-                case .dark: .darkInput
-                @unknown default: .lightInput
-                }
                 HStack(spacing: 0) {
-                        Text(verbatim: Options.characterStandard.isSimplified ? "粤" : "粵")
-                                .font(isSwitched ? .footnote : .body)
-                                .frame(width: partialWidth, height: height)
-                                .background(isSwitched ? Color.clear : selectedColor, in: .capsule)
-                                .shadow(color: isSwitched ? Color.clear : Color.shadowGray, radius: 0.5)
-                        Text(verbatim: "A")
-                                .font(isSwitched ? .body : .footnote)
-                                .frame(width: partialWidth, height: height)
-                                .background(isSwitched ? selectedColor : Color.clear, in: .capsule)
-                                .shadow(color: isSwitched ? Color.shadowGray : Color.clear, radius: 0.5)
+                        ZStack {
+                                Capsule()
+                                        .fill(isSwitched ? Color.clear : colorScheme.inputKeyColor)
+                                        .shadow(color: isSwitched ? Color.clear : Color.shadowGray, radius: 0.5)
+                                Text(verbatim: Options.characterStandard.isSimplified ? "粤" : "粵")
+                                        .font(isSwitched ? .footnote : .body)
+                        }
+                        .frame(width: partialWidth, height: height)
+                        ZStack {
+                                Capsule()
+                                        .fill(isSwitched ? colorScheme.inputKeyColor : Color.clear)
+                                        .shadow(color: isSwitched ? Color.shadowGray : Color.clear, radius: 0.5)
+                                Text(verbatim: "A")
+                                        .font(isSwitched ? .body : .footnote)
+                        }
+                        .frame(width: partialWidth, height: height)
                 }
+                .frame(width: partialWidth * 2, height: height)
                 .background(Material.thin, in: .capsule)
         }
 }
