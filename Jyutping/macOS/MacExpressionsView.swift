@@ -221,9 +221,9 @@ struct MacExpressionsView: View {
 
                                 HStack {
                                         VStack(alignment: .leading, spacing: 10) {
-                                                Text(verbatim: "啦、嘞").font(.significant).padding(.bottom, 2)
+                                                Text(verbatim: "喇、嘞").font(.significant).padding(.bottom, 2)
                                                 Label {
-                                                        Text(verbatim: "我識用粵拼打字啦！")
+                                                        Text(verbatim: "我識用粵拼打字喇！")
                                                 } icon: {
                                                         Image.checkmark.foregroundStyle(Color.green)
                                                 }

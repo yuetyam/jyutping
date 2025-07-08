@@ -23,8 +23,8 @@ struct RightKey: View {
         @State private var selectedIndex: Int = 0
         @State private var pulled: String? = nil
 
-        private let symbols: [String] = ["。", "！", "？", "…"]
-        private let headerText: String = "！"
+        private let symbols: [String] = ["。", "？", "！", "…"]
+        private let headerText: String = "？"
 
         var body: some View {
                 let keyWidth: CGFloat = context.widthUnit
@@ -40,7 +40,6 @@ struct RightKey: View {
                 let shouldPreviewKey: Bool = Options.keyTextPreview
                 let activeColor: Color = shouldPreviewKey ? keyColor : keyActiveColor
                 let shouldShowExtraHeader: Bool = (Options.inputKeyStyle == .numbersAndSymbols)
-                let headerText: String = context.inputMethodMode.isABC ? "!" : "！"
                 ZStack {
                         Color.interactiveClear
                         if isLongPressing {

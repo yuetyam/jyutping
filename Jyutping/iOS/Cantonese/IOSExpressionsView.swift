@@ -198,9 +198,9 @@ struct IOSExpressionsView: View {
                                         }
                                 }
                                 Section {
-                                        Text(verbatim: "啦、嘞").font(.headline)
+                                        Text(verbatim: "喇、嘞").font(.headline)
                                         Label {
-                                                Text(verbatim: "我識用粵拼打字啦！")
+                                                Text(verbatim: "我識用粵拼打字喇！")
                                         } icon: {
                                                 Image.checkmark.foregroundStyle(Color.green)
                                         }

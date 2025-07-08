@@ -6738,55 +6738,55 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "本應用程式使用嘅係，系統提供嘅文字語音朗讀（TTS）功能。"
+            "value" : "應用程式使用嘅係，系統內置提供嘅文字語音朗讀（TTS）功能。"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "本應用程式使用嘅係，系統提供嘅文字語音朗讀（TTS）功能。"
+            "value" : "應用程式使用嘅係，系統內置提供嘅文字語音朗讀（TTS）功能。"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "本應用程式使用嘅係，系統提供嘅文字語音朗讀（TTS）功能。"
+            "value" : "應用程式使用嘅係，系統內置提供嘅文字語音朗讀（TTS）功能。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "本應用程式使用嘅係，系統提供嘅文字語音朗讀（TTS）功能。"
+            "value" : "應用程式使用嘅係，系統內置提供嘅文字語音朗讀（TTS）功能。"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "本應用程式使用嘅係，系統提供嘅文字語音朗讀（TTS）功能。"
+            "value" : "應用程式使用嘅係，系統內置提供嘅文字語音朗讀（TTS）功能。"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "本應用程式使用嘅係，系統提供嘅文字語音朗讀（TTS）功能。"
+            "value" : "應用程式使用嘅係，系統內置提供嘅文字語音朗讀（TTS）功能。"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "本應用程式使用嘅係，系統提供嘅文字語音朗讀（TTS）功能。"
+            "value" : "應用程式使用嘅係，系統內置提供嘅文字語音朗讀（TTS）功能。"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "本應用程式使用嘅係，系統提供嘅文字語音朗讀（TTS）功能。"
+            "value" : "應用程式使用嘅係，系統內置提供嘅文字語音朗讀（TTS）功能。"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "本應用程式使用嘅係，系統提供嘅文字語音朗讀（TTS）功能。"
+            "value" : "應用程式使用嘅係，系統內置提供嘅文字語音朗讀（TTS）功能。"
           }
         }
       }

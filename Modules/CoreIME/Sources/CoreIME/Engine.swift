@@ -294,23 +294,21 @@ extension Engine {
                                 })
                         return conjoinedMatched + anchorsMatched
                 })
-                let gainedMatched: [Candidate] = (1..<inputLength)
-                        .flatMap({ number -> [Candidate] in
-                                let leadingEvents = events.dropLast(number)
-                                let leadingText = leadingEvents.map(\.text).joined()
-                                return anchorsMatch(events: leadingEvents, input: leadingText, limit: 300, statement: anchorsStatement)
-                        })
-                        .compactMap({ item -> Candidate? in
-                                guard item.romanization.hasPrefix(text).negative else {
-                                        return Candidate(text: item.text, romanization: item.romanization, input: text, mark: text, order: item.order)
-                                }
-                                let syllables = item.romanization.removedTones().split(separator: Character.space)
-                                guard let lastSyllable = syllables.last else { return nil }
-                                guard text.hasSuffix(lastSyllable) else { return nil }
-                                let isMatched: Bool = ((syllables.count - 1) + lastSyllable.count) == inputLength
-                                guard isMatched else { return nil }
+                let gainedMatched: [Candidate] = shouldMatchPrefixes.negative ? [] : (1..<inputLength).flatMap({ number -> [Candidate] in
+                        let leadingEvents = events.dropLast(number)
+                        let leadingText = leadingEvents.map(\.text).joined()
+                        return anchorsMatch(events: leadingEvents, input: leadingText, limit: 300, statement: anchorsStatement)
+                }).compactMap({ item -> Candidate? in
+                        guard item.romanization.hasPrefix(text).negative else {
                                 return Candidate(text: item.text, romanization: item.romanization, input: text, mark: text, order: item.order)
-                        })
+                        }
+                        let syllables = item.romanization.removedTones().split(separator: Character.space)
+                        guard let lastSyllable = syllables.last else { return nil }
+                        guard text.hasSuffix(lastSyllable) else { return nil }
+                        let isMatched: Bool = ((syllables.count - 1) + lastSyllable.count) == inputLength
+                        guard isMatched else { return nil }
+                        return Candidate(text: item.text, romanization: item.romanization, input: text, mark: text, order: item.order)
+                })
                 let symbols: [Candidate] = Engine.searchSymbols(text: text, segmentation: segmentation)
                 let fetched: [Candidate] = {
                         guard symbols.isNotEmpty else {

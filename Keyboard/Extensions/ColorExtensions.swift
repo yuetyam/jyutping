@@ -23,7 +23,7 @@ extension Color {
         static let interactiveClear   : Color = Color(white: 0.5, opacity: 0.001)
 
         /// KeyView shadow color
-        static let shadowGray         : Color = Color.black.opacity(0.33)
+        static let shadowGray         : Color = Color.gray.opacity(0.5)
 
         private static let isLiquidGlassPreferred: Bool = {
                 if #available(iOSApplicationExtension 26.0, *) {

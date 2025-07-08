@@ -23,8 +23,8 @@ struct ABCRightKey: View {
         @State private var selectedIndex: Int = 0
         @State private var pulled: String? = nil
 
-        private let symbols: [String] = [".", "!", "?", "…"]
-        private let headerText: String = "!"
+        private let symbols: [String] = [".", "?", "!", "…"]
+        private let headerText: String = "?"
 
         var body: some View {
                 let keyWidth: CGFloat = context.widthUnit
