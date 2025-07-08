@@ -3,14 +3,14 @@ import Foundation
 extension StringProtocol {
         var charCode: Int? {
                 guard self.count < 10 else { return nil }
-                let codes: [Int] = self.compactMap(\.interCode)
+                let codes: [Int] = self.compactMap(\.internalCode)
                 guard codes.count == self.count else { return nil }
                 let code: Int = codes.radix100Combined()
                 return code
         }
         var tenKeyCharCode: Int? {
                 guard self.count < 19 else { return nil }
-                let codes: [Int] = self.compactMap(\.tenKeyInterCode)
+                let codes: [Int] = self.compactMap(\.tenKeyInternalCode)
                 guard codes.count == self.count else { return nil }
                 let code: Int = codes.decimalCombined()
                 return code
@@ -29,7 +29,7 @@ extension RandomAccessCollection where Element == Int {
 }
 
 private extension Character {
-        var interCode: Int? {
+        var internalCode: Int? {
                 return Self.letterCodeMap[self]
         }
         private static let letterCodeMap: [Character : Int] = [
@@ -61,7 +61,7 @@ private extension Character {
                 letterZ : 45,
         ]
 
-        var tenKeyInterCode: Int? {
+        var tenKeyInternalCode: Int? {
                 return Self.tenKeyCodeMap[self]
         }
         private static let tenKeyCodeMap: [Character : Int] = [
