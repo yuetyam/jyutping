@@ -28,6 +28,7 @@ final class CandidateWindow: NSPanel {
 final class SettingsWindow: NSPanel {
         private init(frame: CGRect? = nil, level: NSWindow.Level?) {
                 super.init(contentRect: frame ?? .zero, styleMask: [.titled, .closable, .resizable, .fullSizeContentView], backing: .buffered, defer: true)
+                self.level = level ?? NSWindow.Level(Int(CGShieldingWindowLevel()))
                 isFloatingPanel = true
                 worksWhenModal = true
                 hidesOnDeactivate = false
