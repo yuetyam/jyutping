@@ -57,6 +57,26 @@ extension RandomAccessCollection where Element == Syllable {
                 return flatMap(\.origin).map(\.text).joined()
         }
 
+        /// Anchors of alias events
+        public var aliasAnchors: [InputEvent] {
+                return compactMap(\.alias.first)
+        }
+
+        /// Anchors of origin events
+        public var originAnchors: [InputEvent] {
+                return compactMap(\.origin.first)
+        }
+
+        /// Anchors of alias event texts, conjoined as one text
+        public var aliasAnchorsText: String {
+                return compactMap(\.alias.first?.text).joined()
+        }
+
+        /// Anchors of origin event texts, conjoined as one text
+        public var originAnchorsText: String {
+                return compactMap(\.origin.first?.text).joined()
+        }
+
         /// Alias texts as syllables
         public var mark: String {
                 return map(\.aliasText).joined(separator: String.space)

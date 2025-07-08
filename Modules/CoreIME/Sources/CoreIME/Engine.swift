@@ -73,11 +73,11 @@ extension Engine {
                 let syllableEvents = events.filter(\.isSyllableLetter)
                 let candidates: [Candidate] =  switch (segmentation.first?.first?.alias.count ?? 0) {
                 case 0:
-                        processVerbatim(events: syllableEvents, text: syllableEvents.map(\.text).joined(), anchorsStatement: anchorsStatement, pingStatement: pingStatement)
+                        processSlices(of: syllableEvents, text: syllableEvents.map(\.text).joined(), anchorsStatement: anchorsStatement, pingStatement: pingStatement)
                 case 1 where syllableEvents.count > 1:
-                        process(events: syllableEvents, segmentation: segmentation, anchorsStatement: anchorsStatement, pingStatement: pingStatement, strictStatement: strictStatement) + processVerbatim(events: syllableEvents, text: syllableEvents.map(\.text).joined(), anchorsStatement: anchorsStatement, pingStatement: pingStatement)
+                        search(events: syllableEvents, segmentation: segmentation, anchorsStatement: anchorsStatement, pingStatement: pingStatement, strictStatement: strictStatement) + processSlices(of: syllableEvents, text: syllableEvents.map(\.text).joined(), anchorsStatement: anchorsStatement, pingStatement: pingStatement)
                 default:
-                        process(events: syllableEvents, segmentation: segmentation, anchorsStatement: anchorsStatement, pingStatement: pingStatement, strictStatement: strictStatement)
+                        search(events: syllableEvents, segmentation: segmentation, anchorsStatement: anchorsStatement, pingStatement: pingStatement, strictStatement: strictStatement)
                 }
                 switch (events.contains(where: \.isQuote), events.contains(where: \.isToneEvent)) {
                 case (false, false):
@@ -232,59 +232,20 @@ extension Engine {
                 }
         }
 
-        private static func process<T: RandomAccessCollection<InputEvent>>(events: T, segmentation: Segmentation, limit: Int64? = nil, anchorsStatement: OpaquePointer?, pingStatement: OpaquePointer?, strictStatement: OpaquePointer?) -> [Candidate] {
-                let inputLength: Int = events.count
-                let text: String = events.map(\.text).joined()
-                let primary: [Candidate] = search(inputLength: inputLength, text: text, events: events, segmentation: segmentation, limit: limit, anchorsStatement: anchorsStatement, pingStatement: pingStatement, strictStatement: strictStatement)
-                guard let firstInputCount = primary.first?.inputCount else { return processVerbatim(events: events, text: text, limit: limit, anchorsStatement: anchorsStatement, pingStatement: pingStatement) }
-                guard firstInputCount != inputLength else { return primary }
-                let anchorLimit: Int64 = (limit == nil) ? 500 : 200
-                let prefixes: [Candidate] = segmentation.flatMap({ scheme -> [Candidate] in
-                        let tail = events.dropFirst(scheme.length)
-                        guard let lastAnchor = tail.first else { return [] }
-                        let schemeAnchors = scheme.compactMap(\.alias.first)
-                        let conjoined = schemeAnchors + tail
-                        let anchors = schemeAnchors + [lastAnchor]
-                        let schemeMark = scheme.mark
-                        let mark: String = schemeMark + String.space + tail.map(\.text).joined()
-                        let conjoinedMatched = anchorsMatch(events: conjoined, limit: anchorLimit, statement: anchorsStatement)
-                                .compactMap({ item -> Candidate? in
-                                        let toneFreeRomanization = item.romanization.removedTones()
-                                        guard toneFreeRomanization.hasPrefix(schemeMark) else { return nil }
-                                        let tailAnchors = toneFreeRomanization.dropFirst(schemeMark.count).split(separator: Character.space).compactMap(\.first)
-                                        guard tailAnchors == tail.compactMap(\.text.first) else { return nil }
-                                        return Candidate(text: item.text, romanization: item.romanization, input: text, mark: mark, order: item.order)
-                                })
-                        let anchorsMatched = anchorsMatch(events: anchors, limit: anchorLimit, statement: anchorsStatement)
-                                .compactMap({ item -> Candidate? in
-                                        guard item.romanization.removedTones().hasPrefix(mark) else { return nil }
-                                        return Candidate(text: item.text, romanization: item.romanization, input: text, mark: mark, order: item.order)
-                                })
-                        return conjoinedMatched + anchorsMatched
-                })
-                guard prefixes.isEmpty else { return prefixes + primary }
-                let headInputLengths = primary.map(\.inputCount).uniqued()
-                let concatenated = headInputLengths.compactMap({ headLength -> Candidate? in
-                        let tailEvents = events.dropFirst(headLength)
-                        let tailSegmentation = Segmenter.segment(events: tailEvents)
-                        guard let tailCandidate = process(events: tailEvents, segmentation: tailSegmentation, limit: 50, anchorsStatement: anchorsStatement, pingStatement: pingStatement, strictStatement: strictStatement).sorted().first else { return nil }
-                        guard let headCandidate = primary.filter({ $0.inputCount == headLength }).first else { return nil }
-                        return headCandidate + tailCandidate
-                })
-                let preferredConcatenated = concatenated.uniqued().sorted().prefix(1)
-                return preferredConcatenated + primary
-        }
-
-        private static func processVerbatim<T: RandomAccessCollection<InputEvent>>(events: T, text: String, limit: Int64? = nil, anchorsStatement: OpaquePointer?, pingStatement: OpaquePointer?) -> [Candidate] {
-                let anchorLimit: Int64 = (limit == nil) ? 300 : 100
+        private static func processSlices<T: RandomAccessCollection<InputEvent>>(of events: T, text: String, limit: Int64? = nil, anchorsStatement: OpaquePointer?, pingStatement: OpaquePointer?) -> [Candidate] {
+                let adjustedLimit: Int64 = (limit == nil) ? 300 : 100
                 let inputLength: Int = events.count
                 return (0..<inputLength)
                         .flatMap({ number -> [Candidate] in
                                 let leadingEvents = events.dropLast(number)
                                 let leadingText = leadingEvents.map(\.text).joined()
-                                return pingMatch(text: leadingText, input: leadingText, limit: limit, statement: pingStatement) + anchorsMatch(events: leadingEvents, input: leadingText, limit: anchorLimit, statement: anchorsStatement)
+                                return pingMatch(text: leadingText, input: leadingText, limit: limit, statement: pingStatement) + anchorsMatch(events: leadingEvents, input: leadingText, limit: adjustedLimit, statement: anchorsStatement)
                         })
                         .map({ item -> Candidate in
+                                guard item.inputCount != inputLength else { return item }
+                                guard item.romanization.hasPrefix(text).negative else {
+                                        return Candidate(text: item.text, romanization: item.romanization, input: text, mark: text, order: item.order)
+                                }
                                 let syllables = item.romanization.removedTones().split(separator: Character.space)
                                 guard let lastSyllable = syllables.last else { return item }
                                 guard text.hasSuffix(lastSyllable) else { return item }
@@ -296,28 +257,93 @@ extension Engine {
                         .sorted()
         }
 
-        private static func search<T: RandomAccessCollection<InputEvent>>(inputLength: Int, text: String, events: T, segmentation: Segmentation, limit: Int64? = nil, anchorsStatement: OpaquePointer?, pingStatement: OpaquePointer?, strictStatement: OpaquePointer?) -> [Candidate] {
+        private static func search<T: RandomAccessCollection<InputEvent>>(events: T, segmentation: Segmentation, limit: Int64? = nil, anchorsStatement: OpaquePointer?, pingStatement: OpaquePointer?, strictStatement: OpaquePointer?) -> [Candidate] {
+                let inputLength: Int = events.count
+                let text: String = events.map(\.text).joined()
                 let pingMatched = pingMatch(text: text, input: text, limit: limit, statement: pingStatement)
                 let anchorsMatched = anchorsMatch(events: events, input: text, limit: limit, statement: anchorsStatement)
                 let queried = query(inputLength: inputLength, segmentation: segmentation, limit: limit, strictStatement: strictStatement)
-                lazy var searched = (pingMatched + anchorsMatched + queried).ordered(with: inputLength)
-                let shouldContinue: Bool = (limit == nil) && searched.isNotEmpty
-                guard shouldContinue else { return searched }
+                let shouldMatchPrefixes: Bool = {
+                        guard pingMatched.isEmpty else { return false }
+                        guard queried.contains(where: { $0.inputCount == inputLength }).negative else { return false }
+                        guard (events.last != .letterM) && (events.first != .letterM) else { return true }
+                        return segmentation.contains(where: { $0.length == inputLength }).negative
+                }()
+                let prefixesLimit: Int64 = (limit == nil) ? 500 : 200
+                let prefixMatched: [Candidate] = shouldMatchPrefixes.negative ? [] : segmentation.flatMap({ scheme -> [Candidate] in
+                        // TODO: Works with alias syllables too
+                        let tail = events.dropFirst(scheme.length)
+                        guard let lastAnchor = tail.first else { return [] }
+                        let schemeAnchors = scheme.compactMap(\.alias.first)
+                        let conjoined = schemeAnchors + tail
+                        let anchors = schemeAnchors + [lastAnchor]
+                        let schemeMark: String = scheme.mark
+                        let mark: String = schemeMark + String.space + tail.map(\.text).joined()
+                        let conjoinedMatched = anchorsMatch(events: conjoined, limit: prefixesLimit, statement: anchorsStatement)
+                                .compactMap({ item -> Candidate? in
+                                        let toneFreeRomanization = item.romanization.removedTones()
+                                        guard toneFreeRomanization.hasPrefix(schemeMark) else { return nil }
+                                        let tailAnchors = toneFreeRomanization.dropFirst(schemeMark.count).split(separator: Character.space).compactMap(\.first)
+                                        guard tailAnchors == tail.compactMap(\.text.first) else { return nil }
+                                        return Candidate(text: item.text, romanization: item.romanization, input: text, mark: mark, order: item.order)
+                                })
+                        let anchorsMatched = anchorsMatch(events: anchors, limit: prefixesLimit, statement: anchorsStatement)
+                                .compactMap({ item -> Candidate? in
+                                        guard item.romanization.removedTones().hasPrefix(mark) else { return nil }
+                                        return Candidate(text: item.text, romanization: item.romanization, input: text, mark: mark, order: item.order)
+                                })
+                        return conjoinedMatched + anchorsMatched
+                })
+                let gainedMatched: [Candidate] = (1..<inputLength)
+                        .flatMap({ number -> [Candidate] in
+                                let leadingEvents = events.dropLast(number)
+                                let leadingText = leadingEvents.map(\.text).joined()
+                                return anchorsMatch(events: leadingEvents, input: leadingText, limit: 300, statement: anchorsStatement)
+                        })
+                        .compactMap({ item -> Candidate? in
+                                guard item.romanization.hasPrefix(text).negative else {
+                                        return Candidate(text: item.text, romanization: item.romanization, input: text, mark: text, order: item.order)
+                                }
+                                let syllables = item.romanization.removedTones().split(separator: Character.space)
+                                guard let lastSyllable = syllables.last else { return nil }
+                                guard text.hasSuffix(lastSyllable) else { return nil }
+                                let isMatched: Bool = ((syllables.count - 1) + lastSyllable.count) == inputLength
+                                guard isMatched else { return nil }
+                                return Candidate(text: item.text, romanization: item.romanization, input: text, mark: text, order: item.order)
+                        })
                 let symbols: [Candidate] = Engine.searchSymbols(text: text, segmentation: segmentation)
-                guard symbols.isNotEmpty else { return searched }
-                for symbol in symbols.reversed() {
-                        if let index = searched.firstIndex(where: { $0.lexiconText == symbol.lexiconText && $0.romanization == symbol.romanization }) {
-                                searched.insert(symbol, at: index + 1)
+                let fetched: [Candidate] = {
+                        guard symbols.isNotEmpty else {
+                                return (pingMatched + anchorsMatched + queried + prefixMatched + gainedMatched).ordered(with: inputLength)
                         }
+                        var items: [Candidate] = (pingMatched + anchorsMatched + queried + prefixMatched + gainedMatched).ordered(with: inputLength)
+                        for symbol in symbols.reversed() {
+                                if let index = items.firstIndex(where: { $0.lexiconText == symbol.lexiconText && $0.romanization == symbol.romanization }) {
+                                        items.insert(symbol, at: index + 1)
+                                }
+                        }
+                        return items
+                }()
+                guard let firstInputCount = fetched.first?.inputCount else {
+                        return processSlices(of: events, text: text, limit: limit, anchorsStatement: anchorsStatement, pingStatement: pingStatement)
                 }
-                return searched
+                guard firstInputCount < inputLength else { return fetched }
+                let headInputLengths = fetched.map(\.inputCount).uniqued()
+                let concatenated = headInputLengths.compactMap({ headLength -> Candidate? in
+                        let tailEvents = events.dropFirst(headLength)
+                        let tailSegmentation = Segmenter.segment(events: tailEvents)
+                        guard let tailCandidate = search(events: tailEvents, segmentation: tailSegmentation, limit: 50, anchorsStatement: anchorsStatement, pingStatement: pingStatement, strictStatement: strictStatement).first else { return nil }
+                        guard let headCandidate = fetched.first(where: { $0.inputCount == headLength }) else { return nil }
+                        return headCandidate + tailCandidate
+                }).uniqued().sorted().prefix(1)
+                return concatenated + fetched
         }
         private static func query(inputLength: Int, segmentation: Segmentation, limit: Int64? = nil, strictStatement: OpaquePointer?) -> [Candidate] {
-                let perfectSchemes = segmentation.filter({ $0.length == inputLength })
-                if perfectSchemes.isEmpty {
+                let idealSchemes = segmentation.filter({ $0.length == inputLength })
+                if idealSchemes.isEmpty {
                         return segmentation.flatMap({ perform(scheme: $0, limit: limit, strictStatement: strictStatement) })
                 } else {
-                        return perfectSchemes.flatMap({ scheme -> [Candidate] in
+                        return idealSchemes.flatMap({ scheme -> [Candidate] in
                                 switch scheme.count {
                                 case 0:
                                         return []
