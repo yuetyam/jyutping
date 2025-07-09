@@ -115,6 +115,7 @@ che	ce
 chi	ci
 cho	co
 chu	cyu
+cii	ci
 cik	cik
 cim	cim
 cin	cin
@@ -399,6 +400,7 @@ she	se
 shi	si
 sho	so
 shu	syu
+sii	si
 sik	sik
 sim	sim
 sin	sin
@@ -487,6 +489,7 @@ zhe	ze
 zhi	zi
 zho	zo
 zhu	zyu
+zii	zi
 zik	zik
 zim	zim
 zin	zin
@@ -546,10 +549,12 @@ chat	cat
 chau	cau
 chee	ci
 chek	cek
+chii	ci
 chik	cik
 chim	cim
 chin	cin
 chip	cip
+chir	ci
 chit	cit
 chiu	ciu
 choi	coi
@@ -834,10 +839,12 @@ shay	sei
 shee	si
 shei	sei
 shek	sek
+shii	si
 shik	sik
 shim	sim
 shin	sin
 ship	sip
+shir	si
 shit	sit
 shiu	siu
 shoe	soe
@@ -948,10 +955,12 @@ zhar	zaa
 zhat	zat
 zhau	zau
 zhek	zek
+zhii	zi
 zhik	zik
 zhim	zim
 zhin	zin
 zhip	zip
+zhir	zi
 zhit	zit
 zhiu	ziu
 zhoi	zoi

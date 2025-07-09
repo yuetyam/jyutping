@@ -61,6 +61,7 @@
 1	110000	1F923	笑死	siu3 sei2
 1	110000	1F923	哈哈哈	haa1 haa1 haa1
 1	110000	1F923	哈哈哈哈	haa1 haa1 haa1 haa1
+1	110000	1F923	笑撚死	siu3 lan2 sei2
 1	110000	1F602	笑哭	siu3 huk1
 1	110000	1F602	哭笑	huk1 siu3
 1	110000	1F602	哭笑不得	huk1 siu3 bat1 dak1
@@ -1888,6 +1889,7 @@
 2	110000	1F426	雀	zoek3
 2	110000	1F426	鳥	niu5
 2	110000	1F426	鳥頭	niu5 tau4
+2	110000	1F426	小鳥	siu2 niu5
 2	110000	1F424	雞仔	gai1 zai2
 2	110000	1F424	雞仔頭	gai1 zai2 tau4
 2	110000	1F423	雞殼	gai1 hok3
@@ -1912,9 +1914,13 @@
 2	150000	1F426.200D.2B1B	玄鳥	jyun4 niu5
 2	150000	1F426.200D.2B1B	黑雀	hak1 zoek3
 2	150000	1F426.200D.2B1B	黑色雀仔	hak1 sik1 zoek3 zai2
+2	150000	1F426.200D.2B1B	燕	jin3
+2	150000	1F426.200D.2B1B	燕子	jin3 zi2
+2	150000	1F426.200D.2B1B	烏鴉	wu1 aa1
 2	150000	1F426.200D.2B1B	雀仔	zoek3 zai2
 2	150000	1F426.200D.2B1B	雀	zoek3
 2	150000	1F426.200D.2B1B	鳥	niu5
+2	150000	1F426.200D.2B1B	小鳥	siu2 niu5
 2	110000	1F985	鷹	jing1
 2	110000	1F985	蒼鷹	cong1 jing1
 2	110000	1F985	老鷹	lou5 jing1
@@ -2495,6 +2501,9 @@
 2	110000	2600.FE0F	晴天	cing4 tin1
 2	110000	2600.FE0F	晴朗	cing4 long5
 2	110000	2600.FE0F	晴	cing4
+2	110000	2600.FE0F	㬫	jin3
+2	110000	2600.FE0F	曣	jin3
+2	110000	2600.FE0F	㬈	wan1
 2	110000	1F324	少雲	siu2 wan4
 2	110000	26C5.FE0F	中雲	zung1 wan4
 2	110000	1F325	多雲	do1 wan4
@@ -2517,6 +2526,7 @@
 2	110000	1F327	落雨大	lok6 jyu5 daai6
 2	110000	26C8	雷雨	leoi4 jyu5
 2	110000	26C8	雷陣雨	leoi4 zan6 jyu5
+2	110000	26C8	雷暴	leoi4 bou6
 2	110000	1F329	行雷	haang4 leoi4
 2	110000	1F329	閃電	sim2 din6
 2	110000	1F329	行雷閃電	haang4 leoi4 sim2 din6
