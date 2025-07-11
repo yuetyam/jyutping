@@ -432,7 +432,7 @@ struct AppSettings {
                 syllableViewSize = computeSyllableViewSize()
         }
         private static func computeSyllableViewSize() -> CGSize {
-                let width: CGFloat = commentFontSize * 2.0 + 8.0
+                let width: CGFloat = commentFontSize * 2.0 + 10.0
                 let height: CGFloat = commentFontSize
                 return CGSize(width: width, height: height)
         }

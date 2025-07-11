@@ -31,11 +31,11 @@ struct CandidateBoard: View {
                                                 isLabelLastZero: isLabelLastZero,
                                                 compatibleMode: isCompatibleModeOn
                                         )
-                                        .padding(.vertical, 3)
+                                        .padding(.vertical, 2)
                                         .padding(.trailing, 3)
                                         .padding(.horizontal, lineSpacing / 2.0)
                                         .foregroundStyle(index == highlightedIndex ? Color.white : Color.primary)
-                                        .background(index == highlightedIndex ? Color.accentColor : Color.clear, in: RoundedRectangle(cornerRadius: 7, style: .continuous))
+                                        .background(index == highlightedIndex ? Color.accentColor : Color.clear, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
                                         .contentShape(Rectangle())
                                         .onHover { isHovering in
                                                 guard isHovering else { return }
@@ -48,7 +48,7 @@ struct CandidateBoard: View {
                                         }
                                 }
                         }
-                        .padding(3)
+                        .padding(2)
                         .roundedHUDVisualEffect()
                         .padding(10)
                         .fixedSize()
@@ -56,7 +56,7 @@ struct CandidateBoard: View {
                         VStack(alignment: .leading, spacing: 0) {
                                 ForEach(context.displayCandidates.indices, id: \.self) { index in
                                         ZStack(alignment: .leading) {
-                                                RoundedRectangle(cornerRadius: 7, style: .continuous)
+                                                RoundedRectangle(cornerRadius: 8, style: .continuous)
                                                         .fill(index == highlightedIndex ? Color.accentColor : Color.clear)
                                                 VerticalPageCandidateLabel(
                                                         isHighlighted: index == highlightedIndex,
@@ -86,7 +86,7 @@ struct CandidateBoard: View {
                                         }
                                 }
                         }
-                        .padding(3)
+                        .padding(2)
                         .roundedHUDVisualEffect()
                         .padding(10)
                         .fixedSize()

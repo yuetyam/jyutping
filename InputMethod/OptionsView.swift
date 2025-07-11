@@ -53,7 +53,7 @@ struct OptionsView: View {
                                 OptionLabel(verticalPadding: verticalPadding, labelSet: labelSet, isLabelLastZero: isLabelLastZero, index: 9, highlightedIndex: highlightedIndex, text: options[9], checked: inputMethodMode.isABC)
                         }
                 }
-                .padding(3)
+                .padding(2)
                 .roundedHUDVisualEffect()
                 .padding(10)
                 .fixedSize()
@@ -90,7 +90,7 @@ private struct OptionLabel: View {
                 .padding(.horizontal, 3)
                 .padding(.vertical, verticalPadding)
                 .foregroundStyle(isHighlighted ? Color.white : Color.primary)
-                .background(isHighlighted ? Color.accentColor : Color.clear, in: RoundedRectangle(cornerRadius: 7, style: .continuous))
+                .background(isHighlighted ? Color.accentColor : Color.clear, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
                 .contentShape(Rectangle())
                 .onHover { isHovering in
                         guard isHovering else { return }
