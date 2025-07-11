@@ -6,7 +6,8 @@ final class CandidateWindow: NSPanel {
 
         /// Create a NSPanel with a specified WindowLevel
         private init(frame: CGRect? = nil, level: NSWindow.Level?) {
-                super.init(contentRect: frame ?? .zero, styleMask: [.borderless, .nonactivatingPanel], backing: .buffered, defer: true)
+                let frame: CGRect = frame ?? CGRect(origin: NSEvent.mouseLocation, size: .zero)
+                super.init(contentRect: frame, styleMask: [.borderless, .nonactivatingPanel], backing: .buffered, defer: true)
                 self.level = level ?? NSWindow.Level(Int(CGShieldingWindowLevel()))
                 isFloatingPanel = true
                 worksWhenModal = true
@@ -27,7 +28,8 @@ final class CandidateWindow: NSPanel {
 @MainActor
 final class SettingsWindow: NSPanel {
         private init(frame: CGRect? = nil, level: NSWindow.Level?) {
-                super.init(contentRect: frame ?? .zero, styleMask: [.titled, .closable, .resizable, .fullSizeContentView], backing: .buffered, defer: true)
+                let frame: CGRect = frame ?? CGRect(origin: NSEvent.mouseLocation, size: .zero)
+                super.init(contentRect: frame, styleMask: [.titled, .closable, .resizable, .fullSizeContentView], backing: .buffered, defer: true)
                 self.level = level ?? NSWindow.Level(Int(CGShieldingWindowLevel()))
                 isFloatingPanel = true
                 worksWhenModal = true

@@ -44,11 +44,23 @@ final class JyutpingInputController: IMKInputController, Sendable {
         private func computeWindowFrame(size: CGSize? = nil) -> CGRect {
                 let quadrant = appContext.quadrant
                 let position: CGPoint = {
-                        guard let caretBlock = cursorBlock ?? currentClient?.caretRect ?? client()?.caretRect else { return NSEvent.mouseLocation }
-                        let x: CGFloat = quadrant.isNegativeHorizontal ? caretBlock.minX : caretBlock.maxX
-                        let y: CGFloat = quadrant.isNegativeVertical ? caretBlock.minY : caretBlock.maxY
-                        let point = CGPoint(x: x, y: y)
-                        return screenFrame.contains(point) ? point : NSEvent.mouseLocation
+                        func checkedPoint(of frame: CGRect?) -> CGPoint? {
+                                guard let frame else { return nil }
+                                let x: CGFloat = quadrant.isNegativeHorizontal ? frame.minX : frame.maxX
+                                let y: CGFloat = quadrant.isNegativeVertical ? frame.minY : frame.maxY
+                                let point = CGPoint(x: x, y: y)
+                                let isLocatable: Bool = NSScreen.main?.frame.contains(point) ?? NSScreen.screens.contains(where: { $0.frame.contains(point) })
+                                return isLocatable ? point : nil
+                        }
+                        if let point = checkedPoint(of: caretFrame) {
+                                return point
+                        } else if let point = checkedPoint(of: currentClient?.caretRect) {
+                                return point
+                        } else if let point = checkedPoint(of: client().caretRect) {
+                                return point
+                        } else {
+                                return NSEvent.mouseLocation
+                        }
                 }()
                 let width: CGFloat = switch quadrant {
                 case .upperRight:
@@ -75,27 +87,23 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 return CGRect(x: x, y: y, width: width, height: height)
         }
 
-        private var activeScreen: NSScreen? {
-                lazy var mouseLocation = NSEvent.mouseLocation
-                return NSScreen.main ?? NSScreen.screens.first(where: { $0.frame.contains(mouseLocation) }) ?? NSScreen.screens.first ?? window.screen
-        }
-        private lazy var screenFrame: CGRect = activeScreen?.frame ?? fallbackScreenFrame
-        private lazy var fallbackScreenFrame: CGRect = CGRect(x: 0, y: 0, width: 1280, height: 800)
-
-        private lazy var cursorBlock: CGRect? = nil
-        private func updateCursorBlock(to rect: CGRect?) {
-                guard let point = rect?.origin else { return }
-                guard screenFrame.contains(point) else { return }
-                cursorBlock = rect
-        }
+        nonisolated(unsafe) private var caretFrame: CGRect? = nil
 
         private typealias InputClient = (IMKTextInput & NSObjectProtocol)
         private lazy var currentClient: InputClient? = nil {
                 didSet {
-                        let position: CGPoint = {
-                                guard let point = currentClient?.caretRect.origin ?? client()?.caretRect.origin else { return NSEvent.mouseLocation }
-                                return screenFrame.contains(point) ? point : NSEvent.mouseLocation
+                        guard let position: CGPoint = currentClient?.caretRect.origin else { return }
+                        let screenFrame: CGRect? = {
+                                let isLocatedActiveScreen: Bool = NSScreen.main?.frame.contains(position) ?? false
+                                guard isLocatedActiveScreen.negative else { return NSScreen.main?.frame }
+                                if let screen = NSScreen.screens.first(where: { $0.frame.contains(position) }) {
+                                        return screen.frame
+                                } else {
+                                        let mouseLocation = NSEvent.mouseLocation
+                                        return NSScreen.screens.first(where: { $0.frame.contains(mouseLocation) })?.frame
+                                }
                         }()
+                        guard let screenFrame else { return }
                         let orientation = AppSettings.candidatePageOrientation
                         let isPositiveHorizontal: Bool = switch orientation {
                         case .horizontal:
@@ -141,6 +149,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 super.activateServer(sender)
                 NotificationCenter.default.removeObserver(self)
                 nonisolated(unsafe) let client: InputClient? = (sender as? InputClient) ?? client()
+                caretFrame = client?.caretRect
                 Task { @MainActor in
                         suggestionTask?.cancel()
                         UserLexicon.prepare()
@@ -149,12 +158,11 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                 clearBuffer()
                         }
                         inputStage = .standby
+                        isCompositionCommitted = false
                         if inputForm.isOptions {
                                 updateInputForm()
                         }
-                        screenFrame = activeScreen?.frame ?? fallbackScreenFrame
                         currentClient = client
-                        updateCursorBlock(to: client?.caretRect)
                         prepareWindow()
                         client?.overrideKeyboard(withKeyboardNamed: PresetConstant.systemABCKeyboardLayout)
                 }
@@ -165,9 +173,9 @@ final class JyutpingInputController: IMKInputController, Sendable {
         override func deactivateServer(_ sender: Any!) {
                 nonisolated(unsafe) let client: InputClient? = (sender as? InputClient) ?? client()
                 Task { @MainActor in
-                        guard inputStage != .idle else { return }
+                        guard isCompositionCommitted.negative else { return }
                         suggestionTask?.cancel()
-                        window.setFrame(.zero, display: true)
+                        window.setContentSize(.zero)
                         selectedCandidates = []
                         if inputStage.isBuffering {
                                 let text: String = joinedBufferTexts()
@@ -198,7 +206,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 nonisolated(unsafe) let client: InputClient? = (sender as? InputClient) ?? client()
                 Task { @MainActor in
                         suggestionTask?.cancel()
-                        window.setFrame(.zero, display: true)
+                        window.setContentSize(.zero)
                         selectedCandidates = []
                         if inputStage.isBuffering {
                                 let text: String = joinedBufferTexts()
@@ -210,12 +218,13 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         if inputForm.isOptions {
                                 updateInputForm()
                         }
-                        inputStage = .idle
+                        isCompositionCommitted = true
                 }
 
                 // Do NOT use this line or it will freeze the entire IME
                 // super.commitComposition(sender)
         }
+        private lazy var isCompositionCommitted: Bool = false
 
         @objc private func highlightIndex(_ notification: Notification) {
                 guard let userInfo = notification.userInfo else { return }
@@ -274,6 +283,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                 inputStage = .starting
                                 UserLexicon.prepare()
                                 Engine.prepare()
+                                prepareWindow()
                         case (false, false):
                                 inputStage = .ongoing
                         case (false, true):
@@ -349,7 +359,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
         }
         private lazy var markAttributes: [NSAttributedString.Key: Any] = {
                 let attributes = mark(forStyle: kTSMHiliteSelectedConvertedText, at: replacementRange())
-                return (attributes as? [NSAttributedString.Key: Any]) ?? [.underlineStyle: NSUnderlineStyle.thick.rawValue]
+                return (attributes as? [NSAttributedString.Key: Any]) ?? [.underlineStyle: NSUnderlineStyle.single.rawValue]
         }()
 
         private func markOptionsViewHintText() {
@@ -385,7 +395,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 guard candidateCount > 0 else {
                         indices = (0, 0)
                         appContext.resetDisplayContext()
-                        updateWindowFrame(.zero)
+                        window.setContentSize(.zero)
                         return
                 }
                 let pageSize: Int = AppSettings.displayCandidatePageSize
@@ -593,7 +603,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                         passBuffer()
                                         Options.updateInputMethodMode(to: .abc)
                                         updateInputForm(to: .transparent)
-                                        updateWindowFrame(.zero)
+                                        window.setContentSize(.zero)
                                 case .transparent:
                                         Options.updateInputMethodMode(to: .cantonese)
                                         updateInputForm(to: .cantonese)
@@ -776,23 +786,23 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 }
                 nonisolated(unsafe) let client: InputClient? = (sender as? InputClient)
                 if isBuffering.negative && isEventHandled {
-                        let attributes: [NSAttributedString.Key: Any] = (mark(forStyle: kTSMHiliteSelectedConvertedText, at: replacementRange()) as? [NSAttributedString.Key: Any]) ?? [.underlineStyle: NSUnderlineStyle.thick.rawValue]
-                        let attributedText = NSAttributedString(string: String.zeroWidthSpace, attributes: attributes)
-                        let selectionRange = NSRange(location: String.zeroWidthSpace.utf16.count, length: 0)
+                        caretFrame = client?.caretRect
+                        let text: String = (InputEvent.matchEvent(for: code) ?? InputEvent.letterA).text
+                        let attributes: [NSAttributedString.Key: Any] = [.underlineStyle: 0]
+                        let attributedText = NSAttributedString(string: text, attributes: attributes)
+                        let selectionRange = NSRange(location: text.utf16.count, length: 0)
                         client?.setMarkedText(attributedText, selectionRange: selectionRange, replacementRange: replacementRange())
                 }
                 Task { @MainActor in
-                        process(keyCode: code, client: client, hasControlShiftModifiers: hasControlShiftModifiers, isShifting: isShifting)
+                        if isBuffering.negative || client?.bundleIdentifier() != currentClient?.bundleIdentifier() {
+                                currentClient = client
+                        }
+                        process(keyCode: code, hasControlShiftModifiers: hasControlShiftModifiers, isShifting: isShifting)
                 }
                 return isEventHandled
         }
 
-        private func process(keyCode: UInt16, client: InputClient?, hasControlShiftModifiers: Bool, isShifting: Bool) {
-                updateCursorBlock(to: client?.caretRect)
-                let oldClientID = currentClient?.uniqueClientIdentifierString()
-                if let clientID = client?.uniqueClientIdentifierString(), clientID != oldClientID {
-                        currentClient = client
-                }
+        private func process(keyCode: UInt16, hasControlShiftModifiers: Bool, isShifting: Bool) {
                 let currentInputForm: InputForm = inputForm
                 let isBuffering = inputStage.isBuffering
                 switch keyCode.representative {
@@ -1129,7 +1139,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                         clearMarkedText()
                                         Options.updateInputMethodMode(to: .abc)
                                         updateInputForm(to: .transparent)
-                                        updateWindowFrame(.zero)
+                                        window.setContentSize(.zero)
                                         return
                                 }
                                 if candidates.isNotEmpty {
@@ -1233,9 +1243,9 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         updateInputForm()
                         if Options.inputMethodMode.isABC {
                                 passBuffer()
-                                updateWindowFrame(.zero)
+                                window.setContentSize(.zero)
                         } else if candidates.isEmpty {
-                                updateWindowFrame(.zero)
+                                window.setContentSize(.zero)
                         } else if didCharacterStandardChanged {
                                 bufferEvents += []
                         } else {
@@ -1420,17 +1430,18 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 SettingsWindow.shared.orderFrontRegardless()
         }
         private func settingsWindowFrame() -> CGRect {
-                let maxFrame: CGRect = activeScreen?.frame ?? fallbackScreenFrame
-                let maxWidth: CGFloat = maxFrame.width
-                let maxHeight: CGFloat = maxFrame.height
+                let mouseLocation = NSEvent.mouseLocation
+                let screenFrame: CGRect = NSScreen.screens.first(where: { $0.frame.contains(mouseLocation) })?.frame ?? NSScreen.main?.frame ?? CGRect(x: 0, y: 0, width: 1280, height: 800)
+                let maxWidth: CGFloat = screenFrame.width
+                let maxHeight: CGFloat = screenFrame.height
                 let halfWidth: CGFloat = maxWidth / 2.0
                 let halfHeight: CGFloat = maxHeight / 2.0
                 let idealWidth: CGFloat = 720
                 let width: CGFloat = min(maxWidth - 16, max(idealWidth, halfWidth))
                 let idealHeight: CGFloat = (maxHeight / 3.0) * 2.0
                 let height: CGFloat = (maxWidth > maxHeight) ? idealHeight : halfHeight
-                let x: CGFloat = maxFrame.minX + ((maxWidth - width) / 2.0)
-                let y: CGFloat = maxFrame.minY + ((maxHeight - height) / 2.0)
+                let x: CGFloat = screenFrame.minX + ((maxWidth - width) / 2.0)
+                let y: CGFloat = screenFrame.minY + ((maxHeight - height) / 2.0)
                 return CGRect(x: x, y: y, width: width, height: height)
         }
 
