@@ -24,20 +24,22 @@ struct HUDVisualEffect: NSViewRepresentable {
 
 extension View {
         func applyVisualEffect() -> some View {
-                return self.background(VisualEffectView())
+                return background(VisualEffectView())
         }
+        /*
         func hudVisualEffect() -> some View {
-                return self.background(HUDVisualEffect())
+                return background(HUDVisualEffect())
         }
         func roundedVisualEffect() -> some View {
-                return self.background(
+                return background(
                         VisualEffectView()
                                 .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
                                 .shadow(radius: 3)
                 )
         }
+        */
         func roundedHUDVisualEffect() -> some View {
-                return self.background(
+                return background(
                         HUDVisualEffect()
                                 .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
                                 .shadow(radius: 3)

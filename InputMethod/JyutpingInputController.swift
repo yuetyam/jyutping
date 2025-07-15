@@ -39,7 +39,9 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 }
         }
         private func updateWindowFrame(_ frame: CGRect? = nil) {
-                window.setFrame(frame ?? computeWindowFrame(), display: true)
+                let frame: CGRect = frame ?? computeWindowFrame()
+                guard frame != window.frame else { return }
+                window.setFrame(frame, display: true)
         }
         private func computeWindowFrame(size: CGSize? = nil) -> CGRect {
                 let quadrant = appContext.quadrant
@@ -49,7 +51,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                 let x: CGFloat = quadrant.isNegativeHorizontal ? frame.minX : frame.maxX
                                 let y: CGFloat = quadrant.isNegativeVertical ? frame.minY : frame.maxY
                                 let point = CGPoint(x: x, y: y)
-                                let isLocatable: Bool = NSScreen.main?.frame.contains(point) ?? NSScreen.screens.contains(where: { $0.frame.contains(point) })
+                                let isLocatable: Bool = NSScreen.screens.contains(where: { $0.frame.contains(point) })
                                 return isLocatable ? point : nil
                         }
                         if let point = checkedPoint(of: caretFrame) {
@@ -94,8 +96,6 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 didSet {
                         guard let position: CGPoint = currentClient?.caretRect.origin else { return }
                         let screenFrame: CGRect? = {
-                                let isLocatedActiveScreen: Bool = NSScreen.main?.frame.contains(position) ?? false
-                                guard isLocatedActiveScreen.negative else { return NSScreen.main?.frame }
                                 if let screen = NSScreen.screens.first(where: { $0.frame.contains(position) }) {
                                         return screen.frame
                                 } else {

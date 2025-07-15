@@ -1756,6 +1756,10 @@
 				"zh-Hant-HK",
 				fr,
 				Base,
+				"en-GB",
+				"en-US",
+				"en-CA",
+				ja,
 			);
 			mainGroup = 37EFD71C2B3719C10089D346;
 			productRefGroup = 37EFD7262B3719C10089D346 /* Products */;

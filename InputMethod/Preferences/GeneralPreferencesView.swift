@@ -142,40 +142,47 @@ struct GeneralPreferencesView: View {
                                         }
                                 }
                                 .block()
-                                VStack {
-                                        HStack {
-                                                Picker("GeneralPreferencesView.CharacterStandard.PickerTitle", selection: $characterStandard) {
-                                                        Text("GeneralPreferencesView.CharacterStandard.Traditional").tag(CharacterStandard.traditional)
-                                                        Text("GeneralPreferencesView.CharacterStandard.TraditionalKongKong").tag(CharacterStandard.hongkong)
-                                                        Text("GeneralPreferencesView.CharacterStandard.TraditionalTaiwan").tag(CharacterStandard.taiwan)
-                                                        Text("GeneralPreferencesView.CharacterStandard.Simplified").tag(CharacterStandard.simplified)
-                                                }
-                                                .fixedSize()
-                                                .onChange(of: characterStandard) { newStandard in
-                                                        Options.updateCharacterStandard(to: newStandard)
-                                                }
-                                                Spacer()
-                                        }
-                                        HStack {
-                                                Toggle("GeneralPreferencesView.EmojiSuggestions.ToggleTitle", isOn: $isEmojiSuggestionsOn)
-                                                        .toggleStyle(.switch)
-                                                        .fixedSize()
-                                                        .onChange(of: isEmojiSuggestionsOn) { newState in
-                                                                Options.updateEmojiSuggestions(to: newState)
+                                VStack(spacing: 2) {
+                                        VStack {
+                                                HStack {
+                                                        Picker("GeneralPreferencesView.CharacterStandard.PickerTitle", selection: $characterStandard) {
+                                                                Text("GeneralPreferencesView.CharacterStandard.Traditional").tag(CharacterStandard.traditional)
+                                                                Text("GeneralPreferencesView.CharacterStandard.TraditionalKongKong").tag(CharacterStandard.hongkong)
+                                                                Text("GeneralPreferencesView.CharacterStandard.TraditionalTaiwan").tag(CharacterStandard.taiwan)
+                                                                Text("GeneralPreferencesView.CharacterStandard.Simplified").tag(CharacterStandard.simplified)
                                                         }
-                                                Spacer()
-                                        }
-                                        HStack {
-                                                Toggle("GeneralPreferencesView.SchemeRules.CompatibleMode", isOn: $isCompatibleModeOn)
-                                                        .toggleStyle(.switch)
                                                         .fixedSize()
-                                                        .onChange(of: isCompatibleModeOn) { newState in
-                                                                AppSettings.updateCompatibleMode(to: newState)
+                                                        .onChange(of: characterStandard) { newStandard in
+                                                                Options.updateCharacterStandard(to: newStandard)
                                                         }
+                                                        Spacer()
+                                                }
+                                                HStack {
+                                                        Toggle("GeneralPreferencesView.EmojiSuggestions.ToggleTitle", isOn: $isEmojiSuggestionsOn)
+                                                                .toggleStyle(.switch)
+                                                                .fixedSize()
+                                                                .onChange(of: isEmojiSuggestionsOn) { newState in
+                                                                        Options.updateEmojiSuggestions(to: newState)
+                                                                }
+                                                        Spacer()
+                                                }
+                                                HStack {
+                                                        Toggle("GeneralPreferencesView.SchemeRules.CompatibleMode.ToggleTitle", isOn: $isCompatibleModeOn)
+                                                                .toggleStyle(.switch)
+                                                                .fixedSize()
+                                                                .onChange(of: isCompatibleModeOn) { newState in
+                                                                        AppSettings.updateCompatibleMode(to: newState)
+                                                                }
+                                                        Spacer()
+                                                }
+                                        }
+                                        .block()
+                                        HStack(spacing: 2) {
+                                                Text("GeneralPreferencesView.SchemeRules.CompatibleMode.SectionFooter").textCase(nil).font(.subheadline)
                                                 Spacer()
                                         }
+                                        .padding(.horizontal, 8)
                                 }
-                                .block()
                                 VStack(alignment: .leading, spacing: 2) {
                                         HStack {
                                                 Toggle("GeneralPreferencesView.InputMemory.ToggleTitle", isOn: $isInputMemoryOn)

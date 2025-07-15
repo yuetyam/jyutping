@@ -132,11 +132,13 @@ struct GeneralSettingsView: View {
                                                         .onChange(of: isEmojiSuggestionsOn) { newState in
                                                                 Options.updateEmojiSuggestions(to: newState)
                                                         }
-                                                Toggle("GeneralPreferencesView.SchemeRules.CompatibleMode", isOn: $isCompatibleModeOn)
+                                                Toggle("GeneralPreferencesView.SchemeRules.CompatibleMode.ToggleTitle", isOn: $isCompatibleModeOn)
                                                         .toggleStyle(.switch)
                                                         .onChange(of: isCompatibleModeOn) { newState in
                                                                 AppSettings.updateCompatibleMode(to: newState)
                                                         }
+                                        } footer: {
+                                                Text("GeneralPreferencesView.SchemeRules.CompatibleMode.SectionFooter").textCase(nil)
                                         }
                                         Section {
                                                 Toggle("GeneralPreferencesView.InputMemory.ToggleTitle", isOn: $isInputMemoryOn)

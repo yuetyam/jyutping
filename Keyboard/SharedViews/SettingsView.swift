@@ -261,6 +261,8 @@ struct SettingsView: View {
                                                         AudioFeedback.modified()
                                                         Options.updateCompatibleMode(to: newState)
                                                 }
+                                } footer: {
+                                        Text("SettingsView.SchemeRules.CompatibleMode.SectionFooter").textCase(nil)
                                 }
 
                                 Section {
