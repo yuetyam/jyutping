@@ -1,37 +1,19 @@
 import SwiftUI
 import CommonExtensions
+import CoreIME
 
 struct LargePadInstantInputKey: View {
 
         private let keyText: String
-        init(_ keyText: String) {
+        private let event: InputEvent?
+
+        init(_ keyText: String, event: InputEvent? = nil) {
                 self.keyText = keyText
+                self.event = event
         }
 
         @EnvironmentObject private var context: KeyboardViewController
-
         @Environment(\.colorScheme) private var colorScheme
-
-        private var keyColor: Color {
-                switch colorScheme {
-                case .light:
-                        return .lightInput
-                case .dark:
-                        return .darkInput
-                @unknown default:
-                        return .lightInput
-                }
-        }
-        private var keyActiveColor: Color {
-                switch colorScheme {
-                case .light:
-                        return .activeLightInput
-                case .dark:
-                        return .activeDarkInput
-                @unknown default:
-                        return .activeLightInput
-                }
-        }
 
         @GestureState private var isTouching: Bool = false
 
@@ -46,7 +28,7 @@ struct LargePadInstantInputKey: View {
                 ZStack {
                         Color.interactiveClear
                         RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous)
-                                .fill(isTouching ? keyActiveColor : keyColor)
+                                .fill(isTouching ? colorScheme.activeInputKeyColor : colorScheme.inputKeyColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(.vertical, verticalPadding)
                                 .padding(.horizontal, horizontalPadding)
@@ -64,8 +46,12 @@ struct LargePadInstantInputKey: View {
                                 }
                         }
                         .onEnded { _ in
-                                let text: String = context.keyboardCase.isLowercased ? keyText : keyText.uppercased()
-                                context.operate(.input(text))
+                                if let event {
+                                        context.handle(event)
+                                } else {
+                                        let text: String = context.keyboardCase.isLowercased ? keyText : keyText.uppercased()
+                                        context.operate(.input(text))
+                                }
                          }
                 )
         }

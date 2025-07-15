@@ -1,60 +1,32 @@
 import SwiftUI
 import CommonExtensions
+import CoreIME
 
 struct LargePadUpperLowerInputKey: View {
 
         /// Create a LargePadUpperLowerInputKey
         /// - Parameters:
-        ///   - keyLocale: Key location, left half (leading) or right half (trailing).
+        ///   - keyLocale: Key location, left half screen (leading) or right half screen (trailing)
         ///   - upper: Key upper text
         ///   - lower: Key lower text
+        ///   - event: InputEvent, corresponding to the lower text
         ///   - keyModel: KeyElements
-        init(keyLocale: HorizontalEdge, upper: String, lower: String, keyModel: KeyModel) {
+        init(keyLocale: HorizontalEdge, upper: String, lower: String, event: InputEvent? = nil, keyModel: KeyModel) {
                 self.keyLocale = keyLocale
                 self.upper = upper
                 self.lower = lower
+                self.event = event
                 self.keyModel = keyModel
         }
 
         private let keyLocale: HorizontalEdge
         private let upper: String
         private let lower: String
+        private let event: InputEvent?
         private let keyModel: KeyModel
 
         @EnvironmentObject private var context: KeyboardViewController
-
         @Environment(\.colorScheme) private var colorScheme
-
-        private var keyColor: Color {
-                switch colorScheme {
-                case .light:
-                        return .lightInput
-                case .dark:
-                        return .darkInput
-                @unknown default:
-                        return .lightInput
-                }
-        }
-        private var keyActiveColor: Color {
-                switch colorScheme {
-                case .light:
-                        return .activeLightInput
-                case .dark:
-                        return .activeDarkInput
-                @unknown default:
-                        return .activeLightInput
-                }
-        }
-        private var keyPreviewColor: Color {
-                switch colorScheme {
-                case .light:
-                        return .lightInput
-                case .dark:
-                        return .solidDarkInput
-                @unknown default:
-                        return .lightInput
-                }
-        }
 
         @GestureState private var isTouching: Bool = false
         private let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
@@ -82,7 +54,7 @@ struct LargePadUpperLowerInputKey: View {
                                 let leadingOffset: CGFloat = keyLocale.isLeading ? offsetX : 0
                                 let trailingOffset: CGFloat = keyLocale.isTrailing ? offsetX : 0
                                 PadExpansiveBubbleShape(keyLocale: keyLocale, expansionCount: expansionCount)
-                                        .fill(keyPreviewColor)
+                                        .fill(colorScheme.previewBubbleColor)
                                         .shadow(color: .shadowGray, radius: 1)
                                         .overlay {
                                                 HStack(spacing: 0) {
@@ -124,7 +96,7 @@ struct LargePadUpperLowerInputKey: View {
                                         .padding(.horizontal, horizontalPadding)
                         } else {
                                 RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous)
-                                        .fill(isTouching ? keyActiveColor : keyColor)
+                                        .fill(isTouching ? colorScheme.activeInputKeyColor : colorScheme.inputKeyColor)
                                         .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                         .padding(.vertical, verticalPadding)
                                         .padding(.horizontal, horizontalPadding)
@@ -170,8 +142,7 @@ struct LargePadUpperLowerInputKey: View {
                                                 let index = memberCount - Int((maxPoint - distance) / baseWidth)
                                                 selectedIndex = min(endIndex, max(0, index))
                                         }
-                                } else {
-                                        guard isPullingDown.negative else { return }
+                                } else if isPullingDown.negative {
                                         let distance: CGFloat = state.translation.height
                                         guard distance > 30 else { return }
                                         isPullingDown = true
@@ -179,11 +150,12 @@ struct LargePadUpperLowerInputKey: View {
                         }
                         .onEnded { _ in
                                 buffer = 0
+                                defer {
+                                        selectedIndex = 0
+                                        isLongPressing = false
+                                        isPullingDown = false
+                                }
                                 if isLongPressing {
-                                        defer {
-                                                selectedIndex = 0
-                                                isLongPressing = false
-                                        }
                                         guard let selectedElement = keyModel.members.fetch(selectedIndex) else { return }
                                         let text: String = selectedElement.text
                                         AudioFeedback.inputed()
@@ -191,7 +163,8 @@ struct LargePadUpperLowerInputKey: View {
                                 } else if isPullingDown {
                                         let text: String = upper
                                         context.operate(.process(text))
-                                        isPullingDown = false
+                                } else if let event {
+                                        context.handle(event)
                                 } else {
                                         let text: String = lower
                                         context.operate(.process(text))

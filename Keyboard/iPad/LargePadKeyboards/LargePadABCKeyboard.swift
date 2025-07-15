@@ -96,6 +96,7 @@ struct LargePadABCKeyboard: View {
                                                         keyLocale: .leading,
                                                         upper: "!",
                                                         lower: "1",
+                                                        event: .number1,
                                                         keyModel: KeyModel(
                                                                 primary: KeyElement("1"),
                                                                 members: [
@@ -109,6 +110,7 @@ struct LargePadABCKeyboard: View {
                                                         keyLocale: .leading,
                                                         upper: "@",
                                                         lower: "2",
+                                                        event: .number2,
                                                         keyModel: KeyModel(
                                                                 primary: KeyElement("2"),
                                                                 members: [
@@ -121,6 +123,7 @@ struct LargePadABCKeyboard: View {
                                                         keyLocale: .leading,
                                                         upper: "#",
                                                         lower: "3",
+                                                        event: .number3,
                                                         keyModel: KeyModel(
                                                                 primary: KeyElement("3"),
                                                                 members: [
@@ -133,6 +136,7 @@ struct LargePadABCKeyboard: View {
                                                         keyLocale: .leading,
                                                         upper: "$",
                                                         lower: "4",
+                                                        event: .number4,
                                                         keyModel: KeyModel(
                                                                 primary: KeyElement("4"),
                                                                 members: [
@@ -145,6 +149,7 @@ struct LargePadABCKeyboard: View {
                                                         keyLocale: .leading,
                                                         upper: "%",
                                                         lower: "5",
+                                                        event: .number5,
                                                         keyModel: KeyModel(
                                                                 primary: KeyElement("5"),
                                                                 members: [
@@ -158,6 +163,7 @@ struct LargePadABCKeyboard: View {
                                                         keyLocale: .leading,
                                                         upper: "^",
                                                         lower: "6",
+                                                        event: .number6,
                                                         keyModel: KeyModel(
                                                                 primary: KeyElement("6"),
                                                                 members: [
@@ -170,6 +176,7 @@ struct LargePadABCKeyboard: View {
                                                         keyLocale: .trailing,
                                                         upper: "&",
                                                         lower: "7",
+                                                        event: .number7,
                                                         keyModel: KeyModel(
                                                                 primary: KeyElement("7"),
                                                                 members: [
@@ -183,6 +190,7 @@ struct LargePadABCKeyboard: View {
                                                         keyLocale: .trailing,
                                                         upper: "*",
                                                         lower: "8",
+                                                        event: .number8,
                                                         keyModel: KeyModel(
                                                                 primary: KeyElement("8"),
                                                                 members: [
@@ -196,6 +204,7 @@ struct LargePadABCKeyboard: View {
                                                         keyLocale: .trailing,
                                                         upper: "(",
                                                         lower: "9",
+                                                        event: .number9,
                                                         keyModel: KeyModel(
                                                                 primary: KeyElement("9"),
                                                                 members: [
@@ -208,6 +217,7 @@ struct LargePadABCKeyboard: View {
                                                         keyLocale: .trailing,
                                                         upper: ")",
                                                         lower: "0",
+                                                        event: .number0,
                                                         keyModel: KeyModel(
                                                                 primary: KeyElement("0"),
                                                                 members: [

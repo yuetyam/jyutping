@@ -4,29 +4,7 @@ import CommonExtensions
 struct LargePadSpaceKey: View {
 
         @EnvironmentObject private var context: KeyboardViewController
-
         @Environment(\.colorScheme) private var colorScheme
-
-        private var keyColor: Color {
-                switch colorScheme {
-                case .light:
-                        return .lightInput
-                case .dark:
-                        return .darkInput
-                @unknown default:
-                        return .lightInput
-                }
-        }
-        private var keyActiveColor: Color {
-                switch colorScheme {
-                case .light:
-                        return .activeLightInput
-                case .dark:
-                        return .activeDarkInput
-                @unknown default:
-                        return .activeLightInput
-                }
-        }
 
         @GestureState private var isTouching: Bool = false
         @State private var isLongPressEngaged: Bool = false
@@ -47,7 +25,7 @@ struct LargePadSpaceKey: View {
                 ZStack {
                         Color.interactiveClear
                         RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous)
-                                .fill(isTouching ? keyActiveColor : keyColor)
+                                .fill(isTouching ? colorScheme.activeInputKeyColor : colorScheme.inputKeyColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(.vertical, verticalPadding)
                                 .padding(.horizontal, horizontalPadding)

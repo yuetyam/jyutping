@@ -20,39 +20,7 @@ struct LargePadExpansibleInputKey: View {
         private let keyModel: KeyModel
 
         @EnvironmentObject private var context: KeyboardViewController
-
         @Environment(\.colorScheme) private var colorScheme
-
-        private var keyColor: Color {
-                switch colorScheme {
-                case .light:
-                        return .lightInput
-                case .dark:
-                        return .darkInput
-                @unknown default:
-                        return .lightInput
-                }
-        }
-        private var keyActiveColor: Color {
-                switch colorScheme {
-                case .light:
-                        return .activeLightInput
-                case .dark:
-                        return .activeDarkInput
-                @unknown default:
-                        return .activeLightInput
-                }
-        }
-        private var keyPreviewColor: Color {
-                switch colorScheme {
-                case .light:
-                        return .lightInput
-                case .dark:
-                        return .solidDarkInput
-                @unknown default:
-                        return .lightInput
-                }
-        }
 
         @GestureState private var isTouching: Bool = false
         private let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
@@ -81,7 +49,7 @@ struct LargePadExpansibleInputKey: View {
                                 let leadingOffset: CGFloat = keyLocale.isLeading ? offsetX : 0
                                 let trailingOffset: CGFloat = keyLocale.isTrailing ? offsetX : 0
                                 PadExpansiveBubbleShape(keyLocale: keyLocale, expansionCount: expansionCount)
-                                        .fill(keyPreviewColor)
+                                        .fill(colorScheme.previewBubbleColor)
                                         .shadow(color: .shadowGray, radius: 1)
                                         .overlay {
                                                 HStack(spacing: 0) {
@@ -123,7 +91,7 @@ struct LargePadExpansibleInputKey: View {
                                         .padding(.horizontal, horizontalPadding)
                         } else {
                                 RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous)
-                                        .fill(isTouching ? keyActiveColor : keyColor)
+                                        .fill(isTouching ? colorScheme.activeInputKeyColor : colorScheme.inputKeyColor)
                                         .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                         .padding(.vertical, verticalPadding)
                                         .padding(.horizontal, horizontalPadding)

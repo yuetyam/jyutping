@@ -217,6 +217,30 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 return zip(capitals, bufferEvents).map({ $0 ? $1.text.uppercased() : $1.text }).joined()
         }
 
+        func handle(_ event: InputEvent, isCapitalized: Bool? = nil) {
+                let isCapitalized: Bool = isCapitalized ?? keyboardCase.isCapitalized
+                defer {
+                        adjustKeyboard()
+                }
+                lazy var text: String = isCapitalized ? event.text.uppercased() : event.text
+                let isCantoneseComposeMode: Bool = inputMethodMode.isCantonese && keyboardForm.isBufferrable
+                guard isCantoneseComposeMode else {
+                        textDocumentProxy.insertText(text)
+                        return
+                }
+                let shouldAppendEvent: Bool = event.isLetter || (inputStage.isBuffering && (event.isToneNumber || event.isQuote))
+                guard shouldAppendEvent else {
+                        if inputStage.isBuffering {
+                                inputBufferText(followedBy: text)
+                        } else {
+                                textDocumentProxy.insertText(text)
+                        }
+                        return
+                }
+                capitals.append(isCapitalized)
+                inputLengthSequence.append(1)
+                bufferEvents.append(event)
+        }
         func process(_ event: InputEvent, isCapitalized: Bool) {
                 defer {
                         adjustKeyboard()

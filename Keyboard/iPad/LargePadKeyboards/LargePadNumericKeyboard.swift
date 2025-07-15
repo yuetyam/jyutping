@@ -1,4 +1,5 @@
 import SwiftUI
+import CoreIME
 
 struct LargePadNumericKeyboard: View {
 
@@ -10,16 +11,16 @@ struct LargePadNumericKeyboard: View {
                         HStack(spacing: 0 ) {
                                 LargePadInstantInputKey("`")
                                 Group {
-                                        LargePadInstantInputKey("1")
-                                        LargePadInstantInputKey("2")
-                                        LargePadInstantInputKey("3")
-                                        LargePadInstantInputKey("4")
-                                        LargePadInstantInputKey("5")
-                                        LargePadInstantInputKey("6")
-                                        LargePadInstantInputKey("7")
-                                        LargePadInstantInputKey("8")
-                                        LargePadInstantInputKey("9")
-                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("0"), members: [KeyElement("0"), KeyElement("°")]))
+                                        LargePadInstantInputKey("1", event: .number1)
+                                        LargePadInstantInputKey("2", event: .number2)
+                                        LargePadInstantInputKey("3", event: .number3)
+                                        LargePadInstantInputKey("4", event: .number4)
+                                        LargePadInstantInputKey("5", event: .number5)
+                                        LargePadInstantInputKey("6", event: .number6)
+                                        LargePadInstantInputKey("7", event: .number7)
+                                        LargePadInstantInputKey("8", event: .number8)
+                                        LargePadInstantInputKey("9", event: .number9)
+                                        LargePadExpansibleInputKey(keyLocale: .trailing, event: .number0, keyModel: KeyModel(primary: KeyElement("0"), members: [KeyElement("0"), KeyElement("°")]))
                                 }
                                 LargePadInstantInputKey("<")
                                 LargePadInstantInputKey(">")

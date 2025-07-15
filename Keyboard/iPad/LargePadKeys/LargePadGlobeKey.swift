@@ -16,7 +16,7 @@ struct LargePadGlobeKey: View {
                 ZStack {
                         Color.interactiveClear
                         RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous)
-                                .fill(colorScheme.isDark ? Color.darkAction : Color.lightAction)
+                                .fill(colorScheme.actionKeyColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(.vertical, verticalPadding)
                                 .padding(.horizontal, horizontalPadding)

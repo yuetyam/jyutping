@@ -1,4 +1,6 @@
 import SwiftUI
+import CommonExtensions
+import CoreIME
 
 struct LargePadCantoneseNumericKeyboard: View {
 
@@ -22,6 +24,7 @@ struct LargePadCantoneseNumericKeyboard: View {
                                 Group {
                                         LargePadExpansibleInputKey(
                                                 keyLocale: .leading,
+                                                event: .number1,
                                                 keyModel: KeyModel(
                                                         primary: KeyElement("1"),
                                                         members: [
@@ -36,6 +39,7 @@ struct LargePadCantoneseNumericKeyboard: View {
                                         )
                                         LargePadExpansibleInputKey(
                                                 keyLocale: .leading,
+                                                event: .number2,
                                                 keyModel: KeyModel(
                                                         primary: KeyElement("2"),
                                                         members: [
@@ -50,6 +54,7 @@ struct LargePadCantoneseNumericKeyboard: View {
                                         )
                                         LargePadExpansibleInputKey(
                                                 keyLocale: .leading,
+                                                event: .number3,
                                                 keyModel: KeyModel(
                                                         primary: KeyElement("3"),
                                                         members: [
@@ -64,6 +69,7 @@ struct LargePadCantoneseNumericKeyboard: View {
                                         )
                                         LargePadExpansibleInputKey(
                                                 keyLocale: .leading,
+                                                event: .number4,
                                                 keyModel: KeyModel(
                                                         primary: KeyElement("4"),
                                                         members: [
@@ -78,6 +84,7 @@ struct LargePadCantoneseNumericKeyboard: View {
                                         )
                                         LargePadExpansibleInputKey(
                                                 keyLocale: .leading,
+                                                event: .number5,
                                                 keyModel: KeyModel(
                                                         primary: KeyElement("5"),
                                                         members: [
@@ -92,6 +99,7 @@ struct LargePadCantoneseNumericKeyboard: View {
                                         )
                                         LargePadExpansibleInputKey(
                                                 keyLocale: .leading,
+                                                event: .number6,
                                                 keyModel: KeyModel(
                                                         primary: KeyElement("6"),
                                                         members: [
@@ -106,6 +114,7 @@ struct LargePadCantoneseNumericKeyboard: View {
                                         )
                                         LargePadExpansibleInputKey(
                                                 keyLocale: .trailing,
+                                                event: .number7,
                                                 keyModel: KeyModel(
                                                         primary: KeyElement("7"),
                                                         members: [
@@ -120,6 +129,7 @@ struct LargePadCantoneseNumericKeyboard: View {
                                         )
                                         LargePadExpansibleInputKey(
                                                 keyLocale: .trailing,
+                                                event: .number8,
                                                 keyModel: KeyModel(
                                                         primary: KeyElement("8"),
                                                         members: [
@@ -134,6 +144,7 @@ struct LargePadCantoneseNumericKeyboard: View {
                                         )
                                         LargePadExpansibleInputKey(
                                                 keyLocale: .trailing,
+                                                event: .number9,
                                                 keyModel: KeyModel(
                                                         primary: KeyElement("9"),
                                                         members: [
@@ -148,6 +159,7 @@ struct LargePadCantoneseNumericKeyboard: View {
                                         )
                                         LargePadExpansibleInputKey(
                                                 keyLocale: .trailing,
+                                                event: .number0,
                                                 keyModel: KeyModel(
                                                         primary: KeyElement("0"),
                                                         members: [
