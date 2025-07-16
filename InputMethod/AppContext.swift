@@ -36,12 +36,9 @@ final class AppContext: ObservableObject {
                 displayCandidates = newDisplayCandidates
                 maxIndex = newDisplayCandidates.count - 1
                 let newHighlightedIndex: Int = switch highlight {
-                case .start:
-                        minIndex
-                case .unchanged:
-                        min(highlightedIndex, maxIndex)
-                case .end:
-                        maxIndex
+                case .start    : minIndex
+                case .unchanged: min(highlightedIndex, maxIndex)
+                case .end      : maxIndex
                 }
                 highlightedIndex = newHighlightedIndex
         }

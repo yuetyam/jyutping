@@ -46,14 +46,10 @@ enum Quadrant: Int {
         /// Candidate window MotherBoard alignment
         var alignment: Alignment {
                 switch self {
-                case .upperRight:
-                        return .bottomLeading
-                case .upperLeft:
-                        return .bottomTrailing
-                case .bottomLeft:
-                        return .topTrailing
-                case .bottomRight:
-                        return .topLeading
+                case .upperRight : .bottomLeading
+                case .upperLeft  : .bottomTrailing
+                case .bottomLeft : .topTrailing
+                case .bottomRight: .topLeading
                 }
         }
 }

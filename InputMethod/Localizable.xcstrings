@@ -6340,55 +6340,55 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果你唔瞭解呢項設定嘅作用，千祈唔好開啓。"
+            "value" : "如果你唔瞭解本項設定嘅作用，千祈唔好開啓。"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果你唔瞭解呢項設定嘅作用，千祈唔好開啓。"
+            "value" : "如果你唔瞭解本項設置嘅作用，千祈唔好開啓。"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果你唔瞭解呢項設定嘅作用，千祈唔好開啓。"
+            "value" : "如果你唔瞭解本項設置嘅作用，千祈唔好開啓。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果你唔瞭解呢項設定嘅作用，千祈唔好開啓。"
+            "value" : "如果你唔瞭解本項設定嘅作用，千祈唔好開啓。"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果你唔瞭解呢項設定嘅作用，千祈唔好開啓。"
+            "value" : "如果你唔瞭解本項設置嘅作用，千祈唔好開啓。"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果你唔瞭解呢項設定嘅作用，千祈唔好開啓。"
+            "value" : "如果你唔瞭解本項設定嘅作用，千祈唔好開啓。"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果你唔瞭解呢項設定嘅作用，千祈唔好開啓。"
+            "value" : "如果你唔瞭解本項設定嘅作用，千祈唔好開啓。"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果你唔瞭解呢項設定嘅作用，千祈唔好開啓。"
+            "value" : "如果你唔瞭解本項設定嘅作用，千祈唔好開啓。"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果你唔瞭解呢項設定嘅作用，千祈唔好開啓。"
+            "value" : "如果你唔瞭解本項設定嘅作用，千祈唔好開啓。"
           }
         }
       }
@@ -7586,7 +7586,7 @@
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "直接選擇某個設定選項"
+            "value" : "直接選擇某個設置選項"
           }
         },
         "zh-Hant-HK" : {
@@ -7680,7 +7680,7 @@
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "進入／退出設定選項䈎面"
+            "value" : "進入／退出設置選項䈎面"
           }
         },
         "zh-Hant-HK" : {
@@ -7714,91 +7714,91 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "is located below the esc key"
+            "value" : "is the grave key, located below the esc key."
           }
         },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "is located below the esc key"
+            "value" : "is the grave key, located below the esc key."
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "is located below the esc key"
+            "value" : "is the grave key, located below the esc key."
           }
         },
         "en-US" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "is located below the esc key"
+            "value" : "is the grave key, located below the esc key."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "est situé sous la touche éch."
+            "value" : "est la touche de l’accent grave, située sous la touche échap."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "はescキーの下にあります"
+            "value" : "は「重アクセント」の記号で、esc鍵（エスケープキー）の下にあります。"
           }
         },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "位於 esc 鍵下方"
+            "value" : "係重音符(grave)鍵，位於 esc 鍵下方。"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "位於 esc 鍵下方"
+            "value" : "係重音符(grave)鍵，位於 esc 鍵下方。"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "位於 esc 鍵下方"
+            "value" : "係重音符(grave)鍵，位於 esc 鍵下方。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "位於 esc 鍵下方"
+            "value" : "係重音符(grave)鍵，位於 esc 鍵下方。"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "位於 esc 鍵下方"
+            "value" : "係重音符(grave)鍵，位於 esc 鍵下方。"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "位於 esc 鍵下方"
+            "value" : "係重音符(grave)鍵，位於 esc 鍵下方。"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "位於 esc 鍵下方"
+            "value" : "係重音符(grave)鍵，位於 esc 鍵下方。"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "位於 esc 鍵下方"
+            "value" : "係重音符(grave)鍵，位於 esc 鍵下方。"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "位於 esc 鍵下方"
+            "value" : "係重音符(grave)鍵，位於 esc 鍵下方。"
           }
         }
       }
@@ -8620,7 +8620,7 @@
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "開啓設定視窗（即係當前視窗）"
+            "value" : "開啓設置視窗（即係當前視窗）"
           }
         },
         "zh-Hant-HK" : {
@@ -8654,91 +8654,91 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "is the comma key"
+            "value" : "is the comma key."
           }
         },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "is the comma key"
+            "value" : "is the comma key."
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "is the comma key"
+            "value" : "is the comma key."
           }
         },
         "en-US" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "is the comma key"
+            "value" : "is the comma key."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "est la touche virgule"
+            "value" : "est la touche virgule."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "はコンマキーです"
+            "value" : "はコンマキーです。"
           }
         },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "係逗號鍵"
+            "value" : "係逗號鍵。"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "係逗號鍵"
+            "value" : "係逗號鍵。"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "係逗號鍵"
+            "value" : "係逗號鍵。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "係逗號鍵"
+            "value" : "係逗號鍵。"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "係逗號鍵"
+            "value" : "係逗號鍵。"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "係逗號鍵"
+            "value" : "係逗號鍵。"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "係逗號鍵"
+            "value" : "係逗號鍵。"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "係逗號鍵"
+            "value" : "係逗號鍵。"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "係逗號鍵"
+            "value" : "係逗號鍵。"
           }
         }
       }
@@ -10500,7 +10500,7 @@
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "設定…"
+            "value" : "設置…"
           }
         },
         "zh-Hant-HK" : {
@@ -12474,7 +12474,7 @@
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "設定"
+            "value" : "設置"
           }
         },
         "zh-Hant-HK" : {
@@ -13038,7 +13038,7 @@
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "粵拼輸入法設定"
+            "value" : "粵拼輸入法設置"
           }
         },
         "zh-Hant-HK" : {
@@ -14200,25 +14200,25 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Start with “q”, then enter two components' Jyutping. For example, enter “qmukmuk”, candidate “林” will appear. Candidates will be displayed with the corresponding Jyutping."
+            "value" : "Start with “q”, then enter two components’ Jyutping. For example, enter “qmukmuk”, candidate “林” will appear. Candidates will be displayed with the corresponding Jyutping."
           }
         },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Start with “q”, then enter two components' Jyutping. For example, enter “qmukmuk”, candidate “林” will appear. Candidates will be displayed with the corresponding Jyutping."
+            "value" : "Start with “q”, then enter two components’ Jyutping. For example, enter “qmukmuk”, candidate “林” will appear. Candidates will be displayed with the corresponding Jyutping."
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Start with “q”, then enter two components' Jyutping. For example, enter “qmukmuk”, candidate “林” will appear. Candidates will be displayed with the corresponding Jyutping."
+            "value" : "Start with “q”, then enter two components’ Jyutping. For example, enter “qmukmuk”, candidate “林” will appear. Candidates will be displayed with the corresponding Jyutping."
           }
         },
         "en-US" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Start with “q”, then enter two components' Jyutping. For example, enter “qmukmuk”, candidate “林” will appear. Candidates will be displayed with the corresponding Jyutping."
+            "value" : "Start with “q”, then enter two components’ Jyutping. For example, enter “qmukmuk”, candidate “林” will appear. Candidates will be displayed with the corresponding Jyutping."
           }
         },
         "fr" : {
