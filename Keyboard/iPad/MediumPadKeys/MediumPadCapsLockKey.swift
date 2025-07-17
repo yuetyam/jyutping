@@ -6,34 +6,13 @@ struct MediumPadCapsLockKey: View {
         let widthUnitTimes: CGFloat
 
         @EnvironmentObject private var context: KeyboardViewController
-
         @Environment(\.colorScheme) private var colorScheme
 
-        private var keyColor: Color {
-                switch colorScheme {
-                case .light:
-                        return .lightAction
-                case .dark:
-                        return .darkAction
-                @unknown default:
-                        return .lightAction
-                }
-        }
-        private var keyActiveColor: Color {
-                switch colorScheme {
-                case .light:
-                        return .activeLightAction
-                case .dark:
-                        return .activeDarkAction
-                @unknown default:
-                        return .activeLightAction
-                }
-        }
         private var backColor: Color {
                 if #available(iOSApplicationExtension 26.0, *) {
-                        return isTouching ? keyActiveColor : keyColor
+                        return isTouching ? colorScheme.activeActionKeyColor : colorScheme.actionKeyColor
                 } else {
-                        return context.keyboardCase.isCapsLocked ? keyActiveColor : keyColor
+                        return context.keyboardCase.isCapsLocked ? colorScheme.activeActionKeyColor : colorScheme.actionKeyColor
                 }
         }
 
@@ -55,7 +34,7 @@ struct MediumPadCapsLockKey: View {
                         ZStack(alignment: .topLeading) {
                                 Color.clear
                                 Circle()
-                                        .fill(context.keyboardCase.isCapsLocked ? Color.green : keyActiveColor.opacity(0.66))
+                                        .fill(context.keyboardCase.isCapsLocked ? Color.green : colorScheme.activeActionKeyColor.opacity(0.75))
                                         .frame(width: 5, height: 5)
                         }
                         .padding(.vertical, verticalPadding + 6)

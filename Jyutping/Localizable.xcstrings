@@ -4090,13 +4090,13 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "從鍵盤左上角嘅齒輪入到設定䈎面，搵到「鍵盤介面顯示語言」，然後選擇語言。"
+            "value" : "從鍵盤左上角嘅齒輪入到設置䈎面，搵到「鍵盤介面顯示語言」，然後選擇語言。"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "從鍵盤左上角嘅齒輪入到設定䈎面，搵到「鍵盤介面顯示語言」，然後選擇語言。"
+            "value" : "從鍵盤左上角嘅齒輪入到設置䈎面，搵到「鍵盤介面顯示語言」，然後選擇語言。"
           }
         },
         "zh-Hant" : {
@@ -4108,7 +4108,7 @@
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "從鍵盤左上角嘅齒輪入到設定䈎面，搵到「鍵盤介面顯示語言」，然後選擇語言。"
+            "value" : "從鍵盤左上角嘅齒輪入到設置䈎面，搵到「鍵盤介面顯示語言」，然後選擇語言。"
           }
         },
         "zh-Hant-HK" : {
@@ -4184,13 +4184,13 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "跳轉至設定App，將「粵拼」鍵盤嘅「完全訪問」權限開、關一下。系統就會將鍵盤重啓，語言切換先會起效。"
+            "value" : "跳轉至設置App，將「粵拼」鍵盤嘅「完全訪問」權限開、關一下。系統就會將鍵盤重啓，語言切換先會起效。"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "跳轉至設定App，將「粵拼」鍵盤嘅「完全訪問」權限開、關一下。系統就會將鍵盤重啓，語言切換先會起效。"
+            "value" : "跳轉至設置App，將「粵拼」鍵盤嘅「完全訪問」權限開、關一下。系統就會將鍵盤重啓，語言切換先會起效。"
           }
         },
         "zh-Hant" : {
@@ -4202,7 +4202,7 @@
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "跳轉至設定App，將「粵拼」鍵盤嘅「完全訪問」權限開、關一下。系統就會將鍵盤重啓，語言切換先會起效。"
+            "value" : "跳轉至設置App，將「粵拼」鍵盤嘅「完全訪問」權限開、關一下。系統就會將鍵盤重啓，語言切換先會起效。"
           }
         },
         "zh-Hant-HK" : {
@@ -4372,13 +4372,13 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "跳轉至設定App，然後爲粵拼App選擇偏好語言。"
+            "value" : "跳轉至設置App，然後爲粵拼App選擇偏好語言。"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "跳轉至設定App，然後爲粵拼App選擇偏好語言。"
+            "value" : "跳轉至設置App，然後爲粵拼App選擇偏好語言。"
           }
         },
         "zh-Hant" : {
@@ -4390,7 +4390,7 @@
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "跳轉至設定App，然後爲粵拼App選擇偏好語言。"
+            "value" : "跳轉至設置App，然後爲粵拼App選擇偏好語言。"
           }
         },
         "zh-Hant-HK" : {
@@ -4936,13 +4936,13 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果覺得經常彈提示好煩，可以去系統設定App嘅「粵拼」䈎面；將設定項「從其他App貼上」，由「詢問」改爲「允許」。"
+            "value" : "如果覺得經常彈提示好煩，可以去系統設置App嘅「粵拼」䈎面；將設置項「從其他App貼上」，由「詢問」改爲「允許」。"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果覺得經常彈提示好煩，可以去系統設定App嘅「粵拼」䈎面；將設定項「從其他App貼上」，由「詢問」改爲「允許」。"
+            "value" : "如果覺得經常彈提示好煩，可以去系統設置App嘅「粵拼」䈎面；將設置項「從其他App貼上」，由「詢問」改爲「允許」。"
           }
         },
         "zh-Hant" : {
@@ -4954,7 +4954,7 @@
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果覺得經常彈提示好煩，可以去系統設定App嘅「粵拼」䈎面；將設定項「從其他App貼上」，由「詢問」改爲「允許」。"
+            "value" : "如果覺得經常彈提示好煩，可以去系統設置App嘅「粵拼」䈎面；將設置項「從其他App貼上」，由「詢問」改爲「允許」。"
           }
         },
         "zh-Hant-HK" : {
@@ -5500,13 +5500,13 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "可能需要先完全關閉一次系統設定App，之後再嘗試一次。"
+            "value" : "可能需要先完全關閉一次系統設置App，之後再嘗試一次。"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "可能需要先完全關閉一次系統設定App，之後再嘗試一次。"
+            "value" : "可能需要先完全關閉一次系統設置App，之後再嘗試一次。"
           }
         },
         "zh-Hant" : {
@@ -5518,7 +5518,7 @@
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "可能需要先完全關閉一次系統設定App，之後再嘗試一次。"
+            "value" : "可能需要先完全關閉一次系統設置App，之後再嘗試一次。"
           }
         },
         "zh-Hant-HK" : {
@@ -5876,13 +5876,13 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "系統設定App冇列出粵拼鍵盤？"
+            "value" : "系統設置App冇列出粵拼鍵盤？"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "系統設定App冇列出粵拼鍵盤？"
+            "value" : "系統設置App冇列出粵拼鍵盤？"
           }
         },
         "zh-Hant" : {
@@ -5894,7 +5894,7 @@
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "系統設定App冇列出粵拼鍵盤？"
+            "value" : "系統設置App冇列出粵拼鍵盤？"
           }
         },
         "zh-Hant-HK" : {
@@ -6346,13 +6346,13 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "有時鍵盤出現問題，需要將佢徹底重啓。去系統設定App，將鍵盤嘅「允許完全訪問」權限關閉、再開啓。系統就會將鍵盤重啓。 "
+            "value" : "有時鍵盤出現問題，需要將佢徹底重啓。去系統設置App，將鍵盤嘅「允許完全訪問」權限關閉、再開啓。系統就會將鍵盤重啓。 "
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "有時鍵盤出現問題，需要將佢徹底重啓。去系統設定App，將鍵盤嘅「允許完全訪問」權限關閉、再開啓。系統就會將鍵盤重啓。 "
+            "value" : "有時鍵盤出現問題，需要將佢徹底重啓。去系統設置App，將鍵盤嘅「允許完全訪問」權限關閉、再開啓。系統就會將鍵盤重啓。 "
           }
         },
         "zh-Hant" : {
@@ -6364,7 +6364,7 @@
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "有時鍵盤出現問題，需要將佢徹底重啓。去系統設定App，將鍵盤嘅「允許完全訪問」權限關閉、再開啓。系統就會將鍵盤重啓。 "
+            "value" : "有時鍵盤出現問題，需要將佢徹底重啓。去系統設置App，將鍵盤嘅「允許完全訪問」權限關閉、再開啓。系統就會將鍵盤重啓。 "
           }
         },
         "zh-Hant-HK" : {
@@ -14900,13 +14900,13 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "輸入法／鍵盤設定䈎面可以揀倉頡、速成版本。"
+            "value" : "輸入法／鍵盤設置䈎面可以揀倉頡、速成版本。"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "輸入法／鍵盤設定䈎面可以揀倉頡、速成版本。"
+            "value" : "輸入法／鍵盤設置䈎面可以揀倉頡、速成版本。"
           }
         },
         "zh-Hant" : {
@@ -14918,7 +14918,7 @@
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "輸入法／鍵盤設定䈎面可以揀倉頡、速成版本。"
+            "value" : "輸入法／鍵盤設置䈎面可以揀倉頡、速成版本。"
           }
         },
         "zh-Hant-HK" : {

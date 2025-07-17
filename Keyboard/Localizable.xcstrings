@@ -4466,13 +4466,13 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "然後去系統設定App 開、關一下粵拼鍵盤嘅「完全訪問」，鍵盤就會重啓，語言切換先會起效。"
+            "value" : "然後去系統設置App 開、關一下粵拼鍵盤嘅「完全訪問」，鍵盤就會重啓，語言切換先會起效。"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "然後去系統設定App 開、關一下粵拼鍵盤嘅「完全訪問」，鍵盤就會重啓，語言切換先會起效。"
+            "value" : "然後去系統設置App 開、關一下粵拼鍵盤嘅「完全訪問」，鍵盤就會重啓，語言切換先會起效。"
           }
         },
         "zh-Hant" : {
@@ -4484,7 +4484,7 @@
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "然後去系統設定App 開、關一下粵拼鍵盤嘅「完全訪問」，鍵盤就會重啓，語言切換先會起效。"
+            "value" : "然後去系統設置App 開、關一下粵拼鍵盤嘅「完全訪問」，鍵盤就會重啓，語言切換先會起效。"
           }
         },
         "zh-Hant-HK" : {
@@ -6058,55 +6058,55 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果你唔瞭解呢項設定嘅作用，千祈唔好開啓。"
+            "value" : "如果你唔瞭解本項設定嘅作用，千祈唔好開啓。"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果你唔瞭解呢項設定嘅作用，千祈唔好開啓。"
+            "value" : "如果你唔瞭解本項設置嘅作用，千祈唔好開啓。"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果你唔瞭解呢項設定嘅作用，千祈唔好開啓。"
+            "value" : "如果你唔瞭解本項設置嘅作用，千祈唔好開啓。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果你唔瞭解呢項設定嘅作用，千祈唔好開啓。"
+            "value" : "如果你唔瞭解本項設定嘅作用，千祈唔好開啓。"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果你唔瞭解呢項設定嘅作用，千祈唔好開啓。"
+            "value" : "如果你唔瞭解本項設置嘅作用，千祈唔好開啓。"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果你唔瞭解呢項設定嘅作用，千祈唔好開啓。"
+            "value" : "如果你唔瞭解本項設定嘅作用，千祈唔好開啓。"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果你唔瞭解呢項設定嘅作用，千祈唔好開啓。"
+            "value" : "如果你唔瞭解本項設定嘅作用，千祈唔好開啓。"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果你唔瞭解呢項設定嘅作用，千祈唔好開啓。"
+            "value" : "如果你唔瞭解本項設定嘅作用，千祈唔好開啓。"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果你唔瞭解呢項設定嘅作用，千祈唔好開啓。"
+            "value" : "如果你唔瞭解本項設定嘅作用，千祈唔好開啓。"
           }
         }
       }
