@@ -297,6 +297,9 @@
 		37B0D1CF2DB7788900B6DEFF /* GeneralSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B0D1CE2DB7788900B6DEFF /* GeneralSettingsView.swift */; };
 		37B0D1D12DB7ECCE00B6DEFF /* FontSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B0D1D02DB7ECCE00B6DEFF /* FontSettingsView.swift */; };
 		37CC55792B464C78003ED8CE /* ChangeDisplayLanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CC55782B464C78003ED8CE /* ChangeDisplayLanguageView.swift */; };
+		37CFE5292E289B4100BA278B /* LargePadLeftKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CFE5282E289B4100BA278B /* LargePadLeftKey.swift */; };
+		37CFE52B2E28A10B00BA278B /* MediumPadLeftKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CFE52A2E28A10B00BA278B /* MediumPadLeftKey.swift */; };
+		37CFE52D2E29117900BA278B /* PadLeftKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CFE52C2E29117900BA278B /* PadLeftKey.swift */; };
 		37D00DD22D115045003420EE /* IOSTungkunRailTransitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D00DD12D115044003420EE /* IOSTungkunRailTransitView.swift */; };
 		37D00DD42D11523A003420EE /* IOSMacauMetroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D00DD32D115238003420EE /* IOSMacauMetroView.swift */; };
 		37D00DD62D115A72003420EE /* MacMacauMetroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D00DD52D115A70003420EE /* MacMacauMetroView.swift */; };
@@ -703,6 +706,9 @@
 		37B0D1CE2DB7788900B6DEFF /* GeneralSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsView.swift; sourceTree = "<group>"; };
 		37B0D1D02DB7ECCE00B6DEFF /* FontSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontSettingsView.swift; sourceTree = "<group>"; };
 		37CC55782B464C78003ED8CE /* ChangeDisplayLanguageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeDisplayLanguageView.swift; sourceTree = "<group>"; };
+		37CFE5282E289B4100BA278B /* LargePadLeftKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargePadLeftKey.swift; sourceTree = "<group>"; };
+		37CFE52A2E28A10B00BA278B /* MediumPadLeftKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediumPadLeftKey.swift; sourceTree = "<group>"; };
+		37CFE52C2E29117900BA278B /* PadLeftKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadLeftKey.swift; sourceTree = "<group>"; };
 		37D00DD12D115044003420EE /* IOSTungkunRailTransitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSTungkunRailTransitView.swift; sourceTree = "<group>"; };
 		37D00DD32D115238003420EE /* IOSMacauMetroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSMacauMetroView.swift; sourceTree = "<group>"; };
 		37D00DD52D115A70003420EE /* MacMacauMetroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacMacauMetroView.swift; sourceTree = "<group>"; };
@@ -1219,6 +1225,7 @@
 				371B6F7F2B3B342F005BB31C /* PadDismissKey.swift */,
 				371B6F802B3B342F005BB31C /* PadTransformKey.swift */,
 				371B6F842B3B342F005BB31C /* PadPullableInputKey.swift */,
+				37CFE52C2E29117900BA278B /* PadLeftKey.swift */,
 				371B6F852B3B342F005BB31C /* PadRightKey.swift */,
 			);
 			path = Keys;
@@ -1257,6 +1264,7 @@
 				371B6F682B3B342F005BB31C /* LargePadInstantInputKey.swift */,
 				371B6F692B3B342F005BB31C /* LargePadTransformKey.swift */,
 				371B6F6A2B3B342F005BB31C /* LargePadReturnKey.swift */,
+				37CFE5282E289B4100BA278B /* LargePadLeftKey.swift */,
 				371B6F6B2B3B342F005BB31C /* LargePadRightKey.swift */,
 				371B6F6D2B3B342F005BB31C /* LargePadLetterInputKey.swift */,
 			);
@@ -1373,6 +1381,7 @@
 				37942E322CE46FAE005D6536 /* MediumPadShiftKey.swift */,
 				37942E2A2CE4249C005D6536 /* MediumPadGlobeKey.swift */,
 				371D70762CE5881600508860 /* MediumPadTransformKey.swift */,
+				37CFE52A2E28A10B00BA278B /* MediumPadLeftKey.swift */,
 				371D70782CE589BE00508860 /* MediumPadRightKey.swift */,
 				37942E2E2CE437BD005D6536 /* MediumPadBackspaceKey.swift */,
 				37942E302CE45016005D6536 /* MediumPadReturnKey.swift */,
@@ -1898,6 +1907,7 @@
 				371B6FD02B3B342F005BB31C /* KeyboardForm.swift in Sources */,
 				371B6FE42B3B342F005BB31C /* LargePadCantoneseKeyboard.swift in Sources */,
 				379A9E482BE4DB6A001AE79E /* EditingPanelBackspaceKey.swift in Sources */,
+				37CFE52B2E28A10B00BA278B /* MediumPadLeftKey.swift in Sources */,
 				377486F42DFCB039000FBE0A /* NumberInputKey.swift in Sources */,
 				371B6FD62B3B342F005BB31C /* PadSymbolInputKey.swift in Sources */,
 				371B6FCB2B3B342F005BB31C /* AudioFeedback.swift in Sources */,
@@ -1953,6 +1963,7 @@
 				371B6FB52B3B342F005BB31C /* ScrollViewGestureButton.swift in Sources */,
 				371B6FCF2B3B342F005BB31C /* KeyModel.swift in Sources */,
 				379C516F2CB9DF1600AAB1A3 /* SidebarScrollViewIOS17.swift in Sources */,
+				37CFE52D2E29117900BA278B /* PadLeftKey.swift in Sources */,
 				375B85632CB90409000E124E /* CandidateBoardScrollView.swift in Sources */,
 				371B6FCE2B3B342F005BB31C /* Options.swift in Sources */,
 				379A9E402BE4D486001AE79E /* EditingPanelMoveForwardKey.swift in Sources */,
@@ -2012,6 +2023,7 @@
 				378F4EED2E0049D800766736 /* UIGlobeButton.swift in Sources */,
 				371B6FF62B3B342F005BB31C /* PadCangjieInputKey.swift in Sources */,
 				371B6FB22B3B342F005BB31C /* ToolBar.swift in Sources */,
+				37CFE5292E289B4100BA278B /* LargePadLeftKey.swift in Sources */,
 				371D707B2CE5926D00508860 /* MediumPadCantoneseSymbolicKeyboard.swift in Sources */,
 				371B6FD72B3B342F005BB31C /* PadStrokeInputKey.swift in Sources */,
 				371B6FE12B3B342F005BB31C /* LargePadCantoneseNumericKeyboard.swift in Sources */,

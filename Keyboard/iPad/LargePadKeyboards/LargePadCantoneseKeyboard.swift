@@ -436,7 +436,7 @@ struct LargePadCantoneseKeyboard: View {
                                 } else {
                                         LargePadTransformKey(destination: .numeric, keyLocale: .leading, widthUnitTimes: 2.125)
                                 }
-                                LargePadTransformKey(destination: .numeric, keyLocale: .leading, widthUnitTimes: 2.125)
+                                LargePadLeftKey(widthUnitTimes: 2.125)
                                 LargePadSpaceKey()
                                 LargePadRightKey(widthUnitTimes: 2.125)
                                 LargePadDismissKey(widthUnitTimes: 2.125)

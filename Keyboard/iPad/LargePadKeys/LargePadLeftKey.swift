@@ -1,10 +1,8 @@
 import SwiftUI
 import CommonExtensions
 
-struct MediumPadTransformKey: View {
+struct LargePadLeftKey: View {
 
-        let destination: KeyboardForm
-        let keyLocale: HorizontalEdge
         let widthUnitTimes: CGFloat
 
         @EnvironmentObject private var context: KeyboardViewController
@@ -16,8 +14,8 @@ struct MediumPadTransformKey: View {
                 let keyWidth: CGFloat = context.widthUnit * widthUnitTimes
                 let keyHeight: CGFloat = context.heightUnit
                 let isLandscape: Bool = context.keyboardInterface.isPadLandscape
-                let verticalPadding: CGFloat = isLandscape ? 7 : 5
-                let horizontalPadding: CGFloat = isLandscape ? 7 : 5
+                let verticalPadding: CGFloat = isLandscape ? 5 : 4
+                let horizontalPadding: CGFloat = isLandscape ? 5 : 4
                 ZStack {
                         Color.interactiveClear
                         RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous)
@@ -25,12 +23,23 @@ struct MediumPadTransformKey: View {
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(.vertical, verticalPadding)
                                 .padding(.horizontal, horizontalPadding)
-                        ZStack(alignment: keyLocale.isLeading ? .bottomLeading : .bottomTrailing) {
-                                Color.clear
-                                Text(verbatim: destination.padTransformKeyText).font(.subheadline)
+                        if context.inputStage.isBuffering {
+                                ZStack(alignment: .bottom) {
+                                        Color.clear
+                                        Text(verbatim: PresetConstant.separate)
+                                                .font(.keyFootnote)
+                                                .shallow()
+                                }
+                                .padding(.vertical, verticalPadding + 7)
+                                Text(verbatim: String.separator)
+                        } else {
+                                ZStack(alignment: .bottomLeading) {
+                                        Color.clear
+                                        Text(verbatim: KeyboardForm.numeric.padTransformKeyText)
+                                }
+                                .padding(.vertical, verticalPadding + 7)
+                                .padding(.horizontal, horizontalPadding + 7)
                         }
-                        .padding(.vertical, verticalPadding + 5)
-                        .padding(.horizontal, horizontalPadding + 5)
                 }
                 .frame(width: keyWidth, height: keyHeight)
                 .contentShape(Rectangle())
@@ -42,8 +51,12 @@ struct MediumPadTransformKey: View {
                                 }
                         }
                         .onEnded { _ in
-                                context.updateKeyboardForm(to: destination)
-                         }
+                                if context.inputStage.isBuffering {
+                                        context.operate(.separate)
+                                } else {
+                                        context.updateKeyboardForm(to: .numeric)
+                                }
+                        }
                 )
         }
 }

@@ -84,7 +84,7 @@ struct MediumPadCantoneseKeyboard: View {
                                 } else {
                                         MediumPadTransformKey(destination: .numeric, keyLocale: .leading, widthUnitTimes: 1.5)
                                 }
-                                MediumPadTransformKey(destination: .numeric, keyLocale: .leading, widthUnitTimes: 1.5)
+                                MediumPadLeftKey(widthUnitTimes: 1.5)
                                 PadSpaceKey()
                                 MediumPadRightKey(widthUnitTimes: 1.5)
                                 MediumPadDismissKey(widthUnitTimes: 1.5)

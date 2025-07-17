@@ -1,10 +1,8 @@
 import SwiftUI
 import CommonExtensions
 
-struct MediumPadTransformKey: View {
+struct PadLeftKey: View {
 
-        let destination: KeyboardForm
-        let keyLocale: HorizontalEdge
         let widthUnitTimes: CGFloat
 
         @EnvironmentObject private var context: KeyboardViewController
@@ -25,12 +23,13 @@ struct MediumPadTransformKey: View {
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(.vertical, verticalPadding)
                                 .padding(.horizontal, horizontalPadding)
-                        ZStack(alignment: keyLocale.isLeading ? .bottomLeading : .bottomTrailing) {
+                        ZStack(alignment: .bottom) {
                                 Color.clear
-                                Text(verbatim: destination.padTransformKeyText).font(.subheadline)
+                                Text(verbatim: PresetConstant.separate).font(.keyFootnote)
                         }
-                        .padding(.vertical, verticalPadding + 5)
-                        .padding(.horizontal, horizontalPadding + 5)
+                        .padding(.bottom, verticalPadding + 5)
+                        .opacity(context.inputStage.isBuffering ? 0.5 : 0)
+                        Text(verbatim: context.inputStage.isBuffering ? String.separator : KeyboardForm.numeric.padTransformKeyText)
                 }
                 .frame(width: keyWidth, height: keyHeight)
                 .contentShape(Rectangle())
@@ -42,8 +41,12 @@ struct MediumPadTransformKey: View {
                                 }
                         }
                         .onEnded { _ in
-                                context.updateKeyboardForm(to: destination)
-                         }
+                                if context.inputStage.isBuffering {
+                                        context.operate(.separate)
+                                } else {
+                                        context.updateKeyboardForm(to: .numeric)
+                                }
+                        }
                 )
         }
 }

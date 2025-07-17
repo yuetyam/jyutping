@@ -84,7 +84,7 @@ struct PadTripleStrokeKeyboard: View {
                                 } else {
                                         PadTransformKey(destination: .numeric, widthUnitTimes: 1.5)
                                 }
-                                PadTransformKey(destination: .numeric, widthUnitTimes: 1.5)
+                                PadLeftKey(widthUnitTimes: 1.5)
                                 PadSpaceKey()
                                 PadRightKey(widthUnitTimes: 1.5)
                                 PadDismissKey(widthUnitTimes: 1.5)
