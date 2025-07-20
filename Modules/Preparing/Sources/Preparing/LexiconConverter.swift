@@ -38,10 +38,10 @@ struct LexiconConverter {
                 let syllableText = romanization.filter(\.isLowercaseBasicLatinLetter)
                 guard syllableText.isNotEmpty else { fatalError(errorMessage) }
                 let anchorText = String(anchors)
-                guard let anchorCode: Int = anchorText.charcode else { fatalError(errorMessage) }
-                let ping: Int = syllableText.hash
-                guard let tenKeyAnchorCode: Int = anchorText.tenKeyCharcode else { fatalError(errorMessage) }
-                let tenKeyCode: Int = syllableText.tenKeyCharcode ?? 0
-                return LexiconEntry(word: word, romanization: romanization, anchors: anchorCode, ping: ping, tenKeyAnchors: tenKeyAnchorCode, tenKeyCode: tenKeyCode)
+                guard let anchorCode: Int = anchorText.charCode else { fatalError(errorMessage) }
+                let pingCode: Int = syllableText.hash
+                guard let tenKeyAnchorCode: Int = anchorText.tenKeyCharCode else { fatalError(errorMessage) }
+                let tenKeyCode: Int = syllableText.tenKeyCharCode ?? 0
+                return LexiconEntry(word: word, romanization: romanization, anchors: anchorCode, ping: pingCode, tenKeyAnchors: tenKeyAnchorCode, tenKeyCode: tenKeyCode)
         }
 }

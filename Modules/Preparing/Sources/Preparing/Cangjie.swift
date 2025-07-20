@@ -34,8 +34,8 @@ struct Cangjie {
                         for index in 0..<upperBound {
                                 let cangjie5: String = cangjie5Matches.fetch(index) ?? "X"
                                 let cangjie3: String = cangjie3Matches.fetch(index) ?? "X"
-                                let c5code = cangjie5.charcode ?? 0
-                                let c3code: Int = cangjie3.charcode ?? 0
+                                let c5code = cangjie5.charCode ?? 0
+                                let c3code: Int = cangjie3.charCode ?? 0
                                 let c5complex = cangjie5.count
                                 let c3complex = cangjie3.count
                                 let instance = CangjieEntry(word: item, cangjie5: cangjie5, cangjie3: cangjie3, c5complex: c5complex, c3complex: c3complex, c5code: c5code, c3code: c3code)

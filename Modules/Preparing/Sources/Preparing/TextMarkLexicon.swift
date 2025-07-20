@@ -17,9 +17,9 @@ struct TextMarkLexicon: Hashable {
                         guard parts.count >= 2 else { return nil }
                         let token = parts[0]
                         let text = parts[1]
-                        let ping = token.hash
-                        let tenKeyCode = token.tenKeyCharcode ?? 0
-                        return TextMarkLexicon(text: text, ping: ping, tenKeyCode: tenKeyCode)
+                        let pingCode = token.hash
+                        let tenKeyCode = token.tenKeyCharCode ?? 0
+                        return TextMarkLexicon(text: text, ping: pingCode, tenKeyCode: tenKeyCode)
                 }
                 return entries
         }

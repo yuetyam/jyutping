@@ -39,8 +39,8 @@ struct Quick {
                                         let quick3: String = (cangjie3.count > 2) ? "\(cangjie3.first!)\(cangjie3.last!)" : cangjie3
                                         let q5complex: Int = quick5.count
                                         let q3complex: Int = quick3.count
-                                        let q5code: Int = quick5.charcode ?? 0
-                                        let q3code: Int = quick3.charcode ?? 0
+                                        let q5code: Int = quick5.charCode ?? 0
+                                        let q3code: Int = quick3.charCode ?? 0
                                         let instance = QuickEntry(word: word, quick5: quick5, quick3: quick3, q5complex: q5complex, q3complex: q3complex, q5code: q5code, q3code: q3code)
                                         instances.append(instance)
                                 }
@@ -55,8 +55,8 @@ struct Quick {
                                 let quick3 = quick3Sequence.joined()
                                 let q5complex = quick5.count
                                 let q3complex = quick3.count
-                                let q5code: Int = quick5.charcode ?? 0
-                                let q3code: Int = quick3.charcode ?? 0
+                                let q5code: Int = quick5.charCode ?? 0
+                                let q3code: Int = quick3.charCode ?? 0
                                 let instance = QuickEntry(word: word, quick5: quick5, quick3: quick3, q5complex: q5complex, q3complex: q3complex, q5code: q5code, q3code: q3code)
                                 return [instance]
                         }

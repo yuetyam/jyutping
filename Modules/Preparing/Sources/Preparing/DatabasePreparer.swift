@@ -249,13 +249,13 @@ struct DatabasePreparer {
                         guard parts.count == 5 else { return nil }
                         let category = parts[0]
                         let version = parts[1]
-                        let codepoint = parts[2]
+                        let codePoint = parts[2]
                         let cantonese = parts[3]
                         let romanization = parts[4]
                         let syllableText = romanization.filter(\.isLowercaseBasicLatinLetter)
-                        let ping = syllableText.hash
-                        let tenKeyCode = syllableText.tenKeyCharcode ?? 0
-                        return "(\(category), \(version), '\(codepoint)', '\(cantonese)', '\(romanization)', \(ping), \(tenKeyCode))"
+                        let pingCode = syllableText.hash
+                        let tenKeyCode = syllableText.tenKeyCharCode ?? 0
+                        return "(\(category), \(version), '\(codePoint)', '\(cantonese)', '\(romanization)', \(pingCode), \(tenKeyCode))"
                 }
                 let values: String = entries.joined(separator: ", ")
                 let insert: String = "INSERT INTO symboltable (category, unicodeversion, codepoint, cantonese, romanization, ping, tenkeycode) VALUES \(values);"
@@ -318,14 +318,15 @@ struct DatabasePreparer {
                         .map({ $0.trimmingCharacters(in: .whitespaces).trimmingCharacters(in: .controlCharacters) })
                         .filter(\.isNotEmpty)
                 let entries = sourceLines.compactMap { line -> String? in
+                        lazy var errorMessage: String = "syllable.txt : bad format : \(line)"
                         let parts = line.split(separator: "\t")
-                        guard parts.count == 2 else { fatalError("syllable.txt : bad format : \(line)") }
+                        guard parts.count == 2 else { fatalError(errorMessage) }
                         let alias = parts[0]
                         let origin = parts[1]
-                        guard let aliasCode = alias.charcode, aliasCode > 0 else { fatalError("syllable.txt : bad format : \(line)") }
-                        guard let originCode = origin.charcode, originCode > 0 else { fatalError("syllable.txt : bad format : \(line)") }
-                        guard let tenKeyAliasCode = alias.tenKeyCharcode, tenKeyAliasCode > 0 else { fatalError("syllable.txt : bad format : \(line)") }
-                        guard let tenKeyOriginCode = origin.tenKeyCharcode, tenKeyOriginCode > 0 else { fatalError("syllable.txt : bad format : \(line)") }
+                        guard let aliasCode = alias.charCode, aliasCode > 0 else { fatalError(errorMessage) }
+                        guard let originCode = origin.charCode, originCode > 0 else { fatalError(errorMessage) }
+                        guard let tenKeyAliasCode = alias.tenKeyCharCode, tenKeyAliasCode > 0 else { fatalError(errorMessage) }
+                        guard let tenKeyOriginCode = origin.tenKeyCharCode, tenKeyOriginCode > 0 else { fatalError(errorMessage) }
                         return "(\(aliasCode), \(originCode), \(tenKeyAliasCode), \(tenKeyOriginCode), '\(alias)', '\(origin)')"
                 }
                 let values: String = entries.joined(separator: ", ")
@@ -349,8 +350,9 @@ struct DatabasePreparer {
                         .map({ $0.trimmingCharacters(in: .whitespaces).trimmingCharacters(in: .controlCharacters) })
                         .filter(\.isNotEmpty)
                 let entries = sourceLines.compactMap { syllable -> String? in
-                        guard let code = syllable.charcode, code > 0 else { fatalError("pinyin-syllable.txt : bad format : \(syllable)") }
-                        guard let tenKeyCode = syllable.tenKeyCharcode, tenKeyCode > 0 else { fatalError("pinyin-syllable.txt : bad format : \(syllable)") }
+                        lazy var errorMessage: String = "pinyin-syllable.txt : bad format : \(syllable)"
+                        guard let code = syllable.charCode, code > 0 else { fatalError(errorMessage) }
+                        guard let tenKeyCode = syllable.tenKeyCharCode, tenKeyCode > 0 else { fatalError(errorMessage) }
                         return "(\(code), \(tenKeyCode), '\(syllable)')"
                 }
                 let values: String = entries.joined(separator: ", ")
