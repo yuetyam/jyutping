@@ -2,34 +2,32 @@ import Foundation
 
 extension StringProtocol {
         var charCode: Int? {
-                guard self.count < 10 else { return nil }
-                let codes: [Int] = self.compactMap(\.internalCode)
-                guard codes.count == self.count else { return nil }
-                let code: Int = codes.radix100Combined()
-                return code
+                guard count < 10 else { return nil }
+                let codes: [Int] = compactMap(\.interCode)
+                guard codes.count == count else { return nil }
+                return codes.radix100Combined()
         }
         var tenKeyCharCode: Int? {
-                guard self.count < 19 else { return nil }
-                let codes: [Int] = self.compactMap(\.tenKeyInternalCode)
-                guard codes.count == self.count else { return nil }
-                let code: Int = codes.decimalCombined()
-                return code
+                guard count < 19 else { return nil }
+                let codes: [Int] = compactMap(\.tenKeyInterCode)
+                guard codes.count == count else { return nil }
+                return codes.decimalCombined()
         }
 }
 
 extension RandomAccessCollection where Element == Int {
         func radix100Combined() -> Int {
-                guard self.count < 10 else { return 0 }
+                guard count < 10 else { return 0 }
                 return reduce(0, { $0 * 100 + $1 })
         }
         func decimalCombined() -> Int {
-                guard self.count < 19 else { return 0 }
+                guard count < 19 else { return 0 }
                 return reduce(0, { $0 * 10 + $1 })
         }
 }
 
 private extension Character {
-        var internalCode: Int? {
+        var interCode: Int? {
                 return Self.letterCodeMap[self]
         }
         private static let letterCodeMap: [Character : Int] = [
@@ -61,7 +59,7 @@ private extension Character {
                 letterZ : 45,
         ]
 
-        var tenKeyInternalCode: Int? {
+        var tenKeyInterCode: Int? {
                 return Self.tenKeyCodeMap[self]
         }
         private static let tenKeyCodeMap: [Character : Int] = [

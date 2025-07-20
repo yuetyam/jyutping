@@ -65,7 +65,7 @@ public struct PinyinSegmentor {
         }
 
         private static func match<T: StringProtocol>(text: T, statement: OpaquePointer?) -> String? {
-                guard let code = text.charcode else { return nil }
+                guard let code = text.charCode else { return nil }
                 sqlite3_reset(statement)
                 sqlite3_bind_int64(statement, 1, Int64(code))
                 guard sqlite3_step(statement) == SQLITE_ROW else { return nil }

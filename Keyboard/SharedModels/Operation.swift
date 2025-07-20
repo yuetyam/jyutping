@@ -2,7 +2,6 @@ import CoreIME
 
 enum Operation: Hashable {
         case input(String)
-        case separate
         case process(String)
         case combine(Combo)
         case space

@@ -17,10 +17,10 @@ struct HiddenKey: View {
                                         AudioFeedback.deleted()
                                         context.triggerHapticFeedback()
                                         context.operate(.backspace)
-                                } else if let inputEvent = key.inputEvent {
+                                } else if let event = key.inputEvent {
                                         AudioFeedback.inputed()
                                         context.triggerHapticFeedback()
-                                        context.process(inputEvent, isCapitalized: context.keyboardCase.isCapitalized)
+                                        context.handle(event)
                                 }
                         }
         }

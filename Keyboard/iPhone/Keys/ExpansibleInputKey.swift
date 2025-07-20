@@ -206,7 +206,7 @@ struct ExpansibleInputKey: View {
                                         let text: String = context.keyboardCase.isLowercased ? pulledText : pulledText.uppercased()
                                         context.operate(.process(text))
                                 } else if let event {
-                                        context.process(event, isCapitalized: context.keyboardCase.isCapitalized)
+                                        context.handle(event)
                                 } else {
                                         let text: String = context.keyboardCase.isLowercased ? keyModel.primary.text : keyModel.primary.text.uppercased()
                                         context.operate(.process(text))

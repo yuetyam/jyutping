@@ -1046,7 +1046,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                         return type != .compose
                                 }()
                                 if shouldKeepBuffer {
-                                        bufferEvents.append(InputEvent.quote)
+                                        bufferEvents.append(InputEvent.apostrophe)
                                 } else {
                                         switch Options.punctuationForm {
                                         case .cantonese:
@@ -1296,7 +1296,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 case .some(let event) where event.isReverseLookupTrigger:
                         selectedCandidates = []
                         var tail = bufferEvents.dropFirst(candidate.inputCount + 1)
-                        while (tail.first?.isQuote ?? false) {
+                        while (tail.first?.isApostrophe ?? false) {
                                 tail = tail.dropFirst()
                         }
                         let tailLength = tail.count
@@ -1313,7 +1313,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                 selectedCandidates = []
                         }
                         var tail = bufferEvents.dropFirst(candidate.inputCount)
-                        while (tail.first?.isQuote ?? false) {
+                        while (tail.first?.isApostrophe ?? false) {
                                 tail = tail.dropFirst()
                         }
                         let tailLength = tail.count

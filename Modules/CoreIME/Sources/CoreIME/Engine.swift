@@ -79,7 +79,7 @@ extension Engine {
                 default:
                         search(events: syllableEvents, segmentation: segmentation, anchorsStatement: anchorsStatement, pingStatement: pingStatement, strictStatement: strictStatement)
                 }
-                switch (events.contains(where: \.isQuote), events.contains(where: \.isToneEvent)) {
+                switch (events.contains(where: \.isApostrophe), events.contains(where: \.isToneEvent)) {
                 case (false, false):
                         return candidates
                 case (true, true):
@@ -215,7 +215,7 @@ extension Engine {
                                 }
                         })
                         guard qualified.isEmpty else { return qualified }
-                        let anchorEvents = events.split(separator: InputEvent.quote).compactMap(\.first)
+                        let anchorEvents = events.split(separator: InputEvent.apostrophe).compactMap(\.first)
                         let anchorCount = anchorEvents.count
                         return anchorsMatch(events: anchorEvents, statement: anchorsStatement)
                                 .compactMap({ item -> Candidate? in

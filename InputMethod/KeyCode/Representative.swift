@@ -7,7 +7,9 @@ enum Representative: Hashable {
         case keypadNumber(Int)
         case arrow(Direction)
         case punctuation(PunctuationKey)
+        /// Grave accent; Backtick; Backquote
         case grave
+        /// Apostrophe
         case quote
         case `return`
         case backspace

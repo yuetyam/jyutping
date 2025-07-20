@@ -116,7 +116,7 @@ extension Engine {
                 return statement
         }
         private static func anchorMatch(pinyin text: String, statement: OpaquePointer?, limit: Int64? = nil) -> [PinyinLexicon] {
-                guard let code = text.charcode else { return [] }
+                guard let code = text.charCode else { return [] }
                 sqlite3_reset(statement)
                 sqlite3_bind_int64(statement, 1, Int64(code))
                 sqlite3_bind_int64(statement, 2, (limit ?? 100))

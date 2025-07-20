@@ -8,7 +8,7 @@ extension Engine {
                         .flatMap({ Engine.reveresLookup(text: $0.text, input: $0.input) })
         }
         private static func match(quick5 text: String) -> [ShapeLexicon] {
-                guard let code = text.charcode else { return [] }
+                guard let code = text.charCode else { return [] }
                 let command: String = "SELECT rowid, word FROM quicktable WHERE q5code = \(code);"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
@@ -46,7 +46,7 @@ extension Engine {
                         .flatMap({ Engine.reveresLookup(text: $0.text, input: $0.input) })
         }
         private static func match(quick3 text: String) -> [ShapeLexicon] {
-                guard let code = text.charcode else { return [] }
+                guard let code = text.charCode else { return [] }
                 let command: String = "SELECT rowid, word FROM quicktable WHERE q3code = \(code);"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }

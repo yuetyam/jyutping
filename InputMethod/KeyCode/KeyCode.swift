@@ -98,7 +98,9 @@ struct KeyCode {
                 /// Grave accent; Backtick; Backquote
                 static let grave       : UInt16 = 0x32
                 static let minus       : UInt16 = 0x1b
+                /// Full-stop
                 static let period      : UInt16 = 0x2f
+                /// Apostrophe
                 static let quote       : UInt16 = 0x27
                 static let semicolon   : UInt16 = 0x29
                 static let slash       : UInt16 = 0x2c

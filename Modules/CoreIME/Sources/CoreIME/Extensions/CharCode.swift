@@ -1,24 +1,22 @@
 extension StringProtocol {
-        var charcode: Int? {
-                guard self.count < 10 else { return nil }
-                let codes: [Int] = self.compactMap(\.intercode)
-                guard codes.count == self.count else { return nil }
-                let code: Int = codes.radix100Combined()
-                return code
+        var charCode: Int? {
+                guard count < 10 else { return nil }
+                let codes: [Int] = compactMap(\.interCode)
+                guard codes.count == count else { return nil }
+                return codes.radix100Combined()
         }
-        var tenKeyCharcode: Int? {
-                guard self.count < 19 else { return nil }
-                let codes: [Int] = self.compactMap(\.tenKeyIntercode)
-                guard codes.count == self.count else { return nil }
-                let code: Int = codes.decimalCombined()
-                return code
+        var tenKeyCharCode: Int? {
+                guard count < 19 else { return nil }
+                let codes: [Int] = compactMap(\.tenKeyInterCode)
+                guard codes.count == count else { return nil }
+                return codes.decimalCombined()
         }
 }
 
 extension Collection where Element == Character {
         /// CharCode that replaced 'y' with 'j' for anchors.
         var anchorsCode: Int? {
-                let charCode: Int = self.compactMap(\.intercode)
+                let charCode: Int = compactMap(\.interCode)
                         .map({ $0 == 44 ? 29 : $0 }) // Replace 'y' with 'j'
                         .radix100Combined()
                 return (charCode == 0) ? nil : charCode
@@ -27,18 +25,18 @@ extension Collection where Element == Character {
 
 extension RandomAccessCollection where Element == Int {
         func radix100Combined() -> Int {
-                guard self.count < 10 else { return 0 }
+                guard count < 10 else { return 0 }
                 return reduce(0, { $0 * 100 + $1 })
         }
         func decimalCombined() -> Int {
-                guard self.count < 19 else { return 0 }
+                guard count < 19 else { return 0 }
                 return reduce(0, { $0 * 10 + $1 })
         }
 }
 
 extension Character {
 
-        var intercode: Int? {
+        var interCode: Int? {
                 return Self.letterCodeMap[self]
         }
 
@@ -47,80 +45,80 @@ extension Character {
         }
 
         private static let letterCodeMap: [Character : Int] = [
-                Self.letterA : 20,
-                Self.letterB : 21,
-                Self.letterC : 22,
-                Self.letterD : 23,
-                Self.letterE : 24,
-                Self.letterF : 25,
-                Self.letterG : 26,
-                Self.letterH : 27,
-                Self.letterI : 28,
-                Self.letterJ : 29,
-                Self.letterK : 30,
-                Self.letterL : 31,
-                Self.letterM : 32,
-                Self.letterN : 33,
-                Self.letterO : 34,
-                Self.letterP : 35,
-                Self.letterQ : 36,
-                Self.letterR : 37,
-                Self.letterS : 38,
-                Self.letterT : 39,
-                Self.letterU : 40,
-                Self.letterV : 41,
-                Self.letterW : 42,
-                Self.letterX : 43,
-                Self.letterY : 44,
-                Self.letterZ : 45,
+                letterA : 20,
+                letterB : 21,
+                letterC : 22,
+                letterD : 23,
+                letterE : 24,
+                letterF : 25,
+                letterG : 26,
+                letterH : 27,
+                letterI : 28,
+                letterJ : 29,
+                letterK : 30,
+                letterL : 31,
+                letterM : 32,
+                letterN : 33,
+                letterO : 34,
+                letterP : 35,
+                letterQ : 36,
+                letterR : 37,
+                letterS : 38,
+                letterT : 39,
+                letterU : 40,
+                letterV : 41,
+                letterW : 42,
+                letterX : 43,
+                letterY : 44,
+                letterZ : 45,
         ]
         private static let numberCodeMap: [Character : Int] = [
-                Self.number0 : 10,
-                Self.number1 : 11,
-                Self.number2 : 12,
-                Self.number3 : 13,
-                Self.number4 : 14,
-                Self.number5 : 15,
-                Self.number6 : 16,
-                Self.number7 : 17,
-                Self.number8 : 18,
-                Self.number9 : 19,
+                number0 : 10,
+                number1 : 11,
+                number2 : 12,
+                number3 : 13,
+                number4 : 14,
+                number5 : 15,
+                number6 : 16,
+                number7 : 17,
+                number8 : 18,
+                number9 : 19,
         ]
 }
 
 extension Character {
 
-        var tenKeyIntercode: Int? {
+        var tenKeyInterCode: Int? {
                 return Self.tenKeyCodeMap[self]
         }
 
         private static let tenKeyCodeMap: [Character : Int] = [
-                Self.letterA : 2,
-                Self.letterB : 2,
-                Self.letterC : 2,
-                Self.letterD : 3,
-                Self.letterE : 3,
-                Self.letterF : 3,
-                Self.letterG : 4,
-                Self.letterH : 4,
-                Self.letterI : 4,
-                Self.letterJ : 5,
-                Self.letterK : 5,
-                Self.letterL : 5,
-                Self.letterM : 6,
-                Self.letterN : 6,
-                Self.letterO : 6,
-                Self.letterP : 7,
-                Self.letterQ : 7,
-                Self.letterR : 7,
-                Self.letterS : 7,
-                Self.letterT : 8,
-                Self.letterU : 8,
-                Self.letterV : 8,
-                Self.letterW : 9,
-                Self.letterX : 9,
-                Self.letterY : 9,
-                Self.letterZ : 9,
+                letterA : 2,
+                letterB : 2,
+                letterC : 2,
+                letterD : 3,
+                letterE : 3,
+                letterF : 3,
+                letterG : 4,
+                letterH : 4,
+                letterI : 4,
+                letterJ : 5,
+                letterK : 5,
+                letterL : 5,
+                letterM : 6,
+                letterN : 6,
+                letterO : 6,
+                letterP : 7,
+                letterQ : 7,
+                letterR : 7,
+                letterS : 7,
+                letterT : 8,
+                letterU : 8,
+                letterV : 8,
+                letterW : 9,
+                letterX : 9,
+                letterY : 9,
+                letterZ : 9,
         ]
 }
 

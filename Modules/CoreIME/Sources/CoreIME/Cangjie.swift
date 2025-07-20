@@ -27,7 +27,7 @@ private extension Engine {
                 return (match(cangjie5: text) + glob(cangjie5: text)).uniqued().flatMap({ Engine.reveresLookup(text: $0.text, input: $0.input) })
         }
         private static func match(cangjie5 text: String) -> [ShapeLexicon] {
-                guard let code = text.charcode else { return [] }
+                guard let code = text.charCode else { return [] }
                 let command: String = "SELECT rowid, word FROM cangjietable WHERE c5code = \(code);"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
@@ -64,7 +64,7 @@ private extension Engine {
                         .flatMap({ Engine.reveresLookup(text: $0.text, input: $0.input) })
         }
         private static func match(cangjie3 text: String) -> [ShapeLexicon] {
-                guard let code = text.charcode else { return [] }
+                guard let code = text.charCode else { return [] }
                 let command: String = "SELECT rowid, word FROM cangjietable WHERE c3code = \(code);"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }

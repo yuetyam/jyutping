@@ -15,7 +15,7 @@ extension Engine {
                 guard matched.isNotEmpty else { return [] }
                 let bodyEvents = events.dropFirst()
                 let text = bodyEvents.map(\.text).joined()
-                switch (bodyEvents.contains(where: \.isQuote), bodyEvents.contains(where: \.isToneLetter)) {
+                switch (bodyEvents.contains(where: \.isApostrophe), bodyEvents.contains(where: \.isToneLetter)) {
                 case (true, true):
                         let isOneToneOnly: Bool = (text.count - markFreeText.count) == 2
                         guard isOneToneOnly else { return [] }

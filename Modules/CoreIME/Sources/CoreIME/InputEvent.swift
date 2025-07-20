@@ -73,8 +73,8 @@ public struct InputEvent: Hashable, Identifiable, Comparable, Sendable {
         public static let letterY = InputEvent(text: "y", code: 44, keyCode: 0x10)
         public static let letterZ = InputEvent(text: "z", code: 45, keyCode: 0x06)
 
-        /// Separator; Delimiter; Apostrophe
-        public static let quote = InputEvent(text: "\u{27}", code: 47, keyCode: 0x27)
+        /// Separator; Delimiter; Quote
+        public static let apostrophe = InputEvent(text: "\u{27}", code: 47, keyCode: 0x27)
 
         /// Grave accent; Backtick; Backquote
         public static let grave = InputEvent(text: "\u{60}", code: 48, keyCode: 0x32)
@@ -123,9 +123,9 @@ extension InputEvent {
                 }
         }
 
-        /// Separator; Delimiter; Apostrophe
-        public var isQuote: Bool {
-                return self == Self.quote
+        /// Separator; Delimiter; Quote
+        public var isApostrophe: Bool {
+                return self == Self.apostrophe
         }
 
         /// Grave accent; Backtick; Backquote
@@ -149,8 +149,8 @@ extension InputEvent {
         }
         public static func matchEvent(for keyCode: UInt16) -> InputEvent? {
                 switch keyCode {
-                case InputEvent.quote.keyCode:
-                        return .quote
+                case InputEvent.apostrophe.keyCode:
+                        return .apostrophe
                 case InputEvent.grave.keyCode:
                         return .grave
                 default:

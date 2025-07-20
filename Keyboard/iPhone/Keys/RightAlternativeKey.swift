@@ -1,5 +1,6 @@
 import SwiftUI
 import CommonExtensions
+import CoreIME
 
 /// For keyboards not containing LeftKeys
 struct RightAlternativeKey: View {
@@ -153,7 +154,7 @@ struct RightAlternativeKey: View {
                                 } else if let pulledText = pulled {
                                         context.operate(.input(pulledText))
                                 } else if context.inputStage.isBuffering {
-                                        context.operate(.separate)
+                                        context.handle(.apostrophe)
                                 } else {
                                         context.operate(.input(String.cantoneseComma))
                                 }

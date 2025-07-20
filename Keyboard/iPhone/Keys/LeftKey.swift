@@ -1,5 +1,6 @@
 import SwiftUI
 import CommonExtensions
+import CoreIME
 
 struct LeftKey: View {
 
@@ -152,7 +153,7 @@ struct LeftKey: View {
                                 } else if let pulledText = pulled {
                                         context.operate(.input(pulledText))
                                 } else if context.inputStage.isBuffering {
-                                        context.operate(.separate)
+                                        context.handle(.apostrophe)
                                 } else {
                                         context.operate(.input(String.cantoneseComma))
                                 }

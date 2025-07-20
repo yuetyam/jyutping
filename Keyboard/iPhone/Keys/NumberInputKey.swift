@@ -75,7 +75,7 @@ struct NumberInputKey: View {
                                 }
                         }
                         .onEnded { _ in
-                                context.process(event, isCapitalized: false)
+                                context.handle(event, isCapitalized: false)
                          }
                 )
         }

@@ -1,5 +1,6 @@
 import SwiftUI
 import CommonExtensions
+import CoreIME
 
 struct PadRightKey: View {
 
@@ -42,7 +43,7 @@ struct PadRightKey: View {
                         }
                         .onEnded { _ in
                                 if context.inputStage.isBuffering {
-                                        context.operate(.separate)
+                                        context.handle(.apostrophe)
                                 } else {
                                         context.updateKeyboardForm(to: .numeric)
                                 }

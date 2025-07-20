@@ -1,5 +1,6 @@
 import SwiftUI
 import CommonExtensions
+import CoreIME
 
 struct TenKeySpecialKey: View {
 
@@ -38,7 +39,7 @@ struct TenKeySpecialKey: View {
                         }
                         .onEnded { _ in
                                 if context.inputStage.isBuffering {
-                                        context.operate(.separate)
+                                        context.handle(.apostrophe)
                                 }
                          }
                 )
