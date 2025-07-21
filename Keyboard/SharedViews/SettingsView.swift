@@ -274,6 +274,7 @@ struct SettingsView: View {
                                                 Text(verbatim: "粵語").tag(KeyboardDisplayLanguage.cantonese)
                                                 Text(verbatim: "English").tag(KeyboardDisplayLanguage.english)
                                                 Text(verbatim: "Français").tag(KeyboardDisplayLanguage.french)
+                                                Text(verbatim: "日本語").tag(KeyboardDisplayLanguage.japanese)
                                         }
                                         .pickerStyle(.menu)
                                         .textCase(nil)

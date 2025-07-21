@@ -229,6 +229,7 @@ enum KeyboardDisplayLanguage: Int, CaseIterable {
         case chineseHongKong = 3
         case english = 4
         case french = 5
+        case japanese = 6
 
         static func language(of value: Int) -> KeyboardDisplayLanguage {
                 return self.allCases.first(where: { $0.rawValue == value }) ?? Self.auto
@@ -236,16 +237,12 @@ enum KeyboardDisplayLanguage: Int, CaseIterable {
 
         var languageCode: String? {
                 switch self {
-                case .auto:
-                        nil
-                case .cantonese:
-                        "yue"
-                case .chineseHongKong:
-                        "zh-Hant-HK"
-                case .english:
-                        "en"
-                case .french:
-                        "fr"
+                case .auto: nil
+                case .cantonese: "yue"
+                case .chineseHongKong: "zh-Hant-HK"
+                case .english: "en"
+                case .french: "fr"
+                case .japanese: "ja"
                 }
         }
 }
