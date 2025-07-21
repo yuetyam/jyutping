@@ -166,6 +166,9 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         prepareWindow()
                         client?.overrideKeyboard(withKeyboardNamed: PresetConstant.systemABCKeyboardLayout)
                 }
+                Task {
+                        await obtainSupplementaryLexicon()
+                }
                 NotificationCenter.default.addObserver(self, selector: #selector(handleContentSizeChanged(_:)), name: .contentSize, object: nil)
                 NotificationCenter.default.addObserver(self, selector: #selector(highlightIndex(_:)), name: .highlightIndex, object: nil)
                 NotificationCenter.default.addObserver(self, selector: #selector(selectIndex(_:)), name: .selectIndex, object: nil)
@@ -374,6 +377,36 @@ final class JyutpingInputController: IMKInputController, Sendable {
 
         // MARK: - Candidates
 
+        private lazy var definedLexicons: [DefinedLexicon] = []
+        private func obtainSupplementaryLexicon() async {
+                let kUserDictionary: String = "NSUserDictionaryReplacementItems"
+                let kOn: String = "on"
+                let kReplace: String = "replace"
+                let kWith: String = "with"
+                guard let items = CFPreferencesCopyAppValue(kUserDictionary as CFString, kCFPreferencesAnyApplication) as? [[String: Any]] else { return }
+                definedLexicons = items.compactMap { dict -> DefinedLexicon? in
+                        let isEnabled: Bool = (dict[kOn] as? Bool) == true || (dict[kOn] as? Int) == 1
+                        guard isEnabled else { return nil }
+                        guard let input = (dict[kReplace] as? String), input.isNotEmpty else { return nil }
+                        let events = input.lowercased().compactMap(InputEvent.matchInputEvent(for:))
+                        guard events.count == input.count else { return nil }
+                        guard let text = (dict[kWith] as? String), text.isNotEmpty else { return nil }
+                        return DefinedLexicon(events: events, input: input, text: text)
+                }
+        }
+        private struct DefinedLexicon: Hashable {
+                let events: [InputEvent]
+                let input: String
+                let text: String
+        }
+        private func searchDefinedCandidates(for events: [InputEvent]) -> [Candidate] {
+                guard AppSettings.isTextReplacementsOn else { return [] }
+                return definedLexicons.compactMap({ item -> Candidate? in
+                        guard item.events == events else { return nil }
+                        return Candidate(type: .text, text: item.text, romanization: item.input, input: item.input)
+                })
+        }
+
         /// Cached Candidate sequence for InputMemory
         private lazy var selectedCandidates: [Candidate] = []
         private func appendSelectedCandidate(_ candidate: Candidate) {
@@ -438,6 +471,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         async let userLexiconCandidates: [Candidate] = isInputMemoryOn ? UserLexicon.suggest(events: bufferEvents, segmentation: segmentation) : []
                         async let engineCandidates: [Candidate] = Engine.suggest(events: bufferEvents, segmentation: segmentation)
                         let suggestions = await (userLexiconCandidates + engineCandidates).transformed(with: Options.characterStandard, isEmojiSuggestionsOn: isEmojiSuggestionsOn)
+                        let definedCandidates: [Candidate] = await searchDefinedCandidates(for: bufferEvents)
                         if Task.isCancelled.negative {
                                 await MainActor.run { [weak self] in
                                         guard let self else { return }
@@ -453,7 +487,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                                 return bestScheme.mark + String.space + text.dropFirst(leadingLength)
                                         }()
                                         self.mark(text: text2mark)
-                                        self.candidates = suggestions
+                                        self.candidates = definedCandidates.isEmpty ? suggestions : (definedCandidates + suggestions)
                                 }
                         }
                 }

@@ -12,6 +12,7 @@ struct SettingsKey {
         static let LabelSet: String = "LabelSet"
         static let LabelLast: String = "LabelLast"
         static let CangjieVariant: String = "CangjieVariant"
+        static let SystemLexicon: String = "SystemLexicon"
         static let SchemeRules: String = "SchemeRules"
         static let UserLexiconInputMemory: String = "UserLexiconInputMemory"
 
@@ -346,6 +347,16 @@ struct AppSettings {
                 cangjieVariant = variant
                 let value: Int = variant.rawValue
                 UserDefaults.standard.set(value, forKey: SettingsKey.CangjieVariant)
+        }
+
+        private(set) static var isTextReplacementsOn: Bool = {
+                let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.SystemLexicon)
+                return savedValue != 2
+        }()
+        static func updateTextReplacementsState(to isOn: Bool) {
+                isTextReplacementsOn = isOn
+                let value: Int = isOn ? 1 : 2
+                UserDefaults.standard.set(value, forKey: SettingsKey.SystemLexicon)
         }
 
         private(set) static var isCompatibleModeOn: Bool = {

@@ -19,6 +19,7 @@ struct GeneralPreferencesView: View {
 
         @State private var characterStandard: CharacterStandard = Options.characterStandard
         @State private var isEmojiSuggestionsOn: Bool = Options.isEmojiSuggestionsOn
+        @State private var isTextReplacementsOn: Bool = AppSettings.isTextReplacementsOn
         @State private var isCompatibleModeOn: Bool = AppSettings.isCompatibleModeOn
         @State private var isInputMemoryOn: Bool = AppSettings.isInputMemoryOn
 
@@ -163,6 +164,15 @@ struct GeneralPreferencesView: View {
                                                                 .fixedSize()
                                                                 .onChange(of: isEmojiSuggestionsOn) { newState in
                                                                         Options.updateEmojiSuggestions(to: newState)
+                                                                }
+                                                        Spacer()
+                                                }
+                                                HStack {
+                                                        Toggle("GeneralPreferencesView.SystemLexicon.ToggleTitle", isOn: $isTextReplacementsOn)
+                                                                .toggleStyle(.switch)
+                                                                .fixedSize()
+                                                                .onChange(of: isTextReplacementsOn) { newState in
+                                                                        AppSettings.updateTextReplacementsState(to: newState)
                                                                 }
                                                         Spacer()
                                                 }
