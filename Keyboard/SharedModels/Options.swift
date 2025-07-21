@@ -83,6 +83,16 @@ struct Options {
                 UserDefaults.standard.set(value, forKey: OptionsKey.CommentToneStyle)
         }
 
+        nonisolated(unsafe) private(set) static var cangjieVariant: CangjieVariant = {
+                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.CangjieVariant)
+                return CangjieVariant.variant(of: savedValue)
+        }()
+        static func updateCangjieVariant(to variant: CangjieVariant) {
+                cangjieVariant = variant
+                let value: Int = variant.rawValue
+                UserDefaults.standard.set(value, forKey: OptionsKey.CangjieVariant)
+        }
+
         nonisolated(unsafe) private(set) static var isEmojiSuggestionsOn: Bool = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.EmojiSuggestions)
                 return savedValue != 2
@@ -93,14 +103,14 @@ struct Options {
                 UserDefaults.standard.set(value, forKey: OptionsKey.EmojiSuggestions)
         }
 
-        nonisolated(unsafe) private(set) static var cangjieVariant: CangjieVariant = {
-                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.CangjieVariant)
-                return CangjieVariant.variant(of: savedValue)
+        nonisolated(unsafe) private(set) static var isTextReplacementsOn: Bool = {
+                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.SystemLexicon)
+                return savedValue != 2
         }()
-        static func updateCangjieVariant(to variant: CangjieVariant) {
-                cangjieVariant = variant
-                let value: Int = variant.rawValue
-                UserDefaults.standard.set(value, forKey: OptionsKey.CangjieVariant)
+        static func updateTextReplacementsMode(to isOn: Bool) {
+                isTextReplacementsOn = isOn
+                let value: Int = isOn ? 1 : 2
+                UserDefaults.standard.set(value, forKey: OptionsKey.SystemLexicon)
         }
 
         nonisolated(unsafe) private(set) static var isCompatibleModeOn: Bool = {
@@ -160,6 +170,7 @@ struct OptionsKey {
         static let CangjieVariant: String = "CangjieVariant"
         static let EmojiSuggestions: String = "emoji"
         static let SchemeRules: String = "SchemeRules"
+        static let SystemLexicon: String = "SystemLexicon"
         static let UserLexiconInputMemory: String = "UserLexiconInputMemory"
 
         // @available(*, deprecated)

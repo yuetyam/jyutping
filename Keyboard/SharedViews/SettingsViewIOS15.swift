@@ -32,6 +32,7 @@ struct SettingsViewIOS15: View {
         @State private var commentToneStyle: CommentToneStyle = Options.commentToneStyle
         @State private var cangjieVariant: CangjieVariant = Options.cangjieVariant
         @State private var isEmojiSuggestionsOn: Bool = Options.isEmojiSuggestionsOn
+        @State private var isTextReplacementsOn: Bool = Options.isTextReplacementsOn
         @State private var isCompatibleModeOn: Bool = Options.isCompatibleModeOn
         @State private var preferredLanguage: KeyboardDisplayLanguage = Options.preferredLanguage
         @State private var isInputMemoryOn: Bool = Options.isInputMemoryOn
@@ -241,9 +242,11 @@ struct SettingsViewIOS15: View {
                                                         AudioFeedback.modified()
                                                         Options.updateEmojiSuggestions(to: newState)
                                                 }
-                                }
-
-                                Section {
+                                        Toggle("SettingsView.SystemLexicon.ToggleTitle", isOn: $isTextReplacementsOn)
+                                                .onChange(of: isTextReplacementsOn) { newState in
+                                                        AudioFeedback.modified()
+                                                        Options.updateTextReplacementsMode(to: newState)
+                                                }
                                         Toggle("SettingsView.SchemeRules.CompatibleMode.ToggleTitle", isOn: $isCompatibleModeOn)
                                                 .onChange(of: isCompatibleModeOn) { newState in
                                                         AudioFeedback.modified()

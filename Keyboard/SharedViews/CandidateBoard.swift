@@ -1,14 +1,19 @@
 import SwiftUI
 import CoreIME
+import CommonExtensions
 
 extension Candidate {
         var width: CGFloat {
-                let textCount: Int = self.text.count
-                switch self.type {
+                let textCount: Int = text.count
+                switch type {
                 case .cantonese:
                         return CGFloat(textCount * 20 + 32)
                 case _ where textCount == 1:
                         return 48
+                case .text:
+                        let letterCount: Int = text.count(where: \.isBasicLatinLetter)
+                        let computed: Int = (letterCount * 12) + ((textCount - letterCount) * 28)
+                        return CGFloat(computed)
                 default:
                         return CGFloat(textCount * 12)
                 }
