@@ -183,7 +183,7 @@ private struct ThirdKeyRow: View {
                         EnhancedInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("ng"), members: [KeyElement("ng"), KeyElement("v")]))
                         LetterInputKey(.letterB)
                         LetterInputKey(.letterN)
-                        EnhancedInputKey(keyLocale: .trailing, event: .letterM, keyModel: KeyModel(primary: KeyElement("m"), members: [KeyElement("m"), KeyElement("kw")]))
+                        LetterInputKey(.letterM)
                 }
         }
 }
@@ -208,7 +208,7 @@ private struct ThirdEnhancedKeyRow: View {
                         EnhancedInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("ng", header: "…"), members: [KeyElement("ng"), KeyElement("…"), KeyElement("v")]))
                         EnhancedInputKey(keyLocale: .leading, event: .letterB, keyModel: KeyModel(primary: KeyElement("b", header: "、"), members: [KeyElement("b"), KeyElement("、")]))
                         EnhancedInputKey(keyLocale: .trailing, event: .letterN, keyModel: KeyModel(primary: KeyElement("n", header: "；"), members: [KeyElement("n"), KeyElement("；")]))
-                        EnhancedInputKey(keyLocale: .trailing, event: .letterM, keyModel: KeyModel(primary: KeyElement("m", header: "："), members: [KeyElement("m"), KeyElement("："), KeyElement("kw")]))
+                        EnhancedInputKey(keyLocale: .trailing, event: .letterM, keyModel: KeyModel(primary: KeyElement("m", header: "："), members: [KeyElement("m"), KeyElement("：")]))
                 }
         }
 }

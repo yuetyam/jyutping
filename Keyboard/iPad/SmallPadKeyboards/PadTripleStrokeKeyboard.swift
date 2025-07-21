@@ -51,8 +51,8 @@ struct PadTripleStrokeKeyboard: View {
                                         PadPullableInputKey(event: .letterC, upper: "～", lower: "c")
                                         PadCompleteInputKey(keyLocale: .leading, upper: "…", keyModel: KeyModel(primary: KeyElement("ng"), members: [KeyElement("ng"), KeyElement("v")]))
                                         PadPullableInputKey(event: .letterB, upper: "、", lower: "b")
-                                        PadPullableInputKey(event: .letterN, upper: "：", lower: "n")
-                                        PadCompleteInputKey(keyLocale: .trailing, event: .letterM, upper: "：", keyModel: KeyModel(primary: KeyElement("m"), members: [KeyElement("m"), KeyElement("kw")]))
+                                        PadPullableInputKey(event: .letterN, upper: "；", lower: "n")
+                                        PadPullableInputKey(event: .letterM, upper: "：", lower: "m")
                                 }
                                 if context.keyboardCase.isUppercased {
                                         PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("！"), members: [KeyElement("！"), KeyElement("!", header: PresetConstant.halfWidth)]))

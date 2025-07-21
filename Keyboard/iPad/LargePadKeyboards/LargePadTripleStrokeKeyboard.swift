@@ -417,7 +417,7 @@ struct LargePadTripleStrokeKeyboard: View {
                                         LargePadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("ng"), members: [KeyElement("ng"), KeyElement("v")]))
                                         LargePadLetterInputKey(.letterB)
                                         LargePadLetterInputKey(.letterN)
-                                        LargePadExpansibleInputKey(keyLocale: .trailing, event: .letterM, keyModel: KeyModel(primary: KeyElement("m"), members: [KeyElement("m"), KeyElement("kw")]))
+                                        LargePadLetterInputKey(.letterM)
                                 }
                                 if context.keyboardCase.isUppercased {
                                         LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("《"), members: [KeyElement("《"), KeyElement("〈"), KeyElement("<"), KeyElement("＜", header: PresetConstant.fullWidth)]))
