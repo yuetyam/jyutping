@@ -9,8 +9,8 @@ struct SharedBottomKeys {
                         primary: KeyElement(String.comma),
                         members: [
                                 KeyElement(String.comma),
-                                KeyElement("?"),
                                 KeyElement("!"),
+                                KeyElement("?"),
                                 KeyElement(";")
                         ]
                 )
@@ -21,8 +21,8 @@ struct SharedBottomKeys {
                         primary: KeyElement(String.period),
                         members: [
                                 KeyElement(String.period),
-                                KeyElement("!"),
                                 KeyElement("?"),
+                                KeyElement("!"),
                                 KeyElement("…")
                         ]
                 )
@@ -46,8 +46,8 @@ struct SharedBottomKeys {
                         primary: KeyElement(String.cantoneseComma),
                         members: [
                                 KeyElement(String.cantoneseComma),
-                                KeyElement("？"),
                                 KeyElement("！"),
+                                KeyElement("？"),
                                 KeyElement("、")
                         ]
                 )
@@ -58,9 +58,9 @@ struct SharedBottomKeys {
                         primary: KeyElement(String.cantonesePeriod),
                         members: [
                                 KeyElement(String.cantonesePeriod),
-                                KeyElement("！"),
                                 KeyElement("？"),
-                                KeyElement(String.period)
+                                KeyElement("！"),
+                                KeyElement("…")
                         ]
                 )
         )
