@@ -34,7 +34,7 @@ struct InputMemory {
                         fetchLegacy(lower: 0, upper: 1).forEach(migrate(_:))
                         missionAccomplished()
                 default:
-                        fetchLegacy(lower: 20, upper: 50_000).forEach(migrate(_:))
+                        fetchLegacy(lower: 20, upper: 10_0000).forEach(migrate(_:))
                         UserDefaults.standard.set(20, forKey: kInputMemoryVersion)
 
                         fetchLegacy(lower: 5, upper: 20).forEach(migrate(_:))
@@ -380,10 +380,10 @@ struct InputMemory {
                         guard let word = sqlite3_column_text(statement, 0) else { continue }
                         guard let romanizationText = sqlite3_column_text(statement, 1) else { continue }
                         let romanization: String = String(cString: romanizationText)
-                        let syllableText: String = romanization.filter(\.isLowercaseBasicLatinLetter)
-                        let isFullMatched: Bool = (syllableText.count == inputLength)
+                        let letterText: String = romanization.filter(\.isLowercaseBasicLatinLetter)
+                        let isFullMatched: Bool = (letterText.count == inputLength)
                         lazy var anchorText: String = String(romanization.split(separator: Character.space).compactMap(\.first))
-                        let input: String = isFullMatched ? syllableText : anchorText
+                        let input: String = isFullMatched ? letterText : anchorText
                         let mark: String = isFullMatched ? romanization.removedTones() : anchorText
                         let instance = Candidate(text: String(cString: word), romanization: romanization, input: input, mark: mark, order: -1)
                         candidates.append(instance)
@@ -415,6 +415,6 @@ private struct InternalLexicon: Hashable, Comparable {
 private extension Candidate {
         /// MemoryLexicon identifier
         var identifier: Int {
-                return (lexiconText + "." + romanization).hash
+                return (lexiconText + String.period + romanization).hash
         }
 }

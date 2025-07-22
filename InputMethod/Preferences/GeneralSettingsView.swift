@@ -162,7 +162,7 @@ struct GeneralSettingsView: View {
                                                                 Button("GeneralPreferencesView.InputMemory.Clear.ConfirmationDialog.Confirm", role: .destructive) {
                                                                         clearInputMemoryProgress = 0
                                                                         isPerformingClearInputMemory = true
-                                                                        UserLexicon.deleteAll()
+                                                                        InputMemory.deleteAll()
                                                                 }
                                                                 Button("GeneralPreferencesView.InputMemory.Clear.ConfirmationDialog.Cancel", role: .cancel) {
                                                                         isClearInputMemoryConfirmDialogPresented = false

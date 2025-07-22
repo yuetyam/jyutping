@@ -224,6 +224,9 @@
 		3739048E2DB0B49100D97241 /* TenKeyStrokeKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3739048D2DB0B49100D97241 /* TenKeyStrokeKeyboard.swift */; };
 		373B6ABA2CDF9BBE00C05CD9 /* ExpansiveBubbleShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373B6AB92CDF9BBD00C05CD9 /* ExpansiveBubbleShape.swift */; };
 		373B6ABC2CE074AD00C05CD9 /* PadExpansiveBubbleShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373B6ABB2CE074AB00C05CD9 /* PadExpansiveBubbleShape.swift */; };
+		373CB90E2E2F2E6400A3FDED /* MemoryLexicon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373CB90D2E2F2E6400A3FDED /* MemoryLexicon.swift */; };
+		373CB9102E2F2E9300A3FDED /* CharCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373CB90F2E2F2E9300A3FDED /* CharCode.swift */; };
+		373CB9122E2F30D300A3FDED /* InputMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373CB9112E2F30D300A3FDED /* InputMemory.swift */; };
 		3742192B2BD4B63200FCB170 /* EnhancedReturnKeyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3742192A2BD4B63200FCB170 /* EnhancedReturnKeyType.swift */; };
 		3742824E2B3CB70C00B687D3 /* AboutKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3742824D2B3CB70C00B687D3 /* AboutKit */; };
 		374282502B3CB71400B687D3 /* AboutKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3742824F2B3CB71400B687D3 /* AboutKit */; };
@@ -334,7 +337,6 @@
 		37E6AD822B3B381700F02279 /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD5E2B3B381600F02279 /* PreferencesView.swift */; };
 		37E6AD832B3B381700F02279 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD5F2B3B381600F02279 /* AboutView.swift */; };
 		37E6AD842B3B381700F02279 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD602B3B381600F02279 /* AppSettings.swift */; };
-		37E6AD852B3B381700F02279 /* UserLexicon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD612B3B381600F02279 /* UserLexicon.swift */; };
 		37E6AD862B3B381700F02279 /* PageTransformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD622B3B381600F02279 /* PageTransformation.swift */; };
 		37E6AD872B3B381700F02279 /* OptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD632B3B381600F02279 /* OptionsView.swift */; };
 		37E6AD882B3B381700F02279 /* InputStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD642B3B381600F02279 /* InputStage.swift */; };
@@ -634,6 +636,9 @@
 		3739048D2DB0B49100D97241 /* TenKeyStrokeKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TenKeyStrokeKeyboard.swift; sourceTree = "<group>"; };
 		373B6AB92CDF9BBD00C05CD9 /* ExpansiveBubbleShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpansiveBubbleShape.swift; sourceTree = "<group>"; };
 		373B6ABB2CE074AB00C05CD9 /* PadExpansiveBubbleShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadExpansiveBubbleShape.swift; sourceTree = "<group>"; };
+		373CB90D2E2F2E6400A3FDED /* MemoryLexicon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryLexicon.swift; sourceTree = "<group>"; };
+		373CB90F2E2F2E9300A3FDED /* CharCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharCode.swift; sourceTree = "<group>"; };
+		373CB9112E2F30D300A3FDED /* InputMemory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputMemory.swift; sourceTree = "<group>"; };
 		3742192A2BD4B63200FCB170 /* EnhancedReturnKeyType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnhancedReturnKeyType.swift; sourceTree = "<group>"; };
 		3742824C2B3CB6FD00B687D3 /* AboutKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = AboutKit; path = Modules/AboutKit; sourceTree = "<group>"; };
 		374326082CF44C3900AE8B0B /* ABCKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ABCKeyboard.swift; sourceTree = "<group>"; };
@@ -743,7 +748,6 @@
 		37E6AD5E2B3B381600F02279 /* PreferencesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
 		37E6AD5F2B3B381600F02279 /* AboutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		37E6AD602B3B381600F02279 /* AppSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
-		37E6AD612B3B381600F02279 /* UserLexicon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLexicon.swift; sourceTree = "<group>"; };
 		37E6AD622B3B381600F02279 /* PageTransformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageTransformation.swift; sourceTree = "<group>"; };
 		37E6AD632B3B381600F02279 /* OptionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsView.swift; sourceTree = "<group>"; };
 		37E6AD642B3B381600F02279 /* InputStage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputStage.swift; sourceTree = "<group>"; };
@@ -1147,7 +1151,9 @@
 				37E6AD622B3B381600F02279 /* PageTransformation.swift */,
 				37E6AD652B3B381600F02279 /* VisualEffect.swift */,
 				37E6AD542B3B381600F02279 /* Quadrant.swift */,
-				37E6AD612B3B381600F02279 /* UserLexicon.swift */,
+				373CB9112E2F30D300A3FDED /* InputMemory.swift */,
+				373CB90D2E2F2E6400A3FDED /* MemoryLexicon.swift */,
+				373CB90F2E2F2E9300A3FDED /* CharCode.swift */,
 				37E6AD432B3B381600F02279 /* CandidateViews */,
 				37E6AD582B3B381600F02279 /* Preferences */,
 				37E6AD482B3B381600F02279 /* KeyCode */,
@@ -2046,6 +2052,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				373CB90E2E2F2E6400A3FDED /* MemoryLexicon.swift in Sources */,
 				37E6AD892B3B381700F02279 /* VisualEffect.swift in Sources */,
 				37E6AD842B3B381700F02279 /* AppSettings.swift in Sources */,
 				37E6AD7E2B3B381700F02279 /* FontPicker.swift in Sources */,
@@ -2054,7 +2061,6 @@
 				37B0D1CF2DB7788900B6DEFF /* GeneralSettingsView.swift in Sources */,
 				3797F6E32C188F2B00DE6D0E /* AppDelegate.swift in Sources */,
 				37E6AD742B3B381700F02279 /* CharacterExtensions.swift in Sources */,
-				37E6AD852B3B381700F02279 /* UserLexicon.swift in Sources */,
 				376B84942BFC2C1C0029A0CF /* BottomCommentStackView.swift in Sources */,
 				37E6AD8A2B3B381700F02279 /* JyutpingInputController.swift in Sources */,
 				37E6AD6C2B3B381700F02279 /* CandidateBoard.swift in Sources */,
@@ -2077,12 +2083,14 @@
 				37E6AD822B3B381700F02279 /* PreferencesView.swift in Sources */,
 				37E6AD752B3B381700F02279 /* FontExtensions.swift in Sources */,
 				37E6AD772B3B381700F02279 /* ViewExtensions.swift in Sources */,
+				373CB9122E2F30D300A3FDED /* InputMemory.swift in Sources */,
 				37E6AD6F2B3B381700F02279 /* Direction.swift in Sources */,
 				37E6AD712B3B381700F02279 /* KeyCode.swift in Sources */,
 				376B84962BFC2CB50029A0CF /* RomanizationLabel.swift in Sources */,
 				37E6AD832B3B381700F02279 /* AboutView.swift in Sources */,
 				37E6AD782B3B381700F02279 /* StringExtensions.swift in Sources */,
 				37E6AD802B3B381700F02279 /* FontPreferencesView.swift in Sources */,
+				373CB9102E2F2E9300A3FDED /* CharCode.swift in Sources */,
 				37E6AD762B3B381700F02279 /* IMKTextInputExtensions.swift in Sources */,
 				37E6AD702B3B381700F02279 /* PunctuationKey.swift in Sources */,
 				37D771A82BF805FA008BC978 /* VerticalPageCandidateLabel.swift in Sources */,

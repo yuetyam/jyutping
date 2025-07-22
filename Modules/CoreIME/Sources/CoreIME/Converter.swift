@@ -3,8 +3,8 @@ import SQLite3
 
 extension Array where Element == Candidate {
         public func transformed(with characterStandard: CharacterStandard, isEmojiSuggestionsOn: Bool) -> [Candidate] {
-                let containsUserLexicon: Bool = first?.isUserLexicon ?? false
-                switch (containsUserLexicon, isEmojiSuggestionsOn) {
+                let containsInputMemory: Bool = first?.isInputMemory ?? false
+                switch (containsInputMemory, isEmojiSuggestionsOn) {
                 case (true, true):
                         return filter(\.isCompound.negative).transformed(to: characterStandard).uniqued()
                 case (false, true):

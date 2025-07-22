@@ -152,7 +152,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 caretFrame = client?.caretRect
                 Task { @MainActor in
                         suggestionTask?.cancel()
-                        UserLexicon.prepare()
+                        InputMemory.prepare()
                         Engine.prepare()
                         if inputStage.isBuffering {
                                 clearBuffer()
@@ -284,7 +284,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                 inputStage = .standby
                         case (true, false):
                                 inputStage = .starting
-                                UserLexicon.prepare()
+                                InputMemory.prepare()
                                 Engine.prepare()
                                 prepareWindow()
                         case (false, false):
@@ -297,7 +297,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                 suggestionTask?.cancel()
                                 if AppSettings.isInputMemoryOn && selectedCandidates.isNotEmpty {
                                         let concatenated = selectedCandidates.filter(\.isCantonese).joined()
-                                        UserLexicon.handle(concatenated)
+                                        concatenated.flatMap(InputMemory.handle(_:))
                                 }
                                 selectedCandidates = []
                                 clearMarkedText()
@@ -385,8 +385,8 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 let kWith: String = "with"
                 guard let items = CFPreferencesCopyAppValue(kUserDictionary as CFString, kCFPreferencesAnyApplication) as? [[String: Any]] else { return }
                 definedLexicons = items.compactMap { dict -> DefinedLexicon? in
-                        let isEnabled: Bool = (dict[kOn] as? Bool) == true || (dict[kOn] as? Int) == 1
-                        guard isEnabled else { return nil }
+                        let isDisabled: Bool = (dict[kOn] as? Bool) == false || (dict[kOn] as? Int) == 0
+                        guard isDisabled.negative else { return nil }
                         guard let input = (dict[kReplace] as? String), input.isNotEmpty else { return nil }
                         let events = input.lowercased().compactMap(InputEvent.matchInputEvent(for:))
                         guard events.count == input.count else { return nil }
@@ -468,9 +468,9 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 suggestionTask = Task.detached(priority: .high) { [weak self] in
                         guard let self else { return }
                         let segmentation = await Segmenter.segment(events: bufferEvents)
-                        async let userLexiconCandidates: [Candidate] = isInputMemoryOn ? UserLexicon.suggest(events: bufferEvents, segmentation: segmentation) : []
+                        async let memoryCandidates: [Candidate] = isInputMemoryOn ? InputMemory.suggest(events: bufferEvents, segmentation: segmentation) : []
                         async let engineCandidates: [Candidate] = Engine.suggest(events: bufferEvents, segmentation: segmentation)
-                        let suggestions = await (userLexiconCandidates + engineCandidates).transformed(with: Options.characterStandard, isEmojiSuggestionsOn: isEmojiSuggestionsOn)
+                        let suggestions = await (memoryCandidates + engineCandidates).transformed(with: Options.characterStandard, isEmojiSuggestionsOn: isEmojiSuggestionsOn)
                         let definedCandidates: [Candidate] = await searchDefinedCandidates(for: bufferEvents)
                         if Task.isCancelled.negative {
                                 await MainActor.run { [weak self] in
@@ -819,7 +819,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         }
                 }
                 nonisolated(unsafe) let client: InputClient? = (sender as? InputClient)
-                if isBuffering.negative && isEventHandled {
+                if isBuffering.negative && isEventHandled && inputForm.isOptions.negative {
                         caretFrame = client?.caretRect
                         let text: String = (InputEvent.matchEvent(for: code) ?? InputEvent.letterA).text
                         let attributes: [NSAttributedString.Key: Any] = [.underlineStyle: 0]
@@ -1025,12 +1025,12 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                 .comma where hasHighlighted && commaPeriodKeysMode.isCharacterSelection:
                                         guard let highlighted, let firstCharacter = highlighted.text.first else { return }
                                         insert(String(firstCharacter))
-                                        aftercareSelection(highlighted, shouldProcessUserLexicon: false)
+                                        aftercareSelection(highlighted, shouldRememberSelected: false)
                                 case .bracketRight where hasHighlighted && bracketKeysMode.isCharacterSelection,
                                 .period where hasHighlighted && commaPeriodKeysMode.isCharacterSelection:
                                         guard let highlighted, let lastCharacter = highlighted.text.last else { return }
                                         insert(String(lastCharacter))
-                                        aftercareSelection(highlighted, shouldProcessUserLexicon: false)
+                                        aftercareSelection(highlighted, shouldRememberSelected: false)
                                 default:
                                         if let highlighted {
                                                 insert(highlighted.text)
@@ -1133,7 +1133,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                 let index = appContext.highlightedIndex
                                 guard let candidate = appContext.displayCandidates.fetch(index)?.candidate else { return }
                                 guard candidate.isCantonese else { return }
-                                UserLexicon.removeItem(candidate: candidate)
+                                InputMemory.remove(candidate: candidate)
                         case .transparent:
                                 return
                         case .options:
@@ -1148,7 +1148,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                 let index = appContext.highlightedIndex
                                 guard let candidate = appContext.displayCandidates.fetch(index)?.candidate else { return }
                                 guard candidate.isCantonese else { return }
-                                UserLexicon.removeItem(candidate: candidate)
+                                InputMemory.remove(candidate: candidate)
                         case .transparent:
                                 return
                         case .options:
@@ -1316,7 +1316,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 didCharacterStandardChanged = true
         }
 
-        private func aftercareSelection(_ selected: DisplayCandidate, shouldProcessUserLexicon: Bool = true) {
+        private func aftercareSelection(_ selected: DisplayCandidate, shouldRememberSelected: Bool = true) {
                 let candidate = candidates.fetch(selected.candidateIndex) ?? candidates.first(where: { $0 == selected.candidate })
                 guard let candidate, candidate.isCantonese else {
                         selectedCandidates = []
@@ -1341,7 +1341,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         capitals = capitals.prefix(1) + capitals.suffix(tailLength)
                         bufferEvents = bufferEvents.prefix(1) + bufferEvents.suffix(tailLength)
                 default:
-                        if shouldProcessUserLexicon {
+                        if shouldRememberSelected {
                                 appendSelectedCandidate(candidate)
                         } else {
                                 selectedCandidates = []

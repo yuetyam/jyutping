@@ -28,12 +28,6 @@ struct MemoryLexicon: Hashable {
         /// romanization.removedTonesAndSpaces.hash
         let ping: Int
 
-        /// romanization.anchorText.TenKeyCharCode
-        let tenKeyAnchors: Int
-
-        /// romanization.removedTonesAndSpaces.TenKeyCharCode
-        let tenKeyCode: Int
-
         init(word: String, romanization: String, frequency: Int) {
                 let anchorText: String = String(romanization.split(separator: Character.space).compactMap(\.first))
                 let letterText: String = romanization.filter(\.isLowercaseBasicLatinLetter)
@@ -45,8 +39,6 @@ struct MemoryLexicon: Hashable {
                 self.anchors = anchorText.charCode ?? 0
                 self.shortcut = anchorText.hash
                 self.ping = letterText.hash
-                self.tenKeyAnchors = anchorText.tenKeyCharCode ?? 0
-                self.tenKeyCode = letterText.tenKeyCharCode ?? 0
         }
 
         // Equatable

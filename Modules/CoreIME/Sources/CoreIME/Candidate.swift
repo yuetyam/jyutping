@@ -20,12 +20,12 @@ public struct Candidate: Hashable, Comparable, Sendable {
         /// Candidate Type
         public let type: CandidateType
 
-        /// Candidate text for display.
+        /// Display text.
         ///
-        /// Corresponds to current CharacterStandard
+        /// Corresponds to the current CharacterStandard
         public let text: String
 
-        /// Candidate text for UserLexicon.
+        /// Internal text for InputMemory.
         ///
         /// Always be traditional characters.
         public let lexiconText: String
@@ -48,8 +48,8 @@ public struct Candidate: Hashable, Comparable, Sendable {
         /// Primary Initializer
         /// - Parameters:
         ///   - type: Candidate type.
-        ///   - text: Candidate text for display.
-        ///   - lexiconText: Candidate text for UserLexicon.
+        ///   - text: Display text.
+        ///   - lexiconText: Internal text for InputMemory.
         ///   - romanization: Jyutping.
         ///   - input: User input for this Candidate.
         ///   - mark: Formatted user input for pre-edit display.
@@ -138,8 +138,8 @@ public struct Candidate: Hashable, Comparable, Sendable {
                 return self.order > 1_000_000
         }
 
-        /// isInputMemory, order < 0
-        public var isUserLexicon: Bool {
+        /// isFromInputMemory. order < 0
+        public var isInputMemory: Bool {
                 return self.order < 0
         }
 
