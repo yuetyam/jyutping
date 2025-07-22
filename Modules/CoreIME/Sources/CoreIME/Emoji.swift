@@ -166,7 +166,7 @@ extension Engine {
                 return String(cString: target)
         }
 
-        static func tenKeySearchSymbols(combos: [Combo]) -> [Candidate] {
+        static func tenKeySearchSymbols<T: RandomAccessCollection<Combo>>(combos: T) -> [Candidate] {
                 let tenKeyCode = combos.map(\.rawValue).decimalCombined()
                 guard tenKeyCode > 0 else { return [] }
                 let command: String = "SELECT category, unicodeversion, codepoint, cantonese, romanization FROM symboltable WHERE tenkeycode = ?;"

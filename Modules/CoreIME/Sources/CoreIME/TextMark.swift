@@ -15,7 +15,7 @@ extension Engine {
                 }
                 return textMarks.map({ Candidate(input: text, text: $0) })
         }
-        static func fetchTextMarks(combos: [Combo]) -> [Candidate] {
+        static func fetchTextMarks<T: RandomAccessCollection<Combo>>(combos: T) -> [Candidate] {
                 let tenKeyCode = combos.map(\.rawValue).decimalCombined()
                 guard tenKeyCode > 0 else { return [] }
                 let command: String = "SELECT mark FROM marktable WHERE tenkeycode = ?;"

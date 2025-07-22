@@ -473,35 +473,59 @@ private extension Engine {
 // MARK: - TenKey Suggestions
 
 extension Engine {
-        public static func tenKeySuggest(combos: [Combo]) async -> [Candidate] {
-                lazy var tenKeyAnchorsStatement = prepareTenKeyAnchorsStatement()
-                lazy var tenKeyCodeStatement = prepareTenKeyCodeStatement()
+        public static func tenKeySuggest<T: RandomAccessCollection<Combo>>(combos: T) async -> [Candidate] {
+                lazy var anchorsStatement = prepareTenKeyAnchorsStatement()
+                lazy var codeMatchStatement = prepareTenKeyCodeStatement()
                 defer {
-                        sqlite3_finalize(tenKeyAnchorsStatement)
-                        sqlite3_finalize(tenKeyCodeStatement)
+                        sqlite3_finalize(anchorsStatement)
+                        sqlite3_finalize(codeMatchStatement)
                 }
-                let textMarkCandidates = fetchTextMarks(combos: combos)
-                lazy var queried = (0..<combos.count)
+                return fetchTextMarks(combos: combos) + tenKeySearch(combos: combos, anchorsStatement: anchorsStatement, codeMatchStatement: codeMatchStatement)
+        }
+        private static func tenKeySearch<T: RandomAccessCollection<Combo>>(combos: T, limit: Int64? = nil, anchorsStatement: OpaquePointer?, codeMatchStatement: OpaquePointer?) -> [Candidate] {
+                let inputLength: Int = combos.count
+                let fullCode: Int = combos.map(\.rawValue).decimalCombined()
+                guard inputLength > 1 else {
+                        return tenKeyCodeMatch(code: fullCode, limit: limit, statement: codeMatchStatement) + tenKeyAnchorsMatch(code: fullCode, limit: 100, statement: anchorsStatement)
+                }
+                let fullMatched: [Candidate] = (fullCode == 0) ? [] : tenKeyCodeMatch(code: fullCode, limit: limit, statement: codeMatchStatement)
+                let idealAnchorsMatched: [Candidate] = (fullCode == 0) ? [] : tenKeyAnchorsMatch(code: fullCode, limit: 4, statement: anchorsStatement)
+                let codeMatched: [Candidate] = (1..<inputLength)
                         .flatMap({ number -> [Candidate] in
-                                let tenKeyCode = combos.dropLast(number).map(\.rawValue).decimalCombined()
-                                guard tenKeyCode > 0 else { return [] }
-                                return tenKeyCodeMatch(code: tenKeyCode, statement: tenKeyCodeStatement) + tenKeyAnchorsMatch(code: tenKeyCode, statement: tenKeyAnchorsStatement)
+                                let code = combos.dropLast(number).map(\.rawValue).decimalCombined()
+                                guard code > 0 else { return [] }
+                                return tenKeyCodeMatch(code: code, limit: limit, statement: codeMatchStatement)
                         })
                         .sorted()
-                guard queried.isNotEmpty else { return textMarkCandidates + queried }
-                let symbols = tenKeySearchSymbols(combos: combos)
-                guard symbols.isNotEmpty else { return textMarkCandidates + queried }
-                for symbol in symbols.reversed() {
+                let anchorsMatched: [Candidate] = (0..<inputLength)
+                        .flatMap({ number -> [Candidate] in
+                                let code = combos.dropLast(number).map(\.rawValue).decimalCombined()
+                                guard code > 0 else { return [] }
+                                return tenKeyAnchorsMatch(code: code, limit: limit, statement: anchorsStatement)
+                        })
+                        .sorted()
+                var queried = (fullMatched + idealAnchorsMatched + codeMatched + anchorsMatched)
+                guard queried.isNotEmpty else { return [] }
+                for symbol in tenKeySearchSymbols(combos: combos).reversed() {
                         if let index = queried.firstIndex(where: { $0.lexiconText == symbol.lexiconText && $0.romanization == symbol.romanization }) {
                                 queried.insert(symbol, at: index + 1)
                         }
                 }
-                return textMarkCandidates + queried
+                guard let firstInputCount = queried.first?.inputCount else { return [] }
+                guard firstInputCount < inputLength else { return queried }
+                let headInputLengths = queried.map(\.inputCount).uniqued()
+                let concatenated = headInputLengths.compactMap({ headLength -> Candidate? in
+                        let tailEvents = combos.dropFirst(headLength)
+                        guard let tailCandidate = tenKeySearch(combos: tailEvents, limit: 10, anchorsStatement: anchorsStatement, codeMatchStatement: codeMatchStatement).first else { return nil }
+                        guard let headCandidate = queried.first(where: { $0.inputCount == headLength }) else { return nil }
+                        return headCandidate + tailCandidate
+                }).uniqued().sorted().prefix(1)
+                return concatenated + queried
         }
         private static func tenKeyAnchorsMatch(code: Int, limit: Int64? = nil, statement: OpaquePointer?) -> [Candidate] {
                 sqlite3_reset(statement)
                 sqlite3_bind_int64(statement, 1, Int64(code))
-                sqlite3_bind_int64(statement, 2, (limit ?? 100))
+                sqlite3_bind_int64(statement, 2, (limit ?? 30))
                 var candidates: [Candidate] = []
                 while sqlite3_step(statement) == SQLITE_ROW {
                         let order: Int = Int(sqlite3_column_int64(statement, 0))
