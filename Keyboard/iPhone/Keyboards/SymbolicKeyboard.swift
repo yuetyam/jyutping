@@ -17,11 +17,11 @@ struct SymbolicKeyboard: View {
                                 SymbolInputKey("{")
                                 SymbolInputKey("}")
                                 SymbolInputKey("#")
-                                ExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("%"), members: [KeyElement("%"), KeyElement("‰")]))
+                                EnhancedInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("%"), members: [KeyElement("%"), KeyElement("‰")]))
                                 SymbolInputKey("^")
                                 SymbolInputKey("*")
                                 SymbolInputKey("+")
-                                ExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("="), members: [KeyElement("="), KeyElement("≠"), KeyElement("≈")]))
+                                EnhancedInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("="), members: [KeyElement("="), KeyElement("≠"), KeyElement("≈")]))
                         }
                         HStack(spacing: 0) {
                                 SymbolInputKey("_")
@@ -44,15 +44,17 @@ struct SymbolicKeyboard: View {
                                 SymbolInputKey("℗")
                                 SymbolInputKey("™")
                                 SymbolInputKey("℠")
-                                ExpansibleInputKey(
+                                EnhancedInputKey(
                                         keyLocale: .trailing,
-                                        keyModel: KeyModel(primary: KeyElement("\u{0027}"),
-                                                           members: [
-                                                                KeyElement("\u{0027}", footer: "0027"),
-                                                                KeyElement("\u{2019}", footer: "2019"),
-                                                                KeyElement("\u{2018}", footer: "2018"),
-                                                                KeyElement("\u{0060}", footer: "0060")
-                                                           ])
+                                        keyModel: KeyModel(
+                                                primary: KeyElement("\u{0027}"),
+                                                members: [
+                                                        KeyElement("\u{0027}", footer: "0027"),
+                                                        KeyElement("\u{2019}", footer: "2019"),
+                                                        KeyElement("\u{2018}", footer: "2018"),
+                                                        KeyElement("\u{0060}", footer: "0060")
+                                                ]
+                                        )
                                 )
                                 Spacer()
                                 BackspaceKey()

@@ -11,7 +11,7 @@ struct CantoneseSymbolicKeyboard: View {
                                 NumberRow()
                         }
                         HStack(spacing: 0) {
-                                ExpansibleInputKey(
+                                EnhancedInputKey(
                                         keyLocale: .leading,
                                         keyModel: KeyModel(primary: KeyElement("［"),
                                                            members: [
@@ -22,7 +22,7 @@ struct CantoneseSymbolicKeyboard: View {
                                                                 KeyElement("〔")
                                                            ])
                                 )
-                                ExpansibleInputKey(
+                                EnhancedInputKey(
                                         keyLocale: .leading,
                                         keyModel: KeyModel(primary: KeyElement("］"),
                                                            members: [
@@ -33,7 +33,7 @@ struct CantoneseSymbolicKeyboard: View {
                                                                 KeyElement("〕")
                                                            ])
                                 )
-                                ExpansibleInputKey(
+                                EnhancedInputKey(
                                         keyLocale: .leading,
                                         keyModel: KeyModel(primary: KeyElement("｛"),
                                                            members: [
@@ -41,7 +41,7 @@ struct CantoneseSymbolicKeyboard: View {
                                                                 KeyElement("{", header: PresetConstant.halfWidth)
                                                            ])
                                 )
-                                ExpansibleInputKey(
+                                EnhancedInputKey(
                                         keyLocale: .leading,
                                         keyModel: KeyModel(primary: KeyElement("｝"),
                                                            members: [
@@ -49,7 +49,7 @@ struct CantoneseSymbolicKeyboard: View {
                                                                 KeyElement("}", header: PresetConstant.halfWidth)
                                                            ])
                                 )
-                                ExpansibleInputKey(
+                                EnhancedInputKey(
                                         keyLocale: .leading,
                                         keyModel: KeyModel(primary: KeyElement("#"),
                                                            members: [
@@ -57,7 +57,7 @@ struct CantoneseSymbolicKeyboard: View {
                                                                 KeyElement("＃", header: PresetConstant.fullWidth)
                                                            ])
                                 )
-                                ExpansibleInputKey(
+                                EnhancedInputKey(
                                         keyLocale: .trailing,
                                         keyModel: KeyModel(primary: KeyElement("%"),
                                                            members: [
@@ -66,7 +66,7 @@ struct CantoneseSymbolicKeyboard: View {
                                                                 KeyElement("‰")
                                                            ])
                                 )
-                                ExpansibleInputKey(
+                                EnhancedInputKey(
                                         keyLocale: .trailing,
                                         keyModel: KeyModel(primary: KeyElement("^"),
                                                            members: [
@@ -74,7 +74,7 @@ struct CantoneseSymbolicKeyboard: View {
                                                                 KeyElement("＾", header: PresetConstant.fullWidth),
                                                            ])
                                 )
-                                ExpansibleInputKey(
+                                EnhancedInputKey(
                                         keyLocale: .trailing,
                                         keyModel: KeyModel(primary: KeyElement("*"),
                                                            members: [
@@ -82,7 +82,7 @@ struct CantoneseSymbolicKeyboard: View {
                                                                 KeyElement("＊", header: PresetConstant.fullWidth),
                                                            ])
                                 )
-                                ExpansibleInputKey(
+                                EnhancedInputKey(
                                         keyLocale: .trailing,
                                         keyModel: KeyModel(primary: KeyElement("+"),
                                                            members: [
@@ -90,7 +90,7 @@ struct CantoneseSymbolicKeyboard: View {
                                                                 KeyElement("＋", header: PresetConstant.fullWidth),
                                                            ])
                                 )
-                                ExpansibleInputKey(
+                                EnhancedInputKey(
                                         keyLocale: .trailing,
                                         keyModel: KeyModel(primary: KeyElement("="),
                                                            members: [
@@ -102,7 +102,7 @@ struct CantoneseSymbolicKeyboard: View {
                                 )
                         }
                         HStack(spacing: 0) {
-                                ExpansibleInputKey(
+                                EnhancedInputKey(
                                         keyLocale: .leading,
                                         keyModel: KeyModel(primary: KeyElement("_"),
                                                            members: [
@@ -111,7 +111,7 @@ struct CantoneseSymbolicKeyboard: View {
                                                            ])
                                 )
                                 SymbolInputKey("\u{2014}")
-                                ExpansibleInputKey(
+                                EnhancedInputKey(
                                         keyLocale: .leading,
                                         keyModel: KeyModel(primary: KeyElement("\\"),
                                                            members: [
@@ -119,7 +119,7 @@ struct CantoneseSymbolicKeyboard: View {
                                                                 KeyElement("＼", header: PresetConstant.fullWidth),
                                                            ])
                                 )
-                                ExpansibleInputKey(
+                                EnhancedInputKey(
                                         keyLocale: .leading,
                                         keyModel: KeyModel(primary: KeyElement("｜"),
                                                            members: [
@@ -127,7 +127,7 @@ struct CantoneseSymbolicKeyboard: View {
                                                                 KeyElement("|", header: PresetConstant.halfWidth),
                                                            ])
                                 )
-                                ExpansibleInputKey(
+                                EnhancedInputKey(
                                         keyLocale: .leading,
                                         keyModel: KeyModel(primary: KeyElement("～"),
                                                            members: [
@@ -135,7 +135,7 @@ struct CantoneseSymbolicKeyboard: View {
                                                                 KeyElement("~", header: PresetConstant.halfWidth),
                                                            ])
                                 )
-                                ExpansibleInputKey(
+                                EnhancedInputKey(
                                         keyLocale: .trailing,
                                         keyModel: KeyModel(primary: KeyElement("《"),
                                                            members: [
@@ -145,7 +145,7 @@ struct CantoneseSymbolicKeyboard: View {
                                                                 KeyElement("＜", header: PresetConstant.fullWidth)
                                                            ])
                                 )
-                                ExpansibleInputKey(
+                                EnhancedInputKey(
                                         keyLocale: .trailing,
                                         keyModel: KeyModel(primary: KeyElement("》"),
                                                            members: [
@@ -155,7 +155,7 @@ struct CantoneseSymbolicKeyboard: View {
                                                                 KeyElement("＞", header: PresetConstant.fullWidth)
                                                            ])
                                 )
-                                ExpansibleInputKey(
+                                EnhancedInputKey(
                                         keyLocale: .trailing,
                                         keyModel: KeyModel(primary: KeyElement("¥"),
                                                            members: [
@@ -163,7 +163,7 @@ struct CantoneseSymbolicKeyboard: View {
                                                                 KeyElement("￥", header: PresetConstant.fullWidth)
                                                            ])
                                 )
-                                ExpansibleInputKey(
+                                EnhancedInputKey(
                                         keyLocale: .trailing,
                                         keyModel: KeyModel(primary: KeyElement("&"),
                                                            members: [
@@ -172,7 +172,7 @@ struct CantoneseSymbolicKeyboard: View {
                                                                 KeyElement("§"),
                                                            ])
                                 )
-                                ExpansibleInputKey(
+                                EnhancedInputKey(
                                         keyLocale: .trailing,
                                         keyModel: KeyModel(primary: KeyElement("\u{00B7}"),
                                                            members: [
@@ -188,7 +188,7 @@ struct CantoneseSymbolicKeyboard: View {
                         HStack(spacing: 0) {
                                 TransformKey(destination: .numeric, widthUnitTimes: 1.3)
                                 Spacer()
-                                ExpansibleInputKey(
+                                EnhancedInputKey(
                                         keyLocale: .leading,
                                         keyModel: KeyModel(primary: KeyElement("\u{2026}"),
                                                            members: [
@@ -201,7 +201,7 @@ struct CantoneseSymbolicKeyboard: View {
                                 SymbolInputKey("℗")
                                 SymbolInputKey("™")
                                 SymbolInputKey("℠")
-                                ExpansibleInputKey(
+                                EnhancedInputKey(
                                         keyLocale: .trailing,
                                         keyModel: KeyModel(primary: KeyElement("\u{0027}"),
                                                            members: [

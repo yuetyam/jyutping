@@ -101,7 +101,7 @@
 		371B6F902B3B342F005BB31C /* SymbolInputKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F0C2B3B342E005BB31C /* SymbolInputKey.swift */; };
 		371B6F912B3B342F005BB31C /* GlobeKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F0D2B3B342E005BB31C /* GlobeKey.swift */; };
 		371B6F922B3B342F005BB31C /* CangjieInputKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F0E2B3B342E005BB31C /* CangjieInputKey.swift */; };
-		371B6F932B3B342F005BB31C /* ExpansibleInputKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F0F2B3B342E005BB31C /* ExpansibleInputKey.swift */; };
+		371B6F932B3B342F005BB31C /* EnhancedInputKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F0F2B3B342E005BB31C /* EnhancedInputKey.swift */; };
 		371B6F942B3B342F005BB31C /* NumberPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F102B3B342E005BB31C /* NumberPad.swift */; };
 		371B6F952B3B342F005BB31C /* ShiftKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F112B3B342E005BB31C /* ShiftKey.swift */; };
 		371B6F962B3B342F005BB31C /* CantoneseSymbolicKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F122B3B342E005BB31C /* CantoneseSymbolicKeyboard.swift */; };
@@ -508,7 +508,7 @@
 		371B6F0C2B3B342E005BB31C /* SymbolInputKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SymbolInputKey.swift; sourceTree = "<group>"; };
 		371B6F0D2B3B342E005BB31C /* GlobeKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobeKey.swift; sourceTree = "<group>"; };
 		371B6F0E2B3B342E005BB31C /* CangjieInputKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CangjieInputKey.swift; sourceTree = "<group>"; };
-		371B6F0F2B3B342E005BB31C /* ExpansibleInputKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpansibleInputKey.swift; sourceTree = "<group>"; };
+		371B6F0F2B3B342E005BB31C /* EnhancedInputKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnhancedInputKey.swift; sourceTree = "<group>"; };
 		371B6F102B3B342E005BB31C /* NumberPad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberPad.swift; sourceTree = "<group>"; };
 		371B6F112B3B342E005BB31C /* ShiftKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShiftKey.swift; sourceTree = "<group>"; };
 		371B6F122B3B342E005BB31C /* CantoneseSymbolicKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CantoneseSymbolicKeyboard.swift; sourceTree = "<group>"; };
@@ -1303,7 +1303,7 @@
 				371B6F0C2B3B342E005BB31C /* SymbolInputKey.swift */,
 				371B6F0D2B3B342E005BB31C /* GlobeKey.swift */,
 				371B6F0E2B3B342E005BB31C /* CangjieInputKey.swift */,
-				371B6F0F2B3B342E005BB31C /* ExpansibleInputKey.swift */,
+				371B6F0F2B3B342E005BB31C /* EnhancedInputKey.swift */,
 				371B6F112B3B342E005BB31C /* ShiftKey.swift */,
 				371B6F162B3B342E005BB31C /* BackspaceKey.swift */,
 				371B6F172B3B342E005BB31C /* SpaceKey.swift */,
@@ -1907,7 +1907,7 @@
 				371B6FA22B3B342F005BB31C /* TenKeySpecialKey.swift in Sources */,
 				379A9E2E2BE4C692001AE79E /* EditingPanelReturnKey.swift in Sources */,
 				3747C75E2E126F2300E11099 /* ABCRightAlternativeKey.swift in Sources */,
-				371B6F932B3B342F005BB31C /* ExpansibleInputKey.swift in Sources */,
+				371B6F932B3B342F005BB31C /* EnhancedInputKey.swift in Sources */,
 				371D70772CE5881700508860 /* MediumPadTransformKey.swift in Sources */,
 				371B6FDB2B3B342F005BB31C /* LargePadBackspaceKey.swift in Sources */,
 				371B6FD02B3B342F005BB31C /* KeyboardForm.swift in Sources */,

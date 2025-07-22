@@ -82,7 +82,7 @@ private struct FirstInputKeyRow: View {
                 HStack(spacing: 0 ) {
                         LetterInputKey(.letterQ)
                         LetterInputKey(.letterW)
-                        ExpansibleInputKey(
+                        EnhancedInputKey(
                                 keyLocale: .leading,
                                 event: .letterE,
                                 keyModel:
@@ -101,7 +101,7 @@ private struct FirstInputKeyRow: View {
                         LetterInputKey(.letterR)
                         LetterInputKey(.letterT)
                         LetterInputKey(.letterY)
-                        ExpansibleInputKey(
+                        EnhancedInputKey(
                                 keyLocale: .trailing,
                                 event: .letterU,
                                 keyModel:
@@ -117,7 +117,7 @@ private struct FirstInputKeyRow: View {
                                                 ]
                                         )
                         )
-                        ExpansibleInputKey(
+                        EnhancedInputKey(
                                 keyLocale: .trailing,
                                 event: .letterI,
                                 keyModel:
@@ -133,7 +133,7 @@ private struct FirstInputKeyRow: View {
                                                 ]
                                         )
                         )
-                        ExpansibleInputKey(
+                        EnhancedInputKey(
                                 keyLocale: .trailing,
                                 event: .letterO,
                                 keyModel:

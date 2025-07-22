@@ -2,14 +2,11 @@ import SwiftUI
 import CommonExtensions
 import CoreIME
 
-typealias EnhancedInputKey = ExpansibleInputKey
+struct EnhancedInputKey: View {
 
-// TODO: Rename to EnhancedInputKey
-struct ExpansibleInputKey: View {
-
-        /// Create an ExpansibleInputKey
+        /// Create an EnhancedInputKey
         /// - Parameters:
-        ///   - keyLocale: Key location, left half (leading) or right half (trailing).
+        ///   - keyLocale: Key location, left half screen (leading) or right half screen (trailing).
         ///   - widthUnitTimes: Times of widthUnit
         ///   - event: InputEvent
         ///   - keyModel: KeyModel
