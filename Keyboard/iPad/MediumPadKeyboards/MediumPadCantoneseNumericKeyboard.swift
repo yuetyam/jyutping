@@ -10,7 +10,7 @@ struct MediumPadCantoneseNumericKeyboard: View {
                         HStack(spacing: 0 ) {
                                 MediumPadTabKey(widthUnitTimes: 1)
                                 Group {
-                                        PadCompleteInputKey(
+                                        PadAdvancedInputKey(
                                                 keyLocale: .leading,
                                                 upper: "^",
                                                 keyModel: KeyModel(
@@ -25,7 +25,7 @@ struct MediumPadCantoneseNumericKeyboard: View {
                                                         ]
                                                 )
                                         )
-                                        PadCompleteInputKey(
+                                        PadAdvancedInputKey(
                                                 keyLocale: .leading,
                                                 upper: "_",
                                                 keyModel: KeyModel(
@@ -40,7 +40,7 @@ struct MediumPadCantoneseNumericKeyboard: View {
                                                         ]
                                                 )
                                         )
-                                        PadCompleteInputKey(
+                                        PadAdvancedInputKey(
                                                 keyLocale: .leading,
                                                 upper: "｜",
                                                 keyModel: KeyModel(
@@ -55,7 +55,7 @@ struct MediumPadCantoneseNumericKeyboard: View {
                                                         ]
                                                 )
                                         )
-                                        PadCompleteInputKey(
+                                        PadAdvancedInputKey(
                                                 keyLocale: .leading,
                                                 upper: "\\",
                                                 keyModel: KeyModel(
@@ -70,7 +70,7 @@ struct MediumPadCantoneseNumericKeyboard: View {
                                                         ]
                                                 )
                                         )
-                                        PadCompleteInputKey(
+                                        PadAdvancedInputKey(
                                                 keyLocale: .leading,
                                                 upper: "<",
                                                 keyModel: KeyModel(
@@ -85,7 +85,7 @@ struct MediumPadCantoneseNumericKeyboard: View {
                                                         ]
                                                 )
                                         )
-                                        PadCompleteInputKey(
+                                        PadAdvancedInputKey(
                                                 keyLocale: .leading,
                                                 upper: ">",
                                                 keyModel: KeyModel(
@@ -100,7 +100,7 @@ struct MediumPadCantoneseNumericKeyboard: View {
                                                         ]
                                                 )
                                         )
-                                        PadCompleteInputKey(
+                                        PadAdvancedInputKey(
                                                 keyLocale: .trailing,
                                                 upper: "{",
                                                 keyModel: KeyModel(
@@ -115,7 +115,7 @@ struct MediumPadCantoneseNumericKeyboard: View {
                                                         ]
                                                 )
                                         )
-                                        PadCompleteInputKey(
+                                        PadAdvancedInputKey(
                                                 keyLocale: .trailing,
                                                 upper: "}",
                                                 keyModel: KeyModel(
@@ -130,7 +130,7 @@ struct MediumPadCantoneseNumericKeyboard: View {
                                                         ]
                                                 )
                                         )
-                                        PadCompleteInputKey(
+                                        PadAdvancedInputKey(
                                                 keyLocale: .trailing,
                                                 upper: ",",
                                                 keyModel: KeyModel(
@@ -145,7 +145,7 @@ struct MediumPadCantoneseNumericKeyboard: View {
                                                         ]
                                                 )
                                         )
-                                        PadCompleteInputKey(
+                                        PadAdvancedInputKey(
                                                 keyLocale: .trailing,
                                                 upper: ".",
                                                 keyModel: KeyModel(
@@ -168,15 +168,15 @@ struct MediumPadCantoneseNumericKeyboard: View {
                         HStack(spacing: 0) {
                                 Spacer()
                                 Group {
-                                        PadCompleteInputKey(keyLocale: .leading, upper: "&", keyModel: KeyModel(primary: KeyElement("@"), members: [KeyElement("@"), KeyElement("&"), KeyElement("＠", header: PresetConstant.fullWidth)]))
-                                        PadCompleteInputKey(keyLocale: .leading, upper: "¥", keyModel: KeyModel(primary: KeyElement("#"), members: [KeyElement("#"), KeyElement("¥"), KeyElement("＃", header: PresetConstant.fullWidth)]))
-                                        PadCompleteInputKey(keyLocale: .leading, upper: "€", keyModel: KeyModel(primary: KeyElement("$"), members: [KeyElement("$"), KeyElement("€"), KeyElement("£"), KeyElement("¥"), KeyElement("₩"), KeyElement("₽"), KeyElement("¢")]))
-                                        PadCompleteInputKey(keyLocale: .leading, upper: "*", keyModel: KeyModel(primary: KeyElement("/"), members: [KeyElement("/"), KeyElement("*"), KeyElement("／", header: PresetConstant.fullWidth)]))
-                                        PadCompleteInputKey(keyLocale: .leading, upper: "【", keyModel: KeyModel(primary: KeyElement("（"), members: [KeyElement("（"), KeyElement("【"), KeyElement("(", header: PresetConstant.halfWidth)]))
-                                        PadCompleteInputKey(keyLocale: .trailing, upper: "】", keyModel: KeyModel(primary: KeyElement("）"), members: [KeyElement("）"), KeyElement("】"), KeyElement(")", header: PresetConstant.halfWidth)]))
-                                        PadCompleteInputKey(keyLocale: .trailing, upper: "『", keyModel: KeyModel(primary: KeyElement("「"), members: [KeyElement("「"), KeyElement("『"), KeyElement("\u{201C}"), KeyElement("\u{2018}")]))
-                                        PadCompleteInputKey(keyLocale: .trailing, upper: "』", keyModel: KeyModel(primary: KeyElement("」"), members: [KeyElement("」"), KeyElement("』"), KeyElement("\u{201D}"), KeyElement("\u{2019}")]))
-                                        PadCompleteInputKey(
+                                        PadAdvancedInputKey(keyLocale: .leading, upper: "&", keyModel: KeyModel(primary: KeyElement("@"), members: [KeyElement("@"), KeyElement("&"), KeyElement("＠", header: PresetConstant.fullWidth)]))
+                                        PadAdvancedInputKey(keyLocale: .leading, upper: "¥", keyModel: KeyModel(primary: KeyElement("#"), members: [KeyElement("#"), KeyElement("¥"), KeyElement("＃", header: PresetConstant.fullWidth)]))
+                                        PadAdvancedInputKey(keyLocale: .leading, upper: "€", keyModel: KeyModel(primary: KeyElement("$"), members: [KeyElement("$"), KeyElement("€"), KeyElement("£"), KeyElement("¥"), KeyElement("₩"), KeyElement("₽"), KeyElement("¢")]))
+                                        PadAdvancedInputKey(keyLocale: .leading, upper: "*", keyModel: KeyModel(primary: KeyElement("/"), members: [KeyElement("/"), KeyElement("*"), KeyElement("／", header: PresetConstant.fullWidth)]))
+                                        PadAdvancedInputKey(keyLocale: .leading, upper: "【", keyModel: KeyModel(primary: KeyElement("（"), members: [KeyElement("（"), KeyElement("【"), KeyElement("(", header: PresetConstant.halfWidth)]))
+                                        PadAdvancedInputKey(keyLocale: .trailing, upper: "】", keyModel: KeyModel(primary: KeyElement("）"), members: [KeyElement("）"), KeyElement("】"), KeyElement(")", header: PresetConstant.halfWidth)]))
+                                        PadAdvancedInputKey(keyLocale: .trailing, upper: "『", keyModel: KeyModel(primary: KeyElement("「"), members: [KeyElement("「"), KeyElement("『"), KeyElement("\u{201C}"), KeyElement("\u{2018}")]))
+                                        PadAdvancedInputKey(keyLocale: .trailing, upper: "』", keyModel: KeyModel(primary: KeyElement("」"), members: [KeyElement("」"), KeyElement("』"), KeyElement("\u{201D}"), KeyElement("\u{2019}")]))
+                                        PadAdvancedInputKey(
                                                 keyLocale: .trailing,
                                                 upper: "\"",
                                                 keyModel: KeyModel(
@@ -197,13 +197,13 @@ struct MediumPadCantoneseNumericKeyboard: View {
                         HStack(spacing: 0) {
                                 MediumPadTransformKey(destination: .symbolic, keyLocale: .leading, widthUnitTimes: 1.75)
                                 Group {
-                                        PadCompleteInputKey(keyLocale: .leading, upper: "§", keyModel: KeyModel(primary: KeyElement("%"), members: [KeyElement("%"), KeyElement("§"), KeyElement("％", header: PresetConstant.fullWidth), KeyElement("‰")]))
-                                        PadCompleteInputKey(keyLocale: .leading, upper: "\u{2014}", keyModel: KeyModel(primary: KeyElement("-"), members: [KeyElement("-"), KeyElement("\u{2014}", footer: "2014"), KeyElement("\u{FF0D}", header: PresetConstant.fullWidth, footer: "FF0D"), KeyElement("•", header: "項目符號", footer: "2022")]))
-                                        PadCompleteInputKey(keyLocale: .leading, upper: "+", keyModel: KeyModel(primary: KeyElement("～"), members: [KeyElement("～"), KeyElement("+"), KeyElement("~", header: PresetConstant.halfWidth)]))
-                                        PadCompleteInputKey(keyLocale: .leading, upper: "=", keyModel: KeyModel(primary: KeyElement("⋯"), members: [KeyElement("⋯"), KeyElement("=")]))
-                                        PadCompleteInputKey(keyLocale: .leading, upper: "·", keyModel: KeyModel(primary: KeyElement("、"), members: [KeyElement("、"), KeyElement("·", header: "間隔號", footer: "00B7"), KeyElement("､", header: PresetConstant.halfWidth)]))
-                                        PadCompleteInputKey(keyLocale: .trailing, upper: "《", keyModel: KeyModel(primary: KeyElement("；"), members: [KeyElement("；"), KeyElement("《"), KeyElement(";", header: PresetConstant.halfWidth)]))
-                                        PadCompleteInputKey(keyLocale: .trailing, upper: "》", keyModel: KeyModel(primary: KeyElement("："), members: [KeyElement("："), KeyElement("》"), KeyElement(":", header: PresetConstant.halfWidth)]))
+                                        PadAdvancedInputKey(keyLocale: .leading, upper: "§", keyModel: KeyModel(primary: KeyElement("%"), members: [KeyElement("%"), KeyElement("§"), KeyElement("％", header: PresetConstant.fullWidth), KeyElement("‰")]))
+                                        PadAdvancedInputKey(keyLocale: .leading, upper: "\u{2014}", keyModel: KeyModel(primary: KeyElement("-"), members: [KeyElement("-"), KeyElement("\u{2014}", footer: "2014"), KeyElement("\u{FF0D}", header: PresetConstant.fullWidth, footer: "FF0D"), KeyElement("•", header: "項目符號", footer: "2022")]))
+                                        PadAdvancedInputKey(keyLocale: .leading, upper: "+", keyModel: KeyModel(primary: KeyElement("～"), members: [KeyElement("～"), KeyElement("+"), KeyElement("~", header: PresetConstant.halfWidth)]))
+                                        PadAdvancedInputKey(keyLocale: .leading, upper: "=", keyModel: KeyModel(primary: KeyElement("⋯"), members: [KeyElement("⋯"), KeyElement("=")]))
+                                        PadAdvancedInputKey(keyLocale: .leading, upper: "·", keyModel: KeyModel(primary: KeyElement("、"), members: [KeyElement("、"), KeyElement("·", header: "間隔號", footer: "00B7"), KeyElement("､", header: PresetConstant.halfWidth)]))
+                                        PadAdvancedInputKey(keyLocale: .trailing, upper: "《", keyModel: KeyModel(primary: KeyElement("；"), members: [KeyElement("；"), KeyElement("《"), KeyElement(";", header: PresetConstant.halfWidth)]))
+                                        PadAdvancedInputKey(keyLocale: .trailing, upper: "》", keyModel: KeyModel(primary: KeyElement("："), members: [KeyElement("："), KeyElement("》"), KeyElement(":", header: PresetConstant.halfWidth)]))
                                 }
                                 PadUpperLowerInputKey(keyLocale: .trailing, upper: "！", lower: "，", keyModel: KeyModel(primary: KeyElement("，"), members: [KeyElement("，"), KeyElement("！"), KeyElement(",", header: PresetConstant.halfWidth), KeyElement("!", header: PresetConstant.halfWidth)]))
                                 PadUpperLowerInputKey(

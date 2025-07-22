@@ -2,12 +2,10 @@ import SwiftUI
 import CommonExtensions
 import CoreIME
 
-// TODO: Rename to PadAdvancedInputKey
-
 /// Pullable & Expansible
-struct PadCompleteInputKey: View {
+struct PadAdvancedInputKey: View {
 
-        /// Create a PadCompleteInputKey
+        /// Create a PadAdvancedInputKey
         /// - Parameters:
         ///   - keyLocale: Key location, left half (leading) or right half (trailing).
         ///   - event: InputEvent

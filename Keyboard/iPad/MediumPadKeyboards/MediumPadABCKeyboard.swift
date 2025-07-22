@@ -13,7 +13,7 @@ struct MediumPadABCKeyboard: View {
                                 Group {
                                         PadPullableInputKey(event: .letterQ, upper: "1", lower: "q")
                                         PadPullableInputKey(event: .letterW, upper: "2", lower: "w")
-                                        PadCompleteInputKey(
+                                        PadAdvancedInputKey(
                                                 keyLocale: .leading,
                                                 event: .letterE,
                                                 upper: "3",
@@ -33,7 +33,7 @@ struct MediumPadABCKeyboard: View {
                                         PadPullableInputKey(event: .letterR, upper: "4", lower: "r")
                                         PadPullableInputKey(event: .letterT, upper: "5", lower: "t")
                                         PadPullableInputKey(event: .letterY, upper: "6", lower: "y")
-                                        PadCompleteInputKey(
+                                        PadAdvancedInputKey(
                                                 keyLocale: .trailing,
                                                 event: .letterU,
                                                 upper: "7",
@@ -50,7 +50,7 @@ struct MediumPadABCKeyboard: View {
                                                                 ]
                                                         )
                                         )
-                                        PadCompleteInputKey(
+                                        PadAdvancedInputKey(
                                                 keyLocale: .trailing,
                                                 event: .letterI,
                                                 upper: "8",
@@ -67,7 +67,7 @@ struct MediumPadABCKeyboard: View {
                                                                 ]
                                                         )
                                         )
-                                        PadCompleteInputKey(
+                                        PadAdvancedInputKey(
                                                 keyLocale: .trailing,
                                                 event: .letterO,
                                                 upper: "9",
@@ -91,7 +91,7 @@ struct MediumPadABCKeyboard: View {
                         HStack(spacing: 0) {
                                 MediumPadCapsLockKey(widthUnitTimes: 1.5)
                                 Group {
-                                        PadCompleteInputKey(
+                                        PadAdvancedInputKey(
                                                 keyLocale: .leading,
                                                 event: .letterA,
                                                 upper: "@",
@@ -125,7 +125,7 @@ struct MediumPadABCKeyboard: View {
                                         PadPullableInputKey(event: .letterZ, upper: "%", lower: "z")
                                         PadPullableInputKey(event: .letterX, upper: "-", lower: "x")
                                         PadPullableInputKey(event: .letterC, upper: "+", lower: "c")
-                                        PadCompleteInputKey(
+                                        PadAdvancedInputKey(
                                                 keyLocale: .leading,
                                                 event: .letterV,
                                                 upper: "=",
