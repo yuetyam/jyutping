@@ -463,7 +463,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
         private lazy var suggestionTask: Task<Void, Never>? = nil
         private func suggest() {
                 suggestionTask?.cancel()
-                let isEmojiSuggestionsOn: Bool = Options.isEmojiSuggestionsOn
+                let isEmojiSuggestionsOn: Bool = AppSettings.isEmojiSuggestionsOn
                 let isInputMemoryOn: Bool = AppSettings.isInputMemoryOn
                 suggestionTask = Task.detached(priority: .high) { [weak self] in
                         guard let self else { return }

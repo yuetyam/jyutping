@@ -2,7 +2,7 @@ import SwiftUI
 import CommonExtensions
 import CoreIME
 
-struct SettingsKey {
+private struct SettingsKey {
         static let CandidatePageSize: String = "CandidatePageSize"
         static let CandidateLineSpacing: String = "CandidateLineSpacing"
         static let CandidatePageOrientation: String = "CandidatePageOrientation"
@@ -11,7 +11,9 @@ struct SettingsKey {
         static let ToneDisplayColor: String = "ToneDisplayColor"
         static let LabelSet: String = "LabelSet"
         static let LabelLast: String = "LabelLast"
+
         static let CangjieVariant: String = "CangjieVariant"
+        static let EmojiSuggestions: String = "emoji"
         static let SystemLexicon: String = "SystemLexicon"
         static let SchemeRules: String = "SchemeRules"
         static let UserLexiconInputMemory: String = "UserLexiconInputMemory"
@@ -349,6 +351,19 @@ struct AppSettings {
                 UserDefaults.standard.set(value, forKey: SettingsKey.CangjieVariant)
         }
 
+
+        // MARK: - Input Options
+
+        private(set) static var isEmojiSuggestionsOn: Bool = {
+                let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.EmojiSuggestions)
+                return savedValue != 2
+        }()
+        static func updateEmojiSuggestions(to isOn: Bool) {
+                isEmojiSuggestionsOn = isOn
+                let value: Int = isOn ? 1 : 2
+                UserDefaults.standard.set(value, forKey: SettingsKey.EmojiSuggestions)
+        }
+
         private(set) static var isTextReplacementsOn: Bool = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.SystemLexicon)
                 return savedValue != 2
@@ -370,7 +385,7 @@ struct AppSettings {
         }
 
 
-        // MARK: - User Lexicon
+        // MARK: - Memory
 
         private(set) static var isInputMemoryOn: Bool = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.UserLexiconInputMemory)

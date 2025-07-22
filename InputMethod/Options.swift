@@ -17,14 +17,7 @@ struct Options {
         /// 半寬／全寬數字、字母
         nonisolated(unsafe) private(set) static var characterForm: CharacterForm = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.CharacterForm)
-                switch savedValue {
-                case 0, 1:
-                        return .halfWidth
-                case 2:
-                        return .fullWidth
-                default:
-                        return .halfWidth
-                }
+                return (savedValue == CharacterForm.fullWidth.rawValue) ? .fullWidth : .halfWidth
         }()
         static func updateCharacterForm(to form: CharacterForm) {
                 characterForm = form
@@ -35,14 +28,7 @@ struct Options {
         /// 標點符號形態. 粵文句讀／英文標點
         nonisolated(unsafe) private(set) static var punctuationForm: PunctuationForm = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.PunctuationForm)
-                switch savedValue {
-                case 0, 1:
-                        return .cantonese
-                case 2:
-                        return .english
-                default:
-                        return .cantonese
-                }
+                return (savedValue == PunctuationForm.english.rawValue) ? .english : .cantonese
         }()
         static func updatePunctuationForm(to form: PunctuationForm) {
                 punctuationForm = form
@@ -50,37 +36,10 @@ struct Options {
                 UserDefaults.standard.set(value, forKey: OptionsKey.PunctuationForm)
         }
 
-
-        // TODO: Maybe AppSettings.isEmojiSuggestionsOn
-        /// 候選詞包含 Emoji
-        nonisolated(unsafe) private(set) static var isEmojiSuggestionsOn: Bool = {
-                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.EmojiSuggestions)
-                switch savedValue {
-                case 0, 1:
-                        return true
-                case 2:
-                        return false
-                default:
-                        return true
-                }
-        }()
-        static func updateEmojiSuggestions(to state: Bool) {
-                isEmojiSuggestionsOn = state
-                let value: Int = state ? 1 : 2
-                UserDefaults.standard.set(value, forKey: OptionsKey.EmojiSuggestions)
-        }
-
         /// 輸入法模式. Cantonese / ABC
         nonisolated(unsafe) private(set) static var inputMethodMode: InputMethodMode = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.InputMethodMode)
-                switch savedValue {
-                case 0, 1:
-                        return .cantonese
-                case 2:
-                        return .abc
-                default:
-                        return .cantonese
-                }
+                return (savedValue == InputMethodMode.abc.rawValue) ? .abc : .cantonese
         }()
         static func updateInputMethodMode(to mode: InputMethodMode) {
                 inputMethodMode = mode
@@ -93,8 +52,6 @@ private struct OptionsKey {
         static let CharacterStandard: String = "characters"
         static let CharacterForm: String = "character_form"
         static let PunctuationForm: String = "punctuation"
-        static let EmojiSuggestions: String = "emoji"
-
         static let InputMethodMode: String = "InputMethodMode"
 }
 
