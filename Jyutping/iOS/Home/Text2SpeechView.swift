@@ -3,6 +3,7 @@
 import SwiftUI
 
 struct Text2SpeechView: View {
+        @State private var voiceIdentifier: String? = Speech.voiceIdentifier
         var body: some View {
                 List {
                         Section {
@@ -24,13 +25,37 @@ struct Text2SpeechView: View {
                                         Spacer()
                                         Speaker {
                                                 Speech.speak("測試", isRomanization: false)
+                                                voiceIdentifier = Speech.voiceIdentifier
                                         }
                                 }
                                 HStack {
                                         Text(verbatim: "cak1 si3")
                                         Spacer()
-                                        Speaker("cak1 si3")
+                                        Speaker {
+                                                Speech.speak("cak1 si3", isRomanization: true)
+                                                voiceIdentifier = Speech.voiceIdentifier
+                                        }
                                 }
+                        }
+                        if let voiceIdentifier {
+                                Section {
+                                        HStack(spacing: 0) {
+                                                Text(verbatim: "System")
+                                                Text.separator
+                                                Text(verbatim: Device.system)
+                                        }
+                                        HStack(spacing: 0) {
+                                                Text(verbatim: "Version")
+                                                Text.separator
+                                                Text(verbatim: AppMaster.version)
+                                        }
+                                        HStack(spacing: 0) {
+                                                Text(verbatim: "Voice")
+                                                Text.separator
+                                                Text(verbatim: voiceIdentifier)
+                                        }
+                                }
+                                .font(.footnote)
                         }
                 }
                 .textSelection(.enabled)

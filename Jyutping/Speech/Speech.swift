@@ -1,90 +1,75 @@
 import AVFoundation
 import CommonExtensions
 
-@MainActor
 struct Speech {
 
-        private static let synthesizer: AVSpeechSynthesizer = AVSpeechSynthesizer()
-
-        /// For Non-Jyutping texts. REASON: Premium Cantonese voices in iOS 17 are broken for Jyutping.
-        private static let alternativeVoice: AVSpeechSynthesisVoice? = preferredVoice(of: SpeechLanguage.chineseHongKong)
-
+        nonisolated(unsafe) private static let synthesizer: AVSpeechSynthesizer = AVSpeechSynthesizer()
         private static let voice: AVSpeechSynthesisVoice? = preferredCantoneseVoice()
 
         static func speak(_ text: String, isRomanization: Bool = true) {
-                guard isVoiceAvailable else {
+                guard let voice else {
                         speakFeedback()
                         return
                 }
                 let utterance: AVSpeechUtterance = AVSpeechUtterance(string: text)
-                utterance.voice = isRomanization ? voice : alternativeVoice
+                utterance.voice = voice
                 utterance.rate = AVSpeechUtteranceDefaultSpeechRate * 0.85
                 synthesizer.speak(utterance)
         }
-
         static func speak(text: String, ipa: String) {
                 let pronunciationKey = NSAttributedString.Key(rawValue: AVSpeechSynthesisIPANotationAttribute)
                 let attributedString = NSMutableAttributedString(string: text, attributes: [pronunciationKey: ipa])
                 let utterance = AVSpeechUtterance(attributedString: attributedString)
-                utterance.voice = alternativeVoice
+                utterance.voice = voice
                 synthesizer.speak(utterance)
         }
-
         static func stop() {
                 synthesizer.stopSpeaking(at: .immediate)
         }
         static var isSpeaking: Bool {
                 return synthesizer.isSpeaking
         }
-
-        /// Does current device contain any Cantonese voice
-        static let isVoiceAvailable: Bool = voiceStatus != .unavailable
-
-        /// Does System Preferred Languages contain `zh-Hant-HK`
-        static var isLanguageTraditionalChineseHongKongEnabled: Bool {
-                return Locale.preferredLanguages.contains("zh-Hant-HK")
+        static var voiceIdentifier: String? {
+                return voice?.identifier
         }
 
         private static func speakFeedback() {
-                if let mandarinTaiwanVoice = mandarinTaiwanVoice {
+                if let mandarinTaiwanVoice = preferredVoice(of: .mandarinTaiwan) {
                         let text: String = "此設備缺少粵語語音，請添加後再試。"
                         let utterance: AVSpeechUtterance = AVSpeechUtterance(string: text)
                         utterance.voice = mandarinTaiwanVoice
                         synthesizer.speak(utterance)
-                } else if let mandarinPekingVoice = mandarinPekingVoice {
+                } else if let mandarinPekingVoice = preferredVoice(of: .mandarinPeking) {
                         let text: String = "此设备缺少粤语语音，请添加后再试。"
                         let utterance: AVSpeechUtterance = AVSpeechUtterance(string: text)
                         utterance.voice = mandarinPekingVoice
                         synthesizer.speak(utterance)
-                } else if let cantoneseVoice = voice {
-                        let text: String = "此設備缺少粵語語音，請添加後再試。"
-                        let utterance: AVSpeechUtterance = AVSpeechUtterance(string: text)
-                        utterance.voice = cantoneseVoice
-                        synthesizer.speak(utterance)
-                } else if let englishVoice = englishVoice {
+                } else {
                         let text: String = "This device does not contain a Cantonese voice, please add one and try again."
                         let utterance: AVSpeechUtterance = AVSpeechUtterance(string: text)
-                        utterance.voice = englishVoice
-                        synthesizer.speak(utterance)
-                } else {
-                        let text: String = "No Voice"
-                        let utterance: AVSpeechUtterance = AVSpeechUtterance(string: text)
-                        utterance.voice = currentDefaultVoice
+                        utterance.voice = AVSpeechSynthesisVoice(language: "en-US") ?? AVSpeechSynthesisVoice(language: "en-GB") ?? AVSpeechSynthesisVoice(language: nil)
                         synthesizer.speak(utterance)
                 }
         }
 
-        private static let mandarinTaiwanVoice: AVSpeechSynthesisVoice? = preferredVoice(of: .mandarinTaiwan)
-        private static let mandarinPekingVoice: AVSpeechSynthesisVoice? = preferredVoice(of: .mandarinPeking)
-        private static let englishVoice: AVSpeechSynthesisVoice? = AVSpeechSynthesisVoice(language: "en-US") ?? AVSpeechSynthesisVoice(language: "en-GB") ?? AVSpeechSynthesisVoice(language: "en-AU")
-        private static let currentDefaultVoice: AVSpeechSynthesisVoice? = AVSpeechSynthesisVoice(language: nil)
-
         private static func preferredCantoneseVoice() -> AVSpeechSynthesisVoice? {
                 let languageCode: String = SpeechLanguage.chineseHongKong.code
-                let voices = AVSpeechSynthesisVoice.speechVoices().filter({ $0.language == languageCode })
+                let alternativeLanguageCode: String = SpeechLanguage.cantoneseHongKong.code
+                let voices = AVSpeechSynthesisVoice.speechVoices().filter({ $0.language == languageCode || $0.language == alternativeLanguageCode })
                 guard voices.isNotEmpty else { return AVSpeechSynthesisVoice(language: languageCode) }
                 let preferredVoices = voices.sorted { (lhs, rhs) -> Bool in
-                        if #available(iOS 17.0, macOS 14.0, *) {
+                        if #available(iOS 18.0, macOS 15.0, *) {
+                                switch (lhs.quality, rhs.quality) {
+                                case (.premium, .enhanced):
+                                        return true
+                                case (.premium, .default):
+                                        return true
+                                case (.enhanced, .default):
+                                        return true
+                                case (_, _):
+                                        return false
+                                }
+                        } else if #available(iOS 17.0, macOS 14.0, *) {
                                 // Premium Cantonese voices are broken in iOS 17
                                 switch (lhs.quality, rhs.quality) {
                                 case (.premium, _):
@@ -145,54 +130,21 @@ struct Speech {
                 }
                 return preferredVoices.first ?? AVSpeechSynthesisVoice(language: languageCode)
         }
-
-        static let voiceStatus: VoiceStatus = {
-                guard let voiceQuality = voice?.quality else { return .unavailable }
-                if #available(iOS 16.0, macOS 13.0, *) {
-                        switch voiceQuality {
-                        case .default:
-                                return .regular
-                        case .enhanced:
-                                return .enhanced
-                        case .premium:
-                                return .premium
-                        @unknown default:
-                                return .regular
-                        }
-                } else {
-                        switch voiceQuality {
-                        case .default:
-                                return .regular
-                        case .enhanced:
-                                return .enhanced
-                        default:
-                                return .regular
-                        }
-                }
-        }()
 }
 
-enum VoiceStatus: Int {
-        case unavailable
-        case regular
-        case enhanced
-        case premium
-}
+private enum SpeechLanguage: Int {
 
-enum SpeechLanguage: Int, Hashable {
-
+        case cantoneseHongKong
         case chineseHongKong
         case mandarinTaiwan
         case mandarinPeking
 
         var code: String {
                 switch self {
-                case .chineseHongKong:
-                        return "zh-HK"
-                case .mandarinTaiwan:
-                        return "zh-TW"
-                case .mandarinPeking:
-                        return "zh-CN"
+                case .cantoneseHongKong: "yue-HK"
+                case .chineseHongKong: "zh-HK"
+                case .mandarinTaiwan: "zh-TW"
+                case .mandarinPeking: "zh-CN"
                 }
         }
 }
