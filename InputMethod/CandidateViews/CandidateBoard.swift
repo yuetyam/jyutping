@@ -13,6 +13,9 @@ struct CandidateBoard: View {
         private let isLabelLastZero: Bool = AppSettings.isLabelLastZero
         private let isCompatibleModeOn: Bool = AppSettings.isCompatibleModeOn
         private let lineSpacing: CGFloat = CGFloat(AppSettings.candidateLineSpacing)
+        private let pageCornerRadius: CGFloat = CGFloat(AppSettings.pageCornerRadius)
+        private let contentInsets: CGFloat = CGFloat(AppSettings.contentInsets)
+        private let innerCornerRadius: CGFloat = CGFloat(AppSettings.innerCornerRadius)
 
         var body: some View {
                 let highlightedIndex: Int = context.highlightedIndex
@@ -35,7 +38,7 @@ struct CandidateBoard: View {
                                         .padding(.trailing, 3)
                                         .padding(.horizontal, lineSpacing / 2.0)
                                         .foregroundStyle(index == highlightedIndex ? Color.white : Color.primary)
-                                        .background(index == highlightedIndex ? Color.accentColor : Color.clear, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+                                        .background(index == highlightedIndex ? Color.accentColor : Color.clear, in: RoundedRectangle(cornerRadius: innerCornerRadius, style: .continuous))
                                         .contentShape(Rectangle())
                                         .onHover { isHovering in
                                                 guard isHovering else { return }
@@ -48,15 +51,17 @@ struct CandidateBoard: View {
                                         }
                                 }
                         }
-                        .padding(2)
-                        .roundedHUDVisualEffect()
-                        .padding(10)
+                        .padding(contentInsets)
+                        .background(HUDVisualEffect())
+                        .clipShape(RoundedRectangle(cornerRadius: pageCornerRadius, style: .continuous))
+                        .shadow(radius: 2)
+                        .padding(8)
                         .fixedSize()
                 case .vertical:
                         VStack(alignment: .leading, spacing: 0) {
                                 ForEach(context.displayCandidates.indices, id: \.self) { index in
                                         ZStack(alignment: .leading) {
-                                                RoundedRectangle(cornerRadius: 8, style: .continuous)
+                                                RoundedRectangle(cornerRadius: innerCornerRadius, style: .continuous)
                                                         .fill(index == highlightedIndex ? Color.accentColor : Color.clear)
                                                 VerticalPageCandidateLabel(
                                                         isHighlighted: index == highlightedIndex,
@@ -86,9 +91,11 @@ struct CandidateBoard: View {
                                         }
                                 }
                         }
-                        .padding(2)
-                        .roundedHUDVisualEffect()
-                        .padding(10)
+                        .padding(contentInsets)
+                        .background(HUDVisualEffect())
+                        .clipShape(RoundedRectangle(cornerRadius: pageCornerRadius, style: .continuous))
+                        .shadow(radius: 2)
+                        .padding(8)
                         .fixedSize()
                 }
         }

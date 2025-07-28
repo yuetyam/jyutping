@@ -5,6 +5,9 @@ import CoreIME
 private struct SettingsKey {
         static let CandidatePageSize: String = "CandidatePageSize"
         static let CandidateLineSpacing: String = "CandidateLineSpacing"
+        static let CandidatePageCornerRadius: String = "CandidatePageCornerRadius"
+        static let CandidatePageInsets: String = "CandidatePageInsets"
+        static let CandidateCornerRadius: String = "CandidateCornerRadius"
         static let CandidatePageOrientation: String = "CandidatePageOrientation"
         static let CommentDisplayStyle: String = "CommentDisplayStyle"
         static let ToneDisplayStyle: String = "ToneDisplayStyle"
@@ -223,23 +226,21 @@ struct AppSettings {
 
         // MARK: - Page Size
 
+        /// Candidate count per page
         private(set) static var displayCandidatePageSize: Int = {
+                let hasSavedValue: Bool = UserDefaults.standard.object(forKey: SettingsKey.CandidatePageSize) != nil
+                guard hasSavedValue else { return defaultCandidatePageSize }
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.CandidatePageSize)
-                let isSavedValueValid: Bool = pageSizeValidity(of: savedValue)
-                guard isSavedValueValid else { return defaultCandidatePageSize }
+                guard candidatePageSizeRange.contains(savedValue) else { return defaultCandidatePageSize }
                 return savedValue
         }()
-        static func updateDisplayCandidatePageSize(to newPageSize: Int) {
-                let isNewPageSizeValid: Bool = pageSizeValidity(of: newPageSize)
-                guard isNewPageSizeValid else { return }
-                displayCandidatePageSize = newPageSize
-                UserDefaults.standard.set(newPageSize, forKey: SettingsKey.CandidatePageSize)
-        }
-        private static func pageSizeValidity(of value: Int) -> Bool {
-                return candidatePageSizeRange.contains(value)
+        static func updateDisplayCandidatePageSize(to value: Int) {
+                guard candidatePageSizeRange.contains(value) else { return }
+                displayCandidatePageSize = value
+                UserDefaults.standard.set(value, forKey: SettingsKey.CandidatePageSize)
         }
         private static let defaultCandidatePageSize: Int = 7
-        static let candidatePageSizeRange: Range<Int> = 1..<11
+        static let candidatePageSizeRange: ClosedRange<Int> = 1...10
 
 
         // MARK: - Line Spacing
@@ -248,21 +249,67 @@ struct AppSettings {
                 let hasSavedValue: Bool = UserDefaults.standard.object(forKey: SettingsKey.CandidateLineSpacing) != nil
                 guard hasSavedValue else { return defaultCandidateLineSpacing }
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.CandidateLineSpacing)
-                let isSavedValueValid: Bool = lineSpacingValidity(of: savedValue)
-                guard isSavedValueValid else { return defaultCandidateLineSpacing }
+                guard candidateLineSpacingRange.contains(savedValue) else { return defaultCandidateLineSpacing }
                 return savedValue
         }()
-        static func updateCandidateLineSpacing(to newLineSpacing: Int) {
-                let isNewLineSpacingValid: Bool = lineSpacingValidity(of: newLineSpacing)
-                guard isNewLineSpacingValid else { return }
-                candidateLineSpacing = newLineSpacing
-                UserDefaults.standard.set(newLineSpacing, forKey: SettingsKey.CandidateLineSpacing)
-        }
-        private static func lineSpacingValidity(of value: Int) -> Bool {
-                return candidateLineSpacingRange.contains(value)
+        static func updateCandidateLineSpacing(to value: Int) {
+                guard candidateLineSpacingRange.contains(value) else { return }
+                candidateLineSpacing = value
+                UserDefaults.standard.set(value, forKey: SettingsKey.CandidateLineSpacing)
         }
         private static let defaultCandidateLineSpacing: Int = 6
-        static let candidateLineSpacingRange: Range<Int> = 0..<15
+        static let candidateLineSpacingRange: ClosedRange<Int> = 0...16
+
+
+        // MARK: - Corner Radius
+
+        /// Corner radius of CandidateBoard
+        private(set) static var pageCornerRadius: Int = {
+                let hasSavedValue: Bool = UserDefaults.standard.object(forKey: SettingsKey.CandidatePageCornerRadius) != nil
+                guard hasSavedValue else { return defaultPageCornerRadius }
+                let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.CandidatePageCornerRadius)
+                guard cornerRadiusRange.contains(savedValue) else { return defaultPageCornerRadius }
+                return savedValue
+        }()
+        static func updatePageCornerRadius(to value: Int) {
+                guard cornerRadiusRange.contains(value) else { return }
+                pageCornerRadius = value
+                UserDefaults.standard.set(value, forKey: SettingsKey.CandidatePageCornerRadius)
+        }
+
+        /// CandidateBoard border width
+        private(set) static var contentInsets: Int = {
+                let hasSavedValue: Bool = UserDefaults.standard.object(forKey: SettingsKey.CandidatePageInsets) != nil
+                guard hasSavedValue else { return defaultContentInsets }
+                let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.CandidatePageInsets)
+                guard contentInsetsRange.contains(savedValue) else { return defaultContentInsets }
+                return savedValue
+        }()
+        static func updateContentInsets(to value: Int) {
+                guard contentInsetsRange.contains(value) else { return }
+                contentInsets = value
+                UserDefaults.standard.set(value, forKey: SettingsKey.CandidatePageInsets)
+        }
+
+        /// Corner radius of highlighted Candidate view
+        private(set) static var innerCornerRadius: Int = {
+                let hasSavedValue: Bool = UserDefaults.standard.object(forKey: SettingsKey.CandidateCornerRadius) != nil
+                guard hasSavedValue else { return defaultInnerCornerRadius }
+                let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.CandidateCornerRadius)
+                guard cornerRadiusRange.contains(savedValue) else { return defaultInnerCornerRadius }
+                return savedValue
+        }()
+        static func updateInnerCornerRadius(to value: Int) {
+                guard cornerRadiusRange.contains(value) else { return }
+                innerCornerRadius = value
+                UserDefaults.standard.set(value, forKey: SettingsKey.CandidateCornerRadius)
+        }
+
+        private static let defaultPageCornerRadius: Int = 10
+        private static let defaultContentInsets: Int = 2
+        private static let defaultInnerCornerRadius: Int = 8
+        static let cornerRadiusRange: ClosedRange<Int> = 0...20
+        static let contentInsetsRange: ClosedRange<Int> = 0...16
 
 
         // MARK: - Orientation
@@ -449,7 +496,7 @@ struct AppSettings {
         private static let defaultCandidateFontSize: Int = 16
         private static let defaultCommentFontSize: Int = 13
         private static let defaultLabelFontSize: Int = 13
-        static let fontSizeRange: Range<Int> = 10..<25
+        static let fontSizeRange: ClosedRange<Int> = 10...24
 
 
         // Candidate StackView syllable text frame

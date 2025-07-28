@@ -6,6 +6,9 @@ struct OptionsView: View {
 
         @EnvironmentObject private var context: AppContext
 
+        private let pageCornerRadius: CGFloat = CGFloat(AppSettings.pageCornerRadius)
+        private let contentInsets: CGFloat = CGFloat(AppSettings.contentInsets)
+        private let innerCornerRadius: CGFloat = CGFloat(AppSettings.innerCornerRadius)
         private let verticalPadding: CGFloat = CGFloat(AppSettings.candidateLineSpacing) / 2.0
         private let labelSet: LabelSet = AppSettings.labelSet
         private let isLabelLastZero: Bool = AppSettings.isLabelLastZero
@@ -32,37 +35,40 @@ struct OptionsView: View {
                 let highlightedIndex = context.optionsHighlightedIndex
                 VStack(alignment: .leading, spacing: 0) {
                         Group {
-                                OptionLabel(verticalPadding: verticalPadding, labelSet: labelSet, isLabelLastZero: isLabelLastZero, index: 0, highlightedIndex: highlightedIndex, text: options[0], checked: characterStandard == .traditional)
-                                OptionLabel(verticalPadding: verticalPadding, labelSet: labelSet, isLabelLastZero: isLabelLastZero, index: 1, highlightedIndex: highlightedIndex, text: options[1], checked: characterStandard == .hongkong)
-                                OptionLabel(verticalPadding: verticalPadding, labelSet: labelSet, isLabelLastZero: isLabelLastZero, index: 2, highlightedIndex: highlightedIndex, text: options[2], checked: characterStandard == .taiwan)
-                                OptionLabel(verticalPadding: verticalPadding, labelSet: labelSet, isLabelLastZero: isLabelLastZero, index: 3, highlightedIndex: highlightedIndex, text: options[3], checked: characterStandard == .simplified)
+                                OptionLabel(cornerRadius: innerCornerRadius, verticalPadding: verticalPadding, labelSet: labelSet, isLabelLastZero: isLabelLastZero, index: 0, highlightedIndex: highlightedIndex, text: options[0], checked: characterStandard == .traditional)
+                                OptionLabel(cornerRadius: innerCornerRadius, verticalPadding: verticalPadding, labelSet: labelSet, isLabelLastZero: isLabelLastZero, index: 1, highlightedIndex: highlightedIndex, text: options[1], checked: characterStandard == .hongkong)
+                                OptionLabel(cornerRadius: innerCornerRadius, verticalPadding: verticalPadding, labelSet: labelSet, isLabelLastZero: isLabelLastZero, index: 2, highlightedIndex: highlightedIndex, text: options[2], checked: characterStandard == .taiwan)
+                                OptionLabel(cornerRadius: innerCornerRadius, verticalPadding: verticalPadding, labelSet: labelSet, isLabelLastZero: isLabelLastZero, index: 3, highlightedIndex: highlightedIndex, text: options[3], checked: characterStandard == .simplified)
                         }
                         Divider()
                         Group {
-                                OptionLabel(verticalPadding: verticalPadding, labelSet: labelSet, isLabelLastZero: isLabelLastZero, index: 4, highlightedIndex: highlightedIndex, text: options[4], checked: characterForm.isHalfWidth)
-                                OptionLabel(verticalPadding: verticalPadding, labelSet: labelSet, isLabelLastZero: isLabelLastZero, index: 5, highlightedIndex: highlightedIndex, text: options[5], checked: characterForm.isFullWidth)
+                                OptionLabel(cornerRadius: innerCornerRadius, verticalPadding: verticalPadding, labelSet: labelSet, isLabelLastZero: isLabelLastZero, index: 4, highlightedIndex: highlightedIndex, text: options[4], checked: characterForm.isHalfWidth)
+                                OptionLabel(cornerRadius: innerCornerRadius, verticalPadding: verticalPadding, labelSet: labelSet, isLabelLastZero: isLabelLastZero, index: 5, highlightedIndex: highlightedIndex, text: options[5], checked: characterForm.isFullWidth)
                         }
                         Divider()
                         Group {
-                                OptionLabel(verticalPadding: verticalPadding, labelSet: labelSet, isLabelLastZero: isLabelLastZero, index: 6, highlightedIndex: highlightedIndex, text: options[6], checked: punctuationForm.isCantoneseMode)
-                                OptionLabel(verticalPadding: verticalPadding, labelSet: labelSet, isLabelLastZero: isLabelLastZero, index: 7, highlightedIndex: highlightedIndex, text: options[7], checked: punctuationForm.isEnglishMode)
+                                OptionLabel(cornerRadius: innerCornerRadius, verticalPadding: verticalPadding, labelSet: labelSet, isLabelLastZero: isLabelLastZero, index: 6, highlightedIndex: highlightedIndex, text: options[6], checked: punctuationForm.isCantoneseMode)
+                                OptionLabel(cornerRadius: innerCornerRadius, verticalPadding: verticalPadding, labelSet: labelSet, isLabelLastZero: isLabelLastZero, index: 7, highlightedIndex: highlightedIndex, text: options[7], checked: punctuationForm.isEnglishMode)
                         }
                         Divider()
                         Group {
-                                OptionLabel(verticalPadding: verticalPadding, labelSet: labelSet, isLabelLastZero: isLabelLastZero, index: 8, highlightedIndex: highlightedIndex, text: options[8], checked: inputMethodMode.isCantonese)
-                                OptionLabel(verticalPadding: verticalPadding, labelSet: labelSet, isLabelLastZero: isLabelLastZero, index: 9, highlightedIndex: highlightedIndex, text: options[9], checked: inputMethodMode.isABC)
+                                OptionLabel(cornerRadius: innerCornerRadius, verticalPadding: verticalPadding, labelSet: labelSet, isLabelLastZero: isLabelLastZero, index: 8, highlightedIndex: highlightedIndex, text: options[8], checked: inputMethodMode.isCantonese)
+                                OptionLabel(cornerRadius: innerCornerRadius, verticalPadding: verticalPadding, labelSet: labelSet, isLabelLastZero: isLabelLastZero, index: 9, highlightedIndex: highlightedIndex, text: options[9], checked: inputMethodMode.isABC)
                         }
                 }
-                .padding(2)
-                .roundedHUDVisualEffect()
-                .padding(10)
+                .padding(contentInsets)
+                .background(HUDVisualEffect())
+                .clipShape(RoundedRectangle(cornerRadius: pageCornerRadius, style: .continuous))
+                .shadow(radius: 2)
+                .padding(8)
                 .fixedSize()
         }
 }
 
 private struct OptionLabel: View {
 
-        init(verticalPadding: CGFloat, labelSet: LabelSet, isLabelLastZero: Bool, index: Int, highlightedIndex: Int, text: String, checked: Bool) {
+        init(cornerRadius: CGFloat, verticalPadding: CGFloat, labelSet: LabelSet, isLabelLastZero: Bool, index: Int, highlightedIndex: Int, text: String, checked: Bool) {
+                self.cornerRadius = cornerRadius
                 self.verticalPadding = verticalPadding
                 self.labelText = LabelSet.labelText(for: index, labelSet: labelSet, isLabelLastZero: isLabelLastZero)
                 self.index = index
@@ -71,6 +77,7 @@ private struct OptionLabel: View {
                 self.checked = checked
         }
 
+        private let cornerRadius: CGFloat
         private let verticalPadding: CGFloat
         private let index: Int
         private let isHighlighted: Bool
@@ -90,7 +97,7 @@ private struct OptionLabel: View {
                 .padding(.horizontal, 3)
                 .padding(.vertical, verticalPadding)
                 .foregroundStyle(isHighlighted ? Color.white : Color.primary)
-                .background(isHighlighted ? Color.accentColor : Color.clear, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+                .background(isHighlighted ? Color.accentColor : Color.clear, in: RoundedRectangle(cornerRadius: cornerRadius, style: .continuous))
                 .contentShape(Rectangle())
                 .onHover { isHovering in
                         guard isHovering else { return }

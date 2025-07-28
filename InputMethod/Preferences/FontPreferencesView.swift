@@ -10,7 +10,7 @@ struct FontPreferencesView: View {
         @State private var candidateFontSize: Int = Int(AppSettings.candidateFontSize)
         @State private var commentFontSize: Int = Int(AppSettings.commentFontSize)
         @State private var labelFontSize: Int = Int(AppSettings.labelFontSize)
-        private let fontSizeRange: Range<Int> = AppSettings.fontSizeRange
+        private let fontSizeRange: ClosedRange<Int> = AppSettings.fontSizeRange
 
         @State private var candidateFontMode: FontMode = AppSettings.candidateFontMode
         @State private var commentFontMode: FontMode = AppSettings.commentFontMode

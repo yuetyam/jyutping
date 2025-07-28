@@ -26,23 +26,4 @@ extension View {
         func applyVisualEffect() -> some View {
                 return background(VisualEffectView())
         }
-        /*
-        func hudVisualEffect() -> some View {
-                return background(HUDVisualEffect())
-        }
-        func roundedVisualEffect() -> some View {
-                return background(
-                        VisualEffectView()
-                                .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-                                .shadow(radius: 3)
-                )
-        }
-        */
-        func roundedHUDVisualEffect() -> some View {
-                return background(
-                        HUDVisualEffect()
-                                .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-                                .shadow(radius: 3)
-                )
-        }
 }
