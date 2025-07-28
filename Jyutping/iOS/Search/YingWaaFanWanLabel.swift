@@ -9,10 +9,12 @@ struct YingWaaFanWanLexiconView: View {
         let lexicon: [YingWaaFanWan]
         var body: some View {
                 if let firstEntry = lexicon.first {
-                        HStack {
-                                Text(verbatim: "文字").font(.copilot)
-                                Text.separator.font(.copilot)
-                                Text(verbatim: firstEntry.word)
+                        HStack(spacing: 16) {
+                                HStack(spacing: 2) {
+                                        Text(verbatim: "文字").font(.copilot)
+                                        Text.separator.font(.copilot)
+                                        Text(verbatim: firstEntry.word)
+                                }
                                 if let unicode = firstEntry.word.first?.codePointsText {
                                         Text(verbatim: unicode).font(.footnote.monospaced()).foregroundStyle(Color.secondary)
                                 }
@@ -31,9 +33,11 @@ private struct YingWaaFanWanPronunciationView: View {
                 let ipaText: String = OldCantonese.IPAText(of: entry.romanization)
                 VStack(alignment: .leading) {
                         HStack {
-                                Text(verbatim: "讀音")
-                                Text.separator
-                                Text(verbatim: entry.pronunciation).font(.body)
+                                HStack(spacing: 2) {
+                                        Text(verbatim: "讀音")
+                                        Text.separator
+                                        Text(verbatim: entry.pronunciation).font(.body)
+                                }
                                 if let pronunciationMark = entry.pronunciationMark {
                                         Text(verbatim: pronunciationMark).font(.footnote.italic())
                                 }
@@ -42,7 +46,7 @@ private struct YingWaaFanWanPronunciationView: View {
                                 }
                         }
                         HStack(spacing: 16) {
-                                HStack {
+                                HStack(spacing: 2) {
                                         Text(verbatim: "轉寫")
                                         Text.separator
                                         Text(verbatim: entry.romanization).font(.fixedWidth)
@@ -52,7 +56,7 @@ private struct YingWaaFanWanPronunciationView: View {
                                 Speaker(entry.romanization).opacity(entry.romanization.isValidJyutpingSyllable ? 1 : 0)
                         }
                         if let homophoneText {
-                                HStack {
+                                HStack(spacing: 2) {
                                         Text(verbatim: "同音")
                                         Text.separator
                                         Text(verbatim: homophoneText).font(.body)

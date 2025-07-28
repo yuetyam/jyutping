@@ -9,10 +9,12 @@ struct ChoHokYuetYamCitYiuLexiconView: View {
         let lexicon: [ChoHokYuetYamCitYiu]
         var body: some View {
                 if let firstEntry = lexicon.first {
-                        HStack {
-                                Text(verbatim: "文字").font(.copilot)
-                                Text.separator.font(.copilot)
-                                Text(verbatim: firstEntry.word)
+                        HStack(spacing: 16) {
+                                HStack(spacing: 2) {
+                                        Text(verbatim: "文字").font(.copilot)
+                                        Text.separator.font(.copilot)
+                                        Text(verbatim: firstEntry.word)
+                                }
                                 if let unicode = firstEntry.word.first?.codePointsText {
                                         Text(verbatim: unicode).font(.footnote.monospaced()).foregroundStyle(Color.secondary)
                                 }
@@ -31,16 +33,18 @@ private struct ChoHokYuetYamCitYiuPronunciationView: View {
                 let ipaText: String = OldCantonese.IPAText(of: entry.romanization)
                 VStack(alignment: .leading) {
                         HStack(spacing: 16) {
-                                HStack {
+                                HStack(spacing: 2) {
                                         Text(verbatim: "讀音")
                                         Text.separator
                                         Text(verbatim: entry.pronunciation).font(.body)
                                 }
-                                Text(verbatim: entry.tone)
-                                Text(verbatim: entry.faancit)
+                                HStack(spacing: 8) {
+                                        Text(verbatim: entry.tone)
+                                        Text(verbatim: entry.faancit)
+                                }
                         }
                         HStack(spacing: 16) {
-                                HStack {
+                                HStack(spacing: 2) {
                                         Text(verbatim: "轉寫")
                                         Text.separator
                                         Text(verbatim: entry.romanization).font(.fixedWidth)
@@ -50,7 +54,7 @@ private struct ChoHokYuetYamCitYiuPronunciationView: View {
                                 Speaker(entry.romanization).opacity(entry.romanization.isValidJyutpingSyllable ? 1 : 0)
                         }
                         if let homophoneText {
-                                HStack {
+                                HStack(spacing: 2) {
                                         Text(verbatim: "同音")
                                         Text.separator
                                         Text(verbatim: homophoneText).font(.body)

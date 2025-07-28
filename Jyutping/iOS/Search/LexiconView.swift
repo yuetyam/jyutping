@@ -9,7 +9,7 @@ struct LexiconView: View {
         let lexicon: CantoneseLexicon
         var body: some View {
                 HStack(spacing: 16) {
-                        HStack {
+                        HStack(spacing: 2) {
                                 Text(verbatim: "文字").font(.copilot)
                                 Text.separator.font(.copilot)
                                 Text(verbatim: lexicon.text)
@@ -26,7 +26,7 @@ struct LexiconView: View {
                         PronunciationView(lexicon.pronunciations[index])
                 }
                 if let unihanDefinition = lexicon.unihanDefinition {
-                        HStack {
+                        HStack(spacing: 2) {
                                 Text(verbatim: "英文").font(.copilot)
                                 Text.separator.font(.copilot)
                                 Text(verbatim: unihanDefinition).font(.subheadline)
@@ -62,7 +62,7 @@ private struct PronunciationView: View {
         var body: some View {
                 VStack(alignment: .leading) {
                         HStack(spacing: 16) {
-                                HStack {
+                                HStack(spacing: 2) {
                                         Text(verbatim: "讀音")
                                         Text.separator
                                         Text(verbatim: romanization).font(isSingular ? .fixedWidth : .body)
@@ -74,21 +74,21 @@ private struct PronunciationView: View {
                                 Speaker(romanization)
                         }
                         if let homophoneText {
-                                HStack {
+                                HStack(spacing: 2) {
                                         Text(verbatim: "同音")
                                         Text.separator
                                         Text(verbatim: homophoneText).font(.body)
                                 }
                         }
                         if let interpretation {
-                                HStack {
+                                HStack(spacing: 2) {
                                         Text(verbatim: "釋義")
                                         Text.separator
                                         Text(verbatim: interpretation).font(.body)
                                 }
                         }
                         if let collocationText {
-                                HStack {
+                                HStack(spacing: 2) {
                                         Text(verbatim: "詞例")
                                         Text.separator
                                         Text(verbatim: collocationText).font(.body)
