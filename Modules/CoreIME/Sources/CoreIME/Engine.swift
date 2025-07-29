@@ -209,7 +209,8 @@ extension Engine {
                                         }
                                         let isMatched = checks.reduce(true, { $0 && $1 })
                                         guard isMatched else { return nil }
-                                        let tail: [Character] = Array(repeating: "i", count: syllableCount - 1)
+                                        let separatorCount = syllableCount - 1
+                                        let tail: [Character] = Array(repeating: "i", count: separatorCount)
                                         let combinedInput: String = item.input + tail
                                         return item.replacedInput(with: combinedInput)
                                 }
