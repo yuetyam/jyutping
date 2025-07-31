@@ -2,22 +2,6 @@
 
 import SwiftUI
 
-struct VisualEffectView: NSViewRepresentable {
-        func makeNSView(context: Self.Context) -> NSView {
-                let view = NSVisualEffectView()
-                view.material = .sidebar
-                view.blendingMode = .behindWindow
-                view.state = .active
-                return view
-        }
-        func updateNSView(_ nsView: NSView, context: Context) { }
-}
-extension View {
-        func applyVisualEffect() -> some View {
-                return self.background(VisualEffectView())
-        }
-}
-
 @available(macOS 13.0, *)
 struct MacContentView: View {
 
@@ -82,8 +66,8 @@ struct MacContentView: View {
                                 }
                                 .font(.master)
                         }
-                        .toolbarBackground(Material.ultraThin, for: .windowToolbar)
                         .navigationTitle("MacContentView.NavigationTitle.Jyutping")
+                        .toolbarBackground(Material.ultraThin, for: .windowToolbar)
                         .onReceive(NotificationCenter.default.publisher(for: .focusSearch)) { _ in
                                 selection = .search
                         }
@@ -93,49 +77,49 @@ struct MacContentView: View {
                 } detail: {
                         switch selection {
                         case .installation:
-                                MacInputMethodView().applyVisualEffect()
+                                MacInputMethodView()
                         case .introductions:
-                                MacIntroductionsView().applyVisualEffect()
+                                MacIntroductionsView()
                         case .expressions:
-                                MacExpressionsView().applyVisualEffect()
+                                MacExpressionsView()
                         case .confusion:
-                                MacConfusionView().applyVisualEffect()
+                                MacConfusionView()
                         case .search:
-                                MacSearchView().applyVisualEffect()
+                                MacSearchView()
                         case .initials:
-                                MacJyutpingInitialTable().applyVisualEffect()
+                                MacJyutpingInitialTable()
                         case .finals:
-                                MacJyutpingFinalTable().applyVisualEffect()
+                                MacJyutpingFinalTable()
                         case .tones:
-                                MacJyutpingToneTable().applyVisualEffect()
+                                MacJyutpingToneTable()
                         case .numbers:
-                                NumbersView().applyVisualEffect()
+                                NumbersView()
                         case .stemsBranches:
-                                StemsBranchesView().applyVisualEffect()
+                                StemsBranchesView()
                         case .chineseZodiac:
-                                ChineseZodiacView().applyVisualEffect()
+                                ChineseZodiacView()
                         case .solarTerms:
-                                SolarTermsView().applyVisualEffect()
+                                SolarTermsView()
                         case .surnames:
-                                MacHundredFamilySurnamesView().applyVisualEffect()
+                                MacHundredFamilySurnamesView()
                         case .cinZiMan:
-                                MacThousandCharacterClassicView().applyVisualEffect()
+                                MacThousandCharacterClassicView()
                         case .cantonMetro:
-                                MacCantonMetroView().applyVisualEffect()
+                                MacCantonMetroView()
                         case .fatshanMetro:
-                                MacFatshanMetroView().applyVisualEffect()
+                                MacFatshanMetroView()
                         case .macauMetro:
-                                MacMacauMetroView().applyVisualEffect()
+                                MacMacauMetroView()
                         case .tungkunRailTransit:
-                                MacTungkunRailTransitView().applyVisualEffect()
+                                MacTungkunRailTransitView()
                         case .shamchunMetro:
-                                MacShamChunMetroView().applyVisualEffect()
+                                MacShamChunMetroView()
                         case .hongkongMTR:
-                                MacHongKongMTRView().applyVisualEffect()
+                                MacHongKongMTRView()
                         case .resources:
-                                MacResourcesView().applyVisualEffect()
+                                MacResourcesView()
                         case .about:
-                                MacAboutView().applyVisualEffect()
+                                MacAboutView()
                         }
                 }
         }

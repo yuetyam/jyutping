@@ -55,7 +55,12 @@ struct Speaker: View {
                                 }
                 } else {
                         ZStack {
-                                Circle().fill(Material.regular)
+                                Circle()
+                                        #if os(macOS)
+                                        .fill(Color.textBackgroundColor)
+                                        #else
+                                        .fill(Material.regular)
+                                        #endif
                                 Image.speaker
                                         .resizable()
                                         .scaledToFit()

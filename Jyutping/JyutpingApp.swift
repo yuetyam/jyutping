@@ -12,8 +12,22 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 NSWindow.allowsAutomaticWindowTabbing = false
         }
         func applicationDidFinishLaunching(_ notification: Notification) {
-                _ = NSApp.windows.map({ $0.tabbingMode = .disallowed })
+                NSApp.windows.forEach { window in
+                        window.tabbingMode = .disallowed
+                        window.titlebarAppearsTransparent = true
+                }
         }
+}
+
+struct VisualEffectView: NSViewRepresentable {
+        func makeNSView(context: Self.Context) -> NSView {
+                let view = NSVisualEffectView()
+                view.material = .hudWindow
+                view.blendingMode = .behindWindow
+                view.state = .active
+                return view
+        }
+        func updateNSView(_ nsView: NSView, context: Context) { }
 }
 
 @main
@@ -23,10 +37,12 @@ struct JyutpingApp: App {
 
         var body: some Scene {
                 WindowGroup {
-                        if #available(macOS 13.0, *) {
-                                MacContentView()
+                        if #available(macOS 15.0, *) {
+                                MacContentView().containerBackground(for: .window) { VisualEffectView() }
+                        } else if #available(macOS 13.0, *) {
+                                MacContentView().background(VisualEffectView())
                         } else {
-                                MacContentViewMonterey()
+                                MacContentViewMonterey().background(VisualEffectView())
                         }
                 }
                 .windowToolbarStyle(.unifiedCompact)

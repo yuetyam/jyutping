@@ -28,23 +28,24 @@ struct MacInputMethodView: View {
                                         Link("Shared.About.Website", destination: About.WebsiteURL)
                                                 .font(.master)
                                                 .foregroundStyle(Color.accentColor)
-                                        Text(verbatim: About.WebsiteAddress)
-                                                .font(.fixedWidth)
+                                        Text(verbatim: About.WebsiteAddress).font(.fixedWidth)
                                         Button {
                                                 AppMaster.copy(About.WebsiteAddress)
                                                 isWebsiteAddressCopied = true
+                                                Task {
+                                                        try await Task.sleep(nanoseconds: 2_000_000_000) // 2s
+                                                        isWebsiteAddressCopied = false
+                                                }
                                         } label: {
-                                                if isWebsiteAddressCopied {
-                                                        HStack(spacing: 4) {
-                                                                Image(systemName: "text.badge.checkmark")
-                                                                Text("General.Copied")
-                                                                        .font(.master)
-                                                        }
-                                                } else {
-                                                        HStack(spacing: 4) {
-                                                                Image(systemName: "doc.on.doc")
-                                                                Text("General.Copy")
-                                                                        .font(.master)
+                                                HStack(spacing: 4) {
+                                                        Image(systemName: isWebsiteAddressCopied ? "text.badge.checkmark" : "doc.on.doc")
+                                                                .resizable()
+                                                                .scaledToFit()
+                                                                .frame(width: 16, height: 16)
+                                                        if isWebsiteAddressCopied {
+                                                                Text("General.Copied").font(.master)
+                                                        } else {
+                                                                Text("General.Copy").font(.master)
                                                         }
                                                 }
                                         }
