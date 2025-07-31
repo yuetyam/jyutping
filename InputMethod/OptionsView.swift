@@ -57,7 +57,7 @@ struct OptionsView: View {
                         }
                 }
                 .padding(contentInsets)
-                .background(HUDVisualEffect())
+                .background(VisualEffectView())
                 .clipShape(RoundedRectangle(cornerRadius: pageCornerRadius, style: .continuous))
                 .shadow(radius: 2)
                 .padding(8)

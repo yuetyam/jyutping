@@ -13,6 +13,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 super.init()
         }
 
+        func applicationWillFinishLaunching(_ notification: Notification) {
+                NSWindow.allowsAutomaticWindowTabbing = false
+        }
+
         private lazy var imkServer: IMKServer? = nil
 
         func applicationDidFinishLaunching(_ notification: Notification) {

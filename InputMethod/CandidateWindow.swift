@@ -16,6 +16,7 @@ final class CandidateWindow: NSPanel {
                 collectionBehavior = .moveToActiveSpace
                 isMovable = true
                 isMovableByWindowBackground = true
+                tabbingMode = .disallowed
                 isOpaque = false
                 hasShadow = false
                 backgroundColor = .clear
@@ -38,6 +39,7 @@ final class SettingsWindow: NSPanel {
                 collectionBehavior = .moveToActiveSpace
                 isMovable = true
                 isMovableByWindowBackground = true
+                tabbingMode = .disallowed
                 title = String(localized: "PreferencesView.Window.Title")
                 toolbarStyle = .unifiedCompact
         }

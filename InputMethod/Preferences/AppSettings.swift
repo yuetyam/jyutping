@@ -282,11 +282,11 @@ struct AppSettings {
                 let hasSavedValue: Bool = UserDefaults.standard.object(forKey: SettingsKey.CandidatePageInsets) != nil
                 guard hasSavedValue else { return defaultContentInsets }
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.CandidatePageInsets)
-                guard contentInsetsRange.contains(savedValue) else { return defaultContentInsets }
+                guard cornerRadiusRange.contains(savedValue) else { return defaultContentInsets }
                 return savedValue
         }()
         static func updateContentInsets(to value: Int) {
-                guard contentInsetsRange.contains(value) else { return }
+                guard cornerRadiusRange.contains(value) else { return }
                 contentInsets = value
                 UserDefaults.standard.set(value, forKey: SettingsKey.CandidatePageInsets)
         }
@@ -309,7 +309,6 @@ struct AppSettings {
         private static let defaultContentInsets: Int = 2
         private static let defaultInnerCornerRadius: Int = 8
         static let cornerRadiusRange: ClosedRange<Int> = 0...20
-        static let contentInsetsRange: ClosedRange<Int> = 0...16
 
 
         // MARK: - Orientation

@@ -332,7 +332,7 @@ private struct KeyBlockView: View {
                         .lineLimit(1)
                         .minimumScaleFactor(0.5)
                         .frame(width: 64, height: 24)
-                        .background(Material.regular, in: RoundedRectangle(cornerRadius: 4, style: .continuous))
+                        .background(Color.textBackgroundColor, in: RoundedRectangle(cornerRadius: 5, style: .continuous))
         }
 
         static let control: KeyBlockView = KeyBlockView("Control ⌃")
@@ -356,7 +356,7 @@ private struct SymbolKeyView: View {
                 Text(verbatim: keyText)
                         .padding(.horizontal, 6)
                         .padding(.vertical, 1)
-                        .background(Material.ultraThick, in: RoundedRectangle(cornerRadius: 4, style: .continuous))
+                        .stack(cornerRadius: 5)
         }
 }
 

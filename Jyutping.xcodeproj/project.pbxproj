@@ -334,13 +334,13 @@
 		37E6AD7F2B3B381700F02279 /* GeneralPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD5B2B3B381600F02279 /* GeneralPreferencesView.swift */; };
 		37E6AD802B3B381700F02279 /* FontPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD5C2B3B381600F02279 /* FontPreferencesView.swift */; };
 		37E6AD812B3B381700F02279 /* PresetConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD5D2B3B381600F02279 /* PresetConstant.swift */; };
-		37E6AD822B3B381700F02279 /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD5E2B3B381600F02279 /* PreferencesView.swift */; };
+		37E6AD822B3B381700F02279 /* SettingsContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD5E2B3B381600F02279 /* SettingsContentView.swift */; };
 		37E6AD832B3B381700F02279 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD5F2B3B381600F02279 /* AboutView.swift */; };
 		37E6AD842B3B381700F02279 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD602B3B381600F02279 /* AppSettings.swift */; };
 		37E6AD862B3B381700F02279 /* PageTransformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD622B3B381600F02279 /* PageTransformation.swift */; };
 		37E6AD872B3B381700F02279 /* OptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD632B3B381600F02279 /* OptionsView.swift */; };
 		37E6AD882B3B381700F02279 /* InputStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD642B3B381600F02279 /* InputStage.swift */; };
-		37E6AD892B3B381700F02279 /* VisualEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD652B3B381600F02279 /* VisualEffect.swift */; };
+		37E6AD892B3B381700F02279 /* VisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD652B3B381600F02279 /* VisualEffectView.swift */; };
 		37E6AD8A2B3B381700F02279 /* JyutpingInputController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD662B3B381600F02279 /* JyutpingInputController.swift */; };
 		37E6AD8B2B3B381700F02279 /* AppContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD672B3B381600F02279 /* AppContext.swift */; };
 		37E6AD902B3B384B00F02279 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37E6AD8F2B3B384B00F02279 /* Assets.xcassets */; };
@@ -745,13 +745,13 @@
 		37E6AD5B2B3B381600F02279 /* GeneralPreferencesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralPreferencesView.swift; sourceTree = "<group>"; };
 		37E6AD5C2B3B381600F02279 /* FontPreferencesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontPreferencesView.swift; sourceTree = "<group>"; };
 		37E6AD5D2B3B381600F02279 /* PresetConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresetConstant.swift; sourceTree = "<group>"; };
-		37E6AD5E2B3B381600F02279 /* PreferencesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
+		37E6AD5E2B3B381600F02279 /* SettingsContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsContentView.swift; sourceTree = "<group>"; };
 		37E6AD5F2B3B381600F02279 /* AboutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		37E6AD602B3B381600F02279 /* AppSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		37E6AD622B3B381600F02279 /* PageTransformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageTransformation.swift; sourceTree = "<group>"; };
 		37E6AD632B3B381600F02279 /* OptionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsView.swift; sourceTree = "<group>"; };
 		37E6AD642B3B381600F02279 /* InputStage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputStage.swift; sourceTree = "<group>"; };
-		37E6AD652B3B381600F02279 /* VisualEffect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualEffect.swift; sourceTree = "<group>"; };
+		37E6AD652B3B381600F02279 /* VisualEffectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualEffectView.swift; sourceTree = "<group>"; };
 		37E6AD662B3B381600F02279 /* JyutpingInputController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JyutpingInputController.swift; sourceTree = "<group>"; };
 		37E6AD672B3B381600F02279 /* AppContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppContext.swift; sourceTree = "<group>"; };
 		37E6AD8F2B3B384B00F02279 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -1149,7 +1149,7 @@
 				37E6AD552B3B381600F02279 /* Options.swift */,
 				37E6AD632B3B381600F02279 /* OptionsView.swift */,
 				37E6AD622B3B381600F02279 /* PageTransformation.swift */,
-				37E6AD652B3B381600F02279 /* VisualEffect.swift */,
+				37E6AD652B3B381600F02279 /* VisualEffectView.swift */,
 				37E6AD542B3B381600F02279 /* Quadrant.swift */,
 				373CB9112E2F30D300A3FDED /* InputMemory.swift */,
 				373CB90D2E2F2E6400A3FDED /* MemoryLexicon.swift */,
@@ -1469,7 +1469,7 @@
 		37E6AD582B3B381600F02279 /* Preferences */ = {
 			isa = PBXGroup;
 			children = (
-				37E6AD5E2B3B381600F02279 /* PreferencesView.swift */,
+				37E6AD5E2B3B381600F02279 /* SettingsContentView.swift */,
 				37B0D1CE2DB7788900B6DEFF /* GeneralSettingsView.swift */,
 				37E6AD5B2B3B381600F02279 /* GeneralPreferencesView.swift */,
 				37918A6B2C5B5BBA006C6590 /* ToneInputView.swift */,
@@ -2053,7 +2053,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				373CB90E2E2F2E6400A3FDED /* MemoryLexicon.swift in Sources */,
-				37E6AD892B3B381700F02279 /* VisualEffect.swift in Sources */,
+				37E6AD892B3B381700F02279 /* VisualEffectView.swift in Sources */,
 				37E6AD842B3B381700F02279 /* AppSettings.swift in Sources */,
 				37E6AD7E2B3B381700F02279 /* FontPicker.swift in Sources */,
 				37918A6C2C5B5BBA006C6590 /* ToneInputView.swift in Sources */,
@@ -2080,7 +2080,7 @@
 				37E6AD812B3B381700F02279 /* PresetConstant.swift in Sources */,
 				37E6AD882B3B381700F02279 /* InputStage.swift in Sources */,
 				37E6AD7D2B3B381700F02279 /* HotkeysView.swift in Sources */,
-				37E6AD822B3B381700F02279 /* PreferencesView.swift in Sources */,
+				37E6AD822B3B381700F02279 /* SettingsContentView.swift in Sources */,
 				37E6AD752B3B381700F02279 /* FontExtensions.swift in Sources */,
 				37E6AD772B3B381700F02279 /* ViewExtensions.swift in Sources */,
 				373CB9122E2F30D300A3FDED /* InputMemory.swift in Sources */,
@@ -2263,7 +2263,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 144;
+				CURRENT_PROJECT_VERSION = 145;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Keyboard/Info.plist;
@@ -2294,7 +2294,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 144;
+				CURRENT_PROJECT_VERSION = 145;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Keyboard/Info.plist;
@@ -2331,7 +2331,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 144;
+				CURRENT_PROJECT_VERSION = 145;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"InputMethod/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
@@ -2374,7 +2374,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 144;
+				CURRENT_PROJECT_VERSION = 145;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"InputMethod/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
@@ -2612,7 +2612,7 @@
 				CODE_SIGN_ENTITLEMENTS = Jyutping/Jyutping.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 144;
+				CURRENT_PROJECT_VERSION = 145;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Jyutping/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
@@ -2657,7 +2657,7 @@
 				CODE_SIGN_ENTITLEMENTS = Jyutping/Jyutping.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 144;
+				CURRENT_PROJECT_VERSION = 145;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Jyutping/Preview Content\"";
 				DEVELOPMENT_TEAM = "";

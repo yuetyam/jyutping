@@ -1459,7 +1459,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 guard inputStage.isBuffering.negative else { return }
                 guard SettingsWindow.shared.isVisible.negative else { return }
                 SettingsWindow.shared.level = window.level
-                SettingsWindow.shared.contentViewController = NSHostingController(rootView: PreferencesView())
+                SettingsWindow.shared.contentViewController = NSHostingController(rootView: SettingsContentView())
                 SettingsWindow.shared.setFrame(settingsWindowFrame(), display: true)
                 SettingsWindow.shared.orderFrontRegardless()
         }

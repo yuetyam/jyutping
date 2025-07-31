@@ -13,7 +13,6 @@ struct GeneralPreferencesView: View {
         private let pageSizeRange: ClosedRange<Int> = AppSettings.candidatePageSizeRange
         private let lineSpacingRange: ClosedRange<Int> = AppSettings.candidateLineSpacingRange
         private let cornerRadiusRange: ClosedRange<Int> = AppSettings.cornerRadiusRange
-        private let insetsRange: ClosedRange<Int> = AppSettings.contentInsetsRange
 
         @State private var orientation: CandidatePageOrientation = AppSettings.candidatePageOrientation
         @State private var commentDisplayStyle: CommentDisplayStyle = AppSettings.commentDisplayStyle
@@ -75,7 +74,7 @@ struct GeneralPreferencesView: View {
                                         }
                                         HStack {
                                                 Picker("GeneralPreferencesView.CandidatePageInsets", selection: $contentInsets) {
-                                                        ForEach(insetsRange, id: \.self) {
+                                                        ForEach(cornerRadiusRange, id: \.self) {
                                                                 Text(verbatim: "\($0) pt").tag($0)
                                                         }
                                                 }
