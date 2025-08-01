@@ -288,17 +288,17 @@ struct DatabasePreparer {
                 guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
         }
         private static func createTextMarkTable() async {
-                let createTable: String = "CREATE TABLE marktable(mark TEXT NOT NULL, ping INTEGER NOT NULL, tenkeycode INTEGER NOT NULL);"
+                let createTable: String = "CREATE TABLE marktable(mark TEXT NOT NULL, ping INTEGER NOT NULL, code INTEGER NOT NULL, tenkeycode INTEGER NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
                 sqlite3_finalize(createStatement)
                 let sources: [TextMarkLexicon] = TextMarkLexicon.convert()
                 let entries = sources.map { entry -> String in
-                        return "('\(entry.text)', \(entry.ping), \(entry.tenKeyCode))"
+                        return "('\(entry.text)', \(entry.pingCode), \(entry.charCode), \(entry.tenKeyCharCode))"
                 }
                 let values: String = entries.joined(separator: ", ")
-                let insert: String = "INSERT INTO marktable (mark, ping, tenkeycode) VALUES \(values);"
+                let insert: String = "INSERT INTO marktable (mark, ping, code, tenkeycode) VALUES \(values);"
                 var insertStatement: OpaquePointer? = nil
                 defer { sqlite3_finalize(insertStatement) }
                 guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }
