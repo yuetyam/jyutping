@@ -514,6 +514,16 @@ extension Engine {
                 }
                 guard let firstInputCount = queried.first?.inputCount else { return [] }
                 guard firstInputCount < inputLength else { return queried }
+
+                let tailCombos = combos.dropFirst(firstInputCount)
+                let tailCode = tailCombos.map(\.rawValue).decimalCombined()
+                guard tailCode > 0 else { return queried }
+                let tailCandidates: [Candidate] = tenKeyCodeMatch(code: tailCode, limit: 20, statement: codeMatchStatement) + tenKeyAnchorsMatch(code: tailCode, limit: 20, statement: anchorsStatement)
+                guard tailCandidates.isNotEmpty, let head = queried.first else { return queried }
+                let concatenated = tailCandidates.compactMap({ head + $0 }).sorted().prefix(1)
+                return concatenated + queried
+
+                /*
                 let headInputLengths = queried.map(\.inputCount).uniqued()
                 let concatenated = headInputLengths.compactMap({ headLength -> Candidate? in
                         let tailEvents = combos.dropFirst(headLength)
@@ -522,6 +532,7 @@ extension Engine {
                         return headCandidate + tailCandidate
                 }).uniqued().sorted().prefix(1)
                 return concatenated + queried
+                */
         }
         private static func tenKeyAnchorsMatch(code: Int, limit: Int64? = nil, statement: OpaquePointer?) -> [Candidate] {
                 sqlite3_reset(statement)
