@@ -377,6 +377,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
 
         // MARK: - Candidates
 
+        /// System Text Replacements
         private lazy var definedLexicons: [DefinedLexicon] = []
         private func obtainSupplementaryLexicon() async {
                 let kUserDictionary: String = "NSUserDictionaryReplacementItems"
@@ -391,20 +392,17 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         let events = input.lowercased().compactMap(InputEvent.matchInputEvent(for:))
                         guard events.count == input.count else { return nil }
                         guard let text = (dict[kWith] as? String), text.isNotEmpty else { return nil }
-                        return DefinedLexicon(events: events, input: input, text: text)
+                        return DefinedLexicon(input: input, text: text, events: events)
                 }
-        }
-        private struct DefinedLexicon: Hashable {
-                let events: [InputEvent]
-                let input: String
-                let text: String
         }
         private func searchDefinedCandidates(for events: [InputEvent]) -> [Candidate] {
                 guard AppSettings.isTextReplacementsOn else { return [] }
-                return definedLexicons.compactMap({ item -> Candidate? in
-                        guard item.events == events else { return nil }
-                        return Candidate(type: .text, text: item.text, romanization: item.input, input: item.input)
-                })
+                if events.count < 10 {
+                        let charCode: Int = events.map(\.code).radix100Combined()
+                        return definedLexicons.filter({ $0.charCode == charCode }).map(\.candidate)
+                } else {
+                        return definedLexicons.filter({ $0.events == events }).map(\.candidate)
+                }
         }
 
         /// Cached Candidate sequence for InputMemory
@@ -463,45 +461,49 @@ final class JyutpingInputController: IMKInputController, Sendable {
         private lazy var suggestionTask: Task<Void, Never>? = nil
         private func suggest() {
                 suggestionTask?.cancel()
+                let events = bufferEvents
                 let isEmojiSuggestionsOn: Bool = AppSettings.isEmojiSuggestionsOn
                 let isInputMemoryOn: Bool = AppSettings.isInputMemoryOn
                 suggestionTask = Task.detached(priority: .high) { [weak self] in
                         guard let self else { return }
-                        let segmentation = await Segmenter.segment(events: bufferEvents)
-                        async let memoryCandidates: [Candidate] = isInputMemoryOn ? InputMemory.suggest(events: bufferEvents, segmentation: segmentation) : []
-                        async let engineCandidates: [Candidate] = Engine.suggest(events: bufferEvents, segmentation: segmentation)
+                        let definedCandidates: [Candidate] = await searchDefinedCandidates(for: events)
+                        let textMarkCandidates: [Candidate] = Engine.searchTextMarks(for: events)
+                        let segmentation = Segmenter.segment(events: events)
+                        async let memoryCandidates: [Candidate] = isInputMemoryOn ? InputMemory.suggest(events: events, segmentation: segmentation) : []
+                        async let engineCandidates: [Candidate] = Engine.suggest(events: events, segmentation: segmentation)
                         let suggestions = await (memoryCandidates + engineCandidates).transformed(with: Options.characterStandard, isEmojiSuggestionsOn: isEmojiSuggestionsOn)
-                        let definedCandidates: [Candidate] = await searchDefinedCandidates(for: bufferEvents)
                         if Task.isCancelled.negative {
                                 await MainActor.run { [weak self] in
                                         guard let self else { return }
                                         let text2mark: String = {
                                                 lazy var text: String = joinedBufferTexts()
-                                                let isPeculiar: Bool = capitals.contains(true) || bufferEvents.contains(where: \.isSyllableLetter.negative)
+                                                let isPeculiar: Bool = capitals.contains(true) || events.contains(where: \.isSyllableLetter.negative)
                                                 guard isPeculiar.negative else { return text.toneConverted().formattedForMark() }
                                                 guard let firstCandidate = suggestions.first else { return text }
-                                                guard firstCandidate.inputCount != bufferEvents.count else { return firstCandidate.mark }
+                                                guard firstCandidate.inputCount != events.count else { return firstCandidate.mark }
                                                 guard let bestScheme = segmentation.first else { return text }
                                                 let leadingLength: Int = bestScheme.length
-                                                guard leadingLength < bufferEvents.count else { return bestScheme.mark }
+                                                guard leadingLength < events.count else { return bestScheme.mark }
                                                 return bestScheme.mark + String.space + text.dropFirst(leadingLength)
                                         }()
                                         self.mark(text: text2mark)
-                                        self.candidates = definedCandidates.isEmpty ? suggestions : (definedCandidates + suggestions)
+                                        self.candidates = definedCandidates + textMarkCandidates + suggestions
                                 }
                         }
                 }
         }
         private func pinyinReverseLookup() {
+                let definedCandidates: [Candidate] = searchDefinedCandidates(for: bufferEvents)
+                let textMarkCandidates: [Candidate] = Engine.searchTextMarks(for: bufferEvents)
                 let bufferText = joinedBufferTexts()
                 let text: String = String(bufferText.dropFirst())
                 guard text.isNotEmpty else {
                         mark(text: bufferText)
-                        candidates = []
+                        candidates = definedCandidates + textMarkCandidates
                         return
                 }
                 let schemes: [[String]] = PinyinSegmentor.segment(text: text)
-                let suggestions: [Candidate] = Engine.pinyinReverseLookup(text: text, schemes: schemes)
+                let suggestions: [Candidate] = Engine.pinyinReverseLookup(text: text, schemes: schemes).transformed(to: Options.characterStandard)
                 let tailText2Mark: String = {
                         if let firstCandidate = suggestions.first, firstCandidate.inputCount == text.count { return firstCandidate.mark }
                         guard let bestScheme = schemes.first else { return text }
@@ -514,23 +516,27 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 let prefixMark: String = bufferText.prefix(1) + String.space
                 let text2mark: String = prefixMark + tailText2Mark
                 mark(text: text2mark)
-                candidates = suggestions.transformed(to: Options.characterStandard).uniqued()
+                candidates = definedCandidates + textMarkCandidates + suggestions
         }
         private func cangjieReverseLookup() {
+                let definedCandidates: [Candidate] = searchDefinedCandidates(for: bufferEvents)
+                let textMarkCandidates: [Candidate] = Engine.searchTextMarks(for: bufferEvents)
                 let bufferText = joinedBufferTexts()
                 let text: String = String(bufferText.dropFirst())
                 let converted = text.compactMap({ CharacterStandard.cangjie(of: $0) })
                 let isValidSequence: Bool = converted.isNotEmpty && (converted.count == text.count)
                 if isValidSequence {
                         mark(text: String(converted))
-                        let lookup: [Candidate] = Engine.cangjieReverseLookup(text: text, variant: AppSettings.cangjieVariant)
-                        candidates = lookup.transformed(to: Options.characterStandard).uniqued()
+                        let suggestions: [Candidate] = Engine.cangjieReverseLookup(text: text, variant: AppSettings.cangjieVariant).transformed(to: Options.characterStandard)
+                        candidates = definedCandidates + textMarkCandidates + suggestions
                 } else {
                         mark(text: bufferText)
-                        candidates = []
+                        candidates = definedCandidates + textMarkCandidates
                 }
         }
         private func strokeReverseLookup() {
+                let definedCandidates: [Candidate] = searchDefinedCandidates(for: bufferEvents)
+                let textMarkCandidates: [Candidate] = Engine.searchTextMarks(for: bufferEvents)
                 let bufferText = joinedBufferTexts()
                 let text: String = String(bufferText.dropFirst())
                 let transformed: String = CharacterStandard.strokeTransform(text)
@@ -538,20 +544,22 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 let isValidSequence: Bool = converted.isNotEmpty && (converted.count == text.count)
                 if isValidSequence {
                         mark(text: String(converted))
-                        let lookup: [Candidate] = Engine.strokeReverseLookup(text: transformed)
-                        candidates = lookup.transformed(to: Options.characterStandard).uniqued()
+                        let suggestions: [Candidate] = Engine.strokeReverseLookup(text: transformed).transformed(to: Options.characterStandard)
+                        candidates = definedCandidates + textMarkCandidates + suggestions
                 } else {
                         mark(text: bufferText)
-                        candidates = []
+                        candidates = definedCandidates + textMarkCandidates
                 }
         }
 
         /// 拆字反查. 例如 木 + 木 = 林: mukmuk
         private func structureReverseLookup() {
+                let definedCandidates: [Candidate] = searchDefinedCandidates(for: bufferEvents)
+                let textMarkCandidates: [Candidate] = Engine.searchTextMarks(for: bufferEvents)
                 let bufferText = joinedBufferTexts()
                 guard bufferText.count > 2 else {
                         mark(text: bufferText)
-                        candidates = []
+                        candidates = definedCandidates + textMarkCandidates
                         return
                 }
                 let segmentation = Segmenter.segment(events: bufferEvents)
@@ -567,8 +575,8 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 let prefixMark: String = bufferText.prefix(1) + String.space
                 let text2mark: String = prefixMark + tailMark
                 mark(text: text2mark)
-                let lookup: [Candidate] = Engine.structureReverseLookup(events: bufferEvents, input: bufferText, segmentation: segmentation)
-                candidates = lookup.transformed(to: Options.characterStandard).uniqued()
+                let suggestions: [Candidate] = Engine.structureReverseLookup(events: bufferEvents, input: bufferText, segmentation: segmentation).transformed(to: Options.characterStandard)
+                candidates = definedCandidates + textMarkCandidates + suggestions
         }
 
 

@@ -235,6 +235,8 @@
 		3747C75A2E12601300E11099 /* ABCLeftKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3747C7592E12601300E11099 /* ABCLeftKey.swift */; };
 		3747C75C2E12626E00E11099 /* ABCRightKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3747C75B2E12626E00E11099 /* ABCRightKey.swift */; };
 		3747C75E2E126F2300E11099 /* ABCRightAlternativeKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3747C75D2E126F2300E11099 /* ABCRightAlternativeKey.swift */; };
+		3756452B2E3BD70F000267C9 /* DefinedLexicon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3756452A2E3BD70F000267C9 /* DefinedLexicon.swift */; };
+		3756452D2E3BDECF000267C9 /* DefinedLexicon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3756452C2E3BDECF000267C9 /* DefinedLexicon.swift */; };
 		375A90B32BD0797B009784BB /* TenKeyGlobeKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375A90B22BD0797B009784BB /* TenKeyGlobeKey.swift */; };
 		375B855D2CB8FBEB000E124E /* CandidateBarScrollViewIOS17.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375B855C2CB8FBEB000E124E /* CandidateBarScrollViewIOS17.swift */; };
 		375B855F2CB8FC1B000E124E /* CandidateBarScrollViewIOS18.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375B855E2CB8FC1B000E124E /* CandidateBarScrollViewIOS18.swift */; };
@@ -646,6 +648,8 @@
 		3747C7592E12601300E11099 /* ABCLeftKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ABCLeftKey.swift; sourceTree = "<group>"; };
 		3747C75B2E12626E00E11099 /* ABCRightKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ABCRightKey.swift; sourceTree = "<group>"; };
 		3747C75D2E126F2300E11099 /* ABCRightAlternativeKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ABCRightAlternativeKey.swift; sourceTree = "<group>"; };
+		3756452A2E3BD70F000267C9 /* DefinedLexicon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefinedLexicon.swift; sourceTree = "<group>"; };
+		3756452C2E3BDECF000267C9 /* DefinedLexicon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefinedLexicon.swift; sourceTree = "<group>"; };
 		375A90B22BD0797B009784BB /* TenKeyGlobeKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TenKeyGlobeKey.swift; sourceTree = "<group>"; };
 		375B855C2CB8FBEB000E124E /* CandidateBarScrollViewIOS17.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateBarScrollViewIOS17.swift; sourceTree = "<group>"; };
 		375B855E2CB8FC1B000E124E /* CandidateBarScrollViewIOS18.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateBarScrollViewIOS18.swift; sourceTree = "<group>"; };
@@ -1072,6 +1076,7 @@
 				379488A62E0E704000159BC6 /* InputMemory.swift */,
 				379488A22E0E65BB00159BC6 /* MemoryLexicon.swift */,
 				379488A42E0E6AD400159BC6 /* CharCode.swift */,
+				3756452A2E3BD70F000267C9 /* DefinedLexicon.swift */,
 			);
 			path = SharedModels;
 			sourceTree = "<group>";
@@ -1154,6 +1159,7 @@
 				373CB9112E2F30D300A3FDED /* InputMemory.swift */,
 				373CB90D2E2F2E6400A3FDED /* MemoryLexicon.swift */,
 				373CB90F2E2F2E9300A3FDED /* CharCode.swift */,
+				3756452C2E3BDECF000267C9 /* DefinedLexicon.swift */,
 				37E6AD432B3B381600F02279 /* CandidateViews */,
 				37E6AD582B3B381600F02279 /* Preferences */,
 				37E6AD482B3B381600F02279 /* KeyCode */,
@@ -2011,6 +2017,7 @@
 				371B6FDC2B3B342F005BB31C /* LargePadUpperLowerInputKey.swift in Sources */,
 				371B6FC72B3B342F005BB31C /* Operation.swift in Sources */,
 				371B6FEC2B3B342F005BB31C /* LargePadABCKeyboard.swift in Sources */,
+				3756452B2E3BD70F000267C9 /* DefinedLexicon.swift in Sources */,
 				379488A72E0E704000159BC6 /* InputMemory.swift in Sources */,
 				371B6FEA2B3B342F005BB31C /* LargePadLetterInputKey.swift in Sources */,
 				37942E2D2CE42678005D6536 /* MediumPadDismissKey.swift in Sources */,
@@ -2055,6 +2062,7 @@
 				373CB90E2E2F2E6400A3FDED /* MemoryLexicon.swift in Sources */,
 				37E6AD892B3B381700F02279 /* VisualEffectView.swift in Sources */,
 				37E6AD842B3B381700F02279 /* AppSettings.swift in Sources */,
+				3756452D2E3BDECF000267C9 /* DefinedLexicon.swift in Sources */,
 				37E6AD7E2B3B381700F02279 /* FontPicker.swift in Sources */,
 				37918A6C2C5B5BBA006C6590 /* ToneInputView.swift in Sources */,
 				37E6AD722B3B381700F02279 /* Representative.swift in Sources */,

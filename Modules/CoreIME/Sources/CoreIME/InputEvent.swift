@@ -171,7 +171,7 @@ extension InputEvent {
 
 extension RandomAccessCollection where Element == InputEvent {
         var combinedCode: Int {
-                guard self.count < 10 else { return 0 }
+                guard count < 10 else { return 0 }
                 return reduce(0, { $0 * 100 + $1.code })
         }
         var anchorsCode: Int {

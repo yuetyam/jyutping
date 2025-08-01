@@ -2,20 +2,21 @@ import Foundation
 import SQLite3
 
 extension Engine {
-        static func fetchTextMarks(text: String) -> [Candidate] {
+        public static func searchTextMarks<T: RandomAccessCollection<InputEvent>>(for events: T) -> [Candidate] {
+                let text: String = events.map(\.text).joined()
                 let command: String = "SELECT mark FROM marktable WHERE ping = ?;"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return [] }
                 guard sqlite3_bind_int64(statement, 1, Int64(text.hash)) == SQLITE_OK else { return [] }
-                var textMarks: [String] = []
+                var marks: [String] = []
                 while sqlite3_step(statement) == SQLITE_ROW {
-                        guard let textMark = sqlite3_column_text(statement, 0) else { continue }
-                        textMarks.append(String(cString: textMark))
+                        guard let mark = sqlite3_column_text(statement, 0) else { continue }
+                        marks.append(String(cString: mark))
                 }
-                return textMarks.map({ Candidate(input: text, text: $0) })
+                return marks.map({ Candidate(input: text, text: $0) })
         }
-        static func fetchTextMarks<T: RandomAccessCollection<Combo>>(combos: T) -> [Candidate] {
+        public static func queryTextMarks<T: RandomAccessCollection<Combo>>(for combos: T) -> [Candidate] {
                 let tenKeyCode = combos.map(\.rawValue).decimalCombined()
                 guard tenKeyCode > 0 else { return [] }
                 let command: String = "SELECT mark FROM marktable WHERE tenkeycode = ?;"

@@ -65,7 +65,7 @@ extension Engine {
                                 return anchorsMatch(events: events, statement: anchorsStatement)
                         }
                 default:
-                        return fetchTextMarks(text: events.map(\.text).joined()) + dispatch(events: events, segmentation: segmentation, anchorsStatement: anchorsStatement, pingStatement: pingStatement, strictStatement: strictStatement)
+                        return dispatch(events: events, segmentation: segmentation, anchorsStatement: anchorsStatement, pingStatement: pingStatement, strictStatement: strictStatement)
                 }
         }
 
@@ -481,7 +481,7 @@ extension Engine {
                         sqlite3_finalize(anchorsStatement)
                         sqlite3_finalize(codeMatchStatement)
                 }
-                return fetchTextMarks(combos: combos) + tenKeySearch(combos: combos, anchorsStatement: anchorsStatement, codeMatchStatement: codeMatchStatement)
+                return tenKeySearch(combos: combos, anchorsStatement: anchorsStatement, codeMatchStatement: codeMatchStatement)
         }
         private static func tenKeySearch<T: RandomAccessCollection<Combo>>(combos: T, limit: Int64? = nil, anchorsStatement: OpaquePointer?, codeMatchStatement: OpaquePointer?) -> [Candidate] {
                 let inputLength: Int = combos.count
