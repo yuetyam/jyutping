@@ -43,7 +43,7 @@ struct AboutView: View {
                                 .block()
                         }
                         .textSelection(.enabled)
-                        .padding()
+                        .padding(8)
                 }
                 .navigationTitle("PreferencesView.NavigationTitle.About")
         }

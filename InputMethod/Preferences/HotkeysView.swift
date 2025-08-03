@@ -300,7 +300,7 @@ struct HotkeysView: View {
                                 .block()
                         }
                         .textSelection(.enabled)
-                        .padding()
+                        .padding(8)
                 }
                 .navigationTitle("PreferencesView.NavigationTitle.Hotkeys")
         }

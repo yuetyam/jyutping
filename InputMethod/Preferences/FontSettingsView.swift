@@ -160,8 +160,10 @@ struct FontSettingsView: View {
                                 }
                                 .formStyle(.grouped)
                                 .scrollContentBackground(.hidden)
+                                .background(Color.textBackgroundColor.opacity(0.75), in: RoundedRectangle(cornerRadius: 16, style: .continuous))
                                 .frame(maxWidth: 480)
                         }
+                        .padding(8)
                 }
                 .animation(.default, value: animationState)
                 .navigationTitle("PreferencesView.NavigationTitle.Fonts")

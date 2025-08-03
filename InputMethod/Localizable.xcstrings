@@ -1698,91 +1698,91 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Comment Font"
+            "value" : "Comment (Jyutping) Font"
           }
         },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Comment Font"
+            "value" : "Comment (Jyutping) Font"
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Comment Font"
+            "value" : "Comment (Jyutping) Font"
           }
         },
         "en-US" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Comment Font"
+            "value" : "Comment (Jyutping) Font"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Police des commentaires"
+            "value" : "Police (Jyutping) des commentaires"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "コメントフォント"
+            "value" : "コメント(粵拼)フォント"
           }
         },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞註釋字體"
+            "value" : "候選詞註釋(粵拼)字體"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞註釋字體"
+            "value" : "候選詞註釋(粵拼)字體"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞註釋字體"
+            "value" : "候選詞註釋(粵拼)字體"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞註釋字體"
+            "value" : "候選詞註釋(粵拼)字體"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞註釋字體"
+            "value" : "候選詞註釋(粵拼)字體"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞註釋字體"
+            "value" : "候選詞註釋(粵拼)字體"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞註釋字體"
+            "value" : "候選詞註釋(粵拼)字體"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞註釋字體"
+            "value" : "候選詞註釋(粵拼)字體"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞註釋字體"
+            "value" : "候選詞註釋(粵拼)字體"
           }
         }
       }
@@ -1980,91 +1980,91 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Comment Font Size"
+            "value" : "Comment (Jyutping) Font Size"
           }
         },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Comment Font Size"
+            "value" : "Comment (Jyutping) Font Size"
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Comment Font Size"
+            "value" : "Comment (Jyutping) Font Size"
           }
         },
         "en-US" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Comment Font Size"
+            "value" : "Comment (Jyutping) Font Size"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Taille de la police des commentaires"
+            "value" : "Taille de la police (Jyutping) des commentaires"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "コメントフォントサイズ"
+            "value" : "コメント(粵拼)フォントサイズ"
           }
         },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞註釋字號"
+            "value" : "候選詞註釋(粵拼)字號"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞註釋字號"
+            "value" : "候選詞註釋(粵拼)字號"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞註釋字號"
+            "value" : "候選詞註釋(粵拼)字號"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞註釋字號"
+            "value" : "候選詞註釋(粵拼)字號"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞註釋字號"
+            "value" : "候選詞註釋(粵拼)字號"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞註釋字號"
+            "value" : "候選詞註釋(粵拼)字號"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞註釋字號"
+            "value" : "候選詞註釋(粵拼)字號"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞註釋字號"
+            "value" : "候選詞註釋(粵拼)字號"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞註釋字號"
+            "value" : "候選詞註釋(粵拼)字號"
           }
         }
       }
@@ -3390,25 +3390,25 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Comment(Jyutping) Position"
+            "value" : "Comment (Jyutping) Position"
           }
         },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Comment(Jyutping) Position"
+            "value" : "Comment (Jyutping) Position"
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Comment(Jyutping) Position"
+            "value" : "Comment (Jyutping) Position"
           }
         },
         "en-US" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Comment(Jyutping) Position"
+            "value" : "Comment (Jyutping) Position"
           }
         },
         "fr" : {
@@ -3860,25 +3860,25 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Comment(Jyutping) Tone Color"
+            "value" : "Comment (Jyutping) Tone Color"
           }
         },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Comment(Jyutping) Tone Color"
+            "value" : "Comment (Jyutping) Tone Color"
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Comment(Jyutping) Tone Colour"
+            "value" : "Comment (Jyutping) Tone Colour"
           }
         },
         "en-US" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Comment(Jyutping) Tone Color"
+            "value" : "Comment (Jyutping) Tone Color"
           }
         },
         "fr" : {
@@ -4142,25 +4142,25 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Comment(Jyutping) Tone Style"
+            "value" : "Comment (Jyutping) Tone Style"
           }
         },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Comment(Jyutping) Tone Style"
+            "value" : "Comment (Jyutping) Tone Style"
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Comment(Jyutping) Tone Style"
+            "value" : "Comment (Jyutping) Tone Style"
           }
         },
         "en-US" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Comment(Jyutping) Tone Style"
+            "value" : "Comment (Jyutping) Tone Style"
           }
         },
         "fr" : {
@@ -7092,55 +7092,55 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "括號鍵 [ ] 用作"
+            "value" : "方括號鍵 [ ] 用作"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "括號鍵 [ ] 用作"
+            "value" : "方括號鍵 [ ] 用作"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "括號鍵 [ ] 用作"
+            "value" : "方括號鍵 [ ] 用作"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "括號鍵 [ ] 用作"
+            "value" : "方括號鍵 [ ] 用作"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "括號鍵 [ ] 用作"
+            "value" : "方括號鍵 [ ] 用作"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "括號鍵 [ ] 用作"
+            "value" : "方括號鍵 [ ] 用作"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "括號鍵 [ ] 用作"
+            "value" : "方括號鍵 [ ] 用作"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "括號鍵 [ ] 用作"
+            "value" : "方括號鍵 [ ] 用作"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "括號鍵 [ ] 用作"
+            "value" : "方括號鍵 [ ] 用作"
           }
         }
       }

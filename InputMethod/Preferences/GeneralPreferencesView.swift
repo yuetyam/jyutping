@@ -279,7 +279,7 @@ struct GeneralPreferencesView: View {
                                 .block()
                         }
                         .textSelection(.enabled)
-                        .padding()
+                        .padding(8)
                 }
                 .navigationTitle("GeneralPreferencesView.NavigationTitle.TitleKey")
         }

@@ -174,7 +174,7 @@ struct FontPreferencesView: View {
                                 .block()
                         }
                         .textSelection(.enabled)
-                        .padding()
+                        .padding(8)
                 }
                 .animation(.default, value: animationState)
                 .navigationTitle("PreferencesView.NavigationTitle.Fonts")

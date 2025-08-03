@@ -215,8 +215,10 @@ struct GeneralSettingsView: View {
                                 }
                                 .formStyle(.grouped)
                                 .scrollContentBackground(.hidden)
+                                .background(Color.textBackgroundColor.opacity(0.75), in: RoundedRectangle(cornerRadius: 16, style: .continuous))
                                 .frame(maxWidth: 480)
                         }
+                        .padding(8)
                 }
                 .navigationTitle("GeneralPreferencesView.NavigationTitle.TitleKey")
         }
