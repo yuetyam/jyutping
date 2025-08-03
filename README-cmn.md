@@ -102,13 +102,14 @@ osascript -e 'tell application id "org.jyutping.inputmethod.Jyutping" to quit'
 - [JetBrains](https://www.jetbrains.com/) (Licenses for Open Source Development)
 
 ## 感謝支持（Support this project）
-<a href="https://ko-fi.com/zheung">
-        <img src="images/buy-me-a-coffee.png" alt="Ko-fi, buy me a coffee" width="180"/>
-</a>
-<br>
-<a href="https://patreon.com/bingzheung">
-        <img src="images/become-a-patron.png" alt="Patron" width="180"/>
-</a>
-<br>
-<br>
+Patreon: https://patreon.com/bingzheung
+
+愛發電: https://afdian.com/a/jyutping
+
+Ko-fi: https://ko-fi.com/zheung
+
+PayPal: https://paypal.me/bingzheung
+
+Bitcoin: `bc1qx5tjmlvq8ydmfzxt5fru7vqq0khjkhf2savheh`
+
 <img src="images/sponsor.jpg" alt="WeChat Sponsor" width="180"/>
