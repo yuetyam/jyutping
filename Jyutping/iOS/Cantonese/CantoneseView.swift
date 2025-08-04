@@ -8,9 +8,9 @@ struct CantoneseView: View {
 
         private let characterImageName: String = {
                 if #available(iOS 18.0, *) {
-                        return "character.square"
+                        return "character.square.zh"
                 } else {
-                        return "character"
+                        return "character.zh"
                 }
         }()
 

@@ -9,7 +9,7 @@ struct IOSConfusionView: View {
         @State private var entries: [ConfusionEntry] = AppMaster.confusionEntries
         @State private var isDataSourceLoaded: Bool = false
 
-        private let insets: EdgeInsets = EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0)
+        private let insets: EdgeInsets = EdgeInsets(top: 8, leading: 2, bottom: 8, trailing: 2)
 
         var body: some View {
                 List {

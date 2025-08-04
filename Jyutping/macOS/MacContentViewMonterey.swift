@@ -30,7 +30,7 @@ struct MacContentViewMonterey: View {
                                         NavigationLink {
                                                 MacConfusionView()
                                         } label: {
-                                                Label("MacSidebar.NavigationTitle.SimplifiedCharacterConfusion", systemImage: "character")
+                                                Label("MacSidebar.NavigationTitle.SimplifiedCharacterConfusion", systemImage: "character.zh")
                                         }
                                 } header: {
                                         Text("MacSidebar.SectionHeader.InputMethod").textCase(nil).font(.copilot)
@@ -88,7 +88,7 @@ struct MacContentViewMonterey: View {
                                         NavigationLink {
                                                 MacThousandCharacterClassicView()
                                         } label: {
-                                                Label("MacSidebar.NavigationTitle.ThousandCharacterClassic", systemImage: "character")
+                                                Label("MacSidebar.NavigationTitle.ThousandCharacterClassic", systemImage: "character.zh")
                                         }
                                 } header: {
                                         Text("MacSidebar.SectionHeader.Cantonese").textCase(nil).font(.copilot)
