@@ -3,8 +3,10 @@ import CommonExtensions
 
 @available(macOS 13.0, *)
 struct FontSettingsView: View {
-        private let minusImage: Image = Image(systemName: "minus")
-        private let plusImage: Image = Image(systemName: "plus")
+
+        private let minusImage: Image = Image(systemName: "minus.circle.fill")
+        private let plusImage: Image = Image(systemName: "plus.circle.fill")
+        private let buttonLength: CGFloat = 16
 
         @State private var candidateFontSize: Int = Int(AppSettings.candidateFontSize)
         @State private var commentFontSize: Int = Int(AppSettings.commentFontSize)
@@ -56,7 +58,13 @@ struct FontSettingsView: View {
                                                                                 triggerAnimation()
                                                                         } label: {
                                                                                 minusImage
+                                                                                        .resizable()
+                                                                                        .scaledToFit()
+                                                                                        .symbolRenderingMode(.multicolor)
+                                                                                        .padding(1)
+                                                                                        .frame(width: buttonLength, height: buttonLength)
                                                                         }
+                                                                        .buttonStyle(.plain)
                                                                         FontPicker($customCandidateFonts[index], size: candidateFontSize, fallback: PresetConstant.PingFangHK, adoptFormStyle: true)
                                                                 }
                                                         }
@@ -65,7 +73,13 @@ struct FontSettingsView: View {
                                                                 triggerAnimation()
                                                         } label: {
                                                                 plusImage
+                                                                        .resizable()
+                                                                        .scaledToFit()
+                                                                        .symbolRenderingMode(.palette)
+                                                                        .foregroundStyle(Color.white, Color.accentColor)
+                                                                        .frame(width: buttonLength, height: buttonLength)
                                                         }
+                                                        .buttonStyle(.plain)
                                                         .onChange(of: customCandidateFonts) { newFontNames in
                                                                 AppSettings.updateCustomCandidateFonts(to: newFontNames)
                                                         }
@@ -99,7 +113,13 @@ struct FontSettingsView: View {
                                                                                 triggerAnimation()
                                                                         } label: {
                                                                                 minusImage
+                                                                                        .resizable()
+                                                                                        .scaledToFit()
+                                                                                        .symbolRenderingMode(.multicolor)
+                                                                                        .padding(1)
+                                                                                        .frame(width: buttonLength, height: buttonLength)
                                                                         }
+                                                                        .buttonStyle(.plain)
                                                                         FontPicker($customCommentFonts[index], size: commentFontSize, fallback: PresetConstant.HelveticaNeue, adoptFormStyle: true)
                                                                 }
                                                         }
@@ -108,7 +128,13 @@ struct FontSettingsView: View {
                                                                 triggerAnimation()
                                                         } label: {
                                                                 plusImage
+                                                                        .resizable()
+                                                                        .scaledToFit()
+                                                                        .symbolRenderingMode(.palette)
+                                                                        .foregroundStyle(Color.white, Color.accentColor)
+                                                                        .frame(width: buttonLength, height: buttonLength)
                                                         }
+                                                        .buttonStyle(.plain)
                                                         .onChange(of: customCommentFonts) { newFontNames in
                                                                 AppSettings.updateCustomCommentFonts(to: newFontNames)
                                                         }
@@ -142,7 +168,13 @@ struct FontSettingsView: View {
                                                                                 triggerAnimation()
                                                                         } label: {
                                                                                 minusImage
+                                                                                        .resizable()
+                                                                                        .scaledToFit()
+                                                                                        .symbolRenderingMode(.multicolor)
+                                                                                        .padding(1)
+                                                                                        .frame(width: buttonLength, height: buttonLength)
                                                                         }
+                                                                        .buttonStyle(.plain)
                                                                         FontPicker($customLabelFonts[index], size: labelFontSize, fallback: PresetConstant.Menlo, adoptFormStyle: true)
                                                                 }
                                                         }
@@ -151,7 +183,13 @@ struct FontSettingsView: View {
                                                                 triggerAnimation()
                                                         } label: {
                                                                 plusImage
+                                                                        .resizable()
+                                                                        .scaledToFit()
+                                                                        .symbolRenderingMode(.palette)
+                                                                        .foregroundStyle(Color.white, Color.accentColor)
+                                                                        .frame(width: buttonLength, height: buttonLength)
                                                         }
+                                                        .buttonStyle(.plain)
                                                         .onChange(of: customLabelFonts) { newFontNames in
                                                                 AppSettings.updateCustomLabelFonts(to: newFontNames)
                                                         }
