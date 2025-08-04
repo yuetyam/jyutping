@@ -13,7 +13,17 @@ struct SettingsContentView: View {
 
 @available(macOS 13.0, *)
 struct SettingsSplitView: View {
+
         @State private var selection: PreferencesSidebarRow = AppSettings.selectedPreferencesSidebarRow
+
+        private let characterImageName: String = {
+                if #available(macOS 15.0, *) {
+                        return "character.square.zh"
+                } else {
+                        return "character.zh"
+                }
+        }()
+
         var body: some View {
                 NavigationSplitView {
                         List(selection: $selection) {
@@ -21,7 +31,7 @@ struct SettingsSplitView: View {
                                         Label("PreferencesView.NavigationTitle.General", systemImage: "gear").tag(PreferencesSidebarRow.general)
                                         Label("PreferencesView.NavigationTitle.ToneInput", systemImage: "bell").tag(PreferencesSidebarRow.toneInput)
                                         Label("PreferencesView.NavigationTitle.ReverseLookup", systemImage: "doc.text.magnifyingglass").tag(PreferencesSidebarRow.reverseLookup)
-                                        Label("PreferencesView.NavigationTitle.Fonts", systemImage: "character.square").tag(PreferencesSidebarRow.fonts)
+                                        Label("PreferencesView.NavigationTitle.Fonts", systemImage: characterImageName).tag(PreferencesSidebarRow.fonts)
                                 } header: {
                                         Text("PreferencesView.SectionHeader.Candidates").textCase(nil)
                                 }
@@ -84,7 +94,7 @@ struct PreferencesView: View {
                                         NavigationLink {
                                                 FontPreferencesView()
                                         } label: {
-                                                Label("PreferencesView.NavigationTitle.Fonts", systemImage: "character.square")
+                                                Label("PreferencesView.NavigationTitle.Fonts", systemImage: "character.zh")
                                         }
                                 } header: {
                                         Text("PreferencesView.SectionHeader.Candidates").textCase(nil)
