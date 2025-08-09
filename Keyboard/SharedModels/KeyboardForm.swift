@@ -8,6 +8,7 @@ enum KeyboardForm: Int {
         case emojiBoard
         case numberPad
         case numeric
+        case placeholder
         case settings
         case symbolic
         case tenKeyNumeric

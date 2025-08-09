@@ -6,6 +6,8 @@ struct MotherBoard: View {
 
         var body: some View {
                 switch context.keyboardForm {
+                case .placeholder:
+                        Color.clear.frame(height: context.keyboardHeight)
                 case .settings:
                         if #available(iOSApplicationExtension 16.0, *) {
                                 SettingsView().frame(height: context.isKeyboardHeightExpanded ? context.expandedKeyboardHeight : context.keyboardHeight)

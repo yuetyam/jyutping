@@ -5,88 +5,67 @@ import CoreIME
 final class KeyboardViewController: UIInputViewController, ObservableObject {
 
         private lazy var isKeyboardPrepared: Bool = false
+        private func prepareMotherBoard() {
+                let screenSize: CGSize = UIScreen.main.bounds.size
+                adoptKeyboardInterface(screenSize: screenSize)
+                let rowHeight: CGFloat = keyboardInterface.keyHeightUnit(of: screenSize)
+                let rowCount: CGFloat = (keyboardInterface.isLargePad || Options.needsNumberRow) ? 5 : 4
+                keyboardHeight = (rowHeight * rowCount) + PresetConstant.toolBarHeight
+                let board = UIHostingController(rootView: MotherBoard().environmentObject(self))
+                board.view.translatesAutoresizingMaskIntoConstraints = false
+                addChild(board)
+                view.addSubview(board.view)
+                NSLayoutConstraint.activate([
+                        board.view.topAnchor.constraint(equalTo: view.topAnchor),
+                        board.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                        board.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+                        board.view.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+                ])
+                board.view.backgroundColor = view.backgroundColor
+                board.didMove(toParent: self)
+        }
         private func prepareKeyboard() {
-                _ = view.subviews.map({ $0.removeFromSuperview() })
-                _ = children.map({ $0.removeFromParent() })
+                let screenSize: CGSize = UIScreen.main.bounds.size
+                adoptKeyboardInterface(screenSize: screenSize)
+                updateKeyboardSize(screenSize: screenSize)
+                responsiveKeyboard()
                 InputMemory.prepare()
                 Engine.prepare()
                 instantiateHapticFeedbacks()
-                keyboardInterface = adoptKeyboardInterface()
-                updateKeyboardSize()
-                updateSpaceKeyForm()
-                updateReturnKey()
-                let motherBoard = UIHostingController(rootView: MotherBoard().environmentObject(self))
-                addChild(motherBoard)
-                view.addSubview(motherBoard.view)
-                motherBoard.view.translatesAutoresizingMaskIntoConstraints = false
-                NSLayoutConstraint.activate([
-                        motherBoard.view.topAnchor.constraint(equalTo: view.topAnchor),
-                        motherBoard.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                        motherBoard.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-                        motherBoard.view.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-                ])
-                motherBoard.view.backgroundColor = view.backgroundColor
                 isKeyboardPrepared = true
                 Task {
                         await obtainSupplementaryLexicon()
                 }
         }
-        override func viewDidLoad() {
-                super.viewDidLoad()
-                if isKeyboardPrepared {
-                        // do something
-                } else {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.03) { [unowned self] in
-                                prepareKeyboard()
-                        }
-                }
-        }
         override func viewWillAppear(_ animated: Bool) {
                 super.viewWillAppear(animated)
-                if isKeyboardPrepared {
-                        updateSpaceKeyForm()
-                        updateReturnKey()
-                } else {
+                if isKeyboardPrepared.negative {
+                        prepareMotherBoard()
+                }
+        }
+        override func viewDidAppear(_ animated: Bool) {
+                super.viewDidAppear(animated)
+                if isKeyboardPrepared.negative {
                         prepareKeyboard()
                 }
         }
-        override func viewWillDisappear(_ animated: Bool) {
-                super.viewWillDisappear(animated)
-                _ = view.subviews.map({ $0.removeFromSuperview() })
-                _ = children.map({ $0.removeFromParent() })
-                isKeyboardPrepared = false
-                releaseHapticFeedbacks()
-                selectedCandidates = []
-                candidates = []
-                text2mark = String.empty
-                clearBuffer()
-        }
 
-        private lazy var keyboardType: UIKeyboardType = .default
-        override func textWillChange(_ textInput: (any UITextInput)?) {
-                super.textWillChange(textInput)
-                guard let newKeyboardType = (textInput?.keyboardType ?? textDocumentProxy.keyboardType) else { return }
-                guard keyboardType != newKeyboardType else { return }
-                keyboardType = newKeyboardType
-                let newInputMethodMode = newKeyboardType.inputMethodMode
+        private func responsiveKeyboard(for keyboardType: UIKeyboardType? = nil) {
+                let keyboardType: UIKeyboardType = keyboardType ?? textDocumentProxy.keyboardType ?? .default
+                let newInputMethodMode = keyboardType.inputMethodMode
+                let newKeyboardForm = keyboardType.keyboardForm
                 if inputMethodMode != newInputMethodMode {
                         inputMethodMode = newInputMethodMode
                 }
-                let newKeyboardForm = newKeyboardType.keyboardForm
                 if keyboardForm != newKeyboardForm {
                         updateKeyboardForm(to: newKeyboardForm)
                 }
         }
 
-        private lazy var hasText: Bool? = nil {
-                didSet {
-                        guard oldValue != nil else { return }
-                        guard hasText != oldValue else { return }
-                        updateReturnKey()
-                }
-        }
         override func textDidChange(_ textInput: UITextInput?) {
                 super.textDidChange(textInput)
+                guard isKeyboardPrepared else { return }
+                responsiveKeyboard(for: textInput?.keyboardType)
                 let hasText: Bool = textInput?.hasText ?? textDocumentProxy.hasText
                 self.hasText = hasText
                 let didUserClearTextField: Bool = hasText.negative && inputStage.isBuffering
@@ -94,11 +73,24 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         clearBuffer()
                 }
         }
+        private lazy var hasText: Bool? = nil {
+                didSet {
+                        guard oldValue != nil else { return }
+                        guard hasText != oldValue else { return }
+                        updateReturnKey()
+                }
+        }
 
         override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
                 super.traitCollectionDidChange(previousTraitCollection)
-                keyboardInterface = adoptKeyboardInterface()
+                guard isKeyboardPrepared else { return }
+                adoptKeyboardInterface()
                 updateKeyboardSize()
+        }
+
+        override func viewWillDisappear(_ animated: Bool) {
+                super.viewWillDisappear(animated)
+                releaseHapticFeedbacks()
         }
 
 
@@ -809,8 +801,8 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 updateReturnKey()
         }
 
-        @Published private(set) var previousKeyboardForm: KeyboardForm = .alphabetic
-        @Published private(set) var keyboardForm: KeyboardForm = .alphabetic
+        @Published private(set) var previousKeyboardForm: KeyboardForm = .placeholder
+        @Published private(set) var keyboardForm: KeyboardForm = .placeholder
         func updateKeyboardForm(to form: KeyboardForm) {
                 let shouldStayBuffering: Bool = inputMethodMode.isCantonese && form.isBufferrable
                 if inputStage.isBuffering && shouldStayBuffering.negative {
@@ -898,8 +890,9 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         @Published private(set) var widthUnit: CGFloat = 44
         @Published private(set) var tenKeyWidthUnit: CGFloat = 88
         @Published private(set) var heightUnit: CGFloat = 56
-        private func updateKeyboardSize() {
-                let screenSize: CGSize = view.window?.windowScene?.screen.bounds.size ?? UIScreen.main.bounds.size
+        private func updateKeyboardSize(screenSize: CGSize? = nil) {
+                let screenSize: CGSize = screenSize ?? UIScreen.main.bounds.size
+                /*
                 let newKeyboardWidth: CGFloat = {
                         switch keyboardInterface {
                         case .phoneLandscape:
@@ -926,9 +919,10 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 return screenSize.width
                         }
                 }()
-                keyboardWidth = newKeyboardWidth
-                widthUnit = newKeyboardWidth / keyboardInterface.widthUnitTimes
-                tenKeyWidthUnit = newKeyboardWidth / 5.0
+                */
+                keyboardWidth = view.frame.width
+                widthUnit = keyboardWidth / keyboardInterface.widthUnitTimes
+                tenKeyWidthUnit = keyboardWidth / 5.0
                 heightUnit = keyboardInterface.keyHeightUnit(of: screenSize)
                 let rowCount: CGFloat = (keyboardInterface.isLargePad || Options.needsNumberRow) ? 5 : 4
                 keyboardHeight = (heightUnit * rowCount) + PresetConstant.toolBarHeight
@@ -942,35 +936,50 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 reloadKeyboard()
         }
         private func reloadKeyboard() {
+                // TODO: Needs a more appropriate way
                 _ = view.subviews.map({ $0.removeFromSuperview() })
                 _ = children.map({ $0.removeFromParent() })
-                let motherBoard = UIHostingController(rootView: MotherBoard().environmentObject(self))
-                addChild(motherBoard)
-                view.addSubview(motherBoard.view)
-                motherBoard.view.translatesAutoresizingMaskIntoConstraints = false
+                let board = UIHostingController(rootView: MotherBoard().environmentObject(self))
+                board.view.translatesAutoresizingMaskIntoConstraints = false
+                addChild(board)
+                view.addSubview(board.view)
                 NSLayoutConstraint.activate([
-                        motherBoard.view.topAnchor.constraint(equalTo: view.topAnchor),
-                        motherBoard.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                        motherBoard.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-                        motherBoard.view.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+                        board.view.topAnchor.constraint(equalTo: view.topAnchor),
+                        board.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                        board.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+                        board.view.trailingAnchor.constraint(equalTo: view.trailingAnchor)
                 ])
-                motherBoard.view.backgroundColor = view.backgroundColor
+                board.view.backgroundColor = view.backgroundColor
+                board.didMove(toParent: self)
+                view.layoutIfNeeded()
         }
 
         @Published private(set) var keyboardInterface: KeyboardInterface = .phonePortrait
-        private func adoptKeyboardInterface() -> KeyboardInterface {
+        private func adoptKeyboardInterface(screenSize: CGSize? = nil) {
+                let newInterface = detectKeyboardInterface(screenSize: screenSize)
+                if keyboardInterface != newInterface {
+                        keyboardInterface = newInterface
+                }
+        }
+        private func detectKeyboardInterface(screenSize: CGSize? = nil) -> KeyboardInterface {
                 let isRunningOnPad: Bool = UIDevice.current.userInterfaceIdiom == .pad
                 let isPadInterface: Bool = traitCollection.userInterfaceIdiom == .pad
                 let isCompactHorizontal: Bool = traitCollection.horizontalSizeClass == .compact
-                let isFloatingOnPad: Bool = isRunningOnPad && isPadInterface && isCompactHorizontal
+                let isFloatingOnPad: Bool = {
+                        guard isRunningOnPad && isPadInterface else { return false }
+                        guard isCompactHorizontal.negative else { return true }
+                        let viewWidth = view.frame.width
+                        guard viewWidth > 100 else { return false }
+                        let screenSize: CGSize = screenSize ?? UIScreen.main.bounds.size
+                        return viewWidth < (screenSize.width * 0.75)
+                }()
                 guard isFloatingOnPad.negative else { return .padFloating }
                 switch (isRunningOnPad, isPadInterface) {
                 case (true, true):
                         // iPad
-                        let screenSize: CGSize = view.window?.windowScene?.screen.bounds.size ?? UIScreen.main.bounds.size
+                        let screenSize: CGSize = screenSize ?? UIScreen.main.bounds.size
                         let minDimension: CGFloat = min(screenSize.width, screenSize.height)
-                        let windowSize: CGSize = view.superview?.window?.bounds.size ?? screenSize
-                        let isPortrait: Bool = windowSize.width < (minDimension + 2)
+                        let isPortrait: Bool = screenSize.width < (minDimension + 2)
                         if minDimension > 840 {
                                 return isPortrait ? .padPortraitLarge : .padLandscapeLarge
                         } else if minDimension > 815 {
