@@ -9,11 +9,8 @@ struct NumberPad: View {
 
         var body: some View {
                 let keyWidth: CGFloat = context.keyboardWidth / 3.0
-                let keyHeight: CGFloat = context.heightUnit
+                let keyHeight: CGFloat = (context.keyboardHeight - 16) / 4.0
                 VStack(spacing: 0) {
-                        if Options.needsNumberRow {
-                                NumberRow()
-                        }
                         HStack(spacing: 0) {
                                 NumberPadKey(digit: "1", letters: nil, width: keyWidth, height: keyHeight)
                                 NumberPadKey(digit: "2", letters: "ABC", width: keyWidth, height: keyHeight)
@@ -35,6 +32,7 @@ struct NumberPad: View {
                                 NumberPadBackspaceKey(width: keyWidth, height: keyHeight)
                         }
                 }
+                .padding(.vertical, 8)
         }
 }
 
@@ -46,29 +44,7 @@ private struct NumberPadKey: View {
         let height: CGFloat
 
         @EnvironmentObject private var context: KeyboardViewController
-
         @Environment(\.colorScheme) private var colorScheme
-
-        private var keyColor: Color {
-                switch colorScheme {
-                case .light:
-                        return .lightInput
-                case .dark:
-                        return .darkInput
-                @unknown default:
-                        return .lightInput
-                }
-        }
-        private var keyActiveColor: Color {
-                switch colorScheme {
-                case .light:
-                        return .activeLightInput
-                case .dark:
-                        return .activeDarkInput
-                @unknown default:
-                        return .activeLightInput
-                }
-        }
 
         @GestureState private var isTouching: Bool = false
 
@@ -76,7 +52,7 @@ private struct NumberPadKey: View {
                 ZStack {
                         Color.interactiveClear
                         RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous)
-                                .fill(isTouching ? keyActiveColor : keyColor)
+                                .fill(isTouching ? colorScheme.activeInputKeyColor : colorScheme.inputKeyColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(4)
                         VStack {
