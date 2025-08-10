@@ -21,6 +21,15 @@ enum ReturnKeyState: Int {
                 }
         }
 
+        var isBuffering: Bool {
+                switch self {
+                case .bufferingSimplified, .bufferingTraditional:
+                        return true
+                default:
+                        return false
+                }
+        }
+
         static func state(isAvailable: Bool, isABC: Bool, isSimplified: Bool, isBuffering: Bool) -> ReturnKeyState {
                 guard isBuffering.negative else {
                         return isSimplified ? .bufferingSimplified : .bufferingTraditional

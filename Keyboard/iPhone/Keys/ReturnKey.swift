@@ -23,15 +23,6 @@ struct ReturnKey: View {
                 let horizontalPadding: CGFloat = isPhoneLandscape ? 6 : 3
                 let isDefaultReturn: Bool = context.returnKeyType.isDefaultReturn
                 let keyState: ReturnKeyState = context.returnKeyState
-                let shouldDisplayKeyImage: Bool = {
-                        guard isDefaultReturn else { return false }
-                        switch keyState {
-                        case .bufferingSimplified, .bufferingTraditional:
-                                return false
-                        default:
-                                return true
-                        }
-                }()
                 let backColor: Color = {
                         guard isTouching.negative else { return keyActiveColor }
                         switch keyState {
@@ -61,10 +52,34 @@ struct ReturnKey: View {
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(.vertical, verticalPadding)
                                 .padding(.horizontal, horizontalPadding)
-                        if shouldDisplayKeyImage {
-                                Image.return.foregroundStyle(foreColor)
-                        } else {
+                        switch (keyState.isBuffering, isDefaultReturn) {
+                        case (true, _):
                                 Text(context.returnKeyText).foregroundStyle(foreColor)
+                        case (false, true):
+                                Image.return.foregroundStyle(foreColor)
+                        default:
+                                ZStack(alignment: .bottomTrailing) {
+                                        Color.clear
+                                        Text(context.returnKeyText)
+                                                .font(.caption2)
+                                                .foregroundStyle(foreColor)
+                                }
+                                .padding(.vertical, verticalPadding + 1)
+                                .padding(.horizontal, horizontalPadding + 3)
+                                switch context.returnKeyType {
+                                case .continue, .next:
+                                        Image.chevronForward.foregroundStyle(foreColor)
+                                case .done:
+                                        Image.checkmark.foregroundStyle(foreColor)
+                                case .go, .route, .join:
+                                        Image.arrowForward.foregroundStyle(foreColor)
+                                case .search, .google, .yahoo:
+                                        Image.search.foregroundStyle(foreColor)
+                                case .send:
+                                        Image.arrowUp.foregroundStyle(foreColor)
+                                default:
+                                        Image.return.foregroundStyle(foreColor)
+                                }
                         }
                 }
                 .frame(width: keyWidth, height: keyHeight)

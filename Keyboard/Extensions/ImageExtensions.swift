@@ -3,8 +3,7 @@ import SwiftUI
 extension Image {
         static let chevronUp: Image = Image(systemName: "chevron.up")
         static let chevronDown: Image = Image(systemName: "chevron.down")
-
-        static let checkmark: Image = Image(systemName: "checkmark")
+        static let chevronForward: Image = Image(systemName: "chevron.forward")
 
         /// Backward delete
         static let backspace: Image = Image(systemName: "delete.backward")
@@ -12,6 +11,9 @@ extension Image {
 
         static let `return`: Image = Image(systemName: "return")
         static let search: Image = Image(systemName: "magnifyingglass")
+        static let arrowForward: Image = Image(systemName: "arrow.forward")
+        static let arrowUp: Image = Image(systemName: "arrow.up")
+        static let checkmark: Image = Image(systemName: "checkmark")
 
         static let tab: Image = Image(systemName: "arrow.right.to.line")
         static let globe: Image = Image(systemName: "globe")
