@@ -32,6 +32,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 InputMemory.prepare()
                 Engine.prepare()
                 instantiateHapticFeedbacks()
+                hasText = textDocumentProxy.hasText
                 isKeyboardPrepared = true
                 Task {
                         await obtainSupplementaryLexicon()
@@ -49,7 +50,6 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         prepareKeyboard()
                 }
         }
-
         private func responsiveKeyboard(for keyboardType: UIKeyboardType? = nil) {
                 let keyboardType: UIKeyboardType = keyboardType ?? textDocumentProxy.keyboardType ?? .default
                 let newInputMethodMode = keyboardType.inputMethodMode
@@ -65,10 +65,8 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         override func textDidChange(_ textInput: UITextInput?) {
                 super.textDidChange(textInput)
                 guard isKeyboardPrepared else { return }
-                responsiveKeyboard(for: textInput?.keyboardType)
-                let hasText: Bool = textInput?.hasText ?? textDocumentProxy.hasText
-                self.hasText = hasText
-                let didUserClearTextField: Bool = hasText.negative && inputStage.isBuffering
+                let containsText: Bool = textInput?.hasText ?? textDocumentProxy.hasText
+                let didUserClearTextField: Bool = containsText.negative && inputStage.isBuffering
                 if didUserClearTextField {
                         clearBuffer()
                 }
@@ -76,7 +74,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         private lazy var hasText: Bool? = nil {
                 didSet {
                         guard oldValue != nil else { return }
-                        guard hasText != oldValue else { return }
+                        // guard hasText != oldValue else { return }
                         updateReturnKey()
                 }
         }
@@ -350,16 +348,19 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         // MARK: - Operations
 
         func operate(_ operation: Operation) {
-                defer { hasText = textDocumentProxy.hasText }
+                lazy var shouldAdjustKeyboard: Bool = true
+                defer {
+                        if shouldAdjustKeyboard {
+                                adjustKeyboard()
+                        }
+                }
                 switch operation {
                 case .input(let text):
                         textDocumentProxy.insertText(text)
-                        adjustKeyboard()
                 case .process(let text):
                         let isCantoneseComposeMode: Bool = inputMethodMode.isCantonese && keyboardForm.isBufferrable
                         guard isCantoneseComposeMode else {
                                 textDocumentProxy.insertText(text)
-                                adjustKeyboard()
                                 return
                         }
                         let shouldAppendText: Bool = text.isLetters || (inputStage.isBuffering && (text.first?.isCantoneseToneDigit ?? false))
@@ -367,23 +368,19 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 appendBufferText(text)
                         } else if inputStage.isBuffering {
                                 inputBufferText(followedBy: text)
-                                adjustKeyboard()
                         } else {
                                 textDocumentProxy.insertText(text)
-                                adjustKeyboard()
                         }
                 case .combine(let combo):
                         bufferCombos.append(combo)
                 case .space:
                         guard inputMethodMode.isCantonese else {
                                 textDocumentProxy.insertText(String.space)
-                                adjustKeyboard()
                                 return
                         }
                         guard inputStage.isBuffering else {
                                 let text: String = (keyboardCase == .uppercased) ? String.fullWidthSpace : String.space
                                 textDocumentProxy.insertText(text)
-                                adjustKeyboard()
                                 return
                         }
                         if let candidate = candidates.first {
@@ -392,7 +389,6 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         } else {
                                 inputBufferText()
                                 updateReturnKey()
-                                adjustKeyboard()
                         }
                 case .doubleSpace:
                         if inputStage.isBuffering {
@@ -402,7 +398,6 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 } else {
                                         inputBufferText()
                                         updateReturnKey()
-                                        adjustKeyboard()
                                 }
                         } else {
                                 // TODO: Double-space shortcut
@@ -417,7 +412,6 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 }
                                 */
                                 textDocumentProxy.insertText(String.space)
-                                adjustKeyboard()
                         }
                 case .backspace:
                         if inputStage.isBuffering {
@@ -426,19 +420,16 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                         capitals = capitals.dropLast()
                                         inputLengthSequence = inputLengthSequence.dropLast()
                                         bufferEvents = bufferEvents.dropLast()
-                                        adjustKeyboard()
                                 case .tripleStroke:
                                         guard let lastInputLength = inputLengthSequence.last else { return }
                                         capitals = capitals.dropLast(lastInputLength)
                                         inputLengthSequence = inputLengthSequence.dropLast()
                                         bufferEvents = bufferEvents.dropLast(lastInputLength)
-                                        adjustKeyboard()
                                 case .tenKey:
                                         bufferCombos = bufferCombos.dropLast()
                                 }
                         } else {
                                 textDocumentProxy.deleteBackward()
-                                adjustKeyboard()
                         }
                 case .clearBuffer:
                         clearBuffer()
@@ -449,10 +440,8 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         } else if inputStage.isBuffering {
                                 inputBufferText()
                                 updateReturnKey()
-                                adjustKeyboard()
                         } else {
                                 textDocumentProxy.insertText(String.newLine)
-                                adjustKeyboard()
                         }
                 case .shift:
                         let newCase: KeyboardCase = {
@@ -466,6 +455,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 }
                         }()
                         updateKeyboardCase(to: newCase)
+                        shouldAdjustKeyboard = false
                 case .doubleShift:
                         let newCase: KeyboardCase = {
                                 switch keyboardCase {
@@ -478,15 +468,16 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 }
                         }()
                         updateKeyboardCase(to: newCase)
+                        shouldAdjustKeyboard = false
                 case .tab:
                         if inputStage.isBuffering {
                                 inputBufferText(followedBy: String.tab)
                         } else {
                                 textDocumentProxy.insertText(String.tab)
                         }
-                        adjustKeyboard()
                 case .dismiss:
                         dismissKeyboard()
+                        shouldAdjustKeyboard = false
                 case .select(let candidate):
                         input(candidate.text)
                         aftercareSelected(candidate)
@@ -494,6 +485,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         let didCopyText: Bool = textDocumentProxy.copyAllText()
                         guard didCopyText else { return }
                         isClipboardEmpty = false
+                        shouldAdjustKeyboard = false
                 case .cutAllText:
                         let didCopyText: Bool = textDocumentProxy.cutAllText()
                         guard didCopyText else { return }
@@ -505,6 +497,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 case .clearClipboard:
                         UIPasteboard.general.items.removeAll()
                         isClipboardEmpty = true
+                        shouldAdjustKeyboard = false
                 case .paste:
                         guard UIPasteboard.general.hasStrings else { return }
                         guard let text = UIPasteboard.general.string else { return }
@@ -525,9 +518,6 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 }
         }
         private func aftercareSelected(_ candidate: Candidate) {
-                defer {
-                        adjustKeyboard()
-                }
                 switch keyboardLayout {
                 case .qwerty, .tripleStroke:
                         switch bufferEvents.first {
@@ -586,11 +576,13 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 }
                 switch keyboardForm {
                 case .candidateBoard:
-                        guard candidates.isEmpty else { return }
-                        updateKeyboardForm(to: previousKeyboardForm)
+                        if candidates.isEmpty {
+                                updateKeyboardForm(to: previousKeyboardForm)
+                        }
                 default:
                         break
                 }
+                hasText = textDocumentProxy.hasText
         }
 
 
@@ -853,15 +845,14 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let enablesReturnKeyAutomatically: Bool = textDocumentProxy.enablesReturnKeyAutomatically ?? false
                 let isAvailable: Bool = enablesReturnKeyAutomatically.negative || textDocumentProxy.hasText
                 let newState: ReturnKeyState = ReturnKeyState.state(isAvailable: isAvailable, isABC: inputMethodMode.isABC, isSimplified: Options.characterStandard.isSimplified, isBuffering: inputStage.isBuffering)
-                let newText: AttributedString = newType.attributedText(of: newState)
+                let shouldUpdateKey: Bool = (returnKeyType != newType) || (returnKeyState != newState)
+                guard shouldUpdateKey else { return }
+                returnKeyText = newType.attributedText(of: newState)
                 if returnKeyType != newType {
                         returnKeyType = newType
                 }
                 if returnKeyState != newState {
                         returnKeyState = newState
-                }
-                if returnKeyText != newText {
-                        returnKeyText = newText
                 }
         }
         @Published private(set) var spaceKeyForm: SpaceKeyForm = .fallback
