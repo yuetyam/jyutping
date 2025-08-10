@@ -22,7 +22,7 @@ public struct Syllable: Hashable, Comparable, Sendable {
                 hasher.combine(aliasCode)
                 hasher.combine(originCode)
         }
-        public static func < (lhs: Syllable, rhs: Syllable) -> Bool {
+        public static func <(lhs: Syllable, rhs: Syllable) -> Bool {
                 let aliasQuotient = lhs.aliasCode / rhs.aliasCode
                 guard aliasQuotient == 0 else { return true }
                 let originQuotient = lhs.originCode / rhs.originCode
@@ -44,7 +44,7 @@ extension RandomAccessCollection where Element == Syllable {
 
         /// Count of all alias events
         public var length: Int {
-                return map(\.alias.count).reduce(0, +)
+                return map(\.alias.count).summation
         }
 
         /// Alias texts conjoined as one text
@@ -132,7 +132,7 @@ public struct Segmenter {
                 return Syllable(aliasCode: code, originCode: originCode)
         }
 
-        private static func splitLeading<T: RandomAccessCollection<InputEvent>>(events: T, statement: OpaquePointer?)-> [Syllable] {
+        private static func splitLeading<T: RandomAccessCollection<InputEvent>>(events: T, statement: OpaquePointer?) -> [Syllable] {
                 let maxLength: Int = min(events.count, 6)
                 guard maxLength > 0 else { return [] }
                 return (1...maxLength).reversed().compactMap({ match(code: events.prefix($0).combinedCode, statement: statement) })

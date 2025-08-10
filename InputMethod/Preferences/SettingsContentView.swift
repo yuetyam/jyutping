@@ -18,9 +18,9 @@ struct SettingsSplitView: View {
 
         private let characterImageName: String = {
                 if #available(macOS 15.0, *) {
-                        return "character.square.zh"
+                        return "character.square"
                 } else {
-                        return "character.zh"
+                        return "character"
                 }
         }()
 
@@ -94,7 +94,7 @@ struct PreferencesView: View {
                                         NavigationLink {
                                                 FontPreferencesView()
                                         } label: {
-                                                Label("PreferencesView.NavigationTitle.Fonts", systemImage: "character.zh")
+                                                Label("PreferencesView.NavigationTitle.Fonts", systemImage: "character")
                                         }
                                 } header: {
                                         Text("PreferencesView.SectionHeader.Candidates").textCase(nil)

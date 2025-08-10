@@ -94,7 +94,7 @@ extension Engine {
                         let toneInput = events.filter(\.isSyllableLetter.negative).map(\.text).joined()
                         let text = inputText.toneConverted()
                         let textTones = text.tones
-                        return candidates.compactMap({ item -> Candidate? in
+                        let qualified: [Candidate] = candidates.compactMap({ item -> Candidate? in
                                 let syllableText = item.romanization.removedSpaces()
                                 guard syllableText.hasPrefix(text).negative else { return item.replacedInput(with: inputText) }
                                 let tones = syllableText.tones
@@ -157,13 +157,14 @@ extension Engine {
                                         return nil
                                 }
                         })
+                        return qualified.sorted(by: { $0.inputCount > $1.inputCount })
                 case (true, false):
                         let text = events.map(\.text).joined()
                         let textSeparators = text.filter(\.isSeparator)
                         let textParts = text.split(separator: Character.separator)
                         let isHeadingSeparator: Bool = text.first?.isSeparator ?? false
                         let isTrailingSeparator: Bool = text.last?.isSeparator ?? false
-                        let qualified = candidates.compactMap({ item -> Candidate? in
+                        let qualified: [Candidate] = candidates.compactMap({ item -> Candidate? in
                                 let syllables = item.romanization.removedTones().split(separator: Character.space)
                                 guard syllables != textParts else { return item.replacedInput(with: text) }
                                 guard isHeadingSeparator.negative else { return nil }
@@ -215,7 +216,7 @@ extension Engine {
                                         return item.replacedInput(with: combinedInput)
                                 }
                         })
-                        guard qualified.isEmpty else { return qualified }
+                        guard qualified.isEmpty else { return qualified.sorted(by: { $0.inputCount > $1.inputCount }) }
                         let anchorEvents = events.split(separator: InputEvent.apostrophe).compactMap(\.first)
                         let anchorCount = anchorEvents.count
                         return anchorsMatch(events: anchorEvents, statement: anchorsStatement)

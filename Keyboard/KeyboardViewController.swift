@@ -660,29 +660,38 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 }
         }
         private func pinyinReverseLookup() {
+                suggestionTask?.cancel()
                 let definedCandidates: [Candidate] = searchDefinedCandidates(for: bufferEvents)
                 let textMarkCandidates: [Candidate] = Engine.searchTextMarks(for: bufferEvents)
-                let bufferText = joinedBufferTexts()
-                let text: String = String(bufferText.dropFirst())
-                guard text.isNotEmpty else {
-                        text2mark = bufferText
+                let events = bufferEvents.dropFirst()
+                guard events.isNotEmpty else {
+                        text2mark = joinedBufferTexts()
                         candidates = definedCandidates + textMarkCandidates
                         return
                 }
-                let schemes: [[String]] = PinyinSegmentor.segment(text: text)
-                let suggestions: [Candidate] = Engine.pinyinReverseLookup(text: text, schemes: schemes).transformed(to: Options.characterStandard)
-                let tailText2Mark: String = {
-                        if let firstCandidate = suggestions.first, firstCandidate.inputCount == text.count { return firstCandidate.mark }
-                        guard let bestScheme = schemes.first else { return text }
-                        let leadingLength: Int = bestScheme.summedLength
-                        let leadingText: String = bestScheme.joined(separator: String.space)
-                        guard leadingLength != text.count else { return leadingText }
-                        let tailText = text.dropFirst(leadingLength)
-                        return leadingText + String.space + tailText
-                }()
-                let prefixMark: String = bufferText.prefix(1) + String.space
-                text2mark = prefixMark + tailText2Mark
-                candidates = definedCandidates + textMarkCandidates + suggestions
+                suggestionTask = Task.detached(priority: .high) { [weak self] in
+                        guard let self else { return }
+                        let segmentation = PinyinSegmenter.segment(events: events)
+                        let suggestions: [Candidate] = await Engine.pinyinReverseLookup(events: events, segmentation: segmentation).transformed(to: Options.characterStandard).uniqued()
+                        if Task.isCancelled.negative {
+                                await MainActor.run { [weak self] in
+                                        guard let self else { return }
+                                        let bufferText = joinedBufferTexts()
+                                        let headMark: String = bufferText.prefix(1) + String.space
+                                        let tailMark: String = {
+                                                // TODO: Handle separators
+                                                guard let firstCandidate = suggestions.first else { return String(bufferText.dropFirst()) }
+                                                guard firstCandidate.inputCount != events.count else { return firstCandidate.mark }
+                                                guard let bestScheme = segmentation.first else { return String(bufferText.dropFirst()) }
+                                                let leadingLength: Int = bestScheme.length
+                                                guard leadingLength < events.count else { return bestScheme.mark }
+                                                return bestScheme.mark + String.space + bufferText.dropFirst(leadingLength + 1)
+                                        }()
+                                        self.text2mark = headMark + tailMark
+                                        self.candidates = definedCandidates + textMarkCandidates + suggestions
+                                }
+                        }
+                }
         }
         private func cangjieReverseLookup() {
                 let definedCandidates: [Candidate] = searchDefinedCandidates(for: bufferEvents)

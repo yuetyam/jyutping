@@ -170,6 +170,7 @@ extension InputEvent {
 }
 
 extension RandomAccessCollection where Element == InputEvent {
+        /// radix100Combined
         var combinedCode: Int {
                 guard count < 10 else { return 0 }
                 return reduce(0, { $0 * 100 + $1.code })

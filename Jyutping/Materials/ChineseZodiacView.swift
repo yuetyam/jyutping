@@ -66,7 +66,7 @@ struct ChineseZodiacView: View {
                 羊,joeng4,🐑
                 猴,hau4,🐒
                 雞,gai1,🐓
-                狗,gau2,🐶
+                狗,gau2,🦮
                 豬,zyu1,🐖
                 """
 
@@ -86,7 +86,7 @@ struct ChineseZodiacView: View {
                 未羊,mei6 joeng4,🐑
                 申猴,san1 hau4,🐒
                 酉雞,jau5 gai1,🐓
-                戌狗,seot1 gau2,🐶
+                戌狗,seot1 gau2,🦮
                 亥豬,hoi6 zyu1,🐖
                 """
 
