@@ -8,13 +8,6 @@ struct PadReturnKey: View {
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
 
-        private var keyColor: Color {
-                return colorScheme.isDark ? .darkAction : .lightAction
-        }
-        private var keyActiveColor: Color {
-                return colorScheme.isDark ? .activeDarkAction : .activeLightAction
-        }
-
         @GestureState private var isTouching: Bool = false
 
         var body: some View {
@@ -25,24 +18,15 @@ struct PadReturnKey: View {
                 let horizontalPadding: CGFloat = isLandscape ? 7 : 5
                 let isDefaultReturn: Bool = context.returnKeyType.isDefaultReturn
                 let keyState: ReturnKeyState = context.returnKeyState
-                let shouldDisplayKeyImage: Bool = {
-                        guard isDefaultReturn else { return false }
-                        switch keyState {
-                        case .bufferingSimplified, .bufferingTraditional:
-                                return false
-                        default:
-                                return true
-                        }
-                }()
                 let backColor: Color = {
-                        guard isTouching.negative else { return keyActiveColor }
+                        guard isTouching.negative else { return colorScheme.activeActionKeyColor }
                         switch keyState {
                         case .bufferingSimplified, .bufferingTraditional:
-                                return keyColor
+                                return colorScheme.actionKeyColor
                         case .standbyABC, .standbySimplified, .standbyTraditional:
-                                return isDefaultReturn ? keyColor : Color.accentColor
+                                return isDefaultReturn ? colorScheme.actionKeyColor : Color.accentColor
                         case .unavailableABC, .unavailableSimplified, .unavailableTraditional:
-                                return keyColor
+                                return colorScheme.actionKeyColor
                         }
                 }()
                 let foreColor: Color = {
@@ -63,12 +47,34 @@ struct PadReturnKey: View {
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(.vertical, verticalPadding)
                                 .padding(.horizontal, horizontalPadding)
-                        if shouldDisplayKeyImage {
-                                Image.return
-                                        .font(.title3)
-                                        .foregroundStyle(foreColor)
-                        } else {
+                        switch (keyState.isBuffering, isDefaultReturn) {
+                        case (true, _):
                                 Text(context.returnKeyText).foregroundStyle(foreColor)
+                        case (false, true):
+                                Image.return.foregroundStyle(foreColor)
+                        default:
+                                ZStack(alignment: .bottomTrailing) {
+                                        Color.clear
+                                        Text(context.returnKeyText)
+                                                .font(.caption2)
+                                                .foregroundStyle(foreColor)
+                                }
+                                .padding(.vertical, verticalPadding + 2)
+                                .padding(.horizontal, horizontalPadding + 4)
+                                switch context.returnKeyType {
+                                case .continue, .next:
+                                        Image.chevronForward.foregroundStyle(foreColor)
+                                case .done:
+                                        Image.checkmark.font(.title3).foregroundStyle(foreColor)
+                                case .go, .route, .join:
+                                        Image.arrowForward.font(.title3).foregroundStyle(foreColor)
+                                case .search, .google, .yahoo:
+                                        Image.search.font(.title3).foregroundStyle(foreColor)
+                                case .send:
+                                        Image.arrowUp.font(.title3).foregroundStyle(foreColor)
+                                default:
+                                        Image.return.font(.title3).foregroundStyle(foreColor)
+                                }
                         }
                 }
                 .frame(width: keyWidth, height: keyHeight)

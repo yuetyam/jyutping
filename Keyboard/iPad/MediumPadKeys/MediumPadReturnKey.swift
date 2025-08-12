@@ -6,29 +6,7 @@ struct MediumPadReturnKey: View {
         let widthUnitTimes: CGFloat
 
         @EnvironmentObject private var context: KeyboardViewController
-
         @Environment(\.colorScheme) private var colorScheme
-
-        private var keyColor: Color {
-                switch colorScheme {
-                case .light:
-                        return .lightAction
-                case .dark:
-                        return .darkAction
-                @unknown default:
-                        return .lightAction
-                }
-        }
-        private var keyActiveColor: Color {
-                switch colorScheme {
-                case .light:
-                        return .activeLightAction
-                case .dark:
-                        return .activeDarkAction
-                @unknown default:
-                        return .activeLightAction
-                }
-        }
 
         @GestureState private var isTouching: Bool = false
 
@@ -39,34 +17,16 @@ struct MediumPadReturnKey: View {
                 let verticalPadding: CGFloat = isLandscape ? 7 : 5
                 let horizontalPadding: CGFloat = isLandscape ? 7 : 5
                 let isDefaultReturn: Bool = context.returnKeyType.isDefaultReturn
-                let isSearchReturn: Bool = context.returnKeyType == .search
                 let keyState: ReturnKeyState = context.returnKeyState
-                let shouldDisplayKeyImage: Bool = {
-                        switch keyState {
-                        case .bufferingSimplified, .bufferingTraditional:
-                                return false
-                        default:
-                                return true
-                        }
-                }()
-                let shouldDisplayKeyText: Bool = {
-                        guard isDefaultReturn else { return true }
-                        switch keyState {
-                        case .bufferingSimplified, .bufferingTraditional:
-                                return true
-                        default:
-                                return false
-                        }
-                }()
                 let backColor: Color = {
-                        guard isTouching.negative else { return keyActiveColor }
+                        guard isTouching.negative else { return colorScheme.activeActionKeyColor }
                         switch keyState {
                         case .bufferingSimplified, .bufferingTraditional:
-                                return keyColor
+                                return colorScheme.actionKeyColor
                         case .standbyABC, .standbySimplified, .standbyTraditional:
-                                return isDefaultReturn ? keyColor : Color.accentColor
+                                return isDefaultReturn ? colorScheme.actionKeyColor : Color.accentColor
                         case .unavailableABC, .unavailableSimplified, .unavailableTraditional:
-                                return keyColor
+                                return colorScheme.actionKeyColor
                         }
                 }()
                 let foreColor: Color = {
@@ -87,44 +47,45 @@ struct MediumPadReturnKey: View {
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(.vertical, verticalPadding)
                                 .padding(.horizontal, horizontalPadding)
-                        switch (shouldDisplayKeyImage, shouldDisplayKeyText) {
-                        case (true, true):
+                        switch (keyState.isBuffering, isDefaultReturn) {
+                        case (true, _):
+                                ZStack(alignment: .bottomTrailing) {
+                                        Color.clear
+                                        Text(context.returnKeyText).foregroundStyle(foreColor)
+                                }
+                                .padding(.vertical, verticalPadding + 5)
+                                .padding(.horizontal, horizontalPadding + 5)
+                        case (false, true):
+                                ZStack(alignment: .bottomTrailing) {
+                                        Color.clear
+                                        Image.return.foregroundStyle(foreColor)
+                                }
+                                .padding(.vertical, verticalPadding + 5)
+                                .padding(.horizontal, horizontalPadding + 5)
+                        default:
+                                ZStack(alignment: .bottomTrailing) {
+                                        Color.clear
+                                        Text(context.returnKeyText).font(.footnote).foregroundStyle(foreColor)
+                                }
+                                .padding(.vertical, verticalPadding + 5)
+                                .padding(.horizontal, horizontalPadding + 5)
                                 ZStack(alignment: .topTrailing) {
                                         Color.clear
-                                        if isSearchReturn {
-                                                Image.search
-                                        } else {
-                                                Image.return
+                                        switch context.returnKeyType {
+                                        case .continue, .next:
+                                                Image.chevronForward.foregroundStyle(foreColor)
+                                        case .done:
+                                                Image.checkmark.foregroundStyle(foreColor)
+                                        case .go, .route, .join:
+                                                Image.arrowForward.foregroundStyle(foreColor)
+                                        case .search, .google, .yahoo:
+                                                Image.search.foregroundStyle(foreColor)
+                                        case .send:
+                                                Image.arrowUp.foregroundStyle(foreColor)
+                                        default:
+                                                Image.return.foregroundStyle(foreColor)
                                         }
                                 }
-                                .foregroundStyle(foreColor)
-                                .padding(.vertical, verticalPadding + 5)
-                                .padding(.horizontal, horizontalPadding + 5)
-                                ZStack(alignment: .bottomTrailing) {
-                                        Color.clear
-                                        Text(context.returnKeyText).font(.footnote)
-                                }
-                                .foregroundStyle(foreColor)
-                                .padding(.vertical, verticalPadding + 5)
-                                .padding(.horizontal, horizontalPadding + 5)
-                        case (true, false):
-                                ZStack(alignment: .bottomTrailing) {
-                                        Color.clear
-                                        if isSearchReturn {
-                                                Image.search
-                                        } else {
-                                                Image.return
-                                        }
-                                }
-                                .foregroundStyle(foreColor)
-                                .padding(.vertical, verticalPadding + 5)
-                                .padding(.horizontal, horizontalPadding + 5)
-                        case (false, true), (false, false):
-                                ZStack(alignment: .bottomTrailing) {
-                                        Color.clear
-                                        Text(context.returnKeyText).font(.footnote)
-                                }
-                                .foregroundStyle(foreColor)
                                 .padding(.vertical, verticalPadding + 5)
                                 .padding(.horizontal, horizontalPadding + 5)
                         }

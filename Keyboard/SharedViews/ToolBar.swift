@@ -61,7 +61,7 @@ struct ToolBar: View {
                                 }
                         }
                         .buttonStyle(.plain)
-                        .frame(width: 74, height: buttonHeight)
+                        .frame(width: 72, height: buttonHeight)
 
                         Spacer()
                         ToolBarButton(

@@ -106,107 +106,7 @@ extension Optional where Wrapped == UIReturnKeyType {
 }
 
 extension EnhancedReturnKeyType {
-        func text(of state: ReturnKeyState) -> String {
-                switch state {
-                case .bufferingSimplified:
-                        return "确认"
-                case .bufferingTraditional:
-                        return "確認"
-                case .standbyABC, .unavailableABC:
-                        switch self {
-                        case .continue:
-                                return "continue"
-                        case .default:
-                                return "return"
-                        case .done:
-                                return "done"
-                        case .emergencyCall:
-                                return "emergency"
-                        case .go:
-                                return "go"
-                        case .google:
-                                return "google"
-                        case .join:
-                                return "join"
-                        case .next:
-                                return "next"
-                        case .route:
-                                return "route"
-                        case .search:
-                                return "search"
-                        case .send:
-                                return "send"
-                        case .unknown:
-                                return "return"
-                        case .unspecified:
-                                return "return"
-                        case .yahoo:
-                                return "yahoo"
-                        }
-                case .standbySimplified, .unavailableSimplified:
-                        switch self {
-                        case .continue:
-                                return "继续"
-                        case .default:
-                                return "换行"
-                        case .done:
-                                return "完成"
-                        case .emergencyCall:
-                                return "紧急"
-                        case .go:
-                                return "前往"
-                        case .google:
-                                return "谷歌"
-                        case .join:
-                                return "加入"
-                        case .next:
-                                return "下一个"
-                        case .route:
-                                return "路线"
-                        case .search:
-                                return "搜寻"
-                        case .send:
-                                return "传送"
-                        case .unknown:
-                                return "换行"
-                        case .unspecified:
-                                return "换行"
-                        case .yahoo:
-                                return "雅虎"
-                        }
-                case .standbyTraditional, .unavailableTraditional:
-                        switch self {
-                        case .continue:
-                                return "繼續"
-                        case .default:
-                                return "換行"
-                        case .done:
-                                return "完成"
-                        case .emergencyCall:
-                                return "緊急"
-                        case .go:
-                                return "前往"
-                        case .google:
-                                return "谷歌"
-                        case .join:
-                                return "加入"
-                        case .next:
-                                return "下一個"
-                        case .route:
-                                return "路線"
-                        case .search:
-                                return "搜尋"
-                        case .send:
-                                return "傳送"
-                        case .unknown:
-                                return "換行"
-                        case .unspecified:
-                                return "換行"
-                        case .yahoo:
-                                return "雅虎"
-                        }
-                }
-        }
+
         func attributedText(of state: ReturnKeyState) -> AttributedString {
                 let language: LanguageAttribute = {
                         switch state {
@@ -220,4 +120,73 @@ extension EnhancedReturnKeyType {
                 }()
                 return text(of: state).languageAttributed(for: language)
         }
+        func text(of state: ReturnKeyState) -> String {
+                switch state {
+                case .bufferingSimplified:
+                        return Self.confirmSimplified
+                case .bufferingTraditional:
+                        return Self.confirmTraditional
+                case .standbyABC, .unavailableABC:
+                        return Self.abcMap[self] ?? Self.returnABC
+                case .standbySimplified, .unavailableSimplified:
+                        return Self.simplifiedMap[self] ?? Self.returnSimplified
+                case .standbyTraditional, .unavailableTraditional:
+                        return Self.traditionalMap[self] ?? Self.returnTraditional
+                }
+        }
+
+        private static let confirmSimplified : String = "确认"
+        private static let confirmTraditional: String = "確認"
+        private static let returnABC         : String = "return"
+        private static let returnSimplified  : String = "换行"
+        private static let returnTraditional : String = "換行"
+
+        private static let abcMap: [EnhancedReturnKeyType: String] = [
+                .continue     : "continue",
+                .default      : "return",
+                .done         : "done",
+                .emergencyCall: "emergency",
+                .go           : "go",
+                .google       : "google",
+                .join         : "join",
+                .next         : "next",
+                .route        : "route",
+                .search       : "search",
+                .send         : "send",
+                .unknown      : "return",
+                .unspecified  : "return",
+                .yahoo        : "yahoo"
+        ]
+        private static let simplifiedMap: [EnhancedReturnKeyType: String] = [
+                .continue     : "继续",
+                .default      : "换行",
+                .done         : "完成",
+                .emergencyCall: "紧急",
+                .go           : "前往",
+                .google       : "谷歌",
+                .join         : "加入",
+                .next         : "下一个",
+                .route        : "路线",
+                .search       : "搜寻",
+                .send         : "传送",
+                .unknown      : "换行",
+                .unspecified  : "换行",
+                .yahoo        : "雅虎"
+        ]
+        private static let traditionalMap: [EnhancedReturnKeyType: String] = [
+                .continue     : "繼續",
+                .default      : "換行",
+                .done         : "完成",
+                .emergencyCall: "緊急",
+                .go           : "前往",
+                .google       : "谷歌",
+                .join         : "加入",
+                .next         : "下一個",
+                .route        : "路線",
+                .search       : "搜尋",
+                .send         : "傳送",
+                .unknown      : "換行",
+                .unspecified  : "換行",
+                .yahoo        : "雅虎"
+        ]
 }

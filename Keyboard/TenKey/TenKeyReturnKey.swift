@@ -6,27 +6,20 @@ struct TenKeyReturnKey: View {
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
 
-        private var keyColor: Color {
-                return colorScheme.isDark ? .darkAction : .lightAction
-        }
-        private var keyActiveColor: Color {
-                return colorScheme.isDark ? .activeDarkAction : .activeLightAction
-        }
-
         @GestureState private var isTouching: Bool = false
 
         var body: some View {
                 let isDefaultReturn: Bool = context.returnKeyType.isDefaultReturn
                 let keyState: ReturnKeyState = context.returnKeyState
                 let backColor: Color = {
-                        guard isTouching.negative else { return keyActiveColor }
+                        guard isTouching.negative else { return colorScheme.activeActionKeyColor }
                         switch keyState {
                         case .bufferingSimplified, .bufferingTraditional:
-                                return keyColor
+                                return colorScheme.actionKeyColor
                         case .standbyABC, .standbySimplified, .standbyTraditional:
-                                return isDefaultReturn ? keyColor : Color.accentColor
+                                return isDefaultReturn ? colorScheme.actionKeyColor : Color.accentColor
                         case .unavailableABC, .unavailableSimplified, .unavailableTraditional:
-                                return keyColor
+                                return colorScheme.actionKeyColor
                         }
                 }()
                 let foreColor: Color = {
@@ -46,8 +39,31 @@ struct TenKeyReturnKey: View {
                                 .fill(backColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(3)
-                        Text(context.returnKeyText)
+                        switch (context.returnKeyState.isBuffering, isDefaultReturn) {
+                        case (true, _):
+                                Text(context.returnKeyText).foregroundStyle(foreColor)
+                        case (false, true):
+                                Image.return.foregroundStyle(foreColor)
+                        default:
+                                VStack(spacing: 5) {
+                                        switch context.returnKeyType {
+                                        case .continue, .next:
+                                                Image.chevronForward
+                                        case .done:
+                                                Image.checkmark
+                                        case .go, .route, .join:
+                                                Image.arrowForward
+                                        case .search, .google, .yahoo:
+                                                Image.search
+                                        case .send:
+                                                Image.arrowUp
+                                        default:
+                                                Image.return
+                                        }
+                                        Text(context.returnKeyText).font(.footnote)
+                                }
                                 .foregroundStyle(foreColor)
+                        }
                 }
                 .frame(width: context.tenKeyWidthUnit, height: context.heightUnit * 2)
                 .contentShape(Rectangle())

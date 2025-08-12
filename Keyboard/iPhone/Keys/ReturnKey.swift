@@ -6,13 +6,6 @@ struct ReturnKey: View {
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
 
-        private var keyColor: Color {
-                return colorScheme.isDark ? .darkAction : .lightAction
-        }
-        private var keyActiveColor: Color {
-                return colorScheme.isDark ? .activeDarkAction : .activeLightAction
-        }
-
         @GestureState private var isTouching: Bool = false
 
         var body: some View {
@@ -24,14 +17,14 @@ struct ReturnKey: View {
                 let isDefaultReturn: Bool = context.returnKeyType.isDefaultReturn
                 let keyState: ReturnKeyState = context.returnKeyState
                 let backColor: Color = {
-                        guard isTouching.negative else { return keyActiveColor }
+                        guard isTouching.negative else { return colorScheme.activeActionKeyColor }
                         switch keyState {
                         case .bufferingSimplified, .bufferingTraditional:
-                                return keyColor
+                                return colorScheme.actionKeyColor
                         case .standbyABC, .standbySimplified, .standbyTraditional:
-                                return isDefaultReturn ? keyColor : Color.accentColor
+                                return isDefaultReturn ? colorScheme.actionKeyColor : Color.accentColor
                         case .unavailableABC, .unavailableSimplified, .unavailableTraditional:
-                                return keyColor
+                                return colorScheme.actionKeyColor
                         }
                 }()
                 let foreColor: Color = {
@@ -65,7 +58,7 @@ struct ReturnKey: View {
                                                 .foregroundStyle(foreColor)
                                 }
                                 .padding(.vertical, verticalPadding + 1)
-                                .padding(.horizontal, horizontalPadding + 3)
+                                .padding(.horizontal, horizontalPadding + 1)
                                 switch context.returnKeyType {
                                 case .continue, .next:
                                         Image.chevronForward.foregroundStyle(foreColor)
