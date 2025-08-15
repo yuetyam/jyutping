@@ -144,7 +144,7 @@ extension Engine {
                         emojis.append(instance)
                 }
                 let skinToneStatement: OpaquePointer? = {
-                        let skinToneQuery: String = "SELECT target FROM emojiskinmapping WHERE source = ?;"
+                        let skinToneQuery: String = "SELECT target FROM emojiskinmap WHERE source = ?;"
                         var pointer: OpaquePointer? = nil
                         guard sqlite3_prepare_v2(Engine.database, skinToneQuery, -1, &pointer, nil) == SQLITE_OK else { return nil }
                         return pointer
@@ -186,7 +186,7 @@ extension Engine {
                         emojis.append(instance)
                 }
                 let skinToneStatement: OpaquePointer? = {
-                        let skinToneQuery: String = "SELECT target FROM emojiskinmapping WHERE source = ?;"
+                        let skinToneQuery: String = "SELECT target FROM emojiskinmap WHERE source = ?;"
                         var pointer: OpaquePointer? = nil
                         guard sqlite3_prepare_v2(Engine.database, skinToneQuery, -1, &pointer, nil) == SQLITE_OK else { return nil }
                         return pointer

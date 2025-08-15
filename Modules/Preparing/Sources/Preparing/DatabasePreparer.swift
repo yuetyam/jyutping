@@ -19,7 +19,7 @@ struct DatabasePreparer {
                         group.addTask { await createQuickTable() }
                         group.addTask { await createStrokeTable() }
                         group.addTask { await createSymbolTable() }
-                        group.addTask { await createEmojiSkinMappingTable() }
+                        group.addTask { await createEmojiSkinMapTable() }
                         group.addTask { await createTextMarkTable() }
                         group.addTask { await createSyllableTable() }
                         group.addTask { await createPinyinSyllableTable() }
@@ -75,7 +75,7 @@ struct DatabasePreparer {
 
                         "CREATE INDEX symbolpingindex ON symboltable(ping);",
                         "CREATE INDEX symboltenkeycodeindex ON symboltable(tenkeycode);",
-                        "CREATE INDEX emojiskinmappingindex ON emojiskinmapping(source);",
+                        "CREATE INDEX emojiskinmapindex ON emojiskinmap(source);",
 
                         "CREATE INDEX markpingindex ON marktable(ping);",
                         "CREATE INDEX marktenkeycodeindex ON marktable(tenkeycode);",
@@ -264,13 +264,13 @@ struct DatabasePreparer {
                 guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }
                 guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
         }
-        private static func createEmojiSkinMappingTable() async {
-                let createTable: String = "CREATE TABLE emojiskinmapping(source TEXT NOT NULL, target TEXT NOT NULL);"
+        private static func createEmojiSkinMapTable() async {
+                let createTable: String = "CREATE TABLE emojiskinmap(source TEXT NOT NULL, target TEXT NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
                 sqlite3_finalize(createStatement)
-                guard let url = Bundle.module.url(forResource: "skin-tone-mapping", withExtension: "txt") else { return }
+                guard let url = Bundle.module.url(forResource: "skin-tone-map", withExtension: "txt") else { return }
                 guard let content = try? String(contentsOf: url, encoding: .utf8) else { return }
                 let sourceLines: [String] = content.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
                 let entries = sourceLines.compactMap { line -> String? in
@@ -281,7 +281,7 @@ struct DatabasePreparer {
                         return "('\(source)', '\(target)')"
                 }
                 let values: String = entries.joined(separator: ", ")
-                let insert: String = "INSERT INTO emojiskinmapping (source, target) VALUES \(values);"
+                let insert: String = "INSERT INTO emojiskinmap (source, target) VALUES \(values);"
                 var insertStatement: OpaquePointer? = nil
                 defer { sqlite3_finalize(insertStatement) }
                 guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }

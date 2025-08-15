@@ -17,7 +17,7 @@ struct Stroke {
                 let characters = sourceLines.compactMap { line -> String? in
                         guard let word = line.split(separator: "\t").first else { return nil }
                         guard word.count == 1 else { return nil }
-                        return word.trimmingCharacters(in: .whitespaces)
+                        return String(word)
                 }
                 defer {
                         sqlite3_close_v2(database)
