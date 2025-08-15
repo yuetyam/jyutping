@@ -34,6 +34,7 @@ struct JyutpingView: View {
                                 Section {
                                         ExtendedLinkLabel(title: "粵拼 Jyutping", footnote: "jyutping.org", address: "https://jyutping.org")
                                         ExtendedLinkLabel(title: "粵語拼音速遞 - CUHK", footnote: "ilc.cuhk.edu.hk/workshop/Chinese/Cantonese/Romanization", address: "https://www.ilc.cuhk.edu.hk/workshop/Chinese/Cantonese/Romanization")
+                                        ExtendedLinkLabel(title: "粵語網路課堂 - CUHK", footnote: "ilc.cuhk.edu.hk/workshop/Chinese/Cantonese/OnlineTutorial", address: "https://www.ilc.cuhk.edu.hk/workshop/Chinese/Cantonese/OnlineTutorial")
                                         ExtendedLinkLabel(title: "翻轉粵語教室 - PolyU", footnote: "polyu.edu.hk/clc/cantonese/home", address: "https://www.polyu.edu.hk/clc/cantonese/home")
                                         ExtendedLinkLabel(title: "Zidou - 粵拼版 Wordle", footnote: "chaaklau.github.io/zidou", address: "https://chaaklau.github.io/zidou")
                                         ExtendedLinkLabel(title: "六合 | 粵拼版 Wordle", footnote: "lukhap.jonathanl.dev", address: "https://lukhap.jonathanl.dev")

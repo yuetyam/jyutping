@@ -15,6 +15,8 @@ struct IOSConfusionView: View {
                 List {
                         ForEach(entries.indices, id: \.self) { index in
                                 Section {
+                                        EntryView(entry: entries[index])
+                                } header: {
                                         if index == 0 {
                                                 HStack {
                                                         Text(verbatim: "簡化字").frame(width: 48)
@@ -22,8 +24,8 @@ struct IOSConfusionView: View {
                                                         Text(verbatim: "備註")
                                                 }
                                                 .font(.footnote)
+                                                .textCase(nil)
                                         }
-                                        EntryView(entry: entries[index])
                                 }
                                 .listRowInsets(insets)
                         }
