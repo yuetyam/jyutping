@@ -101,7 +101,7 @@ osascript -e 'tell application id "org.jyutping.inputmethod.Jyutping" to quit'
 - [OpenCC](https://github.com/BYVoid/OpenCC) (Traditional-Simplified Character Conversion)
 - [JetBrains](https://www.jetbrains.com/) (Licenses for Open Source Development)
 
-## 感謝支持（Support this project）
+## 支持作者開發（Support this project）
 Patreon: https://patreon.com/bingzheung
 
 愛發電: https://afdian.com/a/jyutping
