@@ -560,6 +560,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         } else {
                                 selectedCandidates = []
                         }
+                        selectedSyllables = []
                         let tailCount: Int = bufferCombos.count - candidate.inputCount
                         let suffixLength: Int = max(0, tailCount)
                         bufferCombos = bufferCombos.suffix(suffixLength)
@@ -694,7 +695,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let isValidSequence: Bool = converted.isNotEmpty && (converted.count == text.count)
                 if isValidSequence {
                         text2mark = String(converted)
-                        let suggestions: [Candidate] = Engine.cangjieReverseLookup(text: text, variant: Options.cangjieVariant).transformed(to: Options.characterStandard)
+                        let suggestions: [Candidate] = Engine.cangjieReverseLookup(text: text, variant: Options.cangjieVariant).transformed(to: Options.characterStandard).uniqued()
                         candidates = definedCandidates + textMarkCandidates + suggestions
                 } else {
                         text2mark = bufferText
@@ -711,7 +712,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let isValidSequence: Bool = converted.isNotEmpty && (converted.count == text.count)
                 if isValidSequence {
                         text2mark = String(converted)
-                        let suggestions: [Candidate] = Engine.strokeReverseLookup(text: transformed).transformed(to: Options.characterStandard)
+                        let suggestions: [Candidate] = Engine.strokeReverseLookup(text: transformed).transformed(to: Options.characterStandard).uniqued()
                         candidates = definedCandidates + textMarkCandidates + suggestions
                 } else {
                         text2mark = bufferText
@@ -741,7 +742,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 }()
                 let prefixMark: String = bufferText.prefix(1) + String.space
                 text2mark = prefixMark + tailMark
-                let suggestions: [Candidate] = Engine.structureReverseLookup(events: bufferEvents, input: bufferText, segmentation: segmentation).transformed(to: Options.characterStandard)
+                let suggestions: [Candidate] = Engine.structureReverseLookup(events: bufferEvents, input: bufferText, segmentation: segmentation).transformed(to: Options.characterStandard).uniqued()
                 candidates = definedCandidates + textMarkCandidates + suggestions
         }
 
