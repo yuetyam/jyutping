@@ -535,7 +535,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 let isValidSequence: Bool = converted.isNotEmpty && (converted.count == text.count)
                 if isValidSequence {
                         mark(text: String(converted))
-                        let suggestions: [Candidate] = Engine.cangjieReverseLookup(text: text, variant: AppSettings.cangjieVariant).transformed(to: Options.characterStandard)
+                        let suggestions: [Candidate] = Engine.cangjieReverseLookup(text: text, variant: AppSettings.cangjieVariant).transformed(to: Options.characterStandard).uniqued()
                         candidates = definedCandidates + textMarkCandidates + suggestions
                 } else {
                         mark(text: bufferText)
@@ -552,7 +552,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 let isValidSequence: Bool = converted.isNotEmpty && (converted.count == text.count)
                 if isValidSequence {
                         mark(text: String(converted))
-                        let suggestions: [Candidate] = Engine.strokeReverseLookup(text: transformed).transformed(to: Options.characterStandard)
+                        let suggestions: [Candidate] = Engine.strokeReverseLookup(text: transformed).transformed(to: Options.characterStandard).uniqued()
                         candidates = definedCandidates + textMarkCandidates + suggestions
                 } else {
                         mark(text: bufferText)
@@ -583,7 +583,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 let prefixMark: String = bufferText.prefix(1) + String.space
                 let text2mark: String = prefixMark + tailMark
                 mark(text: text2mark)
-                let suggestions: [Candidate] = Engine.structureReverseLookup(events: bufferEvents, input: bufferText, segmentation: segmentation).transformed(to: Options.characterStandard)
+                let suggestions: [Candidate] = Engine.structureReverseLookup(events: bufferEvents, input: bufferText, segmentation: segmentation).transformed(to: Options.characterStandard).uniqued()
                 candidates = definedCandidates + textMarkCandidates + suggestions
         }
 

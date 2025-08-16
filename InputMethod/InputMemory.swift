@@ -275,7 +275,7 @@ struct InputMemory {
                                 return shortcutMatch(text: leadingText, input: leadingText, statement: shortcutStatement)
                         })
                         .compactMap({ item -> InternalLexicon? in
-                                guard item.romanization.hasPrefix(text).negative else {
+                                guard item.romanization.removedSpacesTones().hasPrefix(text).negative else {
                                         return InternalLexicon(word: item.word, romanization: item.romanization, frequency: item.frequency, latest: item.latest, input: text, mark: text)
                                 }
                                 let syllables = item.romanization.removedTones().split(separator: Character.space)

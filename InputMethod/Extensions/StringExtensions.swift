@@ -17,10 +17,16 @@ extension String {
                 return filter(\.isCantoneseToneDigit)
         }
 
-        /// Remove all tones (1-6)
-        /// - Returns: A subsequence that leaves off the tones.
+        /// Remove tones (1-6)
+        /// - Returns: A subsequence that leaves off tones.
         func removedTones() -> String {
                 return filter(\.isCantoneseToneDigit.negative)
+        }
+
+        /// Remove spaces and tones (1-6)
+        /// - Returns: A subsequence that leaves off spaces and tones.
+        func removedSpacesTones() -> String {
+                return filter(\.isLowercaseBasicLatinLetter)
         }
 }
 
