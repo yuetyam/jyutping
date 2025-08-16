@@ -121,8 +121,7 @@ private struct MacToneGridView: View {
                                                 Text(verbatim: "調值: ˧")
                                         }
                                 }
-                                .padding(8)
-                                .stack()
+                                .block()
                                 .fixedSize()
                         }
                         GridRow {
@@ -150,8 +149,7 @@ private struct MacToneGridCell: View {
                         }
                         Text(verbatim: "調值 :  \(tone)")
                 }
-                .padding(8)
-                .stack()
+                .block()
         }
 }
 

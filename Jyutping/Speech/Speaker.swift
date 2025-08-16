@@ -57,7 +57,7 @@ struct Speaker: View {
                         ZStack {
                                 Circle()
                                         #if os(macOS)
-                                        .fill(Color.textBackgroundColor)
+                                        .fill(Color.textBackgroundColor.opacity(0.66))
                                         #else
                                         .fill(Material.regular)
                                         #endif

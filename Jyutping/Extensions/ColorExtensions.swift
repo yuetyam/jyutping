@@ -10,7 +10,7 @@ extension Color {
         #endif
 
         #if os(macOS)
-        static let textBackgroundColor: Color = Color(nsColor: NSColor.textBackgroundColor).opacity(0.66)
+        static let textBackgroundColor: Color = Color(nsColor: NSColor.textBackgroundColor)
         static let separator: Color = Color(nsColor: NSColor.separatorColor)
         #endif
 }
