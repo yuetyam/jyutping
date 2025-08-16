@@ -198,7 +198,7 @@ struct FontSettingsView: View {
                                 }
                                 .formStyle(.grouped)
                                 .scrollContentBackground(.hidden)
-                                .background(Color.textBackgroundColor.opacity(0.75), in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+                                .stack(cornerRadius: 16)
                                 .frame(maxWidth: 480)
                         }
                         .padding(8)

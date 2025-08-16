@@ -4,12 +4,12 @@ extension View {
 
         /// Apply rounded rectangle background with content padding
         func block() -> some View {
-                return padding(8).background(Material.bar.opacity(0.75), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+                return padding(8).background(Color.textBackgroundColor.opacity(0.5), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
         }
 
         /// Apply rounded rectangle background
         func stack(cornerRadius: CGFloat = 10) -> some View {
-                return background(Material.bar.opacity(0.75), in: RoundedRectangle(cornerRadius: cornerRadius, style: .continuous))
+                return background(Color.textBackgroundColor.opacity(0.5), in: RoundedRectangle(cornerRadius: cornerRadius, style: .continuous))
         }
 
         // https://www.avanderlee.com/swiftui/disable-animations-transactions
@@ -34,5 +34,5 @@ extension View {
 }
 
 extension Color {
-        static let textBackgroundColor: Color = Color(nsColor: NSColor.textBackgroundColor).opacity(0.66)
+        static let textBackgroundColor: Color = Color(nsColor: NSColor.textBackgroundColor)
 }
