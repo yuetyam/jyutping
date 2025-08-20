@@ -279,8 +279,7 @@ struct InputMemory {
                                         return InternalLexicon(word: item.word, romanization: item.romanization, frequency: item.frequency, latest: item.latest, input: text, mark: text)
                                 }
                                 let syllables = item.romanization.removedTones().split(separator: Character.space)
-                                guard let lastSyllable = syllables.last else { return nil }
-                                guard text.hasSuffix(lastSyllable) else { return nil }
+                                guard let lastSyllable = syllables.last, text.hasSuffix(lastSyllable) else { return nil }
                                 let isMatched: Bool = ((syllables.count - 1) + lastSyllable.count) == inputLength
                                 guard isMatched else { return nil }
                                 return InternalLexicon(word: item.word, romanization: item.romanization, frequency: item.frequency, latest: item.latest, input: text, mark: text)

@@ -237,26 +237,30 @@ extension Engine {
         private static func processSlices<T: RandomAccessCollection<InputEvent>>(of events: T, text: String, limit: Int64? = nil, anchorsStatement: OpaquePointer?, pingStatement: OpaquePointer?) -> [Candidate] {
                 let adjustedLimit: Int64 = (limit == nil) ? 300 : 100
                 let inputLength: Int = events.count
-                return (0..<inputLength)
-                        .flatMap({ number -> [Candidate] in
-                                let leadingEvents = events.dropLast(number)
-                                let leadingText = leadingEvents.map(\.text).joined()
-                                return pingMatch(text: leadingText, input: leadingText, limit: limit, statement: pingStatement) + anchorsMatch(events: leadingEvents, input: leadingText, limit: adjustedLimit, statement: anchorsStatement)
-                        })
-                        .map({ item -> Candidate in
-                                guard item.inputCount != inputLength else { return item }
-                                guard item.romanization.hasPrefix(text).negative else {
-                                        return Candidate(text: item.text, romanization: item.romanization, input: text, mark: text, order: item.order)
-                                }
-                                let syllables = item.romanization.removedTones().split(separator: Character.space)
-                                guard let lastSyllable = syllables.last else { return item }
-                                guard text.hasSuffix(lastSyllable) else { return item }
-                                let isMatched: Bool = ((syllables.count - 1) + lastSyllable.count) == inputLength
-                                guard isMatched else { return item }
-                                return Candidate(text: item.text, romanization: item.romanization, input: text, mark: text, order: item.order)
-                        })
-                        .uniqued()
-                        .sorted()
+                return (0..<inputLength).flatMap({ number -> [Candidate] in
+                        let leadingEvents = events.dropLast(number)
+                        let leadingText = leadingEvents.map(\.text).joined()
+                        let pingMatched = pingMatch(text: leadingText, input: leadingText, limit: limit, statement: pingStatement)
+                                .map({ modify($0, text: text, textLength: inputLength) })
+                        let anchorsMatched = anchorsMatch(events: leadingEvents, input: leadingText, limit: adjustedLimit, statement: anchorsStatement)
+                                .map({ modify($0, text: text, textLength: inputLength) })
+                                .sorted()
+                                .prefix(72)
+                        return pingMatched + anchorsMatched
+                })
+                .uniqued()
+                .sorted()
+        }
+        private static func modify(_ item: Candidate, text: String, textLength: Int) -> Candidate {
+                guard item.inputCount != textLength else { return item }
+                guard item.romanization.removedSpacesTones().hasPrefix(text).negative else {
+                        return Candidate(text: item.text, romanization: item.romanization, input: text, mark: text, order: item.order)
+                }
+                let syllables = item.romanization.removedTones().split(separator: Character.space)
+                guard let lastSyllable = syllables.last, text.hasSuffix(lastSyllable) else { return item }
+                let isMatched: Bool = ((syllables.count - 1) + lastSyllable.count) == textLength
+                guard isMatched else { return item }
+                return Candidate(text: item.text, romanization: item.romanization, input: text, mark: text, order: item.order)
         }
 
         private static func search<T: RandomAccessCollection<InputEvent>>(events: T, segmentation: Segmentation, limit: Int64? = nil, anchorsStatement: OpaquePointer?, pingStatement: OpaquePointer?, strictStatement: OpaquePointer?) -> [Candidate] {
@@ -301,7 +305,7 @@ extension Engine {
                         let leadingText = leadingEvents.map(\.text).joined()
                         return anchorsMatch(events: leadingEvents, input: leadingText, limit: 300, statement: anchorsStatement)
                 }).compactMap({ item -> Candidate? in
-                        guard item.romanization.hasPrefix(text).negative else {
+                        guard item.romanization.removedSpacesTones().hasPrefix(text).negative else {
                                 return Candidate(text: item.text, romanization: item.romanization, input: text, mark: text, order: item.order)
                         }
                         let syllables = item.romanization.removedTones().split(separator: Character.space)

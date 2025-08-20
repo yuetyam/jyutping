@@ -23,26 +23,32 @@ extension Engine {
         }
 
         private static func processPinyinSlices<T: RandomAccessCollection<InputEvent>>(of events: T, text: String, limit: Int64? = nil, anchorsStatement: OpaquePointer?, pingStatement: OpaquePointer?) -> [PinyinLexicon] {
+                let adjustedLimit: Int64 = (limit == nil) ? 300 : 100
                 let inputLength: Int = events.count
-                let fetched: [PinyinLexicon] = (0..<inputLength).flatMap({ number -> [PinyinLexicon] in
+                return (0..<inputLength).flatMap({ number -> [PinyinLexicon] in
                         let leadingEvents = events.dropLast(number)
                         let leadingText = leadingEvents.map(\.text).joined()
-                        return pinyinMatch(text: leadingText, limit: limit, statement: pingStatement) + pinyinAnchorsMatch(events: leadingEvents, input: leadingText, limit: limit, statement: anchorsStatement)
+                        let pingMatched = pinyinMatch(text: leadingText, limit: limit, statement: pingStatement)
+                                .map({ modify($0, text: text, textLength: inputLength) })
+                        let anchorsMatched = pinyinAnchorsMatch(events: leadingEvents, input: leadingText, limit: adjustedLimit, statement: anchorsStatement)
+                                .map({ modify($0, text: text, textLength: inputLength) })
+                                .sorted()
+                                .prefix(72)
+                        return pingMatched + anchorsMatched
                 })
-                let containsIdealLexicon: Bool = fetched.contains(where: { $0.inputCount == inputLength })
-                guard containsIdealLexicon.negative else { return fetched.uniqued().sorted() }
-                return fetched.map({ item -> PinyinLexicon in
-                        guard item.inputCount != inputLength else { return item }
-                        guard item.pinyin.hasPrefix(text).negative else {
-                                return PinyinLexicon(text: item.text, pinyin: item.pinyin, input: text, mark: text, order: item.order)
-                        }
-                        let syllables = item.pinyin.removedTones().split(separator: Character.space)
-                        guard let lastSyllable = syllables.last else { return item }
-                        guard text.hasSuffix(lastSyllable) else { return item }
-                        let isMatched: Bool = ((syllables.count - 1) + lastSyllable.count) == inputLength
-                        guard isMatched else { return item }
+                .uniqued()
+                .sorted()
+        }
+        private static func modify(_ item: PinyinLexicon, text: String, textLength: Int) -> PinyinLexicon {
+                guard item.inputCount != textLength else { return item }
+                guard item.pinyin.removedSpaces().hasPrefix(text).negative else {
                         return PinyinLexicon(text: item.text, pinyin: item.pinyin, input: text, mark: text, order: item.order)
-                }).uniqued().sorted()
+                }
+                let syllables = item.pinyin.split(separator: Character.space)
+                guard let lastSyllable = syllables.last, text.hasSuffix(lastSyllable) else { return item }
+                let isMatched: Bool = ((syllables.count - 1) + lastSyllable.count) == textLength
+                guard isMatched else { return item }
+                return PinyinLexicon(text: item.text, pinyin: item.pinyin, input: text, mark: text, order: item.order)
         }
 
         private static func pinyinSearch<T: RandomAccessCollection<InputEvent>>(events: T, segmentation: PinyinSegmentation, limit: Int64? = nil, anchorsStatement: OpaquePointer?, pingStatement: OpaquePointer?) -> [PinyinLexicon] {
@@ -67,15 +73,14 @@ extension Engine {
                         let mark: String = schemeMark + String.space + tail.map(\.text).joined()
                         let conjoinedMatched = pinyinAnchorsMatch(events: conjoined, limit: prefixesLimit, statement: anchorsStatement)
                                 .compactMap({ item -> PinyinLexicon? in
-                                        let toneFreeRomanization = item.pinyin.removedTones()
-                                        guard toneFreeRomanization.hasPrefix(schemeMark) else { return nil }
-                                        let tailAnchors = toneFreeRomanization.dropFirst(schemeMark.count).split(separator: Character.space).compactMap(\.first)
+                                        guard item.pinyin.hasPrefix(schemeMark) else { return nil }
+                                        let tailAnchors = item.pinyin.dropFirst(schemeMark.count).split(separator: Character.space).compactMap(\.first)
                                         guard tailAnchors == tail.compactMap(\.text.first) else { return nil }
                                         return PinyinLexicon(text: item.text, pinyin: item.pinyin, input: text, mark: mark, order: item.order)
                                 })
                         let anchorsMatched = pinyinAnchorsMatch(events: anchors, limit: prefixesLimit, statement: anchorsStatement)
                                 .compactMap({ item -> PinyinLexicon? in
-                                        guard item.pinyin.removedTones().hasPrefix(mark) else { return nil }
+                                        guard item.pinyin.hasPrefix(mark) else { return nil }
                                         return PinyinLexicon(text: item.text, pinyin: item.pinyin, input: text, mark: mark, order: item.order)
                                 })
                         return conjoinedMatched + anchorsMatched
@@ -85,12 +90,11 @@ extension Engine {
                         let leadingText = leadingEvents.map(\.text).joined()
                         return pinyinAnchorsMatch(events: leadingEvents, input: leadingText, limit: 300, statement: anchorsStatement)
                 }).compactMap({ item -> PinyinLexicon? in
-                        guard item.pinyin.hasPrefix(text).negative else {
+                        guard item.pinyin.removedSpaces().hasPrefix(text).negative else {
                                 return PinyinLexicon(text: item.text, pinyin: item.pinyin, input: text, mark: text, order: item.order)
                         }
-                        let syllables = item.pinyin.removedTones().split(separator: Character.space)
-                        guard let lastSyllable = syllables.last else { return nil }
-                        guard text.hasSuffix(lastSyllable) else { return nil }
+                        let syllables = item.pinyin.split(separator: Character.space)
+                        guard let lastSyllable = syllables.last, text.hasSuffix(lastSyllable) else { return nil }
                         let isMatched: Bool = ((syllables.count - 1) + lastSyllable.count) == inputLength
                         guard isMatched else { return nil }
                         return PinyinLexicon(text: item.text, pinyin: item.pinyin, input: text, mark: text, order: item.order)
