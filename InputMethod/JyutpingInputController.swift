@@ -467,11 +467,11 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 suggestionTask = Task.detached(priority: .high) { [weak self] in
                         guard let self else { return }
                         let definedCandidates: [Candidate] = await searchDefinedCandidates(for: events)
-                        let textMarkCandidates: [Candidate] = Engine.searchTextMarks(for: events)
+                        async let textMarkCandidates: [Candidate] = Engine.searchTextMarks(for: events)
                         let segmentation = Segmenter.segment(events: events)
                         async let memoryCandidates: [Candidate] = isInputMemoryOn ? InputMemory.suggest(events: events, segmentation: segmentation) : []
                         async let engineCandidates: [Candidate] = Engine.suggest(events: events, segmentation: segmentation)
-                        let suggestions = await (memoryCandidates + engineCandidates).transformed(with: Options.characterStandard, isEmojiSuggestionsOn: isEmojiSuggestionsOn)
+                        let suggestions = await (memoryCandidates + textMarkCandidates + engineCandidates).transformed(with: Options.characterStandard, isEmojiSuggestionsOn: isEmojiSuggestionsOn)
                         if Task.isCancelled.negative {
                                 await MainActor.run { [weak self] in
                                         guard let self else { return }
@@ -487,7 +487,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                                 return bestScheme.mark + String.space + text.dropFirst(leadingLength)
                                         }()
                                         self.mark(text: text2mark)
-                                        self.candidates = definedCandidates + textMarkCandidates + suggestions
+                                        self.candidates = definedCandidates.isEmpty ? suggestions : (definedCandidates + suggestions)
                                 }
                         }
                 }
