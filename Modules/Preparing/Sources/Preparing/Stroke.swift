@@ -5,7 +5,16 @@ struct StrokeEntry: Hashable {
         let word: String
         let stroke: String
         let complex: Int
-        let code: Int
+        let pingCode: Int
+        let charCode: Int
+        let tenKeyCharCode: Int
+        static func == (lhs: StrokeEntry, rhs: StrokeEntry) -> Bool {
+                return lhs.word == rhs.word && lhs.stroke == rhs.stroke
+        }
+        func hash(into hasher: inout Hasher) {
+                hasher.combine(word)
+                hasher.combine(stroke)
+        }
 }
 
 struct Stroke {
@@ -26,7 +35,9 @@ struct Stroke {
                         let strokeMatches = match(text: item)
                         guard !(strokeMatches.isEmpty) else { return [] }
                         let entries = strokeMatches.map { stroke -> StrokeEntry in
-                                return StrokeEntry(word: item, stroke: stroke, complex: stroke.count, code: stroke.hash)
+                                let charCode = stroke.charCode ?? 0
+                                let tenKeyCharCode = stroke.tenKeyCharCode ?? 0
+                                return StrokeEntry(word: item, stroke: stroke, complex: stroke.count, pingCode: stroke.hash, charCode: charCode, tenKeyCharCode: tenKeyCharCode)
                         }
                         return entries
                 }).uniqued()

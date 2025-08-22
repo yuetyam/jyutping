@@ -11,8 +11,8 @@ extension Engine {
                         .flatMap({ Engine.reveresLookup(text: $0.text, input: $0.input) })
         }
         private static func match(strokeText: String) -> [ShapeLexicon] {
-                let code = strokeText.hash
-                let command: String = "SELECT rowid, word FROM stroketable WHERE code = \(code);"
+                let pingCode = strokeText.hash
+                let command: String = "SELECT rowid, word FROM stroketable WHERE ping = \(pingCode);"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(Engine.database, command, -1, &statement, nil) == SQLITE_OK else { return [] }
