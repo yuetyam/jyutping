@@ -597,11 +597,11 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let isInputMemoryOn: Bool = Options.isInputMemoryOn
                 suggestionTask = Task.detached(priority: .high) { [weak self] in
                         guard let self else { return }
-                        let definedCandidates: [Candidate] = await queryDefinedCandidates(for: combos)
+                        async let definedCandidates: [Candidate] = queryDefinedCandidates(for: combos)
                         async let textMarkCandidates: [Candidate] = Engine.queryTextMarks(for: combos)
                         async let memoryCandidates: [Candidate] = isInputMemoryOn ? InputMemory.tenKeySuggest(combos: combos) : []
                         async let engineCandidates: [Candidate] = Engine.tenKeySuggest(combos: combos)
-                        let suggestions: [Candidate] = await (memoryCandidates + textMarkCandidates + engineCandidates).transformed(with: Options.characterStandard, isEmojiSuggestionsOn: isEmojiSuggestionsOn)
+                        let suggestions: [Candidate] = await (memoryCandidates + definedCandidates + textMarkCandidates + engineCandidates).transformed(with: Options.characterStandard, isEmojiSuggestionsOn: isEmojiSuggestionsOn)
                         if Task.isCancelled.negative {
                                 await MainActor.run { [weak self] in
                                         guard let self else { return }
@@ -614,7 +614,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                                 let tailText = tailCombos.compactMap(\.letters.first).joined()
                                                 return firstCandidate.mark + String.space + tailText
                                         }()
-                                        self.tenKeyCachedCandidates = definedCandidates.isEmpty ? suggestions : (definedCandidates + suggestions)
+                                        self.tenKeyCachedCandidates = suggestions
                                         self.updateSidebarSyllables()
                                 }
                         }
@@ -627,12 +627,12 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let isInputMemoryOn: Bool = Options.isInputMemoryOn
                 suggestionTask = Task.detached(priority: .high) { [weak self] in
                         guard let self else { return }
-                        let definedCandidates: [Candidate] = await searchDefinedCandidates(for: events)
+                        async let definedCandidates: [Candidate] = searchDefinedCandidates(for: events)
                         async let textMarkCandidates: [Candidate] = Engine.searchTextMarks(for: events)
                         let segmentation = Segmenter.segment(events: events)
                         async let memoryCandidates: [Candidate] = isInputMemoryOn ? InputMemory.suggest(events: events, segmentation: segmentation) : []
                         async let engineCandidates: [Candidate] = Engine.suggest(events: events, segmentation: segmentation)
-                        let suggestions: [Candidate] = await (memoryCandidates + textMarkCandidates + engineCandidates).transformed(with: Options.characterStandard, isEmojiSuggestionsOn: isEmojiSuggestionsOn)
+                        let suggestions: [Candidate] = await (memoryCandidates + definedCandidates + textMarkCandidates + engineCandidates).transformed(with: Options.characterStandard, isEmojiSuggestionsOn: isEmojiSuggestionsOn)
                         if Task.isCancelled.negative {
                                 await MainActor.run { [weak self] in
                                         guard let self else { return }
@@ -647,7 +647,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                                 guard leadingLength < events.count else { return bestScheme.mark }
                                                 return bestScheme.mark + String.space + text.dropFirst(leadingLength)
                                         }()
-                                        self.candidates = definedCandidates.isEmpty ? suggestions : (definedCandidates + suggestions)
+                                        self.candidates = suggestions
                                 }
                         }
                 }
@@ -659,13 +659,13 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let events = bufferEvents.dropFirst()
                 guard events.isNotEmpty else {
                         text2mark = joinedBufferTexts()
-                        candidates = definedCandidates + textMarkCandidates
+                        candidates = (definedCandidates + textMarkCandidates).uniqued()
                         return
                 }
                 suggestionTask = Task.detached(priority: .high) { [weak self] in
                         guard let self else { return }
                         let segmentation = PinyinSegmenter.segment(events: events)
-                        let suggestions: [Candidate] = await Engine.pinyinReverseLookup(events: events, segmentation: segmentation).transformed(to: Options.characterStandard).uniqued()
+                        let suggestions: [Candidate] = await Engine.pinyinReverseLookup(events: events, segmentation: segmentation).transformed(to: Options.characterStandard)
                         if Task.isCancelled.negative {
                                 await MainActor.run { [weak self] in
                                         guard let self else { return }
@@ -681,7 +681,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                                 return bestScheme.mark + String.space + bufferText.dropFirst(leadingLength + 1)
                                         }()
                                         self.text2mark = headMark + tailMark
-                                        self.candidates = definedCandidates + textMarkCandidates + suggestions
+                                        self.candidates = (definedCandidates + textMarkCandidates + suggestions).uniqued()
                                 }
                         }
                 }
@@ -695,11 +695,11 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let isValidSequence: Bool = converted.isNotEmpty && (converted.count == text.count)
                 if isValidSequence {
                         text2mark = String(converted)
-                        let suggestions: [Candidate] = Engine.cangjieReverseLookup(text: text, variant: Options.cangjieVariant).transformed(to: Options.characterStandard).uniqued()
-                        candidates = definedCandidates + textMarkCandidates + suggestions
+                        let suggestions: [Candidate] = Engine.cangjieReverseLookup(text: text, variant: Options.cangjieVariant).transformed(to: Options.characterStandard)
+                        candidates = (definedCandidates + textMarkCandidates + suggestions).uniqued()
                 } else {
                         text2mark = bufferText
-                        candidates = definedCandidates + textMarkCandidates
+                        candidates = (definedCandidates + textMarkCandidates).uniqued()
                 }
         }
         private func strokeReverseLookup() {
@@ -712,11 +712,11 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let isValidSequence: Bool = converted.isNotEmpty && (converted.count == text.count)
                 if isValidSequence {
                         text2mark = String(converted)
-                        let suggestions: [Candidate] = Engine.strokeReverseLookup(text: transformed).transformed(to: Options.characterStandard).uniqued()
-                        candidates = definedCandidates + textMarkCandidates + suggestions
+                        let suggestions: [Candidate] = Engine.strokeReverseLookup(text: transformed).transformed(to: Options.characterStandard)
+                        candidates = (definedCandidates + textMarkCandidates + suggestions).uniqued()
                 } else {
                         text2mark = bufferText
-                        candidates = definedCandidates + textMarkCandidates
+                        candidates = (definedCandidates + textMarkCandidates).uniqued()
                 }
         }
 
@@ -727,7 +727,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let bufferText = joinedBufferTexts()
                 guard bufferText.count > 2 else {
                         text2mark = bufferText
-                        candidates = definedCandidates + textMarkCandidates
+                        candidates = (definedCandidates + textMarkCandidates).uniqued()
                         return
                 }
                 let segmentation = Segmenter.segment(events: bufferEvents)
@@ -742,8 +742,8 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 }()
                 let prefixMark: String = bufferText.prefix(1) + String.space
                 text2mark = prefixMark + tailMark
-                let suggestions: [Candidate] = Engine.structureReverseLookup(events: bufferEvents, input: bufferText, segmentation: segmentation).transformed(to: Options.characterStandard).uniqued()
-                candidates = definedCandidates + textMarkCandidates + suggestions
+                let suggestions: [Candidate] = Engine.structureReverseLookup(events: bufferEvents, input: bufferText, segmentation: segmentation).transformed(to: Options.characterStandard)
+                candidates = (definedCandidates + textMarkCandidates + suggestions).uniqued()
         }
 
         /// Cached Candidate sequence for InputMemory
@@ -759,18 +759,19 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         private lazy var tenKeyCachedCandidates: [Candidate] = []
 
         /// System Text Replacements
-        private lazy var definedLexicons: [DefinedLexicon] = []
+        private lazy var definedLexicons: Set<DefinedLexicon> = []
         private func obtainSupplementaryLexicon() async {
                 let lexicon = await requestSupplementaryLexicon()
-                definedLexicons = lexicon.entries.compactMap({ entry -> DefinedLexicon? in
-                        let input = entry.userInput
+                let obtained = lexicon.entries.compactMap({ entry -> DefinedLexicon? in
+                        let input = entry.userInput.lowercased()
                         guard input.isNotEmpty else { return nil }
-                        let events = input.lowercased().compactMap(InputEvent.matchInputEvent(for:))
+                        let events = input.compactMap(InputEvent.matchInputEvent(for:))
                         guard events.count == input.count else { return nil }
                         let text = entry.documentText
                         guard text.isNotEmpty else { return nil }
                         return DefinedLexicon(input: input, text: text, events: events)
                 })
+                definedLexicons = Set<DefinedLexicon>(obtained)
         }
         private func searchDefinedCandidates(for events: [InputEvent]) -> [Candidate] {
                 guard Options.isTextReplacementsOn else { return [] }

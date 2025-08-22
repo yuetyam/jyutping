@@ -378,22 +378,23 @@ final class JyutpingInputController: IMKInputController, Sendable {
         // MARK: - Candidates
 
         /// System Text Replacements
-        private lazy var definedLexicons: [DefinedLexicon] = []
+        private lazy var definedLexicons: Set<DefinedLexicon> = []
         private func obtainSupplementaryLexicon() async {
                 let kUserDictionary: String = "NSUserDictionaryReplacementItems"
                 let kOn: String = "on"
                 let kReplace: String = "replace"
                 let kWith: String = "with"
                 guard let items = CFPreferencesCopyAppValue(kUserDictionary as CFString, kCFPreferencesAnyApplication) as? [[String: Any]] else { return }
-                definedLexicons = items.compactMap { dict -> DefinedLexicon? in
+                let obtained = items.compactMap { dict -> DefinedLexicon? in
                         let isDisabled: Bool = (dict[kOn] as? Bool) == false || (dict[kOn] as? Int) == 0
                         guard isDisabled.negative else { return nil }
-                        guard let input = (dict[kReplace] as? String), input.isNotEmpty else { return nil }
+                        guard let input = (dict[kReplace] as? String)?.lowercased(), input.isNotEmpty else { return nil }
                         let events = input.lowercased().compactMap(InputEvent.matchInputEvent(for:))
                         guard events.count == input.count else { return nil }
                         guard let text = (dict[kWith] as? String), text.isNotEmpty else { return nil }
                         return DefinedLexicon(input: input, text: text, events: events)
                 }
+                definedLexicons = Set<DefinedLexicon>(obtained)
         }
         private func searchDefinedCandidates(for events: [InputEvent]) -> [Candidate] {
                 guard AppSettings.isTextReplacementsOn else { return [] }
@@ -466,12 +467,12 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 let isInputMemoryOn: Bool = AppSettings.isInputMemoryOn
                 suggestionTask = Task.detached(priority: .high) { [weak self] in
                         guard let self else { return }
-                        let definedCandidates: [Candidate] = await searchDefinedCandidates(for: events)
+                        async let definedCandidates: [Candidate] = searchDefinedCandidates(for: events)
                         async let textMarkCandidates: [Candidate] = Engine.searchTextMarks(for: events)
                         let segmentation = Segmenter.segment(events: events)
                         async let memoryCandidates: [Candidate] = isInputMemoryOn ? InputMemory.suggest(events: events, segmentation: segmentation) : []
                         async let engineCandidates: [Candidate] = Engine.suggest(events: events, segmentation: segmentation)
-                        let suggestions = await (memoryCandidates + textMarkCandidates + engineCandidates).transformed(with: Options.characterStandard, isEmojiSuggestionsOn: isEmojiSuggestionsOn)
+                        let suggestions = await (memoryCandidates + definedCandidates + textMarkCandidates + engineCandidates).transformed(with: Options.characterStandard, isEmojiSuggestionsOn: isEmojiSuggestionsOn)
                         if Task.isCancelled.negative {
                                 await MainActor.run { [weak self] in
                                         guard let self else { return }
@@ -487,7 +488,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                                 return bestScheme.mark + String.space + text.dropFirst(leadingLength)
                                         }()
                                         self.mark(text: text2mark)
-                                        self.candidates = definedCandidates.isEmpty ? suggestions : (definedCandidates + suggestions)
+                                        self.candidates = suggestions
                                 }
                         }
                 }
@@ -499,13 +500,13 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 let events = bufferEvents.dropFirst()
                 guard events.isNotEmpty else {
                         mark(text: joinedBufferTexts())
-                        candidates = definedCandidates + textMarkCandidates
+                        candidates = (definedCandidates + textMarkCandidates).uniqued()
                         return
                 }
                 suggestionTask = Task.detached(priority: .high) { [weak self] in
                         guard let self else { return }
                         let segmentation = PinyinSegmenter.segment(events: events)
-                        let suggestions: [Candidate] = await Engine.pinyinReverseLookup(events: events, segmentation: segmentation).transformed(to: Options.characterStandard).uniqued()
+                        let suggestions: [Candidate] = await Engine.pinyinReverseLookup(events: events, segmentation: segmentation).transformed(to: Options.characterStandard)
                         if Task.isCancelled.negative {
                                 await MainActor.run { [weak self] in
                                         guard let self else { return }
@@ -521,7 +522,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                                 return bestScheme.mark + String.space + bufferText.dropFirst(leadingLength + 1)
                                         }()
                                         mark(text: headMark + tailMark)
-                                        self.candidates = definedCandidates + textMarkCandidates + suggestions
+                                        self.candidates = (definedCandidates + textMarkCandidates + suggestions).uniqued()
                                 }
                         }
                 }
@@ -535,11 +536,11 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 let isValidSequence: Bool = converted.isNotEmpty && (converted.count == text.count)
                 if isValidSequence {
                         mark(text: String(converted))
-                        let suggestions: [Candidate] = Engine.cangjieReverseLookup(text: text, variant: AppSettings.cangjieVariant).transformed(to: Options.characterStandard).uniqued()
-                        candidates = definedCandidates + textMarkCandidates + suggestions
+                        let suggestions: [Candidate] = Engine.cangjieReverseLookup(text: text, variant: AppSettings.cangjieVariant).transformed(to: Options.characterStandard)
+                        candidates = (definedCandidates + textMarkCandidates + suggestions).uniqued()
                 } else {
                         mark(text: bufferText)
-                        candidates = definedCandidates + textMarkCandidates
+                        candidates = (definedCandidates + textMarkCandidates).uniqued()
                 }
         }
         private func strokeReverseLookup() {
@@ -552,11 +553,11 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 let isValidSequence: Bool = converted.isNotEmpty && (converted.count == text.count)
                 if isValidSequence {
                         mark(text: String(converted))
-                        let suggestions: [Candidate] = Engine.strokeReverseLookup(text: transformed).transformed(to: Options.characterStandard).uniqued()
-                        candidates = definedCandidates + textMarkCandidates + suggestions
+                        let suggestions: [Candidate] = Engine.strokeReverseLookup(text: transformed).transformed(to: Options.characterStandard)
+                        candidates = (definedCandidates + textMarkCandidates + suggestions).uniqued()
                 } else {
                         mark(text: bufferText)
-                        candidates = definedCandidates + textMarkCandidates
+                        candidates = (definedCandidates + textMarkCandidates).uniqued()
                 }
         }
 
@@ -567,7 +568,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 let bufferText = joinedBufferTexts()
                 guard bufferText.count > 2 else {
                         mark(text: bufferText)
-                        candidates = definedCandidates + textMarkCandidates
+                        candidates = (definedCandidates + textMarkCandidates).uniqued()
                         return
                 }
                 let segmentation = Segmenter.segment(events: bufferEvents)
@@ -583,8 +584,8 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 let prefixMark: String = bufferText.prefix(1) + String.space
                 let text2mark: String = prefixMark + tailMark
                 mark(text: text2mark)
-                let suggestions: [Candidate] = Engine.structureReverseLookup(events: bufferEvents, input: bufferText, segmentation: segmentation).transformed(to: Options.characterStandard).uniqued()
-                candidates = definedCandidates + textMarkCandidates + suggestions
+                let suggestions: [Candidate] = Engine.structureReverseLookup(events: bufferEvents, input: bufferText, segmentation: segmentation).transformed(to: Options.characterStandard)
+                candidates = (definedCandidates + textMarkCandidates + suggestions).uniqued()
         }
 
 
