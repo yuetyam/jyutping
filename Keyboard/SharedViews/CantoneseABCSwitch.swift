@@ -11,7 +11,7 @@ struct CantoneseABCSwitch: View {
 
         @Environment(\.colorScheme) private var colorScheme
 
-        private let partialWidth: CGFloat = 35
+        private let partialWidth: CGFloat = 34
         private let height: CGFloat = 26
 
         var body: some View {
@@ -40,7 +40,7 @@ struct InputModeSwitch: View {
 
         @Environment(\.colorScheme) private var colorScheme
 
-        private let partialWidth: CGFloat = 35
+        private let partialWidth: CGFloat = 34
         private let height: CGFloat = 26
 
         var body: some View {
