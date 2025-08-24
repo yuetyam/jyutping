@@ -18,7 +18,7 @@ struct ChoHokLexiconView: View {
                                                 HStack {
                                                         Text(verbatim: "文字")
                                                         Text.separator
-                                                        Text(verbatim: word)
+                                                        Text(verbatim: word).font(.display)
                                                 }
                                                 if let unicode = word.first?.codePointsText {
                                                         Text(verbatim: unicode).font(.fixedWidth).opacity(0.66)

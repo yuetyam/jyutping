@@ -13,7 +13,7 @@ struct CantoneseLexiconView: View {
                                 HStack {
                                         Text(verbatim: "文字")
                                         Text.separator
-                                        Text(verbatim: lexicon.text)
+                                        Text(verbatim: lexicon.text).font(.display)
                                 }
                                 if lexicon.text.count == 1, let unicode = lexicon.text.first?.codePointsText {
                                         Text(verbatim: unicode).font(.fixedWidth).opacity(0.66)

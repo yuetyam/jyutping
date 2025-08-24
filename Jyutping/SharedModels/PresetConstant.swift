@@ -5,6 +5,10 @@ struct PresetConstant {
         static let Inter: String = "Inter"
         static let Roboto: String = "Roboto"
         static let HelveticaNeue: String = "Helvetica Neue"
+        static let WenKaiTC: String = "LXGW WenKai TC"
+        static let WenKai: String = "LXGW WenKai"
+        static let IMingCP: String = "I.MingCP"
+        static let IMing: String = "I.Ming"
         static let primaryCJKVQueue: [String] = ["Shanggu Sans", "ChiuKong Gothic CL", "LXGW XiHei CL", "Source Han Sans K", "Noto Sans CJK KR", "Sarasa Gothic CL"]
         static let systemCJKVQueue: [String] = ["PingFang HK", "PingFang MO", "PingFang SC", "PingFang TC"]
         static let supplementaryCJKVQueue: [String] = ["Chiron Hei HK", "Source Han Sans HC", "Noto Sans CJK HK", "Noto Sans HK"]
