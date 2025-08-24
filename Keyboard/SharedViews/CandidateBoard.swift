@@ -83,7 +83,19 @@ struct CandidateBoard: View {
                         } label: {
                                 ZStack {
                                         Color.interactiveClear
-                                        RoundedRectangle(cornerRadius: 4, style: .continuous).fill(Material.ultraThin)
+                                        if #available(iOSApplicationExtension 26.0, *) {
+                                                Circle()
+                                                        #if canImport(FoundationModels)
+                                                        .glassEffect(.clear)
+                                                        #else
+                                                        .fill(Material.ultraThin)
+                                                        #endif
+                                        } else {
+                                                Circle()
+                                                        .fill(Material.ultraThin)
+                                                        .padding(.top, 2)
+                                                        .padding(.trailing, 2)
+                                        }
                                         Image.chevronUp
                                                 .resizable()
                                                 .scaledToFit()
