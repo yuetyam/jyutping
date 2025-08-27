@@ -2,6 +2,7 @@ import SwiftUI
 
 extension Image {
 
+        static let settings: Image = Image(systemName: "gear")
         static let speaker: Image = Image(systemName: "speaker.wave.2")
         static let speaking: Image = Image(systemName: "speaker.wave.3.fill")
         static let safari: Image = Image(systemName: "safari")

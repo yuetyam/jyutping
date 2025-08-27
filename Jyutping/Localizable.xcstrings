@@ -9025,6 +9025,100 @@
         }
       }
     },
+    "IOSHomeTab.Text2Speech.FeedbackSuggestion" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "If Text-to-Speech doesn’t read Jyutping syllables correctly, please take a screenshot of this page and share it with the developer. You can reach the developer through the contact information on the “About” page."
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "If Text-to-Speech doesn’t read Jyutping syllables correctly, please take a screenshot of this page and share it with the developer. You can reach the developer through the contact information on the “About” page."
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "If Text-to-Speech doesn’t read Jyutping syllables correctly, please take a screenshot of this page and share it with the developer. You can reach the developer through the contact information on the “About” page."
+          }
+        },
+        "en-US" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "If Text-to-Speech doesn’t read Jyutping syllables correctly, please take a screenshot of this page and share it with the developer. You can reach the developer through the contact information on the “About” page."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Si la synthèse vocale ne lit pas correctement les syllabes Jyutping, veuillez prendre une capture d’écran de cette page et la partager avec le développeur. Vous pouvez contacter le développeur grâce aux informations de contact figurant sur la page « À propos »."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "テキスト読み上げが正しくジュットピンの音節を読まない場合は、このページのスクリーンショットを撮り、開発者に共有してください。開発者には「情報」ページの連絡先からご連絡いただけます。"
+          }
+        },
+        "yue" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "如果遇到文字語音朗讀無法正確朗讀粵拼音節，請截屏本䈎面，然後將截圖分享畀開發者。「關於」䈎面有開發者嘅聯繫方式。"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "如果遇到文字語音朗讀無法正確朗讀粵拼音節，請截屏本䈎面，然後將截圖分享畀開發者。「關於」䈎面有開發者嘅聯繫方式。"
+          }
+        },
+        "zh-Hans-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "如果遇到文字語音朗讀無法正確朗讀粵拼音節，請截屏本䈎面，然後將截圖分享畀開發者。「關於」䈎面有開發者嘅聯繫方式。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "如果遇到文字語音朗讀無法正確朗讀粵拼音節，請截屏本䈎面，然後將截圖分享畀開發者。「關於」䈎面有開發者嘅聯繫方式。"
+          }
+        },
+        "zh-Hant-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "如果遇到文字語音朗讀無法正確朗讀粵拼音節，請截屏本䈎面，然後將截圖分享畀開發者。「關於」䈎面有開發者嘅聯繫方式。"
+          }
+        },
+        "zh-Hant-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "如果遇到文字語音朗讀無法正確朗讀粵拼音節，請截屏本䈎面，然後將截圖分享畀開發者。「關於」䈎面有開發者嘅聯繫方式。"
+          }
+        },
+        "zh-Hant-MO" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "如果遇到文字語音朗讀無法正確朗讀粵拼音節，請截屏本䈎面，然後將截圖分享畀開發者。「關於」䈎面有開發者嘅聯繫方式。"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "如果遇到文字語音朗讀無法正確朗讀粵拼音節，請截屏本䈎面，然後將截圖分享畀開發者。「關於」䈎面有開發者嘅聯繫方式。"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "如果遇到文字語音朗讀無法正確朗讀粵拼音節，請截屏本䈎面，然後將截圖分享畀開發者。「關於」䈎面有開發者嘅聯繫方式。"
+          }
+        }
+      }
+    },
     "IOSHomeTab.Text2Speech.Notice1" : {
       "localizations" : {
         "en" : {

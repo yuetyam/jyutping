@@ -57,6 +57,9 @@ struct Text2SpeechView: View {
                                 }
                                 .font(.footnote)
                         }
+                        Section {
+                                Text("IOSHomeTab.Text2Speech.FeedbackSuggestion").font(.footnote)
+                        }
                 }
                 .textSelection(.enabled)
                 .navigationTitle("IOSHomeTab.NavigationTitle.TextToSpeech")
