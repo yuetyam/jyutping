@@ -1,15 +1,19 @@
-/// 10 Key keyboard element
+/// 10 key keyboard element
 public enum Combo: Int, Sendable {
 
-        case ABC = 2
-        case DEF = 3
-        case GHI = 4
-        case JKL = 5
-        case MNO = 6
+        case ABC  = 2
+        case DEF  = 3
+        case GHI  = 4
+        case JKL  = 5
+        case MNO  = 6
         case PQRS = 7
-        case TUV = 8
+        case TUV  = 8
         case WXYZ = 9
 
+        /// Same value as the `self.rawValue`
+        public var code: Int { rawValue }
+
+        /// Key text
         public var text: String {
                 return Self.textMap[self]!
         }
@@ -24,6 +28,7 @@ public enum Combo: Int, Sendable {
                 Combo.WXYZ: "WXYZ",
         ]
 
+        /// Jyutping syllable compatible letters
         public var letters: [String] {
                 return Self.letterMap[self]!
         }

@@ -2,17 +2,21 @@ import Foundation
 import SQLite3
 
 extension Engine {
-        public static func strokeReverseLookup(text: String) -> [Candidate] {
-                let isWildcardSearch: Bool = text.contains("x")
-                let keyText: String = isWildcardSearch ? text.replacingOccurrences(of: "x", with: "[wsadz]") : text
-                let matched: [ShapeLexicon] = isWildcardSearch ? wildcardMatch(strokeText: keyText) : match(strokeText: keyText)
-                return (matched + glob(strokeText: keyText))
+        public static func strokeReverseLookup<T: RandomAccessCollection<InputEvent>>(events: T) -> [Candidate] {
+                let strokeEvents = events.compactMap(\.strokeEvent)
+                let isWildcard: Bool = strokeEvents.contains(where: \.isWildcard)
+                let text: String = isWildcard ? strokeEvents.sequenceText.replacingOccurrences(of: "6", with: "[12345]") : strokeEvents.sequenceText
+                let matched: [ShapeLexicon] = isWildcard ? wildcardMatch(strokeText: text) : match(events: strokeEvents, text: text)
+                return (matched + glob(strokeText: text))
                         .uniqued()
                         .flatMap({ Engine.reveresLookup(text: $0.text, input: $0.input) })
         }
-        private static func match(strokeText: String) -> [ShapeLexicon] {
-                let pingCode = strokeText.hash
-                let command: String = "SELECT rowid, word FROM stroketable WHERE ping = \(pingCode);"
+        private static func match<T: RandomAccessCollection<StrokeEvent>>(events: T, text: String) -> [ShapeLexicon] {
+                let complex: Int = events.count
+                let isLongSequence: Bool = complex >= 19
+                let column: String = isLongSequence ? "ping" : "code"
+                let codeValue: Int = isLongSequence ? text.hash : events.map(\.code).decimalCombined()
+                let command: String = "SELECT rowid, word FROM stroketable WHERE \(column) = \(codeValue);"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(Engine.database, command, -1, &statement, nil) == SQLITE_OK else { return [] }
@@ -20,7 +24,7 @@ extension Engine {
                 while sqlite3_step(statement) == SQLITE_ROW {
                         let order: Int = Int(sqlite3_column_int64(statement, 0))
                         guard let word = sqlite3_column_text(statement, 1) else { continue }
-                        let instance = ShapeLexicon(text: String(cString: word), input: strokeText, complex: strokeText.count, order: order)
+                        let instance = ShapeLexicon(text: String(cString: word), input: text, complex: complex, order: order)
                         items.append(instance)
                 }
                 return items

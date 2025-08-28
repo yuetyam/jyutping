@@ -546,18 +546,14 @@ final class JyutpingInputController: IMKInputController, Sendable {
         private func strokeReverseLookup() {
                 let definedCandidates: [Candidate] = searchDefinedCandidates(for: bufferEvents)
                 let textMarkCandidates: [Candidate] = Engine.searchTextMarks(for: bufferEvents)
-                let bufferText = joinedBufferTexts()
-                let text: String = String(bufferText.dropFirst())
-                let transformed: String = CharacterStandard.strokeTransform(text)
-                let converted = transformed.compactMap({ CharacterStandard.stroke(of: $0) })
-                let isValidSequence: Bool = converted.isNotEmpty && (converted.count == text.count)
-                if isValidSequence {
-                        mark(text: String(converted))
-                        let suggestions: [Candidate] = Engine.strokeReverseLookup(text: transformed).transformed(to: Options.characterStandard)
-                        candidates = (definedCandidates + textMarkCandidates + suggestions).uniqued()
-                } else {
-                        mark(text: bufferText)
+                let events = bufferEvents.dropFirst()
+                if events.isEmpty || StrokeEvent.isValidEvents(events).negative {
+                        mark(text: joinedBufferTexts())
                         candidates = (definedCandidates + textMarkCandidates).uniqued()
+                } else {
+                        mark(text: StrokeEvent.displayText(from: events))
+                        let suggestions: [Candidate] = Engine.strokeReverseLookup(events: events).transformed(to: Options.characterStandard)
+                        candidates = (definedCandidates + textMarkCandidates + suggestions).uniqued()
                 }
         }
 
@@ -915,10 +911,11 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         case .options:
                                 handleOptions(index)
                         }
-                case .keypadNumber(_):
+                case .keypadNumber(let number):
                         let isStrokeReverseLookup: Bool = currentInputForm.isCantonese && (bufferEvents.first == .letterX)
                         guard isStrokeReverseLookup else { return }
-                        guard let event = InputEvent.matchEvent(for: keyCode) else { return }
+                        let code: Int = number + 10
+                        guard let event = InputEvent.matchInputEvent(for: code) else { return }
                         bufferEvents.append(event)
                 case .arrow(let direction):
                         switch direction {

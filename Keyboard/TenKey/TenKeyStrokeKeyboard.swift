@@ -15,14 +15,14 @@ struct TenKeyStrokeKeyboard: View {
                                                 StrokePlaceholderKey(heightUnitTimes: 3).disabled(true)
                                                 VStack(spacing: 0) {
                                                         HStack(spacing: 0) {
-                                                                TenKeyStrokeKey(1)
-                                                                TenKeyStrokeKey(2)
-                                                                TenKeyStrokeKey(3)
+                                                                TenKeyStrokeKey(.horizontal)
+                                                                TenKeyStrokeKey(.vertical)
+                                                                TenKeyStrokeKey(.leftFalling)
                                                         }
                                                         HStack(spacing: 0) {
-                                                                TenKeyStrokeKey(4)
-                                                                TenKeyStrokeKey(5)
-                                                                TenKeyStrokeKey(6)
+                                                                TenKeyStrokeKey(.rightFalling)
+                                                                TenKeyStrokeKey(.turning)
+                                                                TenKeyStrokeKey(.wildcard)
                                                         }
                                                         HStack(spacing: 0) {
                                                                 StrokePlaceholderKey().disabled(true)
@@ -48,39 +48,16 @@ struct TenKeyStrokeKeyboard: View {
 
 private struct TenKeyStrokeKey: View {
 
-        init(_ digit: Int) {
-                let number: String = "\(digit)"
-                self.mappedKey = CharacterStandard.strokeTransform(number)
-                self.keyText = PresetConstant.strokeKeyMap[number] ?? number
+        init(_ event: StrokeEvent) {
+                self.event = event
+                self.keyText = event.strokeText ?? "?"
         }
 
-        private let mappedKey: String
+        private let event: StrokeEvent
         private let keyText: String
 
         @EnvironmentObject private var context: KeyboardViewController
-
         @Environment(\.colorScheme) private var colorScheme
-
-        private var keyColor: Color {
-                switch colorScheme {
-                case .light:
-                        return .lightInput
-                case .dark:
-                        return .darkInput
-                @unknown default:
-                        return .lightInput
-                }
-        }
-        private var keyActiveColor: Color {
-                switch colorScheme {
-                case .light:
-                        return .activeLightInput
-                case .dark:
-                        return .activeDarkInput
-                @unknown default:
-                        return .activeLightInput
-                }
-        }
 
         @GestureState private var isTouching: Bool = false
 
@@ -88,7 +65,7 @@ private struct TenKeyStrokeKey: View {
                 ZStack {
                         Color.interactiveClear
                         RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous)
-                                .fill(isTouching ? keyActiveColor : keyColor)
+                                .fill(isTouching ? colorScheme.activeInputKeyColor : colorScheme.inputKeyColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(3)
                         Text(verbatim: keyText).font(.letterCompact)
@@ -104,7 +81,7 @@ private struct TenKeyStrokeKey: View {
                                 }
                         }
                         .onEnded { _ in
-                                context.operate(.process(mappedKey))
+                                context.handle(event.inputEvent)
                          }
                 )
         }

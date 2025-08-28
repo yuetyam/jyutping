@@ -705,18 +705,14 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         private func strokeReverseLookup() {
                 let definedCandidates: [Candidate] = searchDefinedCandidates(for: bufferEvents)
                 let textMarkCandidates: [Candidate] = Engine.searchTextMarks(for: bufferEvents)
-                let bufferText = joinedBufferTexts()
-                let text: String = String(bufferText.dropFirst())
-                let transformed: String = CharacterStandard.strokeTransform(text)
-                let converted = transformed.compactMap({ CharacterStandard.stroke(of: $0) })
-                let isValidSequence: Bool = converted.isNotEmpty && (converted.count == text.count)
-                if isValidSequence {
-                        text2mark = String(converted)
-                        let suggestions: [Candidate] = Engine.strokeReverseLookup(text: transformed).transformed(to: Options.characterStandard)
-                        candidates = (definedCandidates + textMarkCandidates + suggestions).uniqued()
-                } else {
-                        text2mark = bufferText
+                let events = bufferEvents.dropFirst()
+                if events.isEmpty || StrokeEvent.isValidEvents(events).negative {
+                        text2mark = joinedBufferTexts()
                         candidates = (definedCandidates + textMarkCandidates).uniqued()
+                } else {
+                        text2mark = StrokeEvent.displayText(from: events)
+                        let suggestions: [Candidate] = Engine.strokeReverseLookup(events: events).transformed(to: Options.characterStandard)
+                        candidates = (definedCandidates + textMarkCandidates + suggestions).uniqued()
                 }
         }
 

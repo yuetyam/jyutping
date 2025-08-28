@@ -5,9 +5,8 @@ struct StrokeEntry: Hashable {
         let word: String
         let stroke: String
         let complex: Int
-        let pingCode: Int
-        let charCode: Int
-        let tenKeyCharCode: Int
+        let ping: Int
+        let code: Int
         static func == (lhs: StrokeEntry, rhs: StrokeEntry) -> Bool {
                 return lhs.word == rhs.word && lhs.stroke == rhs.stroke
         }
@@ -18,6 +17,25 @@ struct StrokeEntry: Hashable {
 }
 
 struct Stroke {
+        private static let codeMap: [Character : Int] = [
+                "w" : 1,
+                "s" : 2,
+                "a" : 3,
+                "d" : 4,
+                "z" : 5,
+
+                "h" : 1,
+                // "s" : 2,
+                "p" : 3,
+                "n" : 4,
+                // "z" : 5,
+
+                "1" : 1,
+                "2" : 2,
+                "3" : 3,
+                "4" : 4,
+                "5" : 5,
+        ]
         static func generate() -> [StrokeEntry] {
                 prepare()
                 guard let url = Bundle.module.url(forResource: "jyutping", withExtension: "txt") else { return [] }
@@ -31,13 +49,15 @@ struct Stroke {
                 defer {
                         sqlite3_close_v2(database)
                 }
-                return characters.uniqued().flatMap({ item -> [StrokeEntry] in
-                        let strokeMatches = match(text: item)
-                        guard !(strokeMatches.isEmpty) else { return [] }
-                        let entries = strokeMatches.map { stroke -> StrokeEntry in
-                                let charCode = stroke.charCode ?? 0
-                                let tenKeyCharCode = stroke.tenKeyCharCode ?? 0
-                                return StrokeEntry(word: item, stroke: stroke, complex: stroke.count, pingCode: stroke.hash, charCode: charCode, tenKeyCharCode: tenKeyCharCode)
+                return characters.uniqued().flatMap({ word -> [StrokeEntry] in
+                        let matches = match(text: word)
+                        guard !(matches.isEmpty) else { return [] }
+                        let entries = matches.map { text -> StrokeEntry in
+                                let codes = text.compactMap({ codeMap[$0] })
+                                guard codes.count == text.count else { fatalError("bad stroke format: \(word) = \(text)") }
+                                let stroke = codes.map({ String($0) }).joined()
+                                let code = codes.decimalCombined()
+                                return StrokeEntry(word: word, stroke: stroke, complex: stroke.count, ping: stroke.hash, code: code)
                         }
                         return entries
                 }).uniqued()

@@ -73,7 +73,6 @@ struct DatabasePreparer {
                         "CREATE INDEX strokestrokeindex ON stroketable(stroke);",
                         "CREATE INDEX strokepingindex ON stroketable(ping);",
                         "CREATE INDEX strokecodeindex ON stroketable(code);",
-                        "CREATE INDEX stroketenkeycodeindex ON stroketable(tenkeycode);",
 
                         "CREATE INDEX symbolpingindex ON symboltable(ping);",
                         "CREATE INDEX symboltenkeycodeindex ON symboltable(tenkeycode);",
@@ -222,14 +221,14 @@ struct DatabasePreparer {
                 }
         }
         private static func createStrokeTable() async {
-                let createTable: String = "CREATE TABLE stroketable(word TEXT NOT NULL, stroke TEXT NOT NULL, complex INTEGER NOT NULL, ping INTEGER NOT NULL, code INTEGER NOT NULL, tenkeycode INTEGER NOT NULL);"
+                let createTable: String = "CREATE TABLE stroketable(word TEXT NOT NULL, stroke TEXT NOT NULL, complex INTEGER NOT NULL, ping INTEGER NOT NULL, code INTEGER NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
                 sqlite3_finalize(createStatement)
                 let sourceEntries = Stroke.generate()
                 func insert(values: String) {
-                        let insert: String = "INSERT INTO stroketable (word, stroke, complex, ping, code, tenkeycode) VALUES \(values);"
+                        let insert: String = "INSERT INTO stroketable (word, stroke, complex, ping, code) VALUES \(values);"
                         var insertStatement: OpaquePointer? = nil
                         defer { sqlite3_finalize(insertStatement) }
                         guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }
@@ -241,7 +240,7 @@ struct DatabasePreparer {
                         let bound: Int = number == 1999 ? sourceEntries.count : ((number + 1) * distance)
                         let part = sourceEntries[(number * distance)..<bound]
                         let entries = part.map { entry -> String in
-                                return "('\(entry.word)', '\(entry.stroke)', \(entry.complex), \(entry.pingCode), \(entry.charCode), \(entry.tenKeyCharCode))"
+                                return "('\(entry.word)', '\(entry.stroke)', \(entry.complex), \(entry.ping), \(entry.code))"
                         }
                         let values: String = entries.joined(separator: ", ")
                         insert(values: values)
