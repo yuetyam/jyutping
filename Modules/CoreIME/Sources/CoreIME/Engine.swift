@@ -315,12 +315,20 @@ extension Engine {
                         guard isMatched else { return nil }
                         return Candidate(text: item.text, romanization: item.romanization, input: text, mark: text, order: item.order)
                 })
-                let symbols: [Candidate] = Engine.searchSymbols(text: text, segmentation: segmentation)
+                let adjusted: [Candidate] = {
+                        let idealQueried = queried.filter({ $0.inputCount == inputLength }).sorted(by: { $0.order < $1.order }).uniqued()
+                        let notIdealQueried = queried.filter({ $0.inputCount < inputLength }).sorted().uniqued()
+                        let fullInput = (pingMatched + idealQueried + anchorsMatched + prefixMatched + gainedMatched).uniqued()
+                        let primary = fullInput.prefix(10)
+                        let secondary = fullInput.sorted().prefix(10)
+                        let tertiary = notIdealQueried.prefix(10)
+                        let quaternary = notIdealQueried.sorted(by: { $0.order < $1.order }).prefix(10)
+                        return (primary + secondary + tertiary + quaternary + fullInput + notIdealQueried).uniqued()
+                }()
                 let fetched: [Candidate] = {
-                        guard symbols.isNotEmpty else {
-                                return (pingMatched + anchorsMatched + queried + prefixMatched + gainedMatched).ordered(with: inputLength)
-                        }
-                        var items: [Candidate] = (pingMatched + anchorsMatched + queried + prefixMatched + gainedMatched).ordered(with: inputLength)
+                        let symbols: [Candidate] = Engine.searchSymbols(text: text, segmentation: segmentation)
+                        guard symbols.isNotEmpty else { return adjusted }
+                        var items: [Candidate] = adjusted
                         for symbol in symbols.reversed() {
                                 if let index = items.firstIndex(where: { $0.lexiconText == symbol.lexiconText && $0.romanization == symbol.romanization }) {
                                         items.insert(symbol, at: index + 1)

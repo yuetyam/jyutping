@@ -240,9 +240,8 @@ struct InputMemory {
                         return (events.last == .letterM) || (events.first == .letterM)
                 }()
                 guard shouldMatchPrefixes else {
-                        return (matches + shortcuts + searched)
+                        return (matches + searched + shortcuts)
                                 .uniqued()
-                                .sorted()
                                 .prefix(5)
                                 .map({ Candidate(text: $0.word, romanization: $0.romanization, input: text, mark: $0.mark, order: -1) })
                 }
