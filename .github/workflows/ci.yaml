@@ -1,13 +1,13 @@
 name: CI
 on: [push, pull_request, release]
 
-# env:
-#   DEVELOPER_DIR: /Applications/Xcode_16.app/Contents/Developer
+env:
+  DEVELOPER_DIR: /Applications/Xcode_26.0.app/Contents/Developer
 
 jobs:
   build_preparing:
     name: Build Preparing
-    runs-on: macos-15
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
       - name: Swift Build Preparing
@@ -15,7 +15,7 @@ jobs:
         working-directory: ./Modules/Preparing
   test_common_extensions:
     name: CommonExtensions Tests
-    runs-on: macos-15
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
       - name: CommonExtensions SwiftTest
@@ -23,7 +23,7 @@ jobs:
         working-directory: ./Modules/CommonExtensions
   build_aboutkit:
     name: Build AboutKit
-    runs-on: macos-15
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
       - name: Swift Build AboutKit
@@ -31,7 +31,7 @@ jobs:
         working-directory: ./Modules/AboutKit
   build_app_data_source:
     name: Build AppDataSource
-    runs-on: macos-15
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
       - name: Swift Build AppDataSource
@@ -39,7 +39,7 @@ jobs:
         working-directory: ./Modules/AppDataSource
   build_coreime:
     name: Build CoreIME
-    runs-on: macos-15
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
       - name: Swift Build CoreIME
@@ -47,29 +47,29 @@ jobs:
         working-directory: ./Modules/CoreIME
   build_input_method:
     name: Build InputMethod
-    runs-on: macos-15
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
       - name: Build InputMethod Scheme
         run: set -o pipefail && xcodebuild clean build -project Jyutping.xcodeproj -scheme InputMethod -configuration Debug -destination "platform=macOS" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO ONLY_ACTIVE_ARCH=NO | xcpretty
   build_mac_app:
     name: Build macOS App
-    runs-on: macos-15
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
       - name: Build macOS App Scheme
         run: set -o pipefail && xcodebuild clean build -project Jyutping.xcodeproj -scheme Jyutping -configuration Debug -destination "platform=macOS" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO ONLY_ACTIVE_ARCH=NO | xcpretty
   build_ios_app:
     name: Build iOS App
-    runs-on: macos-15
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
       - name: Build iOS App Scheme
-        run: set -o pipefail && xcodebuild clean build -project Jyutping.xcodeproj -scheme Jyutping -configuration Debug -destination "platform=iOS Simulator,name=iPhone 16 Pro" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO ONLY_ACTIVE_ARCH=NO | xcpretty
+        run: set -o pipefail && xcodebuild clean build -project Jyutping.xcodeproj -scheme Jyutping -configuration Debug -destination "platform=iOS Simulator,name=iPhone 16" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO ONLY_ACTIVE_ARCH=NO | xcpretty
   build_keyboard:
     name: Build Keyboard
-    runs-on: macos-15
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
       - name: Build Keyboard Scheme
-        run: set -o pipefail && xcodebuild clean build -project Jyutping.xcodeproj -scheme Keyboard -configuration Debug -destination "platform=iOS Simulator,name=iPhone 16 Pro" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO ONLY_ACTIVE_ARCH=NO | xcpretty
+        run: set -o pipefail && xcodebuild clean build -project Jyutping.xcodeproj -scheme Keyboard -configuration Debug -destination "platform=iOS Simulator,name=iPhone 16" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO ONLY_ACTIVE_ARCH=NO | xcpretty
