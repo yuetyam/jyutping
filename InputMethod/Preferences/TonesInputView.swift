@@ -1,22 +1,22 @@
 import SwiftUI
 
-struct ToneInputView: View {
+struct TonesInputView: View {
         var body: some View {
                 ScrollView {
                         LazyVStack(spacing: 16) {
                                 VStack {
                                         HStack {
-                                                Text("ToneInputView.ToneInput.Heading")
+                                                Text("TonesInputView.TonesInput.Heading")
                                                 Spacer()
                                         }
                                         Divider()
                                         HStack {
-                                                Text("ToneInputView.ToneInput.Body").font(.body.monospaced())
+                                                Text("TonesInputView.TonesInput.Body").font(.body.monospaced())
                                                 Spacer()
                                         }
                                         Divider()
                                         HStack {
-                                                Text("ToneInputView.ToneInput.Example")
+                                                Text("TonesInputView.TonesInput.Examples")
                                                 Spacer()
                                         }
                                 }
@@ -56,7 +56,7 @@ struct ToneInputView: View {
                         .textSelection(.enabled)
                         .padding(8)
                 }
-                .navigationTitle("PreferencesView.NavigationTitle.ToneInput")
+                .navigationTitle("PreferencesView.NavigationTitle.TonesInput")
         }
 }
 

@@ -29,8 +29,8 @@ struct SettingsSplitView: View {
                         List(selection: $selection) {
                                 Section {
                                         Label("PreferencesView.NavigationTitle.General", systemImage: "gear").tag(PreferencesSidebarRow.general)
-                                        Label("PreferencesView.NavigationTitle.ToneInput", systemImage: "bell").tag(PreferencesSidebarRow.toneInput)
                                         Label("PreferencesView.NavigationTitle.ReverseLookup", systemImage: "doc.text.magnifyingglass").tag(PreferencesSidebarRow.reverseLookup)
+                                        Label("PreferencesView.NavigationTitle.TonesInput", systemImage: "bell").tag(PreferencesSidebarRow.tonesInput)
                                         Label("PreferencesView.NavigationTitle.Fonts", systemImage: characterImageName).tag(PreferencesSidebarRow.fonts)
                                 } header: {
                                         Text("PreferencesView.SectionHeader.Candidates").textCase(nil)
@@ -52,8 +52,8 @@ struct SettingsSplitView: View {
                         switch selection {
                         case .general:
                                 GeneralSettingsView()
-                        case .toneInput:
-                                ToneInputView()
+                        case .tonesInput:
+                                TonesInputView()
                         case .reverseLookup:
                                 ReverseLookupView()
                         case .fonts:
@@ -82,14 +82,14 @@ struct PreferencesView: View {
                                                 Label("PreferencesView.NavigationTitle.General", systemImage: "gear")
                                         }
                                         NavigationLink {
-                                                ToneInputView()
-                                        } label: {
-                                                Label("PreferencesView.NavigationTitle.ToneInput", systemImage: "bell")
-                                        }
-                                        NavigationLink {
                                                 ReverseLookupView()
                                         } label: {
                                                 Label("PreferencesView.NavigationTitle.ReverseLookup", systemImage: "doc.text.magnifyingglass")
+                                        }
+                                        NavigationLink {
+                                                TonesInputView()
+                                        } label: {
+                                                Label("PreferencesView.NavigationTitle.TonesInput", systemImage: "bell")
                                         }
                                         NavigationLink {
                                                 FontPreferencesView()
@@ -124,8 +124,8 @@ struct PreferencesView: View {
 
 enum PreferencesSidebarRow: Int, Identifiable {
         case general
-        case toneInput
         case reverseLookup
+        case tonesInput
         case fonts
         case hotkeys
         case about

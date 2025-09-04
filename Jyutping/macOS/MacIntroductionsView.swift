@@ -8,67 +8,82 @@ struct MacIntroductionsView: View {
                         LazyVStack(spacing: 12) {
                                 VStack(spacing: 16) {
                                         HStack {
-                                                Text("Shared.Guide.Heading.ToneInput").font(.significant)
+                                                Text("Shared.Guide.AbbreviatedInput.Heading").font(.significant)
                                                 Spacer()
                                         }
                                         HStack {
-                                                Text("Shared.Guide.Body.ToneInput").font(.fixedWidth).lineSpacing(5)
+                                                Text("Shared.Guide.AbbreviatedInput.Body.Row1").font(.master)
                                                 Spacer()
                                         }
                                         HStack {
-                                                Text("Shared.Guide.Example.ToneInput").font(.master)
-                                                Spacer()
-                                        }
-                                }
-                                .block()
-                                VStack(spacing: 16) {
-                                        HStack {
-                                                Text("Shared.Guide.Heading.PinyinReverseLookup").font(.significant)
-                                                Spacer()
-                                        }
-                                        HStack {
-                                                Text("Shared.Guide.Body.PinyinReverseLookup").font(.master).lineSpacing(6)
+                                                Text("Shared.Guide.AbbreviatedInput.Body.Row2").font(.master)
                                                 Spacer()
                                         }
                                 }
                                 .block()
                                 VStack(spacing: 16) {
                                         HStack {
-                                                Text("Shared.Guide.Heading.CangjieReverseLookup").font(.significant)
+                                                Text("Shared.Guide.PinyinReverseLookup.Heading").font(.significant)
                                                 Spacer()
                                         }
                                         HStack {
-                                                Text("Shared.Guide.Body.CangjieReverseLookup").font(.master).lineSpacing(6)
-                                                Spacer()
-                                        }
-                                        HStack {
-                                                Text("Shared.Guide.Body.CangjieReverseLookup.Note").font(.master).lineSpacing(6)
+                                                Text("Shared.Guide.PinyinReverseLookup.Body").font(.master)
                                                 Spacer()
                                         }
                                 }
                                 .block()
                                 VStack(spacing: 16) {
                                         HStack {
-                                                Text("Shared.Guide.Heading.StrokeReverseLookup").font(.significant)
+                                                Text("Shared.Guide.CangjieReverseLookup.Heading").font(.significant)
                                                 Spacer()
                                         }
                                         HStack {
-                                                Text("Shared.Guide.Body.StrokeReverseLookup").font(.master).lineSpacing(6)
+                                                Text("Shared.Guide.CangjieReverseLookup.Body").font(.master)
                                                 Spacer()
                                         }
                                         HStack {
-                                                Text("Shared.Guide.Example.StrokeReverseLookup").font(.fixedWidth).lineSpacing(5)
+                                                Text("Shared.Guide.CangjieReverseLookup.Note").font(.master)
                                                 Spacer()
                                         }
                                 }
                                 .block()
                                 VStack(spacing: 16) {
                                         HStack {
-                                                Text("Shared.Guide.Heading.StructureReverseLookup").font(.significant)
+                                                Text("Shared.Guide.StrokeReverseLookup.Heading").font(.significant)
                                                 Spacer()
                                         }
                                         HStack {
-                                                Text("Shared.Guide.Body.StructureReverseLookup").font(.master).lineSpacing(6)
+                                                Text("Shared.Guide.StrokeReverseLookup.Body").font(.master)
+                                                Spacer()
+                                        }
+                                        HStack {
+                                                Text("Shared.Guide.StrokeReverseLookup.Examples").font(.fixedWidth).lineSpacing(5)
+                                                Spacer()
+                                        }
+                                }
+                                .block()
+                                VStack(spacing: 16) {
+                                        HStack {
+                                                Text("Shared.Guide.StructureReverseLookup.Heading").font(.significant)
+                                                Spacer()
+                                        }
+                                        HStack {
+                                                Text("Shared.Guide.StructureReverseLookup.Body").font(.master).lineSpacing(6)
+                                                Spacer()
+                                        }
+                                }
+                                .block()
+                                VStack(spacing: 16) {
+                                        HStack {
+                                                Text("Shared.Guide.TonesInput.Heading").font(.significant)
+                                                Spacer()
+                                        }
+                                        HStack {
+                                                Text("Shared.Guide.TonesInput.Body").font(.fixedWidth).lineSpacing(5)
+                                                Spacer()
+                                        }
+                                        HStack {
+                                                Text("Shared.Guide.TonesInput.Examples").font(.master)
                                                 Spacer()
                                         }
                                 }

@@ -257,7 +257,7 @@
 		3783BB6F2C8DE3600071B892 /* CandidateWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3783BB6E2C8DE3560071B892 /* CandidateWindow.swift */; };
 		378F4EED2E0049D800766736 /* UIGlobeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F4EEC2E0049D800766736 /* UIGlobeButton.swift */; };
 		378F4EEF2E0050C700766736 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378F4EEE2E0050C700766736 /* ViewExtensions.swift */; };
-		37918A6C2C5B5BBA006C6590 /* ToneInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37918A6B2C5B5BBA006C6590 /* ToneInputView.swift */; };
+		37918A6C2C5B5BBA006C6590 /* TonesInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37918A6B2C5B5BBA006C6590 /* TonesInputView.swift */; };
 		37942E1F2CE2EC57005D6536 /* MediumPadTabKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37942E1E2CE2EC55005D6536 /* MediumPadTabKey.swift */; };
 		37942E212CE2EF1D005D6536 /* MediumPadCapsLockKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37942E202CE2EF1B005D6536 /* MediumPadCapsLockKey.swift */; };
 		37942E242CE2F847005D6536 /* MediumPadCantoneseKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37942E232CE2F846005D6536 /* MediumPadCantoneseKeyboard.swift */; };
@@ -670,7 +670,7 @@
 		3783BB6E2C8DE3560071B892 /* CandidateWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateWindow.swift; sourceTree = "<group>"; };
 		378F4EEC2E0049D800766736 /* UIGlobeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIGlobeButton.swift; sourceTree = "<group>"; };
 		378F4EEE2E0050C700766736 /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
-		37918A6B2C5B5BBA006C6590 /* ToneInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToneInputView.swift; sourceTree = "<group>"; };
+		37918A6B2C5B5BBA006C6590 /* TonesInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TonesInputView.swift; sourceTree = "<group>"; };
 		37942E1E2CE2EC55005D6536 /* MediumPadTabKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediumPadTabKey.swift; sourceTree = "<group>"; };
 		37942E202CE2EF1B005D6536 /* MediumPadCapsLockKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediumPadCapsLockKey.swift; sourceTree = "<group>"; };
 		37942E232CE2F846005D6536 /* MediumPadCantoneseKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediumPadCantoneseKeyboard.swift; sourceTree = "<group>"; };
@@ -1478,8 +1478,8 @@
 				37E6AD5E2B3B381600F02279 /* SettingsContentView.swift */,
 				37B0D1CE2DB7788900B6DEFF /* GeneralSettingsView.swift */,
 				37E6AD5B2B3B381600F02279 /* GeneralPreferencesView.swift */,
-				37918A6B2C5B5BBA006C6590 /* ToneInputView.swift */,
 				375FA76C2C0D5227001ABA39 /* ReverseLookupView.swift */,
+				37918A6B2C5B5BBA006C6590 /* TonesInputView.swift */,
 				37B0D1D02DB7ECCE00B6DEFF /* FontSettingsView.swift */,
 				37E6AD5C2B3B381600F02279 /* FontPreferencesView.swift */,
 				37E6AD592B3B381600F02279 /* HotkeysView.swift */,
@@ -2064,7 +2064,7 @@
 				37E6AD842B3B381700F02279 /* AppSettings.swift in Sources */,
 				3756452D2E3BDECF000267C9 /* DefinedLexicon.swift in Sources */,
 				37E6AD7E2B3B381700F02279 /* FontPicker.swift in Sources */,
-				37918A6C2C5B5BBA006C6590 /* ToneInputView.swift in Sources */,
+				37918A6C2C5B5BBA006C6590 /* TonesInputView.swift in Sources */,
 				37E6AD722B3B381700F02279 /* Representative.swift in Sources */,
 				37B0D1CF2DB7788900B6DEFF /* GeneralSettingsView.swift in Sources */,
 				3797F6E32C188F2B00DE6D0E /* AppDelegate.swift in Sources */,

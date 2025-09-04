@@ -93,27 +93,32 @@ struct HomeView: View {
 
                                 Group {
                                         Section {
-                                                Text("Shared.Guide.Heading.ToneInput").font(.headline)
-                                                Text("Shared.Guide.Body.ToneInput").font(.body.monospaced())
-                                                Text("Shared.Guide.Example.ToneInput")
+                                                Text("Shared.Guide.AbbreviatedInput.Heading").font(.headline)
+                                                Text("Shared.Guide.AbbreviatedInput.Body.Row1")
+                                                Text("Shared.Guide.AbbreviatedInput.Body.Row2")
                                         }
                                         Section {
-                                                Text("Shared.Guide.Heading.PinyinReverseLookup").font(.headline)
-                                                Text("Shared.Guide.Body.PinyinReverseLookup")
+                                                Text("Shared.Guide.PinyinReverseLookup.Heading").font(.headline)
+                                                Text("Shared.Guide.PinyinReverseLookup.Body")
                                         }
                                         Section {
-                                                Text("Shared.Guide.Heading.CangjieReverseLookup").font(.headline)
-                                                Text("Shared.Guide.Body.CangjieReverseLookup")
-                                                Text("Shared.Guide.Body.CangjieReverseLookup.Note")
+                                                Text("Shared.Guide.CangjieReverseLookup.Heading").font(.headline)
+                                                Text("Shared.Guide.CangjieReverseLookup.Body")
+                                                Text("Shared.Guide.CangjieReverseLookup.Note")
                                         }
                                         Section {
-                                                Text("Shared.Guide.Heading.StrokeReverseLookup").font(.headline)
-                                                Text("Shared.Guide.Body.StrokeReverseLookup")
-                                                Text("Shared.Guide.Example.StrokeReverseLookup").font(.body.monospaced())
+                                                Text("Shared.Guide.StrokeReverseLookup.Heading").font(.headline)
+                                                Text("Shared.Guide.StrokeReverseLookup.Body")
+                                                Text("Shared.Guide.StrokeReverseLookup.Examples").font(.body.monospaced())
                                         }
                                         Section {
-                                                Text("Shared.Guide.Heading.StructureReverseLookup").font(.headline)
-                                                Text("Shared.Guide.Body.StructureReverseLookup")
+                                                Text("Shared.Guide.StructureReverseLookup.Heading").font(.headline)
+                                                Text("Shared.Guide.StructureReverseLookup.Body")
+                                        }
+                                        Section {
+                                                Text("Shared.Guide.TonesInput.Heading").font(.headline)
+                                                Text("Shared.Guide.TonesInput.Body").font(.body.monospaced())
+                                                Text("Shared.Guide.TonesInput.Examples")
                                         }
                                 }
                                 .textSelection(.enabled)

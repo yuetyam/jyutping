@@ -12973,7 +12973,7 @@
         }
       }
     },
-    "PreferencesView.NavigationTitle.ToneInput" : {
+    "PreferencesView.NavigationTitle.TonesInput" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -13484,55 +13484,55 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "以 v 開始，再輸入倉頡或速成碼即可。例如輸入 vdd 就會出「林」等。候選詞會標示對應嘅粵拼。"
+            "value" : "以 v 開始，再輸入倉頡或速成碼，例如 vdd → 林。"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "以 v 開始，再輸入倉頡或速成碼即可。例如輸入 vdd 就會出「林」等。候選詞會標示對應嘅粵拼。"
+            "value" : "以 v 開始，再輸入倉頡或速成碼，例如 vdd → 林。"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "以 v 開始，再輸入倉頡或速成碼即可。例如輸入 vdd 就會出「林」等。候選詞會標示對應嘅粵拼。"
+            "value" : "以 v 開始，再輸入倉頡或速成碼，例如 vdd → 林。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "以 v 開始，再輸入倉頡或速成碼即可。例如輸入 vdd 就會出「林」等。候選詞會標示對應嘅粵拼。"
+            "value" : "以 v 開始，再輸入倉頡或速成碼，例如 vdd → 林。"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "以 v 開始，再輸入倉頡或速成碼即可。例如輸入 vdd 就會出「林」等。候選詞會標示對應嘅粵拼。"
+            "value" : "以 v 開始，再輸入倉頡或速成碼，例如 vdd → 林。"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "以 v 開始，再輸入倉頡或速成碼即可。例如輸入 vdd 就會出「林」等。候選詞會標示對應嘅粵拼。"
+            "value" : "以 v 開始，再輸入倉頡或速成碼，例如 vdd → 林。"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "以 v 開始，再輸入倉頡或速成碼即可。例如輸入 vdd 就會出「林」等。候選詞會標示對應嘅粵拼。"
+            "value" : "以 v 開始，再輸入倉頡或速成碼，例如 vdd → 林。"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "以 v 開始，再輸入倉頡或速成碼即可。例如輸入 vdd 就會出「林」等。候選詞會標示對應嘅粵拼。"
+            "value" : "以 v 開始，再輸入倉頡或速成碼，例如 vdd → 林。"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "以 v 開始，再輸入倉頡或速成碼即可。例如輸入 vdd 就會出「林」等。候選詞會標示對應嘅粵拼。"
+            "value" : "以 v 開始，再輸入倉頡或速成碼，例如 vdd → 林。"
           }
         }
       }
@@ -14142,55 +14142,55 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "以 r 開始，再輸入普通話拼音即可。例如輸入 rlin 就會出「林」等。候選詞會標示對應嘅粵拼。"
+            "value" : "以 r 開始，再輸入普通話拼音，例如 rlin → 林。"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "以 r 開始，再輸入普通話拼音即可。例如輸入 rlin 就會出「林」等。候選詞會標示對應嘅粵拼。"
+            "value" : "以 r 開始，再輸入普通話拼音，例如 rlin → 林。"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "以 r 開始，再輸入普通話拼音即可。例如輸入 rlin 就會出「林」等。候選詞會標示對應嘅粵拼。"
+            "value" : "以 r 開始，再輸入普通話拼音，例如 rlin → 林。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "以 r 開始，再輸入普通話拼音即可。例如輸入 rlin 就會出「林」等。候選詞會標示對應嘅粵拼。"
+            "value" : "以 r 開始，再輸入普通話拼音，例如 rlin → 林。"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "以 r 開始，再輸入普通話拼音即可。例如輸入 rlin 就會出「林」等。候選詞會標示對應嘅粵拼。"
+            "value" : "以 r 開始，再輸入普通話拼音，例如 rlin → 林。"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "以 r 開始，再輸入普通話拼音即可。例如輸入 rlin 就會出「林」等。候選詞會標示對應嘅粵拼。"
+            "value" : "以 r 開始，再輸入普通話拼音，例如 rlin → 林。"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "以 r 開始，再輸入普通話拼音即可。例如輸入 rlin 就會出「林」等。候選詞會標示對應嘅粵拼。"
+            "value" : "以 r 開始，再輸入普通話拼音，例如 rlin → 林。"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "以 r 開始，再輸入普通話拼音即可。例如輸入 rlin 就會出「林」等。候選詞會標示對應嘅粵拼。"
+            "value" : "以 r 開始，再輸入普通話拼音，例如 rlin → 林。"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "以 r 開始，再輸入普通話拼音即可。例如輸入 rlin 就會出「林」等。候選詞會標示對應嘅粵拼。"
+            "value" : "以 r 開始，再輸入普通話拼音，例如 rlin → 林。"
           }
         }
       }
@@ -14330,55 +14330,55 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "以 x 開始，再輸入筆畫碼即可。例如輸入 xwsad 就會出「木」等。候選詞會標示對應嘅粵拼。"
+            "value" : "以 x 開始，再輸入筆畫碼，例如 xwsad → 木。"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "以 x 開始，再輸入筆畫碼即可。例如輸入 xwsad 就會出「木」等。候選詞會標示對應嘅粵拼。"
+            "value" : "以 x 開始，再輸入筆畫碼，例如 xwsad → 木。"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "以 x 開始，再輸入筆畫碼即可。例如輸入 xwsad 就會出「木」等。候選詞會標示對應嘅粵拼。"
+            "value" : "以 x 開始，再輸入筆畫碼，例如 xwsad → 木。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "以 x 開始，再輸入筆畫碼即可。例如輸入 xwsad 就會出「木」等。候選詞會標示對應嘅粵拼。"
+            "value" : "以 x 開始，再輸入筆畫碼，例如 xwsad → 木。"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "以 x 開始，再輸入筆畫碼即可。例如輸入 xwsad 就會出「木」等。候選詞會標示對應嘅粵拼。"
+            "value" : "以 x 開始，再輸入筆畫碼，例如 xwsad → 木。"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "以 x 開始，再輸入筆畫碼即可。例如輸入 xwsad 就會出「木」等。候選詞會標示對應嘅粵拼。"
+            "value" : "以 x 開始，再輸入筆畫碼，例如 xwsad → 木。"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "以 x 開始，再輸入筆畫碼即可。例如輸入 xwsad 就會出「木」等。候選詞會標示對應嘅粵拼。"
+            "value" : "以 x 開始，再輸入筆畫碼，例如 xwsad → 木。"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "以 x 開始，再輸入筆畫碼即可。例如輸入 xwsad 就會出「木」等。候選詞會標示對應嘅粵拼。"
+            "value" : "以 x 開始，再輸入筆畫碼，例如 xwsad → 木。"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "以 x 開始，再輸入筆畫碼即可。例如輸入 xwsad 就會出「木」等。候選詞會標示對應嘅粵拼。"
+            "value" : "以 x 開始，再輸入筆畫碼，例如 xwsad → 木。"
           }
         }
       }
@@ -14612,55 +14612,55 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "兩分即係將一個字分成兩部分，例如「林」字可以分成「木、木」。以 q 開始，再輸入兩個字嘅粵拼即可。例如輸入 qmukmuk 就會出「林」等。候選詞會標示對應嘅粵拼。"
+            "value" : "兩分即係將一個字分成兩部分，比如【林 = 木, 木】。以 q 開始，再輸入兩個字嘅粵拼，例如 qmukmuk → 林。"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "兩分即係將一個字分成兩部分，例如「林」字可以分成「木、木」。以 q 開始，再輸入兩個字嘅粵拼即可。例如輸入 qmukmuk 就會出「林」等。候選詞會標示對應嘅粵拼。"
+            "value" : "兩分即係將一個字分成兩部分，比如【林 = 木, 木】。以 q 開始，再輸入兩個字嘅粵拼，例如 qmukmuk → 林。"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "兩分即係將一個字分成兩部分，例如「林」字可以分成「木、木」。以 q 開始，再輸入兩個字嘅粵拼即可。例如輸入 qmukmuk 就會出「林」等。候選詞會標示對應嘅粵拼。"
+            "value" : "兩分即係將一個字分成兩部分，比如【林 = 木, 木】。以 q 開始，再輸入兩個字嘅粵拼，例如 qmukmuk → 林。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "兩分即係將一個字分成兩部分，例如「林」字可以分成「木、木」。以 q 開始，再輸入兩個字嘅粵拼即可。例如輸入 qmukmuk 就會出「林」等。候選詞會標示對應嘅粵拼。"
+            "value" : "兩分即係將一個字分成兩部分，比如【林 = 木, 木】。以 q 開始，再輸入兩個字嘅粵拼，例如 qmukmuk → 林。"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "兩分即係將一個字分成兩部分，例如「林」字可以分成「木、木」。以 q 開始，再輸入兩個字嘅粵拼即可。例如輸入 qmukmuk 就會出「林」等。候選詞會標示對應嘅粵拼。"
+            "value" : "兩分即係將一個字分成兩部分，比如【林 = 木, 木】。以 q 開始，再輸入兩個字嘅粵拼，例如 qmukmuk → 林。"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "兩分即係將一個字分成兩部分，例如「林」字可以分成「木、木」。以 q 開始，再輸入兩個字嘅粵拼即可。例如輸入 qmukmuk 就會出「林」等。候選詞會標示對應嘅粵拼。"
+            "value" : "兩分即係將一個字分成兩部分，比如【林 = 木, 木】。以 q 開始，再輸入兩個字嘅粵拼，例如 qmukmuk → 林。"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "兩分即係將一個字分成兩部分，例如「林」字可以分成「木、木」。以 q 開始，再輸入兩個字嘅粵拼即可。例如輸入 qmukmuk 就會出「林」等。候選詞會標示對應嘅粵拼。"
+            "value" : "兩分即係將一個字分成兩部分，比如【林 = 木, 木】。以 q 開始，再輸入兩個字嘅粵拼，例如 qmukmuk → 林。"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "兩分即係將一個字分成兩部分，例如「林」字可以分成「木、木」。以 q 開始，再輸入兩個字嘅粵拼即可。例如輸入 qmukmuk 就會出「林」等。候選詞會標示對應嘅粵拼。"
+            "value" : "兩分即係將一個字分成兩部分，比如【林 = 木, 木】。以 q 開始，再輸入兩個字嘅粵拼，例如 qmukmuk → 林。"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "兩分即係將一個字分成兩部分，例如「林」字可以分成「木、木」。以 q 開始，再輸入兩個字嘅粵拼即可。例如輸入 qmukmuk 就會出「林」等。候選詞會標示對應嘅粵拼。"
+            "value" : "兩分即係將一個字分成兩部分，比如【林 = 木, 木】。以 q 開始，再輸入兩個字嘅粵拼，例如 qmukmuk → 林。"
           }
         }
       }
@@ -14759,7 +14759,7 @@
         }
       }
     },
-    "ToneInputView.ToneInput.Body" : {
+    "TonesInputView.TonesInput.Body" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -14853,7 +14853,7 @@
         }
       }
     },
-    "ToneInputView.ToneInput.Example" : {
+    "TonesInputView.TonesInput.Examples" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -14947,30 +14947,30 @@
         }
       }
     },
-    "ToneInputView.ToneInput.Heading" : {
+    "TonesInputView.TonesInput.Heading" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tone Input"
+            "value" : "Tones Input"
           }
         },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tone Input"
+            "value" : "Tones Input"
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tone Input"
+            "value" : "Tones Input"
           }
         },
         "en-US" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tone Input"
+            "value" : "Tones Input"
           }
         },
         "fr" : {

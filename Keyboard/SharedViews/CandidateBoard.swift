@@ -84,12 +84,7 @@ struct CandidateBoard: View {
                                 ZStack {
                                         Color.interactiveClear
                                         if #available(iOSApplicationExtension 26.0, *) {
-                                                Circle()
-                                                        #if canImport(FoundationModels)
-                                                        .glassEffect(.clear)
-                                                        #else
-                                                        .fill(Material.ultraThin)
-                                                        #endif
+                                                Circle().glassEffect(.clear)
                                         } else {
                                                 Circle()
                                                         .fill(Material.ultraThin)
