@@ -70,8 +70,8 @@ iOS、iPadOS 及 macOS 粵語拼音輸入法。
 
 ## 如何構建（How to build）
 前置要求（Build requirements）
-- macOS 15.0+
-- Xcode 16.0+
+- macOS 26.0+
+- Xcode 26.0+
 
 倉庫體積比較大，建議加 `--depth` 來 clone：
 ~~~bash
@@ -90,7 +90,7 @@ swift run -c release
 
 注意事項: 不要直接 Run `InputMethod`，只可以 Build 或 [Archive](https://developer.apple.com/documentation/xcode/distributing-your-app-for-beta-testing-and-releases#Create-an-archive-of-your-app)
 
-如果要自己本機測試 Mac 輸入法，請將 Archive & Export 出來的 Jyutping.app 輸入法程序放入 `/Library/Input Methods/` 文件夾。  
+如果要自己本機測試 Mac 輸入法，請將 Archive & Export 出來的輸入法程序 Jyutping.app 放入 `/Library/Input Methods/` 文件夾。  
 如果替換舊有 Jyutping.app 輸入法的時候，彈出提示說它正在運行、無法替換，可以去 Terminal（終端） 用以下命令將它結束運行：
 ~~~bash
 osascript -e 'tell application id "org.jyutping.inputmethod.Jyutping" to quit'
