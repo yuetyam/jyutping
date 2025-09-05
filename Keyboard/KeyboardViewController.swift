@@ -4,13 +4,14 @@ import CoreIME
 
 final class KeyboardViewController: UIInputViewController, ObservableObject {
 
-        private lazy var isKeyboardPrepared: Bool = false
-        private func prepareMotherBoard() {
+        private func layoutMotherBoard() {
                 let screenSize: CGSize = UIScreen.main.bounds.size
                 adoptKeyboardInterface(screenSize: screenSize)
                 let rowHeight: CGFloat = keyboardInterface.keyHeightUnit(of: screenSize)
                 let rowCount: CGFloat = (keyboardInterface.isLargePad || Options.needsNumberRow) ? 5 : 4
                 keyboardHeight = (rowHeight * rowCount) + PresetConstant.toolBarHeight
+                view.subviews.forEach({ $0.removeFromSuperview() })
+                children.forEach({ $0.removeFromParent() })
                 let board = UIHostingController(rootView: MotherBoard().environmentObject(self))
                 board.view.translatesAutoresizingMaskIntoConstraints = false
                 addChild(board)
@@ -38,10 +39,11 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         await obtainSupplementaryLexicon()
                 }
         }
+        private lazy var isKeyboardPrepared: Bool = false
         override func viewWillAppear(_ animated: Bool) {
                 super.viewWillAppear(animated)
                 if isKeyboardPrepared.negative {
-                        prepareMotherBoard()
+                        layoutMotherBoard()
                 }
         }
         override func viewDidAppear(_ animated: Bool) {
@@ -88,7 +90,11 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
 
         override func viewWillDisappear(_ animated: Bool) {
                 super.viewWillDisappear(animated)
+                isKeyboardPrepared = false
                 releaseHapticFeedbacks()
+                view.subviews.forEach({ $0.removeFromSuperview() })
+                children.forEach({ $0.removeFromParent() })
+                clearBuffer()
         }
 
 
@@ -935,8 +941,8 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         }
         private func reloadKeyboard() {
                 // TODO: Needs a more appropriate way
-                _ = view.subviews.map({ $0.removeFromSuperview() })
-                _ = children.map({ $0.removeFromParent() })
+                view.subviews.forEach({ $0.removeFromSuperview() })
+                children.forEach({ $0.removeFromParent() })
                 let board = UIHostingController(rootView: MotherBoard().environmentObject(self))
                 board.view.translatesAutoresizingMaskIntoConstraints = false
                 addChild(board)
