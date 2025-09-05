@@ -117,6 +117,13 @@ private extension Sequence where Element == Scheme {
 
 public struct Segmenter {
 
+        public static func syllableText<T: RandomAccessCollection<InputEvent>>(of events: T) -> String? {
+                guard events.count <= 6 else { return nil }
+                let statement = prepareStatement()
+                defer { sqlite3_finalize(statement) }
+                return match(code: events.combinedCode, statement: statement)?.originText
+        }
+
         private static let queryCommand: String = "SELECT origincode FROM syllabletable WHERE aliascode = ? LIMIT 1;"
         private static func prepareStatement() -> OpaquePointer? {
                 var statement: OpaquePointer? = nil

@@ -217,11 +217,10 @@ struct InputMemory {
                         sqlite3_finalize(pingStatement)
                         sqlite3_finalize(strictStatement)
                 }
-                let inputLength = events.count
+                let eventLength = events.count
                 let text = events.map(\.text).joined()
                 let matches = pingMatch(text: text, input: text, statement: pingStatement)
-                let shortcuts = shortcutMatch(text: text, input: text, statement: shortcutStatement)
-                let idealSchemes = segmentation.filter({ $0.length == inputLength })
+                let idealSchemes = segmentation.filter({ $0.length == eventLength })
                 let searched: [InternalLexicon] = idealSchemes.isEmpty ? [] : idealSchemes.flatMap({ scheme -> [InternalLexicon] in
                         let pingCode: Int = scheme.originText.hash
                         let shortcutCode: Int = scheme.originAnchorsText.hash
@@ -234,54 +233,60 @@ struct InputMemory {
                                 return InternalLexicon(word: item.word, romanization: item.romanization, frequency: item.frequency, latest: item.latest, input: text, mark: mark)
                         })
                 })
-                let shouldMatchPrefixes: Bool = {
-                        guard matches.isEmpty && shortcuts.isEmpty && searched.isEmpty else { return false }
-                        guard idealSchemes.isNotEmpty else { return true }
-                        return (events.last == .letterM) || (events.first == .letterM)
-                }()
-                guard shouldMatchPrefixes else {
-                        return (matches + searched + shortcuts)
-                                .uniqued()
-                                .prefix(5)
-                                .map({ Candidate(text: $0.word, romanization: $0.romanization, input: text, mark: $0.mark, order: -1) })
+                guard matches.isEmpty && searched.isEmpty else {
+                        return (matches + searched).uniqued().map({ Candidate(text: $0.word, romanization: $0.romanization, input: text, mark: $0.mark, order: -1) })
                 }
+                let shortcuts = shortcutMatch(text: text, input: text, limit: 5, statement: shortcutStatement)
+                guard shortcuts.isEmpty else {
+                        return shortcuts.map({ Candidate(text: $0.word, romanization: $0.romanization, input: text, mark: $0.mark, order: -1) })
+                }
+                let shouldContinue: Bool = idealSchemes.isEmpty || (events.last == InputEvent.letterM) || (events.first == InputEvent.letterM)
+                guard shouldContinue else { return [] }
                 let prefixMatched: [InternalLexicon] = segmentation.flatMap({ scheme -> [InternalLexicon] in
+                        guard scheme.isNotEmpty else { return [] }
                         let tail = events.dropFirst(scheme.length)
-                        guard let lastAnchor = tail.first else { return [] }
+                        guard tail.isNotEmpty else { return [] }
                         let schemeAnchors = scheme.aliasAnchors
                         let conjoinedText: String = (schemeAnchors + tail).map(\.text).joined()
-                        let anchorsText: String = (schemeAnchors + [lastAnchor]).map(\.text).joined()
-                        let schemeMark: String = scheme.mark
-                        let mark: String = schemeMark + String.space + tail.map(\.text).joined()
+                        let schemeSyllableText: String = scheme.syllableText
+                        let mark: String = scheme.mark + String.space + tail.map(\.text).joined()
+                        let tailAsAnchorText = tail.compactMap({ $0 == InputEvent.letterY ? InputEvent.letterJ.text.first : $0.text.first })
                         let conjoinedMatched = shortcutMatch(text: conjoinedText, input: conjoinedText, statement: shortcutStatement)
                                 .compactMap({ item -> InternalLexicon? in
                                         let toneFreeRomanization = item.romanization.removedTones()
-                                        guard toneFreeRomanization.hasPrefix(schemeMark) else { return nil }
-                                        let tailAnchors = toneFreeRomanization.dropFirst(schemeMark.count).split(separator: Character.space).compactMap(\.first)
-                                        guard tailAnchors == tail.compactMap(\.text.first) else { return nil }
+                                        guard toneFreeRomanization.hasPrefix(schemeSyllableText) else { return nil }
+                                        let suffixAnchorText = toneFreeRomanization.dropFirst(schemeSyllableText.count).split(separator: Character.space).compactMap(\.first)
+                                        guard suffixAnchorText == tailAsAnchorText else { return nil }
                                         return InternalLexicon(word: item.word, romanization: item.romanization, frequency: item.frequency, latest: item.latest, input: text, mark: mark)
                                 })
+                        let transformedTailText = tail.enumerated().map({ $0.offset == 0 && $0.element == InputEvent.letterY ? InputEvent.letterJ.text : $0.element.text }).joined()
+                        let syllableText: String = schemeSyllableText + String.space + transformedTailText
+                        let anchorsText: String = schemeAnchors.map(\.text).joined() + (tail.first?.text ?? String.empty)
                         let anchorsMatched = shortcutMatch(text: anchorsText, input: anchorsText, statement: shortcutStatement)
                                 .compactMap({ item -> InternalLexicon? in
-                                        guard item.romanization.removedTones().hasPrefix(mark) else { return nil }
+                                        guard item.romanization.removedTones().hasPrefix(syllableText) else { return nil }
                                         return InternalLexicon(word: item.word, romanization: item.romanization, frequency: item.frequency, latest: item.latest, input: text, mark: mark)
                                 })
                         return conjoinedMatched + anchorsMatched
                 })
-                let gainedMatched: [InternalLexicon] = (1..<inputLength)
+                let gainedMatched: [InternalLexicon] = (1..<eventLength).reversed()
                         .flatMap({ number -> [InternalLexicon] in
-                                let leadingText = events.dropLast(number).map(\.text).joined()
+                                let leadingText = events.prefix(number).map(\.text).joined()
                                 return shortcutMatch(text: leadingText, input: leadingText, statement: shortcutStatement)
                         })
                         .compactMap({ item -> InternalLexicon? in
-                                guard item.romanization.removedSpacesTones().hasPrefix(text).negative else {
-                                        return InternalLexicon(word: item.word, romanization: item.romanization, frequency: item.frequency, latest: item.latest, input: text, mark: text)
+                                // TODO: Cache tails and syllables ?
+                                let tail = events.dropFirst(item.input.count - 1)
+                                guard tail.count <= 6 else { return nil }
+                                lazy var converted: InternalLexicon = InternalLexicon(word: item.word, romanization: item.romanization, frequency: item.frequency, latest: item.latest, input: text, mark: text)
+                                guard item.romanization.removedSpacesTones().hasPrefix(text).negative else { return converted }
+                                guard let lastSyllable = item.romanization.split(separator: Character.space).last?.filter(\.isCantoneseToneDigit.negative) else { return nil }
+                                if let tailSyllable = Segmenter.syllableText(of: tail) {
+                                        return lastSyllable == tailSyllable ? converted : nil
+                                } else {
+                                        let tailText = tail.map(\.text).joined()
+                                        return lastSyllable.hasPrefix(tailText) ? converted : nil
                                 }
-                                let syllables = item.romanization.removedTones().split(separator: Character.space)
-                                guard let lastSyllable = syllables.last, text.hasSuffix(lastSyllable) else { return nil }
-                                let isMatched: Bool = ((syllables.count - 1) + lastSyllable.count) == inputLength
-                                guard isMatched else { return nil }
-                                return InternalLexicon(word: item.word, romanization: item.romanization, frequency: item.frequency, latest: item.latest, input: text, mark: text)
                         })
                 return (prefixMatched + gainedMatched)
                         .uniqued()
