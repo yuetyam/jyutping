@@ -114,20 +114,21 @@ extension Engine {
                 return emojis
         }
 
-        static func searchSymbols(text: String, segmentation: Segmentation) -> [Candidate] {
+        public static func searchSymbols<T: RandomAccessCollection<InputEvent>>(for events: T, segmentation: Segmentation) -> [Candidate] {
+                let eventLength = events.count
+                let text = events.map(\.text).joined()
                 let command: String = "SELECT category, unicodeversion, codepoint, cantonese, romanization FROM symboltable WHERE ping = ?;"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(Engine.database, command, -1, &statement, nil) == SQLITE_OK else { return [] }
                 let regular: [Candidate] = match(text: text, input: text, statement: statement)
-                let textCount = text.count
-                let schemes = segmentation.filter({ $0.length == textCount })
+                let schemes = segmentation.filter({ $0.length == eventLength })
                 guard schemes.isNotEmpty else { return regular }
                 let matches = schemes.flatMap({ scheme -> [Candidate] in
                         let pingText = scheme.flatMap(\.origin).map(\.text).joined()
                         return match(text: pingText, input: text, statement: statement)
                 })
-                return regular + matches
+                return (regular + matches).uniqued()
         }
         private static func match<T: StringProtocol>(text: T, input: String, statement: OpaquePointer?) -> [Candidate] {
                 sqlite3_reset(statement)
@@ -166,7 +167,7 @@ extension Engine {
                 return String(cString: target)
         }
 
-        static func tenKeySearchSymbols<T: RandomAccessCollection<Combo>>(combos: T) -> [Candidate] {
+        public static func tenKeySearchSymbols<T: RandomAccessCollection<Combo>>(combos: T) -> [Candidate] {
                 let tenKeyCode = combos.map(\.rawValue).decimalCombined()
                 guard tenKeyCode > 0 else { return [] }
                 let command: String = "SELECT category, unicodeversion, codepoint, cantonese, romanization FROM symboltable WHERE tenkeycode = ?;"
@@ -199,6 +200,6 @@ extension Engine {
                         guard let symbolText = Emoji.generateSymbol(from: converted) else { return nil }
                         return Candidate(symbol: symbolText, cantonese: emoji.cantonese, romanization: emoji.romanization, input: input, isEmoji: emoji.uniqueNumber < 10)
                 })
-                return candidates
+                return candidates.uniqued()
         }
 }

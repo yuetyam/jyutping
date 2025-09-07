@@ -467,12 +467,13 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 let isInputMemoryOn: Bool = AppSettings.isInputMemoryOn
                 suggestionTask = Task.detached(priority: .high) { [weak self] in
                         guard let self else { return }
-                        async let definedCandidates: [Candidate] = searchDefinedCandidates(for: events)
-                        async let textMarkCandidates: [Candidate] = Engine.searchTextMarks(for: events)
                         let segmentation = Segmenter.segment(events: events)
-                        async let memoryCandidates: [Candidate] = isInputMemoryOn ? InputMemory.suggest(events: events, segmentation: segmentation) : []
-                        async let engineCandidates: [Candidate] = Engine.suggest(events: events, segmentation: segmentation)
-                        let suggestions = await (memoryCandidates + definedCandidates + textMarkCandidates + engineCandidates).transformed(with: Options.characterStandard, isEmojiSuggestionsOn: isEmojiSuggestionsOn)
+                        async let memory: [Candidate] = isInputMemoryOn ? InputMemory.suggest(events: events, segmentation: segmentation) : []
+                        async let defined: [Candidate] = searchDefinedCandidates(for: events)
+                        async let textMarks: [Candidate] = Engine.searchTextMarks(for: events)
+                        async let symbols: [Candidate] = Engine.searchSymbols(for: events, segmentation: segmentation)
+                        async let queried: [Candidate] = Engine.suggest(events: events, segmentation: segmentation)
+                        let suggestions: [Candidate] = await Converter.dispatch(memory: memory, defined: defined, marks: textMarks, symbols: symbols, queried: queried, isEmojiSuggestionsOn: isEmojiSuggestionsOn, characterStandard: Options.characterStandard)
                         if Task.isCancelled.negative {
                                 await MainActor.run { [weak self] in
                                         guard let self else { return }

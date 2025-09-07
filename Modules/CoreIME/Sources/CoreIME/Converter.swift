@@ -1,7 +1,9 @@
 import Foundation
 import SQLite3
 
+/*
 extension Array where Element == Candidate {
+        @available(*, deprecated, message: "Use Converter.dispatch() instead")
         public func transformed(with characterStandard: CharacterStandard, isEmojiSuggestionsOn: Bool) -> [Candidate] {
                 let containsInputMemory: Bool = first?.isInputMemory ?? false
                 switch (containsInputMemory, isEmojiSuggestionsOn) {
@@ -16,8 +18,82 @@ extension Array where Element == Candidate {
                 }
         }
 }
+*/
 
-extension Array where Element == Candidate {
+extension Converter {
+
+        /// Merge and normalize multiple candidate sources into a single list.
+        /// - Parameters:
+        ///   - memory: Candidates from InputMemory — all Cantonese.
+        ///   - defined: User-defined candidates from System Text Replacements — all plain text.
+        ///   - marks: TextMark candidates suggested by the Engine — all plain text.
+        ///   - symbols: Emoji / symbol candidates suggested by the Engine.
+        ///   - queried: Candidates suggested by the Engine — all Cantonese.
+        ///   - isEmojiSuggestionsOn: Whether emoji and symbol candidates are needs. If `true`, include `symbols`; otherwise, exclude emojis/symbols.
+        ///   - characterStandard: The Chinese character set to use (e.g., Traditional or Simplified).
+        /// - Returns: A merged array of unique, converted candidates.
+        public static func dispatch(memory: [Candidate], defined: [Candidate], marks: [Candidate], symbols: [Candidate], queried: [Candidate], isEmojiSuggestionsOn: Bool, characterStandard: CharacterStandard) -> [Candidate] {
+                switch (memory.isNotEmpty, isEmojiSuggestionsOn) {
+                case (true, true):
+                        guard symbols.isNotEmpty else {
+                                if defined.isEmpty {
+                                        return (memory + marks + queried.filter(\.isCompound.negative))
+                                                .transformed(to: characterStandard)
+                                                .uniqued()
+                                } else {
+                                        return (memory.prefix(3) + defined + memory + marks + queried.filter(\.isCompound.negative))
+                                                .transformed(to: characterStandard)
+                                                .uniqued()
+                                }
+                        }
+                        var items: [Candidate] = {
+                                if defined.isEmpty {
+                                        return (memory + marks + queried.filter(\.isCompound.negative))
+                                                .transformed(to: characterStandard)
+                                                .uniqued()
+                                } else {
+                                        return (memory.prefix(3) + defined + memory + marks + queried.filter(\.isCompound.negative))
+                                                .transformed(to: characterStandard)
+                                                .uniqued()
+                                }
+                        }()
+                        for symbol in symbols.reversed() {
+                                if let index = items.firstIndex(where: { $0.isCantonese && $0.lexiconText == symbol.lexiconText && $0.romanization == symbol.romanization }) {
+                                        items.insert(symbol, at: index + 1)
+                                }
+                        }
+                        return items
+                case (true, false):
+                        if defined.isEmpty {
+                                return (memory + marks + queried.filter(\.isCompound.negative))
+                                        .transformed(to: characterStandard)
+                                        .uniqued()
+                        } else {
+                                return (memory.prefix(3) + defined + memory + marks + queried.filter(\.isCompound.negative))
+                                        .transformed(to: characterStandard)
+                                        .uniqued()
+                        }
+                case (false, true):
+                        guard queried.isNotEmpty else {
+                                return (defined + marks).uniqued()
+                        }
+                        guard symbols.isNotEmpty else {
+                                return (defined + marks + queried.transformed(to: characterStandard)).uniqued()
+                        }
+                        var items: [Candidate] = queried
+                        for symbol in symbols.reversed() {
+                                if let index = items.firstIndex(where: { $0.lexiconText == symbol.lexiconText && $0.romanization == symbol.romanization }) {
+                                        items.insert(symbol, at: index + 1)
+                                }
+                        }
+                        return (defined + marks + items.transformed(to: characterStandard)).uniqued()
+                case (false, false):
+                        return (defined + marks + queried.transformed(to: characterStandard)).uniqued()
+                }
+        }
+}
+
+extension RandomAccessCollection where Element == Candidate {
 
         /// Convert Cantonese Candidate text to the specific variant
         /// - Parameter variant: Character variant
@@ -25,7 +101,7 @@ extension Array where Element == Candidate {
         public func transformed(to variant: CharacterStandard) -> [Candidate] {
                 switch variant {
                 case .traditional:
-                        return self
+                        return (self is Array<Candidate>) ? (self as! Array<Candidate>) : Array<Candidate>(self)
                 case .hongkong:
                         return self.map { origin -> Candidate in
                                 guard origin.isCantonese else { return origin }

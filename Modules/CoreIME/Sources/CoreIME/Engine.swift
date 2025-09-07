@@ -326,7 +326,7 @@ extension Engine {
                                 return lastSyllable.hasPrefix(tailText) ? converted : nil
                         }
                 })
-                let adjusted: [Candidate] = {
+                let fetched: [Candidate] = {
                         let idealQueried = queried.filter({ $0.inputCount == eventLength }).sorted(by: { $0.order < $1.order }).uniqued()
                         let notIdealQueried = queried.filter({ $0.inputCount < eventLength }).sorted().uniqued()
                         let fullInput = (pingMatched + idealQueried + anchorsMatched + prefixMatched + gainedMatched).uniqued()
@@ -335,17 +335,6 @@ extension Engine {
                         let tertiary = notIdealQueried.prefix(10)
                         let quaternary = notIdealQueried.sorted(by: { $0.order < $1.order }).prefix(10)
                         return (primary + secondary + tertiary + quaternary + fullInput + notIdealQueried).uniqued()
-                }()
-                let fetched: [Candidate] = {
-                        let symbols: [Candidate] = Engine.searchSymbols(text: text, segmentation: segmentation)
-                        guard symbols.isNotEmpty else { return adjusted }
-                        var items: [Candidate] = adjusted
-                        for symbol in symbols.reversed() {
-                                if let index = items.firstIndex(where: { $0.lexiconText == symbol.lexiconText && $0.romanization == symbol.romanization }) {
-                                        items.insert(symbol, at: index + 1)
-                                }
-                        }
-                        return items
                 }()
                 guard let firstInputCount = fetched.first?.inputCount else {
                         return processSlices(of: events, text: text, limit: limit, anchorsStatement: anchorsStatement, pingStatement: pingStatement)
@@ -529,16 +518,9 @@ extension Engine {
                                 return tenKeyAnchorsMatch(code: code, limit: limit, statement: anchorsStatement)
                         })
                         .sorted()
-                var queried = (fullMatched + idealAnchorsMatched + codeMatched + anchorsMatched)
-                guard queried.isNotEmpty else { return [] }
-                for symbol in tenKeySearchSymbols(combos: combos).reversed() {
-                        if let index = queried.firstIndex(where: { $0.lexiconText == symbol.lexiconText && $0.romanization == symbol.romanization }) {
-                                queried.insert(symbol, at: index + 1)
-                        }
-                }
+                let queried = (fullMatched + idealAnchorsMatched + codeMatched + anchorsMatched)
                 guard let firstInputCount = queried.first?.inputCount else { return [] }
                 guard firstInputCount < inputLength else { return queried }
-
                 let tailCombos = combos.dropFirst(firstInputCount)
                 let tailCode = tailCombos.map(\.rawValue).decimalCombined()
                 guard tailCode > 0 else { return queried }
