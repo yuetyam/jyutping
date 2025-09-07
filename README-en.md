@@ -108,6 +108,8 @@ osascript -e 'tell application id "org.jyutping.inputmethod.Jyutping" to quit'
 - [JetBrains](https://www.jetbrains.com/) (Licenses for Open Source Development)
 
 ## Thank you for your support
+Website: https://jyutping.app/donate
+
 Patreon: https://patreon.com/bingzheung
 
 愛發電: https://afdian.com/a/jyutping
