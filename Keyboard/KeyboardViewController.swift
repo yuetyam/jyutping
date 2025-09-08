@@ -322,26 +322,39 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         private lazy var selectedSyllables: [SidebarSyllable] = []
         func handleSidebarTapping(at index: Int) {
                 guard let item = sidebarSyllables.fetch(index) else { return }
-                sidebarSyllables.remove(at: index)
-                let newSyllable = SidebarSyllable(text: item.text, isSelected: item.isSelected.negative)
-                sidebarSyllables.insert(newSyllable, at: index)
-                sidebarSyllables.sort(by: { $0.isSelected && $1.isSelected.negative })
-                selectedSyllables = sidebarSyllables.filter(\.isSelected)
+                let shouldClearSelected: Bool = item.isSelected && index < (selectedSyllables.count - 1)
+                if shouldClearSelected {
+                        selectedSyllables = []
+                } else {
+                        sidebarSyllables.remove(at: index)
+                        let newSyllable = SidebarSyllable(text: item.text, isSelected: item.isSelected.negative)
+                        sidebarSyllables.insert(newSyllable, at: index)
+                        sidebarSyllables.sort(by: { $0.isSelected && $1.isSelected.negative })
+                        selectedSyllables = sidebarSyllables.filter(\.isSelected)
+                }
                 updateSidebarSyllables()
         }
         private func updateSidebarSyllables() {
+                guard selectedSyllables.isNotEmpty else {
+                        candidates = tenKeyCachedCandidates
+                        sidebarSyllables = candidates.compactMap({ $0.romanization.split(separator: Character.space).first?.dropLast() })
+                                .uniqued()
+                                .map({ SidebarSyllable(text: String($0), isSelected: false) })
+                        return
+                }
                 let selected = selectedSyllables.map(\.text)
-                let selectedCount: Int = selected.count
-                candidates = (selectedCount == 0) ? tenKeyCachedCandidates : tenKeyCachedCandidates.filter({ item -> Bool in
+                let selectedCount: Int = selectedSyllables.count
+                candidates = tenKeyCachedCandidates.filter({ item -> Bool in
                         let syllables = item.romanization.removedTones().split(separator: Character.space).map({ String($0) })
                         return (syllables.count < selectedCount) ? selected.starts(with: syllables) : syllables.starts(with: selected)
                 })
-                let leadingLength = (selectedCount == 0) ? 0 : selected.reduce(0, { $0 + $1.count + 2 })
-                guard leadingLength < bufferCombos.count else {
+                let selectedLength = selected.reduce(0, { $0 + $1.count })
+                guard selectedLength < bufferCombos.count else {
                         sidebarSyllables = selectedSyllables
                         return
                 }
-                let newSyllables = candidates.compactMap({ $0.romanization.dropFirst(leadingLength).split(separator: Character.space).first?.dropLast() })
+                let leadingLength = selectedLength + selectedCount
+                let newSyllables = candidates.compactMap({ $0.romanization.removedTones().dropFirst(leadingLength).split(separator: Character.space).first })
                         .uniqued()
                         .map({ SidebarSyllable(text: String($0), isSelected: false) })
                 sidebarSyllables = selectedSyllables + newSyllables
