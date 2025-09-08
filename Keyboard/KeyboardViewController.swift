@@ -599,16 +599,17 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         private func tenKeySuggest() {
                 suggestionTask?.cancel()
                 let combos = bufferCombos
-                let isEmojiSuggestionsOn: Bool = Options.isEmojiSuggestionsOn
                 let isInputMemoryOn: Bool = Options.isInputMemoryOn
+                let isEmojiSuggestionsOn: Bool = Options.isEmojiSuggestionsOn
+                let characterStandard = Options.characterStandard
                 suggestionTask = Task.detached(priority: .high) { [weak self] in
                         guard let self else { return }
-                        async let memory: [Candidate] = isEmojiSuggestionsOn ? InputMemory.tenKeySuggest(combos: combos) : []
+                        async let memory: [Candidate] = isInputMemoryOn ? InputMemory.tenKeySuggest(combos: combos) : []
                         async let defined: [Candidate] = queryDefinedCandidates(for: combos)
                         async let textMarks: [Candidate] = Engine.queryTextMarks(for: combos)
                         async let symbols: [Candidate] = Engine.tenKeySearchSymbols(combos: combos)
                         async let queried: [Candidate] = Engine.tenKeySuggest(combos: combos)
-                        let suggestions: [Candidate] = await Converter.dispatch(memory: memory, defined: defined, marks: textMarks, symbols: symbols, queried: queried, isEmojiSuggestionsOn: isEmojiSuggestionsOn, characterStandard: Options.characterStandard)
+                        let suggestions: [Candidate] = await Converter.dispatch(memory: memory, defined: defined, marks: textMarks, symbols: symbols, queried: queried, isEmojiSuggestionsOn: isEmojiSuggestionsOn, characterStandard: characterStandard)
                         if Task.isCancelled.negative {
                                 await MainActor.run { [weak self] in
                                         guard let self else { return }
@@ -630,8 +631,9 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         private func suggest() {
                 suggestionTask?.cancel()
                 let events = bufferEvents
-                let isEmojiSuggestionsOn: Bool = Options.isEmojiSuggestionsOn
                 let isInputMemoryOn: Bool = Options.isInputMemoryOn
+                let isEmojiSuggestionsOn: Bool = Options.isEmojiSuggestionsOn
+                let characterStandard = Options.characterStandard
                 suggestionTask = Task.detached(priority: .high) { [weak self] in
                         guard let self else { return }
                         let segmentation = Segmenter.segment(events: events)
@@ -640,7 +642,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         async let textMarks: [Candidate] = Engine.searchTextMarks(for: events)
                         async let symbols: [Candidate] = Engine.searchSymbols(for: events, segmentation: segmentation)
                         async let queried: [Candidate] = Engine.suggest(events: events, segmentation: segmentation)
-                        let suggestions: [Candidate] = await Converter.dispatch(memory: memory, defined: defined, marks: textMarks, symbols: symbols, queried: queried, isEmojiSuggestionsOn: isEmojiSuggestionsOn, characterStandard: Options.characterStandard)
+                        let suggestions: [Candidate] = await Converter.dispatch(memory: memory, defined: defined, marks: textMarks, symbols: symbols, queried: queried, isEmojiSuggestionsOn: isEmojiSuggestionsOn, characterStandard: characterStandard)
                         if Task.isCancelled.negative {
                                 await MainActor.run { [weak self] in
                                         guard let self else { return }

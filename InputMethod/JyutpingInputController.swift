@@ -463,8 +463,9 @@ final class JyutpingInputController: IMKInputController, Sendable {
         private func suggest() {
                 suggestionTask?.cancel()
                 let events = bufferEvents
-                let isEmojiSuggestionsOn: Bool = AppSettings.isEmojiSuggestionsOn
                 let isInputMemoryOn: Bool = AppSettings.isInputMemoryOn
+                let isEmojiSuggestionsOn: Bool = AppSettings.isEmojiSuggestionsOn
+                let characterStandard = Options.characterStandard
                 suggestionTask = Task.detached(priority: .high) { [weak self] in
                         guard let self else { return }
                         let segmentation = Segmenter.segment(events: events)
@@ -473,7 +474,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         async let textMarks: [Candidate] = Engine.searchTextMarks(for: events)
                         async let symbols: [Candidate] = Engine.searchSymbols(for: events, segmentation: segmentation)
                         async let queried: [Candidate] = Engine.suggest(events: events, segmentation: segmentation)
-                        let suggestions: [Candidate] = await Converter.dispatch(memory: memory, defined: defined, marks: textMarks, symbols: symbols, queried: queried, isEmojiSuggestionsOn: isEmojiSuggestionsOn, characterStandard: Options.characterStandard)
+                        let suggestions: [Candidate] = await Converter.dispatch(memory: memory, defined: defined, marks: textMarks, symbols: symbols, queried: queried, isEmojiSuggestionsOn: isEmojiSuggestionsOn, characterStandard: characterStandard)
                         if Task.isCancelled.negative {
                                 await MainActor.run { [weak self] in
                                         guard let self else { return }

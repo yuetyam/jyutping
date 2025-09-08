@@ -159,29 +159,37 @@ extension Engine {
                         })
                         return qualified.sorted(by: { $0.inputCount > $1.inputCount })
                 case (true, false):
+                        let isHeadingSeparator: Bool = events.first?.isApostrophe ?? false
+                        let isTrailingSeparator: Bool = events.last?.isApostrophe ?? false
+                        guard isHeadingSeparator.negative else { return [] }
+                        let inputSeparatorCount = events.count(where: \.isApostrophe)
+                        let eventLength = events.count
                         let text = events.map(\.text).joined()
-                        let textSeparators = text.filter(\.isSeparator)
                         let textParts = text.split(separator: Character.separator)
-                        let isHeadingSeparator: Bool = text.first?.isSeparator ?? false
-                        let isTrailingSeparator: Bool = text.last?.isSeparator ?? false
                         let qualified: [Candidate] = candidates.compactMap({ item -> Candidate? in
                                 let syllables = item.romanization.removedTones().split(separator: Character.space)
                                 guard syllables != textParts else { return item.replacedInput(with: text) }
-                                guard isHeadingSeparator.negative else { return nil }
-                                switch textSeparators.count {
+                                switch inputSeparatorCount {
                                 case 1 where isTrailingSeparator:
                                         guard syllables.count == 1 else { return nil }
-                                        let isLengthMatched: Bool = item.inputCount == (text.count - 1)
-                                        guard isLengthMatched else { return nil }
+                                        guard item.inputCount == (eventLength - 1) else { return nil }
                                         return item.replacedInput(with: text)
                                 case 1:
                                         switch syllables.count {
                                         case 1:
-                                                guard item.input == textParts.first! else { return nil }
+                                                guard item.inputCount == textParts.first?.count else { return nil }
                                                 let combinedInput: String = item.input + String.separator
                                                 return item.replacedInput(with: combinedInput)
                                         case 2:
-                                                guard syllables.first == textParts.first else { return nil }
+                                                let isMatched: Bool = {
+                                                        guard eventLength != 3 else { return true }
+                                                        guard syllables.first != textParts.first else { return true }
+                                                        guard textParts.first?.count == 1 else { return false }
+                                                        guard textParts.first?.first == syllables.first?.first else { return false }
+                                                        guard let lastSyllable = syllables.last else { return false }
+                                                        return textParts.last?.hasPrefix(lastSyllable) ?? false
+                                                }()
+                                                guard isMatched else { return nil }
                                                 let combinedInput: String = item.input + String.separator
                                                 return item.replacedInput(with: combinedInput)
                                         default:
@@ -190,13 +198,19 @@ extension Engine {
                                 case 2 where isTrailingSeparator:
                                         switch syllables.count {
                                         case 1:
-                                                guard item.input == textParts.first! else { return nil }
+                                                guard item.inputCount == textParts.first?.count else { return nil }
                                                 let combinedInput: String = item.input + String.separator
                                                 return item.replacedInput(with: combinedInput)
                                         case 2:
-                                                let isLengthMatched: Bool = item.inputCount == (text.count - 2)
-                                                guard isLengthMatched else { return nil }
-                                                guard syllables.first == textParts.first else { return nil }
+                                                guard item.inputCount == (eventLength - 2) else { return nil }
+                                                let isMatched: Bool = {
+                                                        guard eventLength != 4 else { return true }
+                                                        guard syllables.first != textParts.first else { return true }
+                                                        guard textParts.first?.count == 1 else { return false }
+                                                        guard textParts.first?.first == syllables.first?.first else { return false }
+                                                        return textParts.last == syllables.last
+                                                }()
+                                                guard isMatched else { return nil }
                                                 return item.replacedInput(with: text)
                                         default:
                                                 return nil
