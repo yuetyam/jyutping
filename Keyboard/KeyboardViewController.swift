@@ -331,11 +331,12 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         }
         private func updateSidebarSyllables() {
                 let selected = selectedSyllables.map(\.text)
-                candidates = selected.isEmpty ? tenKeyCachedCandidates : tenKeyCachedCandidates.filter({ item -> Bool in
+                let selectedCount: Int = selected.count
+                candidates = (selectedCount == 0) ? tenKeyCachedCandidates : tenKeyCachedCandidates.filter({ item -> Bool in
                         let syllables = item.romanization.removedTones().split(separator: Character.space).map({ String($0) })
-                        return syllables.starts(with: selected)
+                        return (syllables.count < selectedCount) ? selected.starts(with: syllables) : syllables.starts(with: selected)
                 })
-                let leadingLength = selected.isEmpty ? 0 : selected.reduce(0, { $0 + $1.count + 2 })
+                let leadingLength = (selectedCount == 0) ? 0 : selected.reduce(0, { $0 + $1.count + 2 })
                 guard leadingLength < bufferCombos.count else {
                         sidebarSyllables = selectedSyllables
                         return
