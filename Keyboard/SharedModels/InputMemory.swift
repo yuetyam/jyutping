@@ -374,24 +374,47 @@ struct InputMemory {
                 let inputLength: Int = combos.count
                 guard inputLength < 19 else { return [] }
                 let code: Int = combos.map(\.rawValue).decimalCombined()
-                let command: String = "SELECT word, romanization FROM memory WHERE tenkeycode = \(code) OR tenkeyanchors = \(code) ORDER BY frequency DESC LIMIT 6;"
+                return (tenKeyCodeMatch(code: code) + tenKeyAnchorsMatch(code: code))
+                        .uniqued()
+                        .sorted()
+                        .map({ Candidate(text: $0.word, romanization: $0.romanization, input: $0.input, mark: $0.mark, order: -1) })
+        }
+        private static func tenKeyCodeMatch(code: Int) -> [InternalLexicon] {
+                let command: String = "SELECT word, romanization, frequency, latest FROM memory WHERE tenkeycode = \(code) ORDER BY frequency DESC LIMIT 100;"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return [] }
-                var candidates: [Candidate] = []
+                var items: [InternalLexicon] = []
                 while sqlite3_step(statement) == SQLITE_ROW {
                         guard let word = sqlite3_column_text(statement, 0) else { continue }
                         guard let romanizationText = sqlite3_column_text(statement, 1) else { continue }
+                        let frequency = sqlite3_column_int64(statement, 2)
+                        let latest = sqlite3_column_int64(statement, 3)
                         let romanization: String = String(cString: romanizationText)
-                        let letterText: String = romanization.filter(\.isLowercaseBasicLatinLetter)
-                        let isFullMatched: Bool = (letterText.count == inputLength)
-                        lazy var anchorText: String = String(romanization.split(separator: Character.space).compactMap(\.first))
-                        let input: String = isFullMatched ? letterText : anchorText
-                        let mark: String = isFullMatched ? romanization.removedTones() : anchorText
-                        let instance = Candidate(text: String(cString: word), romanization: romanization, input: input, mark: mark, order: -1)
-                        candidates.append(instance)
+                        let input: String = romanization.filter(\.isLowercaseBasicLatinLetter)
+                        let mark: String = romanization.removedTones()
+                        let instance = InternalLexicon(word: String(cString: word), romanization: romanization, frequency: frequency, latest: latest, input: input, mark: mark)
+                        items.append(instance)
                 }
-                return candidates
+                return items
+        }
+        private static func tenKeyAnchorsMatch(code: Int) -> [InternalLexicon] {
+                let command: String = "SELECT word, romanization, frequency, latest FROM memory WHERE tenkeyanchors = \(code) ORDER BY frequency DESC LIMIT 6;"
+                var statement: OpaquePointer? = nil
+                defer { sqlite3_finalize(statement) }
+                guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return [] }
+                var items: [InternalLexicon] = []
+                while sqlite3_step(statement) == SQLITE_ROW {
+                        guard let word = sqlite3_column_text(statement, 0) else { continue }
+                        guard let romanizationText = sqlite3_column_text(statement, 1) else { continue }
+                        let frequency = sqlite3_column_int64(statement, 2)
+                        let latest = sqlite3_column_int64(statement, 3)
+                        let romanization: String = String(cString: romanizationText)
+                        let anchorText: String = String(romanization.split(separator: Character.space).compactMap(\.first))
+                        let instance = InternalLexicon(word: String(cString: word), romanization: romanization, frequency: frequency, latest: latest, input: anchorText, mark: anchorText)
+                        items.append(instance)
+                }
+                return items
         }
 }
 
