@@ -132,7 +132,7 @@ struct RightKey: View {
                                         }
                                 } else {
                                         guard shouldShowExtraHeader else { return }
-                                        guard pulled == nil else { return }
+                                        guard pulled == nil && buffer > 1 else { return }
                                         guard context.inputStage.isBuffering.negative else { return }
                                         let distance: CGFloat = state.translation.height
                                         guard abs(distance) > 30 else { return }

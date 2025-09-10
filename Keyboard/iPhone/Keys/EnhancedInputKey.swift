@@ -175,7 +175,8 @@ struct EnhancedInputKey: View {
                                                         selectedIndex = newSelectedIndex
                                                 }
                                         }
-                                } else if pulled == nil {
+                                } else {
+                                        guard pulled == nil && buffer > 1 else { return }
                                         let distance: CGFloat = state.translation.height
                                         if distance > 30 {
                                                 // swipe from top to bottom

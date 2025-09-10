@@ -15,31 +15,11 @@ struct PadPullableInputKey: View {
         private let lower: String
 
         @EnvironmentObject private var context: KeyboardViewController
-
         @Environment(\.colorScheme) private var colorScheme
 
-        private var keyColor: Color {
-                switch colorScheme {
-                case .light:
-                        return .lightInput
-                case .dark:
-                        return .darkInput
-                @unknown default:
-                        return .lightInput
-                }
-        }
-        private var keyActiveColor: Color {
-                switch colorScheme {
-                case .light:
-                        return .activeLightInput
-                case .dark:
-                        return .activeDarkInput
-                @unknown default:
-                        return .activeLightInput
-                }
-        }
-
         @GestureState private var isTouching: Bool = false
+        private let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
+        @State private var buffer: Int = 0
         @State private var isPullingDown: Bool = false
 
         var body: some View {
@@ -53,7 +33,7 @@ struct PadPullableInputKey: View {
                 ZStack {
                         Color.interactiveClear
                         RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous)
-                                .fill(isTouching ? keyActiveColor : keyColor)
+                                .fill(isTouching ? colorScheme.activeInputKeyColor : colorScheme.inputKeyColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(.vertical, verticalPadding)
                                 .padding(.horizontal, horizontalPadding)
@@ -91,12 +71,13 @@ struct PadPullableInputKey: View {
                                 }
                         }
                         .onChanged { state in
-                                guard isPullingDown.negative else { return }
+                                guard isPullingDown.negative && buffer > 1 else { return }
                                 let distance: CGFloat = state.translation.height
-                                guard distance > 16 else { return }
+                                guard distance > 30 else { return }
                                 isPullingDown = true
                         }
                         .onEnded { _ in
+                                buffer = 0
                                 if isPullingDown {
                                         let text: String = context.keyboardCase.isLowercased ? upper : upper.uppercased()
                                         context.operate(.process(text))
@@ -109,5 +90,10 @@ struct PadPullableInputKey: View {
                                 }
                          }
                 )
+                .onReceive(timer) { _ in
+                        guard isTouching else { return }
+                        guard isPullingDown.negative else { return }
+                        buffer += 1
+                }
         }
 }

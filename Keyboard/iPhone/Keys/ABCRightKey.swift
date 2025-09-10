@@ -125,7 +125,7 @@ struct ABCRightKey: View {
                                         }
                                 } else {
                                         guard shouldShowExtraHeader else { return }
-                                        guard pulled == nil else { return }
+                                        guard pulled == nil && buffer > 1 else { return }
                                         let distance: CGFloat = state.translation.height
                                         guard abs(distance) > 30 else { return }
                                         pulled = headerText
