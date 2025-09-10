@@ -217,12 +217,22 @@ struct CantoneseSymbolicKeyboard: View {
                         }
                         switch (context.keyboardInterface.isPadFloating, context.needsInputModeSwitchKey) {
                         case (true, true):
-                                HStack(spacing: 0) {
-                                        GlobeKey()
-                                        TransformKey(destination: .alphabetic, widthUnitTimes: 2)
-                                        SpaceKey()
-                                        SharedBottomKeys.altCantoneseComma
-                                        ReturnKey()
+                                if #available(iOSApplicationExtension 26.0, *) {
+                                        HStack(spacing: 0) {
+                                                TransformKey(destination: .alphabetic, widthUnitTimes: 2)
+                                                SharedBottomKeys.cantoneseComma
+                                                SpaceKey()
+                                                SharedBottomKeys.cantonesePeriod
+                                                ReturnKey()
+                                        }
+                                } else {
+                                        HStack(spacing: 0) {
+                                                GlobeKey()
+                                                TransformKey(destination: .alphabetic, widthUnitTimes: 2)
+                                                SpaceKey()
+                                                SharedBottomKeys.altCantoneseComma
+                                                ReturnKey()
+                                        }
                                 }
                         case (true, false):
                                 HStack(spacing: 0) {
