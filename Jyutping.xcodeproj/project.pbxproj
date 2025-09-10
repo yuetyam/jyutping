@@ -235,6 +235,8 @@
 		3747C75A2E12601300E11099 /* ABCLeftKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3747C7592E12601300E11099 /* ABCLeftKey.swift */; };
 		3747C75C2E12626E00E11099 /* ABCRightKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3747C75B2E12626E00E11099 /* ABCRightKey.swift */; };
 		3747C75E2E126F2300E11099 /* ABCRightAlternativeKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3747C75D2E126F2300E11099 /* ABCRightAlternativeKey.swift */; };
+		3752FD722E6E61A70007CFAB /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = 3752FD712E6E61A70007CFAB /* AppIcon.icon */; };
+		3752FD742E6E62F90007CFAB /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = 3752FD732E6E62F90007CFAB /* AppIcon.icon */; };
 		3756452B2E3BD70F000267C9 /* DefinedLexicon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3756452A2E3BD70F000267C9 /* DefinedLexicon.swift */; };
 		3756452D2E3BDECF000267C9 /* DefinedLexicon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3756452C2E3BDECF000267C9 /* DefinedLexicon.swift */; };
 		375A90B32BD0797B009784BB /* TenKeyGlobeKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375A90B22BD0797B009784BB /* TenKeyGlobeKey.swift */; };
@@ -648,6 +650,8 @@
 		3747C7592E12601300E11099 /* ABCLeftKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ABCLeftKey.swift; sourceTree = "<group>"; };
 		3747C75B2E12626E00E11099 /* ABCRightKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ABCRightKey.swift; sourceTree = "<group>"; };
 		3747C75D2E126F2300E11099 /* ABCRightAlternativeKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ABCRightAlternativeKey.swift; sourceTree = "<group>"; };
+		3752FD712E6E61A70007CFAB /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = AppIcon.icon; sourceTree = "<group>"; };
+		3752FD732E6E62F90007CFAB /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = AppIcon.icon; sourceTree = "<group>"; };
 		3756452A2E3BD70F000267C9 /* DefinedLexicon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefinedLexicon.swift; sourceTree = "<group>"; };
 		3756452C2E3BDECF000267C9 /* DefinedLexicon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefinedLexicon.swift; sourceTree = "<group>"; };
 		375A90B22BD0797B009784BB /* TenKeyGlobeKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TenKeyGlobeKey.swift; sourceTree = "<group>"; };
@@ -1173,6 +1177,7 @@
 				3717DBCA2BF9649D00DC3DB1 /* Localizable.xcstrings */,
 				37E6AD952B3B389400F02279 /* jyutpingime.pdf */,
 				37E6AD8F2B3B384B00F02279 /* Assets.xcassets */,
+				3752FD732E6E62F90007CFAB /* AppIcon.icon */,
 				371EABD12B385D380075089B /* Preview Content */,
 			);
 			path = InputMethod;
@@ -1546,6 +1551,7 @@
 				3717DBD42BF9AF8600DC3DB1 /* Localizable.xcstrings */,
 				371B6EE92B3B3206005BB31C /* Settings.bundle */,
 				371B6EE72B3B31C4005BB31C /* Assets.xcassets */,
+				3752FD712E6E61A70007CFAB /* AppIcon.icon */,
 				37EFD72F2B3719C20089D346 /* Preview Content */,
 			);
 			path = Jyutping;
@@ -1817,6 +1823,7 @@
 				37D1C9362BBF26A200015FD0 /* PrivacyInfo.xcprivacy in Resources */,
 				37E6AD962B3B389400F02279 /* jyutpingime.pdf in Resources */,
 				37E6AD902B3B384B00F02279 /* Assets.xcassets in Resources */,
+				3752FD742E6E62F90007CFAB /* AppIcon.icon in Resources */,
 				3717DBCB2BF9649D00DC3DB1 /* Localizable.xcstrings in Resources */,
 				3717DBCD2BF9649D00DC3DB1 /* InfoPlist.xcstrings in Resources */,
 				371EABD32B385D380075089B /* Preview Assets.xcassets in Resources */,
@@ -1844,6 +1851,7 @@
 				37D1C9382BBF288000015FD0 /* PrivacyInfo.xcprivacy in Resources */,
 				3717DBD32BF9AF8600DC3DB1 /* InfoPlist.xcstrings in Resources */,
 				3717DBD52BF9AF8600DC3DB1 /* Localizable.xcstrings in Resources */,
+				3752FD722E6E61A70007CFAB /* AppIcon.icon in Resources */,
 				371B6EE82B3B31C4005BB31C /* Assets.xcassets in Resources */,
 				371B6EEA2B3B3206005BB31C /* Settings.bundle in Resources */,
 				37EFD7312B3719C20089D346 /* Preview Assets.xcassets in Resources */,

@@ -215,6 +215,21 @@ extension Engine {
                                         default:
                                                 return nil
                                         }
+                                case 2 where eventLength == 5 && textParts.count == 3,
+                                     3 where eventLength == 6 && textParts.count == 3:
+                                        switch syllables.count {
+                                        case 1:
+                                                guard item.inputCount == 1 else { return nil }
+                                                return item.replacedInput(with: item.input + String.separator)
+                                        case 2:
+                                                guard item.inputCount == 2 else { return nil }
+                                                let combinedInput: String = item.input + String.separator + String.separator
+                                                return item.replacedInput(with: combinedInput)
+                                        case 3:
+                                                return item.replacedInput(with: text)
+                                        default:
+                                                return nil
+                                        }
                                 default:
                                         let textPartCount = textParts.count
                                         let syllableCount = syllables.count

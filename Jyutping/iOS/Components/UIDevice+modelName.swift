@@ -4,7 +4,7 @@ import UIKit
 
 extension UIDevice {
 
-        /// Example: iPhone 16 Pro Max
+        /// Example: iPhone 17 Pro Max
         static let modelName: String = {
                 var systemInfo = utsname()
                 uname(&systemInfo)
@@ -53,6 +53,10 @@ extension UIDevice {
                 case "iPhone17,3":                  return "iPhone 16"
                 case "iPhone17,4":                  return "iPhone 16 Plus"
                 case "iPhone17,5":                  return "iPhone 16e"
+                case "iPhone18,1":                  return "iPhone 17 Pro"
+                case "iPhone18,2":                  return "iPhone 17 Pro Max"
+                case "iPhone18,3":                  return "iPhone 17"
+                case "iPhone18,4":                  return "iPhone Air"
 
                 case "iPad6,11", "iPad6,12":        return "iPad (5th generation)"
                 case "iPad7,5", "iPad7,6":          return "iPad (6th generation)"
