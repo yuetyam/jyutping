@@ -58,7 +58,19 @@ struct Speech {
                 let voices = AVSpeechSynthesisVoice.speechVoices().filter({ $0.language == languageCode || $0.language == alternativeLanguageCode })
                 guard voices.isNotEmpty else { return AVSpeechSynthesisVoice(language: languageCode) }
                 let preferredVoices = voices.sorted { (lhs, rhs) -> Bool in
-                        if #available(iOS 18.0, macOS 15.0, *) {
+                        if #available(iOS 26.0, macOS 26.0, *) {
+                                // Premium Cantonese voices are broken in iOS 26
+                                switch (lhs.quality, rhs.quality) {
+                                case (.premium, _):
+                                        return false
+                                case (_, .premium):
+                                        return true
+                                case (.enhanced, .default):
+                                        return true
+                                case (_, _):
+                                        return false
+                                }
+                        } else if #available(iOS 18.0, macOS 15.0, *) {
                                 switch (lhs.quality, rhs.quality) {
                                 case (.premium, .enhanced):
                                         return true

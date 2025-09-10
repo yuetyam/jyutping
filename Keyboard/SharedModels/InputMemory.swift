@@ -374,9 +374,21 @@ struct InputMemory {
                 let inputLength: Int = combos.count
                 guard inputLength < 19 else { return [] }
                 let code: Int = combos.map(\.rawValue).decimalCombined()
-                return (tenKeyCodeMatch(code: code) + tenKeyAnchorsMatch(code: code))
+                let fullMatched = tenKeyCodeMatch(code: code)
+                let anchorsMatched = tenKeyAnchorsMatch(code: code)
+                guard anchorsMatched.isNotEmpty else {
+                        return fullMatched.map({ Candidate(text: $0.word, romanization: $0.romanization, input: $0.input, mark: $0.mark, order: -1) })
+                }
+                guard fullMatched.isNotEmpty else {
+                        return anchorsMatched.map({ Candidate(text: $0.word, romanization: $0.romanization, input: $0.input, mark: $0.mark, order: -1) })
+                }
+                guard fullMatched.count > 10 else {
+                        return (fullMatched + anchorsMatched)
+                                .uniqued()
+                                .map({ Candidate(text: $0.word, romanization: $0.romanization, input: $0.input, mark: $0.mark, order: -1) })
+                }
+                return (fullMatched.prefix(10) + (fullMatched + anchorsMatched).sorted())
                         .uniqued()
-                        .sorted()
                         .map({ Candidate(text: $0.word, romanization: $0.romanization, input: $0.input, mark: $0.mark, order: -1) })
         }
         private static func tenKeyCodeMatch(code: Int) -> [InternalLexicon] {

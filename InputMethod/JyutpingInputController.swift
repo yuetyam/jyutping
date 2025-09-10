@@ -1094,8 +1094,11 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         case .cantonese:
                                 let shouldKeepBuffer: Bool = {
                                         guard isShifting.negative else { return false }
-                                        guard let type = candidates.first?.type else { return false }
-                                        return type != .compose
+                                        if let type = candidates.first?.type, type == .compose {
+                                                return false
+                                        } else {
+                                                return isBuffering
+                                        }
                                 }()
                                 if shouldKeepBuffer {
                                         bufferEvents.append(InputEvent.apostrophe)
