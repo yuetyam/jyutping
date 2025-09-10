@@ -4,29 +4,7 @@ import CommonExtensions
 struct EditingPanelCutKey: View {
 
         @EnvironmentObject private var context: KeyboardViewController
-
         @Environment(\.colorScheme) private var colorScheme
-
-        private var keyColor: Color {
-                switch colorScheme {
-                case .light:
-                        return .lightAction
-                case .dark:
-                        return .darkAction
-                @unknown default:
-                        return .lightAction
-                }
-        }
-        private var keyActiveColor: Color {
-                switch colorScheme {
-                case .light:
-                        return .activeLightAction
-                case .dark:
-                        return .activeDarkAction
-                @unknown default:
-                        return .activeLightAction
-                }
-        }
 
         @GestureState private var isTouching: Bool = false
 
@@ -34,7 +12,7 @@ struct EditingPanelCutKey: View {
                 ZStack {
                         Color.interactiveClear
                         RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous)
-                                .fill(isTouching ? keyActiveColor : keyColor)
+                                .fill(isTouching ? colorScheme.activeActionKeyColor : colorScheme.actionKeyColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(4)
                         VStack(spacing: 4) {
