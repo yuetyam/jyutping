@@ -46,16 +46,16 @@ extension Color {
                 }
         }()
 
-        private static let shallowLight       : Color = white
+        private static let shallowLight       : Color = Color.white.opacity(0.95)
         private static let legacyEmphaticLight: Color = Color(.displayP3, red: 104.0 / 255.0, green: 110.0 / 255.0, blue: 128.0 / 255.0, opacity: 0.25)
         private static let emphaticLight      : Color = Color(white: 0.62, opacity: 0.35)
 
         private static let shallowDark        : Color = Color(white: 1, opacity: 0.3)
         private static let emphaticDark       : Color = Color(white: 1, opacity: 0.15)
-        private static let solidShallowDark   : Color = Color(white: 0.45)
-        private static let solidEmphaticDark  : Color = Color(white: 0.3)
+        private static let solidShallowDark   : Color = Color(white: 0.45, opacity: 0.95)
+        private static let solidEmphaticDark  : Color = Color(white: 0.3, opacity: 0.95)
 
-        static let lightInput       : Color = shallowLight
+        static let lightInput       : Color = isLiquidGlassPreferred ? shallowLight : white
         static let lightAction      : Color = isLiquidGlassPreferred ? shallowLight : legacyEmphaticLight
         static let activeLightInput : Color = isLiquidGlassPreferred ? emphaticLight : legacyEmphaticLight
         static let activeLightAction: Color = isLiquidGlassPreferred ? emphaticLight : shallowLight
@@ -65,7 +65,7 @@ extension Color {
         static let activeDarkInput  : Color = isLiquidGlassPreferred ? shallowDark : emphaticDark
         static let activeDarkAction : Color = shallowDark
 
-        static let solidLightInput  : Color = white
+        static let solidLightInput  : Color = isLiquidGlassPreferred ? shallowLight : white
         static let solidDarkInput   : Color = isLiquidGlassPreferred ? solidEmphaticDark : solidShallowDark
 }
 

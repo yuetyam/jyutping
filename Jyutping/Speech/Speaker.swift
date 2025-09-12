@@ -11,27 +11,15 @@ struct Speaker: View {
                 self.action = action
         }
 
-        private let length: CGFloat = {
-                #if os(iOS)
-                return 32
-                #else
-                return 24
-                #endif
-        }()
-        private let speakerLength: CGFloat = {
-                #if os(iOS)
-                return 20
-                #else
-                return 16
-                #endif
-        }()
-        private let speakingLeading: CGFloat = {
-                #if os(iOS)
-                return 6
-                #else
-                return 4
-                #endif
-        }()
+        #if os(iOS)
+        private let length: CGFloat = 32
+        private let speakerLength: CGFloat = 20
+        private let speakingLeading: CGFloat = 6
+        #else
+        private let length: CGFloat = 24
+        private let speakerLength: CGFloat = 16
+        private let speakingLeading: CGFloat = 4
+        #endif
 
         @State private var isSpeaking: Bool = false
         private let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
@@ -71,8 +59,12 @@ struct Speaker: View {
                         .contentShape(Rectangle())
                         .onTapGesture {
                                 isSpeaking = true
-                                text.flatMap({ Speech.speak($0) })
-                                action?()
+                                if let text {
+                                        Speech.speak(text)
+                                }
+                                if let action {
+                                        action()
+                                }
                         }
                 }
         }
