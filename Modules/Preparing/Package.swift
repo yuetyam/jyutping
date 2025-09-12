@@ -1,10 +1,10 @@
-// swift-tools-version: 6.0
+// swift-tools-version: 6.2
 
 import PackageDescription
 
 let package = Package(
         name: "Preparing",
-        platforms: [.macOS(.v15)],
+        platforms: [.macOS(.v26)],
         products: [.executable(name: "Preparing", targets: ["Preparing"])],
         targets: [
                 .executableTarget(
