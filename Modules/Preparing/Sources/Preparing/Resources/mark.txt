@@ -9,6 +9,8 @@ android	Android
 appkit	AppKit
 appletv	Apple TV
 appstore	App Store
+arkts	ArkTS
+arkui	ArkUI
 audioos	audioOS
 bigsur	Big Sur
 bridgeos	bridgeOS
@@ -66,6 +68,7 @@ ipadmini	iPad mini
 ipados	iPadOS
 ipadpro	iPad Pro
 iphone	iPhone
+iphoneair	iPhone Air
 iphonemini	iPhone mini
 iphoneplus	iPhone Plus
 iphonepro	iPhone Pro
@@ -78,6 +81,7 @@ javascript	JavaScript
 jetbrains	JetBrains
 latex	LaTeX
 lineageos	LineageOS
+localsend	LocalSend
 macappstore	Mac App Store
 macbook	MacBook
 macbookair	MacBook Air
@@ -89,6 +93,7 @@ macpro	Mac Pro
 magicos	MagicOS
 mapkit	MapKit
 mas	Mac App Store
+mba	MBA
 mba	MacBook Air
 mbp	MacBook Pro
 misans	MiSans
@@ -96,6 +101,7 @@ miui	MIUI
 monterey	Monterey
 musickit	MusicKit
 myos	MyOS
+mysql	MySQL
 netbsd	NetBSD
 objectivec	Objective-C
 oneui	One UI
@@ -105,6 +111,7 @@ opencc	OpenCC
 opencl	OpenCL
 opencv	OpenCV
 opengl	OpenGL
+openmtp	OpenMTP
 opensuse	openSUSE
 originos	OriginOS
 osx	OS X
@@ -114,6 +121,7 @@ pencilkit	PencilKit
 photokit	PhotoKit
 promotion	ProMotion
 pushkit	PushKit
+qrcode	QR Code
 realmeui	realme UI
 replaykit	ReplayKit
 researchkit	ResearchKit
@@ -123,6 +131,7 @@ shareplay	SharePlay
 sirikit	SiriKit
 sonoma	Sonoma
 spacex	SpaceX
+sqlite	SQLite
 steamos	SteamOS
 storekit	StoreKit
 swiftui	SwiftUI
