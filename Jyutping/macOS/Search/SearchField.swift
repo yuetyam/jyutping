@@ -16,17 +16,38 @@ struct SearchField: View {
         @State private var inputText: String = String.empty
 
         var body: some View {
-                TextField(titleKey, text: $inputText)
-                        #if os(iOS)
-                        .textInputAutocapitalization(.never)
-                        #endif
-                        #if os(macOS)
-                        .textFieldStyle(.plain)
-                        #endif
-                        .autocorrectionDisabled(true)
-                        .submitLabel(submitLabel)
-                        .onSubmit {
-                                submittedText = inputText
-                        }
+                if #available(macOS 26.0, *) {
+                        TextField(titleKey, text: $inputText)
+                                #if os(iOS)
+                                .textInputAutocapitalization(.never)
+                                #endif
+                                #if os(macOS)
+                                .textFieldStyle(.plain)
+                                #endif
+                                .autocorrectionDisabled(true)
+                                .submitLabel(submitLabel)
+                                .onSubmit {
+                                        submittedText = inputText
+                                }
+                                .font(.master)
+                                .padding(8)
+                                .glassEffect()
+                } else {
+                        TextField(titleKey, text: $inputText)
+                                #if os(iOS)
+                                .textInputAutocapitalization(.never)
+                                #endif
+                                #if os(macOS)
+                                .textFieldStyle(.plain)
+                                #endif
+                                .autocorrectionDisabled(true)
+                                .submitLabel(submitLabel)
+                                .onSubmit {
+                                        submittedText = inputText
+                                }
+                                .font(.master)
+                                .padding(8)
+                                .background(Color.textBackgroundColor.opacity(0.5), in: .capsule)
+                }
         }
 }

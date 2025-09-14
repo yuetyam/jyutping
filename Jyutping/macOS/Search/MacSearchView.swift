@@ -54,9 +54,6 @@ struct MacSearchView: View {
                 ScrollViewReader { proxy in
                         SearchField("TextField.SearchPronunciation", submittedText: $submittedText)
                                 .focused($focusedField, equals: .searchField)
-                                .font(.master)
-                                .padding(8)
-                                .background(Color.textBackgroundColor.opacity(0.5), in: .capsule)
                                 .padding(.horizontal)
                                 .padding(.vertical, 8)
                                 .background {
