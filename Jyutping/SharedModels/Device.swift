@@ -1,4 +1,5 @@
 import SwiftUI
+import CommonExtensions
 
 struct Device {
 
@@ -31,7 +32,7 @@ struct Device {
                 #endif
         }()
 
-        /// Example: iPhone 13 Pro Max
+        /// Example: iPhone 17 Pro Max
         @MainActor
         static let modelName: String = {
                 #if os(iOS)
@@ -41,14 +42,13 @@ struct Device {
                 #endif
         }()
 
-        /// Example: iPadOS 15.2
+        /// Example: iPadOS 26.2
         @MainActor
         static let system: String = {
                 #if os(iOS)
-                return UIDevice.current.systemName + " " + UIDevice.current.systemVersion
+                return UIDevice.current.systemName + String.space + UIDevice.current.systemVersion
                 #else
                 return ProcessInfo.processInfo.operatingSystemVersionString
                 #endif
         }()
 }
-

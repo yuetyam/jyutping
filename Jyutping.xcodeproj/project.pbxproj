@@ -317,6 +317,7 @@
 		37D757DA2C252F8500915B21 /* Linguistics in Frameworks */ = {isa = PBXBuildFile; productRef = 37D757D92C252F8500915B21 /* Linguistics */; };
 		37D771A82BF805FA008BC978 /* VerticalPageCandidateLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D771A72BF805FA008BC978 /* VerticalPageCandidateLabel.swift */; };
 		37D928782CDD73CD00A06729 /* BubbleShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D928772CDD73C600A06729 /* BubbleShape.swift */; };
+		37E5F50C2E79EA39009DAE5E /* TransparentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E5F50B2E79EA39009DAE5E /* TransparentButton.swift */; };
 		37E6AD6C2B3B381700F02279 /* CandidateBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD452B3B381600F02279 /* CandidateBoard.swift */; };
 		37E6AD6D2B3B381700F02279 /* HorizontalPageCandidateLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD462B3B381600F02279 /* HorizontalPageCandidateLabel.swift */; };
 		37E6AD6E2B3B381700F02279 /* MotherBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD472B3B381600F02279 /* MotherBoard.swift */; };
@@ -732,6 +733,7 @@
 		37D757D82C252F2500915B21 /* Linguistics */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Linguistics; path = Modules/Linguistics; sourceTree = "<group>"; };
 		37D771A72BF805FA008BC978 /* VerticalPageCandidateLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalPageCandidateLabel.swift; sourceTree = "<group>"; };
 		37D928772CDD73C600A06729 /* BubbleShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleShape.swift; sourceTree = "<group>"; };
+		37E5F50B2E79EA39009DAE5E /* TransparentButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparentButton.swift; sourceTree = "<group>"; };
 		37E6AD452B3B381600F02279 /* CandidateBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CandidateBoard.swift; sourceTree = "<group>"; };
 		37E6AD462B3B381600F02279 /* HorizontalPageCandidateLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HorizontalPageCandidateLabel.swift; sourceTree = "<group>"; };
 		37E6AD472B3B381600F02279 /* MotherBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotherBoard.swift; sourceTree = "<group>"; };
@@ -768,7 +770,6 @@
 		37E6AD952B3B389400F02279 /* jyutpingime.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = jyutpingime.pdf; sourceTree = "<group>"; };
 		37E6ADB02B3B38B100F02279 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		37EFD7252B3719C10089D346 /* Jyutping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jyutping.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		37EFD72E2B3719C20089D346 /* Jyutping.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Jyutping.entitlements; sourceTree = "<group>"; };
 		37EFD7302B3719C20089D346 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		37EFD7362B3719C30089D346 /* JyutpingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JyutpingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		37EFD73A2B3719C30089D346 /* JyutpingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JyutpingTests.swift; sourceTree = "<group>"; };
@@ -1042,6 +1043,7 @@
 				371B6F2D2B3B342E005BB31C /* ScrollViewButton.swift */,
 				371B6F332B3B342E005BB31C /* ScrollViewGestureButton.swift */,
 				378F4EEC2E0049D800766736 /* UIGlobeButton.swift */,
+				37E5F50B2E79EA39009DAE5E /* TransparentButton.swift */,
 			);
 			path = SharedViews;
 			sourceTree = "<group>";
@@ -1544,7 +1546,6 @@
 				371B6E472B3B3107005BB31C /* Materials */,
 				371B6E942B3B3108005BB31C /* Speech */,
 				371B6E502B3B3107005BB31C /* Extensions */,
-				37EFD72E2B3719C20089D346 /* Jyutping.entitlements */,
 				37D1C9372BBF288000015FD0 /* PrivacyInfo.xcprivacy */,
 				371B6F042B3B3288005BB31C /* Info.plist */,
 				3717DBD22BF9AF8600DC3DB1 /* InfoPlist.xcstrings */,
@@ -2013,6 +2014,7 @@
 				371B6FA92B3B342F005BB31C /* SidebarPanel.swift in Sources */,
 				379C516B2CB9DECE00AAB1A3 /* SymbolSidebarScrollView.swift in Sources */,
 				371B6FAA2B3B342F005BB31C /* TenKeyNumericKeyboard.swift in Sources */,
+				37E5F50C2E79EA39009DAE5E /* TransparentButton.swift in Sources */,
 				371B6F9C2B3B342F005BB31C /* ReturnKey.swift in Sources */,
 				371B6FF72B3B342F005BB31C /* PadSpaceKey.swift in Sources */,
 				371B6FD12B3B342F005BB31C /* KeyboardCase.swift in Sources */,
@@ -2631,13 +2633,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = Jyutping/Jyutping.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 149;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Jyutping/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
+				ENABLE_APP_SANDBOX = YES;
 				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -2676,13 +2678,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = Jyutping/Jyutping.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 149;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Jyutping/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
+				ENABLE_APP_SANDBOX = YES;
 				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
