@@ -26,7 +26,7 @@ struct SidebarScrollViewIOS16: View {
                                                                 Rectangle()
                                                                         .fill(Material.regular)
                                                                         .opacity(item.isSelected ? 1 : 0)
-                                                                Text(verbatim: item.text)
+                                                                Text(verbatim: item.text).font(item.isSelected ? .sidebarSyllable : .body)
                                                         }
                                                         .frame(height: item.isSelected ? compactHeight : idealHeight)
                                                         .frame(maxWidth: .infinity)
