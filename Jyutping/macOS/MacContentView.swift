@@ -38,9 +38,9 @@ struct MacContentView: View {
                                 .font(.master)
                                 Section {
                                         Label("MacSidebar.NavigationTitle.Numbers", systemImage: "number").tag(ViewIdentifier.numbers)
-                                        Label("MacSidebar.NavigationTitle.StemsAndBranches", systemImage: "timelapse").tag(ViewIdentifier.stemsBranches)
                                         Label("MacSidebar.NavigationTitle.ChineseZodiac", systemImage: "hare").tag(ViewIdentifier.chineseZodiac)
                                         Label("MacSidebar.NavigationTitle.SolarTerms", systemImage: "cloud.sun").tag(ViewIdentifier.solarTerms)
+                                        Label("MacSidebar.NavigationTitle.StemsAndBranches", systemImage: "timelapse").tag(ViewIdentifier.stemsBranches)
                                         Label("MacSidebar.NavigationTitle.HundredFamilySurnames", systemImage: "person").tag(ViewIdentifier.surnames)
                                         Label("MacSidebar.NavigationTitle.ThousandCharacterClassic", systemImage: characterImageName).tag(ViewIdentifier.cinZiMan)
                                 } header: {
@@ -94,12 +94,12 @@ struct MacContentView: View {
                                 MacJyutpingToneTable()
                         case .numbers:
                                 NumbersView()
-                        case .stemsBranches:
-                                StemsBranchesView()
                         case .chineseZodiac:
                                 ChineseZodiacView()
                         case .solarTerms:
                                 SolarTermsView()
+                        case .stemsBranches:
+                                StemsBranchesView()
                         case .surnames:
                                 MacHundredFamilySurnamesView()
                         case .cinZiMan:
@@ -138,9 +138,9 @@ private enum ViewIdentifier: Int, Hashable, Identifiable {
         case tones
 
         case numbers
-        case stemsBranches
         case chineseZodiac
         case solarTerms
+        case stemsBranches
         case surnames
         case cinZiMan
         case cantonMetro

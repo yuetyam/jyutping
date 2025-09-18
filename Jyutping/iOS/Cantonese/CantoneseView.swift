@@ -32,14 +32,14 @@ struct CantoneseView: View {
                                         NavigationLink(destination: NumbersView()) {
                                                 Label("IOSCantoneseTab.LabelTitle.Numbers", systemImage: "number")
                                         }
-                                        NavigationLink(destination: StemsBranchesView()) {
-                                                Label("IOSCantoneseTab.LabelTitle.StemsAndBranches", systemImage: "timelapse")
-                                        }
                                         NavigationLink(destination: ChineseZodiacView()) {
                                                 Label("IOSCantoneseTab.LabelTitle.ChineseZodiac", systemImage: "hare")
                                         }
                                         NavigationLink(destination: SolarTermsView()) {
                                                 Label("IOSCantoneseTab.LabelTitle.SolarTerms", systemImage: "cloud.sun")
+                                        }
+                                        NavigationLink(destination: StemsBranchesView()) {
+                                                Label("IOSCantoneseTab.LabelTitle.StemsAndBranches", systemImage: "timelapse")
                                         }
                                         NavigationLink(destination: IOSHundredFamilySurnamesView()) {
                                                 Label("IOSCantoneseTab.LabelTitle.HundredFamilySurnames", systemImage: "person")

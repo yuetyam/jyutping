@@ -66,11 +66,6 @@ struct MacContentViewMonterey: View {
                                                 Label("MacSidebar.NavigationTitle.Numbers", systemImage: "number")
                                         }
                                         NavigationLink {
-                                                StemsBranchesView()
-                                        } label: {
-                                                Label("MacSidebar.NavigationTitle.StemsAndBranches", systemImage: "timelapse")
-                                        }
-                                        NavigationLink {
                                                 ChineseZodiacView()
                                         } label: {
                                                 Label("MacSidebar.NavigationTitle.ChineseZodiac", systemImage: "hare")
@@ -79,6 +74,11 @@ struct MacContentViewMonterey: View {
                                                 SolarTermsView()
                                         } label: {
                                                 Label("MacSidebar.NavigationTitle.SolarTerms", systemImage: "cloud.sun")
+                                        }
+                                        NavigationLink {
+                                                StemsBranchesView()
+                                        } label: {
+                                                Label("MacSidebar.NavigationTitle.StemsAndBranches", systemImage: "timelapse")
                                         }
                                         NavigationLink {
                                                 MacHundredFamilySurnamesView()

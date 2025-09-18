@@ -1,3 +1,5 @@
+#if os(macOS)
+
 import SwiftUI
 import CommonExtensions
 
@@ -18,12 +20,7 @@ struct SearchField: View {
         var body: some View {
                 if #available(macOS 26.0, *) {
                         TextField(titleKey, text: $inputText)
-                                #if os(iOS)
-                                .textInputAutocapitalization(.never)
-                                #endif
-                                #if os(macOS)
                                 .textFieldStyle(.plain)
-                                #endif
                                 .autocorrectionDisabled(true)
                                 .submitLabel(submitLabel)
                                 .onSubmit {
@@ -34,12 +31,7 @@ struct SearchField: View {
                                 .glassEffect()
                 } else {
                         TextField(titleKey, text: $inputText)
-                                #if os(iOS)
-                                .textInputAutocapitalization(.never)
-                                #endif
-                                #if os(macOS)
                                 .textFieldStyle(.plain)
-                                #endif
                                 .autocorrectionDisabled(true)
                                 .submitLabel(submitLabel)
                                 .onSubmit {
@@ -51,3 +43,5 @@ struct SearchField: View {
                 }
         }
 }
+
+#endif
