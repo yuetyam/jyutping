@@ -4,6 +4,9 @@ struct PresetConstant {
 
         static let toolBarHeight: CGFloat = 56
 
+        /// Default value for Button width and height
+        static let buttonLength: CGFloat = 44
+
         /// CandidateBoard top-right collapse button
         static let collapseWidth: CGFloat = 44
 

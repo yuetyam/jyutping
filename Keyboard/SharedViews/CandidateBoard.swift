@@ -76,29 +76,40 @@ struct CandidateBoard: View {
                         } else {
                                 CandidateBoardScrollView()
                         }
-                        Button {
-                                AudioFeedback.modified()
-                                context.triggerHapticFeedback()
-                                context.updateKeyboardForm(to: context.previousKeyboardForm)
-                        } label: {
-                                ZStack {
-                                        Color.interactiveClear
-                                        if #available(iOSApplicationExtension 26.0, *) {
-                                                Circle().glassEffect(.clear)
-                                        } else {
-                                                Circle()
-                                                        .fill(Material.ultraThin)
-                                                        .padding(.top, 2)
-                                                        .padding(.trailing, 2)
+                        if #available(iOSApplicationExtension 26.0, *) {
+                                Button(action: back) {
+                                        ZStack {
+                                                Color.interactiveClear
+                                                Image.chevronUp
+                                                        .resizable()
+                                                        .scaledToFit()
+                                                        .padding(12)
                                         }
-                                        Image.chevronUp
-                                                .resizable()
-                                                .scaledToFit()
-                                                .padding(12)
+                                        .frame(width: PresetConstant.buttonLength, height: PresetConstant.buttonLength)
                                 }
-                                .frame(width: PresetConstant.collapseWidth, height: PresetConstant.collapseHeight)
+                                .buttonStyle(.plain)
+                                .glassEffect(.clear, in: .circle)
+                        } else {
+                                Button(action: back) {
+                                        ZStack {
+                                                Color.interactiveClear
+                                                Circle().fill(Material.ultraThin)
+                                                Image.chevronUp
+                                                        .resizable()
+                                                        .scaledToFit()
+                                                        .padding(11)
+                                        }
+                                        .padding(.top, 2)
+                                        .padding(.trailing, 2)
+                                        .frame(width: PresetConstant.buttonLength, height: PresetConstant.buttonLength)
+                                }
+                                .buttonStyle(.plain)
                         }
-                        .buttonStyle(.plain)
                 }
+        }
+        private func back() {
+                AudioFeedback.modified()
+                context.triggerHapticFeedback()
+                context.updateKeyboardForm(to: context.previousKeyboardForm)
         }
 }

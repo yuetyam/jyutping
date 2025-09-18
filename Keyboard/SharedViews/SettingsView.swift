@@ -2,19 +2,48 @@ import SwiftUI
 import CoreIME
 import CommonExtensions
 
-@available(iOS 16.0, *)
-@available(iOSApplicationExtension 16.0, *)
-struct SettingsView: View {
-
+private struct LeadingNavigationButton: View {
         @EnvironmentObject private var context: KeyboardViewController
-
-        /// Example: 1.0.1 (23)
-        private let version: String = {
-                let marketingVersion: String = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? "error"
-                let currentProjectVersion: String = (Bundle.main.infoDictionary?["CFBundleVersion"] as? String) ?? "null"
-                return marketingVersion + " (" + currentProjectVersion + ")"
-        }()
-
+        var body: some View {
+                HStack(spacing: 0) {
+                        TransparentButton(width: 4, height: PresetConstant.buttonLength, action: action)
+                        if #available(iOSApplicationExtension 26.0, *) {
+                                Button(action: action) {
+                                        ZStack{
+                                                Color.interactiveClear
+                                                Image.chevronUp
+                                                        .resizable()
+                                                        .scaledToFit()
+                                                        .padding(12)
+                                        }
+                                        .frame(width: PresetConstant.buttonLength, height: PresetConstant.buttonLength)
+                                }
+                                .buttonStyle(.plain)
+                                .glassEffect(.clear, in: .circle)
+                        } else {
+                                Button(action: action) {
+                                        ZStack{
+                                                Color.interactiveClear
+                                                Image.chevronUp
+                                                        .resizable()
+                                                        .scaledToFit()
+                                                        .padding(12)
+                                        }
+                                        .frame(width: PresetConstant.buttonLength, height: PresetConstant.buttonLength)
+                                }
+                                .buttonStyle(.plain)
+                        }
+                        TransparentButton(width: 12, height: PresetConstant.buttonLength, action: action)
+                }
+        }
+        private func action() {
+                AudioFeedback.modified()
+                context.triggerHapticFeedback()
+                context.updateKeyboardForm(to: context.previousKeyboardForm)
+        }
+}
+private struct TrailingNavigationButton: View {
+        @EnvironmentObject private var context: KeyboardViewController
         private let expandImageName: String = {
                 if #available(iOSApplicationExtension 17.0, *) {
                         return "arrow.down.backward.and.arrow.up.forward"
@@ -28,6 +57,57 @@ struct SettingsView: View {
                 } else {
                         return "arrow.down.and.line.horizontal.and.arrow.up"
                 }
+        }()
+        var body: some View {
+                HStack(spacing: 0) {
+                        TransparentButton(width: 12, height: PresetConstant.buttonLength, action: action)
+                        if #available(iOSApplicationExtension 26.0, *) {
+                                Button(action: action) {
+                                        ZStack {
+                                                Color.interactiveClear
+                                                Image(systemName: context.isKeyboardHeightExpanded ? collapseImageName : expandImageName)
+                                                        .resizable()
+                                                        .scaledToFit()
+                                                        .padding(13)
+                                        }
+                                        .frame(width: PresetConstant.buttonLength, height: PresetConstant.buttonLength)
+                                }
+                                .buttonStyle(.plain)
+                                .glassEffect(.clear, in: .circle)
+                        } else {
+                                Button(action: action) {
+                                        ZStack {
+                                                Color.interactiveClear
+                                                Image(systemName: context.isKeyboardHeightExpanded ? collapseImageName : expandImageName)
+                                                        .resizable()
+                                                        .scaledToFit()
+                                                        .padding(13)
+                                        }
+                                        .frame(width: PresetConstant.buttonLength, height: PresetConstant.buttonLength)
+                                }
+                                .buttonStyle(.plain)
+                        }
+                        TransparentButton(width: 4, height: PresetConstant.buttonLength, action: action)
+                }
+        }
+        private func action() {
+                AudioFeedback.modified()
+                context.triggerHapticFeedback()
+                context.toggleKeyboardHeight()
+        }
+}
+
+@available(iOS 16.0, *)
+@available(iOSApplicationExtension 16.0, *)
+struct SettingsView: View {
+
+        @EnvironmentObject private var context: KeyboardViewController
+
+        /// Example: 1.0.1 (23)
+        private let version: String = {
+                let marketingVersion: String = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? "error"
+                let currentProjectVersion: String = (Bundle.main.infoDictionary?["CFBundleVersion"] as? String) ?? "null"
+                return marketingVersion + " (" + currentProjectVersion + ")"
         }()
 
         @State private var characterStandard: CharacterStandard = Options.characterStandard
@@ -61,42 +141,12 @@ struct SettingsView: View {
                                         .font(.footnote)
                                         .shallow()
                                 HStack {
-                                        Button {
-                                                AudioFeedback.modified()
-                                                context.triggerHapticFeedback()
-                                                context.updateKeyboardForm(to: context.previousKeyboardForm)
-                                        } label: {
-                                                ZStack {
-                                                        Color.interactiveClear
-                                                        Image.chevronUp
-                                                                .resizable()
-                                                                .scaledToFit()
-                                                                .padding(14)
-                                                }
-                                        }
-                                        .buttonStyle(.plain)
-                                        .frame(width: 48)
-                                        .frame(maxHeight: .infinity)
+                                        LeadingNavigationButton()
                                         Spacer()
-                                        Button {
-                                                AudioFeedback.modified()
-                                                context.triggerHapticFeedback()
-                                                context.toggleKeyboardHeight()
-                                        } label: {
-                                                ZStack {
-                                                        Color.interactiveClear
-                                                        Image(systemName: context.isKeyboardHeightExpanded ? collapseImageName : expandImageName)
-                                                                .resizable()
-                                                                .scaledToFit()
-                                                                .padding(14)
-                                                }
-                                        }
-                                        .buttonStyle(.plain)
-                                        .frame(width: 48)
-                                        .frame(maxHeight: .infinity)
+                                        TrailingNavigationButton()
                                 }
                         }
-                        .frame(height: 44)
+                        .frame(height: PresetConstant.buttonLength)
                         List {
                                 Picker("SettingsView.CharacterStandard.PickerTitle", selection: $characterStandard) {
                                         Text("SettingsView.CharacterStandard.Option.Traditional").tag(CharacterStandard.traditional)
