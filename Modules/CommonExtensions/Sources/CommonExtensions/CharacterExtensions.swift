@@ -75,25 +75,33 @@ extension Character {
         /// is CJKV character
         public var isIdeographic: Bool {
                 guard let scalarValue: UInt32 = self.unicodeScalars.first?.value else { return false }
-                switch scalarValue {
-                case 0x3007: return true
-                case 0x4E00...0x9FFF: return true
-                case 0x3400...0x4DBF: return true
-                case 0x20000...0x2A6DF: return true
-                case 0x2A700...0x2B73F: return true
-                case 0x2B740...0x2B81F: return true
-                case 0x2B820...0x2CEAF: return true
-                case 0x2CEB0...0x2EBEF: return true
-                case 0x30000...0x3134F: return true
-                case 0x31350...0x323AF: return true
-                case 0x2EBF0...0x2EE5F: return true
-                default: return false
+                return scalarValue.isIdeographicCodePoint
+        }
+}
+
+extension BinaryInteger {
+        /// is CJKV character Unicode code point
+        public var isIdeographicCodePoint: Bool {
+                switch self {
+                case 0x3007: true
+                case 0x4E00...0x9FFF: true
+                case 0x3400...0x4DBF: true
+                case 0x20000...0x2A6DF: true
+                case 0x2A700...0x2B73F: true
+                case 0x2B740...0x2B81F: true
+                case 0x2B820...0x2CEAF: true
+                case 0x2CEB0...0x2EBEF: true
+                case 0x30000...0x3134F: true
+                case 0x31350...0x323AF: true
+                case 0x2EBF0...0x2EE5F: true
+                case 0x323B0...0x33479: true
+                default: false
                 }
         }
 }
 
 /*
-U+3007: 〇
+U+3007: Character Zero
 U+4E00-U+9FFF: CJK Unified Ideographs
 U+3400-U+4DBF: CJK Unified Ideographs Extension A
 U+20000-U+2A6DF: CJK Unified Ideographs Extension B
@@ -104,4 +112,5 @@ U+2CEB0-U+2EBEF: CJK Unified Ideographs Extension F
 U+30000-U+3134F: CJK Unified Ideographs Extension G
 U+31350-U+323AF: CJK Unified Ideographs Extension H
 U+2EBF0-U+2EE5F: CJK Unified Ideographs Extension I
+U+323B0-U+33479: CJK Unified Ideographs Extension J
 */
