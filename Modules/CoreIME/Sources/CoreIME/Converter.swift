@@ -1,25 +1,6 @@
 import Foundation
 import SQLite3
 
-/*
-extension Array where Element == Candidate {
-        @available(*, deprecated, message: "Use Converter.dispatch() instead")
-        public func transformed(with characterStandard: CharacterStandard, isEmojiSuggestionsOn: Bool) -> [Candidate] {
-                let containsInputMemory: Bool = first?.isInputMemory ?? false
-                switch (containsInputMemory, isEmojiSuggestionsOn) {
-                case (true, true):
-                        return filter(\.isCompound.negative).transformed(to: characterStandard).uniqued()
-                case (false, true):
-                        return transformed(to: characterStandard).uniqued()
-                case (true, false):
-                        return filter({ $0.isCompound.negative && $0.isEmojiOrSymbol.negative }).transformed(to: characterStandard).uniqued()
-                case (false, false):
-                        return filter(\.isEmojiOrSymbol.negative).transformed(to: characterStandard).uniqued()
-                }
-        }
-}
-*/
-
 extension Converter {
 
         /// Merge and normalize multiple candidate sources into a single list.
@@ -36,27 +17,13 @@ extension Converter {
                 switch (memory.isNotEmpty, isEmojiSuggestionsOn) {
                 case (true, true):
                         guard symbols.isNotEmpty else {
-                                if defined.isEmpty {
-                                        return (memory + marks + queried.filter(\.isCompound.negative))
-                                                .transformed(to: characterStandard)
-                                                .uniqued()
-                                } else {
-                                        return (memory.prefix(3) + defined + memory + marks + queried.filter(\.isCompound.negative))
-                                                .transformed(to: characterStandard)
-                                                .uniqued()
-                                }
+                                return (defined + memory + marks + queried.filter(\.isCompound.negative))
+                                        .transformed(to: characterStandard)
+                                        .uniqued()
                         }
-                        var items: [Candidate] = {
-                                if defined.isEmpty {
-                                        return (memory + marks + queried.filter(\.isCompound.negative))
-                                                .transformed(to: characterStandard)
-                                                .uniqued()
-                                } else {
-                                        return (memory.prefix(3) + defined + memory + marks + queried.filter(\.isCompound.negative))
-                                                .transformed(to: characterStandard)
-                                                .uniqued()
-                                }
-                        }()
+                        var items: [Candidate] = (defined + memory + marks + queried.filter(\.isCompound.negative))
+                                .transformed(to: characterStandard)
+                                .uniqued()
                         for symbol in symbols.reversed() {
                                 if let index = items.firstIndex(where: { $0.isCantonese && $0.lexiconText == symbol.lexiconText && $0.romanization == symbol.romanization }) {
                                         items.insert(symbol, at: index + 1)
@@ -64,15 +31,9 @@ extension Converter {
                         }
                         return items
                 case (true, false):
-                        if defined.isEmpty {
-                                return (memory + marks + queried.filter(\.isCompound.negative))
-                                        .transformed(to: characterStandard)
-                                        .uniqued()
-                        } else {
-                                return (memory.prefix(3) + defined + memory + marks + queried.filter(\.isCompound.negative))
-                                        .transformed(to: characterStandard)
-                                        .uniqued()
-                        }
+                        return (defined + memory + marks + queried.filter(\.isCompound.negative))
+                                .transformed(to: characterStandard)
+                                .uniqued()
                 case (false, true):
                         guard queried.isNotEmpty else {
                                 return (defined + marks).uniqued()
