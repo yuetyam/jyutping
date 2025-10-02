@@ -131,11 +131,11 @@ struct RightKey: View {
                                                 }
                                         }
                                 } else {
-                                        guard shouldShowExtraHeader else { return }
-                                        guard pulled == nil && buffer > 1 else { return }
+                                        guard shouldShowExtraHeader && (pulled == nil) else { return }
                                         guard context.inputStage.isBuffering.negative else { return }
                                         let distance: CGFloat = state.translation.height
-                                        guard abs(distance) > 30 else { return }
+                                        let isSatisfied: Bool = abs(distance) > 36 || (buffer > 1 && abs(distance) > 24)
+                                        guard isSatisfied else { return }
                                         pulled = headerText
                                 }
                         }

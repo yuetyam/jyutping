@@ -3602,7 +3602,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Suggestions d’emoji"
+            "value" : "Suggestions d'emoji"
           }
         },
         "ja" : {
@@ -5588,55 +5588,55 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "鍵盤佈局"
+            "value" : "鍵盤排列佈局"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "鍵盤佈局"
+            "value" : "鍵盤排列佈局"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "鍵盤佈局"
+            "value" : "鍵盤排列佈局"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "鍵盤佈局"
+            "value" : "鍵盤排列佈局"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "鍵盤佈局"
+            "value" : "鍵盤排列佈局"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "鍵盤佈局"
+            "value" : "鍵盤排列佈局"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "鍵盤佈局"
+            "value" : "鍵盤排列佈局"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "鍵盤佈局"
+            "value" : "鍵盤排列佈局"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "鍵盤佈局"
+            "value" : "鍵盤排列佈局"
           }
         }
       }

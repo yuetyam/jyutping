@@ -89,15 +89,16 @@ enum QwertyForm: Int {
         /// Alphabetic, English
         case abc
 
-        /// Alphabetic, Cantonese (粵拼全鍵盤)
+        /// Alphabetic, Cantonese 粵拼全鍵盤
         case jyutping
 
-        /// Cantonese Triple-Stroke (粵拼三拼)
+        /// Cantonese Triple-Stroke 粵拼三拼
         case tripleStroke
 
+        /// 普通話拼音
         case pinyin
 
-        /// Cangjie or Quick(Sucheng)
+        /// 倉頡或速成
         case cangjie
 
         /// 筆畫

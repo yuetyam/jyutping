@@ -38,7 +38,7 @@ struct ABCRightAlternativeKey: View {
                 let previewBottomOffset: CGFloat = (baseHeight * 2) + (curveHeight * 1.5)
                 let shouldPreviewKey: Bool = Options.keyTextPreview
                 let activeColor: Color = shouldPreviewKey ? keyColor : keyActiveColor
-                let shouldShowExtraHeader: Bool = (Options.inputKeyStyle == .numbersAndSymbols)
+                let shouldShowExtraFooter: Bool = (Options.inputKeyStyle == .numbersAndSymbols)
                 ZStack {
                         Color.interactiveClear
                         if isLongPressing {
@@ -91,7 +91,7 @@ struct ABCRightAlternativeKey: View {
                                 }
                                 .padding(.vertical, verticalPadding + 5)
                                 .padding(.horizontal, horizontalPadding + 6)
-                                .opacity(shouldShowExtraHeader ? 0.66 : 0)
+                                .opacity(shouldShowExtraFooter ? 0.66 : 0)
                                 Text(verbatim: String.period).font(.letterCompact)
                         }
                 }
@@ -123,10 +123,10 @@ struct ABCRightAlternativeKey: View {
                                                 }
                                         }
                                 } else {
-                                        guard shouldShowExtraHeader else { return }
-                                        guard pulled == nil && buffer > 1 else { return }
+                                        guard shouldShowExtraFooter && (pulled == nil) else { return }
                                         let distance: CGFloat = state.translation.height
-                                        guard abs(distance) > 30 else { return }
+                                        let isSatisfied: Bool = abs(distance) > 36 || (buffer > 1 && abs(distance) > 24)
+                                        guard isSatisfied else { return }
                                         pulled = String.comma
                                 }
                         }

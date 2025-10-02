@@ -175,13 +175,14 @@ struct EnhancedInputKey: View {
                                                         selectedIndex = newSelectedIndex
                                                 }
                                         }
-                                } else {
-                                        guard pulled == nil && buffer > 1 else { return }
+                                } else if (pulled == nil) {
                                         let distance: CGFloat = state.translation.height
-                                        if distance > 30 {
+                                        let isSatisfied: Bool = abs(distance) > 36 || (buffer > 1 && abs(distance) > 24)
+                                        guard isSatisfied else { return }
+                                        if distance > 0 {
                                                 // swipe from top to bottom
                                                 pulled = keyModel.primary.header ?? keyModel.primary.footer
-                                        } else if distance < -30 {
+                                        } else {
                                                 // swipe from bottom to top
                                                 pulled = keyModel.primary.footer ?? keyModel.primary.header
                                         }

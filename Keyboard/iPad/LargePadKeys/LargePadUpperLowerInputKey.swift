@@ -144,7 +144,8 @@ struct LargePadUpperLowerInputKey: View {
                                         }
                                 } else if isPullingDown.negative {
                                         let distance: CGFloat = state.translation.height
-                                        guard distance > 30 else { return }
+                                        let isSatisfied: Bool = distance > 36 || (buffer > 1 && distance > 24)
+                                        guard isSatisfied else { return }
                                         isPullingDown = true
                                 }
                         }

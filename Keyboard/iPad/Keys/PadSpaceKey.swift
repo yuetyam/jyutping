@@ -62,8 +62,7 @@ struct PadSpaceKey: View {
                                 tapped = true
                         }
                         .onChanged { value in
-                                guard isTouching else { return }
-                                guard isLongPressEngaged else { return }
+                                guard isTouching && isLongPressEngaged else { return }
                                 let currentDraggingDistance = value.translation.width
                                 let extra = currentDraggingDistance - previousDraggingDistance
                                 guard abs(extra) > 10 else { return }

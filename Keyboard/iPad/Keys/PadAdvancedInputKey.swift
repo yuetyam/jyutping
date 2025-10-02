@@ -198,10 +198,10 @@ struct PadAdvancedInputKey: View {
                                                 let index = memberCount - Int((maxPoint - distance) / baseWidth)
                                                 selectedIndex = min(endIndex, max(0, index))
                                         }
-                                } else {
-                                        guard isPullingDown.negative && buffer > 1 else { return }
+                                } else if isPullingDown.negative {
                                         let distance: CGFloat = state.translation.height
-                                        guard distance > 30 else { return }
+                                        let isSatisfied: Bool = distance > 36 || (buffer > 1 && distance > 24)
+                                        guard isSatisfied else { return }
                                         isPullingDown = true
                                 }
                         }

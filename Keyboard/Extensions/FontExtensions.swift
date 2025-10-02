@@ -9,7 +9,7 @@ extension Font {
         static let tone: Font = Font.system(size: 10)
 
         static let letterCompact: Font = Font.system(size: 24)
-        static let dualLettersCompact: Font = Font.system(size: 17)
+        static let dualLettersCompact: Font = Font.system(size: 18)
         static let keyFootnote: Font = Font.system(size: 10)
 
         /// 10-key sidebar selected syllable texts
