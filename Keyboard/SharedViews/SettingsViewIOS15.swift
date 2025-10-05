@@ -28,6 +28,7 @@ struct SettingsViewIOS15: View {
         @State private var showLowercaseKeys: Bool = Options.showLowercaseKeys
         @State private var keyTextPreview: Bool = Options.keyTextPreview
         @State private var inputKeyStyle: InputKeyStyle = Options.inputKeyStyle
+        @State private var keyHeightOffset: CGFloat = Options.fetchKeyHeightOffset()
         @State private var commentStyle: CommentStyle = Options.commentStyle
         @State private var commentToneStyle: CommentToneStyle = Options.commentToneStyle
         @State private var cangjieVariant: CangjieVariant = Options.cangjieVariant
@@ -191,6 +192,25 @@ struct SettingsViewIOS15: View {
                                                 AudioFeedback.modified()
                                                 context.triggerSelectionHapticFeedback()
                                                 Options.updateInputKeyStyle(to: newStyle)
+                                        }
+                                }
+
+                                Section {
+                                        HStack(spacing: 2) {
+                                                Text("SettingsView.KeyHeightOffset.SliderTitle")
+                                                Text(verbatim: ": ").foregroundStyle(Color.secondary)
+                                                Text(verbatim: String(format: "%+g", keyHeightOffset))
+                                        }
+                                        Slider(value: $keyHeightOffset, in: -7...7, step: 1) {
+                                                Text("SettingsView.KeyHeightOffset.SliderTitle")
+                                        } minimumValueLabel: {
+                                                Text(verbatim: "-7")
+                                        } maximumValueLabel: {
+                                                Text(verbatim: "+7")
+                                        } onEditingChanged: { isEditing in
+                                                if isEditing.negative {
+                                                        context.updateKeyHeightOffset(to: keyHeightOffset)
+                                                }
                                         }
                                 }
 

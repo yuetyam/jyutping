@@ -7,23 +7,31 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         private func layoutMotherBoard() {
                 let screenSize: CGSize = UIScreen.main.bounds.size
                 adoptKeyboardInterface(screenSize: screenSize)
-                let rowHeight: CGFloat = keyboardInterface.keyHeightUnit(of: screenSize)
+                updateTopBarHeight()
+                let rowHeight: CGFloat = keyboardInterface.keyHeightUnit(of: screenSize) + keyHeightOffset
                 let rowCount: CGFloat = (keyboardInterface.isLargePad || Options.needsNumberRow) ? 5 : 4
-                keyboardHeight = (rowHeight * rowCount) + PresetConstant.toolBarHeight
+                keyboardHeight = (rowHeight * rowCount) + topBarHeight
                 view.subviews.forEach({ $0.removeFromSuperview() })
                 children.forEach({ $0.removeFromParent() })
                 let board = UIHostingController(rootView: MotherBoard().environmentObject(self))
                 board.view.translatesAutoresizingMaskIntoConstraints = false
                 addChild(board)
                 view.addSubview(board.view)
+                viewHeightConstraint = view.heightAnchor.constraint(equalToConstant: keyboardHeight)
                 NSLayoutConstraint.activate([
                         board.view.topAnchor.constraint(equalTo: view.topAnchor),
                         board.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
                         board.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-                        board.view.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+                        board.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                        viewHeightConstraint
                 ])
                 board.view.backgroundColor = view.backgroundColor
                 board.didMove(toParent: self)
+        }
+        private lazy var viewHeightConstraint: NSLayoutConstraint = NSLayoutConstraint()
+        private func updateViewHeightConstraint() {
+                viewHeightConstraint.constant = keyboardHeight
+                view.setNeedsLayout()
         }
         private func prepareKeyboard() {
                 let screenSize: CGSize = UIScreen.main.bounds.size
@@ -945,35 +953,26 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 keyboardWidth = view.frame.width
                 widthUnit = keyboardWidth / keyboardInterface.widthUnitTimes
                 tenKeyWidthUnit = keyboardWidth / 5.0
-                heightUnit = keyboardInterface.keyHeightUnit(of: screenSize)
+
+                let baseHeight = keyboardInterface.keyHeightUnit(of: screenSize)
+                heightUnit = baseHeight + keyHeightOffset
                 let rowCount: CGFloat = (keyboardInterface.isLargePad || Options.needsNumberRow) ? 5 : 4
-                keyboardHeight = (heightUnit * rowCount) + PresetConstant.toolBarHeight
-                expandedKeyboardHeight = keyboardHeight + 150
+                keyboardHeight = (heightUnit * rowCount) + topBarHeight
+                cachedKeyboardHeight = keyboardHeight
+                updateViewHeightConstraint()
         }
 
-        @Published private(set) var expandedKeyboardHeight: CGFloat = 284 + 150
+        private lazy var cachedKeyboardHeight: CGFloat = 284
         @Published private(set) var isKeyboardHeightExpanded: Bool = false
         func toggleKeyboardHeight() {
+                if isKeyboardHeightExpanded {
+                        keyboardHeight = cachedKeyboardHeight
+                } else {
+                        cachedKeyboardHeight = keyboardHeight
+                        keyboardHeight += 150
+                }
                 isKeyboardHeightExpanded.toggle()
-                reloadKeyboard()
-        }
-        private func reloadKeyboard() {
-                // TODO: Needs a more appropriate way
-                view.subviews.forEach({ $0.removeFromSuperview() })
-                children.forEach({ $0.removeFromParent() })
-                let board = UIHostingController(rootView: MotherBoard().environmentObject(self))
-                board.view.translatesAutoresizingMaskIntoConstraints = false
-                addChild(board)
-                view.addSubview(board.view)
-                NSLayoutConstraint.activate([
-                        board.view.topAnchor.constraint(equalTo: view.topAnchor),
-                        board.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                        board.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-                        board.view.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-                ])
-                board.view.backgroundColor = view.backgroundColor
-                board.didMove(toParent: self)
-                view.layoutIfNeeded()
+                updateViewHeightConstraint()
         }
 
         @Published private(set) var keyboardInterface: KeyboardInterface = .phonePortrait
@@ -1049,7 +1048,26 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         func updateNumberRowState(to isOn: Bool) {
                 Options.updateNumberRowState(to: isOn)
                 updateKeyboardSize()
-                reloadKeyboard()
+                updateViewHeightConstraint()
+        }
+
+        @Published private(set) var keyHeightOffset: CGFloat = Options.fetchKeyHeightOffset()
+        func updateKeyHeightOffset(to offset: CGFloat) {
+                keyHeightOffset = offset
+                updateTopBarHeight()
+                let screenSize: CGSize = UIScreen.main.bounds.size
+                let baseHeight = keyboardInterface.keyHeightUnit(of: screenSize)
+                heightUnit = baseHeight + offset
+                let rowCount: CGFloat = (keyboardInterface.isLargePad || Options.needsNumberRow) ? 5 : 4
+                keyboardHeight = (heightUnit * rowCount) + topBarHeight
+                cachedKeyboardHeight = keyboardHeight
+                updateViewHeightConstraint()
+                let valueToSaved: Int = Int(offset)
+                UserDefaults.standard.set(valueToSaved, forKey: OptionsKey.KeyHeightOffset)
+        }
+        @Published private(set) var topBarHeight: CGFloat = PresetConstant.toolBarHeight
+        private func updateTopBarHeight() {
+                topBarHeight = PresetConstant.toolBarHeight + (max(0, keyHeightOffset) * 3)
         }
 
 

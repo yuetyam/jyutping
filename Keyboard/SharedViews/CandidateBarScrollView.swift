@@ -19,6 +19,20 @@ struct CandidateBarScrollView: View {
                 let toneStyle: CommentToneStyle = Options.commentToneStyle
                 let isCompatibleModeOn: Bool = Options.isCompatibleModeOn
                 let isCompactKeyboard: Bool = context.keyboardInterface.isCompact
+                let romanizationTopPadding: CGFloat = {
+                        if isCompactKeyboard {
+                                return commentStyle.isBelow ? 22 : 0
+                        } else {
+                                return commentStyle.isBelow ? 24 : 0
+                        }
+                }()
+                let romanizationBottomPadding: CGFloat = {
+                        if isCompactKeyboard {
+                                return commentStyle.isBelow ? 0 : 34
+                        } else {
+                                return commentStyle.isBelow ? 0 : 36
+                        }
+                }()
                 ScrollViewReader { proxy in
                         ScrollView(.horizontal) {
                                 LazyHStack(spacing: 0) {
@@ -53,14 +67,12 @@ struct CandidateBarScrollView: View {
                                                 ) {
                                                         ZStack {
                                                                 Color.interactiveClear
-                                                                ZStack(alignment: commentStyle.isBelow ? .bottom : .top) {
-                                                                        Color.clear
-                                                                        RomanizationLabel(romanization: romanization, toneStyle: toneStyle, compatibleMode: isCompatibleModeOn)
-                                                                                .frame(height: 20)
-                                                                                .padding(.horizontal, 1)
-                                                                                .padding(.bottom, commentStyle.isBelow ? 6 : 0)
-                                                                }
-                                                                .opacity(commentStyle.isHidden ? 0 : 1)
+                                                                RomanizationLabel(romanization: romanization, toneStyle: toneStyle, compatibleMode: isCompatibleModeOn)
+                                                                        .frame(height: 20)
+                                                                        .padding(.horizontal, 1)
+                                                                        .padding(.top, romanizationTopPadding)
+                                                                        .padding(.bottom, romanizationBottomPadding)
+                                                                        .opacity(commentStyle.isHidden ? 0 : 1)
                                                                 Text(text)
                                                                         .font(isCompactKeyboard ? .candidate : .iPadCandidate)
                                                                         .minimumScaleFactor(0.4)

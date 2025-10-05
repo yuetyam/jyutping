@@ -10,9 +10,9 @@ struct MotherBoard: View {
                         Color.clear.frame(height: context.keyboardHeight)
                 case .settings:
                         if #available(iOSApplicationExtension 16.0, *) {
-                                SettingsView().frame(height: context.isKeyboardHeightExpanded ? context.expandedKeyboardHeight : context.keyboardHeight)
+                                SettingsView().frame(height: context.keyboardHeight)
                         } else {
-                                SettingsViewIOS15().frame(height: context.isKeyboardHeightExpanded ? context.expandedKeyboardHeight : context.keyboardHeight)
+                                SettingsViewIOS15().frame(height: context.keyboardHeight)
                         }
                 case .editingPanel:
                         EditingPanel().frame(height: context.keyboardHeight)

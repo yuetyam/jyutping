@@ -87,6 +87,7 @@ struct ToolBar: View {
                                 context.dismissKeyboard()
                         }
                 }
+                .frame(height: context.topBarHeight)
         }
 }
 

@@ -35,6 +35,6 @@ struct CandidateBar: View {
                         .frame(width: PresetConstant.collapseWidth)
                         .frame(maxHeight: .infinity)
                 }
-                .frame(height: PresetConstant.toolBarHeight)
+                .frame(height: context.topBarHeight)
         }
 }

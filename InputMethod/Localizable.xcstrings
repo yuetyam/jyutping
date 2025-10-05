@@ -4636,7 +4636,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Suggestions d’emoji"
+            "value" : "Suggestions d'emoji"
           }
         },
         "ja" : {
@@ -4730,7 +4730,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Effacer la mémoire d’entrée"
+            "value" : "Effacer la mémoire d'entrée"
           }
         },
         "ja" : {
@@ -8114,7 +8114,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "est la touche de l’accent grave, située sous la touche échap."
+            "value" : "est la touche de l'accent grave, située sous la touche échap."
           }
         },
         "ja" : {
@@ -8654,25 +8654,25 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Input current Candidate’s Jyutping"
+            "value" : "Input current Candidate's Jyutping"
           }
         },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Input current Candidate’s Jyutping"
+            "value" : "Input current Candidate's Jyutping"
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Input current Candidate’s Jyutping"
+            "value" : "Input current Candidate's Jyutping"
           }
         },
         "en-US" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Input current Candidate’s Jyutping"
+            "value" : "Input current Candidate's Jyutping"
           }
         },
         "fr" : {
@@ -9688,25 +9688,25 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Input current Candidate’s first character"
+            "value" : "Input current Candidate's first character"
           }
         },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Input current Candidate’s first character"
+            "value" : "Input current Candidate's first character"
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Input current Candidate’s first character"
+            "value" : "Input current Candidate's first character"
           }
         },
         "en-US" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Input current Candidate’s first character"
+            "value" : "Input current Candidate's first character"
           }
         },
         "fr" : {
@@ -9782,25 +9782,25 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Input current Candidate’s last character"
+            "value" : "Input current Candidate's last character"
           }
         },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Input current Candidate’s last character"
+            "value" : "Input current Candidate's last character"
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Input current Candidate’s last character"
+            "value" : "Input current Candidate's last character"
           }
         },
         "en-US" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Input current Candidate’s last character"
+            "value" : "Input current Candidate's last character"
           }
         },
         "fr" : {
@@ -14576,25 +14576,25 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Start with “q”, then enter two components’ Jyutping. For example, “qmukmuk” → “林”."
+            "value" : "Start with “q”, then enter two components' Jyutping. For example, “qmukmuk” → “林”."
           }
         },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Start with “q”, then enter two components’ Jyutping. For example, “qmukmuk” → “林”."
+            "value" : "Start with “q”, then enter two components' Jyutping. For example, “qmukmuk” → “林”."
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Start with “q”, then enter two components’ Jyutping. For example, “qmukmuk” → “林”."
+            "value" : "Start with “q”, then enter two components' Jyutping. For example, “qmukmuk” → “林”."
           }
         },
         "en-US" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Start with “q”, then enter two components’ Jyutping. For example, “qmukmuk” → “林”."
+            "value" : "Start with “q”, then enter two components' Jyutping. For example, “qmukmuk” → “林”."
           }
         },
         "fr" : {

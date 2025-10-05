@@ -782,7 +782,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Copier l’ID du groupe QQ"
+            "value" : "Copier l'ID du groupe QQ"
           }
         },
         "ja" : {
@@ -876,7 +876,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Copier le nom d’utilisateur"
+            "value" : "Copier le nom d'utilisateur"
           }
         },
         "ja" : {
@@ -6516,7 +6516,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "À quoi sert « Autoriser l’accès complet » ?"
+            "value" : "À quoi sert « Autoriser l'accès complet » ?"
           }
         },
         "ja" : {
@@ -7644,7 +7644,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Déplacement du point d’insertion"
+            "value" : "Déplacement du point d'insertion"
           }
         },
         "ja" : {
@@ -7926,7 +7926,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Changer la langue d’affichage"
+            "value" : "Changer la langue d'affichage"
           }
         },
         "ja" : {
@@ -8208,7 +8208,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Plus d’introductions"
+            "value" : "Plus d'introductions"
           }
         },
         "ja" : {
@@ -9030,31 +9030,31 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "If Text-to-Speech doesn’t read Jyutping syllables correctly, please take a screenshot of this page and share it with the developer. You can reach the developer through the contact information on the “About” page."
+            "value" : "If Text-to-Speech doesn't read Jyutping syllables correctly, please take a screenshot of this page and share it with the developer. You can reach the developer through the contact information on the “About” page."
           }
         },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "If Text-to-Speech doesn’t read Jyutping syllables correctly, please take a screenshot of this page and share it with the developer. You can reach the developer through the contact information on the “About” page."
+            "value" : "If Text-to-Speech doesn't read Jyutping syllables correctly, please take a screenshot of this page and share it with the developer. You can reach the developer through the contact information on the “About” page."
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "If Text-to-Speech doesn’t read Jyutping syllables correctly, please take a screenshot of this page and share it with the developer. You can reach the developer through the contact information on the “About” page."
+            "value" : "If Text-to-Speech doesn't read Jyutping syllables correctly, please take a screenshot of this page and share it with the developer. You can reach the developer through the contact information on the “About” page."
           }
         },
         "en-US" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "If Text-to-Speech doesn’t read Jyutping syllables correctly, please take a screenshot of this page and share it with the developer. You can reach the developer through the contact information on the “About” page."
+            "value" : "If Text-to-Speech doesn't read Jyutping syllables correctly, please take a screenshot of this page and share it with the developer. You can reach the developer through the contact information on the “About” page."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Si la synthèse vocale ne lit pas correctement les syllabes Jyutping, veuillez prendre une capture d’écran de cette page et la partager avec le développeur. Vous pouvez contacter le développeur grâce aux informations de contact figurant sur la page « À propos »."
+            "value" : "Si la synthèse vocale ne lit pas correctement les syllabes Jyutping, veuillez prendre une capture d'écran de cette page et la partager avec le développeur. Vous pouvez contacter le développeur grâce aux informations de contact figurant sur la page « À propos »."
           }
         },
         "ja" : {
@@ -10276,7 +10276,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Copier l’URL"
+            "value" : "Copier l'URL"
           }
         },
         "ja" : {
@@ -14858,25 +14858,25 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Type faster by entering only the first letters of each syllable. For example, typing “nh” gives you “你好”."
+            "value" : "Type faster by entering only syllable initials (e.g., “nh” → “你好”)."
           }
         },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Type faster by entering only the first letters of each syllable. For example, typing “nh” gives you “你好”."
+            "value" : "Type faster by entering only syllable initials (e.g., “nh” → “你好”)."
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Type faster by entering only the first letters of each syllable. For example, typing “nh” gives you “你好”."
+            "value" : "Type faster by entering only syllable initials (e.g., “nh” → “你好”)."
           }
         },
         "en-US" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Type faster by entering only the first letters of each syllable. For example, typing “nh” gives you “你好”."
+            "value" : "Type faster by entering only syllable initials (e.g., “nh” → “你好”)."
           }
         },
         "fr" : {
@@ -14952,25 +14952,25 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Combine abbreviated and full input for even more flexibility. For example, “nhou” or “neih” also produces “你好”."
+            "value" : "Combine abbreviated and full input for flexibility (e.g., “nhou” / “neih” → “你好”)."
           }
         },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Combine abbreviated and full input for even more flexibility. For example, “nhou” or “neih” also produces “你好”."
+            "value" : "Combine abbreviated and full input for flexibility (e.g., “nhou” / “neih” → “你好”)."
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Combine abbreviated and full input for even more flexibility. For example, “nhou” or “neih” also produces “你好”."
+            "value" : "Combine abbreviated and full input for flexibility (e.g., “nhou” / “neih” → “你好”)."
           }
         },
         "en-US" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Combine abbreviated and full input for even more flexibility. For example, “nhou” or “neih” also produces “你好”."
+            "value" : "Combine abbreviated and full input for flexibility (e.g., “nhou” / “neih” → “你好”)."
           }
         },
         "fr" : {
@@ -15892,25 +15892,25 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Start with “q”, then enter two components’ Jyutping. For example, “qmukmuk” → “林”."
+            "value" : "Start with “q”, then enter two components' Jyutping. For example, “qmukmuk” → “林”."
           }
         },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Start with “q”, then enter two components’ Jyutping. For example, “qmukmuk” → “林”."
+            "value" : "Start with “q”, then enter two components' Jyutping. For example, “qmukmuk” → “林”."
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Start with “q”, then enter two components’ Jyutping. For example, “qmukmuk” → “林”."
+            "value" : "Start with “q”, then enter two components' Jyutping. For example, “qmukmuk” → “林”."
           }
         },
         "en-US" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Start with “q”, then enter two components’ Jyutping. For example, “qmukmuk” → “林”."
+            "value" : "Start with “q”, then enter two components' Jyutping. For example, “qmukmuk” → “林”."
           }
         },
         "fr" : {

@@ -167,7 +167,7 @@ struct IOSExpressionsView: View {
                                 }
                                 Section {
                                         Text(verbatim: "區分【會】以及【識】").font(.headline)
-                                        Text(verbatim: "會：位於動詞前，表示將要做某事。")
+                                        Text(verbatim: "會：位於動詞前，將要做某事。")
                                         Text(verbatim: "識：識得；曉得；懂得；明白。")
                                         Text(verbatim: "例：我會煮飯。（我將要煮飯。）")
                                         Text(verbatim: "例：我識煮飯。（我懂得如何煮飯。）")
@@ -264,7 +264,7 @@ struct IOSExpressionsView: View {
                                                 Image.checkmark.foregroundStyle(Color.green)
                                         }
                                         Label {
-                                                Text(verbatim: "比黃連更苦。")
+                                                Text(verbatim: "比黃連苦。")
                                         } icon: {
                                                 Image.xmark.foregroundStyle(Color.red)
                                         }

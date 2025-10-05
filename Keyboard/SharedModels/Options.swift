@@ -63,6 +63,11 @@ struct Options {
                 UserDefaults.standard.set(value, forKey: OptionsKey.InputKeyStyle)
         }
 
+        static func fetchKeyHeightOffset() -> CGFloat {
+                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.KeyHeightOffset)
+                return CGFloat(savedValue)
+        }
+
         nonisolated(unsafe) private(set) static var commentStyle: CommentStyle = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.CommentStyle)
                 return CommentStyle.style(of: savedValue)
@@ -165,6 +170,7 @@ struct OptionsKey {
         static let KeyCase: String = "KeyCase"
         static let KeyTextPreview: String = "KeyPreview"
         static let InputKeyStyle: String = "InputKeyStyle"
+        static let KeyHeightOffset: String = "KeyHeightOffset"
         static let CommentStyle: String = "jyutping_display"
         static let CommentToneStyle: String = "tone_style"
         static let CangjieVariant: String = "CangjieVariant"
