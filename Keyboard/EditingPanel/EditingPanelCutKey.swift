@@ -17,7 +17,7 @@ struct EditingPanelCutKey: View {
                                 .padding(4)
                         VStack(spacing: 4) {
                                 Image(systemName: "scissors")
-                                Text("EditingPanel.Cut").font(.caption2)
+                                Text("EditingPanel.Cut").font(.keyCaption)
                         }
                 }
                 .contentShape(Rectangle())

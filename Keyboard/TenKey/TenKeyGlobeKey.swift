@@ -14,7 +14,7 @@ struct TenKeyGlobeKey: View {
                                 .fill(colorScheme.actionKeyColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(3)
-                        Image.globe
+                        Image.globe.font(.symbol)
                         UIGlobeButton()
                 }
                 .frame(width: width, height: height)

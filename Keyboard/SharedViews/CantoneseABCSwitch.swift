@@ -17,11 +17,11 @@ struct CantoneseABCSwitch: View {
         var body: some View {
                 HStack(spacing: 0) {
                         Text(verbatim: Options.characterStandard.isSimplified ? "粤" : "粵")
-                                .font(isSwitched ? .footnote : .body)
+                                .font(isSwitched ? .mini : .staticBody)
                                 .frame(width: partialWidth, height: height)
                                 .background(isSwitched ? Color.clear : colorScheme.inputKeyColor, in: .capsule)
                         Text(verbatim: "A")
-                                .font(isSwitched ? .body : .footnote)
+                                .font(isSwitched ? .staticBody : .mini)
                                 .frame(width: partialWidth, height: height)
                                 .background(isSwitched ? colorScheme.inputKeyColor : Color.clear, in: .capsule)
                 }
@@ -50,7 +50,7 @@ struct InputModeSwitch: View {
                                         .fill(isSwitched ? Color.clear : colorScheme.inputKeyColor)
                                         .shadow(color: isSwitched ? Color.clear : Color.shadowGray, radius: 0.5)
                                 Text(verbatim: Options.characterStandard.isSimplified ? "粤" : "粵")
-                                        .font(isSwitched ? .footnote : .body)
+                                        .font(isSwitched ? .mini : .staticBody)
                         }
                         .frame(width: partialWidth, height: height)
                         ZStack {
@@ -58,11 +58,15 @@ struct InputModeSwitch: View {
                                         .fill(isSwitched ? colorScheme.inputKeyColor : Color.clear)
                                         .shadow(color: isSwitched ? Color.shadowGray : Color.clear, radius: 0.5)
                                 Text(verbatim: "A")
-                                        .font(isSwitched ? .body : .footnote)
+                                        .font(isSwitched ? .staticBody : .mini)
                         }
                         .frame(width: partialWidth, height: height)
                 }
                 .frame(width: partialWidth * 2, height: height)
                 .background(Material.thin, in: .capsule)
         }
+}
+
+private extension Font {
+        static let mini: Font = Font.system(size: 14)
 }

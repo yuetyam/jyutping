@@ -17,7 +17,7 @@ struct TenKeyBackspaceKey: View {
                                 .fill(isTouching ? colorScheme.activeActionKeyColor : colorScheme.actionKeyColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(3)
-                        Image.backspace.symbolVariant(isTouching ? .fill : .none)
+                        Image.backspace.symbolVariant(isTouching ? .fill : .none).font(.symbol)
                 }
                 .frame(width: context.tenKeyWidthUnit, height: context.heightUnit)
                 .contentShape(Rectangle())

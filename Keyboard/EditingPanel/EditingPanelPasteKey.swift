@@ -17,7 +17,7 @@ struct EditingPanelPasteKey: View {
                                 .padding(4)
                         VStack(spacing: 4) {
                                 Image(systemName: "doc.on.clipboard")
-                                Text("EditingPanel.Paste").font(.caption2)
+                                Text("EditingPanel.Paste").font(.keyCaption)
                         }
                         .opacity(context.isClipboardEmpty ? 0.5 : 1)
                 }
@@ -72,7 +72,7 @@ struct EditingPanelSystemPasteKey: View {
                                 .buttonBorderShape(.roundedRectangle)
                                 .labelStyle(.iconOnly)
                                 .tint(.gray)
-                                Text("EditingPanel.Paste").font(.caption2).opacity(context.isClipboardEmpty ? 0.5 : 1)
+                                Text("EditingPanel.Paste").font(.keyCaption).opacity(context.isClipboardEmpty ? 0.5 : 1)
                         }
                 }
         }

@@ -54,7 +54,7 @@ struct EditingPanelReturnKey: View {
                                 default:
                                         Image.return
                                 }
-                                Text(context.returnKeyText).font(.caption2)
+                                Text(context.returnKeyText).font(.keyCaption)
                         }
                         .foregroundStyle(foreColor)
                 }

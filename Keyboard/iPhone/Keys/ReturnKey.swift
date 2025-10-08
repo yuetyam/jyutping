@@ -47,34 +47,34 @@ struct ReturnKey: View {
                                 .padding(.horizontal, horizontalPadding)
                         switch (keyState.isBuffering, isDefaultReturn) {
                         case (true, _):
-                                Text(context.returnKeyText).foregroundStyle(foreColor)
+                                Text(context.returnKeyText).font(.staticBody)
                         case (false, true):
-                                Image.return.foregroundStyle(foreColor)
+                                Image.return
                         default:
                                 ZStack(alignment: .bottomTrailing) {
                                         Color.clear
-                                        Text(context.returnKeyText)
-                                                .font(.caption2)
-                                                .foregroundStyle(foreColor)
+                                        Text(context.returnKeyText).font(.keyCaption)
                                 }
                                 .padding(.vertical, verticalPadding + 1)
                                 .padding(.horizontal, horizontalPadding + 1)
                                 switch context.returnKeyType {
                                 case .continue, .next:
-                                        Image.chevronForward.foregroundStyle(foreColor)
+                                        Image.chevronForward
                                 case .done:
-                                        Image.checkmark.foregroundStyle(foreColor)
+                                        Image.checkmark
                                 case .go, .route, .join:
-                                        Image.arrowForward.foregroundStyle(foreColor)
+                                        Image.arrowForward
                                 case .search, .google, .yahoo:
-                                        Image.search.foregroundStyle(foreColor)
+                                        Image.search
                                 case .send:
-                                        Image.arrowUp.foregroundStyle(foreColor)
+                                        Image.arrowUp
                                 default:
-                                        Image.return.foregroundStyle(foreColor)
+                                        Image.return
                                 }
                         }
                 }
+                .font(.symbol)
+                .foregroundStyle(foreColor)
                 .frame(width: keyWidth, height: keyHeight)
                 .contentShape(Rectangle())
                 .gesture(DragGesture(minimumDistance: 0)

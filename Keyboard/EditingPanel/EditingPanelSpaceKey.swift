@@ -25,7 +25,7 @@ struct EditingPanelSpaceKey: View {
                         if isLongPressEngaged {
                                 Text(PresetConstant.spaceKeyLongPressHint)
                         } else {
-                                Text("EditingPanel.Space")
+                                Text("EditingPanel.Space").font(.staticBody)
                         }
                 }
                 .contentShape(Rectangle())

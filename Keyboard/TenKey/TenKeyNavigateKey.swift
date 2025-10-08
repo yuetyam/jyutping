@@ -32,7 +32,7 @@ struct TenKeyNavigateKey: View {
                                 .fill(isTouching ? colorScheme.activeActionKeyColor : colorScheme.actionKeyColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(3)
-                        Text(verbatim: keyText)
+                        Text(verbatim: keyText).font(.staticBody)
                 }
                 .frame(width: context.tenKeyWidthUnit, height: context.heightUnit)
                 .contentShape(Rectangle())

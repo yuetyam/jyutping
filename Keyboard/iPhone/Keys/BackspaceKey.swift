@@ -30,7 +30,7 @@ struct BackspaceKey: View {
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(.vertical, verticalPadding)
                                 .padding(.horizontal, horizontalPadding)
-                        Image.backspace.symbolVariant(isTouching ? .fill : .none)
+                        Image.backspace.symbolVariant(isTouching ? .fill : .none).font(.symbol)
                 }
                 .frame(width: keyWidth, height: keyHeight)
                 .contentShape(Rectangle())

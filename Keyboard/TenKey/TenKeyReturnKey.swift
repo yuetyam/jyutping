@@ -41,9 +41,13 @@ struct TenKeyReturnKey: View {
                                 .padding(3)
                         switch (context.returnKeyState.isBuffering, isDefaultReturn) {
                         case (true, _):
-                                Text(context.returnKeyText).foregroundStyle(foreColor)
+                                Text(context.returnKeyText)
+                                        .font(.staticBody)
+                                        .foregroundStyle(foreColor)
                         case (false, true):
-                                Image.return.foregroundStyle(foreColor)
+                                Image.return
+                                        .font(.symbol)
+                                        .foregroundStyle(foreColor)
                         default:
                                 VStack(spacing: 5) {
                                         switch context.returnKeyType {
@@ -62,6 +66,7 @@ struct TenKeyReturnKey: View {
                                         }
                                         Text(context.returnKeyText).font(.footnote)
                                 }
+                                .font(.symbol)
                                 .foregroundStyle(foreColor)
                         }
                 }

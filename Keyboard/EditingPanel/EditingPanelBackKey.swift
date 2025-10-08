@@ -17,7 +17,7 @@ struct EditingPanelBackKey: View {
                                 .padding(4)
                         VStack(spacing: 4) {
                                 Image.chevronUp
-                                Text("EditingPanel.Back").font(.caption2)
+                                Text("EditingPanel.Back").font(.keyCaption)
                         }
                 }
                 .contentShape(Rectangle())

@@ -19,7 +19,7 @@ struct EditingPanelBackspaceKey: View {
                                 .padding(4)
                         VStack(spacing: 4) {
                                 Image.backspace.symbolVariant(isTouching ? .fill : .none)
-                                Text("EditingPanel.Backspace").font(.caption2)
+                                Text("EditingPanel.Backspace").font(.keyCaption)
                         }
                 }
                 .contentShape(Rectangle())

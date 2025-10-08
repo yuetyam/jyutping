@@ -12,11 +12,14 @@ extension Font {
         static let dualLettersCompact: Font = Font.system(size: 18)
         static let keyFootnote: Font = Font.system(size: 10)
 
-        /// 10-key sidebar selected syllable texts
-        static let sidebarSyllable: Font = Font.system(size: 16)
-
         /// EmojiBoard emoji view
         static let emoji: Font = Font.system(size: 34)
+
+        /// compact keyboard action keys
+        static let symbol: Font = Font.system(size: 19)
+
+        static let staticBody: Font = Font.system(size: 17)
+        static let keyCaption: Font = Font.system(size: 11)
 }
 
 enum LanguageAttribute: Int {

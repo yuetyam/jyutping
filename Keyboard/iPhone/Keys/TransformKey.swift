@@ -31,7 +31,7 @@ struct TransformKey: View {
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(.vertical, verticalPadding)
                                 .padding(.horizontal, horizontalPadding)
-                        Text(verbatim: destination.compactTransformKeyTex)
+                        Text(verbatim: destination.compactTransformKeyTex).font(.staticBody)
                 }
                 .frame(width: keyWidth, height: keyHeight)
                 .contentShape(Rectangle())

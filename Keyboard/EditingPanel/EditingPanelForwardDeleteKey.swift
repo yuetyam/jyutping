@@ -19,7 +19,7 @@ struct EditingPanelForwardDeleteKey: View {
                                 .padding(4)
                         VStack(spacing: 4) {
                                 Image.forwardDelete.symbolVariant(isTouching ? .fill : .none)
-                                Text("EditingPanel.ForwardDelete").font(.caption2)
+                                Text("EditingPanel.ForwardDelete").font(.keyCaption)
                         }
                 }
                 .contentShape(Rectangle())

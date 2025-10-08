@@ -17,7 +17,7 @@ struct EditingPanelClearKey: View {
                                 .padding(4)
                         VStack(spacing: 4) {
                                 Image(systemName: "clear").symbolVariant(isTouching ? .fill : .none)
-                                Text("EditingPanel.Clear").font(.caption2)
+                                Text("EditingPanel.Clear").font(.keyCaption)
                         }
                 }
                 .contentShape(Rectangle())

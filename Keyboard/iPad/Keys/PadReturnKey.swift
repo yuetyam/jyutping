@@ -56,7 +56,7 @@ struct PadReturnKey: View {
                                 ZStack(alignment: .bottomTrailing) {
                                         Color.clear
                                         Text(context.returnKeyText)
-                                                .font(.caption2)
+                                                .font(.keyCaption)
                                                 .foregroundStyle(foreColor)
                                 }
                                 .padding(.vertical, verticalPadding + 2)

@@ -17,7 +17,7 @@ struct EditingPanelCopyKey: View {
                                 .padding(4)
                         VStack(spacing: 4) {
                                 Image(systemName: "doc.on.doc")
-                                Text("EditingPanel.Copy").font(.caption2)
+                                Text("EditingPanel.Copy").font(.keyCaption)
                         }
                 }
                 .contentShape(Rectangle())

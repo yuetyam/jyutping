@@ -18,7 +18,7 @@ struct GlobeKey: View {
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(.vertical, verticalPadding)
                                 .padding(.horizontal, horizontalPadding)
-                        Image.globe
+                        Image.globe.font(.symbol)
                         UIGlobeButton()
                 }
                 .frame(width: width, height: height)
