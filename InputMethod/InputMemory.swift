@@ -5,114 +5,6 @@ import CommonExtensions
 
 struct InputMemory {
 
-        // MARK: - Migration
-
-        private static func performMigration() async {
-                guard isLegacyDatabaseExist else {
-                        missionAccomplished()
-                        return
-                }
-                switch savedInputMemoryVersion {
-                case definedInputMemoryVersion:
-                        missionAccomplished()
-                case 1:
-                        fetchLegacy(lower: 0, upper: 1).forEach(migrate(_:))
-                        missionAccomplished()
-                case 5:
-                        fetchLegacy(lower: 1, upper: 5).forEach(migrate(_:))
-                        UserDefaults.standard.set(1, forKey: kInputMemoryVersion)
-
-                        fetchLegacy(lower: 0, upper: 1).forEach(migrate(_:))
-                        missionAccomplished()
-                case 20:
-                        fetchLegacy(lower: 5, upper: 20).forEach(migrate(_:))
-                        UserDefaults.standard.set(5, forKey: kInputMemoryVersion)
-
-                        fetchLegacy(lower: 1, upper: 5).forEach(migrate(_:))
-                        UserDefaults.standard.set(1, forKey: kInputMemoryVersion)
-
-                        fetchLegacy(lower: 0, upper: 1).forEach(migrate(_:))
-                        missionAccomplished()
-                default:
-                        fetchLegacy(lower: 20, upper: 50_0000).forEach(migrate(_:))
-                        UserDefaults.standard.set(20, forKey: kInputMemoryVersion)
-
-                        fetchLegacy(lower: 5, upper: 20).forEach(migrate(_:))
-                        UserDefaults.standard.set(5, forKey: kInputMemoryVersion)
-
-                        fetchLegacy(lower: 1, upper: 5).forEach(migrate(_:))
-                        UserDefaults.standard.set(1, forKey: kInputMemoryVersion)
-
-                        fetchLegacy(lower: 0, upper: 1).forEach(migrate(_:))
-                        missionAccomplished()
-                }
-        }
-        private static func missionAccomplished() {
-                UserDefaults.standard.set(definedInputMemoryVersion, forKey: kInputMemoryVersion)
-        }
-
-        nonisolated(unsafe) private static let legacyDatabase: OpaquePointer? = {
-                var db: OpaquePointer? = nil
-                let path: String? = {
-                        let fileName: String = "userlexicon.sqlite3"
-                        if #available(macOS 13.0, *) {
-                                return URL.libraryDirectory.appending(path: fileName, directoryHint: .notDirectory).path()
-                        } else {
-                                guard let libraryDirectoryUrl: URL = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask).first else { return nil }
-                                return libraryDirectoryUrl.appendingPathComponent(fileName, isDirectory: false).path
-                        }
-                }()
-                guard let path else { return nil }
-                guard sqlite3_open_v2(path, &db, SQLITE_OPEN_READONLY | SQLITE_OPEN_FULLMUTEX, nil) == SQLITE_OK else { return nil }
-                return db
-        }()
-
-        private static var isLegacyDatabaseExist: Bool {
-                let command: String = "SELECT frequency FROM lexicon WHERE frequency = 1 LIMIT 1;"
-                var statement: OpaquePointer? = nil
-                defer { sqlite3_finalize(statement) }
-                guard sqlite3_prepare_v2(legacyDatabase, command, -1, &statement, nil) == SQLITE_OK else { return false }
-                guard sqlite3_step(statement) == SQLITE_ROW else { return false }
-                let frequency: Int64 = sqlite3_column_int64(statement, 0)
-                return frequency == 1
-        }
-
-        // lexicon(id INTEGER,input INTEGER,ping INTEGER,prefix INTEGER,shortcut INTEGER,frequency INTEGER,word TEXT,jyutping TEXT)
-
-        private static func fetchLegacy(lower: Int, upper: Int) -> [MemoryLexicon] {
-                let command: String = "SELECT frequency, word, jyutping FROM lexicon WHERE frequency > \(lower) AND frequency <= \(upper);"
-                var statement: OpaquePointer? = nil
-                defer { sqlite3_finalize(statement) }
-                guard sqlite3_prepare_v2(legacyDatabase, command, -1, &statement, nil) == SQLITE_OK else { return [] }
-                var items: [MemoryLexicon] = []
-                while sqlite3_step(statement) == SQLITE_ROW {
-                        let frequency: Int64 = sqlite3_column_int64(statement, 0)
-                        guard let word = sqlite3_column_text(statement, 1) else { continue }
-                        guard let jyutping = sqlite3_column_text(statement, 2) else { continue }
-                        let instance = MemoryLexicon(word: String(cString: word), romanization: String(cString: jyutping), frequency: Int(frequency))
-                        items.append(instance)
-                }
-                return items
-        }
-
-        private static let definedInputMemoryVersion: Int = 2025
-        private static let kInputMemoryVersion: String = "InputMemoryVersion"
-        private static var savedInputMemoryVersion: Int {
-                return UserDefaults.standard.integer(forKey: kInputMemoryVersion)
-        }
-
-
-        // MARK: - Preparing
-
-        static func prepare() {
-                ensureMemoryTable()
-                let isMigrated: Bool = (savedInputMemoryVersion == definedInputMemoryVersion)
-                guard isMigrated.negative else { return }
-                Task {
-                        await performMigration()
-                }
-        }
-
         private static let pathToDatabase: String? = {
                 let fileName: String = "memory.sqlite3"
                 if #available(macOS 13.0, *) {
@@ -128,7 +20,8 @@ struct InputMemory {
                 guard sqlite3_open_v2(path, &db, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE | SQLITE_OPEN_FULLMUTEX, nil) == SQLITE_OK else { return nil }
                 return db
         }()
-        private static func ensureMemoryTable() {
+
+        static func prepare() {
                 let command: String = "CREATE TABLE IF NOT EXISTS memory(identifier INTEGER NOT NULL PRIMARY KEY, word TEXT NOT NULL, romanization TEXT NOT NULL, frequency INTEGER NOT NULL, latest INTEGER NOT NULL, anchors INTEGER NOT NULL, shortcut INTEGER NOT NULL, ping INTEGER NOT NULL);"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
@@ -145,15 +38,6 @@ struct InputMemory {
                         update(identifier: identifier, frequency: frequency + 1)
                 } else {
                         let entry = MemoryLexicon(word: candidate.lexiconText, romanization: candidate.romanization, frequency: 1)
-                        insert(entry: entry)
-                }
-        }
-
-        private static func migrate(_ entry: MemoryLexicon) {
-                if let frequency = find(by: entry.identifier) {
-                        let newFrequency: Int64 = max(frequency, Int64(entry.frequency))
-                        update(identifier: entry.identifier, frequency: newFrequency)
-                } else {
                         insert(entry: entry)
                 }
         }
