@@ -5,23 +5,27 @@ struct AppDataPreparer {
 
         nonisolated(unsafe) fileprivate static let database: OpaquePointer? = {
                 var db: OpaquePointer? = nil
-                guard sqlite3_open_v2(":memory:", &db, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE, nil) == SQLITE_OK else { return nil }
+                guard sqlite3_open_v2(":memory:", &db, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE | SQLITE_OPEN_FULLMUTEX, nil) == SQLITE_OK else { return nil }
                 return db
         }()
 
         static func prepare() async {
-                // guard sqlite3_open_v2(":memory:", &database, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE, nil) == SQLITE_OK else { return }
-                createJyutpingTable()
-                createCollocationTable()
-                createYingWaaTable()
-                createChoHokTable()
-                createFanWanTable()
-                createGwongWanTable()
-                createDefinitionTable()
+                await withTaskGroup(of: Void.self) { group in
+                        group.addTask { await createJyutpingTable() }
+                        group.addTask { await createCollocationTable() }
+                        group.addTask { await createDictionaryTable() }
+                        group.addTask { await createYingWaaTable() }
+                        group.addTask { await createChoHokTable() }
+                        group.addTask { await createFanWanTable() }
+                        group.addTask { await createGwongWanTable() }
+                        group.addTask { await createDefinitionTable() }
+                        await group.waitForAll()
+                }
                 createIndies()
                 backupInMemoryDatabase()
                 sqlite3_close_v2(database)
         }
+
         private static func backupInMemoryDatabase() {
                 let path: String = "../AppDataSource/Sources/AppDataSource/Resources/appdb.sqlite3"
                 if FileManager.default.fileExists(atPath: path) {
@@ -37,7 +41,7 @@ struct AppDataPreparer {
 }
 
 private extension AppDataPreparer {
-        static func createJyutpingTable() {
+        static func createJyutpingTable() async {
                 let createTable: String = "CREATE TABLE jyutpingtable(word TEXT NOT NULL, romanization TEXT NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
@@ -68,6 +72,9 @@ private extension AppDataPreparer {
                         "CREATE INDEX collocationwordindex ON collocationtable(word);",
                         "CREATE INDEX collocationromanizationindex ON collocationtable(romanization);",
 
+                        "CREATE INDEX dictionarywordindex ON dictionarytable(word);",
+                        "CREATE INDEX dictionaryromanizationindex ON dictionarytable(romanization);",
+
                         "CREATE INDEX yingwaacodeindex ON yingwaatable(code);",
                         "CREATE INDEX yingwaaromanizationindex ON yingwaatable(romanization);",
 
@@ -88,7 +95,7 @@ private extension AppDataPreparer {
         }
 }
 private extension AppDataPreparer {
-        static func createCollocationTable() {
+        static func createCollocationTable() async {
                 let createTable: String = "CREATE TABLE collocationtable(word TEXT NOT NULL, romanization TEXT NOT NULL, collocation TEXT NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
@@ -114,7 +121,42 @@ private extension AppDataPreparer {
         }
 }
 private extension AppDataPreparer {
-        static func createYingWaaTable() {
+        static func createDictionaryTable() async {
+                let createTable: String = "CREATE TABLE dictionarytable(word TEXT NOT NULL, romanization TEXT NOT NULL, description TEXT NOT NULL);"
+                var createStatement: OpaquePointer? = nil
+                guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
+                guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
+                sqlite3_finalize(createStatement)
+                guard let url = Bundle.module.url(forResource: "wordshk", withExtension: "txt") else { return }
+                guard let content = try? String(contentsOf: url, encoding: .utf8) else { return }
+                let sourceLines: [String] = content.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
+                func insert(values: String) {
+                        let insert: String = "INSERT INTO dictionarytable (word, romanization, description) VALUES \(values);"
+                        var insertStatement: OpaquePointer? = nil
+                        defer { sqlite3_finalize(insertStatement) }
+                        guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }
+                        guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
+                }
+                let range: Range<Int> = 0..<2000
+                let distance: Int = sourceLines.count / 2000
+                for number in range {
+                        let bound: Int = (number == 1999) ? sourceLines.count : ((number + 1) * distance)
+                        let part = sourceLines[(number * distance)..<bound]
+                        let entries = part.compactMap { sourceLine -> String? in
+                                let parts = sourceLine.split(separator: "\t")
+                                guard parts.count == 3 else { return nil }
+                                let word = parts[0]
+                                let romanization = parts[1]
+                                let description = parts[2]
+                                return "('\(word)', '\(romanization)', '\(description)')"
+                        }
+                        let values: String = entries.joined(separator: ", ")
+                        insert(values: values)
+                }
+        }
+}
+private extension AppDataPreparer {
+        static func createYingWaaTable() async {
                 let createTable: String = "CREATE TABLE yingwaatable(code INTEGER NOT NULL, word TEXT NOT NULL, romanization TEXT NOT NULL, pronunciation TEXT NOT NULL, pronunciationmark TEXT NOT NULL, interpretation TEXT NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
@@ -141,7 +183,7 @@ private extension AppDataPreparer {
                 guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }
                 guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
         }
-        static func createChoHokTable() {
+        static func createChoHokTable() async {
                 let createTable: String = "CREATE TABLE chohoktable(code INTEGER NOT NULL, word TEXT NOT NULL, romanization TEXT NOT NULL, initial TEXT NOT NULL, final TEXT NOT NULL, tone TEXT NOT NULL, faancit TEXT NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
@@ -169,7 +211,7 @@ private extension AppDataPreparer {
                 guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }
                 guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
         }
-        static func createFanWanTable() {
+        static func createFanWanTable() async {
                 let createTable: String = "CREATE TABLE fanwantable(code INTEGER NOT NULL, word TEXT NOT NULL, romanization TEXT NOT NULL, initial TEXT NOT NULL, final TEXT NOT NULL, yamyeung TEXT NOT NULL, tone TEXT NOT NULL, rhyme TEXT NOT NULL, interpretation TEXT NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
@@ -199,7 +241,7 @@ private extension AppDataPreparer {
                 guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }
                 guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
         }
-        static func createGwongWanTable() {
+        static func createGwongWanTable() async {
                 let createTable: String = "CREATE TABLE gwongwantable(code INTEGER NOT NULL, word TEXT NOT NULL, rhyme TEXT NOT NULL, subrhyme TEXT NOT NULL, subrhymeserial INTEGER NOT NULL, subrhymenumber INTEGER NOT NULL, upper TEXT NOT NULL, lower TEXT NOT NULL, initial TEXT NOT NULL, rounding TEXT NOT NULL, division TEXT NOT NULL, rhymeclass TEXT NOT NULL, repeating TEXT NOT NULL, tone TEXT NOT NULL, interpretation TEXT NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
@@ -235,7 +277,7 @@ private extension AppDataPreparer {
                 guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }
                 guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
         }
-        private static func createDefinitionTable() {
+        private static func createDefinitionTable() async {
                 let createTable: String = "CREATE TABLE definitiontable(code INTEGER NOT NULL PRIMARY KEY, definition TEXT NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }

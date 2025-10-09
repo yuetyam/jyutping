@@ -2,7 +2,7 @@ import Foundation
 
 struct Hant2Hans {
         static func generate() -> [(traditional: UInt32, simplified: UInt32)] {
-                guard let sourceUrl: URL = Bundle.module.url(forResource: "t2s", withExtension: "txt") else { fatalError("Can find file t2s.txt") }
+                guard let sourceUrl: URL = Bundle.module.url(forResource: "t2s", withExtension: "txt") else { fatalError("Can not find file t2s.txt") }
                 guard let sourceContent: String = try? String(contentsOf: sourceUrl, encoding: .utf8) else { fatalError("Can not read t2s.txt") }
                 let sourceLines: [String] = sourceContent
                         .trimmingCharacters(in: .whitespacesAndNewlines)
