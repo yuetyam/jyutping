@@ -1,5 +1,17 @@
 import SwiftUI
 
+extension View {
+        /// Apply 0.85 opacity
+        func shallow() -> some View {
+                return opacity(0.85)
+        }
+
+        /// Apply 0.66 opacity
+        func airy() -> some View {
+                return opacity(0.66)
+        }
+}
+
 #if os(macOS)
 
 extension View {

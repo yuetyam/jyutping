@@ -11,7 +11,10 @@ extension Sequence where Element: Hashable {
         /// Returns a new Array with the unique elements of this Array, in the order of the first occurrence of each unique element.
         /// - Returns: A new Array with only the unique elements of this Array.
         /// - Complexity: O(*n*), where *n* is the length of the Array.
-        public func distinct() -> [Element] { uniqued() }
+        public func distinct() -> [Element] {
+                var set: Set<Element> = Set<Element>()
+                return filter { set.insert($0).inserted }
+        }
 }
 
 extension Array {
@@ -20,8 +23,7 @@ extension Array {
         /// - Parameter index: Index
         /// - Returns: An Element if index is compatible, otherwise nil.
         public func fetch(_ index: Int) -> Element? {
-                let isSafe: Bool = index >= 0 && index < self.count
-                guard isSafe else { return nil }
+                guard index >= 0 && index < self.count else { return nil }
                 return self[index]
         }
 
@@ -37,6 +39,6 @@ extension Array {
 
 extension Array where Element: Equatable {
         public func notContains(_ element: Element) -> Bool {
-                return !(self.contains(element))
+                return !(contains(element))
         }
 }

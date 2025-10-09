@@ -11,12 +11,12 @@ struct CantoneseLexiconView: View {
                 VStack {
                         HStack(spacing: 16) {
                                 HStack {
-                                        Text(verbatim: "文字")
+                                        Text(verbatim: "文字").shallow()
                                         Text.separator
                                         Text(verbatim: lexicon.text).font(.display)
                                 }
                                 if lexicon.text.count == 1, let unicode = lexicon.text.first?.codePointsText {
-                                        Text(verbatim: unicode).font(.fixedWidth).opacity(0.66)
+                                        Text(verbatim: unicode).font(.fixedWidth).airy()
                                 }
                                 Spacer()
                                 Speaker {
@@ -30,7 +30,7 @@ struct CantoneseLexiconView: View {
                         if let unihanDefinition = lexicon.unihanDefinition {
                                 Divider()
                                 HStack {
-                                        Text(verbatim: "英文")
+                                        Text(verbatim: "英文").shallow()
                                         Text.separator
                                         Text(verbatim: unihanDefinition)
                                         Spacer()
@@ -51,49 +51,42 @@ private struct PronunciationView: View {
                 let isSingular: Bool = romanization.filter({ $0.isLowercaseBasicLatinLetter || $0.isCantoneseToneDigit }).count == romanization.count
                 self.ipa = isSingular ? JyutpingSyllable2IPA.IPAText(of: romanization) : nil
                 self.homophoneText = homophones.isEmpty ? nil : homophones.joined(separator: String.space)
-                self.interpretation = pronunciation.interpretation
                 self.collocationText = collocations.isEmpty ? nil : collocations.prefix(8).joined(separator: String.space)
-                self.collocationSpeechText = collocations.isEmpty ? nil : collocations.prefix(8).joined(separator: "，")
+                self.collocationSpeechText = collocations.isEmpty ? nil : collocations.prefix(8).joined(separator: "；")
+                self.descriptions = pronunciation.descriptions
         }
 
         private let romanization: String
         private let ipa: String?
         private let homophoneText: String?
-        private let interpretation: String?
         private let collocationText: String?
         private let collocationSpeechText: String?
+        private let descriptions: [String]
 
         var body: some View {
                 VStack(alignment: .leading) {
                         HStack(spacing: 16) {
                                 HStack {
-                                        Text(verbatim: "讀音")
+                                        Text(verbatim: "讀音").shallow()
                                         Text.separator
                                         Text(verbatim: romanization).font(.title3.monospaced())
                                 }
                                 if let ipa {
-                                        Text(verbatim: ipa).font(.ipa).opacity(0.66)
+                                        Text(verbatim: ipa).font(.ipa).airy()
                                 }
                                 Spacer()
                                 Speaker(romanization)
                         }
                         if let homophoneText {
                                 HStack {
-                                        Text(verbatim: "同音")
+                                        Text(verbatim: "同音").shallow()
                                         Text.separator
                                         Text(verbatim: homophoneText)
                                 }
                         }
-                        if let interpretation {
-                                HStack {
-                                        Text(verbatim: "釋義")
-                                        Text.separator
-                                        Text(verbatim: interpretation)
-                                }
-                        }
                         if let collocationText {
                                 HStack {
-                                        Text(verbatim: "詞例")
+                                        Text(verbatim: "詞例").shallow()
                                         Text.separator
                                         Text(verbatim: collocationText)
                                         Spacer()
@@ -101,6 +94,14 @@ private struct PronunciationView: View {
                                                 Speech.speak(collocationSpeechText ?? collocationText, isRomanization: false)
                                         }
                                 }
+                        }
+                        ForEach(descriptions.indices, id: \.self) { index in
+                                HStack(alignment: .firstTextBaseline) {
+                                        Text(verbatim: "釋義").shallow()
+                                        Text.separator
+                                        Text(verbatim: descriptions[index]).lineSpacing(4)
+                                }
+                                .padding(.vertical, 2)
                         }
                 }
         }

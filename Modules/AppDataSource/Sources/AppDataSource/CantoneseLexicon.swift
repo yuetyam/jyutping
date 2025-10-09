@@ -5,14 +5,14 @@ public struct Pronunciation: Hashable {
 
         public let romanization: String
         public let homophones: [String]
-        public let interpretation: String?
         public let collocations: [String]
+        public let descriptions: [String]
 
-        public init(romanization: String, homophones: [String] = [], interpretation: String? = nil, collocations: [String] = []) {
+        public init(romanization: String, homophones: [String] = [], collocations: [String] = [], descriptions: [String] = []) {
                 self.romanization = romanization
                 self.homophones = homophones
-                self.interpretation = interpretation
                 self.collocations = collocations
+                self.descriptions = descriptions
         }
 }
 
@@ -43,10 +43,10 @@ public struct CantoneseLexicon: Hashable {
                 let matched = DataMaster.fetchRomanizations(for: text)
                 guard matched.isEmpty else {
                         let pronunciations = matched.map { romanization -> Pronunciation in
-                                guard textCount == 1 else { return Pronunciation(romanization: romanization) }
                                 let homophones = DataMaster.fetchHomophones(for: romanization).filter({ $0 != text })
                                 let collocations = DataMaster.fetchCollocations(word: text, romanization: romanization)
-                                return Pronunciation(romanization: romanization, homophones: homophones, collocations: collocations)
+                                let descriptions = DataMaster.fetchDescriptions(word: text, romanization: romanization)
+                                return Pronunciation(romanization: romanization, homophones: homophones, collocations: collocations, descriptions: descriptions)
                         }
                         let unihanDefinition = UnihanDefinition.match(text: text)?.definition
                         return CantoneseLexicon(text: text, pronunciations: pronunciations, unihanDefinition: unihanDefinition)
@@ -55,10 +55,10 @@ public struct CantoneseLexicon: Hashable {
                 let tryMatched = DataMaster.fetchRomanizations(for: traditionalText)
                 guard tryMatched.isEmpty else {
                         let pronunciations = tryMatched.map { romanization -> Pronunciation in
-                                guard textCount == 1 else { return Pronunciation(romanization: romanization) }
                                 let homophones = DataMaster.fetchHomophones(for: romanization).filter({ $0 != traditionalText })
                                 let collocations = DataMaster.fetchCollocations(word: traditionalText, romanization: romanization)
-                                return Pronunciation(romanization: romanization, homophones: homophones, collocations: collocations)
+                                let descriptions = DataMaster.fetchDescriptions(word: traditionalText, romanization: romanization)
+                                return Pronunciation(romanization: romanization, homophones: homophones, collocations: collocations, descriptions: descriptions)
                         }
                         let unihanDefinition = UnihanDefinition.match(text: traditionalText)?.definition
                         return CantoneseLexicon(text: traditionalText, pronunciations: pronunciations, unihanDefinition: unihanDefinition)
@@ -91,7 +91,8 @@ public struct CantoneseLexicon: Hashable {
                 }
                 guard fetches.isNotEmpty else { return fallback }
                 let romanization: String = fetches.joined(separator: " ")
-                let pronunciation = Pronunciation(romanization: romanization)
+                let descriptions = DataMaster.fetchDescriptions(word: newText, romanization: romanization)
+                let pronunciation = Pronunciation(romanization: romanization, descriptions: descriptions)
                 return CantoneseLexicon(text: newText, pronunciations: [pronunciation])
         }
 
@@ -163,5 +164,23 @@ private extension DataMaster {
                 guard text != "X" else { return [] }
                 let collocations: [String] = text.split(separator: ";").map({ $0.trimmingCharacters(in: .whitespaces) })
                 return collocations
+        }
+
+        /// Fetch definitions / explanations
+        /// - Parameters:
+        ///   - word: Cantonese word
+        ///   - romanization: Jyutping
+        /// - Returns: Description texts
+        static func fetchDescriptions(word: String, romanization: String) -> [String] {
+                var items: [String] = []
+                let command: String = "SELECT description FROM dictionarytable WHERE word = '\(word)' AND romanization = '\(romanization)';"
+                var statement: OpaquePointer? = nil
+                defer { sqlite3_finalize(statement) }
+                guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return items }
+                while sqlite3_step(statement) == SQLITE_ROW {
+                        let item: String = String(cString: sqlite3_column_text(statement, 0))
+                        items.append(item)
+                }
+                return items
         }
 }

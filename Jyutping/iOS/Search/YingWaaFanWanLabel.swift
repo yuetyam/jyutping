@@ -11,7 +11,7 @@ struct YingWaaFanWanLexiconView: View {
                 if let firstEntry = lexicon.first {
                         HStack(spacing: 16) {
                                 HStack(spacing: 2) {
-                                        Text(verbatim: "文字").font(.copilot)
+                                        Text(verbatim: "文字").font(.copilot).shallow()
                                         Text.separator.font(.copilot)
                                         Text(verbatim: firstEntry.word)
                                 }
@@ -34,7 +34,7 @@ private struct YingWaaFanWanPronunciationView: View {
                 VStack(alignment: .leading) {
                         HStack {
                                 HStack(spacing: 2) {
-                                        Text(verbatim: "讀音")
+                                        Text(verbatim: "讀音").shallow()
                                         Text.separator
                                         Text(verbatim: entry.pronunciation).font(.body)
                                 }
@@ -47,7 +47,7 @@ private struct YingWaaFanWanPronunciationView: View {
                         }
                         HStack(spacing: 16) {
                                 HStack(spacing: 2) {
-                                        Text(verbatim: "轉寫")
+                                        Text(verbatim: "轉寫").shallow()
                                         Text.separator
                                         Text(verbatim: entry.romanization).font(.fixedWidth)
                                 }
@@ -57,7 +57,7 @@ private struct YingWaaFanWanPronunciationView: View {
                         }
                         if let homophoneText {
                                 HStack(spacing: 2) {
-                                        Text(verbatim: "同音")
+                                        Text(verbatim: "同音").shallow()
                                         Text.separator
                                         Text(verbatim: homophoneText).font(.body)
                                 }

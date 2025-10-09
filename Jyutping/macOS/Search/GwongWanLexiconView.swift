@@ -10,17 +10,17 @@ struct GwongWanLexiconView: View {
                 VStack(alignment: .leading, spacing: 2) {
                         Text(verbatim: "《大宋重修廣韻》　陳彭年等　北宋")
                                 .font(.copilot)
-                                .opacity(0.66)
+                                .airy()
                         VStack(alignment: .leading) {
                                 if let word = lexicon.first?.word {
                                         HStack(spacing: 16) {
                                                 HStack {
-                                                        Text(verbatim: "文字")
+                                                        Text(verbatim: "文字").shallow()
                                                         Text.separator
                                                         Text(verbatim: word).font(.display)
                                                 }
                                                 if let unicode = word.first?.codePointsText {
-                                                        Text(verbatim: unicode).font(.fixedWidth).opacity(0.66)
+                                                        Text(verbatim: unicode).font(.fixedWidth).airy()
                                                 }
                                         }
                                 }
@@ -39,7 +39,7 @@ private struct GwongWanView: View {
         var body: some View {
                 VStack(alignment: .leading, spacing: 10) {
                         HStack {
-                                Text(verbatim: "讀音")
+                                Text(verbatim: "讀音").shallow()
                                 Text.separator
                                 HStack(spacing: 32) {
                                         Text(verbatim: entry.faancitText)
@@ -48,7 +48,7 @@ private struct GwongWanView: View {
                                 Spacer()
                         }
                         HStack {
-                                Text(verbatim: "釋義")
+                                Text(verbatim: "釋義").shallow()
                                 Text.separator
                                 Text(verbatim: entry.interpretation)
                                 Spacer()

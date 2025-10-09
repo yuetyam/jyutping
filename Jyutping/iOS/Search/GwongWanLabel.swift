@@ -10,7 +10,7 @@ struct GwongWanLexiconView: View {
                 if let firstEntry = lexicon.first {
                         HStack(spacing: 2) {
                                 HStack(spacing: 2) {
-                                        Text(verbatim: "文字").font(.copilot)
+                                        Text(verbatim: "文字").font(.copilot).shallow()
                                         Text.separator.font(.copilot)
                                         Text(verbatim: firstEntry.word)
                                 }
@@ -30,7 +30,7 @@ struct GwongWanLabel: View {
         var body: some View {
                 VStack(alignment: .leading, spacing: 8) {
                         HStack(spacing: 2) {
-                                Text(verbatim: "讀音")
+                                Text(verbatim: "讀音").shallow()
                                 Text.separator
                                 HStack(spacing: 16) {
                                         Text(verbatim: entry.faancitText).font(.body)
@@ -38,7 +38,7 @@ struct GwongWanLabel: View {
                                 }
                         }
                         HStack(spacing: 2) {
-                                Text(verbatim: "釋義")
+                                Text(verbatim: "釋義").shallow()
                                 Text.separator
                                 Text(verbatim: entry.interpretation).font(.body)
                         }

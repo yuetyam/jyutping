@@ -11,7 +11,7 @@ struct FanWanLexiconView: View {
                 if let firstEntry = lexicon.first {
                         HStack(spacing: 16) {
                                 HStack(spacing: 2) {
-                                        Text(verbatim: "文字").font(.copilot)
+                                        Text(verbatim: "文字").font(.copilot).shallow()
                                         Text.separator.font(.copilot)
                                         Text(verbatim: firstEntry.word)
                                 }
@@ -33,13 +33,13 @@ struct FanWanCuetYiuLabel: View {
                 let ipaText: String = OldCantonese.IPAText(of: entry.romanization)
                 VStack(alignment: .leading) {
                         HStack(spacing: 2) {
-                                Text(verbatim: "讀音")
+                                Text(verbatim: "讀音").shallow()
                                 Text.separator
                                 Text(verbatim: entry.abstract).font(.body).minimumScaleFactor(0.5).lineLimit(1)
                         }
                         HStack(spacing: 16) {
                                 HStack(spacing: 2) {
-                                        Text(verbatim: "轉寫")
+                                        Text(verbatim: "轉寫").shallow()
                                         Text.separator
                                         Text(verbatim: entry.romanization).font(.fixedWidth)
                                 }
@@ -49,14 +49,14 @@ struct FanWanCuetYiuLabel: View {
                         }
                         if let homophoneText {
                                 HStack(spacing: 2) {
-                                        Text(verbatim: "同音")
+                                        Text(verbatim: "同音").shallow()
                                         Text.separator
                                         Text(verbatim: homophoneText).font(.body)
                                 }
                                 .padding(.bottom, 4)
                         }
                         HStack(spacing: 2) {
-                                Text(verbatim: "釋義")
+                                Text(verbatim: "釋義").shallow()
                                 Text.separator
                                 Text(verbatim: entry.interpretation).font(.body)
                         }

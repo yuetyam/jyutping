@@ -11,17 +11,17 @@ struct FanWanLexiconView: View {
                 VStack(alignment: .leading, spacing: 2) {
                         Text(verbatim: "《分韻撮要》　佚名　清初　廣州府")
                                 .font(.copilot)
-                                .opacity(0.66)
+                                .airy()
                         VStack(alignment: .leading) {
                                 if let word = lexicon.first?.word {
                                         HStack(spacing: 16) {
                                                 HStack {
-                                                        Text(verbatim: "文字")
+                                                        Text(verbatim: "文字").shallow()
                                                         Text.separator
                                                         Text(verbatim: word).font(.display)
                                                 }
                                                 if let unicode = word.first?.codePointsText {
-                                                        Text(verbatim: unicode).font(.fixedWidth).opacity(0.66)
+                                                        Text(verbatim: unicode).font(.fixedWidth).airy()
                                                 }
                                         }
                                 }
@@ -42,30 +42,30 @@ private struct FanWanCuetYiuView: View {
                 let ipaText: String = OldCantonese.IPAText(of: entry.romanization)
                 VStack(alignment: .leading) {
                         HStack {
-                                Text(verbatim: "讀音")
+                                Text(verbatim: "讀音").shallow()
                                 Text.separator
                                 Text(verbatim: entry.abstract)
                         }
                         HStack(spacing: 16) {
                                 HStack {
-                                        Text(verbatim: "轉寫")
+                                        Text(verbatim: "轉寫").shallow()
                                         Text.separator
                                         Text(verbatim: entry.romanization).font(.title3.monospaced())
                                 }
-                                Text(verbatim: ipaText).font(.ipa).opacity(0.66)
+                                Text(verbatim: ipaText).font(.ipa).airy()
                                 Spacer()
                                 Speaker(entry.romanization).opacity(entry.romanization.isValidJyutpingSyllable ? 1 : 0)
                         }
                         if let homophoneText {
                                 HStack {
-                                        Text(verbatim: "同音")
+                                        Text(verbatim: "同音").shallow()
                                         Text.separator
                                         Text(verbatim: homophoneText)
                                 }
                                 .padding(.bottom, 1)
                         }
                         HStack {
-                                Text(verbatim: "釋義")
+                                Text(verbatim: "釋義").shallow()
                                 Text.separator
                                 Text(verbatim: entry.interpretation)
                         }
