@@ -74,7 +74,8 @@ extension Engine {
                 let candidates: [Candidate] =  switch (segmentation.first?.first?.alias.count ?? 0) {
                 case 0:
                         processSlices(of: syllableEvents, text: syllableEvents.map(\.text).joined(), anchorsStatement: anchorsStatement, pingStatement: pingStatement)
-                case 1 where syllableEvents.count > 1:
+                case 1 where syllableEvents.count > 1,
+                        _ where syllableEvents.count != events.count :
                         search(events: syllableEvents, segmentation: segmentation, anchorsStatement: anchorsStatement, pingStatement: pingStatement, strictStatement: strictStatement) + processSlices(of: syllableEvents, text: syllableEvents.map(\.text).joined(), anchorsStatement: anchorsStatement, pingStatement: pingStatement)
                 default:
                         search(events: syllableEvents, segmentation: segmentation, anchorsStatement: anchorsStatement, pingStatement: pingStatement, strictStatement: strictStatement)

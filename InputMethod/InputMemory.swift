@@ -92,7 +92,109 @@ struct InputMemory {
         // MARK: - Suggestions
 
         static func suggest<T: RandomAccessCollection<InputEvent>>(events: T, segmentation: Segmentation) async -> [Candidate] {
-                guard events.contains(where: \.isSyllableLetter.negative).negative else { return [] }
+                switch (events.contains(where: \.isApostrophe), events.contains(where: \.isToneEvent)) {
+                case (false, false):
+                        return search(events: events, segmentation: segmentation)
+                case (true, true):
+                        let syllableEvents = events.filter(\.isSyllableLetter)
+                        let candidates = search(events: syllableEvents, segmentation: segmentation)
+                        let inputText = events.map(\.text).joined()
+                        let text = inputText.toneConverted()
+                        return candidates.compactMap({ item -> Candidate? in
+                                guard text.hasPrefix(item.romanization) else { return nil }
+                                return item.replacedInput(with: inputText)
+                        })
+                case (false, true):
+                        let syllableEvents = events.filter(\.isSyllableLetter)
+                        let candidates = search(events: syllableEvents, segmentation: segmentation)
+                        let inputText = events.map(\.text).joined()
+                        let text = inputText.toneConverted()
+                        let textTones = text.tones
+                        let qualified: [Candidate] = candidates.compactMap({ item -> Candidate? in
+                                let syllableText = item.romanization.filter(\.isSpace.negative)
+                                guard syllableText != text else { return item.replacedInput(with: inputText) }
+                                let tones = syllableText.tones
+                                switch (textTones.count, tones.count) {
+                                case (1, 1):
+                                        guard (text.last?.isCantoneseToneDigit ?? false) else { return nil }
+                                        guard textTones == tones else { return nil }
+                                        return item.replacedInput(with: inputText)
+                                case (1, 2):
+                                        let isToneLast: Bool = text.last?.isCantoneseToneDigit ?? false
+                                        if isToneLast {
+                                                guard tones.hasSuffix(textTones) else { return nil }
+                                                let isCorrectPosition: Bool = text.dropFirst(item.inputCount).first?.isCantoneseToneDigit ?? false
+                                                guard isCorrectPosition else { return nil }
+                                                return item.replacedInput(with: inputText)
+                                        } else {
+                                                guard tones.hasPrefix(textTones) else { return nil }
+                                                return item.replacedInput(with: inputText)
+                                        }
+                                case (2, 2):
+                                        guard (text.last?.isCantoneseToneDigit ?? false) else { return nil }
+                                        guard textTones == tones else { return nil }
+                                        guard item.inputCount == (text.count - 2) else { return nil }
+                                        return item.replacedInput(with: inputText)
+                                default:
+                                        guard inputText != syllableText else { return item.replacedInput(with: inputText) }
+                                        return nil
+                                }
+                        })
+                        return qualified
+                case (true, false):
+                        let syllableEvents = events.filter(\.isSyllableLetter)
+                        let candidates = search(events: syllableEvents, segmentation: segmentation)
+                        let isHeadingSeparator: Bool = events.first?.isApostrophe ?? false
+                        let isTrailingSeparator: Bool = events.last?.isApostrophe ?? false
+                        guard isHeadingSeparator.negative else { return [] }
+                        let inputSeparatorCount = events.count(where: \.isApostrophe)
+                        let eventLength = events.count
+                        let text = events.map(\.text).joined()
+                        let textParts = text.split(separator: Character.separator)
+                        let qualified: [Candidate] = candidates.compactMap({ item -> Candidate? in
+                                let syllables = item.romanization.removedTones().split(separator: Character.space)
+                                guard syllables != textParts else { return item.replacedInput(with: text) }
+                                switch inputSeparatorCount {
+                                case 1 where isTrailingSeparator:
+                                        guard syllables.count == 1 else { return nil }
+                                        guard item.inputCount == (eventLength - 1) else { return nil }
+                                        return item.replacedInput(with: text)
+                                case 1:
+                                        guard syllables.count == 2 else { return nil }
+                                        let isMatched: Bool = {
+                                                guard eventLength != 3 else { return true }
+                                                guard syllables.first != textParts.first else { return true }
+                                                guard textParts.first?.count == 1 else { return false }
+                                                guard textParts.first?.first == syllables.first?.first else { return false }
+                                                guard let lastSyllable = syllables.last else { return false }
+                                                return textParts.last?.hasPrefix(lastSyllable) ?? false
+                                        }()
+                                        guard isMatched else { return nil }
+                                        return item.replacedInput(with: text)
+                                case 2 where isTrailingSeparator:
+                                        guard syllables.count == 2 else { return nil }
+                                        guard item.inputCount == (eventLength - 2) else { return nil }
+                                        let isMatched: Bool = {
+                                                guard eventLength != 4 else { return true }
+                                                guard syllables.first != textParts.first else { return true }
+                                                guard textParts.first?.count == 1 else { return false }
+                                                guard textParts.first?.first == syllables.first?.first else { return false }
+                                                return textParts.last == syllables.last
+                                        }()
+                                        guard isMatched else { return nil }
+                                        return item.replacedInput(with: text)
+                                case 2 where eventLength == 5 && textParts.count == 3,
+                                        3 where eventLength == 6 && textParts.count == 3:
+                                        guard syllables.count == 3 else { return nil }
+                                        return item.replacedInput(with: text)
+                                default:
+                                        return nil
+                                }
+                        })
+                        return qualified
+                }
+        }
+        private static func search<T: RandomAccessCollection<InputEvent>>(events: T, segmentation: Segmentation) -> [Candidate] {
                 lazy var shortcutStatement = prepareShortcutStatement()
                 lazy var pingStatement = preparePingStatement()
                 lazy var strictStatement = prepareStrictStatement()

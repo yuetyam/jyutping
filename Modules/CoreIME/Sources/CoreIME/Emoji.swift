@@ -115,18 +115,20 @@ extension Engine {
         }
 
         public static func searchSymbols<T: RandomAccessCollection<InputEvent>>(for events: T, segmentation: Segmentation) -> [Candidate] {
-                let eventLength = events.count
-                let text = events.map(\.text).joined()
                 let command: String = "SELECT category, unicodeversion, codepoint, cantonese, romanization FROM symboltable WHERE ping = ?;"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(Engine.database, command, -1, &statement, nil) == SQLITE_OK else { return [] }
-                let regular: [Candidate] = match(text: text, input: text, statement: statement)
-                let schemes = segmentation.filter({ $0.length == eventLength })
+                let syllableEvents = events.filter(\.isSyllableLetter)
+                let syllableLength = syllableEvents.count
+                let text: String = syllableEvents.map(\.text).joined()
+                let input: String = (syllableLength == events.count) ? text : events.map(\.text).joined()
+                let regular: [Candidate] = match(text: text, input: input, statement: statement)
+                let schemes = segmentation.filter({ $0.length == syllableLength })
                 guard schemes.isNotEmpty else { return regular }
                 let matches = schemes.flatMap({ scheme -> [Candidate] in
                         let pingText = scheme.flatMap(\.origin).map(\.text).joined()
-                        return match(text: pingText, input: text, statement: statement)
+                        return match(text: pingText, input: input, statement: statement)
                 })
                 return (regular + matches).uniqued()
         }

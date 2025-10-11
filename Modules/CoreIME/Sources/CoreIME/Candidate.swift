@@ -190,7 +190,7 @@ public struct Candidate: Hashable, Comparable, Sendable {
 }
 
 extension Candidate {
-        func replacedInput(with newInput: String) -> Candidate {
+        public func replacedInput(with newInput: String) -> Candidate {
                 return Candidate(type: type, text: text, lexiconText: lexiconText, romanization: romanization, input: newInput, mark: mark, order: order)
         }
 }
