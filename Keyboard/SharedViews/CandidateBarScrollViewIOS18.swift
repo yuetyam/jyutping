@@ -19,20 +19,10 @@ struct CandidateBarScrollViewIOS18: View {
                 let toneStyle: CommentToneStyle = Options.commentToneStyle
                 let isCompatibleModeOn: Bool = Options.isCompatibleModeOn
                 let isCompactKeyboard: Bool = context.keyboardInterface.isCompact
-                let romanizationTopPadding: CGFloat = {
-                        if isCompactKeyboard {
-                                return commentStyle.isBelow ? 22 : 0
-                        } else {
-                                return commentStyle.isBelow ? 24 : 0
-                        }
-                }()
-                let romanizationBottomPadding: CGFloat = {
-                        if isCompactKeyboard {
-                                return commentStyle.isBelow ? 0 : 34
-                        } else {
-                                return commentStyle.isBelow ? 0 : 36
-                        }
-                }()
+                let romanizationTopPadding: CGFloat = commentStyle.isBelow ? 22 : 0
+                let romanizationBottomPadding: CGFloat = commentStyle.isBelow ? 0 : 36
+                let textTopPadding: CGFloat = commentStyle.isBelow ? 0 : 2
+                let textBottomPadding: CGFloat = commentStyle.isBelow ? 14 : 0
                 ScrollView(.horizontal) {
                         LazyHStack(spacing: 0) {
                                 ForEach(context.candidates.indices, id: \.self) { index in
@@ -75,7 +65,8 @@ struct CandidateBarScrollViewIOS18: View {
                                                                 .font(isCompactKeyboard ? .candidate : .iPadCandidate)
                                                                 .minimumScaleFactor(0.4)
                                                                 .lineLimit(1)
-                                                                .padding(.bottom, commentStyle.isBelow ? 14 : 0)
+                                                                .padding(.top, textTopPadding)
+                                                                .padding(.bottom, textBottomPadding)
                                                 }
                                                 .frame(width: candidate.width)
                                                 .frame(maxHeight: .infinity)
