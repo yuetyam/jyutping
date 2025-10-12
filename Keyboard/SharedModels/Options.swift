@@ -139,8 +139,9 @@ struct Options {
                         UserDefaults.standard.removeObject(forKey: OptionsKey.AppleLanguages)
                         return
                 }
+                let preferredCodes: [String] = [languageCode, "yue-Hant-HK", "zh-Hant-HK"]
                 let oldCodes: [String] = Locale.preferredLanguages
-                let newCodes: [String] = ([languageCode] + oldCodes).uniqued()
+                let newCodes: [String] = (preferredCodes + oldCodes).uniqued()
                 UserDefaults.standard.set(newCodes, forKey: OptionsKey.AppleLanguages)
         }
 
@@ -244,7 +245,7 @@ enum KeyboardDisplayLanguage: Int, CaseIterable {
         var languageCode: String? {
                 switch self {
                 case .auto: nil
-                case .cantonese: "yue"
+                case .cantonese: "yue-Hant-HK"
                 case .chineseHongKong: "zh-Hant-HK"
                 case .english: "en"
                 case .french: "fr"
