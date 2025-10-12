@@ -150,7 +150,7 @@ struct InputMemory {
                         let inputSeparatorCount = events.count(where: \.isApostrophe)
                         let eventLength = events.count
                         let text = events.map(\.text).joined()
-                        let textParts = text.split(separator: Character.separator)
+                        let textParts = text.split(separator: Character.apostrophe)
                         let qualified: [Candidate] = candidates.compactMap({ item -> Candidate? in
                                 let syllables = item.romanization.removedTones().split(separator: Character.space)
                                 guard syllables != textParts else { return item.replacedInput(with: text) }

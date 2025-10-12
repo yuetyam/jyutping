@@ -1,11 +1,11 @@
 extension Character {
 
-        /// UNICODE code points. Example: é = ["U+65", "U+301"]
+        /// Unicode code points. Example: é = ["U+65", "U+301"]
         public var codePoints: [String] {
                 return self.unicodeScalars.map { "U+" + String($0.value, radix: 16, uppercase: true) }
         }
 
-        /// UNICODE code points as a String. Example: é = "U+65 U+301"
+        /// Unicode code points as a String. Example: é = "U+65 U+301"
         public var codePointsText: String {
                 return self.codePoints.joined(separator: String.space)
         }
@@ -18,7 +18,7 @@ extension Character {
                 self.init(scalar)
         }
 
-        /// UNICODE code point as decimal code
+        /// Unicode code point as decimal code
         public var decimalCode: Int? {
                 guard let scalar = self.unicodeScalars.first else { return nil }
                 let number = Int(scalar.value)
@@ -39,12 +39,20 @@ extension Character {
                 return self == Self.space
         }
 
-        /// U+0027 ( ' ) apostrophe
-        public static let separator: Character = "\u{27}"
+        /// U+0027 ( ' ) Separator; Delimiter; Quote
+        public static let apostrophe: Character = "\u{27}"
 
-        /// U+0027 ( ' ) apostrophe
-        public var isSeparator: Bool {
-                return self == Self.separator
+        /// U+0027 ( ' ) Separator; Delimiter; Quote
+        public var isApostrophe: Bool {
+                return self == Self.apostrophe
+        }
+
+        /// U+0060 ( ` ) Grave accent; Backtick; Backquote
+        public static let grave: Character = "\u{60}"
+
+        /// U+0060 ( ` ) Grave accent; Backtick; Backquote
+        public var isGrave: Bool {
+                return self == Self.grave
         }
 
         /// a-z or A-Z

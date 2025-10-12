@@ -1,14 +1,19 @@
-extension Collection where Element: Collection {
-
-        /// Count of (Element of the Element)
-        public var subelementCount: Int {
-                return self.map(\.count).reduce(0, +)
+extension Sequence where Element: Collection {
+        /// The number of elements in the flattened sequence of all nested collections. That is, the count of (Element of the Element).
+        public var flattenedCount: Int {
+                return reduce(0) { $0 + $1.count }
         }
 }
 
 extension Collection {
         public var isNotEmpty: Bool {
-                return !(self.isEmpty)
+                return !isEmpty
+        }
+}
+
+extension Sequence where Element: Equatable {
+        public func notContains(_ element: Element) -> Bool {
+                return !(contains(element))
         }
 }
 

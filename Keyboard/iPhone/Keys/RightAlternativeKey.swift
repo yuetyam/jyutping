@@ -75,7 +75,7 @@ struct RightAlternativeKey: View {
                                         .fill(keyPreviewColor)
                                         .shadow(color: .shadowGray, radius: 1)
                                         .overlay {
-                                                Text(verbatim: pulled ?? (context.inputStage.isBuffering ? String.separator : String.cantoneseComma))
+                                                Text(verbatim: pulled ?? (context.inputStage.isBuffering ? String.apostrophe : String.cantoneseComma))
                                                         .font(.largeTitle)
                                                         .padding(.bottom, previewBottomOffset)
                                         }
@@ -100,7 +100,7 @@ struct RightAlternativeKey: View {
                                 }
                                 .padding(.vertical, verticalPadding + 2)
                                 .opacity(context.inputStage.isBuffering ? 0.5 : 0)
-                                Text(verbatim: context.inputStage.isBuffering ? String.separator : String.cantoneseComma).font(.letterCompact)
+                                Text(verbatim: context.inputStage.isBuffering ? String.apostrophe : String.cantoneseComma).font(.letterCompact)
                         }
                 }
                 .frame(width: keyWidth, height: keyHeight)

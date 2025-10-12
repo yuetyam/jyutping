@@ -1,5 +1,7 @@
 extension Sequence where Element: Hashable {
 
+        // TODO: - Migrate uniqued() calls to distinct()
+
         /// Returns a new Array with the unique elements of this Array, in the order of the first occurrence of each unique element.
         /// - Returns: A new Array with only the unique elements of this Array.
         /// - Complexity: O(*n*), where *n* is the length of the Array.
@@ -34,11 +36,5 @@ extension Array {
                 return stride(from: 0, to: count, by: size).map {
                         Array(self[$0 ..< Swift.min($0 + size, count)])
                 }
-        }
-}
-
-extension Array where Element: Equatable {
-        public func notContains(_ element: Element) -> Bool {
-                return !(contains(element))
         }
 }

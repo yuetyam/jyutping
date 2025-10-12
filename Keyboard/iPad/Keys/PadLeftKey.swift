@@ -30,7 +30,7 @@ struct PadLeftKey: View {
                         }
                         .padding(.bottom, verticalPadding + 5)
                         .opacity(context.inputStage.isBuffering ? 0.5 : 0)
-                        Text(verbatim: context.inputStage.isBuffering ? String.separator : KeyboardForm.numeric.padTransformKeyText)
+                        Text(verbatim: context.inputStage.isBuffering ? String.apostrophe : KeyboardForm.numeric.padTransformKeyText)
                 }
                 .frame(width: keyWidth, height: keyHeight)
                 .contentShape(Rectangle())

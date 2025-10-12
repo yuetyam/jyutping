@@ -75,7 +75,7 @@ struct RightKey: View {
                                         .fill(keyPreviewColor)
                                         .shadow(color: .shadowGray, radius: 1)
                                         .overlay {
-                                                Text(verbatim: pulled ?? (context.inputStage.isBuffering ? String.separator : String.cantonesePeriod))
+                                                Text(verbatim: pulled ?? (context.inputStage.isBuffering ? String.apostrophe : String.cantonesePeriod))
                                                         .font(.largeTitle)
                                                         .padding(.bottom, previewBottomOffset)
                                         }
@@ -100,7 +100,7 @@ struct RightKey: View {
                                 }
                                 .padding(.vertical, verticalPadding + 2)
                                 .opacity(context.inputStage.isBuffering ? 0.5 : 0)
-                                Text(verbatim: context.inputStage.isBuffering ? String.separator : String.cantonesePeriod).font(.letterCompact)
+                                Text(verbatim: context.inputStage.isBuffering ? String.apostrophe : String.cantonesePeriod).font(.letterCompact)
                         }
                 }
                 .frame(width: keyWidth, height: keyHeight)

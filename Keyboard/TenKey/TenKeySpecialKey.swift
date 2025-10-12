@@ -24,7 +24,7 @@ struct TenKeySpecialKey: View {
                                         .opacity(0.35)
                         }
                         .padding(.bottom, 5)
-                        Text(verbatim: context.inputStage.isBuffering ? String.separator : "R")
+                        Text(verbatim: context.inputStage.isBuffering ? String.apostrophe : "R")
                         #endif
                 }
                 .frame(width: context.tenKeyWidthUnit, height: context.heightUnit)

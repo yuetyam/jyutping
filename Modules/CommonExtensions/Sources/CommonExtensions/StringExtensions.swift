@@ -1,10 +1,9 @@
 import Foundation
 
-extension Array where Element == String {
-
-        /// Character count
-        public var summedLength: Int {
-                return self.map(\.count).reduce(0, +)
+extension Sequence where Element: StringProtocol {
+        /// The total number of characters in all string elements.
+        var characterCount: Int {
+                return reduce(0) { $0 + $1.count }
         }
 }
 
@@ -28,8 +27,11 @@ extension String {
         /// U+3000. Ideographic Space. 全寬空格
         public static let fullWidthSpace: String = "\u{3000}"
 
-        /// U+0027 ( ' ) apostrophe
-        public static let separator: String = "\u{27}"
+        /// U+0027 ( ' ) Separator; Delimiter; Quote
+        public static let apostrophe: String = "\u{27}"
+
+        /// U+0060 ( ` ) Grave accent; Backtick; Backquote
+        public static let grave: String = "\u{60}"
 
         /// U+002C. English comma mark.
         public static let comma: String = "\u{2C}"
@@ -37,10 +39,10 @@ extension String {
         /// U+002E. English period (full-stop) mark.
         public static let period: String = "\u{2E}"
 
-        /// U+FF0C. Chinese comma mark.
+        /// U+FF0C. Chinese comma mark. Full-width comma mark.
         public static let cantoneseComma: String = "\u{FF0C}"
 
-        /// U+3002. Chinese period (full-stop) mark.
+        /// U+3002. Chinese period (full-stop) mark. Full-width period mark.
         public static let cantonesePeriod: String = "\u{3002}"
 }
 
@@ -54,18 +56,18 @@ extension StringProtocol {
         /// Convert simplified CJKV characters to traditional
         /// - Returns: Traditional CJKV characters
         public func convertedS2T() -> String {
-                return self.applyingTransform(.simplifiedToTraditional, reverse: false) ?? (self as? String) ?? String(self)
+                return applyingTransform(.simplifiedToTraditional, reverse: false) ?? (self as? String) ?? String(self)
         }
 
         /// Convert traditional CJKV characters to simplified
         /// - Returns: Simplified CJKV characters
         public func convertedT2S() -> String {
-                return self.applyingTransform(.simplifiedToTraditional, reverse: true) ?? (self as? String) ?? String(self)
+                return applyingTransform(.simplifiedToTraditional, reverse: true) ?? (self as? String) ?? String(self)
         }
 
         /// Returns a new String made by removing `.whitespacesAndNewlines` & `.controlCharacters` from both ends of the String.
         public func trimmed() -> String {
-                return self.trimmingCharacters(in: .whitespacesAndNewlines).trimmingCharacters(in: .controlCharacters)
+                return trimmingCharacters(in: .whitespacesAndNewlines).trimmingCharacters(in: .controlCharacters)
         }
 }
 
@@ -73,7 +75,7 @@ extension Sequence where Element == Character {
 
         /// Returns a new string by concatenating the elements of the sequence, adding a space between each element.
         public func spaceSeparated() -> String {
-                return self.reduce(into: String.empty) { partialResult, character in
+                return reduce(into: String.empty) { partialResult, character in
                         if partialResult.isNotEmpty {
                                 partialResult.append(String.space)
                         }

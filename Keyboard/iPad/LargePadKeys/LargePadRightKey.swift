@@ -32,7 +32,7 @@ struct LargePadRightKey: View {
                                                 .shallow()
                                 }
                                 .padding(.vertical, verticalPadding + 7)
-                                Text(verbatim: String.separator)
+                                Text(verbatim: String.apostrophe)
                         } else {
                                 ZStack(alignment: .bottomTrailing) {
                                         Color.clear
