@@ -14,15 +14,12 @@ struct MotherBoard: View {
                                 Color.clear
                         } else {
                                 CandidateBoard()
-                                        .background(
-                                                // TODO: Replace this with onGeometryChange modifier when dropping macOS 12 support
-                                                GeometryReader { proxy in
-                                                        Color.clear.task(id: proxy.size) {
-                                                                guard context.quadrant.isNegativeHorizontal else { return }
-                                                                NotificationCenter.default.post(name: .contentSize, object: nil, userInfo: [NotificationKey.contentSize : proxy.size])
-                                                        }
-                                                }
-                                        )
+                                        .onGeometryChange(for: CGSize.self) { proxy in
+                                                proxy.size
+                                        } action: { newSize in
+                                                guard context.quadrant.isNegativeHorizontal else { return }
+                                                NotificationCenter.default.post(name: .contentSize, object: nil, userInfo: [NotificationKey.contentSize : newSize])
+                                        }
                         }
                 }
         }
