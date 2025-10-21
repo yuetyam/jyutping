@@ -44,16 +44,14 @@ struct IOSJyutpingToneTable: View {
                                 }
                                 .textCase(nil)
                         }
-                        if #available(iOS 16.0, *) {
-                                Section {
-                                        if horizontalSize == .compact {
-                                                IOSToneCompactGridView()
-                                        } else {
-                                                IOSToneGridView()
-                                        }
+                        Section {
+                                if horizontalSize == .compact {
+                                        IOSToneCompactGridView()
+                                } else {
+                                        IOSToneGridView()
                                 }
-                                .listRowBackground(Color.clear)
                         }
+                        .listRowBackground(Color.clear)
                         Section {
                                 ToneChartView()
                                         .padding(.vertical, 8)
@@ -98,7 +96,6 @@ private struct IOSToneLabel: View {
         }
 }
 
-@available(iOS 16.0, *)
 private struct IOSToneCompactGridView: View {
         @Environment(\.colorScheme) private var colorScheme
         var body: some View {
@@ -159,7 +156,6 @@ private struct IOSToneCompactGridView: View {
         }
 }
 
-@available(iOS 16.0, *)
 private struct IOSToneGridView: View {
         @Environment(\.colorScheme) private var colorScheme
         var body: some View {

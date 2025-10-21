@@ -122,20 +122,11 @@ struct AboutView: View {
                                         .contextMenu {
                                                 MenuCopyButton(About.AppStoreAddress, title: "IOSAboutTab.ContextMenu.CopyAppStoreLink")
                                         }
-                                        if #available(iOS 16.0, *) {
-                                                ShareLink(item: About.AppStoreWebURL) {
-                                                        EnhancedLabel("IOSAboutTab.LabelTitle.ShareThisApp", icon: "square.and.arrow.up")
-                                                }
-                                                .contextMenu {
-                                                        MenuCopyButton(About.AppStoreAddress, title: "IOSAboutTab.ContextMenu.CopyAppStoreLink")
-                                                }
-                                        } else {
-                                                ShareSheetView(activityItems: [About.AppStoreWebURL]) {
-                                                        EnhancedLabel("IOSAboutTab.LabelTitle.ShareThisApp", icon: "square.and.arrow.up")
-                                                }
-                                                .contextMenu {
-                                                        MenuCopyButton(About.AppStoreAddress, title: "IOSAboutTab.ContextMenu.CopyAppStoreLink")
-                                                }
+                                        ShareLink(item: About.AppStoreWebURL) {
+                                                EnhancedLabel("IOSAboutTab.LabelTitle.ShareThisApp", icon: "square.and.arrow.up")
+                                        }
+                                        .contextMenu {
+                                                MenuCopyButton(About.AppStoreAddress, title: "IOSAboutTab.ContextMenu.CopyAppStoreLink")
                                         }
                                 }
                         }

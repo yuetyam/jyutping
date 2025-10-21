@@ -66,14 +66,10 @@ struct SearchView: View {
                         Section {
                                 YingWaaFanWanLexiconView(lexicon: yingWaaLexicons[index])
                         } header: {
-                                if #available(iOS 16.0, *) {
-                                        ViewThatFits(in: .horizontal) {
-                                                Text(verbatim: "《英華分韻撮要》　衛三畏 (Samuel Wells Williams)　廣州　1856").textCase(nil)
-                                                Text(verbatim: "《英華分韻撮要》　衛三畏　1856　廣州").textCase(nil)
-                                                Text(verbatim: "《英華分韻撮要》衛三畏 1856 廣州").textCase(nil)
-                                        }
-                                } else {
+                                ViewThatFits(in: .horizontal) {
+                                        Text(verbatim: "《英華分韻撮要》　衛三畏 (Samuel Wells Williams)　廣州　1856").textCase(nil)
                                         Text(verbatim: "《英華分韻撮要》　衛三畏　1856　廣州").textCase(nil)
+                                        Text(verbatim: "《英華分韻撮要》衛三畏 1856 廣州").textCase(nil)
                                 }
                         }
                         .textSelection(.enabled)
@@ -82,14 +78,10 @@ struct SearchView: View {
                         Section {
                                 ChoHokYuetYamCitYiuLexiconView(lexicon: choHokLexicons[index])
                         } header: {
-                                if #available(iOS 16.0, *) {
-                                        ViewThatFits(in: .horizontal) {
-                                                Text(verbatim: "《初學粵音切要》　湛約翰 (John Chalmers)　香港　1855").textCase(nil)
-                                                Text(verbatim: "《初學粵音切要》　湛約翰　1855　香港").textCase(nil)
-                                                Text(verbatim: "《初學粵音切要》湛約翰 1855 香港").textCase(nil)
-                                        }
-                                } else {
+                                ViewThatFits(in: .horizontal) {
+                                        Text(verbatim: "《初學粵音切要》　湛約翰 (John Chalmers)　香港　1855").textCase(nil)
                                         Text(verbatim: "《初學粵音切要》　湛約翰　1855　香港").textCase(nil)
+                                        Text(verbatim: "《初學粵音切要》湛約翰 1855 香港").textCase(nil)
                                 }
                         }
                         .textSelection(.enabled)
