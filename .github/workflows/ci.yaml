@@ -51,14 +51,14 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - name: Build InputMethod Scheme
-        run: set -o pipefail && xcodebuild clean build -arch arm64 -project Jyutping.xcodeproj -scheme InputMethod -configuration Debug -destination "platform=macOS" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO ONLY_ACTIVE_ARCH=NO | xcpretty
+        run: set -o pipefail && xcodebuild clean build -project Jyutping.xcodeproj -scheme InputMethod -configuration Debug -destination "platform=macOS,arch=arm64" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO ONLY_ACTIVE_ARCH=NO | xcpretty
   build_mac_app:
     name: Build macOS App
     runs-on: macos-26
     steps:
       - uses: actions/checkout@v5
       - name: Build macOS App Scheme
-        run: set -o pipefail && xcodebuild clean build -arch arm64 -project Jyutping.xcodeproj -scheme Jyutping -configuration Debug -destination "platform=macOS" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO ONLY_ACTIVE_ARCH=NO | xcpretty
+        run: set -o pipefail && xcodebuild clean build -project Jyutping.xcodeproj -scheme Jyutping -configuration Debug -destination "platform=macOS,arch=arm64" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO ONLY_ACTIVE_ARCH=NO | xcpretty
   build_ios_app:
     name: Build iOS App
     runs-on: macos-26

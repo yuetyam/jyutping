@@ -3,7 +3,6 @@ import Combine
 import CoreIME
 import CommonExtensions
 
-@available(macOS 13.0, *)
 struct GeneralSettingsView: View {
 
         @State private var pageSize: Int = AppSettings.displayCandidatePageSize

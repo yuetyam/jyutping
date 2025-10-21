@@ -1,7 +1,6 @@
 import SwiftUI
 import CommonExtensions
 
-@available(macOS 13.0, *)
 struct FontSettingsView: View {
 
         private let minusImage: Image = Image(systemName: "minus.circle.fill")
@@ -65,7 +64,7 @@ struct FontSettingsView: View {
                                                                                         .frame(width: buttonLength, height: buttonLength)
                                                                         }
                                                                         .buttonStyle(.plain)
-                                                                        FontPicker($customCandidateFonts[index], size: candidateFontSize, fallback: PresetConstant.PingFangHK, adoptFormStyle: true)
+                                                                        FontPicker($customCandidateFonts[index], size: candidateFontSize, fallback: PresetConstant.PingFangHK)
                                                                 }
                                                         }
                                                         Button {
@@ -120,7 +119,7 @@ struct FontSettingsView: View {
                                                                                         .frame(width: buttonLength, height: buttonLength)
                                                                         }
                                                                         .buttonStyle(.plain)
-                                                                        FontPicker($customCommentFonts[index], size: commentFontSize, fallback: PresetConstant.HelveticaNeue, adoptFormStyle: true)
+                                                                        FontPicker($customCommentFonts[index], size: commentFontSize, fallback: PresetConstant.HelveticaNeue)
                                                                 }
                                                         }
                                                         Button {
@@ -175,7 +174,7 @@ struct FontSettingsView: View {
                                                                                         .frame(width: buttonLength, height: buttonLength)
                                                                         }
                                                                         .buttonStyle(.plain)
-                                                                        FontPicker($customLabelFonts[index], size: labelFontSize, fallback: PresetConstant.Menlo, adoptFormStyle: true)
+                                                                        FontPicker($customLabelFonts[index], size: labelFontSize, fallback: PresetConstant.Menlo)
                                                                 }
                                                         }
                                                         Button {

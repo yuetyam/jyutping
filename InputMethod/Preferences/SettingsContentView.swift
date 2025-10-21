@@ -2,17 +2,6 @@ import SwiftUI
 import AppKit
 
 struct SettingsContentView: View {
-        var body: some View {
-                if #available(macOS 13.0, *) {
-                        SettingsSplitView().background(VisualEffectView())
-                } else {
-                        PreferencesView().background(VisualEffectView())
-                }
-        }
-}
-
-@available(macOS 13.0, *)
-struct SettingsSplitView: View {
 
         @State private var selection: PreferencesSidebarRow = AppSettings.selectedPreferencesSidebarRow
 
@@ -64,61 +53,7 @@ struct SettingsSplitView: View {
                                 AboutView()
                         }
                 }
-        }
-}
-
-@available(macOS, introduced: 12.0, deprecated: 13.0, message: "Use SettingsSplitView instead")
-struct PreferencesView: View {
-
-        @State private var isGeneralViewActive: Bool = AppSettings.selectedPreferencesSidebarRow == .general
-        @State private var isHotkeysViewActive: Bool = AppSettings.selectedPreferencesSidebarRow == .hotkeys
-        @State private var isAboutViewActive: Bool = AppSettings.selectedPreferencesSidebarRow == .about
-
-        var body: some View {
-                NavigationView {
-                        List {
-                                Section {
-                                        NavigationLink(destination: GeneralPreferencesView(), isActive: $isGeneralViewActive) {
-                                                Label("PreferencesView.NavigationTitle.General", systemImage: "gear")
-                                        }
-                                        NavigationLink {
-                                                ReverseLookupView()
-                                        } label: {
-                                                Label("PreferencesView.NavigationTitle.ReverseLookup", systemImage: "doc.text.magnifyingglass")
-                                        }
-                                        NavigationLink {
-                                                TonesInputView()
-                                        } label: {
-                                                Label("PreferencesView.NavigationTitle.TonesInput", systemImage: "bell")
-                                        }
-                                        NavigationLink {
-                                                FontPreferencesView()
-                                        } label: {
-                                                Label("PreferencesView.NavigationTitle.Fonts", systemImage: "character")
-                                        }
-                                } header: {
-                                        Text("PreferencesView.SectionHeader.Candidates").textCase(nil)
-                                }
-
-                                Section {
-                                        NavigationLink(destination: HotkeysView(), isActive: $isHotkeysViewActive) {
-                                                Label("PreferencesView.NavigationTitle.Hotkeys", systemImage: "keyboard")
-                                        }
-                                } header: {
-                                        Text("PreferencesView.SectionHeader.Hotkeys").textCase(nil)
-                                }
-
-                                Section {
-                                        NavigationLink(destination: AboutView(), isActive: $isAboutViewActive) {
-                                                Label("PreferencesView.NavigationTitle.About", systemImage: "info.circle")
-                                        }
-                                } header: {
-                                        Text("PreferencesView.SectionHeader.About").textCase(nil)
-                                }
-                        }
-                        .listStyle(.sidebar)
-                        .navigationTitle("PreferencesView.NavigationTitle.Preferences")
-                }
+                .background(VisualEffectView())
         }
 }
 
