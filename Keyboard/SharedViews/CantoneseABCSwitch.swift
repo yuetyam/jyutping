@@ -2,8 +2,8 @@ import SwiftUI
 import CoreIME
 
 /// Toggle InputMethodMode
-@available(iOS, introduced: 15.0, deprecated: 26.0, message: "Use InputModeSwitch instead")
-@available(iOSApplicationExtension, introduced: 15.0, deprecated: 26.0, message: "Use InputModeSwitch instead")
+@available(iOS, deprecated: 26.0, message: "Use InputModeSwitch instead")
+@available(iOSApplicationExtension, deprecated: 26.0, message: "Use InputModeSwitch instead")
 struct CantoneseABCSwitch: View {
 
         /// is ABC mode selected

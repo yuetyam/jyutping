@@ -40,8 +40,6 @@ struct EditingPanelPasteKey: View {
 
 // Deprecated
 /*
-@available(iOS 16.0, *)
-@available(iOSApplicationExtension 16.0, *)
 struct EditingPanelSystemPasteKey: View {
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme

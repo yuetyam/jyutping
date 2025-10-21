@@ -1,7 +1,7 @@
 import SwiftUI
 
-@available(iOS, introduced: 15.0, deprecated: 17.0)
-@available(iOSApplicationExtension, introduced: 15.0, deprecated: 17.0)
+@available(iOS, deprecated: 17.0)
+@available(iOSApplicationExtension, deprecated: 17.0)
 struct SidebarScrollViewIOS16: View {
 
         @EnvironmentObject private var context: KeyboardViewController

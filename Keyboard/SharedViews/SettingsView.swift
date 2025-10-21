@@ -98,8 +98,6 @@ private struct TrailingNavigationButton: View {
         }
 }
 
-@available(iOS 16.0, *)
-@available(iOSApplicationExtension 16.0, *)
 struct SettingsView: View {
 
         @EnvironmentObject private var context: KeyboardViewController

@@ -8,14 +8,6 @@ struct EditingPanelClearClipboardKey: View {
 
         @GestureState private var isTouching: Bool = false
 
-        private let clipboardImageName: String = {
-                if #available(iOSApplicationExtension 16.0, *) {
-                        return "clipboard"
-                } else {
-                        return "doc"
-                }
-        }()
-
         var body: some View {
                 ZStack {
                         Color.interactiveClear
@@ -24,7 +16,7 @@ struct EditingPanelClearClipboardKey: View {
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(4)
                         VStack(spacing: 4) {
-                                Image(systemName: clipboardImageName)
+                                Image(systemName: "clipboard")
                                 Text("EditingPanel.ClearSystemClipboard").font(.keyCaption)
                         }
                 }

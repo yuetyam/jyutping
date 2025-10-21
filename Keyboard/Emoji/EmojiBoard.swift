@@ -98,7 +98,7 @@ struct EmojiBoard: View {
                                                 proxy.scrollTo(Emoji.Category.foodAndDrink.viewID)
                                         }
                                         .foregroundStyle((currentCategory == .foodAndDrink) ? Color.primary : Color.secondary)
-                                        EmojiIndicator(index: 4, imageName: footballImageName) {
+                                        EmojiIndicator(index: 4, imageName: "soccerball") {
                                                 AudioFeedback.modified()
                                                 context.triggerHapticFeedback()
                                                 currentCategory = .activity
@@ -170,14 +170,6 @@ struct EmojiBoard: View {
                         .frame(height: 40)
                 }
         }
-
-        private let footballImageName: String = {
-                if #available(iOSApplicationExtension 16.0, *) {
-                        return "soccerball"
-                } else {
-                        return "EmojiCategoryActivity"
-                }
-        }()
 }
 
 private extension Emoji.Category {

@@ -7,30 +7,16 @@ struct EmojiIndicator: View {
                 self.imageName = imageName
                 self.isCustomImage = imageName.hasPrefix("Emoji")
                 let baseInset: CGFloat = 10
-                self.topInset = {
-                        switch index {
-                        case 2:
-                                return baseInset + 2
-                        case 3:
-                                return baseInset + 2
-                        case 4:
-                                if #available(iOSApplicationExtension 16.0, *) {
-                                        return baseInset + 1
-                                } else {
-                                        return baseInset + 3
-                                }
-                        case 5:
-                                return baseInset + 2
-                        case 6:
-                                return baseInset + 2
-                        case 7:
-                                return baseInset + 4
-                        case 8:
-                                return baseInset + 2
-                        default:
-                                return baseInset
-                        }
-                }()
+                self.topInset = switch index {
+                case 2: baseInset + 2
+                case 3: baseInset + 2
+                case 4: baseInset + 1
+                case 5: baseInset + 2
+                case 6: baseInset + 2
+                case 7: baseInset + 4
+                case 8: baseInset + 2
+                default: baseInset
+                }
                 self.bottomInset = 10
                 self.action = action
         }

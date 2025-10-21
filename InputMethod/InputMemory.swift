@@ -6,10 +6,10 @@ import CommonExtensions
 
 struct InputMemory {
 
-        private static let pathToDatabase: String = URL.libraryDirectory.appending(path: "memory.sqlite3", directoryHint: .notDirectory).path()
         nonisolated(unsafe) private static let database: OpaquePointer? = {
                 var db: OpaquePointer? = nil
-                guard sqlite3_open_v2(pathToDatabase, &db, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE | SQLITE_OPEN_FULLMUTEX, nil) == SQLITE_OK else { return nil }
+                let path: String = URL.libraryDirectory.appending(path: "memory.sqlite3", directoryHint: .notDirectory).path()
+                guard sqlite3_open_v2(path, &db, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE | SQLITE_OPEN_FULLMUTEX, nil) == SQLITE_OK else { return nil }
                 return db
         }()
 

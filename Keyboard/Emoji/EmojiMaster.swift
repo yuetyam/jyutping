@@ -47,11 +47,8 @@ struct EmojiMaster {
                 } else if #available(iOSApplicationExtension 16.4, *) {
                         // Unicode/Emoji version 15.0
                         return Engine.fetchEmojiSequence().filter({ $0.unicodeVersion <= 150000 })
-                } else if #available(iOSApplicationExtension 15.4, *) {
-                        // Unicode/Emoji version 14.0
-                        return Engine.fetchEmojiSequence().filter({ $0.unicodeVersion <= 140000 })
                 } else {
-                        return Engine.fetchEmojiSequence().filter({ $0.unicodeVersion < 140000 })
+                        return Engine.fetchEmojiSequence().filter({ $0.unicodeVersion <= 140000 })
                 }
         }()
 

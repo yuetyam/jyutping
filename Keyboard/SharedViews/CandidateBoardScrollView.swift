@@ -2,8 +2,8 @@ import SwiftUI
 import CommonExtensions
 import CoreIME
 
-@available(iOS, introduced: 15.0, deprecated: 17.0, message: "Use newer versions instead")
-@available(iOSApplicationExtension, introduced: 15.0, deprecated: 17.0, message: "Use newer versions instead")
+@available(iOS, deprecated: 17.0, message: "Use newer versions instead")
+@available(iOSApplicationExtension, deprecated: 17.0, message: "Use newer versions instead")
 struct CandidateBoardScrollView: View {
 
         @EnvironmentObject private var context: KeyboardViewController
@@ -95,6 +95,7 @@ struct CandidateBoardScrollView: View {
                                         }
                                 }
                         }
+                        .scrollIndicators(.hidden)
                         .onChange(of: context.candidateState) { _ in
                                 withAnimation {
                                         proxy.scrollTo(topID, anchor: .top)

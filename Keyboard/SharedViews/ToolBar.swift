@@ -7,14 +7,6 @@ struct ToolBar: View {
         private let buttonWidth: CGFloat = 50
         private let buttonHeight: CGFloat = PresetConstant.toolBarHeight
 
-        private let editingButtonImageName: String = {
-                if #available(iOSApplicationExtension 16.0, *) {
-                        return "arrow.left.and.line.vertical.and.arrow.right"
-                } else {
-                        return "arrowtriangle.left.and.line.vertical.and.arrowtriangle.right"
-                }
-        }()
-
         var body: some View {
                 HStack(spacing: 0) {
                         ToolBarButton(
@@ -65,7 +57,7 @@ struct ToolBar: View {
 
                         Spacer()
                         ToolBarButton(
-                                imageName: editingButtonImageName,
+                                imageName: "arrow.left.and.line.vertical.and.arrow.right",
                                 width: buttonWidth,
                                 height: buttonHeight,
                                 insets: EdgeInsets(top: 18, leading: 0, bottom: 18, trailing: 0)

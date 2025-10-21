@@ -5,18 +5,9 @@ import CommonExtensions
 
 struct InputMemory {
 
-        private static let pathToDatabase: String? = {
-                let fileName: String = "memory.sqlite3"
-                if #available(iOSApplicationExtension 16.0, *) {
-                        return URL.libraryDirectory.appending(path: fileName, directoryHint: .notDirectory).path()
-                } else {
-                        guard let libraryDirectoryUrl: URL = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask).first else { return nil }
-                        return libraryDirectoryUrl.appendingPathComponent(fileName, isDirectory: false).path
-                }
-        }()
         nonisolated(unsafe) private static let database: OpaquePointer? = {
                 var db: OpaquePointer? = nil
-                guard let path = pathToDatabase else { return nil }
+                let path: String = URL.libraryDirectory.appending(path: "memory.sqlite3", directoryHint: .notDirectory).path()
                 guard sqlite3_open_v2(path, &db, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE | SQLITE_OPEN_FULLMUTEX, nil) == SQLITE_OK else { return nil }
                 return db
         }()
