@@ -1,3 +1,5 @@
+import CommonExtensions
+
 /// 筆畫輸入
 public enum StrokeEvent: Int, Sendable {
 

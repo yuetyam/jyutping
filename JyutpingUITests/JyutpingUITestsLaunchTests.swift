@@ -1,3 +1,10 @@
+//
+//  JyutpingUITestsLaunchTests.swift
+//  JyutpingUITests
+//
+//  Created by Bing ZHEUNG on 2025-10-16 08:45.
+//
+
 import XCTest
 
 final class JyutpingUITestsLaunchTests: XCTestCase {
@@ -10,6 +17,7 @@ final class JyutpingUITestsLaunchTests: XCTestCase {
                 continueAfterFailure = false
         }
 
+        @MainActor
         func testLaunch() throws {
                 let app = XCUIApplication()
                 app.launch()

@@ -1,3 +1,5 @@
+import CommonExtensions
+
 /// 字符集標準
 ///
 /// 1: 傳統漢字
@@ -7,7 +9,7 @@
 /// 3: 傳統漢字・臺灣
 ///
 /// 4: 簡化字
-public enum CharacterStandard: Int, CaseIterable {
+public enum CharacterStandard: Int, CaseIterable, Sendable {
 
         /// Traditional. 傳統漢字
         case traditional = 1

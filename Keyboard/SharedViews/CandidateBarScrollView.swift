@@ -76,6 +76,7 @@ struct CandidateBarScrollView: View {
                                         }
                                 }
                         }
+                        .scrollIndicators(.hidden)
                         .onChange(of: context.candidateState) { _ in
                                 withAnimation {
                                         proxy.scrollTo(startID)

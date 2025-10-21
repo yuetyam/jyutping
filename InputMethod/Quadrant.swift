@@ -1,7 +1,7 @@
 import SwiftUI
 
 /// Candidate window pattern
-enum Quadrant: Int {
+enum Quadrant: Int, Sendable {
 
         /// Quadrant I. Positive horizontal and positive vertical. Left to right, bottom to top.
         case upperRight

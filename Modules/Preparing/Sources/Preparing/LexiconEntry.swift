@@ -27,11 +27,11 @@ struct LexiconEntry: Hashable {
         ///   - ping: Letter-only romanization hash code
         ///   - tenKeyAnchors: TenKeyCharCode of initials
         ///   - tenKeyCode: Letter-only romanization TenKeyCharCode
-        init(word: String, romanization: String, anchors: Int, ping: Int, tenKeyAnchors: Int, tenKeyCode: Int) {
+        init(word: String, romanization: String, anchors: Int, ping: Int32, tenKeyAnchors: Int, tenKeyCode: Int) {
                 self.word = word
                 self.romanization = romanization
                 self.anchors = anchors
-                self.ping = ping
+                self.ping = Int(ping)
                 self.tenKeyAnchors = tenKeyAnchors
                 self.tenKeyCode = tenKeyCode
         }

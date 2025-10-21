@@ -1,4 +1,5 @@
 import Foundation
+import CommonExtensions
 
 struct LexiconConverter {
 
@@ -39,7 +40,7 @@ struct LexiconConverter {
                 guard syllableText.isNotEmpty else { fatalError(errorMessage) }
                 let anchorText = String(anchors)
                 guard let anchorCode: Int = anchorText.charCode else { fatalError(errorMessage) }
-                let pingCode: Int = syllableText.hash
+                let pingCode = syllableText.hashCode()
                 guard let tenKeyAnchorCode: Int = anchorText.tenKeyCharCode else { fatalError(errorMessage) }
                 let tenKeyCode: Int = syllableText.tenKeyCharCode ?? 0
                 return LexiconEntry(word: word, romanization: romanization, anchors: anchorCode, ping: pingCode, tenKeyAnchors: tenKeyAnchorCode, tenKeyCode: tenKeyCode)

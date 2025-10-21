@@ -1,5 +1,6 @@
 import Foundation
 import SQLite3
+import CommonExtensions
 
 public struct Emoji: Hashable, Identifiable, Sendable {
         public enum Category: Int, Hashable, CaseIterable, Identifiable, Sendable {
@@ -134,7 +135,7 @@ extension Engine {
         }
         private static func match<T: StringProtocol>(text: T, input: String, statement: OpaquePointer?) -> [Candidate] {
                 sqlite3_reset(statement)
-                guard sqlite3_bind_int64(statement, 1, Int64(text.hash)) == SQLITE_OK else { return [] }
+                guard sqlite3_bind_int64(statement, 1, Int64(text.hashCode())) == SQLITE_OK else { return [] }
                 var emojis: [Emoji] = []
                 while sqlite3_step(statement) == SQLITE_ROW {
                         let categoryCode = sqlite3_column_int64(statement, 0)

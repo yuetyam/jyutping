@@ -1,5 +1,12 @@
 import Foundation
 
+extension StringProtocol {
+        /// Produces the same value as Kotlin's hashCode()
+        public func hashCode() -> Int32 {
+                return utf16.reduce(Int32(0)) { $0 &* 31 &+ Int32($1) }
+        }
+}
+
 extension Sequence where Element: StringProtocol {
         /// The total number of characters in all string elements.
         var characterCount: Int {

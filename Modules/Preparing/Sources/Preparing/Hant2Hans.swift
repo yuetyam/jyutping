@@ -1,4 +1,5 @@
 import Foundation
+import CommonExtensions
 
 struct Hant2Hans {
         static func generate() -> [(traditional: UInt32, simplified: UInt32)] {

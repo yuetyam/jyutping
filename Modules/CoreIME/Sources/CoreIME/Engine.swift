@@ -1,5 +1,6 @@
 import Foundation
 import SQLite3
+import CommonExtensions
 
 // MARK: - Preparing Databases
 
@@ -102,15 +103,15 @@ extension Engine {
                                 switch (textTones.count, tones.count) {
                                 case (1, 1):
                                         guard textTones == tones else { return nil }
-                                        let isCorrectPosition: Bool = text.dropFirst(item.inputCount).first?.isTone ?? false
+                                        let isCorrectPosition: Bool = text.dropFirst(item.inputCount).first?.isCantoneseToneDigit ?? false
                                         guard isCorrectPosition else { return nil }
                                         let combinedInput = item.input + toneInput
                                         return item.replacedInput(with: combinedInput)
                                 case (1, 2):
-                                        let isToneLast: Bool = text.last?.isTone ?? false
+                                        let isToneLast: Bool = text.last?.isCantoneseToneDigit ?? false
                                         if isToneLast {
                                                 guard tones.hasSuffix(textTones) else { return nil }
-                                                let isCorrectPosition: Bool = text.dropFirst(item.inputCount).first?.isTone ?? false
+                                                let isCorrectPosition: Bool = text.dropFirst(item.inputCount).first?.isCantoneseToneDigit ?? false
                                                 guard isCorrectPosition else { return nil }
                                                 return item.replacedInput(with: inputText)
                                         } else {
@@ -120,7 +121,7 @@ extension Engine {
                                         }
                                 case (2, 1):
                                         guard textTones.hasPrefix(tones) else { return nil }
-                                        let isCorrectPosition: Bool = text.dropFirst(item.inputCount).first?.isTone ?? false
+                                        let isCorrectPosition: Bool = text.dropFirst(item.inputCount).first?.isCantoneseToneDigit ?? false
                                         guard isCorrectPosition else { return nil }
                                         var firstSyllableEvents: [InputEvent] = []
                                         for event in events {
@@ -142,7 +143,7 @@ extension Engine {
                                         return item.replacedInput(with: combinedInput)
                                 case (2, 2):
                                         guard textTones == tones else { return nil }
-                                        let isToneLast: Bool = text.last?.isTone ?? false
+                                        let isToneLast: Bool = text.last?.isCantoneseToneDigit ?? false
                                         if isToneLast {
                                                 guard item.inputCount == (text.count - 2) else { return nil }
                                                 return item.replacedInput(with: inputText)
@@ -166,7 +167,7 @@ extension Engine {
                         let inputSeparatorCount = events.count(where: \.isApostrophe)
                         let eventLength = events.count
                         let text = events.map(\.text).joined()
-                        let textParts = text.split(separator: Character.separator)
+                        let textParts = text.split(separator: Character.apostrophe)
                         let qualified: [Candidate] = candidates.compactMap({ item -> Candidate? in
                                 let syllables = item.romanization.removedTones().split(separator: Character.space)
                                 guard syllables != textParts else { return item.replacedInput(with: text) }
@@ -179,7 +180,7 @@ extension Engine {
                                         switch syllables.count {
                                         case 1:
                                                 guard item.inputCount == textParts.first?.count else { return nil }
-                                                let combinedInput: String = item.input + String.separator
+                                                let combinedInput: String = item.input + String.apostrophe
                                                 return item.replacedInput(with: combinedInput)
                                         case 2:
                                                 let isMatched: Bool = {
@@ -191,7 +192,7 @@ extension Engine {
                                                         return textParts.last?.hasPrefix(lastSyllable) ?? false
                                                 }()
                                                 guard isMatched else { return nil }
-                                                let combinedInput: String = item.input + String.separator
+                                                let combinedInput: String = item.input + String.apostrophe
                                                 return item.replacedInput(with: combinedInput)
                                         default:
                                                 return nil
@@ -200,7 +201,7 @@ extension Engine {
                                         switch syllables.count {
                                         case 1:
                                                 guard item.inputCount == textParts.first?.count else { return nil }
-                                                let combinedInput: String = item.input + String.separator
+                                                let combinedInput: String = item.input + String.apostrophe
                                                 return item.replacedInput(with: combinedInput)
                                         case 2:
                                                 guard item.inputCount == (eventLength - 2) else { return nil }
@@ -221,10 +222,10 @@ extension Engine {
                                         switch syllables.count {
                                         case 1:
                                                 guard item.inputCount == 1 else { return nil }
-                                                return item.replacedInput(with: item.input + String.separator)
+                                                return item.replacedInput(with: item.input + String.apostrophe)
                                         case 2:
                                                 guard item.inputCount == 2 else { return nil }
-                                                let combinedInput: String = item.input + String.separator + String.separator
+                                                let combinedInput: String = item.input + String.apostrophe + String.apostrophe
                                                 return item.replacedInput(with: combinedInput)
                                         case 3:
                                                 return item.replacedInput(with: text)
@@ -286,7 +287,7 @@ extension Engine {
                 guard item.inputCount != eventLength else { return item }
                 lazy var converted: Candidate = Candidate(text: item.text, romanization: item.romanization, input: text, mark: text, order: item.order)
                 guard item.romanization.removedSpacesTones().hasPrefix(text).negative else { return converted }
-                guard let lastSyllable = item.romanization.split(separator: Character.space).last?.filter(\.isTone.negative) else { return item }
+                guard let lastSyllable = item.romanization.split(separator: Character.space).last?.filter(\.isCantoneseToneDigit.negative) else { return item }
                 let tail = events.dropFirst(item.inputCount - 1)
                 guard tail.count <= 6 else { return item }
                 if let tailSyllable = Segmenter.syllableText(of: tail) {
@@ -348,7 +349,7 @@ extension Engine {
                         guard tail.count <= 6 else { return nil }
                         lazy var converted: Candidate = Candidate(text: item.text, romanization: item.romanization, input: text, mark: text, order: item.order)
                         guard item.romanization.removedSpacesTones().hasPrefix(text).negative else { return converted }
-                        guard let lastSyllable = item.romanization.split(separator: Character.space).last?.filter(\.isTone.negative) else { return nil }
+                        guard let lastSyllable = item.romanization.split(separator: Character.space).last?.filter(\.isCantoneseToneDigit.negative) else { return nil }
                         if let tailSyllable = Segmenter.syllableText(of: tail) {
                                 return lastSyllable == tailSyllable ? converted : nil
                         } else {
@@ -400,8 +401,8 @@ extension Engine {
         private static func perform<T: RandomAccessCollection<Syllable>>(scheme: T, limit: Int64? = nil, strictStatement: OpaquePointer?) -> [Candidate] {
                 let anchorsCode = scheme.compactMap(\.alias.first).anchorsCode
                 guard anchorsCode > 0 else { return [] }
-                let pingCode = scheme.originText.hash
-                return strictMatch(anchors: anchorsCode, ping: pingCode, input: scheme.aliasText, mark: scheme.mark, limit: limit, statement: strictStatement)
+                let pingCode = scheme.originText.hashCode()
+                return strictMatch(anchors: anchorsCode, ping: Int(pingCode), input: scheme.aliasText, mark: scheme.mark, limit: limit, statement: strictStatement)
         }
 }
 

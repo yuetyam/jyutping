@@ -1,5 +1,6 @@
 import Foundation
 import SQLite3
+import CommonExtensions
 
 struct DatabasePreparer {
 
@@ -264,7 +265,7 @@ struct DatabasePreparer {
                         let cantonese = parts[3]
                         let romanization = parts[4]
                         let syllableText = romanization.filter(\.isLowercaseBasicLatinLetter)
-                        let pingCode = syllableText.hash
+                        let pingCode = syllableText.hashCode()
                         let tenKeyCode = syllableText.tenKeyCharCode ?? 0
                         return "(\(category), \(version), '\(codePoint)', '\(cantonese)', '\(romanization)', \(pingCode), \(tenKeyCode))"
                 }

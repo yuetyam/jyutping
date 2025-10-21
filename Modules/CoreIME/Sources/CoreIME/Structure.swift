@@ -1,5 +1,6 @@
 import Foundation
 import SQLite3
+import CommonExtensions
 
 extension Engine {
 
@@ -53,7 +54,7 @@ extension Engine {
         }
         private static func match(text: String) -> [Candidate] {
                 var candidates: [Candidate] = []
-                let command: String = "SELECT word, romanization FROM structuretable WHERE ping = \(text.hash);"
+                let command: String = "SELECT word, romanization FROM structuretable WHERE ping = \(text.hashCode());"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(Engine.database, command, -1, &statement, nil) == SQLITE_OK else { return [] }

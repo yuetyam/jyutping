@@ -1,4 +1,5 @@
 import SwiftUI
+import Combine
 import CommonExtensions
 import CoreIME
 
@@ -345,7 +346,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         private func updateSidebarSyllables() {
                 guard selectedSyllables.isNotEmpty else {
                         candidates = tenKeyCachedCandidates
-                        sidebarSyllables = candidates.compactMap({ $0.romanization.split(separator: Character.space).first?.dropLast() })
+                        sidebarSyllables = candidates.compactMap({ $0.isNotCantonese ? nil : $0.romanization.split(separator: Character.space).first?.dropLast() })
                                 .uniqued()
                                 .map({ SidebarSyllable(text: String($0), isSelected: false) })
                         return

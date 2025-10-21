@@ -74,6 +74,7 @@ struct CandidateBarScrollViewIOS18: View {
                                 }
                         }
                 }
+                .scrollIndicators(.hidden)
                 .scrollPosition($scrollPosition, anchor: .leading)
                 .defaultScrollAnchor(.leading)
                 .onChange(of: context.candidateState) {

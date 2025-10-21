@@ -1,4 +1,5 @@
 import SwiftUI
+import Combine
 import InputMethodKit
 import os.log
 import CommonExtensions
@@ -1214,6 +1215,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         case .transparent:
                                 let shouldSwitchToCantoneseMode: Bool = isShifting && (AppSettings.shiftSpaceCombination == .switchInputMethodMode)
                                 if shouldSwitchToCantoneseMode {
+                                        clearMarkedText()
                                         Options.updateInputMethodMode(to: .cantonese)
                                         updateInputForm(to: .cantonese)
                                 } else {

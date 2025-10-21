@@ -1,5 +1,6 @@
 import Foundation
 import SQLite3
+import CommonExtensions
 
 private extension DataMaster {
 

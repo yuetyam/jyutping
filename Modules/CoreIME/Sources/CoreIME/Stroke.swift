@@ -1,5 +1,6 @@
 import Foundation
 import SQLite3
+import CommonExtensions
 
 extension Engine {
         public static func strokeReverseLookup<T: RandomAccessCollection<InputEvent>>(events: T) -> [Candidate] {
@@ -15,7 +16,7 @@ extension Engine {
                 let complex: Int = events.count
                 let isLongSequence: Bool = complex >= 19
                 let column: String = isLongSequence ? "ping" : "code"
-                let codeValue: Int = isLongSequence ? text.hash : events.map(\.code).decimalCombined()
+                let codeValue: Int = isLongSequence ? Int(text.hashCode()) : events.map(\.code).decimalCombined()
                 let command: String = "SELECT rowid, word FROM stroketable WHERE \(column) = \(codeValue);"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }

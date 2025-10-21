@@ -1,3 +1,5 @@
+import CommonExtensions
+
 public enum CandidateType: Int, Sendable {
 
         case cantonese

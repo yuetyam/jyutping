@@ -69,7 +69,7 @@ iOS、iPadOS 及 macOS 粵語拼音輸入法。
 兼容系統： macOS 13 Ventura 或者更高。
 
 ## 如何構建（How to build）
-前置要求（Build requirements）
+前置要求（Build requirements）：
 - macOS 26.0+
 - Xcode 26.0+
 

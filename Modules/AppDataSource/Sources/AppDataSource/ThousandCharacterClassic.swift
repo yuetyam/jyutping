@@ -1,4 +1,5 @@
 import Foundation
+import CommonExtensions
 
 /// 千字文
 public struct ThousandCharacterClassic: Hashable {

@@ -1,5 +1,6 @@
 import Foundation
 import SQLite3
+import CommonExtensions
 
 struct StrokeEntry: Hashable {
         let word: String
@@ -57,7 +58,7 @@ struct Stroke {
                                 guard codes.count == text.count else { fatalError("bad stroke format: \(word) = \(text)") }
                                 let stroke = codes.map({ String($0) }).joined()
                                 let code = codes.decimalCombined()
-                                return StrokeEntry(word: word, stroke: stroke, complex: stroke.count, ping: stroke.hash, code: code)
+                                return StrokeEntry(word: word, stroke: stroke, complex: stroke.count, ping: Int(stroke.hashCode()), code: code)
                         }
                         return entries
                 }).uniqued()

@@ -1,5 +1,6 @@
 import Foundation
 import SQLite3
+import CommonExtensions
 
 extension Engine {
         static func quick5ReverseLookup(text: String) -> [Candidate] {

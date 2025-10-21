@@ -75,7 +75,7 @@ Options: Press <kbd>Control</kbd> + <kbd>Shift</kbd> + <kbd>`</kbd> (below the e
 FAQ: [FAQ](https://jyutping.app/faq)
 
 ## How to build
-Build requirements
+Build requirements:
 - macOS 26.0+
 - Xcode 26.0+
 

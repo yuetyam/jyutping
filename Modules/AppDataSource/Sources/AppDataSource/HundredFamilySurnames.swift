@@ -1,4 +1,5 @@
 import Foundation
+import CommonExtensions
 
 /// 百家姓
 public struct HundredFamilySurnames: Hashable {

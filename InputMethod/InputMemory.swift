@@ -1,4 +1,5 @@
 import Foundation
+import Combine
 import SQLite3
 import CoreIME
 import CommonExtensions

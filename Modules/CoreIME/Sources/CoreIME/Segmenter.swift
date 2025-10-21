@@ -1,5 +1,6 @@
 import Foundation
 import SQLite3
+import CommonExtensions
 
 public struct Syllable: Hashable, Comparable, Sendable {
 
@@ -150,7 +151,7 @@ public struct Segmenter {
                 guard leadingTokens.isNotEmpty else { return [] }
                 let eventCount = events.count
                 var segmentation: Set<Scheme> = Set(leadingTokens.map({ [$0] }))
-                var previousSubelementCount = segmentation.subelementCount
+                var previousSubelementCount = segmentation.flattenedCount
                 var shouldContinue: Bool = true
                 while shouldContinue {
                         for scheme in segmentation {
@@ -162,7 +163,7 @@ public struct Segmenter {
                                 let newSegmentation = tailTokens.map({ scheme + [$0] })
                                 newSegmentation.forEach({ segmentation.insert($0) })
                         }
-                        let currentSubelementCount = segmentation.subelementCount
+                        let currentSubelementCount = segmentation.flattenedCount
                         if currentSubelementCount != previousSubelementCount {
                                 previousSubelementCount = currentSubelementCount
                         } else {

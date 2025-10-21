@@ -1,5 +1,6 @@
 import Foundation
 import SQLite3
+import CommonExtensions
 
 extension Engine {
         public static func pinyinReverseLookup<T: RandomAccessCollection<InputEvent>>(events: T, segmentation: PinyinSegmentation) async -> [Candidate] {
@@ -12,7 +13,7 @@ extension Engine {
                         sqlite3_finalize(anchorsStatement)
                         sqlite3_finalize(pingStatement)
                 }
-                let canSegment: Bool = segmentation.subelementCount > 0
+                let canSegment: Bool = segmentation.flattenedCount > 0
                 if canSegment {
                         return pinyinSearch(events: events, segmentation: segmentation, anchorsStatement: anchorsStatement, pingStatement: pingStatement)
                                 .flatMap({ Engine.reveresLookup(text: $0.text, input: $0.input, mark: $0.mark) })
@@ -155,7 +156,7 @@ extension Engine {
         private static func pinyinMatch(text: String, limit: Int64? = nil, statement: OpaquePointer?) -> [PinyinLexicon] {
                 let limit: Int64 = limit ?? -1
                 sqlite3_reset(statement)
-                sqlite3_bind_int64(statement, 1, Int64(text.hash))
+                sqlite3_bind_int64(statement, 1, Int64(text.hashCode()))
                 sqlite3_bind_int64(statement, 2, limit)
                 var items: [PinyinLexicon] = []
                 while sqlite3_step(statement) == SQLITE_ROW {

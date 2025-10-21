@@ -98,7 +98,7 @@ struct SearchView: View {
                         Section {
                                 FanWanLexiconView(lexicon: fanWanLexicons[index])
                         } header: {
-                                Text(verbatim: "《分韻撮要》　佚名　清初　廣州府").textCase(nil)
+                                Text(verbatim: "《分韻撮要》　佚名　廣州府　清初").textCase(nil)
                         }
                         .textSelection(.enabled)
                 }

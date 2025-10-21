@@ -1,64 +1,29 @@
 import Foundation
+import CommonExtensions
 
 extension String {
 
-        static let empty: String = ""
-
-        /// U+0020
-        static let space: String = "\u{20}"
-
-        /// U+0027 ( ' ) apostrophe
-        static let separator: String = "\u{27}"
-
         /// A subsequence that only contains tones (1-6)
         var tones: String {
-                return self.filter(\.isTone)
+                return self.filter(\.isCantoneseToneDigit)
         }
 
         /// Remove all tones (1-6)
         /// - Returns: A subsequence that leaves off tones.
         func removedTones() -> String {
-                return self.filter({ !$0.isTone })
+                return self.filter(\.isCantoneseToneDigit.negative)
         }
 
         /// Remove all spaces
         /// - Returns: A subsequence that leaves off spaces.
         func removedSpaces() -> String {
-                return self.filter({ !$0.isSpace })
+                return self.filter(\.isSpace.negative)
         }
 
         /// Remove all spaces and tones
         /// - Returns: A subsequence that leaves off spaces and tones.
         func removedSpacesTones() -> String {
-                return self.filter({ !$0.isSpaceOrTone })
-        }
-
-        /// Remove all separators
-        /// - Returns: A subsequence that leaves off separators
-        func removedSeparators() -> String {
-                return self.filter({ !$0.isSeparator })
-        }
-
-        /// Remove all separators and tones
-        /// - Returns: A subsequence that leaves off separators and tones
-        func removedSeparatorsTones() -> String {
-                return self.filter({ !$0.isSeparatorOrTone })
-        }
-
-        /// Remove all spaces, tones and separators
-        /// - Returns: A subsequence that leaves off spaces, tones and separators
-        func removedSpacesTonesSeparators() -> String {
-                return self.filter({ !$0.isSpaceOrToneOrSeparator })
-        }
-
-        /// Contains separator
-        var hasSeparators: Bool {
-                return self.contains(Character.separator)
-        }
-
-        /// Contains tone number (1-6)
-        var hasTones: Bool {
-                return self.contains(where: \.isTone)
+                return self.filter({ $0.isSpace.negative && $0.isCantoneseToneDigit.negative })
         }
 }
 
@@ -75,11 +40,12 @@ extension StringProtocol {
                 .replacingOccurrences(of: "q", with: "3")
         }
 
+        // TODO: Improve this code
         /// Format text with separators and tones
         /// - Returns: Formatted text
         public func formattedForMark() -> String {
                 let blocks = self.map { character -> String in
-                        return character.isSeparatorOrTone ? "\(character) " : String(character)
+                        return character.isBasicLatinLetter ? String(character) : "\(character) "
                 }
                 return blocks.joined().trimmingCharacters(in: .whitespaces)
         }
@@ -98,19 +64,12 @@ extension Sequence where Element == Character {
         }
 }
 
-extension Array where Element == String {
-
-        /// Character count
-        var summedLength: Int {
-                return self.map(\.count).reduce(0, +)
-        }
-}
-
 extension String {
         /// Occurrence count of pattern in this String
         /// - Parameter pattern: Regular expression pattern
         /// - Returns: Number of occurrences
         func occurrenceCount(pattern: String) -> Int {
+                // TODO: Improve this code
                 // return self.matches(of: Regex{substring}).count
                 guard let regex = try? NSRegularExpression(pattern: pattern) else { return 0 }
                 return regex.numberOfMatches(in: self, range: NSRange(self.startIndex..., in: self))

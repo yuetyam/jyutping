@@ -9,7 +9,7 @@ struct FanWanLexiconView: View {
         let lexicon: [FanWanCuetYiu]
         var body: some View {
                 VStack(alignment: .leading, spacing: 2) {
-                        Text(verbatim: "《分韻撮要》　佚名　清初　廣州府")
+                        Text(verbatim: "《分韻撮要》　佚名　廣州府　清初")
                                 .font(.copilot)
                                 .airy()
                         VStack(alignment: .leading) {

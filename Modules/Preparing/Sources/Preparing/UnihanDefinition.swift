@@ -1,5 +1,6 @@
 import Foundation
 import SQLite3
+import CommonExtensions
 
 struct UnihanDefinition {
         static func generate() -> [(UInt32, String)] {

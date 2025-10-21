@@ -1,10 +1,11 @@
 import Foundation
+import CommonExtensions
 
 struct TextMarkLexicon: Hashable {
 
         let input: String
         let mark: String
-        let pingCode: Int
+        let pingCode: Int32
         let charCode: Int
         let tenKeyCharCode: Int
 
@@ -31,7 +32,7 @@ struct TextMarkLexicon: Hashable {
                         guard parts.count >= 2 else { return nil }
                         let input = parts[0]
                         let mark = parts[1]
-                        let pingCode = input.hash
+                        let pingCode = input.hashCode()
                         let charCode: Int = input.charCode ?? 0
                         let tenKeyCharCode: Int = input.tenKeyCharCode ?? 0
                         return TextMarkLexicon(input: input, mark: mark, pingCode: pingCode, charCode: charCode, tenKeyCharCode: tenKeyCharCode)

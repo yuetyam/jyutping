@@ -82,8 +82,7 @@ extension Character {
 
         /// is CJKV character
         public var isIdeographic: Bool {
-                guard let scalarValue: UInt32 = self.unicodeScalars.first?.value else { return false }
-                return scalarValue.isIdeographicCodePoint
+                return unicodeScalars.first?.value.isIdeographicCodePoint ?? false
         }
 }
 
@@ -91,18 +90,18 @@ extension BinaryInteger {
         /// is CJKV character Unicode code point
         public var isIdeographicCodePoint: Bool {
                 switch self {
-                case 0x3007: true
-                case 0x4E00...0x9FFF: true
-                case 0x3400...0x4DBF: true
-                case 0x20000...0x2A6DF: true
-                case 0x2A700...0x2B73F: true
-                case 0x2B740...0x2B81F: true
-                case 0x2B820...0x2CEAF: true
-                case 0x2CEB0...0x2EBEF: true
-                case 0x30000...0x3134F: true
-                case 0x31350...0x323AF: true
-                case 0x2EBF0...0x2EE5F: true
-                case 0x323B0...0x33479: true
+                case 0x4E00...0x9FFF,
+                     0x3400...0x4DBF,
+                     0x20000...0x2A6DF,
+                     0x2A700...0x2B73F,
+                     0x2B740...0x2B81F,
+                     0x2B820...0x2CEAF,
+                     0x2CEB0...0x2EBEF,
+                     0x30000...0x3134F,
+                     0x31350...0x323AF,
+                     0x2EBF0...0x2EE5F,
+                     0x323B0...0x33479,
+                     0x3007: true
                 default: false
                 }
         }
