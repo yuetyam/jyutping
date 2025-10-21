@@ -93,19 +93,12 @@ struct Speech {
                                 case (_, _):
                                         return false
                                 }
-                        } else if #available(iOS 16.0, macOS 13.0, *) {
+                        } else {
                                 switch (lhs.quality, rhs.quality) {
                                 case (.premium, .enhanced):
                                         return true
                                 case (.premium, .default):
                                         return true
-                                case (.enhanced, .default):
-                                        return true
-                                case (_, _):
-                                        return false
-                                }
-                        } else {
-                                switch (lhs.quality, rhs.quality) {
                                 case (.enhanced, .default):
                                         return true
                                 case (_, _):
@@ -120,24 +113,15 @@ struct Speech {
                 let voices = AVSpeechSynthesisVoice.speechVoices().filter({ $0.language == languageCode })
                 guard voices.isNotEmpty else { return AVSpeechSynthesisVoice(language: languageCode) }
                 let preferredVoices = voices.sorted { (lhs, rhs) -> Bool in
-                        if #available(iOS 16.0, macOS 13.0, *) {
-                                switch (lhs.quality, rhs.quality) {
-                                case (.premium, .enhanced):
-                                        return true
-                                case (.premium, .default):
-                                        return true
-                                case (.enhanced, .default):
-                                        return true
-                                case (_, _):
-                                        return false
-                                }
-                        } else {
-                                switch (lhs.quality, rhs.quality) {
-                                case (.enhanced, .default):
-                                        return true
-                                case (_, _):
-                                        return false
-                                }
+                        switch (lhs.quality, rhs.quality) {
+                        case (.premium, .enhanced):
+                                return true
+                        case (.premium, .default):
+                                return true
+                        case (.enhanced, .default):
+                                return true
+                        case (_, _):
+                                return false
                         }
                 }
                 return preferredVoices.first ?? AVSpeechSynthesisVoice(language: languageCode)

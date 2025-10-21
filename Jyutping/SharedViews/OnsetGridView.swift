@@ -1,8 +1,6 @@
 import SwiftUI
 import CommonExtensions
 
-@available(iOS 16.0, *)
-@available(macOS 13.0, *)
 struct CompactOnsetGridView: View {
         var body: some View {
                 Grid(horizontalSpacing: 8, verticalSpacing: 12) {
@@ -40,8 +38,6 @@ struct CompactOnsetGridView: View {
         }
 }
 
-@available(iOS 16.0, *)
-@available(macOS 13.0, *)
 private struct OnsetElementCell: View {
 
         #if os(iOS)
@@ -88,8 +84,6 @@ private struct OnsetElementCell: View {
         }
 }
 
-@available(iOS 16.0, *)
-@available(macOS 13.0, *)
 struct OnsetGridView: View {
         private let columnHeaders: [String] = ["塞音、擦音", "塞音、擦音", "鼻音", "擦音", "近音"]
         var body: some View {

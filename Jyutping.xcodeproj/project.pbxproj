@@ -16,7 +16,7 @@
 		373A15172EA1ED2F004866F7 /* AppDataSource in Frameworks */ = {isa = PBXBuildFile; productRef = 373A15162EA1ED2F004866F7 /* AppDataSource */; };
 		373A15192EA1ED34004866F7 /* CommonExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 373A15182EA1ED34004866F7 /* CommonExtensions */; };
 		373A151B2EA1ED38004866F7 /* Linguistics in Frameworks */ = {isa = PBXBuildFile; productRef = 373A151A2EA1ED38004866F7 /* Linguistics */; };
-		373A15F92EA206C6004866F7 /* Keyboard.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 373A15F22EA206C6004866F7 /* Keyboard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		373A15F92EA206C6004866F7 /* Keyboard.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 373A15F22EA206C6004866F7 /* Keyboard.appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		373A18512EA208E8004866F7 /* CommonExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 373A18502EA208E8004866F7 /* CommonExtensions */; };
 		373A18532EA208ED004866F7 /* CoreIME in Frameworks */ = {isa = PBXBuildFile; productRef = 373A18522EA208ED004866F7 /* CoreIME */; };
 /* End PBXBuildFile section */
@@ -622,6 +622,7 @@
 /* Begin PBXTargetDependency section */
 		373A15F82EA206C6004866F7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
+			platformFilter = ios;
 			target = 373A15F12EA206C6004866F7 /* Keyboard */;
 			targetProxy = 373A15F72EA206C6004866F7 /* PBXContainerItemProxy */;
 		};

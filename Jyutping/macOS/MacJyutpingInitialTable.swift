@@ -83,9 +83,7 @@ struct MacJyutpingInitialTable: View {
                                                 .foregroundStyle(Color.secondary)
                                                 .padding(.horizontal, 8)
                                 }
-                                if #available(macOS 13.0, *) {
-                                        OnsetGridView().padding(.vertical)
-                                }
+                                OnsetGridView().padding(.vertical)
                         }
                         .textSelection(.enabled)
                         .padding()

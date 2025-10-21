@@ -39,10 +39,8 @@ struct JyutpingApp: App {
                 WindowGroup {
                         if #available(macOS 15.0, *) {
                                 MacContentView().containerBackground(for: .window) { VisualEffectView() }
-                        } else if #available(macOS 13.0, *) {
-                                MacContentView().background(VisualEffectView())
                         } else {
-                                MacContentViewMonterey().background(VisualEffectView())
+                                MacContentView().background(VisualEffectView())
                         }
                 }
                 .windowToolbarStyle(.unifiedCompact)

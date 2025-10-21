@@ -46,9 +46,7 @@ struct MacJyutpingToneTable: View {
                                 }
                                 .font(.master)
                                 .textSelection(.enabled)
-                                if #available(macOS 13.0, *) {
-                                        MacToneGridView()
-                                }
+                                MacToneGridView()
                                 ToneChartView()
                                         .frame(height: 200)
                                         .padding(8)
@@ -92,7 +90,6 @@ private struct MacToneLabel: View {
         }
 }
 
-@available(macOS 13.0, *)
 private struct MacToneGridView: View {
         var body: some View {
                 Grid(horizontalSpacing: 8, verticalSpacing: 4) {

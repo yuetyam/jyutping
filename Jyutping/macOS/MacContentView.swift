@@ -2,7 +2,6 @@
 
 import SwiftUI
 
-@available(macOS 13.0, *)
 struct MacContentView: View {
 
         @State private var selection: ViewIdentifier = .search
