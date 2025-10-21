@@ -78,9 +78,9 @@ public struct ChoHokYuetYamCitYiu: Hashable {
 
         public static func match<T: StringProtocol>(text: T) -> [ChoHokYuetYamCitYiu] {
                 guard let character = text.first else { return [] }
-                let matched = DataMaster.matchChoHokYuetYamCitYiu(for: character).uniqued()
+                let matched = DataMaster.matchChoHokYuetYamCitYiu(for: character).distinct()
                 guard matched.isEmpty else { return matched }
                 let traditionalCharacter: Character = text.convertedS2T().first ?? character
-                return DataMaster.matchChoHokYuetYamCitYiu(for: traditionalCharacter).uniqued()
+                return DataMaster.matchChoHokYuetYamCitYiu(for: traditionalCharacter).distinct()
         }
 }

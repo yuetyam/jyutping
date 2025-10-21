@@ -50,7 +50,7 @@ struct Stroke {
                 defer {
                         sqlite3_close_v2(database)
                 }
-                return characters.uniqued().flatMap({ word -> [StrokeEntry] in
+                return characters.distinct().flatMap({ word -> [StrokeEntry] in
                         let matches = match(text: word)
                         guard !(matches.isEmpty) else { return [] }
                         let entries = matches.map { text -> StrokeEntry in
@@ -61,7 +61,7 @@ struct Stroke {
                                 return StrokeEntry(word: word, stroke: stroke, complex: stroke.count, ping: Int(stroke.hashCode()), code: code)
                         }
                         return entries
-                }).uniqued()
+                }).distinct()
         }
 
         private static func match<T: StringProtocol>(text: T) -> [String] {

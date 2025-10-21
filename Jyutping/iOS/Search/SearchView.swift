@@ -44,7 +44,7 @@ struct SearchView: View {
                                                 return
                                         }
                                         let ideographicWords: [String] = {
-                                                let characters = trimmedInput.filter(\.isIdeographic).uniqued()
+                                                let characters = trimmedInput.filter(\.isIdeographic).distinct()
                                                 let isCharacterCountFine: Bool = characters.isNotEmpty && characters.count < 4
                                                 guard isCharacterCountFine else { return [] }
                                                 return characters.map({ String($0) })

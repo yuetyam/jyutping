@@ -1,24 +1,3 @@
-extension Sequence where Element: Hashable {
-
-        // TODO: - Migrate uniqued() calls to distinct()
-
-        /// Returns a new Array with the unique elements of this Array, in the order of the first occurrence of each unique element.
-        /// - Returns: A new Array with only the unique elements of this Array.
-        /// - Complexity: O(*n*), where *n* is the length of the Array.
-        public func uniqued() -> [Element] {
-                var set: Set<Element> = Set<Element>()
-                return filter { set.insert($0).inserted }
-        }
-
-        /// Returns a new Array with the unique elements of this Array, in the order of the first occurrence of each unique element.
-        /// - Returns: A new Array with only the unique elements of this Array.
-        /// - Complexity: O(*n*), where *n* is the length of the Array.
-        public func distinct() -> [Element] {
-                var set: Set<Element> = Set<Element>()
-                return filter { set.insert($0).inserted }
-        }
-}
-
 extension Array {
 
         /// Safely access element by index

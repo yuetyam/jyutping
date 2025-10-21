@@ -90,9 +90,9 @@ public struct FanWanCuetYiu: Hashable {
 
         public static func match<T: StringProtocol>(text: T) -> [FanWanCuetYiu] {
                 guard let character = text.first else { return [] }
-                let match = DataMaster.matchFanWanCuetYiu(for: character).uniqued()
+                let match = DataMaster.matchFanWanCuetYiu(for: character).distinct()
                 guard match.isEmpty else { return match }
                 let traditionalCharacter: Character = text.convertedS2T().first ?? character
-                return DataMaster.matchFanWanCuetYiu(for: traditionalCharacter).uniqued()
+                return DataMaster.matchFanWanCuetYiu(for: traditionalCharacter).distinct()
         }
 }

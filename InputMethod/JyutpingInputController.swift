@@ -503,7 +503,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 let events = bufferEvents.dropFirst()
                 guard events.isNotEmpty else {
                         mark(text: joinedBufferTexts())
-                        candidates = (definedCandidates + textMarkCandidates).uniqued()
+                        candidates = (definedCandidates + textMarkCandidates).distinct()
                         return
                 }
                 suggestionTask = Task.detached(priority: .high) { [weak self] in
@@ -525,7 +525,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                                 return bestScheme.mark + String.space + bufferText.dropFirst(leadingLength + 1)
                                         }()
                                         mark(text: headMark + tailMark)
-                                        self.candidates = (definedCandidates + textMarkCandidates + suggestions).uniqued()
+                                        self.candidates = (definedCandidates + textMarkCandidates + suggestions).distinct()
                                 }
                         }
                 }
@@ -540,10 +540,10 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 if isValidSequence {
                         mark(text: String(converted))
                         let suggestions: [Candidate] = Engine.cangjieReverseLookup(text: text, variant: AppSettings.cangjieVariant).transformed(to: Options.characterStandard)
-                        candidates = (definedCandidates + textMarkCandidates + suggestions).uniqued()
+                        candidates = (definedCandidates + textMarkCandidates + suggestions).distinct()
                 } else {
                         mark(text: bufferText)
-                        candidates = (definedCandidates + textMarkCandidates).uniqued()
+                        candidates = (definedCandidates + textMarkCandidates).distinct()
                 }
         }
         private func strokeReverseLookup() {
@@ -552,11 +552,11 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 let events = bufferEvents.dropFirst()
                 if events.isEmpty || StrokeEvent.isValidEvents(events).negative {
                         mark(text: joinedBufferTexts())
-                        candidates = (definedCandidates + textMarkCandidates).uniqued()
+                        candidates = (definedCandidates + textMarkCandidates).distinct()
                 } else {
                         mark(text: StrokeEvent.displayText(from: events))
                         let suggestions: [Candidate] = Engine.strokeReverseLookup(events: events).transformed(to: Options.characterStandard)
-                        candidates = (definedCandidates + textMarkCandidates + suggestions).uniqued()
+                        candidates = (definedCandidates + textMarkCandidates + suggestions).distinct()
                 }
         }
 
@@ -567,7 +567,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 let bufferText = joinedBufferTexts()
                 guard bufferText.count > 2 else {
                         mark(text: bufferText)
-                        candidates = (definedCandidates + textMarkCandidates).uniqued()
+                        candidates = (definedCandidates + textMarkCandidates).distinct()
                         return
                 }
                 let segmentation = Segmenter.segment(events: bufferEvents)
@@ -584,7 +584,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 let text2mark: String = prefixMark + tailMark
                 mark(text: text2mark)
                 let suggestions: [Candidate] = Engine.structureReverseLookup(events: bufferEvents, input: bufferText, segmentation: segmentation).transformed(to: Options.characterStandard)
-                candidates = (definedCandidates + textMarkCandidates + suggestions).uniqued()
+                candidates = (definedCandidates + textMarkCandidates + suggestions).distinct()
         }
 
 

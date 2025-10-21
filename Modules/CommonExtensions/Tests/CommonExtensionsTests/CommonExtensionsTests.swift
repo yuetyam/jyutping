@@ -10,10 +10,10 @@ final class CommonExtensionsTests: XCTestCase {
 
         // MARK: - Array extensions
 
-        func testArrayUniqued() throws {
+        func testSequenceElementUniqueness() throws {
                 let list: [Int] = [0, 1, 3, 4, 3, 2, 1, 1]
                 let expected: [Int] = [0, 1, 3, 4, 2]
-                XCTAssertEqual(list.uniqued(), expected)
+                XCTAssertEqual(list.distinct(), expected)
         }
         func testArrayFetch() throws {
                 let list: [Int] = [0, 1, 2, 3]

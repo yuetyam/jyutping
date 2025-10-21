@@ -40,7 +40,7 @@ public struct YingWaaFanWan: Hashable {
         private static func fetch(for character: Character) -> [YingWaaFanWan] {
                 let items: [YingWaaFanWan] = DataMaster.matchYingWaaFanWan(for: character)
                 guard items.isNotEmpty else { return items }
-                let romanizations = items.map(\.romanization).uniqued()
+                let romanizations = items.map(\.romanization).distinct()
                 let hasDuplicates: Bool = romanizations.count != items.count
                 guard hasDuplicates else { return items }
                 let entries = romanizations.compactMap { syllable -> YingWaaFanWan? in
@@ -52,8 +52,8 @@ public struct YingWaaFanWan: Hashable {
                                 return filtered.first!
                         default:
                                 let example = filtered.first!
-                                let pronunciationMark: String = filtered.compactMap(\.pronunciationMark).uniqued().joined(separator: ", ")
-                                let interpretation: String = filtered.compactMap(\.interpretation).uniqued().joined(separator: " ")
+                                let pronunciationMark: String = filtered.compactMap(\.pronunciationMark).distinct().joined(separator: ", ")
+                                let interpretation: String = filtered.compactMap(\.interpretation).distinct().joined(separator: " ")
                                 return YingWaaFanWan(word: example.word, romanization: syllable, pronunciation: example.pronunciation, pronunciationMark: pronunciationMark, interpretation: interpretation, homophones: example.homophones)
                         }
                 }

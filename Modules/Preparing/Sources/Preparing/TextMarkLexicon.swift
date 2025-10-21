@@ -26,7 +26,7 @@ struct TextMarkLexicon: Hashable {
                         .components(separatedBy: .newlines)
                         .map({ $0.trimmingCharacters(in: .whitespaces) })
                         .filter({ !($0.isEmpty || $0.hasPrefix("#")) })
-                        .uniqued()
+                        .distinct()
                 let entries = sourceLines.compactMap { line -> TextMarkLexicon? in
                         let parts = line.split(separator: "\t").map({ $0.trimmingCharacters(in: .whitespaces) })
                         guard parts.count >= 2 else { return nil }
@@ -37,6 +37,6 @@ struct TextMarkLexicon: Hashable {
                         let tenKeyCharCode: Int = input.tenKeyCharCode ?? 0
                         return TextMarkLexicon(input: input, mark: mark, pingCode: pingCode, charCode: charCode, tenKeyCharCode: tenKeyCharCode)
                 }
-                return entries.uniqued()
+                return entries.distinct()
         }
 }

@@ -347,7 +347,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 guard selectedSyllables.isNotEmpty else {
                         candidates = tenKeyCachedCandidates
                         sidebarSyllables = candidates.compactMap({ $0.isNotCantonese ? nil : $0.romanization.split(separator: Character.space).first?.dropLast() })
-                                .uniqued()
+                                .distinct()
                                 .map({ SidebarSyllable(text: String($0), isSelected: false) })
                         return
                 }
@@ -364,7 +364,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 }
                 let leadingLength = selectedLength + selectedCount
                 let newSyllables = candidates.compactMap({ $0.romanization.removedTones().dropFirst(leadingLength).split(separator: Character.space).first })
-                        .uniqued()
+                        .distinct()
                         .map({ SidebarSyllable(text: String($0), isSelected: false) })
                 sidebarSyllables = selectedSyllables + newSyllables
         }
@@ -692,7 +692,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let events = bufferEvents.dropFirst()
                 guard events.isNotEmpty else {
                         text2mark = joinedBufferTexts()
-                        candidates = (definedCandidates + textMarkCandidates).uniqued()
+                        candidates = (definedCandidates + textMarkCandidates).distinct()
                         return
                 }
                 suggestionTask = Task.detached(priority: .high) { [weak self] in
@@ -714,7 +714,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                                 return bestScheme.mark + String.space + bufferText.dropFirst(leadingLength + 1)
                                         }()
                                         self.text2mark = headMark + tailMark
-                                        self.candidates = (definedCandidates + textMarkCandidates + suggestions).uniqued()
+                                        self.candidates = (definedCandidates + textMarkCandidates + suggestions).distinct()
                                 }
                         }
                 }
@@ -729,10 +729,10 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 if isValidSequence {
                         text2mark = String(converted)
                         let suggestions: [Candidate] = Engine.cangjieReverseLookup(text: text, variant: Options.cangjieVariant).transformed(to: Options.characterStandard)
-                        candidates = (definedCandidates + textMarkCandidates + suggestions).uniqued()
+                        candidates = (definedCandidates + textMarkCandidates + suggestions).distinct()
                 } else {
                         text2mark = bufferText
-                        candidates = (definedCandidates + textMarkCandidates).uniqued()
+                        candidates = (definedCandidates + textMarkCandidates).distinct()
                 }
         }
         private func strokeReverseLookup() {
@@ -741,11 +741,11 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let events = bufferEvents.dropFirst()
                 if events.isEmpty || StrokeEvent.isValidEvents(events).negative {
                         text2mark = joinedBufferTexts()
-                        candidates = (definedCandidates + textMarkCandidates).uniqued()
+                        candidates = (definedCandidates + textMarkCandidates).distinct()
                 } else {
                         text2mark = StrokeEvent.displayText(from: events)
                         let suggestions: [Candidate] = Engine.strokeReverseLookup(events: events).transformed(to: Options.characterStandard)
-                        candidates = (definedCandidates + textMarkCandidates + suggestions).uniqued()
+                        candidates = (definedCandidates + textMarkCandidates + suggestions).distinct()
                 }
         }
 
@@ -756,7 +756,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let bufferText = joinedBufferTexts()
                 guard bufferText.count > 2 else {
                         text2mark = bufferText
-                        candidates = (definedCandidates + textMarkCandidates).uniqued()
+                        candidates = (definedCandidates + textMarkCandidates).distinct()
                         return
                 }
                 let segmentation = Segmenter.segment(events: bufferEvents)
@@ -772,7 +772,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let prefixMark: String = bufferText.prefix(1) + String.space
                 text2mark = prefixMark + tailMark
                 let suggestions: [Candidate] = Engine.structureReverseLookup(events: bufferEvents, input: bufferText, segmentation: segmentation).transformed(to: Options.characterStandard)
-                candidates = (definedCandidates + textMarkCandidates + suggestions).uniqued()
+                candidates = (definedCandidates + textMarkCandidates + suggestions).distinct()
         }
 
         /// Cached Candidate sequence for InputMemory

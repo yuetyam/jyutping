@@ -128,7 +128,7 @@ private enum CJKVStandard: Int {
                                 return nil
                         }
                 })
-                return standards.uniqued()
+                return standards.distinct()
         }()
         static let isHCPreferred: Bool = {
                 guard let HCIndex = preferredStandards.firstIndex(of: .HC) else { return false }

@@ -11,7 +11,7 @@ struct Hant2Hans {
                         .filter({ !$0.isEmpty })
                         .map({ $0.trimmingCharacters(in: .whitespaces).trimmingCharacters(in: .controlCharacters) })
                         .filter({ !($0.isEmpty || $0.hasPrefix("#")) })
-                        .uniqued()
+                        .distinct()
                 let entries = sourceLines.map { line -> (traditional: UInt32, simplified: UInt32) in
                         let parts = line.split(separator: "\t").map({ $0.trimmingCharacters(in: .whitespaces).trimmingCharacters(in: .controlCharacters) })
                         guard parts.count == 2 else { fatalError("Bad format in t2s.txt: \(line)") }

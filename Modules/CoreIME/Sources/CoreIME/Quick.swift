@@ -5,7 +5,7 @@ import CommonExtensions
 extension Engine {
         static func quick5ReverseLookup(text: String) -> [Candidate] {
                 return (match(quick5: text) + glob(quick5: text))
-                        .uniqued()
+                        .distinct()
                         .flatMap({ Engine.reveresLookup(text: $0.text, input: $0.input) })
         }
         private static func match(quick5 text: String) -> [ShapeLexicon] {
@@ -43,7 +43,7 @@ extension Engine {
 extension Engine {
         static func quick3ReverseLookup(text: String) -> [Candidate] {
                 return (match(quick3: text) + glob(quick3: text))
-                        .uniqued()
+                        .distinct()
                         .flatMap({ Engine.reveresLookup(text: $0.text, input: $0.input) })
         }
         private static func match(quick3 text: String) -> [ShapeLexicon] {

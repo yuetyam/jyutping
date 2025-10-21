@@ -20,11 +20,11 @@ extension Converter {
                         guard symbols.isNotEmpty else {
                                 return (defined + memory + marks + queried.filter(\.isCompound.negative))
                                         .transformed(to: characterStandard)
-                                        .uniqued()
+                                        .distinct()
                         }
                         var items: [Candidate] = (defined + memory + marks + queried.filter(\.isCompound.negative))
                                 .transformed(to: characterStandard)
-                                .uniqued()
+                                .distinct()
                         for symbol in symbols.reversed() {
                                 if let index = items.firstIndex(where: { $0.isCantonese && $0.lexiconText == symbol.lexiconText && $0.romanization == symbol.romanization }) {
                                         items.insert(symbol, at: index + 1)
@@ -34,13 +34,13 @@ extension Converter {
                 case (true, false):
                         return (defined + memory + marks + queried.filter(\.isCompound.negative))
                                 .transformed(to: characterStandard)
-                                .uniqued()
+                                .distinct()
                 case (false, true):
                         guard queried.isNotEmpty else {
-                                return (defined + marks).uniqued()
+                                return (defined + marks).distinct()
                         }
                         guard symbols.isNotEmpty else {
-                                return (defined + marks + queried.transformed(to: characterStandard)).uniqued()
+                                return (defined + marks + queried.transformed(to: characterStandard)).distinct()
                         }
                         var items: [Candidate] = queried
                         for symbol in symbols.reversed() {
@@ -48,9 +48,9 @@ extension Converter {
                                         items.insert(symbol, at: index + 1)
                                 }
                         }
-                        return (defined + marks + items.transformed(to: characterStandard)).uniqued()
+                        return (defined + marks + items.transformed(to: characterStandard)).distinct()
                 case (false, false):
-                        return (defined + marks + queried.transformed(to: characterStandard)).uniqued()
+                        return (defined + marks + queried.transformed(to: characterStandard)).distinct()
                 }
         }
 }

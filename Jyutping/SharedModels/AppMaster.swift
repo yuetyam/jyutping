@@ -35,7 +35,7 @@ struct AppMaster {
 extension AppMaster {
 
         static func searchCantoneseLexicons(for text: String) -> [CantoneseLexicon] {
-                let ideographicCharacters = text.filter(\.isIdeographic).uniqued()
+                let ideographicCharacters = text.filter(\.isIdeographic).distinct()
                 guard ideographicCharacters.isNotEmpty else { return [CantoneseLexicon(text: text)] }
                 let primaryLexicon = AppMaster.lookupCantoneseLexicon(for: text)
                 let shouldSearchMoreLexicons: Bool = text.count > 1 && ideographicCharacters.count < 4

@@ -9,7 +9,7 @@ extension Engine {
                 let text: String = isWildcard ? strokeEvents.sequenceText.replacingOccurrences(of: "6", with: "[12345]") : strokeEvents.sequenceText
                 let matched: [ShapeLexicon] = isWildcard ? wildcardMatch(strokeText: text) : match(events: strokeEvents, text: text)
                 return (matched + glob(strokeText: text))
-                        .uniqued()
+                        .distinct()
                         .flatMap({ Engine.reveresLookup(text: $0.text, input: $0.input) })
         }
         private static func match<T: RandomAccessCollection<StrokeEvent>>(events: T, text: String) -> [ShapeLexicon] {

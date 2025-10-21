@@ -13,7 +13,7 @@ struct UnihanDefinition {
                         guard word.count == 1 else { return nil }
                         return word
                 })
-                let entries = words.uniqued().compactMap { word -> (UInt32, String)? in
+                let entries = words.distinct().compactMap { word -> (UInt32, String)? in
                         guard let matched = match(text: word) else { return nil }
                         guard let decimalCode = word.first?.unicodeScalars.first?.value else { return nil }
                         return (decimalCode, matched)

@@ -41,7 +41,7 @@ public struct Metro {
                                 .components(separatedBy: .newlines)
                                 .map({ $0.trimmingCharacters(in: .whitespaces).trimmingCharacters(in: .controlCharacters) })
                                 .filter(\.isNotEmpty)
-                                .uniqued()
+                                .distinct()
                         guard let lineName: String = texts.first else { return nil }
                         let stations = texts.dropFirst().compactMap { text -> Station? in
                                 let parts = text.split(separator: "\t").map({ $0.trimmingCharacters(in: .whitespaces).trimmingCharacters(in: .controlCharacters) })

@@ -22,7 +22,7 @@ struct EmojiMaster {
         }
         static func updateFrequent(latest emoji: Emoji) {
                 guard let previous = emojis[Emoji.Category.frequent] else { return }
-                let combined = ([emoji] + previous).map(\.text).uniqued()
+                let combined = ([emoji] + previous).map(\.text).distinct()
                 guard combined.count >= frequentEmojiCount else { return }
                 let updated = (combined.count == frequentEmojiCount) ? combined : combined.dropLast(combined.count - frequentEmojiCount)
                 let value: String = updated.compactMap(\.first).map(\.formattedCodePointText).joined(separator: ",")
@@ -39,7 +39,7 @@ struct EmojiMaster {
         private static let fetchedEmojis: [Emoji] = {
                 if #available(iOSApplicationExtension 18.4, *) {
                         // Unicode/Emoji version 16.0
-                        // return matched.filter({ $0.unicodeVersion <= 160000 }).uniqued()
+                        // return matched.filter({ $0.unicodeVersion <= 160000 }).distinct()
                         return Engine.fetchEmojiSequence()
                 } else if #available(iOSApplicationExtension 17.4, *) {
                         // Unicode/Emoji version 15.1
@@ -58,7 +58,7 @@ struct EmojiMaster {
         nonisolated(unsafe) private(set) static var emojis: [Emoji.Category: [Emoji]] = {
                 var dict: [Emoji.Category: [Emoji]] = [:]
                 for category in Emoji.Category.allCases {
-                        dict[category] = fetchedEmojis.filter({ $0.category == category }).uniqued()
+                        dict[category] = fetchedEmojis.filter({ $0.category == category }).distinct()
                 }
                 dict[Emoji.Category.frequent] = processFrequent()
                 return dict

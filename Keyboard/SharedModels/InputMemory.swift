@@ -220,7 +220,7 @@ struct InputMemory {
                         })
                 })
                 guard matches.isEmpty && searched.isEmpty else {
-                        return (matches + searched).uniqued().map({ Candidate(text: $0.word, romanization: $0.romanization, input: text, mark: $0.mark, order: -1) })
+                        return (matches + searched).distinct().map({ Candidate(text: $0.word, romanization: $0.romanization, input: text, mark: $0.mark, order: -1) })
                 }
                 let shortcuts = shortcutMatch(text: text, input: text, limit: 5, statement: shortcutStatement)
                 guard shortcuts.isEmpty else {
@@ -275,7 +275,7 @@ struct InputMemory {
                                 }
                         })
                 return (prefixMatched + gainedMatched)
-                        .uniqued()
+                        .distinct()
                         .sorted()
                         .prefix(5)
                         .map({ Candidate(text: $0.word, romanization: $0.romanization, input: text, mark: $0.mark, order: -1) })
@@ -370,11 +370,11 @@ struct InputMemory {
                 }
                 guard fullMatched.count > 10 else {
                         return (fullMatched + anchorsMatched)
-                                .uniqued()
+                                .distinct()
                                 .map({ Candidate(text: $0.word, romanization: $0.romanization, input: $0.input, mark: $0.mark, order: -1) })
                 }
                 return (fullMatched.prefix(10) + (fullMatched + anchorsMatched).sorted())
-                        .uniqued()
+                        .distinct()
                         .map({ Candidate(text: $0.word, romanization: $0.romanization, input: $0.input, mark: $0.mark, order: -1) })
         }
         private static func tenKeyCodeMatch(code: Int) -> [InternalLexicon] {

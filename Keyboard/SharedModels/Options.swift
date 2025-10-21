@@ -141,7 +141,7 @@ struct Options {
                 }
                 let preferredCodes: [String] = [languageCode, "yue-Hant-HK", "zh-Hant-HK"]
                 let oldCodes: [String] = Locale.preferredLanguages
-                let newCodes: [String] = (preferredCodes + oldCodes).uniqued()
+                let newCodes: [String] = (preferredCodes + oldCodes).distinct()
                 UserDefaults.standard.set(newCodes, forKey: OptionsKey.AppleLanguages)
         }
 

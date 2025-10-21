@@ -12,7 +12,7 @@ extension Engine {
         /// - Returns: Candidates
         public static func structureReverseLookup(events: [InputEvent], input: String, segmentation: Segmentation) -> [Candidate] {
                 let markFreeText = events.filter(\.isSyllableLetter).map(\.text).joined()
-                let matched = search(text: markFreeText, segmentation: segmentation).uniqued()
+                let matched = search(text: markFreeText, segmentation: segmentation).distinct()
                 guard matched.isNotEmpty else { return [] }
                 let bodyEvents = events.dropFirst()
                 let text = bodyEvents.map(\.text).joined()

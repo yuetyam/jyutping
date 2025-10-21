@@ -148,7 +148,7 @@ private extension Font {
 
         #if os(macOS)
         private static func combine(fonts names: [String], size: CGFloat) -> Font {
-                let fontNames: [String] = names.filter({ found(font: $0) }).uniqued()
+                let fontNames: [String] = names.filter({ found(font: $0) }).distinct()
                 guard let primary = fontNames.first, let primaryFont = NSFont(name: primary, size: size) else { return Font.system(size: size) }
                 let fallbacks = fontNames.dropFirst()
                 guard fallbacks.isNotEmpty else { return Font.custom(primary, size: size) }
@@ -162,7 +162,7 @@ private extension Font {
         }
         #else
         private static func combine(fonts names: [String], size: CGFloat) -> Font {
-                let fontNames: [String] = names.filter({ found(font: $0) }).uniqued()
+                let fontNames: [String] = names.filter({ found(font: $0) }).distinct()
                 guard let primary = fontNames.first, let primaryFont = UIFont(name: primary, size: size) else { return Font.system(size: size) }
                 let fallbacks = fontNames.dropFirst()
                 guard fallbacks.isNotEmpty else { return Font.custom(primary, size: size) }

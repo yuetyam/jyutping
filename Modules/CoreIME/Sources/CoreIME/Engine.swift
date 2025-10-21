@@ -279,7 +279,7 @@ extension Engine {
                                 .prefix(72)
                         return pingMatched + anchorsMatched
                 })
-                .uniqued()
+                .distinct()
                 .sorted()
         }
         private static func modify<T: RandomAccessCollection<InputEvent>>(_ item: Candidate, events: T, text: String, eventLength: Int) -> Candidate {
@@ -358,27 +358,27 @@ extension Engine {
                         }
                 })
                 let fetched: [Candidate] = {
-                        let idealQueried = queried.filter({ $0.inputCount == eventLength }).sorted(by: { $0.order < $1.order }).uniqued()
-                        let notIdealQueried = queried.filter({ $0.inputCount < eventLength }).sorted().uniqued()
-                        let fullInput = (pingMatched + idealQueried + anchorsMatched + prefixMatched + gainedMatched).uniqued()
+                        let idealQueried = queried.filter({ $0.inputCount == eventLength }).sorted(by: { $0.order < $1.order }).distinct()
+                        let notIdealQueried = queried.filter({ $0.inputCount < eventLength }).sorted().distinct()
+                        let fullInput = (pingMatched + idealQueried + anchorsMatched + prefixMatched + gainedMatched).distinct()
                         let primary = fullInput.prefix(10)
                         let secondary = fullInput.sorted().prefix(10)
                         let tertiary = notIdealQueried.prefix(10)
                         let quaternary = notIdealQueried.sorted(by: { $0.order < $1.order }).prefix(10)
-                        return (primary + secondary + tertiary + quaternary + fullInput + notIdealQueried).uniqued()
+                        return (primary + secondary + tertiary + quaternary + fullInput + notIdealQueried).distinct()
                 }()
                 guard let firstInputCount = fetched.first?.inputCount else {
                         return processSlices(of: events, text: text, limit: limit, anchorsStatement: anchorsStatement, pingStatement: pingStatement)
                 }
                 guard firstInputCount < eventLength else { return fetched }
-                let headInputLengths = fetched.map(\.inputCount).uniqued()
+                let headInputLengths = fetched.map(\.inputCount).distinct()
                 let concatenated = headInputLengths.compactMap({ headLength -> Candidate? in
                         let tailEvents = events.dropFirst(headLength)
                         let tailSegmentation = Segmenter.segment(events: tailEvents)
                         guard let tailCandidate = search(events: tailEvents, segmentation: tailSegmentation, limit: 50, anchorsStatement: anchorsStatement, pingStatement: pingStatement, strictStatement: strictStatement).first else { return nil }
                         guard let headCandidate = fetched.first(where: { $0.inputCount == headLength }) else { return nil }
                         return headCandidate + tailCandidate
-                }).uniqued().sorted().prefix(1)
+                }).distinct().sorted().prefix(1)
                 return concatenated + fetched
         }
         private static func query(inputLength: Int, segmentation: Segmentation, limit: Int64? = nil, strictStatement: OpaquePointer?) -> [Candidate] {
@@ -409,12 +409,12 @@ extension Engine {
 extension Array where Element == Candidate {
         /// Sort Candidates for Qwerty and Triple-Stroke layouts
         func ordered(with textCount: Int) -> [Candidate] {
-                let matched = filter({ $0.inputCount == textCount }).sorted(by: { $0.order < $1.order }).uniqued()
-                let others = filter({ $0.inputCount != textCount }).sorted().uniqued()
+                let matched = filter({ $0.inputCount == textCount }).sorted(by: { $0.order < $1.order }).distinct()
+                let others = filter({ $0.inputCount != textCount }).sorted().distinct()
                 let primary = matched.prefix(15)
                 let secondary = others.prefix(10)
                 let tertiary = others.sorted(by: { $0.order < $1.order }).prefix(7)
-                return (primary + secondary + tertiary + matched + others).uniqued()
+                return (primary + secondary + tertiary + matched + others).distinct()
         }
 }
 
@@ -561,13 +561,13 @@ extension Engine {
                 return concatenated + queried
 
                 /*
-                let headInputLengths = queried.map(\.inputCount).uniqued()
+                let headInputLengths = queried.map(\.inputCount).distinct()
                 let concatenated = headInputLengths.compactMap({ headLength -> Candidate? in
                         let tailEvents = combos.dropFirst(headLength)
                         guard let tailCandidate = tenKeySearch(combos: tailEvents, limit: 10, anchorsStatement: anchorsStatement, codeMatchStatement: codeMatchStatement).first else { return nil }
                         guard let headCandidate = queried.first(where: { $0.inputCount == headLength }) else { return nil }
                         return headCandidate + tailCandidate
-                }).uniqued().sorted().prefix(1)
+                }).distinct().sorted().prefix(1)
                 return concatenated + queried
                 */
         }

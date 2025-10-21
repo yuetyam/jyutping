@@ -36,10 +36,10 @@ private extension DataMaster {
 public struct GwongWan {
         public static func match<T: StringProtocol>(text: T) -> [GwongWanCharacter] {
                 guard let character = text.first else { return [] }
-                let matched = DataMaster.matchGwongWan(for: character).uniqued()
+                let matched = DataMaster.matchGwongWan(for: character).distinct()
                 guard matched.isEmpty else { return matched }
                 let traditionalCharacter: Character = text.convertedS2T().first ?? character
-                return DataMaster.matchGwongWan(for: traditionalCharacter).uniqued()
+                return DataMaster.matchGwongWan(for: traditionalCharacter).distinct()
         }
 }
 

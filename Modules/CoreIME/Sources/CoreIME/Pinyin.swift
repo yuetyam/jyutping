@@ -37,7 +37,7 @@ extension Engine {
                                 .prefix(72)
                         return pingMatched + anchorsMatched
                 })
-                .uniqued()
+                .distinct()
                 .sorted()
         }
         private static func modify(_ item: PinyinLexicon, text: String, textLength: Int) -> PinyinLexicon {
@@ -101,27 +101,27 @@ extension Engine {
                         return PinyinLexicon(text: item.text, pinyin: item.pinyin, input: text, mark: text, order: item.order)
                 })
                 let fetched: [PinyinLexicon] = {
-                        let idealQueried = queried.filter({ $0.inputCount == inputLength }).sorted(by: { $0.order < $1.order }).uniqued()
-                        let notIdealQueried = queried.filter({ $0.inputCount < inputLength }).sorted().uniqued()
-                        let fullInput = (pingMatched + idealQueried + anchorsMatched + prefixMatched + gainedMatched).uniqued()
+                        let idealQueried = queried.filter({ $0.inputCount == inputLength }).sorted(by: { $0.order < $1.order }).distinct()
+                        let notIdealQueried = queried.filter({ $0.inputCount < inputLength }).sorted().distinct()
+                        let fullInput = (pingMatched + idealQueried + anchorsMatched + prefixMatched + gainedMatched).distinct()
                         let primary = fullInput.prefix(10)
                         let secondary = fullInput.sorted().prefix(10)
                         let tertiary = notIdealQueried.prefix(10)
                         let quaternary = notIdealQueried.sorted(by: { $0.order < $1.order }).prefix(10)
-                        return (primary + secondary + tertiary + quaternary + fullInput + notIdealQueried).uniqued()
+                        return (primary + secondary + tertiary + quaternary + fullInput + notIdealQueried).distinct()
                 }()
                 guard let firstInputCount = fetched.first?.inputCount else {
                         return processPinyinSlices(of: events, text: text, limit: limit, anchorsStatement: anchorsStatement, pingStatement: pingStatement)
                 }
                 guard firstInputCount < inputLength else { return fetched }
-                let headInputLengths = fetched.map(\.inputCount).uniqued()
+                let headInputLengths = fetched.map(\.inputCount).distinct()
                 let concatenated = headInputLengths.compactMap({ headLength -> PinyinLexicon? in
                         let tailEvents = events.dropFirst(headLength)
                         let tailSegmentation = PinyinSegmenter.segment(events: tailEvents)
                         guard let tailLexicon = pinyinSearch(events: tailEvents, segmentation: tailSegmentation, limit: 50, anchorsStatement: anchorsStatement, pingStatement: pingStatement).first else { return nil }
                         guard let headLexicon = fetched.first(where: { $0.inputCount == headLength }) else { return nil }
                         return headLexicon + tailLexicon
-                }).uniqued().sorted().prefix(1)
+                }).distinct().sorted().prefix(1)
                 return concatenated + fetched
         }
 
@@ -196,12 +196,12 @@ extension Engine {
 
 private extension Array where Element == PinyinLexicon {
         func ordered(with textCount: Int) -> [PinyinLexicon] {
-                let matched = filter({ $0.inputCount == textCount }).sorted(by: { $0.order < $1.order }).uniqued()
-                let others = filter({ $0.inputCount != textCount }).sorted().uniqued()
+                let matched = filter({ $0.inputCount == textCount }).sorted(by: { $0.order < $1.order }).distinct()
+                let others = filter({ $0.inputCount != textCount }).sorted().distinct()
                 let primary = matched.prefix(15)
                 let secondary = others.prefix(10)
                 let tertiary = others.sorted(by: { $0.order < $1.order }).prefix(7)
-                return (primary + secondary + tertiary + matched + others).uniqued()
+                return (primary + secondary + tertiary + matched + others).distinct()
         }
 }
 

@@ -131,7 +131,7 @@ extension Engine {
                         let pingText = scheme.flatMap(\.origin).map(\.text).joined()
                         return match(text: pingText, input: input, statement: statement)
                 })
-                return (regular + matches).uniqued()
+                return (regular + matches).distinct()
         }
         private static func match<T: StringProtocol>(text: T, input: String, statement: OpaquePointer?) -> [Candidate] {
                 sqlite3_reset(statement)
@@ -203,6 +203,6 @@ extension Engine {
                         guard let symbolText = Emoji.generateSymbol(from: converted) else { return nil }
                         return Candidate(symbol: symbolText, cantonese: emoji.cantonese, romanization: emoji.romanization, input: input, isEmoji: emoji.uniqueNumber < 10)
                 })
-                return candidates.uniqued()
+                return candidates.distinct()
         }
 }
