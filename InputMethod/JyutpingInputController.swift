@@ -482,7 +482,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                         let text2mark: String = {
                                                 lazy var text: String = joinedBufferTexts()
                                                 let isPeculiar: Bool = capitals.contains(true) || events.contains(where: \.isSyllableLetter.negative)
-                                                guard isPeculiar.negative else { return text.toneConverted().formattedForMark() }
+                                                guard isPeculiar.negative else { return text.toneConverted().markFormatted() }
                                                 guard let firstCandidate = suggestions.first else { return text }
                                                 guard firstCandidate.inputCount != events.count else { return firstCandidate.mark }
                                                 guard let bestScheme = segmentation.first else { return text }

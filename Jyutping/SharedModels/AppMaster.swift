@@ -69,22 +69,28 @@ extension AppMaster {
                 let combinedRomanizations = search.pronunciations.map(\.romanization).map { romanization -> String in
                         let syllables: [String] = romanization.components(separatedBy: String.space)
                         var index: Int = 0
+                        var characterSequence: String = String.empty
                         var newRomanization: String = String.empty
-                        var lastWasIdeographic: Bool = false
                         for character in text {
                                 if character.isIdeographic {
-                                        newRomanization += (syllables[index] + String.space)
-                                        index += 1
-                                        lastWasIdeographic = true
+                                        let shouldInsertSpace: Bool = (characterSequence.last?.isBasicLatinLetter ?? false) || (characterSequence.last?.isBasicDigit ?? false)
+                                        if shouldInsertSpace {
+                                                newRomanization.append(Character.space)
+                                        }
+                                        if let syllable = syllables.fetch(index) {
+                                                newRomanization += syllable
+                                                index += 1
+                                        }
                                 } else {
-                                        if lastWasIdeographic {
-                                                newRomanization = String(newRomanization.dropLast())
+                                        let shouldInsertSpace: Bool = (character.isBasicLatinLetter || character.isBasicDigit) && (characterSequence.last?.isIdeographic ?? false)
+                                        if shouldInsertSpace {
+                                                newRomanization.append(Character.space)
                                         }
                                         newRomanization.append(character)
-                                        lastWasIdeographic = false
                                 }
+                                characterSequence.append(character)
                         }
-                        return newRomanization.trimmingCharacters(in: .whitespaces)
+                        return newRomanization
                 }
                 let combinedPronunciations = combinedRomanizations.map({ Pronunciation(romanization: $0) })
                 return CantoneseLexicon(text: combinedText, pronunciations: combinedPronunciations)

@@ -1,4 +1,5 @@
 import Foundation
+import RegexBuilder
 
 extension StringProtocol {
         /// Produces the same value as Kotlin's hashCode()
@@ -76,18 +77,28 @@ extension StringProtocol {
         public func trimmed() -> String {
                 return trimmingCharacters(in: .whitespacesAndNewlines).trimmingCharacters(in: .controlCharacters)
         }
+
+        /// Returns a new string by concatenating the characters, adding a space between each character.
+        public func spaceSeparated() -> String {
+                var result: String = String.empty
+                result.reserveCapacity(count * 2)
+                for character in self {
+                        if result.isNotEmpty {
+                                result.append(Character.space)
+                        }
+                        result.append(character)
+                }
+                return result
+        }
 }
 
-extension Sequence where Element == Character {
-
-        /// Returns a new string by concatenating the elements of the sequence, adding a space between each element.
-        public func spaceSeparated() -> String {
-                return reduce(into: String.empty) { partialResult, character in
-                        if partialResult.isNotEmpty {
-                                partialResult.append(String.space)
-                        }
-                        partialResult.append(character)
-                }
+extension String {
+        /// Occurrence count of pattern in this String
+        /// - Parameter pattern: Regular expression pattern
+        /// - Returns: Number of occurrences
+        public func occurrenceCount(pattern: String) -> Int {
+                guard let regex = try? Regex(pattern) else { return 0 }
+                return matches(of: regex).count
         }
 }
 

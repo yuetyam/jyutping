@@ -1,4 +1,5 @@
 import SwiftUI
+import CoreIME
 
 struct TenKeyNumericKeyboard: View {
         var body: some View {
@@ -13,26 +14,26 @@ struct TenKeyNumericKeyboard: View {
                                                 SidebarPanel()
                                                 VStack(spacing: 0) {
                                                         HStack(spacing: 0) {
-                                                                TenKeyNumberKey(key: "1")
-                                                                TenKeyNumberKey(key: "2")
-                                                                TenKeyNumberKey(key: "3")
+                                                                TenKeyNumberKey(.number1)
+                                                                TenKeyNumberKey(.number2)
+                                                                TenKeyNumberKey(.number3)
                                                         }
                                                         HStack(spacing: 0) {
-                                                                TenKeyNumberKey(key: "4")
-                                                                TenKeyNumberKey(key: "5")
-                                                                TenKeyNumberKey(key: "6")
+                                                                TenKeyNumberKey(.number4)
+                                                                TenKeyNumberKey(.number5)
+                                                                TenKeyNumberKey(.number6)
                                                         }
                                                         HStack(spacing: 0) {
-                                                                TenKeyNumberKey(key: "7")
-                                                                TenKeyNumberKey(key: "8")
-                                                                TenKeyNumberKey(key: "9")
+                                                                TenKeyNumberKey(.number7)
+                                                                TenKeyNumberKey(.number8)
+                                                                TenKeyNumberKey(.number9)
                                                         }
                                                 }
                                         }
                                         HStack(spacing: 0) {
                                                 TenKeyNavigateKey(destination: .alphabetic)
-                                                TenKeyNumberKey(key: ".")
-                                                TenKeyNumberKey(key: "0")
+                                                TenKeyNumberDotKey()
+                                                TenKeyNumberKey(.number0)
                                                 TenKeySpaceKey()
                                         }
                                 }

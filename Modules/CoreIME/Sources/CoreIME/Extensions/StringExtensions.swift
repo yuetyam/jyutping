@@ -33,45 +33,24 @@ extension StringProtocol {
         /// - Returns: Converted text with digital tones
         public func toneConverted() -> String {
                 return replacingOccurrences(of: "vv", with: "4")
-                .replacingOccurrences(of: "xx", with: "5")
-                .replacingOccurrences(of: "qq", with: "6")
-                .replacingOccurrences(of: "v", with: "1")
-                .replacingOccurrences(of: "x", with: "2")
-                .replacingOccurrences(of: "q", with: "3")
+                        .replacingOccurrences(of: "xx", with: "5")
+                        .replacingOccurrences(of: "qq", with: "6")
+                        .replacingOccurrences(of: "v", with: "1")
+                        .replacingOccurrences(of: "x", with: "2")
+                        .replacingOccurrences(of: "q", with: "3")
         }
 
-        // TODO: Improve this code
-        /// Format text with separators and tones
-        /// - Returns: Formatted text
-        public func formattedForMark() -> String {
-                let blocks = self.map { character -> String in
-                        return character.isBasicLatinLetter ? String(character) : "\(character) "
-                }
-                return blocks.joined().trimmingCharacters(in: .whitespaces)
-        }
-}
-
-extension Sequence where Element == Character {
-
-        /// Returns a new string by concatenating the elements of the sequence, adding a space between each element.
-        func spaceSeparated() -> String {
-                return self.reduce(into: String.empty) { partialResult, character in
-                        if partialResult.isNotEmpty {
-                                partialResult.append(String.space)
+        /// Inserts a space after any non-letter character
+        /// - Returns: Formatted text for mark
+        public func markFormatted() -> String {
+                var result: String = String.empty
+                result.reserveCapacity(count * 2)
+                for character in self {
+                        result.append(character)
+                        if character.isBasicLatinLetter.negative {
+                                result.append(Character.space)
                         }
-                        partialResult.append(character)
                 }
-        }
-}
-
-extension String {
-        /// Occurrence count of pattern in this String
-        /// - Parameter pattern: Regular expression pattern
-        /// - Returns: Number of occurrences
-        func occurrenceCount(pattern: String) -> Int {
-                // TODO: Improve this code
-                // return self.matches(of: Regex{substring}).count
-                guard let regex = try? NSRegularExpression(pattern: pattern) else { return 0 }
-                return regex.numberOfMatches(in: self, range: NSRange(self.startIndex..., in: self))
+                return result
         }
 }
