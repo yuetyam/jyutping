@@ -48,27 +48,33 @@ private struct YingWaaFanWanView: View {
                                         Text(verbatim: entry.pronunciation).font(.title3)
                                 }
                                 if let pronunciationMark = entry.pronunciationMark {
-                                        Text(verbatim: pronunciationMark).font(.body.italic())
-                                }
-                                if let interpretation = entry.interpretation {
-                                        Text(verbatim: interpretation).font(.body)
+                                        Text(verbatim: pronunciationMark).font(.body).italic()
                                 }
                         }
                         HStack(spacing: 16) {
                                 HStack {
                                         Text(verbatim: "轉寫").shallow()
                                         Text.separator
-                                        Text(verbatim: entry.romanization).font(.title3.monospaced())
+                                        Text(verbatim: entry.romanization).font(.title3).monospaced()
                                 }
                                 Text(verbatim: ipaText).font(.ipa).airy()
                                 Spacer()
                                 Speaker(entry.romanization).opacity(entry.romanization.isValidJyutpingSyllable ? 1 : 0)
                         }
-                        if let homophoneText {
-                                HStack {
-                                        Text(verbatim: "同音").shallow()
-                                        Text.separator
-                                        Text(verbatim: homophoneText)
+                        VStack(alignment: .leading, spacing: 8) {
+                                if let homophoneText {
+                                        HStack {
+                                                Text(verbatim: "同音").shallow()
+                                                Text.separator
+                                                Text(verbatim: homophoneText)
+                                        }
+                                }
+                                if let interpretation = entry.interpretation {
+                                        HStack(alignment: .firstTextBaseline) {
+                                                Text(verbatim: "釋義").shallow()
+                                                Text.separator
+                                                Text(verbatim: interpretation)
+                                        }
                                 }
                         }
                 }

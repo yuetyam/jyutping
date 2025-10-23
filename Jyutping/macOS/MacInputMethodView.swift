@@ -28,7 +28,7 @@ struct MacInputMethodView: View {
                                         Link("Shared.About.Website", destination: About.WebsiteURL)
                                                 .font(.master)
                                                 .foregroundStyle(Color.accentColor)
-                                        Text(verbatim: About.WebsiteAddress).font(.fixedWidth)
+                                        Text(verbatim: About.WebsiteAddress).monospaced()
                                         Button {
                                                 AppMaster.copy(About.WebsiteAddress)
                                                 isWebsiteAddressCopied = true

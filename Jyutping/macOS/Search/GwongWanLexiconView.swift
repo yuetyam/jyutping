@@ -47,7 +47,7 @@ private struct GwongWanView: View {
                                 }
                                 Spacer()
                         }
-                        HStack {
+                        HStack(alignment: .firstTextBaseline) {
                                 Text(verbatim: "釋義").shallow()
                                 Text.separator
                                 Text(verbatim: entry.interpretation)

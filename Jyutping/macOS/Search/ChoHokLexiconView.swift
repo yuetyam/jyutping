@@ -54,7 +54,7 @@ private struct ChoHokYuetYamCitYiuView: View {
                                 HStack {
                                         Text(verbatim: "轉寫").shallow()
                                         Text.separator
-                                        Text(verbatim: entry.romanization).font(.title3.monospaced())
+                                        Text(verbatim: entry.romanization).font(.title3).monospaced()
                                 }
                                 Text(verbatim: ipaText).font(.ipa).airy()
                                 Spacer()

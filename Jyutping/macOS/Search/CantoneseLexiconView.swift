@@ -8,7 +8,7 @@ import Linguistics
 struct CantoneseLexiconView: View {
         let lexicon: CantoneseLexicon
         var body: some View {
-                VStack {
+                VStack(alignment: .leading) {
                         HStack(spacing: 16) {
                                 HStack {
                                         Text(verbatim: "文字").shallow()
@@ -29,7 +29,7 @@ struct CantoneseLexiconView: View {
                         }
                         if let unihanDefinition = lexicon.unihanDefinition {
                                 Divider()
-                                HStack {
+                                HStack(alignment: .firstTextBaseline) {
                                         Text(verbatim: "英文").shallow()
                                         Text.separator
                                         Text(verbatim: unihanDefinition)
@@ -69,7 +69,7 @@ private struct PronunciationView: View {
                                 HStack {
                                         Text(verbatim: "讀音").shallow()
                                         Text.separator
-                                        Text(verbatim: romanization).font(.title3.monospaced())
+                                        Text(verbatim: romanization).font(.title3).monospaced()
                                 }
                                 if let ipa {
                                         Text(verbatim: ipa).font(.ipa).airy()

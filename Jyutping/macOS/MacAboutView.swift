@@ -2,6 +2,7 @@
 
 import SwiftUI
 import AboutKit
+import CommonExtensions
 
 struct MacAboutView: View {
         var body: some View {
@@ -96,7 +97,8 @@ private struct LinkLabel: View {
                         Text(verbatim: message)
                                 .lineLimit(1)
                                 .minimumScaleFactor(0.5)
-                                .font(isLongMessage ? Font.callout : Font.callout.monospaced())
+                                .font(.callout)
+                                .monospaced(isLongMessage.negative)
                         Spacer()
                 }
         }

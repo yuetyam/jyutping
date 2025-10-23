@@ -12,11 +12,14 @@ struct FanWanLexiconView: View {
                         HStack(spacing: 16) {
                                 HStack(spacing: 2) {
                                         Text(verbatim: "文字").font(.copilot).shallow()
-                                        Text.separator.font(.copilot)
+                                        Text.separator
                                         Text(verbatim: firstEntry.word)
                                 }
                                 if let unicode = firstEntry.word.first?.codePointsText {
-                                        Text(verbatim: unicode).font(.footnote.monospaced()).foregroundStyle(Color.secondary)
+                                        Text(verbatim: unicode)
+                                                .font(.footnote)
+                                                .monospaced()
+                                                .foregroundStyle(Color.secondary)
                                 }
                         }
                 }
@@ -33,15 +36,15 @@ struct FanWanCuetYiuLabel: View {
                 let ipaText: String = OldCantonese.IPAText(of: entry.romanization)
                 VStack(alignment: .leading) {
                         HStack(spacing: 2) {
-                                Text(verbatim: "讀音").shallow()
+                                Text(verbatim: "讀音").font(.copilot).shallow()
                                 Text.separator
-                                Text(verbatim: entry.abstract).font(.body).minimumScaleFactor(0.5).lineLimit(1)
+                                Text(verbatim: entry.abstract).minimumScaleFactor(0.5).lineLimit(1)
                         }
                         HStack(spacing: 16) {
                                 HStack(spacing: 2) {
-                                        Text(verbatim: "轉寫").shallow()
+                                        Text(verbatim: "轉寫").font(.copilot).shallow()
                                         Text.separator
-                                        Text(verbatim: entry.romanization).font(.fixedWidth)
+                                        Text(verbatim: entry.romanization).monospaced()
                                 }
                                 Text(verbatim: ipaText).font(.ipa).foregroundStyle(Color.secondary)
                                 Spacer()
@@ -49,19 +52,18 @@ struct FanWanCuetYiuLabel: View {
                         }
                         if let homophoneText {
                                 HStack(spacing: 2) {
-                                        Text(verbatim: "同音").shallow()
+                                        Text(verbatim: "同音").font(.copilot).shallow()
                                         Text.separator
-                                        Text(verbatim: homophoneText).font(.body)
+                                        Text(verbatim: homophoneText)
                                 }
                                 .padding(.bottom, 4)
                         }
-                        HStack(spacing: 2) {
-                                Text(verbatim: "釋義").shallow()
+                        HStack(alignment: .firstTextBaseline, spacing: 2) {
+                                Text(verbatim: "釋義").font(.copilot).shallow()
                                 Text.separator
-                                Text(verbatim: entry.interpretation).font(.body)
+                                Text(verbatim: entry.interpretation)
                         }
                 }
-                .font(.copilot)
         }
 }
 

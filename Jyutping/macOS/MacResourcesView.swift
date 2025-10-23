@@ -66,7 +66,8 @@ private struct LinkView: View {
                         Text(verbatim: url)
                                 .lineLimit(1)
                                 .minimumScaleFactor(0.5)
-                                .font(.subheadline.monospaced())
+                                .font(.subheadline)
+                                .monospaced()
                                 .textSelection(.enabled)
                         Spacer()
                 }

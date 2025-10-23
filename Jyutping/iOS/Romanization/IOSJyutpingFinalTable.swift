@@ -148,7 +148,7 @@ private struct IOSFinalLabel: View {
                         }
                         ZStack(alignment: .leading) {
                                 Text(verbatim: "gaang").hidden()
-                                Text(verbatim: jyutping).font(.fixedWidth)
+                                Text(verbatim: jyutping).monospaced()
                         }
                         Text(verbatim: ipa)
                         Spacer()

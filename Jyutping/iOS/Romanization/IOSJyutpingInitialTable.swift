@@ -104,7 +104,7 @@ private struct IOSInitialLabel: View {
                         }
                         ZStack {
                                 Text(verbatim: "聲母").hidden()
-                                Text(verbatim: jyutping).font(.fixedWidth)
+                                Text(verbatim: jyutping).monospaced()
                         }
                         Text(verbatim: ipa)
                         Spacer()

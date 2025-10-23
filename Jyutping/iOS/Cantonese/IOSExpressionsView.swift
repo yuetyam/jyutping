@@ -77,7 +77,7 @@ struct IOSExpressionsView: View {
                                         HStack {
                                                 Text(verbatim: "係")
                                                 HStack(spacing: 2) {
-                                                        Text(verbatim: "hai6").font(.fixedWidth)
+                                                        Text(verbatim: "hai6").monospaced()
                                                         Speaker("hai6")
                                                 }
                                                 Text(verbatim: "謂語，義同「是」。")
@@ -86,7 +86,7 @@ struct IOSExpressionsView: View {
                                         HStack {
                                                 Text(verbatim: "喺")
                                                 HStack(spacing: 2) {
-                                                        Text(verbatim: "hai2").font(.fixedWidth)
+                                                        Text(verbatim: "hai2").monospaced()
                                                         Speaker("hai2")
                                                 }
                                                 Text(verbatim: "表方位、時間，義同「在」。")
@@ -108,7 +108,7 @@ struct IOSExpressionsView: View {
                                         HStack(spacing: 16) {
                                                 Text(verbatim: "諗")
                                                 HStack(spacing: 2) {
-                                                        Text(verbatim: "nam2").font(.fixedWidth)
+                                                        Text(verbatim: "nam2").monospaced()
                                                         Speaker("nam2")
                                                 }
                                                 Text(verbatim: "想、思考、覺得")
@@ -117,7 +117,7 @@ struct IOSExpressionsView: View {
                                         HStack(spacing: 16) {
                                                 Text(verbatim: "冧")
                                                 HStack(spacing: 2) {
-                                                        Text(verbatim: "lam3").font(.fixedWidth)
+                                                        Text(verbatim: "lam3").monospaced()
                                                         Speaker("lam3")
                                                 }
                                                 Text(verbatim: "表示倒塌、倒下")
@@ -139,7 +139,7 @@ struct IOSExpressionsView: View {
                                         HStack(spacing: 16) {
                                                 Text(verbatim: "咁")
                                                 HStack(spacing: 2) {
-                                                        Text(verbatim: "gam3").font(.fixedWidth)
+                                                        Text(verbatim: "gam3").monospaced()
                                                         Speaker("gam3")
                                                 }
                                                 Text(verbatim: "音同「禁」")
@@ -148,7 +148,7 @@ struct IOSExpressionsView: View {
                                         HStack(spacing: 16) {
                                                 Text(verbatim: "噉")
                                                 HStack(spacing: 2) {
-                                                        Text(verbatim: "gam2").font(.fixedWidth)
+                                                        Text(verbatim: "gam2").monospaced()
                                                         Speaker("gam2")
                                                 }
                                                 Text(verbatim: "音同「感」")

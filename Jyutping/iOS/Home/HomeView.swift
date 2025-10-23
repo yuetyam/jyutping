@@ -101,7 +101,7 @@ struct HomeView: View {
                                         Section {
                                                 Text("Shared.Guide.StrokeReverseLookup.Heading").font(.headline)
                                                 Text("Shared.Guide.StrokeReverseLookup.Body")
-                                                Text("Shared.Guide.StrokeReverseLookup.Examples").font(.body.monospaced())
+                                                Text("Shared.Guide.StrokeReverseLookup.Examples").monospaced()
                                         }
                                         Section {
                                                 Text("Shared.Guide.StructureReverseLookup.Heading").font(.headline)
@@ -109,7 +109,7 @@ struct HomeView: View {
                                         }
                                         Section {
                                                 Text("Shared.Guide.TonesInput.Heading").font(.headline)
-                                                Text("Shared.Guide.TonesInput.Body").font(.body.monospaced())
+                                                Text("Shared.Guide.TonesInput.Body").monospaced()
                                                 Text("Shared.Guide.TonesInput.Examples")
                                         }
                                 }

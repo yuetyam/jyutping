@@ -11,11 +11,14 @@ struct LexiconView: View {
                 HStack(spacing: 16) {
                         HStack(spacing: 2) {
                                 Text(verbatim: "文字").font(.copilot).shallow()
-                                Text.separator.font(.copilot)
+                                Text.separator
                                 Text(verbatim: lexicon.text)
                         }
                         if lexicon.text.count == 1, let unicode = lexicon.text.first?.codePointsText {
-                                Text(verbatim: unicode).font(.footnote.monospaced()).foregroundStyle(Color.secondary)
+                                Text(verbatim: unicode)
+                                        .font(.footnote)
+                                        .monospaced()
+                                        .foregroundStyle(Color.secondary)
                         }
                         Spacer()
                         Speaker {
@@ -25,11 +28,11 @@ struct LexiconView: View {
                 ForEach(lexicon.pronunciations.indices, id: \.self) { index in
                         PronunciationView(lexicon.pronunciations[index])
                 }
-                if let unihanDefinition = lexicon.unihanDefinition {
-                        HStack(spacing: 2) {
+                if let definition = lexicon.unihanDefinition {
+                        HStack(alignment: .firstTextBaseline, spacing: 2) {
                                 Text(verbatim: "英文").font(.copilot).shallow()
-                                Text.separator.font(.copilot)
-                                Text(verbatim: unihanDefinition).font(.subheadline)
+                                Text.separator
+                                Text(verbatim: definition).font(.callout)
                         }
                 }
         }
@@ -63,9 +66,9 @@ private struct PronunciationView: View {
                 VStack(alignment: .leading) {
                         HStack(spacing: 16) {
                                 HStack(spacing: 2) {
-                                        Text(verbatim: "讀音").shallow()
+                                        Text(verbatim: "讀音").font(.copilot).shallow()
                                         Text.separator
-                                        Text(verbatim: romanization).font(isSingular ? .fixedWidth : .body)
+                                        Text(verbatim: romanization).monospaced(isSingular)
                                 }
                                 if let ipa {
                                         Text(verbatim: ipa).font(.ipa).foregroundStyle(Color.secondary)
@@ -75,16 +78,16 @@ private struct PronunciationView: View {
                         }
                         if let homophoneText {
                                 HStack(spacing: 2) {
-                                        Text(verbatim: "同音").shallow()
+                                        Text(verbatim: "同音").font(.copilot).shallow()
                                         Text.separator
-                                        Text(verbatim: homophoneText).font(.body)
+                                        Text(verbatim: homophoneText)
                                 }
                         }
                         if let collocationText {
                                 HStack(spacing: 2) {
-                                        Text(verbatim: "詞例").shallow()
+                                        Text(verbatim: "詞例").font(.copilot).shallow()
                                         Text.separator
-                                        Text(verbatim: collocationText).font(.body)
+                                        Text(verbatim: collocationText)
                                         Spacer()
                                         Speaker {
                                                 Speech.speak(collocationSpeechText ?? collocationText, isRomanization: false)
@@ -93,14 +96,13 @@ private struct PronunciationView: View {
                         }
                         ForEach(descriptions.indices, id: \.self) { index in
                                 HStack(alignment: .firstTextBaseline, spacing: 2) {
-                                        Text(verbatim: "釋義").shallow()
+                                        Text(verbatim: "釋義").font(.copilot).shallow()
                                         Text.separator
                                         Text(verbatim: descriptions[index]).font(.callout)
                                 }
                                 .padding(.vertical, 2)
                         }
                 }
-                .font(.copilot)
         }
 }
 

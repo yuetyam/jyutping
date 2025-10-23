@@ -15,12 +15,12 @@ struct FAQView: View {
                                         Text("IOSHomeTab.FAQ.Answer.FullAccess.Row2.Clipboard")
                                 } else {
                                         HStack {
-                                                Text(verbatim: "1.").font(.subheadline.monospacedDigit())
+                                                Text(verbatim: "1.").font(.footnote).monospacedDigit()
                                                 Text("IOSHomeTab.FAQ.Answer.FullAccess.Row1.Haptic")
                                                 Spacer()
                                         }
                                         HStack {
-                                                Text(verbatim: "2.").font(.subheadline.monospacedDigit())
+                                                Text(verbatim: "2.").font(.footnote).monospacedDigit()
                                                 Text("IOSHomeTab.FAQ.Answer.FullAccess.Row2.Clipboard")
                                                 Spacer()
                                         }
