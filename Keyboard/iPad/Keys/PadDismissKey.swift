@@ -8,13 +8,6 @@ struct PadDismissKey: View {
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
 
-        private var keyColor: Color {
-                return colorScheme.isDark ? .darkAction : .lightAction
-        }
-        private var keyActiveColor: Color {
-                return colorScheme.isDark ? .activeDarkAction : .activeLightAction
-        }
-
         @GestureState private var isTouching: Bool = false
 
         var body: some View {
@@ -26,7 +19,7 @@ struct PadDismissKey: View {
                 ZStack {
                         Color.interactiveClear
                         RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous)
-                                .fill(isTouching ? keyActiveColor : keyColor)
+                                .fill(isTouching ? colorScheme.activeActionKeyColor : colorScheme.actionKeyColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(.vertical, verticalPadding)
                                 .padding(.horizontal, horizontalPadding)

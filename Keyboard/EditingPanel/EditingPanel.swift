@@ -1,14 +1,9 @@
 import SwiftUI
 
 struct EditingPanel: View {
-
         @EnvironmentObject private var context: KeyboardViewController
-
         var body: some View {
-                let edgeKeyWidth: CGFloat = {
-                        let widthUnit: CGFloat = context.keyboardWidth / 4.0
-                        return min(widthUnit, 128)
-                }()
+                let edgeKeyWidth: CGFloat = min(context.keyboardWidth / 4.0, 128)
                 HStack(spacing: 0) {
                         VStack(spacing: 0) {
                                 EditingPanelCopyKey().frame(maxHeight: .infinity)

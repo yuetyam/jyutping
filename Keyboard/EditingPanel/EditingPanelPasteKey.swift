@@ -37,42 +37,24 @@ struct EditingPanelPasteKey: View {
         }
 }
 
-
-// Deprecated
-/*
 struct EditingPanelSystemPasteKey: View {
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
-        private var keyColor: Color {
-                switch colorScheme {
-                case .light:
-                        return .lightEmphatic
-                case .dark:
-                        return .darkEmphatic
-                @unknown default:
-                        return .lightEmphatic
-                }
-        }
         var body: some View {
                 ZStack {
                         Color.clear
-                        RoundedRectangle(cornerRadius: 6, style: .continuous)
-                                .fill(keyColor)
+                        RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous)
+                                .fill(colorScheme.actionKeyColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(4)
-                        VStack(spacing: 0) {
-                                PasteButton(payloadType: String.self) { strings in
-                                        AudioFeedback.inputed()
-                                        context.triggerHapticFeedback()
-                                        guard let text = strings.first, text.isNotEmpty else { return }
-                                        context.operate(.input(text))
-                                }
-                                .buttonBorderShape(.roundedRectangle)
-                                .labelStyle(.iconOnly)
-                                .tint(.gray)
-                                Text("EditingPanel.Paste").font(.keyCaption).opacity(context.isClipboardEmpty ? 0.5 : 1)
+                        PasteButton(payloadType: String.self) { strings in
+                                AudioFeedback.inputed()
+                                context.triggerHapticFeedback()
+                                guard let text = strings.first, text.isNotEmpty else { return }
+                                context.operate(.input(text))
                         }
+                        .buttonBorderShape(.capsule)
+                        .labelStyle(.titleAndIcon)
                 }
         }
 }
-*/

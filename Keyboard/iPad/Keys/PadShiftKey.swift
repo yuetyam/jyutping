@@ -9,17 +9,11 @@ struct PadShiftKey: View {
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
 
-        private var keyColor: Color {
-                return colorScheme.isDark ? .darkAction : .lightAction
-        }
-        private var keyActiveColor: Color {
-                return colorScheme.isDark ? .activeDarkAction : .activeLightAction
-        }
         private var backColor: Color {
                 if #available(iOSApplicationExtension 26.0, *) {
-                        return isTouching ? keyActiveColor : keyColor
+                        return isTouching ? colorScheme.activeActionKeyColor : colorScheme.actionKeyColor
                 } else {
-                        return context.keyboardCase.isLowercased ? keyColor : keyActiveColor
+                        return context.keyboardCase.isLowercased ? colorScheme.actionKeyColor : colorScheme.activeActionKeyColor
                 }
         }
 
