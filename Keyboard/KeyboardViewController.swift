@@ -231,7 +231,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         adjustKeyboard()
                 }
                 lazy var text: String = isCapitalized ? event.text.uppercased() : event.text
-                let isCantoneseComposeMode: Bool = inputMethodMode.isCantonese && keyboardForm.isBufferrable
+                let isCantoneseComposeMode: Bool = inputMethodMode.isCantonese && keyboardForm.isBufferable
                 guard isCantoneseComposeMode else {
                         textDocumentProxy.insertText(text)
                         return
@@ -255,7 +255,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         adjustKeyboard()
                 }
                 lazy var text: String = isCapitalized ? events.map(\.text).joined().uppercased() : events.map(\.text).joined()
-                let isCantoneseComposeMode: Bool = inputMethodMode.isCantonese && keyboardForm.isBufferrable
+                let isCantoneseComposeMode: Bool = inputMethodMode.isCantonese && keyboardForm.isBufferable
                 guard isCantoneseComposeMode else {
                         textDocumentProxy.insertText(text)
                         return
@@ -387,7 +387,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 case .input(let text):
                         textDocumentProxy.insertText(text)
                 case .process(let text):
-                        let isCantoneseComposeMode: Bool = inputMethodMode.isCantonese && keyboardForm.isBufferrable
+                        let isCantoneseComposeMode: Bool = inputMethodMode.isCantonese && keyboardForm.isBufferable
                         guard isCantoneseComposeMode else {
                                 textDocumentProxy.insertText(text)
                                 return
@@ -836,7 +836,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         @Published private(set) var previousKeyboardForm: KeyboardForm = .placeholder
         @Published private(set) var keyboardForm: KeyboardForm = .placeholder
         func updateKeyboardForm(to form: KeyboardForm) {
-                let shouldStayBuffering: Bool = inputMethodMode.isCantonese && form.isBufferrable
+                let shouldStayBuffering: Bool = inputMethodMode.isCantonese && form.isBufferable
                 if inputStage.isBuffering && shouldStayBuffering.negative {
                         inputBufferText()
                 }

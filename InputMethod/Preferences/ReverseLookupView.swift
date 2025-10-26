@@ -59,7 +59,7 @@ struct ReverseLookupView: View {
                                         }
                                         Divider()
                                         HStack {
-                                                Text("ReverseLookupView.StrokeReverseLookup.Example").font(.body.monospaced())
+                                                Text("ReverseLookupView.StrokeReverseLookup.Example").monospaced()
                                                 Spacer()
                                         }
                                 }

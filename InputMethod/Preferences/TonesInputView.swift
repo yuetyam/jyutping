@@ -11,7 +11,7 @@ struct TonesInputView: View {
                                         }
                                         Divider()
                                         HStack {
-                                                Text("TonesInputView.TonesInput.Body").font(.body.monospaced())
+                                                Text("TonesInputView.TonesInput.Body").monospaced()
                                                 Spacer()
                                         }
                                         Divider()
@@ -25,7 +25,7 @@ struct TonesInputView: View {
                                         HStack(spacing: 16) {
                                                 Text(verbatim: "例字")
                                                 ZStack(alignment: .leading) {
-                                                        Text(verbatim: "faat3").hidden()
+                                                        Text(verbatim: "faat3x").hidden()
                                                         Text(verbatim: "粵拼")
                                                 }
                                                 ZStack(alignment: .leading) {
@@ -72,7 +72,7 @@ private struct ToneLabel: View {
                                 Text(verbatim: word)
                         }
                         ZStack(alignment: .leading) {
-                                Text(verbatim: "faat3").hidden()
+                                Text(verbatim: "faat3x").hidden()
                                 Text(verbatim: syllable)
                         }
                         ZStack(alignment: .leading) {

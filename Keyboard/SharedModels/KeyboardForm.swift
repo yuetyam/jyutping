@@ -57,7 +57,7 @@ extension UIKeyboardType {
 extension KeyboardForm {
 
         /// Should stay buffering, should keep the bufferText
-        var isBufferrable: Bool {
+        var isBufferable: Bool {
                 switch self {
                 case .alphabetic, .candidateBoard, .tenKeyStroke: true
                 default: false

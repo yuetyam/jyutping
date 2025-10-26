@@ -292,7 +292,7 @@ struct CantoneseNumericKeyboard: View {
                                                            ])
                                 )
                                 EnhancedInputKey(
-                                        keyLocale: .trailing,
+                                        keyLocale: .leading,
                                         keyModel: KeyModel(primary: KeyElement("？"),
                                                            members: [
                                                                 KeyElement("？"),

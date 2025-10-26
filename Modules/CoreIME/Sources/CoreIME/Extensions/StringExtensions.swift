@@ -45,9 +45,10 @@ extension StringProtocol {
         public func markFormatted() -> String {
                 var result: String = String.empty
                 result.reserveCapacity(count * 2)
-                for character in self {
+                for index in indices {
+                        let character = self[index]
                         result.append(character)
-                        if character.isBasicLatinLetter.negative {
+                        if character.isBasicLatinLetter.negative && index < endIndex {
                                 result.append(Character.space)
                         }
                 }
