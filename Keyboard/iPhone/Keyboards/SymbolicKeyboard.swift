@@ -9,7 +9,7 @@ struct SymbolicKeyboard: View {
                 VStack(spacing: 0) {
                         ToolBar()
                         if Options.needsNumberRow {
-                                NumberRow()
+                                ABCNumberRow()
                         }
                         HStack(spacing: 0) {
                                 SymbolInputKey("[")

@@ -13,7 +13,7 @@ struct CangjieKeyboard: View {
                                 ToolBar()
                         }
                         if Options.needsNumberRow {
-                                NumberRow()
+                                CantoneseNumberRow()
                         }
                         HStack(spacing: 0 ) {
                                 CangjieInputKey(.letterQ)

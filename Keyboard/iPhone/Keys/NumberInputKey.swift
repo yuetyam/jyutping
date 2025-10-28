@@ -70,21 +70,3 @@ struct NumberInputKey: View {
                 )
         }
 }
-
-/// Number row at the top of iPhone keyboards
-struct NumberRow: View {
-        var body: some View {
-                HStack(spacing: 0 ) {
-                        NumberInputKey(.number1)
-                        NumberInputKey(.number2)
-                        NumberInputKey(.number3)
-                        NumberInputKey(.number4)
-                        NumberInputKey(.number5)
-                        NumberInputKey(.number6)
-                        NumberInputKey(.number7)
-                        NumberInputKey(.number8)
-                        NumberInputKey(.number9)
-                        NumberInputKey(.number0)
-                }
-        }
-}

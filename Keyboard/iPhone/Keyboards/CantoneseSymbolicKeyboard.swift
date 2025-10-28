@@ -8,7 +8,7 @@ struct CantoneseSymbolicKeyboard: View {
                 VStack(spacing: 0) {
                         ToolBar()
                         if Options.needsNumberRow {
-                                NumberRow()
+                                CantoneseNumberRow()
                         }
                         HStack(spacing: 0) {
                                 EnhancedInputKey(

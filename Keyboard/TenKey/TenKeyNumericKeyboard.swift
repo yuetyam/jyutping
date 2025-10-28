@@ -2,11 +2,16 @@ import SwiftUI
 import CoreIME
 
 struct TenKeyNumericKeyboard: View {
+        @EnvironmentObject private var context: KeyboardViewController
         var body: some View {
                 VStack(spacing: 0) {
                         ToolBar()
                         if Options.needsNumberRow {
-                                NumberRow()
+                                if context.inputMethodMode.isABC {
+                                        ABCNumberRow()
+                                } else {
+                                        CantoneseNumberRow()
+                                }
                         }
                         HStack(spacing: 0) {
                                 VStack(spacing: 0) {

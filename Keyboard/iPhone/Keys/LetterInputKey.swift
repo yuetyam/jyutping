@@ -32,8 +32,7 @@ struct LetterInputKey: View {
                 let activeColor: Color = shouldPreviewKey ? colorScheme.inputKeyColor : colorScheme.activeInputKeyColor
                 let shouldShowLowercaseKeys: Bool = Options.showLowercaseKeys && context.keyboardCase.isLowercased
                 let textCase: Text.Case = shouldShowLowercaseKeys ? .lowercase : .uppercase
-                let shouldAdjustKeyTextPosition: Bool = shouldShowLowercaseKeys && (context.keyboardForm == .alphabetic)
-                let keyTextBottomInset: CGFloat = shouldAdjustKeyTextPosition ? 3 : 0
+                let keyTextBottomInset: CGFloat = shouldShowLowercaseKeys ? 3 : 0
                 ZStack {
                         Color.interactiveClear
                         if (isTouching && shouldPreviewKey) {

@@ -7,7 +7,7 @@ struct TenKeyStrokeKeyboard: View {
                 VStack(spacing: 0) {
                         CandidateBar()
                         if Options.needsNumberRow {
-                                NumberRow()
+                                CantoneseNumberRow()
                         }
                         HStack(spacing: 0) {
                                 VStack(spacing: 0) {

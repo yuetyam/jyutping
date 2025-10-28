@@ -13,7 +13,7 @@ struct TenKeyKeyboard: View {
                                 ToolBar()
                         }
                         if Options.needsNumberRow {
-                                NumberRow()
+                                CantoneseNumberRow()
                         }
                         HStack(spacing: 0) {
                                 VStack(spacing: 0) {

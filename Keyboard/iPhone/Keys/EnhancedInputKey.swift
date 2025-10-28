@@ -48,7 +48,7 @@ struct EnhancedInputKey: View {
                 let activeColor: Color = shouldPreviewKey ? colorScheme.inputKeyColor : colorScheme.activeInputKeyColor
                 let shouldShowLowercaseKeys: Bool = Options.showLowercaseKeys && context.keyboardCase.isLowercased
                 let textCase: Text.Case = shouldShowLowercaseKeys ? .lowercase : .uppercase
-                let shouldAdjustKeyTextPosition: Bool = shouldShowLowercaseKeys && (context.keyboardForm == .alphabetic)
+                let shouldAdjustKeyTextPosition: Bool = shouldShowLowercaseKeys && (context.keyboardForm == .alphabetic) && (event?.isNumber.negative ?? true)
                 let keyTextBottomInset: CGFloat = shouldAdjustKeyTextPosition ? 3 : 0
                 ZStack {
                         Color.interactiveClear

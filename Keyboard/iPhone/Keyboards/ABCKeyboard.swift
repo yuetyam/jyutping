@@ -9,7 +9,7 @@ struct ABCKeyboard: View {
                 VStack(spacing: 0) {
                         ToolBar()
                         if Options.needsNumberRow {
-                                NumberRow()
+                                ABCNumberRow()
                         }
                         switch Options.inputKeyStyle {
                         case .clear:

@@ -13,7 +13,7 @@ struct CantoneseKeyboard: View {
                                 ToolBar()
                         }
                         if Options.needsNumberRow {
-                                NumberRow()
+                                CantoneseNumberRow()
                         }
                         switch Options.inputKeyStyle {
                         case .clear:
