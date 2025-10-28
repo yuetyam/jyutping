@@ -48,12 +48,12 @@ struct ToolBar: View {
                                         if #available(iOSApplicationExtension 26.0, *) {
                                                 InputModeSwitch(isSwitched: context.inputMethodMode.isABC)
                                         } else {
-                                                CantoneseABCSwitch(isSwitched: context.inputMethodMode.isABC)
+                                                LegacyInputModeSwitch(isSwitched: context.inputMethodMode.isABC)
                                         }
                                 }
                         }
                         .buttonStyle(.plain)
-                        .frame(width: 70, height: buttonHeight)
+                        .frame(width: 68, height: buttonHeight)
 
                         Spacer()
                         ToolBarButton(
