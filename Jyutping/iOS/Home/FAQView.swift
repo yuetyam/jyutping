@@ -54,6 +54,11 @@ struct FAQView: View {
                                         Text("IOSHomeTab.Text2Speech.Notice5")
                                         Spacer()
                                 }
+                                HStack {
+                                        Text.dotMark
+                                        Text("IOSHomeTab.Text2Speech.Notice6")
+                                        Spacer()
+                                }
                         }
 
                         Section {

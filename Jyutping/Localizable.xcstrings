@@ -9589,6 +9589,100 @@
         }
       }
     },
+    "IOSHomeTab.Text2Speech.Notice6" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Or maybe try uninstalling and reinstalling this app."
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Or maybe try uninstalling and reinstalling this app."
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Or maybe try uninstalling and reinstalling this app."
+          }
+        },
+        "en-US" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Or maybe try uninstalling and reinstalling this app."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ou peut-être essayez de désinstaller puis de réinstaller l’application."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "もしかしたら、このアプリを一度アンインストールしてから再インストールしてみてください。"
+          }
+        },
+        "yue" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "或者試下將本應用程式卸載，再重新安裝。"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "或者試下將本應用程式卸載，再重新安裝。"
+          }
+        },
+        "zh-Hans-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "或者試下將本應用程式卸載，再重新安裝。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "或者試下將本應用程式卸載，再重新安裝。"
+          }
+        },
+        "zh-Hant-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "或者試下將本應用程式卸載，再重新安裝。"
+          }
+        },
+        "zh-Hant-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "或者試下將本應用程式卸載，再重新安裝。"
+          }
+        },
+        "zh-Hant-MO" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "或者試下將本應用程式卸載，再重新安裝。"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "或者試下將本應用程式卸載，再重新安裝。"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "或者試下將本應用程式卸載，再重新安裝。"
+          }
+        }
+      }
+    },
     "IOSJyutpingTab.LabelTitle.JyutpingFinals" : {
       "localizations" : {
         "en" : {

@@ -18,6 +18,7 @@ struct Text2SpeechView: View {
                         }
                         Section {
                                 Text("IOSHomeTab.Text2Speech.Notice5")
+                                Text("IOSHomeTab.Text2Speech.Notice6")
                         }
                         Section {
                                 HStack {
