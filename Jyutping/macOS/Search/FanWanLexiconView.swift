@@ -6,28 +6,17 @@ import CommonExtensions
 import Linguistics
 
 struct FanWanLexiconView: View {
-        let lexicon: [FanWanCuetYiu]
+        let lexicon: FanWanLexicon
         var body: some View {
                 VStack(alignment: .leading, spacing: 2) {
                         Text(verbatim: "《分韻撮要》　佚名　廣州府　清初")
                                 .font(.copilot)
                                 .airy()
                         VStack(alignment: .leading) {
-                                if let word = lexicon.first?.word {
-                                        HStack(spacing: 16) {
-                                                HStack {
-                                                        Text(verbatim: "文字").shallow()
-                                                        Text.separator
-                                                        Text(verbatim: word).font(.display)
-                                                }
-                                                if let unicode = word.first?.codePointsText {
-                                                        Text(verbatim: unicode).font(.fixedWidth).airy()
-                                                }
-                                        }
-                                }
-                                ForEach(lexicon.indices, id: \.self) { index in
+                                WordDisplayLabel(word: lexicon.word)
+                                ForEach(lexicon.units.indices, id: \.self) { index in
                                         Divider()
-                                        FanWanCuetYiuView(entry: lexicon[index])
+                                        FanWanView(entry: lexicon.units[index])
                                 }
                         }
                         .block()
@@ -35,16 +24,17 @@ struct FanWanLexiconView: View {
         }
 }
 
-private struct FanWanCuetYiuView: View {
-        let entry: FanWanCuetYiu
+private struct FanWanView: View {
+        let entry: FanWanUnit
         var body: some View {
+                let abstract: String = "\(entry.initial)母　\(entry.final)韻　\(entry.yamyeung)\(entry.tone)　\(entry.rhyme)小韻"
                 let homophoneText: String? = entry.homophones.isEmpty ? nil : entry.homophones.joined(separator: String.space)
                 let ipaText: String = OldCantonese.IPAText(of: entry.romanization)
                 VStack(alignment: .leading) {
                         HStack {
                                 Text(verbatim: "讀音").shallow()
                                 Text.separator
-                                Text(verbatim: entry.abstract)
+                                Text(verbatim: abstract)
                         }
                         HStack(spacing: 16) {
                                 HStack {

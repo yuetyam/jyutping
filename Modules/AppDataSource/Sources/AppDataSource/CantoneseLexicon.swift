@@ -2,7 +2,7 @@ import Foundation
 import SQLite3
 import CommonExtensions
 
-public struct Pronunciation: Hashable {
+public struct Pronunciation: Hashable, Identifiable {
 
         public let romanization: String
         public let homophones: [String]
@@ -15,14 +15,26 @@ public struct Pronunciation: Hashable {
                 self.collocations = collocations
                 self.descriptions = descriptions
         }
+
+        public static func ==(lhs: Pronunciation, rhs: Pronunciation) -> Bool {
+                return lhs.romanization == rhs.romanization
+        }
+        public func hash(into hasher: inout Hasher) {
+                hasher.combine(romanization)
+        }
+        public var id: String {
+                return romanization
+        }
 }
 
-public struct CantoneseLexicon: Hashable {
+public struct CantoneseLexicon: Hashable, Identifiable {
 
         public let text: String
         public let pronunciations: [Pronunciation]
         public let note: String?
         public let unihanDefinition: String?
+
+        public let id: UUID = UUID()
 
         public init(text: String, pronunciations: [Pronunciation] = [], note: String? = nil, unihanDefinition: String? = nil) {
                 self.text = text

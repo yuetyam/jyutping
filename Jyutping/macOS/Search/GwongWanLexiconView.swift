@@ -5,28 +5,17 @@ import AppDataSource
 import CommonExtensions
 
 struct GwongWanLexiconView: View {
-        let lexicon: [GwongWanCharacter]
+        let lexicon: GwongWanLexicon
         var body: some View {
                 VStack(alignment: .leading, spacing: 2) {
                         Text(verbatim: "《大宋重修廣韻》　陳彭年等　北宋")
                                 .font(.copilot)
                                 .airy()
                         VStack(alignment: .leading) {
-                                if let word = lexicon.first?.word {
-                                        HStack(spacing: 16) {
-                                                HStack {
-                                                        Text(verbatim: "文字").shallow()
-                                                        Text.separator
-                                                        Text(verbatim: word).font(.display)
-                                                }
-                                                if let unicode = word.first?.codePointsText {
-                                                        Text(verbatim: unicode).font(.fixedWidth).airy()
-                                                }
-                                        }
-                                }
-                                ForEach(lexicon.indices, id: \.self) { index in
+                                WordDisplayLabel(word: lexicon.word)
+                                ForEach(lexicon.units.indices, id: \.self) { index in
                                         Divider()
-                                        GwongWanView(entry: lexicon[index])
+                                        GwongWanView(entry: lexicon.units[index])
                                 }
                         }
                         .block()

@@ -6,28 +6,17 @@ import CommonExtensions
 import Linguistics
 
 struct YingWaaLexiconView: View {
-        let lexicon: [YingWaaFanWan]
+        let lexicon: YingWaaLexicon
         var body: some View {
                 VStack(alignment: .leading, spacing: 2) {
                         Text(verbatim: "《英華分韻撮要》　衛三畏（Samuel Wells Williams）　廣州　1856")
                                 .font(.copilot)
                                 .airy()
                         VStack(alignment: .leading) {
-                                if let word = lexicon.first?.word {
-                                        HStack(spacing: 16) {
-                                                HStack {
-                                                        Text(verbatim: "文字").shallow()
-                                                        Text.separator
-                                                        Text(verbatim: word).font(.display)
-                                                }
-                                                if let unicode = word.first?.codePointsText {
-                                                        Text(verbatim: unicode).font(.fixedWidth).airy()
-                                                }
-                                        }
-                                }
-                                ForEach(lexicon.indices, id: \.self) { index in
+                                WordDisplayLabel(word: lexicon.word)
+                                ForEach(lexicon.units.indices, id: \.self) { index in
                                         Divider()
-                                        YingWaaFanWanView(entry: lexicon[index])
+                                        YingWaaView(entry: lexicon.units[index])
                                 }
                         }
                         .block()
@@ -35,8 +24,8 @@ struct YingWaaLexiconView: View {
         }
 }
 
-private struct YingWaaFanWanView: View {
-        let entry: YingWaaFanWan
+private struct YingWaaView: View {
+        let entry: YingWaaUnit
         var body: some View {
                 let homophoneText: String? = entry.homophones.isEmpty ? nil : entry.homophones.joined(separator: String.space)
                 let ipaText: String = OldCantonese.IPAText(of: entry.romanization)

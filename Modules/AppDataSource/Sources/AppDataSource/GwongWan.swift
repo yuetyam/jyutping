@@ -3,13 +3,13 @@ import SQLite3
 import CommonExtensions
 
 private extension DataMaster {
-        static func matchGwongWan(for character: Character) -> [GwongWanCharacter] {
-                var entries: [GwongWanCharacter] = []
-                guard let code: UInt32 = character.unicodeScalars.first?.value else { return [] }
+        static func matchGwongWan(for character: Character) -> GwongWanLexicon? {
+                guard let code: UInt32 = character.unicodeScalars.first?.value else { return nil }
                 let command: String = "SELECT * FROM gwongwantable WHERE code = \(code);"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
-                guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return [] }
+                guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return nil }
+                var entries: [GwongWanCharacter] = []
                 while sqlite3_step(statement) == SQLITE_ROW {
                         // let code: Int = Int(sqlite3_column_int64(queryStatement, 0))
                         let word: String = String(cString: sqlite3_column_text(statement, 1))
@@ -29,24 +29,37 @@ private extension DataMaster {
                         let instance = GwongWanCharacter(word: word, rhyme: rhyme, subRhyme: subRime, subRhymeSerial: subRhymeSerial, subRhymeNumber: subRhymeNumber, upper: upper, lower: lower, initial: initial, rounding: rounding, division: division, rhymeClass: rhymeClass, repeating: repeating, tone: tone, interpretation: interpretation)
                         entries.append(instance)
                 }
-                return entries
+                guard let word = entries.first?.word else { return nil }
+                return GwongWanLexicon(word: word, units: entries)
         }
 }
 
 public struct GwongWan {
-        public static func match<T: StringProtocol>(text: T) -> [GwongWanCharacter] {
-                guard let character = text.first else { return [] }
-                let matched = DataMaster.matchGwongWan(for: character).distinct()
-                guard matched.isEmpty else { return matched }
-                let traditionalCharacter: Character = text.convertedS2T().first ?? character
-                return DataMaster.matchGwongWan(for: traditionalCharacter).distinct()
+        public static func search(_ character: Character) -> GwongWanLexicon? {
+                if let matched = DataMaster.matchGwongWan(for: character) {
+                        return matched
+                } else {
+                        guard let traditional = String(character).convertedS2T().first else { return nil }
+                        guard traditional != character else { return nil }
+                        return DataMaster.matchGwongWan(for: traditional)
+                }
         }
 }
 
-public typealias GwongWanLexicon = Array<GwongWanCharacter>
+public struct GwongWanLexicon: Hashable, Identifiable {
+        public let word: String
+        public let units: [GwongWanCharacter]
+        public static func ==(lhs: GwongWanLexicon, rhs: GwongWanLexicon) -> Bool {
+                return lhs.word == rhs.word
+        }
+        public func hash(into hasher: inout Hasher) {
+                hasher.combine(word)
+        }
+        public let id: UUID = UUID()
+}
 
 /// 字頭,韻目,小韻,小韻號,小韻內序,反切上字,反切下字,聲母,呼,等,韻系,重紐,聲調,釋義
-public struct GwongWanCharacter: Hashable {
+public struct GwongWanCharacter: Hashable, Identifiable {
 
         /// 字頭
         public let word: String
@@ -89,6 +102,10 @@ public struct GwongWanCharacter: Hashable {
 
         /// 釋義. Definition. Description.
         public let interpretation: String
+
+        public var id: String {
+                return word + upper + lower + interpretation
+        }
 }
 
 extension GwongWanCharacter {
@@ -100,18 +117,14 @@ extension GwongWanCharacter {
 
         /// 音韻位屬. 例: 端母　東韻　平聲　一等
         public var hierarchy: String {
-                let tailText: String = {
-                        switch (division != "X", rounding != "X") {
-                        case (true, true):
-                                return "　\(division)等　\(rounding)口"
-                        case (true, false):
-                                return "　\(division)等"
-                        case (false, true):
-                                return "　\(rounding)口"
-                        case (false, false):
-                                return ""
-                        }
-                }()
-                return "\(initial)母　\(rhyme)韻　\(tone)聲\(tailText)"
+                let leading: String = "\(initial)母　\(rhyme)韻　\(tone)聲"
+                var parts: [String] = [leading]
+                if division != "X" {
+                        parts.append("\(division)等")
+                }
+                if rounding != "X" {
+                        parts.append("\(rounding)口")
+                }
+                return parts.joined(separator: "　")
         }
 }

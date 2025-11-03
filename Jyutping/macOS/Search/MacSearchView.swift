@@ -15,11 +15,11 @@ struct MacSearchView: View {
         @State private var submittedText: String = String.empty
         @State private var previousSubmittedText: String = String.empty
 
-        @State private var lexicons: [CantoneseLexiconWithId] = []
-        @State private var yingWaaLexicons: [YingWaaLexiconWithId] = []
-        @State private var choHokLexicons: [ChoHokLexiconWithId] = []
-        @State private var fanWanLexicons: [FanWanLexiconWithId] = []
-        @State private var gwongWanLexicons: [GwongWanLexiconWithId] = []
+        @State private var lexicons: [CantoneseLexicon] = []
+        @State private var yingWaaLexicons: [YingWaaLexicon] = []
+        @State private var choHokLexicons: [ChoHokLexicon] = []
+        @State private var fanWanLexicons: [FanWanLexicon] = []
+        @State private var gwongWanLexicons: [GwongWanLexicon] = []
 
         @State private var animationState: Int = 0
         @Namespace private var topID
@@ -37,17 +37,16 @@ struct MacSearchView: View {
                         gwongWanLexicons = []
                         return
                 }
-                let ideographicWords: [String] = {
+                let ideographicCharacters: [Character] = {
                         let characters = trimmedInput.filter(\.isIdeographic).distinct()
-                        let isCharacterCountFine: Bool = characters.isNotEmpty && characters.count < 4
-                        guard isCharacterCountFine else { return [] }
-                        return characters.map({ String($0) })
+                        guard characters.isNotEmpty && characters.count < 4 else { return [] }
+                        return characters
                 }()
-                lexicons = AppMaster.searchCantoneseLexicons(for: trimmedInput).map({ CantoneseLexiconWithId(lexicon: $0) })
-                yingWaaLexicons = ideographicWords.map({ YingWaaFanWan.match(text: $0) }).filter(\.isNotEmpty).map({ YingWaaLexiconWithId(lexicon: $0) })
-                choHokLexicons = ideographicWords.map({ ChoHokYuetYamCitYiu.match(text: $0) }).filter(\.isNotEmpty).map({ ChoHokLexiconWithId(lexicon: $0) })
-                fanWanLexicons = ideographicWords.map({ FanWanCuetYiu.match(text: $0) }).filter(\.isNotEmpty).map({ FanWanLexiconWithId(lexicon: $0) })
-                gwongWanLexicons = ideographicWords.map({ GwongWan.match(text: $0) }).filter(\.isNotEmpty).map({ GwongWanLexiconWithId(lexicon: $0) })
+                lexicons = AppMaster.searchCantoneseLexicons(for: trimmedInput)
+                yingWaaLexicons = ideographicCharacters.compactMap({ YingWaa.search($0) })
+                choHokLexicons = ideographicCharacters.compactMap({ ChoHok.search($0) })
+                fanWanLexicons = ideographicCharacters.compactMap({ FanWan.search($0) })
+                gwongWanLexicons = ideographicCharacters.compactMap({ GwongWan.search($0) })
         }
 
         var body: some View {
@@ -83,19 +82,19 @@ struct MacSearchView: View {
                                 LazyVStack(spacing: 16) {
                                         EmptyView().id(topID)
                                         ForEach(lexicons) {
-                                                CantoneseLexiconView(lexicon: $0.lexicon)
+                                                CantoneseLexiconView(lexicon: $0)
                                         }
                                         ForEach(yingWaaLexicons) {
-                                                YingWaaLexiconView(lexicon: $0.lexicon)
+                                                YingWaaLexiconView(lexicon: $0)
                                         }
                                         ForEach(choHokLexicons) {
-                                                ChoHokLexiconView(lexicon: $0.lexicon)
+                                                ChoHokLexiconView(lexicon: $0)
                                         }
                                         ForEach(fanWanLexicons) {
-                                                FanWanLexiconView(lexicon: $0.lexicon)
+                                                FanWanLexiconView(lexicon: $0)
                                         }
                                         ForEach(gwongWanLexicons) {
-                                                GwongWanLexiconView(lexicon: $0.lexicon)
+                                                GwongWanLexiconView(lexicon: $0)
                                         }
                                 }
                                 .font(.master)
@@ -107,27 +106,6 @@ struct MacSearchView: View {
                 }
                 .navigationTitle("MacSidebar.NavigationTitle.Search")
         }
-}
-
-private struct CantoneseLexiconWithId: Hashable, Identifiable {
-        let id: UUID = UUID()
-        let lexicon: CantoneseLexicon
-}
-private struct YingWaaLexiconWithId: Hashable, Identifiable {
-        let id: UUID = UUID()
-        let lexicon: YingWaaLexicon
-}
-private struct ChoHokLexiconWithId: Hashable, Identifiable {
-        let id: UUID = UUID()
-        let lexicon: ChoHokLexicon
-}
-private struct FanWanLexiconWithId: Hashable, Identifiable {
-        let id: UUID = UUID()
-        let lexicon: FanWanLexicon
-}
-private struct GwongWanLexiconWithId: Hashable, Identifiable {
-        let id: UUID = UUID()
-        let lexicon: GwongWanLexicon
 }
 
 #endif

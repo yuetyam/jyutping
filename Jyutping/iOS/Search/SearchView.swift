@@ -43,17 +43,16 @@ struct SearchView: View {
                                                 gwongWanLexicons = []
                                                 return
                                         }
-                                        let ideographicWords: [String] = {
+                                        let ideographicCharacters: [Character] = {
                                                 let characters = trimmedInput.filter(\.isIdeographic).distinct()
-                                                let isCharacterCountFine: Bool = characters.isNotEmpty && characters.count < 4
-                                                guard isCharacterCountFine else { return [] }
-                                                return characters.map({ String($0) })
+                                                guard characters.isNotEmpty && characters.count < 4 else { return [] }
+                                                return characters
                                         }()
                                         lexicons = AppMaster.searchCantoneseLexicons(for: trimmedInput)
-                                        yingWaaLexicons = ideographicWords.map({ YingWaaFanWan.match(text: $0) }).filter(\.isNotEmpty)
-                                        choHokLexicons = ideographicWords.map({ ChoHokYuetYamCitYiu.match(text: $0) }).filter(\.isNotEmpty)
-                                        fanWanLexicons = ideographicWords.map({ FanWanCuetYiu.match(text: $0) }).filter(\.isNotEmpty)
-                                        gwongWanLexicons = ideographicWords.map({ GwongWan.match(text: $0) }).filter(\.isNotEmpty)
+                                        yingWaaLexicons = ideographicCharacters.compactMap({ YingWaa.search($0) })
+                                        choHokLexicons = ideographicCharacters.compactMap({ ChoHok.search($0) })
+                                        fanWanLexicons = ideographicCharacters.compactMap({ FanWan.search($0) })
+                                        gwongWanLexicons = ideographicCharacters.compactMap({ GwongWan.search($0) })
                                 }
                 }
                 ForEach(lexicons.indices, id: \.self) { index in
@@ -64,7 +63,7 @@ struct SearchView: View {
                 }
                 ForEach(yingWaaLexicons.indices, id: \.self) { index in
                         Section {
-                                YingWaaFanWanLexiconView(lexicon: yingWaaLexicons[index])
+                                YingWaaLexiconSectionView(lexicon: yingWaaLexicons[index])
                         } header: {
                                 ViewThatFits(in: .horizontal) {
                                         Text(verbatim: "《英華分韻撮要》　衛三畏 (Samuel Wells Williams)　廣州　1856").textCase(nil)
@@ -76,7 +75,7 @@ struct SearchView: View {
                 }
                 ForEach(choHokLexicons.indices, id: \.self) { index in
                         Section {
-                                ChoHokYuetYamCitYiuLexiconView(lexicon: choHokLexicons[index])
+                                ChoHokLexiconSectionView(lexicon: choHokLexicons[index])
                         } header: {
                                 ViewThatFits(in: .horizontal) {
                                         Text(verbatim: "《初學粵音切要》　湛約翰 (John Chalmers)　香港　1855").textCase(nil)
@@ -88,7 +87,7 @@ struct SearchView: View {
                 }
                 ForEach(fanWanLexicons.indices, id: \.self) { index in
                         Section {
-                                FanWanLexiconView(lexicon: fanWanLexicons[index])
+                                FanWanLexiconSectionView(lexicon: fanWanLexicons[index])
                         } header: {
                                 Text(verbatim: "《分韻撮要》　佚名　廣州府　清初").textCase(nil)
                         }
@@ -96,7 +95,7 @@ struct SearchView: View {
                 }
                 ForEach(gwongWanLexicons.indices, id: \.self) { index in
                         Section {
-                                GwongWanLexiconView(lexicon: gwongWanLexicons[index])
+                                GwongWanLexiconSectionView(lexicon: gwongWanLexicons[index])
                         } header: {
                                 Text(verbatim: "《大宋重修廣韻》　陳彭年等　北宋").textCase(nil)
                         }

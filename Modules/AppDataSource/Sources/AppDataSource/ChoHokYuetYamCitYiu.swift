@@ -44,8 +44,6 @@ private extension DataMaster {
         }
 }
 
-public typealias ChoHokLexicon = Array<ChoHokYuetYamCitYiu>
-
 public struct ChoHokYuetYamCitYiu: Hashable {
 
         fileprivate init(word: String, romanization: String, initial: String, final: String, tone: String, faancit: String, homophones: [String]) {

@@ -5,40 +5,27 @@ import AppDataSource
 import CommonExtensions
 import Linguistics
 
-struct FanWanLexiconView: View {
-        let lexicon: [FanWanCuetYiu]
+struct FanWanLexiconSectionView: View {
+        let lexicon: FanWanLexicon
         var body: some View {
-                if let firstEntry = lexicon.first {
-                        HStack(spacing: 16) {
-                                HStack(spacing: 2) {
-                                        Text(verbatim: "文字").font(.copilot).shallow()
-                                        Text.separator
-                                        Text(verbatim: firstEntry.word)
-                                }
-                                if let unicode = firstEntry.word.first?.codePointsText {
-                                        Text(verbatim: unicode)
-                                                .font(.footnote)
-                                                .monospaced()
-                                                .foregroundStyle(Color.secondary)
-                                }
-                        }
-                }
-                ForEach(lexicon.indices, id: \.self) { index in
-                        FanWanCuetYiuLabel(entry: lexicon[index])
+                WordTextLabel(word: lexicon.word)
+                ForEach(lexicon.units.indices, id: \.self) { index in
+                        FanWanPronunciationUnitView(entry: lexicon.units[index])
                 }
         }
 }
 
-struct FanWanCuetYiuLabel: View {
-        let entry: FanWanCuetYiu
+struct FanWanPronunciationUnitView: View {
+        let entry: FanWanUnit
         var body: some View {
+                let abstract: String = "\(entry.initial)母　\(entry.final)韻　\(entry.yamyeung)\(entry.tone)　\(entry.rhyme)小韻"
                 let homophoneText: String? = entry.homophones.isEmpty ? nil : entry.homophones.joined(separator: String.space)
                 let ipaText: String = OldCantonese.IPAText(of: entry.romanization)
                 VStack(alignment: .leading) {
                         HStack(spacing: 2) {
                                 Text(verbatim: "讀音").font(.copilot).shallow()
                                 Text.separator
-                                Text(verbatim: entry.abstract).minimumScaleFactor(0.5).lineLimit(1)
+                                Text(verbatim: abstract).minimumScaleFactor(0.5).lineLimit(1)
                         }
                         HStack(spacing: 16) {
                                 HStack(spacing: 2) {

@@ -2,8 +2,6 @@ import Foundation
 import SQLite3
 import CommonExtensions
 
-public typealias YingWaaLexicon = Array<YingWaaFanWan>
-
 public struct YingWaaFanWan: Hashable {
 
         public let word: String

@@ -5,32 +5,18 @@ import AppDataSource
 import CommonExtensions
 import Linguistics
 
-struct YingWaaFanWanLexiconView: View {
-        let lexicon: [YingWaaFanWan]
+struct YingWaaLexiconSectionView: View {
+        let lexicon: YingWaaLexicon
         var body: some View {
-                if let firstEntry = lexicon.first {
-                        HStack(spacing: 16) {
-                                HStack(spacing: 2) {
-                                        Text(verbatim: "文字").font(.copilot).shallow()
-                                        Text.separator
-                                        Text(verbatim: firstEntry.word)
-                                }
-                                if let unicode = firstEntry.word.first?.codePointsText {
-                                        Text(verbatim: unicode)
-                                                .font(.footnote)
-                                                .monospaced()
-                                                .foregroundStyle(Color.secondary)
-                                }
-                        }
-                }
-                ForEach(lexicon.indices, id: \.self) { index in
-                        YingWaaFanWanPronunciationView(entry: lexicon[index])
+                WordTextLabel(word: lexicon.word)
+                ForEach(lexicon.units.indices, id: \.self) { index in
+                        YingWaaPronunciationUnitView(entry: lexicon.units[index])
                 }
         }
 }
 
-private struct YingWaaFanWanPronunciationView: View {
-        let entry: YingWaaFanWan
+private struct YingWaaPronunciationUnitView: View {
+        let entry: YingWaaUnit
         var body: some View {
                 let homophoneText: String? = entry.homophones.isEmpty ? nil : entry.homophones.joined(separator: String.space)
                 let ipaText: String = OldCantonese.IPAText(of: entry.romanization)
