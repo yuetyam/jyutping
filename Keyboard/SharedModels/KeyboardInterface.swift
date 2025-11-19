@@ -98,24 +98,26 @@ extension KeyboardInterface {
                         let minDimension: CGFloat = min(screenSize.width, screenSize.height)
                         if minDimension > 300 && minDimension < 350 {
                                 // iPhone SE1, iPod touch 7 (320 x 480)
+                                // Some devices on Larger Text mode
                                 return 48
                         } else if minDimension < 385 {
-                                // iPhone 6s, 7, 8, SE2, SE3 (375 x 667)
+                                // iPhone 8, SE2, SE3 (375 x 667)
                                 // iPhone X, Xs, 11 Pro, 12 mini, 13 mini (375 x 812)
                                 return 53
                         } else if minDimension < 405 {
                                 // iPhone 12, 12 Pro, 13, 13 Pro, 14, 16e (390 x 844)
                                 // iPhone 14 Pro, 15, 15 Pro, 16 (393 x 852)
-                                // iPhone 16 Pro (402 x 874)
+                                // iPhone 16 Pro, 17, 17 Pro (402 x 874)
                                 return 54
                         } else if minDimension < 425 {
-                                // iPhone 6s Plus, 7 Plus, 8 Plus (414 x 836)
+                                // iPhone 8 Plus (414 x 836)
                                 // iPhone Xr, Xs Max, 11, 11 Pro Max (414 x 896)
+                                // iPhone Air (420 x 912)
                                 return 56
                         } else if minDimension < 445 {
                                 // iPhone 12 Pro Max, 13 Pro Max, 14 Plus (428 x 926)
                                 // iPhone 14 Pro Max, 15 Plus, 15 Pro Max, 16 Plus (430 x 932)
-                                // iPhone 16 Pro Max (440 x 956)
+                                // iPhone 16 Pro Max, 17 Pro Max (440 x 956)
                                 return 56
                         } else {
                                 let extra: Int = Int(minDimension - 300) / 20

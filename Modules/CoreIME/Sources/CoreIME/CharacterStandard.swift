@@ -1,81 +1,55 @@
 import CommonExtensions
 
-/// 字符集標準
-///
-/// 1: 傳統漢字
-///
-/// 2: 傳統漢字・香港
-///
-/// 3: 傳統漢字・臺灣
-///
-/// 4: 簡化字
+/// 漢字字符集標準／字形標準
 public enum CharacterStandard: Int, CaseIterable, Sendable {
 
-        /// Traditional. 傳統漢字
-        case traditional = 1
+        /// Traditional (Default). 傳統漢字(預設)
+        case preset = 1
 
-        /// Traditional, Hong Kong. 傳統漢字・香港
-        case hongkong = 2
+        /// Traditional, Custom Variant. 傳統漢字・自定轉換字符集
+        case custom = 2
 
-        /// Traditional, Taiwan. 傳統漢字・臺灣
-        case taiwan = 3
+        /// Traditional, Inherited, Old School. 傳統漢字・舊字形・傳承字形
+        case inherited = 3
 
-        /// Simplified. 簡化字
-        case simplified = 4
+        /// Traditional, Philology, Grammatology. 傳統漢字・字源、字理、文字學
+        case etymology = 4
+
+        /// Traditional, OpenCC. 傳統漢字・OpenCC 字表
+        case opencc = 5
+
+        /// Traditional, Hong Kong. 傳統漢字・香港《常用字字形表》
+        case hongkong = 6
+
+        /// Traditional, Taiwan. 傳統漢字・臺灣《國字標準字體表》
+        case taiwan = 7
+
+        /// Traditional, PRC Mainland. 傳統漢字・大陸《通用規範漢字表》
+        case prcGeneral = 8
+
+        /// Traditional, PRC Mainland. 傳統漢字・大陸《古籍印刷通用字規範字形表》
+        case ancientBooksPublishing = 9
+
+        /// Simplified, PRC Mainland. 簡化字・大陸《通用規範漢字表》
+        case mutilated = 51
 }
 
 extension CharacterStandard {
 
-        /// self == .simplified
-        public var isSimplified: Bool {
-                return self == .simplified
+        /// isSimplified
+        public var isMutilated: Bool {
+                return self == .mutilated
         }
 
-        /// self != .simplified
+        /// isNotSimplified
         public var isTraditional: Bool {
-                return self != .simplified
+                return self != .mutilated
         }
 
         /// Match the CharacterStandard for the given RawValue
         /// - Parameter value: RawValue
         /// - Returns: CharacterStandard
         public static func standard(of value: Int) -> CharacterStandard {
-                return Self.allCases.first(where: { $0.rawValue == value }) ?? Self.traditional
+                return Self.allCases.first(where: { $0.rawValue == value }) ?? Self.preset
         }
-}
-
-extension CharacterStandard {
-
-        public static func cangjie(of letter: Character) -> Character? {
-                return cangjieMap[letter]
-        }
-
-        private static let cangjieMap: [Character: Character] = [
-                "a": "日",
-                "b": "月",
-                "c": "金",
-                "d": "木",
-                "e": "水",
-                "f": "火",
-                "g": "土",
-                "h": "竹",
-                "i": "戈",
-                "j": "十",
-                "k": "大",
-                "l": "中",
-                "m": "一",
-                "n": "弓",
-                "o": "人",
-                "p": "心",
-                "q": "手",
-                "r": "口",
-                "s": "尸",
-                "t": "廿",
-                "u": "山",
-                "v": "女",
-                "w": "田",
-                "x": "難",
-                "y": "卜",
-                "z": "重"
-        ]
 }

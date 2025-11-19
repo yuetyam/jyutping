@@ -6,16 +6,16 @@ enum SpaceKeyForm: Int {
         case fallback
 
         case lowercased
-        case lowercasedSimplified
+        case lowercasedMutilated
         case uppercased
-        case uppercasedSimplified
+        case uppercasedMutilated
         case capsLocked
-        case capsLockedSimplified
+        case capsLockedMutilated
 
         case confirm
-        case confirmSimplified
+        case confirmMutilated
         case select
-        case selectSimplified
+        case selectMutilated
 
         var text: String {
                 switch self {
@@ -25,23 +25,23 @@ enum SpaceKeyForm: Int {
                         return "空格"
                 case .lowercased:
                         return "粵拼"
-                case .lowercasedSimplified:
-                        return "粤拼·简"
+                case .lowercasedMutilated:
+                        return "粤拼"
                 case .uppercased:
                         return "全寬空格"
-                case .uppercasedSimplified:
+                case .uppercasedMutilated:
                         return "全宽空格"
                 case .capsLocked:
                         return "大寫鎖定"
-                case .capsLockedSimplified:
+                case .capsLockedMutilated:
                         return "大写锁定"
                 case .confirm:
                         return "確認"
-                case .confirmSimplified:
+                case .confirmMutilated:
                         return "确认"
                 case .select:
                         return "選定"
-                case .selectSimplified:
+                case .selectMutilated:
                         return "选定"
                 }
         }
@@ -54,7 +54,7 @@ enum SpaceKeyForm: Int {
                                 return .unspecified
                         case .lowercased, .uppercased, .capsLocked, .confirm, .select:
                                 return .zhHantHK
-                        case .lowercasedSimplified, .uppercasedSimplified, .capsLockedSimplified, .confirmSimplified, .selectSimplified:
+                        case .lowercasedMutilated, .uppercasedMutilated, .capsLockedMutilated, .confirmMutilated, .selectMutilated:
                                 return .zhHansCN
                         }
                 }()

@@ -1,36 +1,35 @@
 import SwiftUI
-import CoreIME
 
 /// Toggle Cantonese/ABC InputMethodMode
 @available(iOS, deprecated: 26.0, message: "Use InputModeSwitch instead")
 @available(iOSApplicationExtension, deprecated: 26.0, message: "Use InputModeSwitch instead")
 struct LegacyInputModeSwitch: View {
 
-        /// is ABC mode selected
-        let isSwitched: Bool
+        let isCantoneseMode: Bool
+        let isMutilatedMode: Bool
 
         @Environment(\.colorScheme) private var colorScheme
 
         private let height: CGFloat = 26
-        private let partialWidth: CGFloat = 36
-        private let totalWidth: CGFloat = 64
+        private let partialWidth: CGFloat = 35
+        private let totalWidth: CGFloat = 60
 
         var body: some View {
                 ZStack {
                         Color.clear
                         ZStack(alignment: .leading) {
                                 Color.clear
-                                Text(verbatim: Options.characterStandard.isSimplified ? "粤" : "粵")
-                                        .font(isSwitched ? .mini : .staticBody)
+                                Text(verbatim: isMutilatedMode ? "粤" : "粵")
+                                        .font(isCantoneseMode ? .staticBody : .mini)
                                         .frame(width: partialWidth, height: height)
-                                        .background(isSwitched ? Color.clear : colorScheme.inputKeyColor, in: .capsule)
+                                        .background(isCantoneseMode ? colorScheme.inputKeyColor : Color.clear, in: .capsule)
                         }
                         ZStack(alignment: .trailing) {
                                 Color.clear
                                 Text(verbatim: "A")
-                                        .font(isSwitched ? .staticBody : .mini)
+                                        .font(isCantoneseMode ? .mini : .staticBody)
                                         .frame(width: partialWidth, height: height)
-                                        .background(isSwitched ? colorScheme.inputKeyColor : Color.clear, in: .capsule)
+                                        .background(isCantoneseMode ? Color.clear : colorScheme.inputKeyColor, in: .capsule)
                         }
                 }
                 .frame(width: totalWidth, height: height)
@@ -43,14 +42,14 @@ struct LegacyInputModeSwitch: View {
 @available(iOSApplicationExtension 26.0, *)
 struct InputModeSwitch: View {
 
-        /// is ABC mode selected
-        let isSwitched: Bool
+        let isCantoneseMode: Bool
+        let isMutilatedMode: Bool
 
         @Environment(\.colorScheme) private var colorScheme
 
         private let height: CGFloat = 26
-        private let partialWidth: CGFloat = 36
-        private let totalWidth: CGFloat = 64
+        private let partialWidth: CGFloat = 35
+        private let totalWidth: CGFloat = 60
 
         var body: some View {
                 ZStack {
@@ -59,10 +58,10 @@ struct InputModeSwitch: View {
                                 Color.clear
                                 ZStack {
                                         Capsule()
-                                                .fill(isSwitched ? Color.clear : colorScheme.inputKeyColor)
-                                                .shadow(color: isSwitched ? Color.clear : Color.shadowGray, radius: 0.5)
-                                        Text(verbatim: Options.characterStandard.isSimplified ? "粤" : "粵")
-                                                .font(isSwitched ? .mini : .staticBody)
+                                                .fill(isCantoneseMode ? colorScheme.inputKeyColor : Color.clear)
+                                                .shadow(color: isCantoneseMode ? Color.clear : Color.shadowGray, radius: 0.5)
+                                        Text(verbatim: isMutilatedMode ? "粤" : "粵")
+                                                .font(isCantoneseMode ? .staticBody : .mini)
                                 }
                                 .frame(width: partialWidth, height: height)
                         }
@@ -70,10 +69,10 @@ struct InputModeSwitch: View {
                                 Color.clear
                                 ZStack {
                                         Capsule()
-                                                .fill(isSwitched ? colorScheme.inputKeyColor : Color.clear)
-                                                .shadow(color: isSwitched ? Color.clear : Color.shadowGray, radius: 0.5)
+                                                .fill(isCantoneseMode ? Color.clear : colorScheme.inputKeyColor)
+                                                .shadow(color: isCantoneseMode ? Color.clear : Color.shadowGray, radius: 0.5)
                                         Text(verbatim: "A")
-                                                .font(isSwitched ? .staticBody : .mini)
+                                                .font(isCantoneseMode ? .mini : .staticBody)
                                 }
                                 .frame(width: partialWidth, height: height)
                         }
@@ -84,5 +83,5 @@ struct InputModeSwitch: View {
 }
 
 private extension Font {
-        static let mini: Font = Font.system(size: 14)
+        static let mini: Font = Font.system(size: 13)
 }

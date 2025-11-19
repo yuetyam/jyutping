@@ -14,7 +14,7 @@ struct CandidateBarScrollView: View {
         @Namespace private var startID
 
         var body: some View {
-                let characterStandard: CharacterStandard = Options.characterStandard
+                let characterStandard: CharacterStandard = context.characterStandard
                 let commentStyle: CommentStyle = Options.commentStyle
                 let toneStyle: CommentToneStyle = Options.commentToneStyle
                 let isCompatibleModeOn: Bool = Options.isCompatibleModeOn

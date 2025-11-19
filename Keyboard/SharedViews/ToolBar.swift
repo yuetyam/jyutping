@@ -1,10 +1,11 @@
 import SwiftUI
+import CoreIME
 
 struct ToolBar: View {
 
         @EnvironmentObject private var context: KeyboardViewController
 
-        private let buttonWidth: CGFloat = 50
+        private let buttonWidth: CGFloat = 48
         private let buttonHeight: CGFloat = PresetConstant.toolBarHeight
 
         var body: some View {
@@ -38,6 +39,17 @@ struct ToolBar: View {
                         .frame(width: buttonWidth, height: buttonHeight)
 
                         Spacer()
+                        ToolBarButton(
+                                imageName: "hand.draw",
+                                width: 50,
+                                height: buttonHeight,
+                                insets: EdgeInsets(top: 15, leading: 0, bottom: 15, trailing: 0)
+                        ) {
+                                AudioFeedback.modified()
+                                context.triggerHapticFeedback()
+                        }
+
+                        Spacer()
                         Button {
                                 AudioFeedback.modified()
                                 context.triggerSelectionHapticFeedback()
@@ -46,21 +58,21 @@ struct ToolBar: View {
                                 ZStack {
                                         Color.interactiveClear
                                         if #available(iOSApplicationExtension 26.0, *) {
-                                                InputModeSwitch(isSwitched: context.inputMethodMode.isABC)
+                                                InputModeSwitch(isCantoneseMode: context.inputMethodMode.isCantonese, isMutilatedMode: context.characterStandard.isMutilated)
                                         } else {
-                                                LegacyInputModeSwitch(isSwitched: context.inputMethodMode.isABC)
+                                                LegacyInputModeSwitch(isCantoneseMode: context.inputMethodMode.isCantonese, isMutilatedMode: context.characterStandard.isMutilated)
                                         }
                                 }
                         }
                         .buttonStyle(.plain)
-                        .frame(width: 68, height: buttonHeight)
+                        .frame(width: 64, height: buttonHeight)
 
                         Spacer()
                         ToolBarButton(
                                 imageName: "arrow.left.and.line.vertical.and.arrow.right",
                                 width: buttonWidth,
                                 height: buttonHeight,
-                                insets: EdgeInsets(top: 18, leading: 0, bottom: 18, trailing: 0)
+                                insets: EdgeInsets(top: 19, leading: 0, bottom: 19, trailing: 0)
                         ) {
                                 AudioFeedback.modified()
                                 context.triggerHapticFeedback()
@@ -68,11 +80,29 @@ struct ToolBar: View {
                         }
 
                         Spacer()
+                        Button {
+                                AudioFeedback.modified()
+                                context.triggerSelectionHapticFeedback()
+                                context.toggleCharacterScriptVariant()
+                        } label: {
+                                ZStack {
+                                        Color.interactiveClear
+                                        if #available(iOSApplicationExtension 26.0, *) {
+                                                CharacterSetSwitch(isMutilatedMode: context.characterStandard.isMutilated)
+                                        } else {
+                                                LegacyCharacterSetSwitch(isMutilatedMode: context.characterStandard.isMutilated)
+                                        }
+                                }
+                        }
+                        .buttonStyle(.plain)
+                        .frame(width: 50, height: buttonHeight)
+
+                        Spacer()
                         ToolBarButton(
                                 imageName: "keyboard.chevron.compact.down",
                                 width: buttonWidth,
                                 height: buttonHeight,
-                                insets: EdgeInsets(top: 17, leading: 0, bottom: 18, trailing: 0)
+                                insets: EdgeInsets(top: 18, leading: 0, bottom: 18, trailing: 0)
                         ) {
                                 AudioFeedback.modified()
                                 context.triggerHapticFeedback()

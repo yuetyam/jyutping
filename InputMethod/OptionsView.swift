@@ -35,10 +35,10 @@ struct OptionsView: View {
                 let highlightedIndex = context.optionsHighlightedIndex
                 VStack(alignment: .leading, spacing: 0) {
                         Group {
-                                OptionLabel(cornerRadius: innerCornerRadius, verticalPadding: verticalPadding, labelSet: labelSet, isLabelLastZero: isLabelLastZero, index: 0, highlightedIndex: highlightedIndex, text: options[0], checked: characterStandard == .traditional)
+                                OptionLabel(cornerRadius: innerCornerRadius, verticalPadding: verticalPadding, labelSet: labelSet, isLabelLastZero: isLabelLastZero, index: 0, highlightedIndex: highlightedIndex, text: options[0], checked: characterStandard == .preset)
                                 OptionLabel(cornerRadius: innerCornerRadius, verticalPadding: verticalPadding, labelSet: labelSet, isLabelLastZero: isLabelLastZero, index: 1, highlightedIndex: highlightedIndex, text: options[1], checked: characterStandard == .hongkong)
                                 OptionLabel(cornerRadius: innerCornerRadius, verticalPadding: verticalPadding, labelSet: labelSet, isLabelLastZero: isLabelLastZero, index: 2, highlightedIndex: highlightedIndex, text: options[2], checked: characterStandard == .taiwan)
-                                OptionLabel(cornerRadius: innerCornerRadius, verticalPadding: verticalPadding, labelSet: labelSet, isLabelLastZero: isLabelLastZero, index: 3, highlightedIndex: highlightedIndex, text: options[3], checked: characterStandard == .simplified)
+                                OptionLabel(cornerRadius: innerCornerRadius, verticalPadding: verticalPadding, labelSet: labelSet, isLabelLastZero: isLabelLastZero, index: 3, highlightedIndex: highlightedIndex, text: options[3], checked: characterStandard == .mutilated)
                         }
                         Divider()
                         Group {

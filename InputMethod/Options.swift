@@ -6,11 +6,21 @@ struct Options {
         /// 字形標準
         nonisolated(unsafe) private(set) static var characterStandard: CharacterStandard = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.CharacterStandard)
-                return CharacterStandard.standard(of: savedValue)
+                return switch savedValue {
+                case 2: .hongkong
+                case 3: .taiwan
+                case 4: .mutilated
+                default: .preset
+                }
         }()
         static func updateCharacterStandard(to standard: CharacterStandard) {
                 characterStandard = standard
-                let value: Int = standard.rawValue
+                let value: Int = switch standard {
+                case .hongkong: 2
+                case .taiwan: 3
+                case .mutilated: 4
+                default: 1
+                }
                 UserDefaults.standard.set(value, forKey: OptionsKey.CharacterStandard)
         }
 

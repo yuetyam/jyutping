@@ -14,7 +14,7 @@ struct CandidateBoardScrollViewIOS18: View {
         @State private var scrollPosition = ScrollPosition()
 
         var body: some View {
-                let characterStandard: CharacterStandard = Options.characterStandard
+                let characterStandard: CharacterStandard = context.characterStandard
                 let commentStyle: CommentStyle = Options.commentStyle
                 let rowAlignment: VerticalAlignment = switch commentStyle {
                 case .aboveCandidates: .lastTextBaseline

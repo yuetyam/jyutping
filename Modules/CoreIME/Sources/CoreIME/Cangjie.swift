@@ -25,7 +25,9 @@ extension Engine {
 
 private extension Engine {
         static func cangjie5ReverseLookup(text: String) -> [Candidate] {
-                return (match(cangjie5: text) + glob(cangjie5: text)).distinct().flatMap({ Engine.reveresLookup(text: $0.text, input: $0.input) })
+                return (match(cangjie5: text) + glob(cangjie5: text))
+                        .distinct()
+                        .flatMap({ Engine.reveresLookup(text: $0.text, input: $0.input) })
         }
         private static func match(cangjie5 text: String) -> [ShapeLexicon] {
                 guard let code = text.charCode else { return [] }

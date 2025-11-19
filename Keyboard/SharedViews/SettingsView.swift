@@ -109,7 +109,6 @@ struct SettingsView: View {
                 return marketingVersion + " (" + currentProjectVersion + ")"
         }()
 
-        @State private var characterStandard: CharacterStandard = Options.characterStandard
         @State private var isAudioFeedbackOn: Bool = Options.isAudioFeedbackOn
         @State private var hapticFeedback: HapticFeedback = HapticFeedback.fetchSavedMode()
         @State private var keyboardLayout: KeyboardLayout = KeyboardLayout.fetchSavedLayout()
@@ -122,6 +121,7 @@ struct SettingsView: View {
         @State private var inputKeyStyle: InputKeyStyle = Options.inputKeyStyle
         @State private var commentStyle: CommentStyle = Options.commentStyle
         @State private var commentToneStyle: CommentToneStyle = Options.commentToneStyle
+        @State private var traditionalCharacterStandard: CharacterStandard = Options.traditionalCharacterStandard
         @State private var cangjieVariant: CangjieVariant = Options.cangjieVariant
         @State private var isEmojiSuggestionsOn: Bool = Options.isEmojiSuggestionsOn
         @State private var isTextReplacementsOn: Bool = Options.isTextReplacementsOn
@@ -148,20 +148,6 @@ struct SettingsView: View {
                         }
                         .frame(height: PresetConstant.buttonLength)
                         List {
-                                Picker("SettingsView.CharacterStandard.PickerTitle", selection: $characterStandard) {
-                                        Text("SettingsView.CharacterStandard.Option.Traditional").tag(CharacterStandard.traditional)
-                                        Text("SettingsView.CharacterStandard.Option.TraditionalHongKong").tag(CharacterStandard.hongkong)
-                                        Text("SettingsView.CharacterStandard.Option.TraditionalTaiwan").tag(CharacterStandard.taiwan)
-                                        Text("SettingsView.CharacterStandard.Option.Simplified").tag(CharacterStandard.simplified)
-                                }
-                                .pickerStyle(.inline)
-                                .textCase(nil)
-                                .onChange(of: characterStandard) { newStandard in
-                                        AudioFeedback.modified()
-                                        context.triggerSelectionHapticFeedback()
-                                        Options.updateCharacterStandard(to: newStandard)
-                                }
-
                                 Section {
                                         Toggle("SettingsView.KeyboardFeedback.Sound.ToggleTitle", isOn: $isAudioFeedbackOn)
                                                 .onChange(of: isAudioFeedbackOn) { newState in
@@ -300,6 +286,23 @@ struct SettingsView: View {
                                         AudioFeedback.modified()
                                         context.triggerSelectionHapticFeedback()
                                         Options.updateCommentToneStyle(to: newStyle)
+                                }
+
+                                Picker("SettingsView.TraditionalCharacterStandard.PickerTitle", selection: $traditionalCharacterStandard) {
+                                        Text("SettingsView.TraditionalCharacterStandard.Option1.Preset").tag(CharacterStandard.preset)
+                                        Text("SettingsView.TraditionalCharacterStandard.Option3.Inherited").tag(CharacterStandard.inherited)
+                                        Text("SettingsView.TraditionalCharacterStandard.Option6.HongKong").tag(CharacterStandard.hongkong)
+                                        Text("SettingsView.TraditionalCharacterStandard.Option7.Taiwan").tag(CharacterStandard.taiwan)
+                                        Text("SettingsView.TraditionalCharacterStandard.Option8.PRCGeneral").tag(CharacterStandard.prcGeneral)
+                                        Text("SettingsView.TraditionalCharacterStandard.Option9.AncientBooksPublishing").tag(CharacterStandard.ancientBooksPublishing)
+                                }
+                                .pickerStyle(.inline)
+                                .textCase(nil)
+                                .onChange(of: traditionalCharacterStandard) { newStandard in
+                                        AudioFeedback.modified()
+                                        context.triggerSelectionHapticFeedback()
+                                        context.syncTraditionalCharacterStandard(to: newStandard)
+                                        Options.updateTraditionalCharacterStandard(to: newStandard)
                                 }
 
                                 Picker("SettingsView.CangjieVariant.PickerTitle", selection: $cangjieVariant) {

@@ -53,25 +53,25 @@ public struct PinyinSegmenter {
                 return split(events: events.filter(\.isLetter), statement: statement)
         }
         private static func split<T: RandomAccessCollection<InputEvent>>(events: T, statement: OpaquePointer?) -> PinyinSegmentation {
-                let leadingTokens = splitLeading(events: events, statement: statement)
-                guard leadingTokens.isNotEmpty else { return [] }
+                let headSyllables = splitLeading(events: events, statement: statement)
+                guard headSyllables.isNotEmpty else { return [] }
                 let eventCount = events.count
-                var segmentation: Set<PinyinScheme> = Set(leadingTokens.map({ [$0] }))
-                var previousSubelementCount = segmentation.flattenedCount
+                var segmentation: Set<PinyinScheme> = Set(headSyllables.map({ [$0] }))
+                var previousSyllableCount = segmentation.flattenedCount
                 var shouldContinue: Bool = true
                 while shouldContinue {
                         for scheme in segmentation {
                                 let schemeLength: Int = scheme.length
                                 guard schemeLength < eventCount else { continue }
                                 let tailEvents = events.dropFirst(schemeLength)
-                                let tailTokens = splitLeading(events: tailEvents, statement: statement)
-                                guard tailTokens.isNotEmpty else { continue }
-                                let newSegmentation = tailTokens.map({ scheme + [$0] })
+                                let tailSyllables = splitLeading(events: tailEvents, statement: statement)
+                                guard tailSyllables.isNotEmpty else { continue }
+                                let newSegmentation = tailSyllables.map({ scheme + [$0] })
                                 newSegmentation.forEach({ segmentation.insert($0) })
                         }
-                        let currentSubelementCount = segmentation.flattenedCount
-                        if currentSubelementCount != previousSubelementCount {
-                                previousSubelementCount = currentSubelementCount
+                        let currentSyllableCount = segmentation.flattenedCount
+                        if currentSyllableCount != previousSyllableCount {
+                                previousSyllableCount = currentSyllableCount
                         } else {
                                 shouldContinue = false
                         }

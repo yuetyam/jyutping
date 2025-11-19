@@ -7,8 +7,8 @@ struct PadCangjieInputKey: View {
         init(_ event: InputEvent) {
                 self.event = event
                 self.letter = event.text
-                let radical: Character = event.text.first.flatMap(CharacterStandard.cangjie(of:)) ?? "?"
-                self.radical = String(radical)
+                let root: Character = Converter.cangjie(of: event) ?? "?"
+                self.radical = String(root)
         }
 
         private let event: InputEvent

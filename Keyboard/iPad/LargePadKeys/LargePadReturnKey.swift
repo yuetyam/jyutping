@@ -21,22 +21,22 @@ struct LargePadReturnKey: View {
                 let backColor: Color = {
                         guard isTouching.negative else { return colorScheme.activeActionKeyColor }
                         switch keyState {
-                        case .bufferingSimplified, .bufferingTraditional:
+                        case .bufferingMutilated, .bufferingTraditional:
                                 return colorScheme.actionKeyColor
-                        case .standbyABC, .standbySimplified, .standbyTraditional:
+                        case .standbyABC, .standbyMutilated, .standbyTraditional:
                                 return isDefaultReturn ? colorScheme.actionKeyColor : Color.accentColor
-                        case .unavailableABC, .unavailableSimplified, .unavailableTraditional:
+                        case .unavailableABC, .unavailableMutilated, .unavailableTraditional:
                                 return colorScheme.actionKeyColor
                         }
                 }()
                 let foreColor: Color = {
                         guard isTouching.negative else { return Color.primary }
                         switch keyState {
-                        case .bufferingSimplified, .bufferingTraditional:
+                        case .bufferingMutilated, .bufferingTraditional:
                                 return Color.primary
-                        case .standbyABC, .standbySimplified, .standbyTraditional:
+                        case .standbyABC, .standbyMutilated, .standbyTraditional:
                                 return isDefaultReturn ? Color.primary : Color.white
-                        case .unavailableABC, .unavailableSimplified, .unavailableTraditional:
+                        case .unavailableABC, .unavailableMutilated, .unavailableTraditional:
                                 return Color.primary.opacity(0.5)
                         }
                 }()

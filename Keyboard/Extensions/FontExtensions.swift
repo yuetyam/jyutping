@@ -75,7 +75,7 @@ extension String {
         }
         func attributed(for characterStandard: CharacterStandard) -> AttributedString {
                 switch characterStandard {
-                case .traditional:
+                case .preset, .custom, .inherited, .etymology, .opencc:
                         if CJKVStandard.isHCPreferred || CJKVStandard.isSCPreferred || (CJKVStandard.isJPPreferred && CJKVStandard.isTCPreferred.negative) {
                                 return AttributedString(self)
                         } else {
@@ -89,7 +89,7 @@ extension String {
                         }
                 case .taiwan:
                         return AttributedString(self)
-                case .simplified:
+                case .mutilated, .prcGeneral, .ancientBooksPublishing:
                         if CJKVStandard.isSCPreferred || (CJKVStandard.isJPPreferred && CJKVStandard.isTCPreferred.negative) {
                                 return AttributedString(self)
                         } else {

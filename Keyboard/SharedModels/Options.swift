@@ -3,17 +3,6 @@ import CoreIME
 import CommonExtensions
 
 struct Options {
-
-        nonisolated(unsafe) private(set) static var characterStandard: CharacterStandard = {
-                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.CharacterStandard)
-                return CharacterStandard.standard(of: savedValue)
-        }()
-        static func updateCharacterStandard(to standard: CharacterStandard) {
-                characterStandard = standard
-                let value: Int = standard.rawValue
-                UserDefaults.standard.set(value, forKey: OptionsKey.CharacterStandard)
-        }
-
         nonisolated(unsafe) private(set) static var isAudioFeedbackOn: Bool = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.AudioFeedback)
                 return savedValue == 1
@@ -86,6 +75,29 @@ struct Options {
                 commentToneStyle = style
                 let value: Int = style.rawValue
                 UserDefaults.standard.set(value, forKey: OptionsKey.CommentToneStyle)
+        }
+
+        nonisolated(unsafe) private(set) static var traditionalCharacterStandard: CharacterStandard = {
+                let hasSavedValue: Bool = UserDefaults.standard.object(forKey: OptionsKey.TraditionalCharacterStandard) != nil
+                let hasLegacySavedValue: Bool = UserDefaults.standard.object(forKey: OptionsKey.LegacyCharacterStandard) != nil
+                if hasSavedValue.negative && hasLegacySavedValue {
+                        let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.LegacyCharacterStandard)
+                        let standard: CharacterStandard = switch savedValue {
+                        case 2: .hongkong
+                        case 3: .taiwan
+                        default: .preset
+                        }
+                        UserDefaults.standard.set(standard.rawValue, forKey: OptionsKey.TraditionalCharacterStandard)
+                        return standard
+                } else {
+                        let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.LegacyCharacterStandard)
+                        return CharacterStandard.standard(of: savedValue)
+                }
+        }()
+        static func updateTraditionalCharacterStandard(to standard: CharacterStandard) {
+                traditionalCharacterStandard = standard
+                let value: Int = standard.rawValue
+                UserDefaults.standard.set(value, forKey: OptionsKey.TraditionalCharacterStandard)
         }
 
         nonisolated(unsafe) private(set) static var cangjieVariant: CangjieVariant = {
@@ -161,7 +173,10 @@ struct OptionsKey {
         static let AppleLanguages: String = "AppleLanguages"
         static let KeyboardDisplayLanguage: String = "KeyboardDisplayLanguage"
 
-        static let CharacterStandard: String = "logogram"
+        static let LegacyCharacterStandard: String = "logogram"
+        static let TraditionalCharacterStandard: String = "TraditionalCharacterStandard"
+        static let CharacterScriptVariant: String = "CharacterScriptVariant"
+
         static let AudioFeedback: String = "audio_feedback"
         static let HapticFeedback: String = "haptic_feedback"
         static let KeyboardLayout: String = "keyboard_layout"

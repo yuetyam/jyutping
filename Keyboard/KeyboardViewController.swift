@@ -624,7 +624,6 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let combos = bufferCombos
                 let isInputMemoryOn: Bool = Options.isInputMemoryOn
                 let isEmojiSuggestionsOn: Bool = Options.isEmojiSuggestionsOn
-                let characterStandard = Options.characterStandard
                 suggestionTask = Task.detached(priority: .high) { [weak self] in
                         guard let self else { return }
                         async let memory: [Candidate] = isInputMemoryOn ? InputMemory.tenKeySuggest(combos: combos) : []
@@ -656,7 +655,6 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let events = bufferEvents
                 let isInputMemoryOn: Bool = Options.isInputMemoryOn
                 let isEmojiSuggestionsOn: Bool = Options.isEmojiSuggestionsOn
-                let characterStandard = Options.characterStandard
                 suggestionTask = Task.detached(priority: .high) { [weak self] in
                         guard let self else { return }
                         let segmentation = Segmenter.segment(events: events)
@@ -698,7 +696,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 suggestionTask = Task.detached(priority: .high) { [weak self] in
                         guard let self else { return }
                         let segmentation = PinyinSegmenter.segment(events: events)
-                        let suggestions: [Candidate] = await Engine.pinyinReverseLookup(events: events, segmentation: segmentation).transformed(to: Options.characterStandard)
+                        let suggestions: [Candidate] = await Engine.pinyinReverseLookup(events: events, segmentation: segmentation).transformed(to: characterStandard)
                         if Task.isCancelled.negative {
                                 await MainActor.run { [weak self] in
                                         guard let self else { return }
@@ -722,16 +720,16 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         private func cangjieReverseLookup() {
                 let definedCandidates: [Candidate] = searchDefinedCandidates(for: bufferEvents)
                 let textMarkCandidates: [Candidate] = Engine.searchTextMarks(for: bufferEvents)
-                let bufferText = joinedBufferTexts()
-                let text: String = String(bufferText.dropFirst())
-                let converted = text.compactMap({ CharacterStandard.cangjie(of: $0) })
-                let isValidSequence: Bool = converted.isNotEmpty && (converted.count == text.count)
+                let events = bufferEvents.dropFirst()
+                let cangjieRadicals = events.compactMap(Converter.cangjie(of:))
+                let isValidSequence: Bool = cangjieRadicals.isNotEmpty && (cangjieRadicals.count == events.count)
                 if isValidSequence {
-                        text2mark = String(converted)
-                        let suggestions: [Candidate] = Engine.cangjieReverseLookup(text: text, variant: Options.cangjieVariant).transformed(to: Options.characterStandard)
+                        text2mark = String(cangjieRadicals)
+                        let text: String = events.map(\.text).joined()
+                        let suggestions: [Candidate] = Engine.cangjieReverseLookup(text: text, variant: Options.cangjieVariant).transformed(to: characterStandard)
                         candidates = (definedCandidates + textMarkCandidates + suggestions).distinct()
                 } else {
-                        text2mark = bufferText
+                        text2mark = joinedBufferTexts()
                         candidates = (definedCandidates + textMarkCandidates).distinct()
                 }
         }
@@ -744,7 +742,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         candidates = (definedCandidates + textMarkCandidates).distinct()
                 } else {
                         text2mark = StrokeEvent.displayText(from: events)
-                        let suggestions: [Candidate] = Engine.strokeReverseLookup(events: events).transformed(to: Options.characterStandard)
+                        let suggestions: [Candidate] = Engine.strokeReverseLookup(events: events).transformed(to: characterStandard)
                         candidates = (definedCandidates + textMarkCandidates + suggestions).distinct()
                 }
         }
@@ -771,7 +769,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 }()
                 let prefixMark: String = bufferText.prefix(1) + String.space
                 text2mark = prefixMark + tailMark
-                let suggestions: [Candidate] = Engine.structureReverseLookup(events: bufferEvents, input: bufferText, segmentation: segmentation).transformed(to: Options.characterStandard)
+                let suggestions: [Candidate] = Engine.structureReverseLookup(events: bufferEvents, input: bufferText, segmentation: segmentation).transformed(to: characterStandard)
                 candidates = (definedCandidates + textMarkCandidates + suggestions).distinct()
         }
 
@@ -875,7 +873,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let newType: EnhancedReturnKeyType = textDocumentProxy.returnKeyType.enhancedReturnKeyType
                 let enablesReturnKeyAutomatically: Bool = textDocumentProxy.enablesReturnKeyAutomatically ?? false
                 let isAvailable: Bool = enablesReturnKeyAutomatically.negative || textDocumentProxy.hasText
-                let newState: ReturnKeyState = ReturnKeyState.state(isAvailable: isAvailable, isABC: inputMethodMode.isABC, isSimplified: Options.characterStandard.isSimplified, isBuffering: inputStage.isBuffering)
+                let newState: ReturnKeyState = ReturnKeyState.state(isAvailable: isAvailable, isABC: inputMethodMode.isABC, isMutilated: characterStandard.isMutilated, isBuffering: inputStage.isBuffering)
                 let shouldUpdateKey: Bool = (returnKeyType != newType) || (returnKeyState != newState)
                 guard shouldUpdateKey else { return }
                 returnKeyText = newType.attributedText(of: newState)
@@ -891,21 +889,21 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let newForm: SpaceKeyForm = {
                         guard inputMethodMode.isCantonese else { return .english }
                         guard keyboardForm != .tenKeyNumeric else { return .fallback }
-                        let isSimplified: Bool = Options.characterStandard.isSimplified
+                        let isMutilated: Bool = characterStandard.isMutilated
                         if inputStage.isBuffering {
                                 if candidates.isEmpty {
-                                        return isSimplified ? .confirmSimplified : .confirm
+                                        return isMutilated ? .confirmMutilated : .confirm
                                 } else {
-                                        return isSimplified ? .selectSimplified : .select
+                                        return isMutilated ? .selectMutilated : .select
                                 }
                         } else {
                                 switch keyboardCase {
                                 case .lowercased:
-                                        return isSimplified ? .lowercasedSimplified : .lowercased
+                                        return isMutilated ? .lowercasedMutilated : .lowercased
                                 case .uppercased:
-                                        return isSimplified ? .uppercasedSimplified : .uppercased
+                                        return isMutilated ? .uppercasedMutilated : .uppercased
                                 case .capsLocked:
-                                        return isSimplified ? .capsLockedSimplified : .capsLocked
+                                        return isMutilated ? .capsLockedMutilated : .capsLocked
                                 }
                         }
                 }()
@@ -1069,6 +1067,27 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         @Published private(set) var topBarHeight: CGFloat = PresetConstant.toolBarHeight
         private func updateTopBarHeight() {
                 topBarHeight = PresetConstant.toolBarHeight + (max(0, keyHeightOffset) * 3)
+        }
+
+
+        // MARK: - CharacterStandard
+
+        @Published private(set) var characterStandard: CharacterStandard = {
+                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.CharacterScriptVariant)
+                return (savedValue == 2) ? .mutilated : Options.traditionalCharacterStandard
+        }()
+        func toggleCharacterScriptVariant() {
+                let newStandard: CharacterStandard = characterStandard.isMutilated ? Options.traditionalCharacterStandard : .mutilated
+                let value: Int = newStandard.isMutilated ? 2 : 1
+                UserDefaults.standard.set(value, forKey: OptionsKey.CharacterScriptVariant)
+                characterStandard = newStandard
+                updateSpaceKeyForm()
+                updateReturnKey()
+        }
+        func syncTraditionalCharacterStandard(to standard: CharacterStandard) {
+                if characterStandard.isTraditional {
+                        characterStandard = standard
+                }
         }
 
 

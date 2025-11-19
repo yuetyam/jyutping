@@ -150,10 +150,10 @@ struct GeneralSettingsView: View {
                                         }
                                         Section {
                                                 Picker("GeneralPreferencesView.CharacterStandard.PickerTitle", selection: $characterStandard) {
-                                                        Text("GeneralPreferencesView.CharacterStandard.Traditional").tag(CharacterStandard.traditional)
+                                                        Text("GeneralPreferencesView.CharacterStandard.Traditional").tag(CharacterStandard.preset)
                                                         Text("GeneralPreferencesView.CharacterStandard.TraditionalKongKong").tag(CharacterStandard.hongkong)
                                                         Text("GeneralPreferencesView.CharacterStandard.TraditionalTaiwan").tag(CharacterStandard.taiwan)
-                                                        Text("GeneralPreferencesView.CharacterStandard.Simplified").tag(CharacterStandard.simplified)
+                                                        Text("GeneralPreferencesView.CharacterStandard.Simplified").tag(CharacterStandard.mutilated)
                                                 }
                                                 .pickerStyle(.menu)
                                                 .onChange(of: characterStandard) { newStandard in

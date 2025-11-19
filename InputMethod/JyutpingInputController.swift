@@ -533,16 +533,16 @@ final class JyutpingInputController: IMKInputController, Sendable {
         private func cangjieReverseLookup() {
                 let definedCandidates: [Candidate] = searchDefinedCandidates(for: bufferEvents)
                 let textMarkCandidates: [Candidate] = Engine.searchTextMarks(for: bufferEvents)
-                let bufferText = joinedBufferTexts()
-                let text: String = String(bufferText.dropFirst())
-                let converted = text.compactMap({ CharacterStandard.cangjie(of: $0) })
-                let isValidSequence: Bool = converted.isNotEmpty && (converted.count == text.count)
+                let events = bufferEvents.dropFirst()
+                let cangjieRadicals = events.compactMap(Converter.cangjie(of:))
+                let isValidSequence: Bool = cangjieRadicals.isNotEmpty && (cangjieRadicals.count == events.count)
                 if isValidSequence {
-                        mark(text: String(converted))
+                        mark(text: String(cangjieRadicals))
+                        let text: String = events.map(\.text).joined()
                         let suggestions: [Candidate] = Engine.cangjieReverseLookup(text: text, variant: AppSettings.cangjieVariant).transformed(to: Options.characterStandard)
                         candidates = (definedCandidates + textMarkCandidates + suggestions).distinct()
                 } else {
-                        mark(text: bufferText)
+                        mark(text: joinedBufferTexts())
                         candidates = (definedCandidates + textMarkCandidates).distinct()
                 }
         }
@@ -1328,10 +1328,10 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         break
                 }
                 let newVariant: CharacterStandard? = switch selectedIndex {
-                case 0: .traditional
+                case 0: .preset
                 case 1: .hongkong
                 case 2: .taiwan
-                case 3: .simplified
+                case 3: .mutilated
                 default: nil
                 }
                 guard let newVariant, newVariant != Options.characterStandard else { return }
@@ -1406,7 +1406,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
 
                 let traditional = NSMenuItem(title: String(localized: "Menu.CharacterStandard.Traditional"), action: #selector(toggleTraditionalCharacterStandard), keyEquivalent: "1")
                 traditional.keyEquivalentModifierMask = [.control, .shift]
-                traditional.state = (Options.characterStandard == .traditional) ? .on : .off
+                traditional.state = (Options.characterStandard == .preset) ? .on : .off
                 menu.addItem(traditional)
 
                 let hongkong = NSMenuItem(title: String(localized: "Menu.CharacterStandard.TraditionalHongKong"), action: #selector(toggleHongKongCharacterStandard), keyEquivalent: "2")
@@ -1421,7 +1421,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
 
                 let simplified = NSMenuItem(title: String(localized: "Menu.CharacterStandard.Simplified"), action: #selector(toggleSimplifiedCharacterStandard), keyEquivalent: "4")
                 simplified.keyEquivalentModifierMask = [.control, .shift]
-                simplified.state = Options.characterStandard.isSimplified ? .on : .off
+                simplified.state = Options.characterStandard.isMutilated ? .on : .off
                 menu.addItem(simplified)
 
                 menu.addItem(.separator())
