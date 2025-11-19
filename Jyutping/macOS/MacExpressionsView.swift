@@ -43,7 +43,7 @@ struct MacExpressionsView: View {
                                                                 Image.checkmark.foregroundStyle(Color.green)
                                                         }
                                                         Label {
-                                                                Text(verbatim: "「您」係北京方言用字，好少見於其他漢語。如果要用敬詞，粵語一般用「閣下」。")
+                                                                Text(verbatim: "如果要用敬詞，粵語一般用「閣下」。「您」係北京方言用字，好少見於其他漢語。")
                                                         } icon: {
                                                                 Image.warning.foregroundStyle(Color.orange)
                                                         }

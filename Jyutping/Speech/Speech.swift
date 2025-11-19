@@ -59,6 +59,17 @@ struct Speech {
                 guard voices.isNotEmpty else { return AVSpeechSynthesisVoice(language: languageCode) }
                 let preferredVoices = voices.sorted { (lhs, rhs) -> Bool in
                         if #available(iOS 26.0, macOS 26.0, *) {
+                                #if os(macOS)
+                                // Premium and enhanced Cantonese voices are broken in macOS 26.1
+                                switch (lhs.quality, rhs.quality) {
+                                case (.default, .premium):
+                                        return true
+                                case (.default, .enhanced):
+                                        return true
+                                case (_, _):
+                                        return false
+                                }
+                                #else
                                 // Premium Cantonese voices are broken in iOS 26
                                 switch (lhs.quality, rhs.quality) {
                                 case (.premium, _):
@@ -70,6 +81,7 @@ struct Speech {
                                 case (_, _):
                                         return false
                                 }
+                                #endif
                         } else if #available(iOS 18.0, macOS 15.0, *) {
                                 switch (lhs.quality, rhs.quality) {
                                 case (.premium, .enhanced):
@@ -110,21 +122,10 @@ struct Speech {
         }
         private static func preferredVoice(of language: SpeechLanguage) -> AVSpeechSynthesisVoice? {
                 let languageCode: String = language.code
-                let voices = AVSpeechSynthesisVoice.speechVoices().filter({ $0.language == languageCode })
-                guard voices.isNotEmpty else { return AVSpeechSynthesisVoice(language: languageCode) }
-                let preferredVoices = voices.sorted { (lhs, rhs) -> Bool in
-                        switch (lhs.quality, rhs.quality) {
-                        case (.premium, .enhanced):
-                                return true
-                        case (.premium, .default):
-                                return true
-                        case (.enhanced, .default):
-                                return true
-                        case (_, _):
-                                return false
-                        }
-                }
-                return preferredVoices.first ?? AVSpeechSynthesisVoice(language: languageCode)
+                let preferredVoice = AVSpeechSynthesisVoice.speechVoices()
+                        .filter({ $0.language == languageCode })
+                        .max(by: { $0.quality.rawValue < $1.quality.rawValue })
+                return preferredVoice ?? AVSpeechSynthesisVoice(language: languageCode)
         }
 }
 
