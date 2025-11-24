@@ -185,7 +185,11 @@ struct SettingsView: View {
                                 Picker("SettingsView.KeyboardLayout.PickerTitle", selection: $keyboardLayout) {
                                         Text("SettingsView.KeyboardLayout.Option.QWERTY").tag(KeyboardLayout.qwerty)
                                         Text("SettingsView.KeyboardLayout.Option.TripleStroke").tag(KeyboardLayout.tripleStroke)
-                                        Text("SettingsView.KeyboardLayout.Option.10Key").tag(KeyboardLayout.tenKey)
+                                        Text("SettingsView.KeyboardLayout.Option.NineKey").tag(KeyboardLayout.nineKey)
+                                        #if DEBUG
+                                        Text("SettingsView.KeyboardLayout.Option.FourteenKey").tag(KeyboardLayout.fourteenKey)
+                                        Text("SettingsView.KeyboardLayout.Option.EighteenKey").tag(KeyboardLayout.eighteenKey)
+                                        #endif
                                 }
                                 .pickerStyle(.inline)
                                 .textCase(nil)

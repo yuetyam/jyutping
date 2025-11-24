@@ -9,8 +9,14 @@ enum KeyboardLayout: Int, CaseIterable {
         /// 26鍵三拼
         case tripleStroke = 2
 
-        /// 九宮格
-        case tenKey = 3
+        /// 9鍵（九宮格）
+        case nineKey = 3
+
+        /// 14鍵
+        case fourteenKey = 4
+
+        /// 18鍵
+        case eighteenKey = 5
 
         /// Read KeyboardLayout from UserDefaults
         static func fetchSavedLayout() -> KeyboardLayout {
@@ -24,8 +30,14 @@ enum KeyboardLayout: Int, CaseIterable {
         /// 26鍵三拼
         var isTripleStroke: Bool { self == .tripleStroke }
 
-        /// 九宮格
-        var isTenKey: Bool { self == .tenKey }
+        /// 9鍵（九宮格）
+        var isNineKey: Bool { self == .nineKey }
+
+        /// 14鍵
+        var isFourteenKey: Bool { self == .fourteenKey }
+
+        /// 18鍵
+        var isEighteenKey: Bool { self == .fourteenKey }
 }
 
 /// Numeric keyboard for the Qwerty KeyboardLayout

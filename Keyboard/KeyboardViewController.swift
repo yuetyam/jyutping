@@ -454,8 +454,14 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                         capitals = capitals.dropLast(lastInputLength)
                                         inputLengthSequence = inputLengthSequence.dropLast()
                                         bufferEvents = bufferEvents.dropLast(lastInputLength)
-                                case .tenKey:
+                                case .nineKey:
                                         bufferCombos = bufferCombos.dropLast()
+                                case .fourteenKey:
+                                        // TODO: 14 Key
+                                        break
+                                case .eighteenKey:
+                                        // TODO: 18 Key
+                                        break
                                 }
                         } else {
                                 textDocumentProxy.deleteBackward()
@@ -583,7 +589,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 inputLengthSequence = inputLengthSequence.suffix(tailLength)
                                 bufferEvents = bufferEvents.suffix(tailLength)
                         }
-                case .tenKey:
+                case .nineKey:
                         if candidate.isCantonese {
                                 selectedCandidates.append(candidate)
                         } else {
@@ -593,6 +599,12 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         let tailCount: Int = bufferCombos.count - candidate.inputCount
                         let suffixLength: Int = max(0, tailCount)
                         bufferCombos = bufferCombos.suffix(suffixLength)
+                case .fourteenKey:
+                        // TODO: 14 Key
+                        break
+                case .eighteenKey:
+                        // TODO: 18 Key
+                        break
                 }
         }
         private func adjustKeyboard() {

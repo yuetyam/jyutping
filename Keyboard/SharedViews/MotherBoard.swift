@@ -358,8 +358,14 @@ struct MotherBoard: View {
                                                         LargePadTripleStrokeKeyboard()
                                                 }
                                         }
-                                case .tenKey:
+                                case .nineKey:
                                         TenKeyKeyboard()
+                                case .fourteenKey:
+                                        // TODO: 14 Key
+                                        CantoneseKeyboard()
+                                case .eighteenKey:
+                                        // TODO: 18 Key
+                                        CantoneseKeyboard()
                                 }
                         }
                 }
