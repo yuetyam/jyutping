@@ -18,7 +18,7 @@ public struct UnihanDefinition: Hashable {
 
 private extension DataMaster {
         static func matchDefinition<T: BinaryInteger>(for code: T) -> String? {
-                let command: String = "SELECT definition FROM definitiontable WHERE code = \(code) LIMIT 1;"
+                let command: String = "SELECT definition FROM definition_table WHERE code = \(code) LIMIT 1;"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return nil }

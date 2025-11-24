@@ -5,7 +5,7 @@ import CommonExtensions
 private extension DataMaster {
         static func matchGwongWan(for character: Character) -> GwongWanLexicon? {
                 guard let code: UInt32 = character.unicodeScalars.first?.value else { return nil }
-                let command: String = "SELECT * FROM gwongwantable WHERE code = \(code);"
+                let command: String = "SELECT * FROM gwongwan_table WHERE code = \(code);"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return nil }

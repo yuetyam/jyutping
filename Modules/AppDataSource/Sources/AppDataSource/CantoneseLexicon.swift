@@ -131,7 +131,7 @@ private extension DataMaster {
         /// - Parameter text: Cantonese text
         /// - Returns: An Array of Jyutping
         static func fetchRomanizations(for text: String) -> [String] {
-                let command: String = "SELECT romanization FROM jyutpingtable WHERE word = ?;"
+                let command: String = "SELECT romanization FROM jyutping_table WHERE word = ?;"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return [] }
@@ -151,7 +151,7 @@ private extension DataMaster {
         /// - Returns: Homophone characters
         static func fetchHomophones(for romanization: String) -> [String] {
                 var homophones: [String] = []
-                let query = "SELECT word FROM jyutpingtable WHERE romanization = '\(romanization)' LIMIT 11;"
+                let query = "SELECT word FROM jyutping_table WHERE romanization = '\(romanization)' LIMIT 11;"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK else { return homophones }
@@ -168,7 +168,7 @@ private extension DataMaster {
         ///   - romanization: Jyutping
         /// - Returns: Collocation words
         static func fetchCollocations(word: String, romanization: String) -> [String] {
-                let command: String = "SELECT collocation FROM collocationtable WHERE word = '\(word)' AND romanization = '\(romanization)' LIMIT 1;"
+                let command: String = "SELECT collocation FROM collocation_table WHERE word = '\(word)' AND romanization = '\(romanization)' LIMIT 1;"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return [] }
@@ -186,7 +186,7 @@ private extension DataMaster {
         /// - Returns: Description texts
         static func fetchDescriptions(word: String, romanization: String) -> [String] {
                 var items: [String] = []
-                let command: String = "SELECT description FROM dictionarytable WHERE word = '\(word)' AND romanization = '\(romanization)';"
+                let command: String = "SELECT description FROM dictionary_table WHERE word = '\(word)' AND romanization = '\(romanization)';"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return items }

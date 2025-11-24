@@ -32,12 +32,12 @@ public struct ChoHokLexicon: Hashable, Identifiable {
         public let id: UUID = UUID()
 }
 
-// chohoktable(code INTEGER NOT NULL, word TEXT NOT NULL, romanization TEXT NOT NULL, initial TEXT NOT NULL, final TEXT NOT NULL, tone TEXT NOT NULL, faancit TEXT NOT NULL);
+// chohok_table(code INTEGER NOT NULL, word TEXT NOT NULL, romanization TEXT NOT NULL, initial TEXT NOT NULL, final TEXT NOT NULL, tone TEXT NOT NULL, faancit TEXT NOT NULL);
 
 private extension DataMaster {
         static func matchChoHok(for character: Character) -> ChoHokLexicon? {
                 guard let code: UInt32 = character.unicodeScalars.first?.value else { return nil }
-                let command: String = "SELECT * FROM chohoktable WHERE code = \(code);"
+                let command: String = "SELECT * FROM chohok_table WHERE code = \(code);"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return nil }
@@ -65,7 +65,7 @@ private extension DataMaster {
         }
         static func fetchChoHokHomophones(for romanization: String) -> [String] {
                 var homophones: [String] = []
-                let query = "SELECT word FROM chohoktable WHERE romanization = '\(romanization)' LIMIT 11;"
+                let query = "SELECT word FROM chohok_table WHERE romanization = '\(romanization)' LIMIT 11;"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK else { return homophones }

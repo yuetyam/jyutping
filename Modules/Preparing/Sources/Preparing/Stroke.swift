@@ -86,7 +86,7 @@ struct Stroke {
                 // guard sqlite3_open_v2(":memory:", &database, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE, nil) == SQLITE_OK else { return }
                 createTable()
                 insertValues()
-                createIndies()
+                createIndexes()
         }
         private static func createTable() {
                 let command: String = "CREATE TABLE stroketable(word TEXT NOT NULL, stroke TEXT NOT NULL);"
@@ -113,7 +113,7 @@ struct Stroke {
                 guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return }
                 guard sqlite3_step(statement) == SQLITE_DONE else { return }
         }
-        private static func createIndies() {
+        private static func createIndexes() {
                 let command: String = "CREATE INDEX strokewordindex ON stroketable(word);"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }

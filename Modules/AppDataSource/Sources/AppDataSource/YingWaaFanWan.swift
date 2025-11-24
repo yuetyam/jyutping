@@ -61,11 +61,11 @@ public struct YingWaaFanWan: Hashable {
 
 private extension DataMaster {
 
-        // CREATE TABLE yingwaatable(code INTEGER NOT NULL, word TEXT NOT NULL, romanization TEXT NOT NULL, pronunciation TEXT NOT NULL, pronunciationmark TEXT NOT NULL, interpretation TEXT NOT NULL);
+        // CREATE TABLE yingwaa_table(code INTEGER NOT NULL, word TEXT NOT NULL, romanization TEXT NOT NULL, pronunciation TEXT NOT NULL, pronunciationmark TEXT NOT NULL, interpretation TEXT NOT NULL);
         static func matchYingWaaFanWan(for character: Character) -> [YingWaaFanWan] {
                 var entries: [YingWaaFanWan] = []
                 guard let code: UInt32 = character.unicodeScalars.first?.value else { return entries }
-                let query: String = "SELECT * FROM yingwaatable WHERE code = \(code);"
+                let query: String = "SELECT * FROM yingwaa_table WHERE code = \(code);"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK else { return entries }
@@ -88,7 +88,7 @@ private extension DataMaster {
         /// - Returns: Homophone characters
         static func fetchHomophones(for romanization: String) -> [String] {
                 var homophones: [String] = []
-                let query = "SELECT word FROM yingwaatable WHERE romanization = '\(romanization)' LIMIT 11;"
+                let query = "SELECT word FROM yingwaa_table WHERE romanization = '\(romanization)' LIMIT 11;"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK else { return homophones }

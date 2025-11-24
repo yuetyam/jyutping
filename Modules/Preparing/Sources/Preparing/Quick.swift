@@ -100,7 +100,7 @@ struct Quick {
                 insertCangjie5Values()
                 createCangjie3Table()
                 insertCangjie3Values()
-                createIndies()
+                createIndexes()
         }
         private static func createCangjie5Table() {
                 let command: String = "CREATE TABLE cangjie5table(word TEXT NOT NULL, cangjie TEXT NOT NULL);"
@@ -152,7 +152,7 @@ struct Quick {
                 guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return }
                 guard sqlite3_step(statement) == SQLITE_DONE else { return }
         }
-        private static func createIndies() {
+        private static func createIndexes() {
                 let commands: [String] = [
                         "CREATE INDEX cangjie5wordindex ON cangjie5table(word);",
                         "CREATE INDEX cangjie3wordindex ON cangjie3table(word);"

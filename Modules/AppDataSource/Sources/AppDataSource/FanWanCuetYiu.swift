@@ -4,11 +4,11 @@ import CommonExtensions
 
 private extension DataMaster {
 
-        // CREATE TABLE fanwantable(code INTEGER NOT NULL, word TEXT NOT NULL, romanization TEXT NOT NULL, initial TEXT NOT NULL, final TEXT NOT NULL, yamyeung TEXT NOT NULL, tone TEXT NOT NULL, rhyme TEXT NOT NULL, interpretation TEXT NOT NULL);
+        // CREATE TABLE fanwan_table(code INTEGER NOT NULL, word TEXT NOT NULL, romanization TEXT NOT NULL, initial TEXT NOT NULL, final TEXT NOT NULL, yamyeung TEXT NOT NULL, tone TEXT NOT NULL, rhyme TEXT NOT NULL, interpretation TEXT NOT NULL);
         static func matchFanWanCuetYiu(for character: Character) -> [FanWanCuetYiu] {
                 var entries: [FanWanCuetYiu] = []
                 guard let code: UInt32 = character.unicodeScalars.first?.value else { return entries }
-                let query: String = "SELECT * FROM fanwantable WHERE code = \(code);"
+                let query: String = "SELECT * FROM fanwan_table WHERE code = \(code);"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK else { return entries }
@@ -33,7 +33,7 @@ private extension DataMaster {
         /// - Returns: Homophone characters
         static func fetchHomophones(for romanization: String) -> [String] {
                 var homophones: [String] = []
-                let query = "SELECT word FROM fanwantable WHERE romanization = '\(romanization)' LIMIT 11;"
+                let query = "SELECT word FROM fanwan_table WHERE romanization = '\(romanization)' LIMIT 11;"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK else { return homophones }

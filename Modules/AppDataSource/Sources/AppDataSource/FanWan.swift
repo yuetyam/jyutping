@@ -36,12 +36,12 @@ public struct FanWanLexicon: Hashable, Identifiable {
         public let id: UUID = UUID()
 }
 
-// fanwantable(code INTEGER NOT NULL, word TEXT NOT NULL, romanization TEXT NOT NULL, initial TEXT NOT NULL, final TEXT NOT NULL, yamyeung TEXT NOT NULL, tone TEXT NOT NULL, rhyme TEXT NOT NULL, interpretation TEXT NOT NULL);
+// fanwan_table(code INTEGER NOT NULL, word TEXT NOT NULL, romanization TEXT NOT NULL, initial TEXT NOT NULL, final TEXT NOT NULL, yamyeung TEXT NOT NULL, tone TEXT NOT NULL, rhyme TEXT NOT NULL, interpretation TEXT NOT NULL);
 
 private extension DataMaster {
         static func matchFanWan(for character: Character) -> FanWanLexicon? {
                 guard let code: UInt32 = character.unicodeScalars.first?.value else { return nil }
-                let command: String = "SELECT * FROM fanwantable WHERE code = \(code);"
+                let command: String = "SELECT * FROM fanwan_table WHERE code = \(code);"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return nil }
@@ -64,7 +64,7 @@ private extension DataMaster {
         }
         static func fetchFanWanHomophones(for romanization: String) -> [String] {
                 var homophones: [String] = []
-                let command: String = "SELECT word FROM fanwantable WHERE romanization = '\(romanization)' LIMIT 11;"
+                let command: String = "SELECT word FROM fanwan_table WHERE romanization = '\(romanization)' LIMIT 11;"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return homophones }

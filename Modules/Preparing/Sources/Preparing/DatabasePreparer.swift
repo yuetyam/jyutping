@@ -43,7 +43,7 @@ struct DatabasePreparer {
                         }
                         await group.waitForAll()
                 }
-                createIndies()
+                createIndexes()
                 backupInMemoryDatabase()
                 sqlite3_close_v2(database)
         }
@@ -60,7 +60,7 @@ struct DatabasePreparer {
                 guard sqlite3_backup_finish(backup) == SQLITE_OK else { return }
         }
 
-        private static func createIndies() {
+        private static func createIndexes() {
                 let commands: [String] = [
                         "CREATE INDEX ix_core_lexicon_ping ON core_lexicon(ping);",
                         "CREATE INDEX ix_core_lexicon_anchors ON core_lexicon(anchors);",
