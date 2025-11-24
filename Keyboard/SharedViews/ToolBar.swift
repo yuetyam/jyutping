@@ -41,7 +41,7 @@ struct ToolBar: View {
                         Spacer()
                         ToolBarButton(
                                 imageName: "hand.draw",
-                                width: 50,
+                                width: buttonWidth,
                                 height: buttonHeight,
                                 insets: EdgeInsets(top: 15, leading: 0, bottom: 15, trailing: 0)
                         ) {
@@ -88,14 +88,14 @@ struct ToolBar: View {
                                 ZStack {
                                         Color.interactiveClear
                                         if #available(iOSApplicationExtension 26.0, *) {
-                                                CharacterSetSwitch(isMutilatedMode: context.characterStandard.isMutilated)
+                                                CharacterSetSwitch(isMutilatedMode: context.characterStandard.isMutilated).disableAnimations()
                                         } else {
-                                                LegacyCharacterSetSwitch(isMutilatedMode: context.characterStandard.isMutilated)
+                                                LegacyCharacterSetSwitch(isMutilatedMode: context.characterStandard.isMutilated).disableAnimations()
                                         }
                                 }
                         }
                         .buttonStyle(.plain)
-                        .frame(width: 50, height: buttonHeight)
+                        .frame(width: buttonWidth, height: buttonHeight)
 
                         Spacer()
                         ToolBarButton(

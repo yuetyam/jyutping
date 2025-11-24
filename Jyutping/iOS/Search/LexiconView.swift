@@ -32,7 +32,11 @@ struct LexiconView: View {
                         HStack(alignment: .firstTextBaseline, spacing: 2) {
                                 Text(verbatim: "英文").font(.copilot).shallow()
                                 Text.separator
-                                Text(verbatim: definition).font(.callout)
+                                if #available(iOS 16.1, *) {
+                                        Text(verbatim: definition).font(.callout).fontDesign(.serif)
+                                } else {
+                                        Text(verbatim: definition).font(.callout)
+                                }
                         }
                 }
         }

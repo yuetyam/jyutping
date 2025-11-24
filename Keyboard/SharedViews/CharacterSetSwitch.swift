@@ -10,7 +10,7 @@ struct LegacyCharacterSetSwitch: View {
 
         private let height: CGFloat = 26
         private let partialWidth: CGFloat = 28
-        private let totalWidth: CGFloat = 50
+        private let totalWidth: CGFloat = 48
 
         var body: some View {
                 ZStack {
@@ -19,6 +19,7 @@ struct LegacyCharacterSetSwitch: View {
                                 Color.clear
                                 Text(verbatim: "繁")
                                         .font(isMutilatedMode ? .small : .large)
+                                        .padding(.trailing, isMutilatedMode ? 4 : 0)
                                         .frame(width: partialWidth, height: height)
                                         .background(isMutilatedMode ? Color.clear : colorScheme.inputKeyColor, in: .capsule)
                         }
@@ -26,6 +27,7 @@ struct LegacyCharacterSetSwitch: View {
                                 Color.clear
                                 Text(verbatim: "简")
                                         .font(isMutilatedMode ? .large : .small)
+                                        .padding(.leading, isMutilatedMode ? 0 : 4)
                                         .frame(width: partialWidth, height: height)
                                         .background(isMutilatedMode ? colorScheme.inputKeyColor : Color.clear, in: .capsule)
                         }
@@ -45,7 +47,7 @@ struct CharacterSetSwitch: View {
 
         private let height: CGFloat = 26
         private let partialWidth: CGFloat = 28
-        private let totalWidth: CGFloat = 50
+        private let totalWidth: CGFloat = 48
 
         var body: some View {
                 ZStack {
@@ -58,6 +60,7 @@ struct CharacterSetSwitch: View {
                                                 .shadow(color: isMutilatedMode ? Color.clear : Color.shadowGray, radius: 0.5)
                                         Text(verbatim: "繁")
                                                 .font(isMutilatedMode ? .small : .large)
+                                                .padding(.trailing, isMutilatedMode ? 4 : 0)
                                 }
                                 .frame(width: partialWidth, height: height)
                         }
@@ -69,6 +72,7 @@ struct CharacterSetSwitch: View {
                                                 .shadow(color: isMutilatedMode ? Color.clear : Color.shadowGray, radius: 0.5)
                                         Text(verbatim: "简")
                                                 .font(isMutilatedMode ? .large : .small)
+                                                .padding(.leading, isMutilatedMode ? 0 : 4)
                                 }
                                 .frame(width: partialWidth, height: height)
                         }

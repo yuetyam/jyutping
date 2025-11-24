@@ -37,6 +37,7 @@ dockkit	DockKit
 duckduckgo	DuckDuckGo
 egpu	eGPU
 esim	eSIM
+faceid	Face ID
 facetime	FaceTime
 fcp	Final Cut Pro
 ffmpeg	FFmpeg
@@ -75,6 +76,7 @@ iphonepro	iPhone Pro
 iphonepromax	iPhone Pro Max
 iphonese	iPhone SE
 ipod	iPod
+iqoo	iQOO
 itunes	iTunes
 javafx	JavaFX
 javascript	JavaScript
@@ -139,6 +141,7 @@ tahoe	Tahoe
 testflight	TestFlight
 tiktok	TikTok
 tipkit	TipKit
+touchid	Touch ID
 tvos	tvOS
 typec	Type-C
 typeduck	TypeDuck

@@ -32,7 +32,7 @@ struct CantoneseLexiconView: View {
                                 HStack(alignment: .firstTextBaseline) {
                                         Text(verbatim: "英文").shallow()
                                         Text.separator
-                                        Text(verbatim: unihanDefinition)
+                                        Text(verbatim: unihanDefinition).font(.body).fontDesign(.serif)
                                         Spacer()
                                 }
                         }

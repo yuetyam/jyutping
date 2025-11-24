@@ -75,7 +75,7 @@ extension Emoji {
 extension Engine {
 
         public static func fetchEmojiSequence(category: Emoji.Category? = nil) -> [Emoji] {
-                let command: String = "SELECT rowid, category, unicodeversion, codepoint, cantonese, romanization FROM symboltable WHERE category > 0 AND category < 9;"
+                let command: String = "SELECT rowid, category, unicode_version, code_point, cantonese, romanization FROM symbol_table WHERE category > 0 AND category < 9;"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(Engine.database, command, -1, &statement, nil) == SQLITE_OK else { return [] }
@@ -84,11 +84,11 @@ extension Engine {
                         let rowid = sqlite3_column_int64(statement, 0)
                         let categoryCode = sqlite3_column_int64(statement, 1)
                         let unicodeVersion = sqlite3_column_int64(statement, 2)
-                        guard let codepoint = sqlite3_column_text(statement, 3) else { continue }
+                        guard let codePoint = sqlite3_column_text(statement, 3) else { continue }
                         guard let cantonese = sqlite3_column_text(statement, 4) else { continue }
                         guard let romanization = sqlite3_column_text(statement, 5) else { continue }
                         guard let category = Emoji.Category(rawValue: Int(categoryCode)),
-                              let text = Emoji.generateSymbol(from: String(cString: codepoint)) else { continue }
+                              let text = Emoji.generateSymbol(from: String(cString: codePoint)) else { continue }
                         let uniqueNumber: Int = 10000 + Int(rowid)
                         let instance = Emoji(category: category, uniqueNumber: uniqueNumber, unicodeVersion: Int(unicodeVersion), text: text, cantonese: String(cString: cantonese), romanization: String(cString: romanization))
                         emojis.append(instance)
@@ -96,7 +96,7 @@ extension Engine {
                 return emojis
         }
         public static func fetchDefaultFrequentEmojis() -> [Emoji] {
-                let command: String = "SELECT rowid, unicodeversion, codepoint, cantonese, romanization FROM symboltable WHERE category = 0;"
+                let command: String = "SELECT rowid, unicode_version, code_point, cantonese, romanization FROM symbol_table WHERE category = 0;"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(Engine.database, command, -1, &statement, nil) == SQLITE_OK else { return [] }
@@ -104,10 +104,10 @@ extension Engine {
                 while sqlite3_step(statement) == SQLITE_ROW {
                         let rowID = sqlite3_column_int64(statement, 0)
                         let unicodeVersion = sqlite3_column_int64(statement, 1)
-                        guard let codepoint = sqlite3_column_text(statement, 2) else { continue }
+                        guard let codePoint = sqlite3_column_text(statement, 2) else { continue }
                         guard let cantonese = sqlite3_column_text(statement, 3) else { continue }
                         guard let romanization = sqlite3_column_text(statement, 4) else { continue }
-                        guard let text = Emoji.generateSymbol(from: String(cString: codepoint)) else { continue }
+                        guard let text = Emoji.generateSymbol(from: String(cString: codePoint)) else { continue }
                         let uniqueNumber: Int = 5000 + Int(rowID)
                         let instance = Emoji(category: .frequent, uniqueNumber: uniqueNumber, unicodeVersion: Int(unicodeVersion), text: text, cantonese: String(cString: cantonese), romanization: String(cString: romanization))
                         emojis.append(instance)
@@ -116,7 +116,7 @@ extension Engine {
         }
 
         public static func searchSymbols<T: RandomAccessCollection<InputEvent>>(for events: T, segmentation: Segmentation) -> [Candidate] {
-                let command: String = "SELECT category, unicodeversion, codepoint, cantonese, romanization FROM symboltable WHERE ping = ?;"
+                let command: String = "SELECT category, unicode_version, code_point, cantonese, romanization FROM symbol_table WHERE ping = ?;"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(Engine.database, command, -1, &statement, nil) == SQLITE_OK else { return [] }
@@ -140,15 +140,15 @@ extension Engine {
                 while sqlite3_step(statement) == SQLITE_ROW {
                         let categoryCode = sqlite3_column_int64(statement, 0)
                         let unicodeVersion = sqlite3_column_int64(statement, 1)
-                        guard let codepoint = sqlite3_column_text(statement, 2) else { continue }
+                        guard let codePoint = sqlite3_column_text(statement, 2) else { continue }
                         guard let cantonese = sqlite3_column_text(statement, 3) else { continue }
                         guard let romanization = sqlite3_column_text(statement, 4) else { continue }
                         let category = Emoji.Category(rawValue: Int(categoryCode)) ?? Emoji.Category.frequent
-                        let instance = Emoji(category: category, uniqueNumber: Int(categoryCode), unicodeVersion: Int(unicodeVersion), text: String(cString: codepoint), cantonese: String(cString: cantonese), romanization: String(cString: romanization))
+                        let instance = Emoji(category: category, uniqueNumber: Int(categoryCode), unicodeVersion: Int(unicodeVersion), text: String(cString: codePoint), cantonese: String(cString: cantonese), romanization: String(cString: romanization))
                         emojis.append(instance)
                 }
                 let skinToneStatement: OpaquePointer? = {
-                        let skinToneQuery: String = "SELECT target FROM emojiskinmap WHERE source = ?;"
+                        let skinToneQuery: String = "SELECT target FROM emoji_skin_map WHERE source = ?;"
                         var pointer: OpaquePointer? = nil
                         guard sqlite3_prepare_v2(Engine.database, skinToneQuery, -1, &pointer, nil) == SQLITE_OK else { return nil }
                         return pointer
@@ -173,7 +173,7 @@ extension Engine {
         public static func tenKeySearchSymbols<T: RandomAccessCollection<Combo>>(combos: T) -> [Candidate] {
                 let tenKeyCode = combos.map(\.rawValue).decimalCombined()
                 guard tenKeyCode > 0 else { return [] }
-                let command: String = "SELECT category, unicodeversion, codepoint, cantonese, romanization FROM symboltable WHERE tenkeycode = ?;"
+                let command: String = "SELECT category, unicode_version, code_point, cantonese, romanization FROM symbol_table WHERE ten_key_code = ?;"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(Engine.database, command, -1, &statement, nil) == SQLITE_OK else { return [] }
@@ -182,15 +182,15 @@ extension Engine {
                 while sqlite3_step(statement) == SQLITE_ROW {
                         let categoryCode = sqlite3_column_int64(statement, 0)
                         let unicodeVersion = sqlite3_column_int64(statement, 1)
-                        guard let codepoint = sqlite3_column_text(statement, 2) else { continue }
+                        guard let codePoint = sqlite3_column_text(statement, 2) else { continue }
                         guard let cantonese = sqlite3_column_text(statement, 3) else { continue }
                         guard let romanization = sqlite3_column_text(statement, 4) else { continue }
                         let category = Emoji.Category(rawValue: Int(categoryCode)) ?? Emoji.Category.frequent
-                        let instance = Emoji(category: category, uniqueNumber: Int(categoryCode), unicodeVersion: Int(unicodeVersion), text: String(cString: codepoint), cantonese: String(cString: cantonese), romanization: String(cString: romanization))
+                        let instance = Emoji(category: category, uniqueNumber: Int(categoryCode), unicodeVersion: Int(unicodeVersion), text: String(cString: codePoint), cantonese: String(cString: cantonese), romanization: String(cString: romanization))
                         emojis.append(instance)
                 }
                 let skinToneStatement: OpaquePointer? = {
-                        let skinToneQuery: String = "SELECT target FROM emojiskinmap WHERE source = ?;"
+                        let skinToneQuery: String = "SELECT target FROM emoji_skin_map WHERE source = ?;"
                         var pointer: OpaquePointer? = nil
                         guard sqlite3_prepare_v2(Engine.database, skinToneQuery, -1, &pointer, nil) == SQLITE_OK else { return nil }
                         return pointer

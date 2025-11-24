@@ -75,6 +75,11 @@ extension Character {
                 return ("0"..."9") ~= self
         }
 
+        /// a-z, A-Z, or 0-9
+        public var isAlphanumeric: Bool {
+                return isBasicLatinLetter || isBasicDigit
+        }
+
         /// 1-6
         public var isCantoneseToneDigit: Bool {
                 return ("1"..."6") ~= self

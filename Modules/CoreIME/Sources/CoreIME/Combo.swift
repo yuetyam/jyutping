@@ -18,14 +18,14 @@ public enum Combo: Int, Sendable {
                 return Self.textMap[self]!
         }
         private static let textMap: [Combo: String] = [
-                Combo.ABC : "ABC",
-                Combo.DEF : "DEF",
-                Combo.GHI : "GHI",
-                Combo.JKL : "JKL",
-                Combo.MNO : "MNO",
-                Combo.PQRS: "PQRS",
-                Combo.TUV : "TUV",
-                Combo.WXYZ: "WXYZ",
+                ABC : "ABC",
+                DEF : "DEF",
+                GHI : "GHI",
+                JKL : "JKL",
+                MNO : "MNO",
+                PQRS: "PQRS",
+                TUV : "TUV",
+                WXYZ: "WXYZ",
         ]
 
         /// Jyutping syllable compatible letters
@@ -33,13 +33,13 @@ public enum Combo: Int, Sendable {
                 return Self.letterMap[self]!
         }
         private static let letterMap: [Combo: [String]] = [
-                Combo.ABC : ["a", "b", "c"],
-                Combo.DEF : ["d", "e", "f"],
-                Combo.GHI : ["g", "h", "i"],
-                Combo.JKL : ["j", "k", "l"],
-                Combo.MNO : ["m", "n", "o"],
-                Combo.PQRS: ["p", "s"],
-                Combo.TUV : ["t", "u"],
-                Combo.WXYZ: ["w", "y", "z"]
+                ABC : ["a", "b", "c"],
+                DEF : ["d", "e", "f"],
+                GHI : ["g", "h", "i"],
+                JKL : ["j", "k", "l"],
+                MNO : ["m", "n", "o"],
+                PQRS: ["p", "s"],
+                TUV : ["t", "u"],
+                WXYZ: ["w", "y", "z"]
         ]
 }

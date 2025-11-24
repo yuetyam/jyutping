@@ -10,7 +10,7 @@ extension Engine {
         }
         private static func match(quick5 text: String) -> [ShapeLexicon] {
                 guard let code = text.charCode else { return [] }
-                let command: String = "SELECT rowid, word FROM quicktable WHERE q5code = \(code);"
+                let command: String = "SELECT rowid, word FROM quick_table WHERE q5code = \(code);"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(Engine.database, command, -1, &statement, nil) == SQLITE_OK else { return [] }
@@ -24,7 +24,7 @@ extension Engine {
                 return items
         }
         private static func glob(quick5 text: String) -> [ShapeLexicon] {
-                let command: String = "SELECT rowid, word, q5complex FROM quicktable WHERE quick5 GLOB '\(text)*' ORDER BY q5complex ASC LIMIT 100;"
+                let command: String = "SELECT rowid, word, q5complex FROM quick_table WHERE quick5 GLOB '\(text)*' ORDER BY q5complex ASC LIMIT 100;"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(Engine.database, command, -1, &statement, nil) == SQLITE_OK else { return [] }
@@ -48,7 +48,7 @@ extension Engine {
         }
         private static func match(quick3 text: String) -> [ShapeLexicon] {
                 guard let code = text.charCode else { return [] }
-                let command: String = "SELECT rowid, word FROM quicktable WHERE q3code = \(code);"
+                let command: String = "SELECT rowid, word FROM quick_table WHERE q3code = \(code);"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(Engine.database, command, -1, &statement, nil) == SQLITE_OK else { return [] }
@@ -62,7 +62,7 @@ extension Engine {
                 return items
         }
         private static func glob(quick3 text: String) -> [ShapeLexicon] {
-                let command: String = "SELECT rowid, word, q3complex FROM quicktable WHERE quick3 GLOB '\(text)*' ORDER BY q3complex ASC LIMIT 100;"
+                let command: String = "SELECT rowid, word, q3complex FROM quick_table WHERE quick3 GLOB '\(text)*' ORDER BY q3complex ASC LIMIT 100;"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(Engine.database, command, -1, &statement, nil) == SQLITE_OK else { return [] }

@@ -17,7 +17,7 @@ extension Engine {
                 let isLongSequence: Bool = complex >= 19
                 let column: String = isLongSequence ? "ping" : "code"
                 let codeValue: Int = isLongSequence ? Int(text.hashCode()) : events.map(\.code).decimalCombined()
-                let command: String = "SELECT rowid, word FROM stroketable WHERE \(column) = \(codeValue);"
+                let command: String = "SELECT rowid, word FROM stroke_table WHERE \(column) = \(codeValue);"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(Engine.database, command, -1, &statement, nil) == SQLITE_OK else { return [] }
@@ -31,7 +31,7 @@ extension Engine {
                 return items
         }
         private static func wildcardMatch(strokeText: String) -> [ShapeLexicon] {
-                let command: String = "SELECT rowid, word, complex FROM stroketable WHERE stroke LIKE '\(strokeText)' LIMIT 100;"
+                let command: String = "SELECT rowid, word, complex FROM stroke_table WHERE stroke LIKE '\(strokeText)' LIMIT 100;"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(Engine.database, command, -1, &statement, nil) == SQLITE_OK else { return [] }
@@ -46,7 +46,7 @@ extension Engine {
                 return items.sorted()
         }
         private static func glob(strokeText: String) -> [ShapeLexicon] {
-                let command: String = "SELECT rowid, word, complex FROM stroketable WHERE stroke GLOB '\(strokeText)*' ORDER BY complex ASC LIMIT 100;"
+                let command: String = "SELECT rowid, word, complex FROM stroke_table WHERE stroke GLOB '\(strokeText)*' ORDER BY complex ASC LIMIT 100;"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(Engine.database, command, -1, &statement, nil) == SQLITE_OK else { return [] }

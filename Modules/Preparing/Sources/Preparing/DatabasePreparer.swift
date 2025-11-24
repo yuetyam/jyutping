@@ -12,8 +12,7 @@ struct DatabasePreparer {
 
         static func prepare() async {
                 await withTaskGroup(of: Void.self) { group in
-                        group.addTask { await createLexiconTable() }
-                        group.addTask { await createT2STable() }
+                        group.addTask { await createCoreLexiconTable() }
                         group.addTask { await createStructureTable() }
                         group.addTask { await createPinyinTable() }
                         group.addTask { await createCangjieTable() }
@@ -24,6 +23,24 @@ struct DatabasePreparer {
                         group.addTask { await createTextMarkTable() }
                         group.addTask { await createSyllableTable() }
                         group.addTask { await createPinyinSyllableTable() }
+                        group.addTask {
+                                await createCharacterVariantTable(fileName: "CharacterVariant.AncientBooksPublishing", tableName: "variant_abp")
+                        }
+                        group.addTask {
+                                await createCharacterVariantTable(fileName: "CharacterVariant.HongKong", tableName: "variant_hk")
+                        }
+                        group.addTask {
+                                await createCharacterVariantTable(fileName: "CharacterVariant.Inherited", tableName: "variant_old")
+                        }
+                        group.addTask {
+                                await createCharacterVariantTable(fileName: "CharacterVariant.PRCGeneral", tableName: "variant_prc")
+                        }
+                        group.addTask {
+                                await createCharacterVariantTable(fileName: "CharacterVariant.Simplified", tableName: "variant_sim")
+                        }
+                        group.addTask {
+                                await createCharacterVariantTable(fileName: "CharacterVariant.Taiwan", tableName: "variant_tw")
+                        }
                         await group.waitForAll()
                 }
                 createIndies()
@@ -45,46 +62,65 @@ struct DatabasePreparer {
 
         private static func createIndies() {
                 let commands: [String] = [
-                        "CREATE INDEX lexiconpingindex ON lexicontable(ping);",
-                        "CREATE INDEX lexiconanchorsindex ON lexicontable(anchors);",
-                        "CREATE INDEX lexiconstrictindex ON lexicontable(ping, anchors);",
-                        "CREATE INDEX lexicontenkeycodeindex ON lexicontable(tenkeycode);",
-                        "CREATE INDEX lexicontenkeyanchorsindex ON lexicontable(tenkeyanchors);",
-                        "CREATE INDEX lexiconwordindex ON lexicontable(word);",
+                        "CREATE INDEX ix_core_lexicon_ping ON core_lexicon(ping);",
+                        "CREATE INDEX ix_core_lexicon_anchors ON core_lexicon(anchors);",
+                        "CREATE INDEX ix_core_lexicon_strict ON core_lexicon(ping, anchors);",
+                        "CREATE INDEX ix_core_lexicon_ten_key_code ON core_lexicon(ten_key_code);",
+                        "CREATE INDEX ix_core_lexicon_ten_key_anchors ON core_lexicon(ten_key_anchors);",
+                        "CREATE INDEX ix_core_lexicon_word ON core_lexicon(word);",
 
-                        "CREATE INDEX structurepingindex ON structuretable(ping);",
-                        "CREATE INDEX structuretenkeycodeindex ON structuretable(tenkeycode);",
+                        "CREATE INDEX ix_structure_ping ON structure_table(ping);",
+                        "CREATE INDEX ix_structure_ten_key_code ON structure_table(ten_key_code);",
 
-                        "CREATE INDEX pinyinpingindex ON pinyintable(ping);",
-                        "CREATE INDEX pinyinanchorsindex ON pinyintable(anchors);",
-                        "CREATE INDEX pinyinstrictindex ON pinyintable(ping, anchors);",
-                        "CREATE INDEX pinyintenkeycodeindex ON pinyintable(tenkeycode);",
-                        "CREATE INDEX pinyintenkeyanchorsindex ON pinyintable(tenkeyanchors);",
+                        "CREATE INDEX ix_pinyin_ping ON pinyin_lexicon(ping);",
+                        "CREATE INDEX ix_pinyin_anchors ON pinyin_lexicon(anchors);",
+                        "CREATE INDEX ix_pinyin_strict ON pinyin_lexicon(ping, anchors);",
+                        "CREATE INDEX ix_pinyin_ten_key_code ON pinyin_lexicon(ten_key_code);",
+                        "CREATE INDEX ix_pinyin_ten_ken_anchors ON pinyin_lexicon(ten_key_anchors);",
 
-                        "CREATE INDEX cangjiecangjie5index ON cangjietable(cangjie5);",
-                        "CREATE INDEX cangjiec5codeindex ON cangjietable(c5code);",
-                        "CREATE INDEX cangjiecangjie3index ON cangjietable(cangjie3);",
-                        "CREATE INDEX cangjiec3codeindex ON cangjietable(c3code);",
+                        "CREATE INDEX ix_cangjie_cangjie5 ON cangjie_table(cangjie5);",
+                        "CREATE INDEX ix_cangjie_c5code ON cangjie_table(c5code);",
+                        "CREATE INDEX ix_cangjie_cangjie3 ON cangjie_table(cangjie3);",
+                        "CREATE INDEX ix_cangjie_c3code ON cangjie_table(c3code);",
 
-                        "CREATE INDEX quickquick5index ON quicktable(quick5);",
-                        "CREATE INDEX quickq5codeindex ON quicktable(q5code);",
-                        "CREATE INDEX quickquick3index ON quicktable(quick3);",
-                        "CREATE INDEX quickq3codeindex ON quicktable(q3code);",
+                        "CREATE INDEX ix_quick_quick5 ON quick_table(quick5);",
+                        "CREATE INDEX ix_quick_q5code ON quick_table(q5code);",
+                        "CREATE INDEX ix_quick_quick3 ON quick_table(quick3);",
+                        "CREATE INDEX ix_quick_c3code ON quick_table(q3code);",
 
-                        "CREATE INDEX strokestrokeindex ON stroketable(stroke);",
-                        "CREATE INDEX strokepingindex ON stroketable(ping);",
-                        "CREATE INDEX strokecodeindex ON stroketable(code);",
+                        "CREATE INDEX ix_stroke_stroke ON stroke_table(stroke);",
+                        "CREATE INDEX ix_stroke_ping ON stroke_table(ping);",
+                        "CREATE INDEX ix_stroke_code ON stroke_table(code);",
 
-                        "CREATE INDEX symbolpingindex ON symboltable(ping);",
-                        "CREATE INDEX symboltenkeycodeindex ON symboltable(tenkeycode);",
-                        "CREATE INDEX emojiskinmapindex ON emojiskinmap(source);",
+                        "CREATE INDEX ix_symbol_ping ON symbol_table(ping);",
+                        "CREATE INDEX ix_symbol_ten_key_code ON symbol_table(ten_key_code);",
+                        "CREATE INDEX ix_emoji_skin_map_source ON emoji_skin_map(source);",
 
-                        "CREATE INDEX markpingindex ON marktable(ping);",
-                        "CREATE INDEX markcodeindex ON marktable(code);",
-                        "CREATE INDEX marktenkeycodeindex ON marktable(tenkeycode);",
+                        "CREATE INDEX ix_mark_ping ON mark_table(ping);",
+                        "CREATE INDEX ix_mark_code ON mark_table(code);",
+                        "CREATE INDEX ix_mark_ten_key_code ON mark_table(ten_key_code);",
 
-                        "CREATE INDEX syllabletenkeyindex ON syllabletable(tenkeyaliascode);",
-                        "CREATE INDEX pinyinsyllabletenkeyindex ON pinyinsyllabletable(tenkeycode);"
+                        "CREATE INDEX ix_syllable_ten_key_alias_code ON syllable_table(ten_key_alias_code);",
+                        "CREATE INDEX ix_pinyin_syllable_ten_key_code ON pinyin_syllable_table(ten_key_code);",
+
+
+                        "CREATE INDEX ix_variant_abp_left ON variant_abp(left);",
+                        "CREATE INDEX ix_variant_abp_right ON variant_abp(right);",
+
+                        "CREATE INDEX ix_variant_hk_left ON variant_hk(left);",
+                        "CREATE INDEX ix_variant_hk_right ON variant_hk(right);",
+
+                        "CREATE INDEX ix_variant_old_left ON variant_old(left);",
+                        "CREATE INDEX ix_variant_old_right ON variant_old(right);",
+
+                        "CREATE INDEX ix_variant_prc_left ON variant_prc(left);",
+                        "CREATE INDEX ix_variant_prc_right ON variant_prc(right);",
+
+                        "CREATE INDEX ix_variant_sim_left ON variant_sim(left);",
+                        "CREATE INDEX ix_variant_sim_right ON variant_sim(right);",
+
+                        "CREATE INDEX ix_variant_tw_left ON variant_tw(left);",
+                        "CREATE INDEX ix_variant_tw_right ON variant_tw(right);",
                 ]
                 for command in commands {
                         var statement: OpaquePointer? = nil
@@ -94,15 +130,15 @@ struct DatabasePreparer {
                 }
         }
 
-        private static func createLexiconTable() async {
-                let createTable: String = "CREATE TABLE lexicontable(word TEXT NOT NULL, romanization TEXT NOT NULL, anchors INTEGER NOT NULL, ping INTEGER NOT NULL, tenkeyanchors INTEGER NOT NULL, tenkeycode INTEGER NOT NULL);"
+        private static func createCoreLexiconTable() async {
+                let createTable: String = "CREATE TABLE core_lexicon(word TEXT NOT NULL, romanization TEXT NOT NULL, anchors INTEGER NOT NULL, ping INTEGER NOT NULL, ten_key_anchors INTEGER NOT NULL, ten_key_code INTEGER NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
                 sqlite3_finalize(createStatement)
                 let sourceEntries: [LexiconEntry] = LexiconConverter.jyutping()
                 func insert(values: String) {
-                        let insert: String = "INSERT INTO lexicontable (word, romanization, anchors, ping, tenkeyanchors, tenkeycode) VALUES \(values);"
+                        let insert: String = "INSERT INTO core_lexicon (word, romanization, anchors, ping, ten_key_anchors, ten_key_code) VALUES \(values);"
                         var insertStatement: OpaquePointer? = nil
                         defer { sqlite3_finalize(insertStatement) }
                         guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }
@@ -120,23 +156,22 @@ struct DatabasePreparer {
                         insert(values: values)
                 }
         }
-
-        private static func createT2STable() async {
-                let createTable: String = "CREATE TABLE t2stable(traditional INTEGER NOT NULL PRIMARY KEY, simplified INTEGER NOT NULL);"
+        private static func createCharacterVariantTable(fileName: String, tableName: String) async {
+                let createTable: String = "CREATE TABLE \(tableName)(left INTEGER NOT NULL, right INTEGER NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
                 sqlite3_finalize(createStatement)
-                let entries: [String] = Hant2Hans.generate().map({ "(\($0.traditional), \($0.simplified))" })
-                let values: String = entries.joined(separator: ", ")
-                let insert: String = "INSERT INTO t2stable (traditional, simplified) VALUES \(values);"
+                guard let sourceUrl: URL = Bundle.module.url(forResource: fileName, withExtension: "txt") else { fatalError("Can not load file \(fileName).txt") }
+                let values: String = CharacterVariant.process(sourceUrl).map({ "(\($0.left), \($0.right))" }).joined(separator: ", ")
+                let insert: String = "INSERT INTO \(tableName) (left, right) VALUES \(values);"
                 var insertStatement: OpaquePointer? = nil
                 defer { sqlite3_finalize(insertStatement) }
                 guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }
                 guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
         }
         private static func createStructureTable() async {
-                let createTable: String = "CREATE TABLE structuretable(word TEXT NOT NULL, romanization TEXT NOT NULL, ping INTEGER NOT NULL, tenkeycode INTEGER NOT NULL);"
+                let createTable: String = "CREATE TABLE structure_table(word TEXT NOT NULL, romanization TEXT NOT NULL, ping INTEGER NOT NULL, ten_key_code INTEGER NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
@@ -146,21 +181,21 @@ struct DatabasePreparer {
                         return "('\(entry.word)', '\(entry.romanization)', \(entry.ping), \(entry.tenKeyCode))"
                 }
                 let values: String = entries.joined(separator: ", ")
-                let insert: String = "INSERT INTO structuretable (word, romanization, ping, tenkeycode) VALUES \(values);"
+                let insert: String = "INSERT INTO structure_table (word, romanization, ping, ten_key_code) VALUES \(values);"
                 var insertStatement: OpaquePointer? = nil
                 defer { sqlite3_finalize(insertStatement) }
                 guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }
                 guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
         }
         private static func createPinyinTable() async {
-                let createTable: String = "CREATE TABLE pinyintable(word TEXT NOT NULL, romanization TEXT NOT NULL, anchors INTEGER NOT NULL, ping INTEGER NOT NULL, tenkeyanchors INTEGER NOT NULL, tenkeycode INTEGER NOT NULL);"
+                let createTable: String = "CREATE TABLE pinyin_lexicon(word TEXT NOT NULL, romanization TEXT NOT NULL, anchors INTEGER NOT NULL, ping INTEGER NOT NULL, ten_key_anchors INTEGER NOT NULL, ten_key_code INTEGER NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
                 sqlite3_finalize(createStatement)
                 let sourceEntries: [LexiconEntry] = LexiconConverter.pinyin()
                 func insert(values: String) {
-                        let insert: String = "INSERT INTO pinyintable (word, romanization, anchors, ping, tenkeyanchors, tenkeycode) VALUES \(values);"
+                        let insert: String = "INSERT INTO pinyin_lexicon (word, romanization, anchors, ping, ten_key_anchors, ten_key_code) VALUES \(values);"
                         var insertStatement: OpaquePointer? = nil
                         defer { sqlite3_finalize(insertStatement) }
                         guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }
@@ -179,7 +214,7 @@ struct DatabasePreparer {
                 }
         }
         private static func createCangjieTable() async {
-                let createTable: String = "CREATE TABLE cangjietable(word TEXT NOT NULL, cangjie5 TEXT NOT NULL, c5complex INTEGER NOT NULL, c5code INTEGER NOT NULL, cangjie3 TEXT NOT NULL, c3complex INTEGER NOT NULL, c3code INTEGER NOT NULL);"
+                let createTable: String = "CREATE TABLE cangjie_table(word TEXT NOT NULL, cangjie5 TEXT NOT NULL, c5complex INTEGER NOT NULL, c5code INTEGER NOT NULL, cangjie3 TEXT NOT NULL, c3complex INTEGER NOT NULL, c3code INTEGER NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
@@ -189,21 +224,21 @@ struct DatabasePreparer {
                         return "('\(entry.word)', '\(entry.cangjie5)', \(entry.c5complex), \(entry.c5code), '\(entry.cangjie3)', \(entry.c3complex), \(entry.c3code))"
                 }
                 let values: String = entries.joined(separator: ", ")
-                let insert: String = "INSERT INTO cangjietable (word, cangjie5, c5complex, c5code, cangjie3, c3complex, c3code) VALUES \(values);"
+                let insert: String = "INSERT INTO cangjie_table (word, cangjie5, c5complex, c5code, cangjie3, c3complex, c3code) VALUES \(values);"
                 var insertStatement: OpaquePointer? = nil
                 defer { sqlite3_finalize(insertStatement) }
                 guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }
                 guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
         }
         private static func createQuickTable() async {
-                let createTable: String = "CREATE TABLE quicktable(word TEXT NOT NULL, quick5 TEXT NOT NULL, q5complex INTEGER NOT NULL, q5code INTEGER NOT NULL, quick3 TEXT NOT NULL, q3complex INTEGER NOT NULL, q3code INTEGER NOT NULL);"
+                let createTable: String = "CREATE TABLE quick_table(word TEXT NOT NULL, quick5 TEXT NOT NULL, q5complex INTEGER NOT NULL, q5code INTEGER NOT NULL, quick3 TEXT NOT NULL, q3complex INTEGER NOT NULL, q3code INTEGER NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
                 sqlite3_finalize(createStatement)
                 let sourceEntries = Quick.generate()
                 func insert(values: String) {
-                        let insert: String = "INSERT INTO quicktable (word, quick5, q5complex, q5code, quick3, q3complex, q3code) VALUES \(values);"
+                        let insert: String = "INSERT INTO quick_table (word, quick5, q5complex, q5code, quick3, q3complex, q3code) VALUES \(values);"
                         var insertStatement: OpaquePointer? = nil
                         defer { sqlite3_finalize(insertStatement) }
                         guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }
@@ -222,14 +257,14 @@ struct DatabasePreparer {
                 }
         }
         private static func createStrokeTable() async {
-                let createTable: String = "CREATE TABLE stroketable(word TEXT NOT NULL, stroke TEXT NOT NULL, complex INTEGER NOT NULL, ping INTEGER NOT NULL, code INTEGER NOT NULL);"
+                let createTable: String = "CREATE TABLE stroke_table(word TEXT NOT NULL, stroke TEXT NOT NULL, complex INTEGER NOT NULL, ping INTEGER NOT NULL, code INTEGER NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
                 sqlite3_finalize(createStatement)
                 let sourceEntries = Stroke.generate()
                 func insert(values: String) {
-                        let insert: String = "INSERT INTO stroketable (word, stroke, complex, ping, code) VALUES \(values);"
+                        let insert: String = "INSERT INTO stroke_table (word, stroke, complex, ping, code) VALUES \(values);"
                         var insertStatement: OpaquePointer? = nil
                         defer { sqlite3_finalize(insertStatement) }
                         guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }
@@ -248,7 +283,7 @@ struct DatabasePreparer {
                 }
         }
         private static func createSymbolTable() async {
-                let createTable: String = "CREATE TABLE symboltable(category INTEGER NOT NULL, unicodeversion INTEGER NOT NULL, codepoint TEXT NOT NULL, cantonese TEXT NOT NULL, romanization TEXT NOT NULL, ping INTEGER NOT NULL, tenkeycode INTEGER NOT NULL);"
+                let createTable: String = "CREATE TABLE symbol_table(category INTEGER NOT NULL, unicode_version INTEGER NOT NULL, code_point TEXT NOT NULL, cantonese TEXT NOT NULL, romanization TEXT NOT NULL, ping INTEGER NOT NULL, ten_key_code INTEGER NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
@@ -270,14 +305,14 @@ struct DatabasePreparer {
                         return "(\(category), \(version), '\(codePoint)', '\(cantonese)', '\(romanization)', \(pingCode), \(tenKeyCode))"
                 }
                 let values: String = entries.joined(separator: ", ")
-                let insert: String = "INSERT INTO symboltable (category, unicodeversion, codepoint, cantonese, romanization, ping, tenkeycode) VALUES \(values);"
+                let insert: String = "INSERT INTO symbol_table (category, unicode_version, code_point, cantonese, romanization, ping, ten_key_code) VALUES \(values);"
                 var insertStatement: OpaquePointer? = nil
                 defer { sqlite3_finalize(insertStatement) }
                 guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }
                 guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
         }
         private static func createEmojiSkinMapTable() async {
-                let createTable: String = "CREATE TABLE emojiskinmap(source TEXT NOT NULL, target TEXT NOT NULL);"
+                let createTable: String = "CREATE TABLE emoji_skin_map(source TEXT NOT NULL, target TEXT NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
@@ -293,14 +328,14 @@ struct DatabasePreparer {
                         return "('\(source)', '\(target)')"
                 }
                 let values: String = entries.joined(separator: ", ")
-                let insert: String = "INSERT INTO emojiskinmap (source, target) VALUES \(values);"
+                let insert: String = "INSERT INTO emoji_skin_map (source, target) VALUES \(values);"
                 var insertStatement: OpaquePointer? = nil
                 defer { sqlite3_finalize(insertStatement) }
                 guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }
                 guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
         }
         private static func createTextMarkTable() async {
-                let createTable: String = "CREATE TABLE marktable(input TEXT NOT NULL, mark TEXT NOT NULL, ping INTEGER NOT NULL, code INTEGER NOT NULL, tenkeycode INTEGER NOT NULL);"
+                let createTable: String = "CREATE TABLE mark_table(input TEXT NOT NULL, mark TEXT NOT NULL, ping INTEGER NOT NULL, code INTEGER NOT NULL, ten_key_code INTEGER NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
@@ -310,14 +345,14 @@ struct DatabasePreparer {
                         return "('\(entry.input)', '\(entry.mark)', \(entry.pingCode), \(entry.charCode), \(entry.tenKeyCharCode))"
                 }
                 let values: String = entries.joined(separator: ", ")
-                let insert: String = "INSERT INTO marktable (input, mark, ping, code, tenkeycode) VALUES \(values);"
+                let insert: String = "INSERT INTO mark_table (input, mark, ping, code, ten_key_code) VALUES \(values);"
                 var insertStatement: OpaquePointer? = nil
                 defer { sqlite3_finalize(insertStatement) }
                 guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }
                 guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
         }
         private static func createSyllableTable() async {
-                let createTable: String = "CREATE TABLE syllabletable(aliascode INTEGER NOT NULL PRIMARY KEY, origincode INTEGER NOT NULL, tenkeyaliascode INTEGER NOT NULL, tenkeyorigincode INTEGER NOT NULL, alias TEXT NOT NULL, origin TEXT NOT NULL);"
+                let createTable: String = "CREATE TABLE syllable_table(alias_code INTEGER NOT NULL PRIMARY KEY, origin_code INTEGER NOT NULL, ten_key_alias_code INTEGER NOT NULL, ten_key_origin_code INTEGER NOT NULL, alias TEXT NOT NULL, origin TEXT NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
@@ -342,14 +377,14 @@ struct DatabasePreparer {
                         return "(\(aliasCode), \(originCode), \(tenKeyAliasCode), \(tenKeyOriginCode), '\(alias)', '\(origin)')"
                 }
                 let values: String = entries.joined(separator: ", ")
-                let insertValues: String = "INSERT INTO syllabletable (aliascode, origincode, tenkeyaliascode, tenkeyorigincode, alias, origin) VALUES \(values);"
+                let insertValues: String = "INSERT INTO syllable_table (alias_code, origin_code, ten_key_alias_code, ten_key_origin_code, alias, origin) VALUES \(values);"
                 var insertStatement: OpaquePointer? = nil
                 defer { sqlite3_finalize(insertStatement) }
                 guard sqlite3_prepare_v2(database, insertValues, -1, &insertStatement, nil) == SQLITE_OK else { return }
                 guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
         }
         private static func createPinyinSyllableTable() async {
-                let createTable: String = "CREATE TABLE pinyinsyllabletable(code INTEGER NOT NULL PRIMARY KEY, tenkeycode INTEGER NOT NULL, syllable TEXT NOT NULL);"
+                let createTable: String = "CREATE TABLE pinyin_syllable_table(code INTEGER NOT NULL PRIMARY KEY, ten_key_code INTEGER NOT NULL, syllable TEXT NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
@@ -368,7 +403,7 @@ struct DatabasePreparer {
                         return "(\(code), \(tenKeyCode), '\(syllable)')"
                 }
                 let values: String = entries.joined(separator: ", ")
-                let insertValues: String = "INSERT INTO pinyinsyllabletable (code, tenkeycode, syllable) VALUES \(values);"
+                let insertValues: String = "INSERT INTO pinyin_syllable_table (code, ten_key_code, syllable) VALUES \(values);"
                 var insertStatement: OpaquePointer? = nil
                 defer { sqlite3_finalize(insertStatement) }
                 guard sqlite3_prepare_v2(database, insertValues, -1, &insertStatement, nil) == SQLITE_OK else { return }

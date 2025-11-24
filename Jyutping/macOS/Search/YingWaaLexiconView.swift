@@ -62,7 +62,7 @@ private struct YingWaaView: View {
                                         HStack(alignment: .firstTextBaseline) {
                                                 Text(verbatim: "釋義").shallow()
                                                 Text.separator
-                                                Text(verbatim: interpretation)
+                                                Text(verbatim: interpretation).font(.body).fontDesign(.serif)
                                         }
                                 }
                         }

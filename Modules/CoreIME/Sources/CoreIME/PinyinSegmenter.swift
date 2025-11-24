@@ -97,7 +97,7 @@ public struct PinyinSegmenter {
                 return String(cString: syllable)
         }
 
-        private static let queryCommand: String = "SELECT syllable FROM pinyinsyllabletable WHERE code = ? LIMIT 1;"
+        private static let queryCommand: String = "SELECT syllable FROM pinyin_syllable_table WHERE code = ? LIMIT 1;"
         private static func prepareStatement() -> OpaquePointer? {
                 var statement: OpaquePointer?
                 guard sqlite3_prepare_v2(Engine.database, queryCommand, -1, &statement, nil) == SQLITE_OK else { return nil }

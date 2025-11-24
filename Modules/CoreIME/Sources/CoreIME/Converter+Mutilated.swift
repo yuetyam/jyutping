@@ -2,39 +2,28 @@ import Foundation
 import SQLite3
 import CommonExtensions
 
-struct Simplifier {
+extension Converter {
 
-        private static func t2s(character: Character, statement: OpaquePointer?) -> Character {
+        private static func char2char(character: Character, statement: OpaquePointer?) -> Character {
                 guard let code = character.unicodeScalars.first?.value else { return character }
                 sqlite3_reset(statement)
                 sqlite3_bind_int64(statement, 1, Int64(code))
                 guard sqlite3_step(statement) == SQLITE_ROW else { return character }
-                let simplifiedCode = Int(sqlite3_column_int64(statement, 0))
-                guard let simplifiedCharacter = transfromCharacter(from: simplifiedCode) else { return character }
-                return simplifiedCharacter
+                let targetCode = Int(sqlite3_column_int64(statement, 0))
+                return Character(decimal: targetCode) ?? character
         }
-        private static func convert(character: Character, statement: OpaquePointer?) -> String {
-                guard let code = character.unicodeScalars.first?.value else { return String(character) }
-                sqlite3_reset(statement)
-                sqlite3_bind_int64(statement, 1, Int64(code))
-                guard sqlite3_step(statement) == SQLITE_ROW else { return String(character) }
-                let simplifiedCode = Int(sqlite3_column_int64(statement, 0))
-                guard let simplifiedCharacter = transfromCharacter(from: simplifiedCode) else { return String(character) }
-                return String(simplifiedCharacter)
-        }
-        private static func transfromCharacter(from code: Int) -> Character? {
-                guard let scalar = Unicode.Scalar(code) else { return nil }
-                return Character(scalar)
+        private static func process(character: Character, statement: OpaquePointer?) -> String {
+                return String(char2char(character: character, statement: statement))
         }
 
-        static func simplify(_ text: String, statement: OpaquePointer?) -> String {
+        static func mutilatedCovert(_ text: String, statement: OpaquePointer?) -> String {
                 switch text.count {
                 case 0:
                         return text
                 case 1:
-                        return String(t2s(character: text.first!, statement: statement))
+                        return String(char2char(character: text.first!, statement: statement))
                 case 2:
-                        return phrases[text] ?? String(text.map({ t2s(character: $0, statement: statement) }))
+                        return phrases[text] ?? String(text.map({ char2char(character: $0, statement: statement) }))
                 default:
                         return phrases[text] ?? transform(text, statement: statement)
                 }
@@ -43,19 +32,19 @@ struct Simplifier {
         private static func transform(_ text: String, statement: OpaquePointer?) -> String {
                 let roundOne = replace(text, replacement: "W")
                 guard roundOne.matched.isNotEmpty else {
-                        return String(text.map({ t2s(character: $0, statement: statement) }))
+                        return String(text.map({ char2char(character: $0, statement: statement) }))
                 }
 
                 let roundTwo = replace(roundOne.modified, replacement: "X")
                 guard roundTwo.matched.isNotEmpty else {
-                        let transformed = roundTwo.modified.map({ convert(character: $0, statement: statement) }).joined()
+                        let transformed = roundTwo.modified.map({ process(character: $0, statement: statement) }).joined()
                         let reverted: String = transformed.replacingOccurrences(of: roundOne.replacement, with: roundOne.matched)
                         return reverted
                 }
 
                 let roundThree = replace(roundTwo.modified, replacement: "Y")
                 guard roundThree.matched.isNotEmpty else {
-                        let transformed: String = roundThree.modified.map({ convert(character: $0, statement: statement) }).joined()
+                        let transformed: String = roundThree.modified.map({ process(character: $0, statement: statement) }).joined()
                         let reverted: String = transformed
                                 .replacingOccurrences(of: roundOne.replacement, with: roundOne.matched)
                                 .replacingOccurrences(of: roundTwo.replacement, with: roundTwo.matched)
@@ -64,7 +53,7 @@ struct Simplifier {
 
                 let roundFour = replace(roundThree.modified, replacement: "Z")
                 guard roundFour.matched.isNotEmpty else {
-                        let transformed: String = roundFour.modified.map({ convert(character: $0, statement: statement) }).joined()
+                        let transformed: String = roundFour.modified.map({ process(character: $0, statement: statement) }).joined()
                         let reverted: String = transformed
                                 .replacingOccurrences(of: roundOne.replacement, with: roundOne.matched)
                                 .replacingOccurrences(of: roundTwo.replacement, with: roundTwo.matched)
@@ -72,7 +61,7 @@ struct Simplifier {
                         return reverted
                 }
 
-                let transformed: String = roundFour.modified.map({ convert(character: $0, statement: statement) }).joined()
+                let transformed: String = roundFour.modified.map({ process(character: $0, statement: statement) }).joined()
                 let reverted: String = transformed
                         .replacingOccurrences(of: roundOne.replacement, with: roundOne.matched)
                         .replacingOccurrences(of: roundTwo.replacement, with: roundTwo.matched)

@@ -5,7 +5,7 @@ import CommonExtensions
 extension Engine {
         public static func searchTextMarks<T: RandomAccessCollection<InputEvent>>(for events: T) -> [Candidate] {
                 let text: String = events.map(\.text).joined()
-                let command: String = "SELECT mark FROM marktable WHERE ping = ?;"
+                let command: String = "SELECT mark FROM mark_table WHERE ping = ?;"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return [] }
@@ -20,7 +20,7 @@ extension Engine {
         public static func queryTextMarks<T: RandomAccessCollection<Combo>>(for combos: T) -> [Candidate] {
                 let tenKeyCode = combos.map(\.rawValue).decimalCombined()
                 guard tenKeyCode > 0 else { return [] }
-                let command: String = "SELECT input, mark FROM marktable WHERE tenkeycode = ?;"
+                let command: String = "SELECT input, mark FROM mark_table WHERE ten_key_code = ?;"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return [] }

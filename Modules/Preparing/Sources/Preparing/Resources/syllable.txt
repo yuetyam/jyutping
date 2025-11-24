@@ -19,6 +19,7 @@ de	de
 di	di
 do	do
 fa	faa
+fe	fe
 fo	fo
 fu	fu
 ga	gaa

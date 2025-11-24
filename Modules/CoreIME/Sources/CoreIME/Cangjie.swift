@@ -31,7 +31,7 @@ private extension Engine {
         }
         private static func match(cangjie5 text: String) -> [ShapeLexicon] {
                 guard let code = text.charCode else { return [] }
-                let command: String = "SELECT rowid, word FROM cangjietable WHERE c5code = \(code);"
+                let command: String = "SELECT rowid, word FROM cangjie_table WHERE c5code = \(code);"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(Engine.database, command, -1, &statement, nil) == SQLITE_OK else { return [] }
@@ -45,7 +45,7 @@ private extension Engine {
                 return items
         }
         private static func glob(cangjie5 text: String) -> [ShapeLexicon] {
-                let command: String = "SELECT rowid, word, c5complex FROM cangjietable WHERE cangjie5 GLOB '\(text)*' ORDER BY c5complex ASC LIMIT 100;"
+                let command: String = "SELECT rowid, word, c5complex FROM cangjie_table WHERE cangjie5 GLOB '\(text)*' ORDER BY c5complex ASC LIMIT 100;"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(Engine.database, command, -1, &statement, nil) == SQLITE_OK else { return [] }
@@ -68,7 +68,7 @@ private extension Engine {
         }
         private static func match(cangjie3 text: String) -> [ShapeLexicon] {
                 guard let code = text.charCode else { return [] }
-                let command: String = "SELECT rowid, word FROM cangjietable WHERE c3code = \(code);"
+                let command: String = "SELECT rowid, word FROM cangjie_table WHERE c3code = \(code);"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(Engine.database, command, -1, &statement, nil) == SQLITE_OK else { return [] }
@@ -82,7 +82,7 @@ private extension Engine {
                 return items
         }
         private static func glob(cangjie3 text: String) -> [ShapeLexicon] {
-                let command: String = "SELECT rowid, word, c3complex FROM cangjietable WHERE cangjie3 GLOB '\(text)*' ORDER BY c3complex ASC LIMIT 100;"
+                let command: String = "SELECT rowid, word, c3complex FROM cangjie_table WHERE cangjie3 GLOB '\(text)*' ORDER BY c3complex ASC LIMIT 100;"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(Engine.database, command, -1, &statement, nil) == SQLITE_OK else { return [] }

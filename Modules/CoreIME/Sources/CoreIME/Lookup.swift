@@ -58,7 +58,7 @@ extension Engine {
 
         private static func match(for text: String) -> [String] {
                 var romanizations: [String] = []
-                let command: String = "SELECT romanization FROM lexicontable WHERE word = '\(text)';"
+                let command: String = "SELECT romanization FROM core_lexicon WHERE word = '\(text)';"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(Engine.database, command, -1, &statement, nil) == SQLITE_OK else { return romanizations }

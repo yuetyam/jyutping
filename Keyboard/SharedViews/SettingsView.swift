@@ -117,11 +117,11 @@ struct SettingsView: View {
         @State private var needsNumberRow: Bool = Options.needsNumberRow
         @State private var showLowercaseKeys: Bool = Options.showLowercaseKeys
         @State private var keyTextPreview: Bool = Options.keyTextPreview
-        @State private var keyHeightOffset: CGFloat = Options.fetchKeyHeightOffset()
         @State private var inputKeyStyle: InputKeyStyle = Options.inputKeyStyle
+        @State private var keyHeightOffset: CGFloat = Options.fetchKeyHeightOffset()
+        @State private var traditionalCharacterStandard: CharacterStandard = Options.traditionalCharacterStandard
         @State private var commentStyle: CommentStyle = Options.commentStyle
         @State private var commentToneStyle: CommentToneStyle = Options.commentToneStyle
-        @State private var traditionalCharacterStandard: CharacterStandard = Options.traditionalCharacterStandard
         @State private var cangjieVariant: CangjieVariant = Options.cangjieVariant
         @State private var isEmojiSuggestionsOn: Bool = Options.isEmojiSuggestionsOn
         @State private var isTextReplacementsOn: Bool = Options.isTextReplacementsOn
@@ -261,33 +261,6 @@ struct SettingsView: View {
                                         }
                                 }
 
-                                Picker("SettingsView.CommentStyle.PickerTitle", selection: $commentStyle) {
-                                        Text("SettingsView.CommentStyle.Option.Above").tag(CommentStyle.aboveCandidates)
-                                        Text("SettingsView.CommentStyle.Option.Below").tag(CommentStyle.belowCandidates)
-                                        Text("SettingsView.CommentStyle.Option.None").tag(CommentStyle.noComments)
-                                }
-                                .pickerStyle(.inline)
-                                .textCase(nil)
-                                .onChange(of: commentStyle) { newStyle in
-                                        AudioFeedback.modified()
-                                        context.triggerSelectionHapticFeedback()
-                                        Options.updateCommentStyle(to: newStyle)
-                                }
-
-                                Picker("SettingsView.CommentToneStyle.PickerTitle", selection: $commentToneStyle) {
-                                        Text("SettingsView.CommentToneStyle.PickerOption1").tag(CommentToneStyle.normal)
-                                        Text("SettingsView.CommentToneStyle.PickerOption2").tag(CommentToneStyle.noTones)
-                                        Text("SettingsView.CommentToneStyle.PickerOption3").tag(CommentToneStyle.superscript)
-                                        Text("SettingsView.CommentToneStyle.PickerOption4").tag(CommentToneStyle.subscript)
-                                }
-                                .pickerStyle(.inline)
-                                .textCase(nil)
-                                .onChange(of: commentToneStyle) { newStyle in
-                                        AudioFeedback.modified()
-                                        context.triggerSelectionHapticFeedback()
-                                        Options.updateCommentToneStyle(to: newStyle)
-                                }
-
                                 Picker("SettingsView.TraditionalCharacterStandard.PickerTitle", selection: $traditionalCharacterStandard) {
                                         Text("SettingsView.TraditionalCharacterStandard.Option1.Preset").tag(CharacterStandard.preset)
                                         Text("SettingsView.TraditionalCharacterStandard.Option3.Inherited").tag(CharacterStandard.inherited)
@@ -303,6 +276,51 @@ struct SettingsView: View {
                                         context.triggerSelectionHapticFeedback()
                                         context.syncTraditionalCharacterStandard(to: newStandard)
                                         Options.updateTraditionalCharacterStandard(to: newStandard)
+                                }
+
+                                Section {
+                                        Picker("SettingsView.CommentStyle.PickerTitle", selection: $commentStyle) {
+                                                Text("SettingsView.CommentStyle.Option.Above").tag(CommentStyle.aboveCandidates)
+                                                Text("SettingsView.CommentStyle.Option.Below").tag(CommentStyle.belowCandidates)
+                                                Text("SettingsView.CommentStyle.Option.None").tag(CommentStyle.noComments)
+                                        }
+                                        .pickerStyle(.inline)
+                                        .labelsHidden()
+                                        .onChange(of: commentStyle) { newStyle in
+                                                AudioFeedback.modified()
+                                                context.triggerSelectionHapticFeedback()
+                                                Options.updateCommentStyle(to: newStyle)
+                                        }
+                                        #if DEBUG
+                                        HStack(spacing: 0) {
+                                                Text(verbatim: "場景").minimumScaleFactor(0.5).lineLimit(1)
+                                                Spacer()
+                                                Picker("SettingsView.CommentStyle.PickerTitle", selection: $commentStyle) {
+                                                        Text(verbatim: "所有").tag(CommentStyle.aboveCandidates)
+                                                        Text(verbatim: "反查").tag(CommentStyle.belowCandidates)
+                                                        Text(verbatim: "無").tag(CommentStyle.noComments)
+                                                }
+                                                .pickerStyle(.segmented)
+                                                .labelsHidden()
+                                                .fixedSize()
+                                        }
+                                        #endif
+                                } header: {
+                                        Text("SettingsView.CommentStyle.PickerTitle").textCase(nil)
+                                }
+
+                                Picker("SettingsView.CommentToneStyle.PickerTitle", selection: $commentToneStyle) {
+                                        Text("SettingsView.CommentToneStyle.PickerOption1").tag(CommentToneStyle.normal)
+                                        Text("SettingsView.CommentToneStyle.PickerOption2").tag(CommentToneStyle.noTones)
+                                        Text("SettingsView.CommentToneStyle.PickerOption3").tag(CommentToneStyle.superscript)
+                                        Text("SettingsView.CommentToneStyle.PickerOption4").tag(CommentToneStyle.subscript)
+                                }
+                                .pickerStyle(.inline)
+                                .textCase(nil)
+                                .onChange(of: commentToneStyle) { newStyle in
+                                        AudioFeedback.modified()
+                                        context.triggerSelectionHapticFeedback()
+                                        Options.updateCommentToneStyle(to: newStyle)
                                 }
 
                                 Picker("SettingsView.CangjieVariant.PickerTitle", selection: $cangjieVariant) {

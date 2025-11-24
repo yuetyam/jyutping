@@ -125,7 +125,7 @@ public struct Segmenter {
                 return match(code: events.combinedCode, statement: statement)?.originText
         }
 
-        private static let queryCommand: String = "SELECT origincode FROM syllabletable WHERE aliascode = ? LIMIT 1;"
+        private static let queryCommand: String = "SELECT origin_code FROM syllable_table WHERE alias_code = ? LIMIT 1;"
         private static func prepareStatement() -> OpaquePointer? {
                 var statement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(Engine.database, queryCommand, -1, &statement, nil) == SQLITE_OK else { return nil }

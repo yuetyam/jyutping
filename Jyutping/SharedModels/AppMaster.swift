@@ -73,7 +73,7 @@ extension AppMaster {
                         var newRomanization: String = String.empty
                         for character in text {
                                 if character.isIdeographic {
-                                        let shouldInsertSpace: Bool = (characterSequence.last?.isBasicLatinLetter ?? false) || (characterSequence.last?.isBasicDigit ?? false)
+                                        let shouldInsertSpace: Bool = (characterSequence.last?.isAlphanumeric ?? false) || (newRomanization.last?.isAlphanumeric ?? false)
                                         if shouldInsertSpace {
                                                 newRomanization.append(Character.space)
                                         }
@@ -82,7 +82,7 @@ extension AppMaster {
                                                 index += 1
                                         }
                                 } else {
-                                        let shouldInsertSpace: Bool = (character.isBasicLatinLetter || character.isBasicDigit) && (characterSequence.last?.isIdeographic ?? false)
+                                        let shouldInsertSpace: Bool = character.isAlphanumeric && (characterSequence.last?.isIdeographic ?? false)
                                         if shouldInsertSpace {
                                                 newRomanization.append(Character.space)
                                         }
