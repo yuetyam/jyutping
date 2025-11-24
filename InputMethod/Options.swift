@@ -1,27 +1,41 @@
 import Foundation
 import CoreIME
+import CommonExtensions
+
+extension CharacterStandard {
+        fileprivate var legacyRawValue: Int? {
+                switch self {
+                case .hongkong: 2
+                case .taiwan: 3
+                case .mutilated: 4
+                default: nil
+                }
+        }
+        var isPreset: Bool { self == .preset }
+}
 
 struct Options {
 
         /// 字形標準
-        nonisolated(unsafe) private(set) static var characterStandard: CharacterStandard = {
-                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.CharacterStandard)
-                return switch savedValue {
-                case 2: .hongkong
-                case 3: .taiwan
-                case 4: .mutilated
-                default: .preset
-                }
+        nonisolated(unsafe) private(set) static var legacyCharacterStandard: CharacterStandard = {
+                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.LegacyCharacterStandard)
+                return CharacterStandard.allCases.first(where: { $0.legacyRawValue == savedValue }) ?? .preset
         }()
-        static func updateCharacterStandard(to standard: CharacterStandard) {
-                characterStandard = standard
-                let value: Int = switch standard {
-                case .hongkong: 2
-                case .taiwan: 3
-                case .mutilated: 4
-                default: 1
-                }
-                UserDefaults.standard.set(value, forKey: OptionsKey.CharacterStandard)
+        static func updateLegacyCharacterStandard(to standard: CharacterStandard) {
+                legacyCharacterStandard = standard
+                let value: Int = standard.legacyRawValue ?? 1
+                UserDefaults.standard.set(value, forKey: OptionsKey.LegacyCharacterStandard)
+        }
+
+        /// 「傳統漢字」字形標準
+        nonisolated(unsafe) private(set) static var traditionalCharacterStandard: CharacterStandard = {
+                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.TraditionalCharacterStandard)
+                return CharacterStandard.standard(of: savedValue)
+        }()
+        static func updateTraditionalCharacterStandard(to standard: CharacterStandard) {
+                traditionalCharacterStandard = standard
+                let value: Int = standard.rawValue
+                UserDefaults.standard.set(value, forKey: OptionsKey.TraditionalCharacterStandard)
         }
 
         /// 半寬／全寬數字、字母
@@ -59,7 +73,8 @@ struct Options {
 }
 
 private struct OptionsKey {
-        static let CharacterStandard: String = "characters"
+        static let LegacyCharacterStandard: String = "characters"
+        static let TraditionalCharacterStandard: String = "TraditionalCharacterStandard"
         static let CharacterForm: String = "character_form"
         static let PunctuationForm: String = "punctuation"
         static let InputMethodMode: String = "InputMethodMode"

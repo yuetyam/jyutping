@@ -21,7 +21,8 @@ struct GeneralSettingsView: View {
         @State private var labelSet: LabelSet = AppSettings.labelSet
         @State private var isLabelLastZero: Bool = AppSettings.isLabelLastZero
 
-        @State private var characterStandard: CharacterStandard = Options.characterStandard
+        @State private var legacyCharacterStandard: CharacterStandard = Options.legacyCharacterStandard
+        @State private var traditionalCharacterStandard: CharacterStandard = Options.traditionalCharacterStandard
         @State private var isEmojiSuggestionsOn: Bool = AppSettings.isEmojiSuggestionsOn
         @State private var isTextReplacementsOn: Bool = AppSettings.isTextReplacementsOn
         @State private var isCompatibleModeOn: Bool = AppSettings.isCompatibleModeOn
@@ -149,15 +150,27 @@ struct GeneralSettingsView: View {
                                                         }
                                         }
                                         Section {
-                                                Picker("GeneralPreferencesView.CharacterStandard.PickerTitle", selection: $characterStandard) {
+                                                Picker("GeneralPreferencesView.CharacterStandard.PickerTitle", selection: $legacyCharacterStandard) {
                                                         Text("GeneralPreferencesView.CharacterStandard.Traditional").tag(CharacterStandard.preset)
                                                         Text("GeneralPreferencesView.CharacterStandard.TraditionalKongKong").tag(CharacterStandard.hongkong)
                                                         Text("GeneralPreferencesView.CharacterStandard.TraditionalTaiwan").tag(CharacterStandard.taiwan)
                                                         Text("GeneralPreferencesView.CharacterStandard.Simplified").tag(CharacterStandard.mutilated)
                                                 }
                                                 .pickerStyle(.menu)
-                                                .onChange(of: characterStandard) { newStandard in
-                                                        Options.updateCharacterStandard(to: newStandard)
+                                                .onChange(of: legacyCharacterStandard) { newStandard in
+                                                        Options.updateLegacyCharacterStandard(to: newStandard)
+                                                }
+                                                Picker("GeneralPreferencesView.TraditionalCharacterStandard.PickerTitle", selection: $traditionalCharacterStandard) {
+                                                        Text("GeneralPreferencesView.TraditionalCharacterStandard.Option1.Preset").tag(CharacterStandard.preset)
+                                                        Text("GeneralPreferencesView.TraditionalCharacterStandard.Option3.Inherited").tag(CharacterStandard.inherited)
+                                                        Text("GeneralPreferencesView.TraditionalCharacterStandard.Option6.HongKong").tag(CharacterStandard.hongkong)
+                                                        Text("GeneralPreferencesView.TraditionalCharacterStandard.Option7.Taiwan").tag(CharacterStandard.taiwan)
+                                                        Text("GeneralPreferencesView.TraditionalCharacterStandard.Option8.PRCGeneral").tag(CharacterStandard.prcGeneral)
+                                                        Text("GeneralPreferencesView.TraditionalCharacterStandard.Option9.AncientBooksPublishing").tag(CharacterStandard.ancientBooksPublishing)
+                                                }
+                                                .pickerStyle(.menu)
+                                                .onChange(of: traditionalCharacterStandard) { newStandard in
+                                                        Options.updateTraditionalCharacterStandard(to: newStandard)
                                                 }
                                                 Toggle("GeneralPreferencesView.EmojiSuggestions.ToggleTitle", isOn: $isEmojiSuggestionsOn)
                                                         .toggleStyle(.switch)

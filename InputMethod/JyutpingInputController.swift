@@ -451,8 +451,9 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 let bound: Int = min(firstIndex + pageSize, candidateCount)
                 indices = (firstIndex, bound - 1)
                 updateWindowFrame()
+                let standard: CharacterStandard = Options.legacyCharacterStandard.isPreset ? Options.traditionalCharacterStandard : Options.legacyCharacterStandard
                 let newDisplayCandidates = (firstIndex..<bound).map({ index -> DisplayCandidate in
-                        return DisplayCandidate(candidate: candidates[index], candidateIndex: index)
+                        return DisplayCandidate(candidate: candidates[index], candidateIndex: index, characterStandard: standard)
                 })
                 appContext.update(with: newDisplayCandidates, highlight: highlight)
         }
@@ -466,7 +467,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 let events = bufferEvents
                 let isInputMemoryOn: Bool = AppSettings.isInputMemoryOn
                 let isEmojiSuggestionsOn: Bool = AppSettings.isEmojiSuggestionsOn
-                let characterStandard = Options.characterStandard
+                let standard: CharacterStandard = Options.legacyCharacterStandard.isPreset ? Options.traditionalCharacterStandard : Options.legacyCharacterStandard
                 suggestionTask = Task.detached(priority: .high) { [weak self] in
                         guard let self else { return }
                         let segmentation = Segmenter.segment(events: events)
@@ -475,7 +476,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         async let textMarks: [Candidate] = Engine.searchTextMarks(for: events)
                         async let symbols: [Candidate] = Engine.searchSymbols(for: events, segmentation: segmentation)
                         async let queried: [Candidate] = Engine.suggest(events: events, segmentation: segmentation)
-                        let suggestions: [Candidate] = await Converter.dispatch(memory: memory, defined: defined, marks: textMarks, symbols: symbols, queried: queried, isEmojiSuggestionsOn: isEmojiSuggestionsOn, characterStandard: characterStandard)
+                        let suggestions: [Candidate] = await Converter.dispatch(memory: memory, defined: defined, marks: textMarks, symbols: symbols, queried: queried, isEmojiSuggestionsOn: isEmojiSuggestionsOn, characterStandard: standard)
                         if Task.isCancelled.negative {
                                 await MainActor.run { [weak self] in
                                         guard let self else { return }
@@ -506,10 +507,11 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         candidates = (definedCandidates + textMarkCandidates).distinct()
                         return
                 }
+                let standard: CharacterStandard = Options.legacyCharacterStandard.isPreset ? Options.traditionalCharacterStandard : Options.legacyCharacterStandard
                 suggestionTask = Task.detached(priority: .high) { [weak self] in
                         guard let self else { return }
                         let segmentation = PinyinSegmenter.segment(events: events)
-                        let suggestions: [Candidate] = await Engine.pinyinReverseLookup(events: events, segmentation: segmentation).transformed(to: Options.characterStandard)
+                        let suggestions: [Candidate] = await Engine.pinyinReverseLookup(events: events, segmentation: segmentation).transformed(to: standard)
                         if Task.isCancelled.negative {
                                 await MainActor.run { [weak self] in
                                         guard let self else { return }
@@ -539,7 +541,8 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 if isValidSequence {
                         mark(text: String(cangjieRadicals))
                         let text: String = events.map(\.text).joined()
-                        let suggestions: [Candidate] = Engine.cangjieReverseLookup(text: text, variant: AppSettings.cangjieVariant).transformed(to: Options.characterStandard)
+                        let standard: CharacterStandard = Options.legacyCharacterStandard.isPreset ? Options.traditionalCharacterStandard : Options.legacyCharacterStandard
+                        let suggestions: [Candidate] = Engine.cangjieReverseLookup(text: text, variant: AppSettings.cangjieVariant).transformed(to: standard)
                         candidates = (definedCandidates + textMarkCandidates + suggestions).distinct()
                 } else {
                         mark(text: joinedBufferTexts())
@@ -555,7 +558,8 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         candidates = (definedCandidates + textMarkCandidates).distinct()
                 } else {
                         mark(text: StrokeEvent.displayText(from: events))
-                        let suggestions: [Candidate] = Engine.strokeReverseLookup(events: events).transformed(to: Options.characterStandard)
+                        let standard: CharacterStandard = Options.legacyCharacterStandard.isPreset ? Options.traditionalCharacterStandard : Options.legacyCharacterStandard
+                        let suggestions: [Candidate] = Engine.strokeReverseLookup(events: events).transformed(to: standard)
                         candidates = (definedCandidates + textMarkCandidates + suggestions).distinct()
                 }
         }
@@ -583,7 +587,8 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 let prefixMark: String = bufferText.prefix(1) + String.space
                 let text2mark: String = prefixMark + tailMark
                 mark(text: text2mark)
-                let suggestions: [Candidate] = Engine.structureReverseLookup(events: bufferEvents, input: bufferText, segmentation: segmentation).transformed(to: Options.characterStandard)
+                let standard: CharacterStandard = Options.legacyCharacterStandard.isPreset ? Options.traditionalCharacterStandard : Options.legacyCharacterStandard
+                let suggestions: [Candidate] = Engine.structureReverseLookup(events: bufferEvents, input: bufferText, segmentation: segmentation).transformed(to: standard)
                 candidates = (definedCandidates + textMarkCandidates + suggestions).distinct()
         }
 
@@ -1334,8 +1339,8 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 case 3: .mutilated
                 default: nil
                 }
-                guard let newVariant, newVariant != Options.characterStandard else { return }
-                Options.updateCharacterStandard(to: newVariant)
+                guard let newVariant, newVariant != Options.legacyCharacterStandard else { return }
+                Options.updateLegacyCharacterStandard(to: newVariant)
                 didCharacterStandardChanged = true
         }
 
@@ -1406,22 +1411,22 @@ final class JyutpingInputController: IMKInputController, Sendable {
 
                 let traditional = NSMenuItem(title: String(localized: "Menu.CharacterStandard.Traditional"), action: #selector(toggleTraditionalCharacterStandard), keyEquivalent: "1")
                 traditional.keyEquivalentModifierMask = [.control, .shift]
-                traditional.state = (Options.characterStandard == .preset) ? .on : .off
+                traditional.state = (Options.legacyCharacterStandard == .preset) ? .on : .off
                 menu.addItem(traditional)
 
                 let hongkong = NSMenuItem(title: String(localized: "Menu.CharacterStandard.TraditionalHongKong"), action: #selector(toggleHongKongCharacterStandard), keyEquivalent: "2")
                 hongkong.keyEquivalentModifierMask = [.control, .shift]
-                hongkong.state = (Options.characterStandard == .hongkong) ? .on : .off
+                hongkong.state = (Options.legacyCharacterStandard == .hongkong) ? .on : .off
                 menu.addItem(hongkong)
 
                 let taiwan = NSMenuItem(title: String(localized: "Menu.CharacterStandard.TraditionalTaiwan"), action: #selector(toggleTaiwanCharacterStandard), keyEquivalent: "3")
                 taiwan.keyEquivalentModifierMask = [.control, .shift]
-                taiwan.state = (Options.characterStandard == .taiwan) ? .on : .off
+                taiwan.state = (Options.legacyCharacterStandard == .taiwan) ? .on : .off
                 menu.addItem(taiwan)
 
                 let simplified = NSMenuItem(title: String(localized: "Menu.CharacterStandard.Simplified"), action: #selector(toggleSimplifiedCharacterStandard), keyEquivalent: "4")
                 simplified.keyEquivalentModifierMask = [.control, .shift]
-                simplified.state = Options.characterStandard.isMutilated ? .on : .off
+                simplified.state = Options.legacyCharacterStandard.isMutilated ? .on : .off
                 menu.addItem(simplified)
 
                 menu.addItem(.separator())

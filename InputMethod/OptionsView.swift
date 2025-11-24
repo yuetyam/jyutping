@@ -26,7 +26,7 @@ struct OptionsView: View {
                 String(localized: "OptionsView.InputMethodMode.ABC")
         ]
 
-        private let characterStandard: CharacterStandard = Options.characterStandard
+        private let characterStandard: CharacterStandard = Options.legacyCharacterStandard
         private let characterForm: CharacterForm = Options.characterForm
         private let punctuationForm: PunctuationForm = Options.punctuationForm
         private let inputMethodMode: InputMethodMode = Options.inputMethodMode
