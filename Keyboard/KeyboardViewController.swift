@@ -445,7 +445,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 case .backspace:
                         if inputStage.isBuffering {
                                 switch keyboardLayout {
-                                case .qwerty:
+                                case .qwerty, .fourteenKey, .eighteenKey, .nineteenKey, .twentyOneKey:
                                         capitals = capitals.dropLast()
                                         inputLengthSequence = inputLengthSequence.dropLast()
                                         bufferEvents = bufferEvents.dropLast()
@@ -456,12 +456,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                         bufferEvents = bufferEvents.dropLast(lastInputLength)
                                 case .nineKey:
                                         bufferCombos = bufferCombos.dropLast()
-                                case .fourteenKey:
-                                        // TODO: 14 Key
-                                        break
-                                case .eighteenKey:
-                                        // TODO: 18 Key
-                                        break
+                                // TODO: 14 ~ 21 Key
                                 }
                         } else {
                                 textDocumentProxy.deleteBackward()
@@ -554,7 +549,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         }
         private func aftercareSelected(_ candidate: Candidate) {
                 switch keyboardLayout {
-                case .qwerty, .tripleStroke:
+                case .qwerty, .tripleStroke, .fourteenKey, .eighteenKey, .nineteenKey, .twentyOneKey:
                         switch bufferEvents.first {
                         case .some(let event) where event.isReverseLookupTrigger:
                                 selectedCandidates = []
@@ -599,12 +594,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         let tailCount: Int = bufferCombos.count - candidate.inputCount
                         let suffixLength: Int = max(0, tailCount)
                         bufferCombos = bufferCombos.suffix(suffixLength)
-                case .fourteenKey:
-                        // TODO: 14 Key
-                        break
-                case .eighteenKey:
-                        // TODO: 18 Key
-                        break
+                // TODO: 14 ~ 21 Key
                 }
         }
         private func adjustKeyboard() {
@@ -980,7 +970,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         keyboardHeight = cachedKeyboardHeight
                 } else {
                         cachedKeyboardHeight = keyboardHeight
-                        keyboardHeight += 150
+                        keyboardHeight += (keyboardInterface.isPhoneLandscape ? 128 : 168)
                 }
                 isKeyboardHeightExpanded.toggle()
                 updateViewHeightConstraint()

@@ -13,10 +13,16 @@ enum KeyboardLayout: Int, CaseIterable {
         case nineKey = 3
 
         /// 14鍵
-        case fourteenKey = 4
+        case fourteenKey = 14
 
         /// 18鍵
-        case eighteenKey = 5
+        case eighteenKey = 18
+
+        /// 19鍵
+        case nineteenKey = 19
+
+        /// 21鍵
+        case twentyOneKey = 21
 
         /// Read KeyboardLayout from UserDefaults
         static func fetchSavedLayout() -> KeyboardLayout {
@@ -38,6 +44,12 @@ enum KeyboardLayout: Int, CaseIterable {
 
         /// 18鍵
         var isEighteenKey: Bool { self == .fourteenKey }
+
+        /// 19鍵
+        var isNineteenKey: Bool { self == .nineteenKey }
+
+        /// 21鍵
+        var isTwentyOneKey: Bool { self == .twentyOneKey }
 }
 
 /// Numeric keyboard for the Qwerty KeyboardLayout

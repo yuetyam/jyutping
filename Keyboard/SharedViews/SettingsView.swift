@@ -189,6 +189,8 @@ struct SettingsView: View {
                                         #if DEBUG
                                         Text("SettingsView.KeyboardLayout.Option.FourteenKey").tag(KeyboardLayout.fourteenKey)
                                         Text("SettingsView.KeyboardLayout.Option.EighteenKey").tag(KeyboardLayout.eighteenKey)
+                                        Text("SettingsView.KeyboardLayout.Option.NineteenKey").tag(KeyboardLayout.nineteenKey)
+                                        Text("SettingsView.KeyboardLayout.Option.TwentyOneKey").tag(KeyboardLayout.twentyOneKey)
                                         #endif
                                 }
                                 .pickerStyle(.inline)

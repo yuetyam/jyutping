@@ -16,7 +16,14 @@ struct RightAlternativeKey: View {
         @State private var selectedIndex: Int = 0
         @State private var pulled: String? = nil
 
-        private let symbols: [String] = ["，", "。", "？", "！"]
+        private let elements: [KeyElement] = [
+                KeyElement("，"),
+                KeyElement("。"),
+                KeyElement("？"),
+                KeyElement("！"),
+                KeyElement(",", header: "英文"),
+                KeyElement(".", header: "英文")
+        ]
 
         var body: some View {
                 let keyWidth: CGFloat = context.widthUnit
@@ -35,7 +42,7 @@ struct RightAlternativeKey: View {
                 ZStack {
                         Color.interactiveClear
                         if isLongPressing {
-                                let symbolCount: Int = symbols.count
+                                let symbolCount: Int = elements.count
                                 let expansionCount: Int = symbolCount - 1
                                 let trailingOffset: CGFloat = baseWidth * CGFloat(expansionCount)
                                 ExpansiveBubbleShape(keyLocale: .trailing, expansionCount: expansionCount)
@@ -43,12 +50,19 @@ struct RightAlternativeKey: View {
                                         .shadow(color: .shadowGray, radius: 1)
                                         .overlay {
                                                 HStack(spacing: 0) {
-                                                        ForEach(symbols.indices, id: \.self) { index in
+                                                        ForEach(elements.indices, id: \.self) { index in
                                                                 let reversedIndex = (symbolCount - 1) - index
+                                                                let element = elements[reversedIndex]
                                                                 ZStack {
                                                                         RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius, style: .continuous)
                                                                                 .fill(selectedIndex == reversedIndex ? Color.accentColor : Color.clear)
-                                                                        Text(verbatim: symbols[reversedIndex])
+                                                                        ZStack(alignment: .top) {
+                                                                                Color.interactiveClear
+                                                                                Text(verbatim: element.header ?? String.space)
+                                                                                        .font(.keyFootnote)
+                                                                                        .shallow()
+                                                                        }
+                                                                        Text(verbatim: element.text)
                                                                                 .font(.title2)
                                                                                 .foregroundStyle(selectedIndex == reversedIndex ? Color.white : Color.primary)
                                                                 }
@@ -106,7 +120,7 @@ struct RightAlternativeKey: View {
                         }
                         .onChanged { state in
                                 if isLongPressing {
-                                        let memberCount: Int = 4
+                                        let memberCount: Int = elements.count
                                         let distance: CGFloat = -(state.translation.width)
                                         if distance < (baseWidth / 2.0) {
                                                 if selectedIndex != 0 {
@@ -138,7 +152,7 @@ struct RightAlternativeKey: View {
                                         pulled = nil
                                 }
                                 if isLongPressing {
-                                        guard let selectedSymbol: String = symbols.fetch(selectedIndex) else { return }
+                                        guard let selectedSymbol: String = elements.fetch(selectedIndex)?.text else { return }
                                         AudioFeedback.inputed()
                                         context.triggerSelectionHapticFeedback()
                                         context.operate(.input(selectedSymbol))

@@ -31,6 +31,7 @@ enum HiddenEvent: Int {
         case letterA
         case letterL
         case letterZ
+        case letterM
         case backspace
 
         var inputEvent: InputEvent? {
@@ -38,6 +39,7 @@ enum HiddenEvent: Int {
                 case .letterA: .letterA
                 case .letterL: .letterL
                 case .letterZ: .letterZ
+                case .letterM: .letterM
                 case .backspace: nil
                 }
         }

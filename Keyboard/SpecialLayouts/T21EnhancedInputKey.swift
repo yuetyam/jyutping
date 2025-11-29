@@ -3,7 +3,25 @@ import Combine
 import CommonExtensions
 import CoreIME
 
-struct RightKey: View {
+struct T21EnhancedInputKey: View {
+
+        /// Create an EnhancedInputKey
+        /// - Parameters:
+        ///   - keyLocale: Key location, left half screen (leading) or right half screen (trailing).
+        ///   - widthUnitTimes: Times of widthUnit
+        ///   - event: InputEvent
+        ///   - keyUnit: KeyModel
+        init(keyLocale: HorizontalEdge, widthUnitTimes: CGFloat = 1.25, event: InputEvent? = nil, keyUnit: KeyUnit) {
+                self.keyLocale = keyLocale
+                self.widthUnitTimes = widthUnitTimes
+                self.event = event
+                self.keyUnit = keyUnit
+        }
+
+        private let keyLocale: HorizontalEdge
+        private let widthUnitTimes: CGFloat
+        private let event: InputEvent?
+        private let keyUnit: KeyUnit
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
@@ -15,17 +33,8 @@ struct RightKey: View {
         @State private var selectedIndex: Int = 0
         @State private var pulled: String? = nil
 
-        private let elements: [KeyElement] = [
-                KeyElement("。"),
-                KeyElement("？"),
-                KeyElement("！"),
-                KeyElement("…", header: "省略"),
-                KeyElement(".", header: "英文")
-        ]
-        private let headerText: String = "？"
-
         var body: some View {
-                let keyWidth: CGFloat = context.widthUnit
+                let keyWidth: CGFloat = context.widthUnit * widthUnitTimes
                 let keyHeight: CGFloat = context.heightUnit
                 let isPhoneLandscape: Bool = context.keyboardInterface.isPhoneLandscape
                 let verticalPadding: CGFloat = isPhoneLandscape ? 3 : 6
@@ -37,39 +46,52 @@ struct RightKey: View {
                 let previewBottomOffset: CGFloat = (baseHeight * 2) + (curveHeight * 1.5)
                 let shouldPreviewKey: Bool = Options.keyTextPreview
                 let activeColor: Color = shouldPreviewKey ? colorScheme.inputKeyColor : colorScheme.activeInputKeyColor
-                let shouldShowExtraHeader: Bool = (Options.inputKeyStyle == .numbersAndSymbols)
+                let shouldShowLowercaseKeys: Bool = Options.showLowercaseKeys && context.keyboardCase.isLowercased
+                let textCase: Text.Case = shouldShowLowercaseKeys ? .lowercase : .uppercase
+                let shouldAdjustKeyTextPosition: Bool = shouldShowLowercaseKeys && (context.keyboardForm == .alphabetic) && (event?.isNumber.negative ?? true)
+                let keyTextBottomInset: CGFloat = shouldAdjustKeyTextPosition ? 3 : 0
                 ZStack {
                         Color.interactiveClear
                         if isLongPressing {
-                                let symbolCount: Int = elements.count
-                                let expansionCount: Int = symbolCount - 1
-                                let trailingOffset: CGFloat = baseWidth * CGFloat(expansionCount)
-                                ExpansiveBubbleShape(keyLocale: .trailing, expansionCount: expansionCount)
+                                let memberCount: Int = keyUnit.members.count
+                                let expansionCount: Int = memberCount - 1
+                                let offsetX: CGFloat = baseWidth * CGFloat(expansionCount)
+                                let leadingOffset: CGFloat = keyLocale.isLeading ? offsetX : 0
+                                let trailingOffset: CGFloat = keyLocale.isTrailing ? offsetX : 0
+                                ExpansiveBubbleShape(keyLocale: keyLocale, expansionCount: expansionCount)
                                         .fill(colorScheme.previewBubbleColor)
                                         .shadow(color: .shadowGray, radius: 1)
                                         .overlay {
                                                 HStack(spacing: 0) {
-                                                        ForEach(elements.indices, id: \.self) { index in
-                                                                let reversedIndex = (symbolCount - 1) - index
-                                                                let element = elements[reversedIndex]
+                                                        ForEach(keyUnit.members.indices, id: \.self) { index in
+                                                                let elementIndex: Int = keyLocale.isLeading ? index : ((memberCount - 1) - index)
+                                                                let element: KeyElement = keyUnit.members[elementIndex]
                                                                 ZStack {
                                                                         RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius, style: .continuous)
-                                                                                .fill(selectedIndex == reversedIndex ? Color.accentColor : Color.clear)
+                                                                                .fill(selectedIndex == elementIndex ? Color.accentColor : Color.clear)
                                                                         ZStack(alignment: .top) {
                                                                                 Color.interactiveClear
                                                                                 Text(verbatim: element.header ?? String.space)
                                                                                         .font(.keyFootnote)
                                                                                         .shallow()
                                                                         }
+                                                                        ZStack(alignment: .bottom) {
+                                                                                Color.interactiveClear
+                                                                                Text(verbatim: element.footer ?? String.space)
+                                                                                        .font(.keyFootnote)
+                                                                                        .shallow()
+                                                                        }
                                                                         Text(verbatim: element.text)
-                                                                                .font(.title2)
-                                                                                .foregroundStyle(selectedIndex == reversedIndex ? Color.white : Color.primary)
+                                                                                .textCase(textCase)
+                                                                                .font(element.isTextSingular ? .title2 : .title3)
+                                                                                .foregroundStyle(selectedIndex == elementIndex ? Color.white : Color.primary)
                                                                 }
                                                                 .frame(maxWidth: .infinity)
                                                         }
                                                 }
-                                                .frame(width: baseWidth * CGFloat(symbolCount), height: baseHeight)
+                                                .frame(width: baseWidth * CGFloat(memberCount), height: baseHeight)
                                                 .padding(.bottom, previewBottomOffset)
+                                                .padding(.leading, leadingOffset)
                                                 .padding(.trailing, trailingOffset)
                                         }
                                         .padding(.vertical, verticalPadding)
@@ -79,8 +101,9 @@ struct RightKey: View {
                                         .fill(colorScheme.previewBubbleColor)
                                         .shadow(color: .shadowGray, radius: 1)
                                         .overlay {
-                                                Text(verbatim: pulled ?? (context.inputStage.isBuffering ? String.apostrophe : String.cantonesePeriod))
-                                                        .font(.largeTitle)
+                                                Text(verbatim: pulled ?? keyUnit.primary.text)
+                                                        .textCase(textCase)
+                                                        .font(keyUnit.primary.isTextSingular ? .title : .title3)
                                                         .padding(.bottom, previewBottomOffset)
                                         }
                                         .padding(.vertical, verticalPadding)
@@ -91,20 +114,22 @@ struct RightKey: View {
                                         .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                         .padding(.vertical, verticalPadding)
                                         .padding(.horizontal, horizontalPadding)
-                                ZStack(alignment: .topTrailing) {
-                                        Color.clear
-                                        Text(verbatim: headerText).font(.keyFootnote)
+                                ForEach(keyUnit.primary.extras.indices, id: \.self) { index in
+                                        let extra = keyUnit.primary.extras[index]
+                                        ZStack(alignment: extra.alignment) {
+                                                Color.clear
+                                                Text(verbatim: extra.text)
+                                                        .textCase(textCase)
+                                                        .font(.system(size: 14))
+                                                        .shallow()
+                                        }
+                                        .padding(.vertical, verticalPadding + 2)
+                                        .padding(.horizontal, horizontalPadding + 3)
                                 }
-                                .padding(.vertical, verticalPadding)
-                                .padding(.horizontal, horizontalPadding + 2)
-                                .opacity((shouldShowExtraHeader && context.inputStage.isBuffering.negative) ? 0.5 : 0)
-                                ZStack(alignment: .bottom) {
-                                        Color.clear
-                                        Text(verbatim: PresetConstant.separate).font(.keyFootnote)
-                                }
-                                .padding(.vertical, verticalPadding + 2)
-                                .opacity(context.inputStage.isBuffering ? 0.5 : 0)
-                                Text(verbatim: context.inputStage.isBuffering ? String.apostrophe : String.cantonesePeriod).font(.letterCompact)
+                                Text(verbatim: keyUnit.primary.text)
+                                        .textCase(textCase)
+                                        .font(keyUnit.primary.isTextSingular ? .letterCompact : .adjustedLetterCompact)
+                                        .padding(.bottom, keyTextBottomInset)
                         }
                 }
                 .frame(width: keyWidth, height: keyHeight)
@@ -119,8 +144,9 @@ struct RightKey: View {
                         }
                         .onChanged { state in
                                 if isLongPressing {
-                                        let memberCount: Int = elements.count
-                                        let distance: CGFloat = -(state.translation.width)
+                                        let memberCount: Int = keyUnit.members.count
+                                        guard memberCount > 1 else { return }
+                                        let distance: CGFloat = keyLocale.isLeading ? state.translation.width : -(state.translation.width)
                                         if distance < (baseWidth / 2.0) {
                                                 if selectedIndex != 0 {
                                                         selectedIndex = 0
@@ -134,13 +160,19 @@ struct RightKey: View {
                                                         selectedIndex = newSelectedIndex
                                                 }
                                         }
-                                } else {
-                                        guard shouldShowExtraHeader && (pulled == nil) else { return }
-                                        guard context.inputStage.isBuffering.negative else { return }
+                                } else if (pulled == nil) {
                                         let distance: CGFloat = state.translation.height
                                         let isSatisfied: Bool = abs(distance) > 36 || (buffer > 1 && abs(distance) > 24)
                                         guard isSatisfied else { return }
-                                        pulled = headerText
+                                        if distance > 0 {
+                                                // swipe from top to bottom
+                                                let extra = keyUnit.primary.extras.first(where: \.alignment.isTopEdge) ?? keyUnit.primary.extras.first(where: \.alignment.isBottomEdge)
+                                                pulled = extra?.text
+                                        } else {
+                                                // swipe from bottom to top
+                                                let extra = keyUnit.primary.extras.first(where: \.alignment.isBottomEdge) ?? keyUnit.primary.extras.first(where: \.alignment.isTopEdge)
+                                                pulled = extra?.text
+                                        }
                                 }
                         }
                         .onEnded { _ in
@@ -151,27 +183,28 @@ struct RightKey: View {
                                         pulled = nil
                                 }
                                 if isLongPressing {
-                                        guard let selectedSymbol: String = elements.fetch(selectedIndex)?.text else { return }
+                                        guard let selectedElement = keyUnit.members.fetch(selectedIndex) else { return }
                                         AudioFeedback.inputed()
                                         context.triggerSelectionHapticFeedback()
-                                        context.operate(.input(selectedSymbol))
+                                        let text: String = context.keyboardCase.isLowercased ? selectedElement.text : selectedElement.text.uppercased()
+                                        context.operate(.process(text))
                                 } else if let pulledText = pulled {
-                                        context.operate(.input(pulledText))
-                                } else if context.inputStage.isBuffering {
-                                        context.handle(.apostrophe)
+                                        let text: String = context.keyboardCase.isLowercased ? pulledText : pulledText.uppercased()
+                                        context.operate(.process(text))
+                                } else if let event {
+                                        context.handle(event)
                                 } else {
-                                        context.operate(.input(String.cantonesePeriod))
+                                        let text: String = context.keyboardCase.isLowercased ? keyUnit.primary.text : keyUnit.primary.text.uppercased()
+                                        context.operate(.process(text))
                                 }
-                         }
+                        }
                 )
                 .onReceive(timer) { _ in
                         guard isTouching else { return }
                         guard isLongPressing.negative else { return }
                         let shouldTriggerLongPress: Bool = buffer > 6 || (buffer > 3 && pulled == nil)
                         if shouldTriggerLongPress {
-                                if context.inputStage.isBuffering.negative {
-                                        isLongPressing = true
-                                }
+                                isLongPressing = true
                         } else {
                                 buffer += 1
                         }

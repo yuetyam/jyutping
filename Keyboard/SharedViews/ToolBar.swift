@@ -22,6 +22,17 @@ struct ToolBar: View {
                         }
 
                         Spacer()
+                        ToolBarButton(
+                                imageName: "keyboard",
+                                width: buttonWidth,
+                                height: buttonHeight,
+                                insets: EdgeInsets(top: 19, leading: 0, bottom: 19, trailing: 0)
+                        ) {
+                                AudioFeedback.modified()
+                                context.triggerHapticFeedback()
+                        }
+
+                        Spacer()
                         Button {
                                 AudioFeedback.modified()
                                 context.triggerHapticFeedback()
@@ -38,16 +49,6 @@ struct ToolBar: View {
                         .buttonStyle(.plain)
                         .frame(width: buttonWidth, height: buttonHeight)
 
-                        Spacer()
-                        ToolBarButton(
-                                imageName: "hand.draw",
-                                width: buttonWidth,
-                                height: buttonHeight,
-                                insets: EdgeInsets(top: 15, leading: 0, bottom: 15, trailing: 0)
-                        ) {
-                                AudioFeedback.modified()
-                                context.triggerHapticFeedback()
-                        }
 
                         Spacer()
                         Button {

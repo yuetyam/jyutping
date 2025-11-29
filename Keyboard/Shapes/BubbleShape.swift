@@ -25,7 +25,7 @@ struct BubbleShape: Shape {
 
 private extension BubbleShape {
         static func bubblePath(origin: CGPoint, baseWidth: CGFloat, baseHeight: CGFloat, keyCornerRadius: CGFloat, previewCornerRadius: CGFloat) -> Path {
-                let isPhoneLandscape: Bool = (baseWidth > baseHeight)
+                let isPhoneLandscape: Bool = (baseWidth > baseHeight) && (baseHeight < 43)
                 let width: CGFloat = baseWidth / (3.0 / 5.0)
                 let height: CGFloat = isPhoneLandscape ? (baseHeight / (2 / 6.0)) : baseHeight / ((2.5 / 6.0))
                 let curveWidth: CGFloat = width / 5.0

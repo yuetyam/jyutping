@@ -361,11 +361,49 @@ struct MotherBoard: View {
                                 case .nineKey:
                                         TenKeyKeyboard()
                                 case .fourteenKey:
-                                        // TODO: 14 Key
-                                        CantoneseKeyboard()
+                                        switch context.qwertyForm {
+                                        case .pinyin:
+                                                CantoneseKeyboard()
+                                        case .cangjie:
+                                                CangjieKeyboard()
+                                        case .stroke:
+                                                StrokeKeyboard()
+                                        default:
+                                                FourteenKeyKeyboard()
+                                        }
                                 case .eighteenKey:
-                                        // TODO: 18 Key
-                                        CantoneseKeyboard()
+                                        switch context.qwertyForm {
+                                        case .pinyin:
+                                                CantoneseKeyboard()
+                                        case .cangjie:
+                                                CangjieKeyboard()
+                                        case .stroke:
+                                                StrokeKeyboard()
+                                        default:
+                                                EighteenKeyKeyboard()
+                                        }
+                                case .nineteenKey:
+                                        switch context.qwertyForm {
+                                        case .pinyin:
+                                                CantoneseKeyboard()
+                                        case .cangjie:
+                                                CangjieKeyboard()
+                                        case .stroke:
+                                                StrokeKeyboard()
+                                        default:
+                                                NineteenKeyKeyboard()
+                                        }
+                                case .twentyOneKey:
+                                        switch context.qwertyForm {
+                                        case .pinyin:
+                                                CantoneseKeyboard()
+                                        case .cangjie:
+                                                CangjieKeyboard()
+                                        case .stroke:
+                                                StrokeKeyboard()
+                                        default:
+                                                TwentyOneKeyKeyboard()
+                                        }
                                 }
                         }
                 }
