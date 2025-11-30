@@ -9,11 +9,14 @@ enum KeyboardLayout: Int, CaseIterable {
         /// 26鍵三拼
         case tripleStroke = 2
 
-        /// 9鍵（九宮格）
+        /// 9鍵／九宮格
         case nineKey = 3
 
         /// 14鍵
         case fourteenKey = 14
+
+        /// 15鍵
+        case fifteenKey = 15
 
         /// 18鍵
         case eighteenKey = 18
@@ -36,14 +39,17 @@ enum KeyboardLayout: Int, CaseIterable {
         /// 26鍵三拼
         var isTripleStroke: Bool { self == .tripleStroke }
 
-        /// 9鍵（九宮格）
+        /// 9鍵／九宮格
         var isNineKey: Bool { self == .nineKey }
 
         /// 14鍵
         var isFourteenKey: Bool { self == .fourteenKey }
 
+        /// 15鍵
+        var isFifteenKey: Bool { self == .fifteenKey }
+
         /// 18鍵
-        var isEighteenKey: Bool { self == .fourteenKey }
+        var isEighteenKey: Bool { self == .eighteenKey }
 
         /// 19鍵
         var isNineteenKey: Bool { self == .nineteenKey }

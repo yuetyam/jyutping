@@ -2,9 +2,7 @@ import SwiftUI
 import CoreIME
 
 struct ABCKeyboard: View {
-
         @EnvironmentObject private var context: KeyboardViewController
-
         var body: some View {
                 VStack(spacing: 0) {
                         ToolBar()

@@ -12,6 +12,8 @@ struct MotherBoard: View {
                         SettingsView().frame(height: context.keyboardHeight)
                 case .editingPanel:
                         EditingPanel().frame(height: context.keyboardHeight)
+                case .layoutPicker:
+                        KeyboardLayoutPickerView().frame(height: context.keyboardHeight)
                 case .candidateBoard:
                         CandidateBoard().frame(height: context.keyboardHeight)
                 case .emojiBoard:
@@ -370,6 +372,17 @@ struct MotherBoard: View {
                                                 StrokeKeyboard()
                                         default:
                                                 FourteenKeyKeyboard()
+                                        }
+                                case .fifteenKey:
+                                        switch context.qwertyForm {
+                                        case .pinyin:
+                                                CantoneseKeyboard()
+                                        case .cangjie:
+                                                CangjieKeyboard()
+                                        case .stroke:
+                                                StrokeKeyboard()
+                                        default:
+                                                FifteenKeyKeyboard()
                                         }
                                 case .eighteenKey:
                                         switch context.qwertyForm {

@@ -3,101 +3,6 @@ import Combine
 import CoreIME
 import CommonExtensions
 
-private struct LeadingNavigationButton: View {
-        @EnvironmentObject private var context: KeyboardViewController
-        var body: some View {
-                HStack(spacing: 0) {
-                        TransparentButton(width: 4, height: PresetConstant.buttonLength, action: action)
-                        if #available(iOSApplicationExtension 26.0, *) {
-                                Button(action: action) {
-                                        ZStack{
-                                                Color.interactiveClear
-                                                Image.chevronUp
-                                                        .resizable()
-                                                        .scaledToFit()
-                                                        .padding(12)
-                                        }
-                                        .frame(width: PresetConstant.buttonLength, height: PresetConstant.buttonLength)
-                                }
-                                .buttonStyle(.plain)
-                                .glassEffect(.clear, in: .circle)
-                        } else {
-                                Button(action: action) {
-                                        ZStack{
-                                                Color.interactiveClear
-                                                Image.chevronUp
-                                                        .resizable()
-                                                        .scaledToFit()
-                                                        .padding(12)
-                                        }
-                                        .frame(width: PresetConstant.buttonLength, height: PresetConstant.buttonLength)
-                                }
-                                .buttonStyle(.plain)
-                        }
-                        TransparentButton(width: 12, height: PresetConstant.buttonLength, action: action)
-                }
-        }
-        private func action() {
-                AudioFeedback.modified()
-                context.triggerHapticFeedback()
-                context.updateKeyboardForm(to: context.previousKeyboardForm)
-        }
-}
-private struct TrailingNavigationButton: View {
-        @EnvironmentObject private var context: KeyboardViewController
-        private let expandImageName: String = {
-                if #available(iOSApplicationExtension 17.0, *) {
-                        return "arrow.down.backward.and.arrow.up.forward"
-                } else {
-                        return "arrow.up.and.line.horizontal.and.arrow.down"
-                }
-        }()
-        private let collapseImageName: String = {
-                if #available(iOSApplicationExtension 17.0, *) {
-                        return "arrow.up.forward.and.arrow.down.backward"
-                } else {
-                        return "arrow.down.and.line.horizontal.and.arrow.up"
-                }
-        }()
-        var body: some View {
-                HStack(spacing: 0) {
-                        TransparentButton(width: 12, height: PresetConstant.buttonLength, action: action)
-                        if #available(iOSApplicationExtension 26.0, *) {
-                                Button(action: action) {
-                                        ZStack {
-                                                Color.interactiveClear
-                                                Image(systemName: context.isKeyboardHeightExpanded ? collapseImageName : expandImageName)
-                                                        .resizable()
-                                                        .scaledToFit()
-                                                        .padding(13)
-                                        }
-                                        .frame(width: PresetConstant.buttonLength, height: PresetConstant.buttonLength)
-                                }
-                                .buttonStyle(.plain)
-                                .glassEffect(.clear, in: .circle)
-                        } else {
-                                Button(action: action) {
-                                        ZStack {
-                                                Color.interactiveClear
-                                                Image(systemName: context.isKeyboardHeightExpanded ? collapseImageName : expandImageName)
-                                                        .resizable()
-                                                        .scaledToFit()
-                                                        .padding(13)
-                                        }
-                                        .frame(width: PresetConstant.buttonLength, height: PresetConstant.buttonLength)
-                                }
-                                .buttonStyle(.plain)
-                        }
-                        TransparentButton(width: 4, height: PresetConstant.buttonLength, action: action)
-                }
-        }
-        private func action() {
-                AudioFeedback.modified()
-                context.triggerHapticFeedback()
-                context.toggleKeyboardHeight()
-        }
-}
-
 struct SettingsView: View {
 
         @EnvironmentObject private var context: KeyboardViewController
@@ -112,6 +17,7 @@ struct SettingsView: View {
         @State private var isAudioFeedbackOn: Bool = Options.isAudioFeedbackOn
         @State private var hapticFeedback: HapticFeedback = HapticFeedback.fetchSavedMode()
         @State private var keyboardLayout: KeyboardLayout = KeyboardLayout.fetchSavedLayout()
+        @State private var traditionalCharacterStandard: CharacterStandard = Options.traditionalCharacterStandard
         @State private var isKeyPadNumericLayout: Bool = NumericLayout.fetchSavedLayout().isNumberKeyPad
         @State private var isTenKeyStrokeLayout: Bool = StrokeLayout.fetchSavedLayout().isTenKey
         @State private var needsNumberRow: Bool = Options.needsNumberRow
@@ -119,7 +25,6 @@ struct SettingsView: View {
         @State private var keyTextPreview: Bool = Options.keyTextPreview
         @State private var inputKeyStyle: InputKeyStyle = Options.inputKeyStyle
         @State private var keyHeightOffset: CGFloat = Options.fetchKeyHeightOffset()
-        @State private var traditionalCharacterStandard: CharacterStandard = Options.traditionalCharacterStandard
         @State private var commentStyle: CommentStyle = Options.commentStyle
         @State private var commentToneStyle: CommentToneStyle = Options.commentToneStyle
         @State private var cangjieVariant: CangjieVariant = Options.cangjieVariant
@@ -141,9 +46,9 @@ struct SettingsView: View {
                                         .font(.footnote)
                                         .shallow()
                                 HStack {
-                                        LeadingNavigationButton()
+                                        NavigationLeadingBackButton()
                                         Spacer()
-                                        TrailingNavigationButton()
+                                        NavigationTrailingExpansionButton()
                                 }
                         }
                         .frame(height: PresetConstant.buttonLength)
@@ -182,23 +87,21 @@ struct SettingsView: View {
                                         }
                                 }
 
-                                Picker("SettingsView.KeyboardLayout.PickerTitle", selection: $keyboardLayout) {
-                                        Text("SettingsView.KeyboardLayout.Option.QWERTY").tag(KeyboardLayout.qwerty)
-                                        Text("SettingsView.KeyboardLayout.Option.TripleStroke").tag(KeyboardLayout.tripleStroke)
-                                        Text("SettingsView.KeyboardLayout.Option.NineKey").tag(KeyboardLayout.nineKey)
-                                        #if DEBUG
-                                        Text("SettingsView.KeyboardLayout.Option.FourteenKey").tag(KeyboardLayout.fourteenKey)
-                                        Text("SettingsView.KeyboardLayout.Option.EighteenKey").tag(KeyboardLayout.eighteenKey)
-                                        Text("SettingsView.KeyboardLayout.Option.NineteenKey").tag(KeyboardLayout.nineteenKey)
-                                        Text("SettingsView.KeyboardLayout.Option.TwentyOneKey").tag(KeyboardLayout.twentyOneKey)
-                                        #endif
+                                Picker("SettingsView.TraditionalCharacterStandard.PickerTitle", selection: $traditionalCharacterStandard) {
+                                        Text("SettingsView.TraditionalCharacterStandard.Option1.Preset").tag(CharacterStandard.preset)
+                                        Text("SettingsView.TraditionalCharacterStandard.Option3.Inherited").tag(CharacterStandard.inherited)
+                                        Text("SettingsView.TraditionalCharacterStandard.Option6.HongKong").tag(CharacterStandard.hongkong)
+                                        Text("SettingsView.TraditionalCharacterStandard.Option7.Taiwan").tag(CharacterStandard.taiwan)
+                                        Text("SettingsView.TraditionalCharacterStandard.Option8.PRCGeneral").tag(CharacterStandard.prcGeneral)
+                                        Text("SettingsView.TraditionalCharacterStandard.Option9.AncientBooksPublishing").tag(CharacterStandard.ancientBooksPublishing)
                                 }
                                 .pickerStyle(.inline)
                                 .textCase(nil)
-                                .onChange(of: keyboardLayout) { newLayout in
+                                .onChange(of: traditionalCharacterStandard) { newStandard in
                                         AudioFeedback.modified()
                                         context.triggerSelectionHapticFeedback()
-                                        context.updateKeyboardLayout(to: newLayout)
+                                        context.syncTraditionalCharacterStandard(to: newStandard)
+                                        Options.updateTraditionalCharacterStandard(to: newStandard)
                                 }
 
                                 Section {
@@ -265,23 +168,6 @@ struct SettingsView: View {
                                                         context.updateKeyHeightOffset(to: keyHeightOffset)
                                                 }
                                         }
-                                }
-
-                                Picker("SettingsView.TraditionalCharacterStandard.PickerTitle", selection: $traditionalCharacterStandard) {
-                                        Text("SettingsView.TraditionalCharacterStandard.Option1.Preset").tag(CharacterStandard.preset)
-                                        Text("SettingsView.TraditionalCharacterStandard.Option3.Inherited").tag(CharacterStandard.inherited)
-                                        Text("SettingsView.TraditionalCharacterStandard.Option6.HongKong").tag(CharacterStandard.hongkong)
-                                        Text("SettingsView.TraditionalCharacterStandard.Option7.Taiwan").tag(CharacterStandard.taiwan)
-                                        Text("SettingsView.TraditionalCharacterStandard.Option8.PRCGeneral").tag(CharacterStandard.prcGeneral)
-                                        Text("SettingsView.TraditionalCharacterStandard.Option9.AncientBooksPublishing").tag(CharacterStandard.ancientBooksPublishing)
-                                }
-                                .pickerStyle(.inline)
-                                .textCase(nil)
-                                .onChange(of: traditionalCharacterStandard) { newStandard in
-                                        AudioFeedback.modified()
-                                        context.triggerSelectionHapticFeedback()
-                                        context.syncTraditionalCharacterStandard(to: newStandard)
-                                        Options.updateTraditionalCharacterStandard(to: newStandard)
                                 }
 
                                 Section {

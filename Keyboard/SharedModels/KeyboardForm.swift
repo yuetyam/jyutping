@@ -6,6 +6,7 @@ enum KeyboardForm: Int {
         case decimalPad
         case editingPanel
         case emojiBoard
+        case layoutPicker
         case numberPad
         case numeric
         case placeholder

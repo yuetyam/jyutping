@@ -19,7 +19,7 @@ struct RightKey: View {
                 KeyElement("。"),
                 KeyElement("？"),
                 KeyElement("！"),
-                KeyElement("…", header: "省略"),
+                KeyElement("…", header: "省略號"),
                 KeyElement(".", header: "英文")
         ]
         private let headerText: String = "？"

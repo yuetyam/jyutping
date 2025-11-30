@@ -4889,6 +4889,100 @@
         }
       }
     },
+    "SettingsView.KeyboardLayout.Option.FifteenKey" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "15 Key"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "15 Key"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "15 Key"
+          }
+        },
+        "en-US" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "15 Key"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "15 touches"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "15キー"
+          }
+        },
+        "yue" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "15鍵"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "15鍵"
+          }
+        },
+        "zh-Hans-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "15鍵"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "15鍵"
+          }
+        },
+        "zh-Hant-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "15鍵"
+          }
+        },
+        "zh-Hant-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "15鍵"
+          }
+        },
+        "zh-Hant-MO" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "15鍵"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "15鍵"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "15鍵"
+          }
+        }
+      }
+    },
     "SettingsView.KeyboardLayout.Option.FourteenKey" : {
       "localizations" : {
         "en" : {
@@ -4988,91 +5082,91 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "9 Key (九宮格)"
+            "value" : "9 Key"
           }
         },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "9 Key (九宮格)"
+            "value" : "9 Key"
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "9 Key (九宮格)"
+            "value" : "9 Key"
           }
         },
         "en-US" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "9 Key (九宮格)"
+            "value" : "9 Key"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "9 touches (九宮格)"
+            "value" : "9 touches"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "10キー (九宮格)"
+            "value" : "10キー"
           }
         },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "9鍵（九宮格）"
+            "value" : "9鍵／九宮格"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "9鍵（九宮格）"
+            "value" : "9鍵／九宮格"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "9鍵（九宮格）"
+            "value" : "9鍵／九宮格"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "9鍵（九宮格）"
+            "value" : "9鍵／九宮格"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "9鍵（九宮格）"
+            "value" : "9鍵／九宮格"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "9鍵（九宮格）"
+            "value" : "9鍵／九宮格"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "9鍵（九宮格）"
+            "value" : "9鍵／九宮格"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "9鍵（九宮格）"
+            "value" : "9鍵／九宮格"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "9鍵（九宮格）"
+            "value" : "9鍵／九宮格"
           }
         }
       }
@@ -5176,37 +5270,37 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "QWERTY (26鍵全鍵盤)"
+            "value" : "QWERTY"
           }
         },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "QWERTY (26鍵全鍵盤)"
+            "value" : "QWERTY"
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "QWERTY (26鍵全鍵盤)"
+            "value" : "QWERTY"
           }
         },
         "en-US" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "QWERTY (26鍵全鍵盤)"
+            "value" : "QWERTY"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "QWERTY (26鍵全鍵盤)"
+            "value" : "QWERTY"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "QWERTY (26キー)"
+            "value" : "QWERTY"
           }
         },
         "yue" : {
@@ -5270,37 +5364,37 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Triple-Stroke (26鍵三拼)"
+            "value" : "Triple-Stroke"
           }
         },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Triple-Stroke (26鍵三拼)"
+            "value" : "Triple-Stroke"
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Triple-Stroke (26鍵三拼)"
+            "value" : "Triple-Stroke"
           }
         },
         "en-US" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Triple-Stroke (26鍵三拼)"
+            "value" : "Triple-Stroke"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Triple-Course (26鍵三拼)"
+            "value" : "Triple-Course"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Triple-Stroke (26キー三拼)"
+            "value" : "26キー三拼"
           }
         },
         "yue" : {
@@ -5449,100 +5543,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "21鍵"
-          }
-        }
-      }
-    },
-    "SettingsView.KeyboardLayout.PickerTitle" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Keyboard Layout"
-          }
-        },
-        "en-CA" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Keyboard Layout"
-          }
-        },
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Keyboard Layout"
-          }
-        },
-        "en-US" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Keyboard Layout"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Disposition du clavier"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "鍵盤配列"
-          }
-        },
-        "yue" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "鍵盤排列佈局"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "鍵盤排列佈局"
-          }
-        },
-        "zh-Hans-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "鍵盤排列佈局"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "鍵盤排列佈局"
-          }
-        },
-        "zh-Hant-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "鍵盤排列佈局"
-          }
-        },
-        "zh-Hant-HK" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "鍵盤排列佈局"
-          }
-        },
-        "zh-Hant-MO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "鍵盤排列佈局"
-          }
-        },
-        "zh-Hant-TW" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "鍵盤排列佈局"
-          }
-        },
-        "zh-HK" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "鍵盤排列佈局"
           }
         }
       }

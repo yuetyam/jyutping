@@ -445,7 +445,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 case .backspace:
                         if inputStage.isBuffering {
                                 switch keyboardLayout {
-                                case .qwerty, .fourteenKey, .eighteenKey, .nineteenKey, .twentyOneKey:
+                                case .qwerty, .fourteenKey, .fifteenKey, .eighteenKey, .nineteenKey, .twentyOneKey:
                                         capitals = capitals.dropLast()
                                         inputLengthSequence = inputLengthSequence.dropLast()
                                         bufferEvents = bufferEvents.dropLast()
@@ -549,7 +549,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         }
         private func aftercareSelected(_ candidate: Candidate) {
                 switch keyboardLayout {
-                case .qwerty, .tripleStroke, .fourteenKey, .eighteenKey, .nineteenKey, .twentyOneKey:
+                case .qwerty, .tripleStroke, .fourteenKey, .fifteenKey, .eighteenKey, .nineteenKey, .twentyOneKey:
                         switch bufferEvents.first {
                         case .some(let event) where event.isReverseLookupTrigger:
                                 selectedCandidates = []

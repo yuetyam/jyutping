@@ -30,6 +30,8 @@ struct ToolBar: View {
                         ) {
                                 AudioFeedback.modified()
                                 context.triggerHapticFeedback()
+                                let newForm: KeyboardForm = (context.keyboardForm == .layoutPicker) ? context.previousKeyboardForm : .layoutPicker
+                                context.updateKeyboardForm(to: newForm)
                         }
 
                         Spacer()
