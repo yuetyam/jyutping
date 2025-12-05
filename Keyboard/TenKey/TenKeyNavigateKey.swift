@@ -13,7 +13,7 @@ struct TenKeyNavigateKey: View {
                 case .alphabetic:
                         return "ABC"
                 case .numeric:
-                        return context.numericLayout.isNumberKeyPad ? "#@$" : "123"
+                        return context.preferredNumericForm == .numeric ? "123" : "#@$"
                 case .symbolic:
                         return "#+="
                 case .tenKeyNumeric:

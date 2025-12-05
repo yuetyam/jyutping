@@ -61,24 +61,13 @@ struct SymbolicKeyboard: View {
                         }
                         switch (context.keyboardInterface.isPadFloating, context.needsInputModeSwitchKey) {
                         case (true, true):
-                                if #available(iOSApplicationExtension 26.0, *) {
-                                        HStack(spacing: 0) {
-                                                TransformKey(destination: .alphabetic, widthUnitTimes: 2)
-                                                SharedBottomKeys.comma
-                                                SpaceKey()
-                                                SharedBottomKeys.period
-                                                ReturnKey()
-                                        }
-                                } else {
-                                        HStack(spacing: 0) {
-                                                GlobeKey()
-                                                TransformKey(destination: .alphabetic, widthUnitTimes: 2)
-                                                SpaceKey()
-                                                SharedBottomKeys.altPeriod
-                                                ReturnKey()
-                                        }
+                                HStack(spacing: 0) {
+                                        GlobeKey()
+                                        TransformKey(destination: .alphabetic, widthUnitTimes: 2)
+                                        SpaceKey()
+                                        SharedBottomKeys.altPeriod
+                                        ReturnKey()
                                 }
-
                         case (true, false):
                                 HStack(spacing: 0) {
                                         TransformKey(destination: .alphabetic, widthUnitTimes: 2)

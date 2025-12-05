@@ -45,22 +45,12 @@ struct CantoneseKeyboard: View {
                         }
                         switch (context.keyboardInterface.isPadFloating, context.needsInputModeSwitchKey) {
                         case (true, true):
-                                if #available(iOSApplicationExtension 26.0, *) {
-                                        HStack(spacing: 0) {
-                                                TransformKey(destination: .numeric, widthUnitTimes: 2)
-                                                LeftKey()
-                                                SpaceKey()
-                                                RightKey()
-                                                ReturnKey()
-                                        }
-                                } else {
-                                        HStack(spacing: 0) {
-                                                GlobeKey()
-                                                TransformKey(destination: .numeric, widthUnitTimes: 2)
-                                                SpaceKey()
-                                                RightAlternativeKey()
-                                                ReturnKey()
-                                        }
+                                HStack(spacing: 0) {
+                                        GlobeKey()
+                                        TransformKey(destination: .numeric, widthUnitTimes: 2)
+                                        SpaceKey()
+                                        RightAlternativeKey()
+                                        ReturnKey()
                                 }
                         case (true, false):
                                 HStack(spacing: 0) {

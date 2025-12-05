@@ -40,44 +40,37 @@ struct TenKeyKeyboard: View {
                                         switch (context.isRunningOnPhone, context.needsInputModeSwitchKey) {
                                         case (true, true):
                                                 HStack(spacing: 0) {
-                                                        TenKeyNavigateKey(destination: context.numericLayout.isNumberKeyPad ? .tenKeyNumeric : .numeric)
+                                                        TenKeyNavigateKey(destination: context.preferredNumericForm)
                                                         TenKeyGlobeKey()
                                                         TenKeySpaceKey()
                                                 }
                                         case (true, false):
                                                 HStack(spacing: 0) {
-                                                        TenKeyNavigateKey(destination: context.numericLayout.isNumberKeyPad ? .tenKeyNumeric : .numeric)
+                                                        TenKeyNavigateKey(destination: context.preferredNumericForm)
                                                         TenKeySpaceKey()
                                                 }
                                         case (false, true) where context.keyboardInterface.isPadFloating:
-                                                if #available(iOSApplicationExtension 26.0, *) {
-                                                        HStack(spacing: 0) {
-                                                                TenKeyNavigateKey(destination: context.numericLayout.isNumberKeyPad ? .tenKeyNumeric : .numeric)
-                                                                TenKeySpaceKey()
-                                                        }
-                                                } else {
-                                                        HStack(spacing: 0) {
-                                                                TenKeyGlobeKey()
-                                                                TenKeyNavigateKey(destination: context.numericLayout.isNumberKeyPad ? .tenKeyNumeric : .numeric)
-                                                                TenKeySpaceKey()
-                                                        }
+                                                HStack(spacing: 0) {
+                                                        TenKeyGlobeKey()
+                                                        TenKeyNavigateKey(destination: context.preferredNumericForm)
+                                                        TenKeySpaceKey()
                                                 }
                                         case (false, true):
                                                 HStack(spacing: 0) {
                                                         TenKeyGlobeKey()
-                                                        TenKeyNavigateKey(destination: context.numericLayout.isNumberKeyPad ? .tenKeyNumeric : .numeric)
+                                                        TenKeyNavigateKey(destination: context.preferredNumericForm)
                                                         TenKeySpaceKey()
                                                 }
                                         case (false, false):
                                                 HStack(spacing: 0) {
-                                                        TenKeyNavigateKey(destination: context.numericLayout.isNumberKeyPad ? .tenKeyNumeric : .numeric)
+                                                        TenKeyNavigateKey(destination: context.preferredNumericForm)
                                                         TenKeySpaceKey()
                                                 }
                                         }
                                 }
                                 VStack(spacing: 0) {
                                         TenKeyBackspaceKey()
-                                        TenKeyNavigateKey(destination: context.numericLayout.isNumberKeyPad ? .numeric : .symbolic)
+                                        TenKeyNavigateKey(destination: context.preferredNumericForm == .numeric ? .symbolic : .numeric)
                                         TenKeyReturnKey()
                                 }
                         }

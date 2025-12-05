@@ -57,41 +57,10 @@ struct StrokeKeyboard: View {
                                 HiddenKey(key: .backspace)
                                 BackspaceKey()
                         }
-                        switch (context.keyboardInterface.isPadFloating, context.needsInputModeSwitchKey) {
-                        case (true, true):
-                                if #available(iOSApplicationExtension 26.0, *) {
-                                        HStack(spacing: 0) {
-                                                TransformKey(destination: .numeric, widthUnitTimes: 2)
-                                                SpaceKey()
-                                                ReturnKey()
-                                        }
-                                } else {
-                                        HStack(spacing: 0) {
-                                                GlobeKey()
-                                                TransformKey(destination: .numeric, widthUnitTimes: 2)
-                                                SpaceKey()
-                                                ReturnKey()
-                                        }
-                                }
-                        case (true, false):
-                                HStack(spacing: 0) {
-                                        TransformKey(destination: .numeric, widthUnitTimes: 2)
-                                        SpaceKey()
-                                        ReturnKey()
-                                }
-                        case (false, true):
-                                HStack(spacing: 0) {
-                                        TransformKey(destination: context.preferredNumericForm, widthUnitTimes: 2)
-                                        GlobeKey()
-                                        SpaceKey()
-                                        ReturnKey()
-                                }
-                        case (false, false):
-                                HStack(spacing: 0) {
-                                        TransformKey(destination: context.preferredNumericForm, widthUnitTimes: 2)
-                                        SpaceKey()
-                                        ReturnKey()
-                                }
+                        HStack(spacing: 0) {
+                                TransformKey(destination: context.preferredNumericForm, widthUnitTimes: 2)
+                                SpaceKey()
+                                ReturnKey()
                         }
                 }
         }

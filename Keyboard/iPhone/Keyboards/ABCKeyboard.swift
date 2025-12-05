@@ -2,7 +2,9 @@ import SwiftUI
 import CoreIME
 
 struct ABCKeyboard: View {
+
         @EnvironmentObject private var context: KeyboardViewController
+
         var body: some View {
                 VStack(spacing: 0) {
                         ToolBar()
@@ -39,22 +41,12 @@ struct ABCKeyboard: View {
                         }
                         switch (context.keyboardInterface.isPadFloating, context.needsInputModeSwitchKey) {
                         case (true, true):
-                                if #available(iOSApplicationExtension 26.0, *) {
-                                        HStack(spacing: 0) {
-                                                TransformKey(destination: .numeric, widthUnitTimes: 2)
-                                                ABCLeftKey()
-                                                SpaceKey()
-                                                ABCRightKey()
-                                                ReturnKey()
-                                        }
-                                } else {
-                                        HStack(spacing: 0) {
-                                                GlobeKey()
-                                                TransformKey(destination: .numeric, widthUnitTimes: 2)
-                                                SpaceKey()
-                                                ABCRightAlternativeKey()
-                                                ReturnKey()
-                                        }
+                                HStack(spacing: 0) {
+                                        GlobeKey()
+                                        TransformKey(destination: .numeric, widthUnitTimes: 2)
+                                        SpaceKey()
+                                        ABCRightAlternativeKey()
+                                        ReturnKey()
                                 }
                         case (true, false):
                                 HStack(spacing: 0) {
