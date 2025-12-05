@@ -7,9 +7,9 @@ extension StringProtocol {
                 guard codes.count == count else { return nil }
                 return codes.radix100Combined()
         }
-        var tenKeyCharCode: Int? {
+        var nineKeyCharCode: Int? {
                 guard count < 19 else { return nil }
-                let codes: [Int] = compactMap(\.tenKeyInterCode)
+                let codes: [Int] = compactMap(\.nineKeyInterCode)
                 guard codes.count == count else { return nil }
                 return codes.decimalCombined()
         }
@@ -59,10 +59,10 @@ private extension Character {
                 letterZ : 45,
         ]
 
-        var tenKeyInterCode: Int? {
-                return Self.tenKeyCodeMap[self]
+        var nineKeyInterCode: Int? {
+                return Self.nineKeyCodeMap[self]
         }
-        private static let tenKeyCodeMap: [Character : Int] = [
+        private static let nineKeyCodeMap: [Character : Int] = [
                 letterA : 2,
                 letterB : 2,
                 letterC : 2,

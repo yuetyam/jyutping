@@ -40,9 +40,9 @@ struct LexiconConverter {
                 guard syllableText.isNotEmpty else { fatalError(errorMessage) }
                 let anchorText = String(anchors)
                 guard let anchorCode: Int = anchorText.charCode else { fatalError(errorMessage) }
-                let pingCode = syllableText.hashCode()
-                guard let tenKeyAnchorCode: Int = anchorText.tenKeyCharCode else { fatalError(errorMessage) }
-                let tenKeyCode: Int = syllableText.tenKeyCharCode ?? 0
-                return LexiconEntry(word: word, romanization: romanization, anchors: anchorCode, ping: pingCode, tenKeyAnchors: tenKeyAnchorCode, tenKeyCode: tenKeyCode)
+                let spellCode = syllableText.hashCode()
+                guard let nineKeyAnchorsCode: Int = anchorText.nineKeyCharCode else { fatalError(errorMessage) }
+                let nineKeyCode: Int = syllableText.nineKeyCharCode ?? 0
+                return LexiconEntry(word: word, romanization: romanization, anchors: anchorCode, spell: spellCode, nineKeyAnchors: nineKeyAnchorsCode, nineKeyCode: nineKeyCode)
         }
 }

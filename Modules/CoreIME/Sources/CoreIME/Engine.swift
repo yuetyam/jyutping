@@ -421,7 +421,7 @@ extension Array where Element == Candidate {
 
 // MARK: - SQLite Statement Preparing
 
-// CREATE TABLE core_lexicon(word TEXT NOT NULL, romanization TEXT NOT NULL, anchors INTEGER NOT NULL, ping INTEGER NOT NULL, ten_key_anchors INTEGER NOT NULL, ten_key_code INTEGER NOT NULL);
+// CREATE TABLE core_lexicon(word TEXT NOT NULL, romanization TEXT NOT NULL, anchors INTEGER NOT NULL, spell INTEGER NOT NULL, nine_key_anchors INTEGER NOT NULL, nine_key_code INTEGER NOT NULL);
 
 private extension Engine {
         private static let anchorsQuery: String = "SELECT rowid, word, romanization FROM core_lexicon WHERE anchors = ? LIMIT ?;"
@@ -431,28 +431,28 @@ private extension Engine {
                 return statement
         }
 
-        private static let pingQuery: String = "SELECT rowid, word, romanization FROM core_lexicon WHERE ping = ? LIMIT ?;"
+        private static let pingQuery: String = "SELECT rowid, word, romanization FROM core_lexicon WHERE spell = ? LIMIT ?;"
         static func preparePingStatement() -> OpaquePointer? {
                 var statement: OpaquePointer?
                 guard sqlite3_prepare_v2(database, pingQuery, -1, &statement, nil) == SQLITE_OK else { return nil }
                 return statement
         }
 
-        private static let strictQuery: String = "SELECT rowid, word, romanization FROM core_lexicon WHERE ping = ? AND anchors = ? LIMIT ?;"
+        private static let strictQuery: String = "SELECT rowid, word, romanization FROM core_lexicon WHERE spell = ? AND anchors = ? LIMIT ?;"
         static func prepareStrictStatement() -> OpaquePointer? {
                 var statement: OpaquePointer?
                 guard sqlite3_prepare_v2(database, strictQuery, -1, &statement, nil) == SQLITE_OK else { return nil }
                 return statement
         }
 
-        private static let tenKeyAnchorsQuery: String = "SELECT rowid, word, romanization FROM core_lexicon WHERE ten_key_anchors = ? LIMIT ?;"
+        private static let tenKeyAnchorsQuery: String = "SELECT rowid, word, romanization FROM core_lexicon WHERE nine_key_anchors = ? LIMIT ?;"
         static func prepareTenKeyAnchorsStatement() -> OpaquePointer? {
                 var statement: OpaquePointer?
                 guard sqlite3_prepare_v2(database, tenKeyAnchorsQuery, -1, &statement, nil) == SQLITE_OK else { return nil }
                 return statement
         }
 
-        private static let tenKeyCodeQuery: String = "SELECT rowid, word, romanization FROM core_lexicon WHERE ten_key_code = ? LIMIT ?;"
+        private static let tenKeyCodeQuery: String = "SELECT rowid, word, romanization FROM core_lexicon WHERE nine_key_code = ? LIMIT ?;"
         static func prepareTenKeyCodeStatement() -> OpaquePointer? {
                 var statement: OpaquePointer?
                 guard sqlite3_prepare_v2(database, tenKeyCodeQuery, -1, &statement, nil) == SQLITE_OK else { return nil }

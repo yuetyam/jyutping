@@ -148,7 +148,7 @@ extension Engine {
         }
 
         private static func preparePinyinStatement() -> OpaquePointer? {
-                let command: String = "SELECT rowid, word, romanization FROM pinyin_lexicon WHERE ping = ? LIMIT ?;"
+                let command: String = "SELECT rowid, word, romanization FROM pinyin_lexicon WHERE spell = ? LIMIT ?;"
                 var statement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(Engine.database, command, -1, &statement, nil) == SQLITE_OK else { return nil }
                 return statement

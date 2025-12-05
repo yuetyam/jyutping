@@ -10,8 +10,7 @@ struct UnihanDefinition {
                 let sourceLines: [String] = sourceContent.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
                 let words = sourceLines.compactMap({ line -> String.SubSequence? in
                         guard let word = line.split(separator: "\t").first else { return nil }
-                        guard word.count == 1 else { return nil }
-                        return word
+                        return (word.count == 1) ? word : nil
                 })
                 let entries = words.distinct().compactMap { word -> (UInt32, String)? in
                         guard let matched = match(text: word) else { return nil }
@@ -23,7 +22,7 @@ struct UnihanDefinition {
         }
 
         private static func match<T: StringProtocol>(text: T) -> String? {
-                let command: String = "SELECT definition FROM definitiontable WHERE word = '\(text)' LIMIT 1;"
+                let command: String = "SELECT definition FROM definition_table WHERE word = '\(text)' LIMIT 1;"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return nil }
@@ -44,7 +43,7 @@ struct UnihanDefinition {
                 createIndexes()
         }
         private static func createTable() {
-                let command: String = "CREATE TABLE definitiontable(word TEXT NOT NULL, definition TEXT NOT NULL);"
+                let command: String = "CREATE TABLE definition_table(word TEXT NOT NULL, definition TEXT NOT NULL);"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return }
@@ -62,14 +61,14 @@ struct UnihanDefinition {
                         return "('\(word)', '\(definition)')"
                 }
                 let values: String = entries.joined(separator: ", ")
-                let command: String = "INSERT INTO definitiontable (word, definition) VALUES \(values);"
+                let command: String = "INSERT INTO definition_table (word, definition) VALUES \(values);"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return }
                 guard sqlite3_step(statement) == SQLITE_DONE else { return }
         }
         private static func createIndexes() {
-                let command: String = "CREATE INDEX definitionwordindex ON definitiontable(word);"
+                let command: String = "CREATE INDEX ix_definition_word ON definition_table(word);"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return }

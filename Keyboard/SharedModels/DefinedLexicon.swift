@@ -8,13 +8,13 @@ struct DefinedLexicon: Hashable {
         let text: String
         let events: [InputEvent]
         let charCode: Int
-        let tenKeyCharCode: Int
+        let nineKeyCharCode: Int
         init(input: String, text: String, events: [InputEvent]) {
                 self.input = input
                 self.text = text
                 self.events = events
                 self.charCode = events.map(\.code).radix100Combined()
-                self.tenKeyCharCode = input.tenKeyCharCode ?? 0
+                self.nineKeyCharCode = input.nineKeyCharCode ?? 0
         }
         static func ==(lhs: DefinedLexicon, rhs: DefinedLexicon) -> Bool {
                 return lhs.input == rhs.input && lhs.text == rhs.text

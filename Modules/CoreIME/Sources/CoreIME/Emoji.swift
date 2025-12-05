@@ -116,7 +116,7 @@ extension Engine {
         }
 
         public static func searchSymbols<T: RandomAccessCollection<InputEvent>>(for events: T, segmentation: Segmentation) -> [Candidate] {
-                let command: String = "SELECT category, unicode_version, code_point, cantonese, romanization FROM symbol_table WHERE ping = ?;"
+                let command: String = "SELECT category, unicode_version, code_point, cantonese, romanization FROM symbol_table WHERE spell = ?;"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(Engine.database, command, -1, &statement, nil) == SQLITE_OK else { return [] }
@@ -171,13 +171,13 @@ extension Engine {
         }
 
         public static func tenKeySearchSymbols<T: RandomAccessCollection<Combo>>(combos: T) -> [Candidate] {
-                let tenKeyCode = combos.map(\.rawValue).decimalCombined()
-                guard tenKeyCode > 0 else { return [] }
-                let command: String = "SELECT category, unicode_version, code_point, cantonese, romanization FROM symbol_table WHERE ten_key_code = ?;"
+                let nineKeyCode = combos.map(\.rawValue).decimalCombined()
+                guard nineKeyCode > 0 else { return [] }
+                let command: String = "SELECT category, unicode_version, code_point, cantonese, romanization FROM symbol_table WHERE nine_key_code = ?;"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(Engine.database, command, -1, &statement, nil) == SQLITE_OK else { return [] }
-                guard sqlite3_bind_int64(statement, 1, Int64(tenKeyCode)) == SQLITE_OK else { return [] }
+                guard sqlite3_bind_int64(statement, 1, Int64(nineKeyCode)) == SQLITE_OK else { return [] }
                 var emojis: [Emoji] = []
                 while sqlite3_step(statement) == SQLITE_ROW {
                         let categoryCode = sqlite3_column_int64(statement, 0)

@@ -813,9 +813,9 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         }
         private func queryDefinedCandidates(for combos: [Combo]) -> [Candidate] {
                 guard Options.isTextReplacementsOn else { return [] }
-                let tenKeyCharCode: Int = combos.map(\.rawValue).decimalCombined()
-                guard tenKeyCharCode > 0 else { return [] }
-                return definedLexicons.filter({ $0.tenKeyCharCode == tenKeyCharCode }).map(\.candidate)
+                let nineKeyCharCode: Int = combos.map(\.rawValue).decimalCombined()
+                guard nineKeyCharCode > 0 else { return [] }
+                return definedLexicons.filter({ $0.nineKeyCharCode == nineKeyCharCode }).map(\.candidate)
         }
 
 
@@ -1020,7 +1020,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 }
         }
 
-        /// Cantonese Keyboard Layout. Qwerty / TripleStroke / TenKey
+        /// Cantonese Keyboard Layout. Qwerty / TripleStroke / 9 Key / etc.
         @Published private(set) var keyboardLayout: KeyboardLayout = KeyboardLayout.fetchSavedLayout()
         func updateKeyboardLayout(to layout: KeyboardLayout) {
                 keyboardLayout = layout

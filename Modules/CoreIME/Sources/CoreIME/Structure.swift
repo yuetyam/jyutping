@@ -54,7 +54,7 @@ extension Engine {
         }
         private static func match(text: String) -> [Candidate] {
                 var candidates: [Candidate] = []
-                let command: String = "SELECT word, romanization FROM structure_table WHERE ping = \(text.hashCode());"
+                let command: String = "SELECT word, romanization FROM structure_table WHERE spell = \(text.hashCode());"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(Engine.database, command, -1, &statement, nil) == SQLITE_OK else { return [] }

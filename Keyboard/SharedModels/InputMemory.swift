@@ -52,7 +52,7 @@ struct InputMemory {
         private static func insert(entry: MemoryLexicon) {
                 let leading: String = "INSERT INTO memory (identifier, word, romanization, frequency, latest, anchors, shortcut, ping, tenkeyanchors, tenkeycode) VALUES ("
                 let trailing: String = ");"
-                let values: String = "\(entry.identifier), '\(entry.word)', '\(entry.romanization)', \(entry.frequency), \(entry.latest), \(entry.anchors), \(entry.shortcut), \(entry.ping), \(entry.tenKeyAnchors), \(entry.tenKeyCode)"
+                let values: String = "\(entry.identifier), '\(entry.word)', '\(entry.romanization)', \(entry.frequency), \(entry.latest), \(entry.anchors), \(entry.shortcut), \(entry.ping), \(entry.nineKeyAnchors), \(entry.nineKeyCode)"
                 let command: String = leading + values + trailing
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }

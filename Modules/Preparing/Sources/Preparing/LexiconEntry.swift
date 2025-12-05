@@ -11,29 +11,29 @@ struct LexiconEntry: Hashable {
         let anchors: Int
 
         /// Letter-only romanization hash code
-        let ping: Int
+        let spell: Int
 
-        /// TenKeyCharCode of initials
-        let tenKeyAnchors: Int
+        /// NineKeyCharCode of initials
+        let nineKeyAnchors: Int
 
-        /// Letter-only romanization TenKeyCharCode
-        let tenKeyCode: Int
-        
+        /// Letter-only romanization NineKeyCharCode
+        let nineKeyCode: Int
+
         /// Create a lexicon entry
         /// - Parameters:
         ///   - word: Chinese text
         ///   - romanization: Jyutping, Pinyin, ...
         ///   - anchors: CharCode of initials
         ///   - ping: Letter-only romanization hash code
-        ///   - tenKeyAnchors: TenKeyCharCode of initials
-        ///   - tenKeyCode: Letter-only romanization TenKeyCharCode
-        init(word: String, romanization: String, anchors: Int, ping: Int32, tenKeyAnchors: Int, tenKeyCode: Int) {
+        ///   - nineKeyAnchors: NineKeyCharCode of initials
+        ///   - nineKeyCode: Letter-only romanization NineKeyCharCode
+        init(word: String, romanization: String, anchors: Int, spell: Int32, nineKeyAnchors: Int, nineKeyCode: Int) {
                 self.word = word
                 self.romanization = romanization
                 self.anchors = anchors
-                self.ping = Int(ping)
-                self.tenKeyAnchors = tenKeyAnchors
-                self.tenKeyCode = tenKeyCode
+                self.spell = Int(spell)
+                self.nineKeyAnchors = nineKeyAnchors
+                self.nineKeyCode = nineKeyCode
         }
 
         // Equatable
