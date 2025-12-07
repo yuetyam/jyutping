@@ -9,20 +9,22 @@ struct HiddenKey: View {
         let key: HiddenEvent
 
         var body: some View {
-                Color.interactiveClear
-                        .frame(height: context.heightUnit)
-                        .frame(maxWidth: .infinity)
-                        .onTapGesture {
-                                if key == .backspace {
-                                        AudioFeedback.deleted()
-                                        context.triggerHapticFeedback()
-                                        context.operate(.backspace)
-                                } else if let event = key.inputEvent {
-                                        AudioFeedback.inputed()
-                                        context.triggerHapticFeedback()
-                                        context.handle(event)
-                                }
+                Button {
+                        if key == .backspace {
+                                AudioFeedback.deleted()
+                                context.triggerHapticFeedback()
+                                context.operate(.backspace)
+                        } else if let event = key.inputEvent {
+                                AudioFeedback.inputed()
+                                context.triggerHapticFeedback()
+                                context.handle(event)
                         }
+                } label: {
+                        Color.interactiveClear
+                                .frame(height: context.heightUnit)
+                                .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.plain)
         }
 }
 

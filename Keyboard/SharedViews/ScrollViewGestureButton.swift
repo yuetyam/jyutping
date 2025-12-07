@@ -2,6 +2,7 @@ import SwiftUI
 
 // https://danielsaidi.com/blog/2022/11/16/using-complex-gestures-in-a-scroll-view
 
+@available(*, unavailable)
 struct ScrollViewGestureButton<Label: View>: View {
 
         init(

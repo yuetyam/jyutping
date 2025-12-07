@@ -6,13 +6,13 @@ struct ScrollViewButton<Label: View>: View {
 
         /// Button for ScrollView
         /// - Parameters:
-        ///   - longPressTime: Long-press delay in nanosecond
+        ///   - longPressTime: Long-press delay in milliseconds
         ///   - longPressAction: Long-press action
         ///   - endAction: Ending action
         ///   - releaseAction: Releasing action
         ///   - label: View
         init(
-                longPressTime: UInt64 = 400_000_000, // 0.4s
+                longPressTime: UInt64 = 400, // 0.4s
                 longPressAction: @escaping () -> Void = {},
                 endAction: @escaping () -> Void = {},
                 releaseAction: @escaping () -> Void,
@@ -40,7 +40,7 @@ private struct ScrollViewButtonStyle: ButtonStyle {
 
         /// Button Style
         /// - Parameters:
-        ///   - longPressTime: Long-press delay in nanosecond
+        ///   - longPressTime: Long-press delay in milliseconds
         ///   - longPressAction: Long-press action
         ///   - endAction: Ending action
         init(
@@ -73,7 +73,7 @@ private struct ScrollViewButtonStyle: ButtonStyle {
 
         private func tryTriggerLongPressAfterDelay(triggered date: Date) {
                 Task {
-                        try await Task.sleep(nanoseconds: longPressTime)
+                        try await Task.sleep(for: .milliseconds(longPressTime))
 
                         // TODO: Better way to compare?
                         if date == longPressDate {

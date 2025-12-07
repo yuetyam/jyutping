@@ -57,8 +57,11 @@ private struct NumberPadKey: View {
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(4)
                         VStack {
-                                Text(verbatim: digit).font(.title2)
-                                Text(verbatim: letters ?? String.space).font(.system(size: 10, weight: .semibold)).tracking(1.5)
+                                Text(verbatim: digit)
+                                        .font(.title2)
+                                Text(verbatim: letters ?? String.space)
+                                        .font(.system(size: 10, weight: .semibold))
+                                        .tracking(1.5)
                         }
                 }
                 .frame(width: width, height: height)
@@ -87,20 +90,23 @@ private struct DecimalPadPointKey: View {
         @GestureState private var isTouching: Bool = false
 
         var body: some View {
-                ZStack {
-                        Color.interactiveClear
-                        VStack {
-                                Text(verbatim: ".").font(.title)
-                                Text(verbatim: String.space).font(.system(size: 10, weight: .semibold))
-                        }
-                }
-                .frame(width: width, height: height)
-                .contentShape(Rectangle())
-                .onTapGesture {
+                Button {
                         AudioFeedback.inputed()
                         context.triggerHapticFeedback()
                         context.operate(.input("."))
+                } label: {
+                        ZStack {
+                                Color.interactiveClear
+                                VStack {
+                                        Text(verbatim: ".")
+                                                .font(.title)
+                                        Text(verbatim: String.space)
+                                                .font(.system(size: 10, weight: .semibold))
+                                }
+                        }
+                        .frame(width: width, height: height)
                 }
+                .buttonStyle(.plain)
         }
 }
 

@@ -90,7 +90,7 @@ struct Options {
                         UserDefaults.standard.set(standard.rawValue, forKey: OptionsKey.TraditionalCharacterStandard)
                         return standard
                 } else {
-                        let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.LegacyCharacterStandard)
+                        let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.TraditionalCharacterStandard)
                         return CharacterStandard.standard(of: savedValue)
                 }
         }()

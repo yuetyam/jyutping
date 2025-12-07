@@ -32,7 +32,7 @@ struct CandidateBarScrollViewIOS17: View {
                                         let text: AttributedString = candidate.text.attributed(for: characterStandard)
                                         let romanization: String? = candidate.isCantonese ? candidate.romanization : nil
                                         ScrollViewButton(
-                                                longPressTime: 400_000_000, // 0.4s
+                                                longPressTime: 400, // 0.4s
                                                 longPressAction: {
                                                         guard isReleaseActionTriggered.negative else { return }
                                                         defer { isLongPressActionTriggered = true }
@@ -42,7 +42,7 @@ struct CandidateBarScrollViewIOS17: View {
                                                 },
                                                 endAction: {
                                                         Task {
-                                                                try await Task.sleep(nanoseconds: 500_000_000) // 0.5s
+                                                                try await Task.sleep(for: .milliseconds(500)) // 0.5s
                                                                 isLongPressActionTriggered = false
                                                                 isReleaseActionTriggered = false
                                                         }

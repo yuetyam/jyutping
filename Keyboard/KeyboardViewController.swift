@@ -149,9 +149,9 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         private func performInput(_ text: String) {
                 defer {
                         Task {
-                                try await Task.sleep(nanoseconds: 10_000_000) // 0.01s
+                                try await Task.sleep(for: .milliseconds(10)) // 0.01s
                                 textDocumentProxy.setMarkedText(String.zeroWidthSpace, selectedRange: NSRange(location: String.zeroWidthSpace.utf16.count, length: 0))
-                                try await Task.sleep(nanoseconds: 10_000_000) // 0.01s
+                                try await Task.sleep(for: .milliseconds(10)) // 0.01s
                                 canMarkText = true
                         }
                 }

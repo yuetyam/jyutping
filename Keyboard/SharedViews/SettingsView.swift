@@ -155,7 +155,7 @@ struct SettingsView: View {
                                         HStack(spacing: 2) {
                                                 Text("SettingsView.KeyHeightOffset.SliderTitle")
                                                 Text(verbatim: ": ").foregroundStyle(Color.secondary)
-                                                Text(verbatim: String(format: "%+g", keyHeightOffset))
+                                                Text(keyHeightOffset, format: .number.sign(strategy: .always()).grouping(.never))
                                         }
                                         Slider(value: $keyHeightOffset, in: -7...7, step: 1) {
                                                 Text("SettingsView.KeyHeightOffset.SliderTitle")
