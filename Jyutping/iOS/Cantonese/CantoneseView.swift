@@ -15,7 +15,7 @@ struct CantoneseView: View {
         }()
 
         var body: some View {
-                NavigationView {
+                NavigationStack {
                         List {
                                 SearchView(placeholder: "TextField.SearchPronunciation", animationState: $animationState)
 
@@ -81,7 +81,6 @@ struct CantoneseView: View {
                         .animation(.default, value: animationState)
                         .navigationTitle("IOSTabView.NavigationTitle.Cantonese")
                 }
-                .navigationViewStyle(.stack)
         }
 }
 

@@ -6,7 +6,7 @@ import AboutKit
 
 struct AboutView: View {
         var body: some View {
-                NavigationView {
+                NavigationStack {
                         List {
                                 Section {
                                         EnhancedLabel("Shared.About.Version", icon: "info.circle", message: Text(verbatim: AppMaster.version))
@@ -132,7 +132,6 @@ struct AboutView: View {
                         }
                         .navigationTitle("IOSTabView.NavigationTitle.About")
                 }
-                .navigationViewStyle(.stack)
         }
 }
 

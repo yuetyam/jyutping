@@ -33,7 +33,7 @@ struct MacInputMethodView: View {
                                                 AppMaster.copy(About.WebsiteAddress)
                                                 isWebsiteAddressCopied = true
                                                 Task {
-                                                        try await Task.sleep(nanoseconds: 2_000_000_000) // 2s
+                                                        try await Task.sleep(for: .seconds(2))
                                                         isWebsiteAddressCopied = false
                                                 }
                                         } label: {

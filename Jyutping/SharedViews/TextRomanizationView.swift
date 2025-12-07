@@ -7,7 +7,7 @@ struct TextRomanizationView: View {
                 let characters = text.map({ $0 })
                 let ideographicCharacters = text.filter(\.isIdeographic).map({ String($0) })
                 let syllables = romanization
-                        .replacingOccurrences(of: "[，。！？、：；]", with: String.space, options: .regularExpression)
+                        .replacing(/[，。！？、：；]/, with: String.space)
                         .split(separator: Character.space)
                         .map({ String($0) })
                 let isEqual: Bool = ideographicCharacters.count == syllables.count

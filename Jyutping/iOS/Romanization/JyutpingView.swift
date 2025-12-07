@@ -8,7 +8,7 @@ struct JyutpingView: View {
         private let searchIcon: String = "doc.text.magnifyingglass"
 
         var body: some View {
-                NavigationView {
+                NavigationStack {
                         List {
                                 SearchView(placeholder: "TextField.SearchPronunciation", animationState: $animationState)
 
@@ -43,7 +43,6 @@ struct JyutpingView: View {
                         .animation(.default, value: animationState)
                         .navigationTitle("IOSTabView.NavigationTitle.Jyutping")
                 }
-                .navigationViewStyle(.stack)
         }
 }
 

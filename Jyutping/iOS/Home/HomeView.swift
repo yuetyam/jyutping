@@ -19,7 +19,7 @@ struct HomeView: View {
         }
 
         var body: some View {
-                NavigationView {
+                NavigationStack {
                         List {
                                 SearchView(placeholder: "TextField.SearchPronunciation", submitLabel: .return, animationState: $animationState)
 
@@ -144,7 +144,6 @@ struct HomeView: View {
                         }
                         .navigationTitle("IOSTabView.NavigationTitle.Home")
                 }
-                .navigationViewStyle(.stack)
         }
 }
 
