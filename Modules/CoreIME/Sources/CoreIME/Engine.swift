@@ -388,10 +388,8 @@ extension Engine {
                 } else {
                         return idealSchemes.flatMap({ scheme -> [Candidate] in
                                 switch scheme.count {
-                                case 0:
-                                        return []
-                                case 1:
-                                        return perform(scheme: scheme, limit: limit, strictStatement: strictStatement)
+                                case 0: return []
+                                case 1: return perform(scheme: scheme, limit: limit, strictStatement: strictStatement)
                                 default:
                                         return (1...scheme.count).reversed().map({ scheme.prefix($0) }).flatMap({ perform(scheme: $0, limit: limit, strictStatement: strictStatement) })
                                 }

@@ -144,6 +144,12 @@ public struct Candidate: Hashable, Comparable, Sendable {
         public var isInputMemory: Bool {
                 return self.order < 0
         }
+        public var isIdealInputMemory: Bool {
+                return self.order == -1
+        }
+        public var isNotIdealInputMemory: Bool {
+                return self.order == -2
+        }
 
         // Equatable
         public static func ==(lhs: Candidate, rhs: Candidate) -> Bool {

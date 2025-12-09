@@ -15,43 +15,26 @@ extension Converter {
         ///   - characterStandard: The Chinese character set to use (e.g., Traditional or Simplified).
         /// - Returns: A merged array of unique, converted candidates.
         public static func dispatch(memory: [Candidate], defined: [Candidate], marks: [Candidate], symbols: [Candidate], queried: [Candidate], isEmojiSuggestionsOn: Bool, characterStandard: CharacterStandard) -> [Candidate] {
-                switch (memory.isNotEmpty, isEmojiSuggestionsOn) {
-                case (true, true):
-                        guard symbols.isNotEmpty else {
-                                return (defined + memory + marks + queried.filter(\.isCompound.negative))
-                                        .transformed(to: characterStandard)
-                                        .distinct()
+                let idealMemory = memory.filter(\.isIdealInputMemory)
+                let notIdealMemory = memory.filter(\.isNotIdealInputMemory)
+                var chained: [Candidate] = idealMemory.isEmpty ? queried : queried.filter(\.isCompound.negative)
+                for entry in notIdealMemory.reversed() {
+                        if let index = chained.firstIndex(where: { $0.inputCount == entry.inputCount }) {
+                                chained.insert(entry, at: index)
+                        } else if chained.isNotEmpty {
+                                chained.insert(entry, at: 0)
+                        } else {
+                                chained.append(entry)
                         }
-                        var items: [Candidate] = (defined + memory + marks + queried.filter(\.isCompound.negative))
-                                .transformed(to: characterStandard)
-                                .distinct()
-                        for symbol in symbols.reversed() {
-                                if let index = items.firstIndex(where: { $0.isCantonese && $0.lexiconText == symbol.lexiconText && $0.romanization == symbol.romanization }) {
-                                        items.insert(symbol, at: index + 1)
-                                }
-                        }
-                        return items
-                case (true, false):
-                        return (defined + memory + marks + queried.filter(\.isCompound.negative))
-                                .transformed(to: characterStandard)
-                                .distinct()
-                case (false, true):
-                        guard queried.isNotEmpty else {
-                                return (defined + marks).distinct()
-                        }
-                        guard symbols.isNotEmpty else {
-                                return (defined + marks + queried.transformed(to: characterStandard)).distinct()
-                        }
-                        var items: [Candidate] = queried
-                        for symbol in symbols.reversed() {
-                                if let index = items.firstIndex(where: { $0.lexiconText == symbol.lexiconText && $0.romanization == symbol.romanization }) {
-                                        items.insert(symbol, at: index + 1)
-                                }
-                        }
-                        return (defined + marks + items.transformed(to: characterStandard)).distinct()
-                case (false, false):
-                        return (defined + marks + queried.transformed(to: characterStandard)).distinct()
                 }
+                chained = idealMemory.prefix(2) + defined + idealMemory + marks + chained
+                let symbols: [Candidate] = isEmojiSuggestionsOn ? symbols : []
+                for symbol in symbols.reversed() {
+                        if let index = chained.firstIndex(where: { $0.isCantonese && $0.lexiconText == symbol.lexiconText && $0.romanization == symbol.romanization }) {
+                                chained.insert(symbol, at: index + 1)
+                        }
+                }
+                return chained.transformed(to: characterStandard).distinct()
         }
 }
 

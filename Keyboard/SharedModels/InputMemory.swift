@@ -196,29 +196,23 @@ struct InputMemory {
                 }
                 let eventLength = events.count
                 let text = events.map(\.text).joined()
-                let matches = pingMatch(text: text, input: text, statement: pingStatement)
+                let fullMatched = pingMatch(text: text, input: text, statement: pingStatement)
                 let idealSchemes = segmentation.filter({ $0.length == eventLength })
-                let searched: [InternalLexicon] = idealSchemes.isEmpty ? [] : idealSchemes.flatMap({ scheme -> [InternalLexicon] in
+                let idealQueried: [InternalLexicon] = idealSchemes.flatMap({ scheme -> [InternalLexicon] in
                         let pingCode: Int = scheme.originText.hash
                         let shortcutCode: Int = scheme.originAnchorsText.hash
-                        let matched = strictMatch(ping: pingCode, shortcut: shortcutCode, input: text, statement: strictStatement)
-                        guard matched.isNotEmpty else { return [] }
-                        let mark = scheme.mark
-                        let syllables = scheme.syllableText
-                        return matched.compactMap({ item -> InternalLexicon? in
-                                guard item.mark == syllables else { return nil }
-                                return InternalLexicon(word: item.word, romanization: item.romanization, frequency: item.frequency, latest: item.latest, input: text, mark: mark)
-                        })
+                        return strictMatch(ping: pingCode, shortcut: shortcutCode, input: text, mark: scheme.mark, statement: strictStatement)
                 })
-                guard matches.isEmpty && searched.isEmpty else {
-                        return (matches + searched).distinct().map({ Candidate(text: $0.word, romanization: $0.romanization, input: text, mark: $0.mark, order: -1) })
+                let queried = query(segmentation: segmentation, idealSchemes: idealSchemes, strictStatement: strictStatement)
+                guard fullMatched.isEmpty && idealQueried.isEmpty else {
+                        return (fullMatched + idealQueried).distinct().map({ Candidate(text: $0.word, romanization: $0.romanization, input: text, mark: $0.mark, order: -1) }) + queried
                 }
                 let shortcuts = shortcutMatch(text: text, input: text, limit: 5, statement: shortcutStatement)
                 guard shortcuts.isEmpty else {
-                        return shortcuts.map({ Candidate(text: $0.word, romanization: $0.romanization, input: text, mark: $0.mark, order: -1) })
+                        return shortcuts.map({ Candidate(text: $0.word, romanization: $0.romanization, input: text, mark: $0.mark, order: -1) }) + queried
                 }
-                let shouldContinue: Bool = idealSchemes.isEmpty || (events.last == InputEvent.letterM) || (events.first == InputEvent.letterM)
-                guard shouldContinue else { return [] }
+                let shouldPartiallyMatch: Bool = idealSchemes.isEmpty || (events.last == InputEvent.letterM) || (events.first == InputEvent.letterM)
+                guard shouldPartiallyMatch else { return queried }
                 let prefixMatched: [InternalLexicon] = segmentation.flatMap({ scheme -> [InternalLexicon] in
                         guard scheme.isNotEmpty else { return [] }
                         let tail = events.dropFirst(scheme.length)
@@ -265,11 +259,36 @@ struct InputMemory {
                                         return lastSyllable.hasPrefix(tailText) ? converted : nil
                                 }
                         })
-                return (prefixMatched + gainedMatched)
+                let partialMatched = (prefixMatched + gainedMatched)
                         .distinct()
                         .sorted()
                         .prefix(5)
                         .map({ Candidate(text: $0.word, romanization: $0.romanization, input: text, mark: $0.mark, order: -1) })
+                return partialMatched + queried
+        }
+        private static func query(segmentation: Segmentation, idealSchemes: [Scheme], strictStatement: OpaquePointer?) -> [Candidate] {
+                guard segmentation.isNotEmpty else { return [] }
+                if idealSchemes.isEmpty {
+                        return segmentation.flatMap({ perform(scheme: $0, strictStatement: strictStatement) })
+                                .distinct()
+                                .sorted()
+                                .prefix(6)
+                                .map({ Candidate(text: $0.word, romanization: $0.romanization, input: $0.input, mark: $0.mark, order: -2) })
+                } else {
+                        return idealSchemes.flatMap({ scheme -> [InternalLexicon] in
+                                guard scheme.count > 1 else { return [] }
+                                return (1..<scheme.count).reversed().map({ scheme.prefix($0) }).flatMap({ perform(scheme: $0, strictStatement: strictStatement) })
+                        })
+                        .distinct()
+                        .sorted()
+                        .prefix(6)
+                        .map({ Candidate(text: $0.word, romanization: $0.romanization, input: $0.input, mark: $0.mark, order: -2) })
+                }
+        }
+        private static func perform<T: RandomAccessCollection<Syllable>>(scheme: T, strictStatement: OpaquePointer?) -> [InternalLexicon] {
+                let pingCode = scheme.originText.hash
+                let shortcutCode = scheme.originAnchorsText.hash
+                return strictMatch(ping: pingCode, shortcut: shortcutCode, input: scheme.aliasText, mark: scheme.mark, limit: 5, statement: strictStatement)
         }
 
         private static func shortcutMatch<T: StringProtocol>(text: T, input: String, limit: Int64? = nil, statement: OpaquePointer?) -> [InternalLexicon] {
@@ -413,7 +432,17 @@ private struct InternalLexicon: Hashable, Comparable {
         let frequency: Int64
         let latest: Int64
         let input: String
+        let inputCount: Int
         let mark: String
+        init(word: String, romanization: String, frequency: Int64, latest: Int64, input: String, mark: String) {
+                self.word = word
+                self.romanization = romanization
+                self.frequency = frequency
+                self.latest = latest
+                self.input = input
+                self.inputCount = input.count
+                self.mark = mark
+        }
         static func == (lhs: InternalLexicon, rhs: InternalLexicon) -> Bool {
                 return (lhs.word == rhs.word) && (lhs.romanization == rhs.romanization)
         }
@@ -422,6 +451,7 @@ private struct InternalLexicon: Hashable, Comparable {
                 hasher.combine(romanization)
         }
         static func < (lhs: InternalLexicon, rhs: InternalLexicon) -> Bool {
+                guard lhs.inputCount == rhs.inputCount else { return lhs.inputCount > rhs.inputCount }
                 guard lhs.frequency == rhs.frequency else { return lhs.frequency > rhs.frequency }
                 return lhs.latest > rhs.latest
         }
