@@ -1,5 +1,6 @@
 import SwiftUI
 import CoreIME
+import CommonExtensions
 
 struct ToolBar: View {
 
@@ -21,17 +22,19 @@ struct ToolBar: View {
                                 context.updateKeyboardForm(to: .settings)
                         }
 
-                        Spacer()
-                        ToolBarButton(
-                                imageName: "keyboard",
-                                width: buttonWidth,
-                                height: buttonHeight,
-                                insets: EdgeInsets(top: 19, leading: 0, bottom: 19, trailing: 0)
-                        ) {
-                                AudioFeedback.modified()
-                                context.triggerHapticFeedback()
-                                let newForm: KeyboardForm = (context.keyboardForm == .layoutPicker) ? context.previousKeyboardForm : .layoutPicker
-                                context.updateKeyboardForm(to: newForm)
+                        if context.keyboardInterface.isPadFloating.negative {
+                                Spacer()
+                                ToolBarButton(
+                                        imageName: "keyboard",
+                                        width: buttonWidth,
+                                        height: buttonHeight,
+                                        insets: EdgeInsets(top: 19, leading: 0, bottom: 19, trailing: 0)
+                                ) {
+                                        AudioFeedback.modified()
+                                        context.triggerHapticFeedback()
+                                        let newForm: KeyboardForm = (context.keyboardForm == .layoutPicker) ? context.previousKeyboardForm : .layoutPicker
+                                        context.updateKeyboardForm(to: newForm)
+                                }
                         }
 
                         Spacer()
@@ -100,16 +103,18 @@ struct ToolBar: View {
                         .buttonStyle(.plain)
                         .frame(width: buttonWidth, height: buttonHeight)
 
-                        Spacer()
-                        ToolBarButton(
-                                imageName: "keyboard.chevron.compact.down",
-                                width: buttonWidth,
-                                height: buttonHeight,
-                                insets: EdgeInsets(top: 18, leading: 0, bottom: 18, trailing: 0)
-                        ) {
-                                AudioFeedback.modified()
-                                context.triggerHapticFeedback()
-                                context.dismissKeyboard()
+                        if context.keyboardInterface.isPadFloating.negative {
+                                Spacer()
+                                ToolBarButton(
+                                        imageName: "keyboard.chevron.compact.down",
+                                        width: buttonWidth,
+                                        height: buttonHeight,
+                                        insets: EdgeInsets(top: 18, leading: 0, bottom: 18, trailing: 0)
+                                ) {
+                                        AudioFeedback.modified()
+                                        context.triggerHapticFeedback()
+                                        context.dismissKeyboard()
+                                }
                         }
                 }
                 .frame(height: context.topBarHeight)
@@ -131,13 +136,10 @@ private struct ToolBarButton: View {
                                 Image(systemName: imageName)
                                         .resizable()
                                         .scaledToFit()
-                                        .padding(.top, insets.top)
-                                        .padding(.bottom, insets.bottom)
-                                        .padding(.leading, insets.leading)
-                                        .padding(.trailing, insets.trailing)
+                                        .padding(insets)
                         }
+                        .frame(width: width, height: height)
                 }
                 .buttonStyle(.plain)
-                .frame(width: width, height: height)
         }
 }

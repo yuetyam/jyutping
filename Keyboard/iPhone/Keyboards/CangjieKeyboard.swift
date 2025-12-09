@@ -7,11 +7,7 @@ struct CangjieKeyboard: View {
 
         var body: some View {
                 VStack(spacing: 0) {
-                        if context.inputStage.isBuffering {
-                                CandidateBar()
-                        } else {
-                                ToolBar()
-                        }
+                        CandidateBar()
                         if Options.needsNumberRow {
                                 CantoneseNumberRow()
                         }

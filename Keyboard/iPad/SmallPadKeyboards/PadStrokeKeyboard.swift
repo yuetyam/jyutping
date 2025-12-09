@@ -7,11 +7,7 @@ struct PadStrokeKeyboard: View {
 
         var body: some View {
                 VStack(spacing: 0) {
-                        if context.inputStage.isBuffering {
-                                CandidateBar()
-                        } else {
-                                ToolBar()
-                        }
+                        CandidateBar()
                         HStack(spacing: 0 ) {
                                 Group {
                                         PadStrokeInputKey(.letterQ)

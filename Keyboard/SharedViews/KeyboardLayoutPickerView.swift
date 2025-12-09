@@ -16,14 +16,18 @@ struct KeyboardLayoutPickerView: View {
                                                 LayoutOptionView(layout: .qwerty, isSelected: selectedLayout.isQwerty)
                                                 LayoutOptionView(layout: .tripleStroke, isSelected: selectedLayout.isTripleStroke)
                                                 LayoutOptionView(layout: .nineKey, isSelected: selectedLayout.isNineKey)
+                                                #if DEBUG
                                                 LayoutOptionView(layout: .fourteenKey, isSelected: selectedLayout.isFourteenKey)
+                                                #endif
                                         }
+                                        #if DEBUG
                                         HStack {
                                                 LayoutOptionView(layout: .fifteenKey, isSelected: selectedLayout.isFifteenKey)
                                                 LayoutOptionView(layout: .eighteenKey, isSelected: selectedLayout.isEighteenKey)
                                                 LayoutOptionView(layout: .nineteenKey, isSelected: selectedLayout.isNineteenKey)
                                                 LayoutOptionView(layout: .twentyOneKey, isSelected: selectedLayout.isTwentyOneKey)
                                         }
+                                        #endif
                                 }
                                 .frame(maxHeight: .infinity)
                         } else {
@@ -33,6 +37,7 @@ struct KeyboardLayoutPickerView: View {
                                                 LayoutOptionView(layout: .tripleStroke, isSelected: selectedLayout.isTripleStroke)
                                                 LayoutOptionView(layout: .nineKey, isSelected: selectedLayout.isNineKey)
                                         }
+                                        #if DEBUG
                                         HStack {
                                                 LayoutOptionView(layout: .fourteenKey, isSelected: selectedLayout.isFourteenKey)
                                                 LayoutOptionView(layout: .fifteenKey, isSelected: selectedLayout.isFifteenKey)
@@ -42,6 +47,7 @@ struct KeyboardLayoutPickerView: View {
                                                 LayoutOptionView(layout: .nineteenKey, isSelected: selectedLayout.isNineteenKey)
                                                 LayoutOptionView(layout: .twentyOneKey, isSelected: selectedLayout.isTwentyOneKey)
                                         }
+                                        #endif
                                 }
                                 .frame(maxHeight: .infinity)
                         }

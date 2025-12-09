@@ -7,11 +7,7 @@ struct LargePadStrokeKeyboard: View {
 
         var body: some View {
                 VStack(spacing: 0) {
-                        if context.inputStage.isBuffering {
-                                CandidateBar()
-                        } else {
-                                ToolBar()
-                        }
+                        CandidateBar()
                         if context.keyboardCase.isUppercased {
                                 HStack(spacing: 0 ) {
                                         LargePadExpansibleInputKey(
