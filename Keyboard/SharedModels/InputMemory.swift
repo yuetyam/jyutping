@@ -291,11 +291,11 @@ struct InputMemory {
                 return strictMatch(ping: pingCode, shortcut: shortcutCode, input: scheme.aliasText, mark: scheme.mark, limit: 5, statement: strictStatement)
         }
 
-        private static func shortcutMatch<T: StringProtocol>(text: T, input: String, limit: Int64? = nil, statement: OpaquePointer?) -> [InternalLexicon] {
+        private static func shortcutMatch<T: StringProtocol>(text: T, input: String, limit: Int64 = 100, statement: OpaquePointer?) -> [InternalLexicon] {
                 let code = text.replacingOccurrences(of: "y", with: "j").hash
                 sqlite3_reset(statement)
                 sqlite3_bind_int64(statement, 1, Int64(code))
-                sqlite3_bind_int64(statement, 2, (limit ?? 100))
+                sqlite3_bind_int64(statement, 2, limit)
                 var items: [InternalLexicon] = []
                 while sqlite3_step(statement) == SQLITE_ROW {
                         guard let word = sqlite3_column_text(statement, 0) else { continue }
@@ -308,10 +308,10 @@ struct InputMemory {
                 }
                 return items
         }
-        private static func pingMatch<T: StringProtocol>(text: T, input: String, mark: String? = nil, limit: Int64? = nil, statement: OpaquePointer?) -> [InternalLexicon] {
+        private static func pingMatch<T: StringProtocol>(text: T, input: String, mark: String? = nil, limit: Int64 = 100, statement: OpaquePointer?) -> [InternalLexicon] {
                 sqlite3_reset(statement)
                 sqlite3_bind_int64(statement, 1, Int64(text.hash))
-                sqlite3_bind_int64(statement, 2, (limit ?? 100))
+                sqlite3_bind_int64(statement, 2, limit)
                 var items: [InternalLexicon] = []
                 while sqlite3_step(statement) == SQLITE_ROW {
                         guard let word = sqlite3_column_text(statement, 0) else { continue }
@@ -325,11 +325,11 @@ struct InputMemory {
                 }
                 return items
         }
-        private static func strictMatch(ping: Int, shortcut: Int, input: String, mark: String? = nil, limit: Int64? = nil, statement: OpaquePointer?) -> [InternalLexicon] {
+        private static func strictMatch(ping: Int, shortcut: Int, input: String, mark: String? = nil, limit: Int64 = 100, statement: OpaquePointer?) -> [InternalLexicon] {
                 sqlite3_reset(statement)
                 sqlite3_bind_int64(statement, 1, Int64(ping))
                 sqlite3_bind_int64(statement, 2, Int64(shortcut))
-                sqlite3_bind_int64(statement, 3, (limit ?? 100))
+                sqlite3_bind_int64(statement, 3, limit)
                 var items: [InternalLexicon] = []
                 while sqlite3_step(statement) == SQLITE_ROW {
                         guard let word = sqlite3_column_text(statement, 0) else { continue }
@@ -364,34 +364,41 @@ struct InputMemory {
         }
 
 
-        // MARK: - TenKey Suggestions
+        // MARK: - NineKey suggestions
 
-        static func tenKeySuggest(combos: [Combo]) async -> [Candidate] {
-                let inputLength: Int = combos.count
-                guard inputLength < 19 else { return [] }
-                let code: Int = combos.map(\.rawValue).decimalCombined()
-                let fullMatched = tenKeyCodeMatch(code: code)
-                let anchorsMatched = tenKeyAnchorsMatch(code: code)
-                guard anchorsMatched.isNotEmpty else {
-                        return fullMatched.map({ Candidate(text: $0.word, romanization: $0.romanization, input: $0.input, mark: $0.mark, order: -1) })
-                }
-                guard fullMatched.isNotEmpty else {
-                        return anchorsMatched.map({ Candidate(text: $0.word, romanization: $0.romanization, input: $0.input, mark: $0.mark, order: -1) })
-                }
-                guard fullMatched.count > 10 else {
-                        return (fullMatched + anchorsMatched)
-                                .distinct()
-                                .map({ Candidate(text: $0.word, romanization: $0.romanization, input: $0.input, mark: $0.mark, order: -1) })
-                }
-                return (fullMatched.prefix(10) + (fullMatched + anchorsMatched).sorted())
-                        .distinct()
-                        .map({ Candidate(text: $0.word, romanization: $0.romanization, input: $0.input, mark: $0.mark, order: -1) })
+        private static let nineKeyAnchorsCommand: String = "SELECT word, romanization, frequency, latest FROM memory WHERE tenkeyanchors = ? ORDER BY frequency DESC LIMIT ?;"
+        private static func prepareNineKeyAnchorsStatement() -> OpaquePointer? {
+                var statement: OpaquePointer?
+                guard sqlite3_prepare_v2(database, nineKeyAnchorsCommand, -1, &statement, nil) == SQLITE_OK else { return nil }
+                return statement
         }
-        private static func tenKeyCodeMatch(code: Int) -> [InternalLexicon] {
-                let command: String = "SELECT word, romanization, frequency, latest FROM memory WHERE tenkeycode = \(code) ORDER BY frequency DESC LIMIT 100;"
-                var statement: OpaquePointer? = nil
-                defer { sqlite3_finalize(statement) }
-                guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return [] }
+        private static let nineKeyCodeCommand: String = "SELECT word, romanization, frequency, latest FROM memory WHERE tenkeycode = ? ORDER BY frequency DESC LIMIT ?;"
+        private static func prepareNineKeyCodeStatement() -> OpaquePointer? {
+                var statement: OpaquePointer?
+                guard sqlite3_prepare_v2(database, nineKeyCodeCommand, -1, &statement, nil) == SQLITE_OK else { return nil }
+                return statement
+        }
+        private static func nineKeyAnchorsMatch(code: Int, limit: Int64 = 5, statement: OpaquePointer?) -> [InternalLexicon] {
+                sqlite3_reset(statement)
+                sqlite3_bind_int64(statement, 1, Int64(code))
+                sqlite3_bind_int64(statement, 2, limit)
+                var items: [InternalLexicon] = []
+                while sqlite3_step(statement) == SQLITE_ROW {
+                        guard let word = sqlite3_column_text(statement, 0) else { continue }
+                        guard let romanizationText = sqlite3_column_text(statement, 1) else { continue }
+                        let frequency = sqlite3_column_int64(statement, 2)
+                        let latest = sqlite3_column_int64(statement, 3)
+                        let romanization: String = String(cString: romanizationText)
+                        let anchorText: String = String(romanization.split(separator: Character.space).compactMap(\.first))
+                        let instance = InternalLexicon(word: String(cString: word), romanization: romanization, frequency: frequency, latest: latest, input: anchorText, mark: anchorText)
+                        items.append(instance)
+                }
+                return items
+        }
+        private static func nineKeyCodeMatch(code: Int, limit: Int64 = 100, statement: OpaquePointer?) -> [InternalLexicon] {
+                sqlite3_reset(statement)
+                sqlite3_bind_int64(statement, 1, Int64(code))
+                sqlite3_bind_int64(statement, 2, limit)
                 var items: [InternalLexicon] = []
                 while sqlite3_step(statement) == SQLITE_ROW {
                         guard let word = sqlite3_column_text(statement, 0) else { continue }
@@ -406,23 +413,39 @@ struct InputMemory {
                 }
                 return items
         }
-        private static func tenKeyAnchorsMatch(code: Int) -> [InternalLexicon] {
-                let command: String = "SELECT word, romanization, frequency, latest FROM memory WHERE tenkeyanchors = \(code) ORDER BY frequency DESC LIMIT 6;"
-                var statement: OpaquePointer? = nil
-                defer { sqlite3_finalize(statement) }
-                guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return [] }
-                var items: [InternalLexicon] = []
-                while sqlite3_step(statement) == SQLITE_ROW {
-                        guard let word = sqlite3_column_text(statement, 0) else { continue }
-                        guard let romanizationText = sqlite3_column_text(statement, 1) else { continue }
-                        let frequency = sqlite3_column_int64(statement, 2)
-                        let latest = sqlite3_column_int64(statement, 3)
-                        let romanization: String = String(cString: romanizationText)
-                        let anchorText: String = String(romanization.split(separator: Character.space).compactMap(\.first))
-                        let instance = InternalLexicon(word: String(cString: word), romanization: romanization, frequency: frequency, latest: latest, input: anchorText, mark: anchorText)
-                        items.append(instance)
+        static func nineKeySearch<T: RandomAccessCollection<Combo>>(combos: T) async -> [Candidate] {
+                guard combos.isNotEmpty else { return [] }
+                let eventLength = combos.count
+                lazy var anchorsStatement = prepareNineKeyAnchorsStatement()
+                lazy var codeStatement = prepareNineKeyCodeStatement()
+                defer {
+                        sqlite3_finalize(anchorsStatement)
+                        sqlite3_finalize(codeStatement)
                 }
-                return items
+                guard eventLength > 1 else {
+                        let code: Int = combos.first?.rawValue ?? -1
+                        let codeMatched = nineKeyCodeMatch(code: code, limit: 100, statement: codeStatement)
+                        let anchorsMatched = nineKeyAnchorsMatch(code: code, limit: 100, statement: anchorsStatement)
+                        return (codeMatched + anchorsMatched)
+                                .distinct()
+                                .map({ Candidate(text: $0.word, romanization: $0.romanization, input: $0.input, mark: $0.mark, order: -1) })
+                }
+                let fullCode: Int = combos.map(\.rawValue).decimalCombined()
+                let fullCodeMatched = nineKeyCodeMatch(code: fullCode, limit: 100, statement: codeStatement)
+                let fullAnchorsMatched = nineKeyAnchorsMatch(code: fullCode, limit: 5, statement: anchorsStatement)
+                let ideal = (fullCodeMatched.prefix(10) + (fullCodeMatched + fullAnchorsMatched).sorted())
+                        .distinct()
+                        .map({ Candidate(text: $0.word, romanization: $0.romanization, input: $0.input, mark: $0.mark, order: -1) })
+                let queried = (1..<eventLength)
+                        .flatMap({ number -> [InternalLexicon] in
+                                let code = combos.dropLast(number).map(\.rawValue).decimalCombined()
+                                guard code > 0 else { return [] }
+                                return nineKeyCodeMatch(code: code, limit: 4, statement: codeStatement)
+                        })
+                        .distinct()
+                        .prefix(6)
+                        .map({ Candidate(text: $0.word, romanization: $0.romanization, input: $0.input, mark: $0.mark, order: -2) })
+                return ideal + queried
         }
 }
 

@@ -539,14 +539,12 @@ extension Engine {
                                 guard code > 0 else { return [] }
                                 return tenKeyCodeMatch(code: code, limit: limit, statement: codeMatchStatement)
                         })
-                        .sorted()
                 let anchorsMatched: [Candidate] = (0..<inputLength)
                         .flatMap({ number -> [Candidate] in
                                 let code = combos.dropLast(number).map(\.rawValue).decimalCombined()
                                 guard code > 0 else { return [] }
                                 return tenKeyAnchorsMatch(code: code, limit: limit, statement: anchorsStatement)
                         })
-                        .sorted()
                 let queried = (fullMatched + idealAnchorsMatched + codeMatched + anchorsMatched)
                 guard let firstInputCount = queried.first?.inputCount else { return [] }
                 guard firstInputCount < inputLength else { return queried }

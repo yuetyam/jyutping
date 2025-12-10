@@ -628,7 +628,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let isEmojiSuggestionsOn: Bool = Options.isEmojiSuggestionsOn
                 suggestionTask = Task.detached(priority: .high) { [weak self] in
                         guard let self else { return }
-                        async let memory: [Candidate] = isInputMemoryOn ? InputMemory.tenKeySuggest(combos: combos) : []
+                        async let memory: [Candidate] = isInputMemoryOn ? InputMemory.nineKeySearch(combos: combos) : []
                         async let defined: [Candidate] = queryDefinedCandidates(for: combos)
                         async let textMarks: [Candidate] = Engine.queryTextMarks(for: combos)
                         async let symbols: [Candidate] = Engine.tenKeySearchSymbols(combos: combos)
