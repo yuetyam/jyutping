@@ -109,13 +109,6 @@ struct SettingsView: View {
                                                 Text("SettingsView.KeyboardLayout.Option.QWERTY").tag(KeyboardLayout.qwerty)
                                                 Text("SettingsView.KeyboardLayout.Option.TripleStroke").tag(KeyboardLayout.tripleStroke)
                                                 Text("SettingsView.KeyboardLayout.Option.NineKey").tag(KeyboardLayout.nineKey)
-                                                #if DEBUG
-                                                Text("SettingsView.KeyboardLayout.Option.FourteenKey").tag(KeyboardLayout.fourteenKey)
-                                                Text("SettingsView.KeyboardLayout.Option.FifteenKey").tag(KeyboardLayout.fifteenKey)
-                                                Text("SettingsView.KeyboardLayout.Option.EighteenKey").tag(KeyboardLayout.eighteenKey)
-                                                Text("SettingsView.KeyboardLayout.Option.NineteenKey").tag(KeyboardLayout.nineteenKey)
-                                                Text("SettingsView.KeyboardLayout.Option.TwentyOneKey").tag(KeyboardLayout.twentyOneKey)
-                                                #endif
                                         }
                                         .pickerStyle(.inline)
                                         .textCase(nil)

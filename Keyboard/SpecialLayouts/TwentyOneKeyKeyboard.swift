@@ -1,10 +1,9 @@
 import SwiftUI
 import CoreIME
+import CommonExtensions
 
 struct TwentyOneKeyKeyboard: View {
-
         @EnvironmentObject private var context: KeyboardViewController
-
         var body: some View {
                 VStack(spacing: 0) {
                         if context.inputStage.isBuffering {
@@ -22,8 +21,10 @@ struct TwentyOneKeyKeyboard: View {
                                 FirstEnhancedLetterRow()
                         }
                         switch Options.inputKeyStyle {
-                        case .clear, .numbers:
-                                SecondLetterRow()
+                        case .clear:
+                                SecondLetterRow(needsNumbers: false)
+                        case .numbers:
+                                SecondLetterRow(needsNumbers: true)
                         case .numbersAndSymbols:
                                 SecondEnhancedLetterRow()
                         }
@@ -81,24 +82,24 @@ private struct FirstLetterRow: View {
         var body: some View {
                 HStack(spacing: 0 ) {
                         T21EnhancedInputKey(
-                                keyLocale: .leading,
+                                side: .leading,
                                 event: .letterW,
-                                keyUnit: .init(
-                                        primary: .init("w", extras: [.init("q", alignment: .bottomLeading)]),
+                                unit: KeyUnit(
+                                        primary: KeyElement("w", extras: [.init("q", alignment: .bottomLeading)]),
                                         members: [
-                                                .init("q"),
-                                                .init("w")
+                                                KeyElement("q"),
+                                                KeyElement("w")
                                         ]
                                 )
                         )
                         T21EnhancedInputKey(
-                                keyLocale: .leading,
+                                side: .leading,
                                 event: .letterE,
-                                keyUnit: .init(
-                                        primary: .init("e", extras: [.init("r", alignment: .bottomTrailing)]),
+                                unit: KeyUnit(
+                                        primary: KeyElement("e", extras: [.init("r", alignment: .bottomTrailing)]),
                                         members: [
-                                                .init("e"),
-                                                .init("r")
+                                                KeyElement("e"),
+                                                KeyElement("r")
                                         ]
                                 )
                         )
@@ -114,37 +115,143 @@ private struct FirstLetterRow: View {
 private struct FirstEnhancedLetterRow: View {
         var body: some View {
                 HStack(spacing: 0 ) {
-                        EnhancedInputKey(keyLocale: .leading, event: .letterQ, keyModel: KeyModel(primary: KeyElement("q", header: "1"), members: [KeyElement("q"), KeyElement("1")]))
-                        EnhancedInputKey(keyLocale: .leading, event: .letterW, keyModel: KeyModel(primary: KeyElement("w", header: "2"), members: [KeyElement("w"), KeyElement("2")]))
-                        EnhancedInputKey(keyLocale: .leading, event: .letterE, keyModel: KeyModel(primary: KeyElement("e", header: "3"), members: [KeyElement("e"), KeyElement("3")]))
-                        EnhancedInputKey(keyLocale: .leading, event: .letterR, keyModel: KeyModel(primary: KeyElement("r", header: "4"), members: [KeyElement("r"), KeyElement("4")]))
-                        EnhancedInputKey(keyLocale: .leading, event: .letterT, keyModel: KeyModel(primary: KeyElement("t", header: "5"), members: [KeyElement("t"), KeyElement("5")]))
-                        EnhancedInputKey(keyLocale: .leading, event: .letterY, keyModel: KeyModel(primary: KeyElement("y", header: "6"), members: [KeyElement("y"), KeyElement("6")]))
-                        EnhancedInputKey(keyLocale: .trailing, event: .letterU, keyModel: KeyModel(primary: KeyElement("u", header: "7"), members: [KeyElement("u"), KeyElement("7")]))
-                        EnhancedInputKey(keyLocale: .trailing, event: .letterI, keyModel: KeyModel(primary: KeyElement("i", header: "8"), members: [KeyElement("i"), KeyElement("8")]))
-                        EnhancedInputKey(keyLocale: .trailing, event: .letterO, keyModel: KeyModel(primary: KeyElement("o", header: "9"), members: [KeyElement("o"), KeyElement("9")]))
-                        EnhancedInputKey(keyLocale: .trailing, event: .letterP, keyModel: KeyModel(primary: KeyElement("p", header: "0"), members: [KeyElement("p"), KeyElement("0")]))
+                        T21EnhancedInputKey(
+                                side: .leading,
+                                event: .letterW,
+                                unit: KeyUnit(
+                                        primary: KeyElement("w", extras: [.init("q", alignment: .bottomLeading), .init("1", alignment: .topTrailing)]),
+                                        members: [
+                                                KeyElement("q"),
+                                                KeyElement("w"),
+                                                KeyElement("1"),
+                                        ]
+                                )
+                        )
+                        T21EnhancedInputKey(
+                                side: .leading,
+                                event: .letterE,
+                                unit: KeyUnit(
+                                        primary: KeyElement("e", extras: [.init("r", alignment: .bottomTrailing), .init("2", alignment: .topTrailing)]),
+                                        members: [
+                                                KeyElement("e"),
+                                                KeyElement("r"),
+                                                KeyElement("2"),
+                                        ]
+                                )
+                        )
+                        T21EnhancedInputKey(
+                                side: .leading,
+                                event: .letterT,
+                                unit: KeyUnit(
+                                        primary: KeyElement("t", extras: [.init("3", alignment: .topTrailing)]),
+                                        members: [
+                                                KeyElement("t"),
+                                                KeyElement("3"),
+                                        ]
+                                )
+                        )
+                        T21EnhancedInputKey(
+                                side: .leading,
+                                event: .letterY,
+                                unit: KeyUnit(
+                                        primary: KeyElement("y", extras: [.init("4", alignment: .topTrailing)]),
+                                        members: [
+                                                KeyElement("y"),
+                                                KeyElement("4"),
+                                        ]
+                                )
+                        )
+                        T21EnhancedInputKey(
+                                side: .leading,
+                                event: .letterU,
+                                unit: KeyUnit(
+                                        primary: KeyElement("u", extras: [.init("5", alignment: .topTrailing)]),
+                                        members: [
+                                                KeyElement("u"),
+                                                KeyElement("5"),
+                                        ]
+                                )
+                        )
+                        T21EnhancedInputKey(
+                                side: .leading,
+                                event: .letterI,
+                                unit: KeyUnit(
+                                        primary: KeyElement("i", extras: [.init("6", alignment: .topTrailing)]),
+                                        members: [
+                                                KeyElement("i"),
+                                                KeyElement("6"),
+                                        ]
+                                )
+                        )
+                        T21EnhancedInputKey(
+                                side: .trailing,
+                                event: .letterO,
+                                unit: KeyUnit(
+                                        primary: KeyElement("o", extras: [.init("7", alignment: .topTrailing)]),
+                                        members: [
+                                                KeyElement("o"),
+                                                KeyElement("7"),
+                                        ]
+                                )
+                        )
+                        T21EnhancedInputKey(
+                                side: .trailing,
+                                event: .letterP,
+                                unit: KeyUnit(
+                                        primary: KeyElement("p", extras: [.init("8", alignment: .topTrailing)]),
+                                        members: [
+                                                KeyElement("p"),
+                                                KeyElement("8"),
+                                        ]
+                                )
+                        )
                 }
         }
 }
 
 private struct SecondLetterRow: View {
+        let needsNumbers: Bool
         var body: some View {
                 HStack(spacing: 0 ) {
-                        T21LetterInputKey(.letterA)
-                        T21LetterInputKey(.letterS)
+                        if needsNumbers {
+                                T21EnhancedInputKey(
+                                        side: .trailing,
+                                        event: .letterA,
+                                        unit: KeyUnit(
+                                                primary: KeyElement("a", extras: [.init("9", alignment: .topTrailing)]),
+                                                members: [
+                                                        KeyElement("a"),
+                                                        KeyElement("9"),
+                                                ]
+                                        )
+                                )
+                                T21EnhancedInputKey(
+                                        side: .trailing,
+                                        event: .letterS,
+                                        unit: KeyUnit(
+                                                primary: KeyElement("s", extras: [.init("0", alignment: .topTrailing)]),
+                                                members: [
+                                                        KeyElement("s"),
+                                                        KeyElement("0"),
+                                                ]
+                                        )
+                                )
+                        } else {
+                                T21LetterInputKey(.letterA)
+                                T21LetterInputKey(.letterS)
+                        }
                         T21LetterInputKey(.letterD)
                         T21LetterInputKey(.letterF)
                         T21LetterInputKey(.letterG)
                         T21LetterInputKey(.letterH)
                         T21EnhancedInputKey(
-                                keyLocale: .trailing,
+                                side: .trailing,
                                 event: .letterK,
-                                keyUnit: .init(
-                                        primary: .init("k", extras: [.init("j", alignment: .bottomLeading)]),
+                                unit: KeyUnit(
+                                        primary: KeyElement("k", extras: [.init("j", alignment: .bottomLeading)]),
                                         members: [
-                                                .init("k"),
-                                                .init("j")
+                                                KeyElement("k"),
+                                                KeyElement("j")
                                         ]
                                 )
                         )
@@ -155,69 +262,120 @@ private struct SecondLetterRow: View {
 private struct SecondEnhancedLetterRow: View {
         var body: some View {
                 HStack(spacing: 0 ) {
-                        EnhancedInputKey(keyLocale: .leading, event: .letterA, keyModel: KeyModel(primary: KeyElement("a", header: "@"), members: [KeyElement("a"), KeyElement("@")]))
-                        EnhancedInputKey(keyLocale: .leading, event: .letterS, keyModel: KeyModel(primary: KeyElement("s", header: "#"), members: [KeyElement("s"), KeyElement("#")]))
-                        EnhancedInputKey(keyLocale: .leading, event: .letterD, keyModel: KeyModel(primary: KeyElement("d", header: "$"), members: [KeyElement("d"), KeyElement("$"), KeyElement("¥")]))
-                        EnhancedInputKey(
-                                keyLocale: .leading,
-                                event: .letterF,
-                                keyModel: KeyModel(
-                                        primary: KeyElement("f", header: "/"),
+                        T21EnhancedInputKey(
+                                side: .leading,
+                                event: .letterA,
+                                unit: KeyUnit(
+                                        primary: KeyElement("a", extras: [.init("9", alignment: .topTrailing)]),
                                         members: [
-                                                KeyElement("f"),
-                                                KeyElement("/"),
-                                                KeyElement("／", header: PresetConstant.fullWidth),
-                                                KeyElement("\\"),
-                                                KeyElement("＼", header: PresetConstant.fullWidth)
+                                                KeyElement("a"),
+                                                KeyElement("9"),
                                         ]
                                 )
                         )
-                        EnhancedInputKey(keyLocale: .leading, event: .letterG, keyModel: KeyModel(primary: KeyElement("g", header: "（"), members: [KeyElement("g"), KeyElement("（")]))
-                        EnhancedInputKey(keyLocale: .trailing, event: .letterH, keyModel: KeyModel(primary: KeyElement("h", header: "）"), members: [KeyElement("h"), KeyElement("）")]))
-                        EnhancedInputKey(keyLocale: .trailing, event: .letterJ, keyModel: KeyModel(primary: KeyElement("j", header: "「"), members: [KeyElement("j"), KeyElement("「")]))
-                        EnhancedInputKey(keyLocale: .trailing, event: .letterK, keyModel: KeyModel(primary: KeyElement("k", header: "」"), members: [KeyElement("k"), KeyElement("」")]))
-                        EnhancedInputKey(
-                                keyLocale: .trailing,
+                        T21EnhancedInputKey(
+                                side: .leading,
+                                event: .letterS,
+                                unit: KeyUnit(
+                                        primary: KeyElement("s", extras: [.init("0", alignment: .topTrailing)]),
+                                        members: [
+                                                KeyElement("s"),
+                                                KeyElement("0"),
+                                        ]
+                                )
+                        )
+                        T21EnhancedInputKey(
+                                side: .leading,
+                                event: .letterD,
+                                unit: KeyUnit(
+                                        primary: KeyElement("d", extras: [.init("@", alignment: .topTrailing)]),
+                                        members: [
+                                                KeyElement("d"),
+                                                KeyElement("@"),
+                                        ]
+                                )
+                        )
+                        T21EnhancedInputKey(
+                                side: .leading,
+                                event: .letterF,
+                                unit: KeyUnit(
+                                        primary: KeyElement("f", extras: [.init("#", alignment: .topTrailing)]),
+                                        members: [
+                                                KeyElement("f"),
+                                                KeyElement("#"),
+                                        ]
+                                )
+                        )
+                        T21EnhancedInputKey(
+                                side: .leading,
+                                event: .letterG,
+                                unit: KeyUnit(
+                                        primary: KeyElement("g", extras: [.init("$", alignment: .topTrailing)]),
+                                        members: [
+                                                KeyElement("g"),
+                                                KeyElement("$"),
+                                        ]
+                                )
+                        )
+                        T21EnhancedInputKey(
+                                side: .leading,
+                                event: .letterH,
+                                unit: KeyUnit(
+                                        primary: KeyElement("h", extras: [.init("/", alignment: .topTrailing)]),
+                                        members: [
+                                                KeyElement("h"),
+                                                KeyElement("/"),
+                                        ]
+                                )
+                        )
+                        T21EnhancedInputKey(
+                                side: .trailing,
+                                event: .letterK,
+                                unit: KeyUnit(
+                                        primary: KeyElement("k", extras: [.init("j", alignment: .bottomLeading), .init("-", alignment: .topTrailing)]),
+                                        members: [
+                                                KeyElement("k"),
+                                                KeyElement("j"),
+                                                KeyElement("-"),
+                                        ]
+                                )
+                        )
+                        T21EnhancedInputKey(
+                                side: .trailing,
                                 event: .letterL,
-                                keyModel: KeyModel(
-                                        primary: KeyElement("l", header: "'"),
+                                unit: KeyUnit(
+                                        primary: KeyElement("l", extras: [.init(String.apostrophe, alignment: .topTrailing)]),
                                         members: [
                                                 KeyElement("l"),
-                                                KeyElement("'", footer: "0027"),
-                                                KeyElement("’", header: "右", footer: "2019"),
-                                                KeyElement("‘", header: "左", footer: "2018"),
-                                                KeyElement("\"", footer: "0022"),
-                                                KeyElement("”", header: "右", footer: "201D"),
-                                                KeyElement("“", header: "左", footer: "201C")
+                                                KeyElement(String.apostrophe),
                                         ]
                                 )
                         )
                 }
         }
 }
-
 private struct ThirdLetterRow: View {
         var body: some View {
                 HStack(spacing: 0 ) {
                         T21EnhancedInputKey(
-                                keyLocale: .leading,
+                                side: .leading,
                                 event: .letterZ,
-                                keyUnit: .init(
-                                        primary: .init("z", extras: [.init("x", alignment: .bottomTrailing)]),
+                                unit: .init(
+                                        primary: KeyElement("z", extras: [.init("x", alignment: .bottomTrailing)]),
                                         members: [
-                                                .init("z"),
-                                                .init("x")
+                                                KeyElement("z"),
+                                                KeyElement("x")
                                         ]
                                 )
                         )
                         T21EnhancedInputKey(
-                                keyLocale: .leading,
+                                side: .leading,
                                 event: .letterC,
-                                keyUnit: .init(
-                                        primary: .init("c", extras: [.init("v", alignment: .bottomTrailing)]),
+                                unit: .init(
+                                        primary: KeyElement("c", extras: [.init("v", alignment: .bottomTrailing)]),
                                         members: [
-                                                .init("c"),
-                                                .init("v")
+                                                KeyElement("c"),
+                                                KeyElement("v")
                                         ]
                                 )
                         )
@@ -230,25 +388,64 @@ private struct ThirdLetterRow: View {
 private struct ThirdEnhancedLetterRow: View {
         var body: some View {
                 HStack(spacing: 0 ) {
-                        EnhancedInputKey(
-                                keyLocale: .leading,
+                        T21EnhancedInputKey(
+                                side: .leading,
                                 event: .letterZ,
-                                keyModel: KeyModel(
-                                        primary: KeyElement("z", header: "%"),
+                                unit: .init(
+                                        primary: KeyElement("z", extras: [.init("x", alignment: .bottomTrailing), .init("%", alignment: .topTrailing)]),
                                         members: [
                                                 KeyElement("z"),
+                                                KeyElement("x"),
                                                 KeyElement("%"),
-                                                KeyElement("％", header: PresetConstant.fullWidth),
-                                                KeyElement("‰")
                                         ]
                                 )
                         )
-                        EnhancedInputKey(keyLocale: .leading, event: .letterX, keyModel: KeyModel(primary: KeyElement("x", header: "-"), members: [KeyElement("x"), KeyElement("-")]))
-                        EnhancedInputKey(keyLocale: .leading, event: .letterC, keyModel: KeyModel(primary: KeyElement("c", header: "～"), members: [KeyElement("c"), KeyElement("～"), KeyElement("~", header: PresetConstant.halfWidth)]))
-                        EnhancedInputKey(keyLocale: .leading, event: .letterV, keyModel: KeyModel(primary: KeyElement("v", header: "…"), members: [KeyElement("v"), KeyElement("…")]))
-                        EnhancedInputKey(keyLocale: .leading, event: .letterB, keyModel: KeyModel(primary: KeyElement("b", header: "、"), members: [KeyElement("b"), KeyElement("、")]))
-                        EnhancedInputKey(keyLocale: .trailing, event: .letterN, keyModel: KeyModel(primary: KeyElement("n", header: "；"), members: [KeyElement("n"), KeyElement("；")]))
-                        EnhancedInputKey(keyLocale: .trailing, event: .letterM, keyModel: KeyModel(primary: KeyElement("m", header: "："), members: [KeyElement("m"), KeyElement("：")]))
+                        T21EnhancedInputKey(
+                                side: .leading,
+                                event: .letterC,
+                                unit: .init(
+                                        primary: KeyElement("c", extras: [.init("v", alignment: .bottomTrailing), .init("～", alignment: .topTrailing)]),
+                                        members: [
+                                                KeyElement("c"),
+                                                KeyElement("v"),
+                                                KeyElement("～"),
+                                                KeyElement("~", extras: [.init(PresetConstant.halfWidth, alignment: .top)]),
+                                        ]
+                                )
+                        )
+                        T21EnhancedInputKey(
+                                side: .leading,
+                                event: .letterB,
+                                unit: .init(
+                                        primary: KeyElement("b", extras: [.init("、", alignment: .topTrailing)]),
+                                        members: [
+                                                KeyElement("b"),
+                                                KeyElement("、"),
+                                        ]
+                                )
+                        )
+                        T21EnhancedInputKey(
+                                side: .leading,
+                                event: .letterN,
+                                unit: .init(
+                                        primary: KeyElement("n", extras: [.init("；", alignment: .topTrailing)]),
+                                        members: [
+                                                KeyElement("n"),
+                                                KeyElement("；"),
+                                        ]
+                                )
+                        )
+                        T21EnhancedInputKey(
+                                side: .leading,
+                                event: .letterM,
+                                unit: .init(
+                                        primary: KeyElement("m", extras: [.init("：", alignment: .topTrailing)]),
+                                        members: [
+                                                KeyElement("m"),
+                                                KeyElement("："),
+                                        ]
+                                )
+                        )
                 }
         }
 }

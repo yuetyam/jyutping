@@ -5,21 +5,21 @@ import CoreIME
 
 struct T21EnhancedInputKey: View {
 
-        /// Create an EnhancedInputKey
+        /// Create a T21EnhancedInputKey
         /// - Parameters:
-        ///   - keyLocale: Key location, left half screen (leading) or right half screen (trailing).
-        ///   - widthUnitTimes: Times of widthUnit
+        ///   - side: Key location, left half screen (leading) or right half screen (trailing).
+        ///   - coefficient: Multiplier to the `widthUnit`
         ///   - event: InputEvent
-        ///   - keyUnit: KeyModel
-        init(keyLocale: HorizontalEdge, widthUnitTimes: CGFloat = 1.25, event: InputEvent? = nil, keyUnit: KeyUnit) {
-                self.keyLocale = keyLocale
-                self.widthUnitTimes = widthUnitTimes
+        ///   - unit: KeyUnit
+        init(side: HorizontalEdge, coefficient: CGFloat = 1.25, event: InputEvent? = nil, unit: KeyUnit) {
+                self.side = side
+                self.coefficient = coefficient
                 self.event = event
-                self.keyUnit = keyUnit
+                self.keyUnit = unit
         }
 
-        private let keyLocale: HorizontalEdge
-        private let widthUnitTimes: CGFloat
+        private let side: HorizontalEdge
+        private let coefficient: CGFloat
         private let event: InputEvent?
         private let keyUnit: KeyUnit
 
@@ -34,7 +34,7 @@ struct T21EnhancedInputKey: View {
         @State private var pulled: String? = nil
 
         var body: some View {
-                let keyWidth: CGFloat = context.widthUnit * widthUnitTimes
+                let keyWidth: CGFloat = context.widthUnit * coefficient
                 let keyHeight: CGFloat = context.heightUnit
                 let isPhoneLandscape: Bool = context.keyboardInterface.isPhoneLandscape
                 let verticalPadding: CGFloat = isPhoneLandscape ? 3 : 6
@@ -56,34 +56,31 @@ struct T21EnhancedInputKey: View {
                                 let memberCount: Int = keyUnit.members.count
                                 let expansionCount: Int = memberCount - 1
                                 let offsetX: CGFloat = baseWidth * CGFloat(expansionCount)
-                                let leadingOffset: CGFloat = keyLocale.isLeading ? offsetX : 0
-                                let trailingOffset: CGFloat = keyLocale.isTrailing ? offsetX : 0
-                                ExpansiveBubbleShape(keyLocale: keyLocale, expansionCount: expansionCount)
+                                let leadingOffset: CGFloat = side.isLeading ? offsetX : 0
+                                let trailingOffset: CGFloat = side.isTrailing ? offsetX : 0
+                                ExpansiveBubbleShape(keyLocale: side, expansionCount: expansionCount)
                                         .fill(colorScheme.previewBubbleColor)
                                         .shadow(color: .shadowGray, radius: 1)
                                         .overlay {
                                                 HStack(spacing: 0) {
                                                         ForEach(keyUnit.members.indices, id: \.self) { index in
-                                                                let elementIndex: Int = keyLocale.isLeading ? index : ((memberCount - 1) - index)
+                                                                let elementIndex: Int = side.isLeading ? index : ((memberCount - 1) - index)
                                                                 let element: KeyElement = keyUnit.members[elementIndex]
                                                                 ZStack {
                                                                         RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius, style: .continuous)
                                                                                 .fill(selectedIndex == elementIndex ? Color.accentColor : Color.clear)
-                                                                        ZStack(alignment: .top) {
-                                                                                Color.interactiveClear
-                                                                                Text(verbatim: element.header ?? String.space)
-                                                                                        .font(.keyFootnote)
-                                                                                        .shallow()
-                                                                        }
-                                                                        ZStack(alignment: .bottom) {
-                                                                                Color.interactiveClear
-                                                                                Text(verbatim: element.footer ?? String.space)
-                                                                                        .font(.keyFootnote)
-                                                                                        .shallow()
+                                                                        ForEach(element.extras.indices, id: \.self) { extraIndex in
+                                                                                let extra = element.extras[extraIndex]
+                                                                                ZStack(alignment: extra.alignment) {
+                                                                                        Color.clear
+                                                                                        Text(verbatim: extra.text)
+                                                                                                .font(.keyFootnote)
+                                                                                                .shallow()
+                                                                                }
                                                                         }
                                                                         Text(verbatim: element.text)
                                                                                 .textCase(textCase)
-                                                                                .font(element.isTextSingular ? .title2 : .title3)
+                                                                                .font(.title)
                                                                                 .foregroundStyle(selectedIndex == elementIndex ? Color.white : Color.primary)
                                                                 }
                                                                 .frame(maxWidth: .infinity)
@@ -103,7 +100,7 @@ struct T21EnhancedInputKey: View {
                                         .overlay {
                                                 Text(verbatim: pulled ?? keyUnit.primary.text)
                                                         .textCase(textCase)
-                                                        .font(keyUnit.primary.isTextSingular ? .title : .title3)
+                                                        .font(.title)
                                                         .padding(.bottom, previewBottomOffset)
                                         }
                                         .padding(.vertical, verticalPadding)
@@ -123,12 +120,12 @@ struct T21EnhancedInputKey: View {
                                                         .font(.system(size: 14))
                                                         .shallow()
                                         }
-                                        .padding(.vertical, verticalPadding + 2)
+                                        .padding(.vertical, verticalPadding + 1)
                                         .padding(.horizontal, horizontalPadding + 3)
                                 }
                                 Text(verbatim: keyUnit.primary.text)
                                         .textCase(textCase)
-                                        .font(keyUnit.primary.isTextSingular ? .letterCompact : .adjustedLetterCompact)
+                                        .font(.letterCompact)
                                         .padding(.bottom, keyTextBottomInset)
                         }
                 }
@@ -146,7 +143,7 @@ struct T21EnhancedInputKey: View {
                                 if isLongPressing {
                                         let memberCount: Int = keyUnit.members.count
                                         guard memberCount > 1 else { return }
-                                        let distance: CGFloat = keyLocale.isLeading ? state.translation.width : -(state.translation.width)
+                                        let distance: CGFloat = side.isLeading ? state.translation.width : -(state.translation.width)
                                         if distance < (baseWidth / 2.0) {
                                                 if selectedIndex != 0 {
                                                         selectedIndex = 0

@@ -18,6 +18,8 @@ struct KeyboardLayoutPickerView: View {
                                                 LayoutOptionView(layout: .nineKey, isSelected: selectedLayout.isNineKey)
                                                 #if DEBUG
                                                 LayoutOptionView(layout: .fourteenKey, isSelected: selectedLayout.isFourteenKey)
+                                                #else
+                                                LayoutOptionView(layout: .twentyOneKey, isSelected: selectedLayout.isTwentyOneKey)
                                                 #endif
                                         }
                                         #if DEBUG
@@ -37,17 +39,23 @@ struct KeyboardLayoutPickerView: View {
                                                 LayoutOptionView(layout: .tripleStroke, isSelected: selectedLayout.isTripleStroke)
                                                 LayoutOptionView(layout: .nineKey, isSelected: selectedLayout.isNineKey)
                                         }
-                                        #if DEBUG
-                                        HStack {
-                                                LayoutOptionView(layout: .fourteenKey, isSelected: selectedLayout.isFourteenKey)
-                                                LayoutOptionView(layout: .fifteenKey, isSelected: selectedLayout.isFifteenKey)
-                                                LayoutOptionView(layout: .eighteenKey, isSelected: selectedLayout.isEighteenKey)
+                                        if context.isRunningOnPhone {
+                                                #if DEBUG
+                                                HStack {
+                                                        LayoutOptionView(layout: .fourteenKey, isSelected: selectedLayout.isFourteenKey)
+                                                        LayoutOptionView(layout: .fifteenKey, isSelected: selectedLayout.isFifteenKey)
+                                                        LayoutOptionView(layout: .eighteenKey, isSelected: selectedLayout.isEighteenKey)
+                                                }
+                                                HStack {
+                                                        LayoutOptionView(layout: .nineteenKey, isSelected: selectedLayout.isNineteenKey)
+                                                        LayoutOptionView(layout: .twentyOneKey, isSelected: selectedLayout.isTwentyOneKey)
+                                                }
+                                                #else
+                                                HStack {
+                                                        LayoutOptionView(layout: .twentyOneKey, isSelected: selectedLayout.isTwentyOneKey)
+                                                }
+                                                #endif
                                         }
-                                        HStack {
-                                                LayoutOptionView(layout: .nineteenKey, isSelected: selectedLayout.isNineteenKey)
-                                                LayoutOptionView(layout: .twentyOneKey, isSelected: selectedLayout.isTwentyOneKey)
-                                        }
-                                        #endif
                                 }
                                 .frame(maxHeight: .infinity)
                         }
