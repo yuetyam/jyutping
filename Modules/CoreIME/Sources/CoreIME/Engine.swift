@@ -513,19 +513,19 @@ private extension Engine {
 }
 
 
-// MARK: - TenKey Suggestions
+// MARK: - NineKey Suggestions
 
 extension Engine {
-        public static func tenKeySuggest<T: RandomAccessCollection<Combo>>(combos: T) async -> [Candidate] {
+        public static func nineKeySuggest<T: RandomAccessCollection<Combo>>(combos: T) async -> [Candidate] {
                 lazy var anchorsStatement = prepareTenKeyAnchorsStatement()
                 lazy var codeMatchStatement = prepareTenKeyCodeStatement()
                 defer {
                         sqlite3_finalize(anchorsStatement)
                         sqlite3_finalize(codeMatchStatement)
                 }
-                return tenKeySearch(combos: combos, anchorsStatement: anchorsStatement, codeMatchStatement: codeMatchStatement)
+                return nineKeySearch(combos: combos, anchorsStatement: anchorsStatement, codeMatchStatement: codeMatchStatement)
         }
-        private static func tenKeySearch<T: RandomAccessCollection<Combo>>(combos: T, limit: Int64? = nil, anchorsStatement: OpaquePointer?, codeMatchStatement: OpaquePointer?) -> [Candidate] {
+        private static func nineKeySearch<T: RandomAccessCollection<Combo>>(combos: T, limit: Int64? = nil, anchorsStatement: OpaquePointer?, codeMatchStatement: OpaquePointer?) -> [Candidate] {
                 let inputLength: Int = combos.count
                 let fullCode: Int = combos.map(\.rawValue).decimalCombined()
                 guard inputLength > 1 else {

@@ -170,7 +170,7 @@ extension Engine {
                 return String(cString: target)
         }
 
-        public static func tenKeySearchSymbols<T: RandomAccessCollection<Combo>>(combos: T) -> [Candidate] {
+        public static func nineKeySearchSymbols<T: RandomAccessCollection<Combo>>(combos: T) -> [Candidate] {
                 let nineKeyCode = combos.map(\.rawValue).decimalCombined()
                 guard nineKeyCode > 0 else { return [] }
                 let command: String = "SELECT category, unicode_version, code_point, cantonese, romanization FROM symbol_table WHERE nine_key_code = ?;"

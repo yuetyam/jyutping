@@ -304,13 +304,13 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         case (true, false):
                                 inputStage = .starting
                                 updateReturnKey()
-                                tenKeySuggest()
+                                nineKeySuggest()
                         case (false, false):
                                 inputStage = .ongoing
                                 if bufferCombos.count == (oldValue.count - 1) {
                                         selectedSyllables = []
                                 }
-                                tenKeySuggest()
+                                nineKeySuggest()
                         case (false, true):
                                 inputStage = .ending
                                 suggestionTask?.cancel()
@@ -345,7 +345,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         }
         private func updateSidebarSyllables() {
                 guard selectedSyllables.isNotEmpty else {
-                        candidates = tenKeyCachedCandidates
+                        candidates = nineKeyCachedCandidates
                         sidebarSyllables = candidates.compactMap({ $0.isNotCantonese ? nil : $0.romanization.split(separator: Character.space).first?.dropLast() })
                                 .distinct()
                                 .map({ SidebarSyllable(text: String($0), isSelected: false) })
@@ -353,7 +353,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 }
                 let selected = selectedSyllables.map(\.text)
                 let selectedCount: Int = selectedSyllables.count
-                candidates = tenKeyCachedCandidates.filter({ item -> Bool in
+                candidates = nineKeyCachedCandidates.filter({ item -> Bool in
                         let syllables = item.romanization.removedTones().split(separator: Character.space).map({ String($0) })
                         return (syllables.count < selectedCount) ? selected.starts(with: syllables) : syllables.starts(with: selected)
                 })
@@ -621,7 +621,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         // MARK: - Candidate Suggestions
 
         private lazy var suggestionTask: Task<Void, Never>? = nil
-        private func tenKeySuggest() {
+        private func nineKeySuggest() {
                 suggestionTask?.cancel()
                 let combos = bufferCombos
                 let isInputMemoryOn: Bool = Options.isInputMemoryOn
@@ -631,8 +631,8 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         async let memory: [Candidate] = isInputMemoryOn ? InputMemory.nineKeySearch(combos: combos) : []
                         async let defined: [Candidate] = queryDefinedCandidates(for: combos)
                         async let textMarks: [Candidate] = Engine.queryTextMarks(for: combos)
-                        async let symbols: [Candidate] = Engine.tenKeySearchSymbols(combos: combos)
-                        async let queried: [Candidate] = Engine.tenKeySuggest(combos: combos)
+                        async let symbols: [Candidate] = Engine.nineKeySearchSymbols(combos: combos)
+                        async let queried: [Candidate] = Engine.nineKeySuggest(combos: combos)
                         let suggestions: [Candidate] = await Converter.dispatch(memory: memory, defined: defined, marks: textMarks, symbols: symbols, queried: queried, isEmojiSuggestionsOn: isEmojiSuggestionsOn, characterStandard: characterStandard)
                         if Task.isCancelled.negative {
                                 await MainActor.run { [weak self] in
@@ -646,7 +646,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                                 let tailText = tailCombos.compactMap(\.letters.first).joined()
                                                 return firstCandidate.mark + String.space + tailText
                                         }()
-                                        self.tenKeyCachedCandidates = suggestions
+                                        self.nineKeyCachedCandidates = suggestions
                                         self.updateSidebarSyllables()
                                 }
                         }
@@ -785,13 +785,13 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         updateSpaceKeyForm()
                 }
         }
-        private lazy var tenKeyCachedCandidates: [Candidate] = []
+        private lazy var nineKeyCachedCandidates: [Candidate] = []
 
         /// System Text Replacements
-        private lazy var definedLexicons: Set<DefinedLexicon> = []
+        private lazy var definedLexicons: [DefinedLexicon] = []
         private func obtainSupplementaryLexicon() async {
                 let lexicon = await requestSupplementaryLexicon()
-                let obtained = lexicon.entries.compactMap({ entry -> DefinedLexicon? in
+                definedLexicons = lexicon.entries.compactMap({ entry -> DefinedLexicon? in
                         let input = entry.userInput.lowercased()
                         guard input.isNotEmpty else { return nil }
                         let events = input.compactMap(InputEvent.matchInputEvent(for:))
@@ -799,8 +799,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         let text = entry.documentText
                         guard text.isNotEmpty else { return nil }
                         return DefinedLexicon(input: input, text: text, events: events)
-                })
-                definedLexicons = Set<DefinedLexicon>(obtained)
+                }).distinct()
         }
         private func searchDefinedCandidates(for events: [InputEvent]) -> [Candidate] {
                 guard Options.isTextReplacementsOn else { return [] }

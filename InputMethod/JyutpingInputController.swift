@@ -379,14 +379,14 @@ final class JyutpingInputController: IMKInputController, Sendable {
         // MARK: - Candidates
 
         /// System Text Replacements
-        private lazy var definedLexicons: Set<DefinedLexicon> = []
+        private lazy var definedLexicons: [DefinedLexicon] = []
         private func obtainSupplementaryLexicon() async {
                 let kUserDictionary: String = "NSUserDictionaryReplacementItems"
                 let kOn: String = "on"
                 let kReplace: String = "replace"
                 let kWith: String = "with"
                 guard let items = CFPreferencesCopyAppValue(kUserDictionary as CFString, kCFPreferencesAnyApplication) as? [[String: Any]] else { return }
-                let obtained = items.compactMap { dict -> DefinedLexicon? in
+                definedLexicons = items.compactMap({ dict -> DefinedLexicon? in
                         let isDisabled: Bool = (dict[kOn] as? Bool) == false || (dict[kOn] as? Int) == 0
                         guard isDisabled.negative else { return nil }
                         guard let input = (dict[kReplace] as? String)?.lowercased(), input.isNotEmpty else { return nil }
@@ -394,8 +394,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         guard events.count == input.count else { return nil }
                         guard let text = (dict[kWith] as? String), text.isNotEmpty else { return nil }
                         return DefinedLexicon(input: input, text: text, events: events)
-                }
-                definedLexicons = Set<DefinedLexicon>(obtained)
+                }).distinct()
         }
         private func searchDefinedCandidates(for events: [InputEvent]) -> [Candidate] {
                 guard AppSettings.isTextReplacementsOn else { return [] }

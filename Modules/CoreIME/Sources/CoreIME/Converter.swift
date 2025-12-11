@@ -19,7 +19,7 @@ extension Converter {
                 let notIdealMemory = memory.filter(\.isNotIdealInputMemory)
                 var chained: [Candidate] = idealMemory.isEmpty ? queried : queried.filter(\.isCompound.negative)
                 for entry in notIdealMemory.reversed() {
-                        if let index = chained.firstIndex(where: { $0.inputCount == entry.inputCount }) {
+                        if let index = chained.firstIndex(where: { $0.inputCount <= entry.inputCount }) {
                                 chained.insert(entry, at: index)
                         } else if chained.isNotEmpty {
                                 chained.insert(entry, at: 0)
