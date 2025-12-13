@@ -21,8 +21,6 @@ extension Converter {
                 for entry in notIdealMemory.reversed() {
                         if let index = chained.firstIndex(where: { $0.inputCount <= entry.inputCount }) {
                                 chained.insert(entry, at: index)
-                        } else if chained.isNotEmpty {
-                                chained.insert(entry, at: 0)
                         } else {
                                 chained.append(entry)
                         }

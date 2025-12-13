@@ -11,17 +11,19 @@ struct MacMetroLineView: View {
         var body: some View {
                 if isExpanded {
                         VStack(alignment: .leading) {
-                                HStack {
-                                        Text(verbatim: line.name)
-                                        Spacer()
-                                        Image(systemName: isExpanded ? "chevron.down" : "chevron.backward")
-                                }
-                                .textSelection(.disabled)
-                                .padding(.vertical, 8)
-                                .contentShape(Rectangle())
-                                .onTapGesture {
+                                Button {
                                         isExpanded.toggle()
+                                } label: {
+                                        HStack {
+                                                Text(verbatim: line.name)
+                                                Spacer()
+                                                Image(systemName: isExpanded ? "chevron.down" : "chevron.backward")
+                                        }
+                                        .textSelection(.disabled)
+                                        .padding(.vertical, 8)
+                                        .contentShape(Rectangle())
                                 }
+                                .buttonStyle(.plain)
                                 VStack(alignment: .leading) {
                                         ForEach(line.stations.indices, id: \.self) { index in
                                                 MacMetroStationLabel(station: line.stations[index])
@@ -33,17 +35,19 @@ struct MacMetroLineView: View {
                         .padding(.bottom, 12)
                         .stack()
                 } else {
-                        HStack {
-                                Text(verbatim: line.name)
-                                Spacer()
-                                Image(systemName: isExpanded ? "chevron.down" : "chevron.backward")
-                        }
-                        .textSelection(.disabled)
-                        .block()
-                        .contentShape(Rectangle())
-                        .onTapGesture {
+                        Button {
                                 isExpanded.toggle()
+                        } label: {
+                                HStack {
+                                        Text(verbatim: line.name)
+                                        Spacer()
+                                        Image(systemName: isExpanded ? "chevron.down" : "chevron.backward")
+                                }
+                                .textSelection(.disabled)
+                                .block()
+                                .contentShape(Rectangle())
                         }
+                        .buttonStyle(.plain)
                 }
         }
 }

@@ -25,19 +25,21 @@ struct HomeView: View {
 
                                 Section {
                                         if isKeyboardEnabled {
-                                                HStack {
-                                                        Text("IOSHomeTab.Heading.HowToEnableThisKeyboard")
-                                                        Spacer()
-                                                        if isGuideViewExpanded {
-                                                                Image.downChevron
-                                                        } else {
-                                                                Image.backwardChevron
-                                                        }
-                                                }
-                                                .contentShape(Rectangle())
-                                                .onTapGesture {
+                                                Button {
                                                         isGuideViewExpanded.toggle()
+                                                } label: {
+                                                        HStack {
+                                                                Text("IOSHomeTab.Heading.HowToEnableThisKeyboard")
+                                                                Spacer()
+                                                                if isGuideViewExpanded {
+                                                                        Image.downChevron
+                                                                } else {
+                                                                        Image.backwardChevron
+                                                                }
+                                                        }
+                                                        .contentShape(Rectangle())
                                                 }
+                                                .buttonStyle(.plain)
                                         } else {
                                                 Text("IOSHomeTab.Heading.HowToEnableThisKeyboard").font(.headline)
                                         }

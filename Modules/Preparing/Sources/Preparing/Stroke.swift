@@ -66,7 +66,7 @@ struct Stroke {
 
         private static func match<T: StringProtocol>(text: T) -> [String] {
                 var items: [String] = []
-                let command: String = "SELECT stroke FROM stroketable WHERE word = '\(text)';"
+                let command: String = "SELECT stroke FROM stroke_table WHERE word = '\(text)';"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return [] }
@@ -89,7 +89,7 @@ struct Stroke {
                 createIndexes()
         }
         private static func createTable() {
-                let command: String = "CREATE TABLE stroketable(word TEXT NOT NULL, stroke TEXT NOT NULL);"
+                let command: String = "CREATE TABLE stroke_table(word TEXT NOT NULL, stroke TEXT NOT NULL);"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return }
@@ -107,14 +107,14 @@ struct Stroke {
                         return "('\(word)', '\(stroke)')"
                 }
                 let values: String = entries.joined(separator: ", ")
-                let command: String = "INSERT INTO stroketable (word, stroke) VALUES \(values);"
+                let command: String = "INSERT INTO stroke_table (word, stroke) VALUES \(values);"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return }
                 guard sqlite3_step(statement) == SQLITE_DONE else { return }
         }
         private static func createIndexes() {
-                let command: String = "CREATE INDEX strokewordindex ON stroketable(word);"
+                let command: String = "CREATE INDEX ix_stroke_word ON stroke_table(word);"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return }
