@@ -66,14 +66,18 @@ extension PunctuationKey {
                         PunctuationSymbol("＇", comment: PresetConstant.fullWidth, secondaryComment: "U+FF07"),
                         PunctuationSymbol("‘", comment: "左", secondaryComment: "U+2018"),
                         PunctuationSymbol("’", comment: "右", secondaryComment: "U+2019"),
-                        PunctuationSymbol(";", comment: "半寬分號")
+                        PunctuationSymbol(";", comment: "半寬分號"),
+                        // PunctuationSymbol("\u{2018}\u{FE01}", comment: "全寬左", secondaryComment: "U+2018 U+FE01"),
+                        // PunctuationSymbol("\u{2019}\u{FE01}", comment: "全寬右", secondaryComment: "U+2019 U+FE01"),
                 ]
                 let shiftingSymbols: [PunctuationSymbol] = [
                         PunctuationSymbol("\"", comment: "U+0022"),
                         PunctuationSymbol("＂", comment: PresetConstant.fullWidth, secondaryComment: "U+FF02"),
                         PunctuationSymbol("“", comment: "左", secondaryComment: "U+201C"),
                         PunctuationSymbol("”", comment: "右", secondaryComment: "U+201D"),
-                        PunctuationSymbol(":", comment: "半寬冒號")
+                        PunctuationSymbol(":", comment: "半寬冒號"),
+                        // PunctuationSymbol("\u{201C}\u{FE01}", comment: "全寬左", secondaryComment: "U+201C U+FE01"),
+                        // PunctuationSymbol("\u{201D}\u{FE01}", comment: "全寬右", secondaryComment: "U+201D U+FE01"),
                 ]
                 return PunctuationKey(keyText: "'", shiftingKeyText: "\"", instantSymbol: nil, instantShiftingSymbol: nil, symbols: symbols, shiftingSymbols: shiftingSymbols)
         }()
@@ -121,7 +125,8 @@ extension PunctuationKey {
                         PunctuationSymbol("•", comment: "項目符號", secondaryComment: "U+2022"),
                         PunctuationSymbol("‧", comment: "連字點", secondaryComment: "U+2027"),
                         PunctuationSymbol("･", comment: "半寬中點", secondaryComment: "U+FF65"),
-                        PunctuationSymbol("・", comment: "全寬中點", secondaryComment: "U+30FB")
+                        PunctuationSymbol("・", comment: "全寬中點", secondaryComment: "U+30FB"),
+                        PunctuationSymbol("◉", comment: "魚眼", secondaryComment: "U+25C9"),
                 ]
                 let shiftingSymbols: [PunctuationSymbol] = [
                         PunctuationSymbol("~"),

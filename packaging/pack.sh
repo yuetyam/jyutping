@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 BUNDLE_IDENTIFIER='org.jyutping.inputmethod.Jyutping'
-APP_VERSION='0.67.0'
+APP_VERSION='0.67.1'
 INSTALL_LOCATION='/Library/Input Methods'
 
 pkgbuild \
