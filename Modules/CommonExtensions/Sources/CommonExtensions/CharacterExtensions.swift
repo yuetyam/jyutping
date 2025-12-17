@@ -1,6 +1,6 @@
 extension Character {
 
-        /// Unicode code points. Example: é = ["U+65", "U+301"]
+        /// Unicode code points. Example: é = `["U+65", "U+301"]`
         public var codePoints: [String] {
                 return self.unicodeScalars.map { "U+" + String($0.value, radix: 16, uppercase: true) }
         }
@@ -89,10 +89,20 @@ extension Character {
         public var isIdeographic: Bool {
                 return unicodeScalars.first?.value.isIdeographicCodePoint ?? false
         }
+
+        /// is supplemental ideographic character
+        public var isSupplementalCJKVCharacter: Bool {
+                return unicodeScalars.first?.value.isSupplementalCJKVCodePoint ?? false
+        }
+
+        /// ideographic or supplemental CJKV character
+        public var isGenericCJKVCharacter: Bool {
+                return unicodeScalars.first?.value.isGenericCJKVCodePoint ?? false
+        }
 }
 
 extension BinaryInteger {
-        /// is CJKV character Unicode code point
+        /// CJKV character Unicode code point
         public var isIdeographicCodePoint: Bool {
                 switch self {
                 case 0x4E00...0x9FFF,
@@ -110,6 +120,24 @@ extension BinaryInteger {
                 default: false
                 }
         }
+
+        /// CJKV supplemental code point
+        public var isSupplementalCJKVCodePoint: Bool {
+                switch self {
+                case 0x2E80...0x2E99,
+                     0x2E9B...0x2EF3,
+                     0x2F00...0x2FD5,
+                     0xF900...0xFA6D,
+                     0xFA70...0xFAD9,
+                     0x2F800...0x2FA1D: true
+                default: false
+                }
+        }
+
+        /// ideographic or supplemental CJKV code point
+        public var isGenericCJKVCodePoint: Bool {
+                return isIdeographicCodePoint || isSupplementalCJKVCodePoint
+        }
 }
 
 /*
@@ -126,3 +154,13 @@ U+31350-U+323AF: CJK Unified Ideographs Extension H
 U+2EBF0-U+2EE5F: CJK Unified Ideographs Extension I
 U+323B0-U+33479: CJK Unified Ideographs Extension J
 */
+
+/*
+U+2E80-U+2E99: CJK Radicals Supplement
+U+2E9B-U+2EF3: CJK Radicals Supplement
+U+2F00-U+2FD5: Kangxi Radicals
+U+F900-U+FA6D: CJK Compatibility Ideographs
+U+FA70-U+FAD9: CJK Compatibility Ideographs
+U+2F800-U+2FA1D: CJK Compatibility Ideographs Supplement
+*/
+
