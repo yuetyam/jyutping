@@ -379,6 +379,7 @@ struct InputMemory {
                 return statement
         }
         private static func nineKeyAnchorsMatch(code: Int, limit: Int64 = 5, statement: OpaquePointer?) -> [InternalLexicon] {
+                guard code > 0 else { return [] }
                 sqlite3_reset(statement)
                 sqlite3_bind_int64(statement, 1, Int64(code))
                 sqlite3_bind_int64(statement, 2, limit)
@@ -396,6 +397,7 @@ struct InputMemory {
                 return items
         }
         private static func nineKeyCodeMatch(code: Int, limit: Int64 = 100, statement: OpaquePointer?) -> [InternalLexicon] {
+                guard code > 0 else { return [] }
                 sqlite3_reset(statement)
                 sqlite3_bind_int64(statement, 1, Int64(code))
                 sqlite3_bind_int64(statement, 2, limit)
@@ -423,7 +425,7 @@ struct InputMemory {
                         sqlite3_finalize(codeStatement)
                 }
                 guard eventLength > 1 else {
-                        let code: Int = combos.first?.rawValue ?? -1
+                        guard let code = combos.first?.rawValue else { return [] }
                         let codeMatched = nineKeyCodeMatch(code: code, limit: 100, statement: codeStatement)
                         let anchorsMatched = nineKeyAnchorsMatch(code: code, limit: 100, statement: anchorsStatement)
                         return (codeMatched + anchorsMatched)

@@ -531,8 +531,8 @@ extension Engine {
                 guard inputLength > 1 else {
                         return tenKeyCodeMatch(code: fullCode, limit: limit, statement: codeMatchStatement) + tenKeyAnchorsMatch(code: fullCode, limit: 100, statement: anchorsStatement)
                 }
-                let fullMatched: [Candidate] = (fullCode == 0) ? [] : tenKeyCodeMatch(code: fullCode, limit: limit, statement: codeMatchStatement)
-                let idealAnchorsMatched: [Candidate] = (fullCode == 0) ? [] : tenKeyAnchorsMatch(code: fullCode, limit: 4, statement: anchorsStatement)
+                let fullMatched: [Candidate] = tenKeyCodeMatch(code: fullCode, limit: limit, statement: codeMatchStatement)
+                let idealAnchorsMatched: [Candidate] = tenKeyAnchorsMatch(code: fullCode, limit: 4, statement: anchorsStatement)
                 let codeMatched: [Candidate] = (1..<inputLength)
                         .flatMap({ number -> [Candidate] in
                                 let code = combos.dropLast(number).map(\.rawValue).decimalCombined()
@@ -568,6 +568,7 @@ extension Engine {
                 */
         }
         private static func tenKeyAnchorsMatch(code: Int, limit: Int64? = nil, statement: OpaquePointer?) -> [Candidate] {
+                guard code > 0 else { return [] }
                 sqlite3_reset(statement)
                 sqlite3_bind_int64(statement, 1, Int64(code))
                 sqlite3_bind_int64(statement, 2, (limit ?? 30))
@@ -584,6 +585,7 @@ extension Engine {
                 return candidates
         }
         private static func tenKeyCodeMatch(code: Int, limit: Int64? = nil, statement: OpaquePointer?) -> [Candidate] {
+                guard code > 0 else { return [] }
                 sqlite3_reset(statement)
                 sqlite3_bind_int64(statement, 1, Int64(code))
                 sqlite3_bind_int64(statement, 2, (limit ?? -1))
