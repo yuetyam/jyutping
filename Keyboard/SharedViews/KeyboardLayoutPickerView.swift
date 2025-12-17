@@ -75,17 +75,37 @@ private struct LayoutOptionView: View {
                 } label: {
                         ZStack {
                                 Color.interactiveClear
-                                VStack(spacing: 4) {
-                                        Image(systemName: layout.isNineKey ? "square.grid.3x3" : "keyboard")
-                                                .font(layout.isNineKey ? .title : .largeTitle)
+                                VStack(spacing: 2) {
+                                        if #available(iOSApplicationExtension 26.0, *) {
+                                                ZStack {
+                                                        Color.clear
+                                                        Image(systemName: layout.isNineKey ? "square.grid.3x3" : "keyboard")
+                                                                .resizable()
+                                                                .scaledToFit()
+                                                                .foregroundStyle(isSelected ? Color.accentColor : Color.primary)
+                                                                .padding(.horizontal, layout.isNineKey ? 14 : 8)
+                                                }
+                                                .frame(width: 50, height: 50)
+                                                .glassEffect(isSelected ? .regular : .clear, in: .circle)
+                                        } else {
+                                                ZStack {
+                                                        Circle().fill(isSelected ? Material.regular : Material.ultraThick)
+                                                        Image(systemName: layout.isNineKey ? "square.grid.3x3" : "keyboard")
+                                                                .resizable()
+                                                                .scaledToFit()
+                                                                .foregroundStyle(isSelected ? Color.accentColor : Color.primary)
+                                                                .padding(.horizontal, layout.isNineKey ? 14 : 8)
+                                                }
+                                                .frame(width: 50, height: 50)
+                                        }
                                         Text(layout.labelName)
                                                 .font(.footnote)
                                                 .minimumScaleFactor(0.5)
                                                 .lineLimit(1)
+                                                .foregroundStyle(isSelected ? Color.accentColor : Color.primary)
                                 }
-                                .foregroundStyle(isSelected ? Color.accentColor : Color.primary)
                         }
-                        .frame(width: 100, height: 64)
+                        .frame(width: 100, height: 68)
                 }
                 .buttonStyle(.plain)
         }
