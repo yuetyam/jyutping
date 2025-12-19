@@ -6,15 +6,15 @@ struct ToolBar: View {
 
         @EnvironmentObject private var context: KeyboardViewController
 
-        private let buttonWidth: CGFloat = 48
-        private let buttonHeight: CGFloat = PresetConstant.toolBarHeight
+        private let width: CGFloat = 48
+        private let height: CGFloat = PresetConstant.toolBarHeight
 
         var body: some View {
                 HStack(spacing: 0) {
                         ToolBarButton(
                                 imageName: "gear",
-                                width: buttonWidth,
-                                height: buttonHeight,
+                                width: width,
+                                height: height,
                                 insets: EdgeInsets(top: 16, leading: 0, bottom: 16, trailing: 0)
                         ) {
                                 AudioFeedback.modified()
@@ -23,11 +23,11 @@ struct ToolBar: View {
                         }
 
                         if context.keyboardInterface.isPadFloating.negative {
-                                Spacer()
+                                Spacer().frame(minWidth: 0, maxWidth: .infinity)
                                 ToolBarButton(
                                         imageName: "keyboard",
-                                        width: buttonWidth,
-                                        height: buttonHeight,
+                                        width: width,
+                                        height: height,
                                         insets: EdgeInsets(top: 19, leading: 0, bottom: 19, trailing: 0)
                                 ) {
                                         AudioFeedback.modified()
@@ -37,7 +37,7 @@ struct ToolBar: View {
                                 }
                         }
 
-                        Spacer()
+                        Spacer().frame(minWidth: 0, maxWidth: .infinity)
                         Button {
                                 AudioFeedback.modified()
                                 context.triggerHapticFeedback()
@@ -50,12 +50,12 @@ struct ToolBar: View {
                                                 .scaledToFit()
                                                 .frame(width: 24, height: 24)
                                 }
+                                .frame(width: width, height: height)
                         }
                         .buttonStyle(.plain)
-                        .frame(width: buttonWidth, height: buttonHeight)
 
 
-                        Spacer()
+                        Spacer().frame(minWidth: 0, maxWidth: .infinity)
                         Button {
                                 AudioFeedback.modified()
                                 context.triggerSelectionHapticFeedback()
@@ -69,15 +69,15 @@ struct ToolBar: View {
                                                 LegacyInputModeSwitch(isCantoneseMode: context.inputMethodMode.isCantonese, isMutilatedMode: context.characterStandard.isMutilated)
                                         }
                                 }
+                                .frame(width: 64, height: height)
                         }
                         .buttonStyle(.plain)
-                        .frame(width: 64, height: buttonHeight)
 
-                        Spacer()
+                        Spacer().frame(minWidth: 0, maxWidth: .infinity)
                         ToolBarButton(
                                 imageName: "arrow.left.and.line.vertical.and.arrow.right",
-                                width: buttonWidth,
-                                height: buttonHeight,
+                                width: width,
+                                height: height,
                                 insets: EdgeInsets(top: 19, leading: 0, bottom: 19, trailing: 0)
                         ) {
                                 AudioFeedback.modified()
@@ -85,7 +85,7 @@ struct ToolBar: View {
                                 context.updateKeyboardForm(to: .editingPanel)
                         }
 
-                        Spacer()
+                        Spacer().frame(minWidth: 0, maxWidth: .infinity)
                         Button {
                                 AudioFeedback.modified()
                                 context.triggerSelectionHapticFeedback()
@@ -99,16 +99,16 @@ struct ToolBar: View {
                                                 LegacyCharacterSetSwitch(isMutilatedMode: context.characterStandard.isMutilated).disableAnimations()
                                         }
                                 }
+                                .frame(width: width, height: height)
                         }
                         .buttonStyle(.plain)
-                        .frame(width: buttonWidth, height: buttonHeight)
 
                         if context.keyboardInterface.isPadFloating.negative {
-                                Spacer()
+                                Spacer().frame(minWidth: 0, maxWidth: .infinity)
                                 ToolBarButton(
                                         imageName: "keyboard.chevron.compact.down",
-                                        width: buttonWidth,
-                                        height: buttonHeight,
+                                        width: width,
+                                        height: height,
                                         insets: EdgeInsets(top: 18, leading: 0, bottom: 18, trailing: 0)
                                 ) {
                                         AudioFeedback.modified()
