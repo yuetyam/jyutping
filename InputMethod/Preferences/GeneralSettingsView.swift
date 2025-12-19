@@ -162,13 +162,11 @@ struct GeneralSettingsView: View {
                                                 }
                                                 Picker("GeneralPreferencesView.TraditionalCharacterStandard.PickerTitle", selection: $traditionalCharacterStandard) {
                                                         Text("GeneralPreferencesView.TraditionalCharacterStandard.Option1.Preset").tag(CharacterStandard.preset)
-                                                        #if DEBUG
-                                                        Text("GeneralPreferencesView.TraditionalCharacterStandard.Option3.Inherited").tag(CharacterStandard.inherited)
-                                                        #endif
                                                         Text("GeneralPreferencesView.TraditionalCharacterStandard.Option6.HongKong").tag(CharacterStandard.hongkong)
                                                         Text("GeneralPreferencesView.TraditionalCharacterStandard.Option7.Taiwan").tag(CharacterStandard.taiwan)
                                                         Text("GeneralPreferencesView.TraditionalCharacterStandard.Option8.PRCGeneral").tag(CharacterStandard.prcGeneral)
                                                         Text("GeneralPreferencesView.TraditionalCharacterStandard.Option9.AncientBooksPublishing").tag(CharacterStandard.ancientBooksPublishing)
+                                                        Text("GeneralPreferencesView.TraditionalCharacterStandard.Option3.Inherited").tag(CharacterStandard.inherited)
                                                 }
                                                 .pickerStyle(.menu)
                                                 .onChange(of: traditionalCharacterStandard) { newStandard in
