@@ -443,17 +443,17 @@ private extension Engine {
                 return statement
         }
 
-        private static let tenKeyAnchorsQuery: String = "SELECT rowid, word, romanization FROM core_lexicon WHERE nine_key_anchors = ? LIMIT ?;"
-        static func prepareTenKeyAnchorsStatement() -> OpaquePointer? {
+        private static let nineKeyAnchorsQuery: String = "SELECT rowid, word, romanization FROM core_lexicon WHERE nine_key_anchors = ? LIMIT ?;"
+        static func prepareNineKeyAnchorsStatement() -> OpaquePointer? {
                 var statement: OpaquePointer?
-                guard sqlite3_prepare_v2(database, tenKeyAnchorsQuery, -1, &statement, nil) == SQLITE_OK else { return nil }
+                guard sqlite3_prepare_v2(database, nineKeyAnchorsQuery, -1, &statement, nil) == SQLITE_OK else { return nil }
                 return statement
         }
 
-        private static let tenKeyCodeQuery: String = "SELECT rowid, word, romanization FROM core_lexicon WHERE nine_key_code = ? LIMIT ?;"
-        static func prepareTenKeyCodeStatement() -> OpaquePointer? {
+        private static let nineKeyCodeQuery: String = "SELECT rowid, word, romanization FROM core_lexicon WHERE nine_key_code = ? LIMIT ?;"
+        static func prepareNineKeyCodeStatement() -> OpaquePointer? {
                 var statement: OpaquePointer?
-                guard sqlite3_prepare_v2(database, tenKeyCodeQuery, -1, &statement, nil) == SQLITE_OK else { return nil }
+                guard sqlite3_prepare_v2(database, nineKeyCodeQuery, -1, &statement, nil) == SQLITE_OK else { return nil }
                 return statement
         }
 }
@@ -517,8 +517,8 @@ private extension Engine {
 
 extension Engine {
         public static func nineKeySuggest<T: RandomAccessCollection<Combo>>(combos: T) async -> [Candidate] {
-                lazy var anchorsStatement = prepareTenKeyAnchorsStatement()
-                lazy var codeMatchStatement = prepareTenKeyCodeStatement()
+                lazy var anchorsStatement = prepareNineKeyAnchorsStatement()
+                lazy var codeMatchStatement = prepareNineKeyCodeStatement()
                 defer {
                         sqlite3_finalize(anchorsStatement)
                         sqlite3_finalize(codeMatchStatement)
@@ -529,21 +529,21 @@ extension Engine {
                 let inputLength: Int = combos.count
                 let fullCode: Int = combos.map(\.rawValue).decimalCombined()
                 guard inputLength > 1 else {
-                        return tenKeyCodeMatch(code: fullCode, limit: limit, statement: codeMatchStatement) + tenKeyAnchorsMatch(code: fullCode, limit: 100, statement: anchorsStatement)
+                        return nineKeyCodeMatch(code: fullCode, limit: limit, statement: codeMatchStatement) + nineKeyAnchorsMatch(code: fullCode, limit: 100, statement: anchorsStatement)
                 }
-                let fullMatched: [Candidate] = tenKeyCodeMatch(code: fullCode, limit: limit, statement: codeMatchStatement)
-                let idealAnchorsMatched: [Candidate] = tenKeyAnchorsMatch(code: fullCode, limit: 4, statement: anchorsStatement)
+                let fullMatched: [Candidate] = nineKeyCodeMatch(code: fullCode, limit: limit, statement: codeMatchStatement)
+                let idealAnchorsMatched: [Candidate] = nineKeyAnchorsMatch(code: fullCode, limit: 4, statement: anchorsStatement)
                 let codeMatched: [Candidate] = (1..<inputLength)
                         .flatMap({ number -> [Candidate] in
                                 let code = combos.dropLast(number).map(\.rawValue).decimalCombined()
                                 guard code > 0 else { return [] }
-                                return tenKeyCodeMatch(code: code, limit: limit, statement: codeMatchStatement)
+                                return nineKeyCodeMatch(code: code, limit: limit, statement: codeMatchStatement)
                         })
                 let anchorsMatched: [Candidate] = (0..<inputLength)
                         .flatMap({ number -> [Candidate] in
                                 let code = combos.dropLast(number).map(\.rawValue).decimalCombined()
                                 guard code > 0 else { return [] }
-                                return tenKeyAnchorsMatch(code: code, limit: limit, statement: anchorsStatement)
+                                return nineKeyAnchorsMatch(code: code, limit: limit, statement: anchorsStatement)
                         })
                 let queried = (fullMatched + idealAnchorsMatched + codeMatched + anchorsMatched)
                 guard let firstInputCount = queried.first?.inputCount else { return [] }
@@ -551,7 +551,7 @@ extension Engine {
                 let tailCombos = combos.dropFirst(firstInputCount)
                 let tailCode = tailCombos.map(\.rawValue).decimalCombined()
                 guard tailCode > 0 else { return queried }
-                let tailCandidates: [Candidate] = tenKeyCodeMatch(code: tailCode, limit: 20, statement: codeMatchStatement) + tenKeyAnchorsMatch(code: tailCode, limit: 20, statement: anchorsStatement)
+                let tailCandidates: [Candidate] = nineKeyCodeMatch(code: tailCode, limit: 20, statement: codeMatchStatement) + nineKeyAnchorsMatch(code: tailCode, limit: 20, statement: anchorsStatement)
                 guard tailCandidates.isNotEmpty, let head = queried.first else { return queried }
                 let concatenated = tailCandidates.compactMap({ head + $0 }).sorted().prefix(1)
                 return concatenated + queried
@@ -560,14 +560,14 @@ extension Engine {
                 let headInputLengths = queried.map(\.inputCount).distinct()
                 let concatenated = headInputLengths.compactMap({ headLength -> Candidate? in
                         let tailEvents = combos.dropFirst(headLength)
-                        guard let tailCandidate = tenKeySearch(combos: tailEvents, limit: 10, anchorsStatement: anchorsStatement, codeMatchStatement: codeMatchStatement).first else { return nil }
+                        guard let tailCandidate = nineKeySearch(combos: tailEvents, limit: 10, anchorsStatement: anchorsStatement, codeMatchStatement: codeMatchStatement).first else { return nil }
                         guard let headCandidate = queried.first(where: { $0.inputCount == headLength }) else { return nil }
                         return headCandidate + tailCandidate
                 }).distinct().sorted().prefix(1)
                 return concatenated + queried
                 */
         }
-        private static func tenKeyAnchorsMatch(code: Int, limit: Int64? = nil, statement: OpaquePointer?) -> [Candidate] {
+        private static func nineKeyAnchorsMatch(code: Int, limit: Int64? = nil, statement: OpaquePointer?) -> [Candidate] {
                 guard code > 0 else { return [] }
                 sqlite3_reset(statement)
                 sqlite3_bind_int64(statement, 1, Int64(code))
@@ -584,7 +584,7 @@ extension Engine {
                 }
                 return candidates
         }
-        private static func tenKeyCodeMatch(code: Int, limit: Int64? = nil, statement: OpaquePointer?) -> [Candidate] {
+        private static func nineKeyCodeMatch(code: Int, limit: Int64? = nil, statement: OpaquePointer?) -> [Candidate] {
                 guard code > 0 else { return [] }
                 sqlite3_reset(statement)
                 sqlite3_bind_int64(statement, 1, Int64(code))
