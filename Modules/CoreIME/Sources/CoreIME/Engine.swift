@@ -45,11 +45,11 @@ public struct Engine {
 extension Engine {
         public static func suggest<T: RandomAccessCollection<InputEvent>>(events: T, segmentation: Segmentation) -> [Candidate] {
                 lazy var anchorsStatement = prepareAnchorsStatement()
-                lazy var pingStatement = preparePingStatement()
+                lazy var spellStatement = prepareSpellStatement()
                 lazy var strictStatement = prepareStrictStatement()
                 defer {
                         sqlite3_finalize(anchorsStatement)
-                        sqlite3_finalize(pingStatement)
+                        sqlite3_finalize(spellStatement)
                         sqlite3_finalize(strictStatement)
                 }
                 switch events.count {
@@ -58,28 +58,28 @@ extension Engine {
                         switch events.first {
                         case .letterA:
                                 let text = InputEvent.letterA.text
-                                return pingMatch(text: text, input: text, mark: text, statement: pingStatement) + pingMatch(text: text + text, input: text, mark: text, statement: pingStatement) + anchorsMatch(events: events, input: text, statement: anchorsStatement)
+                                return spellMatch(text: text, input: text, mark: text, statement: spellStatement) + spellMatch(text: text + text, input: text, mark: text, statement: spellStatement) + anchorsMatch(events: events, input: text, statement: anchorsStatement)
                         case .letterO, .letterM:
                                 guard let text = events.first?.text else { return [] }
-                                return pingMatch(text: text, input: text, mark: text, statement: pingStatement) + anchorsMatch(events: events, input: text, statement: anchorsStatement)
+                                return spellMatch(text: text, input: text, mark: text, statement: spellStatement) + anchorsMatch(events: events, input: text, statement: anchorsStatement)
                         default:
                                 return anchorsMatch(events: events, statement: anchorsStatement)
                         }
                 default:
-                        return dispatch(events: events, segmentation: segmentation, anchorsStatement: anchorsStatement, pingStatement: pingStatement, strictStatement: strictStatement)
+                        return dispatch(events: events, segmentation: segmentation, anchorsStatement: anchorsStatement, spellStatement: spellStatement, strictStatement: strictStatement)
                 }
         }
 
-        private static func dispatch<T: RandomAccessCollection<InputEvent>>(events: T, segmentation: Segmentation, anchorsStatement: OpaquePointer?, pingStatement: OpaquePointer?, strictStatement: OpaquePointer?) -> [Candidate] {
+        private static func dispatch<T: RandomAccessCollection<InputEvent>>(events: T, segmentation: Segmentation, anchorsStatement: OpaquePointer?, spellStatement: OpaquePointer?, strictStatement: OpaquePointer?) -> [Candidate] {
                 let syllableEvents = events.filter(\.isSyllableLetter)
                 let candidates: [Candidate] =  switch (segmentation.first?.first?.alias.count ?? 0) {
                 case 0:
-                        processSlices(of: syllableEvents, text: syllableEvents.map(\.text).joined(), anchorsStatement: anchorsStatement, pingStatement: pingStatement)
+                        processSlices(of: syllableEvents, text: syllableEvents.map(\.text).joined(), anchorsStatement: anchorsStatement, spellStatement: spellStatement)
                 case 1 where syllableEvents.count > 1,
                         _ where syllableEvents.count != events.count :
-                        search(events: syllableEvents, segmentation: segmentation, anchorsStatement: anchorsStatement, pingStatement: pingStatement, strictStatement: strictStatement) + processSlices(of: syllableEvents, text: syllableEvents.map(\.text).joined(), anchorsStatement: anchorsStatement, pingStatement: pingStatement)
+                        search(events: syllableEvents, segmentation: segmentation, anchorsStatement: anchorsStatement, spellStatement: spellStatement, strictStatement: strictStatement) + processSlices(of: syllableEvents, text: syllableEvents.map(\.text).joined(), anchorsStatement: anchorsStatement, spellStatement: spellStatement)
                 default:
-                        search(events: syllableEvents, segmentation: segmentation, anchorsStatement: anchorsStatement, pingStatement: pingStatement, strictStatement: strictStatement)
+                        search(events: syllableEvents, segmentation: segmentation, anchorsStatement: anchorsStatement, spellStatement: spellStatement, strictStatement: strictStatement)
                 }
                 switch (events.contains(where: \.isApostrophe), events.contains(where: \.isToneEvent)) {
                 case (false, false):
@@ -265,19 +265,19 @@ extension Engine {
                 }
         }
 
-        private static func processSlices<T: RandomAccessCollection<InputEvent>>(of events: T, text: String, limit: Int64? = nil, anchorsStatement: OpaquePointer?, pingStatement: OpaquePointer?) -> [Candidate] {
+        private static func processSlices<T: RandomAccessCollection<InputEvent>>(of events: T, text: String, limit: Int64? = nil, anchorsStatement: OpaquePointer?, spellStatement: OpaquePointer?) -> [Candidate] {
                 let adjustedLimit: Int64 = (limit == nil) ? 300 : 100
                 let eventLength: Int = events.count
                 return (0..<eventLength).flatMap({ number -> [Candidate] in
                         let leadingEvents = events.dropLast(number)
                         let leadingText = leadingEvents.map(\.text).joined()
-                        let pingMatched = pingMatch(text: leadingText, input: leadingText, limit: limit, statement: pingStatement)
+                        let spellMatched = spellMatch(text: leadingText, input: leadingText, limit: limit, statement: spellStatement)
                                 .map({ modify($0, events: events, text: text, eventLength: eventLength) })
                         let anchorsMatched = anchorsMatch(events: leadingEvents, input: leadingText, limit: adjustedLimit, statement: anchorsStatement)
                                 .map({ modify($0, events: events, text: text, eventLength: eventLength) })
                                 .sorted()
                                 .prefix(72)
-                        return pingMatched + anchorsMatched
+                        return spellMatched + anchorsMatched
                 })
                 .distinct()
                 .sorted()
@@ -298,15 +298,15 @@ extension Engine {
                 }
         }
 
-        private static func search<T: RandomAccessCollection<InputEvent>>(events: T, segmentation: Segmentation, limit: Int64? = nil, anchorsStatement: OpaquePointer?, pingStatement: OpaquePointer?, strictStatement: OpaquePointer?) -> [Candidate] {
+        private static func search<T: RandomAccessCollection<InputEvent>>(events: T, segmentation: Segmentation, limit: Int64? = nil, anchorsStatement: OpaquePointer?, spellStatement: OpaquePointer?, strictStatement: OpaquePointer?) -> [Candidate] {
                 let eventLength: Int = events.count
                 let text: String = events.map(\.text).joined()
-                let pingMatched = pingMatch(text: text, input: text, limit: limit, statement: pingStatement)
+                let spellMatched = spellMatch(text: text, input: text, limit: limit, statement: spellStatement)
                 let anchorsMatched = anchorsMatch(events: events, input: text, limit: limit, statement: anchorsStatement)
                 let queried = query(inputLength: eventLength, segmentation: segmentation, limit: limit, strictStatement: strictStatement)
                 let shouldMatchPrefixes: Bool = {
                         guard eventLength > 2 else { return false }
-                        guard pingMatched.isEmpty else { return false }
+                        guard spellMatched.isEmpty else { return false }
                         guard queried.contains(where: { $0.inputCount == eventLength }).negative else { return false }
                         guard (events.last != .letterM) && (events.first != .letterM) else { return true }
                         return segmentation.contains(where: { $0.length == eventLength }).negative
@@ -360,7 +360,7 @@ extension Engine {
                 let fetched: [Candidate] = {
                         let idealQueried = queried.filter({ $0.inputCount == eventLength }).sorted(by: { $0.order < $1.order }).distinct()
                         let notIdealQueried = queried.filter({ $0.inputCount < eventLength }).sorted().distinct()
-                        let fullInput = (pingMatched + idealQueried + anchorsMatched + prefixMatched + gainedMatched).distinct()
+                        let fullInput = (spellMatched + idealQueried + anchorsMatched + prefixMatched + gainedMatched).distinct()
                         let primary = fullInput.prefix(10)
                         let secondary = fullInput.sorted().prefix(10)
                         let tertiary = notIdealQueried.prefix(10)
@@ -368,14 +368,14 @@ extension Engine {
                         return (primary + secondary + tertiary + quaternary + fullInput + notIdealQueried).distinct()
                 }()
                 guard let firstInputCount = fetched.first?.inputCount else {
-                        return processSlices(of: events, text: text, limit: limit, anchorsStatement: anchorsStatement, pingStatement: pingStatement)
+                        return processSlices(of: events, text: text, limit: limit, anchorsStatement: anchorsStatement, spellStatement: spellStatement)
                 }
                 guard firstInputCount < eventLength else { return fetched }
                 let headInputLengths = fetched.map(\.inputCount).distinct()
                 let concatenated = headInputLengths.compactMap({ headLength -> Candidate? in
                         let tailEvents = events.dropFirst(headLength)
                         let tailSegmentation = Segmenter.segment(events: tailEvents)
-                        guard let tailCandidate = search(events: tailEvents, segmentation: tailSegmentation, limit: 50, anchorsStatement: anchorsStatement, pingStatement: pingStatement, strictStatement: strictStatement).first else { return nil }
+                        guard let tailCandidate = search(events: tailEvents, segmentation: tailSegmentation, limit: 50, anchorsStatement: anchorsStatement, spellStatement: spellStatement, strictStatement: strictStatement).first else { return nil }
                         guard let headCandidate = fetched.first(where: { $0.inputCount == headLength }) else { return nil }
                         return headCandidate + tailCandidate
                 }).distinct().sorted().prefix(1)
@@ -399,8 +399,8 @@ extension Engine {
         private static func perform<T: RandomAccessCollection<Syllable>>(scheme: T, limit: Int64? = nil, strictStatement: OpaquePointer?) -> [Candidate] {
                 let anchorsCode = scheme.compactMap(\.alias.first).anchorsCode
                 guard anchorsCode > 0 else { return [] }
-                let pingCode = scheme.originText.hashCode()
-                return strictMatch(anchors: anchorsCode, ping: Int(pingCode), input: scheme.aliasText, mark: scheme.mark, limit: limit, statement: strictStatement)
+                let spellCode = scheme.originText.hashCode()
+                return strictMatch(anchors: anchorsCode, spell: spellCode, input: scheme.aliasText, mark: scheme.mark, limit: limit, statement: strictStatement)
         }
 }
 
@@ -429,10 +429,10 @@ private extension Engine {
                 return statement
         }
 
-        private static let pingQuery: String = "SELECT rowid, word, romanization FROM core_lexicon WHERE spell = ? LIMIT ?;"
-        static func preparePingStatement() -> OpaquePointer? {
+        private static let spellQuery: String = "SELECT rowid, word, romanization FROM core_lexicon WHERE spell = ? LIMIT ?;"
+        static func prepareSpellStatement() -> OpaquePointer? {
                 var statement: OpaquePointer?
-                guard sqlite3_prepare_v2(database, pingQuery, -1, &statement, nil) == SQLITE_OK else { return nil }
+                guard sqlite3_prepare_v2(database, spellQuery, -1, &statement, nil) == SQLITE_OK else { return nil }
                 return statement
         }
 
@@ -479,9 +479,9 @@ private extension Engine {
                 }
                 return candidates
         }
-        static func pingMatch<T: StringProtocol>(text: T, input: String, mark: String? = nil, limit: Int64? = nil, statement: OpaquePointer?) -> [Candidate] {
+        static func spellMatch<T: StringProtocol>(text: T, input: String, mark: String? = nil, limit: Int64? = nil, statement: OpaquePointer?) -> [Candidate] {
                 sqlite3_reset(statement)
-                sqlite3_bind_int64(statement, 1, Int64(text.hash))
+                sqlite3_bind_int64(statement, 1, Int64(text.hashCode()))
                 sqlite3_bind_int64(statement, 2, (limit ?? -1))
                 var candidates: [Candidate] = []
                 while sqlite3_step(statement) == SQLITE_ROW {
@@ -494,9 +494,9 @@ private extension Engine {
                 }
                 return candidates
         }
-        static func strictMatch(anchors: Int, ping: Int, input: String, mark: String? = nil, limit: Int64? = nil, statement: OpaquePointer?) -> [Candidate] {
+        static func strictMatch(anchors: Int, spell: Int32, input: String, mark: String? = nil, limit: Int64? = nil, statement: OpaquePointer?) -> [Candidate] {
                 sqlite3_reset(statement)
-                sqlite3_bind_int64(statement, 1, Int64(ping))
+                sqlite3_bind_int64(statement, 1, Int64(spell))
                 sqlite3_bind_int64(statement, 2, Int64(anchors))
                 sqlite3_bind_int64(statement, 3, (limit ?? -1))
                 var candidates: [Candidate] = []
