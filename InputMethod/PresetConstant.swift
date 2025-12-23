@@ -2,6 +2,7 @@ struct PresetConstant {
         static let MonaspaceNeon: String = "Monaspace Neon"
         static let SFMono: String = "SF Mono"
         static let SFPro: String = "SF Pro"
+        static let GoogleSansFlex: String = "Google Sans Flex"
         static let Inter: String = "Inter"
         static let Roboto: String = "Roboto"
         static let HelveticaNeue: String = "Helvetica Neue"
@@ -16,4 +17,6 @@ struct PresetConstant {
         static let fullWidth: String = "全寬"
 
         static let systemABCKeyboardLayout: String = "com.apple.keylayout.ABC"
+        static let bundleIdentifier: String = "org.jyutping.inputmethod.Jyutping"
+        static let connectionName: String = "org.jyutping.inputmethod.Jyutping_Connection"
 }

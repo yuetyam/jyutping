@@ -1,12 +1,14 @@
 struct PresetConstant {
         static let KeyboardIdentifier: String = "im.cantonese.CantoneseIM.Keyboard"
         static let SFPro: String = "SF Pro"
+        static let GoogleSansFlex: String = "Google Sans Flex"
         static let Arial: String = "Arial"
         static let Inter: String = "Inter"
         static let Roboto: String = "Roboto"
         static let HelveticaNeue: String = "Helvetica Neue"
         static let WenKaiTC: String = "LXGW WenKai TC"
         static let WenKai: String = "LXGW WenKai"
+        static let MoonStarsKai: String = "Moon Stars Kai"
         static let IMingCP: String = "I.MingCP"
         static let IMing: String = "I.Ming"
         static let primaryCJKVQueue: [String] = ["Shanggu Sans", "ChiuKong Gothic CL", "LXGW XiHei CL", "Source Han Sans K", "Noto Sans CJK KR", "Sarasa Gothic CL"]
@@ -17,6 +19,7 @@ struct PresetConstant {
 
 struct BolderFont {
         static let SFPro: String = "SFPro-Medium"
+        static let GoogleSansFlex: String = "GoogleSansFlex-Medium"
         static let Inter: String = "Inter-Medium"
         static let Roboto: String = "Roboto-Medium"
         static let HelveticaNeue: String = "HelveticaNeue-Medium"
@@ -33,3 +36,4 @@ static let etymologyNote: String = """
 """
 
 }
+

@@ -33,7 +33,7 @@ private extension Font {
         }
 
         private static let preferredFontNames: [String] = {
-                var names: [String] = [PresetConstant.SFPro, PresetConstant.Roboto, PresetConstant.Arial, PresetConstant.Inter, PresetConstant.HelveticaNeue]
+                var names: [String] = [PresetConstant.SFPro, PresetConstant.GoogleSansFlex, PresetConstant.Roboto, PresetConstant.Arial, PresetConstant.Inter, PresetConstant.HelveticaNeue]
                 var shouldConsiderSupplementaryFonts: Bool = true
                 for name in PresetConstant.primaryCJKVQueue {
                         if found(font: name) {
@@ -62,7 +62,7 @@ private extension Font {
 
         private static let bolderFonts: [String] = {
                 var names: [String] = []
-                let latinQueue: [String] = [BolderFont.SFPro, BolderFont.Inter, BolderFont.Roboto, BolderFont.HelveticaNeue]
+                let latinQueue: [String] = [BolderFont.SFPro, BolderFont.Inter, BolderFont.GoogleSansFlex, BolderFont.Roboto, BolderFont.HelveticaNeue]
                 for name in latinQueue {
                         if found(font: name) {
                                 names.append(name)
@@ -96,14 +96,14 @@ private extension Font {
 
         private static let characterDisplayFonts: [String] = {
                 var names: [String] = []
-                let latinQueue: [String] = [PresetConstant.SFPro, PresetConstant.Inter, PresetConstant.Roboto, PresetConstant.HelveticaNeue]
+                let latinQueue: [String] = [PresetConstant.SFPro, PresetConstant.Inter, PresetConstant.GoogleSansFlex, PresetConstant.Roboto, PresetConstant.HelveticaNeue]
                 for name in latinQueue {
                         if found(font: name) {
                                 names.append(name)
                                 break
                         }
                 }
-                let primaryList: [String] = [PresetConstant.WenKaiTC, PresetConstant.WenKai]
+                let primaryList: [String] = [PresetConstant.WenKaiTC, PresetConstant.WenKai, PresetConstant.MoonStarsKai]
                 names.append(contentsOf: primaryList)
                 var shouldConsiderSupplementaryFonts: Bool = true
                 for name in PresetConstant.primaryCJKVQueue {

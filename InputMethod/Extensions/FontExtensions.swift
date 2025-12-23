@@ -22,7 +22,7 @@ extension Font {
         }
         private static let preferredCandidateFontNames: [String] = {
                 var names: [String] = [PresetConstant.MonaspaceNeon]
-                let latinQueue: [String] = [PresetConstant.SFPro, PresetConstant.Inter, PresetConstant.Roboto]
+                let latinQueue: [String] = [PresetConstant.SFPro, PresetConstant.Inter, PresetConstant.GoogleSansFlex, PresetConstant.Roboto]
                 for name in latinQueue {
                         if found(font: name) {
                                 names.append(name)
@@ -92,7 +92,7 @@ extension Font {
         }
         private static let preferredAnnotationFontNames: [String] = {
                 var names: [String] = []
-                let latinQueue: [String] = [PresetConstant.SFPro, PresetConstant.Inter, PresetConstant.Roboto]
+                let latinQueue: [String] = [PresetConstant.SFPro, PresetConstant.Inter, PresetConstant.GoogleSansFlex, PresetConstant.Roboto]
                 for name in latinQueue {
                         if found(font: name) {
                                 names.append(name)

@@ -206,7 +206,9 @@ extension PunctuationKey {
                         PunctuationSymbol("＊", comment: PresetConstant.fullWidth),
                         PunctuationSymbol("×", comment: "乘號"),
                         PunctuationSymbol("·", comment: "間隔號"),
-                        PunctuationSymbol("※", comment: "參攷號")
+                        PunctuationSymbol("•", comment: "項目符號"),
+                        PunctuationSymbol("※", comment: "參攷號"),
+                        PunctuationSymbol("◉", comment: "魚眼"),
                 ]
                 return PunctuationKey(keyText: "8", shiftingKeyText: "*", instantSymbol: "8", instantShiftingSymbol: nil, symbols: [.init("8")], shiftingSymbols: shiftingSymbols)
         }()
