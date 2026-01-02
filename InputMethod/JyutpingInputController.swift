@@ -573,7 +573,8 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         candidates = (definedCandidates + textMarkCandidates).distinct()
                         return
                 }
-                let segmentation = Segmenter.segment(events: bufferEvents)
+                let input = bufferEvents.dropFirst()
+                let segmentation = Segmenter.segment(events: input)
                 let tailMark: String = {
                         let isPeculiar: Bool = bufferEvents.contains(where: \.isLetter.negative)
                         guard isPeculiar.negative else { return bufferText.dropFirst().toneConverted() }
@@ -598,7 +599,6 @@ final class JyutpingInputController: IMKInputController, Sendable {
         nonisolated private func updatePreviousModifiers(to modifiers: NSEvent.ModifierFlags) {
                 previousModifiers = modifiers
         }
-
         nonisolated(unsafe) private var isModifiersBuffering: Bool = false
         nonisolated private func triggerModifiersBuffer() {
                 isModifiersBuffering = true
@@ -608,35 +608,40 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         isModifiersBuffering = false
                 }
         }
-
-        nonisolated private func shouldSwitchInputMethodMode(with event: NSEvent) -> Bool {
+        private enum ShiftSituation: Int {
+                case irrelevant
+                case transparent
+                case buffer
+                case handle
+        }
+        nonisolated private func detectShift(with event: NSEvent) -> ShiftSituation {
                 let currentModifiers: NSEvent.ModifierFlags = event.modifierFlags
                 defer {
                         updatePreviousModifiers(to: currentModifiers)
                 }
                 guard AppSettings.pressShiftOnce == .switchInputMethodMode else {
                         resetModifiersBuffer()
-                        return false
+                        return .transparent
                 }
                 guard (event.keyCode == KeyCode.Modifier.shiftLeft) || (event.keyCode == KeyCode.Modifier.shiftRight) else {
                         resetModifiersBuffer()
-                        return false
+                        return .irrelevant
                 }
                 guard event.type == .flagsChanged else {
                         resetModifiersBuffer()
-                        return false
+                        return .irrelevant
                 }
                 let isShiftKeyPressed: Bool = previousModifiers.isEmpty && (currentModifiers == .shift)
                 let isShiftKeyReleased: Bool = (previousModifiers == .shift) && currentModifiers.isEmpty
                 if isShiftKeyPressed && isModifiersBuffering.negative {
                         triggerModifiersBuffer()
-                        return false
+                        return .buffer
                 } else if isShiftKeyReleased && isModifiersBuffering {
                         resetModifiersBuffer()
-                        return true
+                        return .handle
                 } else {
                         resetModifiersBuffer()
-                        return false
+                        return .transparent
                 }
         }
 
@@ -650,7 +655,12 @@ final class JyutpingInputController: IMKInputController, Sendable {
 
         override func handle(_ event: NSEvent!, client sender: Any!) -> Bool {
                 guard let event = event else { return false }
-                guard shouldSwitchInputMethodMode(with: event).negative else {
+                switch detectShift(with: event) {
+                case .irrelevant, .transparent:
+                        break
+                case .buffer:
+                        return true
+                case .handle:
                         Task { @MainActor in
                                 switch inputForm {
                                 case .cantonese:

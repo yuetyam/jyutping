@@ -23,6 +23,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 let name: String = (Bundle.main.infoDictionary?["InputMethodConnectionName"] as? String) ?? "org.jyutping.inputmethod.Jyutping_Connection"
                 let identifier: String = Bundle.main.bundleIdentifier ?? "org.jyutping.inputmethod.Jyutping"
                 imkServer = IMKServer(name: name, bundleIdentifier: identifier)
+                NSApplication.shared.setActivationPolicy(.accessory)
                 prepareUpdaterController()
         }
 
