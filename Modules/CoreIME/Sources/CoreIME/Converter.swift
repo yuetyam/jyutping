@@ -11,10 +11,9 @@ extension Converter {
         ///   - marks: TextMark candidates suggested by the Engine — all plain text.
         ///   - symbols: Emoji / symbol candidates suggested by the Engine.
         ///   - queried: Candidates suggested by the Engine — all Cantonese.
-        ///   - isEmojiSuggestionsOn: Whether emoji and symbol candidates are needs. If `true`, include `symbols`; otherwise, exclude emojis/symbols.
         ///   - characterStandard: The Chinese character set to use (e.g., Traditional or Simplified).
         /// - Returns: A merged array of unique, converted candidates.
-        public static func dispatch(memory: [Candidate], defined: [Candidate], marks: [Candidate], symbols: [Candidate], queried: [Candidate], isEmojiSuggestionsOn: Bool, characterStandard: CharacterStandard) -> [Candidate] {
+        public static func dispatch(memory: [Candidate], defined: [Candidate], marks: [Candidate], symbols: [Candidate], queried: [Candidate], characterStandard: CharacterStandard) -> [Candidate] {
                 let idealMemory = memory.filter(\.isIdealInputMemory)
                 let notIdealMemory = memory.filter(\.isNotIdealInputMemory)
                 var chained: [Candidate] = idealMemory.isEmpty ? queried : queried.filter(\.isCompound.negative)
@@ -26,7 +25,6 @@ extension Converter {
                         }
                 }
                 chained = idealMemory.prefix(2) + defined + idealMemory + marks + chained
-                let symbols: [Candidate] = isEmojiSuggestionsOn ? symbols : []
                 for symbol in symbols.reversed() {
                         if let index = chained.firstIndex(where: { $0.isCantonese && $0.lexiconText == symbol.lexiconText && $0.romanization == symbol.romanization }) {
                                 chained.insert(symbol, at: index + 1)

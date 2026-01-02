@@ -397,7 +397,7 @@ extension Engine {
                 }
         }
         private static func perform<T: RandomAccessCollection<Syllable>>(scheme: T, limit: Int64? = nil, strictStatement: OpaquePointer?) -> [Candidate] {
-                let anchorsCode = scheme.compactMap(\.alias.first).anchorsCode
+                let anchorsCode = scheme.aliasAnchors.anchorsCode
                 guard anchorsCode > 0 else { return [] }
                 let spellCode = scheme.originText.hashCode()
                 return strictMatch(anchors: anchorsCode, spell: spellCode, input: scheme.aliasText, mark: scheme.mark, limit: limit, statement: strictStatement)
