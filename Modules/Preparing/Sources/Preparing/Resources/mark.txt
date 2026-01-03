@@ -95,6 +95,11 @@ macpro	Mac Pro
 magicos	MagicOS
 mapkit	MapKit
 mas	Mac App Store
+matebook	MateBook
+matebookfold	MateBook Fold
+matebookpro	MateBook Pro
+matepad	MatePad
+matepadpro	MatePad Pro
 mba	MBA
 mba	MacBook Air
 mbp	MacBook Pro
