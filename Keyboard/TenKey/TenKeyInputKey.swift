@@ -31,7 +31,7 @@ struct TenKeyInputKey: View {
                                 }
                         }
                         .onEnded { _ in
-                                context.operate(.combine(key))
+                                context.nineKeyProcess(key)
                          }
                 )
         }

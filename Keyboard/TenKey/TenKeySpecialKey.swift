@@ -16,16 +16,16 @@ struct TenKeySpecialKey: View {
                                 .fill(isTouching ? colorScheme.activeInputKeyColor : colorScheme.inputKeyColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(3)
-                        #if DEBUG
-                        ZStack(alignment: .bottom) {
-                                Color.clear
-                                Text(verbatim: context.inputStage.isBuffering ? PresetConstant.separate : PresetConstant.reverseLookup)
-                                        .font(.keyFootnote)
-                                        .opacity(0.35)
+                        if context.inputStage.isBuffering.negative {
+                                ZStack(alignment: .bottom) {
+                                        Color.clear
+                                        Text(verbatim: PresetConstant.reverseLookup)
+                                                .font(.keyFootnote)
+                                                .opacity(0.35)
+                                }
+                                .padding(.bottom, 5)
+                                Text(verbatim: "R")
                         }
-                        .padding(.bottom, 5)
-                        Text(verbatim: context.inputStage.isBuffering ? String.apostrophe : "R")
-                        #endif
                 }
                 .frame(width: context.tenKeyWidthUnit, height: context.heightUnit)
                 .contentShape(Rectangle())
@@ -38,11 +38,10 @@ struct TenKeySpecialKey: View {
                                 }
                         }
                         .onEnded { _ in
-                                if context.inputStage.isBuffering {
-                                        context.handle(.apostrophe)
+                                if context.inputStage.isBuffering.negative {
+                                        context.nineKeyProcess(.special)
                                 }
                          }
                 )
-                .disabled(true)
         }
 }

@@ -1,6 +1,7 @@
 /// 10 key keyboard element
 public enum Combo: Int, Sendable {
 
+        case special = 1
         case ABC  = 2
         case DEF  = 3
         case GHI  = 4
@@ -18,6 +19,7 @@ public enum Combo: Int, Sendable {
                 return Self.textMap[self]!
         }
         private static let textMap: [Combo: String] = [
+                special: "R",
                 ABC : "ABC",
                 DEF : "DEF",
                 GHI : "GHI",
@@ -33,6 +35,7 @@ public enum Combo: Int, Sendable {
                 return Self.letterMap[self]!
         }
         private static let letterMap: [Combo: [String]] = [
+                special: ["r"],
                 ABC : ["a", "b", "c"],
                 DEF : ["d", "e", "f"],
                 GHI : ["g", "h", "i"],

@@ -527,7 +527,7 @@ extension Engine {
         }
         private static func nineKeySearch<T: RandomAccessCollection<Combo>>(combos: T, limit: Int64? = nil, anchorsStatement: OpaquePointer?, codeMatchStatement: OpaquePointer?) -> [Candidate] {
                 let inputLength: Int = combos.count
-                let fullCode: Int = combos.map(\.rawValue).decimalCombined()
+                let fullCode: Int = combos.map(\.code).decimalCombined()
                 guard inputLength > 1 else {
                         return nineKeyCodeMatch(code: fullCode, limit: limit, statement: codeMatchStatement) + nineKeyAnchorsMatch(code: fullCode, limit: 100, statement: anchorsStatement)
                 }
@@ -535,13 +535,13 @@ extension Engine {
                 let idealAnchorsMatched: [Candidate] = nineKeyAnchorsMatch(code: fullCode, limit: 4, statement: anchorsStatement)
                 let codeMatched: [Candidate] = (1..<inputLength)
                         .flatMap({ number -> [Candidate] in
-                                let code = combos.dropLast(number).map(\.rawValue).decimalCombined()
+                                let code = combos.dropLast(number).map(\.code).decimalCombined()
                                 guard code > 0 else { return [] }
                                 return nineKeyCodeMatch(code: code, limit: limit, statement: codeMatchStatement)
                         })
                 let anchorsMatched: [Candidate] = (0..<inputLength)
                         .flatMap({ number -> [Candidate] in
-                                let code = combos.dropLast(number).map(\.rawValue).decimalCombined()
+                                let code = combos.dropLast(number).map(\.code).decimalCombined()
                                 guard code > 0 else { return [] }
                                 return nineKeyAnchorsMatch(code: code, limit: limit, statement: anchorsStatement)
                         })
@@ -549,7 +549,7 @@ extension Engine {
                 guard let firstInputCount = queried.first?.inputCount else { return [] }
                 guard firstInputCount < inputLength else { return queried }
                 let tailCombos = combos.dropFirst(firstInputCount)
-                let tailCode = tailCombos.map(\.rawValue).decimalCombined()
+                let tailCode = tailCombos.map(\.code).decimalCombined()
                 guard tailCode > 0 else { return queried }
                 let tailCandidates: [Candidate] = nineKeyCodeMatch(code: tailCode, limit: 20, statement: codeMatchStatement) + nineKeyAnchorsMatch(code: tailCode, limit: 20, statement: anchorsStatement)
                 guard tailCandidates.isNotEmpty, let head = queried.first else { return queried }

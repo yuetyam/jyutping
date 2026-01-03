@@ -432,7 +432,7 @@ struct InputMemory {
                                 .distinct()
                                 .map({ Candidate(text: $0.word, romanization: $0.romanization, input: $0.input, mark: $0.mark, order: -1) })
                 }
-                let fullCode: Int = combos.map(\.rawValue).decimalCombined()
+                let fullCode: Int = combos.map(\.code).decimalCombined()
                 let fullCodeMatched = nineKeyCodeMatch(code: fullCode, limit: 100, statement: codeStatement)
                 let fullAnchorsMatched = nineKeyAnchorsMatch(code: fullCode, limit: 5, statement: anchorsStatement)
                 let ideal = (fullCodeMatched.prefix(10) + (fullCodeMatched + fullAnchorsMatched).sorted())
@@ -440,7 +440,7 @@ struct InputMemory {
                         .map({ Candidate(text: $0.word, romanization: $0.romanization, input: $0.input, mark: $0.mark, order: -1) })
                 let queried = (1..<eventLength)
                         .flatMap({ number -> [InternalLexicon] in
-                                let code = combos.dropLast(number).map(\.rawValue).decimalCombined()
+                                let code = combos.dropLast(number).map(\.code).decimalCombined()
                                 guard code > 0 else { return [] }
                                 return nineKeyCodeMatch(code: code, limit: 4, statement: codeStatement)
                         })

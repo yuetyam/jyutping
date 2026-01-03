@@ -303,13 +303,11 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         case (true, false):
                                 inputStage = .starting
                                 updateReturnKey()
-                                nineKeySuggest()
                         case (false, false):
                                 inputStage = .ongoing
                                 if bufferCombos.count == (oldValue.count - 1) {
                                         selectedSyllables = []
                                 }
-                                nineKeySuggest()
                         case (false, true):
                                 inputStage = .ending
                                 suggestionTask?.cancel()
@@ -323,7 +321,18 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 clearSidebarSyllables()
                                 updateReturnKey()
                         }
+                        switch bufferCombos.first {
+                        case .none:
+                                break
+                        case .special:
+                                nineKeyPinyinReverseLookup()
+                        default:
+                                nineKeySuggest()
+                        }
                 }
+        }
+        func nineKeyProcess(_ combo: Combo) {
+                bufferCombos.append(combo)
         }
 
         @Published private(set) var sidebarSyllables: [SidebarSyllable] = []
@@ -399,8 +408,6 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         } else {
                                 textDocumentProxy.insertText(text)
                         }
-                case .combine(let combo):
-                        bufferCombos.append(combo)
                 case .space:
                         guard inputMethodMode.isCantonese else {
                                 textDocumentProxy.insertText(String.space)
@@ -580,16 +587,28 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 bufferEvents = bufferEvents.suffix(tailLength)
                         }
                 case .nineKey:
-                        if candidate.isCantonese {
-                                selectedCandidates.append(candidate)
+                        let isReverseLookup: Bool = (bufferCombos.first == .special)
+                        if isReverseLookup {
+                                let tailCount: Int = (bufferCombos.count - 1 - candidate.inputCount)
+                                if tailCount > 0 {
+                                        bufferCombos = bufferCombos.prefix(1) + bufferCombos.suffix(tailCount)
+                                } else {
+                                        bufferCombos = []
+                                }
                         } else {
-                                selectedCandidates = []
+                                if candidate.isCantonese {
+                                        selectedCandidates.append(candidate)
+                                } else {
+                                        selectedCandidates = []
+                                }
+                                selectedSyllables = []
+                                let tailCount: Int = bufferCombos.count - candidate.inputCount
+                                if tailCount > 0 {
+                                        bufferCombos = bufferCombos.suffix(tailCount)
+                                } else {
+                                        bufferCombos = []
+                                }
                         }
-                        selectedSyllables = []
-                        let tailCount: Int = bufferCombos.count - candidate.inputCount
-                        let suffixLength: Int = max(0, tailCount)
-                        bufferCombos = bufferCombos.suffix(suffixLength)
-                // TODO: 14 ~ 21 Key
                 }
         }
         private func adjustKeyboard() {
@@ -643,6 +662,35 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                         }()
                                         self.nineKeyCachedCandidates = suggestions
                                         self.updateSidebarSyllables()
+                                }
+                        }
+                }
+        }
+        private func nineKeyPinyinReverseLookup() {
+                suggestionTask?.cancel()
+                let keys = bufferCombos.dropFirst()
+                guard keys.isNotEmpty else {
+                        text2mark = "r"
+                        candidates = []
+                        return
+                }
+                suggestionTask = Task.detached(priority: .high) { [weak self] in
+                        guard let self else { return }
+                        let suggestions: [Candidate] = await Engine.pinyinNineKeyReverseLookup(combos: keys).transformed(to: characterStandard)
+                        if Task.isCancelled.negative {
+                                await MainActor.run { [weak self] in
+                                        guard let self else { return }
+                                        let tailMark = {
+                                                guard let firstCandidate = suggestions.first else { return keys.compactMap(\.letters.first).joined() }
+                                                let userInputCount = keys.count
+                                                let firstInputCount = firstCandidate.inputCount
+                                                guard firstInputCount < userInputCount else { return firstCandidate.mark }
+                                                let tailCombos = keys.suffix(userInputCount - firstInputCount)
+                                                let tailText = tailCombos.compactMap(\.letters.first).joined()
+                                                return firstCandidate.mark + String.space + tailText
+                                        }()
+                                        self.text2mark = "r " + tailMark
+                                        self.candidates = suggestions
                                 }
                         }
                 }
@@ -812,7 +860,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         }
         private func queryDefinedCandidates(for combos: [Combo]) -> [Candidate] {
                 guard Options.isTextReplacementsOn else { return [] }
-                let nineKeyCharCode: Int = combos.map(\.rawValue).decimalCombined()
+                let nineKeyCharCode: Int = combos.map(\.code).decimalCombined()
                 guard nineKeyCharCode > 0 else { return [] }
                 return definedLexicons.filter({ $0.nineKeyCharCode == nineKeyCharCode }).map(\.candidate)
         }
