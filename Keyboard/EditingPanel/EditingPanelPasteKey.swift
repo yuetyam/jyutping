@@ -17,7 +17,11 @@ struct EditingPanelPasteKey: View {
                                 .padding(4)
                         VStack(spacing: 4) {
                                 Image(systemName: "doc.on.clipboard")
-                                Text("EditingPanel.Paste").font(.keyCaption)
+                                Text("EditingPanel.Paste")
+                                        .font(.keyCaption)
+                                        .lineLimit(1)
+                                        .minimumScaleFactor(0.5)
+                                        .padding(.horizontal, 4)
                         }
                         .opacity(context.isClipboardEmpty ? 0.5 : 1)
                 }

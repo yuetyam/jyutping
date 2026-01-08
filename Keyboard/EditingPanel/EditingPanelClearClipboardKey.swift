@@ -17,7 +17,11 @@ struct EditingPanelClearClipboardKey: View {
                                 .padding(4)
                         VStack(spacing: 4) {
                                 Image(systemName: "clipboard")
-                                Text("EditingPanel.ClearSystemClipboard").font(.keyCaption)
+                                Text("EditingPanel.ClearSystemClipboard")
+                                        .font(.keyCaption)
+                                        .lineLimit(1)
+                                        .minimumScaleFactor(0.5)
+                                        .padding(.horizontal, 4)
                         }
                 }
                 .contentShape(Rectangle())

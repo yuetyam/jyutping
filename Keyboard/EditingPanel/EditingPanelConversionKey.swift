@@ -17,7 +17,11 @@ struct EditingPanelConversionKey: View {
                                 .padding(4)
                         VStack(spacing: 4) {
                                 Image(systemName: "arrow.left.arrow.right")
-                                Text("EditingPanel.HantHansConversion").font(.keyCaption)
+                                Text("EditingPanel.HantHansConversion")
+                                        .font(.keyCaption)
+                                        .lineLimit(1)
+                                        .minimumScaleFactor(0.5)
+                                        .padding(.horizontal, 4)
                         }
                 }
                 .contentShape(Rectangle())
