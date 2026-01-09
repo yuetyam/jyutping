@@ -7521,6 +7521,100 @@
         }
       }
     },
+    "GeneralPreferencesView.TraditionalCharacterStandard.SectionFooter" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The Inherited option uses rare characters and may have limited compatibility. Use it with caution."
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The Inherited option uses rare characters and may have limited compatibility. Use it with caution."
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The Inherited option uses rare characters and may have limited compatibility. Use it with caution."
+          }
+        },
+        "en-US" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The Inherited option uses rare characters and may have limited compatibility. Use it with caution."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L’option Héritée utilise des caractères rares et peut présenter une compatibilité limitée. Utilisez-la avec prudence."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "旧字体オプションは稀な文字を使用するため、互換性が制限される可能性があります。使用にはご注意ください。"
+          }
+        },
+        "yue" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "舊字形選項會用到罕見字符，可能兼容性較差。謹慎使用。"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "舊字形選項會用到罕見字符，可能兼容性較差。謹慎使用。"
+          }
+        },
+        "zh-Hans-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "舊字形選項會用到罕見字符，可能兼容性較差。謹慎使用。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "舊字形選項會用到罕見字符，可能兼容性較差。謹慎使用。"
+          }
+        },
+        "zh-Hant-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "舊字形選項會用到罕見字符，可能兼容性較差。謹慎使用。"
+          }
+        },
+        "zh-Hant-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "舊字形選項會用到罕見字符，可能兼容性較差。謹慎使用。"
+          }
+        },
+        "zh-Hant-MO" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "舊字形選項會用到罕見字符，可能兼容性較差。謹慎使用。"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "舊字形選項會用到罕見字符，可能兼容性較差。謹慎使用。"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "舊字形選項會用到罕見字符，可能兼容性較差。謹慎使用。"
+          }
+        }
+      }
+    },
     "HotkeysView.BackToTheFirstCandidatePage" : {
       "localizations" : {
         "en" : {

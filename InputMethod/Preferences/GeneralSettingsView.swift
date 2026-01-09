@@ -172,6 +172,10 @@ struct GeneralSettingsView: View {
                                                 .onChange(of: traditionalCharacterStandard) { newStandard in
                                                         Options.updateTraditionalCharacterStandard(to: newStandard)
                                                 }
+                                        } footer: {
+                                                Text("GeneralPreferencesView.TraditionalCharacterStandard.SectionFooter").textCase(nil)
+                                        }
+                                        Section {
                                                 Toggle("GeneralPreferencesView.EmojiSuggestions.ToggleTitle", isOn: $isEmojiSuggestionsOn)
                                                         .toggleStyle(.switch)
                                                         .onChange(of: isEmojiSuggestionsOn) { newState in
