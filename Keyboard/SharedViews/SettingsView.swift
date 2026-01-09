@@ -87,21 +87,27 @@ struct SettingsView: View {
                                         }
                                 }
 
-                                Picker("SettingsView.TraditionalCharacterStandard.PickerTitle", selection: $traditionalCharacterStandard) {
-                                        Text("SettingsView.TraditionalCharacterStandard.Option1.Preset").tag(CharacterStandard.preset)
-                                        Text("SettingsView.TraditionalCharacterStandard.Option6.HongKong").tag(CharacterStandard.hongkong)
-                                        Text("SettingsView.TraditionalCharacterStandard.Option7.Taiwan").tag(CharacterStandard.taiwan)
-                                        Text("SettingsView.TraditionalCharacterStandard.Option8.PRCGeneral").tag(CharacterStandard.prcGeneral)
-                                        Text("SettingsView.TraditionalCharacterStandard.Option9.AncientBooksPublishing").tag(CharacterStandard.ancientBooksPublishing)
-                                        Text("SettingsView.TraditionalCharacterStandard.Option3.Inherited").tag(CharacterStandard.inherited)
-                                }
-                                .pickerStyle(.inline)
-                                .textCase(nil)
-                                .onChange(of: traditionalCharacterStandard) { newStandard in
-                                        AudioFeedback.modified()
-                                        context.triggerSelectionHapticFeedback()
-                                        context.syncTraditionalCharacterStandard(to: newStandard)
-                                        Options.updateTraditionalCharacterStandard(to: newStandard)
+                                Section {
+                                        Picker("SettingsView.TraditionalCharacterStandard.PickerTitle", selection: $traditionalCharacterStandard) {
+                                                Text("SettingsView.TraditionalCharacterStandard.Option1.Preset").tag(CharacterStandard.preset)
+                                                Text("SettingsView.TraditionalCharacterStandard.Option6.HongKong").tag(CharacterStandard.hongkong)
+                                                Text("SettingsView.TraditionalCharacterStandard.Option7.Taiwan").tag(CharacterStandard.taiwan)
+                                                Text("SettingsView.TraditionalCharacterStandard.Option8.PRCGeneral").tag(CharacterStandard.prcGeneral)
+                                                Text("SettingsView.TraditionalCharacterStandard.Option9.AncientBooksPublishing").tag(CharacterStandard.ancientBooksPublishing)
+                                                Text("SettingsView.TraditionalCharacterStandard.Option3.Inherited").tag(CharacterStandard.inherited)
+                                        }
+                                        .pickerStyle(.inline)
+                                        .labelsHidden()
+                                        .onChange(of: traditionalCharacterStandard) { newStandard in
+                                                AudioFeedback.modified()
+                                                context.triggerSelectionHapticFeedback()
+                                                context.syncTraditionalCharacterStandard(to: newStandard)
+                                                Options.updateTraditionalCharacterStandard(to: newStandard)
+                                        }
+                                } header: {
+                                        Text("SettingsView.TraditionalCharacterStandard.SectionHeader").textCase(nil)
+                                } footer: {
+                                        Text("SettingsView.TraditionalCharacterStandard.SectionFooter").textCase(nil)
                                 }
 
                                 if context.keyboardInterface.isPadFloating {
