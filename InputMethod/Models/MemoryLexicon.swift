@@ -4,7 +4,7 @@ import CommonExtensions
 /// InputMemory Lexicon Entry
 struct MemoryLexicon: Hashable {
 
-        /// (Candidate.lexiconText + period + Candidate.romanization).hash
+        /// (Candidate.lexiconText + String.period + Candidate.romanization).hash
         let identifier: Int
 
         /// Cantonese candidate lexicon text

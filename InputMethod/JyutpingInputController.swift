@@ -179,6 +179,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 Task { @MainActor in
                         guard isCompositionCommitted.negative else { return }
                         suggestionTask?.cancel()
+                        appContext.updateIndicatorTexts(to: nil)
                         window.setContentSize(.zero)
                         selectedCandidates = []
                         if inputStage.isBuffering {
@@ -210,6 +211,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 nonisolated(unsafe) let client: InputClient? = (sender as? InputClient) ?? client()
                 Task { @MainActor in
                         suggestionTask?.cancel()
+                        appContext.updateIndicatorTexts(to: nil)
                         window.setContentSize(.zero)
                         selectedCandidates = []
                         if inputStage.isBuffering {
