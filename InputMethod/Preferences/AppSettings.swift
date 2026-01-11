@@ -174,6 +174,8 @@ enum PressShiftOnce: Int, CaseIterable {
         static func action(of value: Int) -> PressShiftOnce {
                 return Self.allCases.first(where: { $0.rawValue == value }) ?? Self.doNothing
         }
+        var isDoingNothing: Bool { self == .doNothing }
+        var isSwitchingInputMethodMode: Bool { self == .switchInputMethodMode }
 }
 
 enum ShiftSpaceCombination: Int, CaseIterable {
@@ -182,6 +184,8 @@ enum ShiftSpaceCombination: Int, CaseIterable {
         static func action(of value: Int) -> ShiftSpaceCombination {
                 return Self.allCases.first(where: { $0.rawValue == value }) ?? Self.inputFullWidthSpace
         }
+        var isInputingFullWidthSpace: Bool { self == .inputFullWidthSpace }
+        var isSwitchingInputMethodMode: Bool { self == .switchInputMethodMode }
 }
 
 /// 括號鍵 [ ] 額外功能

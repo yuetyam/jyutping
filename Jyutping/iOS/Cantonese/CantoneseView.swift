@@ -70,7 +70,8 @@ struct CantoneseView: View {
                                 }
 
                                 Section {
-                                        ExtendedLinkLabel(title: "懶音診療室 - PolyU", footnote: "polyu.edu.hk/cbs/pronunciation", address: "https://www.polyu.edu.hk/cbs/pronunciation")
+                                        ExtendedLinkLabel(title: "懶音診療室 - PolyU", footnote: "polyu.edu.hk/clc/pronunciation", address: "https://www.polyu.edu.hk/clc/pronunciation")
+                                        ExtendedLinkLabel(title: "消滅錯別字 - PolyU", footnote: "polyu.edu.hk/clc/typo", address: "https://www.polyu.edu.hk/clc/typo")
                                         ExtendedLinkLabel(title: "粵語語氣詞", footnote: "jyutping.org/blog/particles", address: "https://jyutping.org/blog/particles")
                                         ExtendedLinkLabel(title: "CANTONESE.com.hk", footnote: "cantonese.com.hk", address: "https://www.cantonese.com.hk")
                                         ExtendedLinkLabel(title: "中國古詩文精讀", footnote: "classicalchineseliterature.org", address: "https://www.classicalchineseliterature.org")

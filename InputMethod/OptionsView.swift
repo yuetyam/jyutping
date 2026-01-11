@@ -13,19 +13,6 @@ struct OptionsView: View {
         private let labelSet: LabelSet = AppSettings.labelSet
         private let isLabelLastZero: Bool = AppSettings.isLabelLastZero
 
-        private let options: [String] = [
-                String(localized: "OptionsView.CharacterStandard.Traditional"),
-                String(localized: "OptionsView.CharacterStandard.TraditionalHongKong"),
-                String(localized: "OptionsView.CharacterStandard.TraditionalTaiwan"),
-                String(localized: "OptionsView.CharacterStandard.Simplified"),
-                String(localized: "OptionsView.CharacterForm.HalfWidth"),
-                String(localized: "OptionsView.CharacterForm.FullWidth"),
-                String(localized: "OptionsView.PunctuationForm.Cantonese"),
-                String(localized: "OptionsView.PunctuationForm.English"),
-                String(localized: "OptionsView.InputMethodMode.Cantonese"),
-                String(localized: "OptionsView.InputMethodMode.ABC")
-        ]
-
         private let characterStandard: CharacterStandard = Options.legacyCharacterStandard
         private let characterForm: CharacterForm = Options.characterForm
         private let punctuationForm: PunctuationForm = Options.punctuationForm
@@ -35,25 +22,25 @@ struct OptionsView: View {
                 let highlightedIndex = context.optionsHighlightedIndex
                 VStack(alignment: .leading, spacing: 0) {
                         Group {
-                                OptionLabel(cornerRadius: innerCornerRadius, verticalPadding: verticalPadding, labelSet: labelSet, isLabelLastZero: isLabelLastZero, index: 0, highlightedIndex: highlightedIndex, text: options[0], checked: characterStandard == .preset)
-                                OptionLabel(cornerRadius: innerCornerRadius, verticalPadding: verticalPadding, labelSet: labelSet, isLabelLastZero: isLabelLastZero, index: 1, highlightedIndex: highlightedIndex, text: options[1], checked: characterStandard == .hongkong)
-                                OptionLabel(cornerRadius: innerCornerRadius, verticalPadding: verticalPadding, labelSet: labelSet, isLabelLastZero: isLabelLastZero, index: 2, highlightedIndex: highlightedIndex, text: options[2], checked: characterStandard == .taiwan)
-                                OptionLabel(cornerRadius: innerCornerRadius, verticalPadding: verticalPadding, labelSet: labelSet, isLabelLastZero: isLabelLastZero, index: 3, highlightedIndex: highlightedIndex, text: options[3], checked: characterStandard == .mutilated)
+                                OptionLabel(cornerRadius: innerCornerRadius, verticalPadding: verticalPadding, labelSet: labelSet, isLabelLastZero: isLabelLastZero, index: 0, highlightedIndex: highlightedIndex, checked: characterStandard == .preset)
+                                OptionLabel(cornerRadius: innerCornerRadius, verticalPadding: verticalPadding, labelSet: labelSet, isLabelLastZero: isLabelLastZero, index: 1, highlightedIndex: highlightedIndex, checked: characterStandard == .hongkong)
+                                OptionLabel(cornerRadius: innerCornerRadius, verticalPadding: verticalPadding, labelSet: labelSet, isLabelLastZero: isLabelLastZero, index: 2, highlightedIndex: highlightedIndex, checked: characterStandard == .taiwan)
+                                OptionLabel(cornerRadius: innerCornerRadius, verticalPadding: verticalPadding, labelSet: labelSet, isLabelLastZero: isLabelLastZero, index: 3, highlightedIndex: highlightedIndex, checked: characterStandard == .mutilated)
                         }
                         Divider()
                         Group {
-                                OptionLabel(cornerRadius: innerCornerRadius, verticalPadding: verticalPadding, labelSet: labelSet, isLabelLastZero: isLabelLastZero, index: 4, highlightedIndex: highlightedIndex, text: options[4], checked: characterForm.isHalfWidth)
-                                OptionLabel(cornerRadius: innerCornerRadius, verticalPadding: verticalPadding, labelSet: labelSet, isLabelLastZero: isLabelLastZero, index: 5, highlightedIndex: highlightedIndex, text: options[5], checked: characterForm.isFullWidth)
+                                OptionLabel(cornerRadius: innerCornerRadius, verticalPadding: verticalPadding, labelSet: labelSet, isLabelLastZero: isLabelLastZero, index: 4, highlightedIndex: highlightedIndex, checked: characterForm.isHalfWidth)
+                                OptionLabel(cornerRadius: innerCornerRadius, verticalPadding: verticalPadding, labelSet: labelSet, isLabelLastZero: isLabelLastZero, index: 5, highlightedIndex: highlightedIndex, checked: characterForm.isFullWidth)
                         }
                         Divider()
                         Group {
-                                OptionLabel(cornerRadius: innerCornerRadius, verticalPadding: verticalPadding, labelSet: labelSet, isLabelLastZero: isLabelLastZero, index: 6, highlightedIndex: highlightedIndex, text: options[6], checked: punctuationForm.isCantoneseMode)
-                                OptionLabel(cornerRadius: innerCornerRadius, verticalPadding: verticalPadding, labelSet: labelSet, isLabelLastZero: isLabelLastZero, index: 7, highlightedIndex: highlightedIndex, text: options[7], checked: punctuationForm.isEnglishMode)
+                                OptionLabel(cornerRadius: innerCornerRadius, verticalPadding: verticalPadding, labelSet: labelSet, isLabelLastZero: isLabelLastZero, index: 6, highlightedIndex: highlightedIndex, checked: punctuationForm.isCantoneseMode)
+                                OptionLabel(cornerRadius: innerCornerRadius, verticalPadding: verticalPadding, labelSet: labelSet, isLabelLastZero: isLabelLastZero, index: 7, highlightedIndex: highlightedIndex, checked: punctuationForm.isEnglishMode)
                         }
                         Divider()
                         Group {
-                                OptionLabel(cornerRadius: innerCornerRadius, verticalPadding: verticalPadding, labelSet: labelSet, isLabelLastZero: isLabelLastZero, index: 8, highlightedIndex: highlightedIndex, text: options[8], checked: inputMethodMode.isCantonese)
-                                OptionLabel(cornerRadius: innerCornerRadius, verticalPadding: verticalPadding, labelSet: labelSet, isLabelLastZero: isLabelLastZero, index: 9, highlightedIndex: highlightedIndex, text: options[9], checked: inputMethodMode.isABC)
+                                OptionLabel(cornerRadius: innerCornerRadius, verticalPadding: verticalPadding, labelSet: labelSet, isLabelLastZero: isLabelLastZero, index: 8, highlightedIndex: highlightedIndex, checked: inputMethodMode.isCantonese)
+                                OptionLabel(cornerRadius: innerCornerRadius, verticalPadding: verticalPadding, labelSet: labelSet, isLabelLastZero: isLabelLastZero, index: 9, highlightedIndex: highlightedIndex, checked: inputMethodMode.isABC)
                         }
                 }
                 .padding(contentInsets)
@@ -67,13 +54,12 @@ struct OptionsView: View {
 
 private struct OptionLabel: View {
 
-        init(cornerRadius: CGFloat, verticalPadding: CGFloat, labelSet: LabelSet, isLabelLastZero: Bool, index: Int, highlightedIndex: Int, text: String, checked: Bool) {
+        init(cornerRadius: CGFloat, verticalPadding: CGFloat, labelSet: LabelSet, isLabelLastZero: Bool, index: Int, highlightedIndex: Int, checked: Bool) {
                 self.cornerRadius = cornerRadius
                 self.verticalPadding = verticalPadding
                 self.labelText = LabelSet.labelText(for: index, labelSet: labelSet, isLabelLastZero: isLabelLastZero)
                 self.index = index
                 self.isHighlighted = index == highlightedIndex
-                self.text = text
                 self.checked = checked
         }
 
@@ -82,14 +68,13 @@ private struct OptionLabel: View {
         private let index: Int
         private let isHighlighted: Bool
         private let labelText: String
-        private let text: String
         private let checked: Bool
 
         var body: some View {
                 HStack(spacing: 0) {
                         HStack(spacing: 6) {
-                                Text(verbatim: labelText).font(.label).opacity(isHighlighted ? 1 : 0.75)
-                                Text(verbatim: text).font(.candidate)
+                                Text(labelText).font(.label).opacity(isHighlighted ? 1 : 0.75)
+                                Text(PresetConstant.optionsViewTexts[index] ?? "?").font(.candidate)
                         }
                         Spacer()
                         Image(systemName: "checkmark").font(.title3).opacity(checked ? 1 : 0)

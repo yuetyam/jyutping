@@ -179,7 +179,8 @@ extension PunctuationKey {
                         PunctuationSymbol("‱"),
                         PunctuationSymbol("°"),
                         PunctuationSymbol("℃"),
-                        PunctuationSymbol("℉")
+                        PunctuationSymbol("℉"),
+                        PunctuationSymbol("∞")
                 ]
                 return PunctuationKey(keyText: "5", shiftingKeyText: "%", instantSymbol: "5", instantShiftingSymbol: nil, symbols: [.init("5")], shiftingSymbols: shiftingSymbols)
         }()

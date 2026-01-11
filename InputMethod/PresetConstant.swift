@@ -1,3 +1,5 @@
+import Foundation
+
 struct PresetConstant {
         static let MonaspaceNeon: String = "Monaspace Neon"
         static let SFMono: String = "SF Mono"
@@ -15,6 +17,19 @@ struct PresetConstant {
 
         static let halfWidth: String = "半寬"
         static let fullWidth: String = "全寬"
+
+        static let optionsViewTexts: [Int : String] = [
+                0 : String(localized: "OptionsView.CharacterStandard.Traditional"),
+                1 : String(localized: "OptionsView.CharacterStandard.TraditionalHongKong"),
+                2 : String(localized: "OptionsView.CharacterStandard.TraditionalTaiwan"),
+                3 : String(localized: "OptionsView.CharacterStandard.Simplified"),
+                4 : String(localized: "OptionsView.CharacterForm.HalfWidth"),
+                5 : String(localized: "OptionsView.CharacterForm.FullWidth"),
+                6 : String(localized: "OptionsView.PunctuationForm.Cantonese"),
+                7 : String(localized: "OptionsView.PunctuationForm.English"),
+                8 : String(localized: "OptionsView.InputMethodMode.Cantonese"),
+                9 : String(localized: "OptionsView.InputMethodMode.ABC")
+        ]
 
         static let systemABCKeyboardLayout: String = "com.apple.keylayout.ABC"
         static let bundleIdentifier: String = "org.jyutping.inputmethod.Jyutping"

@@ -294,6 +294,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         switch bufferEvents.first?.key {
                         case .none:
                                 suggestionTask?.cancel()
+                                appContext.updateIndicatorTexts(to: nil)
                                 if AppSettings.isInputMemoryOn && selectedCandidates.isNotEmpty {
                                         let concatenated = selectedCandidates.filter(\.isCantonese).joined()
                                         concatenated.flatMap(InputMemory.handle(_:))
@@ -302,16 +303,22 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                 clearMarkedText()
                                 candidates = []
                         case InputEvent.letterR:
+                                appContext.updateIndicatorTexts(to: .pinyinReverseLookup)
                                 pinyinReverseLookup()
                         case InputEvent.letterV:
+                                appContext.updateIndicatorTexts(to: IndicatorTexts.cangjieReverseLookup(for: AppSettings.cangjieVariant))
                                 cangjieReverseLookup()
                         case InputEvent.letterX:
+                                appContext.updateIndicatorTexts(to: .strokeReverseLookup)
                                 strokeReverseLookup()
                         case InputEvent.letterQ:
+                                appContext.updateIndicatorTexts(to: .structureReverseLookup)
                                 structureReverseLookup()
                         case .some(let inputEvent) where inputEvent.isLetter:
+                                appContext.updateIndicatorTexts(to: nil)
                                 suggest()
                         default:
+                                appContext.updateIndicatorTexts(to: nil)
                                 mark(text: joinedBufferTexts())
                         }
                 }
@@ -424,7 +431,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 guard candidateCount > 0 else {
                         indices = (0, 0)
                         appContext.resetDisplayContext()
-                        window.setContentSize(.zero)
+                        updateWindowFrame()
                         return
                 }
                 let pageSize: Int = AppSettings.displayCandidatePageSize
@@ -597,51 +604,27 @@ final class JyutpingInputController: IMKInputController, Sendable {
         // MARK: - Shift to switch InputMethodMode
 
         nonisolated(unsafe) private var previousModifiers: NSEvent.ModifierFlags = .init()
-        nonisolated private func updatePreviousModifiers(to modifiers: NSEvent.ModifierFlags) {
-                previousModifiers = modifiers
-        }
-        nonisolated(unsafe) private var isModifiersBuffering: Bool = false
-        nonisolated private func triggerModifiersBuffer() {
-                isModifiersBuffering = true
-        }
-        nonisolated private func resetModifiersBuffer() {
-                if isModifiersBuffering {
-                        isModifiersBuffering = false
-                }
-        }
-        private enum ShiftSituation: Int {
-                case irrelevant
-                case transparent
-                case buffer
-                case handle
-        }
+        nonisolated(unsafe) private var previousKeyCode: UInt16 = KeyCode.Function.f20
         nonisolated private func detectShift(with event: NSEvent) -> ShiftSituation {
-                let currentModifiers: NSEvent.ModifierFlags = event.modifierFlags
-                defer {
-                        updatePreviousModifiers(to: currentModifiers)
-                }
-                guard AppSettings.pressShiftOnce == .switchInputMethodMode else {
-                        resetModifiersBuffer()
+                guard AppSettings.pressShiftOnce.isSwitchingInputMethodMode else {
                         return .transparent
                 }
-                guard (event.keyCode == KeyCode.Modifier.shiftLeft) || (event.keyCode == KeyCode.Modifier.shiftRight) else {
-                        resetModifiersBuffer()
+                let currentModifiers = event.modifierFlags
+                let currentKeyCode = event.keyCode
+                defer {
+                        previousModifiers = currentModifiers
+                        previousKeyCode = currentKeyCode
+                }
+                guard currentKeyCode.isShiftKeyCode else {
                         return .irrelevant
                 }
-                guard event.type == .flagsChanged else {
-                        resetModifiersBuffer()
-                        return .irrelevant
-                }
-                let isShiftKeyPressed: Bool = previousModifiers.isEmpty && (currentModifiers == .shift)
-                let isShiftKeyReleased: Bool = (previousModifiers == .shift) && currentModifiers.isEmpty
-                if isShiftKeyPressed && isModifiersBuffering.negative {
-                        triggerModifiersBuffer()
+                let isPressing: Bool = currentModifiers.isShift && (previousModifiers.isEmpty || (previousModifiers.isShift && previousKeyCode.isShiftKeyCode))
+                let isReleased: Bool = previousModifiers.isShift && currentModifiers.isEmpty && previousKeyCode.isShiftKeyCode
+                if isPressing {
                         return .buffer
-                } else if isShiftKeyReleased && isModifiersBuffering {
-                        resetModifiersBuffer()
+                } else if isReleased {
                         return .handle
                 } else {
-                        resetModifiersBuffer()
                         return .transparent
                 }
         }
@@ -668,10 +651,13 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                         passBuffer()
                                         Options.updateInputMethodMode(to: .abc)
                                         updateInputForm(to: .transparent)
-                                        window.setContentSize(.zero)
+                                        appContext.flashIndicatorTexts(to: .abcMode)
+                                        updateWindowFrame()
                                 case .transparent:
                                         Options.updateInputMethodMode(to: .cantonese)
                                         updateInputForm(to: .cantonese)
+                                        appContext.flashIndicatorTexts(to: Options.legacyCharacterStandard.isMutilated ? .mutilatedCantoneseMode : .cantoneseMode)
+                                        updateWindowFrame()
                                 case .options:
                                         break
                                 }
@@ -715,7 +701,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 default:
                         guard modifiers.contains(.deviceIndependentFlagsMask).negative else { return false }
                 }
-                let isShifting: Bool = (modifiers == .shift)
+                let isShifting: Bool = modifiers.isShift
                 switch code.representative {
                 case .letter:
                         switch inputForm {
@@ -807,7 +793,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                 guard shouldHandle else { return false }
                                 isEventHandled = true
                         case .transparent:
-                                let shouldHandle: Bool = isShifting && (AppSettings.shiftSpaceCombination == .switchInputMethodMode)
+                                let shouldHandle: Bool = isShifting && AppSettings.shiftSpaceCombination.isSwitchingInputMethodMode
                                 guard shouldHandle else { return false }
                                 isEventHandled = true
                         case .options:
@@ -1205,13 +1191,14 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 case .space:
                         switch currentInputForm {
                         case .cantonese:
-                                let shouldSwitchToABCMode: Bool = isShifting && (AppSettings.shiftSpaceCombination == .switchInputMethodMode)
+                                let shouldSwitchToABCMode: Bool = isShifting && AppSettings.shiftSpaceCombination.isSwitchingInputMethodMode
                                 guard shouldSwitchToABCMode.negative else {
                                         passBuffer()
                                         clearMarkedText()
                                         Options.updateInputMethodMode(to: .abc)
                                         updateInputForm(to: .transparent)
-                                        window.setContentSize(.zero)
+                                        appContext.flashIndicatorTexts(to: .abcMode)
+                                        updateWindowFrame()
                                         return
                                 }
                                 if candidates.isNotEmpty {
@@ -1229,11 +1216,13 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                         insert(String.space)
                                 }
                         case .transparent:
-                                let shouldSwitchToCantoneseMode: Bool = isShifting && (AppSettings.shiftSpaceCombination == .switchInputMethodMode)
+                                let shouldSwitchToCantoneseMode: Bool = isShifting && AppSettings.shiftSpaceCombination.isSwitchingInputMethodMode
                                 if shouldSwitchToCantoneseMode {
                                         clearMarkedText()
                                         Options.updateInputMethodMode(to: .cantonese)
                                         updateInputForm(to: .cantonese)
+                                        appContext.flashIndicatorTexts(to: Options.legacyCharacterStandard.isMutilated ? .mutilatedCantoneseMode : .cantoneseMode)
+                                        updateWindowFrame()
                                 } else {
                                         insert(String.space)
                                 }
@@ -1316,12 +1305,12 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         updateInputForm()
                         if Options.inputMethodMode.isABC {
                                 passBuffer()
-                                window.setContentSize(.zero)
-                        } else if candidates.isEmpty {
-                                window.setContentSize(.zero)
-                        } else if didCharacterStandardChanged {
+                        }
+                        if didCharacterStandardChanged {
                                 bufferEvents += []
-                        } else {
+                        }
+                        if let texts = IndicatorTexts.matchTexts(for: selectedIndex, isMutilated: Options.legacyCharacterStandard.isMutilated) {
+                                appContext.flashIndicatorTexts(to: texts)
                                 updateWindowFrame()
                         }
                 }

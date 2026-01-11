@@ -3,15 +3,16 @@ import Combine
 import CoreIME
 import CommonExtensions
 
+@MainActor
 final class AppContext: ObservableObject {
 
-        @Published private(set) var isClean: Bool = true
         @Published private(set) var displayCandidates: [DisplayCandidate] = []
         @Published private(set) var highlightedIndex: Int = 0
         @Published private(set) var optionsHighlightedIndex: Int = 0
         @Published private(set) var inputForm: InputForm = InputForm.matchInputMethodMode()
         @Published private(set) var quadrant: Quadrant = .upperRight
         @Published private(set) var mouseLocation: CGPoint = .zero
+        @Published private(set) var indicatorTexts: IndicatorTexts? = nil
 
         private let minIndex: Int = 0
         private var maxIndex: Int = 0
@@ -20,7 +21,6 @@ final class AppContext: ObservableObject {
         // MARK: - Update context
 
         func resetDisplayContext() {
-                isClean = true
                 displayCandidates = []
                 highlightedIndex = minIndex
                 optionsHighlightedIndex = minIndex
@@ -33,7 +33,6 @@ final class AppContext: ObservableObject {
                         resetDisplayContext()
                         return
                 }
-                isClean = false
                 displayCandidates = newDisplayCandidates
                 maxIndex = newDisplayCandidates.count - 1
                 let newHighlightedIndex: Int = switch highlight {
@@ -99,6 +98,25 @@ final class AppContext: ObservableObject {
         func updateOptionsHighlightedIndex(to newIndex: Int) {
                 guard newIndex >= optionsMinIndex && newIndex <= optionsMaxIndex else { return }
                 optionsHighlightedIndex = newIndex
+        }
+
+
+        // MARK: - IndicatorBarTexts
+
+        func updateIndicatorTexts(to texts: IndicatorTexts?) {
+                if indicatorTexts != texts {
+                        indicatorTexts = texts
+                }
+        }
+        func flashIndicatorTexts(to texts: IndicatorTexts?) {
+                if indicatorTexts != texts {
+                        let reserved: IndicatorTexts? = (indicatorTexts?.isFlash ?? true) ? nil : indicatorTexts
+                        indicatorTexts = texts
+                        Task {
+                                try await Task.sleep(for: .seconds(1))
+                                updateIndicatorTexts(to: reserved)
+                        }
+                }
         }
 }
 

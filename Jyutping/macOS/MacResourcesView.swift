@@ -29,7 +29,8 @@ struct MacResourcesView: View {
                                 .block()
 
                                 VStack {
-                                        LinkView(icon: globeIcon, title: "懶音診療室 - PolyU", url: "https://www.polyu.edu.hk/cbs/pronunciation")
+                                        LinkView(icon: globeIcon, title: "懶音診療室 - PolyU", url: "https://www.polyu.edu.hk/clc/pronunciation")
+                                        LinkView(icon: globeIcon, title: "消滅錯別字 - PolyU", url: "https://www.polyu.edu.hk/clc/typo")
                                         LinkView(icon: globeIcon, title: "粵語語氣詞", url: "https://jyutping.org/blog/particles")
                                         LinkView(icon: globeIcon, title: "CANTONESE.com.hk", url: "https://www.cantonese.com.hk")
                                         LinkView(icon: globeIcon, title: "中國古詩文精讀", url: "https://www.classicalchineseliterature.org")
