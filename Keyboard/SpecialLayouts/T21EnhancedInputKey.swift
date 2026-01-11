@@ -117,7 +117,7 @@ struct T21EnhancedInputKey: View {
                                                 Color.clear
                                                 Text(verbatim: extra.text)
                                                         .textCase(textCase)
-                                                        .font(.system(size: 14))
+                                                        .font(.largerKeyFootnote)
                                                         .shallow()
                                         }
                                         .padding(.vertical, verticalPadding + 1)

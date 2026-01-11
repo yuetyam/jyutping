@@ -332,11 +332,11 @@ private struct SecondEnhancedLetterRow: View {
                                 side: .trailing,
                                 event: .letterK,
                                 unit: KeyUnit(
-                                        primary: KeyElement("k", extras: [.init("j", alignment: .bottomLeading), .init("-", alignment: .topTrailing)]),
+                                        primary: KeyElement("k", extras: [.init("j", alignment: .bottomLeading), .init("「", alignment: .topTrailing)]),
                                         members: [
                                                 KeyElement("k"),
                                                 KeyElement("j"),
-                                                KeyElement("-"),
+                                                KeyElement("「"),
                                         ]
                                 )
                         )
@@ -344,10 +344,10 @@ private struct SecondEnhancedLetterRow: View {
                                 side: .trailing,
                                 event: .letterL,
                                 unit: KeyUnit(
-                                        primary: KeyElement("l", extras: [.init(String.apostrophe, alignment: .topTrailing)]),
+                                        primary: KeyElement("l", extras: [.init("」", alignment: .topTrailing)]),
                                         members: [
                                                 KeyElement("l"),
-                                                KeyElement(String.apostrophe),
+                                                KeyElement("」"),
                                         ]
                                 )
                         )

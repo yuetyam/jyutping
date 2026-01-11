@@ -1,9 +1,9 @@
 import SwiftUI
 
 extension ColorScheme {
-        var isDark: Bool {
-                return self == .dark
-        }
+
+        var isLight: Bool { self == .light }
+        var isDark: Bool { self == .dark }
 
         /// Input key background color
         var inputKeyColor: Color {
@@ -33,10 +33,11 @@ extension ColorScheme {
 
 extension Color {
 
+        /// Clear yet touchable
         static let interactiveClear: Color = Color(white: 0.5, opacity: 0.001)
 
         /// KeyView shadow color
-        static let shadowGray      : Color = Color.gray.opacity(0.5)
+        static let shadowGray: Color = Color.gray.opacity(0.5)
 
         private static let isLiquidGlassPreferred: Bool = {
                 if #available(iOSApplicationExtension 26.0, *) {

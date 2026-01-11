@@ -247,7 +247,7 @@ struct InputMemory {
                         })
                         .compactMap({ item -> InternalLexicon? in
                                 // TODO: Cache tails and syllables ?
-                                let tail = events.dropFirst(item.input.count - 1)
+                                let tail = events.dropFirst(item.inputCount - 1)
                                 guard tail.count <= 6 else { return nil }
                                 lazy var converted: InternalLexicon = InternalLexicon(word: item.word, romanization: item.romanization, frequency: item.frequency, latest: item.latest, input: text, mark: text)
                                 guard item.romanization.removedSpacesTones().hasPrefix(text).negative else { return converted }
