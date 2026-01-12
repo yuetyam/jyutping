@@ -260,8 +260,8 @@ struct InputMemory {
                                 }
                         })
                 let partialMatched = (prefixMatched + gainedMatched)
-                        .distinct()
                         .sorted()
+                        .distinct()
                         .prefix(5)
                         .map({ Candidate(text: $0.word, romanization: $0.romanization, input: text, mark: $0.mark, order: -1) })
                 return partialMatched + queried
@@ -270,8 +270,8 @@ struct InputMemory {
                 guard segmentation.isNotEmpty else { return [] }
                 if idealSchemes.isEmpty {
                         return segmentation.flatMap({ perform(scheme: $0, strictStatement: strictStatement) })
-                                .distinct()
                                 .sorted()
+                                .distinct()
                                 .prefix(6)
                                 .map({ Candidate(text: $0.word, romanization: $0.romanization, input: $0.input, mark: $0.mark, order: -2) })
                 } else {
@@ -279,8 +279,8 @@ struct InputMemory {
                                 guard scheme.count > 1 else { return [] }
                                 return (1..<scheme.count).reversed().map({ scheme.prefix($0) }).flatMap({ perform(scheme: $0, strictStatement: strictStatement) })
                         })
-                        .distinct()
                         .sorted()
+                        .distinct()
                         .prefix(6)
                         .map({ Candidate(text: $0.word, romanization: $0.romanization, input: $0.input, mark: $0.mark, order: -2) })
                 }

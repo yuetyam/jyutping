@@ -27,7 +27,7 @@ struct EighteenKeyKeyboard: View {
                                 case .clear:
                                         SecondLetterRow()
                                 case .numbers:
-                                        SecondLetterAltRow()
+                                        AltSecondLetterRow()
                                 case .numbersAndSymbols:
                                         SecondEnhancedLetterRow()
                                 }
@@ -90,12 +90,12 @@ private struct SecondLetterRow: View {
                         T18LetterInputKey(.letterS)
                         T18EnhancedInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("df"), members: [KeyElement("d"), KeyElement("f")]))
                         T18EnhancedInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("gh"), members: [KeyElement("g"), KeyElement("h")]))
-                        T18EnhancedInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("jk"), members: [KeyElement("j"), KeyElement("k")]))
+                        T18EnhancedInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("jk"), members: [KeyElement("k"), KeyElement("j")]))
                         T18LetterInputKey(.letterL)
                 }
         }
 }
-private struct SecondLetterAltRow: View {
+private struct AltSecondLetterRow: View {
         var body: some View {
                 HStack(spacing: 0 ) {
                         T18EnhancedInputKey(
@@ -132,7 +132,7 @@ private struct SecondLetterAltRow: View {
                                 )
                         )
                         T18EnhancedInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("gh"), members: [KeyElement("g"), KeyElement("h")]))
-                        T18EnhancedInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("jk"), members: [KeyElement("j"), KeyElement("k")]))
+                        T18EnhancedInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("jk"), members: [KeyElement("k"), KeyElement("j")]))
                         T18LetterInputKey(.letterL)
                 }
         }

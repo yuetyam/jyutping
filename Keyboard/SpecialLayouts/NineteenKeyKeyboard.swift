@@ -26,7 +26,7 @@ struct NineteenKeyKeyboard: View {
                         case .clear:
                                 SecondLetterRow()
                         case .numbers:
-                                SecondLetterAltRow()
+                                AltSecondLetterRow()
                         case .numbersAndSymbols:
                                 SecondEnhancedLetterRow()
                         }
@@ -100,7 +100,7 @@ struct T18T19FirstLetterRow: View {
                         T18LetterInputKey(.letterT)
                         T18LetterInputKey(.letterY)
                         T18LetterInputKey(.letterU)
-                        T18EnhancedInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("io"), members: [KeyElement("i"), KeyElement("o")]))
+                        T18EnhancedInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("io"), members: [KeyElement("o"), KeyElement("i")]))
                         T18LetterInputKey(.letterP)
                 }
         }
@@ -152,7 +152,7 @@ struct T18T19FirstEnhancedLetterRow: View {
                                 keyLocale: .trailing,
                                 keyModel: KeyModel(
                                         primary: KeyElement("io", extras: [.init("6", alignment: .topTrailing)]),
-                                        members: [KeyElement("i"), KeyElement("o"), KeyElement("6")]
+                                        members: [KeyElement("o"), KeyElement("i"), KeyElement("6")]
                                 )
                         )
                         T18EnhancedInputKey(
@@ -175,12 +175,12 @@ private struct SecondLetterRow: View {
                         T18EnhancedInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("df"), members: [KeyElement("d"), KeyElement("f")]))
                         T18LetterInputKey(.letterG)
                         T18LetterInputKey(.letterH)
-                        T18EnhancedInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("jk"), members: [KeyElement("j"), KeyElement("k")]))
+                        T18EnhancedInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("jk"), members: [KeyElement("k"), KeyElement("j")]))
                         T18LetterInputKey(.letterL)
                 }
         }
 }
-private struct SecondLetterAltRow: View {
+private struct AltSecondLetterRow: View {
         var body: some View {
                 HStack(spacing: 0 ) {
                         T18EnhancedInputKey(
@@ -218,7 +218,7 @@ private struct SecondLetterAltRow: View {
                         )
                         T18LetterInputKey(.letterG)
                         T18LetterInputKey(.letterH)
-                        T18EnhancedInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("jk"), members: [KeyElement("j"), KeyElement("k")]))
+                        T18EnhancedInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("jk"), members: [KeyElement("k"), KeyElement("j")]))
                         T18LetterInputKey(.letterL)
                 }
         }
@@ -383,7 +383,7 @@ struct T18T19ThirdEnhancedLetterRow: View {
                                 )
                         )
                         T18EnhancedInputKey(
-                                keyLocale: .leading,
+                                keyLocale: .trailing,
                                 event: .letterM,
                                 keyModel: .init(
                                         primary: KeyElement("m", extras: [.init("：", alignment: .topTrailing)]),

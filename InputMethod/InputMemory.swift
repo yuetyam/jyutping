@@ -248,7 +248,7 @@ struct InputMemory {
                         })
                         .compactMap({ item -> InternalLexicon? in
                                 // TODO: Cache tails and syllables ?
-                                let tail = events.dropFirst(item.input.count - 1)
+                                let tail = events.dropFirst(item.inputCount - 1)
                                 guard tail.count <= 6 else { return nil }
                                 lazy var converted: InternalLexicon = InternalLexicon(word: item.word, romanization: item.romanization, frequency: item.frequency, latest: item.latest, input: text, mark: text)
                                 guard item.romanization.removedSpacesTones().hasPrefix(text).negative else { return converted }
@@ -261,8 +261,8 @@ struct InputMemory {
                                 }
                         })
                 let partialMatched = (prefixMatched + gainedMatched)
-                        .distinct()
                         .sorted()
+                        .distinct()
                         .prefix(5)
                         .map({ Candidate(text: $0.word, romanization: $0.romanization, input: text, mark: $0.mark, order: -1) })
                 return partialMatched + queried
@@ -271,8 +271,8 @@ struct InputMemory {
                 guard segmentation.isNotEmpty else { return [] }
                 if idealSchemes.isEmpty {
                         return segmentation.flatMap({ perform(scheme: $0, strictStatement: strictStatement) })
-                                .distinct()
                                 .sorted()
+                                .distinct()
                                 .prefix(6)
                                 .map({ Candidate(text: $0.word, romanization: $0.romanization, input: $0.input, mark: $0.mark, order: -2) })
                 } else {
@@ -280,8 +280,8 @@ struct InputMemory {
                                 guard scheme.count > 1 else { return [] }
                                 return (1..<scheme.count).reversed().map({ scheme.prefix($0) }).flatMap({ perform(scheme: $0, strictStatement: strictStatement) })
                         })
-                        .distinct()
                         .sorted()
+                        .distinct()
                         .prefix(6)
                         .map({ Candidate(text: $0.word, romanization: $0.romanization, input: $0.input, mark: $0.mark, order: -2) })
                 }
