@@ -12,7 +12,7 @@ extension Font {
                 let size: CGFloat = AppSettings.candidateFontSize
                 switch AppSettings.candidateFontMode {
                 case .default:
-                        return combine(fonts: preferredCandidateFontNames, size: size) ?? Font.system(size: size)
+                        return combine(fonts: preferredFontNames, size: size) ?? Font.system(size: size)
                 case .system:
                         return Font.system(size: size)
                 case .custom:
@@ -20,10 +20,9 @@ extension Font {
                         return combine(fonts: names, size: size) ?? Font.system(size: size)
                 }
         }
-        private static let preferredCandidateFontNames: [String] = {
-                var names: [String] = [PresetConstant.MonaspaceNeon]
-                let latinQueue: [String] = [PresetConstant.SFPro, PresetConstant.Inter, PresetConstant.GoogleSansFlex, PresetConstant.Roboto]
-                for name in latinQueue {
+        private static let preferredFontNames: [String] = {
+                var names: [String] = []
+                for name in PresetConstant.latinQueue {
                         if found(font: name) {
                                 names.append(name)
                                 break
@@ -82,7 +81,7 @@ extension Font {
         private static func annotationFont(size: CGFloat) -> Font {
                 switch AppSettings.commentFontMode {
                 case .default:
-                        return combine(fonts: preferredAnnotationFontNames, size: size) ?? Font.system(size: size)
+                        return combine(fonts: preferredFontNames, size: size) ?? Font.system(size: size)
                 case .system:
                         return Font.system(size: size)
                 case .custom:
@@ -90,41 +89,6 @@ extension Font {
                         return combine(fonts: names, size: size) ?? Font.system(size: size)
                 }
         }
-        private static let preferredAnnotationFontNames: [String] = {
-                var names: [String] = []
-                let latinQueue: [String] = [PresetConstant.SFPro, PresetConstant.Inter, PresetConstant.GoogleSansFlex, PresetConstant.Roboto]
-                for name in latinQueue {
-                        if found(font: name) {
-                                names.append(name)
-                                break
-                        }
-                }
-                names.append(PresetConstant.HelveticaNeue)
-                var shouldConsiderSupplementaryFonts: Bool = true
-                for name in PresetConstant.primaryCJKVQueue {
-                        if found(font: name) {
-                                names.append(name)
-                                shouldConsiderSupplementaryFonts = false
-                                break
-                        }
-                }
-                for name in PresetConstant.systemCJKVQueue {
-                        if found(font: name) {
-                                names.append(name)
-                                break
-                        }
-                }
-                if shouldConsiderSupplementaryFonts {
-                        for name in PresetConstant.supplementaryCJKVQueue {
-                                if found(font: name) {
-                                        names.append(name)
-                                        break
-                                }
-                        }
-                }
-                names.append(contentsOf: PresetConstant.fallbackCJKVList)
-                return names
-        }()
 }
 
 @MainActor
@@ -142,11 +106,7 @@ extension Font {
                         case .arabic, .fullWidthArabic:
                                 return Font.system(size: size).monospacedDigit()
                         case .chinese, .capitalizedChinese, .soochow, .stems, .branches:
-                                if let fontName = PresetConstant.primaryCJKVQueue.first(where: { found(font: $0) }) {
-                                        return Font.custom(fontName, size: size)
-                                } else {
-                                        return Font.system(size: size)
-                                }
+                                return combine(fonts: preferredFontNames, size: size) ?? Font.system(size: size)
                         default:
                                 return Font.system(size: size)
                         }

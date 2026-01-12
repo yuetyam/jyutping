@@ -432,8 +432,8 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 let candidateCount: Int = candidates.count
                 guard candidateCount > 0 else {
                         indices = (0, 0)
-                        appContext.resetDisplayContext()
                         updateWindowFrame()
+                        appContext.resetDisplayContext()
                         return
                 }
                 let pageSize: Int = AppSettings.displayCandidatePageSize
@@ -647,19 +647,22 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 case .buffer:
                         return true
                 case .handle:
+                        if inputStage.isBuffering.negative {
+                                caretFrame = (sender as? InputClient)?.caretRect
+                        }
                         Task { @MainActor in
                                 switch inputForm {
                                 case .cantonese:
                                         passBuffer()
                                         Options.updateInputMethodMode(to: .abc)
                                         updateInputForm(to: .transparent)
-                                        appContext.flashIndicatorTexts(to: .abcMode)
                                         updateWindowFrame()
+                                        appContext.flashIndicatorTexts(to: .abcMode)
                                 case .transparent:
                                         Options.updateInputMethodMode(to: .cantonese)
                                         updateInputForm(to: .cantonese)
-                                        appContext.flashIndicatorTexts(to: Options.legacyCharacterStandard.isMutilated ? .mutilatedCantoneseMode : .cantoneseMode)
                                         updateWindowFrame()
+                                        appContext.flashIndicatorTexts(to: Options.legacyCharacterStandard.isMutilated ? .mutilatedCantoneseMode : .cantoneseMode)
                                 case .options:
                                         break
                                 }
@@ -1199,8 +1202,8 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                         clearMarkedText()
                                         Options.updateInputMethodMode(to: .abc)
                                         updateInputForm(to: .transparent)
-                                        appContext.flashIndicatorTexts(to: .abcMode)
                                         updateWindowFrame()
+                                        appContext.flashIndicatorTexts(to: .abcMode)
                                         return
                                 }
                                 if candidates.isNotEmpty {
@@ -1223,8 +1226,8 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                         clearMarkedText()
                                         Options.updateInputMethodMode(to: .cantonese)
                                         updateInputForm(to: .cantonese)
-                                        appContext.flashIndicatorTexts(to: Options.legacyCharacterStandard.isMutilated ? .mutilatedCantoneseMode : .cantoneseMode)
                                         updateWindowFrame()
+                                        appContext.flashIndicatorTexts(to: Options.legacyCharacterStandard.isMutilated ? .mutilatedCantoneseMode : .cantoneseMode)
                                 } else {
                                         insert(String.space)
                                 }
@@ -1312,8 +1315,8 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                 bufferEvents += []
                         }
                         if let texts = IndicatorTexts.matchTexts(for: selectedIndex, isMutilated: Options.legacyCharacterStandard.isMutilated) {
-                                appContext.flashIndicatorTexts(to: texts)
                                 updateWindowFrame()
+                                appContext.flashIndicatorTexts(to: texts)
                         }
                 }
                 switch selectedIndex {
