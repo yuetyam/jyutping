@@ -3,20 +3,20 @@ import SQLite3
 import CommonExtensions
 
 extension Engine {
-        public static func strokeReverseLookup<T: RandomAccessCollection<VirtualInputKey>>(events: T) -> [Candidate] {
-                let strokeEvents = events.compactMap(\.strokeEvent)
-                let isWildcard: Bool = strokeEvents.contains(where: \.isWildcard)
-                let text: String = isWildcard ? strokeEvents.sequenceText.replacingOccurrences(of: "6", with: "[12345]") : strokeEvents.sequenceText
-                let matched: [ShapeLexicon] = isWildcard ? wildcardMatch(strokeText: text) : match(events: strokeEvents, text: text)
+        public static func strokeReverseLookup<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T) -> [Candidate] {
+                let strokeKeys = keys.compactMap(\.strokeEvent)
+                let isWildcard: Bool = strokeKeys.contains(where: \.isWildcard)
+                let text: String = isWildcard ? strokeKeys.sequenceText.replacingOccurrences(of: "6", with: "[12345]") : strokeKeys.sequenceText
+                let matched: [ShapeLexicon] = isWildcard ? wildcardMatch(strokeText: text) : match(keys: strokeKeys, text: text)
                 return (matched + glob(strokeText: text))
                         .distinct()
                         .flatMap({ Engine.reveresLookup(text: $0.text, input: $0.input) })
         }
-        private static func match<T: RandomAccessCollection<StrokeEvent>>(events: T, text: String) -> [ShapeLexicon] {
-                let complex: Int = events.count
+        private static func match<T: RandomAccessCollection<StrokeEvent>>(keys: T, text: String) -> [ShapeLexicon] {
+                let complex: Int = keys.count
                 let isLongSequence: Bool = complex >= 19
                 let column: String = isLongSequence ? "ping" : "code"
-                let codeValue: Int = isLongSequence ? Int(text.hashCode()) : events.map(\.code).decimalCombined()
+                let codeValue: Int = isLongSequence ? Int(text.hashCode()) : keys.map(\.code).decimalCombined()
                 let command: String = "SELECT rowid, word FROM stroke_table WHERE \(column) = \(codeValue);"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }

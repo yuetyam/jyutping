@@ -396,7 +396,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         let isDisabled: Bool = (dict[kOn] as? Bool) == false || (dict[kOn] as? Int) == 0
                         guard isDisabled.negative else { return nil }
                         guard let input = (dict[kReplace] as? String)?.lowercased(), input.isNotEmpty else { return nil }
-                        let events = input.lowercased().compactMap(VirtualInputKey.matchInputEvent(for:))
+                        let events = input.lowercased().compactMap(VirtualInputKey.matchInputKey(for:))
                         guard events.count == input.count else { return nil }
                         guard let text = (dict[kWith] as? String), text.isNotEmpty else { return nil }
                         return DefinedLexicon(input: input, text: text, events: events)
@@ -476,7 +476,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 let standard: CharacterStandard = Options.legacyCharacterStandard.isPreset ? Options.traditionalCharacterStandard : Options.legacyCharacterStandard
                 suggestionTask = Task.detached(priority: .high) { [weak self] in
                         guard let self else { return }
-                        let segmentation = Segmenter.segment(events: keys)
+                        let segmentation = Segmenter.segment(keys)
                         async let memory: [Candidate] = isInputMemoryOn ? InputMemory.suggest(events: keys, segmentation: segmentation) : []
                         async let defined: [Candidate] = searchDefinedCandidates(for: keys)
                         async let textMarks: [Candidate] = isEmojiSuggestionsOn ? Engine.searchTextMarks(for: keys) : []
@@ -516,7 +516,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 let standard: CharacterStandard = Options.legacyCharacterStandard.isPreset ? Options.traditionalCharacterStandard : Options.legacyCharacterStandard
                 suggestionTask = Task.detached(priority: .high) { [weak self] in
                         guard let self else { return }
-                        let segmentation = PinyinSegmenter.segment(events: keys)
+                        let segmentation = PinyinSegmenter.segment(keys)
                         let suggestions: [Candidate] = await Engine.pinyinReverseLookup(events: keys, segmentation: segmentation).transformed(to: standard)
                         if Task.isCancelled.negative {
                                 await MainActor.run { [weak self] in
@@ -567,7 +567,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 } else {
                         mark(text: StrokeEvent.displayText(from: keys))
                         let standard: CharacterStandard = Options.legacyCharacterStandard.isPreset ? Options.traditionalCharacterStandard : Options.legacyCharacterStandard
-                        let suggestions: [Candidate] = Engine.strokeReverseLookup(events: keys).transformed(to: standard)
+                        let suggestions: [Candidate] = Engine.strokeReverseLookup(keys).transformed(to: standard)
                         candidates = (definedCandidates + textMarkCandidates + suggestions).distinct()
                 }
         }
@@ -584,7 +584,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         return
                 }
                 let keys = allKeys.dropFirst()
-                let segmentation = Segmenter.segment(events: keys)
+                let segmentation = Segmenter.segment(keys)
                 let tailMark: String = {
                         let isPeculiar: Bool = keys.contains(where: \.isLetter.negative)
                         guard isPeculiar.negative else { return bufferText.dropFirst().toneConverted() }
@@ -598,7 +598,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 let text2mark: String = prefixMark + tailMark
                 mark(text: text2mark)
                 let standard: CharacterStandard = Options.legacyCharacterStandard.isPreset ? Options.traditionalCharacterStandard : Options.legacyCharacterStandard
-                let suggestions: [Candidate] = Engine.structureReverseLookup(events: keys, input: bufferText, segmentation: segmentation).transformed(to: standard)
+                let suggestions: [Candidate] = Engine.structureReverseLookup(keys, input: bufferText, segmentation: segmentation).transformed(to: standard)
                 candidates = (definedCandidates + textMarkCandidates + suggestions).distinct()
         }
 
@@ -845,7 +845,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 nonisolated(unsafe) let client: InputClient? = (sender as? InputClient)
                 if isBuffering.negative && isEventHandled && inputForm.isOptions.negative {
                         caretFrame = client?.caretRect
-                        let text: String = (VirtualInputKey.matchEvent(for: code) ?? VirtualInputKey.letterA).text
+                        let text: String = (VirtualInputKey.matchInputKey(for: code) ?? VirtualInputKey.letterA).text
                         let attributes: [NSAttributedString.Key: Any] = [.underlineStyle: 0]
                         let attributedText = NSAttributedString(string: text, attributes: attributes)
                         let selectionRange = NSRange(location: text.utf16.count, length: 0)
@@ -924,7 +924,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         let isStrokeReverseLookup: Bool = currentInputForm.isCantonese && (bufferEvents.first?.key == .letterX)
                         guard isStrokeReverseLookup else { return }
                         let code: Int = number + 10
-                        guard let event = VirtualInputKey.matchInputEvent(for: code) else { return }
+                        guard let event = VirtualInputKey.matchInputKey(for: code) else { return }
                         let newEvent = BasicInputEvent(key: event, isCapitalized: false)
                         bufferEvents.append(newEvent)
                 case .arrow(let direction):

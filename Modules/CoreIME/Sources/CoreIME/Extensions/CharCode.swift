@@ -40,7 +40,7 @@ extension Character {
                 return Self.letterCodeMap[self]
         }
 
-        var inputEventCode: Int? {
+        var virtualKeyInputCode: Int? {
                 return Self.letterCodeMap[self] ?? Self.numberCodeMap[self]
         }
 

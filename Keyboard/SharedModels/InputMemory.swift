@@ -83,7 +83,7 @@ struct InputMemory {
         // MARK: - Suggestions
 
         static func suggest<T: RandomAccessCollection<VirtualInputKey>>(events: T, segmentation: Segmentation) async -> [Candidate] {
-                switch (events.contains(where: \.isApostrophe), events.contains(where: \.isToneEvent)) {
+                switch (events.contains(where: \.isApostrophe), events.contains(where: \.isToneInputKey)) {
                 case (false, false):
                         return search(events: events, segmentation: segmentation)
                 case (true, true):

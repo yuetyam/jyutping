@@ -115,15 +115,15 @@ extension Engine {
                 return emojis
         }
 
-        public static func searchSymbols<T: RandomAccessCollection<VirtualInputKey>>(for events: T, segmentation: Segmentation) -> [Candidate] {
+        public static func searchSymbols<T: RandomAccessCollection<VirtualInputKey>>(for keys: T, segmentation: Segmentation) -> [Candidate] {
                 let command: String = "SELECT category, unicode_version, code_point, cantonese, romanization FROM symbol_table WHERE spell = ?;"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(Engine.database, command, -1, &statement, nil) == SQLITE_OK else { return [] }
-                let syllableEvents = events.filter(\.isSyllableLetter)
-                let syllableLength = syllableEvents.count
-                let text: String = syllableEvents.map(\.text).joined()
-                let input: String = (syllableLength == events.count) ? text : events.map(\.text).joined()
+                let syllableKeys = keys.filter(\.isSyllableLetter)
+                let syllableLength = syllableKeys.count
+                let text: String = syllableKeys.map(\.text).joined()
+                let input: String = (syllableLength == keys.count) ? text : keys.map(\.text).joined()
                 let regular: [Candidate] = match(text: text, input: input, statement: statement)
                 let schemes = segmentation.filter({ $0.length == syllableLength })
                 guard schemes.isNotEmpty else { return regular }

@@ -1,4 +1,3 @@
-/// Input key; Input method processing event
 public struct VirtualInputKey: Hashable, Identifiable, Comparable, Sendable {
 
         /// Key text
@@ -111,7 +110,7 @@ extension VirtualInputKey {
         }
 
         /// v, x, q, [1-6]
-        public var isToneEvent: Bool {
+        public var isToneInputKey: Bool {
                 return isToneLetter || isToneNumber
         }
 
@@ -147,7 +146,7 @@ extension VirtualInputKey {
         public static func isMatchedLetter(keyCode: UInt16) -> Bool {
                 return alphabetSet.contains(where: { $0.keyCode == keyCode })
         }
-        public static func matchEvent(for keyCode: UInt16) -> VirtualInputKey? {
+        public static func matchInputKey(for keyCode: UInt16) -> VirtualInputKey? {
                 switch keyCode {
                 case VirtualInputKey.apostrophe.keyCode:
                         return .apostrophe
@@ -157,16 +156,16 @@ extension VirtualInputKey {
                         return alphabetSet.first(where: { $0.keyCode == keyCode }) ?? digitSet.first(where: { $0.keyCode == keyCode })
                 }
         }
-        public static func matchInputEvent(for code: Int) -> VirtualInputKey? {
+        public static func matchInputKey(for code: Int) -> VirtualInputKey? {
                 return alphabetSet.first(where: { $0.code == code }) ?? digitSet.first(where: { $0.code == code })
         }
-        public static func matchInputEvent(for character: Character) -> VirtualInputKey? {
-                guard let code = character.inputEventCode else { return nil }
+        public static func matchInputKey(for character: Character) -> VirtualInputKey? {
+                guard let code = character.virtualKeyInputCode else { return nil }
                 return alphabetSet.first(where: { $0.code == code }) ?? digitSet.first(where: { $0.code == code })
         }
 
-        public static let GWEvents: [VirtualInputKey] = [letterG, letterW]
-        public static let KWEvents: [VirtualInputKey] = [letterK, letterW]
+        public static let GWInputKeys: [VirtualInputKey] = [letterG, letterW]
+        public static let KWInputKeys: [VirtualInputKey] = [letterK, letterW]
 }
 
 extension RandomAccessCollection where Element == VirtualInputKey {
@@ -181,14 +180,14 @@ extension RandomAccessCollection where Element == VirtualInputKey {
 }
 
 extension Int {
-        var matchedInputEvents: [VirtualInputKey] {
+        var matchedInputKeys: [VirtualInputKey] {
                 var number = self
                 var codes: [Int] = []
                 while number > 0 {
                         codes.append(number % 100)
                         number /= 100
                 }
-                return codes.reversed().compactMap(VirtualInputKey.matchInputEvent(for:))
+                return codes.reversed().compactMap(VirtualInputKey.matchInputKey(for:))
         }
 }
 

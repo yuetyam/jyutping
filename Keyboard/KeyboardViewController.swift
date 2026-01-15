@@ -268,9 +268,9 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         return
                 }
                 let keyCase = keyboardCase
-                let shouldConvertEvents: Bool = keyboardLayout.isTripleStroke && (events == VirtualInputKey.GWEvents) && (inputLengthSequence.last == 2) && (bufferEvents.last?.key == .letterW)
+                let shouldConvertEvents: Bool = keyboardLayout.isTripleStroke && (events == VirtualInputKey.GWInputKeys) && (inputLengthSequence.last == 2) && (bufferEvents.last?.key == .letterW)
                 if shouldConvertEvents {
-                        let newEvents = VirtualInputKey.KWEvents.map({ BasicInputEvent(key: $0, case: keyCase) })
+                        let newEvents = VirtualInputKey.KWInputKeys.map({ BasicInputEvent(key: $0, case: keyCase) })
                         bufferEvents = bufferEvents.dropLast(2) + newEvents
                 } else {
                         inputLengthSequence.append(events.count)
@@ -280,7 +280,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         }
         private func appendBufferText(_ text: String) {
                 guard let isCapitalized = text.first?.isUppercase else { return }
-                let events = text.lowercased().compactMap(VirtualInputKey.matchInputEvent(for:))
+                let events = text.lowercased().compactMap(VirtualInputKey.matchInputKey(for:))
                 switch events.count {
                 case 0: return
                 case 1: events.first.flatMap({ handle($0, isCapitalized: isCapitalized) })
@@ -703,7 +703,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let isEmojiSuggestionsOn: Bool = Options.isEmojiSuggestionsOn
                 suggestionTask = Task.detached(priority: .high) { [weak self] in
                         guard let self else { return }
-                        let segmentation = Segmenter.segment(events: keys)
+                        let segmentation = Segmenter.segment(keys)
                         async let memory: [Candidate] = isInputMemoryOn ? InputMemory.suggest(events: keys, segmentation: segmentation) : []
                         async let defined: [Candidate] = searchDefinedCandidates(for: keys)
                         async let textMarks: [Candidate] = isEmojiSuggestionsOn ? Engine.searchTextMarks(for: keys) : []
@@ -741,7 +741,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 }
                 suggestionTask = Task.detached(priority: .high) { [weak self] in
                         guard let self else { return }
-                        let segmentation = PinyinSegmenter.segment(events: keys)
+                        let segmentation = PinyinSegmenter.segment(keys)
                         let suggestions: [Candidate] = await Engine.pinyinReverseLookup(events: keys, segmentation: segmentation).transformed(to: characterStandard)
                         if Task.isCancelled.negative {
                                 await MainActor.run { [weak self] in
@@ -790,7 +790,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         candidates = (definedCandidates + textMarkCandidates).distinct()
                 } else {
                         text2mark = StrokeEvent.displayText(from: keys)
-                        let suggestions: [Candidate] = Engine.strokeReverseLookup(events: keys).transformed(to: characterStandard)
+                        let suggestions: [Candidate] = Engine.strokeReverseLookup(keys).transformed(to: characterStandard)
                         candidates = (definedCandidates + textMarkCandidates + suggestions).distinct()
                 }
         }
@@ -807,7 +807,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         return
                 }
                 let keys = allKeys.dropFirst()
-                let segmentation = Segmenter.segment(events: keys)
+                let segmentation = Segmenter.segment(keys)
                 let tailMark: String = {
                         let isPeculiar: Bool = keys.contains(where: \.isLetter.negative)
                         guard isPeculiar.negative else { return bufferText.dropFirst().toneConverted() }
@@ -819,7 +819,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 }()
                 let prefixMark: String = bufferText.prefix(1) + String.space
                 text2mark = prefixMark + tailMark
-                let suggestions: [Candidate] = Engine.structureReverseLookup(events: keys, input: bufferText, segmentation: segmentation).transformed(to: characterStandard)
+                let suggestions: [Candidate] = Engine.structureReverseLookup(keys, input: bufferText, segmentation: segmentation).transformed(to: characterStandard)
                 candidates = (definedCandidates + textMarkCandidates + suggestions).distinct()
         }
 
@@ -842,7 +842,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 definedLexicons = lexicon.entries.compactMap({ entry -> DefinedLexicon? in
                         let input = entry.userInput.lowercased()
                         guard input.isNotEmpty else { return nil }
-                        let events = input.compactMap(VirtualInputKey.matchInputEvent(for:))
+                        let events = input.compactMap(VirtualInputKey.matchInputKey(for:))
                         guard events.count == input.count else { return nil }
                         let text = entry.documentText
                         guard text.isNotEmpty else { return nil }

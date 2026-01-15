@@ -81,7 +81,7 @@ extension Engine {
                 default:
                         search(events: syllableEvents, segmentation: segmentation, anchorsStatement: anchorsStatement, spellStatement: spellStatement, strictStatement: strictStatement)
                 }
-                switch (events.contains(where: \.isApostrophe), events.contains(where: \.isToneEvent)) {
+                switch (events.contains(where: \.isApostrophe), events.contains(where: \.isToneInputKey)) {
                 case (false, false):
                         return candidates
                 case (true, true):
@@ -374,7 +374,7 @@ extension Engine {
                 let headInputLengths = fetched.map(\.inputCount).distinct()
                 let concatenated = headInputLengths.compactMap({ headLength -> Candidate? in
                         let tailEvents = events.dropFirst(headLength)
-                        let tailSegmentation = Segmenter.segment(events: tailEvents)
+                        let tailSegmentation = Segmenter.segment(tailEvents)
                         guard let tailCandidate = search(events: tailEvents, segmentation: tailSegmentation, limit: 50, anchorsStatement: anchorsStatement, spellStatement: spellStatement, strictStatement: strictStatement).first else { return nil }
                         guard let headCandidate = fetched.first(where: { $0.inputCount == headLength }) else { return nil }
                         return headCandidate + tailCandidate

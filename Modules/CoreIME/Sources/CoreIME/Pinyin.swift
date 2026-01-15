@@ -67,7 +67,7 @@ extension Engine {
                 let prefixMatched: [PinyinLexicon] = shouldMatchPrefixes.negative ? [] : segmentation.flatMap({ scheme -> [PinyinLexicon] in
                         let tail = events.dropFirst(scheme.length)
                         guard let lastAnchor = tail.first else { return [] }
-                        let schemeAnchors = scheme.compactMap(\.events.first)
+                        let schemeAnchors = scheme.compactMap(\.keys.first)
                         let conjoined = schemeAnchors + tail
                         let anchors = schemeAnchors + [lastAnchor]
                         let schemeMark: String = scheme.map(\.text).joined(separator: String.space)
@@ -117,7 +117,7 @@ extension Engine {
                 let headInputLengths = fetched.map(\.inputCount).distinct()
                 let concatenated = headInputLengths.compactMap({ headLength -> PinyinLexicon? in
                         let tailEvents = events.dropFirst(headLength)
-                        let tailSegmentation = PinyinSegmenter.segment(events: tailEvents)
+                        let tailSegmentation = PinyinSegmenter.segment(tailEvents)
                         guard let tailLexicon = pinyinSearch(events: tailEvents, segmentation: tailSegmentation, limit: 50, anchorsStatement: anchorsStatement, spellStatement: spellStatement).first else { return nil }
                         guard let headLexicon = fetched.first(where: { $0.inputCount == headLength }) else { return nil }
                         return headLexicon + tailLexicon

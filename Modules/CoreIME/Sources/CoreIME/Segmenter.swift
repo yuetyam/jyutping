@@ -7,8 +7,8 @@ public struct Syllable: Hashable, Comparable, Sendable {
         init(aliasCode: Int, originCode: Int) {
                 self.aliasCode = aliasCode
                 self.originCode = originCode
-                self.alias = aliasCode.matchedInputEvents
-                self.origin = originCode.matchedInputEvents
+                self.alias = aliasCode.matchedInputKeys
+                self.origin = originCode.matchedInputKeys
         }
 
         let aliasCode: Int
@@ -43,7 +43,7 @@ public typealias Segmentation = Array<Scheme>
 
 extension RandomAccessCollection where Element == Syllable {
 
-        /// Count of all alias events
+        /// Count of all alias input keys
         public var length: Int {
                 return map(\.alias.count).summation
         }
@@ -58,22 +58,22 @@ extension RandomAccessCollection where Element == Syllable {
                 return flatMap(\.origin).map(\.text).joined()
         }
 
-        /// Anchors of alias events
+        /// Anchors of alias input keys
         public var aliasAnchors: [VirtualInputKey] {
                 return compactMap(\.alias.first)
         }
 
-        /// Anchors of origin events
+        /// Anchors of origin input keys
         public var originAnchors: [VirtualInputKey] {
                 return compactMap(\.origin.first)
         }
 
-        /// Anchors of alias event texts, conjoined as one text
+        /// Anchors of alias input key texts, conjoined as one text
         public var aliasAnchorsText: String {
                 return compactMap(\.alias.first?.text).joined()
         }
 
-        /// Anchors of origin event texts, conjoined as one text
+        /// Anchors of origin input key texts, conjoined as one text
         public var originAnchorsText: String {
                 return compactMap(\.origin.first?.text).joined()
         }
@@ -118,11 +118,11 @@ private extension Sequence where Element == Scheme {
 
 public struct Segmenter {
 
-        public static func syllableText<T: RandomAccessCollection<VirtualInputKey>>(of events: T) -> String? {
-                guard events.count <= 6 else { return nil }
+        public static func syllableText<T: RandomAccessCollection<VirtualInputKey>>(of keys: T) -> String? {
+                guard keys.count <= 6 else { return nil }
                 let statement = prepareStatement()
                 defer { sqlite3_finalize(statement) }
-                return match(code: events.combinedCode, statement: statement)?.originText
+                return match(code: keys.combinedCode, statement: statement)?.originText
         }
 
         private static let queryCommand: String = "SELECT origin_code FROM syllable_table WHERE alias_code = ? LIMIT 1;"
@@ -140,25 +140,25 @@ public struct Segmenter {
                 return Syllable(aliasCode: code, originCode: originCode)
         }
 
-        private static func splitLeading<T: RandomAccessCollection<VirtualInputKey>>(events: T, statement: OpaquePointer?) -> [Syllable] {
-                let maxLength: Int = min(events.count, 6)
+        private static func splitLeading<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T, statement: OpaquePointer?) -> [Syllable] {
+                let maxLength: Int = min(keys.count, 6)
                 guard maxLength > 0 else { return [] }
-                return (1...maxLength).reversed().compactMap({ match(code: events.prefix($0).combinedCode, statement: statement) })
+                return (1...maxLength).reversed().compactMap({ match(code: keys.prefix($0).combinedCode, statement: statement) })
         }
 
-        private static func split<T: RandomAccessCollection<VirtualInputKey>>(events: T, statement: OpaquePointer?) -> Segmentation {
-                let headSyllables = splitLeading(events: events, statement: statement)
+        private static func split<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T, statement: OpaquePointer?) -> Segmentation {
+                let headSyllables = splitLeading(keys, statement: statement)
                 guard headSyllables.isNotEmpty else { return [] }
-                let eventCount = events.count
+                let inputLength = keys.count
                 var segmentation: Set<Scheme> = Set(headSyllables.map({ [$0] }))
                 var previousSyllableCount = segmentation.flattenedCount
                 var shouldContinue: Bool = true
                 while shouldContinue {
                         for scheme in segmentation {
                                 let schemeLength = scheme.length
-                                guard schemeLength < eventCount else { continue }
-                                let tailEvents = events.dropFirst(schemeLength)
-                                let tailSyllables = splitLeading(events: tailEvents, statement: statement)
+                                guard schemeLength < inputLength else { continue }
+                                let tailKeys = keys.dropFirst(schemeLength)
+                                let tailSyllables = splitLeading(tailKeys, statement: statement)
                                 guard tailSyllables.isNotEmpty else { continue }
                                 let newSegmentation = tailSyllables.map({ scheme + [$0] })
                                 newSegmentation.forEach({ segmentation.insert($0) })
@@ -173,29 +173,29 @@ public struct Segmenter {
                 return segmentation.filter(\.isValid).descended()
         }
 
-        public static func segment<T: RandomAccessCollection<VirtualInputKey>>(events: T) -> Segmentation {
-                switch events.count {
+        public static func segment<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T) -> Segmentation {
+                switch keys.count {
                 case 0: return []
                 case 1:
-                        switch events.first {
+                        switch keys.first {
                         case .letterA: return letterA
                         case .letterO: return letterO
                         case .letterM: return letterM
                         default: return []
                         }
                 case 4:
-                        switch events.combinedCode {
+                        switch keys.combinedCode {
                         case 32203220: return mama
                         case 32203228: return mami
                         default:
                                 let statement = prepareStatement()
                                 defer { sqlite3_finalize(statement) }
-                                return split(events: events.filter(\.isSyllableLetter), statement: statement)
+                                return split(keys.filter(\.isSyllableLetter), statement: statement)
                         }
                 default:
                         let statement = prepareStatement()
                         defer { sqlite3_finalize(statement) }
-                        return split(events: events.filter(\.isSyllableLetter), statement: statement)
+                        return split(keys.filter(\.isSyllableLetter), statement: statement)
                 }
         }
 

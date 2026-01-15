@@ -6,17 +6,17 @@ extension Engine {
 
         /// Character Components Reverse Lookup. 拆字反查. 例如 木 + 木 = 林
         /// - Parameters:
-        ///   - events: Input Events
+        ///   - keys: VirtualInputKey Sequence
         ///   - input: User input text
         ///   - segmentation: Segmentation
         /// - Returns: Candidates
-        public static func structureReverseLookup<T: RandomAccessCollection<VirtualInputKey>>(events: T, input: String, segmentation: Segmentation) -> [Candidate] {
-                let markFreeText = events.filter(\.isSyllableLetter).map(\.text).joined()
+        public static func structureReverseLookup<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T, input: String, segmentation: Segmentation) -> [Candidate] {
+                let markFreeText = keys.filter(\.isSyllableLetter).map(\.text).joined()
                 let matched = search(text: markFreeText, segmentation: segmentation).distinct()
                 guard matched.isNotEmpty else { return [] }
-                let bodyEvents = events.dropFirst()
-                let text = bodyEvents.map(\.text).joined()
-                switch (bodyEvents.contains(where: \.isApostrophe), bodyEvents.contains(where: \.isToneLetter)) {
+                let bodyKeys = keys.dropFirst()
+                let text = bodyKeys.map(\.text).joined()
+                switch (bodyKeys.contains(where: \.isApostrophe), bodyKeys.contains(where: \.isToneLetter)) {
                 case (true, true):
                         let isOneToneOnly: Bool = (text.count - markFreeText.count) == 2
                         guard isOneToneOnly else { return [] }
