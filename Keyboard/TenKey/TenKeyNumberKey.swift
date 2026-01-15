@@ -4,11 +4,11 @@ import CoreIME
 
 struct TenKeyNumberKey: View {
 
-        init(_ event: VirtualInputKey) {
-                self.event = event
+        init(_ virtualKey: VirtualInputKey) {
+                self.virtualKey = virtualKey
         }
 
-        private let event: VirtualInputKey
+        private let virtualKey: VirtualInputKey
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
@@ -22,7 +22,7 @@ struct TenKeyNumberKey: View {
                                 .fill(isTouching ? colorScheme.activeInputKeyColor : colorScheme.inputKeyColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(3)
-                        Text(verbatim: event.text).font(.letterCompact)
+                        Text(verbatim: virtualKey.text).font(.letterCompact)
                 }
                 .frame(width: context.tenKeyWidthUnit, height: context.heightUnit)
                 .contentShape(Rectangle())
@@ -35,7 +35,7 @@ struct TenKeyNumberKey: View {
                                 }
                         }
                         .onEnded { _ in
-                                context.handle(event)
+                                context.handle(virtualKey)
                          }
                 )
         }
@@ -45,7 +45,7 @@ struct TenKeyNumberDotKey: View {
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
         @GestureState private var isTouching: Bool = false
-        private let keyText: String = "."
+        private let keyText: String = String.period
         var body: some View {
                 ZStack {
                         Color.interactiveClear

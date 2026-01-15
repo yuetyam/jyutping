@@ -4,13 +4,10 @@ import CommonExtensions
 
 struct T18LetterInputKey: View {
 
-        init(_ event: VirtualInputKey) {
-                self.event = event
-                self.keyText = event.text
+        init(_ virtualKey: VirtualInputKey) {
+                self.virtualKey = virtualKey
         }
-
-        private let event: VirtualInputKey
-        private let keyText: String
+        private let virtualKey: VirtualInputKey
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
@@ -33,7 +30,7 @@ struct T18LetterInputKey: View {
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(.vertical, verticalPadding)
                                 .padding(.horizontal, horizontalPadding)
-                        Text(verbatim: keyText)
+                        Text(verbatim: virtualKey.text)
                                 .textCase(textCase)
                                 .font(.letterCompact)
                                 .padding(.bottom, keyTextBottomInset)
@@ -49,7 +46,7 @@ struct T18LetterInputKey: View {
                                 }
                         }
                         .onEnded { _ in
-                                context.handle(event)
+                                context.handle(virtualKey)
                         }
                 )
         }

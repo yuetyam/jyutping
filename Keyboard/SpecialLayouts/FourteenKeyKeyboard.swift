@@ -78,11 +78,11 @@ struct FourteenKeyKeyboard: View {
 private struct FirstLetterRow: View {
         var body: some View {
                 HStack(spacing: 0 ) {
-                        T14InputKey(keyLocale: .leading, event: .letterW, keyModel: KeyModel(primary: KeyElement("qw"), members: [KeyElement("w"), KeyElement("q")]))
-                        T14InputKey(keyLocale: .leading, event: .letterE, keyModel: KeyModel(primary: KeyElement("er"), members: [KeyElement("e"), KeyElement("r")]))
-                        T14InputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("ty"), members: [KeyElement("t"), KeyElement("y")]))
-                        T14InputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("ui"), members: [KeyElement("u"), KeyElement("i")]))
-                        T14InputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("op"), members: [KeyElement("p"), KeyElement("o")]))
+                        T14InputKey(side: .leading, virtual: .letterW, unit: KeyModel(primary: KeyElement("qw"), members: [KeyElement("w"), KeyElement("q")]))
+                        T14InputKey(side: .leading, virtual: .letterE, unit: KeyModel(primary: KeyElement("er"), members: [KeyElement("e"), KeyElement("r")]))
+                        T14InputKey(side: .leading, unit: KeyModel(primary: KeyElement("ty"), members: [KeyElement("t"), KeyElement("y")]))
+                        T14InputKey(side: .leading, unit: KeyModel(primary: KeyElement("ui"), members: [KeyElement("u"), KeyElement("i")]))
+                        T14InputKey(side: .trailing, unit: KeyModel(primary: KeyElement("op"), members: [KeyElement("p"), KeyElement("o")]))
                 }
         }
 }
@@ -106,11 +106,11 @@ private struct FirstEnhancedLetterRow: View {
 private struct SecondLetterRow: View {
         var body: some View {
                 HStack(spacing: 0 ) {
-                        T14InputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("as"), members: [KeyElement("a"), KeyElement("s")]))
-                        T14InputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("df"), members: [KeyElement("d"), KeyElement("f")]))
-                        T14InputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("gh"), members: [KeyElement("g"), KeyElement("h")]))
-                        T14InputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("jk"), members: [KeyElement("j"), KeyElement("k")]))
-                        T14InputKey(keyLocale: .trailing, event: .letterL, keyModel: KeyModel(primary: KeyElement("l"), members: [KeyElement("l")]))
+                        T14InputKey(side: .leading, unit: KeyModel(primary: KeyElement("as"), members: [KeyElement("a"), KeyElement("s")]))
+                        T14InputKey(side: .leading, unit: KeyModel(primary: KeyElement("df"), members: [KeyElement("d"), KeyElement("f")]))
+                        T14InputKey(side: .leading, unit: KeyModel(primary: KeyElement("gh"), members: [KeyElement("g"), KeyElement("h")]))
+                        T14InputKey(side: .leading, unit: KeyModel(primary: KeyElement("jk"), members: [KeyElement("j"), KeyElement("k")]))
+                        T14InputKey(side: .trailing, virtual: .letterL, unit: KeyModel(primary: KeyElement("l"), members: [KeyElement("l")]))
                 }
         }
 }
@@ -161,10 +161,10 @@ private struct SecondEnhancedLetterRow: View {
 private struct ThirdLetterRow: View {
         var body: some View {
                 HStack(spacing: 0 ) {
-                        T14InputKey(keyLocale: .leading, widthUnitTimes: 1.85, event: .letterZ, keyModel: KeyModel(primary: KeyElement("zx"), members: [KeyElement("z"), KeyElement("x")]))
-                        T14InputKey(keyLocale: .leading, widthUnitTimes: 1.85, event: .letterC, keyModel: KeyModel(primary: KeyElement("cv"), members: [KeyElement("c"), KeyElement("v")]))
-                        T14InputKey(keyLocale: .leading, widthUnitTimes: 1.85, keyModel: KeyModel(primary: KeyElement("bn"), members: [KeyElement("b"), KeyElement("n")]))
-                        T14InputKey(keyLocale: .trailing, widthUnitTimes: 1.85, event: .letterM, keyModel: KeyModel(primary: KeyElement("m"), members: [KeyElement("m")]))
+                        T14InputKey(side: .leading, coefficient: 1.85, virtual: .letterZ, unit: KeyModel(primary: KeyElement("zx"), members: [KeyElement("z"), KeyElement("x")]))
+                        T14InputKey(side: .leading, coefficient: 1.85, virtual: .letterC, unit: KeyModel(primary: KeyElement("cv"), members: [KeyElement("c"), KeyElement("v")]))
+                        T14InputKey(side: .leading, coefficient: 1.85, unit: KeyModel(primary: KeyElement("bn"), members: [KeyElement("b"), KeyElement("n")]))
+                        T14InputKey(side: .trailing, coefficient: 1.85, virtual: .letterM, unit: KeyModel(primary: KeyElement("m"), members: [KeyElement("m")]))
                 }
         }
 }

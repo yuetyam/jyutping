@@ -5,20 +5,20 @@ import CoreIME
 
 struct T18EnhancedInputKey: View {
 
-        /// Create an EnhancedInputKey
+        /// Create a T18EnhancedInputKey
         /// - Parameters:
-        ///   - keyLocale: Key location, left half screen (leading) or right half screen (trailing).
-        ///   - event: InputEvent
-        ///   - keyModel: KeyModel
-        init(keyLocale: HorizontalEdge, event: VirtualInputKey? = nil, keyModel: KeyModel) {
-                self.keyLocale = keyLocale
-                self.event = event
-                self.keyModel = keyModel
+        ///   - side: Key location, left half screen (leading) or right half screen (trailing).
+        ///   - virtual: VirtualInputKey
+        ///   - unit: KeyUnit
+        init(side: HorizontalEdge, virtual: VirtualInputKey? = nil, unit: KeyUnit) {
+                self.side = side
+                self.virtual = virtual
+                self.unit = unit
         }
 
-        private let keyLocale: HorizontalEdge
-        private let event: VirtualInputKey?
-        private let keyModel: KeyModel
+        private let side: HorizontalEdge
+        private let virtual: VirtualInputKey?
+        private let unit: KeyModel
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
@@ -43,24 +43,24 @@ struct T18EnhancedInputKey: View {
                 let previewBottomOffset: CGFloat = (baseHeight * 2) + (curveHeight * 1.5)
                 let shouldShowLowercaseKeys: Bool = Options.showLowercaseKeys && context.keyboardCase.isLowercased
                 let textCase: Text.Case = shouldShowLowercaseKeys ? .lowercase : .uppercase
-                let shouldAdjustKeyTextPosition: Bool = shouldShowLowercaseKeys && (context.keyboardForm == .alphabetic) && (event?.isNumber.negative ?? true)
+                let shouldAdjustKeyTextPosition: Bool = shouldShowLowercaseKeys && (context.keyboardForm == .alphabetic) && (virtual?.isNumber.negative ?? true)
                 let keyTextBottomInset: CGFloat = shouldAdjustKeyTextPosition ? 3 : 0
                 ZStack {
                         Color.interactiveClear
                         if isLongPressing {
-                                let memberCount: Int = keyModel.members.count
+                                let memberCount: Int = unit.members.count
                                 let expansionCount: Int = memberCount - 1
                                 let offsetX: CGFloat = baseWidth * CGFloat(expansionCount)
-                                let leadingOffset: CGFloat = keyLocale.isLeading ? offsetX : 0
-                                let trailingOffset: CGFloat = keyLocale.isTrailing ? offsetX : 0
-                                ExpansiveBubbleShape(keyLocale: keyLocale, expansionCount: expansionCount)
+                                let leadingOffset: CGFloat = side.isLeading ? offsetX : 0
+                                let trailingOffset: CGFloat = side.isTrailing ? offsetX : 0
+                                ExpansiveBubbleShape(keyLocale: side, expansionCount: expansionCount)
                                         .fill(colorScheme.previewBubbleColor)
                                         .shadow(color: .shadowGray, radius: 1)
                                         .overlay {
                                                 HStack(spacing: 0) {
-                                                        ForEach(keyModel.members.indices, id: \.self) { index in
-                                                                let elementIndex: Int = keyLocale.isLeading ? index : ((memberCount - 1) - index)
-                                                                let element: KeyElement = keyModel.members[elementIndex]
+                                                        ForEach(unit.members.indices, id: \.self) { index in
+                                                                let elementIndex: Int = side.isLeading ? index : ((memberCount - 1) - index)
+                                                                let element: KeyElement = unit.members[elementIndex]
                                                                 ZStack {
                                                                         RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius, style: .continuous)
                                                                                 .fill(selectedIndex == elementIndex ? Color.accentColor : Color.clear)
@@ -94,8 +94,8 @@ struct T18EnhancedInputKey: View {
                                         .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                         .padding(.vertical, verticalPadding)
                                         .padding(.horizontal, horizontalPadding)
-                                ForEach(keyModel.primary.extras.indices, id: \.self) { index in
-                                        let extra = keyModel.primary.extras[index]
+                                ForEach(unit.primary.extras.indices, id: \.self) { index in
+                                        let extra = unit.primary.extras[index]
                                         ZStack(alignment: extra.alignment) {
                                                 Color.clear
                                                 Text(verbatim: extra.text)
@@ -106,13 +106,13 @@ struct T18EnhancedInputKey: View {
                                         .padding(.vertical, verticalPadding + 1)
                                         .padding(.horizontal, horizontalPadding + 3)
                                 }
-                                if keyModel.primary.isTextSingular {
-                                        Text(verbatim: keyModel.primary.text)
+                                if unit.primary.isTextSingular {
+                                        Text(verbatim: unit.primary.text)
                                                 .textCase(textCase)
                                                 .font(.letterCompact)
                                                 .padding(.bottom, keyTextBottomInset)
                                 } else {
-                                        Text(verbatim: keyModel.primary.text.spaceSeparated())
+                                        Text(verbatim: unit.primary.text.spaceSeparated())
                                                 .textCase(textCase)
                                                 .font(.adjustedLetterCompact)
                                                 .padding(.bottom, keyTextBottomInset)
@@ -131,9 +131,9 @@ struct T18EnhancedInputKey: View {
                         }
                         .onChanged { state in
                                 if isLongPressing {
-                                        let memberCount: Int = keyModel.members.count
+                                        let memberCount: Int = unit.members.count
                                         guard memberCount > 1 else { return }
-                                        let distance: CGFloat = keyLocale.isLeading ? state.translation.width : -(state.translation.width)
+                                        let distance: CGFloat = side.isLeading ? state.translation.width : -(state.translation.width)
                                         if distance < (baseWidth / 2.0) {
                                                 if selectedIndex != 0 {
                                                         selectedIndex = 0
@@ -153,10 +153,10 @@ struct T18EnhancedInputKey: View {
                                         guard isSatisfied else { return }
                                         if distance > 0 {
                                                 // swipe from top to bottom
-                                                pulled = keyModel.primary.header ?? keyModel.primary.footer
+                                                pulled = unit.primary.header ?? unit.primary.footer
                                         } else {
                                                 // swipe from bottom to top
-                                                pulled = keyModel.primary.footer ?? keyModel.primary.header
+                                                pulled = unit.primary.footer ?? unit.primary.header
                                         }
                                 }
                         }
@@ -168,7 +168,7 @@ struct T18EnhancedInputKey: View {
                                         pulled = nil
                                 }
                                 if isLongPressing {
-                                        guard let selectedElement = keyModel.members.fetch(selectedIndex) else { return }
+                                        guard let selectedElement = unit.members.fetch(selectedIndex) else { return }
                                         AudioFeedback.inputed()
                                         context.triggerSelectionHapticFeedback()
                                         let text: String = context.keyboardCase.isLowercased ? selectedElement.text : selectedElement.text.uppercased()
@@ -176,10 +176,10 @@ struct T18EnhancedInputKey: View {
                                 } else if let pulledText = pulled {
                                         let text: String = context.keyboardCase.isLowercased ? pulledText : pulledText.uppercased()
                                         context.operate(.process(text))
-                                } else if let event {
-                                        context.handle(event)
+                                } else if let virtual {
+                                        context.handle(virtual)
                                 } else {
-                                        let text: String = context.keyboardCase.isLowercased ? keyModel.primary.text : keyModel.primary.text.uppercased()
+                                        let text: String = context.keyboardCase.isLowercased ? unit.primary.text : unit.primary.text.uppercased()
                                         context.operate(.process(text))
                                 }
                         }

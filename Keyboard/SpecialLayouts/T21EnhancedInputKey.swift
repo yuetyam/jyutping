@@ -9,18 +9,18 @@ struct T21EnhancedInputKey: View {
         /// - Parameters:
         ///   - side: Key location, left half screen (leading) or right half screen (trailing).
         ///   - coefficient: Multiplier to the `widthUnit`
-        ///   - event: InputEvent
+        ///   - virtual: VirtualInputKey
         ///   - unit: KeyUnit
-        init(side: HorizontalEdge, coefficient: CGFloat = 1.25, event: VirtualInputKey? = nil, unit: KeyUnit) {
+        init(side: HorizontalEdge, coefficient: CGFloat = 1.25, virtual: VirtualInputKey? = nil, unit: KeyUnit) {
                 self.side = side
                 self.coefficient = coefficient
-                self.event = event
+                self.virtual = virtual
                 self.keyUnit = unit
         }
 
         private let side: HorizontalEdge
         private let coefficient: CGFloat
-        private let event: VirtualInputKey?
+        private let virtual: VirtualInputKey?
         private let keyUnit: KeyUnit
 
         @EnvironmentObject private var context: KeyboardViewController
@@ -48,7 +48,7 @@ struct T21EnhancedInputKey: View {
                 let activeColor: Color = shouldPreviewKey ? colorScheme.inputKeyColor : colorScheme.activeInputKeyColor
                 let shouldShowLowercaseKeys: Bool = Options.showLowercaseKeys && context.keyboardCase.isLowercased
                 let textCase: Text.Case = shouldShowLowercaseKeys ? .lowercase : .uppercase
-                let shouldAdjustKeyTextPosition: Bool = shouldShowLowercaseKeys && (context.keyboardForm == .alphabetic) && (event?.isNumber.negative ?? true)
+                let shouldAdjustKeyTextPosition: Bool = shouldShowLowercaseKeys && (context.keyboardForm == .alphabetic) && (virtual?.isNumber.negative ?? true)
                 let keyTextBottomInset: CGFloat = shouldAdjustKeyTextPosition ? 3 : 0
                 ZStack {
                         Color.interactiveClear
@@ -188,8 +188,8 @@ struct T21EnhancedInputKey: View {
                                 } else if let pulledText = pulled {
                                         let text: String = context.keyboardCase.isLowercased ? pulledText : pulledText.uppercased()
                                         context.operate(.process(text))
-                                } else if let event {
-                                        context.handle(event)
+                                } else if let virtual {
+                                        context.handle(virtual)
                                 } else {
                                         let text: String = context.keyboardCase.isLowercased ? keyUnit.primary.text : keyUnit.primary.text.uppercased()
                                         context.operate(.process(text))

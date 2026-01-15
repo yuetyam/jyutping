@@ -83,7 +83,7 @@ private struct FirstLetterRow: View {
                 HStack(spacing: 0 ) {
                         T21EnhancedInputKey(
                                 side: .leading,
-                                event: .letterW,
+                                virtual: .letterW,
                                 unit: KeyUnit(
                                         primary: KeyElement("w", extras: [.init("q", alignment: .bottomLeading)]),
                                         members: [
@@ -94,7 +94,7 @@ private struct FirstLetterRow: View {
                         )
                         T21EnhancedInputKey(
                                 side: .leading,
-                                event: .letterE,
+                                virtual: .letterE,
                                 unit: KeyUnit(
                                         primary: KeyElement("e", extras: [.init("r", alignment: .bottomTrailing)]),
                                         members: [
@@ -117,7 +117,7 @@ private struct FirstEnhancedLetterRow: View {
                 HStack(spacing: 0 ) {
                         T21EnhancedInputKey(
                                 side: .leading,
-                                event: .letterW,
+                                virtual: .letterW,
                                 unit: KeyUnit(
                                         primary: KeyElement("w", extras: [.init("q", alignment: .bottomLeading), .init("1", alignment: .topTrailing)]),
                                         members: [
@@ -129,7 +129,7 @@ private struct FirstEnhancedLetterRow: View {
                         )
                         T21EnhancedInputKey(
                                 side: .leading,
-                                event: .letterE,
+                                virtual: .letterE,
                                 unit: KeyUnit(
                                         primary: KeyElement("e", extras: [.init("r", alignment: .bottomTrailing), .init("2", alignment: .topTrailing)]),
                                         members: [
@@ -141,7 +141,7 @@ private struct FirstEnhancedLetterRow: View {
                         )
                         T21EnhancedInputKey(
                                 side: .leading,
-                                event: .letterT,
+                                virtual: .letterT,
                                 unit: KeyUnit(
                                         primary: KeyElement("t", extras: [.init("3", alignment: .topTrailing)]),
                                         members: [
@@ -152,7 +152,7 @@ private struct FirstEnhancedLetterRow: View {
                         )
                         T21EnhancedInputKey(
                                 side: .leading,
-                                event: .letterY,
+                                virtual: .letterY,
                                 unit: KeyUnit(
                                         primary: KeyElement("y", extras: [.init("4", alignment: .topTrailing)]),
                                         members: [
@@ -163,7 +163,7 @@ private struct FirstEnhancedLetterRow: View {
                         )
                         T21EnhancedInputKey(
                                 side: .leading,
-                                event: .letterU,
+                                virtual: .letterU,
                                 unit: KeyUnit(
                                         primary: KeyElement("u", extras: [.init("5", alignment: .topTrailing)]),
                                         members: [
@@ -174,7 +174,7 @@ private struct FirstEnhancedLetterRow: View {
                         )
                         T21EnhancedInputKey(
                                 side: .leading,
-                                event: .letterI,
+                                virtual: .letterI,
                                 unit: KeyUnit(
                                         primary: KeyElement("i", extras: [.init("6", alignment: .topTrailing)]),
                                         members: [
@@ -185,7 +185,7 @@ private struct FirstEnhancedLetterRow: View {
                         )
                         T21EnhancedInputKey(
                                 side: .trailing,
-                                event: .letterO,
+                                virtual: .letterO,
                                 unit: KeyUnit(
                                         primary: KeyElement("o", extras: [.init("7", alignment: .topTrailing)]),
                                         members: [
@@ -196,7 +196,7 @@ private struct FirstEnhancedLetterRow: View {
                         )
                         T21EnhancedInputKey(
                                 side: .trailing,
-                                event: .letterP,
+                                virtual: .letterP,
                                 unit: KeyUnit(
                                         primary: KeyElement("p", extras: [.init("8", alignment: .topTrailing)]),
                                         members: [
@@ -216,7 +216,7 @@ private struct SecondLetterRow: View {
                         if needsNumbers {
                                 T21EnhancedInputKey(
                                         side: .trailing,
-                                        event: .letterA,
+                                        virtual: .letterA,
                                         unit: KeyUnit(
                                                 primary: KeyElement("a", extras: [.init("9", alignment: .topTrailing)]),
                                                 members: [
@@ -227,7 +227,7 @@ private struct SecondLetterRow: View {
                                 )
                                 T21EnhancedInputKey(
                                         side: .trailing,
-                                        event: .letterS,
+                                        virtual: .letterS,
                                         unit: KeyUnit(
                                                 primary: KeyElement("s", extras: [.init("0", alignment: .topTrailing)]),
                                                 members: [
@@ -246,7 +246,7 @@ private struct SecondLetterRow: View {
                         T21LetterInputKey(.letterH)
                         T21EnhancedInputKey(
                                 side: .trailing,
-                                event: .letterK,
+                                virtual: .letterK,
                                 unit: KeyUnit(
                                         primary: KeyElement("k", extras: [.init("j", alignment: .bottomLeading)]),
                                         members: [
@@ -264,7 +264,7 @@ private struct SecondEnhancedLetterRow: View {
                 HStack(spacing: 0 ) {
                         T21EnhancedInputKey(
                                 side: .leading,
-                                event: .letterA,
+                                virtual: .letterA,
                                 unit: KeyUnit(
                                         primary: KeyElement("a", extras: [.init("9", alignment: .topTrailing)]),
                                         members: [
@@ -275,7 +275,7 @@ private struct SecondEnhancedLetterRow: View {
                         )
                         T21EnhancedInputKey(
                                 side: .leading,
-                                event: .letterS,
+                                virtual: .letterS,
                                 unit: KeyUnit(
                                         primary: KeyElement("s", extras: [.init("0", alignment: .topTrailing)]),
                                         members: [
@@ -286,7 +286,7 @@ private struct SecondEnhancedLetterRow: View {
                         )
                         T21EnhancedInputKey(
                                 side: .leading,
-                                event: .letterD,
+                                virtual: .letterD,
                                 unit: KeyUnit(
                                         primary: KeyElement("d", extras: [.init("@", alignment: .topTrailing)]),
                                         members: [
@@ -297,7 +297,7 @@ private struct SecondEnhancedLetterRow: View {
                         )
                         T21EnhancedInputKey(
                                 side: .leading,
-                                event: .letterF,
+                                virtual: .letterF,
                                 unit: KeyUnit(
                                         primary: KeyElement("f", extras: [.init("#", alignment: .topTrailing)]),
                                         members: [
@@ -308,7 +308,7 @@ private struct SecondEnhancedLetterRow: View {
                         )
                         T21EnhancedInputKey(
                                 side: .leading,
-                                event: .letterG,
+                                virtual: .letterG,
                                 unit: KeyUnit(
                                         primary: KeyElement("g", extras: [.init("$", alignment: .topTrailing)]),
                                         members: [
@@ -319,7 +319,7 @@ private struct SecondEnhancedLetterRow: View {
                         )
                         T21EnhancedInputKey(
                                 side: .leading,
-                                event: .letterH,
+                                virtual: .letterH,
                                 unit: KeyUnit(
                                         primary: KeyElement("h", extras: [.init("/", alignment: .topTrailing)]),
                                         members: [
@@ -330,7 +330,7 @@ private struct SecondEnhancedLetterRow: View {
                         )
                         T21EnhancedInputKey(
                                 side: .trailing,
-                                event: .letterK,
+                                virtual: .letterK,
                                 unit: KeyUnit(
                                         primary: KeyElement("k", extras: [.init("j", alignment: .bottomLeading), .init("「", alignment: .topTrailing)]),
                                         members: [
@@ -342,7 +342,7 @@ private struct SecondEnhancedLetterRow: View {
                         )
                         T21EnhancedInputKey(
                                 side: .trailing,
-                                event: .letterL,
+                                virtual: .letterL,
                                 unit: KeyUnit(
                                         primary: KeyElement("l", extras: [.init("」", alignment: .topTrailing)]),
                                         members: [
@@ -359,7 +359,7 @@ private struct ThirdLetterRow: View {
                 HStack(spacing: 0 ) {
                         T21EnhancedInputKey(
                                 side: .leading,
-                                event: .letterZ,
+                                virtual: .letterZ,
                                 unit: .init(
                                         primary: KeyElement("z", extras: [.init("x", alignment: .bottomTrailing)]),
                                         members: [
@@ -370,7 +370,7 @@ private struct ThirdLetterRow: View {
                         )
                         T21EnhancedInputKey(
                                 side: .leading,
-                                event: .letterC,
+                                virtual: .letterC,
                                 unit: .init(
                                         primary: KeyElement("c", extras: [.init("v", alignment: .bottomTrailing)]),
                                         members: [
@@ -390,7 +390,7 @@ private struct ThirdEnhancedLetterRow: View {
                 HStack(spacing: 0 ) {
                         T21EnhancedInputKey(
                                 side: .leading,
-                                event: .letterZ,
+                                virtual: .letterZ,
                                 unit: .init(
                                         primary: KeyElement("z", extras: [.init("x", alignment: .bottomTrailing), .init("%", alignment: .topTrailing)]),
                                         members: [
@@ -402,7 +402,7 @@ private struct ThirdEnhancedLetterRow: View {
                         )
                         T21EnhancedInputKey(
                                 side: .leading,
-                                event: .letterC,
+                                virtual: .letterC,
                                 unit: .init(
                                         primary: KeyElement("c", extras: [.init("v", alignment: .bottomTrailing), .init("～", alignment: .topTrailing)]),
                                         members: [
@@ -415,7 +415,7 @@ private struct ThirdEnhancedLetterRow: View {
                         )
                         T21EnhancedInputKey(
                                 side: .leading,
-                                event: .letterB,
+                                virtual: .letterB,
                                 unit: .init(
                                         primary: KeyElement("b", extras: [.init("、", alignment: .topTrailing)]),
                                         members: [
@@ -426,7 +426,7 @@ private struct ThirdEnhancedLetterRow: View {
                         )
                         T21EnhancedInputKey(
                                 side: .leading,
-                                event: .letterN,
+                                virtual: .letterN,
                                 unit: .init(
                                         primary: KeyElement("n", extras: [.init("；", alignment: .topTrailing)]),
                                         members: [
@@ -437,7 +437,7 @@ private struct ThirdEnhancedLetterRow: View {
                         )
                         T21EnhancedInputKey(
                                 side: .leading,
-                                event: .letterM,
+                                virtual: .letterM,
                                 unit: .init(
                                         primary: KeyElement("m", extras: [.init("：", alignment: .topTrailing)]),
                                         members: [
