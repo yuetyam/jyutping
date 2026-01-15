@@ -316,7 +316,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         case VirtualInputKey.letterQ:
                                 appContext.updateIndicatorTexts(to: .structureReverseLookup)
                                 structureReverseLookup()
-                        case .some(let inputEvent) where inputEvent.isLetter:
+                        case .some(let key) where key.isLetter:
                                 appContext.updateIndicatorTexts(to: nil)
                                 suggest()
                         default:
@@ -396,19 +396,19 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         let isDisabled: Bool = (dict[kOn] as? Bool) == false || (dict[kOn] as? Int) == 0
                         guard isDisabled.negative else { return nil }
                         guard let input = (dict[kReplace] as? String)?.lowercased(), input.isNotEmpty else { return nil }
-                        let events = input.lowercased().compactMap(VirtualInputKey.matchInputKey(for:))
-                        guard events.count == input.count else { return nil }
+                        let keys = input.lowercased().compactMap(VirtualInputKey.matchInputKey(for:))
+                        guard keys.count == input.count else { return nil }
                         guard let text = (dict[kWith] as? String), text.isNotEmpty else { return nil }
-                        return DefinedLexicon(input: input, text: text, events: events)
+                        return DefinedLexicon(input: input, text: text, keys: keys)
                 }).distinct()
         }
-        private func searchDefinedCandidates(for events: [VirtualInputKey]) -> [Candidate] {
+        private func searchDefinedCandidates(for keys: [VirtualInputKey]) -> [Candidate] {
                 guard AppSettings.isTextReplacementsOn else { return [] }
-                if events.count < 10 {
-                        let charCode: Int = events.map(\.code).radix100Combined()
+                if keys.count < 10 {
+                        let charCode: Int = keys.map(\.code).radix100Combined()
                         return definedLexicons.filter({ $0.charCode == charCode }).map(\.candidate)
                 } else {
-                        return definedLexicons.filter({ $0.events == events }).map(\.candidate)
+                        return definedLexicons.filter({ $0.keys == keys }).map(\.candidate)
                 }
         }
 
@@ -477,11 +477,11 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 suggestionTask = Task.detached(priority: .high) { [weak self] in
                         guard let self else { return }
                         let segmentation = Segmenter.segment(keys)
-                        async let memory: [Candidate] = isInputMemoryOn ? InputMemory.suggest(events: keys, segmentation: segmentation) : []
+                        async let memory: [Candidate] = isInputMemoryOn ? InputMemory.suggest(keys, segmentation: segmentation) : []
                         async let defined: [Candidate] = searchDefinedCandidates(for: keys)
                         async let textMarks: [Candidate] = isEmojiSuggestionsOn ? Engine.searchTextMarks(for: keys) : []
                         async let symbols: [Candidate] = isEmojiSuggestionsOn ? Engine.searchSymbols(for: keys, segmentation: segmentation) : []
-                        async let queried: [Candidate] = Engine.suggest(events: keys, segmentation: segmentation)
+                        async let queried: [Candidate] = Engine.suggest(keys, segmentation: segmentation)
                         let suggestions: [Candidate] = await Converter.dispatch(memory: memory, defined: defined, marks: textMarks, symbols: symbols, queried: queried, characterStandard: standard)
                         if Task.isCancelled.negative {
                                 await MainActor.run { [weak self] in
@@ -517,7 +517,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 suggestionTask = Task.detached(priority: .high) { [weak self] in
                         guard let self else { return }
                         let segmentation = PinyinSegmenter.segment(keys)
-                        let suggestions: [Candidate] = await Engine.pinyinReverseLookup(events: keys, segmentation: segmentation).transformed(to: standard)
+                        let suggestions: [Candidate] = await Engine.pinyinReverseLookup(keys, segmentation: segmentation).transformed(to: standard)
                         if Task.isCancelled.negative {
                                 await MainActor.run { [weak self] in
                                         guard let self else { return }
@@ -866,18 +866,18 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 switch keyCode.representative {
                 case .letter where hasControlShiftModifiers && isBuffering && (keyCode == KeyCode.Alphabet.letterU):
                         clearBuffer()
-                case .letter(let letterEvent):
+                case .letter(let letterKey):
                         switch currentInputForm {
                         case .cantonese:
-                                let newEvent = BasicInputEvent(key: letterEvent, isCapitalized: isShifting)
+                                let newEvent = BasicInputEvent(key: letterKey, isCapitalized: isShifting)
                                 bufferEvents.append(newEvent)
                         case .transparent:
                                 return
                         case .options:
                                 return
                         }
-                case .number(let numberEvent):
-                        guard let number = numberEvent.digit else { return }
+                case .number(let numberKey):
+                        guard let number = numberKey.digit else { return }
                         let index: Int = (number == 0) ? 9 : (number - 1)
                         switch currentInputForm {
                         case .cantonese:
@@ -907,7 +907,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                         insert(selectedItem.text)
                                         aftercareSelection(selectedItem)
                                 } else {
-                                        let keyText: String = numberEvent.text
+                                        let keyText: String = numberKey.text
                                         let inputText: String = Options.characterForm.isHalfWidth ? keyText : keyText.fullWidth()
                                         insert(inputText)
                                 }
@@ -924,8 +924,8 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         let isStrokeReverseLookup: Bool = currentInputForm.isCantonese && (bufferEvents.first?.key == .letterX)
                         guard isStrokeReverseLookup else { return }
                         let code: Int = number + 10
-                        guard let event = VirtualInputKey.matchInputKey(for: code) else { return }
-                        let newEvent = BasicInputEvent(key: event, isCapitalized: false)
+                        guard let key = VirtualInputKey.matchInputKey(for: code) else { return }
+                        let newEvent = BasicInputEvent(key: key, isCapitalized: false)
                         bufferEvents.append(newEvent)
                 case .arrow(let direction):
                         switch direction {
@@ -1357,10 +1357,10 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         return
                 }
                 switch bufferEvents.first?.key {
-                case .some(let event) where event.isLetter.negative:
+                case .some(let key) where key.isLetter.negative:
                         selectedCandidates = []
                         clearBuffer()
-                case .some(let event) where event.isReverseLookupTrigger:
+                case .some(let key) where key.isReverseLookupTrigger:
                         selectedCandidates = []
                         var tail = bufferEvents.dropFirst(candidate.inputCount + 1)
                         while (tail.first?.key.isApostrophe ?? false) {

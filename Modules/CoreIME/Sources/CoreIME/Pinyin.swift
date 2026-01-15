@@ -3,7 +3,7 @@ import SQLite3
 import CommonExtensions
 
 extension Engine {
-        public static func pinyinReverseLookup<T: RandomAccessCollection<VirtualInputKey>>(events: T, segmentation: PinyinSegmentation) async -> [Candidate] {
+        public static func pinyinReverseLookup<T: RandomAccessCollection<VirtualInputKey>>(_ events: T, segmentation: PinyinSegmentation) async -> [Candidate] {
                 let isLetterEventOnly: Bool = events.contains(where: \.isLetter.negative).negative
                 // TODO: Handle separators
                 guard isLetterEventOnly else { return [] }

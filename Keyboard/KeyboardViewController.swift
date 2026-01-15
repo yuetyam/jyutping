@@ -708,7 +708,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         async let defined: [Candidate] = searchDefinedCandidates(for: keys)
                         async let textMarks: [Candidate] = isEmojiSuggestionsOn ? Engine.searchTextMarks(for: keys) : []
                         async let symbols: [Candidate] = isEmojiSuggestionsOn ? Engine.searchSymbols(for: keys, segmentation: segmentation) : []
-                        async let queried: [Candidate] = Engine.suggest(events: keys, segmentation: segmentation)
+                        async let queried: [Candidate] = Engine.suggest(keys, segmentation: segmentation)
                         let suggestions: [Candidate] = await Converter.dispatch(memory: memory, defined: defined, marks: textMarks, symbols: symbols, queried: queried, characterStandard: characterStandard)
                         if Task.isCancelled.negative {
                                 await MainActor.run { [weak self] in
@@ -742,7 +742,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 suggestionTask = Task.detached(priority: .high) { [weak self] in
                         guard let self else { return }
                         let segmentation = PinyinSegmenter.segment(keys)
-                        let suggestions: [Candidate] = await Engine.pinyinReverseLookup(events: keys, segmentation: segmentation).transformed(to: characterStandard)
+                        let suggestions: [Candidate] = await Engine.pinyinReverseLookup(keys, segmentation: segmentation).transformed(to: characterStandard)
                         if Task.isCancelled.negative {
                                 await MainActor.run { [weak self] in
                                         guard let self else { return }

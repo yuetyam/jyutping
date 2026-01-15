@@ -95,11 +95,11 @@ extension UInt16 {
                 case KeyCode.Special.pageDown:
                         return .pageDown
                 case _ where VirtualInputKey.isMatchedNumber(keyCode: self):
-                        guard let numberEvent = VirtualInputKey.matchInputKey(for: self) else { return .other }
-                        return .number(numberEvent)
+                        guard let numberKey = VirtualInputKey.matchInputKey(for: self) else { return .other }
+                        return .number(numberKey)
                 case _ where VirtualInputKey.isMatchedLetter(keyCode: self):
-                        guard let letterEvent = VirtualInputKey.matchInputKey(for: self) else { return .other }
-                        return .letter(letterEvent)
+                        guard let letterKey = VirtualInputKey.matchInputKey(for: self) else { return .other }
+                        return .letter(letterKey)
                 default:
                         return .other
                 }

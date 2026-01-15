@@ -43,7 +43,7 @@ public struct Engine {
 // MARK: - Suggestions
 
 extension Engine {
-        public static func suggest<T: RandomAccessCollection<VirtualInputKey>>(events: T, segmentation: Segmentation) -> [Candidate] {
+        public static func suggest<T: RandomAccessCollection<VirtualInputKey>>(_ events: T, segmentation: Segmentation) -> [Candidate] {
                 lazy var anchorsStatement = prepareAnchorsStatement()
                 lazy var spellStatement = prepareSpellStatement()
                 lazy var strictStatement = prepareStrictStatement()
