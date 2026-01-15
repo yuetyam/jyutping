@@ -115,7 +115,7 @@ extension Engine {
                 return emojis
         }
 
-        public static func searchSymbols<T: RandomAccessCollection<InputEvent>>(for events: T, segmentation: Segmentation) -> [Candidate] {
+        public static func searchSymbols<T: RandomAccessCollection<VirtualInputKey>>(for events: T, segmentation: Segmentation) -> [Candidate] {
                 let command: String = "SELECT category, unicode_version, code_point, cantonese, romanization FROM symbol_table WHERE spell = ?;"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }

@@ -3,7 +3,7 @@ import SQLite3
 import CommonExtensions
 
 extension Engine {
-        public static func searchTextMarks<T: RandomAccessCollection<InputEvent>>(for events: T) -> [Candidate] {
+        public static func searchTextMarks<T: RandomAccessCollection<VirtualInputKey>>(for events: T) -> [Candidate] {
                 let text: String = events.map(\.text).joined()
                 let command: String = "SELECT mark FROM mark_table WHERE spell = ?;"
                 var statement: OpaquePointer? = nil

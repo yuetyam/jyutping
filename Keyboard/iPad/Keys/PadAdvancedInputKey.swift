@@ -12,7 +12,7 @@ struct PadAdvancedInputKey: View {
         ///   - event: InputEvent
         ///   - upper: Key upper text for pulling down
         ///   - keyModel: KeyModel
-        init(keyLocale: HorizontalEdge, event: InputEvent? = nil, upper: String, keyModel: KeyModel) {
+        init(keyLocale: HorizontalEdge, event: VirtualInputKey? = nil, upper: String, keyModel: KeyModel) {
                 self.keyLocale = keyLocale
                 self.event = event
                 self.upper = upper
@@ -20,7 +20,7 @@ struct PadAdvancedInputKey: View {
         }
 
         private let keyLocale: HorizontalEdge
-        private let event: InputEvent?
+        private let event: VirtualInputKey?
         private let upper: String
         private let keyModel: KeyModel
 

@@ -43,7 +43,7 @@ public struct Engine {
 // MARK: - Suggestions
 
 extension Engine {
-        public static func suggest<T: RandomAccessCollection<InputEvent>>(events: T, segmentation: Segmentation) -> [Candidate] {
+        public static func suggest<T: RandomAccessCollection<VirtualInputKey>>(events: T, segmentation: Segmentation) -> [Candidate] {
                 lazy var anchorsStatement = prepareAnchorsStatement()
                 lazy var spellStatement = prepareSpellStatement()
                 lazy var strictStatement = prepareStrictStatement()
@@ -57,7 +57,7 @@ extension Engine {
                 case 1:
                         switch events.first {
                         case .letterA:
-                                let text = InputEvent.letterA.text
+                                let text = VirtualInputKey.letterA.text
                                 return spellMatch(text: text, input: text, mark: text, statement: spellStatement) + spellMatch(text: text + text, input: text, mark: text, statement: spellStatement) + anchorsMatch(events: events, input: text, statement: anchorsStatement)
                         case .letterO, .letterM:
                                 guard let text = events.first?.text else { return [] }
@@ -70,7 +70,7 @@ extension Engine {
                 }
         }
 
-        private static func dispatch<T: RandomAccessCollection<InputEvent>>(events: T, segmentation: Segmentation, anchorsStatement: OpaquePointer?, spellStatement: OpaquePointer?, strictStatement: OpaquePointer?) -> [Candidate] {
+        private static func dispatch<T: RandomAccessCollection<VirtualInputKey>>(events: T, segmentation: Segmentation, anchorsStatement: OpaquePointer?, spellStatement: OpaquePointer?, strictStatement: OpaquePointer?) -> [Candidate] {
                 let syllableEvents = events.filter(\.isSyllableLetter)
                 let candidates: [Candidate] =  switch (segmentation.first?.first?.alias.count ?? 0) {
                 case 0:
@@ -123,7 +123,7 @@ extension Engine {
                                         guard textTones.hasPrefix(tones) else { return nil }
                                         let isCorrectPosition: Bool = text.dropFirst(item.inputCount).first?.isCantoneseToneDigit ?? false
                                         guard isCorrectPosition else { return nil }
-                                        var firstSyllableEvents: [InputEvent] = []
+                                        var firstSyllableEvents: [VirtualInputKey] = []
                                         for event in events {
                                                 if event.isSyllableLetter {
                                                         firstSyllableEvents.append(event)
@@ -131,7 +131,7 @@ extension Engine {
                                                         break
                                                 }
                                         }
-                                        var firstToneEvents: [InputEvent] = []
+                                        var firstToneEvents: [VirtualInputKey] = []
                                         for event in events.dropFirst(firstSyllableEvents.count) {
                                                 if event.isSyllableLetter.negative {
                                                         firstToneEvents.append(event)
@@ -248,7 +248,7 @@ extension Engine {
                                 }
                         })
                         guard qualified.isEmpty else { return qualified.sorted(by: { $0.inputCount > $1.inputCount }) }
-                        let anchorEvents = events.split(separator: InputEvent.apostrophe).compactMap(\.first)
+                        let anchorEvents = events.split(separator: VirtualInputKey.apostrophe).compactMap(\.first)
                         let anchorCount = anchorEvents.count
                         return anchorsMatch(events: anchorEvents, statement: anchorsStatement)
                                 .compactMap({ item -> Candidate? in
@@ -265,7 +265,7 @@ extension Engine {
                 }
         }
 
-        private static func processSlices<T: RandomAccessCollection<InputEvent>>(of events: T, text: String, limit: Int64? = nil, anchorsStatement: OpaquePointer?, spellStatement: OpaquePointer?) -> [Candidate] {
+        private static func processSlices<T: RandomAccessCollection<VirtualInputKey>>(of events: T, text: String, limit: Int64? = nil, anchorsStatement: OpaquePointer?, spellStatement: OpaquePointer?) -> [Candidate] {
                 let adjustedLimit: Int64 = (limit == nil) ? 300 : 100
                 let eventLength: Int = events.count
                 return (0..<eventLength).flatMap({ number -> [Candidate] in
@@ -282,7 +282,7 @@ extension Engine {
                 .distinct()
                 .sorted()
         }
-        private static func modify<T: RandomAccessCollection<InputEvent>>(_ item: Candidate, events: T, text: String, eventLength: Int) -> Candidate {
+        private static func modify<T: RandomAccessCollection<VirtualInputKey>>(_ item: Candidate, events: T, text: String, eventLength: Int) -> Candidate {
                 guard eventLength > 1 else { return item }
                 guard item.inputCount != eventLength else { return item }
                 lazy var converted: Candidate = Candidate(text: item.text, romanization: item.romanization, input: text, mark: text, order: item.order)
@@ -298,7 +298,7 @@ extension Engine {
                 }
         }
 
-        private static func search<T: RandomAccessCollection<InputEvent>>(events: T, segmentation: Segmentation, limit: Int64? = nil, anchorsStatement: OpaquePointer?, spellStatement: OpaquePointer?, strictStatement: OpaquePointer?) -> [Candidate] {
+        private static func search<T: RandomAccessCollection<VirtualInputKey>>(events: T, segmentation: Segmentation, limit: Int64? = nil, anchorsStatement: OpaquePointer?, spellStatement: OpaquePointer?, strictStatement: OpaquePointer?) -> [Candidate] {
                 let eventLength: Int = events.count
                 let text: String = events.map(\.text).joined()
                 let spellMatched = spellMatch(text: text, input: text, limit: limit, statement: spellStatement)
@@ -321,7 +321,7 @@ extension Engine {
                         let anchors = schemeAnchors + [lastAnchor]
                         let schemeSyllableText: String = scheme.syllableText
                         let mark: String = scheme.mark + String.space + tail.map(\.text).joined()
-                        let tailAsAnchorText = tail.compactMap({ $0 == InputEvent.letterY ? InputEvent.letterJ.text.first : $0.text.first })
+                        let tailAsAnchorText = tail.compactMap({ $0 == VirtualInputKey.letterY ? VirtualInputKey.letterJ.text.first : $0.text.first })
                         let conjoinedMatched = anchorsMatch(events: conjoined, limit: prefixesLimit, statement: anchorsStatement)
                                 .compactMap({ item -> Candidate? in
                                         let toneFreeRomanization = item.romanization.removedTones()
@@ -330,7 +330,7 @@ extension Engine {
                                         guard suffixAnchorText == tailAsAnchorText else { return nil }
                                         return Candidate(text: item.text, romanization: item.romanization, input: text, mark: mark, order: item.order)
                                 })
-                        let transformedTailText = tail.enumerated().map({ $0.offset == 0 && $0.element == InputEvent.letterY ? InputEvent.letterJ.text : $0.element.text }).joined()
+                        let transformedTailText = tail.enumerated().map({ $0.offset == 0 && $0.element == VirtualInputKey.letterY ? VirtualInputKey.letterJ.text : $0.element.text }).joined()
                         let syllables: String = schemeSyllableText + String.space + transformedTailText
                         let anchorsMatched = anchorsMatch(events: anchors, limit: prefixesLimit, statement: anchorsStatement)
                                 .compactMap({ item -> Candidate? in
@@ -462,7 +462,7 @@ private extension Engine {
 // MARK: - SQLite Querying
 
 private extension Engine {
-        static func anchorsMatch<T: RandomAccessCollection<InputEvent>>(events: T, input: String? = nil, limit: Int64? = nil, statement: OpaquePointer?) -> [Candidate] {
+        static func anchorsMatch<T: RandomAccessCollection<VirtualInputKey>>(events: T, input: String? = nil, limit: Int64? = nil, statement: OpaquePointer?) -> [Candidate] {
                 let code = events.anchorsCode
                 guard code > 0 else { return [] }
                 sqlite3_reset(statement)

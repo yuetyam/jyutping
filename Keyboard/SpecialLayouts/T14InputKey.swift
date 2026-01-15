@@ -11,7 +11,7 @@ struct T14InputKey: View {
         ///   - widthUnitTimes: Times of widthUnit
         ///   - event: InputEvent
         ///   - keyModel: KeyModel
-        init(keyLocale: HorizontalEdge, widthUnitTimes: CGFloat = 2, event: InputEvent? = nil, keyModel: KeyModel) {
+        init(keyLocale: HorizontalEdge, widthUnitTimes: CGFloat = 2, event: VirtualInputKey? = nil, keyModel: KeyModel) {
                 self.keyLocale = keyLocale
                 self.widthUnitTimes = widthUnitTimes
                 self.event = event
@@ -20,7 +20,7 @@ struct T14InputKey: View {
 
         private let keyLocale: HorizontalEdge
         private let widthUnitTimes: CGFloat
-        private let event: InputEvent?
+        private let event: VirtualInputKey?
         private let keyModel: KeyModel
 
         @EnvironmentObject private var context: KeyboardViewController

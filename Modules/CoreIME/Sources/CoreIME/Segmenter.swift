@@ -13,8 +13,8 @@ public struct Syllable: Hashable, Comparable, Sendable {
 
         let aliasCode: Int
         let originCode: Int
-        let alias: Array<InputEvent>
-        let origin: Array<InputEvent>
+        let alias: Array<VirtualInputKey>
+        let origin: Array<VirtualInputKey>
 
         public static func ==(lhs: Syllable, rhs: Syllable) -> Bool {
                 return lhs.aliasCode == rhs.aliasCode && lhs.originCode == rhs.originCode
@@ -59,12 +59,12 @@ extension RandomAccessCollection where Element == Syllable {
         }
 
         /// Anchors of alias events
-        public var aliasAnchors: [InputEvent] {
+        public var aliasAnchors: [VirtualInputKey] {
                 return compactMap(\.alias.first)
         }
 
         /// Anchors of origin events
-        public var originAnchors: [InputEvent] {
+        public var originAnchors: [VirtualInputKey] {
                 return compactMap(\.origin.first)
         }
 
@@ -93,7 +93,7 @@ private extension Scheme {
         // REASON: *am => [*aa, m] => *aam
         var isValid: Bool {
                 guard self.count > 1 else { return true }
-                guard self.dropLast().contains(where: { $0.origin.last == InputEvent.letterA }) else { return true }
+                guard self.dropLast().contains(where: { $0.origin.last == VirtualInputKey.letterA }) else { return true }
                 let originNumber = self.flatMap(\.origin).map(\.text).joined().occurrenceCount(pattern: "aa(m|ng)")
                 guard originNumber > 0 else { return true }
                 let aliasNumber = self.flatMap(\.alias).map(\.text).joined().occurrenceCount(pattern: "aa(m|ng)")
@@ -118,7 +118,7 @@ private extension Sequence where Element == Scheme {
 
 public struct Segmenter {
 
-        public static func syllableText<T: RandomAccessCollection<InputEvent>>(of events: T) -> String? {
+        public static func syllableText<T: RandomAccessCollection<VirtualInputKey>>(of events: T) -> String? {
                 guard events.count <= 6 else { return nil }
                 let statement = prepareStatement()
                 defer { sqlite3_finalize(statement) }
@@ -140,13 +140,13 @@ public struct Segmenter {
                 return Syllable(aliasCode: code, originCode: originCode)
         }
 
-        private static func splitLeading<T: RandomAccessCollection<InputEvent>>(events: T, statement: OpaquePointer?) -> [Syllable] {
+        private static func splitLeading<T: RandomAccessCollection<VirtualInputKey>>(events: T, statement: OpaquePointer?) -> [Syllable] {
                 let maxLength: Int = min(events.count, 6)
                 guard maxLength > 0 else { return [] }
                 return (1...maxLength).reversed().compactMap({ match(code: events.prefix($0).combinedCode, statement: statement) })
         }
 
-        private static func split<T: RandomAccessCollection<InputEvent>>(events: T, statement: OpaquePointer?) -> Segmentation {
+        private static func split<T: RandomAccessCollection<VirtualInputKey>>(events: T, statement: OpaquePointer?) -> Segmentation {
                 let headSyllables = splitLeading(events: events, statement: statement)
                 guard headSyllables.isNotEmpty else { return [] }
                 let eventCount = events.count
@@ -173,7 +173,7 @@ public struct Segmenter {
                 return segmentation.filter(\.isValid).descended()
         }
 
-        public static func segment<T: RandomAccessCollection<InputEvent>>(events: T) -> Segmentation {
+        public static func segment<T: RandomAccessCollection<VirtualInputKey>>(events: T) -> Segmentation {
                 switch events.count {
                 case 0: return []
                 case 1:

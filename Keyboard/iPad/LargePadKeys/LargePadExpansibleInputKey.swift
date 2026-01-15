@@ -10,14 +10,14 @@ struct LargePadExpansibleInputKey: View {
         ///   - keyLocale: Key location, left half (leading) or right half (trailing).
         ///   - event: InputEvent
         ///   - keyModel: KeyElements
-        init(keyLocale: HorizontalEdge ,event: InputEvent? = nil, keyModel: KeyModel) {
+        init(keyLocale: HorizontalEdge ,event: VirtualInputKey? = nil, keyModel: KeyModel) {
                 self.keyLocale = keyLocale
                 self.event = event
                 self.keyModel = keyModel
         }
 
         private let keyLocale: HorizontalEdge
-        private let event: InputEvent?
+        private let event: VirtualInputKey?
         private let keyModel: KeyModel
 
         @EnvironmentObject private var context: KeyboardViewController

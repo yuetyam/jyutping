@@ -5,9 +5,9 @@ import CoreIME
 struct LargePadInstantInputKey: View {
 
         private let keyText: String
-        private let event: InputEvent?
+        private let event: VirtualInputKey?
 
-        init(_ keyText: String, event: InputEvent? = nil) {
+        init(_ keyText: String, event: VirtualInputKey? = nil) {
                 self.keyText = keyText
                 self.event = event
         }

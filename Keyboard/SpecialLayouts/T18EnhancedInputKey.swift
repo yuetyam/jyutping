@@ -10,14 +10,14 @@ struct T18EnhancedInputKey: View {
         ///   - keyLocale: Key location, left half screen (leading) or right half screen (trailing).
         ///   - event: InputEvent
         ///   - keyModel: KeyModel
-        init(keyLocale: HorizontalEdge, event: InputEvent? = nil, keyModel: KeyModel) {
+        init(keyLocale: HorizontalEdge, event: VirtualInputKey? = nil, keyModel: KeyModel) {
                 self.keyLocale = keyLocale
                 self.event = event
                 self.keyModel = keyModel
         }
 
         private let keyLocale: HorizontalEdge
-        private let event: InputEvent?
+        private let event: VirtualInputKey?
         private let keyModel: KeyModel
 
         @EnvironmentObject private var context: KeyboardViewController

@@ -4,14 +4,14 @@ import CommonExtensions
 
 struct CangjieInputKey: View {
 
-        init(_ event: InputEvent) {
+        init(_ event: VirtualInputKey) {
                 self.event = event
                 self.letter = event.text
                 let root: Character = Converter.cangjie(of: event) ?? "?"
                 self.radical = String(root)
         }
 
-        private let event: InputEvent
+        private let event: VirtualInputKey
         private let letter: String
         private let radical: String
 

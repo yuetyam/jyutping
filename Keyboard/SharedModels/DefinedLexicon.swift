@@ -6,10 +6,10 @@ import CoreIME
 struct DefinedLexicon: Hashable {
         let input: String
         let text: String
-        let events: [InputEvent]
+        let events: [VirtualInputKey]
         let charCode: Int
         let nineKeyCharCode: Int
-        init(input: String, text: String, events: [InputEvent]) {
+        init(input: String, text: String, events: [VirtualInputKey]) {
                 self.input = input
                 self.text = text
                 self.events = events

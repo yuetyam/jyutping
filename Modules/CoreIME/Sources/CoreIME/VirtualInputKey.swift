@@ -1,5 +1,5 @@
 /// Input key; Input method processing event
-public struct InputEvent: Hashable, Identifiable, Comparable, Sendable {
+public struct VirtualInputKey: Hashable, Identifiable, Comparable, Sendable {
 
         /// Key text
         public let text: String
@@ -21,7 +21,7 @@ public struct InputEvent: Hashable, Identifiable, Comparable, Sendable {
         }
 
         // Equatable
-        public static func ==(lhs: InputEvent, rhs: InputEvent) -> Bool {
+        public static func ==(lhs: VirtualInputKey, rhs: VirtualInputKey) -> Bool {
                 return lhs.code == rhs.code
         }
 
@@ -31,56 +31,56 @@ public struct InputEvent: Hashable, Identifiable, Comparable, Sendable {
         }
 
         // Comparable
-        public static func < (lhs: InputEvent, rhs: InputEvent) -> Bool {
+        public static func < (lhs: VirtualInputKey, rhs: VirtualInputKey) -> Bool {
                 return lhs.code < rhs.code
         }
 
-        public static let number0 = InputEvent(text: "0", code: 10, keyCode: 0x1D)
-        public static let number1 = InputEvent(text: "1", code: 11, keyCode: 0x12)
-        public static let number2 = InputEvent(text: "2", code: 12, keyCode: 0x13)
-        public static let number3 = InputEvent(text: "3", code: 13, keyCode: 0x14)
-        public static let number4 = InputEvent(text: "4", code: 14, keyCode: 0x15)
-        public static let number5 = InputEvent(text: "5", code: 15, keyCode: 0x17)
-        public static let number6 = InputEvent(text: "6", code: 16, keyCode: 0x16)
-        public static let number7 = InputEvent(text: "7", code: 17, keyCode: 0x1A)
-        public static let number8 = InputEvent(text: "8", code: 18, keyCode: 0x1C)
-        public static let number9 = InputEvent(text: "9", code: 19, keyCode: 0x19)
+        public static let number0 = VirtualInputKey(text: "0", code: 10, keyCode: 0x1D)
+        public static let number1 = VirtualInputKey(text: "1", code: 11, keyCode: 0x12)
+        public static let number2 = VirtualInputKey(text: "2", code: 12, keyCode: 0x13)
+        public static let number3 = VirtualInputKey(text: "3", code: 13, keyCode: 0x14)
+        public static let number4 = VirtualInputKey(text: "4", code: 14, keyCode: 0x15)
+        public static let number5 = VirtualInputKey(text: "5", code: 15, keyCode: 0x17)
+        public static let number6 = VirtualInputKey(text: "6", code: 16, keyCode: 0x16)
+        public static let number7 = VirtualInputKey(text: "7", code: 17, keyCode: 0x1A)
+        public static let number8 = VirtualInputKey(text: "8", code: 18, keyCode: 0x1C)
+        public static let number9 = VirtualInputKey(text: "9", code: 19, keyCode: 0x19)
 
-        public static let letterA = InputEvent(text: "a", code: 20, keyCode: 0x00)
-        public static let letterB = InputEvent(text: "b", code: 21, keyCode: 0x0B)
-        public static let letterC = InputEvent(text: "c", code: 22, keyCode: 0x08)
-        public static let letterD = InputEvent(text: "d", code: 23, keyCode: 0x02)
-        public static let letterE = InputEvent(text: "e", code: 24, keyCode: 0x0E)
-        public static let letterF = InputEvent(text: "f", code: 25, keyCode: 0x03)
-        public static let letterG = InputEvent(text: "g", code: 26, keyCode: 0x05)
-        public static let letterH = InputEvent(text: "h", code: 27, keyCode: 0x04)
-        public static let letterI = InputEvent(text: "i", code: 28, keyCode: 0x22)
-        public static let letterJ = InputEvent(text: "j", code: 29, keyCode: 0x26)
-        public static let letterK = InputEvent(text: "k", code: 30, keyCode: 0x28)
-        public static let letterL = InputEvent(text: "l", code: 31, keyCode: 0x25)
-        public static let letterM = InputEvent(text: "m", code: 32, keyCode: 0x2E)
-        public static let letterN = InputEvent(text: "n", code: 33, keyCode: 0x2D)
-        public static let letterO = InputEvent(text: "o", code: 34, keyCode: 0x1F)
-        public static let letterP = InputEvent(text: "p", code: 35, keyCode: 0x23)
-        public static let letterQ = InputEvent(text: "q", code: 36, keyCode: 0x0C)
-        public static let letterR = InputEvent(text: "r", code: 37, keyCode: 0x0F)
-        public static let letterS = InputEvent(text: "s", code: 38, keyCode: 0x01)
-        public static let letterT = InputEvent(text: "t", code: 39, keyCode: 0x11)
-        public static let letterU = InputEvent(text: "u", code: 40, keyCode: 0x20)
-        public static let letterV = InputEvent(text: "v", code: 41, keyCode: 0x09)
-        public static let letterW = InputEvent(text: "w", code: 42, keyCode: 0x0D)
-        public static let letterX = InputEvent(text: "x", code: 43, keyCode: 0x07)
-        public static let letterY = InputEvent(text: "y", code: 44, keyCode: 0x10)
-        public static let letterZ = InputEvent(text: "z", code: 45, keyCode: 0x06)
+        public static let letterA = VirtualInputKey(text: "a", code: 20, keyCode: 0x00)
+        public static let letterB = VirtualInputKey(text: "b", code: 21, keyCode: 0x0B)
+        public static let letterC = VirtualInputKey(text: "c", code: 22, keyCode: 0x08)
+        public static let letterD = VirtualInputKey(text: "d", code: 23, keyCode: 0x02)
+        public static let letterE = VirtualInputKey(text: "e", code: 24, keyCode: 0x0E)
+        public static let letterF = VirtualInputKey(text: "f", code: 25, keyCode: 0x03)
+        public static let letterG = VirtualInputKey(text: "g", code: 26, keyCode: 0x05)
+        public static let letterH = VirtualInputKey(text: "h", code: 27, keyCode: 0x04)
+        public static let letterI = VirtualInputKey(text: "i", code: 28, keyCode: 0x22)
+        public static let letterJ = VirtualInputKey(text: "j", code: 29, keyCode: 0x26)
+        public static let letterK = VirtualInputKey(text: "k", code: 30, keyCode: 0x28)
+        public static let letterL = VirtualInputKey(text: "l", code: 31, keyCode: 0x25)
+        public static let letterM = VirtualInputKey(text: "m", code: 32, keyCode: 0x2E)
+        public static let letterN = VirtualInputKey(text: "n", code: 33, keyCode: 0x2D)
+        public static let letterO = VirtualInputKey(text: "o", code: 34, keyCode: 0x1F)
+        public static let letterP = VirtualInputKey(text: "p", code: 35, keyCode: 0x23)
+        public static let letterQ = VirtualInputKey(text: "q", code: 36, keyCode: 0x0C)
+        public static let letterR = VirtualInputKey(text: "r", code: 37, keyCode: 0x0F)
+        public static let letterS = VirtualInputKey(text: "s", code: 38, keyCode: 0x01)
+        public static let letterT = VirtualInputKey(text: "t", code: 39, keyCode: 0x11)
+        public static let letterU = VirtualInputKey(text: "u", code: 40, keyCode: 0x20)
+        public static let letterV = VirtualInputKey(text: "v", code: 41, keyCode: 0x09)
+        public static let letterW = VirtualInputKey(text: "w", code: 42, keyCode: 0x0D)
+        public static let letterX = VirtualInputKey(text: "x", code: 43, keyCode: 0x07)
+        public static let letterY = VirtualInputKey(text: "y", code: 44, keyCode: 0x10)
+        public static let letterZ = VirtualInputKey(text: "z", code: 45, keyCode: 0x06)
 
         /// Separator; Delimiter; Quote
-        public static let apostrophe = InputEvent(text: "\u{27}", code: 47, keyCode: 0x27)
+        public static let apostrophe = VirtualInputKey(text: "\u{27}", code: 47, keyCode: 0x27)
 
         /// Grave accent; Backtick; Backquote
-        public static let grave = InputEvent(text: "\u{60}", code: 48, keyCode: 0x32)
+        public static let grave = VirtualInputKey(text: "\u{60}", code: 48, keyCode: 0x32)
 }
 
-extension InputEvent {
+extension VirtualInputKey {
 
         /// Digits [0-9]
         public var isNumber: Bool {
@@ -140,62 +140,62 @@ extension InputEvent {
         }
 }
 
-extension InputEvent {
+extension VirtualInputKey {
         public static func isMatchedNumber(keyCode: UInt16) -> Bool {
                 return digitSet.contains(where: { $0.keyCode == keyCode })
         }
         public static func isMatchedLetter(keyCode: UInt16) -> Bool {
                 return alphabetSet.contains(where: { $0.keyCode == keyCode })
         }
-        public static func matchEvent(for keyCode: UInt16) -> InputEvent? {
+        public static func matchEvent(for keyCode: UInt16) -> VirtualInputKey? {
                 switch keyCode {
-                case InputEvent.apostrophe.keyCode:
+                case VirtualInputKey.apostrophe.keyCode:
                         return .apostrophe
-                case InputEvent.grave.keyCode:
+                case VirtualInputKey.grave.keyCode:
                         return .grave
                 default:
                         return alphabetSet.first(where: { $0.keyCode == keyCode }) ?? digitSet.first(where: { $0.keyCode == keyCode })
                 }
         }
-        public static func matchInputEvent(for code: Int) -> InputEvent? {
+        public static func matchInputEvent(for code: Int) -> VirtualInputKey? {
                 return alphabetSet.first(where: { $0.code == code }) ?? digitSet.first(where: { $0.code == code })
         }
-        public static func matchInputEvent(for character: Character) -> InputEvent? {
+        public static func matchInputEvent(for character: Character) -> VirtualInputKey? {
                 guard let code = character.inputEventCode else { return nil }
                 return alphabetSet.first(where: { $0.code == code }) ?? digitSet.first(where: { $0.code == code })
         }
 
-        public static let GWEvents: [InputEvent] = [letterG, letterW]
-        public static let KWEvents: [InputEvent] = [letterK, letterW]
+        public static let GWEvents: [VirtualInputKey] = [letterG, letterW]
+        public static let KWEvents: [VirtualInputKey] = [letterK, letterW]
 }
 
-extension RandomAccessCollection where Element == InputEvent {
+extension RandomAccessCollection where Element == VirtualInputKey {
         /// radix100Combined
         var combinedCode: Int {
                 guard count < 10 else { return 0 }
                 return reduce(0, { $0 * 100 + $1.code })
         }
         var anchorsCode: Int {
-                return map({ $0 == InputEvent.letterY ? InputEvent.letterJ : $0 }).combinedCode
+                return map({ $0 == VirtualInputKey.letterY ? VirtualInputKey.letterJ : $0 }).combinedCode
         }
 }
 
 extension Int {
-        var matchedInputEvents: [InputEvent] {
+        var matchedInputEvents: [VirtualInputKey] {
                 var number = self
                 var codes: [Int] = []
                 while number > 0 {
                         codes.append(number % 100)
                         number /= 100
                 }
-                return codes.reversed().compactMap(InputEvent.matchInputEvent(for:))
+                return codes.reversed().compactMap(VirtualInputKey.matchInputEvent(for:))
         }
 }
 
-extension InputEvent {
+extension VirtualInputKey {
 
         /// Digit numbers [0-9]
-        public static let digitSet: Set<InputEvent> = [
+        public static let digitSet: Set<VirtualInputKey> = [
                 number0,
                 number1,
                 number2,
@@ -209,7 +209,7 @@ extension InputEvent {
         ]
 
         /// Cantonese tone digits [1-6]
-        public static let toneSet: Set<InputEvent> = [
+        public static let toneSet: Set<VirtualInputKey> = [
                 number1,
                 number2,
                 number3,
@@ -219,7 +219,7 @@ extension InputEvent {
         ]
 
         /// Letters [a-z]
-        public static let alphabetSet: Set<InputEvent> = [
+        public static let alphabetSet: Set<VirtualInputKey> = [
                 letterA,
                 letterB,
                 letterC,

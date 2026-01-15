@@ -199,20 +199,20 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 }
                                 candidates = []
                                 text2mark = String.empty
-                        case InputEvent.letterR:
+                        case VirtualInputKey.letterR:
                                 ensureQwertyForm(to: .pinyin)
                                 pinyinReverseLookup()
-                        case InputEvent.letterV:
+                        case VirtualInputKey.letterV:
                                 ensureQwertyForm(to: .cangjie)
                                 cangjieReverseLookup()
-                        case InputEvent.letterX:
+                        case VirtualInputKey.letterX:
                                 if strokeLayout.isTenKey && keyboardForm != .tenKeyStroke {
                                         updateKeyboardForm(to: .tenKeyStroke)
                                 } else {
                                         ensureQwertyForm(to: .stroke)
                                 }
                                 strokeReverseLookup()
-                        case InputEvent.letterQ:
+                        case VirtualInputKey.letterQ:
                                 structureReverseLookup()
                         default:
                                 suggest()
@@ -223,7 +223,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 return bufferEvents.map({ $0.case.isLowercased ? $0.key.text : $0.key.text.uppercased() }).joined()
         }
 
-        func handle(_ key: InputEvent, isCapitalized: Bool? = nil) {
+        func handle(_ key: VirtualInputKey, isCapitalized: Bool? = nil) {
                 let isCapitalized: Bool = isCapitalized ?? keyboardCase.isCapitalized
                 defer {
                         adjustKeyboard()
@@ -247,7 +247,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let newEvent = BasicInputEvent(key: key, case: keyboardCase)
                 bufferEvents.append(newEvent)
         }
-        private func process(events: [InputEvent], isCapitalized: Bool) {
+        private func process(events: [VirtualInputKey], isCapitalized: Bool) {
                 guard let firstEvent = events.first else { return }
                 defer {
                         adjustKeyboard()
@@ -268,9 +268,9 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         return
                 }
                 let keyCase = keyboardCase
-                let shouldConvertEvents: Bool = keyboardLayout.isTripleStroke && (events == InputEvent.GWEvents) && (inputLengthSequence.last == 2) && (bufferEvents.last?.key == .letterW)
+                let shouldConvertEvents: Bool = keyboardLayout.isTripleStroke && (events == VirtualInputKey.GWEvents) && (inputLengthSequence.last == 2) && (bufferEvents.last?.key == .letterW)
                 if shouldConvertEvents {
-                        let newEvents = InputEvent.KWEvents.map({ BasicInputEvent(key: $0, case: keyCase) })
+                        let newEvents = VirtualInputKey.KWEvents.map({ BasicInputEvent(key: $0, case: keyCase) })
                         bufferEvents = bufferEvents.dropLast(2) + newEvents
                 } else {
                         inputLengthSequence.append(events.count)
@@ -280,7 +280,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         }
         private func appendBufferText(_ text: String) {
                 guard let isCapitalized = text.first?.isUppercase else { return }
-                let events = text.lowercased().compactMap(InputEvent.matchInputEvent(for:))
+                let events = text.lowercased().compactMap(VirtualInputKey.matchInputEvent(for:))
                 switch events.count {
                 case 0: return
                 case 1: events.first.flatMap({ handle($0, isCapitalized: isCapitalized) })
@@ -842,14 +842,14 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 definedLexicons = lexicon.entries.compactMap({ entry -> DefinedLexicon? in
                         let input = entry.userInput.lowercased()
                         guard input.isNotEmpty else { return nil }
-                        let events = input.compactMap(InputEvent.matchInputEvent(for:))
+                        let events = input.compactMap(VirtualInputKey.matchInputEvent(for:))
                         guard events.count == input.count else { return nil }
                         let text = entry.documentText
                         guard text.isNotEmpty else { return nil }
                         return DefinedLexicon(input: input, text: text, events: events)
                 }).distinct()
         }
-        private func searchDefinedCandidates(for events: [InputEvent]) -> [Candidate] {
+        private func searchDefinedCandidates(for events: [VirtualInputKey]) -> [Candidate] {
                 guard Options.isTextReplacementsOn else { return [] }
                 if events.count < 10 {
                         let charCode: Int = events.map(\.code).radix100Combined()

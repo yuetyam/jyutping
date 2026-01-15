@@ -1,6 +1,6 @@
 import CoreIME
 
 struct BasicInputEvent: Hashable {
-        let key: InputEvent
+        let key: VirtualInputKey
         let isCapitalized: Bool
 }

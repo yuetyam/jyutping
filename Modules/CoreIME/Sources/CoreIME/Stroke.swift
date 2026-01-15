@@ -3,7 +3,7 @@ import SQLite3
 import CommonExtensions
 
 extension Engine {
-        public static func strokeReverseLookup<T: RandomAccessCollection<InputEvent>>(events: T) -> [Candidate] {
+        public static func strokeReverseLookup<T: RandomAccessCollection<VirtualInputKey>>(events: T) -> [Candidate] {
                 let strokeEvents = events.compactMap(\.strokeEvent)
                 let isWildcard: Bool = strokeEvents.contains(where: \.isWildcard)
                 let text: String = isWildcard ? strokeEvents.sequenceText.replacingOccurrences(of: "6", with: "[12345]") : strokeEvents.sequenceText

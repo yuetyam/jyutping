@@ -5,13 +5,13 @@ import CoreIME
 
 struct PadPullableInputKey: View {
 
-        init(event: InputEvent? = nil, upper: String, lower: String) {
+        init(event: VirtualInputKey? = nil, upper: String, lower: String) {
                 self.event = event
                 self.upper = upper
                 self.lower = lower
         }
 
-        private let event: InputEvent?
+        private let event: VirtualInputKey?
         private let upper: String
         private let lower: String
 

@@ -2,8 +2,8 @@ import CoreIME
 import CommonExtensions
 
 enum Representative: Hashable {
-        case letter(InputEvent)
-        case number(InputEvent)
+        case letter(VirtualInputKey)
+        case number(VirtualInputKey)
         case keypadNumber(Int)
         case arrow(Direction)
         case punctuation(PunctuationKey)
@@ -94,11 +94,11 @@ extension UInt16 {
                         return .pageUp
                 case KeyCode.Special.pageDown:
                         return .pageDown
-                case _ where InputEvent.isMatchedNumber(keyCode: self):
-                        guard let numberEvent = InputEvent.matchEvent(for: self) else { return .other }
+                case _ where VirtualInputKey.isMatchedNumber(keyCode: self):
+                        guard let numberEvent = VirtualInputKey.matchEvent(for: self) else { return .other }
                         return .number(numberEvent)
-                case _ where InputEvent.isMatchedLetter(keyCode: self):
-                        guard let letterEvent = InputEvent.matchEvent(for: self) else { return .other }
+                case _ where VirtualInputKey.isMatchedLetter(keyCode: self):
+                        guard let letterEvent = VirtualInputKey.matchEvent(for: self) else { return .other }
                         return .letter(letterEvent)
                 default:
                         return .other

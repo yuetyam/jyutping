@@ -3,7 +3,7 @@ import SQLite3
 import CommonExtensions
 
 extension Engine {
-        public static func pinyinReverseLookup<T: RandomAccessCollection<InputEvent>>(events: T, segmentation: PinyinSegmentation) async -> [Candidate] {
+        public static func pinyinReverseLookup<T: RandomAccessCollection<VirtualInputKey>>(events: T, segmentation: PinyinSegmentation) async -> [Candidate] {
                 let isLetterEventOnly: Bool = events.contains(where: \.isLetter.negative).negative
                 // TODO: Handle separators
                 guard isLetterEventOnly else { return [] }
@@ -23,7 +23,7 @@ extension Engine {
                 }
         }
 
-        private static func processPinyinSlices<T: RandomAccessCollection<InputEvent>>(of events: T, text: String, limit: Int64? = nil, anchorsStatement: OpaquePointer?, spellStatement: OpaquePointer?) -> [PinyinLexicon] {
+        private static func processPinyinSlices<T: RandomAccessCollection<VirtualInputKey>>(of events: T, text: String, limit: Int64? = nil, anchorsStatement: OpaquePointer?, spellStatement: OpaquePointer?) -> [PinyinLexicon] {
                 let adjustedLimit: Int64 = (limit == nil) ? 300 : 100
                 let inputLength: Int = events.count
                 return (0..<inputLength).flatMap({ number -> [PinyinLexicon] in
@@ -52,7 +52,7 @@ extension Engine {
                 return PinyinLexicon(text: item.text, pinyin: item.pinyin, input: text, mark: text, order: item.order)
         }
 
-        private static func pinyinSearch<T: RandomAccessCollection<InputEvent>>(events: T, segmentation: PinyinSegmentation, limit: Int64? = nil, anchorsStatement: OpaquePointer?, spellStatement: OpaquePointer?) -> [PinyinLexicon] {
+        private static func pinyinSearch<T: RandomAccessCollection<VirtualInputKey>>(events: T, segmentation: PinyinSegmentation, limit: Int64? = nil, anchorsStatement: OpaquePointer?, spellStatement: OpaquePointer?) -> [PinyinLexicon] {
                 let inputLength: Int = events.count
                 let text: String = events.map(\.text).joined()
                 let spellMatched = pinyinSpellMatch(text: text, limit: limit, statement: spellStatement)
@@ -174,7 +174,7 @@ extension Engine {
                 guard sqlite3_prepare_v2(Engine.database, command, -1, &statement, nil) == SQLITE_OK else { return nil }
                 return statement
         }
-        private static func pinyinAnchorsMatch<T: RandomAccessCollection<InputEvent>>(events: T, input: String? = nil, limit: Int64? = nil, statement: OpaquePointer?) -> [PinyinLexicon] {
+        private static func pinyinAnchorsMatch<T: RandomAccessCollection<VirtualInputKey>>(events: T, input: String? = nil, limit: Int64? = nil, statement: OpaquePointer?) -> [PinyinLexicon] {
                 let code = events.combinedCode
                 guard code > 0 else { return [] }
                 sqlite3_reset(statement)

@@ -4,13 +4,13 @@ import CommonExtensions
 
 struct StrokeInputKey: View {
 
-        init(_ event: InputEvent) {
+        init(_ event: VirtualInputKey) {
                 self.event = event
                 self.letter = event.text
                 self.stroke = PresetConstant.strokeKeyMap[letter]
         }
 
-        private let event: InputEvent
+        private let event: VirtualInputKey
         private let letter: String
         private let stroke: String?
 

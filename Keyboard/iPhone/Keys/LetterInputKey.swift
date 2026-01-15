@@ -4,12 +4,12 @@ import CommonExtensions
 
 struct LetterInputKey: View {
 
-        init(_ event: InputEvent) {
+        init(_ event: VirtualInputKey) {
                 self.event = event
                 self.keyText = event.text
         }
 
-        private let event: InputEvent
+        private let event: VirtualInputKey
         private let keyText: String
 
         @EnvironmentObject private var context: KeyboardViewController

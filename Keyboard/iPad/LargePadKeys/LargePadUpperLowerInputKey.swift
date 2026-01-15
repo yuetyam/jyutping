@@ -12,7 +12,7 @@ struct LargePadUpperLowerInputKey: View {
         ///   - lower: Key lower text
         ///   - event: InputEvent, corresponding to the lower text
         ///   - keyModel: KeyElements
-        init(keyLocale: HorizontalEdge, upper: String, lower: String, event: InputEvent? = nil, keyModel: KeyModel) {
+        init(keyLocale: HorizontalEdge, upper: String, lower: String, event: VirtualInputKey? = nil, keyModel: KeyModel) {
                 self.keyLocale = keyLocale
                 self.upper = upper
                 self.lower = lower
@@ -23,7 +23,7 @@ struct LargePadUpperLowerInputKey: View {
         private let keyLocale: HorizontalEdge
         private let upper: String
         private let lower: String
-        private let event: InputEvent?
+        private let event: VirtualInputKey?
         private let keyModel: KeyModel
 
         @EnvironmentObject private var context: KeyboardViewController

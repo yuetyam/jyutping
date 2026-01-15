@@ -36,7 +36,7 @@ enum HiddenEvent: Int {
         case letterM
         case backspace
 
-        var inputEvent: InputEvent? {
+        var inputEvent: VirtualInputKey? {
                 switch self {
                 case .letterA: .letterA
                 case .letterL: .letterL

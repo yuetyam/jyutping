@@ -304,16 +304,16 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                 selectedCandidates = []
                                 clearMarkedText()
                                 candidates = []
-                        case InputEvent.letterR:
+                        case VirtualInputKey.letterR:
                                 appContext.updateIndicatorTexts(to: .pinyinReverseLookup)
                                 pinyinReverseLookup()
-                        case InputEvent.letterV:
+                        case VirtualInputKey.letterV:
                                 appContext.updateIndicatorTexts(to: IndicatorTexts.cangjieReverseLookup(for: AppSettings.cangjieVariant))
                                 cangjieReverseLookup()
-                        case InputEvent.letterX:
+                        case VirtualInputKey.letterX:
                                 appContext.updateIndicatorTexts(to: .strokeReverseLookup)
                                 strokeReverseLookup()
-                        case InputEvent.letterQ:
+                        case VirtualInputKey.letterQ:
                                 appContext.updateIndicatorTexts(to: .structureReverseLookup)
                                 structureReverseLookup()
                         case .some(let inputEvent) where inputEvent.isLetter:
@@ -396,13 +396,13 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         let isDisabled: Bool = (dict[kOn] as? Bool) == false || (dict[kOn] as? Int) == 0
                         guard isDisabled.negative else { return nil }
                         guard let input = (dict[kReplace] as? String)?.lowercased(), input.isNotEmpty else { return nil }
-                        let events = input.lowercased().compactMap(InputEvent.matchInputEvent(for:))
+                        let events = input.lowercased().compactMap(VirtualInputKey.matchInputEvent(for:))
                         guard events.count == input.count else { return nil }
                         guard let text = (dict[kWith] as? String), text.isNotEmpty else { return nil }
                         return DefinedLexicon(input: input, text: text, events: events)
                 }).distinct()
         }
-        private func searchDefinedCandidates(for events: [InputEvent]) -> [Candidate] {
+        private func searchDefinedCandidates(for events: [VirtualInputKey]) -> [Candidate] {
                 guard AppSettings.isTextReplacementsOn else { return [] }
                 if events.count < 10 {
                         let charCode: Int = events.map(\.code).radix100Combined()
@@ -845,7 +845,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 nonisolated(unsafe) let client: InputClient? = (sender as? InputClient)
                 if isBuffering.negative && isEventHandled && inputForm.isOptions.negative {
                         caretFrame = client?.caretRect
-                        let text: String = (InputEvent.matchEvent(for: code) ?? InputEvent.letterA).text
+                        let text: String = (VirtualInputKey.matchEvent(for: code) ?? VirtualInputKey.letterA).text
                         let attributes: [NSAttributedString.Key: Any] = [.underlineStyle: 0]
                         let attributedText = NSAttributedString(string: text, attributes: attributes)
                         let selectionRange = NSRange(location: text.utf16.count, length: 0)
@@ -924,7 +924,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         let isStrokeReverseLookup: Bool = currentInputForm.isCantonese && (bufferEvents.first?.key == .letterX)
                         guard isStrokeReverseLookup else { return }
                         let code: Int = number + 10
-                        guard let event = InputEvent.matchInputEvent(for: code) else { return }
+                        guard let event = VirtualInputKey.matchInputEvent(for: code) else { return }
                         let newEvent = BasicInputEvent(key: event, isCapitalized: false)
                         bufferEvents.append(newEvent)
                 case .arrow(let direction):
@@ -1109,7 +1109,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                         }
                                 }()
                                 if shouldKeepBuffer {
-                                        let newEvent = BasicInputEvent(key: InputEvent.apostrophe, isCapitalized: false)
+                                        let newEvent = BasicInputEvent(key: VirtualInputKey.apostrophe, isCapitalized: false)
                                         bufferEvents.append(newEvent)
                                 } else {
                                         switch Options.punctuationForm {

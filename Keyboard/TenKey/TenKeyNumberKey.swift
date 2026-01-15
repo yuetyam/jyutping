@@ -4,11 +4,11 @@ import CoreIME
 
 struct TenKeyNumberKey: View {
 
-        init(_ event: InputEvent) {
+        init(_ event: VirtualInputKey) {
                 self.event = event
         }
 
-        private let event: InputEvent
+        private let event: VirtualInputKey
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme

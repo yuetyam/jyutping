@@ -11,7 +11,7 @@ struct T21EnhancedInputKey: View {
         ///   - coefficient: Multiplier to the `widthUnit`
         ///   - event: InputEvent
         ///   - unit: KeyUnit
-        init(side: HorizontalEdge, coefficient: CGFloat = 1.25, event: InputEvent? = nil, unit: KeyUnit) {
+        init(side: HorizontalEdge, coefficient: CGFloat = 1.25, event: VirtualInputKey? = nil, unit: KeyUnit) {
                 self.side = side
                 self.coefficient = coefficient
                 self.event = event
@@ -20,7 +20,7 @@ struct T21EnhancedInputKey: View {
 
         private let side: HorizontalEdge
         private let coefficient: CGFloat
-        private let event: InputEvent?
+        private let event: VirtualInputKey?
         private let keyUnit: KeyUnit
 
         @EnvironmentObject private var context: KeyboardViewController

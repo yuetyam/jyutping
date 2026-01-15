@@ -5,7 +5,7 @@ import CommonExtensions
 public struct PinyinSyllable: Hashable, Comparable, Sendable {
 
         let code: Int
-        let events: Array<InputEvent>
+        let events: Array<VirtualInputKey>
         let text: String
 
         public static func ==(lhs: PinyinSyllable, rhs: PinyinSyllable) -> Bool {
@@ -47,12 +47,12 @@ private extension Sequence where Element == PinyinScheme {
 
 public struct PinyinSegmenter {
 
-        public static func segment<T: RandomAccessCollection<InputEvent>>(events: T) -> PinyinSegmentation {
+        public static func segment<T: RandomAccessCollection<VirtualInputKey>>(events: T) -> PinyinSegmentation {
                 let statement = prepareStatement()
                 defer { sqlite3_finalize(statement) }
                 return split(events: events.filter(\.isLetter), statement: statement)
         }
-        private static func split<T: RandomAccessCollection<InputEvent>>(events: T, statement: OpaquePointer?) -> PinyinSegmentation {
+        private static func split<T: RandomAccessCollection<VirtualInputKey>>(events: T, statement: OpaquePointer?) -> PinyinSegmentation {
                 let headSyllables = splitLeading(events: events, statement: statement)
                 guard headSyllables.isNotEmpty else { return [] }
                 let eventCount = events.count
@@ -78,14 +78,14 @@ public struct PinyinSegmenter {
                 }
                 return segmentation.descended()
         }
-        private static func splitLeading<T: RandomAccessCollection<InputEvent>>(events: T, statement: OpaquePointer?) -> [PinyinSyllable] {
+        private static func splitLeading<T: RandomAccessCollection<VirtualInputKey>>(events: T, statement: OpaquePointer?) -> [PinyinSyllable] {
                 let maxLength: Int = min(events.count, 6)
                 guard maxLength > 0 else { return [] }
                 return (1...maxLength).reversed().compactMap({ number -> PinyinSyllable? in
                         let leadingEvents = events.prefix(number)
                         let code = leadingEvents.combinedCode
                         guard let text = match(code: code, statement: statement) else { return nil }
-                        return PinyinSyllable(code: code, events: Array<InputEvent>(leadingEvents), text: text)
+                        return PinyinSyllable(code: code, events: Array<VirtualInputKey>(leadingEvents), text: text)
                 })
         }
 

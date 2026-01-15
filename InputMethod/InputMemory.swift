@@ -83,7 +83,7 @@ struct InputMemory {
 
         // MARK: - Suggestions
 
-        static func suggest<T: RandomAccessCollection<InputEvent>>(events: T, segmentation: Segmentation) async -> [Candidate] {
+        static func suggest<T: RandomAccessCollection<VirtualInputKey>>(events: T, segmentation: Segmentation) async -> [Candidate] {
                 switch (events.contains(where: \.isApostrophe), events.contains(where: \.isToneEvent)) {
                 case (false, false):
                         return search(events: events, segmentation: segmentation)
@@ -186,7 +186,7 @@ struct InputMemory {
                         return qualified
                 }
         }
-        private static func search<T: RandomAccessCollection<InputEvent>>(events: T, segmentation: Segmentation) -> [Candidate] {
+        private static func search<T: RandomAccessCollection<VirtualInputKey>>(events: T, segmentation: Segmentation) -> [Candidate] {
                 lazy var shortcutStatement = prepareShortcutStatement()
                 lazy var pingStatement = preparePingStatement()
                 lazy var strictStatement = prepareStrictStatement()
@@ -212,7 +212,7 @@ struct InputMemory {
                 guard shortcuts.isEmpty else {
                         return shortcuts.map({ Candidate(text: $0.word, romanization: $0.romanization, input: text, mark: $0.mark, order: -1) }) + queried
                 }
-                let shouldPartiallyMatch: Bool = idealSchemes.isEmpty || (events.last == InputEvent.letterM) || (events.first == InputEvent.letterM)
+                let shouldPartiallyMatch: Bool = idealSchemes.isEmpty || (events.last == VirtualInputKey.letterM) || (events.first == VirtualInputKey.letterM)
                 guard shouldPartiallyMatch else { return queried }
                 let prefixMatched: [InternalLexicon] = segmentation.flatMap({ scheme -> [InternalLexicon] in
                         guard scheme.isNotEmpty else { return [] }
@@ -222,7 +222,7 @@ struct InputMemory {
                         let conjoinedText: String = (schemeAnchors + tail).map(\.text).joined()
                         let schemeSyllableText: String = scheme.syllableText
                         let mark: String = scheme.mark + String.space + tail.map(\.text).joined()
-                        let tailAsAnchorText = tail.compactMap({ $0 == InputEvent.letterY ? InputEvent.letterJ.text.first : $0.text.first })
+                        let tailAsAnchorText = tail.compactMap({ $0 == VirtualInputKey.letterY ? VirtualInputKey.letterJ.text.first : $0.text.first })
                         let conjoinedMatched = shortcutMatch(text: conjoinedText, input: conjoinedText, statement: shortcutStatement)
                                 .compactMap({ item -> InternalLexicon? in
                                         let toneFreeRomanization = item.romanization.removedTones()
@@ -231,7 +231,7 @@ struct InputMemory {
                                         guard suffixAnchorText == tailAsAnchorText else { return nil }
                                         return InternalLexicon(word: item.word, romanization: item.romanization, frequency: item.frequency, latest: item.latest, input: text, mark: mark)
                                 })
-                        let transformedTailText = tail.enumerated().map({ $0.offset == 0 && $0.element == InputEvent.letterY ? InputEvent.letterJ.text : $0.element.text }).joined()
+                        let transformedTailText = tail.enumerated().map({ $0.offset == 0 && $0.element == VirtualInputKey.letterY ? VirtualInputKey.letterJ.text : $0.element.text }).joined()
                         let syllableText: String = schemeSyllableText + String.space + transformedTailText
                         let anchorsText: String = schemeAnchors.map(\.text).joined() + (tail.first?.text ?? String.empty)
                         let anchorsMatched = shortcutMatch(text: anchorsText, input: anchorsText, statement: shortcutStatement)
