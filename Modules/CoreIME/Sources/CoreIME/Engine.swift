@@ -43,7 +43,7 @@ public struct Engine {
 // MARK: - Suggestions
 
 extension Engine {
-        public static func suggest<T: RandomAccessCollection<VirtualInputKey>>(_ events: T, segmentation: Segmentation) -> [Candidate] {
+        public static func suggest<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T, segmentation: Segmentation) -> [Candidate] {
                 lazy var anchorsStatement = prepareAnchorsStatement()
                 lazy var spellStatement = prepareSpellStatement()
                 lazy var strictStatement = prepareStrictStatement()
@@ -52,48 +52,48 @@ extension Engine {
                         sqlite3_finalize(spellStatement)
                         sqlite3_finalize(strictStatement)
                 }
-                switch events.count {
+                switch keys.count {
                 case 0: return []
                 case 1:
-                        switch events.first {
+                        switch keys.first {
                         case .letterA:
                                 let text = VirtualInputKey.letterA.text
-                                return spellMatch(text: text, input: text, mark: text, statement: spellStatement) + spellMatch(text: text + text, input: text, mark: text, statement: spellStatement) + anchorsMatch(events: events, input: text, statement: anchorsStatement)
+                                return spellMatch(text: text, input: text, mark: text, statement: spellStatement) + spellMatch(text: text + text, input: text, mark: text, statement: spellStatement) + anchorsMatch(keys: keys, input: text, statement: anchorsStatement)
                         case .letterO, .letterM:
-                                guard let text = events.first?.text else { return [] }
-                                return spellMatch(text: text, input: text, mark: text, statement: spellStatement) + anchorsMatch(events: events, input: text, statement: anchorsStatement)
+                                guard let text = keys.first?.text else { return [] }
+                                return spellMatch(text: text, input: text, mark: text, statement: spellStatement) + anchorsMatch(keys: keys, input: text, statement: anchorsStatement)
                         default:
-                                return anchorsMatch(events: events, statement: anchorsStatement)
+                                return anchorsMatch(keys: keys, statement: anchorsStatement)
                         }
                 default:
-                        return dispatch(events: events, segmentation: segmentation, anchorsStatement: anchorsStatement, spellStatement: spellStatement, strictStatement: strictStatement)
+                        return dispatch(keys, segmentation: segmentation, anchorsStatement: anchorsStatement, spellStatement: spellStatement, strictStatement: strictStatement)
                 }
         }
 
-        private static func dispatch<T: RandomAccessCollection<VirtualInputKey>>(events: T, segmentation: Segmentation, anchorsStatement: OpaquePointer?, spellStatement: OpaquePointer?, strictStatement: OpaquePointer?) -> [Candidate] {
-                let syllableEvents = events.filter(\.isSyllableLetter)
+        private static func dispatch<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T, segmentation: Segmentation, anchorsStatement: OpaquePointer?, spellStatement: OpaquePointer?, strictStatement: OpaquePointer?) -> [Candidate] {
+                let syllableKeys = keys.filter(\.isSyllableLetter)
                 let candidates: [Candidate] =  switch (segmentation.first?.first?.alias.count ?? 0) {
                 case 0:
-                        processSlices(of: syllableEvents, text: syllableEvents.map(\.text).joined(), anchorsStatement: anchorsStatement, spellStatement: spellStatement)
-                case 1 where syllableEvents.count > 1,
-                        _ where syllableEvents.count != events.count :
-                        search(events: syllableEvents, segmentation: segmentation, anchorsStatement: anchorsStatement, spellStatement: spellStatement, strictStatement: strictStatement) + processSlices(of: syllableEvents, text: syllableEvents.map(\.text).joined(), anchorsStatement: anchorsStatement, spellStatement: spellStatement)
+                        processSlices(of: syllableKeys, text: syllableKeys.map(\.text).joined(), anchorsStatement: anchorsStatement, spellStatement: spellStatement)
+                case 1 where syllableKeys.count > 1,
+                        _ where syllableKeys.count != keys.count :
+                        search(syllableKeys, segmentation: segmentation, anchorsStatement: anchorsStatement, spellStatement: spellStatement, strictStatement: strictStatement) + processSlices(of: syllableKeys, text: syllableKeys.map(\.text).joined(), anchorsStatement: anchorsStatement, spellStatement: spellStatement)
                 default:
-                        search(events: syllableEvents, segmentation: segmentation, anchorsStatement: anchorsStatement, spellStatement: spellStatement, strictStatement: strictStatement)
+                        search(syllableKeys, segmentation: segmentation, anchorsStatement: anchorsStatement, spellStatement: spellStatement, strictStatement: strictStatement)
                 }
-                switch (events.contains(where: \.isApostrophe), events.contains(where: \.isToneInputKey)) {
+                switch (keys.contains(where: \.isApostrophe), keys.contains(where: \.isToneInputKey)) {
                 case (false, false):
                         return candidates
                 case (true, true):
-                        let inputText = events.map(\.text).joined()
+                        let inputText = keys.map(\.text).joined()
                         let text = inputText.toneConverted()
                         return candidates.compactMap({ item -> Candidate? in
                                 guard text.hasPrefix(item.romanization) else { return nil }
                                 return item.replacedInput(with: inputText)
                         })
                 case (false, true):
-                        let inputText = events.map(\.text).joined()
-                        let toneInput = events.filter(\.isSyllableLetter.negative).map(\.text).joined()
+                        let inputText = keys.map(\.text).joined()
+                        let toneInput = keys.filter(\.isSyllableLetter.negative).map(\.text).joined()
                         let text = inputText.toneConverted()
                         let textTones = text.tones
                         let qualified: [Candidate] = candidates.compactMap({ item -> Candidate? in
@@ -123,23 +123,23 @@ extension Engine {
                                         guard textTones.hasPrefix(tones) else { return nil }
                                         let isCorrectPosition: Bool = text.dropFirst(item.inputCount).first?.isCantoneseToneDigit ?? false
                                         guard isCorrectPosition else { return nil }
-                                        var firstSyllableEvents: [VirtualInputKey] = []
-                                        for event in events {
-                                                if event.isSyllableLetter {
-                                                        firstSyllableEvents.append(event)
+                                        var firstSyllableKeys: [VirtualInputKey] = []
+                                        for key in keys {
+                                                if key.isSyllableLetter {
+                                                        firstSyllableKeys.append(key)
                                                 } else {
                                                         break
                                                 }
                                         }
-                                        var firstToneEvents: [VirtualInputKey] = []
-                                        for event in events.dropFirst(firstSyllableEvents.count) {
-                                                if event.isSyllableLetter.negative {
-                                                        firstToneEvents.append(event)
+                                        var firstToneKeys: [VirtualInputKey] = []
+                                        for key in keys.dropFirst(firstSyllableKeys.count) {
+                                                if key.isSyllableLetter.negative {
+                                                        firstToneKeys.append(key)
                                                 } else {
                                                         break
                                                 }
                                         }
-                                        let combinedInput: String = (firstSyllableEvents + firstToneEvents).map(\.text).joined()
+                                        let combinedInput: String = (firstSyllableKeys + firstToneKeys).map(\.text).joined()
                                         return item.replacedInput(with: combinedInput)
                                 case (2, 2):
                                         guard textTones == tones else { return nil }
@@ -161,12 +161,12 @@ extension Engine {
                         })
                         return qualified.sorted(by: { $0.inputCount > $1.inputCount })
                 case (true, false):
-                        let isHeadingSeparator: Bool = events.first?.isApostrophe ?? false
-                        let isTrailingSeparator: Bool = events.last?.isApostrophe ?? false
+                        let isHeadingSeparator: Bool = keys.first?.isApostrophe ?? false
+                        let isTrailingSeparator: Bool = keys.last?.isApostrophe ?? false
                         guard isHeadingSeparator.negative else { return [] }
-                        let inputSeparatorCount = events.count(where: \.isApostrophe)
-                        let eventLength = events.count
-                        let text = events.map(\.text).joined()
+                        let inputSeparatorCount = keys.count(where: \.isApostrophe)
+                        let inputLength = keys.count
+                        let text = keys.map(\.text).joined()
                         let textParts = text.split(separator: Character.apostrophe)
                         let qualified: [Candidate] = candidates.compactMap({ item -> Candidate? in
                                 let syllables = item.romanization.removedTones().split(separator: Character.space)
@@ -174,7 +174,7 @@ extension Engine {
                                 switch inputSeparatorCount {
                                 case 1 where isTrailingSeparator:
                                         guard syllables.count == 1 else { return nil }
-                                        guard item.inputCount == (eventLength - 1) else { return nil }
+                                        guard item.inputCount == (inputLength - 1) else { return nil }
                                         return item.replacedInput(with: text)
                                 case 1:
                                         switch syllables.count {
@@ -184,7 +184,7 @@ extension Engine {
                                                 return item.replacedInput(with: combinedInput)
                                         case 2:
                                                 let isMatched: Bool = {
-                                                        guard eventLength != 3 else { return true }
+                                                        guard inputLength != 3 else { return true }
                                                         guard syllables.first != textParts.first else { return true }
                                                         guard textParts.first?.count == 1 else { return false }
                                                         guard textParts.first?.first == syllables.first?.first else { return false }
@@ -204,9 +204,9 @@ extension Engine {
                                                 let combinedInput: String = item.input + String.apostrophe
                                                 return item.replacedInput(with: combinedInput)
                                         case 2:
-                                                guard item.inputCount == (eventLength - 2) else { return nil }
+                                                guard item.inputCount == (inputLength - 2) else { return nil }
                                                 let isMatched: Bool = {
-                                                        guard eventLength != 4 else { return true }
+                                                        guard inputLength != 4 else { return true }
                                                         guard syllables.first != textParts.first else { return true }
                                                         guard textParts.first?.count == 1 else { return false }
                                                         guard textParts.first?.first == syllables.first?.first else { return false }
@@ -217,8 +217,8 @@ extension Engine {
                                         default:
                                                 return nil
                                         }
-                                case 2 where eventLength == 5 && textParts.count == 3,
-                                     3 where eventLength == 6 && textParts.count == 3:
+                                case 2 where inputLength == 5 && textParts.count == 3,
+                                     3 where inputLength == 6 && textParts.count == 3:
                                         switch syllables.count {
                                         case 1:
                                                 guard item.inputCount == 1 else { return nil }
@@ -248,9 +248,9 @@ extension Engine {
                                 }
                         })
                         guard qualified.isEmpty else { return qualified.sorted(by: { $0.inputCount > $1.inputCount }) }
-                        let anchorEvents = events.split(separator: VirtualInputKey.apostrophe).compactMap(\.first)
-                        let anchorCount = anchorEvents.count
-                        return anchorsMatch(events: anchorEvents, statement: anchorsStatement)
+                        let anchorKeys = keys.split(separator: VirtualInputKey.apostrophe).compactMap(\.first)
+                        let anchorCount = anchorKeys.count
+                        return anchorsMatch(keys: anchorKeys, statement: anchorsStatement)
                                 .compactMap({ item -> Candidate? in
                                         let syllables = item.romanization.split(separator: Character.space).map({ $0.dropLast() })
                                         guard syllables.count == anchorCount else { return nil }
@@ -265,16 +265,16 @@ extension Engine {
                 }
         }
 
-        private static func processSlices<T: RandomAccessCollection<VirtualInputKey>>(of events: T, text: String, limit: Int64? = nil, anchorsStatement: OpaquePointer?, spellStatement: OpaquePointer?) -> [Candidate] {
+        private static func processSlices<T: RandomAccessCollection<VirtualInputKey>>(of keys: T, text: String, limit: Int64? = nil, anchorsStatement: OpaquePointer?, spellStatement: OpaquePointer?) -> [Candidate] {
                 let adjustedLimit: Int64 = (limit == nil) ? 300 : 100
-                let eventLength: Int = events.count
-                return (0..<eventLength).flatMap({ number -> [Candidate] in
-                        let leadingEvents = events.dropLast(number)
-                        let leadingText = leadingEvents.map(\.text).joined()
+                let inputLength: Int = keys.count
+                return (0..<inputLength).flatMap({ number -> [Candidate] in
+                        let leadingKeys = keys.dropLast(number)
+                        let leadingText = leadingKeys.map(\.text).joined()
                         let spellMatched = spellMatch(text: leadingText, input: leadingText, limit: limit, statement: spellStatement)
-                                .map({ modify($0, events: events, text: text, eventLength: eventLength) })
-                        let anchorsMatched = anchorsMatch(events: leadingEvents, input: leadingText, limit: adjustedLimit, statement: anchorsStatement)
-                                .map({ modify($0, events: events, text: text, eventLength: eventLength) })
+                                .map({ modify($0, keys: keys, text: text, inputLength: inputLength) })
+                        let anchorsMatched = anchorsMatch(keys: leadingKeys, input: leadingText, limit: adjustedLimit, statement: anchorsStatement)
+                                .map({ modify($0, keys: keys, text: text, inputLength: inputLength) })
                                 .sorted()
                                 .prefix(72)
                         return spellMatched + anchorsMatched
@@ -282,13 +282,13 @@ extension Engine {
                 .distinct()
                 .sorted()
         }
-        private static func modify<T: RandomAccessCollection<VirtualInputKey>>(_ item: Candidate, events: T, text: String, eventLength: Int) -> Candidate {
-                guard eventLength > 1 else { return item }
-                guard item.inputCount != eventLength else { return item }
+        private static func modify<T: RandomAccessCollection<VirtualInputKey>>(_ item: Candidate, keys: T, text: String, inputLength: Int) -> Candidate {
+                guard inputLength > 1 else { return item }
+                guard item.inputCount != inputLength else { return item }
                 lazy var converted: Candidate = Candidate(text: item.text, romanization: item.romanization, input: text, mark: text, order: item.order)
                 guard item.romanization.removedSpacesTones().hasPrefix(text).negative else { return converted }
                 guard let lastSyllable = item.romanization.split(separator: Character.space).last?.filter(\.isCantoneseToneDigit.negative) else { return item }
-                let tail = events.dropFirst(item.inputCount - 1)
+                let tail = keys.dropFirst(item.inputCount - 1)
                 guard tail.count <= 6 else { return item }
                 if let tailSyllable = Segmenter.syllableText(of: tail) {
                         return lastSyllable == tailSyllable ? converted : item
@@ -298,23 +298,23 @@ extension Engine {
                 }
         }
 
-        private static func search<T: RandomAccessCollection<VirtualInputKey>>(events: T, segmentation: Segmentation, limit: Int64? = nil, anchorsStatement: OpaquePointer?, spellStatement: OpaquePointer?, strictStatement: OpaquePointer?) -> [Candidate] {
-                let eventLength: Int = events.count
-                let text: String = events.map(\.text).joined()
+        private static func search<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T, segmentation: Segmentation, limit: Int64? = nil, anchorsStatement: OpaquePointer?, spellStatement: OpaquePointer?, strictStatement: OpaquePointer?) -> [Candidate] {
+                let inputLength: Int = keys.count
+                let text: String = keys.map(\.text).joined()
                 let spellMatched = spellMatch(text: text, input: text, limit: limit, statement: spellStatement)
-                let anchorsMatched = anchorsMatch(events: events, input: text, limit: limit, statement: anchorsStatement)
-                let queried = query(inputLength: eventLength, segmentation: segmentation, limit: limit, strictStatement: strictStatement)
+                let anchorsMatched = anchorsMatch(keys: keys, input: text, limit: limit, statement: anchorsStatement)
+                let queried = query(inputLength: inputLength, segmentation: segmentation, limit: limit, strictStatement: strictStatement)
                 let shouldMatchPrefixes: Bool = {
-                        guard eventLength > 2 else { return false }
+                        guard inputLength > 2 else { return false }
                         guard spellMatched.isEmpty else { return false }
-                        guard queried.contains(where: { $0.inputCount == eventLength }).negative else { return false }
-                        guard (events.last != .letterM) && (events.first != .letterM) else { return true }
-                        return segmentation.contains(where: { $0.length == eventLength }).negative
+                        guard queried.contains(where: { $0.inputCount == inputLength }).negative else { return false }
+                        guard (keys.last != .letterM) && (keys.first != .letterM) else { return true }
+                        return segmentation.contains(where: { $0.length == inputLength }).negative
                 }()
                 let prefixesLimit: Int64 = (limit == nil) ? 500 : 200
                 let prefixMatched: [Candidate] = shouldMatchPrefixes.negative ? [] : segmentation.flatMap({ scheme -> [Candidate] in
                         guard scheme.isNotEmpty else { return [] }
-                        let tail = events.dropFirst(scheme.length)
+                        let tail = keys.dropFirst(scheme.length)
                         guard let lastAnchor = tail.first else { return [] }
                         let schemeAnchors = scheme.aliasAnchors
                         let conjoined = schemeAnchors + tail
@@ -322,7 +322,7 @@ extension Engine {
                         let schemeSyllableText: String = scheme.syllableText
                         let mark: String = scheme.mark + String.space + tail.map(\.text).joined()
                         let tailAsAnchorText = tail.compactMap({ $0 == VirtualInputKey.letterY ? VirtualInputKey.letterJ.text.first : $0.text.first })
-                        let conjoinedMatched = anchorsMatch(events: conjoined, limit: prefixesLimit, statement: anchorsStatement)
+                        let conjoinedMatched = anchorsMatch(keys: conjoined, limit: prefixesLimit, statement: anchorsStatement)
                                 .compactMap({ item -> Candidate? in
                                         let toneFreeRomanization = item.romanization.removedTones()
                                         guard toneFreeRomanization.hasPrefix(schemeSyllableText) else { return nil }
@@ -332,20 +332,20 @@ extension Engine {
                                 })
                         let transformedTailText = tail.enumerated().map({ $0.offset == 0 && $0.element == VirtualInputKey.letterY ? VirtualInputKey.letterJ.text : $0.element.text }).joined()
                         let syllables: String = schemeSyllableText + String.space + transformedTailText
-                        let anchorsMatched = anchorsMatch(events: anchors, limit: prefixesLimit, statement: anchorsStatement)
+                        let anchorsMatched = anchorsMatch(keys: anchors, limit: prefixesLimit, statement: anchorsStatement)
                                 .compactMap({ item -> Candidate? in
                                         guard item.romanization.removedTones().hasPrefix(syllables) else { return nil }
                                         return Candidate(text: item.text, romanization: item.romanization, input: text, mark: mark, order: item.order)
                                 })
                         return conjoinedMatched + anchorsMatched
                 })
-                let gainedMatched: [Candidate] = shouldMatchPrefixes.negative ? [] : (1..<eventLength).reversed().flatMap({ number -> [Candidate] in
-                        let leadingEvents = events.prefix(number)
-                        let leadingText = leadingEvents.map(\.text).joined()
-                        return anchorsMatch(events: leadingEvents, input: leadingText, limit: 300, statement: anchorsStatement)
+                let gainedMatched: [Candidate] = shouldMatchPrefixes.negative ? [] : (1..<inputLength).reversed().flatMap({ number -> [Candidate] in
+                        let leadingKeys = keys.prefix(number)
+                        let leadingText = leadingKeys.map(\.text).joined()
+                        return anchorsMatch(keys: leadingKeys, input: leadingText, limit: 300, statement: anchorsStatement)
                 }).compactMap({ item -> Candidate? in
                         // TODO: Cache tails and syllables ?
-                        let tail = events.dropFirst(item.inputCount - 1)
+                        let tail = keys.dropFirst(item.inputCount - 1)
                         guard tail.count <= 6 else { return nil }
                         lazy var converted: Candidate = Candidate(text: item.text, romanization: item.romanization, input: text, mark: text, order: item.order)
                         guard item.romanization.removedSpacesTones().hasPrefix(text).negative else { return converted }
@@ -358,8 +358,8 @@ extension Engine {
                         }
                 })
                 let fetched: [Candidate] = {
-                        let idealQueried = queried.filter({ $0.inputCount == eventLength }).sorted(by: { $0.order < $1.order }).distinct()
-                        let notIdealQueried = queried.filter({ $0.inputCount < eventLength }).sorted().distinct()
+                        let idealQueried = queried.filter({ $0.inputCount == inputLength }).sorted(by: { $0.order < $1.order }).distinct()
+                        let notIdealQueried = queried.filter({ $0.inputCount < inputLength }).sorted().distinct()
                         let fullInput = (spellMatched + idealQueried + anchorsMatched + prefixMatched + gainedMatched).distinct()
                         let primary = fullInput.prefix(10)
                         let secondary = fullInput.sorted().prefix(10)
@@ -368,14 +368,14 @@ extension Engine {
                         return (primary + secondary + tertiary + quaternary + fullInput + notIdealQueried).distinct()
                 }()
                 guard let firstInputCount = fetched.first?.inputCount else {
-                        return processSlices(of: events, text: text, limit: limit, anchorsStatement: anchorsStatement, spellStatement: spellStatement)
+                        return processSlices(of: keys, text: text, limit: limit, anchorsStatement: anchorsStatement, spellStatement: spellStatement)
                 }
-                guard firstInputCount < eventLength else { return fetched }
+                guard firstInputCount < inputLength else { return fetched }
                 let headInputLengths = fetched.map(\.inputCount).distinct()
                 let concatenated = headInputLengths.compactMap({ headLength -> Candidate? in
-                        let tailEvents = events.dropFirst(headLength)
-                        let tailSegmentation = Segmenter.segment(tailEvents)
-                        guard let tailCandidate = search(events: tailEvents, segmentation: tailSegmentation, limit: 50, anchorsStatement: anchorsStatement, spellStatement: spellStatement, strictStatement: strictStatement).first else { return nil }
+                        let tailKeys = keys.dropFirst(headLength)
+                        let tailSegmentation = Segmenter.segment(tailKeys)
+                        guard let tailCandidate = search(tailKeys, segmentation: tailSegmentation, limit: 50, anchorsStatement: anchorsStatement, spellStatement: spellStatement, strictStatement: strictStatement).first else { return nil }
                         guard let headCandidate = fetched.first(where: { $0.inputCount == headLength }) else { return nil }
                         return headCandidate + tailCandidate
                 }).distinct().sorted().prefix(1)
@@ -462,13 +462,13 @@ private extension Engine {
 // MARK: - SQLite Querying
 
 private extension Engine {
-        static func anchorsMatch<T: RandomAccessCollection<VirtualInputKey>>(events: T, input: String? = nil, limit: Int64? = nil, statement: OpaquePointer?) -> [Candidate] {
-                let code = events.anchorsCode
+        static func anchorsMatch<T: RandomAccessCollection<VirtualInputKey>>(keys: T, input: String? = nil, limit: Int64? = nil, statement: OpaquePointer?) -> [Candidate] {
+                let code = keys.anchorsCode
                 guard code > 0 else { return [] }
                 sqlite3_reset(statement)
                 sqlite3_bind_int64(statement, 1, Int64(code))
                 sqlite3_bind_int64(statement, 2, (limit ?? 100))
-                let text: String = input ?? events.map(\.text).joined()
+                let text: String = input ?? keys.map(\.text).joined()
                 var candidates: [Candidate] = []
                 while sqlite3_step(statement) == SQLITE_ROW {
                         let order: Int = Int(sqlite3_column_int64(statement, 0))
@@ -559,8 +559,8 @@ extension Engine {
                 /*
                 let headInputLengths = queried.map(\.inputCount).distinct()
                 let concatenated = headInputLengths.compactMap({ headLength -> Candidate? in
-                        let tailEvents = combos.dropFirst(headLength)
-                        guard let tailCandidate = nineKeySearch(combos: tailEvents, limit: 10, anchorsStatement: anchorsStatement, codeMatchStatement: codeMatchStatement).first else { return nil }
+                        let tailCombos = combos.dropFirst(headLength)
+                        guard let tailCandidate = nineKeySearch(combos: tailCombos, limit: 10, anchorsStatement: anchorsStatement, codeMatchStatement: codeMatchStatement).first else { return nil }
                         guard let headCandidate = queried.first(where: { $0.inputCount == headLength }) else { return nil }
                         return headCandidate + tailCandidate
                 }).distinct().sorted().prefix(1)
