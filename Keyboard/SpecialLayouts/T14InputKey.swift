@@ -67,17 +67,14 @@ struct T14InputKey: View {
                                                                 ZStack {
                                                                         RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius, style: .continuous)
                                                                                 .fill(selectedIndex == elementIndex ? Color.accentColor : Color.clear)
-                                                                        ZStack(alignment: .top) {
-                                                                                Color.interactiveClear
-                                                                                Text(verbatim: element.header ?? String.space)
-                                                                                        .font(.keyFootnote)
-                                                                                        .shallow()
-                                                                        }
-                                                                        ZStack(alignment: .bottom) {
-                                                                                Color.interactiveClear
-                                                                                Text(verbatim: element.footer ?? String.space)
-                                                                                        .font(.keyFootnote)
-                                                                                        .shallow()
+                                                                        ForEach(element.extras.indices, id: \.self) { extraIndex in
+                                                                                let extra = element.extras[extraIndex]
+                                                                                ZStack(alignment: extra.alignment) {
+                                                                                        Color.clear
+                                                                                        Text(verbatim: extra.text)
+                                                                                                .font(.keyFootnote)
+                                                                                                .shallow()
+                                                                                }
                                                                         }
                                                                         Text(verbatim: element.text)
                                                                                 .textCase(textCase)
@@ -100,28 +97,29 @@ struct T14InputKey: View {
                                         .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                         .padding(.vertical, verticalPadding)
                                         .padding(.horizontal, horizontalPadding)
-                                ZStack(alignment: .topTrailing) {
-                                        Color.clear
-                                        Text(verbatim: unit.primary.header ?? String.space)
-                                                .textCase(textCase)
-                                                .font(.keyFootnote)
-                                                .shallow()
+                                ForEach(unit.primary.extras.indices, id: \.self) { index in
+                                        let extra = unit.primary.extras[index]
+                                        ZStack(alignment: extra.alignment) {
+                                                Color.clear
+                                                Text(verbatim: extra.text)
+                                                        .textCase(textCase)
+                                                        .font(.largerKeyFootnote)
+                                                        .shallow()
+                                        }
+                                        .padding(.vertical, verticalPadding + 1)
+                                        .padding(.horizontal, horizontalPadding + 3)
                                 }
-                                .padding(.vertical, verticalPadding)
-                                .padding(.horizontal, horizontalPadding + 2)
-                                ZStack(alignment: .bottomTrailing) {
-                                        Color.clear
-                                        Text(verbatim: unit.primary.footer ?? String.space)
+                                if unit.primary.isTextSingular {
+                                        Text(verbatim: unit.primary.text)
                                                 .textCase(textCase)
-                                                .font(.keyFootnote)
-                                                .shallow()
+                                                .font(.letterCompact)
+                                                .padding(.bottom, keyTextBottomInset)
+                                } else {
+                                        Text(verbatim: unit.primary.text.spaceSeparated())
+                                                .textCase(textCase)
+                                                .font(.adjustedLetterCompact)
+                                                .padding(.bottom, keyTextBottomInset)
                                 }
-                                .padding(.vertical, verticalPadding)
-                                .padding(.horizontal, horizontalPadding + 2)
-                                Text(verbatim: unit.primary.text)
-                                        .textCase(textCase)
-                                        .font(unit.primary.isTextSingular ? .letterCompact : .adjustedLetterCompact)
-                                        .padding(.bottom, keyTextBottomInset)
                         }
                 }
                 .frame(width: keyWidth, height: keyHeight)
