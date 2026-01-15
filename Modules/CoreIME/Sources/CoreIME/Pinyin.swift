@@ -3,10 +3,10 @@ import SQLite3
 import CommonExtensions
 
 extension Engine {
-        public static func pinyinReverseLookup<T: RandomAccessCollection<VirtualInputKey>>(_ events: T, segmentation: PinyinSegmentation) async -> [Candidate] {
-                let isLetterEventOnly: Bool = events.contains(where: \.isLetter.negative).negative
+        public static func pinyinReverseLookup<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T, segmentation: PinyinSegmentation) async -> [Candidate] {
+                let isLetterKeyOnly: Bool = keys.contains(where: \.isLetter.negative).negative
                 // TODO: Handle separators
-                guard isLetterEventOnly else { return [] }
+                guard isLetterKeyOnly else { return [] }
                 lazy var anchorsStatement: OpaquePointer? = preparePinyinAnchorsStatement()
                 lazy var spellStatement: OpaquePointer? = preparePinyinStatement()
                 defer {
@@ -15,23 +15,23 @@ extension Engine {
                 }
                 let canSegment: Bool = segmentation.flattenedCount > 0
                 if canSegment {
-                        return pinyinSearch(events: events, segmentation: segmentation, anchorsStatement: anchorsStatement, spellStatement: spellStatement)
+                        return pinyinSearch(keys, segmentation: segmentation, anchorsStatement: anchorsStatement, spellStatement: spellStatement)
                                 .flatMap({ Engine.reveresLookup(text: $0.text, input: $0.input, mark: $0.mark) })
                 } else {
-                        return processPinyinSlices(of: events, text: events.map(\.text).joined(), anchorsStatement: anchorsStatement, spellStatement: spellStatement)
+                        return processPinyinSlices(of: keys, text: keys.map(\.text).joined(), anchorsStatement: anchorsStatement, spellStatement: spellStatement)
                                 .flatMap({ Engine.reveresLookup(text: $0.text, input: $0.input, mark: $0.mark) })
                 }
         }
 
-        private static func processPinyinSlices<T: RandomAccessCollection<VirtualInputKey>>(of events: T, text: String, limit: Int64? = nil, anchorsStatement: OpaquePointer?, spellStatement: OpaquePointer?) -> [PinyinLexicon] {
+        private static func processPinyinSlices<T: RandomAccessCollection<VirtualInputKey>>(of keys: T, text: String, limit: Int64? = nil, anchorsStatement: OpaquePointer?, spellStatement: OpaquePointer?) -> [PinyinLexicon] {
                 let adjustedLimit: Int64 = (limit == nil) ? 300 : 100
-                let inputLength: Int = events.count
+                let inputLength: Int = keys.count
                 return (0..<inputLength).flatMap({ number -> [PinyinLexicon] in
-                        let leadingEvents = events.dropLast(number)
-                        let leadingText = leadingEvents.map(\.text).joined()
+                        let leadingKeys = keys.dropLast(number)
+                        let leadingText = leadingKeys.map(\.text).joined()
                         let spellMatched = pinyinSpellMatch(text: leadingText, limit: limit, statement: spellStatement)
                                 .map({ modify($0, text: text, textLength: inputLength) })
-                        let anchorsMatched = pinyinAnchorsMatch(events: leadingEvents, input: leadingText, limit: adjustedLimit, statement: anchorsStatement)
+                        let anchorsMatched = pinyinAnchorsMatch(keys: leadingKeys, input: leadingText, limit: adjustedLimit, statement: anchorsStatement)
                                 .map({ modify($0, text: text, textLength: inputLength) })
                                 .sorted()
                                 .prefix(72)
@@ -52,11 +52,11 @@ extension Engine {
                 return PinyinLexicon(text: item.text, pinyin: item.pinyin, input: text, mark: text, order: item.order)
         }
 
-        private static func pinyinSearch<T: RandomAccessCollection<VirtualInputKey>>(events: T, segmentation: PinyinSegmentation, limit: Int64? = nil, anchorsStatement: OpaquePointer?, spellStatement: OpaquePointer?) -> [PinyinLexicon] {
-                let inputLength: Int = events.count
-                let text: String = events.map(\.text).joined()
+        private static func pinyinSearch<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T, segmentation: PinyinSegmentation, limit: Int64? = nil, anchorsStatement: OpaquePointer?, spellStatement: OpaquePointer?) -> [PinyinLexicon] {
+                let inputLength: Int = keys.count
+                let text: String = keys.map(\.text).joined()
                 let spellMatched = pinyinSpellMatch(text: text, limit: limit, statement: spellStatement)
-                let anchorsMatched = pinyinAnchorsMatch(events: events, limit: limit, statement: anchorsStatement)
+                let anchorsMatched = pinyinAnchorsMatch(keys: keys, limit: limit, statement: anchorsStatement)
                 let queried = pinyinQuery(inputLength: inputLength, segmentation: segmentation, limit: limit, statement: spellStatement)
                 let shouldMatchPrefixes: Bool = {
                         guard spellMatched.isEmpty else { return false }
@@ -65,21 +65,21 @@ extension Engine {
                 }()
                 let prefixesLimit: Int64 = (limit == nil) ? 500 : 200
                 let prefixMatched: [PinyinLexicon] = shouldMatchPrefixes.negative ? [] : segmentation.flatMap({ scheme -> [PinyinLexicon] in
-                        let tail = events.dropFirst(scheme.length)
+                        let tail = keys.dropFirst(scheme.length)
                         guard let lastAnchor = tail.first else { return [] }
                         let schemeAnchors = scheme.compactMap(\.keys.first)
                         let conjoined = schemeAnchors + tail
                         let anchors = schemeAnchors + [lastAnchor]
                         let schemeMark: String = scheme.map(\.text).joined(separator: String.space)
                         let mark: String = schemeMark + String.space + tail.map(\.text).joined()
-                        let conjoinedMatched = pinyinAnchorsMatch(events: conjoined, limit: prefixesLimit, statement: anchorsStatement)
+                        let conjoinedMatched = pinyinAnchorsMatch(keys: conjoined, limit: prefixesLimit, statement: anchorsStatement)
                                 .compactMap({ item -> PinyinLexicon? in
                                         guard item.pinyin.hasPrefix(schemeMark) else { return nil }
                                         let tailAnchors = item.pinyin.dropFirst(schemeMark.count).split(separator: Character.space).compactMap(\.first)
                                         guard tailAnchors == tail.compactMap(\.text.first) else { return nil }
                                         return PinyinLexicon(text: item.text, pinyin: item.pinyin, input: text, mark: mark, order: item.order)
                                 })
-                        let anchorsMatched = pinyinAnchorsMatch(events: anchors, limit: prefixesLimit, statement: anchorsStatement)
+                        let anchorsMatched = pinyinAnchorsMatch(keys: anchors, limit: prefixesLimit, statement: anchorsStatement)
                                 .compactMap({ item -> PinyinLexicon? in
                                         guard item.pinyin.hasPrefix(mark) else { return nil }
                                         return PinyinLexicon(text: item.text, pinyin: item.pinyin, input: text, mark: mark, order: item.order)
@@ -87,9 +87,9 @@ extension Engine {
                         return conjoinedMatched + anchorsMatched
                 })
                 let gainedMatched: [PinyinLexicon] = shouldMatchPrefixes.negative ? [] : (1..<inputLength).flatMap({ number -> [PinyinLexicon] in
-                        let leadingEvents = events.dropLast(number)
-                        let leadingText = leadingEvents.map(\.text).joined()
-                        return pinyinAnchorsMatch(events: leadingEvents, input: leadingText, limit: 300, statement: anchorsStatement)
+                        let leadingKeys = keys.dropLast(number)
+                        let leadingText = leadingKeys.map(\.text).joined()
+                        return pinyinAnchorsMatch(keys: leadingKeys, input: leadingText, limit: 300, statement: anchorsStatement)
                 }).compactMap({ item -> PinyinLexicon? in
                         guard item.pinyin.removedSpaces().hasPrefix(text).negative else {
                                 return PinyinLexicon(text: item.text, pinyin: item.pinyin, input: text, mark: text, order: item.order)
@@ -111,14 +111,14 @@ extension Engine {
                         return (primary + secondary + tertiary + quaternary + fullInput + notIdealQueried).distinct()
                 }()
                 guard let firstInputCount = fetched.first?.inputCount else {
-                        return processPinyinSlices(of: events, text: text, limit: limit, anchorsStatement: anchorsStatement, spellStatement: spellStatement)
+                        return processPinyinSlices(of: keys, text: text, limit: limit, anchorsStatement: anchorsStatement, spellStatement: spellStatement)
                 }
                 guard firstInputCount < inputLength else { return fetched }
                 let headInputLengths = fetched.map(\.inputCount).distinct()
                 let concatenated = headInputLengths.compactMap({ headLength -> PinyinLexicon? in
-                        let tailEvents = events.dropFirst(headLength)
-                        let tailSegmentation = PinyinSegmenter.segment(tailEvents)
-                        guard let tailLexicon = pinyinSearch(events: tailEvents, segmentation: tailSegmentation, limit: 50, anchorsStatement: anchorsStatement, spellStatement: spellStatement).first else { return nil }
+                        let tailKeys = keys.dropFirst(headLength)
+                        let tailSegmentation = PinyinSegmenter.segment(tailKeys)
+                        guard let tailLexicon = pinyinSearch(tailKeys, segmentation: tailSegmentation, limit: 50, anchorsStatement: anchorsStatement, spellStatement: spellStatement).first else { return nil }
                         guard let headLexicon = fetched.first(where: { $0.inputCount == headLength }) else { return nil }
                         return headLexicon + tailLexicon
                 }).distinct().sorted().prefix(1)
@@ -174,13 +174,13 @@ extension Engine {
                 guard sqlite3_prepare_v2(Engine.database, command, -1, &statement, nil) == SQLITE_OK else { return nil }
                 return statement
         }
-        private static func pinyinAnchorsMatch<T: RandomAccessCollection<VirtualInputKey>>(events: T, input: String? = nil, limit: Int64? = nil, statement: OpaquePointer?) -> [PinyinLexicon] {
-                let code = events.combinedCode
+        private static func pinyinAnchorsMatch<T: RandomAccessCollection<VirtualInputKey>>(keys: T, input: String? = nil, limit: Int64? = nil, statement: OpaquePointer?) -> [PinyinLexicon] {
+                let code = keys.combinedCode
                 guard code > 0 else { return [] }
                 sqlite3_reset(statement)
                 sqlite3_bind_int64(statement, 1, Int64(code))
                 sqlite3_bind_int64(statement, 2, (limit ?? 100))
-                let inputText: String = input ?? events.map(\.text).joined()
+                let inputText: String = input ?? keys.map(\.text).joined()
                 var instances: [PinyinLexicon] = []
                 while sqlite3_step(statement) == SQLITE_ROW {
                         let rowID = sqlite3_column_int64(statement, 0)
