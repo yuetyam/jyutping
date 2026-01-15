@@ -1,7 +1,7 @@
 import CommonExtensions
 
 /// 筆畫輸入
-public enum StrokeEvent: Int, Sendable {
+public enum StrokeVirtualKey: Int, Sendable {
 
         /// 橫 w
         case horizontal   = 1
@@ -27,16 +27,16 @@ public enum StrokeEvent: Int, Sendable {
         public var code: Int { rawValue }
 }
 
-extension RandomAccessCollection where Element == StrokeEvent {
+extension RandomAccessCollection where Element == StrokeVirtualKey {
         var sequenceText: String {
                 return compactMap(\.codeText).joined()
         }
 }
-private extension StrokeEvent {
+private extension StrokeVirtualKey {
         var codeText: String? {
                 return Self.codeTextMap[self]
         }
-        private static let codeTextMap: [StrokeEvent : String] = [
+        private static let codeTextMap: [StrokeVirtualKey : String] = [
                 .horizontal   : "1",
                 .vertical     : "2",
                 .leftFalling  : "3",
@@ -46,15 +46,15 @@ private extension StrokeEvent {
         ]
 }
 
-extension StrokeEvent {
+extension StrokeVirtualKey {
 
-        public static func displayText<T: RandomAccessCollection<VirtualInputKey>>(from events: T) -> String {
-                return events.compactMap(\.strokeEvent?.strokeText).joined()
+        public static func displayText<T: RandomAccessCollection<VirtualInputKey>>(from keys: T) -> String {
+                return keys.compactMap(\.strokeKey?.strokeText).joined()
         }
         public var strokeText: String? {
                 return Self.displayMap[self]
         }
-        private static let displayMap: [StrokeEvent : String] = [
+        private static let displayMap: [StrokeVirtualKey : String] = [
                 .horizontal   : "⼀",
                 .vertical     : "⼁",
                 .leftFalling  : "⼃",
@@ -63,7 +63,7 @@ extension StrokeEvent {
                 .wildcard     : "＊"
         ]
 
-        public var inputEvent: VirtualInputKey {
+        public var virtualInputKey: VirtualInputKey {
                 switch self {
                 case .horizontal  : .number1
                 case .vertical    : .number2
@@ -74,16 +74,16 @@ extension StrokeEvent {
                 }
         }
 
-        public static func isValidEvents<T: RandomAccessCollection<VirtualInputKey>>(_ events: T) -> Bool {
-                return events.contains(where: { $0.strokeEvent == nil }).negative
+        public static func isValidStrokes<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T) -> Bool {
+                return keys.contains(where: { $0.strokeKey == nil }).negative
         }
 }
 
 extension VirtualInputKey {
-        var strokeEvent: StrokeEvent? {
-                return Self.eventMap[self]
+        var strokeKey: StrokeVirtualKey? {
+                return Self.keyMap[self]
         }
-        private static let eventMap: [VirtualInputKey : StrokeEvent] = [
+        private static let keyMap: [VirtualInputKey : StrokeVirtualKey] = [
                 .letterW : .horizontal,
                 .letterH : .horizontal,
                 .letterT : .horizontal,

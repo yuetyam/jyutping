@@ -48,13 +48,13 @@ struct TenKeyStrokeKeyboard: View {
 
 private struct TenKeyStrokeKey: View {
 
-        init(_ event: StrokeEvent) {
-                self.event = event
-                self.keyText = event.strokeText ?? "?"
+        init(_ key: StrokeVirtualKey) {
+                self.key = key
+                self.text = key.strokeText ?? "?"
         }
 
-        private let event: StrokeEvent
-        private let keyText: String
+        private let key: StrokeVirtualKey
+        private let text: String
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
@@ -68,7 +68,7 @@ private struct TenKeyStrokeKey: View {
                                 .fill(isTouching ? colorScheme.activeInputKeyColor : colorScheme.inputKeyColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(3)
-                        Text(verbatim: keyText).font(.letterCompact)
+                        Text(verbatim: text).font(.letterCompact)
                 }
                 .frame(width: context.tenKeyWidthUnit, height: context.heightUnit)
                 .contentShape(Rectangle())
@@ -81,7 +81,7 @@ private struct TenKeyStrokeKey: View {
                                 }
                         }
                         .onEnded { _ in
-                                context.handle(event.inputEvent)
+                                context.handle(key.virtualInputKey)
                          }
                 )
         }

@@ -3,8 +3,8 @@ import SQLite3
 import CommonExtensions
 
 extension Engine {
-        public static func searchTextMarks<T: RandomAccessCollection<VirtualInputKey>>(for events: T) -> [Candidate] {
-                let text: String = events.map(\.text).joined()
+        public static func searchTextMarks<T: RandomAccessCollection<VirtualInputKey>>(for keys: T) -> [Candidate] {
+                let text: String = keys.map(\.text).joined()
                 let command: String = "SELECT mark FROM mark_table WHERE spell = ?;"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }

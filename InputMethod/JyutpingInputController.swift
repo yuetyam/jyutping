@@ -561,11 +561,11 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 let definedCandidates: [Candidate] = searchDefinedCandidates(for: allKeys)
                 let textMarkCandidates: [Candidate] = AppSettings.isEmojiSuggestionsOn ? Engine.searchTextMarks(for: allKeys) : []
                 let keys = allKeys.dropFirst()
-                if keys.isEmpty || StrokeEvent.isValidEvents(keys).negative {
+                if keys.isEmpty || StrokeVirtualKey.isValidStrokes(keys).negative {
                         mark(text: joinedBufferTexts())
                         candidates = (definedCandidates + textMarkCandidates).distinct()
                 } else {
-                        mark(text: StrokeEvent.displayText(from: keys))
+                        mark(text: StrokeVirtualKey.displayText(from: keys))
                         let standard: CharacterStandard = Options.legacyCharacterStandard.isPreset ? Options.traditionalCharacterStandard : Options.legacyCharacterStandard
                         let suggestions: [Candidate] = Engine.strokeReverseLookup(keys).transformed(to: standard)
                         candidates = (definedCandidates + textMarkCandidates + suggestions).distinct()

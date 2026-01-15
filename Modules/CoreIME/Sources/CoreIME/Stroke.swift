@@ -4,7 +4,7 @@ import CommonExtensions
 
 extension Engine {
         public static func strokeReverseLookup<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T) -> [Candidate] {
-                let strokeKeys = keys.compactMap(\.strokeEvent)
+                let strokeKeys = keys.compactMap(\.strokeKey)
                 let isWildcard: Bool = strokeKeys.contains(where: \.isWildcard)
                 let text: String = isWildcard ? strokeKeys.sequenceText.replacingOccurrences(of: "6", with: "[12345]") : strokeKeys.sequenceText
                 let matched: [ShapeLexicon] = isWildcard ? wildcardMatch(strokeText: text) : match(keys: strokeKeys, text: text)
@@ -12,7 +12,7 @@ extension Engine {
                         .distinct()
                         .flatMap({ Engine.reveresLookup(text: $0.text, input: $0.input) })
         }
-        private static func match<T: RandomAccessCollection<StrokeEvent>>(keys: T, text: String) -> [ShapeLexicon] {
+        private static func match<T: RandomAccessCollection<StrokeVirtualKey>>(keys: T, text: String) -> [ShapeLexicon] {
                 let complex: Int = keys.count
                 let isLongSequence: Bool = complex >= 19
                 let column: String = isLongSequence ? "ping" : "code"

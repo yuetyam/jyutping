@@ -1,12 +1,12 @@
 extension Converter {
 
-        /// Convert the given letter InputEvent to a Cangjie root character
-        /// - Parameter event: Letter InputEvent [a-z]
+        /// Convert the given letter VirtualInputKey to a Cangjie root character
+        /// - Parameter key: Letter VirtualInputKey [a-z]
         /// - Returns: Cangjie root / radical character
-        public static func cangjie(of event: VirtualInputKey) -> Character? {
-                return cangjieEventMap[event]
+        public static func cangjie(of key: VirtualInputKey) -> Character? {
+                return cangjieKeyMap[key]
         }
-        private static let cangjieEventMap: [VirtualInputKey: Character] = [
+        private static let cangjieKeyMap: [VirtualInputKey: Character] = [
                 VirtualInputKey.letterA: "日",
                 VirtualInputKey.letterB: "月",
                 VirtualInputKey.letterC: "金",

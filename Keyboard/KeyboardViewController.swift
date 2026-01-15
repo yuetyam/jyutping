@@ -785,11 +785,11 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let definedCandidates: [Candidate] = searchDefinedCandidates(for: allKeys)
                 let textMarkCandidates: [Candidate] = Options.isEmojiSuggestionsOn ? Engine.searchTextMarks(for: allKeys) : []
                 let keys = allKeys.dropFirst()
-                if keys.isEmpty || StrokeEvent.isValidEvents(keys).negative {
+                if keys.isEmpty || StrokeVirtualKey.isValidStrokes(keys).negative {
                         text2mark = joinedBufferTexts()
                         candidates = (definedCandidates + textMarkCandidates).distinct()
                 } else {
-                        text2mark = StrokeEvent.displayText(from: keys)
+                        text2mark = StrokeVirtualKey.displayText(from: keys)
                         let suggestions: [Candidate] = Engine.strokeReverseLookup(keys).transformed(to: characterStandard)
                         candidates = (definedCandidates + textMarkCandidates + suggestions).distinct()
                 }
