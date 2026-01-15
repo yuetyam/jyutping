@@ -234,8 +234,8 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         textDocumentProxy.insertText(text)
                         return
                 }
-                let shouldAppendEvent: Bool = key.isLetter || (inputStage.isBuffering && (key.isToneNumber || key.isApostrophe))
-                guard shouldAppendEvent else {
+                let shouldAppendKey: Bool = key.isLetter || (inputStage.isBuffering && (key.isToneNumber || key.isApostrophe))
+                guard shouldAppendKey else {
                         if inputStage.isBuffering {
                                 inputBufferText(followedBy: text)
                         } else {
@@ -247,19 +247,19 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let newEvent = BasicInputEvent(key: key, case: keyboardCase)
                 bufferEvents.append(newEvent)
         }
-        private func process(events: [VirtualInputKey], isCapitalized: Bool) {
-                guard let firstEvent = events.first else { return }
+        private func process(keys: [VirtualInputKey], isCapitalized: Bool) {
+                guard let firstKey = keys.first else { return }
                 defer {
                         adjustKeyboard()
                 }
-                lazy var text: String = isCapitalized ? events.map(\.text).joined().uppercased() : events.map(\.text).joined()
+                lazy var text: String = isCapitalized ? keys.map(\.text).joined().uppercased() : keys.map(\.text).joined()
                 let isCantoneseComposeMode: Bool = inputMethodMode.isCantonese && keyboardForm.isBufferable
                 guard isCantoneseComposeMode else {
                         textDocumentProxy.insertText(text)
                         return
                 }
-                let shouldAppendEvent: Bool = firstEvent.isLetter || (inputStage.isBuffering && (firstEvent.isToneNumber || firstEvent.isApostrophe))
-                guard shouldAppendEvent else {
+                let shouldAppendKey: Bool = firstKey.isLetter || (inputStage.isBuffering && (firstKey.isToneNumber || firstKey.isApostrophe))
+                guard shouldAppendKey else {
                         if inputStage.isBuffering {
                                 inputBufferText(followedBy: text)
                         } else {
@@ -268,23 +268,23 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         return
                 }
                 let keyCase = keyboardCase
-                let shouldConvertEvents: Bool = keyboardLayout.isTripleStroke && (events == VirtualInputKey.GWInputKeys) && (inputLengthSequence.last == 2) && (bufferEvents.last?.key == .letterW)
-                if shouldConvertEvents {
+                let shouldConvertKeys: Bool = keyboardLayout.isTripleStroke && (keys == VirtualInputKey.GWInputKeys) && (inputLengthSequence.last == 2) && (bufferEvents.last?.key == .letterW)
+                if shouldConvertKeys {
                         let newEvents = VirtualInputKey.KWInputKeys.map({ BasicInputEvent(key: $0, case: keyCase) })
                         bufferEvents = bufferEvents.dropLast(2) + newEvents
                 } else {
-                        inputLengthSequence.append(events.count)
-                        let newEvents = events.map({ BasicInputEvent(key: $0, case: keyCase) })
+                        inputLengthSequence.append(keys.count)
+                        let newEvents = keys.map({ BasicInputEvent(key: $0, case: keyCase) })
                         bufferEvents += newEvents
                 }
         }
         private func appendBufferText(_ text: String) {
                 guard let isCapitalized = text.first?.isUppercase else { return }
-                let events = text.lowercased().compactMap(VirtualInputKey.matchInputKey(for:))
-                switch events.count {
+                let keys = text.lowercased().compactMap(VirtualInputKey.matchInputKey(for:))
+                switch keys.count {
                 case 0: return
-                case 1: events.first.flatMap({ handle($0, isCapitalized: isCapitalized) })
-                default: process(events: events, isCapitalized: isCapitalized)
+                case 1: keys.first.flatMap({ handle($0, isCapitalized: isCapitalized) })
+                default: process(keys: keys, isCapitalized: isCapitalized)
                 }
         }
 
@@ -704,7 +704,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 suggestionTask = Task.detached(priority: .high) { [weak self] in
                         guard let self else { return }
                         let segmentation = Segmenter.segment(keys)
-                        async let memory: [Candidate] = isInputMemoryOn ? InputMemory.suggest(events: keys, segmentation: segmentation) : []
+                        async let memory: [Candidate] = isInputMemoryOn ? InputMemory.suggest(keys, segmentation: segmentation) : []
                         async let defined: [Candidate] = searchDefinedCandidates(for: keys)
                         async let textMarks: [Candidate] = isEmojiSuggestionsOn ? Engine.searchTextMarks(for: keys) : []
                         async let symbols: [Candidate] = isEmojiSuggestionsOn ? Engine.searchSymbols(for: keys, segmentation: segmentation) : []
@@ -842,20 +842,20 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 definedLexicons = lexicon.entries.compactMap({ entry -> DefinedLexicon? in
                         let input = entry.userInput.lowercased()
                         guard input.isNotEmpty else { return nil }
-                        let events = input.compactMap(VirtualInputKey.matchInputKey(for:))
-                        guard events.count == input.count else { return nil }
+                        let keys = input.compactMap(VirtualInputKey.matchInputKey(for:))
+                        guard keys.count == input.count else { return nil }
                         let text = entry.documentText
                         guard text.isNotEmpty else { return nil }
-                        return DefinedLexicon(input: input, text: text, events: events)
+                        return DefinedLexicon(input: input, text: text, keys: keys)
                 }).distinct()
         }
-        private func searchDefinedCandidates(for events: [VirtualInputKey]) -> [Candidate] {
+        private func searchDefinedCandidates(for keys: [VirtualInputKey]) -> [Candidate] {
                 guard Options.isTextReplacementsOn else { return [] }
-                if events.count < 10 {
-                        let charCode: Int = events.map(\.code).radix100Combined()
+                if keys.count < 10 {
+                        let charCode: Int = keys.map(\.code).radix100Combined()
                         return definedLexicons.filter({ $0.charCode == charCode }).map(\.candidate)
                 } else {
-                        return definedLexicons.filter({ $0.events == events }).map(\.candidate)
+                        return definedLexicons.filter({ $0.keys == keys }).map(\.candidate)
                 }
         }
         private func queryDefinedCandidates(for combos: [Combo]) -> [Candidate] {

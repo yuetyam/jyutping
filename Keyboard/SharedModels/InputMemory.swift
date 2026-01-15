@@ -82,23 +82,23 @@ struct InputMemory {
 
         // MARK: - Suggestions
 
-        static func suggest<T: RandomAccessCollection<VirtualInputKey>>(events: T, segmentation: Segmentation) async -> [Candidate] {
-                switch (events.contains(where: \.isApostrophe), events.contains(where: \.isToneInputKey)) {
+        static func suggest<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T, segmentation: Segmentation) async -> [Candidate] {
+                switch (keys.contains(where: \.isApostrophe), keys.contains(where: \.isToneInputKey)) {
                 case (false, false):
-                        return search(events: events, segmentation: segmentation)
+                        return search(keys, segmentation: segmentation)
                 case (true, true):
-                        let syllableEvents = events.filter(\.isSyllableLetter)
-                        let candidates = search(events: syllableEvents, segmentation: segmentation)
-                        let inputText = events.map(\.text).joined()
+                        let syllableKeys = keys.filter(\.isSyllableLetter)
+                        let candidates = search(syllableKeys, segmentation: segmentation)
+                        let inputText = keys.map(\.text).joined()
                         let text = inputText.toneConverted()
                         return candidates.compactMap({ item -> Candidate? in
                                 guard text.hasPrefix(item.romanization) else { return nil }
                                 return item.replacedInput(with: inputText)
                         })
                 case (false, true):
-                        let syllableEvents = events.filter(\.isSyllableLetter)
-                        let candidates = search(events: syllableEvents, segmentation: segmentation)
-                        let inputText = events.map(\.text).joined()
+                        let syllableKeys = keys.filter(\.isSyllableLetter)
+                        let candidates = search(syllableKeys, segmentation: segmentation)
+                        let inputText = keys.map(\.text).joined()
                         let text = inputText.toneConverted()
                         let textTones = text.tones
                         let qualified: [Candidate] = candidates.compactMap({ item -> Candidate? in
@@ -133,14 +133,14 @@ struct InputMemory {
                         })
                         return qualified
                 case (true, false):
-                        let syllableEvents = events.filter(\.isSyllableLetter)
-                        let candidates = search(events: syllableEvents, segmentation: segmentation)
-                        let isHeadingSeparator: Bool = events.first?.isApostrophe ?? false
-                        let isTrailingSeparator: Bool = events.last?.isApostrophe ?? false
+                        let syllableKeys = keys.filter(\.isSyllableLetter)
+                        let candidates = search(syllableKeys, segmentation: segmentation)
+                        let isHeadingSeparator: Bool = keys.first?.isApostrophe ?? false
+                        let isTrailingSeparator: Bool = keys.last?.isApostrophe ?? false
                         guard isHeadingSeparator.negative else { return [] }
-                        let inputSeparatorCount = events.count(where: \.isApostrophe)
-                        let eventLength = events.count
-                        let text = events.map(\.text).joined()
+                        let inputSeparatorCount = keys.count(where: \.isApostrophe)
+                        let inputLength = keys.count
+                        let text = keys.map(\.text).joined()
                         let textParts = text.split(separator: Character.apostrophe)
                         let qualified: [Candidate] = candidates.compactMap({ item -> Candidate? in
                                 let syllables = item.romanization.removedTones().split(separator: Character.space)
@@ -148,12 +148,12 @@ struct InputMemory {
                                 switch inputSeparatorCount {
                                 case 1 where isTrailingSeparator:
                                         guard syllables.count == 1 else { return nil }
-                                        guard item.inputCount == (eventLength - 1) else { return nil }
+                                        guard item.inputCount == (inputLength - 1) else { return nil }
                                         return item.replacedInput(with: text)
                                 case 1:
                                         guard syllables.count == 2 else { return nil }
                                         let isMatched: Bool = {
-                                                guard eventLength != 3 else { return true }
+                                                guard inputLength != 3 else { return true }
                                                 guard syllables.first != textParts.first else { return true }
                                                 guard textParts.first?.count == 1 else { return false }
                                                 guard textParts.first?.first == syllables.first?.first else { return false }
@@ -164,9 +164,9 @@ struct InputMemory {
                                         return item.replacedInput(with: text)
                                 case 2 where isTrailingSeparator:
                                         guard syllables.count == 2 else { return nil }
-                                        guard item.inputCount == (eventLength - 2) else { return nil }
+                                        guard item.inputCount == (inputLength - 2) else { return nil }
                                         let isMatched: Bool = {
-                                                guard eventLength != 4 else { return true }
+                                                guard inputLength != 4 else { return true }
                                                 guard syllables.first != textParts.first else { return true }
                                                 guard textParts.first?.count == 1 else { return false }
                                                 guard textParts.first?.first == syllables.first?.first else { return false }
@@ -174,8 +174,8 @@ struct InputMemory {
                                         }()
                                         guard isMatched else { return nil }
                                         return item.replacedInput(with: text)
-                                case 2 where eventLength == 5 && textParts.count == 3,
-                                        3 where eventLength == 6 && textParts.count == 3:
+                                case 2 where inputLength == 5 && textParts.count == 3,
+                                        3 where inputLength == 6 && textParts.count == 3:
                                         guard syllables.count == 3 else { return nil }
                                         return item.replacedInput(with: text)
                                 default:
@@ -185,7 +185,7 @@ struct InputMemory {
                         return qualified
                 }
         }
-        private static func search<T: RandomAccessCollection<VirtualInputKey>>(events: T, segmentation: Segmentation) -> [Candidate] {
+        private static func search<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T, segmentation: Segmentation) -> [Candidate] {
                 lazy var shortcutStatement = prepareShortcutStatement()
                 lazy var pingStatement = preparePingStatement()
                 lazy var strictStatement = prepareStrictStatement()
@@ -194,10 +194,10 @@ struct InputMemory {
                         sqlite3_finalize(pingStatement)
                         sqlite3_finalize(strictStatement)
                 }
-                let eventLength = events.count
-                let text = events.map(\.text).joined()
+                let inputLength = keys.count
+                let text = keys.map(\.text).joined()
                 let fullMatched = pingMatch(text: text, input: text, statement: pingStatement)
-                let idealSchemes = segmentation.filter({ $0.length == eventLength })
+                let idealSchemes = segmentation.filter({ $0.length == inputLength })
                 let idealQueried: [InternalLexicon] = idealSchemes.flatMap({ scheme -> [InternalLexicon] in
                         let pingCode: Int = scheme.originText.hash
                         let shortcutCode: Int = scheme.originAnchorsText.hash
@@ -211,11 +211,11 @@ struct InputMemory {
                 guard shortcuts.isEmpty else {
                         return shortcuts.map({ Candidate(text: $0.word, romanization: $0.romanization, input: text, mark: $0.mark, order: -1) }) + queried
                 }
-                let shouldPartiallyMatch: Bool = idealSchemes.isEmpty || (events.last == VirtualInputKey.letterM) || (events.first == VirtualInputKey.letterM)
+                let shouldPartiallyMatch: Bool = idealSchemes.isEmpty || (keys.last == VirtualInputKey.letterM) || (keys.first == VirtualInputKey.letterM)
                 guard shouldPartiallyMatch else { return queried }
                 let prefixMatched: [InternalLexicon] = segmentation.flatMap({ scheme -> [InternalLexicon] in
                         guard scheme.isNotEmpty else { return [] }
-                        let tail = events.dropFirst(scheme.length)
+                        let tail = keys.dropFirst(scheme.length)
                         guard tail.isNotEmpty else { return [] }
                         let schemeAnchors = scheme.aliasAnchors
                         let conjoinedText: String = (schemeAnchors + tail).map(\.text).joined()
@@ -240,14 +240,14 @@ struct InputMemory {
                                 })
                         return conjoinedMatched + anchorsMatched
                 })
-                let gainedMatched: [InternalLexicon] = (1..<eventLength).reversed()
+                let gainedMatched: [InternalLexicon] = (1..<inputLength).reversed()
                         .flatMap({ number -> [InternalLexicon] in
-                                let leadingText = events.prefix(number).map(\.text).joined()
+                                let leadingText = keys.prefix(number).map(\.text).joined()
                                 return shortcutMatch(text: leadingText, input: leadingText, statement: shortcutStatement)
                         })
                         .compactMap({ item -> InternalLexicon? in
                                 // TODO: Cache tails and syllables ?
-                                let tail = events.dropFirst(item.inputCount - 1)
+                                let tail = keys.dropFirst(item.inputCount - 1)
                                 guard tail.count <= 6 else { return nil }
                                 lazy var converted: InternalLexicon = InternalLexicon(word: item.word, romanization: item.romanization, frequency: item.frequency, latest: item.latest, input: text, mark: text)
                                 guard item.romanization.removedSpacesTones().hasPrefix(text).negative else { return converted }
@@ -417,14 +417,14 @@ struct InputMemory {
         }
         static func nineKeySearch<T: RandomAccessCollection<Combo>>(combos: T) async -> [Candidate] {
                 guard combos.isNotEmpty else { return [] }
-                let eventLength = combos.count
+                let inputLength = combos.count
                 lazy var anchorsStatement = prepareNineKeyAnchorsStatement()
                 lazy var codeStatement = prepareNineKeyCodeStatement()
                 defer {
                         sqlite3_finalize(anchorsStatement)
                         sqlite3_finalize(codeStatement)
                 }
-                guard eventLength > 1 else {
+                guard inputLength > 1 else {
                         guard let code = combos.first?.rawValue else { return [] }
                         let codeMatched = nineKeyCodeMatch(code: code, limit: 100, statement: codeStatement)
                         let anchorsMatched = nineKeyAnchorsMatch(code: code, limit: 100, statement: anchorsStatement)
@@ -438,7 +438,7 @@ struct InputMemory {
                 let ideal = (fullCodeMatched.prefix(10) + (fullCodeMatched + fullAnchorsMatched).sorted())
                         .distinct()
                         .map({ Candidate(text: $0.word, romanization: $0.romanization, input: $0.input, mark: $0.mark, order: -1) })
-                let queried = (1..<eventLength)
+                let queried = (1..<inputLength)
                         .flatMap({ number -> [InternalLexicon] in
                                 let code = combos.dropLast(number).map(\.code).decimalCombined()
                                 guard code > 0 else { return [] }
