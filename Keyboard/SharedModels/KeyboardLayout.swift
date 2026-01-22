@@ -56,6 +56,16 @@ enum KeyboardLayout: Int, CaseIterable {
 
         /// 21鍵
         var isTwentyOneKey: Bool { self == .twentyOneKey }
+
+        /// Should use AmbiguousInputEvent
+        var isAmbiguous: Bool {
+                switch self {
+                case .fourteenKey, .fifteenKey, .eighteenKey, .nineteenKey:
+                        true
+                default:
+                        false
+                }
+        }
 }
 
 /// Numeric keyboard for the Qwerty KeyboardLayout

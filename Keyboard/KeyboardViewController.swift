@@ -215,7 +215,11 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         case .letterQ:
                                 structureReverseLookup()
                         default:
-                                suggest()
+                                if keyboardLayout.isAmbiguous {
+                                        ambiguouslySuggest()
+                                } else {
+                                        suggest()
+                                }
                         }
                 }
         }
@@ -265,6 +269,12 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         } else {
                                 textDocumentProxy.insertText(text)
                         }
+                        return
+                }
+                guard keyboardLayout.isAmbiguous.negative else {
+                        inputLengthSequence.append(1)
+                        let newEvent = AmbiguousInputEvent(keys: Set(keys), case: keyboardCase)
+                        bufferEvents.append(newEvent)
                         return
                 }
                 let keyCase = keyboardCase
@@ -694,6 +704,79 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         }
                 }
         }
+
+        private func ambiguouslySuggest() {
+                suggestionTask?.cancel()
+                let inputLength = bufferEvents.count
+                let isPeculiar: Bool = bufferEvents.contains(where: \.case.isCapitalized) || bufferEvents.contains(where: { $0.keys.contains(where: \.isSyllableLetter.negative) })
+                let keySetArray: Array<Set<VirtualInputKey>> = bufferEvents.map(\.keys)
+                let isInputMemoryOn: Bool = Options.isInputMemoryOn
+                let isEmojiSuggestionsOn: Bool = Options.isEmojiSuggestionsOn
+                suggestionTask = Task.detached(priority: .high) { [weak self] in
+                        guard let self else { return }
+                        let sequences: [[VirtualInputKey]] = {
+                                var result: [[VirtualInputKey]] = [[]]
+                                var count = 1
+                                for keys in keySetArray {
+                                        let keyCount = keys.count
+                                        let nextCount = count * keyCount
+                                        var newResult: [[VirtualInputKey]] = []
+                                        newResult.reserveCapacity(nextCount)
+                                        for existing in result {
+                                                for key in keys {
+                                                        var sequence = existing
+                                                        sequence.append(key)
+                                                        newResult.append(sequence)
+                                                }
+                                        }
+                                        result = newResult
+                                        count = nextCount
+                                }
+                                return result
+                        }()
+                        let results = await withTaskGroup(of: (memory: [Candidate], defined: [Candidate], marks: [Candidate], symbols: [Candidate], queried: [Candidate]).self) { group in
+                                for keys in sequences {
+                                        group.addTask {
+                                                let segmentation = Segmenter.segment(keys)
+                                                let memory: [Candidate] = isInputMemoryOn ? await InputMemory.suggest(keys, segmentation: segmentation) : []
+                                                let defined: [Candidate] = await self.searchDefinedCandidates(for: keys)
+                                                let textMarks: [Candidate] = isEmojiSuggestionsOn ? Engine.searchTextMarks(for: keys) : []
+                                                let symbols: [Candidate] = isEmojiSuggestionsOn ? Engine.searchSymbols(for: keys, segmentation: segmentation) : []
+                                                let queried: [Candidate] = Engine.suggest(keys, segmentation: segmentation)
+                                                return (memory, defined, textMarks, symbols, queried)
+                                        }
+                                }
+                                var allMemory: [Candidate] = []
+                                var allDefined: [Candidate] = []
+                                var allTextMarks: [Candidate] = []
+                                var allSymbols: [Candidate] = []
+                                var allQueried: [Candidate] = []
+                                for await result in group {
+                                        allMemory.append(contentsOf: result.memory)
+                                        allDefined.append(contentsOf: result.defined)
+                                        allTextMarks.append(contentsOf: result.marks)
+                                        allSymbols.append(contentsOf: result.symbols)
+                                        allQueried.append(contentsOf: result.queried)
+                                }
+                                return (allMemory, allDefined, allTextMarks, allSymbols, allQueried)
+                        }
+                        let suggestions: [Candidate] = await Converter.ambiguouslyDispatch(memory: results.0, defined: results.1, marks: results.2, symbols: results.3, queried: results.4, characterStandard: characterStandard)
+                        if Task.isCancelled.negative {
+                                await MainActor.run { [weak self] in
+                                        guard let self else { return }
+                                        self.text2mark = {
+                                                lazy var text: String = joinedBufferTexts()
+                                                guard isPeculiar.negative else { return text.toneConverted().markFormatted() }
+                                                guard let firstCandidate = suggestions.first else { return text }
+                                                guard firstCandidate.inputCount != inputLength else { return firstCandidate.mark }
+                                                return text
+                                        }()
+                                        self.candidates = suggestions
+                                }
+                        }
+                }
+        }
+
         private func suggest() {
                 suggestionTask?.cancel()
                 let keys = bufferEvents.compactMap(\.keys.first)
