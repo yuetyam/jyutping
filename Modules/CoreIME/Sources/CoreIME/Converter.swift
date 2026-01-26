@@ -33,17 +33,7 @@ extension Converter {
                 return chained.transformed(to: characterStandard).distinct()
         }
         public static func ambiguouslyDispatch(memory: [Candidate], defined: [Candidate], marks: [Candidate], symbols: [Candidate], queried: [Candidate], characterStandard: CharacterStandard) -> [Candidate] {
-                let idealMemory = memory.filter(\.isIdealInputMemory).sorted()
-                let notIdealMemory = memory.filter(\.isNotIdealInputMemory).sorted()
-                var chained: [Candidate] = idealMemory.isEmpty ? queried.sorted() : queried.filter(\.isCompound.negative).sorted()
-                for entry in notIdealMemory.reversed() {
-                        if let index = chained.firstIndex(where: { $0.inputCount <= entry.inputCount }) {
-                                chained.insert(entry, at: index)
-                        } else {
-                                chained.append(entry)
-                        }
-                }
-                chained = idealMemory.prefix(2) + defined + idealMemory + marks + chained
+                var chained = memory.prefix(2) + defined + memory + marks + queried.sorted()
                 for symbol in symbols.reversed() {
                         if let index = chained.firstIndex(where: { $0.isCantonese && $0.lexiconText == symbol.lexiconText && $0.romanization == symbol.romanization }) {
                                 chained.insert(symbol, at: index + 1)

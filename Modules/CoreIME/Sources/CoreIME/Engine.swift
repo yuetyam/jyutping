@@ -43,7 +43,7 @@ public struct Engine {
 // MARK: - Suggestions
 
 extension Engine {
-        public static func suggest<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T, segmentation: Segmentation) -> [Candidate] {
+        public static func suggest<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T, segmentation: Segmentation, deepSearch: Bool = true) -> [Candidate] {
                 lazy var anchorsStatement = prepareAnchorsStatement()
                 lazy var spellStatement = prepareSpellStatement()
                 lazy var strictStatement = prepareStrictStatement()
@@ -66,20 +66,22 @@ extension Engine {
                                 return anchorsMatch(keys: keys, statement: anchorsStatement)
                         }
                 default:
-                        return dispatch(keys, segmentation: segmentation, anchorsStatement: anchorsStatement, spellStatement: spellStatement, strictStatement: strictStatement)
+                        return dispatch(keys, segmentation: segmentation, deepSearch: deepSearch, anchorsStatement: anchorsStatement, spellStatement: spellStatement, strictStatement: strictStatement)
                 }
         }
 
-        private static func dispatch<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T, segmentation: Segmentation, anchorsStatement: OpaquePointer?, spellStatement: OpaquePointer?, strictStatement: OpaquePointer?) -> [Candidate] {
+        private static func dispatch<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T, segmentation: Segmentation, deepSearch: Bool, anchorsStatement: OpaquePointer?, spellStatement: OpaquePointer?, strictStatement: OpaquePointer?) -> [Candidate] {
                 let syllableKeys = keys.filter(\.isSyllableLetter)
                 let candidates: [Candidate] =  switch (segmentation.first?.first?.alias.count ?? 0) {
-                case 0:
+                case 0 where deepSearch:
                         processSlices(of: syllableKeys, text: syllableKeys.map(\.text).joined(), anchorsStatement: anchorsStatement, spellStatement: spellStatement)
+                case 0:
+                        anchorsMatch(keys: syllableKeys, input: syllableKeys.map(\.text).joined(), statement: anchorsStatement)
                 case 1 where syllableKeys.count > 1,
                         _ where syllableKeys.count != keys.count :
-                        search(syllableKeys, segmentation: segmentation, anchorsStatement: anchorsStatement, spellStatement: spellStatement, strictStatement: strictStatement) + processSlices(of: syllableKeys, text: syllableKeys.map(\.text).joined(), anchorsStatement: anchorsStatement, spellStatement: spellStatement)
+                        search(syllableKeys, segmentation: segmentation, deepSearch: deepSearch, anchorsStatement: anchorsStatement, spellStatement: spellStatement, strictStatement: strictStatement) + processSlices(of: syllableKeys, text: syllableKeys.map(\.text).joined(), anchorsStatement: anchorsStatement, spellStatement: spellStatement)
                 default:
-                        search(syllableKeys, segmentation: segmentation, anchorsStatement: anchorsStatement, spellStatement: spellStatement, strictStatement: strictStatement)
+                        search(syllableKeys, segmentation: segmentation, deepSearch: deepSearch, anchorsStatement: anchorsStatement, spellStatement: spellStatement, strictStatement: strictStatement)
                 }
                 switch (keys.contains(where: \.isApostrophe), keys.contains(where: \.isToneInputKey)) {
                 case (false, false):
@@ -298,13 +300,14 @@ extension Engine {
                 }
         }
 
-        private static func search<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T, segmentation: Segmentation, limit: Int64? = nil, anchorsStatement: OpaquePointer?, spellStatement: OpaquePointer?, strictStatement: OpaquePointer?) -> [Candidate] {
+        private static func search<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T, segmentation: Segmentation, limit: Int64? = nil, deepSearch: Bool, anchorsStatement: OpaquePointer?, spellStatement: OpaquePointer?, strictStatement: OpaquePointer?) -> [Candidate] {
                 let inputLength: Int = keys.count
                 let text: String = keys.map(\.text).joined()
                 let spellMatched = spellMatch(text: text, input: text, limit: limit, statement: spellStatement)
                 let anchorsMatched = anchorsMatch(keys: keys, input: text, limit: limit, statement: anchorsStatement)
                 let queried = query(inputLength: inputLength, segmentation: segmentation, limit: limit, strictStatement: strictStatement)
                 let shouldMatchPrefixes: Bool = {
+                        guard deepSearch else { return false }
                         guard inputLength > 2 else { return false }
                         guard spellMatched.isEmpty else { return false }
                         guard queried.contains(where: { $0.inputCount == inputLength }).negative else { return false }
@@ -321,7 +324,7 @@ extension Engine {
                         let anchors = schemeAnchors + [lastAnchor]
                         let schemeSyllableText: String = scheme.syllableText
                         let mark: String = scheme.mark + String.space + tail.map(\.text).joined()
-                        let tailAsAnchorText = tail.compactMap({ $0 == VirtualInputKey.letterY ? VirtualInputKey.letterJ.text.first : $0.text.first })
+                        let tailAsAnchorText = tail.compactMap({ $0.isYLetterY ? VirtualInputKey.letterJ.text.first : $0.text.first })
                         let conjoinedMatched = anchorsMatch(keys: conjoined, limit: prefixesLimit, statement: anchorsStatement)
                                 .compactMap({ item -> Candidate? in
                                         let toneFreeRomanization = item.romanization.removedTones()
@@ -330,7 +333,7 @@ extension Engine {
                                         guard suffixAnchorText == tailAsAnchorText else { return nil }
                                         return Candidate(text: item.text, romanization: item.romanization, input: text, mark: mark, order: item.order)
                                 })
-                        let transformedTailText = tail.enumerated().map({ $0.offset == 0 && $0.element == VirtualInputKey.letterY ? VirtualInputKey.letterJ.text : $0.element.text }).joined()
+                        let transformedTailText = tail.enumerated().map({ $0.offset == 0 && $0.element.isYLetterY ? VirtualInputKey.letterJ.text : $0.element.text }).joined()
                         let syllables: String = schemeSyllableText + String.space + transformedTailText
                         let anchorsMatched = anchorsMatch(keys: anchors, limit: prefixesLimit, statement: anchorsStatement)
                                 .compactMap({ item -> Candidate? in
@@ -368,14 +371,19 @@ extension Engine {
                         return (primary + secondary + tertiary + quaternary + fullInput + notIdealQueried).distinct()
                 }()
                 guard let firstInputCount = fetched.first?.inputCount else {
-                        return processSlices(of: keys, text: text, limit: limit, anchorsStatement: anchorsStatement, spellStatement: spellStatement)
+                        if deepSearch {
+                                return processSlices(of: keys, text: text, limit: limit, anchorsStatement: anchorsStatement, spellStatement: spellStatement)
+                        } else {
+                                return anchorsMatch(keys: keys, input: text, limit: limit, statement: anchorsStatement)
+                        }
                 }
                 guard firstInputCount < inputLength else { return fetched }
+                guard deepSearch else { return fetched }
                 let headInputLengths = fetched.map(\.inputCount).distinct()
                 let concatenated = headInputLengths.compactMap({ headLength -> Candidate? in
                         let tailKeys = keys.dropFirst(headLength)
                         let tailSegmentation = Segmenter.segment(tailKeys)
-                        guard let tailCandidate = search(tailKeys, segmentation: tailSegmentation, limit: 50, anchorsStatement: anchorsStatement, spellStatement: spellStatement, strictStatement: strictStatement).first else { return nil }
+                        guard let tailCandidate = search(tailKeys, segmentation: tailSegmentation, limit: 50, deepSearch: deepSearch, anchorsStatement: anchorsStatement, spellStatement: spellStatement, strictStatement: strictStatement).first else { return nil }
                         guard let headCandidate = fetched.first(where: { $0.inputCount == headLength }) else { return nil }
                         return headCandidate + tailCandidate
                 }).distinct().sorted().prefix(1)

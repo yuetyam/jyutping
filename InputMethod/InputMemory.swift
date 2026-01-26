@@ -222,7 +222,7 @@ struct InputMemory {
                         let conjoinedText: String = (schemeAnchors + tail).map(\.text).joined()
                         let schemeSyllableText: String = scheme.syllableText
                         let mark: String = scheme.mark + String.space + tail.map(\.text).joined()
-                        let tailAsAnchorText = tail.compactMap({ $0 == VirtualInputKey.letterY ? VirtualInputKey.letterJ.text.first : $0.text.first })
+                        let tailAsAnchorText = tail.compactMap({ $0.isYLetterY ? VirtualInputKey.letterJ.text.first : $0.text.first })
                         let conjoinedMatched = shortcutMatch(text: conjoinedText, input: conjoinedText, statement: shortcutStatement)
                                 .compactMap({ item -> InternalLexicon? in
                                         let toneFreeRomanization = item.romanization.removedTones()
@@ -231,7 +231,7 @@ struct InputMemory {
                                         guard suffixAnchorText == tailAsAnchorText else { return nil }
                                         return InternalLexicon(word: item.word, romanization: item.romanization, frequency: item.frequency, latest: item.latest, input: text, mark: mark)
                                 })
-                        let transformedTailText = tail.enumerated().map({ $0.offset == 0 && $0.element == VirtualInputKey.letterY ? VirtualInputKey.letterJ.text : $0.element.text }).joined()
+                        let transformedTailText = tail.enumerated().map({ $0.offset == 0 && $0.element.isYLetterY ? VirtualInputKey.letterJ.text : $0.element.text }).joined()
                         let syllableText: String = schemeSyllableText + String.space + transformedTailText
                         let anchorsText: String = schemeAnchors.map(\.text).joined() + (tail.first?.text ?? String.empty)
                         let anchorsMatched = shortcutMatch(text: anchorsText, input: anchorsText, statement: shortcutStatement)

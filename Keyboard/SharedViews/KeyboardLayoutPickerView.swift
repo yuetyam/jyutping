@@ -29,6 +29,11 @@ struct KeyboardLayoutPickerView: View {
                                                 LayoutOptionView(layout: .nineteenKey, isSelected: selectedLayout.isNineteenKey)
                                                 LayoutOptionView(layout: .twentyOneKey, isSelected: selectedLayout.isTwentyOneKey)
                                         }
+                                        #else
+                                        HStack {
+                                                LayoutOptionView(layout: .eighteenKey, isSelected: selectedLayout.isEighteenKey)
+                                                LayoutOptionView(layout: .nineteenKey, isSelected: selectedLayout.isNineteenKey)
+                                        }
                                         #endif
                                 }
                                 .frame(maxHeight: .infinity)
@@ -52,6 +57,8 @@ struct KeyboardLayoutPickerView: View {
                                                 }
                                                 #else
                                                 HStack {
+                                                        LayoutOptionView(layout: .eighteenKey, isSelected: selectedLayout.isEighteenKey)
+                                                        LayoutOptionView(layout: .nineteenKey, isSelected: selectedLayout.isNineteenKey)
                                                         LayoutOptionView(layout: .twentyOneKey, isSelected: selectedLayout.isTwentyOneKey)
                                                 }
                                                 #endif

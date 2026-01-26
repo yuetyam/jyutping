@@ -29,6 +29,7 @@ struct JyutpingView: View {
                                         ExtendedLinkLabel(icon: searchIcon, title: "粵典", footnote: "words.hk", address: "https://words.hk")
                                         ExtendedLinkLabel(icon: searchIcon, title: "粵語審音配詞字庫", footnote: "humanum.arts.cuhk.edu.hk/Lexis/lexi-can", address: "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-can")
                                         ExtendedLinkLabel(icon: searchIcon, title: "羊羊粵語", footnote: "shyyp.net/hant", address: "https://shyyp.net/hant")
+                                        ExtendedLinkLabel(icon: searchIcon, title: "粵語辭叢", footnote: "jyutjyu.com", address: "https://www.jyutjyu.com")
                                 }
 
                                 Section {

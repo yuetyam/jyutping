@@ -735,14 +735,18 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 return result
                         }()
                         let results = await withTaskGroup(of: (memory: [Candidate], defined: [Candidate], marks: [Candidate], symbols: [Candidate], queried: [Candidate]).self) { group in
+                                var maxLength: Int = 0
                                 for keys in sequences {
+                                        let segmentation = Segmenter.segment(keys)
+                                        let length = (segmentation.first?.length ?? 0)
+                                        guard length >= maxLength else { continue }
+                                        maxLength = length
                                         group.addTask {
-                                                let segmentation = Segmenter.segment(keys)
-                                                let memory: [Candidate] = isInputMemoryOn ? await InputMemory.suggest(keys, segmentation: segmentation) : []
+                                                let memory: [Candidate] = isInputMemoryOn ? await InputMemory.suggest(keys, segmentation: segmentation, deepSearch: false) : []
                                                 let defined: [Candidate] = await self.searchDefinedCandidates(for: keys)
                                                 let textMarks: [Candidate] = isEmojiSuggestionsOn ? Engine.searchTextMarks(for: keys) : []
                                                 let symbols: [Candidate] = isEmojiSuggestionsOn ? Engine.searchSymbols(for: keys, segmentation: segmentation) : []
-                                                let queried: [Candidate] = Engine.suggest(keys, segmentation: segmentation)
+                                                let queried: [Candidate] = Engine.suggest(keys, segmentation: segmentation, deepSearch: false)
                                                 return (memory, defined, textMarks, symbols, queried)
                                         }
                                 }

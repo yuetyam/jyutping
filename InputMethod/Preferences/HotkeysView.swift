@@ -315,7 +315,7 @@ private struct LabelText: View {
                 Text(title)
                         .lineLimit(1)
                         .minimumScaleFactor(0.5)
-                        .frame(width: 240, alignment: .leading)
+                        .frame(width: 234, alignment: .leading)
         }
 }
 

@@ -126,15 +126,14 @@ extension VirtualInputKey {
                 }
         }
 
+        /// Letter Y
+        public var isYLetterY: Bool { self == .letterY }
+
         /// Separator; Delimiter; Quote
-        public var isApostrophe: Bool {
-                return self == Self.apostrophe
-        }
+        public var isApostrophe: Bool { self == .apostrophe }
 
         /// Grave accent; Backtick; Backquote
-        public var isGrave: Bool {
-                return self == Self.grave
-        }
+        public var isGrave: Bool { self == .grave }
 
         /// Integer number of the number key
         public var digit: Int? {
@@ -179,7 +178,7 @@ extension RandomAccessCollection where Element == VirtualInputKey {
                 return reduce(0, { $0 * 100 + $1.code })
         }
         var anchorsCode: Int {
-                return map({ $0 == VirtualInputKey.letterY ? VirtualInputKey.letterJ : $0 }).combinedCode
+                return map({ $0.isYLetterY ? VirtualInputKey.letterJ : $0 }).combinedCode
         }
 }
 
