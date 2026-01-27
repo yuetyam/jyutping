@@ -153,10 +153,12 @@ struct T18EnhancedInputKey: View {
                                         guard isSatisfied else { return }
                                         if distance > 0 {
                                                 // swipe from top to bottom
-                                                pulled = unit.primary.header ?? unit.primary.footer
+                                                let extra = unit.primary.extras.first(where: \.alignment.isTopEdge) ?? unit.primary.extras.first(where: \.alignment.isBottomEdge)
+                                                pulled = extra?.text
                                         } else {
                                                 // swipe from bottom to top
-                                                pulled = unit.primary.footer ?? unit.primary.header
+                                                let extra = unit.primary.extras.first(where: \.alignment.isBottomEdge) ?? unit.primary.extras.first(where: \.alignment.isTopEdge)
+                                                pulled = extra?.text
                                         }
                                 }
                         }
