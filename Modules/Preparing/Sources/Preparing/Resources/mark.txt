@@ -1,4 +1,5 @@
 activitykit	ActivityKit
+ai	AI
 airdrop	AirDrop
 airplay	AirPlay
 airpods	AirPods
@@ -40,6 +41,7 @@ esim	eSIM
 faceid	Face ID
 facetime	FaceTime
 fcp	Final Cut Pro
+fdroid	F-Droid
 ffmpeg	FFmpeg
 finalcutpro	Final Cut Pro
 freebsd	FreeBSD
@@ -111,6 +113,7 @@ myos	MyOS
 mysql	MySQL
 netbsd	NetBSD
 objectivec	Objective-C
+oneplus	OnePlus
 oneui	One UI
 openai	OpenAI
 openbsd	OpenBSD
@@ -129,6 +132,7 @@ photokit	PhotoKit
 promotion	ProMotion
 pushkit	PushKit
 qrcode	QR Code
+quicktime	QuickTime
 realmeui	realme UI
 replaykit	ReplayKit
 researchkit	ResearchKit

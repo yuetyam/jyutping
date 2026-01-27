@@ -1,11 +1,11 @@
 #!/usr/bin/env zsh
 
 BUNDLE_IDENTIFIER='org.jyutping.inputmethod.Jyutping'
-APP_VERSION='0.68.0'
+APP_VERSION='0.69.0'
 INSTALL_LOCATION='/Library/Input Methods'
 
 pkgbuild \
-    --min-os-version 12.0 \
+    --min-os-version 13.0 \
     --compression latest \
     --identifier "${BUNDLE_IDENTIFIER}" \
     --version "${APP_VERSION}" \
