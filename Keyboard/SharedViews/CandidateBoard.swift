@@ -9,13 +9,13 @@ extension Candidate {
                 case .cantonese:
                         return CGFloat(textCount * 20 + 32)
                 case _ where textCount == 1:
-                        return 48
+                        return 50
                 case .text:
                         let letterCount: Int = text.count(where: \.isBasicLatinLetter)
                         let computed: Int = (letterCount * 12) + ((textCount - letterCount) * 28)
-                        return CGFloat(computed)
+                        return CGFloat(max(56, computed))
                 default:
-                        return CGFloat(textCount * 12)
+                        return CGFloat(max(56, textCount * 12))
                 }
         }
 }
