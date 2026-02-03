@@ -13,11 +13,18 @@ struct CandidateBarScrollViewIOS18: View {
 
         @State private var scrollPosition = ScrollPosition()
 
+        private let savedCommentStyle: CommentStyle = Options.commentStyle
+        private let commentScene: CommentScene = Options.commentScene
+        private let toneStyle: CommentToneStyle = Options.commentToneStyle
+        private let isCompatibleModeOn: Bool = Options.isCompatibleModeOn
+
         var body: some View {
                 let characterStandard: CharacterStandard = context.characterStandard
-                let commentStyle: CommentStyle = Options.commentStyle
-                let toneStyle: CommentToneStyle = Options.commentToneStyle
-                let isCompatibleModeOn: Bool = Options.isCompatibleModeOn
+                let commentStyle: CommentStyle = switch commentScene {
+                case .all: savedCommentStyle
+                case .reverseLookup: context.isReverseLookup ? savedCommentStyle : .noComments
+                case .noneOfAll: .noComments
+                }
                 let isCompactKeyboard: Bool = context.keyboardInterface.isCompact
                 let romanizationTopPadding: CGFloat = commentStyle.isBelow ? 22 : 0
                 let romanizationBottomPadding: CGFloat = commentStyle.isBelow ? 0 : 36
@@ -28,7 +35,7 @@ struct CandidateBarScrollViewIOS18: View {
                                 ForEach(context.candidates.indices, id: \.self) { index in
                                         let candidate = context.candidates[index]
                                         let text: AttributedString = candidate.text.attributed(for: characterStandard)
-                                        let romanization: String? = candidate.isCantonese ? candidate.romanization : nil
+                                        let romanization: String? = candidate.isCantonese ? candidate.comment : nil
                                         ScrollViewButton(
                                                 longPressTime: 400, // 0.4s
                                                 longPressAction: {
@@ -36,7 +43,7 @@ struct CandidateBarScrollViewIOS18: View {
                                                         defer { isLongPressActionTriggered = true }
                                                         AudioFeedback.deleted()
                                                         // context.triggerHapticFeedback()
-                                                        InputMemory.remove(candidate: candidate)
+                                                        InputMemory.forget(candidate.lexicon)
                                                 },
                                                 endAction: {
                                                         Task {

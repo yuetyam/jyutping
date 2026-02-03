@@ -23,12 +23,12 @@ struct InputMemory {
 
         // MARK: - Candidate Handling
 
-        static func handle(_ candidate: Candidate) {
-                let identifier: Int = candidate.identifier
+        static func handle(_ lexicon: Lexicon) {
+                let identifier: Int = lexicon.identifier
                 if let frequency = find(by: identifier) {
                         update(identifier: identifier, frequency: frequency + 1)
                 } else {
-                        let entry = MemoryLexicon(word: candidate.lexiconText, romanization: candidate.romanization, frequency: 1)
+                        let entry = MemoryLexicon(word: lexicon.text, romanization: lexicon.romanization, frequency: 1)
                         insert(entry: entry)
                 }
         }
@@ -60,9 +60,9 @@ struct InputMemory {
                 guard sqlite3_step(statement) == SQLITE_DONE else { return }
         }
 
-        /// Delete a Candidate from InputMemory
-        static func remove(candidate: Candidate) {
-                let identifier: Int = candidate.identifier
+        /// Delete the given Lexicon from InputMemory
+        static func forget(_ lexicon: Lexicon) {
+                let identifier: Int = lexicon.identifier
                 let command: String = "DELETE FROM memory WHERE identifier = \(identifier);"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
@@ -82,7 +82,7 @@ struct InputMemory {
 
         // MARK: - Suggestions
 
-        static func suggest<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T, segmentation: Segmentation, deepSearch: Bool = true) async -> [Candidate] {
+        static func suggest<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T, segmentation: Segmentation, deepSearch: Bool = true) async -> [Lexicon] {
                 switch (keys.contains(where: \.isApostrophe), keys.contains(where: \.isToneInputKey)) {
                 case (false, false):
                         return search(keys, segmentation: segmentation, deepSearch: deepSearch)
@@ -91,7 +91,7 @@ struct InputMemory {
                         let candidates = search(syllableKeys, segmentation: segmentation, deepSearch: deepSearch)
                         let inputText = keys.map(\.text).joined()
                         let text = inputText.toneConverted()
-                        return candidates.compactMap({ item -> Candidate? in
+                        return candidates.compactMap({ item -> Lexicon? in
                                 guard text.hasPrefix(item.romanization) else { return nil }
                                 return item.replacedInput(with: inputText)
                         })
@@ -101,7 +101,7 @@ struct InputMemory {
                         let inputText = keys.map(\.text).joined()
                         let text = inputText.toneConverted()
                         let textTones = text.tones
-                        let qualified: [Candidate] = candidates.compactMap({ item -> Candidate? in
+                        let qualified = candidates.compactMap({ item -> Lexicon? in
                                 let syllableText = item.romanization.filter(\.isSpace.negative)
                                 guard syllableText != text else { return item.replacedInput(with: inputText) }
                                 let tones = syllableText.tones
@@ -142,7 +142,7 @@ struct InputMemory {
                         let inputLength = keys.count
                         let text = keys.map(\.text).joined()
                         let textParts = text.split(separator: Character.apostrophe)
-                        let qualified: [Candidate] = candidates.compactMap({ item -> Candidate? in
+                        let qualified = candidates.compactMap({ item -> Lexicon? in
                                 let syllables = item.romanization.removedTones().split(separator: Character.space)
                                 guard syllables != textParts else { return item.replacedInput(with: text) }
                                 switch inputSeparatorCount {
@@ -185,7 +185,7 @@ struct InputMemory {
                         return qualified
                 }
         }
-        private static func search<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T, segmentation: Segmentation, deepSearch: Bool) -> [Candidate] {
+        private static func search<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T, segmentation: Segmentation, deepSearch: Bool) -> [Lexicon] {
                 lazy var shortcutStatement = prepareShortcutStatement()
                 lazy var pingStatement = preparePingStatement()
                 lazy var strictStatement = prepareStrictStatement()
@@ -205,11 +205,11 @@ struct InputMemory {
                 })
                 let queried = query(segmentation: segmentation, idealSchemes: idealSchemes, deepSearch: deepSearch, strictStatement: strictStatement)
                 guard fullMatched.isEmpty && idealQueried.isEmpty else {
-                        return (fullMatched + idealQueried).distinct().map({ Candidate(text: $0.word, romanization: $0.romanization, input: text, mark: $0.mark, order: -1) }) + queried
+                        return (fullMatched + idealQueried).distinct().map({ Lexicon(text: $0.word, romanization: $0.romanization, input: text, mark: $0.mark, number: -1) }) + queried
                 }
                 let shortcuts = shortcutMatch(text: text, input: text, limit: 5, statement: shortcutStatement)
                 guard shortcuts.isEmpty else {
-                        return shortcuts.map({ Candidate(text: $0.word, romanization: $0.romanization, input: text, mark: $0.mark, order: -1) }) + queried
+                        return shortcuts.map({ Lexicon(text: $0.word, romanization: $0.romanization, input: text, mark: $0.mark, number: -1) }) + queried
                 }
                 guard deepSearch else { return queried }
                 let shouldPartiallyMatch: Bool = idealSchemes.isEmpty || (keys.last == VirtualInputKey.letterM) || (keys.first == VirtualInputKey.letterM)
@@ -264,24 +264,24 @@ struct InputMemory {
                         .sorted()
                         .distinct()
                         .prefix(5)
-                        .map({ Candidate(text: $0.word, romanization: $0.romanization, input: text, mark: $0.mark, order: -1) })
+                        .map({ Lexicon(text: $0.word, romanization: $0.romanization, input: text, mark: $0.mark, number: -1) })
                 return partialMatched + queried
         }
-        private static func query(segmentation: Segmentation, idealSchemes: [Scheme], deepSearch: Bool, strictStatement: OpaquePointer?) -> [Candidate] {
+        private static func query(segmentation: Segmentation, idealSchemes: [Scheme], deepSearch: Bool, strictStatement: OpaquePointer?) -> [Lexicon] {
                 guard segmentation.isNotEmpty else { return [] }
                 guard deepSearch else {
                         return idealSchemes.flatMap({ perform(scheme: $0, strictStatement: strictStatement) })
                                 .sorted()
                                 .distinct()
                                 .prefix(6)
-                                .map({ Candidate(text: $0.word, romanization: $0.romanization, input: $0.input, mark: $0.mark, order: -2) })
+                                .map({ Lexicon(text: $0.word, romanization: $0.romanization, input: $0.input, mark: $0.mark, number: -2) })
                 }
                 if idealSchemes.isEmpty {
                         return segmentation.flatMap({ perform(scheme: $0, strictStatement: strictStatement) })
                                 .sorted()
                                 .distinct()
                                 .prefix(6)
-                                .map({ Candidate(text: $0.word, romanization: $0.romanization, input: $0.input, mark: $0.mark, order: -2) })
+                                .map({ Lexicon(text: $0.word, romanization: $0.romanization, input: $0.input, mark: $0.mark, number: -2) })
                 } else {
                         return idealSchemes.flatMap({ scheme -> [InternalLexicon] in
                                 guard scheme.count > 1 else { return [] }
@@ -290,7 +290,7 @@ struct InputMemory {
                         .sorted()
                         .distinct()
                         .prefix(6)
-                        .map({ Candidate(text: $0.word, romanization: $0.romanization, input: $0.input, mark: $0.mark, order: -2) })
+                        .map({ Lexicon(text: $0.word, romanization: $0.romanization, input: $0.input, mark: $0.mark, number: -2) })
                 }
         }
         private static func perform<T: RandomAccessCollection<Syllable>>(scheme: T, strictStatement: OpaquePointer?) -> [InternalLexicon] {
@@ -423,7 +423,7 @@ struct InputMemory {
                 }
                 return items
         }
-        static func nineKeySearch<T: RandomAccessCollection<Combo>>(combos: T) async -> [Candidate] {
+        static func nineKeySearch<T: RandomAccessCollection<Combo>>(combos: T) async -> [Lexicon] {
                 guard combos.isNotEmpty else { return [] }
                 let inputLength = combos.count
                 lazy var anchorsStatement = prepareNineKeyAnchorsStatement()
@@ -438,14 +438,14 @@ struct InputMemory {
                         let anchorsMatched = nineKeyAnchorsMatch(code: code, limit: 100, statement: anchorsStatement)
                         return (codeMatched + anchorsMatched)
                                 .distinct()
-                                .map({ Candidate(text: $0.word, romanization: $0.romanization, input: $0.input, mark: $0.mark, order: -1) })
+                                .map({ Lexicon(text: $0.word, romanization: $0.romanization, input: $0.input, mark: $0.mark, number: -1) })
                 }
                 let fullCode: Int = combos.map(\.code).decimalCombined()
                 let fullCodeMatched = nineKeyCodeMatch(code: fullCode, limit: 100, statement: codeStatement)
                 let fullAnchorsMatched = nineKeyAnchorsMatch(code: fullCode, limit: 5, statement: anchorsStatement)
                 let ideal = (fullCodeMatched.prefix(10) + (fullCodeMatched + fullAnchorsMatched).sorted())
                         .distinct()
-                        .map({ Candidate(text: $0.word, romanization: $0.romanization, input: $0.input, mark: $0.mark, order: -1) })
+                        .map({ Lexicon(text: $0.word, romanization: $0.romanization, input: $0.input, mark: $0.mark, number: -1) })
                 let queried = (1..<inputLength)
                         .flatMap({ number -> [InternalLexicon] in
                                 let code = combos.dropLast(number).map(\.code).decimalCombined()
@@ -454,7 +454,7 @@ struct InputMemory {
                         })
                         .distinct()
                         .prefix(6)
-                        .map({ Candidate(text: $0.word, romanization: $0.romanization, input: $0.input, mark: $0.mark, order: -2) })
+                        .map({ Lexicon(text: $0.word, romanization: $0.romanization, input: $0.input, mark: $0.mark, number: -2) })
                 return ideal + queried
         }
 }
@@ -490,9 +490,9 @@ private struct InternalLexicon: Hashable, Comparable {
         }
 }
 
-private extension Candidate {
+private extension Lexicon {
         /// MemoryLexicon identifier
         var identifier: Int {
-                return (lexiconText + String.period + romanization).hash
+                return (text + String.period + romanization).hash
         }
 }

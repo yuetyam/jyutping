@@ -129,6 +129,9 @@ extension VirtualInputKey {
         /// Letter Y
         public var isYLetterY: Bool { self == .letterY }
 
+        /// Letter M
+        public var isMLetterM: Bool { self == .letterM }
+
         /// Separator; Delimiter; Quote
         public var isApostrophe: Bool { self == .apostrophe }
 

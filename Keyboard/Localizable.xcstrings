@@ -2257,6 +2257,382 @@
         }
       }
     },
+    "SettingsView.CommentScene.Option.All" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All"
+          }
+        },
+        "en-US" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toute"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "全て"
+          }
+        },
+        "yue" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "所有"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "所有"
+          }
+        },
+        "zh-Hans-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "所有"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "所有"
+          }
+        },
+        "zh-Hant-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "所有"
+          }
+        },
+        "zh-Hant-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "所有"
+          }
+        },
+        "zh-Hant-MO" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "所有"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "所有"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "所有"
+          }
+        }
+      }
+    },
+    "SettingsView.CommentScene.Option.Lookup" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lookup"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lookup"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lookup"
+          }
+        },
+        "en-US" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lookup"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rechercher"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "逆引き検索"
+          }
+        },
+        "yue" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "反查"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "反查"
+          }
+        },
+        "zh-Hans-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "反查"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "反查"
+          }
+        },
+        "zh-Hant-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "反查"
+          }
+        },
+        "zh-Hant-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "反查"
+          }
+        },
+        "zh-Hant-MO" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "反查"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "反查"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "反查"
+          }
+        }
+      }
+    },
+    "SettingsView.CommentScene.Option.None" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "None"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "None"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "None"
+          }
+        },
+        "en-US" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "None"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucun"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "なし"
+          }
+        },
+        "yue" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "無"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "無"
+          }
+        },
+        "zh-Hans-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "無"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "無"
+          }
+        },
+        "zh-Hant-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "無"
+          }
+        },
+        "zh-Hant-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "無"
+          }
+        },
+        "zh-Hant-MO" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "無"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "無"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "無"
+          }
+        }
+      }
+    },
+    "SettingsView.CommentScene.PickerTitle" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scenes"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scenes"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scenes"
+          }
+        },
+        "en-US" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scenes"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scènes"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "シーン"
+          }
+        },
+        "yue" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "場景"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "場景"
+          }
+        },
+        "zh-Hans-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "場景"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "場景"
+          }
+        },
+        "zh-Hant-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "場景"
+          }
+        },
+        "zh-Hant-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "場景"
+          }
+        },
+        "zh-Hant-MO" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "場景"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "場景"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "場景"
+          }
+        }
+      }
+    },
     "SettingsView.CommentStyle.Option.Above" : {
       "localizations" : {
         "en" : {
@@ -2441,100 +2817,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "候選詞下邊"
-          }
-        }
-      }
-    },
-    "SettingsView.CommentStyle.Option.None" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "None"
-          }
-        },
-        "en-CA" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "None"
-          }
-        },
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "None"
-          }
-        },
-        "en-US" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "None"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aucun"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "非表示"
-          }
-        },
-        "yue" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "無"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "無"
-          }
-        },
-        "zh-Hans-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "無"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "無"
-          }
-        },
-        "zh-Hant-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "無"
-          }
-        },
-        "zh-Hant-HK" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "無"
-          }
-        },
-        "zh-Hant-MO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "無"
-          }
-        },
-        "zh-Hant-TW" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "無"
-          }
-        },
-        "zh-HK" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "無"
           }
         }
       }

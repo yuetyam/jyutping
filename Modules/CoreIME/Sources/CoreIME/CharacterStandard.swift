@@ -50,6 +50,6 @@ extension CharacterStandard {
         /// - Parameter value: RawValue
         /// - Returns: CharacterStandard
         public static func standard(of value: Int) -> CharacterStandard {
-                return Self.allCases.first(where: { $0.rawValue == value }) ?? Self.preset
+                return allCases.first(where: { $0.rawValue == value }) ?? .preset
         }
 }

@@ -9,10 +9,10 @@ extension Engine {
         ///   - text: Cantonese word text.
         ///   - input: User input for this word.
         ///   - mark: Formatted user input for pre-edit display.
-        /// - Returns: Candidates.
-        static func reveresLookup(text: String, input: String, mark: String? = nil) -> [Candidate] {
+        /// - Returns: Lookup transformed Lexicons.
+        static func reveresLookup(text: String, input: String, mark: String? = nil) -> [Lexicon] {
                 let romanizations: [String] = Engine.lookup(text)
-                return romanizations.map({ Candidate(text: text, romanization: $0, input: input, mark: mark) })
+                return romanizations.map({ Lexicon(text: text, romanization: $0, input: input, mark: mark) })
         }
 
         /// Search Romanization for word

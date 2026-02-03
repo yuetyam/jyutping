@@ -17,6 +17,6 @@ public enum CangjieVariant: Int, CaseIterable {
         /// - Parameter value: RawValue
         /// - Returns: CangjieVariant
         public static func variant(of value: Int) -> CangjieVariant {
-                return Self.allCases.first(where: { $0.rawValue == value }) ?? Self.cangjie5
+                return allCases.first(where: { $0.rawValue == value }) ?? .cangjie5
         }
 }

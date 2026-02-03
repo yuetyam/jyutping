@@ -15,6 +15,7 @@ struct GeneralSettingsView: View {
         private let cornerRadiusRange: ClosedRange<Int> = AppSettings.cornerRadiusRange
 
         @State private var orientation: CandidatePageOrientation = AppSettings.candidatePageOrientation
+        @State private var commentDisplayScene: CommentDisplayScene = AppSettings.commentDisplayScene
         @State private var commentDisplayStyle: CommentDisplayStyle = AppSettings.commentDisplayStyle
         @State private var toneDisplayStyle: ToneDisplayStyle = AppSettings.toneDisplayStyle
         @State private var toneDisplayColor: ToneDisplayColor = AppSettings.toneDisplayColor
@@ -95,11 +96,19 @@ struct GeneralSettingsView: View {
                                                 }
                                         }
                                         Section {
+                                                Picker("GeneralPreferencesView.CommentScene", selection: $commentDisplayScene) {
+                                                        Text("GeneralPreferencesView.CommentScene.All").tag(CommentDisplayScene.all)
+                                                        Text("GeneralPreferencesView.CommentScene.Lookup").tag(CommentDisplayScene.reverseLookup)
+                                                        Text("GeneralPreferencesView.CommentScene.None").tag(CommentDisplayScene.noneOfAll)
+                                                }
+                                                .pickerStyle(.menu)
+                                                .onChange(of: commentDisplayScene) { scene in
+                                                        AppSettings.updateCommentDisplayScene(to: scene)
+                                                }
                                                 Picker("GeneralPreferencesView.CommentStyle", selection: $commentDisplayStyle) {
                                                         Text("GeneralPreferencesView.CommentStyle.Top").tag(CommentDisplayStyle.top)
                                                         Text("GeneralPreferencesView.CommentStyle.Bottom").tag(CommentDisplayStyle.bottom)
                                                         Text("GeneralPreferencesView.CommentStyle.Right").tag(CommentDisplayStyle.right)
-                                                        Text("GeneralPreferencesView.CommentStyle.NoComments").tag(CommentDisplayStyle.noComments)
                                                 }
                                                 .pickerStyle(.menu)
                                                 .onChange(of: commentDisplayStyle) { newStyle in

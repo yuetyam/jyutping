@@ -9,8 +9,8 @@ extension Engine {
         ///   - keys: VirtualInputKey Sequence
         ///   - input: User input text
         ///   - segmentation: Segmentation
-        /// - Returns: Candidates
-        public static func structureReverseLookup<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T, input: String, segmentation: Segmentation) -> [Candidate] {
+        /// - Returns: Lookup transformed Lexicons
+        public static func structureReverseLookup<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T, input: String, segmentation: Segmentation) -> [Lexicon] {
                 let markFreeText = keys.filter(\.isSyllableLetter).map(\.text).joined()
                 let matched = search(text: markFreeText, segmentation: segmentation).distinct()
                 guard matched.isNotEmpty else { return [] }
@@ -45,25 +45,25 @@ extension Engine {
                         return matched.map(\.text).flatMap({ Engine.reveresLookup(text: $0, input: input) })
                 }
         }
-        private static func search(text: String, segmentation: Segmentation) -> [Candidate] {
+        private static func search(text: String, segmentation: Segmentation) -> [Lexicon] {
                 let matched = match(text: text)
                 let textCount = text.count
                 let schemes = segmentation.filter({ $0.length == textCount })
                 let matches = schemes.flatMap({ match(text: $0.originText) })
                 return matched + matches
         }
-        private static func match(text: String) -> [Candidate] {
-                var candidates: [Candidate] = []
+        private static func match(text: String) -> [Lexicon] {
                 let command: String = "SELECT word, romanization FROM structure_table WHERE spell = \(text.hashCode());"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(Engine.database, command, -1, &statement, nil) == SQLITE_OK else { return [] }
+                var items: [Lexicon] = []
                 while sqlite3_step(statement) == SQLITE_ROW {
                         let word: String = String(cString: sqlite3_column_text(statement, 0))
                         let romanization: String = String(cString: sqlite3_column_text(statement, 1))
-                        let instance = Candidate(text: word, romanization: romanization, input: text)
-                        candidates.append(instance)
+                        let instance = Lexicon(text: word, romanization: romanization, input: text)
+                        items.append(instance)
                 }
-                return candidates
+                return items
         }
 }

@@ -3,7 +3,7 @@ import SQLite3
 import CommonExtensions
 
 extension Engine {
-        static func quick5ReverseLookup(text: String) -> [Candidate] {
+        static func quick5ReverseLookup(text: String) -> [Lexicon] {
                 return (match(quick5: text) + glob(quick5: text))
                         .distinct()
                         .flatMap({ Engine.reveresLookup(text: $0.text, input: $0.input) })
@@ -41,7 +41,7 @@ extension Engine {
 }
 
 extension Engine {
-        static func quick3ReverseLookup(text: String) -> [Candidate] {
+        static func quick3ReverseLookup(text: String) -> [Lexicon] {
                 return (match(quick3: text) + glob(quick3: text))
                         .distinct()
                         .flatMap({ Engine.reveresLookup(text: $0.text, input: $0.input) })

@@ -30,7 +30,7 @@ enum KeyboardLayout: Int, CaseIterable {
         /// Read KeyboardLayout from UserDefaults
         static func fetchSavedLayout() -> KeyboardLayout {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.KeyboardLayout)
-                return Self.allCases.first(where: { $0.rawValue == savedValue }) ?? Self.qwerty
+                return allCases.first(where: { $0.rawValue == savedValue }) ?? .qwerty
         }
 
         /// 26鍵全鍵盤
@@ -80,7 +80,7 @@ enum NumericLayout: Int, CaseIterable {
         /// Read NumericLayout from UserDefaults
         static func fetchSavedLayout() -> NumericLayout {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.NumericLayout)
-                return Self.allCases.first(where: { $0.rawValue == savedValue }) ?? Self.default
+                return allCases.first(where: { $0.rawValue == savedValue }) ?? .default
         }
 
         /// 10 Key KeyPad
@@ -99,7 +99,7 @@ enum StrokeLayout: Int, CaseIterable {
         /// Read StrokeLayout from UserDefaults
         static func fetchSavedLayout() -> StrokeLayout {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.StrokeLayout)
-                return Self.allCases.first(where: { $0.rawValue == savedValue }) ?? Self.default
+                return allCases.first(where: { $0.rawValue == savedValue }) ?? .default
         }
 
         /// 10 Key KeyPad

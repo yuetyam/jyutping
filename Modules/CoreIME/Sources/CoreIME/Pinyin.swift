@@ -3,7 +3,7 @@ import SQLite3
 import CommonExtensions
 
 extension Engine {
-        public static func pinyinReverseLookup<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T, segmentation: PinyinSegmentation) async -> [Candidate] {
+        public static func pinyinReverseLookup<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T, segmentation: PinyinSegmentation) async -> [Lexicon] {
                 let isLetterKeyOnly: Bool = keys.contains(where: \.isLetter.negative).negative
                 // TODO: Handle separators
                 guard isLetterKeyOnly else { return [] }
@@ -207,7 +207,7 @@ extension Engine {
                 return statement
         }
 
-        public static func pinyinNineKeyReverseLookup<T: RandomAccessCollection<Combo>>(combos: T) async -> [Candidate] {
+        public static func pinyinNineKeyReverseLookup<T: RandomAccessCollection<Combo>>(combos: T) async -> [Lexicon] {
                 lazy var anchorsStatement = preparePinyinNineKeyAnchorsStatement()
                 lazy var codeMatchStatement = preparePinyinNineKeyCodeStatement()
                 defer {
@@ -243,9 +243,9 @@ extension Engine {
                 let tailCombos = combos.dropFirst(firstInputCount)
                 let tailCode = tailCombos.map(\.code).decimalCombined()
                 guard tailCode > 0 else { return queried }
-                let tailCandidates: [PinyinLexicon] = pinyinNineKeyCodeMatch(code: tailCode, limit: 20, statement: codeMatchStatement) + pinyinNineKeyAnchorsMatch(code: tailCode, limit: 20, statement: anchorsStatement)
-                guard tailCandidates.isNotEmpty, let head = queried.first else { return queried }
-                let concatenated = tailCandidates.compactMap({ head + $0 }).sorted().prefix(1)
+                let tailLexicons: [PinyinLexicon] = pinyinNineKeyCodeMatch(code: tailCode, limit: 20, statement: codeMatchStatement) + pinyinNineKeyAnchorsMatch(code: tailCode, limit: 20, statement: anchorsStatement)
+                guard tailLexicons.isNotEmpty, let head = queried.first else { return queried }
+                let concatenated = tailLexicons.compactMap({ head + $0 }).sorted().prefix(1)
                 return concatenated + queried
         }
         private static func pinyinNineKeyAnchorsMatch(code: Int, limit: Int64? = nil, statement: OpaquePointer?) -> [PinyinLexicon] {

@@ -26,6 +26,7 @@ struct SettingsView: View {
         @State private var inputKeyStyle: InputKeyStyle = Options.inputKeyStyle
         @State private var keyHeightOffset: CGFloat = Options.fetchKeyHeightOffset()
         @State private var commentStyle: CommentStyle = Options.commentStyle
+        @State private var commentScene: CommentScene = Options.commentScene
         @State private var commentToneStyle: CommentToneStyle = Options.commentToneStyle
         @State private var cangjieVariant: CangjieVariant = Options.cangjieVariant
         @State private var isEmojiSuggestionsOn: Bool = Options.isEmojiSuggestionsOn
@@ -195,7 +196,6 @@ struct SettingsView: View {
                                         Picker("SettingsView.CommentStyle.PickerTitle", selection: $commentStyle) {
                                                 Text("SettingsView.CommentStyle.Option.Above").tag(CommentStyle.aboveCandidates)
                                                 Text("SettingsView.CommentStyle.Option.Below").tag(CommentStyle.belowCandidates)
-                                                Text("SettingsView.CommentStyle.Option.None").tag(CommentStyle.noComments)
                                         }
                                         .pickerStyle(.inline)
                                         .labelsHidden()
@@ -204,20 +204,23 @@ struct SettingsView: View {
                                                 context.triggerSelectionHapticFeedback()
                                                 Options.updateCommentStyle(to: newStyle)
                                         }
-                                        #if DEBUG
                                         HStack(spacing: 0) {
-                                                Text(verbatim: "場景").minimumScaleFactor(0.5).lineLimit(1)
+                                                Text("SettingsView.CommentScene.PickerTitle").minimumScaleFactor(0.5).lineLimit(1)
                                                 Spacer()
-                                                Picker("SettingsView.CommentStyle.PickerTitle", selection: $commentStyle) {
-                                                        Text(verbatim: "所有").tag(CommentStyle.aboveCandidates)
-                                                        Text(verbatim: "反查").tag(CommentStyle.belowCandidates)
-                                                        Text(verbatim: "無").tag(CommentStyle.noComments)
+                                                Picker("SettingsView.CommentScene.PickerTitle", selection: $commentScene) {
+                                                        Text("SettingsView.CommentScene.Option.All").tag(CommentScene.all)
+                                                        Text("SettingsView.CommentScene.Option.Lookup").tag(CommentScene.reverseLookup)
+                                                        Text("SettingsView.CommentScene.Option.None").tag(CommentScene.noneOfAll)
                                                 }
                                                 .pickerStyle(.segmented)
                                                 .labelsHidden()
                                                 .fixedSize()
+                                                .onChange(of: commentScene) { scene in
+                                                        AudioFeedback.modified()
+                                                        context.triggerSelectionHapticFeedback()
+                                                        Options.updateCommentScene(to: scene)
+                                                }
                                         }
-                                        #endif
                                 } header: {
                                         Text("SettingsView.CommentStyle.PickerTitle").textCase(nil)
                                 }

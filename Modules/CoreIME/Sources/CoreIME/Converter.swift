@@ -11,12 +11,13 @@ extension Converter {
         ///   - marks: TextMark candidates suggested by the Engine — all plain text.
         ///   - symbols: Emoji / symbol candidates suggested by the Engine.
         ///   - queried: Candidates suggested by the Engine — all Cantonese.
-        ///   - characterStandard: The Chinese character set to use (e.g., Traditional or Simplified).
+        ///   - commentForm: Romanization Form. Full, tone-free, or none.
+        ///   - charset: The Chinese character set to use (e.g., Traditional or Simplified).
         /// - Returns: A merged array of unique, converted candidates.
-        public static func dispatch(memory: [Candidate], defined: [Candidate], marks: [Candidate], symbols: [Candidate], queried: [Candidate], characterStandard: CharacterStandard) -> [Candidate] {
+        public static func dispatch(memory: [Lexicon], defined: [Lexicon], marks: [Lexicon], symbols: [Lexicon], queried: [Lexicon], commentForm: RomanizationForm, charset: CharacterStandard) -> [Candidate] {
                 let idealMemory = memory.filter(\.isIdealInputMemory)
                 let notIdealMemory = memory.filter(\.isNotIdealInputMemory)
-                var chained: [Candidate] = idealMemory.isEmpty ? queried : queried.filter(\.isCompound.negative)
+                var chained: [Lexicon] = idealMemory.isEmpty ? queried : queried.filter(\.isCompound.negative)
                 for entry in notIdealMemory.reversed() {
                         if let index = chained.firstIndex(where: { $0.inputCount <= entry.inputCount }) {
                                 chained.insert(entry, at: index)
@@ -26,23 +27,78 @@ extension Converter {
                 }
                 chained = idealMemory.prefix(2) + defined + idealMemory + marks + chained
                 for symbol in symbols.reversed() {
-                        if let index = chained.firstIndex(where: { $0.isCantonese && $0.lexiconText == symbol.lexiconText && $0.romanization == symbol.romanization }) {
+                        if let index = chained.firstIndex(where: { $0.isCantonese && $0.text == symbol.attached && $0.romanization == symbol.romanization }) {
                                 chained.insert(symbol, at: index + 1)
                         }
                 }
-                return chained.transformed(to: characterStandard).distinct()
+                return chained.transformed(commentForm: commentForm, charset: charset).distinct()
         }
-        public static func ambiguouslyDispatch(memory: [Candidate], defined: [Candidate], marks: [Candidate], symbols: [Candidate], queried: [Candidate], characterStandard: CharacterStandard) -> [Candidate] {
+        public static func ambiguouslyDispatch(memory: [Lexicon], defined: [Lexicon], marks: [Lexicon], symbols: [Lexicon], queried: [Lexicon], commentForm: RomanizationForm, charset: CharacterStandard) -> [Candidate] {
                 var chained = memory.prefix(2) + defined + memory + marks + queried.sorted()
                 for symbol in symbols.reversed() {
-                        if let index = chained.firstIndex(where: { $0.isCantonese && $0.lexiconText == symbol.lexiconText && $0.romanization == symbol.romanization }) {
+                        if let index = chained.firstIndex(where: { $0.isCantonese && $0.text == symbol.attached && $0.romanization == symbol.romanization }) {
                                 chained.insert(symbol, at: index + 1)
                         }
                 }
-                return chained.transformed(to: characterStandard).distinct()
+                return chained.transformed(commentForm: commentForm, charset: charset).distinct()
         }
 }
 
+extension RandomAccessCollection where Element == Lexicon {
+        public func transformed(commentForm: RomanizationForm, charset: CharacterStandard) -> [Candidate] {
+                switch charset {
+                case .preset, .custom, .etymology, .opencc:
+                        return map({ Candidate(text: $0.text, lexicon: $0, commentForm: commentForm, charset: charset) })
+                case .inherited, .hongkong, .taiwan, .ancientBooksPublishing:
+                        let statement: OpaquePointer? = {
+                                let query: String = "SELECT right FROM \(charset.variantTableName) WHERE left = ? LIMIT 1;"
+                                var pointer: OpaquePointer? = nil
+                                guard sqlite3_prepare_v2(Engine.database, query, -1, &pointer, nil) == SQLITE_OK else { return nil }
+                                return pointer
+                        }()
+                        defer { sqlite3_finalize(statement) }
+                        return map({ origin -> Candidate in
+                                guard origin.isCantonese else {
+                                        return Candidate(text: origin.text, lexicon: origin, commentForm: commentForm, charset: charset)
+                                }
+                                let converted = origin.text.map({ Converter.match(character: $0, statement: statement) })
+                                return Candidate(text: String(converted), lexicon: origin, commentForm: commentForm, charset: charset)
+                        })
+                case .prcGeneral:
+                        let statement: OpaquePointer? = {
+                                let query: String = "SELECT right FROM \(charset.variantTableName) WHERE left = ? LIMIT 1;"
+                                var pointer: OpaquePointer? = nil
+                                guard sqlite3_prepare_v2(Engine.database, query, -1, &pointer, nil) == SQLITE_OK else { return nil }
+                                return pointer
+                        }()
+                        defer { sqlite3_finalize(statement) }
+                        return map({ origin -> Candidate in
+                                guard origin.isCantonese else {
+                                        return Candidate(text: origin.text, lexicon: origin, commentForm: commentForm, charset: charset)
+                                }
+                                let converted = Converter.prcGeneralConvert(origin.text, statement: statement)
+                                return Candidate(text: converted, lexicon: origin, commentForm: commentForm, charset: charset)
+                        })
+                case .mutilated:
+                        let statement: OpaquePointer? = {
+                                let query: String = "SELECT right FROM \(charset.variantTableName) WHERE left = ? LIMIT 1;"
+                                var pointer: OpaquePointer? = nil
+                                guard sqlite3_prepare_v2(Engine.database, query, -1, &pointer, nil) == SQLITE_OK else { return nil }
+                                return pointer
+                        }()
+                        defer { sqlite3_finalize(statement) }
+                        return map({ origin -> Candidate in
+                                guard origin.isCantonese else {
+                                        return Candidate(text: origin.text, lexicon: origin, commentForm: commentForm, charset: charset)
+                                }
+                                let converted = Converter.mutilatedCovert(origin.text, statement: statement)
+                                return Candidate(text: converted, lexicon: origin, commentForm: commentForm, charset: charset)
+                        })
+                }
+        }
+}
+
+/*
 extension RandomAccessCollection where Element == Candidate {
 
         /// Convert Cantonese Candidate text to the specific variant
@@ -94,6 +150,7 @@ extension RandomAccessCollection where Element == Candidate {
                 }
         }
 }
+*/
 
 /// Character Variant Converter
 public struct Converter {

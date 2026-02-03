@@ -6,7 +6,8 @@ struct CandidateBoard: View {
         @EnvironmentObject private var context: AppContext
 
         private let pageOrientation: CandidatePageOrientation = AppSettings.candidatePageOrientation
-        private let commentStyle: CommentDisplayStyle = AppSettings.commentDisplayStyle
+        private let commentScene: CommentDisplayScene = AppSettings.commentDisplayScene
+        private let savedCommentStyle: CommentDisplayStyle = AppSettings.commentDisplayStyle
         private let toneStyle: ToneDisplayStyle = AppSettings.toneDisplayStyle
         private let toneColor: ToneDisplayColor = AppSettings.toneDisplayColor
         private let labelSet: LabelSet = AppSettings.labelSet
@@ -18,6 +19,11 @@ struct CandidateBoard: View {
         private let innerCornerRadius: CGFloat = CGFloat(AppSettings.innerCornerRadius)
 
         var body: some View {
+                let commentStyle: CommentDisplayStyle = switch commentScene {
+                case .all: savedCommentStyle
+                case .reverseLookup: context.isReverseLookup ? savedCommentStyle : .noComments
+                case .noneOfAll: .noComments
+                }
                 let highlightedIndex: Int = context.highlightedIndex
                 switch pageOrientation {
                 case .horizontal:

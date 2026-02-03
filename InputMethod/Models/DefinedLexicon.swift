@@ -21,7 +21,7 @@ struct DefinedLexicon: Hashable {
                 hasher.combine(input)
                 hasher.combine(text)
         }
-        var candidate: Candidate {
-                return Candidate(type: .text, text: text, romanization: input, input: input)
+        var mappedLexicon: Lexicon {
+                return Lexicon(type: .text, text: text, romanization: input, input: input)
         }
 }

@@ -169,6 +169,12 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         // MARK: - Buffer
 
         @Published private(set) var inputStage: InputStage = .standby
+        @Published private(set) var isReverseLookup: Bool = false
+        private func updateReverseLookupState(to isLookup: Bool) {
+                if isReverseLookup != isLookup {
+                        isReverseLookup = isLookup
+                }
+        }
 
         private lazy var inputLengthSequence: [Int] = []
         private lazy var bufferEvents: [AmbiguousInputEvent] = [] {
@@ -183,27 +189,30 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 inputStage = .ongoing
                         case (false, true):
                                 inputStage = .ending
-                                if Options.isInputMemoryOn && selectedCandidates.isNotEmpty {
-                                        let concatenated = selectedCandidates.filter(\.isCantonese).joined()
-                                        concatenated.flatMap(InputMemory.handle(_:))
-                                }
-                                selectedCandidates = []
-                                updateReturnKey()
-                        }
-                        switch bufferEvents.first?.keys.first {
-                        case .none:
                                 suggestionTask?.cancel()
-                                ensureQwertyForm(to: .jyutping)
+                                candidates = []
+                                text2mark = String.empty
                                 if keyboardForm == .tenKeyStroke {
                                         updateKeyboardForm(to: .alphabetic)
                                 }
-                                candidates = []
-                                text2mark = String.empty
+                                ensureQwertyForm(to: .jyutping)
+                                updateReturnKey()
+                                if Options.isInputMemoryOn && selectedLexicons.isNotEmpty {
+                                        let concatenated = selectedLexicons.filter(\.isCantonese).joined()
+                                        concatenated.flatMap(InputMemory.handle(_:))
+                                }
+                                selectedLexicons = []
+                        }
+                        switch bufferEvents.first?.keys.first {
+                        case .none:
+                                updateReverseLookupState(to: false)
                         case .letterR:
                                 ensureQwertyForm(to: .pinyin)
+                                updateReverseLookupState(to: true)
                                 pinyinReverseLookup()
                         case .letterV:
                                 ensureQwertyForm(to: .cangjie)
+                                updateReverseLookupState(to: true)
                                 cangjieReverseLookup()
                         case .letterX:
                                 if strokeLayout.isTenKey && keyboardForm != .tenKeyStroke {
@@ -211,10 +220,12 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 } else {
                                         ensureQwertyForm(to: .stroke)
                                 }
+                                updateReverseLookupState(to: true)
                                 strokeReverseLookup()
                         case .letterQ:
                                 structureReverseLookup()
                         default:
+                                updateReverseLookupState(to: false)
                                 if keyboardLayout.isAmbiguous {
                                         ambiguouslySuggest()
                                 } else {
@@ -321,11 +332,11 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         case (false, true):
                                 inputStage = .ending
                                 suggestionTask?.cancel()
-                                if Options.isInputMemoryOn && selectedCandidates.isNotEmpty {
-                                        let concatenated = selectedCandidates.filter(\.isCantonese).joined()
+                                if Options.isInputMemoryOn && selectedLexicons.isNotEmpty {
+                                        let concatenated = selectedLexicons.filter(\.isCantonese).joined()
                                         concatenated.flatMap(InputMemory.handle(_:))
                                 }
-                                selectedCandidates = []
+                                selectedLexicons = []
                                 candidates = []
                                 text2mark = String.empty
                                 clearSidebarSyllables()
@@ -333,10 +344,12 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         }
                         switch bufferCombos.first {
                         case .none:
-                                break
+                                updateReverseLookupState(to: false)
                         case .special:
+                                updateReverseLookupState(to: true)
                                 nineKeyPinyinReverseLookup()
                         default:
+                                updateReverseLookupState(to: false)
                                 nineKeySuggest()
                         }
                 }
@@ -364,7 +377,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         private func updateSidebarSyllables() {
                 guard selectedSyllables.isNotEmpty else {
                         candidates = nineKeyCachedCandidates
-                        sidebarSyllables = candidates.compactMap({ $0.isNotCantonese ? nil : $0.romanization.split(separator: Character.space).first?.dropLast() })
+                        sidebarSyllables = candidates.compactMap({ $0.isNotCantonese ? nil : $0.lexicon.romanization.split(separator: Character.space).first?.dropLast() })
                                 .distinct()
                                 .map({ SidebarSyllable(text: String($0), isSelected: false) })
                         return
@@ -372,7 +385,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let selected = selectedSyllables.map(\.text)
                 let selectedCount: Int = selectedSyllables.count
                 candidates = nineKeyCachedCandidates.filter({ item -> Bool in
-                        let syllables = item.romanization.removedTones().split(separator: Character.space).map({ String($0) })
+                        let syllables = item.lexicon.romanization.removedTones().split(separator: Character.space).map({ String($0) })
                         return (syllables.count < selectedCount) ? selected.starts(with: syllables) : syllables.starts(with: selected)
                 })
                 let selectedLength = selected.reduce(0, { $0 + $1.count })
@@ -381,7 +394,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         return
                 }
                 let leadingLength = selectedLength + selectedCount
-                let newSyllables = candidates.compactMap({ $0.romanization.removedTones().dropFirst(leadingLength).split(separator: Character.space).first })
+                let newSyllables = candidates.compactMap({ $0.lexicon.romanization.removedTones().dropFirst(leadingLength).split(separator: Character.space).first })
                         .distinct()
                         .map({ SidebarSyllable(text: String($0), isSelected: false) })
                 sidebarSyllables = selectedSyllables + newSyllables
@@ -565,8 +578,8 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 case .qwerty, .tripleStroke, .fourteenKey, .fifteenKey, .eighteenKey, .nineteenKey, .twentyOneKey:
                         switch bufferEvents.first?.keys.first {
                         case .some(let key) where key.isReverseLookupTrigger:
-                                selectedCandidates = []
-                                var tail = bufferEvents.dropFirst(candidate.inputCount + 1)
+                                selectedLexicons = []
+                                var tail = bufferEvents.dropFirst(candidate.lexicon.inputCount + 1)
                                 while (tail.first?.keys.first?.isApostrophe ?? false) {
                                         tail = tail.dropFirst()
                                 }
@@ -579,11 +592,11 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 bufferEvents = bufferEvents.prefix(1) + bufferEvents.suffix(tailLength)
                         default:
                                 if candidate.isCantonese {
-                                        selectedCandidates.append(candidate)
+                                        selectedLexicons.append(candidate.lexicon)
                                 } else {
-                                        selectedCandidates = []
+                                        selectedLexicons = []
                                 }
-                                var tail = bufferEvents.dropFirst(candidate.inputCount)
+                                var tail = bufferEvents.dropFirst(candidate.lexicon.inputCount)
                                 while (tail.first?.keys.first?.isApostrophe ?? false) {
                                         tail = tail.dropFirst()
                                 }
@@ -598,7 +611,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 case .nineKey:
                         let isReverseLookup: Bool = (bufferCombos.first == .special)
                         if isReverseLookup {
-                                let tailCount: Int = (bufferCombos.count - 1 - candidate.inputCount)
+                                let tailCount: Int = (bufferCombos.count - 1 - candidate.lexicon.inputCount)
                                 if tailCount > 0 {
                                         bufferCombos = bufferCombos.prefix(1) + bufferCombos.suffix(tailCount)
                                 } else {
@@ -606,12 +619,12 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 }
                         } else {
                                 if candidate.isCantonese {
-                                        selectedCandidates.append(candidate)
+                                        selectedLexicons.append(candidate.lexicon)
                                 } else {
-                                        selectedCandidates = []
+                                        selectedLexicons = []
                                 }
                                 selectedSyllables = []
-                                let tailCount: Int = bufferCombos.count - candidate.inputCount
+                                let tailCount: Int = bufferCombos.count - candidate.lexicon.inputCount
                                 if tailCount > 0 {
                                         bufferCombos = bufferCombos.suffix(tailCount)
                                 } else {
@@ -649,25 +662,29 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let combos = bufferCombos
                 let isInputMemoryOn: Bool = Options.isInputMemoryOn
                 let isEmojiSuggestionsOn: Bool = Options.isEmojiSuggestionsOn
+                let commentForm: RomanizationForm = {
+                        guard Options.commentScene == .all else { return .nothing }
+                        return (Options.commentToneStyle == .noTones) ? .toneless : .full
+                }()
                 suggestionTask = Task.detached(priority: .high) { [weak self] in
                         guard let self else { return }
-                        async let memory: [Candidate] = isInputMemoryOn ? InputMemory.nineKeySearch(combos: combos) : []
-                        async let defined: [Candidate] = queryDefinedCandidates(for: combos)
-                        async let textMarks: [Candidate] = isEmojiSuggestionsOn ? Engine.queryTextMarks(for: combos) : []
-                        async let symbols: [Candidate] = isEmojiSuggestionsOn ? Engine.nineKeySearchSymbols(combos: combos) : []
-                        async let queried: [Candidate] = Engine.nineKeySuggest(combos: combos)
-                        let suggestions: [Candidate] = await Converter.dispatch(memory: memory, defined: defined, marks: textMarks, symbols: symbols, queried: queried, characterStandard: characterStandard)
+                        async let memory: [Lexicon] = isInputMemoryOn ? InputMemory.nineKeySearch(combos: combos) : []
+                        async let defined: [Lexicon] = queryDefinedCandidates(for: combos)
+                        async let textMarks: [Lexicon] = Engine.queryTextMarks(for: combos)
+                        async let symbols: [Lexicon] = isEmojiSuggestionsOn ? Engine.nineKeySearchSymbols(combos: combos) : []
+                        async let queried: [Lexicon] = Engine.nineKeySuggest(combos: combos)
+                        let suggestions: [Candidate] = await Converter.dispatch(memory: memory, defined: defined, marks: textMarks, symbols: symbols, queried: queried, commentForm: commentForm, charset: characterStandard)
                         if Task.isCancelled.negative {
                                 await MainActor.run { [weak self] in
                                         guard let self else { return }
                                         self.text2mark = {
                                                 guard let firstCandidate = suggestions.first else { return combos.compactMap(\.letters.first).joined() }
                                                 let userInputCount = combos.count
-                                                let firstInputCount = firstCandidate.inputCount
-                                                guard firstInputCount < userInputCount else { return firstCandidate.mark }
+                                                let firstInputCount = firstCandidate.lexicon.inputCount
+                                                guard firstInputCount < userInputCount else { return firstCandidate.lexicon.mark }
                                                 let tailCombos = combos.suffix(userInputCount - firstInputCount)
                                                 let tailText = tailCombos.compactMap(\.letters.first).joined()
-                                                return firstCandidate.mark + String.space + tailText
+                                                return firstCandidate.lexicon.mark + String.space + tailText
                                         }()
                                         self.nineKeyCachedCandidates = suggestions
                                         self.updateSidebarSyllables()
@@ -683,20 +700,24 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         candidates = []
                         return
                 }
+                let commentForm: RomanizationForm = {
+                        guard Options.commentScene != .noneOfAll else { return .nothing }
+                        return (Options.commentToneStyle == .noTones) ? .toneless : .full
+                }()
                 suggestionTask = Task.detached(priority: .high) { [weak self] in
                         guard let self else { return }
-                        let suggestions: [Candidate] = await Engine.pinyinNineKeyReverseLookup(combos: keys).transformed(to: characterStandard)
+                        let suggestions = await Engine.pinyinNineKeyReverseLookup(combos: keys).transformed(commentForm: commentForm, charset: characterStandard)
                         if Task.isCancelled.negative {
                                 await MainActor.run { [weak self] in
                                         guard let self else { return }
                                         let tailMark = {
                                                 guard let firstCandidate = suggestions.first else { return keys.compactMap(\.letters.first).joined() }
                                                 let userInputCount = keys.count
-                                                let firstInputCount = firstCandidate.inputCount
-                                                guard firstInputCount < userInputCount else { return firstCandidate.mark }
+                                                let firstInputCount = firstCandidate.lexicon.inputCount
+                                                guard firstInputCount < userInputCount else { return firstCandidate.lexicon.mark }
                                                 let tailCombos = keys.suffix(userInputCount - firstInputCount)
                                                 let tailText = tailCombos.compactMap(\.letters.first).joined()
-                                                return firstCandidate.mark + String.space + tailText
+                                                return firstCandidate.lexicon.mark + String.space + tailText
                                         }()
                                         self.text2mark = VirtualInputKey.letterR.text + String.space + tailMark
                                         self.candidates = suggestions
@@ -712,6 +733,10 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let keySetArray: Array<Set<VirtualInputKey>> = bufferEvents.map(\.keys)
                 let isInputMemoryOn: Bool = Options.isInputMemoryOn
                 let isEmojiSuggestionsOn: Bool = Options.isEmojiSuggestionsOn
+                let commentForm: RomanizationForm = {
+                        guard Options.commentScene == .all else { return .nothing }
+                        return (Options.commentToneStyle == .noTones) ? .toneless : .full
+                }()
                 suggestionTask = Task.detached(priority: .high) { [weak self] in
                         guard let self else { return }
                         let sequences: [[VirtualInputKey]] = {
@@ -734,7 +759,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 }
                                 return result
                         }()
-                        let results = await withTaskGroup(of: (memory: [Candidate], defined: [Candidate], marks: [Candidate], symbols: [Candidate], queried: [Candidate]).self) { group in
+                        let results = await withTaskGroup(of: (memory: [Lexicon], defined: [Lexicon], marks: [Lexicon], symbols: [Lexicon], queried: [Lexicon]).self) { group in
                                 var maxLength: Int = 0
                                 for keys in sequences {
                                         let segmentation = Segmenter.segment(keys)
@@ -742,19 +767,19 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                         guard length >= maxLength else { continue }
                                         maxLength = length
                                         group.addTask {
-                                                let memory: [Candidate] = isInputMemoryOn ? await InputMemory.suggest(keys, segmentation: segmentation, deepSearch: false) : []
-                                                let defined: [Candidate] = await self.searchDefinedCandidates(for: keys)
-                                                let textMarks: [Candidate] = isEmojiSuggestionsOn ? Engine.searchTextMarks(for: keys) : []
-                                                let symbols: [Candidate] = isEmojiSuggestionsOn ? Engine.searchSymbols(for: keys, segmentation: segmentation) : []
-                                                let queried: [Candidate] = Engine.suggest(keys, segmentation: segmentation, deepSearch: false)
+                                                let memory: [Lexicon] = isInputMemoryOn ? await InputMemory.suggest(keys, segmentation: segmentation, deepSearch: false) : []
+                                                let defined: [Lexicon] = await self.searchDefinedCandidates(for: keys)
+                                                let textMarks: [Lexicon] = Engine.searchTextMarks(for: keys)
+                                                let symbols: [Lexicon] = isEmojiSuggestionsOn ? Engine.searchSymbols(for: keys, segmentation: segmentation) : []
+                                                let queried: [Lexicon] = Engine.suggest(keys, segmentation: segmentation, deepSearch: false)
                                                 return (memory, defined, textMarks, symbols, queried)
                                         }
                                 }
-                                var allMemory: [Candidate] = []
-                                var allDefined: [Candidate] = []
-                                var allTextMarks: [Candidate] = []
-                                var allSymbols: [Candidate] = []
-                                var allQueried: [Candidate] = []
+                                var allMemory: [Lexicon] = []
+                                var allDefined: [Lexicon] = []
+                                var allTextMarks: [Lexicon] = []
+                                var allSymbols: [Lexicon] = []
+                                var allQueried: [Lexicon] = []
                                 for await result in group {
                                         allMemory.append(contentsOf: result.memory)
                                         allDefined.append(contentsOf: result.defined)
@@ -764,7 +789,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 }
                                 return (allMemory, allDefined, allTextMarks, allSymbols, allQueried)
                         }
-                        let suggestions: [Candidate] = await Converter.ambiguouslyDispatch(memory: results.0, defined: results.1, marks: results.2, symbols: results.3, queried: results.4, characterStandard: characterStandard)
+                        let suggestions = await Converter.ambiguouslyDispatch(memory: results.0, defined: results.1, marks: results.2, symbols: results.3, queried: results.4, commentForm: commentForm, charset: characterStandard)
                         if Task.isCancelled.negative {
                                 await MainActor.run { [weak self] in
                                         guard let self else { return }
@@ -772,7 +797,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                                 lazy var text: String = joinedBufferTexts()
                                                 guard isPeculiar.negative else { return text.toneConverted().markFormatted() }
                                                 guard let firstCandidate = suggestions.first else { return text }
-                                                guard firstCandidate.inputCount != inputLength else { return firstCandidate.mark }
+                                                guard firstCandidate.lexicon.inputCount != inputLength else { return firstCandidate.lexicon.mark }
                                                 return text
                                         }()
                                         self.candidates = suggestions
@@ -787,15 +812,19 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let isPeculiar: Bool = bufferEvents.contains(where: \.case.isCapitalized) || keys.contains(where: \.isSyllableLetter.negative)
                 let isInputMemoryOn: Bool = Options.isInputMemoryOn
                 let isEmojiSuggestionsOn: Bool = Options.isEmojiSuggestionsOn
+                let commentForm: RomanizationForm = {
+                        guard Options.commentScene == .all else { return .nothing }
+                        return (Options.commentToneStyle == .noTones) ? .toneless : .full
+                }()
                 suggestionTask = Task.detached(priority: .high) { [weak self] in
                         guard let self else { return }
                         let segmentation = Segmenter.segment(keys)
-                        async let memory: [Candidate] = isInputMemoryOn ? InputMemory.suggest(keys, segmentation: segmentation) : []
-                        async let defined: [Candidate] = searchDefinedCandidates(for: keys)
-                        async let textMarks: [Candidate] = isEmojiSuggestionsOn ? Engine.searchTextMarks(for: keys) : []
-                        async let symbols: [Candidate] = isEmojiSuggestionsOn ? Engine.searchSymbols(for: keys, segmentation: segmentation) : []
-                        async let queried: [Candidate] = Engine.suggest(keys, segmentation: segmentation)
-                        let suggestions: [Candidate] = await Converter.dispatch(memory: memory, defined: defined, marks: textMarks, symbols: symbols, queried: queried, characterStandard: characterStandard)
+                        async let memory: [Lexicon] = isInputMemoryOn ? InputMemory.suggest(keys, segmentation: segmentation) : []
+                        async let defined: [Lexicon] = searchDefinedCandidates(for: keys)
+                        async let textMarks: [Lexicon] = Engine.searchTextMarks(for: keys)
+                        async let symbols: [Lexicon] = isEmojiSuggestionsOn ? Engine.searchSymbols(for: keys, segmentation: segmentation) : []
+                        async let queried: [Lexicon] = Engine.suggest(keys, segmentation: segmentation)
+                        let suggestions = await Converter.dispatch(memory: memory, defined: defined, marks: textMarks, symbols: symbols, queried: queried, commentForm: commentForm, charset: characterStandard)
                         if Task.isCancelled.negative {
                                 await MainActor.run { [weak self] in
                                         guard let self else { return }
@@ -803,7 +832,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                                 lazy var text: String = joinedBufferTexts()
                                                 guard isPeculiar.negative else { return text.toneConverted().markFormatted() }
                                                 guard let firstCandidate = suggestions.first else { return text }
-                                                guard firstCandidate.inputCount != keys.count else { return firstCandidate.mark }
+                                                guard firstCandidate.lexicon.inputCount != keys.count else { return firstCandidate.lexicon.mark }
                                                 guard let bestScheme = segmentation.first else { return text }
                                                 let leadingLength: Int = bestScheme.length
                                                 guard leadingLength < keys.count else { return bestScheme.mark }
@@ -817,18 +846,22 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         private func pinyinReverseLookup() {
                 suggestionTask?.cancel()
                 let allKeys = bufferEvents.compactMap(\.keys.first)
-                let definedCandidates: [Candidate] = searchDefinedCandidates(for: allKeys)
-                let textMarkCandidates: [Candidate] = Options.isEmojiSuggestionsOn ? Engine.searchTextMarks(for: allKeys) : []
+                let definedCandidates = searchDefinedCandidates(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                let textMarkCandidates = Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
                 let keys = allKeys.dropFirst()
                 guard keys.isNotEmpty else {
                         text2mark = joinedBufferTexts()
                         candidates = (definedCandidates + textMarkCandidates).distinct()
                         return
                 }
+                let commentForm: RomanizationForm = {
+                        guard Options.commentScene != .noneOfAll else { return .nothing }
+                        return (Options.commentToneStyle == .noTones) ? .toneless : .full
+                }()
                 suggestionTask = Task.detached(priority: .high) { [weak self] in
                         guard let self else { return }
                         let segmentation = PinyinSegmenter.segment(keys)
-                        let suggestions: [Candidate] = await Engine.pinyinReverseLookup(keys, segmentation: segmentation).transformed(to: characterStandard)
+                        let suggestions = await Engine.pinyinReverseLookup(keys, segmentation: segmentation).transformed(commentForm: commentForm, charset: characterStandard)
                         if Task.isCancelled.negative {
                                 await MainActor.run { [weak self] in
                                         guard let self else { return }
@@ -836,7 +869,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                         let tailMark: String = {
                                                 // TODO: Handle separators
                                                 guard let firstCandidate = suggestions.first else { return String(bufferText.dropFirst()) }
-                                                guard firstCandidate.inputCount != keys.count else { return firstCandidate.mark }
+                                                guard firstCandidate.lexicon.inputCount != keys.count else { return firstCandidate.lexicon.mark }
                                                 guard let bestScheme = segmentation.first else { return String(bufferText.dropFirst()) }
                                                 let leadingLength: Int = bestScheme.length
                                                 guard leadingLength < keys.count else { return bestScheme.mark }
@@ -850,15 +883,19 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         }
         private func cangjieReverseLookup() {
                 let allKeys = bufferEvents.compactMap(\.keys.first)
-                let definedCandidates: [Candidate] = searchDefinedCandidates(for: allKeys)
-                let textMarkCandidates: [Candidate] = Options.isEmojiSuggestionsOn ? Engine.searchTextMarks(for: allKeys) : []
+                let definedCandidates = searchDefinedCandidates(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                let textMarkCandidates = Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
                 let keys = allKeys.dropFirst()
                 let cangjieRadicals = keys.compactMap(Converter.cangjie(of:))
                 let isValidSequence: Bool = cangjieRadicals.isNotEmpty && (cangjieRadicals.count == keys.count)
                 if isValidSequence {
                         text2mark = String(cangjieRadicals)
+                        let commentForm: RomanizationForm = {
+                                guard Options.commentScene != .noneOfAll else { return .nothing }
+                                return (Options.commentToneStyle == .noTones) ? .toneless : .full
+                        }()
                         let text: String = keys.map(\.text).joined()
-                        let suggestions: [Candidate] = Engine.cangjieReverseLookup(text: text, variant: Options.cangjieVariant).transformed(to: characterStandard)
+                        let suggestions = Engine.cangjieReverseLookup(text: text, variant: Options.cangjieVariant).transformed(commentForm: commentForm, charset: characterStandard)
                         candidates = (definedCandidates + textMarkCandidates + suggestions).distinct()
                 } else {
                         text2mark = joinedBufferTexts()
@@ -867,15 +904,19 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         }
         private func strokeReverseLookup() {
                 let allKeys = bufferEvents.compactMap(\.keys.first)
-                let definedCandidates: [Candidate] = searchDefinedCandidates(for: allKeys)
-                let textMarkCandidates: [Candidate] = Options.isEmojiSuggestionsOn ? Engine.searchTextMarks(for: allKeys) : []
+                let definedCandidates = searchDefinedCandidates(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                let textMarkCandidates = Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
                 let keys = allKeys.dropFirst()
                 if keys.isEmpty || StrokeVirtualKey.isValidStrokes(keys).negative {
                         text2mark = joinedBufferTexts()
                         candidates = (definedCandidates + textMarkCandidates).distinct()
                 } else {
                         text2mark = StrokeVirtualKey.displayText(from: keys)
-                        let suggestions: [Candidate] = Engine.strokeReverseLookup(keys).transformed(to: characterStandard)
+                        let commentForm: RomanizationForm = {
+                                guard Options.commentScene != .noneOfAll else { return .nothing }
+                                return (Options.commentToneStyle == .noTones) ? .toneless : .full
+                        }()
+                        let suggestions = Engine.strokeReverseLookup(keys).transformed(commentForm: commentForm, charset: characterStandard)
                         candidates = (definedCandidates + textMarkCandidates + suggestions).distinct()
                 }
         }
@@ -883,8 +924,8 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         /// 拆字、兩分反查. 例如 木 + 木 = 林: mukmuk
         private func structureReverseLookup() {
                 let allKeys = bufferEvents.compactMap(\.keys.first)
-                let definedCandidates: [Candidate] = searchDefinedCandidates(for: allKeys)
-                let textMarkCandidates: [Candidate] = Options.isEmojiSuggestionsOn ? Engine.searchTextMarks(for: allKeys) : []
+                let definedCandidates = searchDefinedCandidates(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                let textMarkCandidates = Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
                 let bufferText = joinedBufferTexts()
                 guard bufferText.count > 2 else {
                         text2mark = bufferText
@@ -903,12 +944,16 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         return bestScheme.mark + String.space + tailText
                 }()
                 text2mark = bufferText.prefix(1) + String.space + tailMark
-                let suggestions: [Candidate] = Engine.structureReverseLookup(keys, input: bufferText, segmentation: segmentation).transformed(to: characterStandard)
+                let commentForm: RomanizationForm = {
+                        guard Options.commentScene != .noneOfAll else { return .nothing }
+                        return (Options.commentToneStyle == .noTones) ? .toneless : .full
+                }()
+                let suggestions = Engine.structureReverseLookup(keys, input: bufferText, segmentation: segmentation).transformed(commentForm: commentForm, charset: characterStandard)
                 candidates = (definedCandidates + textMarkCandidates + suggestions).distinct()
         }
 
-        /// Cached Candidate sequence for InputMemory
-        private lazy var selectedCandidates: [Candidate] = []
+        /// Cached Lexicon sequence for InputMemory
+        private lazy var selectedLexicons: [Lexicon] = []
 
         @Published private(set) var candidateState: Int = 0
         @Published private(set) var candidates: [Candidate] = [] {
@@ -933,20 +978,20 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         return DefinedLexicon(input: input, text: text, keys: keys)
                 }).distinct()
         }
-        private func searchDefinedCandidates(for keys: [VirtualInputKey]) -> [Candidate] {
+        private func searchDefinedCandidates(for keys: [VirtualInputKey]) -> [Lexicon] {
                 guard Options.isTextReplacementsOn else { return [] }
                 if keys.count < 10 {
                         let charCode: Int = keys.map(\.code).radix100Combined()
-                        return definedLexicons.filter({ $0.charCode == charCode }).map(\.candidate)
+                        return definedLexicons.filter({ $0.charCode == charCode }).map(\.mappedLexicon)
                 } else {
-                        return definedLexicons.filter({ $0.keys == keys }).map(\.candidate)
+                        return definedLexicons.filter({ $0.keys == keys }).map(\.mappedLexicon)
                 }
         }
-        private func queryDefinedCandidates(for combos: [Combo]) -> [Candidate] {
+        private func queryDefinedCandidates(for combos: [Combo]) -> [Lexicon] {
                 guard Options.isTextReplacementsOn else { return [] }
                 let nineKeyCharCode: Int = combos.map(\.code).decimalCombined()
                 guard nineKeyCharCode > 0 else { return [] }
-                return definedLexicons.filter({ $0.nineKeyCharCode == nineKeyCharCode }).map(\.candidate)
+                return definedLexicons.filter({ $0.nineKeyCharCode == nineKeyCharCode }).map(\.mappedLexicon)
         }
 
 

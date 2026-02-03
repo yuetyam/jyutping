@@ -43,7 +43,7 @@ public struct Engine {
 // MARK: - Suggestions
 
 extension Engine {
-        public static func suggest<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T, segmentation: Segmentation, deepSearch: Bool = true) -> [Candidate] {
+        public static func suggest<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T, segmentation: Segmentation, deepSearch: Bool = true) -> [Lexicon] {
                 lazy var anchorsStatement = prepareAnchorsStatement()
                 lazy var spellStatement = prepareSpellStatement()
                 lazy var strictStatement = prepareStrictStatement()
@@ -70,9 +70,9 @@ extension Engine {
                 }
         }
 
-        private static func dispatch<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T, segmentation: Segmentation, deepSearch: Bool, anchorsStatement: OpaquePointer?, spellStatement: OpaquePointer?, strictStatement: OpaquePointer?) -> [Candidate] {
+        private static func dispatch<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T, segmentation: Segmentation, deepSearch: Bool, anchorsStatement: OpaquePointer?, spellStatement: OpaquePointer?, strictStatement: OpaquePointer?) -> [Lexicon] {
                 let syllableKeys = keys.filter(\.isSyllableLetter)
-                let candidates: [Candidate] =  switch (segmentation.first?.first?.alias.count ?? 0) {
+                let lexicons: [Lexicon] =  switch (segmentation.first?.first?.alias.count ?? 0) {
                 case 0 where deepSearch:
                         processSlices(of: syllableKeys, text: syllableKeys.map(\.text).joined(), anchorsStatement: anchorsStatement, spellStatement: spellStatement)
                 case 0:
@@ -85,11 +85,11 @@ extension Engine {
                 }
                 switch (keys.contains(where: \.isApostrophe), keys.contains(where: \.isToneInputKey)) {
                 case (false, false):
-                        return candidates
+                        return lexicons
                 case (true, true):
                         let inputText = keys.map(\.text).joined()
                         let text = inputText.toneConverted()
-                        return candidates.compactMap({ item -> Candidate? in
+                        return lexicons.compactMap({ item -> Lexicon? in
                                 guard text.hasPrefix(item.romanization) else { return nil }
                                 return item.replacedInput(with: inputText)
                         })
@@ -98,7 +98,7 @@ extension Engine {
                         let toneInput = keys.filter(\.isSyllableLetter.negative).map(\.text).joined()
                         let text = inputText.toneConverted()
                         let textTones = text.tones
-                        let qualified: [Candidate] = candidates.compactMap({ item -> Candidate? in
+                        let qualified: [Lexicon] = lexicons.compactMap({ item -> Lexicon? in
                                 let syllableText = item.romanization.removedSpaces()
                                 guard syllableText.hasPrefix(text).negative else { return item.replacedInput(with: inputText) }
                                 let tones = syllableText.tones
@@ -170,7 +170,7 @@ extension Engine {
                         let inputLength = keys.count
                         let text = keys.map(\.text).joined()
                         let textParts = text.split(separator: Character.apostrophe)
-                        let qualified: [Candidate] = candidates.compactMap({ item -> Candidate? in
+                        let qualified: [Lexicon] = lexicons.compactMap({ item -> Lexicon? in
                                 let syllables = item.romanization.removedTones().split(separator: Character.space)
                                 guard syllables != textParts else { return item.replacedInput(with: text) }
                                 switch inputSeparatorCount {
@@ -253,7 +253,7 @@ extension Engine {
                         let anchorKeys = keys.split(separator: VirtualInputKey.apostrophe).compactMap(\.first)
                         let anchorCount = anchorKeys.count
                         return anchorsMatch(keys: anchorKeys, statement: anchorsStatement)
-                                .compactMap({ item -> Candidate? in
+                                .compactMap({ item -> Lexicon? in
                                         let syllables = item.romanization.split(separator: Character.space).map({ $0.dropLast() })
                                         guard syllables.count == anchorCount else { return nil }
                                         let checks = (0..<anchorCount).map({ index -> Bool in
@@ -267,10 +267,10 @@ extension Engine {
                 }
         }
 
-        private static func processSlices<T: RandomAccessCollection<VirtualInputKey>>(of keys: T, text: String, limit: Int64? = nil, anchorsStatement: OpaquePointer?, spellStatement: OpaquePointer?) -> [Candidate] {
+        private static func processSlices<T: RandomAccessCollection<VirtualInputKey>>(of keys: T, text: String, limit: Int64? = nil, anchorsStatement: OpaquePointer?, spellStatement: OpaquePointer?) -> [Lexicon] {
                 let adjustedLimit: Int64 = (limit == nil) ? 300 : 100
                 let inputLength: Int = keys.count
-                return (0..<inputLength).flatMap({ number -> [Candidate] in
+                return (0..<inputLength).flatMap({ number -> [Lexicon] in
                         let leadingKeys = keys.dropLast(number)
                         let leadingText = leadingKeys.map(\.text).joined()
                         let spellMatched = spellMatch(text: leadingText, input: leadingText, limit: limit, statement: spellStatement)
@@ -284,10 +284,10 @@ extension Engine {
                 .distinct()
                 .sorted()
         }
-        private static func modify<T: RandomAccessCollection<VirtualInputKey>>(_ item: Candidate, keys: T, text: String, inputLength: Int) -> Candidate {
+        private static func modify<T: RandomAccessCollection<VirtualInputKey>>(_ item: Lexicon, keys: T, text: String, inputLength: Int) -> Lexicon {
                 guard inputLength > 1 else { return item }
                 guard item.inputCount != inputLength else { return item }
-                lazy var converted: Candidate = Candidate(text: item.text, romanization: item.romanization, input: text, mark: text, order: item.order)
+                lazy var converted: Lexicon = Lexicon(text: item.text, romanization: item.romanization, input: text, mark: text, number: item.number)
                 guard item.romanization.removedSpacesTones().hasPrefix(text).negative else { return converted }
                 guard let lastSyllable = item.romanization.split(separator: Character.space).last?.filter(\.isCantoneseToneDigit.negative) else { return item }
                 let tail = keys.dropFirst(item.inputCount - 1)
@@ -300,7 +300,7 @@ extension Engine {
                 }
         }
 
-        private static func search<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T, segmentation: Segmentation, limit: Int64? = nil, deepSearch: Bool, anchorsStatement: OpaquePointer?, spellStatement: OpaquePointer?, strictStatement: OpaquePointer?) -> [Candidate] {
+        private static func search<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T, segmentation: Segmentation, limit: Int64? = nil, deepSearch: Bool, anchorsStatement: OpaquePointer?, spellStatement: OpaquePointer?, strictStatement: OpaquePointer?) -> [Lexicon] {
                 let inputLength: Int = keys.count
                 let text: String = keys.map(\.text).joined()
                 let spellMatched = spellMatch(text: text, input: text, limit: limit, statement: spellStatement)
@@ -315,7 +315,7 @@ extension Engine {
                         return segmentation.contains(where: { $0.length == inputLength }).negative
                 }()
                 let prefixesLimit: Int64 = (limit == nil) ? 500 : 200
-                let prefixMatched: [Candidate] = shouldMatchPrefixes.negative ? [] : segmentation.flatMap({ scheme -> [Candidate] in
+                let prefixMatched: [Lexicon] = shouldMatchPrefixes.negative ? [] : segmentation.flatMap({ scheme -> [Lexicon] in
                         guard scheme.isNotEmpty else { return [] }
                         let tail = keys.dropFirst(scheme.length)
                         guard let lastAnchor = tail.first else { return [] }
@@ -326,31 +326,31 @@ extension Engine {
                         let mark: String = scheme.mark + String.space + tail.map(\.text).joined()
                         let tailAsAnchorText = tail.compactMap({ $0.isYLetterY ? VirtualInputKey.letterJ.text.first : $0.text.first })
                         let conjoinedMatched = anchorsMatch(keys: conjoined, limit: prefixesLimit, statement: anchorsStatement)
-                                .compactMap({ item -> Candidate? in
+                                .compactMap({ item -> Lexicon? in
                                         let toneFreeRomanization = item.romanization.removedTones()
                                         guard toneFreeRomanization.hasPrefix(schemeSyllableText) else { return nil }
                                         let suffixAnchorText = toneFreeRomanization.dropFirst(schemeSyllableText.count).split(separator: Character.space).compactMap(\.first)
                                         guard suffixAnchorText == tailAsAnchorText else { return nil }
-                                        return Candidate(text: item.text, romanization: item.romanization, input: text, mark: mark, order: item.order)
+                                        return Lexicon(text: item.text, romanization: item.romanization, input: text, mark: mark, number: item.number)
                                 })
                         let transformedTailText = tail.enumerated().map({ $0.offset == 0 && $0.element.isYLetterY ? VirtualInputKey.letterJ.text : $0.element.text }).joined()
                         let syllables: String = schemeSyllableText + String.space + transformedTailText
                         let anchorsMatched = anchorsMatch(keys: anchors, limit: prefixesLimit, statement: anchorsStatement)
-                                .compactMap({ item -> Candidate? in
+                                .compactMap({ item -> Lexicon? in
                                         guard item.romanization.removedTones().hasPrefix(syllables) else { return nil }
-                                        return Candidate(text: item.text, romanization: item.romanization, input: text, mark: mark, order: item.order)
+                                        return Lexicon(text: item.text, romanization: item.romanization, input: text, mark: mark, number: item.number)
                                 })
                         return conjoinedMatched + anchorsMatched
                 })
-                let gainedMatched: [Candidate] = shouldMatchPrefixes.negative ? [] : (1..<inputLength).reversed().flatMap({ number -> [Candidate] in
+                let gainedMatched: [Lexicon] = shouldMatchPrefixes.negative ? [] : (1..<inputLength).reversed().flatMap({ number -> [Lexicon] in
                         let leadingKeys = keys.prefix(number)
                         let leadingText = leadingKeys.map(\.text).joined()
                         return anchorsMatch(keys: leadingKeys, input: leadingText, limit: 300, statement: anchorsStatement)
-                }).compactMap({ item -> Candidate? in
+                }).compactMap({ item -> Lexicon? in
                         // TODO: Cache tails and syllables ?
                         let tail = keys.dropFirst(item.inputCount - 1)
                         guard tail.count <= 6 else { return nil }
-                        lazy var converted: Candidate = Candidate(text: item.text, romanization: item.romanization, input: text, mark: text, order: item.order)
+                        lazy var converted: Lexicon = Lexicon(text: item.text, romanization: item.romanization, input: text, mark: text, number: item.number)
                         guard item.romanization.removedSpacesTones().hasPrefix(text).negative else { return converted }
                         guard let lastSyllable = item.romanization.split(separator: Character.space).last?.filter(\.isCantoneseToneDigit.negative) else { return nil }
                         if let tailSyllable = Segmenter.syllableText(of: tail) {
@@ -360,14 +360,14 @@ extension Engine {
                                 return lastSyllable.hasPrefix(tailText) ? converted : nil
                         }
                 })
-                let fetched: [Candidate] = {
-                        let idealQueried = queried.filter({ $0.inputCount == inputLength }).sorted(by: { $0.order < $1.order }).distinct()
+                let fetched: [Lexicon] = {
+                        let idealQueried = queried.filter({ $0.inputCount == inputLength }).sorted(by: { $0.number < $1.number }).distinct()
                         let notIdealQueried = queried.filter({ $0.inputCount < inputLength }).sorted().distinct()
                         let fullInput = (spellMatched + idealQueried + anchorsMatched + prefixMatched + gainedMatched).distinct()
                         let primary = fullInput.prefix(10)
                         let secondary = fullInput.sorted().prefix(10)
                         let tertiary = notIdealQueried.prefix(10)
-                        let quaternary = notIdealQueried.sorted(by: { $0.order < $1.order }).prefix(10)
+                        let quaternary = notIdealQueried.sorted(by: { $0.number < $1.number }).prefix(10)
                         return (primary + secondary + tertiary + quaternary + fullInput + notIdealQueried).distinct()
                 }()
                 guard let firstInputCount = fetched.first?.inputCount else {
@@ -380,21 +380,21 @@ extension Engine {
                 guard firstInputCount < inputLength else { return fetched }
                 guard deepSearch else { return fetched }
                 let headInputLengths = fetched.map(\.inputCount).distinct()
-                let concatenated = headInputLengths.compactMap({ headLength -> Candidate? in
+                let concatenated = headInputLengths.compactMap({ headLength -> Lexicon? in
                         let tailKeys = keys.dropFirst(headLength)
                         let tailSegmentation = Segmenter.segment(tailKeys)
-                        guard let tailCandidate = search(tailKeys, segmentation: tailSegmentation, limit: 50, deepSearch: deepSearch, anchorsStatement: anchorsStatement, spellStatement: spellStatement, strictStatement: strictStatement).first else { return nil }
-                        guard let headCandidate = fetched.first(where: { $0.inputCount == headLength }) else { return nil }
-                        return headCandidate + tailCandidate
+                        guard let tailLexicon = search(tailKeys, segmentation: tailSegmentation, limit: 50, deepSearch: deepSearch, anchorsStatement: anchorsStatement, spellStatement: spellStatement, strictStatement: strictStatement).first else { return nil }
+                        guard let headLexicon = fetched.first(where: { $0.inputCount == headLength }) else { return nil }
+                        return headLexicon + tailLexicon
                 }).distinct().sorted().prefix(1)
                 return concatenated + fetched
         }
-        private static func query(inputLength: Int, segmentation: Segmentation, limit: Int64? = nil, strictStatement: OpaquePointer?) -> [Candidate] {
+        private static func query(inputLength: Int, segmentation: Segmentation, limit: Int64? = nil, strictStatement: OpaquePointer?) -> [Lexicon] {
                 let idealSchemes = segmentation.filter({ $0.length == inputLength })
                 if idealSchemes.isEmpty {
                         return segmentation.flatMap({ perform(scheme: $0, limit: limit, strictStatement: strictStatement) })
                 } else {
-                        return idealSchemes.flatMap({ scheme -> [Candidate] in
+                        return idealSchemes.flatMap({ scheme -> [Lexicon] in
                                 switch scheme.count {
                                 case 0: return []
                                 case 1: return perform(scheme: scheme, limit: limit, strictStatement: strictStatement)
@@ -404,23 +404,11 @@ extension Engine {
                         })
                 }
         }
-        private static func perform<T: RandomAccessCollection<Syllable>>(scheme: T, limit: Int64? = nil, strictStatement: OpaquePointer?) -> [Candidate] {
+        private static func perform<T: RandomAccessCollection<Syllable>>(scheme: T, limit: Int64? = nil, strictStatement: OpaquePointer?) -> [Lexicon] {
                 let anchorsCode = scheme.aliasAnchors.anchorsCode
                 guard anchorsCode > 0 else { return [] }
                 let spellCode = scheme.originText.hashCode()
                 return strictMatch(anchors: anchorsCode, spell: spellCode, input: scheme.aliasText, mark: scheme.mark, limit: limit, statement: strictStatement)
-        }
-}
-
-extension Array where Element == Candidate {
-        /// Sort Candidates for Qwerty and Triple-Stroke layouts
-        func ordered(with textCount: Int) -> [Candidate] {
-                let matched = filter({ $0.inputCount == textCount }).sorted(by: { $0.order < $1.order }).distinct()
-                let others = filter({ $0.inputCount != textCount }).sorted().distinct()
-                let primary = matched.prefix(15)
-                let secondary = others.prefix(10)
-                let tertiary = others.sorted(by: { $0.order < $1.order }).prefix(7)
-                return (primary + secondary + tertiary + matched + others).distinct()
         }
 }
 
@@ -470,53 +458,53 @@ private extension Engine {
 // MARK: - SQLite Querying
 
 private extension Engine {
-        static func anchorsMatch<T: RandomAccessCollection<VirtualInputKey>>(keys: T, input: String? = nil, limit: Int64? = nil, statement: OpaquePointer?) -> [Candidate] {
+        static func anchorsMatch<T: RandomAccessCollection<VirtualInputKey>>(keys: T, input: String? = nil, limit: Int64? = nil, statement: OpaquePointer?) -> [Lexicon] {
                 let code = keys.anchorsCode
                 guard code > 0 else { return [] }
                 sqlite3_reset(statement)
                 sqlite3_bind_int64(statement, 1, Int64(code))
                 sqlite3_bind_int64(statement, 2, (limit ?? 100))
                 let text: String = input ?? keys.map(\.text).joined()
-                var candidates: [Candidate] = []
+                var items: [Lexicon] = []
                 while sqlite3_step(statement) == SQLITE_ROW {
-                        let order: Int = Int(sqlite3_column_int64(statement, 0))
+                        let number: Int = Int(sqlite3_column_int64(statement, 0))
                         let word: String = String(cString: sqlite3_column_text(statement, 1))
                         let romanization: String = String(cString: sqlite3_column_text(statement, 2))
-                        let candidate = Candidate(text: word, romanization: romanization, input: text, mark: text, order: order)
-                        candidates.append(candidate)
+                        let instance = Lexicon(text: word, romanization: romanization, input: text, mark: text, number: number)
+                        items.append(instance)
                 }
-                return candidates
+                return items
         }
-        static func spellMatch<T: StringProtocol>(text: T, input: String, mark: String? = nil, limit: Int64? = nil, statement: OpaquePointer?) -> [Candidate] {
+        static func spellMatch<T: StringProtocol>(text: T, input: String, mark: String? = nil, limit: Int64? = nil, statement: OpaquePointer?) -> [Lexicon] {
                 sqlite3_reset(statement)
                 sqlite3_bind_int64(statement, 1, Int64(text.hashCode()))
                 sqlite3_bind_int64(statement, 2, (limit ?? -1))
-                var candidates: [Candidate] = []
+                var items: [Lexicon] = []
                 while sqlite3_step(statement) == SQLITE_ROW {
-                        let order: Int = Int(sqlite3_column_int64(statement, 0))
+                        let number: Int = Int(sqlite3_column_int64(statement, 0))
                         let word: String = String(cString: sqlite3_column_text(statement, 1))
                         let romanization: String = String(cString: sqlite3_column_text(statement, 2))
                         let mark: String = mark ?? romanization.removedTones()
-                        let candidate = Candidate(text: word, romanization: romanization, input: input, mark: mark, order: order)
-                        candidates.append(candidate)
+                        let instance = Lexicon(text: word, romanization: romanization, input: input, mark: mark, number: number)
+                        items.append(instance)
                 }
-                return candidates
+                return items
         }
-        static func strictMatch(anchors: Int, spell: Int32, input: String, mark: String? = nil, limit: Int64? = nil, statement: OpaquePointer?) -> [Candidate] {
+        static func strictMatch(anchors: Int, spell: Int32, input: String, mark: String? = nil, limit: Int64? = nil, statement: OpaquePointer?) -> [Lexicon] {
                 sqlite3_reset(statement)
                 sqlite3_bind_int64(statement, 1, Int64(spell))
                 sqlite3_bind_int64(statement, 2, Int64(anchors))
                 sqlite3_bind_int64(statement, 3, (limit ?? -1))
-                var candidates: [Candidate] = []
+                var items: [Lexicon] = []
                 while sqlite3_step(statement) == SQLITE_ROW {
-                        let order: Int = Int(sqlite3_column_int64(statement, 0))
+                        let number: Int = Int(sqlite3_column_int64(statement, 0))
                         let word: String = String(cString: sqlite3_column_text(statement, 1))
                         let romanization: String = String(cString: sqlite3_column_text(statement, 2))
                         let mark: String = mark ?? romanization.removedTones()
-                        let candidate = Candidate(text: word, romanization: romanization, input: input, mark: mark, order: order)
-                        candidates.append(candidate)
+                        let instance = Lexicon(text: word, romanization: romanization, input: input, mark: mark, number: number)
+                        items.append(instance)
                 }
-                return candidates
+                return items
         }
 }
 
@@ -524,7 +512,7 @@ private extension Engine {
 // MARK: - NineKey Suggestions
 
 extension Engine {
-        public static func nineKeySuggest<T: RandomAccessCollection<Combo>>(combos: T) async -> [Candidate] {
+        public static func nineKeySuggest<T: RandomAccessCollection<Combo>>(combos: T) async -> [Lexicon] {
                 lazy var anchorsStatement = prepareNineKeyAnchorsStatement()
                 lazy var codeMatchStatement = prepareNineKeyCodeStatement()
                 defer {
@@ -533,22 +521,22 @@ extension Engine {
                 }
                 return nineKeySearch(combos: combos, anchorsStatement: anchorsStatement, codeMatchStatement: codeMatchStatement)
         }
-        private static func nineKeySearch<T: RandomAccessCollection<Combo>>(combos: T, limit: Int64? = nil, anchorsStatement: OpaquePointer?, codeMatchStatement: OpaquePointer?) -> [Candidate] {
+        private static func nineKeySearch<T: RandomAccessCollection<Combo>>(combos: T, limit: Int64? = nil, anchorsStatement: OpaquePointer?, codeMatchStatement: OpaquePointer?) -> [Lexicon] {
                 let inputLength: Int = combos.count
                 let fullCode: Int = combos.map(\.code).decimalCombined()
                 guard inputLength > 1 else {
                         return nineKeyCodeMatch(code: fullCode, limit: limit, statement: codeMatchStatement) + nineKeyAnchorsMatch(code: fullCode, limit: 100, statement: anchorsStatement)
                 }
-                let fullMatched: [Candidate] = nineKeyCodeMatch(code: fullCode, limit: limit, statement: codeMatchStatement)
-                let idealAnchorsMatched: [Candidate] = nineKeyAnchorsMatch(code: fullCode, limit: 4, statement: anchorsStatement)
-                let codeMatched: [Candidate] = (1..<inputLength)
-                        .flatMap({ number -> [Candidate] in
+                let fullMatched = nineKeyCodeMatch(code: fullCode, limit: limit, statement: codeMatchStatement)
+                let idealAnchorsMatched = nineKeyAnchorsMatch(code: fullCode, limit: 4, statement: anchorsStatement)
+                let codeMatched: [Lexicon] = (1..<inputLength)
+                        .flatMap({ number -> [Lexicon] in
                                 let code = combos.dropLast(number).map(\.code).decimalCombined()
                                 guard code > 0 else { return [] }
                                 return nineKeyCodeMatch(code: code, limit: limit, statement: codeMatchStatement)
                         })
-                let anchorsMatched: [Candidate] = (0..<inputLength)
-                        .flatMap({ number -> [Candidate] in
+                let anchorsMatched: [Lexicon] = (0..<inputLength)
+                        .flatMap({ number -> [Lexicon] in
                                 let code = combos.dropLast(number).map(\.code).decimalCombined()
                                 guard code > 0 else { return [] }
                                 return nineKeyAnchorsMatch(code: code, limit: limit, statement: anchorsStatement)
@@ -559,53 +547,53 @@ extension Engine {
                 let tailCombos = combos.dropFirst(firstInputCount)
                 let tailCode = tailCombos.map(\.code).decimalCombined()
                 guard tailCode > 0 else { return queried }
-                let tailCandidates: [Candidate] = nineKeyCodeMatch(code: tailCode, limit: 20, statement: codeMatchStatement) + nineKeyAnchorsMatch(code: tailCode, limit: 20, statement: anchorsStatement)
-                guard tailCandidates.isNotEmpty, let head = queried.first else { return queried }
-                let concatenated = tailCandidates.compactMap({ head + $0 }).sorted().prefix(1)
+                let tailLexicons = nineKeyCodeMatch(code: tailCode, limit: 20, statement: codeMatchStatement) + nineKeyAnchorsMatch(code: tailCode, limit: 20, statement: anchorsStatement)
+                guard tailLexicons.isNotEmpty, let head = queried.first else { return queried }
+                let concatenated = tailLexicons.compactMap({ head + $0 }).sorted().prefix(1)
                 return concatenated + queried
 
                 /*
                 let headInputLengths = queried.map(\.inputCount).distinct()
-                let concatenated = headInputLengths.compactMap({ headLength -> Candidate? in
+                let concatenated = headInputLengths.compactMap({ headLength -> Lexicon? in
                         let tailCombos = combos.dropFirst(headLength)
-                        guard let tailCandidate = nineKeySearch(combos: tailCombos, limit: 10, anchorsStatement: anchorsStatement, codeMatchStatement: codeMatchStatement).first else { return nil }
-                        guard let headCandidate = queried.first(where: { $0.inputCount == headLength }) else { return nil }
-                        return headCandidate + tailCandidate
+                        guard let tailLexicon = nineKeySearch(combos: tailCombos, limit: 10, anchorsStatement: anchorsStatement, codeMatchStatement: codeMatchStatement).first else { return nil }
+                        guard let headLexicon = queried.first(where: { $0.inputCount == headLength }) else { return nil }
+                        return headLexicon + tailLexicon
                 }).distinct().sorted().prefix(1)
                 return concatenated + queried
                 */
         }
-        private static func nineKeyAnchorsMatch(code: Int, limit: Int64? = nil, statement: OpaquePointer?) -> [Candidate] {
+        private static func nineKeyAnchorsMatch(code: Int, limit: Int64? = nil, statement: OpaquePointer?) -> [Lexicon] {
                 guard code > 0 else { return [] }
                 sqlite3_reset(statement)
                 sqlite3_bind_int64(statement, 1, Int64(code))
                 sqlite3_bind_int64(statement, 2, (limit ?? 30))
-                var candidates: [Candidate] = []
+                var items: [Lexicon] = []
                 while sqlite3_step(statement) == SQLITE_ROW {
-                        let order: Int = Int(sqlite3_column_int64(statement, 0))
+                        let number: Int = Int(sqlite3_column_int64(statement, 0))
                         let word: String = String(cString: sqlite3_column_text(statement, 1))
                         let romanization: String = String(cString: sqlite3_column_text(statement, 2))
                         let anchors = romanization.split(separator: Character.space).compactMap(\.first)
                         let anchorText = String(anchors)
-                        let candidate = Candidate(text: word, romanization: romanization, input: anchorText, mark: anchorText, order: order)
-                        candidates.append(candidate)
+                        let instance = Lexicon(text: word, romanization: romanization, input: anchorText, mark: anchorText, number: number)
+                        items.append(instance)
                 }
-                return candidates
+                return items
         }
-        private static func nineKeyCodeMatch(code: Int, limit: Int64? = nil, statement: OpaquePointer?) -> [Candidate] {
+        private static func nineKeyCodeMatch(code: Int, limit: Int64? = nil, statement: OpaquePointer?) -> [Lexicon] {
                 guard code > 0 else { return [] }
                 sqlite3_reset(statement)
                 sqlite3_bind_int64(statement, 1, Int64(code))
                 sqlite3_bind_int64(statement, 2, (limit ?? -1))
-                var candidates: [Candidate] = []
+                var items: [Lexicon] = []
                 while sqlite3_step(statement) == SQLITE_ROW {
-                        let order: Int = Int(sqlite3_column_int64(statement, 0))
+                        let number: Int = Int(sqlite3_column_int64(statement, 0))
                         let word: String = String(cString: sqlite3_column_text(statement, 1))
                         let romanization: String = String(cString: sqlite3_column_text(statement, 2))
                         let mark: String = romanization.removedTones()
-                        let candidate = Candidate(text: word, romanization: romanization, input: mark.removedSpaces(), mark: mark, order: order)
-                        candidates.append(candidate)
+                        let instance = Lexicon(text: word, romanization: romanization, input: mark.removedSpaces(), mark: mark, number: number)
+                        items.append(instance)
                 }
-                return candidates
+                return items
         }
 }

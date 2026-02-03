@@ -3385,6 +3385,382 @@
         }
       }
     },
+    "GeneralPreferencesView.CommentScene" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comment (Jyutping) Scenes"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comment (Jyutping) Scenes"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comment (Jyutping) Scenes"
+          }
+        },
+        "en-US" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comment (Jyutping) Scenes"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scènes des commentaires (Jyutping)"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "コメント(粵拼)のシーン"
+          }
+        },
+        "yue" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "候選詞註釋(粵拼)顯示場景"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "候選詞註釋(粵拼)顯示場景"
+          }
+        },
+        "zh-Hans-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "候選詞註釋(粵拼)顯示場景"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "候選詞註釋(粵拼)顯示場景"
+          }
+        },
+        "zh-Hant-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "候選詞註釋(粵拼)顯示場景"
+          }
+        },
+        "zh-Hant-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "候選詞註釋(粵拼)顯示場景"
+          }
+        },
+        "zh-Hant-MO" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "候選詞註釋(粵拼)顯示場景"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "候選詞註釋(粵拼)顯示場景"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "候選詞註釋(粵拼)顯示場景"
+          }
+        }
+      }
+    },
+    "GeneralPreferencesView.CommentScene.All" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All"
+          }
+        },
+        "en-US" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toute"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "全て"
+          }
+        },
+        "yue" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "所有"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "所有"
+          }
+        },
+        "zh-Hans-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "所有"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "所有"
+          }
+        },
+        "zh-Hant-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "所有"
+          }
+        },
+        "zh-Hant-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "所有"
+          }
+        },
+        "zh-Hant-MO" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "所有"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "所有"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "所有"
+          }
+        }
+      }
+    },
+    "GeneralPreferencesView.CommentScene.Lookup" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lookup"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lookup"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lookup"
+          }
+        },
+        "en-US" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lookup"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rechercher"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "逆引き検索"
+          }
+        },
+        "yue" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "反查"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "反查"
+          }
+        },
+        "zh-Hans-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "反查"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "反查"
+          }
+        },
+        "zh-Hant-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "反查"
+          }
+        },
+        "zh-Hant-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "反查"
+          }
+        },
+        "zh-Hant-MO" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "反查"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "反查"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "反查"
+          }
+        }
+      }
+    },
+    "GeneralPreferencesView.CommentScene.None" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "None"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "None"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "None"
+          }
+        },
+        "en-US" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "None"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucun"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "なし"
+          }
+        },
+        "yue" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "無"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "無"
+          }
+        },
+        "zh-Hans-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "無"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "無"
+          }
+        },
+        "zh-Hant-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "無"
+          }
+        },
+        "zh-Hant-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "無"
+          }
+        },
+        "zh-Hant-MO" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "無"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "無"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "無"
+          }
+        }
+      }
+    },
     "GeneralPreferencesView.CommentStyle" : {
       "localizations" : {
         "en" : {
@@ -3426,55 +3802,55 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞註釋(粵拼)位置"
+            "value" : "候選詞註釋(粵拼)相對位置"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞註釋(粵拼)位置"
+            "value" : "候選詞註釋(粵拼)相對位置"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞註釋(粵拼)位置"
+            "value" : "候選詞註釋(粵拼)相對位置"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞註釋(粵拼)位置"
+            "value" : "候選詞註釋(粵拼)相對位置"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞註釋(粵拼)位置"
+            "value" : "候選詞註釋(粵拼)相對位置"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞註釋(粵拼)位置"
+            "value" : "候選詞註釋(粵拼)相對位置"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞註釋(粵拼)位置"
+            "value" : "候選詞註釋(粵拼)相對位置"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞註釋(粵拼)位置"
+            "value" : "候選詞註釋(粵拼)相對位置"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞註釋(粵拼)位置"
+            "value" : "候選詞註釋(粵拼)相對位置"
           }
         }
       }
@@ -3569,100 +3945,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "下邊"
-          }
-        }
-      }
-    },
-    "GeneralPreferencesView.CommentStyle.NoComments" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "None"
-          }
-        },
-        "en-CA" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "None"
-          }
-        },
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "None"
-          }
-        },
-        "en-US" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "None"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aucun"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "なし"
-          }
-        },
-        "yue" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "無"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "無"
-          }
-        },
-        "zh-Hans-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "無"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "無"
-          }
-        },
-        "zh-Hant-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "無"
-          }
-        },
-        "zh-Hant-HK" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "無"
-          }
-        },
-        "zh-Hant-MO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "無"
-          }
-        },
-        "zh-Hant-TW" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "無"
-          }
-        },
-        "zh-HK" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "無"
           }
         }
       }

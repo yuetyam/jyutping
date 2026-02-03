@@ -3,7 +3,7 @@ import SQLite3
 import CommonExtensions
 
 extension Engine {
-        public static func searchTextMarks<T: RandomAccessCollection<VirtualInputKey>>(for keys: T) -> [Candidate] {
+        public static func searchTextMarks<T: RandomAccessCollection<VirtualInputKey>>(for keys: T) -> [Lexicon] {
                 let text: String = keys.map(\.text).joined()
                 let command: String = "SELECT mark FROM mark_table WHERE spell = ?;"
                 var statement: OpaquePointer? = nil
@@ -15,9 +15,9 @@ extension Engine {
                         guard let mark = sqlite3_column_text(statement, 0) else { continue }
                         marks.append(String(cString: mark))
                 }
-                return marks.map({ Candidate(input: text, text: $0) })
+                return marks.map({ Lexicon(input: text, text: $0) })
         }
-        public static func queryTextMarks<T: RandomAccessCollection<Combo>>(for combos: T) -> [Candidate] {
+        public static func queryTextMarks<T: RandomAccessCollection<Combo>>(for combos: T) -> [Lexicon] {
                 let nineKeyCode = combos.map(\.code).decimalCombined()
                 guard nineKeyCode > 0 else { return [] }
                 let command: String = "SELECT input, mark FROM mark_table WHERE nine_key_code = ?;"
@@ -25,12 +25,13 @@ extension Engine {
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return [] }
                 guard sqlite3_bind_int64(statement, 1, Int64(nineKeyCode)) == SQLITE_OK else { return [] }
-                var candidates: [Candidate] = []
+                var items: [Lexicon] = []
                 while sqlite3_step(statement) == SQLITE_ROW {
                         guard let input = sqlite3_column_text(statement, 0) else { continue }
-                        guard let mark = sqlite3_column_text(statement, 1) else { continue }
-                        candidates.append(Candidate(input: String(cString: input), text: String(cString: mark)))
+                        guard let textMark = sqlite3_column_text(statement, 1) else { continue }
+                        let instance = Lexicon(input: String(cString: input), text: String(cString: textMark))
+                        items.append(instance)
                 }
-                return candidates
+                return items
         }
 }

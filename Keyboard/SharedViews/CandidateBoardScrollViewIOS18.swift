@@ -13,16 +13,23 @@ struct CandidateBoardScrollViewIOS18: View {
 
         @State private var scrollPosition = ScrollPosition()
 
+        private let savedCommentStyle: CommentStyle = Options.commentStyle
+        private let commentScene: CommentScene = Options.commentScene
+        private let toneStyle: CommentToneStyle = Options.commentToneStyle
+        private let isCompatibleModeOn: Bool = Options.isCompatibleModeOn
+
         var body: some View {
                 let characterStandard: CharacterStandard = context.characterStandard
-                let commentStyle: CommentStyle = Options.commentStyle
+                let commentStyle: CommentStyle = switch commentScene {
+                case .all: savedCommentStyle
+                case .reverseLookup: context.isReverseLookup ? savedCommentStyle : .noComments
+                case .noneOfAll: .noComments
+                }
                 let rowAlignment: VerticalAlignment = switch commentStyle {
                 case .aboveCandidates: .lastTextBaseline
                 case .belowCandidates: .firstTextBaseline
                 case .noComments: .center
                 }
-                let toneStyle: CommentToneStyle = Options.commentToneStyle
-                let isCompatibleModeOn: Bool = Options.isCompatibleModeOn
                 let isCompactKeyboard: Bool = context.keyboardInterface.isCompact
                 let rows = context.candidates.boardRows(keyboardWidth: context.keyboardWidth)
                 ScrollView(.vertical) {
@@ -32,7 +39,7 @@ struct CandidateBoardScrollViewIOS18: View {
                                                 ForEach(row.elements) { element in
                                                         let candidate = element.candidate
                                                         let text: AttributedString = candidate.text.attributed(for: characterStandard)
-                                                        let romanization: String? = candidate.isCantonese ? candidate.romanization : nil
+                                                        let romanization: String? = candidate.isCantonese ? candidate.comment : nil
                                                         ScrollViewButton(
                                                                 longPressTime: 400, // 0.4s
                                                                 longPressAction: {
@@ -40,7 +47,7 @@ struct CandidateBoardScrollViewIOS18: View {
                                                                         defer { isLongPressActionTriggered = true }
                                                                         AudioFeedback.deleted()
                                                                         // context.triggerHapticFeedback()
-                                                                        InputMemory.remove(candidate: candidate)
+                                                                        InputMemory.forget(candidate.lexicon)
                                                                 },
                                                                 endAction: {
                                                                         Task {

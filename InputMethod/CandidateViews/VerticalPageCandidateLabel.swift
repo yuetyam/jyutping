@@ -3,7 +3,7 @@ import CoreIME
 import CommonExtensions
 
 struct VerticalPageCandidateLabel: View {
-        init(isHighlighted: Bool, index: Int, candidate: DisplayCandidate, commentStyle: CommentDisplayStyle, toneStyle: ToneDisplayStyle, toneColor: ToneDisplayColor, labelSet: LabelSet, isLabelLastZero: Bool, compatibleMode: Bool) {
+        init(isHighlighted: Bool, index: Int, candidate: Candidate, commentStyle: CommentDisplayStyle, toneStyle: ToneDisplayStyle, toneColor: ToneDisplayColor, labelSet: LabelSet, isLabelLastZero: Bool, compatibleMode: Bool) {
                 self.label = LabelSet.labelText(for: index, labelSet: labelSet, isLabelLastZero: isLabelLastZero)
                 self.labelOpacity = isHighlighted ? 1 : 0.75
                 self.candidate = candidate
@@ -14,13 +14,13 @@ struct VerticalPageCandidateLabel: View {
         }
         private let label: String
         private let labelOpacity: Double
-        private let candidate: DisplayCandidate
+        private let candidate: Candidate
         private let commentStyle: CommentDisplayStyle
         private let toneStyle: ToneDisplayStyle
         private let shallowTone: Bool
         private let compatibleMode: Bool
         var body: some View {
-                switch candidate.candidate.type {
+                switch candidate.lexicon.type {
                 case .cantonese:
                         switch commentStyle {
                         case .top:
@@ -60,7 +60,7 @@ struct VerticalPageCandidateLabel: View {
                                 }
                         }
                         .padding(.vertical, commentStyle.isVertical ? 4 : 0)
-                case .compose:
+                case .composed:
                         HStack(spacing: 6) {
                                 Text(verbatim: label).font(.label).opacity(labelOpacity)
                                 Text(verbatim: candidate.text).font(.candidate)

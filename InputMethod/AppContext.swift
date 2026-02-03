@@ -6,9 +6,10 @@ import CommonExtensions
 @MainActor
 final class AppContext: ObservableObject {
 
-        @Published private(set) var displayCandidates: [DisplayCandidate] = []
+        @Published private(set) var displayCandidates: [Candidate] = []
         @Published private(set) var highlightedIndex: Int = 0
         @Published private(set) var optionsHighlightedIndex: Int = 0
+        @Published private(set) var isReverseLookup: Bool = false
         @Published private(set) var inputForm: InputForm = InputForm.matchInputMethodMode()
         @Published private(set) var quadrant: Quadrant = .upperRight
         @Published private(set) var mouseLocation: CGPoint = .zero
@@ -27,14 +28,14 @@ final class AppContext: ObservableObject {
                 maxIndex = minIndex
         }
 
-        func update(with newDisplayCandidates: [DisplayCandidate], highlight: Highlight) {
+        func update<T: RandomAccessCollection<Candidate>>(with newCandidates: T, highlight: Highlight) {
                 mouseLocation = NSEvent.mouseLocation
-                guard newDisplayCandidates.isNotEmpty else {
+                guard newCandidates.isNotEmpty else {
                         resetDisplayContext()
                         return
                 }
-                displayCandidates = newDisplayCandidates
-                maxIndex = newDisplayCandidates.count - 1
+                displayCandidates = Array<Candidate>(newCandidates)
+                maxIndex = newCandidates.count - 1
                 let newHighlightedIndex: Int = switch highlight {
                 case .start    : minIndex
                 case .unchanged: min(highlightedIndex, maxIndex)
@@ -43,6 +44,11 @@ final class AppContext: ObservableObject {
                 highlightedIndex = newHighlightedIndex
         }
 
+        func updateReverseLookupState(to isLookup: Bool) {
+                if isReverseLookup != isLookup {
+                        isReverseLookup = isLookup
+                }
+        }
         func updateInputForm(to form: InputForm) {
                 if form.isOptions {
                         optionsHighlightedIndex = minIndex

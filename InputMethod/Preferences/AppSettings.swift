@@ -9,6 +9,7 @@ private struct SettingsKey {
         static let CandidatePageInsets: String = "CandidatePageInsets"
         static let CandidateCornerRadius: String = "CandidateCornerRadius"
         static let CandidatePageOrientation: String = "CandidatePageOrientation"
+        static let CommentDisplayScene: String = "CommentDisplayScene"
         static let CommentDisplayStyle: String = "CommentDisplayStyle"
         static let ToneDisplayStyle: String = "ToneDisplayStyle"
         static let ToneDisplayColor: String = "ToneDisplayColor"
@@ -47,25 +48,33 @@ enum CandidatePageOrientation: Int, CaseIterable {
         var isHorizontal: Bool { self == .horizontal }
         var isVertical: Bool { self == .vertical }
         static func orientation(of value: Int) -> CandidatePageOrientation {
-                return Self.allCases.first(where: { $0.rawValue == value }) ?? Self.horizontal
+                return allCases.first(where: { $0.rawValue == value }) ?? .horizontal
         }
 }
 
+enum CommentDisplayScene: Int, CaseIterable {
+        case all = 1
+        case reverseLookup = 2
+        case noneOfAll = 3
+        static func scene(of value: Int) -> CommentDisplayScene {
+                return allCases.first(where: { $0.rawValue == value }) ?? .all
+        }
+}
 enum CommentDisplayStyle: Int, CaseIterable {
 
         case top = 1
         case bottom = 2
-        // case left = 3 // Unwanted
+        // case left = 3
         case right = 4
         case noComments = 5
 
         static func style(of value: Int) -> CommentDisplayStyle {
-                return Self.allCases.first(where: { $0.rawValue == value }) ?? Self.top
+                guard value != noComments.rawValue else { return .top }
+                return allCases.first(where: { $0.rawValue == value }) ?? .top
         }
         var isTop: Bool { self == .top }
         var isBottom: Bool { self == .bottom }
         var isRight: Bool { self == .right }
-        var isCommentFree: Bool { self == .noComments }
         var isVertical: Bool {
                 switch self {
                 case .top, .bottom: true
@@ -82,7 +91,7 @@ enum ToneDisplayStyle: Int, CaseIterable {
         case `subscript` = 4
 
         static func style(of value: Int) -> ToneDisplayStyle {
-                return Self.allCases.first(where: { $0.rawValue == value }) ?? Self.normal
+                return allCases.first(where: { $0.rawValue == value }) ?? .normal
         }
 }
 enum ToneDisplayColor: Int, CaseIterable {
@@ -93,7 +102,7 @@ enum ToneDisplayColor: Int, CaseIterable {
         case shallow = 2
 
         static func color(of value: Int) -> ToneDisplayColor {
-                return Self.allCases.first(where: { $0.rawValue == value }) ?? Self.normal
+                return allCases.first(where: { $0.rawValue == value }) ?? .normal
         }
 
         var isShallow: Bool { self == .shallow}
@@ -139,7 +148,7 @@ enum LabelSet: Int, CaseIterable {
         case branches = 12
 
         static func labelSet(of value: Int) -> LabelSet {
-                return Self.allCases.first(where: { $0.rawValue == value }) ?? Self.arabic
+                return allCases.first(where: { $0.rawValue == value }) ?? .arabic
         }
 }
 
@@ -148,7 +157,7 @@ enum LabelLast: Int, CaseIterable {
         case zero = 1
         case ten = 2
         static func labelLast(of value: Int) -> LabelLast {
-                return Self.allCases.first(where: { $0.rawValue == value }) ?? Self.zero
+                return allCases.first(where: { $0.rawValue == value }) ?? .zero
         }
 }
 
@@ -164,7 +173,7 @@ enum FontMode: Int, CaseIterable {
         }
 
         static func mode(of value: Int) -> FontMode {
-                return Self.allCases.first(where: { $0.rawValue == value }) ?? Self.default
+                return allCases.first(where: { $0.rawValue == value }) ?? .default
         }
 }
 
@@ -172,7 +181,7 @@ enum PressShiftOnce: Int, CaseIterable {
         case doNothing = 1
         case switchInputMethodMode = 2
         static func action(of value: Int) -> PressShiftOnce {
-                return Self.allCases.first(where: { $0.rawValue == value }) ?? Self.doNothing
+                return allCases.first(where: { $0.rawValue == value }) ?? .doNothing
         }
         var isDoingNothing: Bool { self == .doNothing }
         var isSwitchingInputMethodMode: Bool { self == .switchInputMethodMode }
@@ -182,7 +191,7 @@ enum ShiftSpaceCombination: Int, CaseIterable {
         case inputFullWidthSpace = 1
         case switchInputMethodMode = 2
         static func action(of value: Int) -> ShiftSpaceCombination {
-                return Self.allCases.first(where: { $0.rawValue == value }) ?? Self.inputFullWidthSpace
+                return allCases.first(where: { $0.rawValue == value }) ?? .inputFullWidthSpace
         }
         var isInputingFullWidthSpace: Bool { self == .inputFullWidthSpace }
         var isSwitchingInputMethodMode: Bool { self == .switchInputMethodMode }
@@ -197,7 +206,7 @@ enum BracketKeysMode: Int, CaseIterable {
         /// 無額外功能
         case noOperation = 3
         static func mode(of value: Int) -> BracketKeysMode {
-                return Self.allCases.first(where: { $0.rawValue == value }) ?? Self.characterSelection
+                return allCases.first(where: { $0.rawValue == value }) ?? .characterSelection
         }
         var isCharacterSelection: Bool { self == .characterSelection }
         var isPaging: Bool { self == .candidatePaging }
@@ -212,7 +221,7 @@ enum CommaPeriodKeysMode: Int, CaseIterable {
         /// 無額外功能
         case noOperation = 3
         static func mode(of value: Int) -> CommaPeriodKeysMode {
-                return Self.allCases.first(where: { $0.rawValue == value }) ?? Self.candidatePaging
+                return allCases.first(where: { $0.rawValue == value }) ?? .candidatePaging
         }
         var isPaging: Bool { self == .candidatePaging }
         var isCharacterSelection: Bool { self == .characterSelection }
@@ -328,7 +337,17 @@ struct AppSettings {
         }
 
 
-        // MARK: - Comment Display Style
+        // MARK: - Comment Display
+
+        private(set) static var commentDisplayScene: CommentDisplayScene = {
+                let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.CommentDisplayScene)
+                return CommentDisplayScene.scene(of: savedValue)
+        }()
+        static func updateCommentDisplayScene(to scene: CommentDisplayScene) {
+                commentDisplayScene = scene
+                let value: Int = scene.rawValue
+                UserDefaults.standard.set(value, forKey: SettingsKey.CommentDisplayScene)
+        }
 
         private(set) static var commentDisplayStyle: CommentDisplayStyle = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.CommentDisplayStyle)

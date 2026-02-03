@@ -115,7 +115,7 @@ extension Engine {
                 return emojis
         }
 
-        public static func searchSymbols<T: RandomAccessCollection<VirtualInputKey>>(for keys: T, segmentation: Segmentation) -> [Candidate] {
+        public static func searchSymbols<T: RandomAccessCollection<VirtualInputKey>>(for keys: T, segmentation: Segmentation) -> [Lexicon] {
                 let command: String = "SELECT category, unicode_version, code_point, cantonese, romanization FROM symbol_table WHERE spell = ?;"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
@@ -124,16 +124,16 @@ extension Engine {
                 let syllableLength = syllableKeys.count
                 let text: String = syllableKeys.map(\.text).joined()
                 let input: String = (syllableLength == keys.count) ? text : keys.map(\.text).joined()
-                let regular: [Candidate] = match(text: text, input: input, statement: statement)
+                let regular: [Lexicon] = match(text: text, input: input, statement: statement)
                 let schemes = segmentation.filter({ $0.length == syllableLength })
                 guard schemes.isNotEmpty else { return regular }
-                let matches = schemes.flatMap({ scheme -> [Candidate] in
+                let matches = schemes.flatMap({ scheme -> [Lexicon] in
                         let pingText = scheme.flatMap(\.origin).map(\.text).joined()
                         return match(text: pingText, input: input, statement: statement)
                 })
                 return (regular + matches).distinct()
         }
-        private static func match<T: StringProtocol>(text: T, input: String, statement: OpaquePointer?) -> [Candidate] {
+        private static func match<T: StringProtocol>(text: T, input: String, statement: OpaquePointer?) -> [Lexicon] {
                 sqlite3_reset(statement)
                 guard sqlite3_bind_int64(statement, 1, Int64(text.hashCode())) == SQLITE_OK else { return [] }
                 var emojis: [Emoji] = []
@@ -154,13 +154,13 @@ extension Engine {
                         return pointer
                 }()
                 defer { sqlite3_finalize(skinToneStatement) }
-                let candidates = emojis.compactMap({ emoji -> Candidate? in
+                let entries = emojis.compactMap({ emoji -> Lexicon? in
                         let codePoint: String = emoji.text
                         let converted: String = (emoji.category == .smileysAndPeople || emoji.category == .activity) ? (mapSkinTone(source: codePoint, statement: skinToneStatement) ?? codePoint) : codePoint
                         guard let symbolText = Emoji.generateSymbol(from: converted) else { return nil }
-                        return Candidate(symbol: symbolText, cantonese: emoji.cantonese, romanization: emoji.romanization, input: input, isEmoji: emoji.uniqueNumber < 10)
+                        return Lexicon(symbol: symbolText, cantonese: emoji.cantonese, romanization: emoji.romanization, input: input, isEmoji: emoji.uniqueNumber < 10)
                 })
-                return candidates
+                return entries
         }
         private static func mapSkinTone(source: String, statement: OpaquePointer?) -> String? {
                 sqlite3_reset(statement)
@@ -170,7 +170,7 @@ extension Engine {
                 return String(cString: target)
         }
 
-        public static func nineKeySearchSymbols<T: RandomAccessCollection<Combo>>(combos: T) -> [Candidate] {
+        public static func nineKeySearchSymbols<T: RandomAccessCollection<Combo>>(combos: T) -> [Lexicon] {
                 let nineKeyCode = combos.map(\.code).decimalCombined()
                 guard nineKeyCode > 0 else { return [] }
                 let command: String = "SELECT category, unicode_version, code_point, cantonese, romanization FROM symbol_table WHERE nine_key_code = ?;"
@@ -197,12 +197,12 @@ extension Engine {
                 }()
                 defer { sqlite3_finalize(skinToneStatement) }
                 let input: String = combos.compactMap(\.letters.first).joined()
-                let candidates = emojis.compactMap({ emoji -> Candidate? in
+                let items = emojis.compactMap({ emoji -> Lexicon? in
                         let codePoint: String = emoji.text
                         let converted: String = (emoji.category == .smileysAndPeople || emoji.category == .activity) ? (mapSkinTone(source: codePoint, statement: skinToneStatement) ?? codePoint) : codePoint
                         guard let symbolText = Emoji.generateSymbol(from: converted) else { return nil }
-                        return Candidate(symbol: symbolText, cantonese: emoji.cantonese, romanization: emoji.romanization, input: input, isEmoji: emoji.uniqueNumber < 10)
+                        return Lexicon(symbol: symbolText, cantonese: emoji.cantonese, romanization: emoji.romanization, input: input, isEmoji: emoji.uniqueNumber < 10)
                 })
-                return candidates.distinct()
+                return items.distinct()
         }
 }

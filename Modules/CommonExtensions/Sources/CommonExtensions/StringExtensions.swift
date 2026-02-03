@@ -52,6 +52,12 @@ extension String {
 
         /// U+3002. Chinese period (full-stop) mark. Full-width period mark.
         public static let cantonesePeriod: String = "\u{3002}"
+
+        /// U+0028. Left round bracket (
+        public static let openingParenthesis: String = "\u{28}"
+
+        /// U+0029. Right round bracket )
+        public static let closingParenthesis: String = "\u{29}"
 }
 
 extension StringTransform {

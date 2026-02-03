@@ -8,8 +8,8 @@ extension Engine {
         /// - Parameters:
         ///   - text: User input
         ///   - variant: Cangjie / Quick version
-        /// - Returns: Candidates
-        public static func cangjieReverseLookup(text: String, variant: CangjieVariant) -> [Candidate] {
+        /// - Returns: Lookup transformed Lexicons
+        public static func cangjieReverseLookup(text: String, variant: CangjieVariant) -> [Lexicon] {
                 switch variant {
                 case .cangjie5:
                         return cangjie5ReverseLookup(text: text)
@@ -24,7 +24,7 @@ extension Engine {
 }
 
 private extension Engine {
-        static func cangjie5ReverseLookup(text: String) -> [Candidate] {
+        static func cangjie5ReverseLookup(text: String) -> [Lexicon] {
                 return (match(cangjie5: text) + glob(cangjie5: text))
                         .distinct()
                         .flatMap({ Engine.reveresLookup(text: $0.text, input: $0.input) })
@@ -61,7 +61,7 @@ private extension Engine {
         }
 }
 private extension Engine {
-        static func cangjie3ReverseLookup(text: String) -> [Candidate] {
+        static func cangjie3ReverseLookup(text: String) -> [Lexicon] {
                 return (match(cangjie3: text) + glob(cangjie3: text))
                         .distinct()
                         .flatMap({ Engine.reveresLookup(text: $0.text, input: $0.input) })

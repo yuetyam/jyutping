@@ -67,6 +67,16 @@ struct Options {
                 UserDefaults.standard.set(value, forKey: OptionsKey.CommentStyle)
         }
 
+        nonisolated(unsafe) private(set) static var commentScene: CommentScene = {
+                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.CommentScene)
+                return CommentScene.scene(of: savedValue)
+        }()
+        static func updateCommentScene(to scene: CommentScene) {
+                commentScene = scene
+                let value: Int = scene.rawValue
+                UserDefaults.standard.set(value, forKey: OptionsKey.CommentScene)
+        }
+
         nonisolated(unsafe) private(set) static var commentToneStyle: CommentToneStyle = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.CommentToneStyle)
                 return CommentToneStyle.style(of: savedValue)
@@ -188,6 +198,7 @@ struct OptionsKey {
         static let InputKeyStyle: String = "InputKeyStyle"
         static let KeyHeightOffset: String = "KeyHeightOffset"
         static let CommentStyle: String = "jyutping_display"
+        static let CommentScene: String = "CommentDisplayScene"
         static let CommentToneStyle: String = "tone_style"
         static let CangjieVariant: String = "CangjieVariant"
         static let EmojiSuggestions: String = "emoji"
@@ -215,19 +226,28 @@ enum InputKeyStyle: Int, CaseIterable {
         case numbersAndSymbols = 3
 
         static func style(of value: Int) -> InputKeyStyle {
-                return Self.allCases.first(where: { $0.rawValue == value }) ?? Self.clear
+                return allCases.first(where: { $0.rawValue == value }) ?? .clear
         }
 
         /// Letters only
         var isClear: Bool { self == .clear }
 }
 
+enum CommentScene: Int, CaseIterable {
+        case all = 1
+        case reverseLookup = 2
+        case noneOfAll = 3
+        static func scene(of value: Int) -> CommentScene {
+                return allCases.first(where: { $0.rawValue == value }) ?? .all
+        }
+}
 enum CommentStyle: Int, CaseIterable {
         case aboveCandidates = 1
         case belowCandidates = 2
         case noComments = 3
         static func style(of value: Int) -> CommentStyle {
-                return Self.allCases.first(where: { $0.rawValue == value }) ?? Self.aboveCandidates
+                guard value != noComments.rawValue else { return .aboveCandidates }
+                return allCases.first(where: { $0.rawValue == value }) ?? .aboveCandidates
         }
         var isAbove: Bool { self == .aboveCandidates }
         var isBelow: Bool { self == .belowCandidates }
@@ -239,7 +259,7 @@ enum CommentToneStyle: Int, CaseIterable {
         case `subscript` = 3
         case noTones = 4
         static func style(of value: Int) -> CommentToneStyle {
-                return Self.allCases.first(where: { $0.rawValue == value }) ?? Self.normal
+                return allCases.first(where: { $0.rawValue == value }) ?? .normal
         }
 }
 
@@ -254,7 +274,7 @@ enum KeyboardDisplayLanguage: Int, CaseIterable {
         case japanese = 6
 
         static func language(of value: Int) -> KeyboardDisplayLanguage {
-                return self.allCases.first(where: { $0.rawValue == value }) ?? Self.auto
+                return allCases.first(where: { $0.rawValue == value }) ?? .auto
         }
 
         var languageCode: String? {

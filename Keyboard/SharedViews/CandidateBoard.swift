@@ -5,7 +5,7 @@ import CommonExtensions
 extension Candidate {
         var width: CGFloat {
                 let textCount: Int = text.count
-                switch type {
+                switch lexicon.type {
                 case .cantonese:
                         return CGFloat(textCount * 20 + 32)
                 case _ where textCount == 1:
