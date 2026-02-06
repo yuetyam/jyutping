@@ -25,7 +25,7 @@ extension Converter {
                                 chained.append(entry)
                         }
                 }
-                chained = idealMemory.prefix(2) + defined + idealMemory + marks + chained
+                chained = idealMemory.prefix(3) + defined + marks + idealMemory + chained
                 for symbol in symbols.reversed() {
                         if let index = chained.firstIndex(where: { $0.isCantonese && $0.text == symbol.attached && $0.romanization == symbol.romanization }) {
                                 chained.insert(symbol, at: index + 1)

@@ -107,6 +107,7 @@ struct InputMemory {
                                 let tones = syllableText.tones
                                 switch (textTones.count, tones.count) {
                                 case (1, 1):
+                                        guard text.count == (item.inputCount + 1) else { return nil }
                                         guard (text.last?.isCantoneseToneDigit ?? false) else { return nil }
                                         guard textTones == tones else { return nil }
                                         return item.replacedInput(with: inputText)

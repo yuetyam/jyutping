@@ -11040,55 +11040,55 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "全寬數字"
+            "value" : "全寬數字、字母"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "全寬數字"
+            "value" : "全寬數字、字母"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "全寬數字"
+            "value" : "全寬數字、字母"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "全寬數字"
+            "value" : "全寬數字、字母"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "全寬數字"
+            "value" : "全寬數字、字母"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "全寬數字"
+            "value" : "全寬數字、字母"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "全寬數字"
+            "value" : "全寬數字、字母"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "全寬數字"
+            "value" : "全寬數字、字母"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "全寬數字"
+            "value" : "全寬數字、字母"
           }
         }
       }
@@ -11134,55 +11134,55 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "半寬數字"
+            "value" : "半寬數字、字母"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "半寬數字"
+            "value" : "半寬數字、字母"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "半寬數字"
+            "value" : "半寬數字、字母"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "半寬數字"
+            "value" : "半寬數字、字母"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "半寬數字"
+            "value" : "半寬數字、字母"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "半寬數字"
+            "value" : "半寬數字、字母"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "半寬數字"
+            "value" : "半寬數字、字母"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "半寬數字"
+            "value" : "半寬數字、字母"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "半寬數字"
+            "value" : "半寬數字、字母"
           }
         }
       }
@@ -12414,25 +12414,25 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "全寬數字 (Full-width)"
+            "value" : "全寬數字、字母 (Full-width)"
           }
         },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "全寬數字 (Full-width)"
+            "value" : "全寬數字、字母 (Full-width)"
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "全寬數字 (Full-width)"
+            "value" : "全寬數字、字母 (Full-width)"
           }
         },
         "en-US" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "全寬數字 (Full-width)"
+            "value" : "全寬數字、字母 (Full-width)"
           }
         },
         "fr" : {
@@ -12450,55 +12450,55 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "全寬數字"
+            "value" : "全寬數字、字母"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "全寬數字"
+            "value" : "全寬數字、字母"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "全寬數字"
+            "value" : "全寬數字、字母"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "全寬數字"
+            "value" : "全寬數字、字母"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "全寬數字"
+            "value" : "全寬數字、字母"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "全寬數字"
+            "value" : "全寬數字、字母"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "全寬數字"
+            "value" : "全寬數字、字母"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "全寬數字"
+            "value" : "全寬數字、字母"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "全寬數字"
+            "value" : "全寬數字、字母"
           }
         }
       }
@@ -12508,25 +12508,25 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "半寬數字 (Half-width)"
+            "value" : "半寬數字、字母 (Half-width)"
           }
         },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "半寬數字 (Half-width)"
+            "value" : "半寬數字、字母 (Half-width)"
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "半寬數字 (Half-width)"
+            "value" : "半寬數字、字母 (Half-width)"
           }
         },
         "en-US" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "半寬數字 (Half-width)"
+            "value" : "半寬數字、字母 (Half-width)"
           }
         },
         "fr" : {
@@ -12544,55 +12544,55 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "半寬數字"
+            "value" : "半寬數字、字母"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "半寬數字"
+            "value" : "半寬數字、字母"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "半寬數字"
+            "value" : "半寬數字、字母"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "半寬數字"
+            "value" : "半寬數字、字母"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "半寬數字"
+            "value" : "半寬數字、字母"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "半寬數字"
+            "value" : "半寬數字、字母"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "半寬數字"
+            "value" : "半寬數字、字母"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "半寬數字"
+            "value" : "半寬數字、字母"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "半寬數字"
+            "value" : "半寬數字、字母"
           }
         }
       }
