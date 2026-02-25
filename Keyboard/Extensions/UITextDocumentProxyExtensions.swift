@@ -1,5 +1,6 @@
 import UIKit
 import CommonExtensions
+import CoreIME
 
 extension UITextDocumentProxy {
 
@@ -72,11 +73,9 @@ extension UITextDocumentProxy {
                 }
                 let text: String = head + tail
                 guard text.isNotEmpty else { return }
-                let convertedText: String = {
-                        let mutilated: String = text.convertedT2S()
-                        return (mutilated == text) ? text.convertedS2T() : mutilated
-                }()
-                insertText(convertedText)
+                let mutilated: String = Converter.convert(text, to: .mutilated)
+                let converted: String = (mutilated == text) ? text.convertedS2T() : mutilated
+                insertText(converted)
         }
 
         func moveBackward() {

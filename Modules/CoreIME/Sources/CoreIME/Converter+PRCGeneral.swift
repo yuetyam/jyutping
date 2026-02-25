@@ -12,10 +12,12 @@ extension Converter {
                 let targetCode = Int(sqlite3_column_int64(statement, 0))
                 return Character(decimal: targetCode) ?? character
         }
-        private static func process(character: Character, statement: OpaquePointer?) -> String {
-                return String(char2char(character: character, statement: statement))
-        }
 
+        /// Transform traditional Cantonese / Chinese text to the PRC General character standard.
+        /// - Parameters:
+        ///   - text: The source traditional Cantonese / Chinese characters.
+        ///   - statement: SQLite3 statement pointer.
+        /// - Returns: Converted text.
         static func prcGeneralConvert(_ text: String, statement: OpaquePointer?) -> String {
                 switch text.count {
                 case 0:
@@ -29,74 +31,48 @@ extension Converter {
                 }
         }
 
+        /// Convert traditional Cantonese / Chinese text to the PRC General character standard.
+        /// Greedy left-to-right longest-match: at each position, try the longest phrase first; fall back to single-character conversion.
+        /// - Parameters:
+        ///   - text: The source traditional Cantonese / Chinese characters.
+        ///   - statement: SQLite3 statement pointer.
+        /// - Returns: Transformed text.
         private static func transform(_ text: String, statement: OpaquePointer?) -> String {
-                let roundOne = replace(text, replacement: "W")
-                guard roundOne.matched.isNotEmpty else {
-                        return String(text.map({ char2char(character: $0, statement: statement) }))
-                }
-
-                let roundTwo = replace(roundOne.modified, replacement: "X")
-                guard roundTwo.matched.isNotEmpty else {
-                        let transformed = roundTwo.modified.map({ process(character: $0, statement: statement) }).joined()
-                        let reverted: String = transformed.replacingOccurrences(of: roundOne.replacement, with: roundOne.matched)
-                        return reverted
-                }
-
-                let roundThree = replace(roundTwo.modified, replacement: "Y")
-                guard roundThree.matched.isNotEmpty else {
-                        let transformed: String = roundThree.modified.map({ process(character: $0, statement: statement) }).joined()
-                        let reverted: String = transformed
-                                .replacingOccurrences(of: roundOne.replacement, with: roundOne.matched)
-                                .replacingOccurrences(of: roundTwo.replacement, with: roundTwo.matched)
-                        return reverted
-                }
-
-                let roundFour = replace(roundThree.modified, replacement: "Z")
-                guard roundFour.matched.isNotEmpty else {
-                        let transformed: String = roundFour.modified.map({ process(character: $0, statement: statement) }).joined()
-                        let reverted: String = transformed
-                                .replacingOccurrences(of: roundOne.replacement, with: roundOne.matched)
-                                .replacingOccurrences(of: roundTwo.replacement, with: roundTwo.matched)
-                                .replacingOccurrences(of: roundThree.replacement, with: roundThree.matched)
-                        return reverted
-                }
-
-                let transformed: String = roundFour.modified.map({ process(character: $0, statement: statement) }).joined()
-                let reverted: String = transformed
-                        .replacingOccurrences(of: roundOne.replacement, with: roundOne.matched)
-                        .replacingOccurrences(of: roundTwo.replacement, with: roundTwo.matched)
-                        .replacingOccurrences(of: roundThree.replacement, with: roundThree.matched)
-                        .replacingOccurrences(of: roundFour.replacement, with: roundFour.matched)
-                return reverted
-        }
-
-        private static func replace(_ text: String, replacement: String) -> (modified: String, matched: String, replacement: String) {
-                let textCount: Int = text.count
-                let keys: [String] = phrases.keys.filter({ $0.count <= textCount }).sorted(by: { $0.count > $1.count })
-                lazy var modified: String = text
-                lazy var matched: String = ""
-                for key in keys {
-                        if text.hasPrefix(key) {
-                                modified = text.replacingOccurrences(of: key, with: replacement)
-                                matched = phrases[key]!
-                                break
+                let characters = Array(text)
+                let charCount = characters.count
+                var result = String()
+                result.reserveCapacity(charCount)
+                var index = 0
+                while index < charCount {
+                        var matched = false
+                        let maxLength = min(maxPhraseLength, charCount - index)
+                        for length in stride(from: maxLength, through: minPhraseLength, by: -1) {
+                                let substring = String(characters[index..<(index + length)])
+                                if let replacement = phrases[substring] {
+                                        result += replacement
+                                        index += length
+                                        matched = true
+                                        break
+                                }
+                        }
+                        if matched.negative {
+                                let char = characters[index]
+                                if char.isIdeographic {
+                                        result.append(char2char(character: characters[index], statement: statement))
+                                } else {
+                                        result.append(char)
+                                }
+                                index += 1
                         }
                 }
-                guard matched.isEmpty else {
-                        return (modified, matched, replacement)
-                }
-                for key in keys {
-                        if text.contains(key) {
-                                modified = text.replacingOccurrences(of: key, with: replacement)
-                                matched = phrases[key]!
-                                break
-                        }
-                }
-                return (modified, matched, replacement)
+                return result
         }
 
+        private static let minPhraseLength: Int = 2
+        private static let maxPhraseLength: Int = phrases.keys.map(\.count).max() ?? 4
 
 private static let phrases: [String: String] = [
+
 "上鍊": "上鏈",
 "么麼": "幺麽",
 "么麽": "幺麽",
