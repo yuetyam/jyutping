@@ -52,6 +52,11 @@ struct TonesInputView: View {
                                         }
                                         .block()
                                 }
+                                ToneChartView()
+                                        .frame(height: 200)
+                                        .padding(8)
+                                        .block()
+                                        .padding(.vertical)
                         }
                         .textSelection(.enabled)
                         .padding(8)

@@ -7,7 +7,7 @@ struct CompactOnsetGridView: View {
                         GridRow {
                                 OnsetElementCell(onset: "b", ipa: "[ p ]", word: "跛", syllable: "bai1")
                                 OnsetElementCell(onset: "p", ipa: "[ pʰ ]", word: "批", syllable: "pai1")
-                                OnsetElementCell(onset: "m", ipa: "[ m ]", word: "咪", syllable: "mai1")
+                                OnsetElementCell(onset: "m", ipa: "[ m ]", word: "銤", syllable: "mai1")
                                 OnsetElementCell(onset: "f", ipa: "[ f ]", word: "輝", syllable: "fai1")
                         }
                         GridRow {
@@ -98,7 +98,7 @@ struct OnsetGridView: View {
                                 RowHeaderCell(headerText: "脣音")
                                 OnsetElementCell(onset: "b", ipa: "[ p ]", word: "跛", syllable: "bai1")
                                 OnsetElementCell(onset: "p", ipa: "[ pʰ ]", word: "批", syllable: "pai1")
-                                OnsetElementCell(onset: "m", ipa: "[ m ]", word: "咪", syllable: "mai1")
+                                OnsetElementCell(onset: "m", ipa: "[ m ]", word: "銤", syllable: "mai1")
                                 OnsetElementCell(onset: "f", ipa: "[ f ]", word: "輝", syllable: "fai1")
                                 PlaceholderCell()
                         }
