@@ -27,25 +27,6 @@ public enum StrokeVirtualKey: Int, Sendable {
         public var code: Int { rawValue }
 }
 
-extension RandomAccessCollection where Element == StrokeVirtualKey {
-        var sequenceText: String {
-                return compactMap(\.codeText).joined()
-        }
-}
-private extension StrokeVirtualKey {
-        var codeText: String? {
-                return Self.codeTextMap[self]
-        }
-        private static let codeTextMap: [StrokeVirtualKey : String] = [
-                .horizontal   : "1",
-                .vertical     : "2",
-                .leftFalling  : "3",
-                .rightFalling : "4",
-                .turning      : "5",
-                .wildcard     : "6"
-        ]
-}
-
 extension StrokeVirtualKey {
 
         public static func displayText<T: RandomAccessCollection<VirtualInputKey>>(from keys: T) -> String {
@@ -54,7 +35,7 @@ extension StrokeVirtualKey {
         public var strokeText: String? {
                 return Self.displayMap[self]
         }
-        private static let displayMap: [StrokeVirtualKey : String] = [
+        private static let displayMap: [StrokeVirtualKey: String] = [
                 .horizontal   : "⼀",
                 .vertical     : "⼁",
                 .leftFalling  : "⼃",
@@ -81,17 +62,16 @@ extension StrokeVirtualKey {
 
 extension VirtualInputKey {
         var strokeKey: StrokeVirtualKey? {
-                return Self.keyMap[self]
+                return Self.keyKeyMap[self] ?? Self.extraKeyKeyMap[self]
         }
-        private static let keyMap: [VirtualInputKey : StrokeVirtualKey] = [
+        public var displayStrokeKeyText: String? {
+                return Self.keyKeyMap[self]?.strokeText
+        }
+        private static let keyKeyMap: [VirtualInputKey : StrokeVirtualKey] = [
                 .letterW : .horizontal,
-                .letterH : .horizontal,
-                .letterT : .horizontal,
                 .letterS : .vertical,
                 .letterA : .leftFalling,
-                .letterP : .leftFalling,
                 .letterD : .rightFalling,
-                .letterN : .rightFalling,
                 .letterZ : .turning,
                 .letterX : .wildcard,
 
@@ -108,6 +88,12 @@ extension VirtualInputKey {
                 .number4 : .rightFalling,
                 .number5 : .turning,
                 .number6 : .wildcard,
+        ]
+        private static let extraKeyKeyMap: [VirtualInputKey: StrokeVirtualKey] = [
+                .letterH : .horizontal,
+                .letterT : .horizontal,
+                .letterP : .leftFalling,
+                .letterN : .rightFalling,
         ]
 }
 

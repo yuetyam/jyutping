@@ -4,15 +4,13 @@ import CommonExtensions
 
 struct LargePadStrokeInputKey: View {
 
-        init(_ event: VirtualInputKey) {
-                self.event = event
-                self.letter = event.text
-                self.stroke = PresetConstant.strokeKeyMap[letter]
+        init(_ virtual: VirtualInputKey) {
+                self.virtual = virtual
+                self.displayStroke = virtual.displayStrokeKeyText
         }
 
-        private let event: VirtualInputKey
-        private let letter: String
-        private let stroke: String?
+        private let virtual: VirtualInputKey
+        private let displayStroke: String?
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
@@ -34,19 +32,19 @@ struct LargePadStrokeInputKey: View {
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(.vertical, verticalPadding)
                                 .padding(.horizontal, horizontalPadding)
-                        if let stroke {
+                        if let displayStroke {
                                 ZStack(alignment: .topTrailing) {
                                         Color.clear
-                                        Text(verbatim: letter)
+                                        Text(verbatim: virtual.text)
                                                 .textCase(textCase)
                                                 .font(.footnote)
                                                 .shallow()
                                 }
                                 .padding(.vertical, verticalPadding + 2)
                                 .padding(.horizontal, horizontalPadding + 4)
-                                Text(verbatim: stroke)
+                                Text(verbatim: displayStroke)
                         } else {
-                                Text(verbatim: letter)
+                                Text(verbatim: virtual.text)
                                         .textCase(textCase)
                                         .shallow()
                         }
@@ -61,7 +59,7 @@ struct LargePadStrokeInputKey: View {
                                 }
                         }
                         .onEnded { _ in
-                                context.handle(event)
+                                context.handle(virtual)
                         }
                 )
         }
