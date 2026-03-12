@@ -188,7 +188,7 @@ struct HotkeysView: View {
                                                 Text.plus
                                                 KeyBlockView.shift
                                                 Text.plus
-                                                KeyBlockView.backwardDelete
+                                                KeyBlockView.backspace
                                                 Spacer()
                                         }
                                 }
@@ -343,8 +343,8 @@ private struct KeyBlockView: View {
         static let tab: KeyBlockView = KeyBlockView("Tab ⇥")
         static let returnKey: KeyBlockView = KeyBlockView("Return ⏎")
 
-        /// Backspace. NOT Forward-Delete.
-        static let backwardDelete: KeyBlockView = KeyBlockView("Delete ⌫")
+        /// Backward-delete
+        static let backspace: KeyBlockView = KeyBlockView("Delete ⌫")
 }
 
 private struct SymbolKeyView: View {

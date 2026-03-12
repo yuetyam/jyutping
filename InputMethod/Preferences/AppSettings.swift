@@ -518,7 +518,7 @@ struct AppSettings {
         private static let defaultCandidateFontSize: Int = 16
         private static let defaultCommentFontSize: Int = 13
         private static let defaultLabelFontSize: Int = 13
-        static let fontSizeRange: ClosedRange<Int> = 10...24
+        static let fontSizeRange: ClosedRange<Int> = 10...34
 
 
         // Candidate StackView syllable text frame

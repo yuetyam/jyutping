@@ -37,10 +37,12 @@ struct EmojiMaster {
 
         private static let defaultFrequent: [Emoji] = Engine.fetchDefaultFrequentEmojis()
         private static let fetchedEmojis: [Emoji] = {
-                if #available(iOSApplicationExtension 18.4, *) {
-                        // Unicode/Emoji version 16.0
-                        // return matched.filter({ $0.unicodeVersion <= 160000 }).distinct()
+                if #available(iOSApplicationExtension 26.4, *) {
+                        // Unicode/Emoji version 17.0
                         return Engine.fetchEmojiSequence()
+                } else if #available(iOSApplicationExtension 18.4, *) {
+                        // Unicode/Emoji version 16.0
+                        return Engine.fetchEmojiSequence().filter({ $0.unicodeVersion <= 160000 })
                 } else if #available(iOSApplicationExtension 17.4, *) {
                         // Unicode/Emoji version 15.1
                         return Engine.fetchEmojiSequence().filter({ $0.unicodeVersion <= 150100 })

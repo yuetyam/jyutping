@@ -10252,91 +10252,91 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Press **Shift** once to"
+            "value" : "Press **Shift** ⇧ once to"
           }
         },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Press **Shift** once to"
+            "value" : "Press **Shift** ⇧ once to"
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Press **Shift** once to"
+            "value" : "Press **Shift** ⇧ once to"
           }
         },
         "en-US" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Press **Shift** once to"
+            "value" : "Press **Shift** ⇧ once to"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Appuyer une fois sur **Shift** pour"
+            "value" : "Appuyer une fois sur **Shift** ⇧ pour"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "**Shift** キーを1回押したときの動作"
+            "value" : "**Shift** ⇧ キーを1回押したときの動作"
           }
         },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "按一下 **Shift** 鍵"
+            "value" : "按一下 **Shift** ⇧ 鍵"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "按一下 **Shift** 鍵"
+            "value" : "按一下 **Shift** ⇧ 鍵"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "按一下 **Shift** 鍵"
+            "value" : "按一下 **Shift** ⇧ 鍵"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "按一下 **Shift** 鍵"
+            "value" : "按一下 **Shift** ⇧ 鍵"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "按一下 **Shift** 鍵"
+            "value" : "按一下 **Shift** ⇧ 鍵"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "按一下 **Shift** 鍵"
+            "value" : "按一下 **Shift** ⇧ 鍵"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "按一下 **Shift** 鍵"
+            "value" : "按一下 **Shift** ⇧ 鍵"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "按一下 **Shift** 鍵"
+            "value" : "按一下 **Shift** ⇧ 鍵"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "按一下 **Shift** 鍵"
+            "value" : "按一下 **Shift** ⇧ 鍵"
           }
         }
       }
@@ -10440,91 +10440,91 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Press **Shift** + **Space** to"
+            "value" : "Press **Shift** ⇧ + **Space** to"
           }
         },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Press **Shift** + **Space** to"
+            "value" : "Press **Shift** ⇧ + **Space** to"
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Press **Shift** + **Space** to"
+            "value" : "Press **Shift** ⇧ + **Space** to"
           }
         },
         "en-US" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Press **Shift** + **Space** to"
+            "value" : "Press **Shift** ⇧ + **Space** to"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Appuyer sur **Shift** + **Espace** pour"
+            "value" : "Appuyer sur **Shift** ⇧ + **Espace** pour"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "**Shift** + **スペース** キーの動作"
+            "value" : "**Shift** ⇧ + **スペース** キーの動作"
           }
         },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "按 **Shift** + **Space** 鍵"
+            "value" : "按 **Shift** ⇧ + **Space** 鍵"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "按 **Shift** + **Space** 鍵"
+            "value" : "按 **Shift** ⇧ + **Space** 鍵"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "按 **Shift** + **Space** 鍵"
+            "value" : "按 **Shift** ⇧ + **Space** 鍵"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "按 **Shift** + **Space** 鍵"
+            "value" : "按 **Shift** ⇧ + **Space** 鍵"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "按 **Shift** + **Space** 鍵"
+            "value" : "按 **Shift** ⇧ + **Space** 鍵"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "按 **Shift** + **Space** 鍵"
+            "value" : "按 **Shift** ⇧ + **Space** 鍵"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "按 **Shift** + **Space** 鍵"
+            "value" : "按 **Shift** ⇧ + **Space** 鍵"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "按 **Shift** + **Space** 鍵"
+            "value" : "按 **Shift** ⇧ + **Space** 鍵"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "按 **Shift** + **Space** 鍵"
+            "value" : "按 **Shift** ⇧ + **Space** 鍵"
           }
         }
       }

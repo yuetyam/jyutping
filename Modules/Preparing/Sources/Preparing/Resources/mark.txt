@@ -36,8 +36,10 @@ dimsum	Dim Sum
 directx	DirectX
 dockkit	DockKit
 duckduckgo	DuckDuckGo
+eg	e.g.
 egpu	eGPU
 esim	eSIM
+etc	etc.
 faceid	Face ID
 facetime	FaceTime
 fcp	Final Cut Pro
@@ -60,6 +62,7 @@ homepod	HomePod
 homepodmini	HomePod mini
 hyperos	HyperOS
 icloud	iCloud
+ie	i.e.
 imac	iMac
 imacpro	iMac Pro
 imessage	iMessage
@@ -89,6 +92,7 @@ localsend	LocalSend
 macappstore	Mac App Store
 macbook	MacBook
 macbookair	MacBook Air
+macbookneo	MacBook Neo
 macbookpro	MacBook Pro
 macmini	Mac mini
 macos	macOS
@@ -104,6 +108,7 @@ matepad	MatePad
 matepadpro	MatePad Pro
 mba	MBA
 mba	MacBook Air
+mbn	MacBook Neo
 mbp	MacBook Pro
 misans	MiSans
 miui	MIUI
@@ -113,15 +118,20 @@ myos	MyOS
 mysql	MySQL
 netbsd	NetBSD
 objectivec	Objective-C
+onedrive	OneDrive
 oneplus	OnePlus
 oneui	One UI
 openai	OpenAI
+openapi	OpenAPI
 openbsd	OpenBSD
 opencc	OpenCC
 opencl	OpenCL
+openclaw	OpenClaw
+opencode	OpenCode
 opencv	OpenCV
 opengl	OpenGL
 openmtp	OpenMTP
+openrouter	OpenRouter
 opensuse	openSUSE
 originos	OriginOS
 osx	OS X
@@ -131,6 +141,7 @@ pencilkit	PencilKit
 photokit	PhotoKit
 promotion	ProMotion
 pushkit	PushKit
+pytorch	PyTorch
 qrcode	QR Code
 quicktime	QuickTime
 realmeui	realme UI
@@ -162,6 +173,7 @@ ventura	Ventura
 visionkit	VisionKit
 visionos	visionOS
 visionpro	Vision Pro
+vpn	VPN
 watchkit	WatchKit
 watchos	watchOS
 webassembly	WebAssembly
@@ -265,3 +277,37 @@ wc	WC
 wc	🚾
 tm	™
 sm	℠
+command	command
+command	⌘
+option	option
+option	⌥
+alt	alt
+alt	⎇
+control	control
+control	⌃
+shift	shift
+shift	⇧
+capslock	Caps Lock
+capslock	⇪
+escape	escape
+escape	⎋
+esc	esc
+esc	⎋
+eject	eject
+eject	⏏
+tab	tab
+tab	⇥
+return	return
+return	⏎
+return	↵
+enter	enter
+enter	⏎
+enter	↵
+enter	⌅
+backspace	backspace
+backspace	⌫
+delete	delete
+delete	⌫
+delete	⌦
+clear	clear
+clear	⌧

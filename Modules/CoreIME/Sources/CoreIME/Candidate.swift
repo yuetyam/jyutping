@@ -66,30 +66,13 @@ public struct Candidate: Hashable, Sendable {
 
         // Equatable
         public static func == (lhs: Candidate, rhs: Candidate) -> Bool {
-                #if os(iOS)
                 return lhs.text == rhs.text && lhs.comment == rhs.comment
-                #else
-                if lhs.lexicon.isEmojiOrSymbol && rhs.lexicon.isEmojiOrSymbol {
-                        return lhs.text == rhs.text
-                } else {
-                        return lhs.text == rhs.text && lhs.comment == rhs.comment
-                }
-                #endif
         }
 
         // Hashable
         public func hash(into hasher: inout Hasher) {
-                #if os(iOS)
                 hasher.combine(text)
                 hasher.combine(comment)
-                #else
-                if lexicon.isEmojiOrSymbol {
-                        hasher.combine(text)
-                } else {
-                        hasher.combine(text)
-                        hasher.combine(comment)
-                }
-                #endif
         }
 
         public var isCantonese: Bool { lexicon.isCantonese }

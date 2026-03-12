@@ -37,7 +37,7 @@ public struct Emoji: Hashable, Identifiable, Sendable {
 }
 
 extension Emoji {
-        
+
         /// Convert an emoji text to an Emoji instance
         /// - Parameters:
         ///   - text: Text that is an emoji
@@ -126,7 +126,7 @@ extension Engine {
                 let input: String = (syllableLength == keys.count) ? text : keys.map(\.text).joined()
                 let regular: [Lexicon] = match(text: text, input: input, statement: statement)
                 let schemes = segmentation.filter({ $0.length == syllableLength })
-                guard schemes.isNotEmpty else { return regular }
+                guard schemes.isNotEmpty else { return regular.distinct() }
                 let matches = schemes.flatMap({ scheme -> [Lexicon] in
                         let pingText = scheme.flatMap(\.origin).map(\.text).joined()
                         return match(text: pingText, input: input, statement: statement)

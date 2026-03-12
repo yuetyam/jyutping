@@ -145,6 +145,7 @@ dat	dat
 dau	dau
 day	dei
 dei	dei
+dek	dek
 dik	dik
 dim	dim
 din	din
@@ -426,6 +427,7 @@ tam	tam
 tan	tan
 tar	taa
 tau	tau
+tek	tek
 tik	tik
 tim	tim
 tin	tin
