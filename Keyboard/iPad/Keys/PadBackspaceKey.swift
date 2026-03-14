@@ -42,7 +42,7 @@ struct PadBackspaceKey: View {
                         }
                         .onEnded { value in
                                 buffer = 0
-                                guard value.translation.width < -44 else { return }
+                                guard (value.translation.width < -44) || (value.translation.height < -44) else { return }
                                 AudioFeedback.deleted()
                                 context.triggerHapticFeedback()
                                 context.operate(.clearBuffer)

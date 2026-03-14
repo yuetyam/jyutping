@@ -30,9 +30,11 @@ extension Engine {
                         let textTones = text.filter(\.isCantoneseToneDigit)
                         switch textTones.count {
                         case 1:
+                                let isToneInTail: Bool = text.last?.isCantoneseToneDigit ?? false
                                 let filtered = searched.filter({ item -> Bool in
                                         guard item.romanization.removedSpaces().hasPrefix(text).negative else { return true }
-                                        return item.romanization.filter(\.isCantoneseToneDigit).hasPrefix(textTones)
+                                        let tones = item.romanization.filter(\.isCantoneseToneDigit)
+                                        return isToneInTail ? tones.hasSuffix(textTones) : tones.hasPrefix(textTones)
                                 })
                                 return filtered.map(\.text).flatMap({ Engine.reveresLookup(text: $0, input: inputText) })
                         case 2:

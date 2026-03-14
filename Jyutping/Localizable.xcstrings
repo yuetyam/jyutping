@@ -6868,91 +6868,91 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Swipe from right to left on the Delete key will clear current pre-edit syllables."
+            "value" : "Swipe right to left, or bottom to top on the Delete key to clear the pre-edit syllables."
           }
         },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Swipe from right to left on the Delete key will clear current pre-edit syllables."
+            "value" : "Swipe right to left, or bottom to top on the Delete key to clear the pre-edit syllables."
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Swipe from right to left on the Delete key will clear current pre-edit syllables."
+            "value" : "Swipe right to left, or bottom to top on the Delete key to clear the pre-edit syllables."
           }
         },
         "en-US" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Swipe from right to left on the Delete key will clear current pre-edit syllables."
+            "value" : "Swipe right to left, or bottom to top on the Delete key to clear the pre-edit syllables."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Balayer de droite à gauche sur la touche Suppr effacera les syllabes de pré-édition actuelles."
+            "value" : "Balayez de droite à gauche, ou de bas en haut sur la touche Supprimer pour effacer les syllabes de pré-édition."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "削除キーを右から左にスワイプすると、現在の編集中の音節がクリアされます。"
+            "value" : "削除キーを右から左、または下から上にスワイプすると、プリエディットの音節を消去できます。"
           }
         },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "刪除鍵(Delete)從右向左滑，即可一次過清空預輸入拼寫。"
+            "value" : "刪除鍵(Delete)從右向左滑，或者從下向上滑，即可一次過清空預輸入拼寫。"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "刪除鍵(Delete)從右向左滑，即可一次過清空預輸入拼寫。"
+            "value" : "刪除鍵(Delete)從右向左滑，或者從下向上滑，即可一次過清空預輸入拼寫。"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "刪除鍵(Delete)從右向左滑，即可一次過清空預輸入拼寫。"
+            "value" : "刪除鍵(Delete)從右向左滑，或者從下向上滑，即可一次過清空預輸入拼寫。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "刪除鍵(Delete)從右向左滑，即可一次過清空預輸入拼寫。"
+            "value" : "刪除鍵(Delete)從右向左滑，或者從下向上滑，即可一次過清空預輸入拼寫。"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "刪除鍵(Delete)從右向左滑，即可一次過清空預輸入拼寫。"
+            "value" : "刪除鍵(Delete)從右向左滑，或者從下向上滑，即可一次過清空預輸入拼寫。"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "刪除鍵(Delete)從右向左滑，即可一次過清空預輸入拼寫。"
+            "value" : "刪除鍵(Delete)從右向左滑，或者從下向上滑，即可一次過清空預輸入拼寫。"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "刪除鍵(Delete)從右向左滑，即可一次過清空預輸入拼寫。"
+            "value" : "刪除鍵(Delete)從右向左滑，或者從下向上滑，即可一次過清空預輸入拼寫。"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "刪除鍵(Delete)從右向左滑，即可一次過清空預輸入拼寫。"
+            "value" : "刪除鍵(Delete)從右向左滑，或者從下向上滑，即可一次過清空預輸入拼寫。"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "刪除鍵(Delete)從右向左滑，即可一次過清空預輸入拼寫。"
+            "value" : "刪除鍵(Delete)從右向左滑，或者從下向上滑，即可一次過清空預輸入拼寫。"
           }
         }
       }
