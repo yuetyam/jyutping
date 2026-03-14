@@ -7,50 +7,62 @@ extension Engine {
         /// Character Components Reverse Lookup. 拆字反查. 例如 木 + 木 = 林
         /// - Parameters:
         ///   - keys: VirtualInputKey Sequence
-        ///   - input: User input text
         ///   - segmentation: Segmentation
         /// - Returns: Lookup transformed Lexicons
-        public static func structureReverseLookup<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T, input: String, segmentation: Segmentation) -> [Lexicon] {
+        public static func structureReverseLookup<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T, segmentation: Segmentation) -> [Lexicon] {
                 let markFreeText = keys.filter(\.isSyllableLetter).map(\.text).joined()
-                let matched = search(text: markFreeText, segmentation: segmentation).distinct()
-                guard matched.isNotEmpty else { return [] }
-                let bodyKeys = keys.dropFirst()
-                let text = bodyKeys.map(\.text).joined()
-                switch (bodyKeys.contains(where: \.isApostrophe), bodyKeys.contains(where: \.isToneLetter)) {
+                let searched = search(text: markFreeText, segmentation: segmentation)
+                guard searched.isNotEmpty else { return [] }
+                let inputText = keys.map(\.text).joined()
+                switch (keys.contains(where: \.isApostrophe), keys.contains(where: \.isToneLetter)) {
                 case (true, true):
-                        let isOneToneOnly: Bool = (text.count - markFreeText.count) == 2
-                        guard isOneToneOnly else { return [] }
-                        let textParts = text.removedTones().split(separator: "'")
-                        let filtered = matched.filter({ item -> Bool in
-                                let syllables = item.romanization.removedTones().split(separator: " ")
-                                return (syllables == textParts) && (item.romanization.last == text.last)
+                        let text = inputText.toneConverted()
+                        let textTones = text.filter(\.isCantoneseToneDigit)
+                        guard textTones.count == 1 else { return [] }
+                        let isToneInTail: Bool = text.last?.isCantoneseToneDigit ?? false
+                        let filtered = searched.filter({ item -> Bool in
+                                let tones = item.romanization.filter(\.isCantoneseToneDigit)
+                                return isToneInTail ? tones.hasSuffix(textTones) : tones.hasPrefix(textTones)
                         })
-                        return filtered.map(\.text).flatMap({ Engine.reveresLookup(text: $0, input: input) })
+                        return filtered.map(\.text).flatMap({ Engine.reveresLookup(text: $0, input: inputText) })
                 case (false, true):
-                        let isOneToneOnly: Bool = (text.count - markFreeText.count) == 1
-                        let filtered = matched.filter({ item -> Bool in
-                                guard item.romanization.removedSpaces().hasPrefix(text).negative else { return true }
-                                guard isOneToneOnly else { return false }
-                                return text.last == item.romanization.last
-                        })
-                        return filtered.map(\.text).flatMap({ Engine.reveresLookup(text: $0, input: input) })
+                        let text = inputText.toneConverted()
+                        let textTones = text.filter(\.isCantoneseToneDigit)
+                        switch textTones.count {
+                        case 1:
+                                let filtered = searched.filter({ item -> Bool in
+                                        guard item.romanization.removedSpaces().hasPrefix(text).negative else { return true }
+                                        return item.romanization.filter(\.isCantoneseToneDigit).hasPrefix(textTones)
+                                })
+                                return filtered.map(\.text).flatMap({ Engine.reveresLookup(text: $0, input: inputText) })
+                        case 2:
+                                let filtered = searched.filter({ item -> Bool in
+                                        guard item.romanization.removedSpaces().hasPrefix(text).negative else { return true }
+                                        return textTones == item.romanization.filter(\.isCantoneseToneDigit)
+                                })
+                                return filtered.map(\.text).flatMap({ Engine.reveresLookup(text: $0, input: inputText) })
+                        default:
+                                let filtered = searched.filter({ item -> Bool in
+                                        return item.romanization.removedSpaces().hasPrefix(text)
+                                })
+                                return filtered.map(\.text).flatMap({ Engine.reveresLookup(text: $0, input: inputText) })
+                        }
                 case (true, false):
-                        let textParts = text.split(separator: "'")
-                        let filtered = matched.filter({ item -> Bool in
-                                let syllables = item.romanization.removedTones().split(separator: " ")
+                        let textParts = inputText.split(separator: String.apostrophe)
+                        let filtered = searched.filter({ item -> Bool in
+                                let syllables = item.romanization.removedTones().split(separator: String.space)
                                 return syllables == textParts
                         })
-                        return filtered.map(\.text).flatMap({ Engine.reveresLookup(text: $0, input: input) })
+                        return filtered.map(\.text).flatMap({ Engine.reveresLookup(text: $0, input: inputText) })
                 case (false, false):
-                        return matched.map(\.text).flatMap({ Engine.reveresLookup(text: $0, input: input) })
+                        return searched.map(\.text).flatMap({ Engine.reveresLookup(text: $0, input: inputText) })
                 }
         }
         private static func search(text: String, segmentation: Segmentation) -> [Lexicon] {
                 let matched = match(text: text)
                 let textCount = text.count
-                let schemes = segmentation.filter({ $0.length == textCount })
-                let matches = schemes.flatMap({ match(text: $0.originText) })
-                return matched + matches
+                let queried = segmentation.filter({ $0.length == textCount }).flatMap({ match(text: $0.originText) })
+                return matched + queried
         }
         private static func match(text: String) -> [Lexicon] {
                 let command: String = "SELECT word, romanization FROM structure_table WHERE spell = \(text.hashCode());"

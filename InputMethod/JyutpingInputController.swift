@@ -598,32 +598,31 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 let allKeys = bufferEvents.map(\.key)
                 let definedCandidates = searchDefined(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
                 let textMarkCandidates = Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
-                let bufferText = joinedBufferTexts()
-                guard bufferText.count > 2 else {
-                        mark(text: bufferText)
+                let keys = allKeys.dropFirst()
+                guard keys.isNotEmpty else {
+                        mark(text: joinedBufferTexts())
                         candidates = (definedCandidates + textMarkCandidates).distinct()
                         return
                 }
-                let keys = allKeys.dropFirst()
+                let bufferText = joinedBufferTexts()
                 let segmentation = Segmenter.segment(keys)
                 let tailMark: String = {
-                        let isPeculiar: Bool = keys.contains(where: \.isLetter.negative)
-                        guard isPeculiar.negative else { return bufferText.dropFirst().toneConverted() }
-                        guard let bestScheme = segmentation.first else { return bufferText.dropFirst().toneConverted() }
+                        let isPeculiar: Bool = keys.contains(where: \.isSyllableLetter.negative)
+                        guard isPeculiar.negative else { return bufferText.dropFirst().toneConverted().markFormatted() }
+                        guard let bestScheme = segmentation.first else { return bufferText.dropFirst().toneConverted().markFormatted() }
                         let leadingLength: Int = bestScheme.length
                         guard leadingLength < keys.count else { return bestScheme.mark }
                         let tailText = keys.dropFirst(leadingLength).map(\.text).joined()
                         return bestScheme.mark + String.space + tailText
                 }()
-                let prefixMark: String = bufferText.prefix(1) + String.space
-                let text2mark: String = prefixMark + tailMark
+                let text2mark: String = bufferText.prefix(1) + String.space + tailMark
                 mark(text: text2mark)
                 let commentForm: RomanizationForm = {
                         guard AppSettings.commentDisplayScene != .noneOfAll else { return .nothing }
                         return (AppSettings.toneDisplayStyle == .noTones) ? .toneless : .full
                 }()
                 let charset: CharacterStandard = Options.legacyCharacterStandard.isPreset ? Options.traditionalCharacterStandard : Options.legacyCharacterStandard
-                let suggestions = Engine.structureReverseLookup(keys, input: bufferText, segmentation: segmentation).transformed(commentForm: commentForm, charset: charset)
+                let suggestions = Engine.structureReverseLookup(keys, segmentation: segmentation).transformed(commentForm: commentForm, charset: charset)
                 candidates = (definedCandidates + textMarkCandidates + suggestions).distinct()
         }
 

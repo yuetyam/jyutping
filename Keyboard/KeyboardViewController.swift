@@ -926,18 +926,18 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let allKeys = bufferEvents.compactMap(\.keys.first)
                 let definedCandidates = searchDefinedCandidates(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
                 let textMarkCandidates = Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
-                let bufferText = joinedBufferTexts()
-                guard bufferText.count > 2 else {
-                        text2mark = bufferText
+                let keys = allKeys.dropFirst()
+                guard keys.isNotEmpty else {
+                        text2mark = joinedBufferTexts()
                         candidates = (definedCandidates + textMarkCandidates).distinct()
                         return
                 }
-                let keys = allKeys.dropFirst()
+                let bufferText = joinedBufferTexts()
                 let segmentation = Segmenter.segment(keys)
                 let tailMark: String = {
-                        let isPeculiar: Bool = keys.contains(where: \.isLetter.negative)
-                        guard isPeculiar.negative else { return bufferText.dropFirst().toneConverted() }
-                        guard let bestScheme = segmentation.first else { return bufferText.dropFirst().toneConverted() }
+                        let isPeculiar: Bool = keys.contains(where: \.isSyllableLetter.negative)
+                        guard isPeculiar.negative else { return bufferText.dropFirst().toneConverted().markFormatted() }
+                        guard let bestScheme = segmentation.first else { return bufferText.dropFirst().toneConverted().markFormatted() }
                         let leadingLength: Int = bestScheme.length
                         guard leadingLength < keys.count else { return bestScheme.mark }
                         let tailText = keys.dropFirst(leadingLength).map(\.text).joined()
@@ -948,7 +948,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         guard Options.commentScene != .noneOfAll else { return .nothing }
                         return (Options.commentToneStyle == .noTones) ? .toneless : .full
                 }()
-                let suggestions = Engine.structureReverseLookup(keys, input: bufferText, segmentation: segmentation).transformed(commentForm: commentForm, charset: characterStandard)
+                let suggestions = Engine.structureReverseLookup(keys, segmentation: segmentation).transformed(commentForm: commentForm, charset: characterStandard)
                 candidates = (definedCandidates + textMarkCandidates + suggestions).distinct()
         }
 
