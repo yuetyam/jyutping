@@ -31,6 +31,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         }
         private lazy var viewHeightConstraint: NSLayoutConstraint = NSLayoutConstraint()
         private func updateViewHeightConstraint() {
+                guard abs(viewHeightConstraint.constant - keyboardHeight) > 1 else { return }
                 viewHeightConstraint.constant = keyboardHeight
                 view.setNeedsLayout()
         }
@@ -223,7 +224,12 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 updateReverseLookupState(to: true)
                                 strokeReverseLookup()
                         case .letterQ:
-                                structureReverseLookup()
+                                updateReverseLookupState(to: true)
+                                if keyboardLayout.isAmbiguous {
+                                        structureAmbiguouslyReverseLookup()
+                                } else {
+                                        structureReverseLookup()
+                                }
                         default:
                                 updateReverseLookupState(to: false)
                                 if keyboardLayout.isAmbiguous {
@@ -767,11 +773,11 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                         guard length >= maxLength else { continue }
                                         maxLength = length
                                         group.addTask {
-                                                let memory: [Lexicon] = isInputMemoryOn ? await InputMemory.suggest(keys, segmentation: segmentation, deepSearch: false) : []
+                                                let memory: [Lexicon] = isInputMemoryOn ? await InputMemory.suggest(keys, segmentation: segmentation, deepSearch: inputLength < 6) : []
                                                 let defined: [Lexicon] = await self.searchDefinedCandidates(for: keys)
                                                 let textMarks: [Lexicon] = Engine.searchTextMarks(for: keys)
                                                 let symbols: [Lexicon] = isEmojiSuggestionsOn ? Engine.searchSymbols(for: keys, segmentation: segmentation) : []
-                                                let queried: [Lexicon] = Engine.suggest(keys, segmentation: segmentation, deepSearch: false)
+                                                let queried: [Lexicon] = Engine.suggest(keys, segmentation: segmentation, deepSearch: inputLength < 6)
                                                 return (memory, defined, textMarks, symbols, queried)
                                         }
                                 }
@@ -882,33 +888,47 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 }
         }
         private func cangjieReverseLookup() {
+                suggestionTask?.cancel()
                 let allKeys = bufferEvents.compactMap(\.keys.first)
-                let definedCandidates = searchDefinedCandidates(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
-                let textMarkCandidates = Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
                 let keys = allKeys.dropFirst()
                 let cangjieRadicals = keys.compactMap(Converter.cangjie(of:))
                 let isValidSequence: Bool = cangjieRadicals.isNotEmpty && (cangjieRadicals.count == keys.count)
-                if isValidSequence {
+                if isValidSequence.negative {
+                        text2mark = joinedBufferTexts()
+                        let definedCandidates = searchDefinedCandidates(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                        let textMarkCandidates = Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                        candidates = (definedCandidates + textMarkCandidates).distinct()
+                } else {
                         text2mark = String(cangjieRadicals)
                         let commentForm: RomanizationForm = {
                                 guard Options.commentScene != .noneOfAll else { return .nothing }
                                 return (Options.commentToneStyle == .noTones) ? .toneless : .full
                         }()
                         let text: String = keys.map(\.text).joined()
-                        let suggestions = Engine.cangjieReverseLookup(text: text, variant: Options.cangjieVariant).transformed(commentForm: commentForm, charset: characterStandard)
-                        candidates = (definedCandidates + textMarkCandidates + suggestions).distinct()
-                } else {
-                        text2mark = joinedBufferTexts()
-                        candidates = (definedCandidates + textMarkCandidates).distinct()
+                        nonisolated(unsafe) let cangjieVariant = Options.cangjieVariant
+                        suggestionTask = Task.detached(priority: .high) { [weak self] in
+                                guard let self else { return }
+                                async let definedCandidates = searchDefinedCandidates(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                                async let textMarkCandidates = Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                                async let lookup = Engine.cangjieReverseLookup(text: text, variant: cangjieVariant).transformed(commentForm: commentForm, charset: characterStandard)
+                                let suggestions = await (definedCandidates + textMarkCandidates + lookup).distinct()
+                                if Task.isCancelled.negative {
+                                        await MainActor.run { [weak self] in
+                                                guard let self else { return }
+                                                candidates = suggestions
+                                        }
+                                }
+                        }
                 }
         }
         private func strokeReverseLookup() {
+                suggestionTask?.cancel()
                 let allKeys = bufferEvents.compactMap(\.keys.first)
-                let definedCandidates = searchDefinedCandidates(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
-                let textMarkCandidates = Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
                 let keys = allKeys.dropFirst()
                 if keys.isEmpty || StrokeVirtualKey.isValidStrokes(keys).negative {
                         text2mark = joinedBufferTexts()
+                        let definedCandidates = searchDefinedCandidates(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                        let textMarkCandidates = Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
                         candidates = (definedCandidates + textMarkCandidates).distinct()
                 } else {
                         text2mark = StrokeVirtualKey.displayText(from: keys)
@@ -916,40 +936,142 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 guard Options.commentScene != .noneOfAll else { return .nothing }
                                 return (Options.commentToneStyle == .noTones) ? .toneless : .full
                         }()
-                        let suggestions = Engine.strokeReverseLookup(keys).transformed(commentForm: commentForm, charset: characterStandard)
-                        candidates = (definedCandidates + textMarkCandidates + suggestions).distinct()
+                        suggestionTask = Task.detached(priority: .high) { [weak self] in
+                                guard let self else { return }
+                                async let definedCandidates = searchDefinedCandidates(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                                async let textMarkCandidates = Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                                async let lookup = Engine.strokeReverseLookup(keys).transformed(commentForm: commentForm, charset: characterStandard)
+                                let suggestions = await (definedCandidates + textMarkCandidates + lookup).distinct()
+                                if Task.isCancelled.negative {
+                                        await MainActor.run { [weak self] in
+                                                guard let self else { return }
+                                                candidates = suggestions
+                                        }
+                                }
+                        }
                 }
         }
 
         /// 拆字、兩分反查. 例如 木 + 木 = 林: mukmuk
         private func structureReverseLookup() {
+                suggestionTask?.cancel()
                 let allKeys = bufferEvents.compactMap(\.keys.first)
-                let definedCandidates = searchDefinedCandidates(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
-                let textMarkCandidates = Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
                 let keys = allKeys.dropFirst()
-                guard keys.isNotEmpty else {
+                if keys.isEmpty {
                         text2mark = joinedBufferTexts()
+                        let definedCandidates = searchDefinedCandidates(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                        let textMarkCandidates = Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
                         candidates = (definedCandidates + textMarkCandidates).distinct()
+                } else {
+                        let commentForm: RomanizationForm = {
+                                guard Options.commentScene != .noneOfAll else { return .nothing }
+                                return (Options.commentToneStyle == .noTones) ? .toneless : .full
+                        }()
+                        suggestionTask = Task.detached(priority: .high) { [weak self] in
+                                guard let self else { return }
+                                let segmentation = Segmenter.segment(keys)
+                                async let definedCandidates = searchDefinedCandidates(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                                async let textMarkCandidates = Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                                async let lookup = Engine.structureReverseLookup(keys, segmentation: segmentation).transformed(commentForm: commentForm, charset: characterStandard)
+                                let suggestions = await (definedCandidates + textMarkCandidates + lookup).distinct()
+                                if Task.isCancelled.negative {
+                                        await MainActor.run { [weak self] in
+                                                guard let self else { return }
+                                                let bufferText = joinedBufferTexts()
+                                                let tailMark: String = {
+                                                        let isPeculiar: Bool = keys.contains(where: \.isSyllableLetter.negative)
+                                                        guard isPeculiar.negative else { return bufferText.dropFirst().toneConverted().markFormatted() }
+                                                        guard let bestScheme = segmentation.first else { return bufferText.dropFirst().toneConverted().markFormatted() }
+                                                        let leadingLength: Int = bestScheme.length
+                                                        guard leadingLength < keys.count else { return bestScheme.mark }
+                                                        let tailText = keys.dropFirst(leadingLength).map(\.text).joined()
+                                                        return bestScheme.mark + String.space + tailText
+                                                }()
+                                                text2mark = bufferText.prefix(1) + String.space + tailMark
+                                                candidates = suggestions
+                                        }
+                                }
+                        }
+                }
+        }
+        private func structureAmbiguouslyReverseLookup() {
+                suggestionTask?.cancel()
+                guard bufferEvents.count > 1 else {
+                        text2mark = joinedBufferTexts()
+                        candidates = []
                         return
                 }
-                let bufferText = joinedBufferTexts()
-                let segmentation = Segmenter.segment(keys)
-                let tailMark: String = {
-                        let isPeculiar: Bool = keys.contains(where: \.isSyllableLetter.negative)
-                        guard isPeculiar.negative else { return bufferText.dropFirst().toneConverted().markFormatted() }
-                        guard let bestScheme = segmentation.first else { return bufferText.dropFirst().toneConverted().markFormatted() }
-                        let leadingLength: Int = bestScheme.length
-                        guard leadingLength < keys.count else { return bestScheme.mark }
-                        let tailText = keys.dropFirst(leadingLength).map(\.text).joined()
-                        return bestScheme.mark + String.space + tailText
-                }()
-                text2mark = bufferText.prefix(1) + String.space + tailMark
+                let events = bufferEvents.dropFirst()
+                let inputLength = events.count
+                let isPeculiar: Bool = events.contains(where: \.case.isCapitalized) || events.contains(where: { $0.keys.contains(where: \.isSyllableLetter.negative) })
+                let keySetArray: Array<Set<VirtualInputKey>> = events.map(\.keys)
                 let commentForm: RomanizationForm = {
                         guard Options.commentScene != .noneOfAll else { return .nothing }
                         return (Options.commentToneStyle == .noTones) ? .toneless : .full
                 }()
-                let suggestions = Engine.structureReverseLookup(keys, segmentation: segmentation).transformed(commentForm: commentForm, charset: characterStandard)
-                candidates = (definedCandidates + textMarkCandidates + suggestions).distinct()
+                suggestionTask = Task.detached(priority: .high) { [weak self] in
+                        guard let self else { return }
+                        let sequences: [[VirtualInputKey]] = {
+                                var result: [[VirtualInputKey]] = [[]]
+                                var count = 1
+                                for keys in keySetArray {
+                                        let keyCount = keys.count
+                                        let nextCount = count * keyCount
+                                        var newResult: [[VirtualInputKey]] = []
+                                        newResult.reserveCapacity(nextCount)
+                                        for existing in result {
+                                                for key in keys {
+                                                        var sequence = existing
+                                                        sequence.append(key)
+                                                        newResult.append(sequence)
+                                                }
+                                        }
+                                        result = newResult
+                                        count = nextCount
+                                }
+                                return result
+                        }()
+                        let results = await withTaskGroup(of: (defined: [Candidate], marks: [Candidate], queried: [Candidate]).self) { group in
+                                var maxLength: Int = 0
+                                for keys in sequences {
+                                        let segmentation = Segmenter.segment(keys)
+                                        let length = (segmentation.first?.length ?? 0)
+                                        guard length >= maxLength else { continue }
+                                        maxLength = length
+                                        let allKeys: [VirtualInputKey] = [VirtualInputKey.letterQ] + keys
+                                        group.addTask {
+                                                let defined: [Candidate] = await self.searchDefinedCandidates(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                                                let textMarks: [Candidate] = Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                                                let queried: [Candidate] = await Engine.structureReverseLookup(keys, segmentation: segmentation).transformed(commentForm: commentForm, charset: self.characterStandard)
+                                                return (defined, textMarks, queried)
+                                        }
+                                }
+                                var allDefined: [Candidate] = []
+                                var allTextMarks: [Candidate] = []
+                                var allQueried: [Candidate] = []
+                                for await result in group {
+                                        allDefined.append(contentsOf: result.defined)
+                                        allTextMarks.append(contentsOf: result.marks)
+                                        allQueried.append(contentsOf: result.queried)
+                                }
+                                return (allDefined, allTextMarks, allQueried)
+                        }
+                        let suggestions = (results.0 + results.1 + results.2).distinct()
+                        if Task.isCancelled.negative {
+                                await MainActor.run { [weak self] in
+                                        guard let self else { return }
+                                        let text: String = joinedBufferTexts()
+                                        let tailMark: String = {
+                                                guard isPeculiar.negative else { return text.dropFirst().toneConverted().markFormatted() }
+                                                guard let firstCandidate = suggestions.first else { return String(text.dropFirst()) }
+                                                guard firstCandidate.lexicon.inputCount != inputLength else { return firstCandidate.lexicon.mark }
+                                                return String(text.dropFirst())
+                                        }()
+                                        self.text2mark = text.prefix(1) + String.space + tailMark
+                                        self.candidates = suggestions
+                                }
+                        }
+                }
         }
 
         /// Cached Lexicon sequence for InputMemory
