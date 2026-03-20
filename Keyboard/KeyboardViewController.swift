@@ -905,7 +905,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 return (Options.commentToneStyle == .noTones) ? .toneless : .full
                         }()
                         let text: String = keys.map(\.text).joined()
-                        nonisolated(unsafe) let cangjieVariant = Options.cangjieVariant
+                        let cangjieVariant = Options.cangjieVariant
                         suggestionTask = Task.detached(priority: .high) { [weak self] in
                                 guard let self else { return }
                                 async let definedCandidates = searchDefinedCandidates(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })

@@ -1,5 +1,5 @@
 /// 倉頡／速成版本
-public enum CangjieVariant: Int, CaseIterable {
+public enum CangjieVariant: Int, CaseIterable, Sendable {
 
         /// 倉頡五代
         case cangjie5 = 11

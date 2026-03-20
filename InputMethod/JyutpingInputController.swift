@@ -569,7 +569,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         }()
                         let charset: CharacterStandard = Options.legacyCharacterStandard.isPreset ? Options.traditionalCharacterStandard : Options.legacyCharacterStandard
                         let text: String = keys.map(\.text).joined()
-                        nonisolated(unsafe) let cangjieVariant = AppSettings.cangjieVariant
+                        let cangjieVariant = AppSettings.cangjieVariant
                         suggestionTask = Task.detached(priority: .high) { [weak self] in
                                 guard let self else { return }
                                 async let definedCandidates = searchDefined(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
