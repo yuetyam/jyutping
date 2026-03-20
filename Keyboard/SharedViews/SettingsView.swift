@@ -1,5 +1,4 @@
 import SwiftUI
-import Combine
 import CoreIME
 import CommonExtensions
 
@@ -38,7 +37,6 @@ struct SettingsView: View {
         @State private var isTryingToClearInputMemory: Bool = false
         @State private var isPerformingClearInputMemory: Bool = false
         @State private var clearInputMemoryProgress: Double = 0
-        private let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
 
         var body: some View {
                 VStack(spacing: 0) {
@@ -329,15 +327,18 @@ struct SettingsView: View {
                                                 .opacity(isPerformingClearInputMemory ? 0.5 : 1)
                                                 ProgressView(value: clearInputMemoryProgress).opacity(isPerformingClearInputMemory ? 1 : 0)
                                         }
-                                        .onReceive(timer) { _ in
-                                                if isTryingToClearInputMemory {
-                                                        isTryingToClearInputMemory = false
-                                                }
-                                                if isPerformingClearInputMemory {
-                                                        if clearInputMemoryProgress < 1 {
-                                                                clearInputMemoryProgress += 0.1
-                                                        } else {
-                                                                isPerformingClearInputMemory = false
+                                        .task {
+                                                while Task.isCancelled.negative {
+                                                        try? await Task.sleep(for: .milliseconds(100)) // 0.1s
+                                                        if isTryingToClearInputMemory {
+                                                                isTryingToClearInputMemory = false
+                                                        }
+                                                        if isPerformingClearInputMemory {
+                                                                if clearInputMemoryProgress < 1 {
+                                                                        clearInputMemoryProgress += 0.1
+                                                                } else {
+                                                                        isPerformingClearInputMemory = false
+                                                                }
                                                         }
                                                 }
                                         }

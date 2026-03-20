@@ -1,5 +1,4 @@
 import SwiftUI
-import Combine
 import CommonExtensions
 
 struct Speaker: View {
@@ -23,7 +22,6 @@ struct Speaker: View {
         #endif
 
         @State private var isSpeaking: Bool = false
-        private let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
 
         var body: some View {
                 if isSpeaking {
@@ -37,9 +35,12 @@ struct Speaker: View {
                                         Speech.stop()
                                         isSpeaking = false
                                 }
-                                .onReceive(timer) { _ in
-                                        if Speech.isSpeaking.negative {
-                                                isSpeaking = false
+                                .task {
+                                        while Task.isCancelled.negative {
+                                                try? await Task.sleep(for: .milliseconds(100)) // 0.1s
+                                                if isSpeaking && Speech.isSpeaking.negative {
+                                                        isSpeaking = false
+                                                }
                                         }
                                 }
                 } else {

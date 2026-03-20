@@ -1,5 +1,4 @@
 import SwiftUI
-import Combine
 import CommonExtensions
 
 struct LargePadShiftKey: View {
@@ -22,7 +21,6 @@ struct LargePadShiftKey: View {
         @State private var previousKeyboardCase: KeyboardCase = .lowercased
         @State private var isInTheMediumOfDoubleTapping: Bool = false
         @State private var doubleTappingBuffer: Int = 0
-        private let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
 
         var body: some View {
                 let keyWidth: CGFloat = context.widthUnit * widthUnitTimes
@@ -81,13 +79,16 @@ struct LargePadShiftKey: View {
                                 }
                         }
                 )
-                .onReceive(timer) { _ in
-                        if isInTheMediumOfDoubleTapping {
-                                if doubleTappingBuffer >= 3 {
-                                        doubleTappingBuffer = 0
-                                        isInTheMediumOfDoubleTapping = false
-                                } else {
-                                        doubleTappingBuffer += 1
+                .task {
+                        while Task.isCancelled.negative {
+                                try? await Task.sleep(for: .milliseconds(100)) // 0.1s
+                                if isInTheMediumOfDoubleTapping {
+                                        if doubleTappingBuffer >= 3 {
+                                                doubleTappingBuffer = 0
+                                                isInTheMediumOfDoubleTapping = false
+                                        } else {
+                                                doubleTappingBuffer += 1
+                                        }
                                 }
                         }
                 }

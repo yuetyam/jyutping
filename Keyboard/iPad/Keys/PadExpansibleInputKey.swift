@@ -1,5 +1,4 @@
 import SwiftUI
-import Combine
 import CommonExtensions
 
 struct PadExpansibleInputKey: View {
@@ -20,7 +19,6 @@ struct PadExpansibleInputKey: View {
         @Environment(\.colorScheme) private var colorScheme
 
         @GestureState private var isTouching: Bool = false
-        private let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
         @State private var buffer: Int = 0
         @State private var isLongPressing: Bool = false
         @State private var selectedIndex: Int = 0
@@ -157,13 +155,18 @@ struct PadExpansibleInputKey: View {
                                 }
                          }
                 )
-                .onReceive(timer) { _ in
-                        guard isTouching else { return }
-                        guard isLongPressing.negative else { return }
-                        if buffer > 3 {
-                                isLongPressing = true
-                        } else {
-                                buffer += 1
+                .task {
+                        while Task.isCancelled.negative {
+                                try? await Task.sleep(for: .milliseconds(100)) // 0.1s
+                                if isTouching {
+                                        if isLongPressing.negative {
+                                                if buffer > 3 {
+                                                        isLongPressing = true
+                                                } else {
+                                                        buffer += 1
+                                                }
+                                        }
+                                }
                         }
                 }
         }

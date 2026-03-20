@@ -1,5 +1,4 @@
 import SwiftUI
-import Combine
 import CommonExtensions
 
 struct PadSpaceKey: View {
@@ -14,8 +13,6 @@ struct PadSpaceKey: View {
 
         @State private var isInTheMediumOfDoubleTapping: Bool = false
         @State private var doubleTappingBuffer: Int = 0
-
-        private let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
 
         var body: some View {
                 // let keyWidth: CGFloat = context.widthUnit * widthUnitTimes
@@ -71,22 +68,25 @@ struct PadSpaceKey: View {
                                 }
                         }
                 )
-                .onReceive(timer) { _ in
-                        if isTouching {
-                                if longPressBuffer > 3 {
-                                        if isLongPressEngaged.negative {
-                                                AudioFeedback.modified()
-                                                isLongPressEngaged = true
+                .task {
+                        while Task.isCancelled.negative {
+                                try? await Task.sleep(for: .milliseconds(100)) // 0.1s
+                                if isTouching {
+                                        if longPressBuffer > 3 {
+                                                if isLongPressEngaged.negative {
+                                                        AudioFeedback.modified()
+                                                        isLongPressEngaged = true
+                                                }
+                                        } else {
+                                                longPressBuffer += 1
                                         }
-                                } else {
-                                        longPressBuffer += 1
-                                }
-                        } else if isInTheMediumOfDoubleTapping {
-                                if doubleTappingBuffer > 2 {
-                                        doubleTappingBuffer = 0
-                                        isInTheMediumOfDoubleTapping = false
-                                } else {
-                                        doubleTappingBuffer += 1
+                                } else if isInTheMediumOfDoubleTapping {
+                                        if doubleTappingBuffer > 2 {
+                                                doubleTappingBuffer = 0
+                                                isInTheMediumOfDoubleTapping = false
+                                        } else {
+                                                doubleTappingBuffer += 1
+                                        }
                                 }
                         }
                 }

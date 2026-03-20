@@ -1,5 +1,4 @@
 import SwiftUI
-import Combine
 import CommonExtensions
 
 struct EditingPanelMoveBackwardKey: View {
@@ -9,7 +8,6 @@ struct EditingPanelMoveBackwardKey: View {
 
         @GestureState private var isTouching: Bool = false
         @State private var buffer: Int = 0
-        private let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
 
         var body: some View {
                 ZStack {
@@ -33,14 +31,18 @@ struct EditingPanelMoveBackwardKey: View {
                                 buffer = 0
                         }
                 )
-                .onReceive(timer) { _ in
-                        guard isTouching else { return }
-                        if buffer > 3 {
-                                AudioFeedback.modified()
-                                context.triggerHapticFeedback()
-                                context.operate(.moveCursorBackward)
-                        } else {
-                                buffer += 1
+                .task {
+                        while Task.isCancelled.negative {
+                                try? await Task.sleep(for: .milliseconds(100)) // 0.1s
+                                if isTouching {
+                                        if buffer > 3 {
+                                                AudioFeedback.modified()
+                                                context.triggerHapticFeedback()
+                                                context.operate(.moveCursorBackward)
+                                        } else {
+                                                buffer += 1
+                                        }
+                                }
                         }
                 }
         }

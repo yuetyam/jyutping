@@ -1,5 +1,4 @@
 import SwiftUI
-import Combine
 import CommonExtensions
 
 struct BackspaceKey: View {
@@ -14,7 +13,6 @@ struct BackspaceKey: View {
 
         @GestureState private var isTouching: Bool = false
         @State private var buffer: Int = 0
-        private let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
 
         var body: some View {
                 let keyWidth: CGFloat = context.widthUnit * widthUnitTimes
@@ -49,14 +47,18 @@ struct BackspaceKey: View {
                                 context.operate(.clearBuffer)
                          }
                 )
-                .onReceive(timer) { _ in
-                        guard isTouching else { return }
-                        if buffer > 3 {
-                                AudioFeedback.deleted()
-                                context.triggerHapticFeedback()
-                                context.operate(.backspace)
-                        } else {
-                                buffer += 1
+                .task {
+                        while Task.isCancelled.negative {
+                                try? await Task.sleep(for: .milliseconds(100)) // 0.1s
+                                if isTouching {
+                                        if buffer > 3 {
+                                                AudioFeedback.deleted()
+                                                context.triggerHapticFeedback()
+                                                context.operate(.backspace)
+                                        } else {
+                                                buffer += 1
+                                        }
+                                }
                         }
                 }
         }

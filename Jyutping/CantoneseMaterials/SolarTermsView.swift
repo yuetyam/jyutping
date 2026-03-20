@@ -37,7 +37,7 @@ struct SolarTermsView: View {
                 let textBlock: String = """
                 立春,lap6 ceon1
                 雨水,jyu5 seoi2
-                驚蟄,ging1 zap6
+                驚蟄,ging1 zat6
                 春分,ceon1 fan1
                 清明,cing1 ming4
                 穀雨,guk1 jyu5

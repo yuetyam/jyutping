@@ -1,5 +1,4 @@
 import SwiftUI
-import Combine
 import CommonExtensions
 import CoreIME
 
@@ -10,7 +9,6 @@ struct RightAlternativeKey: View {
         @Environment(\.colorScheme) private var colorScheme
 
         @GestureState private var isTouching: Bool = false
-        private let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
         @State private var buffer: Int = 0
         @State private var isLongPressing: Bool = false
         @State private var selectedIndex: Int = 0
@@ -165,16 +163,21 @@ struct RightAlternativeKey: View {
                                 }
                         }
                 )
-                .onReceive(timer) { _ in
-                        guard isTouching else { return }
-                        guard isLongPressing.negative else { return }
-                        let shouldTriggerLongPress: Bool = buffer > 6 || (buffer > 3 && pulled == nil)
-                        if shouldTriggerLongPress {
-                                if context.inputStage.isBuffering.negative {
-                                        isLongPressing = true
+                .task {
+                        while Task.isCancelled.negative {
+                                try? await Task.sleep(for: .milliseconds(100)) // 0.1s
+                                if isTouching {
+                                        if isLongPressing.negative {
+                                                let shouldTriggerLongPress: Bool = buffer > 6 || (buffer > 3 && pulled == nil)
+                                                if shouldTriggerLongPress {
+                                                        if context.inputStage.isBuffering.negative {
+                                                                isLongPressing = true
+                                                        }
+                                                } else {
+                                                        buffer += 1
+                                                }
+                                        }
                                 }
-                        } else {
-                                buffer += 1
                         }
                 }
         }

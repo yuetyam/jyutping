@@ -1,5 +1,4 @@
 import SwiftUI
-import Combine
 import CommonExtensions
 import CoreIME
 
@@ -19,7 +18,6 @@ struct PadPullableInputKey: View {
         @Environment(\.colorScheme) private var colorScheme
 
         @GestureState private var isTouching: Bool = false
-        private let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
         @State private var buffer: Int = 0
         @State private var isPullingDown: Bool = false
 
@@ -92,10 +90,15 @@ struct PadPullableInputKey: View {
                                 }
                          }
                 )
-                .onReceive(timer) { _ in
-                        guard isTouching else { return }
-                        guard isPullingDown.negative else { return }
-                        buffer += 1
+                .task {
+                        while Task.isCancelled.negative {
+                                try? await Task.sleep(for: .milliseconds(100)) // 0.1s
+                                if isTouching {
+                                        if isPullingDown.negative {
+                                                buffer += 1
+                                        }
+                                }
+                        }
                 }
         }
 }

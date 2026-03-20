@@ -1,5 +1,4 @@
 import SwiftUI
-import Combine
 import CommonExtensions
 import CoreIME
 
@@ -15,7 +14,6 @@ struct EmojiBoard: View {
 
         @GestureState private var isBackspacing: Bool = false
         @State private var buffer: Int = 0
-        private let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
 
         @State private var currentCategory: Emoji.Category = .frequent
 
@@ -156,14 +154,18 @@ struct EmojiBoard: View {
                                                 buffer = 0
                                         }
                                 )
-                                .onReceive(timer) { _ in
-                                        guard isBackspacing else { return }
-                                        if buffer > 3 {
-                                                AudioFeedback.deleted()
-                                                context.triggerHapticFeedback()
-                                                context.operate(.backspace)
-                                        } else {
-                                                buffer += 1
+                                .task {
+                                        while Task.isCancelled.negative {
+                                                try? await Task.sleep(for: .milliseconds(100)) // 0.1s
+                                                if isBackspacing {
+                                                        if buffer > 3 {
+                                                                AudioFeedback.deleted()
+                                                                context.triggerHapticFeedback()
+                                                                context.operate(.backspace)
+                                                        } else {
+                                                                buffer += 1
+                                                        }
+                                                }
                                         }
                                 }
                         }
