@@ -45,12 +45,13 @@ struct VerticalPageCandidateLabel: View {
                                         Text(verbatim: candidate.text).font(.candidate)
                                 }
                         }
-                case .text:
+                case .text, .emoji, .symbol:
                         HStack(spacing: 6) {
                                 Text(verbatim: label).font(.label).opacity(labelOpacity)
                                 Text(verbatim: candidate.text).font(.candidate)
                         }
                         .padding(.vertical, commentStyle.isVertical ? 4 : 0)
+                /*
                 case .emoji, .symbol:
                         HStack(spacing: 6) {
                                 Text(verbatim: label).font(.label).opacity(labelOpacity)
@@ -60,6 +61,7 @@ struct VerticalPageCandidateLabel: View {
                                 }
                         }
                         .padding(.vertical, commentStyle.isVertical ? 4 : 0)
+                 */
                 case .composed:
                         HStack(spacing: 6) {
                                 Text(verbatim: label).font(.label).opacity(labelOpacity)

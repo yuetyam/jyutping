@@ -43,15 +43,14 @@ public struct Candidate: Hashable, Sendable {
                         self.comment = nil
                         self.secondaryComment = nil
                 case .emoji, .symbol:
-                        #if os(iOS)
-                        self.comment = nil
-                        #else
+                        /*
                         if let cantonese = lexicon.attached, cantonese.isNotEmpty {
                                 self.comment = String.openingParenthesis + Converter.convert(cantonese, to: charset) + String.closingParenthesis
                         } else {
                                 self.comment = nil
                         }
-                        #endif
+                        */
+                        self.comment = nil
                         self.secondaryComment = nil
                 case .composed:
                         if let cantonese = lexicon.attached, cantonese.isNotEmpty {

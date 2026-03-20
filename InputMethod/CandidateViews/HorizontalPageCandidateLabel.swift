@@ -1,5 +1,4 @@
 import SwiftUI
-import Combine
 import CoreIME
 import CommonExtensions
 
@@ -46,13 +45,14 @@ struct HorizontalPageCandidateLabel: View {
                                         Text(verbatim: candidate.text).font(.candidate)
                                 }
                         }
-                case .text:
+                case .text, .emoji, .symbol:
                         HStack(spacing: 2) {
                                 Text(verbatim: label).font(.label).opacity(labelOpacity)
                                 Text(verbatim: candidate.text).font(.candidate)
                         }
                         .padding(.top, commentStyle.isTop ? 8 : 0)
                         .padding(.bottom, commentStyle.isBottom ? 8 : 0)
+                /*
                 case .emoji, .symbol:
                         HStack(spacing: 2) {
                                 Text(verbatim: label).font(.label).opacity(labelOpacity)
@@ -61,6 +61,7 @@ struct HorizontalPageCandidateLabel: View {
                         }
                         .padding(.top, commentStyle.isTop ? 8 : 0)
                         .padding(.bottom, commentStyle.isBottom ? 8 : 0)
+                */
                 case .composed:
                         HStack(spacing: 2) {
                                 Text(verbatim: label).font(.label).opacity(labelOpacity)

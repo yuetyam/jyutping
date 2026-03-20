@@ -1,5 +1,4 @@
 import SwiftUI
-import Combine
 import InputMethodKit
 import os.log
 import CommonExtensions
@@ -552,13 +551,17 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 }
         }
         private func cangjieReverseLookup() {
+                suggestionTask?.cancel()
                 let allKeys = bufferEvents.map(\.key)
-                let definedCandidates = searchDefined(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
-                let textMarkCandidates = Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
                 let keys = allKeys.dropFirst()
                 let cangjieRadicals = keys.compactMap(Converter.cangjie(of:))
                 let isValidSequence: Bool = cangjieRadicals.isNotEmpty && (cangjieRadicals.count == keys.count)
-                if isValidSequence {
+                if isValidSequence.negative {
+                        mark(text: joinedBufferTexts())
+                        let definedCandidates = searchDefined(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                        let textMarkCandidates = Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                        candidates = (definedCandidates + textMarkCandidates).distinct()
+                } else {
                         mark(text: String(cangjieRadicals))
                         let commentForm: RomanizationForm = {
                                 guard AppSettings.commentDisplayScene != .noneOfAll else { return .nothing }
@@ -566,20 +569,30 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         }()
                         let charset: CharacterStandard = Options.legacyCharacterStandard.isPreset ? Options.traditionalCharacterStandard : Options.legacyCharacterStandard
                         let text: String = keys.map(\.text).joined()
-                        let suggestions = Engine.cangjieReverseLookup(text: text, variant: AppSettings.cangjieVariant).transformed(commentForm: commentForm, charset: charset)
-                        candidates = (definedCandidates + textMarkCandidates + suggestions).distinct()
-                } else {
-                        mark(text: joinedBufferTexts())
-                        candidates = (definedCandidates + textMarkCandidates).distinct()
+                        nonisolated(unsafe) let cangjieVariant = AppSettings.cangjieVariant
+                        suggestionTask = Task.detached(priority: .high) { [weak self] in
+                                guard let self else { return }
+                                async let definedCandidates = searchDefined(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                                async let textMarkCandidates = Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                                async let lookup = Engine.cangjieReverseLookup(text: text, variant: cangjieVariant).transformed(commentForm: commentForm, charset: charset)
+                                let suggestions = await (definedCandidates + textMarkCandidates + lookup).distinct()
+                                if Task.isCancelled.negative {
+                                        await MainActor.run { [weak self] in
+                                                guard let self else { return }
+                                                candidates = suggestions
+                                        }
+                                }
+                        }
                 }
         }
         private func strokeReverseLookup() {
+                suggestionTask?.cancel()
                 let allKeys = bufferEvents.map(\.key)
-                let definedCandidates = searchDefined(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
-                let textMarkCandidates = Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
                 let keys = allKeys.dropFirst()
                 if keys.isEmpty || StrokeVirtualKey.isValidStrokes(keys).negative {
                         mark(text: joinedBufferTexts())
+                        let definedCandidates = searchDefined(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                        let textMarkCandidates = Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
                         candidates = (definedCandidates + textMarkCandidates).distinct()
                 } else {
                         mark(text: StrokeVirtualKey.displayText(from: keys))
@@ -588,42 +601,65 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                 return (AppSettings.toneDisplayStyle == .noTones) ? .toneless : .full
                         }()
                         let charset: CharacterStandard = Options.legacyCharacterStandard.isPreset ? Options.traditionalCharacterStandard : Options.legacyCharacterStandard
-                        let suggestions = Engine.strokeReverseLookup(keys).transformed(commentForm: commentForm, charset: charset)
-                        candidates = (definedCandidates + textMarkCandidates + suggestions).distinct()
+                        suggestionTask = Task.detached(priority: .high) { [weak self] in
+                                guard let self else { return }
+                                async let definedCandidates = searchDefined(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                                async let textMarkCandidates = Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                                async let lookup = Engine.strokeReverseLookup(keys).transformed(commentForm: commentForm, charset: charset)
+                                let suggestions = await (definedCandidates + textMarkCandidates + lookup).distinct()
+                                if Task.isCancelled.negative {
+                                        await MainActor.run { [weak self] in
+                                                guard let self else { return }
+                                                candidates = suggestions
+                                        }
+                                }
+                        }
                 }
         }
 
         /// 拆字反查. 例如 木 + 木 = 林: mukmuk
         private func structureReverseLookup() {
+                suggestionTask?.cancel()
                 let allKeys = bufferEvents.map(\.key)
-                let definedCandidates = searchDefined(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
-                let textMarkCandidates = Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
                 let keys = allKeys.dropFirst()
-                guard keys.isNotEmpty else {
+                if keys.isEmpty {
                         mark(text: joinedBufferTexts())
+                        let definedCandidates = searchDefined(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                        let textMarkCandidates = Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
                         candidates = (definedCandidates + textMarkCandidates).distinct()
-                        return
+                } else {
+                        let commentForm: RomanizationForm = {
+                                guard AppSettings.commentDisplayScene != .noneOfAll else { return .nothing }
+                                return (AppSettings.toneDisplayStyle == .noTones) ? .toneless : .full
+                        }()
+                        let charset: CharacterStandard = Options.legacyCharacterStandard.isPreset ? Options.traditionalCharacterStandard : Options.legacyCharacterStandard
+                        suggestionTask = Task.detached(priority: .high) { [weak self] in
+                                guard let self else { return }
+                                let segmentation = Segmenter.segment(keys)
+                                async let definedCandidates = searchDefined(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                                async let textMarkCandidates = Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                                async let lookup = Engine.structureReverseLookup(keys, segmentation: segmentation).transformed(commentForm: commentForm, charset: charset)
+                                let suggestions = await (definedCandidates + textMarkCandidates + lookup).distinct()
+                                if Task.isCancelled.negative {
+                                        await MainActor.run { [weak self] in
+                                                guard let self else { return }
+                                                let bufferText = joinedBufferTexts()
+                                                let tailMark: String = {
+                                                        let isPeculiar: Bool = keys.contains(where: \.isSyllableLetter.negative)
+                                                        guard isPeculiar.negative else { return bufferText.dropFirst().toneConverted().markFormatted() }
+                                                        guard let bestScheme = segmentation.first else { return bufferText.dropFirst().toneConverted().markFormatted() }
+                                                        let leadingLength: Int = bestScheme.length
+                                                        guard leadingLength < keys.count else { return bestScheme.mark }
+                                                        let tailText = keys.dropFirst(leadingLength).map(\.text).joined()
+                                                        return bestScheme.mark + String.space + tailText
+                                                }()
+                                                let text2mark: String = bufferText.prefix(1) + String.space + tailMark
+                                                mark(text: text2mark)
+                                                candidates = suggestions
+                                        }
+                                }
+                        }
                 }
-                let bufferText = joinedBufferTexts()
-                let segmentation = Segmenter.segment(keys)
-                let tailMark: String = {
-                        let isPeculiar: Bool = keys.contains(where: \.isSyllableLetter.negative)
-                        guard isPeculiar.negative else { return bufferText.dropFirst().toneConverted().markFormatted() }
-                        guard let bestScheme = segmentation.first else { return bufferText.dropFirst().toneConverted().markFormatted() }
-                        let leadingLength: Int = bestScheme.length
-                        guard leadingLength < keys.count else { return bestScheme.mark }
-                        let tailText = keys.dropFirst(leadingLength).map(\.text).joined()
-                        return bestScheme.mark + String.space + tailText
-                }()
-                let text2mark: String = bufferText.prefix(1) + String.space + tailMark
-                mark(text: text2mark)
-                let commentForm: RomanizationForm = {
-                        guard AppSettings.commentDisplayScene != .noneOfAll else { return .nothing }
-                        return (AppSettings.toneDisplayStyle == .noTones) ? .toneless : .full
-                }()
-                let charset: CharacterStandard = Options.legacyCharacterStandard.isPreset ? Options.traditionalCharacterStandard : Options.legacyCharacterStandard
-                let suggestions = Engine.structureReverseLookup(keys, segmentation: segmentation).transformed(commentForm: commentForm, charset: charset)
-                candidates = (definedCandidates + textMarkCandidates + suggestions).distinct()
         }
 
 

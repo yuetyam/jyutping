@@ -1,5 +1,4 @@
 import SwiftUI
-import Combine
 import CoreIME
 import CommonExtensions
 
@@ -32,7 +31,6 @@ struct GeneralSettingsView: View {
         @State private var isClearInputMemoryConfirmDialogPresented: Bool = false
         @State private var isPerformingClearInputMemory: Bool = false
         @State private var clearInputMemoryProgress: Double = 0
-        private let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
 
         var body: some View {
                 ScrollView {
@@ -225,12 +223,16 @@ struct GeneralSettingsView: View {
                                                                         isClearInputMemoryConfirmDialogPresented = false
                                                                 }
                                                         }
-                                                        .onReceive(timer) { _ in
-                                                                guard isPerformingClearInputMemory else { return }
-                                                                if clearInputMemoryProgress > 1 {
-                                                                        isPerformingClearInputMemory = false
-                                                                } else {
-                                                                        clearInputMemoryProgress += 0.1
+                                                        .task {
+                                                                while Task.isCancelled.negative {
+                                                                        try? await Task.sleep(for: .milliseconds(100)) // 0.1s
+                                                                        if isPerformingClearInputMemory {
+                                                                                if clearInputMemoryProgress > 1 {
+                                                                                        isPerformingClearInputMemory = false
+                                                                                } else {
+                                                                                        clearInputMemoryProgress += 0.1
+                                                                                }
+                                                                        }
                                                                 }
                                                         }
                                                         ProgressView(value: clearInputMemoryProgress)
