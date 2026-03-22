@@ -1474,12 +1474,12 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 traditional.state = (Options.legacyCharacterStandard == .preset) ? .on : .off
                 menu.addItem(traditional)
 
-                let hongkong = NSMenuItem(title: String(localized: "Menu.CharacterStandard.TraditionalHongKong"), action: #selector(toggleHongKongCharacterStandard), keyEquivalent: "2")
+                let hongkong = NSMenuItem(title: String(localized: "Menu.CharacterStandard.HongKong"), action: #selector(toggleHongKongCharacterStandard), keyEquivalent: "2")
                 hongkong.keyEquivalentModifierMask = [.control, .shift]
                 hongkong.state = (Options.legacyCharacterStandard == .hongkong) ? .on : .off
                 menu.addItem(hongkong)
 
-                let taiwan = NSMenuItem(title: String(localized: "Menu.CharacterStandard.TraditionalTaiwan"), action: #selector(toggleTaiwanCharacterStandard), keyEquivalent: "3")
+                let taiwan = NSMenuItem(title: String(localized: "Menu.CharacterStandard.Taiwan"), action: #selector(toggleTaiwanCharacterStandard), keyEquivalent: "3")
                 taiwan.keyEquivalentModifierMask = [.control, .shift]
                 taiwan.state = (Options.legacyCharacterStandard == .taiwan) ? .on : .off
                 menu.addItem(taiwan)

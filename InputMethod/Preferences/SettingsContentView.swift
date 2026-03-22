@@ -17,25 +17,25 @@ struct SettingsContentView: View {
                 NavigationSplitView {
                         List(selection: $selection) {
                                 Section {
-                                        Label("PreferencesView.NavigationTitle.General", systemImage: "gear").tag(PreferencesSidebarRow.general)
-                                        Label("PreferencesView.NavigationTitle.ReverseLookup", systemImage: "doc.text.magnifyingglass").tag(PreferencesSidebarRow.reverseLookup)
-                                        Label("PreferencesView.NavigationTitle.TonesInput", systemImage: "bell").tag(PreferencesSidebarRow.tonesInput)
-                                        Label("PreferencesView.NavigationTitle.Fonts", systemImage: characterImageName).tag(PreferencesSidebarRow.fonts)
+                                        Label("SettingsView.NavigationTitle.General", systemImage: "gear").tag(PreferencesSidebarRow.general)
+                                        Label("SettingsView.NavigationTitle.ReverseLookup", systemImage: "doc.text.magnifyingglass").tag(PreferencesSidebarRow.reverseLookup)
+                                        Label("SettingsView.NavigationTitle.TonesInput", systemImage: "bell").tag(PreferencesSidebarRow.tonesInput)
+                                        Label("SettingsView.NavigationTitle.Fonts", systemImage: characterImageName).tag(PreferencesSidebarRow.fonts)
                                 } header: {
-                                        Text("PreferencesView.SectionHeader.Candidates").textCase(nil)
+                                        Text("SettingsView.SectionHeader.Candidates").textCase(nil)
                                 }
                                 Section {
-                                        Label("PreferencesView.NavigationTitle.Hotkeys", systemImage: "keyboard").tag(PreferencesSidebarRow.hotkeys)
+                                        Label("SettingsView.NavigationTitle.Hotkeys", systemImage: "keyboard").tag(PreferencesSidebarRow.hotkeys)
                                 } header: {
-                                        Text("PreferencesView.SectionHeader.Hotkeys").textCase(nil)
+                                        Text("SettingsView.SectionHeader.Hotkeys").textCase(nil)
                                 }
                                 Section {
-                                        Label("PreferencesView.NavigationTitle.About", systemImage: "info.circle").tag(PreferencesSidebarRow.about)
+                                        Label("SettingsView.NavigationTitle.About", systemImage: "info.circle").tag(PreferencesSidebarRow.about)
                                 } header: {
-                                        Text("PreferencesView.SectionHeader.About").textCase(nil)
+                                        Text("SettingsView.SectionHeader.About").textCase(nil)
                                 }
                         }
-                        .navigationTitle("PreferencesView.NavigationTitle.Preferences")
+                        .navigationTitle("SettingsView.NavigationTitle.Settings")
                         .toolbarBackground(Material.ultraThin, for: .windowToolbar)
                 } detail: {
                         switch selection {

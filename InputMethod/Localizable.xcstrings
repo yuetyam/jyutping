@@ -1317,7 +1317,7 @@
         }
       }
     },
-    "FontPreferencesView.FontMode.Custom" : {
+    "FontSettingsView.FontMode.Custom" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1411,7 +1411,7 @@
         }
       }
     },
-    "FontPreferencesView.FontMode.Default" : {
+    "FontSettingsView.FontMode.Default" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1505,7 +1505,7 @@
         }
       }
     },
-    "FontPreferencesView.FontMode.System" : {
+    "FontSettingsView.FontMode.System" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1599,7 +1599,7 @@
         }
       }
     },
-    "FontPreferencesView.FontModePicker.Candidate" : {
+    "FontSettingsView.FontModePicker.Candidate" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1693,7 +1693,7 @@
         }
       }
     },
-    "FontPreferencesView.FontModePicker.Comment" : {
+    "FontSettingsView.FontModePicker.Comment" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1787,7 +1787,7 @@
         }
       }
     },
-    "FontPreferencesView.FontModePicker.SerialNumber" : {
+    "FontSettingsView.FontModePicker.SerialNumber" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1881,7 +1881,7 @@
         }
       }
     },
-    "FontPreferencesView.FontSizePicker.Candidate" : {
+    "FontSettingsView.FontSizePicker.Candidate" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1975,7 +1975,7 @@
         }
       }
     },
-    "FontPreferencesView.FontSizePicker.Comment" : {
+    "FontSettingsView.FontSizePicker.Comment" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2069,7 +2069,7 @@
         }
       }
     },
-    "FontPreferencesView.FontSizePicker.SerialNumber" : {
+    "FontSettingsView.FontSizePicker.SerialNumber" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2163,7 +2163,7 @@
         }
       }
     },
-    "GeneralPreferencesView.CandidateCornerRadius" : {
+    "GeneralSettingsView.CandidateCornerRadius" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2257,7 +2257,7 @@
         }
       }
     },
-    "GeneralPreferencesView.CandidateCountPerPage" : {
+    "GeneralSettingsView.CandidateCountPerPage" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2351,7 +2351,7 @@
         }
       }
     },
-    "GeneralPreferencesView.CandidateLineSpacing" : {
+    "GeneralSettingsView.CandidateLineSpacing" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2445,7 +2445,7 @@
         }
       }
     },
-    "GeneralPreferencesView.CandidatePageCornerRadius" : {
+    "GeneralSettingsView.CandidatePageCornerRadius" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2539,7 +2539,7 @@
         }
       }
     },
-    "GeneralPreferencesView.CandidatePageInsets" : {
+    "GeneralSettingsView.CandidatePageInsets" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2633,7 +2633,7 @@
         }
       }
     },
-    "GeneralPreferencesView.CandidatePageOrientation" : {
+    "GeneralSettingsView.CandidatePageOrientation" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2727,7 +2727,7 @@
         }
       }
     },
-    "GeneralPreferencesView.CandidatePageOrientation.Horizontal" : {
+    "GeneralSettingsView.CandidatePageOrientation.Horizontal" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2821,7 +2821,7 @@
         }
       }
     },
-    "GeneralPreferencesView.CandidatePageOrientation.Vertical" : {
+    "GeneralSettingsView.CandidatePageOrientation.Vertical" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2915,7 +2915,7 @@
         }
       }
     },
-    "GeneralPreferencesView.CharacterStandard.PickerTitle" : {
+    "GeneralSettingsView.CharacterStandard.PickerTitle" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3009,7 +3009,7 @@
         }
       }
     },
-    "GeneralPreferencesView.CharacterStandard.Simplified" : {
+    "GeneralSettingsView.CharacterStandard.Simplified" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3103,7 +3103,7 @@
         }
       }
     },
-    "GeneralPreferencesView.CharacterStandard.Traditional" : {
+    "GeneralSettingsView.CharacterStandard.Traditional" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3197,7 +3197,7 @@
         }
       }
     },
-    "GeneralPreferencesView.CharacterStandard.TraditionalKongKong" : {
+    "GeneralSettingsView.CharacterStandard.KongKong" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3291,7 +3291,7 @@
         }
       }
     },
-    "GeneralPreferencesView.CharacterStandard.TraditionalTaiwan" : {
+    "GeneralSettingsView.CharacterStandard.Taiwan" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3385,7 +3385,7 @@
         }
       }
     },
-    "GeneralPreferencesView.CommentScene" : {
+    "GeneralSettingsView.CommentScene" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3479,7 +3479,7 @@
         }
       }
     },
-    "GeneralPreferencesView.CommentScene.All" : {
+    "GeneralSettingsView.CommentScene.All" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3573,7 +3573,7 @@
         }
       }
     },
-    "GeneralPreferencesView.CommentScene.Lookup" : {
+    "GeneralSettingsView.CommentScene.Lookup" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3667,7 +3667,7 @@
         }
       }
     },
-    "GeneralPreferencesView.CommentScene.None" : {
+    "GeneralSettingsView.CommentScene.None" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3761,7 +3761,7 @@
         }
       }
     },
-    "GeneralPreferencesView.CommentStyle" : {
+    "GeneralSettingsView.CommentStyle" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3855,7 +3855,7 @@
         }
       }
     },
-    "GeneralPreferencesView.CommentStyle.Bottom" : {
+    "GeneralSettingsView.CommentStyle.Bottom" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3949,7 +3949,7 @@
         }
       }
     },
-    "GeneralPreferencesView.CommentStyle.Right" : {
+    "GeneralSettingsView.CommentStyle.Right" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4043,7 +4043,7 @@
         }
       }
     },
-    "GeneralPreferencesView.CommentStyle.Top" : {
+    "GeneralSettingsView.CommentStyle.Top" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4137,7 +4137,7 @@
         }
       }
     },
-    "GeneralPreferencesView.CommentToneColor" : {
+    "GeneralSettingsView.CommentToneColor" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4231,7 +4231,7 @@
         }
       }
     },
-    "GeneralPreferencesView.CommentToneColor.Normal" : {
+    "GeneralSettingsView.CommentToneColor.Normal" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4325,7 +4325,7 @@
         }
       }
     },
-    "GeneralPreferencesView.CommentToneColor.Shallow" : {
+    "GeneralSettingsView.CommentToneColor.Shallow" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4419,7 +4419,7 @@
         }
       }
     },
-    "GeneralPreferencesView.CommentToneStyle" : {
+    "GeneralSettingsView.CommentToneStyle" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4513,7 +4513,7 @@
         }
       }
     },
-    "GeneralPreferencesView.CommentToneStyle.Normal" : {
+    "GeneralSettingsView.CommentToneStyle.Normal" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4607,7 +4607,7 @@
         }
       }
     },
-    "GeneralPreferencesView.CommentToneStyle.NoTones" : {
+    "GeneralSettingsView.CommentToneStyle.NoTones" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4701,7 +4701,7 @@
         }
       }
     },
-    "GeneralPreferencesView.CommentToneStyle.Subscript" : {
+    "GeneralSettingsView.CommentToneStyle.Subscript" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4795,7 +4795,7 @@
         }
       }
     },
-    "GeneralPreferencesView.CommentToneStyle.Superscript" : {
+    "GeneralSettingsView.CommentToneStyle.Superscript" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4889,7 +4889,7 @@
         }
       }
     },
-    "GeneralPreferencesView.EmojiSuggestions.ToggleTitle" : {
+    "GeneralSettingsView.EmojiSuggestions.ToggleTitle" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4983,7 +4983,7 @@
         }
       }
     },
-    "GeneralPreferencesView.InputMemory.Clear.ButtonTitle" : {
+    "GeneralSettingsView.InputMemory.Clear.ButtonTitle" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5077,7 +5077,7 @@
         }
       }
     },
-    "GeneralPreferencesView.InputMemory.Clear.ConfirmationDialog.Cancel" : {
+    "GeneralSettingsView.InputMemory.Clear.ConfirmationDialog.Cancel" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5171,7 +5171,7 @@
         }
       }
     },
-    "GeneralPreferencesView.InputMemory.Clear.ConfirmationDialog.Confirm" : {
+    "GeneralSettingsView.InputMemory.Clear.ConfirmationDialog.Confirm" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5265,7 +5265,7 @@
         }
       }
     },
-    "GeneralPreferencesView.InputMemory.Clear.ConfirmationDialog.Title" : {
+    "GeneralSettingsView.InputMemory.Clear.ConfirmationDialog.Title" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5359,7 +5359,7 @@
         }
       }
     },
-    "GeneralPreferencesView.InputMemory.ToggleTitle" : {
+    "GeneralSettingsView.InputMemory.ToggleTitle" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5453,7 +5453,7 @@
         }
       }
     },
-    "GeneralPreferencesView.LabelLastZero.ToggleTitle" : {
+    "GeneralSettingsView.LabelLastZero.ToggleTitle" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5547,7 +5547,7 @@
         }
       }
     },
-    "GeneralPreferencesView.LabelSet" : {
+    "GeneralSettingsView.LabelSet" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5641,7 +5641,7 @@
         }
       }
     },
-    "GeneralPreferencesView.LabelSet.Arabic" : {
+    "GeneralSettingsView.LabelSet.Arabic" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5735,7 +5735,7 @@
         }
       }
     },
-    "GeneralPreferencesView.LabelSet.Branches" : {
+    "GeneralSettingsView.LabelSet.Branches" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5829,7 +5829,7 @@
         }
       }
     },
-    "GeneralPreferencesView.LabelSet.CapitalizedChinese" : {
+    "GeneralSettingsView.LabelSet.CapitalizedChinese" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5923,7 +5923,7 @@
         }
       }
     },
-    "GeneralPreferencesView.LabelSet.Chinese" : {
+    "GeneralSettingsView.LabelSet.Chinese" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -6017,7 +6017,7 @@
         }
       }
     },
-    "GeneralPreferencesView.LabelSet.FullWidthArabic" : {
+    "GeneralSettingsView.LabelSet.FullWidthArabic" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -6111,7 +6111,7 @@
         }
       }
     },
-    "GeneralPreferencesView.LabelSet.HorizontalCountingRods" : {
+    "GeneralSettingsView.LabelSet.HorizontalCountingRods" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -6205,7 +6205,7 @@
         }
       }
     },
-    "GeneralPreferencesView.LabelSet.Mahjong" : {
+    "GeneralSettingsView.LabelSet.Mahjong" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -6299,7 +6299,7 @@
         }
       }
     },
-    "GeneralPreferencesView.LabelSet.Roman" : {
+    "GeneralSettingsView.LabelSet.Roman" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -6393,7 +6393,7 @@
         }
       }
     },
-    "GeneralPreferencesView.LabelSet.SmallRoman" : {
+    "GeneralSettingsView.LabelSet.SmallRoman" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -6487,7 +6487,7 @@
         }
       }
     },
-    "GeneralPreferencesView.LabelSet.Soochow" : {
+    "GeneralSettingsView.LabelSet.Soochow" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -6581,7 +6581,7 @@
         }
       }
     },
-    "GeneralPreferencesView.LabelSet.Stems" : {
+    "GeneralSettingsView.LabelSet.Stems" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -6675,7 +6675,7 @@
         }
       }
     },
-    "GeneralPreferencesView.LabelSet.VerticalCountingRods" : {
+    "GeneralSettingsView.LabelSet.VerticalCountingRods" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -6769,7 +6769,7 @@
         }
       }
     },
-    "GeneralPreferencesView.NavigationTitle.TitleKey" : {
+    "GeneralSettingsView.NavigationTitle.TitleKey" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -6863,7 +6863,7 @@
         }
       }
     },
-    "GeneralPreferencesView.SchemeRules.CompatibleMode.SectionFooter" : {
+    "GeneralSettingsView.SchemeRules.CompatibleMode.SectionFooter" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -6957,7 +6957,7 @@
         }
       }
     },
-    "GeneralPreferencesView.SchemeRules.CompatibleMode.ToggleTitle" : {
+    "GeneralSettingsView.SchemeRules.CompatibleMode.ToggleTitle" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -7051,7 +7051,7 @@
         }
       }
     },
-    "GeneralPreferencesView.SystemLexicon.ToggleTitle" : {
+    "GeneralSettingsView.SystemLexicon.ToggleTitle" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -7145,7 +7145,7 @@
         }
       }
     },
-    "GeneralPreferencesView.TraditionalCharacterStandard.Option1.Preset" : {
+    "GeneralSettingsView.TraditionalCharacterStandard.Option1.Preset" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -7239,7 +7239,7 @@
         }
       }
     },
-    "GeneralPreferencesView.TraditionalCharacterStandard.Option3.Inherited" : {
+    "GeneralSettingsView.TraditionalCharacterStandard.Option3.Inherited" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -7333,7 +7333,7 @@
         }
       }
     },
-    "GeneralPreferencesView.TraditionalCharacterStandard.Option6.HongKong" : {
+    "GeneralSettingsView.TraditionalCharacterStandard.Option6.HongKong" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -7427,7 +7427,7 @@
         }
       }
     },
-    "GeneralPreferencesView.TraditionalCharacterStandard.Option7.Taiwan" : {
+    "GeneralSettingsView.TraditionalCharacterStandard.Option7.Taiwan" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -7521,7 +7521,7 @@
         }
       }
     },
-    "GeneralPreferencesView.TraditionalCharacterStandard.Option8.PRCGeneral" : {
+    "GeneralSettingsView.TraditionalCharacterStandard.Option8.PRCGeneral" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -7615,7 +7615,7 @@
         }
       }
     },
-    "GeneralPreferencesView.TraditionalCharacterStandard.Option9.AncientBooksPublishing" : {
+    "GeneralSettingsView.TraditionalCharacterStandard.Option9.AncientBooksPublishing" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -7709,7 +7709,7 @@
         }
       }
     },
-    "GeneralPreferencesView.TraditionalCharacterStandard.PickerTitle" : {
+    "GeneralSettingsView.TraditionalCharacterStandard.PickerTitle" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -7803,7 +7803,7 @@
         }
       }
     },
-    "GeneralPreferencesView.TraditionalCharacterStandard.SectionFooter" : {
+    "GeneralSettingsView.TraditionalCharacterStandard.SectionFooter" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9965,7 +9965,7 @@
         }
       }
     },
-    "HotkeysView.OpenPreferencesWindow" : {
+    "HotkeysView.OpenSettingsWindow" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10059,7 +10059,7 @@
         }
       }
     },
-    "HotkeysView.OpenPreferencesWindow.Footer" : {
+    "HotkeysView.OpenSettingsWindow.Footer" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -11375,7 +11375,7 @@
         }
       }
     },
-    "Menu.CharacterStandard.TraditionalHongKong" : {
+    "Menu.CharacterStandard.HongKong" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -11469,7 +11469,7 @@
         }
       }
     },
-    "Menu.CharacterStandard.TraditionalTaiwan" : {
+    "Menu.CharacterStandard.Taiwan" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -12785,7 +12785,7 @@
         }
       }
     },
-    "OptionsView.CharacterStandard.TraditionalHongKong" : {
+    "OptionsView.CharacterStandard.HongKong" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -12879,7 +12879,7 @@
         }
       }
     },
-    "OptionsView.CharacterStandard.TraditionalTaiwan" : {
+    "OptionsView.CharacterStandard.Taiwan" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -13349,7 +13349,7 @@
         }
       }
     },
-    "Preferences.FontPicker.ChangeCurrentFont" : {
+    "FontPicker.ButtonTitle.ChangeCurrentFont" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -13443,7 +13443,7 @@
         }
       }
     },
-    "PreferencesView.NavigationTitle.About" : {
+    "SettingsView.NavigationTitle.About" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -13537,7 +13537,7 @@
         }
       }
     },
-    "PreferencesView.NavigationTitle.Fonts" : {
+    "SettingsView.NavigationTitle.Fonts" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -13631,7 +13631,7 @@
         }
       }
     },
-    "PreferencesView.NavigationTitle.General" : {
+    "SettingsView.NavigationTitle.General" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -13725,7 +13725,7 @@
         }
       }
     },
-    "PreferencesView.NavigationTitle.Hotkeys" : {
+    "SettingsView.NavigationTitle.Hotkeys" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -13819,7 +13819,7 @@
         }
       }
     },
-    "PreferencesView.NavigationTitle.Preferences" : {
+    "SettingsView.NavigationTitle.Settings" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -13913,7 +13913,7 @@
         }
       }
     },
-    "PreferencesView.NavigationTitle.ReverseLookup" : {
+    "SettingsView.NavigationTitle.ReverseLookup" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -14007,7 +14007,7 @@
         }
       }
     },
-    "PreferencesView.NavigationTitle.TonesInput" : {
+    "SettingsView.NavigationTitle.TonesInput" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -14101,7 +14101,7 @@
         }
       }
     },
-    "PreferencesView.SectionHeader.About" : {
+    "SettingsView.SectionHeader.About" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -14195,7 +14195,7 @@
         }
       }
     },
-    "PreferencesView.SectionHeader.Candidates" : {
+    "SettingsView.SectionHeader.Candidates" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -14289,7 +14289,7 @@
         }
       }
     },
-    "PreferencesView.SectionHeader.Hotkeys" : {
+    "SettingsView.SectionHeader.Hotkeys" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -14383,7 +14383,7 @@
         }
       }
     },
-    "PreferencesView.Window.Title" : {
+    "SettingsView.Window.Title" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {

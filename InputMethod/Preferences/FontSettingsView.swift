@@ -30,7 +30,7 @@ struct FontSettingsView: View {
                         LazyVStack(alignment: .leading) {
                                 Form {
                                         Section {
-                                                Picker("FontPreferencesView.FontSizePicker.Candidate", selection: $candidateFontSize) {
+                                                Picker("FontSettingsView.FontSizePicker.Candidate", selection: $candidateFontSize) {
                                                         ForEach(fontSizeRange, id: \.self) {
                                                                 Text(verbatim: "\($0) pt").tag($0)
                                                         }
@@ -39,10 +39,10 @@ struct FontSettingsView: View {
                                                 .onChange(of: candidateFontSize) { newFontSize in
                                                         AppSettings.updateCandidateFontSize(to: newFontSize)
                                                 }
-                                                Picker("FontPreferencesView.FontModePicker.Candidate", selection: $candidateFontMode) {
-                                                        Text("FontPreferencesView.FontMode.Default").tag(FontMode.default)
-                                                        Text("FontPreferencesView.FontMode.System").tag(FontMode.system)
-                                                        Text("FontPreferencesView.FontMode.Custom").tag(FontMode.custom)
+                                                Picker("FontSettingsView.FontModePicker.Candidate", selection: $candidateFontMode) {
+                                                        Text("FontSettingsView.FontMode.Default").tag(FontMode.default)
+                                                        Text("FontSettingsView.FontMode.System").tag(FontMode.system)
+                                                        Text("FontSettingsView.FontMode.Custom").tag(FontMode.custom)
                                                 }
                                                 .pickerStyle(.menu)
                                                 .onChange(of: candidateFontMode) { newMode in
@@ -85,7 +85,7 @@ struct FontSettingsView: View {
                                                 }
                                         }
                                         Section {
-                                                Picker("FontPreferencesView.FontSizePicker.Comment", selection: $commentFontSize) {
+                                                Picker("FontSettingsView.FontSizePicker.Comment", selection: $commentFontSize) {
                                                         ForEach(fontSizeRange, id: \.self) {
                                                                 Text(verbatim: "\($0) pt").tag($0)
                                                         }
@@ -94,10 +94,10 @@ struct FontSettingsView: View {
                                                 .onChange(of: commentFontSize) { newFontSize in
                                                         AppSettings.updateCommentFontSize(to: newFontSize)
                                                 }
-                                                Picker("FontPreferencesView.FontModePicker.Comment", selection: $commentFontMode) {
-                                                        Text("FontPreferencesView.FontMode.Default").tag(FontMode.default)
-                                                        Text("FontPreferencesView.FontMode.System").tag(FontMode.system)
-                                                        Text("FontPreferencesView.FontMode.Custom").tag(FontMode.custom)
+                                                Picker("FontSettingsView.FontModePicker.Comment", selection: $commentFontMode) {
+                                                        Text("FontSettingsView.FontMode.Default").tag(FontMode.default)
+                                                        Text("FontSettingsView.FontMode.System").tag(FontMode.system)
+                                                        Text("FontSettingsView.FontMode.Custom").tag(FontMode.custom)
                                                 }
                                                 .pickerStyle(.menu)
                                                 .onChange(of: commentFontMode) { newMode in
@@ -140,7 +140,7 @@ struct FontSettingsView: View {
                                                 }
                                         }
                                         Section {
-                                                Picker("FontPreferencesView.FontSizePicker.SerialNumber", selection: $labelFontSize) {
+                                                Picker("FontSettingsView.FontSizePicker.SerialNumber", selection: $labelFontSize) {
                                                         ForEach(fontSizeRange, id: \.self) {
                                                                 Text(verbatim: "\($0) pt").tag($0)
                                                         }
@@ -149,10 +149,10 @@ struct FontSettingsView: View {
                                                 .onChange(of: labelFontSize) { newFontSize in
                                                         AppSettings.updateLabelFontSize(to: newFontSize)
                                                 }
-                                                Picker("FontPreferencesView.FontModePicker.SerialNumber", selection: $labelFontMode) {
-                                                        Text("FontPreferencesView.FontMode.Default").tag(FontMode.default)
-                                                        Text("FontPreferencesView.FontMode.System").tag(FontMode.system)
-                                                        Text("FontPreferencesView.FontMode.Custom").tag(FontMode.custom)
+                                                Picker("FontSettingsView.FontModePicker.SerialNumber", selection: $labelFontMode) {
+                                                        Text("FontSettingsView.FontMode.Default").tag(FontMode.default)
+                                                        Text("FontSettingsView.FontMode.System").tag(FontMode.system)
+                                                        Text("FontSettingsView.FontMode.Custom").tag(FontMode.custom)
                                                 }
                                                 .pickerStyle(.menu)
                                                 .onChange(of: labelFontMode) { newMode in
@@ -203,6 +203,6 @@ struct FontSettingsView: View {
                         .padding(8)
                 }
                 .animation(.default, value: animationState)
-                .navigationTitle("PreferencesView.NavigationTitle.Fonts")
+                .navigationTitle("SettingsView.NavigationTitle.Fonts")
         }
 }

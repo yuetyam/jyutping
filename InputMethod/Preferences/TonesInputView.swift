@@ -61,7 +61,7 @@ struct TonesInputView: View {
                         .textSelection(.enabled)
                         .padding(8)
                 }
-                .navigationTitle("PreferencesView.NavigationTitle.TonesInput")
+                .navigationTitle("SettingsView.NavigationTitle.TonesInput")
         }
 }
 

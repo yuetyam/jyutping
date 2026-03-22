@@ -40,7 +40,7 @@ final class SettingsWindow: NSPanel {
                 isMovable = true
                 isMovableByWindowBackground = true
                 tabbingMode = .disallowed
-                title = String(localized: "PreferencesView.Window.Title")
+                title = String(localized: "SettingsView.Window.Title")
                 toolbarStyle = .unifiedCompact
         }
         static let shared: SettingsWindow = SettingsWindow(level: nil)

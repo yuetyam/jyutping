@@ -80,6 +80,6 @@ struct ReverseLookupView: View {
                         .textSelection(.enabled)
                         .padding(8)
                 }
-                .navigationTitle("PreferencesView.NavigationTitle.ReverseLookup")
+                .navigationTitle("SettingsView.NavigationTitle.ReverseLookup")
         }
 }

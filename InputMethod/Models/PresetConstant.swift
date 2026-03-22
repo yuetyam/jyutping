@@ -15,8 +15,8 @@ struct PresetConstant {
 
         static let optionsViewTexts: [Int : String] = [
                 0 : String(localized: "OptionsView.CharacterStandard.Traditional"),
-                1 : String(localized: "OptionsView.CharacterStandard.TraditionalHongKong"),
-                2 : String(localized: "OptionsView.CharacterStandard.TraditionalTaiwan"),
+                1 : String(localized: "OptionsView.CharacterStandard.HongKong"),
+                2 : String(localized: "OptionsView.CharacterStandard.Taiwan"),
                 3 : String(localized: "OptionsView.CharacterStandard.Simplified"),
                 4 : String(localized: "OptionsView.CharacterForm.HalfWidth"),
                 5 : String(localized: "OptionsView.CharacterForm.FullWidth"),

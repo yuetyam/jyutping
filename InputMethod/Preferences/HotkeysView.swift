@@ -81,7 +81,7 @@ struct HotkeysView: View {
 
                                 VStack(spacing: 2) {
                                         HStack(spacing: 4) {
-                                                LabelText("HotkeysView.OpenPreferencesWindow")
+                                                LabelText("HotkeysView.OpenSettingsWindow")
                                                 Text.separator
                                                 KeyBlockView.control
                                                 Text.plus
@@ -93,7 +93,7 @@ struct HotkeysView: View {
                                         .block()
                                         HStack(spacing: 2) {
                                                 SymbolKeyView(",")
-                                                Text("HotkeysView.OpenPreferencesWindow.Footer").font(.subheadline)
+                                                Text("HotkeysView.OpenSettingsWindow.Footer").font(.subheadline)
                                                 Spacer()
                                         }
                                         .padding(.horizontal, 8)
@@ -302,7 +302,7 @@ struct HotkeysView: View {
                         .textSelection(.enabled)
                         .padding(8)
                 }
-                .navigationTitle("PreferencesView.NavigationTitle.Hotkeys")
+                .navigationTitle("SettingsView.NavigationTitle.Hotkeys")
         }
 }
 
