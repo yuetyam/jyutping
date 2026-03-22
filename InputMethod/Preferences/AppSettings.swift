@@ -231,9 +231,9 @@ enum CommaPeriodKeysMode: Int, CaseIterable {
 struct AppSettings {
 
         /// Settings Window Sidebar
-        private(set) static var selectedPreferencesSidebarRow: PreferencesSidebarRow = .general
-        static func updateSelectedPreferencesSidebarRow(to row: PreferencesSidebarRow) {
-                selectedPreferencesSidebarRow = row
+        private(set) static var selectedSettingsSidebarRow: SettingsSidebarRow = .general
+        static func updateSelectedSettingsSidebarRow(to row: SettingsSidebarRow) {
+                selectedSettingsSidebarRow = row
         }
 
 

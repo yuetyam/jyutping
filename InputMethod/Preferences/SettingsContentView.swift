@@ -3,7 +3,7 @@ import AppKit
 
 struct SettingsContentView: View {
 
-        @State private var selection: PreferencesSidebarRow = AppSettings.selectedPreferencesSidebarRow
+        @State private var selection: SettingsSidebarRow = AppSettings.selectedSettingsSidebarRow
 
         private let characterImageName: String = {
                 if #available(macOS 15.0, *) {
@@ -17,20 +17,20 @@ struct SettingsContentView: View {
                 NavigationSplitView {
                         List(selection: $selection) {
                                 Section {
-                                        Label("SettingsView.NavigationTitle.General", systemImage: "gear").tag(PreferencesSidebarRow.general)
-                                        Label("SettingsView.NavigationTitle.ReverseLookup", systemImage: "doc.text.magnifyingglass").tag(PreferencesSidebarRow.reverseLookup)
-                                        Label("SettingsView.NavigationTitle.TonesInput", systemImage: "bell").tag(PreferencesSidebarRow.tonesInput)
-                                        Label("SettingsView.NavigationTitle.Fonts", systemImage: characterImageName).tag(PreferencesSidebarRow.fonts)
+                                        Label("SettingsView.NavigationTitle.General", systemImage: "gear").tag(SettingsSidebarRow.general)
+                                        Label("SettingsView.NavigationTitle.ReverseLookup", systemImage: "doc.text.magnifyingglass").tag(SettingsSidebarRow.reverseLookup)
+                                        Label("SettingsView.NavigationTitle.TonesInput", systemImage: "bell").tag(SettingsSidebarRow.tonesInput)
+                                        Label("SettingsView.NavigationTitle.Fonts", systemImage: characterImageName).tag(SettingsSidebarRow.fonts)
                                 } header: {
                                         Text("SettingsView.SectionHeader.Candidates").textCase(nil)
                                 }
                                 Section {
-                                        Label("SettingsView.NavigationTitle.Hotkeys", systemImage: "keyboard").tag(PreferencesSidebarRow.hotkeys)
+                                        Label("SettingsView.NavigationTitle.Hotkeys", systemImage: "keyboard").tag(SettingsSidebarRow.hotkeys)
                                 } header: {
                                         Text("SettingsView.SectionHeader.Hotkeys").textCase(nil)
                                 }
                                 Section {
-                                        Label("SettingsView.NavigationTitle.About", systemImage: "info.circle").tag(PreferencesSidebarRow.about)
+                                        Label("SettingsView.NavigationTitle.About", systemImage: "info.circle").tag(SettingsSidebarRow.about)
                                 } header: {
                                         Text("SettingsView.SectionHeader.About").textCase(nil)
                                 }
@@ -57,7 +57,7 @@ struct SettingsContentView: View {
         }
 }
 
-enum PreferencesSidebarRow: Int, Identifiable {
+enum SettingsSidebarRow: Int, Identifiable {
         case general
         case reverseLookup
         case tonesInput

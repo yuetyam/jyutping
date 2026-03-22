@@ -1529,18 +1529,18 @@ final class JyutpingInputController: IMKInputController, Sendable {
         }
 
         @objc private func openSettingsWindow() {
-                AppSettings.updateSelectedPreferencesSidebarRow(to: .general)
+                AppSettings.updateSelectedSettingsSidebarRow(to: .general)
                 displaySettingsView()
         }
         @objc func checkForUpdates() {
                 AppDelegate.shared.checkForUpdates()
         }
         @objc private func openHelpWindow() {
-                AppSettings.updateSelectedPreferencesSidebarRow(to: .hotkeys)
+                AppSettings.updateSelectedSettingsSidebarRow(to: .hotkeys)
                 displaySettingsView()
         }
         @objc private func openAboutWindow() {
-                AppSettings.updateSelectedPreferencesSidebarRow(to: .about)
+                AppSettings.updateSelectedSettingsSidebarRow(to: .about)
                 displaySettingsView()
         }
         private func displaySettingsView() {
