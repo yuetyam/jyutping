@@ -19,12 +19,12 @@ struct IntroductionsView: View {
                         }
 
                         // TODO: Double-space shortcut
-                        #if DEBUG
-                        Section {
-                                Text("IOSHomeTab.IntroductionsView.Heading.SpaceDoubleTapping").font(.headline)
-                                Text("IOSHomeTab.IntroductionsView.Body.SpaceDoubleTapping")
+                        if #available(iOS 1000.0, *) {
+                                Section {
+                                        Text("IOSHomeTab.IntroductionsView.Heading.SpaceDoubleTapping").font(.headline)
+                                        Text("IOSHomeTab.IntroductionsView.Body.SpaceDoubleTapping")
+                                }
                         }
-                        #endif
 
                         Section {
                                 Text("IOSHomeTab.IntroductionsView.Heading.TripleStrokeKeyboard").font(.headline)

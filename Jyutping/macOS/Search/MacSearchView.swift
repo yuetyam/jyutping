@@ -39,7 +39,7 @@ struct MacSearchView: View {
                 }
                 let ideographicCharacters: [Character] = {
                         let characters = trimmedInput.filter(\.isIdeographic).distinct()
-                        guard characters.isNotEmpty && characters.count < 4 else { return [] }
+                        guard characters.isNotEmpty && characters.count < 10 else { return [] }
                         return characters
                 }()
                 lexicons = AppMaster.searchCantoneseLexicons(for: trimmedInput)

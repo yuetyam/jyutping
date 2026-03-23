@@ -38,7 +38,7 @@ extension AppMaster {
                 let ideographicCharacters = text.filter(\.isIdeographic).distinct()
                 guard ideographicCharacters.isNotEmpty else { return [CantoneseLexicon(text: text)] }
                 let primaryLexicon = AppMaster.lookupCantoneseLexicon(for: text)
-                let shouldSearchMoreLexicons: Bool = text.count > 1 && ideographicCharacters.count < 4
+                let shouldSearchMoreLexicons: Bool = text.count > 1 && ideographicCharacters.count < 10
                 guard shouldSearchMoreLexicons else { return [primaryLexicon] }
                 let subLexicons = ideographicCharacters.map({ CantoneseLexicon.search(text: String($0)) })
                 return [primaryLexicon] + subLexicons
