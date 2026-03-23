@@ -60,6 +60,9 @@ extension String {
         func languageAttributed(for language: LanguageAttribute) -> AttributedString {
                 switch language {
                 case .unspecified, .zhHantHK:
+                        guard CJKVStandard.isNonCJKVPreferred.negative else {
+                                return CJKVStandard.isSCPreferred ? attributedCNHans() : attributedHKHant()
+                        }
                         if CJKVStandard.isHCPreferred || CJKVStandard.isSCPreferred || (CJKVStandard.isJPPreferred && CJKVStandard.isTCPreferred.negative) {
                                 return AttributedString(self)
                         } else {
@@ -78,12 +81,18 @@ extension String {
         func attributed(for characterStandard: CharacterStandard) -> AttributedString {
                 switch characterStandard {
                 case .preset, .custom, .inherited, .etymology, .opencc:
+                        guard CJKVStandard.isNonCJKVPreferred.negative else {
+                                return CJKVStandard.isSCPreferred ? attributedCNHans() : attributedHKHant()
+                        }
                         if CJKVStandard.isHCPreferred || CJKVStandard.isSCPreferred || (CJKVStandard.isJPPreferred && CJKVStandard.isTCPreferred.negative) {
                                 return AttributedString(self)
                         } else {
                                 return attributedHKHant()
                         }
                 case .hongkong:
+                        guard CJKVStandard.isNonCJKVPreferred.negative else {
+                                return attributedHKHant()
+                        }
                         if CJKVStandard.isHCPreferred || (CJKVStandard.isJPPreferred && CJKVStandard.isTCPreferred.negative) {
                                 return AttributedString(self)
                         } else {
@@ -92,6 +101,9 @@ extension String {
                 case .taiwan:
                         return AttributedString(self)
                 case .mutilated, .prcGeneral, .ancientBooksPublishing:
+                        guard CJKVStandard.isNonCJKVPreferred.negative else {
+                                return attributedCNHans()
+                        }
                         if CJKVStandard.isSCPreferred || (CJKVStandard.isJPPreferred && CJKVStandard.isTCPreferred.negative) {
                                 return AttributedString(self)
                         } else {
@@ -106,9 +118,10 @@ private enum CJKVStandard: Int {
         case TC
         case SC
         case JP
+        case nonCJKV
         static let preferredStandards: [CJKVStandard] = {
                 let languages = Locale.preferredLanguages
-                let standards = languages.compactMap({ language -> CJKVStandard? in
+                let standards = languages.map({ language -> CJKVStandard in
                         switch language {
                         case "zh-Hant-HK", "zh-HK", "yue-Hant-HK", "yue-Hant", "yue":
                                 return .HC
@@ -127,10 +140,15 @@ private enum CJKVStandard: Int {
                         case let code where code.hasPrefix("ja"):
                                 return .JP
                         default:
-                                return nil
+                                return .nonCJKV
                         }
                 })
                 return standards.distinct()
+        }()
+        static let isNonCJKVPreferred: Bool = {
+                guard let nonCJKVIndex = preferredStandards.firstIndex(of: .nonCJKV) else { return false }
+                guard let cjkvIndex = preferredStandards.firstIndex(where: { $0 != .nonCJKV }) else { return true }
+                return nonCJKVIndex < cjkvIndex
         }()
         static let isHCPreferred: Bool = {
                 guard let HCIndex = preferredStandards.firstIndex(of: .HC) else { return false }
