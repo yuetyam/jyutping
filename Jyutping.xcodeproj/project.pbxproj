@@ -10,8 +10,6 @@
 		373156F02EA2118300092A2C /* AboutKit in Frameworks */ = {isa = PBXBuildFile; productRef = 373156EF2EA2118300092A2C /* AboutKit */; };
 		373156F22EA2118900092A2C /* CommonExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 373156F12EA2118900092A2C /* CommonExtensions */; };
 		373156F42EA2118E00092A2C /* CoreIME in Frameworks */ = {isa = PBXBuildFile; productRef = 373156F32EA2118E00092A2C /* CoreIME */; };
-		373156F52EA211C400092A2C /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 373156ED2EA2116E00092A2C /* Sparkle.framework */; };
-		373156F62EA211C400092A2C /* Sparkle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 373156ED2EA2116E00092A2C /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		373A15152EA1ED29004866F7 /* AboutKit in Frameworks */ = {isa = PBXBuildFile; productRef = 373A15142EA1ED29004866F7 /* AboutKit */; };
 		373A15172EA1ED2F004866F7 /* AppDataSource in Frameworks */ = {isa = PBXBuildFile; productRef = 373A15162EA1ED2F004866F7 /* AppDataSource */; };
 		373A15192EA1ED34004866F7 /* CommonExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 373A15182EA1ED34004866F7 /* CommonExtensions */; };
@@ -19,6 +17,8 @@
 		373A15F92EA206C6004866F7 /* Keyboard.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 373A15F22EA206C6004866F7 /* Keyboard.appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		373A18512EA208E8004866F7 /* CommonExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 373A18502EA208E8004866F7 /* CommonExtensions */; };
 		373A18532EA208ED004866F7 /* CoreIME in Frameworks */ = {isa = PBXBuildFile; productRef = 373A18522EA208ED004866F7 /* CoreIME */; };
+		37813A862F722A3900930947 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37813A842F7229DF00930947 /* Sparkle.framework */; };
+		37813A872F722A3900930947 /* Sparkle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 37813A842F7229DF00930947 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,7 +66,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				373156F62EA211C400092A2C /* Sparkle.framework in Embed Frameworks */,
+				37813A872F722A3900930947 /* Sparkle.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -85,7 +85,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		373156ED2EA2116E00092A2C /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		373A150E2EA1ECD3004866F7 /* CommonExtensions */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CommonExtensions; path = Modules/CommonExtensions; sourceTree = "<group>"; };
 		373A150F2EA1ECFA004866F7 /* AboutKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = AboutKit; path = Modules/AboutKit; sourceTree = "<group>"; };
 		373A15102EA1ED02004866F7 /* Linguistics */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Linguistics; path = Modules/Linguistics; sourceTree = "<group>"; };
@@ -95,6 +94,7 @@
 		373A1AB62EA20EE9004866F7 /* InputMethod.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InputMethod.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		373A1AC22EA20EEA004866F7 /* InputMethodTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InputMethodTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		373A1ACC2EA20EEA004866F7 /* InputMethodUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InputMethodUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		37813A842F7229DF00930947 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		37ED43932EA0779700F28272 /* Jyutping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jyutping.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37ED43A02EA0779800F28272 /* JyutpingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JyutpingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		37ED43AA2EA0779800F28272 /* JyutpingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JyutpingUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -180,7 +180,7 @@
 				373156F22EA2118900092A2C /* CommonExtensions in Frameworks */,
 				373156F02EA2118300092A2C /* AboutKit in Frameworks */,
 				373156F42EA2118E00092A2C /* CoreIME in Frameworks */,
-				373156F52EA211C400092A2C /* Sparkle.framework in Frameworks */,
+				37813A862F722A3900930947 /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -250,7 +250,7 @@
 				373A15112EA1ED0A004866F7 /* AppDataSource */,
 				373A15122EA1ED15004866F7 /* CoreIME */,
 				373A15132EA1ED29004866F7 /* Frameworks */,
-				373156ED2EA2116E00092A2C /* Sparkle.framework */,
+				37813A842F7229DF00930947 /* Sparkle.framework */,
 			);
 			sourceTree = "<group>";
 		};
