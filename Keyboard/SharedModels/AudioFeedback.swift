@@ -12,14 +12,14 @@ enum AudioFeedback: SystemSoundID {
         }
         static func inputed() {
                 guard Options.isAudioFeedbackOn else { return }
-                AudioServicesPlaySystemSound(Self.input.rawValue)
+                AudioServicesPlaySystemSound(input.rawValue)
         }
         static func deleted() {
                 guard Options.isAudioFeedbackOn else { return }
-                AudioServicesPlaySystemSound(Self.delete.rawValue)
+                AudioServicesPlaySystemSound(delete.rawValue)
         }
         static func modified() {
                 guard Options.isAudioFeedbackOn else { return }
-                AudioServicesPlaySystemSound(Self.modify.rawValue)
+                AudioServicesPlaySystemSound(modify.rawValue)
         }
 }

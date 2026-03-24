@@ -1,7 +1,7 @@
 import SwiftUI
 import CommonExtensions
 
-struct TenKeyBackspaceKey: View {
+struct NineKeyBackspaceKey: View {
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme

@@ -2,7 +2,7 @@ import SwiftUI
 import CommonExtensions
 import CoreIME
 
-struct TenKeySpecialKey: View {
+struct NineKeySpecialKey: View {
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme

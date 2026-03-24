@@ -1,7 +1,7 @@
 import SwiftUI
 import CoreIME
 
-struct TenKeyNumericKeyboard: View {
+struct NineKeyNumericKeyboard: View {
         @EnvironmentObject private var context: KeyboardViewController
         var body: some View {
                 VStack(spacing: 0) {
@@ -19,33 +19,33 @@ struct TenKeyNumericKeyboard: View {
                                                 SidebarPanel()
                                                 VStack(spacing: 0) {
                                                         HStack(spacing: 0) {
-                                                                TenKeyNumberKey(.number1)
-                                                                TenKeyNumberKey(.number2)
-                                                                TenKeyNumberKey(.number3)
+                                                                NineKeyNumberKey(.number1)
+                                                                NineKeyNumberKey(.number2)
+                                                                NineKeyNumberKey(.number3)
                                                         }
                                                         HStack(spacing: 0) {
-                                                                TenKeyNumberKey(.number4)
-                                                                TenKeyNumberKey(.number5)
-                                                                TenKeyNumberKey(.number6)
+                                                                NineKeyNumberKey(.number4)
+                                                                NineKeyNumberKey(.number5)
+                                                                NineKeyNumberKey(.number6)
                                                         }
                                                         HStack(spacing: 0) {
-                                                                TenKeyNumberKey(.number7)
-                                                                TenKeyNumberKey(.number8)
-                                                                TenKeyNumberKey(.number9)
+                                                                NineKeyNumberKey(.number7)
+                                                                NineKeyNumberKey(.number8)
+                                                                NineKeyNumberKey(.number9)
                                                         }
                                                 }
                                         }
                                         HStack(spacing: 0) {
-                                                TenKeyNavigateKey(destination: .alphabetic)
-                                                TenKeyNumberDotKey()
-                                                TenKeyNumberKey(.number0)
-                                                TenKeySpaceKey()
+                                                NineKeyNavigateKey(destination: .alphabetic)
+                                                NineKeyNumberDotKey()
+                                                NineKeyNumberKey(.number0)
+                                                NineKeySpaceKey()
                                         }
                                 }
                                 VStack(spacing: 0) {
-                                        TenKeyBackspaceKey()
-                                        TenKeyNavigateKey(destination: .numeric)
-                                        TenKeyReturnKey()
+                                        NineKeyBackspaceKey()
+                                        NineKeyNavigateKey(destination: .numeric)
+                                        NineKeyReturnKey()
                                 }
                         }
                 }

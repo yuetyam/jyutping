@@ -2,7 +2,7 @@ import SwiftUI
 import CoreIME
 import CommonExtensions
 
-struct TenKeyStrokeKeyboard: View {
+struct NineKeyStrokeKeyboard: View {
         var body: some View {
                 VStack(spacing: 0) {
                         CandidateBar()
@@ -15,14 +15,14 @@ struct TenKeyStrokeKeyboard: View {
                                                 StrokePlaceholderKey(heightUnitTimes: 3).disabled(true)
                                                 VStack(spacing: 0) {
                                                         HStack(spacing: 0) {
-                                                                TenKeyStrokeKey(.horizontal)
-                                                                TenKeyStrokeKey(.vertical)
-                                                                TenKeyStrokeKey(.leftFalling)
+                                                                NineKeyStrokeKey(.horizontal)
+                                                                NineKeyStrokeKey(.vertical)
+                                                                NineKeyStrokeKey(.leftFalling)
                                                         }
                                                         HStack(spacing: 0) {
-                                                                TenKeyStrokeKey(.rightFalling)
-                                                                TenKeyStrokeKey(.turning)
-                                                                TenKeyStrokeKey(.wildcard)
+                                                                NineKeyStrokeKey(.rightFalling)
+                                                                NineKeyStrokeKey(.turning)
+                                                                NineKeyStrokeKey(.wildcard)
                                                         }
                                                         HStack(spacing: 0) {
                                                                 StrokePlaceholderKey().disabled(true)
@@ -33,20 +33,20 @@ struct TenKeyStrokeKeyboard: View {
                                         }
                                         HStack(spacing: 0) {
                                                 StrokePlaceholderKey().disabled(true)
-                                                TenKeySpaceKey()
+                                                NineKeySpaceKey()
                                         }
                                 }
                                 VStack(spacing: 0) {
-                                        TenKeyBackspaceKey()
+                                        NineKeyBackspaceKey()
                                         StrokePlaceholderKey().disabled(true)
-                                        TenKeyReturnKey()
+                                        NineKeyReturnKey()
                                 }
                         }
                 }
         }
 }
 
-private struct TenKeyStrokeKey: View {
+private struct NineKeyStrokeKey: View {
 
         init(_ key: StrokeVirtualKey) {
                 self.key = key

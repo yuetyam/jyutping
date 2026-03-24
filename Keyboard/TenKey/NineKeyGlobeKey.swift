@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct TenKeyGlobeKey: View {
+struct NineKeyGlobeKey: View {
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme

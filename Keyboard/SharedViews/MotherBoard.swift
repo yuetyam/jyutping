@@ -147,9 +147,9 @@ struct MotherBoard: View {
                                 LargePadNumericKeyboard()
                         }
                 case .tenKeyNumeric:
-                        TenKeyNumericKeyboard()
+                        NineKeyNumericKeyboard()
                 case .tenKeyStroke:
-                        TenKeyStrokeKeyboard()
+                        NineKeyStrokeKeyboard()
                 default:
                         switch context.inputMethodMode {
                         case .abc:
@@ -361,7 +361,7 @@ struct MotherBoard: View {
                                                 }
                                         }
                                 case .nineKey:
-                                        TenKeyKeyboard()
+                                        NineKeyKeyboard()
                                 case .fourteenKey:
                                         switch context.qwertyForm {
                                         case .pinyin:

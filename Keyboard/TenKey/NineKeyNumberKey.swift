@@ -2,7 +2,7 @@ import SwiftUI
 import CommonExtensions
 import CoreIME
 
-struct TenKeyNumberKey: View {
+struct NineKeyNumberKey: View {
 
         init(_ virtualKey: VirtualInputKey) {
                 self.virtualKey = virtualKey
@@ -41,7 +41,7 @@ struct TenKeyNumberKey: View {
         }
 }
 
-struct TenKeyNumberDotKey: View {
+struct NineKeyNumberDotKey: View {
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
         @GestureState private var isTouching: Bool = false

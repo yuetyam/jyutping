@@ -1,7 +1,7 @@
 import SwiftUI
 import CommonExtensions
 
-struct TenKeySpaceKey: View {
+struct NineKeySpaceKey: View {
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme

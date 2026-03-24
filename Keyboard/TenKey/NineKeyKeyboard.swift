@@ -1,7 +1,7 @@
 import SwiftUI
 import CoreIME
 
-struct TenKeyKeyboard: View {
+struct NineKeyKeyboard: View {
 
         @EnvironmentObject private var context: KeyboardViewController
 
@@ -21,57 +21,57 @@ struct TenKeyKeyboard: View {
                                                 SidebarPanel()
                                                 VStack(spacing: 0) {
                                                         HStack(spacing: 0) {
-                                                                TenKeySpecialKey()
-                                                                TenKeyInputKey(key: .ABC)
-                                                                TenKeyInputKey(key: .DEF)
+                                                                NineKeySpecialKey()
+                                                                NineKeyInputKey(key: .ABC)
+                                                                NineKeyInputKey(key: .DEF)
                                                         }
                                                         HStack(spacing: 0) {
-                                                                TenKeyInputKey(key: .GHI)
-                                                                TenKeyInputKey(key: .JKL)
-                                                                TenKeyInputKey(key: .MNO)
+                                                                NineKeyInputKey(key: .GHI)
+                                                                NineKeyInputKey(key: .JKL)
+                                                                NineKeyInputKey(key: .MNO)
                                                         }
                                                         HStack(spacing: 0) {
-                                                                TenKeyInputKey(key: .PQRS)
-                                                                TenKeyInputKey(key: .TUV)
-                                                                TenKeyInputKey(key: .WXYZ)
+                                                                NineKeyInputKey(key: .PQRS)
+                                                                NineKeyInputKey(key: .TUV)
+                                                                NineKeyInputKey(key: .WXYZ)
                                                         }
                                                 }
                                         }
                                         switch (context.isRunningOnPhone, context.needsInputModeSwitchKey) {
                                         case (true, true):
                                                 HStack(spacing: 0) {
-                                                        TenKeyNavigateKey(destination: context.preferredNumericForm)
-                                                        TenKeyGlobeKey()
-                                                        TenKeySpaceKey()
+                                                        NineKeyNavigateKey(destination: context.preferredNumericForm)
+                                                        NineKeyGlobeKey()
+                                                        NineKeySpaceKey()
                                                 }
                                         case (true, false):
                                                 HStack(spacing: 0) {
-                                                        TenKeyNavigateKey(destination: context.preferredNumericForm)
-                                                        TenKeySpaceKey()
+                                                        NineKeyNavigateKey(destination: context.preferredNumericForm)
+                                                        NineKeySpaceKey()
                                                 }
                                         case (false, true) where context.keyboardInterface.isPadFloating:
                                                 HStack(spacing: 0) {
-                                                        TenKeyGlobeKey()
-                                                        TenKeyNavigateKey(destination: context.preferredNumericForm)
-                                                        TenKeySpaceKey()
+                                                        NineKeyGlobeKey()
+                                                        NineKeyNavigateKey(destination: context.preferredNumericForm)
+                                                        NineKeySpaceKey()
                                                 }
                                         case (false, true):
                                                 HStack(spacing: 0) {
-                                                        TenKeyGlobeKey()
-                                                        TenKeyNavigateKey(destination: context.preferredNumericForm)
-                                                        TenKeySpaceKey()
+                                                        NineKeyGlobeKey()
+                                                        NineKeyNavigateKey(destination: context.preferredNumericForm)
+                                                        NineKeySpaceKey()
                                                 }
                                         case (false, false):
                                                 HStack(spacing: 0) {
-                                                        TenKeyNavigateKey(destination: context.preferredNumericForm)
-                                                        TenKeySpaceKey()
+                                                        NineKeyNavigateKey(destination: context.preferredNumericForm)
+                                                        NineKeySpaceKey()
                                                 }
                                         }
                                 }
                                 VStack(spacing: 0) {
-                                        TenKeyBackspaceKey()
-                                        TenKeyNavigateKey(destination: context.preferredNumericForm == .numeric ? .symbolic : .numeric)
-                                        TenKeyReturnKey()
+                                        NineKeyBackspaceKey()
+                                        NineKeyNavigateKey(destination: context.preferredNumericForm == .numeric ? .symbolic : .numeric)
+                                        NineKeyReturnKey()
                                 }
                         }
                 }
