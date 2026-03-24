@@ -3,7 +3,7 @@
 import SwiftUI
 
 @available(iOS 18.0, *)
-struct IOS18ContentView: View {
+struct IOSContentView: View {
 
         init() {
                 UITextField.appearance().clearButtonMode = .always
@@ -35,7 +35,8 @@ struct IOS18ContentView: View {
         }
 }
 
-struct IOSContentView: View {
+@available(iOS, introduced: 16.0, deprecated: 18.0, message: "Use IOSContentView instead")
+struct IOSLegacyContentView: View {
 
         init() {
                 UITextField.appearance().clearButtonMode = .always

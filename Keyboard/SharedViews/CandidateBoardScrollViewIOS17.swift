@@ -2,8 +2,8 @@ import SwiftUI
 import CommonExtensions
 import CoreIME
 
-@available(iOS, introduced: 17.0, deprecated: 18.0, message: "Use newer versions instead")
-@available(iOSApplicationExtension, introduced: 17.0, deprecated: 18.0, message: "Use newer versions instead")
+@available(iOS, introduced: 17.0, deprecated: 18.0, message: "Use CandidateBoardScrollView instead")
+@available(iOSApplicationExtension, introduced: 17.0, deprecated: 18.0, message: "Use CandidateBoardScrollView instead")
 struct CandidateBoardScrollViewIOS17: View {
 
         @EnvironmentObject private var context: KeyboardViewController

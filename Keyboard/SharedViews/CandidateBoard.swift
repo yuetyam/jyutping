@@ -70,11 +70,11 @@ struct CandidateBoard: View {
         var body: some View {
                 ZStack(alignment: .topTrailing) {
                         if #available(iOSApplicationExtension 18.0, *) {
-                                CandidateBoardScrollViewIOS18()
+                                CandidateBoardScrollView()
                         } else if #available(iOSApplicationExtension 17.0, *) {
                                 CandidateBoardScrollViewIOS17()
                         } else {
-                                CandidateBoardScrollView()
+                                CandidateBoardScrollViewIOS16()
                         }
                         if #available(iOSApplicationExtension 26.0, *) {
                                 Button(action: back) {

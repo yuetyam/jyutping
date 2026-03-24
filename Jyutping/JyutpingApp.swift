@@ -73,9 +73,9 @@ struct JyutpingApp: App {
         var body: some Scene {
                 WindowGroup {
                         if #available(iOS 18.0, *) {
-                                IOS18ContentView()
-                        } else {
                                 IOSContentView()
+                        } else {
+                                IOSLegacyContentView()
                         }
                 }
         }

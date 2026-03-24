@@ -7,11 +7,11 @@ struct CandidateBar: View {
         var body: some View {
                 HStack(spacing: 0) {
                         if #available(iOSApplicationExtension 18.0, *) {
-                                CandidateBarScrollViewIOS18()
+                                CandidateBarScrollView()
                         } else if #available(iOSApplicationExtension 17.0, *) {
                                 CandidateBarScrollViewIOS17()
                         } else {
-                                CandidateBarScrollView()
+                                CandidateBarScrollViewIOS16()
                         }
                         Button {
                                 AudioFeedback.modified()

@@ -1,7 +1,7 @@
 import SwiftUI
 
-@available(iOS, deprecated: 17.0)
-@available(iOSApplicationExtension, deprecated: 17.0)
+@available(iOS, introduced: 16.0, deprecated: 17.0, message: "Use newer versions instead")
+@available(iOSApplicationExtension, introduced: 16.0, deprecated: 17.0, message: "Use newer versions instead")
 struct SymbolSidebarScrollViewIOS16: View {
 
         let texts: [String]
