@@ -185,6 +185,7 @@ widgetkit	WidgetKit
 wifi	Wi-Fi
 windows	Windows
 winui	WinUI
+wordpress	WordPress
 xcode	Xcode
 youtube	YouTube
 yumcha	Yum Cha

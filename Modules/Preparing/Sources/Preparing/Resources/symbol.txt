@@ -14,7 +14,7 @@
 0	110000	1F60F	奸笑	gaan1 siu3
 0	110000	1F914	諗	nam2
 0	110000	2764.FE0F	心	sam1
-0	110000	1F496	心	sam1
+0	110000	1F496	閃閃心	sim2 sim2 sam1
 0	110000	1F495	心心	sam1 sam1
 0	110000	1F49E	心心	sam1 sam1
 0	110000	1F339	玫瑰	mui4 gwai3
@@ -97,7 +97,6 @@
 1	110000	1F609	調皮	tiu4 pei4
 1	110000	1F609	頑皮	waan4 pei4
 1	110000	1F609	䁪單眼	zaam2 daan1 ngaan5
-1	110000	1F609	眨單眼	zaam2 daan1 ngaan5
 1	110000	1F609	眨單眼	zaap3 daan1 ngaan5
 1	110000	1F609	眼放電	ngaan5 fong3 din6
 1	110000	1F609	單眼	daan1 ngaan5
@@ -197,19 +196,14 @@
 1	110000	1F9D0	睇睇	tai2 tai2
 1	110000	1F9D0	思考	si1 haau2
 1	110000	1F9D0	檢視	gim2 si6
-1	110000	1F913	戴眼鏡	daai3 ngaan5 geng2
 1	110000	1F913	戴眼鏡	daai3 ngaan5 geng3
 1	110000	1F913	眼鏡	ngaan5 geng3
-1	110000	1F913	眼鏡	ngaan5 geng2
 1	110000	1F913	眼鏡仔	ngaan5 geng3 zai2
-1	110000	1F913	哨牙	saau3 ngaa4
 1	110000	1F913	書呆子	syu1 ngoi4 zi2
 1	110000	1F913	書呆子	syu1 daai1 zi2
 1	110000	1F913	做題家	zou6 tai4 gaa1
-1	110000	1F913	做題蛆	zou6 tai4 ceoi1
 1	110000	1F913	四眼	sei3 ngaan5
 1	110000	1F913	四眼仔	sei3 ngaan5 zai2
-1	110000	1F913	四眼狗	sei3 ngaan5 gau2
 1	110000	1F60E	墨鏡	mak6 geng3
 1	110000	1F60E	墨超	mak6 ciu1
 1	110000	1F60E	型	jing4
@@ -316,7 +310,6 @@
 1	110000	1F97A	無辜	mou4 gu1
 1	110000	1F622	可惜	ho2 sik1
 1	110000	1F622	眼淚	ngaan5 leoi6
-1	110000	1F622	吓	haa2
 1	110000	1F622	嗄	haa2
 1	110000	1F62D	淚流滿面	leoi6 lau4 mun5 min6
 1	110000	1F62D	流淚	lau4 leoi6
@@ -367,7 +360,6 @@
 1	110000	1F92F	噉都得	gam2 dou1 dak1
 1	110000	1F633	愕然	ngok6 jin4
 1	110000	1F633	不知所措	bat1 zi1 so2 cou3
-1	110000	1F633	吓	haa2
 1	110000	1F633	嗄	haa2
 1	110000	1F633	震驚	zan3 ging1
 1	110000	1F975	熱	jit6
@@ -380,12 +372,11 @@
 1	110000	1F975	熱死	jit6 sei2
 1	110000	1F975	中暑	zung3 syu2
 1	110000	1F975	發熱	faat3 jit6
-1	110000	1F976	凍甩牙	dung3 lat1 ngaa4
+1	110000	1F976	凍	dung3
+1	110000	1F976	好凍	hou2 dung3
 1	110000	1F976	凍死	dung3 sei2
 1	110000	1F976	死鬼咁凍	sei2 gwai2 gam3 dung3
 1	110000	1F976	鬼死咁凍	gwai2 sei2 gam3 dung3
-1	110000	1F976	好凍	hou2 dung3
-1	110000	1F976	凍	dung3
 1	110000	1F976	冷	laang5
 1	110000	1F976	冰凍	bing1 dung3
 1	110000	1F976	冰冷	bing1 laang5
@@ -537,7 +528,6 @@
 1	160000	1FAE9	眼瞓	ngaan5 fan3
 1	160000	1FAE9	瞌睡	hap1 seoi6
 1	160000	1FAE9	眼睡	ngaan5 seoi6
-1	170000	1FAEA	吓	haa2
 1	170000	1FAEA	嗄	haa2
 1	170000	1FAEA	咩話	me1 waa2
 1	170000	1FAEA	不知所措	bat1 zi1 so2 cou3
@@ -554,7 +544,6 @@
 1	170000	1FAEA	震驚	zan3 ging1
 1	170000	1FAEA	奇怪	kei4 gwaai3
 1	170000	1FAEA	難以置信	naan4 ji5 zi3 seon3
-1	170000	1FAEA	迷惑	mai4 waak6
 1	170000	1FAEA	困惑	kwan3 waak6
 1	170000	1FAEA	大鑊	daai6 wok6
 1	170000	1FAEA	乖巧	gwaai1 haau2
@@ -1821,14 +1810,20 @@
 1	110000	1F45A	女裝	neoi5 zong1
 1	110000	1F45A	衫	saam1
 1	110000	1F45A	衣服	ji1 fuk6
+1	110000	1F45A	上衣	soeng6 ji1
+1	110000	1F45A	件衫	gin6 saam1
 1	110000	1F455	男裝	naam4 zong1
 1	110000	1F455	衫	saam1
 1	110000	1F455	衣服	ji1 fuk6
+1	110000	1F455	上衣	soeng6 ji1
+1	110000	1F455	件衫	gin6 saam1
 1	110000	1F456	牛仔褲	ngau4 zai2 fu3
 1	110000	1F456	褲	fu3
 1	110000	1F456	長褲	coeng4 fu3
+1	110000	1F456	條褲	tiu4 fu3
 1	110000	1FA72	底褲	dai2 fu3
 1	110000	1FA72	內褲	noi6 fu3
+1	110000	1FA72	條底褲	tiu4 dai2 fu3
 1	110000	1FA73	三分褲	saam1 fan1 fu3
 1	110000	1FA73	短褲	dyun2 fu3
 1	110000	1F454	襯衣	can3 ji1
@@ -1842,6 +1837,7 @@
 1	110000	1F459	比基尼	bei2 gei1 nei4
 1	110000	1F459	比堅尼	bei2 gin1 nei4
 1	110000	1F459	三點裝	saam1 dim2 zong1
+1	110000	1F459	三點式	saam1 dim2 sik1
 1	110000	1FA71	泳衣	wing6 ji1
 1	110000	1FA71	泳裝	wing6 zong1
 1	110000	1FA71	連體衣	lin4 tai2 ji1
@@ -1864,10 +1860,15 @@
 1	110000	1F45E	皮鞋	pei4 haai4
 1	110000	1F45F	球鞋	kau4 haai4
 1	110000	1F45F	運動鞋	wan6 dung6 haai4
+1	110000	1F45F	波鞋	bo1 haai4
+1	110000	1F45F	鞋	haai4
+1	110000	1F45F	着鞋	zoek3 haai4
 1	110000	1F97E	男靴	naam4 hoe1
 1	110000	1F97E	登山靴	dang1 saan1 hoe1
 1	110000	1F9E6	襪	mat6
 1	110000	1F9E6	襪	maat6
+1	110000	1F9E6	着襪	zoek3 mat6
+1	110000	1F9E6	着襪	zoek3 maat6
 1	110000	1F9E4	手套	sau2 tou3
 1	110000	1F9E3	圍巾	wai4 gan1
 1	110000	1F3A9	男帽	naam4 mou6
@@ -1888,25 +1889,34 @@
 1	110000	26D1.FE0F	安全帽	on1 cyun4 mou6
 1	110000	1FA96	頭盔	tau4 kwai1
 1	110000	1FA96	盔	kwai1
+1	110000	1FA96	鋼盔	gong3 kwai1
+1	110000	1F451	王冠	wong4 gun1
 1	110000	1F451	皇冠	wong4 gun1
 1	110000	1F48D	戒指	gaai3 zi2
 1	110000	1F48D	指環	zi2 waan4
 1	110000	1F48D	結婚戒指	git3 fan1 gaai3 zi2
 1	110000	1F48D	鑽戒	zyun3 gaai3
 1	110000	1F45D	皮包	pei4 baau1
-1	110000	1F45B	錢包	cin4 baau1
-1	110000	1F45B	錢夾	cin4 gaap3
+1	110000	1F45D	包	baau1
+1	110000	1F45B	手袋	sau2 doi2
 1	110000	1F45C	手提包	sau2 tai4 baau1
 1	110000	1F45C	挎包	kwaa3 baau1
+1	110000	1F45C	包	baau1
+1	110000	1F45C	手袋	sau2 doi2
+1	110000	1F45C	袋	doi2
 1	110000	1F4BC	公文包	gung1 man4 baau1
 1	110000	1F4BC	電腦包	din6 nou5 baau1
+1	110000	1F4BC	電腦袋	din6 nou5 doi2
 1	110000	1F392	書包	syu1 baau1
 1	110000	1F392	背包	bui3 baau1
 1	110000	1F392	雙肩包	soeng1 gin1 baau1
 1	110000	1F9F3	行李	hang4 lei5
 1	110000	1F9F3	行李箱	hang4 lei5 soeng1
+1	110000	1F9F3	篋	gip1
+1	110000	1F9F3	行李篋	hang4 lei5 gip1
+1	110000	1F453	眼鏡	ngaan5 geng3
+1	110000	1F453	戴眼鏡	daai3 ngaan5 geng3
 1	110000	1F453	老花鏡	lou5 faa1 geng3
-1	110000	1F453	近視眼鏡	gan6 si6 ngaan5 geng3
 1	110000	1F576.FE0F	墨鏡	mak6 geng3
 1	110000	1F576.FE0F	墨超	mak6 ciu1
 1	110000	1F576.FE0F	太陽鏡	taai3 joeng4 geng3
@@ -2186,6 +2196,8 @@
 2	110000	1F98E	四腳蛇	sei3 goek3 se4
 2	110000	1F98E	石龍子	sek6 lung4 zi2
 2	110000	1F98E	豬仔蛇	zyu1 zai2 se4
+2	110000	1F98E	爬行	paa4 hang4
+2	110000	1F98E	爬	paa4
 2	110000	1F996	霸王龍	baa3 wong4 lung4
 2	110000	1F996	恐龍	hung2 lung4
 2	110000	1F995	恐龍	hung2 lung4
@@ -2552,6 +2564,8 @@
 2	110000	1F337	花朵	faa1 doe2
 2	110000	1F339	玫瑰	mui4 gwai3
 2	110000	1F339	玫瑰花	mui4 gwai3 faa1
+2	110000	1F339	月季	jyut6 gwai3
+2	110000	1F339	月季花	jyut6 gwai3 faa1
 2	110000	1F339	花	faa1
 2	110000	1F339	花朵	faa1 do2
 2	110000	1F339	花朵	faa1 doe2
@@ -2563,8 +2577,12 @@
 2	150000	1FABB	風信子	fung1 seon3 zi2
 2	140000	1FAB7	蓮花	lin4 faa1
 2	140000	1FAB7	蓮	lin4
+2	110000	1F33A	木槿	muk6 gan2
+2	110000	1F33A	木槿花	muk6 gan2 faa1
 2	110000	1F33A	芙蓉	fu4 jung4
 2	110000	1F33A	芙蓉花	fu4 jung4 faa1
+2	110000	1F33A	木芙蓉	muk6 fu4 jung4
+2	110000	1F33A	紅花	hung4 faa1
 2	110000	1F33A	花	faa1
 2	110000	1F33A	花朵	faa1 do2
 2	110000	1F33A	花朵	faa1 doe2
@@ -2574,11 +2592,11 @@
 2	110000	1F338	花朵	faa1 do2
 2	110000	1F338	花朵	faa1 doe2
 2	110000	1F33C	黃花	wong4 faa1
-2	110000	1F33C	花	faa1
-2	110000	1F33C	花朵	faa1 do2
-2	110000	1F33C	花朵	faa1 doe2
+2	110000	1F33C	菊花	guk1 faa1
+2	110000	1F33C	菊	guk1
 2	110000	1F33B	向日葵	hoeng3 jat6 kwai4
 2	110000	1F33B	葵花	kwai4 faa1
+2	110000	1F33B	葵	kwai4
 2	110000	1F31E	太陽	taai3 joeng4
 2	110000	1F31E	日頭	jit6 tau4
 2	110000	1F31E	日頭	jit6 tau2
@@ -3684,11 +3702,14 @@
 5	110000	1F6B2	自行車	zi6 hang4 ce1
 5	110000	1F6F5	電動單車	din6 dung6 daan1 ce1
 5	110000	1F6F5	電動自行車	din6 dung6 zi6 hang4 ce1
+5	110000	1F6F5	電動車	din6 dung6 ce1
+5	110000	1F6F5	電雞	din6 gai1
 5	110000	1F3CD	摩托車	mo1 tok3 ce1
 5	110000	1F3CD	摩托	mo1 tok3
 5	110000	1F3CD	電單車	din6 daan1 ce1
 5	110000	1F3CD	機車	gei1 ce1
 5	110000	1F6FA	三輪車	saam1 leon4 ce1
+5	110000	1F6FA	三腳雞	saam1 goek3 gai1
 5	140000	1F6DE	車轆	ce1 luk1
 5	140000	1F6DE	轆	luk1
 5	140000	1F6DE	車輪	ce1 leon4
@@ -4028,6 +4049,7 @@
 6	110000	1F4BB	筆記本電腦	bat1 gei3 bun2 din6 nou5
 6	110000	1F4BB	手提電腦	sau2 tai4 din6 nou5
 6	110000	1F4BB	電腦	din6 nou5
+6	110000	1F4BB	筆電	bat1 din6
 6	110000	2328.FE0F	鍵盤	gin6 pun2
 6	110000	2328.FE0F	打字	daa2 zi6
 6	110000	2328.FE0F	輸入法	syu1 jap6 faat3
@@ -4299,6 +4321,7 @@
 6	110000	26B0.FE0F	棺材	gun1 coi4
 6	110000	26B0.FE0F	棺	gun1
 6	110000	26B0.FE0F	棺木	gun1 muk6
+6	110000	26B0.FE0F	梓宮	zi2 gung1
 6	110000	1FAA6	墓碑	mou6 bei1
 6	110000	1FAA6	墓	mou6
 6	110000	1FAA6	墳墓	fan4 mou6
@@ -4478,6 +4501,7 @@
 6	110000	1F380	蝴蝶結	wu4 dip2 git3
 6	110000	1FA84	魔法棍	mo1 faat3 gwan3
 6	110000	1FA84	魔法棒	mo1 faat3 paang5
+6	110000	1FA84	魔法	mo1 faat3
 6	110000	1FA85	皮納塔	pei4 naap6 taap3
 6	110000	1F38A	慶典	hing3 din2
 6	110000	1F38A	慶祝	hing3 zuk1
@@ -4494,6 +4518,7 @@
 6	110000	1F38E	日本女兒節	jat6 bun2 neoi5 ji4 zit3
 6	150000	1FAAD	摺扇	zip3 sin3
 6	150000	1FAAD	扇	sin3
+6	150000	1FAAD	撥扇	put3 sin3
 6	110000	1F3EE	居酒屋燈籠	geoi1 zau2 uk1 dang1 lung4
 6	110000	1F3EE	居酒屋	geoi1 zau2 uk1
 6	110000	1F390	風鈴	fung1 ling4
@@ -4536,6 +4561,10 @@
 6	110000	1F4E6	箱仔	soeng1 zai2
 6	110000	1F4E6	盒	hap6
 6	110000	1F4E6	盒仔	hap6 zai2
+6	110000	1F4E6	包裝盒	baau1 zong1 hap6
+6	110000	1F4E6	包裝箱	baau1 zong1 soeng1
+6	110000	1F4E6	紙箱	zi2 soeng1
+6	110000	1F4E6	紙皮箱	zi2 pei4 soeng1
 6	110000	1F3F7	標籤	biu1 cim1
 6	110000	1FAA7	標語	biu1 jyu5
 6	110000	1F4EA	冇來信	mou5 loi4 seon3
@@ -4703,19 +4732,19 @@
 6	110000	1F58B	筆	bat1
 6	110000	2712.FE0F	鋼筆	gong3 bat1
 6	110000	1F58C	畫筆	waa2 bat1
-6	110000	1F58C	畫筆	waa6 bat1
-6	110000	1F58C	畫筆	waak6 bat1
 6	110000	1F58D	蠟筆	laap6 bat1
 6	110000	1F4DD	筆錄	bat1 luk6
 6	110000	1F4DD	備忘	bei6 mong4
 6	110000	1F4DD	備忘錄	bei6 mong4 luk6
 6	110000	1F4DD	便條	bin6 tiu4
 6	110000	270F.FE0F	鉛筆	jyun4 bat1
+6	110000	270F.FE0F	木筆	muk6 bat1
 6	110000	270F.FE0F	筆	bat1
 6	110000	1F50D	放大鏡	fong3 daai6 geng3
 6	110000	1F50D	搜尋	sau2 cam4
 6	110000	1F50D	搜索	sau2 sok3
 6	110000	1F50D	搜索	sau2 saak3
+6	110000	1F50D	檢索	gim2 sok3
 6	110000	1F50E	放大鏡	fong3 daai6 geng3
 6	110000	1F50F	隱秘	jan2 bei3
 6	110000	1F510	鎖匙	so2 si4
@@ -4785,6 +4814,7 @@
 7	110000	1F497	心動	sam1 dung6
 7	110000	1F497	心跳	sam1 tiu3
 7	110000	1F496	心閃閃	sam1 sim2 sim2
+7	110000	1F496	閃閃心	sim2 sim2 sam1
 7	110000	1F496	心閃	sam1 sim2
 7	110000	1F496	閃心	sim2 sam1
 7	110000	1F498	心中箭	sam1 zung3 zin3
@@ -5748,7 +5778,9 @@
 8	110000	1F1F8.1F1E6	沙特阿拉伯	saa1 dak6 aa3 laai1 baak3
 8	110000	1F1F8.1F1E6	沙特	saa1 dak6
 8	110000	1F1F8.1F1E6	沙烏地阿拉伯	saa1 wu1 dei6 aa3 laai1 baak3
+8	110000	1F1F8.1F1E6	沙烏地	saa1 wu1 dei6
 8	110000	1F1F8.1F1E6	沙地阿拉伯	saa1 dei6 aa3 laai1 baak3
+8	110000	1F1F8.1F1E6	沙地	saa1 dei6
 8	110000	1F1F8.1F1F3	塞內加爾	coi3 noi6 gaa1 ji5
 8	110000	1F1F7.1F1F8	塞爾維亞	coi3 ji5 wai4 aa3
 8	110000	1F1F8.1F1E8	塞舌爾	coi3 sit3 ji5
