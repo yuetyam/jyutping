@@ -27,7 +27,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         return max(relatedValue, idealValue)
                 }()
                 window.level = NSWindow.Level(levelValue)
-                window.contentViewController = NSHostingController(rootView: MotherBoard().environmentObject(appContext))
+                window.contentViewController = NSHostingController(rootView: MotherBoard().environmentObject(context))
                 window.orderFrontRegardless()
         }
         @objc private func handleContentSizeChanged(_ notification: Notification) {
@@ -44,7 +44,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 window.setFrame(frame, display: true)
         }
         private func computeWindowFrame(size: CGSize? = nil) -> CGRect {
-                let quadrant = appContext.quadrant
+                let quadrant = context.quadrant
                 let position: CGPoint = {
                         func checkedPoint(of frame: CGRect?) -> CGPoint? {
                                 guard let frame else { return nil }
@@ -127,8 +127,8 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         case (false, false):
                                 Quadrant.bottomLeft
                         }
-                        if newQuadrant != appContext.quadrant {
-                                appContext.updateQuadrant(to: newQuadrant)
+                        if newQuadrant != context.quadrant {
+                                context.updateQuadrant(to: newQuadrant)
                         }
                 }
         }
@@ -178,7 +178,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 Task { @MainActor in
                         guard isCompositionCommitted.negative else { return }
                         suggestionTask?.cancel()
-                        appContext.updateIndicatorTexts(to: nil)
+                        context.updateIndicatorTexts(to: nil)
                         window.setContentSize(.zero)
                         selectedSequence = []
                         if inputStage.isBuffering {
@@ -210,7 +210,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 nonisolated(unsafe) let client: InputClient? = (sender as? InputClient) ?? client()
                 Task { @MainActor in
                         suggestionTask?.cancel()
-                        appContext.updateIndicatorTexts(to: nil)
+                        context.updateIndicatorTexts(to: nil)
                         window.setContentSize(.zero)
                         selectedSequence = []
                         if inputStage.isBuffering {
@@ -237,11 +237,11 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 Task { @MainActor in
                         switch inputForm {
                         case .cantonese:
-                                appContext.updateHighlightedIndex(to: newIndex)
+                                context.updateHighlightedIndex(to: newIndex)
                         case .transparent:
                                 break
                         case .options:
-                                appContext.updateOptionsHighlightedIndex(to: newIndex)
+                                context.updateOptionsHighlightedIndex(to: newIndex)
                         }
                 }
         }
@@ -251,7 +251,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 Task { @MainActor in
                         switch inputForm {
                         case .cantonese:
-                                guard let selected = appContext.displayCandidates.fetch(selectedIndex) else { return }
+                                guard let selected = context.displayCandidates.fetch(selectedIndex) else { return }
                                 insert(selected.text)
                                 aftercareSelection(selected)
                         case .transparent:
@@ -262,13 +262,13 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 }
         }
 
-        private lazy var appContext: AppContext = AppContext()
+        private lazy var context: InputContext = InputContext()
 
         nonisolated(unsafe) private var inputForm: InputForm = InputForm.matchInputMethodMode()
         private func updateInputForm(to form: InputForm? = nil) {
                 let newForm: InputForm = form ?? InputForm.matchInputMethodMode()
                 inputForm = newForm
-                appContext.updateInputForm(to: newForm)
+                context.updateInputForm(to: newForm)
         }
 
         nonisolated(unsafe) private var inputStage: InputStage = .standby
@@ -295,8 +295,8 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         switch bufferEvents.first?.key {
                         case .none:
                                 suggestionTask?.cancel()
-                                appContext.updateIndicatorTexts(to: nil)
-                                appContext.updateReverseLookupState(to: false)
+                                context.updateIndicatorTexts(to: nil)
+                                context.updateReverseLookupState(to: false)
                                 if AppSettings.isInputMemoryOn && selectedSequence.isNotEmpty {
                                         let concatenated = selectedSequence.filter(\.isCantonese).joined()
                                         concatenated.flatMap(InputMemory.handle(_:))
@@ -305,28 +305,28 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                 clearMarkedText()
                                 candidates = []
                         case VirtualInputKey.letterR:
-                                appContext.updateIndicatorTexts(to: .pinyinReverseLookup)
-                                appContext.updateReverseLookupState(to: true)
+                                context.updateIndicatorTexts(to: .pinyinReverseLookup)
+                                context.updateReverseLookupState(to: true)
                                 pinyinReverseLookup()
                         case VirtualInputKey.letterV:
-                                appContext.updateIndicatorTexts(to: IndicatorTexts.cangjieReverseLookup(for: AppSettings.cangjieVariant))
-                                appContext.updateReverseLookupState(to: true)
+                                context.updateIndicatorTexts(to: IndicatorTexts.cangjieReverseLookup(for: AppSettings.cangjieVariant))
+                                context.updateReverseLookupState(to: true)
                                 cangjieReverseLookup()
                         case VirtualInputKey.letterX:
-                                appContext.updateIndicatorTexts(to: .strokeReverseLookup)
-                                appContext.updateReverseLookupState(to: true)
+                                context.updateIndicatorTexts(to: .strokeReverseLookup)
+                                context.updateReverseLookupState(to: true)
                                 strokeReverseLookup()
                         case VirtualInputKey.letterQ:
-                                appContext.updateIndicatorTexts(to: .structureReverseLookup)
-                                appContext.updateReverseLookupState(to: true)
+                                context.updateIndicatorTexts(to: .structureReverseLookup)
+                                context.updateReverseLookupState(to: true)
                                 structureReverseLookup()
                         case .some(let key) where key.isLetter:
-                                appContext.updateIndicatorTexts(to: nil)
-                                appContext.updateReverseLookupState(to: false)
+                                context.updateIndicatorTexts(to: nil)
+                                context.updateReverseLookupState(to: false)
                                 suggest()
                         default:
-                                appContext.updateIndicatorTexts(to: nil)
-                                appContext.updateReverseLookupState(to: false)
+                                context.updateIndicatorTexts(to: nil)
+                                context.updateReverseLookupState(to: false)
                                 mark(text: joinedBufferTexts())
                         }
                 }
@@ -442,7 +442,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 guard candidateCount > 0 else {
                         indices = (0, 0)
                         updateWindowFrame()
-                        appContext.resetDisplayContext()
+                        context.resetAll()
                         return
                 }
                 let pageSize: Int = AppSettings.displayCandidatePageSize
@@ -465,7 +465,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 let bound: Int = min(firstIndex + pageSize, candidateCount)
                 indices = (firstIndex, bound - 1)
                 updateWindowFrame()
-                appContext.update(with: candidates[firstIndex..<bound], highlight: highlight)
+                context.update(with: candidates[firstIndex..<bound], highlight: highlight)
         }
 
 
@@ -717,12 +717,12 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                         Options.updateInputMethodMode(to: .abc)
                                         updateInputForm(to: .transparent)
                                         updateWindowFrame()
-                                        appContext.flashIndicatorTexts(to: .abcMode)
+                                        context.flashIndicatorTexts(to: .abcMode)
                                 case .transparent:
                                         Options.updateInputMethodMode(to: .cantonese)
                                         updateInputForm(to: .cantonese)
                                         updateWindowFrame()
-                                        appContext.flashIndicatorTexts(to: Options.legacyCharacterStandard.isMutilated ? .mutilatedCantoneseMode : .cantoneseMode)
+                                        context.flashIndicatorTexts(to: Options.legacyCharacterStandard.isMutilated ? .mutilatedCantoneseMode : .cantoneseMode)
                                 case .options:
                                         break
                                 }
@@ -943,7 +943,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         case .cantonese:
                                 guard hasControlShiftModifiers.negative else { return } // NSMenu Shortcuts
                                 if isShifting {
-                                        if let highlighted = appContext.displayCandidates.fetch(appContext.highlightedIndex) {
+                                        if let highlighted = context.displayCandidates.fetch(context.highlightedIndex) {
                                                 insert(highlighted.text)
                                                 appendSelected(highlighted.lexicon)
                                                 clearBuffer()
@@ -963,7 +963,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                                 insert(symbol)
                                         }
                                 } else if isBuffering {
-                                        guard let selectedItem = appContext.displayCandidates.fetch(index) else { return }
+                                        guard let selectedItem = context.displayCandidates.fetch(index) else { return }
                                         insert(selectedItem.text)
                                         aftercareSelection(selectedItem)
                                 } else {
@@ -997,16 +997,16 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                         case .horizontal:
                                                 updateDisplayCandidates(.previousPage, highlight: .unchanged)
                                         case .vertical:
-                                                if appContext.isHighlightingStart {
+                                                if context.isHighlightingStart {
                                                         updateDisplayCandidates(.previousPage, highlight: .end)
                                                 } else {
-                                                        appContext.decreaseHighlightedIndex()
+                                                        context.decreaseHighlightedIndex()
                                                 }
                                         }
                                 case .transparent:
                                         return
                                 case .options:
-                                        appContext.decreaseOptionsHighlightedIndex()
+                                        context.decreaseOptionsHighlightedIndex()
                                 }
                         case .down:
                                 switch currentInputForm {
@@ -1016,16 +1016,16 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                         case .horizontal:
                                                 updateDisplayCandidates(.nextPage, highlight: .unchanged)
                                         case .vertical:
-                                                if appContext.isHighlightingEnd {
+                                                if context.isHighlightingEnd {
                                                         updateDisplayCandidates(.nextPage, highlight: .start)
                                                 } else {
-                                                        appContext.increaseHighlightedIndex()
+                                                        context.increaseHighlightedIndex()
                                                 }
                                         }
                                 case .transparent:
                                         return
                                 case .options:
-                                        appContext.increaseOptionsHighlightedIndex()
+                                        context.increaseOptionsHighlightedIndex()
                                 }
                         case .left:
                                 switch currentInputForm {
@@ -1033,10 +1033,10 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                         guard isBuffering else { return }
                                         switch AppSettings.candidatePageOrientation {
                                         case .horizontal:
-                                                if appContext.isHighlightingStart {
+                                                if context.isHighlightingStart {
                                                         updateDisplayCandidates(.previousPage, highlight: .end)
                                                 } else {
-                                                        appContext.decreaseHighlightedIndex()
+                                                        context.decreaseHighlightedIndex()
                                                 }
                                         case .vertical:
                                                 updateDisplayCandidates(.previousPage, highlight: .unchanged)
@@ -1052,10 +1052,10 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                         guard isBuffering else { return }
                                         switch AppSettings.candidatePageOrientation {
                                         case .horizontal:
-                                                if appContext.isHighlightingEnd {
+                                                if context.isHighlightingEnd {
                                                         updateDisplayCandidates(.nextPage, highlight: .start)
                                                 } else {
-                                                        appContext.increaseHighlightedIndex()
+                                                        context.increaseHighlightedIndex()
                                                 }
                                         case .vertical:
                                                 updateDisplayCandidates(.nextPage, highlight: .unchanged)
@@ -1077,7 +1077,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         }
                 case .grave:
                         guard currentInputForm.isCantonese else { return }
-                        if let highlighted = appContext.displayCandidates.fetch(appContext.highlightedIndex) {
+                        if let highlighted = context.displayCandidates.fetch(context.highlightedIndex) {
                                 insert(highlighted.text)
                                 appendSelected(highlighted.lexicon)
                                 clearBuffer()
@@ -1093,7 +1093,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         }
                 case .punctuation(let punctuationKey):
                         guard currentInputForm.isCantonese else { return }
-                        let highlighted = appContext.displayCandidates.fetch(appContext.highlightedIndex)
+                        let highlighted = context.displayCandidates.fetch(context.highlightedIndex)
                         if isBuffering && isShifting.negative {
                                 let hasHighlighted: Bool = (highlighted != nil)
                                 let bracketKeysMode = AppSettings.bracketKeysMode
@@ -1190,8 +1190,8 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                 guard isBuffering else { return }
                                 let romanization: String? = {
                                         guard isShifting && candidates.isNotEmpty else { return nil }
-                                        let index = appContext.highlightedIndex
-                                        guard let candidate = appContext.displayCandidates.fetch(index) else { return nil }
+                                        let index = context.highlightedIndex
+                                        guard let candidate = context.displayCandidates.fetch(index) else { return nil }
                                         guard candidate.isCantonese else { return nil }
                                         return candidate.lexicon.romanization
                                 }()
@@ -1216,8 +1216,8 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                         return
                                 }
                                 guard candidates.isNotEmpty else { return }
-                                let index = appContext.highlightedIndex
-                                guard let lexicon = appContext.displayCandidates.fetch(index)?.lexicon else { return }
+                                let index = context.highlightedIndex
+                                guard let lexicon = context.displayCandidates.fetch(index)?.lexicon else { return }
                                 guard lexicon.isCantonese else { return }
                                 InputMemory.forget(lexicon)
                         case .transparent:
@@ -1231,8 +1231,8 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                 guard isBuffering else { return }
                                 guard hasControlShiftModifiers else { return }
                                 guard candidates.isNotEmpty else { return }
-                                let index = appContext.highlightedIndex
-                                guard let lexicon = appContext.displayCandidates.fetch(index)?.lexicon else { return }
+                                let index = context.highlightedIndex
+                                guard let lexicon = context.displayCandidates.fetch(index)?.lexicon else { return }
                                 guard lexicon.isCantonese else { return }
                                 InputMemory.forget(lexicon)
                         case .transparent:
@@ -1260,12 +1260,12 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                         Options.updateInputMethodMode(to: .abc)
                                         updateInputForm(to: .transparent)
                                         updateWindowFrame()
-                                        appContext.flashIndicatorTexts(to: .abcMode)
+                                        context.flashIndicatorTexts(to: .abcMode)
                                         return
                                 }
                                 if candidates.isNotEmpty {
-                                        let index = appContext.highlightedIndex
-                                        guard let selectedItem = appContext.displayCandidates.fetch(index) else { return }
+                                        let index = context.highlightedIndex
+                                        guard let selectedItem = context.displayCandidates.fetch(index) else { return }
                                         insert(selectedItem.text)
                                         aftercareSelection(selectedItem)
                                 } else if isBuffering {
@@ -1284,7 +1284,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                         Options.updateInputMethodMode(to: .cantonese)
                                         updateInputForm(to: .cantonese)
                                         updateWindowFrame()
-                                        appContext.flashIndicatorTexts(to: Options.legacyCharacterStandard.isMutilated ? .mutilatedCantoneseMode : .cantoneseMode)
+                                        context.flashIndicatorTexts(to: Options.legacyCharacterStandard.isMutilated ? .mutilatedCantoneseMode : .cantoneseMode)
                                 } else {
                                         insert(String.space)
                                 }
@@ -1296,25 +1296,25 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         case .cantonese:
                                 guard isBuffering else { return }
                                 if isShifting {
-                                        if appContext.isHighlightingStart {
+                                        if context.isHighlightingStart {
                                                 updateDisplayCandidates(.previousPage, highlight: .end)
                                         } else {
-                                                appContext.decreaseHighlightedIndex()
+                                                context.decreaseHighlightedIndex()
                                         }
                                 } else {
-                                        if appContext.isHighlightingEnd {
+                                        if context.isHighlightingEnd {
                                                 updateDisplayCandidates(.nextPage, highlight: .start)
                                         } else {
-                                                appContext.increaseHighlightedIndex()
+                                                context.increaseHighlightedIndex()
                                         }
                                 }
                         case .transparent:
                                 return
                         case .options:
                                 if isShifting {
-                                        appContext.decreaseOptionsHighlightedIndex()
+                                        context.decreaseOptionsHighlightedIndex()
                                 } else {
-                                        appContext.increaseOptionsHighlightedIndex()
+                                        context.increaseOptionsHighlightedIndex()
                                 }
                         }
                 case .pageUp:
@@ -1360,7 +1360,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
         }
 
         private func handleOptions(_ index: Int? = nil) {
-                let selectedIndex: Int = index ?? appContext.optionsHighlightedIndex
+                let selectedIndex: Int = index ?? context.optionsHighlightedIndex
                 var didCharacterStandardChanged: Bool = false
                 defer {
                         clearOptionsViewHintText()
@@ -1373,7 +1373,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         }
                         if let texts = IndicatorTexts.matchTexts(for: selectedIndex, isMutilated: Options.legacyCharacterStandard.isMutilated) {
                                 updateWindowFrame()
-                                appContext.flashIndicatorTexts(to: texts)
+                                context.flashIndicatorTexts(to: texts)
                         }
                 }
                 switch selectedIndex {

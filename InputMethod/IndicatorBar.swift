@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct IndicatorBar: View {
-        @EnvironmentObject private var context: AppContext
+        @EnvironmentObject private var context: InputContext
         @Environment(\.colorScheme) private var colorScheme
         var body: some View {
                 if let texts = context.indicatorTexts {

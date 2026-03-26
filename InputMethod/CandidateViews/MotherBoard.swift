@@ -3,7 +3,7 @@ import CommonExtensions
 
 struct MotherBoard: View {
 
-        @EnvironmentObject private var context: AppContext
+        @EnvironmentObject private var context: InputContext
 
         var body: some View {
                 ZStack(alignment: context.quadrant.alignment) {

@@ -4,7 +4,7 @@ import CommonExtensions
 
 struct OptionsView: View {
 
-        @EnvironmentObject private var context: AppContext
+        @EnvironmentObject private var context: InputContext
 
         private let pageCornerRadius: CGFloat = CGFloat(AppSettings.pageCornerRadius)
         private let contentInsets: CGFloat = CGFloat(AppSettings.contentInsets)

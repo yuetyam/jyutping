@@ -3,7 +3,7 @@ import CommonExtensions
 
 struct CandidateBoard: View {
 
-        @EnvironmentObject private var context: AppContext
+        @EnvironmentObject private var context: InputContext
 
         private let pageOrientation: CandidatePageOrientation = AppSettings.candidatePageOrientation
         private let commentScene: CommentDisplayScene = AppSettings.commentDisplayScene

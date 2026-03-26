@@ -4,7 +4,7 @@ import CoreIME
 import CommonExtensions
 
 @MainActor
-final class AppContext: ObservableObject {
+final class InputContext: ObservableObject {
 
         @Published private(set) var displayCandidates: [Candidate] = []
         @Published private(set) var highlightedIndex: Int = 0
@@ -21,7 +21,7 @@ final class AppContext: ObservableObject {
 
         // MARK: - Update context
 
-        func resetDisplayContext() {
+        func resetAll() {
                 displayCandidates = []
                 highlightedIndex = minIndex
                 optionsHighlightedIndex = minIndex
@@ -31,7 +31,7 @@ final class AppContext: ObservableObject {
         func update<T: RandomAccessCollection<Candidate>>(with newCandidates: T, highlight: Highlight) {
                 mouseLocation = NSEvent.mouseLocation
                 guard newCandidates.isNotEmpty else {
-                        resetDisplayContext()
+                        resetAll()
                         return
                 }
                 displayCandidates = Array<Candidate>(newCandidates)
