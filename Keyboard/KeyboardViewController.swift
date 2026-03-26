@@ -196,7 +196,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 if keyboardForm == .nineKeyStroke {
                                         updateKeyboardForm(to: .alphabetic)
                                 }
-                                ensureQwertyForm(to: .jyutping)
+                                ensureQwertyForm(to: .primary)
                                 updateReturnKey()
                                 if Options.isInputMemoryOn && selectedLexicons.isNotEmpty {
                                         let concatenated = selectedLexicons.filter(\.isCantonese).joined()
@@ -1154,7 +1154,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 }
         }
 
-        @Published private(set) var qwertyForm: QwertyForm = .jyutping
+        @Published private(set) var qwertyForm: QwertyForm = .primary
         private func ensureQwertyForm(to form: QwertyForm) {
                 guard qwertyForm != form else { return }
                 qwertyForm = form

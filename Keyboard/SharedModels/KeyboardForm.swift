@@ -87,25 +87,21 @@ extension KeyboardForm {
 
 enum QwertyForm: Int {
 
-        /// Alphabetic, English
+        /// ANSI layout for typing English
         case abc
 
-        // TODO: Rename to primary
-        /// Alphabetic, Cantonese 粵拼全鍵盤
-        case jyutping
+        /// ANSI layout for inputing Cantonese
+        case primary
 
-        /// Cantonese Triple-Stroke 粵拼三拼
+        /// Cantonese Triple-Stroke. 粵拼三拼
         case tripleStroke
 
-        /// 普通話拼音
+        /// ANSI layout for reverse lookup using Mandarin Pinyin. 普通話拼音反查粵拼
         case pinyin
 
-        /// 倉頡或速成
+        /// ANSI layout for reverse lookup using Cangjie or Quick. 倉頡或速成反查粵拼
         case cangjie
 
-        /// 筆畫
+        /// ANSI layout for reverse lookup using Stroke. 筆畫反查粵拼
         case stroke
-
-        /// 拆字、兩分反查. 例如 木 + 木 = 林: mukmuk
-        case structure
 }
