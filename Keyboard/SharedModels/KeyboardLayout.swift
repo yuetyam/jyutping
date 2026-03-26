@@ -94,7 +94,7 @@ enum StrokeLayout: Int, CaseIterable {
         case `default` = 1
 
         /// 10 Key KeyPad
-        case tenKey = 2
+        case nineKey = 2
 
         /// Read StrokeLayout from UserDefaults
         static func fetchSavedLayout() -> StrokeLayout {
@@ -103,5 +103,5 @@ enum StrokeLayout: Int, CaseIterable {
         }
 
         /// 10 Key KeyPad
-        var isTenKey: Bool { self == .tenKey }
+        var isNineKey: Bool { self == .nineKey }
 }

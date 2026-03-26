@@ -193,7 +193,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 suggestionTask?.cancel()
                                 candidates = []
                                 text2mark = String.empty
-                                if keyboardForm == .tenKeyStroke {
+                                if keyboardForm == .nineKeyStroke {
                                         updateKeyboardForm(to: .alphabetic)
                                 }
                                 ensureQwertyForm(to: .jyutping)
@@ -216,8 +216,8 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 updateReverseLookupState(to: true)
                                 cangjieReverseLookup()
                         case .letterX:
-                                if strokeLayout.isTenKey && keyboardForm != .tenKeyStroke {
-                                        updateKeyboardForm(to: .tenKeyStroke)
+                                if strokeLayout.isNineKey && keyboardForm != .nineKeyStroke {
+                                        updateKeyboardForm(to: .nineKeyStroke)
                                 } else {
                                         ensureQwertyForm(to: .stroke)
                                 }
@@ -321,7 +321,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 bufferEvents = []
         }
 
-        /// Cantonese TenKey layout
+        /// Cantonese 10-Key / T9 layout
         private lazy var bufferCombos: [Combo] = [] {
                 didSet {
                         switch (oldValue.isEmpty, bufferCombos.isEmpty) {
@@ -496,7 +496,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 case .clearBuffer:
                         clearBuffer()
                 case .return:
-                        if keyboardForm == .tenKeyStroke, let candidate = candidates.first {
+                        if keyboardForm == .nineKeyStroke, let candidate = candidates.first {
                                 input(candidate.text)
                                 aftercareSelected(candidate)
                         } else if inputStage.isBuffering {
@@ -1188,7 +1188,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         private func updateSpaceKeyForm() {
                 let newForm: SpaceKeyForm = {
                         guard inputMethodMode.isCantonese else { return .english }
-                        guard keyboardForm != .tenKeyNumeric else { return .fallback }
+                        guard keyboardForm != .nineKeyNumeric else { return .fallback }
                         let isMutilated: Bool = characterStandard.isMutilated
                         if inputStage.isBuffering {
                                 if candidates.isEmpty {
@@ -1217,7 +1217,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         @Published private(set) var keyboardWidth: CGFloat = 440
         @Published private(set) var keyboardHeight: CGFloat = 284
         @Published private(set) var widthUnit: CGFloat = 44
-        @Published private(set) var tenKeyWidthUnit: CGFloat = 88
+        @Published private(set) var nineKeyWidthUnit: CGFloat = 88
         @Published private(set) var heightUnit: CGFloat = 56
         private func updateKeyboardSize(screenSize: CGSize? = nil) {
                 let screenSize: CGSize = screenSize ?? UIScreen.main.bounds.size
@@ -1251,7 +1251,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 */
                 keyboardWidth = view.frame.width
                 widthUnit = keyboardWidth / keyboardInterface.widthUnitTimes
-                tenKeyWidthUnit = keyboardWidth / 5.0
+                nineKeyWidthUnit = keyboardWidth / 5.0
 
                 let baseHeight = keyboardInterface.keyHeightUnit(of: screenSize)
                 heightUnit = baseHeight + keyHeightOffset
@@ -1329,11 +1329,11 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         // @Published private(set) var numericLayout: NumericLayout = NumericLayout.fetchSavedLayout()
         func updateNumericLayout(to layout: NumericLayout) {
                 // numericLayout = layout
-                preferredNumericForm = layout.isNumberKeyPad ? .tenKeyNumeric : .numeric
+                preferredNumericForm = layout.isNumberKeyPad ? .nineKeyNumeric : .numeric
                 let value: Int = layout.rawValue
                 UserDefaults.standard.set(value, forKey: OptionsKey.NumericLayout)
         }
-        @Published private(set) var preferredNumericForm: KeyboardForm = NumericLayout.fetchSavedLayout().isNumberKeyPad ? .tenKeyNumeric : .numeric
+        @Published private(set) var preferredNumericForm: KeyboardForm = NumericLayout.fetchSavedLayout().isNumberKeyPad ? .nineKeyNumeric : .numeric
 
         /// Keyboard Layout for Stroke Reverse Lookup
         @Published private(set) var strokeLayout: StrokeLayout = StrokeLayout.fetchSavedLayout()

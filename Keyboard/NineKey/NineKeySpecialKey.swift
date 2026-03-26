@@ -1,10 +1,8 @@
 import SwiftUI
-import CoreIME
 import CommonExtensions
+import CoreIME
 
-struct NineKeyInputKey: View {
-
-        let key: Combo
+struct NineKeySpecialKey: View {
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
@@ -18,9 +16,18 @@ struct NineKeyInputKey: View {
                                 .fill(isTouching ? colorScheme.activeInputKeyColor : colorScheme.inputKeyColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(3)
-                        Text(verbatim: key.text)
+                        if context.inputStage.isBuffering.negative {
+                                ZStack(alignment: .bottom) {
+                                        Color.clear
+                                        Text(verbatim: PresetConstant.reverseLookup)
+                                                .font(.keyFootnote)
+                                                .opacity(0.35)
+                                }
+                                .padding(.bottom, 5)
+                                Text(verbatim: "R")
+                        }
                 }
-                .frame(width: context.tenKeyWidthUnit, height: context.heightUnit)
+                .frame(width: context.nineKeyWidthUnit, height: context.heightUnit)
                 .contentShape(Rectangle())
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in
@@ -31,7 +38,9 @@ struct NineKeyInputKey: View {
                                 }
                         }
                         .onEnded { _ in
-                                context.nineKeyProcess(key)
+                                if context.inputStage.isBuffering.negative {
+                                        context.nineKeyProcess(.special)
+                                }
                          }
                 )
         }

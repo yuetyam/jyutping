@@ -18,7 +18,7 @@ struct NineKeyBackspaceKey: View {
                                 .padding(3)
                         Image.backspace.symbolVariant(isTouching ? .fill : .none).font(.symbol)
                 }
-                .frame(width: context.tenKeyWidthUnit, height: context.heightUnit)
+                .frame(width: context.nineKeyWidthUnit, height: context.heightUnit)
                 .contentShape(Rectangle())
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in

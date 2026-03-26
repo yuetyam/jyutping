@@ -70,7 +70,7 @@ struct NineKeyReturnKey: View {
                                 .foregroundStyle(foreColor)
                         }
                 }
-                .frame(width: context.tenKeyWidthUnit, height: context.heightUnit * 2)
+                .frame(width: context.nineKeyWidthUnit, height: context.heightUnit * 2)
                 .contentShape(Rectangle())
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in

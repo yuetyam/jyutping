@@ -146,9 +146,9 @@ struct MotherBoard: View {
                         case .padLandscapeLarge:
                                 LargePadNumericKeyboard()
                         }
-                case .tenKeyNumeric:
+                case .nineKeyNumeric:
                         NineKeyNumericKeyboard()
-                case .tenKeyStroke:
+                case .nineKeyStroke:
                         NineKeyStrokeKeyboard()
                 default:
                         switch context.inputMethodMode {

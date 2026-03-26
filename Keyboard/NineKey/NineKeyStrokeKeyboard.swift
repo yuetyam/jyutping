@@ -70,7 +70,7 @@ private struct NineKeyStrokeKey: View {
                                 .padding(3)
                         Text(verbatim: text).font(.letterCompact)
                 }
-                .frame(width: context.tenKeyWidthUnit, height: context.heightUnit)
+                .frame(width: context.nineKeyWidthUnit, height: context.heightUnit)
                 .contentShape(Rectangle())
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in
@@ -98,6 +98,6 @@ private struct StrokePlaceholderKey: View {
                         .fill(Material.regular)
                         .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                         .padding(3)
-                        .frame(width: context.tenKeyWidthUnit, height: context.heightUnit * heightUnitTimes)
+                        .frame(width: context.nineKeyWidthUnit, height: context.heightUnit * heightUnitTimes)
         }
 }

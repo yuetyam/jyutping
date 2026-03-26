@@ -6,7 +6,7 @@ struct NineKeyGlobeKey: View {
         @Environment(\.colorScheme) private var colorScheme
 
         var body: some View {
-                let width: CGFloat = context.tenKeyWidthUnit
+                let width: CGFloat = context.nineKeyWidthUnit
                 let height: CGFloat = context.heightUnit
                 ZStack {
                         Color.interactiveClear

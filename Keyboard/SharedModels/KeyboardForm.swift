@@ -12,8 +12,8 @@ enum KeyboardForm: Int {
         case placeholder
         case settings
         case symbolic
-        case tenKeyNumeric
-        case tenKeyStroke
+        case nineKeyNumeric
+        case nineKeyStroke
 }
 
 extension UIKeyboardType {
@@ -60,7 +60,7 @@ extension KeyboardForm {
         /// Should stay buffering, should keep the bufferText
         var isBufferable: Bool {
                 switch self {
-                case .alphabetic, .candidateBoard, .tenKeyStroke: true
+                case .alphabetic, .candidateBoard, .nineKeyStroke: true
                 default: false
                 }
         }
@@ -68,11 +68,11 @@ extension KeyboardForm {
         /// Phone, PhoneOnPad, PadFloating
         var compactTransformKeyTex: String {
                 switch self {
-                case .alphabetic: "ABC"
+                case .alphabetic:     "ABC"
                 case .numeric,
-                .tenKeyNumeric  : "123"
-                case .symbolic  : "#+="
-                default         : "???"
+                     .nineKeyNumeric: "123"
+                case .symbolic:       "#+="
+                default:              "???"
                 }
         }
         var padTransformKeyText: String {
@@ -90,6 +90,7 @@ enum QwertyForm: Int {
         /// Alphabetic, English
         case abc
 
+        // TODO: Rename to primary
         /// Alphabetic, Cantonese 粵拼全鍵盤
         case jyutping
 

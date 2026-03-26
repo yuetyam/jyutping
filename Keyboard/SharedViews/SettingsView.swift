@@ -18,7 +18,7 @@ struct SettingsView: View {
         @State private var traditionalCharacterStandard: CharacterStandard = Options.traditionalCharacterStandard
         @State private var keyboardLayout: KeyboardLayout = KeyboardLayout.fetchSavedLayout()
         @State private var isKeyPadNumericLayout: Bool = NumericLayout.fetchSavedLayout().isNumberKeyPad
-        @State private var isTenKeyStrokeLayout: Bool = StrokeLayout.fetchSavedLayout().isTenKey
+        @State private var isNineKeyStrokeLayout: Bool = StrokeLayout.fetchSavedLayout().isNineKey
         @State private var needsNumberRow: Bool = Options.needsNumberRow
         @State private var showLowercaseKeys: Bool = Options.showLowercaseKeys
         @State private var keyTextPreview: Bool = Options.keyTextPreview
@@ -132,10 +132,10 @@ struct SettingsView: View {
                                                                 let newLayout: NumericLayout = isOn ? .numberKeyPad : .default
                                                                 context.updateNumericLayout(to: newLayout)
                                                         }
-                                                Toggle("SettingsView.StrokeLayout.ToggleTitle", isOn: $isTenKeyStrokeLayout)
-                                                        .onChange(of: isTenKeyStrokeLayout) { isOn in
+                                                Toggle("SettingsView.StrokeLayout.ToggleTitle", isOn: $isNineKeyStrokeLayout)
+                                                        .onChange(of: isNineKeyStrokeLayout) { isOn in
                                                                 AudioFeedback.modified()
-                                                                let newLayout: StrokeLayout = isOn ? .tenKey : .default
+                                                                let newLayout: StrokeLayout = isOn ? .nineKey : .default
                                                                 context.updateStrokeLayout(to: newLayout)
                                                         }
                                                 Toggle("SettingsView.NumberRow.ToggleTitle", isOn: $needsNumberRow)

@@ -24,7 +24,7 @@ struct NineKeyNumberKey: View {
                                 .padding(3)
                         Text(verbatim: virtualKey.text).font(.letterCompact)
                 }
-                .frame(width: context.tenKeyWidthUnit, height: context.heightUnit)
+                .frame(width: context.nineKeyWidthUnit, height: context.heightUnit)
                 .contentShape(Rectangle())
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in
@@ -55,7 +55,7 @@ struct NineKeyNumberDotKey: View {
                                 .padding(3)
                         Text(verbatim: keyText).font(.letterCompact)
                 }
-                .frame(width: context.tenKeyWidthUnit, height: context.heightUnit)
+                .frame(width: context.nineKeyWidthUnit, height: context.heightUnit)
                 .contentShape(Rectangle())
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in
