@@ -78,6 +78,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 super.textDidChange(textInput)
                 guard isKeyboardPrepared else { return }
                 let containsText: Bool = textInput?.hasText ?? textDocumentProxy.hasText
+                hasText = containsText
                 let didUserClearTextField: Bool = containsText.negative && inputStage.isBuffering
                 if didUserClearTextField {
                         clearBuffer()
@@ -86,7 +87,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         private lazy var hasText: Bool? = nil {
                 didSet {
                         guard oldValue != nil else { return }
-                        // guard hasText != oldValue else { return }
+                        guard hasText != oldValue else { return }
                         updateReturnKey()
                 }
         }
@@ -148,22 +149,33 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 performInput(text)
         }
         private func performInput(_ text: String) {
-                defer {
+                let previousContext: String = textDocumentProxy.documentContextBeforeInput ?? String.empty
+                if previousContext.isEmpty {
+                        textDocumentProxy.setMarkedText(String.empty, selectedRange: NSRange(location: 0, length: 0))
+                        textDocumentProxy.unmarkText()
                         Task {
-                                try await Task.sleep(for: .milliseconds(10)) // 0.01s
-                                textDocumentProxy.setMarkedText(String.zeroWidthSpace, selectedRange: NSRange(location: String.zeroWidthSpace.utf16.count, length: 0))
-                                try await Task.sleep(for: .milliseconds(10)) // 0.01s
+                                try? await Task.sleep(for: .milliseconds(10)) // 0.01s
+                                textDocumentProxy.insertText(text)
+                                hasText = true
                                 canMarkText = true
                         }
+                } else {
+                        defer {
+                                Task {
+                                        try? await Task.sleep(for: .milliseconds(10)) // 0.01s
+                                        textDocumentProxy.setMarkedText(String.zeroWidthSpace, selectedRange: NSRange(location: String.zeroWidthSpace.utf16.count, length: 0))
+                                        try? await Task.sleep(for: .milliseconds(10)) // 0.01s
+                                        canMarkText = true
+                                }
+                        }
+                        textDocumentProxy.setMarkedText(text, selectedRange: NSRange(location: text.utf16.count, length: 0))
+                        textDocumentProxy.unmarkText()
+                        let previousLength: Int = previousContext.count
+                        let currentContext: String = textDocumentProxy.documentContextBeforeInput ?? String.empty
+                        guard currentContext.count == previousLength else { return }
+                        guard currentContext == previousContext else { return }
+                        textDocumentProxy.insertText(text)
                 }
-                let previousContext: String = textDocumentProxy.documentContextBeforeInput ?? String.empty
-                let previousLength: Int = previousContext.count
-                textDocumentProxy.setMarkedText(text, selectedRange: NSRange(location: text.utf16.count, length: 0))
-                textDocumentProxy.unmarkText()
-                let currentContext: String = textDocumentProxy.documentContextBeforeInput ?? String.empty
-                guard currentContext.count == previousLength else { return }
-                guard currentContext == previousContext else { return }
-                textDocumentProxy.insertText(text)
         }
 
 
@@ -868,6 +880,8 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         guard let self else { return }
                         let segmentation = PinyinSegmenter.segment(keys)
                         let suggestions = await Engine.pinyinReverseLookup(keys, segmentation: segmentation).transformed(commentForm: commentForm, charset: characterStandard)
+                        // TODO: Joining
+                        // let suggestions = await (definedCandidates + textMarkCandidates + lookup).distinct()
                         if Task.isCancelled.negative {
                                 await MainActor.run { [weak self] in
                                         guard let self else { return }

@@ -90,7 +90,7 @@ enum QwertyForm: Int {
         /// ANSI layout for typing English
         case abc
 
-        /// ANSI layout for inputing Cantonese
+        /// ANSI layout for inputting Cantonese
         case primary
 
         /// Cantonese Triple-Stroke. 粵拼三拼

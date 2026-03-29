@@ -53,7 +53,7 @@ struct CandidateBoardScrollViewIOS17: View {
                                                                 },
                                                                 endAction: {
                                                                         Task {
-                                                                                try await Task.sleep(for: .milliseconds(500)) // 0.5s
+                                                                                try? await Task.sleep(for: .milliseconds(500)) // 0.5s
                                                                                 isLongPressActionTriggered = false
                                                                                 isReleaseActionTriggered = false
                                                                         }

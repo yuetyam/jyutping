@@ -73,7 +73,7 @@ private struct ScrollViewButtonStyle: ButtonStyle {
 
         private func tryTriggerLongPressAfterDelay(triggered date: Date) {
                 Task {
-                        try await Task.sleep(for: .milliseconds(longPressTime))
+                        try? await Task.sleep(for: .milliseconds(longPressTime))
 
                         // TODO: Better way to compare?
                         if date == longPressDate {
