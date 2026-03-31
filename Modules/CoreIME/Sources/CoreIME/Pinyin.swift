@@ -56,7 +56,7 @@ extension Engine {
                 let inputLength: Int = keys.count
                 let text: String = keys.map(\.text).joined()
                 let spellMatched = pinyinSpellMatch(text: text, limit: limit, statement: spellStatement)
-                let anchorsMatched = pinyinAnchorsMatch(keys: keys, limit: limit, statement: anchorsStatement)
+                let anchorsMatched = pinyinAnchorsMatch(keys: keys, input: text, limit: limit, statement: anchorsStatement)
                 let queried = pinyinQuery(inputLength: inputLength, segmentation: segmentation, limit: limit, statement: spellStatement)
                 let shouldMatchPrefixes: Bool = {
                         guard spellMatched.isEmpty else { return false }

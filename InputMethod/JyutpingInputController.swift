@@ -513,11 +513,10 @@ final class JyutpingInputController: IMKInputController, Sendable {
         private func pinyinReverseLookup() {
                 suggestionTask?.cancel()
                 let allKeys = bufferEvents.map(\.key)
-                let definedCandidates = searchDefined(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
-                let textMarkCandidates = Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
-                let keys = allKeys.dropFirst()
-                guard keys.isNotEmpty else {
+                guard allKeys.count > 1 else {
                         mark(text: joinedBufferTexts())
+                        let definedCandidates = searchDefined(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                        let textMarkCandidates = Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
                         candidates = (definedCandidates + textMarkCandidates).distinct()
                         return
                 }
@@ -526,10 +525,14 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         return (AppSettings.toneDisplayStyle == .noTones) ? .toneless : .full
                 }()
                 let charset: CharacterStandard = Options.legacyCharacterStandard.isPreset ? Options.traditionalCharacterStandard : Options.legacyCharacterStandard
+                let keys = allKeys.dropFirst()
                 suggestionTask = Task.detached(priority: .high) { [weak self] in
                         guard let self else { return }
                         let segmentation = PinyinSegmenter.segment(keys)
-                        let suggestions = await Engine.pinyinReverseLookup(keys, segmentation: segmentation).transformed(commentForm: commentForm, charset: charset)
+                        async let definedCandidates = searchDefined(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                        async let textMarkCandidates = Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                        async let lookup = Engine.pinyinReverseLookup(keys, segmentation: segmentation).transformed(commentForm: commentForm, charset: charset)
+                        let suggestions = await (definedCandidates + textMarkCandidates + lookup).distinct()
                         if Task.isCancelled.negative {
                                 await MainActor.run { [weak self] in
                                         guard let self else { return }
@@ -545,7 +548,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                                 return bestScheme.mark + String.space + bufferText.dropFirst(leadingLength + 1)
                                         }()
                                         mark(text: headMark + tailMark)
-                                        self.candidates = (definedCandidates + textMarkCandidates + suggestions).distinct()
+                                        self.candidates = suggestions
                                 }
                         }
                 }

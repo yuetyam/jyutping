@@ -152,10 +152,10 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let previousContext: String = textDocumentProxy.documentContextBeforeInput ?? String.empty
                 if previousContext.isEmpty {
                         textDocumentProxy.setMarkedText(String.empty, selectedRange: NSRange(location: 0, length: 0))
-                        textDocumentProxy.unmarkText()
                         Task {
                                 try? await Task.sleep(for: .milliseconds(10)) // 0.01s
                                 textDocumentProxy.insertText(text)
+                                try? await Task.sleep(for: .milliseconds(10)) // 0.01s
                                 hasText = true
                                 canMarkText = true
                         }
@@ -864,11 +864,10 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         private func pinyinReverseLookup() {
                 suggestionTask?.cancel()
                 let allKeys = bufferEvents.compactMap(\.keys.first)
-                let definedCandidates = searchDefinedCandidates(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
-                let textMarkCandidates = Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
-                let keys = allKeys.dropFirst()
-                guard keys.isNotEmpty else {
+                guard allKeys.count > 1 else {
                         text2mark = joinedBufferTexts()
+                        let definedCandidates = searchDefinedCandidates(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                        let textMarkCandidates = Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
                         candidates = (definedCandidates + textMarkCandidates).distinct()
                         return
                 }
@@ -876,12 +875,14 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         guard Options.commentScene != .noneOfAll else { return .nothing }
                         return (Options.commentToneStyle == .noTones) ? .toneless : .full
                 }()
+                let keys = allKeys.dropFirst()
                 suggestionTask = Task.detached(priority: .high) { [weak self] in
                         guard let self else { return }
                         let segmentation = PinyinSegmenter.segment(keys)
-                        let suggestions = await Engine.pinyinReverseLookup(keys, segmentation: segmentation).transformed(commentForm: commentForm, charset: characterStandard)
-                        // TODO: Joining
-                        // let suggestions = await (definedCandidates + textMarkCandidates + lookup).distinct()
+                        async let definedCandidates = searchDefinedCandidates(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                        async let textMarkCandidates = Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                        async let lookup = Engine.pinyinReverseLookup(keys, segmentation: segmentation).transformed(commentForm: commentForm, charset: characterStandard)
+                        let suggestions = await (definedCandidates + textMarkCandidates + lookup).distinct()
                         if Task.isCancelled.negative {
                                 await MainActor.run { [weak self] in
                                         guard let self else { return }
@@ -896,7 +897,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                                 return bestScheme.mark + String.space + bufferText.dropFirst(leadingLength + 1)
                                         }()
                                         self.text2mark = bufferText.prefix(1) + String.space + tailMark
-                                        self.candidates = (definedCandidates + textMarkCandidates + suggestions).distinct()
+                                        self.candidates = suggestions
                                 }
                         }
                 }

@@ -20,6 +20,12 @@ extension String {
         /// Empty String. `String.init()`
         public static let empty: String = String.init()
 
+        /// U+0078. letter x
+        public static let lowercasedLetterX: String = "x"
+
+        /// U+0058. Letter X
+        public static let uppercasedLetterX: String = "X"
+
         /// U+0009. Horizontal tab. `\t`
         public static let tab: String = "\t"
 

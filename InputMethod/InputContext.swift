@@ -119,7 +119,7 @@ final class InputContext: ObservableObject {
                         let reserved: IndicatorTexts? = (indicatorTexts?.isFlash ?? true) ? nil : indicatorTexts
                         indicatorTexts = texts
                         Task {
-                                try await Task.sleep(for: .seconds(1))
+                                try? await Task.sleep(for: .seconds(1))
                                 updateIndicatorTexts(to: reserved)
                         }
                 }

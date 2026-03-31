@@ -1,4 +1,4 @@
-/// 10 key keyboard element
+/// 10-key / T9 keyboard element
 public enum Combo: Int, Sendable {
 
         case special = 1
