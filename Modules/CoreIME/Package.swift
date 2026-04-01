@@ -1,4 +1,4 @@
-// swift-tools-version: 6.2
+// swift-tools-version: 6.3
 
 import PackageDescription
 
@@ -26,5 +26,6 @@ let package = Package(
                         name: "CoreIMETests",
                         dependencies: ["CoreIME"]
                 )
-        ]
+        ],
+        swiftLanguageModes: [.v6]
 )

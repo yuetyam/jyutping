@@ -64,6 +64,12 @@ extension String {
 
         /// U+0029. Right round bracket )
         public static let closingParenthesis: String = "\u{29}"
+
+        /// U+0023. ( # ) Number sign; hash; hashtag
+        public static let numberSign: String = "\u{23}"
+
+        /// U+0023. ( # ) Number sign; hash; hashtag
+        public static let hashtag: String = numberSign
 }
 
 extension StringTransform {

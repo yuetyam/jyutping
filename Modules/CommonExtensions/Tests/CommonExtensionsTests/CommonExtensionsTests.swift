@@ -26,6 +26,8 @@ struct CommonExtensionsTests {
         @Test("String static constants")
         func stringStaticConstants() {
                 #expect(String.empty == "")
+                #expect(String.lowercasedLetterX == "\u{78}")
+                #expect(String.uppercasedLetterX == "\u{58}")
                 #expect(String.tab == "\t")
                 #expect(String.newLine == "\n")
                 #expect(String.space == "\u{20}")
@@ -39,6 +41,8 @@ struct CommonExtensionsTests {
                 #expect(String.cantonesePeriod == "\u{3002}")
                 #expect(String.openingParenthesis == "\u{28}")
                 #expect(String.closingParenthesis == "\u{29}")
+                #expect(String.numberSign == "\u{23}")
+                #expect(String.hashtag == "\u{23}")
         }
 
         @Test("Convert simplified to traditional Chinese")

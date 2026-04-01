@@ -1,4 +1,4 @@
-// swift-tools-version: 6.2
+// swift-tools-version: 6.3
 
 import PackageDescription
 
@@ -25,5 +25,6 @@ let package = Package(
                         name: "LinguisticsTests",
                         dependencies: ["Linguistics"]
                 )
-        ]
+        ],
+        swiftLanguageModes: [.v6]
 )
