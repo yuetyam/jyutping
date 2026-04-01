@@ -106,26 +106,18 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         guard let screenFrame else { return }
                         let orientation = AppSettings.candidatePageOrientation
                         let isPositiveHorizontal: Bool = switch orientation {
-                        case .horizontal:
-                                (screenFrame.maxX - position.x) > 450
-                        case .vertical:
-                                (screenFrame.maxX - position.x) > 300
+                        case .horizontal: (screenFrame.maxX - position.x) > 450
+                        case .vertical  : (screenFrame.maxX - position.x) > 300
                         }
                         let isPositiveVertical: Bool = switch orientation {
-                        case .horizontal:
-                                (position.y - screenFrame.minY) < 100
-                        case .vertical:
-                                (position.y - screenFrame.minY) < 300
+                        case .horizontal: (position.y - screenFrame.minY) < 100
+                        case .vertical  : (position.y - screenFrame.minY) < 350
                         }
                         let newQuadrant: Quadrant = switch (isPositiveHorizontal, isPositiveVertical) {
-                        case (true, true):
-                                Quadrant.upperRight
-                        case (false, true):
-                                Quadrant.upperLeft
-                        case (true, false):
-                                Quadrant.bottomRight
-                        case (false, false):
-                                Quadrant.bottomLeft
+                        case (true,  true) : .upperRight
+                        case (false, true) : .upperLeft
+                        case (true,  false): .bottomRight
+                        case (false, false): .bottomLeft
                         }
                         if newQuadrant != context.quadrant {
                                 context.updateQuadrant(to: newQuadrant)
