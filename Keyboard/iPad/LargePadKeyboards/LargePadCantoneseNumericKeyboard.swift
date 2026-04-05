@@ -284,6 +284,7 @@ struct LargePadCantoneseNumericKeyboard: View {
                                                         members: [
                                                                 KeyElement("*"),
                                                                 KeyElement("＊", header: PresetConstant.fullWidth),
+                                                                KeyElement("×"),
                                                         ]
                                                 )
                                         )

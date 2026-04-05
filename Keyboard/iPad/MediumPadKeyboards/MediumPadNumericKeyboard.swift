@@ -30,7 +30,7 @@ struct MediumPadNumericKeyboard: View {
                                         PadAdvancedInputKey(keyLocale: .leading, upper: "€", keyModel: KeyModel(primary: KeyElement("#"), members: [KeyElement("#"), KeyElement("€")]))
                                         PadAdvancedInputKey(keyLocale: .leading, upper: "£", keyModel: KeyModel(primary: KeyElement("$"), members: [KeyElement("$"), KeyElement("£")]))
                                         PadAdvancedInputKey(keyLocale: .leading, upper: "_", keyModel: KeyModel(primary: KeyElement("&"), members: [KeyElement("&"), KeyElement("_")]))
-                                        PadAdvancedInputKey(keyLocale: .leading, upper: "^", keyModel: KeyModel(primary: KeyElement("*"), members: [KeyElement("*"), KeyElement("^")]))
+                                        PadAdvancedInputKey(keyLocale: .leading, upper: "^", keyModel: KeyModel(primary: KeyElement("*"), members: [KeyElement("*"), KeyElement("^"), KeyElement("×")]))
                                         PadAdvancedInputKey(keyLocale: .trailing, upper: "[", keyModel: KeyModel(primary: KeyElement("("), members: [KeyElement("("), KeyElement("[")]))
                                         PadAdvancedInputKey(keyLocale: .trailing, upper: "]", keyModel: KeyModel(primary: KeyElement(")"), members: [KeyElement(")"), KeyElement("]")]))
                                         PadAdvancedInputKey(keyLocale: .trailing, upper: "{", keyModel: KeyModel(primary: KeyElement("'"), members: [KeyElement("'"), KeyElement("{"), KeyElement("\u{2019}", footer: "2019"), KeyElement("\u{2018}", footer: "2018"), KeyElement("\u{0060}", footer: "0060")]))

@@ -286,7 +286,8 @@ struct LargePadTripleStrokeKeyboard: View {
                                                                 members: [
                                                                         KeyElement("8"),
                                                                         KeyElement("*"),
-                                                                        KeyElement("＊", header: PresetConstant.fullWidth)
+                                                                        KeyElement("＊", header: PresetConstant.fullWidth),
+                                                                        KeyElement("×"),
                                                                 ]
                                                         )
                                                 )

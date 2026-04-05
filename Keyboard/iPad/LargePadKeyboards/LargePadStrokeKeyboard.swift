@@ -105,7 +105,8 @@ struct LargePadStrokeKeyboard: View {
                                                                 primary: KeyElement("*"),
                                                                 members: [
                                                                         KeyElement("*"),
-                                                                        KeyElement("＊", header: PresetConstant.fullWidth)
+                                                                        KeyElement("＊", header: PresetConstant.fullWidth),
+                                                                        KeyElement("×"),
                                                                 ]
                                                         )
                                                 )

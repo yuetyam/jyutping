@@ -12,10 +12,10 @@ extension Candidate {
                         return 50
                 case .text:
                         let letterCount: Int = text.count(where: \.isBasicLatinLetter)
-                        let computed: Int = (letterCount * 12) + ((textCount - letterCount) * 28)
+                        let computed: Int = (letterCount * 14) + ((textCount - letterCount) * 28)
                         return CGFloat(max(56, computed))
                 default:
-                        return CGFloat(max(56, textCount * 12))
+                        return CGFloat(max(56, textCount * 14))
                 }
         }
 }

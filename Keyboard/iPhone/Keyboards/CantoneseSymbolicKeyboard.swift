@@ -80,6 +80,7 @@ struct CantoneseSymbolicKeyboard: View {
                                                            members: [
                                                                 KeyElement("*"),
                                                                 KeyElement("＊", header: PresetConstant.fullWidth),
+                                                                KeyElement("×"),
                                                            ])
                                 )
                                 EnhancedInputKey(

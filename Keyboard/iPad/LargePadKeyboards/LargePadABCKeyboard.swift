@@ -66,7 +66,8 @@ struct LargePadABCKeyboard: View {
                                                                 primary: KeyElement("*"),
                                                                 members: [
                                                                         KeyElement("*"),
-                                                                        KeyElement("•")
+                                                                        KeyElement("•"),
+                                                                        KeyElement("×"),
                                                                 ]
                                                         )
                                                 )
