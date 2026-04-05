@@ -8,17 +8,19 @@ import Linguistics
 struct LexiconView: View {
         let lexicon: CantoneseLexicon
         var body: some View {
-                HStack(spacing: 16) {
-                        HStack(spacing: 2) {
-                                Text(verbatim: "文字").font(.copilot).shallow()
-                                Text.separator
-                                Text(verbatim: lexicon.text)
-                        }
-                        if lexicon.text.count == 1, let unicode = lexicon.text.first?.codePointsText {
-                                Text(verbatim: unicode)
-                                        .font(.footnote)
-                                        .monospaced()
-                                        .foregroundStyle(Color.secondary)
+                HStack(spacing: 2) {
+                        HStack(spacing: 16) {
+                                HStack(spacing: 2) {
+                                        Text(verbatim: "文字").font(.copilot).shallow()
+                                        Text.separator
+                                        Text(verbatim: lexicon.text)
+                                }
+                                if lexicon.text.count == 1, let unicode = lexicon.text.first?.codePointsText {
+                                        Text(verbatim: unicode)
+                                                .font(.footnote)
+                                                .monospaced()
+                                                .foregroundStyle(Color.secondary)
+                                }
                         }
                         Spacer()
                         Speaker {
@@ -68,14 +70,16 @@ private struct PronunciationView: View {
 
         var body: some View {
                 VStack(alignment: .leading) {
-                        HStack(spacing: 16) {
-                                HStack(spacing: 2) {
-                                        Text(verbatim: "讀音").font(.copilot).shallow()
-                                        Text.separator
-                                        Text(verbatim: romanization).monospaced(isSingular)
-                                }
-                                if let ipa {
-                                        Text(verbatim: ipa).font(.ipa).foregroundStyle(Color.secondary)
+                        HStack(spacing: 2) {
+                                HStack(spacing: 16) {
+                                        HStack(spacing: 2) {
+                                                Text(verbatim: "讀音").font(.copilot).shallow()
+                                                Text.separator
+                                                Text(verbatim: romanization).monospaced(isSingular)
+                                        }
+                                        if let ipa {
+                                                Text(verbatim: ipa).font(.ipa).foregroundStyle(Color.secondary)
+                                        }
                                 }
                                 Spacer()
                                 Speaker(romanization)
