@@ -30,7 +30,7 @@ struct CantoneseLexiconView: View {
                         if let unihanDefinition = lexicon.unihanDefinition {
                                 Divider()
                                 HStack(alignment: .firstTextBaseline) {
-                                        Text(verbatim: "英文").shallow()
+                                        Text(verbatim: "英語").shallow()
                                         Text.separator
                                         Text(verbatim: unihanDefinition).font(.body).fontDesign(.serif)
                                         Spacer()

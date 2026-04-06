@@ -24,6 +24,7 @@ struct GeneralSettingsView: View {
         @State private var legacyCharacterStandard: CharacterStandard = Options.legacyCharacterStandard
         @State private var traditionalCharacterStandard: CharacterStandard = Options.traditionalCharacterStandard
         @State private var isEmojiSuggestionsOn: Bool = AppSettings.isEmojiSuggestionsOn
+        @State private var isEnglishSuggestionsOn: Bool = AppSettings.isEnglishSuggestionsOn
         @State private var isTextReplacementsOn: Bool = AppSettings.isTextReplacementsOn
         @State private var isCompatibleModeOn: Bool = AppSettings.isCompatibleModeOn
         @State private var isInputMemoryOn: Bool = AppSettings.isInputMemoryOn
@@ -159,7 +160,7 @@ struct GeneralSettingsView: View {
                                         Section {
                                                 Picker("GeneralSettingsView.CharacterStandard.PickerTitle", selection: $legacyCharacterStandard) {
                                                         Text("GeneralSettingsView.CharacterStandard.Traditional").tag(CharacterStandard.preset)
-                                                        Text("GeneralSettingsView.CharacterStandard.KongKong").tag(CharacterStandard.hongkong)
+                                                        Text("GeneralSettingsView.CharacterStandard.HongKong").tag(CharacterStandard.hongkong)
                                                         Text("GeneralSettingsView.CharacterStandard.Taiwan").tag(CharacterStandard.taiwan)
                                                         Text("GeneralSettingsView.CharacterStandard.Simplified").tag(CharacterStandard.mutilated)
                                                 }
@@ -187,6 +188,11 @@ struct GeneralSettingsView: View {
                                                         .toggleStyle(.switch)
                                                         .onChange(of: isEmojiSuggestionsOn) { newState in
                                                                 AppSettings.updateEmojiSuggestions(to: newState)
+                                                        }
+                                                Toggle("GeneralSettingsView.EnglishSuggestions.ToggleTitle", isOn: $isEnglishSuggestionsOn)
+                                                        .toggleStyle(.switch)
+                                                        .onChange(of: isEnglishSuggestionsOn) { newState in
+                                                                AppSettings.updateEnglishSuggestions(to: newState)
                                                         }
                                                 Toggle("GeneralSettingsView.SystemLexicon.ToggleTitle", isOn: $isTextReplacementsOn)
                                                         .toggleStyle(.switch)

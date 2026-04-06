@@ -468,8 +468,9 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 suggestionTask?.cancel()
                 let isPeculiar: Bool = bufferEvents.contains(where: { $0.isCapitalized || $0.key.isSyllableLetter.negative })
                 let keys = bufferEvents.map(\.key)
-                let isInputMemoryOn: Bool = AppSettings.isInputMemoryOn
-                let isEmojiSuggestionsOn: Bool = AppSettings.isEmojiSuggestionsOn
+                let isInputMemoryOn = AppSettings.isInputMemoryOn
+                let isEmojiSuggestionsOn = AppSettings.isEmojiSuggestionsOn
+                let isEnglishSuggestionsOn = AppSettings.isEnglishSuggestionsOn
                 let commentForm: RomanizationForm = {
                         guard AppSettings.commentDisplayScene == .all else { return .nothing }
                         return (AppSettings.toneDisplayStyle == .noTones) ? .toneless : .full
@@ -477,10 +478,10 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 let charset: CharacterStandard = Options.legacyCharacterStandard.isPreset ? Options.traditionalCharacterStandard : Options.legacyCharacterStandard
                 suggestionTask = Task.detached(priority: .high) { [weak self] in
                         guard let self else { return }
+                        async let defined: [Lexicon] = searchDefined(for: keys)
+                        async let textMarks: [Lexicon] = isEnglishSuggestionsOn ? Engine.searchTextMarks(for: keys) : []
                         let segmentation = Segmenter.segment(keys)
                         async let memory: [Lexicon] = isInputMemoryOn ? InputMemory.suggest(keys, segmentation: segmentation) : []
-                        async let defined: [Lexicon] = searchDefined(for: keys)
-                        async let textMarks: [Lexicon] = Engine.searchTextMarks(for: keys)
                         async let symbols: [Lexicon] = isEmojiSuggestionsOn ? Engine.searchSymbols(for: keys, segmentation: segmentation) : []
                         async let queried: [Lexicon] = Engine.suggest(keys, segmentation: segmentation)
                         let suggestions: [Candidate] = await Converter.dispatch(memory: memory, defined: defined, marks: textMarks, symbols: symbols, queried: queried, commentForm: commentForm, charset: charset)
@@ -507,9 +508,9 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 let allKeys = bufferEvents.map(\.key)
                 guard allKeys.count > 1 else {
                         mark(text: joinedBufferTexts())
-                        let definedCandidates = searchDefined(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
-                        let textMarkCandidates = Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
-                        candidates = (definedCandidates + textMarkCandidates).distinct()
+                        let defined = searchDefined(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                        let textMarks: [Candidate] = AppSettings.isEnglishSuggestionsOn.negative ? [] : Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                        candidates = (defined + textMarks).distinct()
                         return
                 }
                 let commentForm: RomanizationForm = {
@@ -518,13 +519,14 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 }()
                 let charset: CharacterStandard = Options.legacyCharacterStandard.isPreset ? Options.traditionalCharacterStandard : Options.legacyCharacterStandard
                 let keys = allKeys.dropFirst()
+                let isEnglishSuggestionsOn = AppSettings.isEnglishSuggestionsOn
                 suggestionTask = Task.detached(priority: .high) { [weak self] in
                         guard let self else { return }
+                        async let defined = searchDefined(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                        async let textMarks: [Candidate] = isEnglishSuggestionsOn.negative ? [] : Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
                         let segmentation = PinyinSegmenter.segment(keys)
-                        async let definedCandidates = searchDefined(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
-                        async let textMarkCandidates = Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
                         async let lookup = Engine.pinyinReverseLookup(keys, segmentation: segmentation).transformed(commentForm: commentForm, charset: charset)
-                        let suggestions = await (definedCandidates + textMarkCandidates + lookup).distinct()
+                        let suggestions = await (defined + textMarks + lookup).distinct()
                         if Task.isCancelled.negative {
                                 await MainActor.run { [weak self] in
                                         guard let self else { return }
@@ -553,9 +555,9 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 let isValidSequence: Bool = cangjieRadicals.isNotEmpty && (cangjieRadicals.count == keys.count)
                 if isValidSequence.negative {
                         mark(text: joinedBufferTexts())
-                        let definedCandidates = searchDefined(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
-                        let textMarkCandidates = Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
-                        candidates = (definedCandidates + textMarkCandidates).distinct()
+                        let defined = searchDefined(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                        let textMarks: [Candidate] = AppSettings.isEnglishSuggestionsOn.negative ? [] : Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                        candidates = (defined + textMarks).distinct()
                 } else {
                         mark(text: String(cangjieRadicals))
                         let commentForm: RomanizationForm = {
@@ -565,12 +567,13 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         let charset: CharacterStandard = Options.legacyCharacterStandard.isPreset ? Options.traditionalCharacterStandard : Options.legacyCharacterStandard
                         let text: String = keys.map(\.text).joined()
                         let cangjieVariant = AppSettings.cangjieVariant
+                        let isEnglishSuggestionsOn = AppSettings.isEnglishSuggestionsOn
                         suggestionTask = Task.detached(priority: .high) { [weak self] in
                                 guard let self else { return }
-                                async let definedCandidates = searchDefined(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
-                                async let textMarkCandidates = Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                                async let defined = searchDefined(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                                async let textMarks: [Candidate] = isEnglishSuggestionsOn.negative ? [] : Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
                                 async let lookup = Engine.cangjieReverseLookup(text: text, variant: cangjieVariant).transformed(commentForm: commentForm, charset: charset)
-                                let suggestions = await (definedCandidates + textMarkCandidates + lookup).distinct()
+                                let suggestions = await (defined + textMarks + lookup).distinct()
                                 if Task.isCancelled.negative {
                                         await MainActor.run { [weak self] in
                                                 guard let self else { return }
@@ -586,9 +589,9 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 let keys = allKeys.dropFirst()
                 if keys.isEmpty || StrokeVirtualKey.isValidStrokes(keys).negative {
                         mark(text: joinedBufferTexts())
-                        let definedCandidates = searchDefined(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
-                        let textMarkCandidates = Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
-                        candidates = (definedCandidates + textMarkCandidates).distinct()
+                        let defined = searchDefined(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                        let textMarks: [Candidate] = AppSettings.isEnglishSuggestionsOn.negative ? [] : Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                        candidates = (defined + textMarks).distinct()
                 } else {
                         mark(text: StrokeVirtualKey.displayText(from: keys))
                         let commentForm: RomanizationForm = {
@@ -596,12 +599,13 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                 return (AppSettings.toneDisplayStyle == .noTones) ? .toneless : .full
                         }()
                         let charset: CharacterStandard = Options.legacyCharacterStandard.isPreset ? Options.traditionalCharacterStandard : Options.legacyCharacterStandard
+                        let isEnglishSuggestionsOn = AppSettings.isEnglishSuggestionsOn
                         suggestionTask = Task.detached(priority: .high) { [weak self] in
                                 guard let self else { return }
-                                async let definedCandidates = searchDefined(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
-                                async let textMarkCandidates = Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                                async let defined = searchDefined(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                                async let textMarks: [Candidate] = isEnglishSuggestionsOn.negative ? [] : Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
                                 async let lookup = Engine.strokeReverseLookup(keys).transformed(commentForm: commentForm, charset: charset)
-                                let suggestions = await (definedCandidates + textMarkCandidates + lookup).distinct()
+                                let suggestions = await (defined + textMarks + lookup).distinct()
                                 if Task.isCancelled.negative {
                                         await MainActor.run { [weak self] in
                                                 guard let self else { return }
@@ -619,22 +623,23 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 let keys = allKeys.dropFirst()
                 if keys.isEmpty {
                         mark(text: joinedBufferTexts())
-                        let definedCandidates = searchDefined(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
-                        let textMarkCandidates = Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
-                        candidates = (definedCandidates + textMarkCandidates).distinct()
+                        let defined = searchDefined(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                        let textMarks: [Candidate] = AppSettings.isEnglishSuggestionsOn.negative ? [] : Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                        candidates = (defined + textMarks).distinct()
                 } else {
                         let commentForm: RomanizationForm = {
                                 guard AppSettings.commentDisplayScene != .noneOfAll else { return .nothing }
                                 return (AppSettings.toneDisplayStyle == .noTones) ? .toneless : .full
                         }()
                         let charset: CharacterStandard = Options.legacyCharacterStandard.isPreset ? Options.traditionalCharacterStandard : Options.legacyCharacterStandard
+                        let isEnglishSuggestionsOn = AppSettings.isEnglishSuggestionsOn
                         suggestionTask = Task.detached(priority: .high) { [weak self] in
                                 guard let self else { return }
+                                async let defined = searchDefined(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                                async let textMarks: [Candidate] = isEnglishSuggestionsOn.negative ? [] : Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
                                 let segmentation = Segmenter.segment(keys)
-                                async let definedCandidates = searchDefined(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
-                                async let textMarkCandidates = Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
                                 async let lookup = Engine.structureReverseLookup(keys, segmentation: segmentation).transformed(commentForm: commentForm, charset: charset)
-                                let suggestions = await (definedCandidates + textMarkCandidates + lookup).distinct()
+                                let suggestions = await (defined + textMarks + lookup).distinct()
                                 if Task.isCancelled.negative {
                                         await MainActor.run { [weak self] in
                                                 guard let self else { return }

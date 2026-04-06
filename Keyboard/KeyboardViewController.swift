@@ -680,6 +680,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let combos = bufferCombos
                 let isInputMemoryOn: Bool = Options.isInputMemoryOn
                 let isEmojiSuggestionsOn: Bool = Options.isEmojiSuggestionsOn
+                let isEnglishSuggestionsOn: Bool = Options.isEnglishSuggestionsOn
                 let commentForm: RomanizationForm = {
                         guard Options.commentScene == .all else { return .nothing }
                         return (Options.commentToneStyle == .noTones) ? .toneless : .full
@@ -688,7 +689,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         guard let self else { return }
                         async let memory: [Lexicon] = isInputMemoryOn ? InputMemory.nineKeySearch(combos: combos) : []
                         async let defined: [Lexicon] = queryDefinedCandidates(for: combos)
-                        async let textMarks: [Lexicon] = Engine.queryTextMarks(for: combos)
+                        async let textMarks: [Lexicon] = isEnglishSuggestionsOn ? Engine.queryTextMarks(for: combos) : []
                         async let symbols: [Lexicon] = isEmojiSuggestionsOn ? Engine.nineKeySearchSymbols(combos: combos) : []
                         async let queried: [Lexicon] = Engine.nineKeySuggest(combos: combos)
                         let suggestions: [Candidate] = await Converter.dispatch(memory: memory, defined: defined, marks: textMarks, symbols: symbols, queried: queried, commentForm: commentForm, charset: characterStandard)
@@ -751,6 +752,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let keySetArray: Array<Set<VirtualInputKey>> = bufferEvents.map(\.keys)
                 let isInputMemoryOn: Bool = Options.isInputMemoryOn
                 let isEmojiSuggestionsOn: Bool = Options.isEmojiSuggestionsOn
+                let isEnglishSuggestionsOn: Bool = Options.isEnglishSuggestionsOn
                 let commentForm: RomanizationForm = {
                         guard Options.commentScene == .all else { return .nothing }
                         return (Options.commentToneStyle == .noTones) ? .toneless : .full
@@ -787,7 +789,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                         group.addTask {
                                                 let memory: [Lexicon] = isInputMemoryOn ? await InputMemory.suggest(keys, segmentation: segmentation, deepSearch: inputLength < 6) : []
                                                 let defined: [Lexicon] = await self.searchDefinedCandidates(for: keys)
-                                                let textMarks: [Lexicon] = Engine.searchTextMarks(for: keys)
+                                                let textMarks: [Lexicon] = isEnglishSuggestionsOn ? Engine.searchTextMarks(for: keys) : []
                                                 let symbols: [Lexicon] = isEmojiSuggestionsOn ? Engine.searchSymbols(for: keys, segmentation: segmentation) : []
                                                 let queried: [Lexicon] = Engine.suggest(keys, segmentation: segmentation, deepSearch: inputLength < 6)
                                                 return (memory, defined, textMarks, symbols, queried)
@@ -830,16 +832,17 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let isPeculiar: Bool = bufferEvents.contains(where: \.case.isCapitalized) || keys.contains(where: \.isSyllableLetter.negative)
                 let isInputMemoryOn: Bool = Options.isInputMemoryOn
                 let isEmojiSuggestionsOn: Bool = Options.isEmojiSuggestionsOn
+                let isEnglishSuggestionsOn: Bool = Options.isEnglishSuggestionsOn
                 let commentForm: RomanizationForm = {
                         guard Options.commentScene == .all else { return .nothing }
                         return (Options.commentToneStyle == .noTones) ? .toneless : .full
                 }()
                 suggestionTask = Task.detached(priority: .high) { [weak self] in
                         guard let self else { return }
+                        async let defined: [Lexicon] = searchDefinedCandidates(for: keys)
+                        async let textMarks: [Lexicon] = isEnglishSuggestionsOn ? Engine.searchTextMarks(for: keys) : []
                         let segmentation = Segmenter.segment(keys)
                         async let memory: [Lexicon] = isInputMemoryOn ? InputMemory.suggest(keys, segmentation: segmentation) : []
-                        async let defined: [Lexicon] = searchDefinedCandidates(for: keys)
-                        async let textMarks: [Lexicon] = Engine.searchTextMarks(for: keys)
                         async let symbols: [Lexicon] = isEmojiSuggestionsOn ? Engine.searchSymbols(for: keys, segmentation: segmentation) : []
                         async let queried: [Lexicon] = Engine.suggest(keys, segmentation: segmentation)
                         let suggestions = await Converter.dispatch(memory: memory, defined: defined, marks: textMarks, symbols: symbols, queried: queried, commentForm: commentForm, charset: characterStandard)
@@ -866,9 +869,9 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let allKeys = bufferEvents.compactMap(\.keys.first)
                 guard allKeys.count > 1 else {
                         text2mark = joinedBufferTexts()
-                        let definedCandidates = searchDefinedCandidates(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
-                        let textMarkCandidates = Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
-                        candidates = (definedCandidates + textMarkCandidates).distinct()
+                        let defined = searchDefinedCandidates(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                        let textMarks: [Candidate] = Options.isEnglishSuggestionsOn.negative ? [] : Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                        candidates = (defined + textMarks).distinct()
                         return
                 }
                 let commentForm: RomanizationForm = {
@@ -876,13 +879,14 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         return (Options.commentToneStyle == .noTones) ? .toneless : .full
                 }()
                 let keys = allKeys.dropFirst()
+                let isEnglishSuggestionsOn: Bool = Options.isEnglishSuggestionsOn
                 suggestionTask = Task.detached(priority: .high) { [weak self] in
                         guard let self else { return }
+                        async let defined = searchDefinedCandidates(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                        async let textMarks: [Candidate] = isEnglishSuggestionsOn.negative ? [] : Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
                         let segmentation = PinyinSegmenter.segment(keys)
-                        async let definedCandidates = searchDefinedCandidates(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
-                        async let textMarkCandidates = Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
                         async let lookup = Engine.pinyinReverseLookup(keys, segmentation: segmentation).transformed(commentForm: commentForm, charset: characterStandard)
-                        let suggestions = await (definedCandidates + textMarkCandidates + lookup).distinct()
+                        let suggestions = await (defined + textMarks + lookup).distinct()
                         if Task.isCancelled.negative {
                                 await MainActor.run { [weak self] in
                                         guard let self else { return }
@@ -910,9 +914,9 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let isValidSequence: Bool = cangjieRadicals.isNotEmpty && (cangjieRadicals.count == keys.count)
                 if isValidSequence.negative {
                         text2mark = joinedBufferTexts()
-                        let definedCandidates = searchDefinedCandidates(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
-                        let textMarkCandidates = Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
-                        candidates = (definedCandidates + textMarkCandidates).distinct()
+                        let defined = searchDefinedCandidates(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                        let textMarks: [Candidate] = Options.isEnglishSuggestionsOn.negative ? [] : Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                        candidates = (defined + textMarks).distinct()
                 } else {
                         text2mark = String(cangjieRadicals)
                         let commentForm: RomanizationForm = {
@@ -921,12 +925,13 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         }()
                         let text: String = keys.map(\.text).joined()
                         let cangjieVariant = Options.cangjieVariant
+                        let isEnglishSuggestionsOn: Bool = Options.isEnglishSuggestionsOn
                         suggestionTask = Task.detached(priority: .high) { [weak self] in
                                 guard let self else { return }
-                                async let definedCandidates = searchDefinedCandidates(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
-                                async let textMarkCandidates = Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                                async let defined = searchDefinedCandidates(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                                async let textMarks: [Candidate] = isEnglishSuggestionsOn.negative ? [] : Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
                                 async let lookup = Engine.cangjieReverseLookup(text: text, variant: cangjieVariant).transformed(commentForm: commentForm, charset: characterStandard)
-                                let suggestions = await (definedCandidates + textMarkCandidates + lookup).distinct()
+                                let suggestions = await (defined + textMarks + lookup).distinct()
                                 if Task.isCancelled.negative {
                                         await MainActor.run { [weak self] in
                                                 guard let self else { return }
@@ -942,21 +947,22 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let keys = allKeys.dropFirst()
                 if keys.isEmpty || StrokeVirtualKey.isValidStrokes(keys).negative {
                         text2mark = joinedBufferTexts()
-                        let definedCandidates = searchDefinedCandidates(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
-                        let textMarkCandidates = Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
-                        candidates = (definedCandidates + textMarkCandidates).distinct()
+                        let defined = searchDefinedCandidates(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                        let textMarks: [Candidate] = Options.isEnglishSuggestionsOn.negative ? [] : Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                        candidates = (defined + textMarks).distinct()
                 } else {
                         text2mark = StrokeVirtualKey.displayText(from: keys)
                         let commentForm: RomanizationForm = {
                                 guard Options.commentScene != .noneOfAll else { return .nothing }
                                 return (Options.commentToneStyle == .noTones) ? .toneless : .full
                         }()
+                        let isEnglishSuggestionsOn: Bool = Options.isEnglishSuggestionsOn
                         suggestionTask = Task.detached(priority: .high) { [weak self] in
                                 guard let self else { return }
-                                async let definedCandidates = searchDefinedCandidates(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
-                                async let textMarkCandidates = Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                                async let defined = searchDefinedCandidates(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                                async let textMarks: [Candidate] = isEnglishSuggestionsOn.negative ? [] : Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
                                 async let lookup = Engine.strokeReverseLookup(keys).transformed(commentForm: commentForm, charset: characterStandard)
-                                let suggestions = await (definedCandidates + textMarkCandidates + lookup).distinct()
+                                let suggestions = await (defined + textMarks + lookup).distinct()
                                 if Task.isCancelled.negative {
                                         await MainActor.run { [weak self] in
                                                 guard let self else { return }
@@ -974,21 +980,22 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let keys = allKeys.dropFirst()
                 if keys.isEmpty {
                         text2mark = joinedBufferTexts()
-                        let definedCandidates = searchDefinedCandidates(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
-                        let textMarkCandidates = Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
-                        candidates = (definedCandidates + textMarkCandidates).distinct()
+                        let defined = searchDefinedCandidates(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                        let textMarks: [Candidate] = Options.isEnglishSuggestionsOn.negative ? [] : Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                        candidates = (defined + textMarks).distinct()
                 } else {
                         let commentForm: RomanizationForm = {
                                 guard Options.commentScene != .noneOfAll else { return .nothing }
                                 return (Options.commentToneStyle == .noTones) ? .toneless : .full
                         }()
+                        let isEnglishSuggestionsOn: Bool = Options.isEnglishSuggestionsOn
                         suggestionTask = Task.detached(priority: .high) { [weak self] in
                                 guard let self else { return }
+                                async let defined = searchDefinedCandidates(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                                async let textMarks: [Candidate] = isEnglishSuggestionsOn.negative ? [] : Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
                                 let segmentation = Segmenter.segment(keys)
-                                async let definedCandidates = searchDefinedCandidates(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
-                                async let textMarkCandidates = Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
                                 async let lookup = Engine.structureReverseLookup(keys, segmentation: segmentation).transformed(commentForm: commentForm, charset: characterStandard)
-                                let suggestions = await (definedCandidates + textMarkCandidates + lookup).distinct()
+                                let suggestions = await (defined + textMarks + lookup).distinct()
                                 if Task.isCancelled.negative {
                                         await MainActor.run { [weak self] in
                                                 guard let self else { return }
@@ -1024,6 +1031,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         guard Options.commentScene != .noneOfAll else { return .nothing }
                         return (Options.commentToneStyle == .noTones) ? .toneless : .full
                 }()
+                let isEnglishSuggestionsOn: Bool = Options.isEnglishSuggestionsOn
                 suggestionTask = Task.detached(priority: .high) { [weak self] in
                         guard let self else { return }
                         let sequences: [[VirtualInputKey]] = {
@@ -1056,7 +1064,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                         let allKeys: [VirtualInputKey] = [VirtualInputKey.letterQ] + keys
                                         group.addTask {
                                                 let defined: [Candidate] = await self.searchDefinedCandidates(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
-                                                let textMarks: [Candidate] = Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
+                                                let textMarks: [Candidate] = isEnglishSuggestionsOn.negative ? [] : Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
                                                 let queried: [Candidate] = await Engine.structureReverseLookup(keys, segmentation: segmentation).transformed(commentForm: commentForm, charset: self.characterStandard)
                                                 return (defined, textMarks, queried)
                                         }

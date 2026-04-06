@@ -29,6 +29,7 @@ struct SettingsView: View {
         @State private var commentToneStyle: CommentToneStyle = Options.commentToneStyle
         @State private var cangjieVariant: CangjieVariant = Options.cangjieVariant
         @State private var isEmojiSuggestionsOn: Bool = Options.isEmojiSuggestionsOn
+        @State private var isEnglishSuggestionsOn: Bool = Options.isEnglishSuggestionsOn
         @State private var isTextReplacementsOn: Bool = Options.isTextReplacementsOn
         @State private var isCompatibleModeOn: Bool = Options.isCompatibleModeOn
         @State private var preferredLanguage: KeyboardDisplayLanguage = Options.preferredLanguage
@@ -257,6 +258,11 @@ struct SettingsView: View {
                                                 .onChange(of: isEmojiSuggestionsOn) { newState in
                                                         AudioFeedback.modified()
                                                         Options.updateEmojiSuggestions(to: newState)
+                                                }
+                                        Toggle("SettingsView.EnglishSuggestions.ToggleTitle", isOn: $isEnglishSuggestionsOn)
+                                                .onChange(of: isEnglishSuggestionsOn) { newState in
+                                                        AudioFeedback.modified()
+                                                        Options.updateEnglishSuggestions(to: newState)
                                                 }
                                         Toggle("SettingsView.SystemLexicon.ToggleTitle", isOn: $isTextReplacementsOn)
                                                 .onChange(of: isTextReplacementsOn) { newState in

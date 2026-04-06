@@ -130,6 +130,16 @@ struct Options {
                 UserDefaults.standard.set(value, forKey: OptionsKey.EmojiSuggestions)
         }
 
+        nonisolated(unsafe) private(set) static var isEnglishSuggestionsOn: Bool = {
+                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.EnglishSuggestions)
+                return savedValue != 2
+        }()
+        static func updateEnglishSuggestions(to isOn: Bool) {
+                isEnglishSuggestionsOn = isOn
+                let value: Int = isOn ? 1 : 2
+                UserDefaults.standard.set(value, forKey: OptionsKey.EnglishSuggestions)
+        }
+
         nonisolated(unsafe) private(set) static var isTextReplacementsOn: Bool = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.SystemLexicon)
                 return savedValue != 2
@@ -202,6 +212,7 @@ struct OptionsKey {
         static let CommentToneStyle: String = "tone_style"
         static let CangjieVariant: String = "CangjieVariant"
         static let EmojiSuggestions: String = "emoji"
+        static let EnglishSuggestions: String = "EnglishSuggestions"
         static let SchemeRules: String = "SchemeRules"
         static let SystemLexicon: String = "SystemLexicon"
         static let UserLexiconInputMemory: String = "UserLexiconInputMemory"

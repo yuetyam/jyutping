@@ -18,6 +18,7 @@ private struct SettingsKey {
 
         static let CangjieVariant: String = "CangjieVariant"
         static let EmojiSuggestions: String = "emoji"
+        static let EnglishSuggestions: String = "EnglishSuggestions"
         static let SystemLexicon: String = "SystemLexicon"
         static let SchemeRules: String = "SchemeRules"
         static let UserLexiconInputMemory: String = "UserLexiconInputMemory"
@@ -431,6 +432,16 @@ struct AppSettings {
                 isEmojiSuggestionsOn = isOn
                 let value: Int = isOn ? 1 : 2
                 UserDefaults.standard.set(value, forKey: SettingsKey.EmojiSuggestions)
+        }
+
+        private(set) static var isEnglishSuggestionsOn: Bool = {
+                let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.EnglishSuggestions)
+                return savedValue != 2
+        }()
+        static func updateEnglishSuggestions(to isOn: Bool) {
+                isEnglishSuggestionsOn = isOn
+                let value: Int = isOn ? 1 : 2
+                UserDefaults.standard.set(value, forKey: SettingsKey.EnglishSuggestions)
         }
 
         private(set) static var isTextReplacementsOn: Bool = {
