@@ -57,6 +57,9 @@ extension UIKeyboardType {
 
 extension KeyboardForm {
 
+        var isNineKeyNumeric: Bool { self == .nineKeyNumeric }
+        var isNineKeyStroke: Bool { self == .nineKeyStroke }
+
         /// Should stay buffering, should keep the bufferText
         var isBufferable: Bool {
                 switch self {

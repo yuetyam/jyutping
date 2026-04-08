@@ -13,7 +13,7 @@ struct NineKeyNavigateKey: View {
                 case .alphabetic:
                         return "ABC"
                 case .numeric:
-                        return context.preferredNumericForm == .numeric ? "123" : "#@$"
+                        return context.preferredNumericForm.isNineKeyNumeric ? "#@$" : "123"
                 case .symbolic:
                         return "#+="
                 case .nineKeyNumeric:

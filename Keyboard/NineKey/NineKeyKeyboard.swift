@@ -70,7 +70,7 @@ struct NineKeyKeyboard: View {
                                 }
                                 VStack(spacing: 0) {
                                         NineKeyBackspaceKey()
-                                        NineKeyNavigateKey(destination: context.preferredNumericForm == .numeric ? .symbolic : .numeric)
+                                        NineKeyNavigateKey(destination: context.preferredNumericForm.isNineKeyNumeric ? .numeric : .symbolic)
                                         NineKeyReturnKey()
                                 }
                         }

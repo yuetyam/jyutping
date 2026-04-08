@@ -10,7 +10,7 @@ struct SidebarPanel: View {
         private let symbols: [String] = ["+", "-", "*", "/", "=", "%", ":", "@", "#", ",", "$", "~", "≈"]
 
         var body: some View {
-                let texts: [String] = (context.keyboardForm == .nineKeyNumeric) ? symbols : punctuation
+                let texts: [String] = context.keyboardForm.isNineKeyNumeric ? symbols : punctuation
                 ZStack {
                         RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous)
                                 .fill(colorScheme.actionKeyColor)

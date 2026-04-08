@@ -898,6 +898,7 @@
 1	110000	1F64F	合十	hap6 sap6
 1	110000	1F64F	祈禱	kei4 tou2
 1	110000	1F64F	懇求	han2 kau4
+1	110000	1F64F	拜託	baai3 tok3
 1	110000	1F64F	唔該	m4 goi1
 1	110000	1F64F	唔該晒	m4 goi1 saai3
 1	110000	1F64F	多謝	do1 ze6
@@ -994,14 +995,13 @@
 1	110000	1F476	蘇蝦	sou1 haa1
 1	110000	1F467	女童	neoi5 tung4
 1	110000	1F467	細𡀔女	sai3 lou6 neoi2
-1	110000	1F467	細路女	sai3 lou6 neoi2
 1	110000	1F467	女孩	neoi5 hoi4
 1	110000	1F467	女孩	neoi5 haai4
 1	110000	1F467	兒童	ji4 tung4
 1	110000	1F467	細𡀔	sai3 lou6
-1	110000	1F467	細路	sai3 lou6
-1	110000	1F467	細呅仔	sai3 man1 zai2
 1	110000	1F467	細呅	sai3 man1
+1	110000	1F467	細呅女	sai3 man1 neoi2
+1	110000	1F467	細呅仔	sai3 man1 zai2
 1	110000	1F467	小朋友	siu2 pang4 jau5
 1	110000	1F467	叉燒	caa1 siu1
 1	110000	1F467	叉燒包	caa1 siu1 baau1
@@ -1016,16 +1016,11 @@
 1	110000	1F9D2	中性兒童	zung1 sing3 ji4 tung4
 1	110000	1F466	男童	naam4 tung4
 1	110000	1F466	細𡀔仔	sai3 lou6 zai2
-1	110000	1F466	細路仔	sai3 lou6 zai2
-1	110000	1F466	細𡀔哥	sai3 lou6 go1
 1	110000	1F466	細𡀔哥	sai3 lou2 go1
-1	110000	1F466	細路哥	sai3 lou6 go1
-1	110000	1F466	細路哥	sai3 lou2 go1
 1	110000	1F466	男孩	naam4 hoi4
 1	110000	1F466	男孩	naam4 haai4
 1	110000	1F466	兒童	ji4 tung4
 1	110000	1F466	細𡀔	sai3 lou6
-1	110000	1F466	細路	sai3 lou6
 1	110000	1F466	細呅仔	sai3 man1 zai2
 1	110000	1F466	細呅	sai3 man1
 1	110000	1F466	小朋友	siu2 pang4 jau5
@@ -1670,6 +1665,10 @@
 1	110000	1F6B6.200D.2640.FE0F	路人女	lou6 jan4 neoi5
 1	110000	1F6B6.200D.2640.FE0F	行人	hang4 jan4
 1	110000	1F6B6.200D.2640.FE0F	路人	lou6 jan4
+1	110000	1F6B6.200D.2640.FE0F	行路	haang4 lou6
+1	110000	1F6B6.200D.2640.FE0F	步行	bou6 hang4
+1	110000	1F6B6.200D.2640.FE0F	向左行	hoeng3 zo2 haang4
+1	110000	1F6B6.200D.2640.FE0F	行	haang4
 1	110000	1F6B6	中性行人	zung1 sing3 hang4 jan4
 1	110000	1F6B6.200D.2642.FE0F	男行人	naam4 hang4 jan4
 1	110000	1F6B6.200D.2642.FE0F	男路人	naam4 lou6 jan4
@@ -1677,12 +1676,20 @@
 1	110000	1F6B6.200D.2642.FE0F	路人男	lou6 jan4 naam4
 1	110000	1F6B6.200D.2642.FE0F	行人	hang4 jan4
 1	110000	1F6B6.200D.2642.FE0F	路人	lou6 jan4
+1	110000	1F6B6.200D.2642.FE0F	行路	haang4 lou6
+1	110000	1F6B6.200D.2642.FE0F	步行	bou6 hang4
+1	110000	1F6B6.200D.2642.FE0F	向左行	hoeng3 zo2 haang4
+1	110000	1F6B6.200D.2642.FE0F	行	haang4
 1	150100	1F6B6.200D.2640.FE0F.200D.27A1.FE0F	女行人	neoi5 hang4 jan4
 1	150100	1F6B6.200D.2640.FE0F.200D.27A1.FE0F	女路人	neoi5 lou6 jan4
 1	150100	1F6B6.200D.2640.FE0F.200D.27A1.FE0F	行人女	hang4 jan4 neoi5
 1	150100	1F6B6.200D.2640.FE0F.200D.27A1.FE0F	路人女	lou6 jan4 neoi5
 1	150100	1F6B6.200D.2640.FE0F.200D.27A1.FE0F	行人	hang4 jan4
 1	150100	1F6B6.200D.2640.FE0F.200D.27A1.FE0F	路人	lou6 jan4
+1	150100	1F6B6.200D.2640.FE0F.200D.27A1.FE0F	行路	haang4 lou6
+1	150100	1F6B6.200D.2640.FE0F.200D.27A1.FE0F	步行	bou6 hang4
+1	150100	1F6B6.200D.2640.FE0F.200D.27A1.FE0F	向右行	hoeng3 jau6 haang4
+1	150100	1F6B6.200D.2640.FE0F.200D.27A1.FE0F	行	haang4
 1	150100	1F6B6.200D.27A1.FE0F	中性行人	zung1 sing3 hang4 jan4
 1	150100	1F6B6.200D.2642.FE0F.200D.27A1.FE0F	男行人	naam4 hang4 jan4
 1	150100	1F6B6.200D.2642.FE0F.200D.27A1.FE0F	男路人	naam4 lou6 jan4
@@ -1690,24 +1697,33 @@
 1	150100	1F6B6.200D.2642.FE0F.200D.27A1.FE0F	路人男	lou6 jan4 naam4
 1	150100	1F6B6.200D.2642.FE0F.200D.27A1.FE0F	行人	hang4 jan4
 1	150100	1F6B6.200D.2642.FE0F.200D.27A1.FE0F	路人	lou6 jan4
+1	150100	1F6B6.200D.2642.FE0F.200D.27A1.FE0F	行路	haang4 lou6
+1	150100	1F6B6.200D.2642.FE0F.200D.27A1.FE0F	步行	bou6 hang4
+1	150100	1F6B6.200D.2642.FE0F.200D.27A1.FE0F	向右行	hoeng3 jau6 haang4
+1	150100	1F6B6.200D.2642.FE0F.200D.27A1.FE0F	行	haang4
 1	110000	1F469.200D.1F9AF	女盲人	neoi5 maang4 jan4
 1	110000	1F469.200D.1F9AF	盲人女	maang4 jan4 neoi5
 1	110000	1F469.200D.1F9AF	盲女	maang4 neoi5
+1	110000	1F469.200D.1F9AF	盲婆	maang4 po2
 1	110000	1F469.200D.1F9AF	盲人	maang4 jan4
 1	110000	1F9D1.200D.1F9AF	中性盲人	zung1 sing3 maang4 jan4
 1	110000	1F468.200D.1F9AF	男盲人	naam4 maang4 jan4
 1	110000	1F468.200D.1F9AF	盲人男	maang4 jan4 naam4
 1	110000	1F468.200D.1F9AF	盲男	maang4 naam4
+1	110000	1F468.200D.1F9AF	盲佬	maang4 lou2
 1	110000	1F468.200D.1F9AF	盲人	maang4 jan4
 1	150100	1F469.200D.1F9AF.200D.27A1.FE0F	女盲人	neoi5 maang4 jan4
 1	150100	1F469.200D.1F9AF.200D.27A1.FE0F	盲人女	maang4 jan4 neoi5
 1	150100	1F469.200D.1F9AF.200D.27A1.FE0F	盲女	maang4 neoi5
+1	150100	1F469.200D.1F9AF.200D.27A1.FE0F	盲婆	maang4 po2
 1	150100	1F469.200D.1F9AF.200D.27A1.FE0F	盲人	maang4 jan4
 1	150100	1F9D1.200D.1F9AF.200D.27A1.FE0F	中性盲人	zung1 sing3 maang4 jan4
 1	150100	1F468.200D.1F9AF.200D.27A1.FE0F	男盲人	naam4 maang4 jan4
 1	150100	1F468.200D.1F9AF.200D.27A1.FE0F	盲人男	maang4 jan4 naam4
 1	150100	1F468.200D.1F9AF.200D.27A1.FE0F	盲男	maang4 naam4
+1	150100	1F468.200D.1F9AF.200D.27A1.FE0F	盲佬	maang4 lou2
 1	150100	1F468.200D.1F9AF.200D.27A1.FE0F	盲人	maang4 jan4
+1	150100	1F468.200D.1F9AF.200D.27A1.FE0F	盲炳	maang4 bing2
 1	110000	1F9CE.200D.2640.FE0F	跪地女	gwai6 dei6 neoi5
 1	110000	1F9CE.200D.2640.FE0F	下跪女	haa6 gwai6 neoi5
 1	110000	1F9CE.200D.2640.FE0F	跪地	gwai6 dei6
@@ -2122,9 +2138,13 @@
 2	110000	1FAB1	蚯蚓	jau1 jan5
 2	110000	1FAB1	地龍	dei6 lung4
 2	110000	1F41B	蟲	cung4
+2	110000	1F41B	昆蟲	kwan1 cung4
 2	110000	1F41B	毛毛蟲	mou4 mou4 cung4
 2	110000	1F41B	毛蟲	mou4 cung4
 2	110000	1F41B	一條蟲	jat1 tiu4 cung4
+2	110000	1F41B	𧕴蟲	naan3 cung4
+2	110000	1F41B	𧕴蛆	naan3 ceoi1
+2	110000	1F41B	𧕴蛆	naan3 zeoi1
 2	110000	1F98B	蝴蝶	wu4 dip6
 2	110000	1F98B	蝴蝶	wu4 dip2
 2	110000	1F98B	蝶	dip6
@@ -2440,7 +2460,6 @@
 2	110000	1F332	松樹	cung4 syu6
 2	110000	1F332	松木	cung4 muk6
 2	110000	1F332	松	cung4
-2	110000	1F333	樹	syu6
 2	110000	1F333	樹木	syu6 muk6
 2	110000	1F333	灌木	gun3 muk6
 2	110000	1F334	棕櫚樹	zung1 leoi4 syu6
@@ -2448,7 +2467,6 @@
 2	110000	1F334	椰子樹	je4 zi2 syu6
 2	110000	1F334	椰樹	je4 syu6
 2	160000	1FABE	無葉樹	mou4 jip6 syu6
-2	160000	1FABE	樹木	syu6 muk6
 2	160000	1FABE	枯木	fu1 muk6
 2	160000	1FABE	枯樹	fu1 syu6
 2	160000	1FABE	樹幹	syu6 gon3
@@ -2487,16 +2505,22 @@
 2	110000	1F38B	乞巧	hat1 haau2
 2	110000	1F38B	竹	zuk1
 2	110000	1F343	落葉	lok6 jip6
+2	110000	1F343	木葉	muk6 jip6
 2	110000	1F343	樹葉	syu6 jip6
+2	110000	1F343	葉	jip6
 2	110000	1F342	枯葉	fu1 jip6
 2	110000	1F342	落葉	lok6 jip6
+2	110000	1F342	木葉	muk6 jip6
 2	110000	1F342	樹葉	syu6 jip6
+2	110000	1F342	葉	jip6
 2	110000	1F342	凋零	diu1 ling4
 2	110000	1F342	凋落	diu1 lok6
 2	110000	1F341	楓葉	fung1 jip6
 2	110000	1F341	楓	fung1
 2	110000	1F341	紅葉	hung4 jip6
+2	110000	1F341	木葉	muk6 jip6
 2	110000	1F341	樹葉	syu6 jip6
+2	110000	1F341	葉	jip6
 2	140000	1FABA	雀仔蛋	zoek3 zai2 daan6
 2	140000	1FABA	雀仔膥	zoek3 zai2 ceon1
 2	140000	1FABA	鳥蛋	niu5 daan6
@@ -2822,7 +2846,6 @@
 3	110000	1F34A	柑橘	gam1 gwat1
 3	110000	1F34A	橘	gwat1
 3	110000	1F34A	柑	gam1
-3	110000	1F34A	橙	caang4
 3	110000	1F34A	橙	caang2
 3	110000	1F34A	橘子	gwat1 zi2
 3	110000	1F34A	柑子	gam1 zi2
@@ -3074,6 +3097,8 @@
 3	110000	1F35C	嗦粉	sok3 fan2
 3	110000	1F35C	碗粉	wun2 fan2
 3	110000	1F372	食物	sik6 mat6
+3	110000	1F372	煮嘢	zyu2 je5
+3	110000	1F372	煮嘢食	zyu2 je5 sik6
 3	110000	1F372	火鍋	fo2 wo1
 3	110000	1F372	香鍋	hoeng1 wo1
 3	110000	1F372	打邊爐	daa2 bin1 lou4
@@ -3615,6 +3640,7 @@
 4	110000	1F3BA	小號	siu2 hou6
 4	110000	1F3BA	小喇叭	siu2 laa3 baa1
 4	110000	1F3BA	喇叭	laa3 baa1
+4	110000	1F3BA	樂器	ngok6 hei3
 4	170000	1FA8A	長號	coeng4 hou6
 4	110000	1FA97	手風琴	sau2 fung1 kam4
 4	110000	1F3B8	結他	git3 taa1
@@ -3622,6 +3648,7 @@
 4	110000	1FA95	五弦琴	ng5 jin4 kam4
 4	110000	1F3BB	小提琴	siu2 tai4 kam4
 4	110000	1F3BB	提琴	tai4 kam4
+4	110000	1F3BB	樂器	ngok6 hei3
 4	160000	1FA89	豎琴	syu6 kam4
 4	160000	1FA89	琴	kam4
 4	160000	1FA89	箜篌	hung1 hau4
@@ -4193,12 +4220,15 @@
 6	110000	1F4B8	紙幣	zi2 bai6
 6	110000	1F4B5	美元	mei5 jyun4
 6	110000	1F4B5	美金	mei5 gam1
+6	110000	1F4B5	美鈔	mei5 caau1
 6	110000	1F4B5	紙幣	zi2 bai6
 6	110000	1F4B5	銀紙	ngan4 zi2
+6	110000	1F4B5	鈔票	caau1 piu3
 6	110000	1F4B5	錢	cin4
 6	110000	1F4B5	錢	cin2
 6	110000	1F4B5	錢銀	cin4 ngan4
 6	110000	1F4B5	錢銀	cin2 ngan2
+6	110000	1F4B5	錢財	cin4 coi4
 6	110000	1F4B4	日元	jat6 jyun4
 6	110000	1F4B6	歐元	au1 jyun4
 6	110000	1F4B7	英鎊	jing1 bong6
@@ -4227,6 +4257,7 @@
 6	170000	1FA8E	百寶箱	baak3 bou2 soeng1
 6	170000	1FA8E	財富	coi4 fu3
 6	170000	1FA8E	財寶	coi4 bou2
+6	170000	1FA8E	寶藏	bou2 zong6
 6	170000	1FA8E	寶物	bou2 mat6
 6	170000	1FA8E	寶物箱	bou2 mat6 soeng1
 6	170000	1FA8E	寶貝	bou2 bui3
@@ -4877,8 +4908,8 @@
 7	110000	269B.FE0F	原子	jyun4 zi2
 7	110000	269B.FE0F	原子符號	jyun4 zi2 fu4 hou6
 7	110000	269B.FE0F	原子能	jyun4 zi2 nang4
-7	110000	1F251	可	ho2
-7	110000	1F251	可以	ho2 ji5
+7	110000	1F251.FE0F	可	ho2
+7	110000	1F251.FE0F	可以	ho2 ji5
 7	110000	2622.FE0F	電離輻射	din6 lei4 fuk1 se6
 7	110000	2622.FE0F	輻射	fuk1 se6
 7	110000	2623.FE0F	生物危害	sang1 mat6 ngai4 hoi6
@@ -4888,10 +4919,10 @@
 7	110000	1F4F4	關機模式	gwaan1 gei1 mou4 sik1
 7	110000	1F4F3	振動	zan3 dung6
 7	110000	1F4F3	震機	zan3 gei1
-7	110000	1F236	有	jau5
+7	110000	1F236.FE0F	有	jau5
 7	110000	1F21A.FE0F	無	mou4
-7	110000	1F238	申	san1
-7	110000	1F23A	營	jing4
+7	110000	1F238.FE0F	申	san1
+7	110000	1F23A.FE0F	營	jing4
 7	110000	1F237.FE0F	月	jyut6
 7	110000	2734.FE0F	八角星	baat3 gok3 sing1
 7	110000	1F19A	對決	deoi3 kyut3
@@ -4900,7 +4931,7 @@
 7	110000	1F19A	對戰	deoi3 zin3
 7	110000	1F19A	對局	deoi3 guk6
 7	110000	1F4AE	日本白花	jat6 bun2 baak6 faa1
-7	110000	1F250	得	dak1
+7	110000	1F250.FE0F	得	dak1
 7	110000	3299.FE0F	祕	bei3
 7	110000	3299.FE0F	祕密	bei3 mat6
 7	110000	3299.FE0F	神祕	san4 bei3
@@ -4911,11 +4942,11 @@
 7	110000	3297.FE0F	慶祝	hing3 zuk1
 7	110000	3297.FE0F	恭祝	gung1 zuk1
 7	110000	3297.FE0F	祝福	zuk1 fuk1
-7	110000	1F234	合	hap6
-7	110000	1F235	滿	mun5
-7	110000	1F239	割	got3
-7	110000	1F232	禁	gam3
-7	110000	1F232	禁止	gam3 zi2
+7	110000	1F234.FE0F	合	hap6
+7	110000	1F235.FE0F	滿	mun5
+7	110000	1F239.FE0F	割	got3
+7	110000	1F232.FE0F	禁	gam3
+7	110000	1F232.FE0F	禁止	gam3 zi2
 7	110000	1F170.FE0F	血液型號	hyut3 jik6 jing4 hou6
 7	110000	1F170.FE0F	血型	hyut3 jing4
 7	110000	1F171.FE0F	血液型號	hyut3 jik6 jing4 hou6
@@ -5072,9 +5103,8 @@
 7	110000	1F22F.FE0F	指定席	zi2 ding6 zik6
 7	110000	1F4B9	匯率	wui6 leot2
 7	110000	1F4B9	外匯	ngoi6 wui6
-7	110000	2747.FE0F	條幅星	tiu4 fuk1 sing1
-7	110000	2747.FE0F	火花	fo2 faa1
-7	110000	2747.FE0F	星號	sing1 hou6
+7	110000	2747.FE0F	四角星	sei3 gok3 sing1
+7	110000	2747.FE0F	四角星號	sei3 gok3 sing1 hou6
 7	110000	2733.FE0F	八輻星號	baat3 fuk1 sing1 hou6
 7	110000	2733.FE0F	八輻星	baat3 fuk1 sing1
 7	110000	2733.FE0F	米字	mai5 zi6
@@ -5135,7 +5165,7 @@
 7	110000	1F6D7	坐電梯	co5 din6 tai1
 7	110000	1F6D7	坐昇降機	co5 sing1 gong3 gei1
 7	110000	1F6D7	坐𨋢	co5 lip1
-7	110000	1F233	空	hung1
+7	110000	1F233.FE0F	空	hung1
 7	110000	1F202.FE0F	日本服務標誌	jat6 bun2 fuk6 mou6 biu1 zi3
 7	110000	1F6C2	護照控制	wu6 ziu3 hung3 zai3
 7	110000	1F6C3	海關	hoi2 gwaan1
@@ -5188,19 +5218,17 @@
 7	110000	1F524	字母	zi6 mou5
 7	110000	1F524	英文輸入	jing1 man2 syu1 jap6
 7	110000	1F524	英文鍵盤	jing1 man2 gin6 pun2
+7	110000	1F524	英語輸入	jing1 jyu5 syu1 jap6
+7	110000	1F524	英語鍵盤	jing1 jyu5 gin6 pun2
 7	110000	1F521	小寫字母	siu2 se2 zi6 mou5
 7	110000	1F521	細楷	sai3 gaai1
 7	110000	1F520	大寫字母	daai6 se2 zi6 mou5
 7	110000	1F520	大楷	daai6 gaai1
-7	110000	1F196	唔好	m4 hou2
-7	110000	1F196	唔得	m4 dak1
-7	110000	1F196	唔掂	m4 dim6
+7	110000	1F196	未夠好	mei6 gau3 hou2
 7	110000	1F197	好	hou2
-7	110000	1F197	得	dak1
-7	110000	1F197	掂	dim6
+7	110000	1F197	好嘅	hou2 ge3
 7	110000	1F199	頂	ding2
 7	110000	1F199	頂	deng2
-7	110000	1F192	好	hou2
 7	110000	1F192	清涼	cing1 loeng4
 7	110000	1F195	新	san1
 7	110000	1F193	免費	min5 fai3
@@ -5235,6 +5263,7 @@
 7	110000	23.FE0F.20E3	井號鍵	zeng2 hou6 gin6
 7	110000	23.FE0F.20E3	井號	zeng2 hou6
 7	110000	23.FE0F.20E3	井鍵	zeng2 gin6
+7	110000	23.FE0F.20E3	數字	sou3 zi6
 7	110000	2A.FE0F.20E3	星號鍵	sing1 hou6 gin6
 7	110000	2A.FE0F.20E3	星號	sing1 hou6
 7	110000	2A.FE0F.20E3	星鍵	sing1 gin6
@@ -5339,7 +5368,6 @@
 7	110000	1F534	紅色	hung4 sik1
 7	110000	1F534	赤色	cek3 sik1
 7	110000	1F7E0	橙色	caang4 sik1
-7	110000	1F7E0	橙色	caang2 sik1
 7	110000	1F7E0	橘色	gwat1 sik1
 7	110000	1F7E1	黃色	wong4 sik1
 7	110000	1F7E2	綠色	luk6 sik1
@@ -5380,9 +5408,7 @@
 7	110000	1F7E5	紅	hung4
 7	110000	1F7E5	赤	cek3
 7	110000	1F7E7	橙色	caang4 sik1
-7	110000	1F7E7	橙色	caang2 sik1
 7	110000	1F7E7	橙	caang4
-7	110000	1F7E7	橙	caang2
 7	110000	1F7E7	橘色	gwat1 sik1
 7	110000	1F7E7	橘	gwat1
 7	110000	1F7E8	黃色	wong4 sik1
@@ -5536,7 +5562,6 @@
 8	110000	1F1E6.1F1FC	阿魯巴	aa3 lou5 baa1
 8	110000	1F1E6.1F1FA	澳大利亞	ou3 daai6 lei6 aa3
 8	110000	1F1E6.1F1FA	澳洲	ou3 zau1
-8	110000	1F1E6.1F1FA	澳	ou3
 8	110000	1F1E6.1F1FA	袋鼠國	doi6 syu2 gwok3
 8	110000	1F1E6.1F1F9	奧地利	ou3 dei6 lei6
 8	110000	1F1E6.1F1FF	阿塞拜疆	aa3 coi3 baai3 goeng1
@@ -5604,7 +5629,6 @@
 8	110000	1F1E9.1F1F4	多米尼加共和國	do1 mai5 nei4 gaa1 gung6 wo4 gwok3
 8	110000	1F1EA.1F1E8	厄瓜多爾	ak1 gwaa1 do1 ji5
 8	110000	1F1EA.1F1EC	埃及	oi1 kap6
-8	110000	1F1EA.1F1EC	埃	oi1
 8	110000	1F1F8.1F1FB	薩爾瓦多	saat3 ji5 ngaa5 do1
 8	110000	1F1EC.1F1F6	赤道幾內亞	cek3 dou6 gei2 noi6 aa3
 8	110000	1F1EA.1F1F7	厄立特里亞	ak1 laap6 dak6 lei5 aa3
@@ -5619,7 +5643,6 @@
 8	110000	1F1EB.1F1EE	芬蘭	fan1 laan4
 8	110000	1F1EB.1F1F7	法國	faat3 gwok3
 8	110000	1F1EB.1F1F7	法蘭西	faat3 laan4 sai1
-8	110000	1F1EB.1F1F7	法	faat3
 8	110000	1F1EC.1F1EB	法屬圭亞那	faat3 suk6 gwai1 aa3 naa5
 8	110000	1F1F5.1F1EB	法屬波利尼西亞	faat3 suk6 bo1 lei6 nei4 sai1 aa3
 8	110000	1F1F9.1F1EB	法屬南部領地	faat3 suk6 naam4 bou6 ling5 dei6
@@ -5628,7 +5651,6 @@
 8	110000	1F1EC.1F1EA	格魯吉亞	gaak3 lou5 gat1 aa3
 8	110000	1F1E9.1F1EA	德國	dak1 gwok3
 8	110000	1F1E9.1F1EA	德意志	dak1 ji3 zi3
-8	110000	1F1E9.1F1EA	德	dak1
 8	110000	1F1EC.1F1ED	加納	gaa1 naap6
 8	110000	1F1EC.1F1ED	迦納	gaa1 naap6
 8	110000	1F1EC.1F1EE	直布羅陀	zik6 bou3 lo4 to4
@@ -5645,13 +5667,11 @@
 8	110000	1F1ED.1F1F9	海地	hoi2 dei6
 8	110000	1F1ED.1F1F3	洪都拉斯	hung4 dou1 laai1 si1
 8	110000	1F1ED.1F1F0	香港	hoeng1 gong2
-8	110000	1F1ED.1F1F0	港	gong2
 8	110000	1F1ED.1F1F0	紫荊花旗	zi2 ging1 faa1 kei4
 8	110000	1F1ED.1F1F0	紫荊旗	zi2 ging1 kei4
 8	110000	1F1ED.1F1FA	匈牙利	hung1 ngaa4 lei6
 8	110000	1F1EE.1F1F8	冰島	bing1 dou2
 8	110000	1F1EE.1F1F3	印度	jan3 dou6
-8	110000	1F1EE.1F1F3	印	jan3
 8	110000	1F1EE.1F1F3	婆羅多	po4 lo4 do1
 8	110000	1F1EE.1F1F3	天竺	tin1 zuk1
 8	110000	1F1EE.1F1E9	印度尼西亞	jan3 dou6 nei4 sai1 aa3
@@ -5662,11 +5682,9 @@
 8	110000	1F1EE.1F1F2	馬恩島	maa5 jan1 dou2
 8	110000	1F1EE.1F1F1	以色列	ji5 sik1 lit6
 8	110000	1F1EE.1F1F9	意大利	ji3 daai6 lei6
-8	110000	1F1EE.1F1F9	意	ji3
 8	110000	1F1EF.1F1F2	牙買加	ngaa4 maai5 gaa1
 8	110000	1F1EF.1F1F5	日本	jat6 bun2
 8	110000	1F1EF.1F1F5	日本國	jat6 bun2 gwok3
-8	110000	1F1EF.1F1F5	日	jat6
 8	110000	1F38C	交叉旗	gaau1 caa1 kei4
 8	110000	1F38C	交叉旗	kaau1 caa1 kei4
 8	110000	1F38C	日本交叉旗	jat6 bun2 gaau1 caa1 kei4
@@ -5691,8 +5709,6 @@
 8	110000	1F1F1.1F1F9	立陶宛	lap6 tou4 jyun2
 8	110000	1F1F1.1F1FA	盧森堡	lou4 sam1 bou2
 8	110000	1F1F2.1F1F4	澳門	ou3 mun2
-8	110000	1F1F2.1F1F4	澳門	ou3 mun4
-8	110000	1F1F2.1F1F4	澳	ou3
 8	110000	1F1F2.1F1EC	馬達加斯加	maa5 daat6 gaa1 si1 gaa1
 8	110000	1F1F2.1F1FC	馬拉維	maa5 laai1 wai4
 8	110000	1F1F2.1F1FE	馬來西亞	maa5 loi4 sai1 aa3
@@ -5709,13 +5725,11 @@
 8	110000	1F1F2.1F1FA	毛里求斯	mou4 lei5 kau4 si1
 8	110000	1F1FE.1F1F9	馬約特島	maa5 joek3 dak6 dou2
 8	110000	1F1F2.1F1FD	墨西哥	mak6 sai1 go1
-8	110000	1F1F2.1F1FD	墨	mak6
 8	110000	1F1EB.1F1F2	密克羅尼西亞	mat6 hak1 lo4 nei4 sai1 aa3
 8	110000	1F1F2.1F1E9	摩爾多瓦	mo1 ji5 do1 ngaa5
 8	110000	1F1F2.1F1E8	摩納哥	mo1 naap6 go1
 8	110000	1F1F2.1F1F3	蒙古國	mung4 gu2 gwok3
 8	110000	1F1F2.1F1F3	蒙古	mung4 gu2
-8	110000	1F1F2.1F1F3	蒙	mung4
 8	110000	1F1F2.1F1EA	黑山	hak1 saan1
 8	110000	1F1F2.1F1F8	蒙特塞拉特	mung4 dak6 sak1 laai1 dak6
 8	110000	1F1F2.1F1E6	摩洛哥	mo1 lok3 go1
@@ -5725,7 +5739,7 @@
 8	110000	1F1F3.1F1F7	瑙魯	nou5 lou5
 8	110000	1F1F3.1F1F5	尼泊爾	nei4 bok6 ji5
 8	110000	1F1F3.1F1F1	荷蘭	ho4 laan1
-8	110000	1F1F3.1F1F1	荷	ho4
+8	110000	1F1F3.1F1F1	尼德蘭	nei4 dak1 laan4
 8	110000	1F1F3.1F1F1	風車國	fung1 ce1 gwok3
 8	110000	1F1F3.1F1E8	新喀里多尼亞	san1 haak3 lei5 do1 nei4 aa3
 8	110000	1F1F3.1F1FF	新西蘭	san1 sai1 laan4
@@ -5737,8 +5751,6 @@
 8	110000	1F1F3.1F1EB	諾福克島	nok6 fuk1 hak1 dou2
 8	110000	1F1F0.1F1F5	朝鮮	ciu4 sin1
 8	110000	1F1F0.1F1F5	朝鮮	ziu1 sin1
-8	110000	1F1F0.1F1F5	朝	ciu4
-8	110000	1F1F0.1F1F5	朝	ziu1
 8	110000	1F1F0.1F1F5	北朝鮮	bak1 ciu4 sin1
 8	110000	1F1F0.1F1F5	北朝鮮	bak1 ziu1 sin1
 8	110000	1F1F0.1F1F5	北韓	bak1 hon4
@@ -5759,7 +5771,6 @@
 8	110000	1F1F5.1F1F3	皮特肯	pei4 dak6 hang2
 8	110000	1F1F5.1F1F1	波蘭	bo1 laan4
 8	110000	1F1F5.1F1F9	葡萄牙	pou4 tou4 ngaa4
-8	110000	1F1F5.1F1F9	葡	pou4
 8	110000	1F1F5.1F1F7	波多黎各	bo1 do1 lai4 gok3
 8	110000	1F1F6.1F1E6	卡塔爾	kaa1 taap3 ji5
 8	110000	1F1F7.1F1EA	留尼旺	lau4 nei4 wong6
@@ -5801,7 +5812,6 @@
 8	110000	1F1F0.1F1F7	韓國	hon4 gwok3
 8	110000	1F1F0.1F1F7	大韓民國	daai6 hon4 man4 gwok3
 8	110000	1F1F0.1F1F7	南韓	naam4 hon4
-8	110000	1F1F0.1F1F7	韓	hon4
 8	110000	1F1F0.1F1F7	南朝鮮	naam4 ciu4 sin1
 8	110000	1F1F0.1F1F7	南朝鮮	naam4 ziu1 sin1
 8	110000	1F1F0.1F1F7	高麗	gou1 lai6
@@ -5824,12 +5834,10 @@
 8	110000	1F1F9.1F1FC	臺灣	toi4 waan1
 8	110000	1F1F9.1F1FC	中華民國	zung1 waa4 man4 gwok3
 8	110000	1F1F9.1F1FC	民國	man4 gwok3
-8	110000	1F1F9.1F1FC	臺	toi4
 8	110000	1F1F9.1F1FC	青天白日滿地紅	cing1 tin1 baak6 jat6 mun5 dei6 hung4
 8	110000	1F1F9.1F1EF	塔吉克斯坦	taap3 gat1 hak1 si1 taan2
 8	110000	1F1F9.1F1FF	坦桑尼亞	taan2 song1 nei4 aa3
 8	110000	1F1F9.1F1ED	泰國	taai3 gwok3
-8	110000	1F1F9.1F1ED	泰	taai3
 8	110000	1F1F9.1F1ED	暹羅	cim3 lo4
 8	110000	1F1F9.1F1F1	東帝汶	dung1 dai3 man4
 8	110000	1F1F9.1F1EC	多哥	do1 go1
@@ -5846,8 +5854,8 @@
 8	110000	1F1E6.1F1EA	阿拉伯聯合酋長國	aa3 laai1 baak3 lyun4 hap6 jau4 zoeng2 gwok3
 8	110000	1F1E6.1F1EA	阿聯酋	aa3 lyun4 jau4
 8	110000	1F1EC.1F1E7	英國	jing1 gwok3
+8	110000	1F1EC.1F1E7	米字旗	mai5 zi6 kei4
 8	110000	1F1EC.1F1E7	英吉利	jing1 gat1 lei6
-8	110000	1F1EC.1F1E7	英	jing1
 8	110000	1F1EC.1F1E7	大不列顛	daai6 bat1 lit6 din1
 8	110000	1F1EC.1F1E7	聯合王國	lyun4 hap6 wong4 gwok3
 8	110000	1F1EC.1F1E7	大英帝國	daai6 jing1 dai3 gwok3
@@ -5856,11 +5864,10 @@
 8	110000	1F3F4.E0067.E0062.E0077.E006C.E0073.E007F	威爾士	wai1 ji5 si6
 8	110000	1F1FA.1F1F8	美國	mei5 gwok3
 8	110000	1F1FA.1F1F8	米國	mai5 gwok3
+8	110000	1F1FA.1F1F8	星條旗	sing1 tiu4 kei4
 8	110000	1F1FA.1F1F8	美利堅	mei5 lei6 gin1
 8	110000	1F1FA.1F1F8	米利堅	mai5 lei6 gin1
 8	110000	1F1FA.1F1F8	美利堅合衆國	mei5 lei6 gin1 hap6 zung3 gwok3
-8	110000	1F1FA.1F1F8	美	mei5
-8	110000	1F1FA.1F1F8	米	mai5
 8	110000	1F1FA.1F1F8	花旗	faa1 kei4
 8	110000	1F1FA.1F1F8	花旗國	faa1 kei4 gwok3
 8	110000	1F1FA.1F1FE	烏拉圭	wu1 laai1 gwai1
@@ -5878,22 +5885,22 @@
 8	110000	1F1FF.1F1F2	贊比亞	zaan3 bei2 aa3
 8	110000	1F1FF.1F1FC	津巴布韋	zeon1 baa1 bou3 wai4
 9	110000	1F3FB	膚色	fu1 sik1
+9	110000	1F3FB	皮膚	pei4 fu1
 9	110000	1F3FB	淺色膚色	cin2 sik1 fu1 sik1
 9	110000	1F3FB	淺膚色	cin2 fu1 sik1
-9	110000	1F3FB	皮膚	pei4 fu1
 9	110000	1F3FB	淺色皮膚	cin2 sik1 pei4 fu1
 9	110000	1F3FC	膚色	fu1 sik1
-9	110000	1F3FC	較淺膚色	gaau3 cin2 fu1 sik1
 9	110000	1F3FC	皮膚	pei4 fu1
+9	110000	1F3FC	較淺膚色	gaau3 cin2 fu1 sik1
 9	110000	1F3FD	膚色	fu1 sik1
 9	110000	1F3FD	皮膚	pei4 fu1
 9	110000	1F3FE	膚色	fu1 sik1
-9	110000	1F3FE	較深膚色	gaau3 sam1 fu1 sik1
 9	110000	1F3FE	皮膚	pei4 fu1
+9	110000	1F3FE	較深膚色	gaau3 sam1 fu1 sik1
 9	110000	1F3FF	膚色	fu1 sik1
+9	110000	1F3FF	皮膚	pei4 fu1
 9	110000	1F3FF	深色膚色	sam1 sik1 fu1 sik1
 9	110000	1F3FF	深膚色	sam1 fu1 sik1
-9	110000	1F3FF	皮膚	pei4 fu1
 9	110000	1F3FF	深色皮膚	sam1 sik1 pei4 fu1
 9	110000	1F44D.1F3FF	黑手	hak1 sau2
 9	110000	1F44A.1F3FF	黑拳	hak1 kyun2
@@ -5906,7 +5913,6 @@
 9	110000	1F91C.1F3FF	黑拳	hak1 kyun4
 9	110000	1F468.1F3FF	黑人	hak1 jan4
 9	110000	1F468.1F3FF	黑佬	hak1 lou2
-9	110000	1F468.1F3FF	老廣	lou5 gwong2
 9	110000	1F469.1F3FF	黑人	hak1 jan4
 9	110000	1F469.1F3FF	黑妹	hak1 mui1
 9	110000	1F469	女人	neoi5 jan2
@@ -6667,8 +6673,11 @@
 10	110000	25B1	梯形	tai1 jing4
 10	110000	25B2	黑三角	hak1 saam1 gok3
 10	110000	25B2	黑色三角形	hak1 sik1 saam1 gok3 jing4
+10	110000	25B2	三角形	saam1 gok3 jing4
 10	110000	25B3	三角	saam1 gok3
 10	110000	25B3	三角形	saam1 gok3 jing4
+10	110000	25BC	倒三角	dou2 saam1 gok3
+10	110000	25BD	倒三角	dou2 saam1 gok3
 10	110000	25C7	菱形	ling4 jing4
 10	110000	25CB	圓	jyun4
 10	110000	25CB	圓形	jyun4 jing4
@@ -6863,132 +6872,132 @@
 10	110000	1F230	走	zau2
 10	110000	1F231	打	daa2
 10	110000	1F23B	配	pui3
-9	110000	48.2082	氫氣	hing1 hei3
-9	110000	4E.2082	氮氣	daam6 hei3
-9	110000	4F.2082	氧氣	joeng5 hei3
-9	110000	43.48.2084	甲烷	gaap3 jyun4
-9	110000	43.2082.48.2086	乙烷	jyut3 jyun4
-9	110000	43.2083.48.2088	丙烷	bing2 jyun4
-9	110000	43.48.2083.43.48.2082.43.48.2082.43.48.2083	丁烷	ding1 jyun4
-9	110000	43.2082.48.2082	乙炔	jyut3 kyut3
-9	110000	43.48.2083.4F.48	甲醇	gaap3 seon4
-9	110000	43.2082.48.2085.4F.48	乙醇	jyut3 seon4
-9	110000	43.2082.48.2085.4F.48	酒精	zau2 zing1
-9	110000	43.48.2083.43.4F.4F.48	醋酸	cou3 syun1
-9	110000	43.48.2083.43.4F.4F.48	乙酸	jyut3 syun1
-9	110000	43.48.2083.43.4F.4F.48	醋	cou3
-9	110000	48.42.72	溴化氫	cau3 faa3 hing1
-9	110000	48.2082.53	硫化氫	lau4 faa3 hing1
-9	110000	4E.61.2082.53	硫化鈉	lau4 faa3 hing1
-9	110000	43.75.53	硫化銅	lau4 faa3 tung4
-9	110000	4B.43.6C.4F.2083	氯酸鉀	luk6 syun1 gaap3
-9	110000	4B.2082.4D.6E.4F.2084	高錳酸鉀	gou1 maang5 syun1 gaap3
-9	110000	43.2083.48.2086.4E.2086	三聚氰胺	saam1 zeoi6 cing4 on3
-9	110000	43.2081.2082.48.2081.2085.4E	甲基苯丙胺	gaap3 gei1 bun2 bing2 on3
-9	110000	43.2081.2082.48.2081.2085.4E	甲基安非他命	gaap3 gei1 on1 fei1 taa1 ming6
-9	110000	43.2081.2082.48.2081.2085.4E	冰毒	bing1 duk6
-9	110000	43.2086.48.2081.2082.4F.2086	葡萄糖	pou4 tou4 tong4
-9	110000	43.2086.48.2081.2082.4F.2086	果糖	gwo2 tong4
-9	110000	43.2081.2082.48.2082.2082.4F.2081.2081	蔗糖	ze3 tong4
-9	110000	43.2081.2082.48.2082.2082.4F.2081.2084.5A.6E	葡萄糖酸鋅	pou4 tou4 tong4 syun1 san1
-9	110000	43.2085.48.2088.4E.4F.2084.4E.61	穀氨酸鈉	guk1 on1 syun1 naap6
-9	110000	43.2085.48.2088.4E.4F.2084.4E.61	味精	mei6 zing1
-9	110000	43.2085.48.2088.4E.4F.2084.4E.61	師傅	si1 fu2
-9	110000	48.46	氫氟酸	hing1 fat1 syun1
-9	110000	48.46	氟化氫	fat1 faa3 hing1
-9	110000	48.2082.53.4F.2083	亞硫酸	aa3 lau4 syun1
-9	110000	4E.61.53.4F.2083	亞硫酸鈉	aa3 lau4 syun1 naap6
-9	110000	43.75.53.4F.2084	硫酸銅	lau4 syun1 tung4
-9	110000	4E.61.2082.53.4F.2084	硫酸鈉	lau4 syun1 naap6
-9	110000	48.2082.53.4F.2084	硫酸	lau4 syun1
-9	110000	42.61.53.4F.2084	硫酸鋇	lau4 syun1 bui3
-9	110000	43.61.53.4F.2084	硫酸鈣	lau4 syun1 koi3
-9	110000	4B.2082.53.4F.2084	硫酸鉀	lau4 syun1 gaap3
-9	110000	4D.67.53.4F.2084	硫酸鎂	lau4 syun1 mei5
-9	110000	46.65.53.4F.2084	硫酸亞鐵	lau4 syun1 aa3 tit3
-9	110000	46.65.2082.28.53.4F.2084.29.2083	硫酸鐵	lau4 syun1 tit3
-9	110000	41.6C.2082.28.53.4F.2084.29.2083	硫酸鋁	lau4 syun1 leoi5
-9	110000	4E.61.48.53.4F.2084	硫酸氫鈉	lau4 syun1 hing1 naap6
-9	110000	4B.48.53.4F.2084	硫酸氫鉀	lau4 syun1 hing1 gaap3
-9	110000	28.4E.48.2084.29.2082.53.4F.2084	硫酸銨	lau4 syun1 on2
-9	110000	4E.61.4E.4F.2082	亞硝酸鈉	aa3 siu1 syun1 naap6
-9	110000	48.4E.4F.2083	硝酸	siu1 syun1
-9	110000	4E.48.2084.4E.4F.2083	硝酸銨	siu1 syun1 on2
-9	110000	4E.61.4E.4F.2083	硝酸鈉	siu1 syun1 naap6
-9	110000	4B.4E.4F.2083	硝酸鉀	siu1 syun1 gaap3
-9	110000	41.67.4E.4F.2083	硝酸銀	siu1 syun1 ngan4
-9	110000	4D.67.28.4E.4F.2083.29.2082	硝酸鎂	siu1 syun1 mei5
-9	110000	43.75.28.4E.4F.2083.29.2082	硝酸銅	siu1 syun1 tung4
-9	110000	43.61.28.4E.4F.2083.29.2082	硝酸鈣	siu1 syun1 koi3
-9	110000	5A.6E.28.4E.4F.2083.29.2082	硝酸鋅	siu1 syun1 san1
-9	110000	50.62.28.4E.4F.2083.29.2082	硝酸鉛	siu1 syun1 jyun4
-9	110000	4C.69.4E.4F.2083	硝酸鋰	siu1 syun1 lei5
-9	110000	48.2082.43.4F.2083	碳酸	taan3 syun1
-9	110000	4E.61.2082.43.4F.2083	碳酸鈉	taan3 syun1 naap6
-9	110000	4E.61.2082.43.4F.2083	純鹼	seon4 gaan2
-9	110000	43.61.43.4F.2083	碳酸鈣	taan3 syun1 koi3
-9	110000	4D.67.43.4F.2083	碳酸鎂	taan3 syun1 mei5
-9	110000	4B.2082.43.4F.2083	碳酸鉀	taan3 syun1 gaap3
-9	110000	43.75.2082.28.4F.48.29.2082.43.4F.2083	鹼式碳酸銅	gaan2 sik1 lau4 syun1 tung4
-9	110000	4E.48.2084.48.43.4F.2083	碳酸氫銨	taan3 syun1 hing1 on2
-9	110000	4E.61.48.43.4F.2083	碳酸氫鈉	taan3 syun1 hing1 naap6
-9	110000	48.2083.50.4F.2084	磷酸	leon4 syun1
-9	110000	4B.48.2082.50.4F.2084	磷酸二氫鉀	leon4 syun1 ji6 hing1 gaap3
-9	110000	4E.61.48.2082.50.4F.2084	磷酸二氫鈉	leon4 syun1 ji6 hing1 naap6
-9	110000	43.61.2083.28.50.4F.2084.29.2082	磷酸鈣	leon4 syun1 koi3
-9	110000	48.2082.4F	水	seoi2
-9	110000	48.2082.4F	水分子	seoi2 fan1 zi2
-9	110000	48.2082.4F	一氧化二氫	jat1 joeng5 faa3 ji6 hing1
-9	110000	48.2082.4F.2082	二氧化氫	ji6 joeng5 faa3 hing1
-9	110000	48.2082.4F.2082	過氧化氫	gwo3 joeng5 faa3 hing1
-9	110000	46.65.2082.4F.2083	氧化鐵	joeng5 faa3 tit3
-9	110000	46.65.2082.4F.2083	三氧化二鐵	ji6 joeng5 faa3 saam1 tit3
-9	110000	4E.61.4F.48	燒鹼	siu1 gaan2
-9	110000	4E.61.4F.48	氫氧化鈉	hing1 joeng5 faa3 naap6
-9	110000	41.6C.2082.4F.2083	氧化鋁	joeng5 faa3 leoi5
-9	110000	41.6C.2082.4F.2083	三氧化二鋁	saam1 joeng5 faa3 ji6 leoi5
-9	110000	43.4F.2082	乾冰	gon1 bing1
-9	110000	43.4F.2082	二氧化碳	ji6 joeng5 faa3 taan3
-9	110000	43.4F	一氧化碳	jat1 joeng5 faa3 taan3
-9	110000	50.2082.4F.2085	五氧化二磷	ng5 joeng5 faa3 ji6 leon4
-9	110000	4E.61.2082.4F	氧化鈉	joeng5 faa3 naap6
-9	110000	4E.4F.2082	二氧化氮	ji6 joeng5 faa3 daam6
-9	110000	53.69.4F.2082	二氧化硅	ji6 joeng5 faa3 gwai1
-9	110000	53.4F.2082	二氧化硫	ji6 joeng5 faa3 lau4
-9	110000	53.4F.2083	三氧化硫	saam1 joeng5 faa3 lau4
-9	110000	4E.4F	一氧化氮	jat1 joeng5 faa3 daam6
-9	110000	4D.67.4F	氧化鎂	joeng5 faa3 mei5
-9	110000	43.75.4F	氧化銅	joeng5 faa3 tung4
-9	110000	42.61.4F	氧化鋇	joeng5 faa3 bui3
-9	110000	43.75.2082.4F	氧化亞銅	joeng5 faa3 aa3 tung4
-9	110000	46.65.4F	氧化亞鐵	joeng5 faa3 aa3 tit3
-9	110000	46.65.2083.4F.2084	四氧化三鐵	sei3 joeng5 faa3 saam1 tit3
-9	110000	57.4F.2083	三氧化鎢	saam1 joeng5 faa3 wu1
-9	110000	41.67.2082.4F	氧化銀	joeng5 faa3 ngan4
-9	110000	50.62.4F	氧化鉛	joeng5 faa3 jyun4
-9	110000	4D.6E.4F.2082	二氧化錳	ji6 joeng5 faa3 maang5
-9	110000	43.61.28.4F.48.29.2082	氫氧化鈣	hing1 joeng5 faa3 gaap3
-9	110000	42.61.28.4F.48.29.2082	氫氧化鋇	hing1 joeng5 faa3 bui3
-9	110000	4D.67.28.4F.48.29.2082	氫氧化鎂	hing1 joeng5 faa3 mei5
-9	110000	43.75.28.4F.48.29.2082	氫氧化銅	hing1 joeng5 faa3 tung4
-9	110000	4B.4F.48	氫氧化鉀	hing1 joeng5 faa3 gaap3
-9	110000	41.6C.28.4F.48.29.2083	氫氧化鋁	hing1 joeng5 faa3 leoi5
-9	110000	46.65.28.4F.48.29.2083	氫氧化鐵	hing1 joeng5 faa3 tit3
-9	110000	46.65.28.4F.48.29.2082	氫氧化亞鐵	hing1 joeng5 faa3 aa3 tit3
-9	110000	4E.48.2084.4F.48	氫氧化銨	hing1 joeng5 faa3 on2
-9	110000	4B.2082.4F	氧化鉀	joeng5 faa3 gaap3
-9	110000	4C.69.4F.48	氫氧化鋰	hing1 joeng5 faa3 lei5
-9	110000	48.43.6C	氯化氫	luk6 faa3 hing1
-9	110000	48.43.6C	鹽酸	jim4 syun1
-9	110000	4E.61.43.6C	氯化鈉	luk6 faa3 naap6
-9	110000	4B.43.6C	氯化鉀	luk6 faa3 gaap3
-9	110000	4D.67.43.6C.2082	氯化鎂	luk6 faa3 mei5
-9	110000	43.61.43.6C.2082	氯化鈣	luk6 faa3 koi3
-9	110000	43.75.43.6C.2082	氯化銅	luk6 faa3 tung4
-9	110000	5A.6E.43.6C.2082	氯化鋅	luk6 faa3 san1
-9	110000	42.61.43.6C.2082	氯化鋇	luk6 faa3 bui3
-9	110000	41.6C.43.6C.2083	氯化鋁	luk6 faa3 leoi5
-9	110000	46.65.43.6C.2082	氯化亞鐵	luk6 faa3 aa3 tit3
-9	110000	46.65.43.6C.2083	氯化鐵	luk6 faa3 tit3
-9	110000	41.67.43.6C	氯化銀	luk6 faa3 ngan4
-9	110000	4E.48.2084.43.6C	氯化銨	luk6 faa3 on2
+10	110000	48.2082	氫氣	hing1 hei3
+10	110000	4E.2082	氮氣	daam6 hei3
+10	110000	4F.2082	氧氣	joeng5 hei3
+10	110000	43.48.2084	甲烷	gaap3 jyun4
+10	110000	43.2082.48.2086	乙烷	jyut3 jyun4
+10	110000	43.2083.48.2088	丙烷	bing2 jyun4
+10	110000	43.48.2083.43.48.2082.43.48.2082.43.48.2083	丁烷	ding1 jyun4
+10	110000	43.2082.48.2082	乙炔	jyut3 kyut3
+10	110000	43.48.2083.4F.48	甲醇	gaap3 seon4
+10	110000	43.2082.48.2085.4F.48	乙醇	jyut3 seon4
+10	110000	43.2082.48.2085.4F.48	酒精	zau2 zing1
+10	110000	43.48.2083.43.4F.4F.48	醋酸	cou3 syun1
+10	110000	43.48.2083.43.4F.4F.48	乙酸	jyut3 syun1
+10	110000	43.48.2083.43.4F.4F.48	醋	cou3
+10	110000	48.42.72	溴化氫	cau3 faa3 hing1
+10	110000	48.2082.53	硫化氫	lau4 faa3 hing1
+10	110000	4E.61.2082.53	硫化鈉	lau4 faa3 hing1
+10	110000	43.75.53	硫化銅	lau4 faa3 tung4
+10	110000	4B.43.6C.4F.2083	氯酸鉀	luk6 syun1 gaap3
+10	110000	4B.2082.4D.6E.4F.2084	高錳酸鉀	gou1 maang5 syun1 gaap3
+10	110000	43.2083.48.2086.4E.2086	三聚氰胺	saam1 zeoi6 cing4 on3
+10	110000	43.2081.2082.48.2081.2085.4E	甲基苯丙胺	gaap3 gei1 bun2 bing2 on3
+10	110000	43.2081.2082.48.2081.2085.4E	甲基安非他命	gaap3 gei1 on1 fei1 taa1 ming6
+10	110000	43.2081.2082.48.2081.2085.4E	冰毒	bing1 duk6
+10	110000	43.2086.48.2081.2082.4F.2086	葡萄糖	pou4 tou4 tong4
+10	110000	43.2086.48.2081.2082.4F.2086	果糖	gwo2 tong4
+10	110000	43.2081.2082.48.2082.2082.4F.2081.2081	蔗糖	ze3 tong4
+10	110000	43.2081.2082.48.2082.2082.4F.2081.2084.5A.6E	葡萄糖酸鋅	pou4 tou4 tong4 syun1 san1
+10	110000	43.2085.48.2088.4E.4F.2084.4E.61	穀氨酸鈉	guk1 on1 syun1 naap6
+10	110000	43.2085.48.2088.4E.4F.2084.4E.61	味精	mei6 zing1
+10	110000	43.2085.48.2088.4E.4F.2084.4E.61	師傅	si1 fu2
+10	110000	48.46	氫氟酸	hing1 fat1 syun1
+10	110000	48.46	氟化氫	fat1 faa3 hing1
+10	110000	48.2082.53.4F.2083	亞硫酸	aa3 lau4 syun1
+10	110000	4E.61.53.4F.2083	亞硫酸鈉	aa3 lau4 syun1 naap6
+10	110000	43.75.53.4F.2084	硫酸銅	lau4 syun1 tung4
+10	110000	4E.61.2082.53.4F.2084	硫酸鈉	lau4 syun1 naap6
+10	110000	48.2082.53.4F.2084	硫酸	lau4 syun1
+10	110000	42.61.53.4F.2084	硫酸鋇	lau4 syun1 bui3
+10	110000	43.61.53.4F.2084	硫酸鈣	lau4 syun1 koi3
+10	110000	4B.2082.53.4F.2084	硫酸鉀	lau4 syun1 gaap3
+10	110000	4D.67.53.4F.2084	硫酸鎂	lau4 syun1 mei5
+10	110000	46.65.53.4F.2084	硫酸亞鐵	lau4 syun1 aa3 tit3
+10	110000	46.65.2082.28.53.4F.2084.29.2083	硫酸鐵	lau4 syun1 tit3
+10	110000	41.6C.2082.28.53.4F.2084.29.2083	硫酸鋁	lau4 syun1 leoi5
+10	110000	4E.61.48.53.4F.2084	硫酸氫鈉	lau4 syun1 hing1 naap6
+10	110000	4B.48.53.4F.2084	硫酸氫鉀	lau4 syun1 hing1 gaap3
+10	110000	28.4E.48.2084.29.2082.53.4F.2084	硫酸銨	lau4 syun1 on2
+10	110000	4E.61.4E.4F.2082	亞硝酸鈉	aa3 siu1 syun1 naap6
+10	110000	48.4E.4F.2083	硝酸	siu1 syun1
+10	110000	4E.48.2084.4E.4F.2083	硝酸銨	siu1 syun1 on2
+10	110000	4E.61.4E.4F.2083	硝酸鈉	siu1 syun1 naap6
+10	110000	4B.4E.4F.2083	硝酸鉀	siu1 syun1 gaap3
+10	110000	41.67.4E.4F.2083	硝酸銀	siu1 syun1 ngan4
+10	110000	4D.67.28.4E.4F.2083.29.2082	硝酸鎂	siu1 syun1 mei5
+10	110000	43.75.28.4E.4F.2083.29.2082	硝酸銅	siu1 syun1 tung4
+10	110000	43.61.28.4E.4F.2083.29.2082	硝酸鈣	siu1 syun1 koi3
+10	110000	5A.6E.28.4E.4F.2083.29.2082	硝酸鋅	siu1 syun1 san1
+10	110000	50.62.28.4E.4F.2083.29.2082	硝酸鉛	siu1 syun1 jyun4
+10	110000	4C.69.4E.4F.2083	硝酸鋰	siu1 syun1 lei5
+10	110000	48.2082.43.4F.2083	碳酸	taan3 syun1
+10	110000	4E.61.2082.43.4F.2083	碳酸鈉	taan3 syun1 naap6
+10	110000	4E.61.2082.43.4F.2083	純鹼	seon4 gaan2
+10	110000	43.61.43.4F.2083	碳酸鈣	taan3 syun1 koi3
+10	110000	4D.67.43.4F.2083	碳酸鎂	taan3 syun1 mei5
+10	110000	4B.2082.43.4F.2083	碳酸鉀	taan3 syun1 gaap3
+10	110000	43.75.2082.28.4F.48.29.2082.43.4F.2083	鹼式碳酸銅	gaan2 sik1 lau4 syun1 tung4
+10	110000	4E.48.2084.48.43.4F.2083	碳酸氫銨	taan3 syun1 hing1 on2
+10	110000	4E.61.48.43.4F.2083	碳酸氫鈉	taan3 syun1 hing1 naap6
+10	110000	48.2083.50.4F.2084	磷酸	leon4 syun1
+10	110000	4B.48.2082.50.4F.2084	磷酸二氫鉀	leon4 syun1 ji6 hing1 gaap3
+10	110000	4E.61.48.2082.50.4F.2084	磷酸二氫鈉	leon4 syun1 ji6 hing1 naap6
+10	110000	43.61.2083.28.50.4F.2084.29.2082	磷酸鈣	leon4 syun1 koi3
+10	110000	48.2082.4F	水	seoi2
+10	110000	48.2082.4F	水分子	seoi2 fan1 zi2
+10	110000	48.2082.4F	一氧化二氫	jat1 joeng5 faa3 ji6 hing1
+10	110000	48.2082.4F.2082	二氧化氫	ji6 joeng5 faa3 hing1
+10	110000	48.2082.4F.2082	過氧化氫	gwo3 joeng5 faa3 hing1
+10	110000	46.65.2082.4F.2083	氧化鐵	joeng5 faa3 tit3
+10	110000	46.65.2082.4F.2083	三氧化二鐵	ji6 joeng5 faa3 saam1 tit3
+10	110000	4E.61.4F.48	燒鹼	siu1 gaan2
+10	110000	4E.61.4F.48	氫氧化鈉	hing1 joeng5 faa3 naap6
+10	110000	41.6C.2082.4F.2083	氧化鋁	joeng5 faa3 leoi5
+10	110000	41.6C.2082.4F.2083	三氧化二鋁	saam1 joeng5 faa3 ji6 leoi5
+10	110000	43.4F.2082	乾冰	gon1 bing1
+10	110000	43.4F.2082	二氧化碳	ji6 joeng5 faa3 taan3
+10	110000	43.4F	一氧化碳	jat1 joeng5 faa3 taan3
+10	110000	50.2082.4F.2085	五氧化二磷	ng5 joeng5 faa3 ji6 leon4
+10	110000	4E.61.2082.4F	氧化鈉	joeng5 faa3 naap6
+10	110000	4E.4F.2082	二氧化氮	ji6 joeng5 faa3 daam6
+10	110000	53.69.4F.2082	二氧化硅	ji6 joeng5 faa3 gwai1
+10	110000	53.4F.2082	二氧化硫	ji6 joeng5 faa3 lau4
+10	110000	53.4F.2083	三氧化硫	saam1 joeng5 faa3 lau4
+10	110000	4E.4F	一氧化氮	jat1 joeng5 faa3 daam6
+10	110000	4D.67.4F	氧化鎂	joeng5 faa3 mei5
+10	110000	43.75.4F	氧化銅	joeng5 faa3 tung4
+10	110000	42.61.4F	氧化鋇	joeng5 faa3 bui3
+10	110000	43.75.2082.4F	氧化亞銅	joeng5 faa3 aa3 tung4
+10	110000	46.65.4F	氧化亞鐵	joeng5 faa3 aa3 tit3
+10	110000	46.65.2083.4F.2084	四氧化三鐵	sei3 joeng5 faa3 saam1 tit3
+10	110000	57.4F.2083	三氧化鎢	saam1 joeng5 faa3 wu1
+10	110000	41.67.2082.4F	氧化銀	joeng5 faa3 ngan4
+10	110000	50.62.4F	氧化鉛	joeng5 faa3 jyun4
+10	110000	4D.6E.4F.2082	二氧化錳	ji6 joeng5 faa3 maang5
+10	110000	43.61.28.4F.48.29.2082	氫氧化鈣	hing1 joeng5 faa3 gaap3
+10	110000	42.61.28.4F.48.29.2082	氫氧化鋇	hing1 joeng5 faa3 bui3
+10	110000	4D.67.28.4F.48.29.2082	氫氧化鎂	hing1 joeng5 faa3 mei5
+10	110000	43.75.28.4F.48.29.2082	氫氧化銅	hing1 joeng5 faa3 tung4
+10	110000	4B.4F.48	氫氧化鉀	hing1 joeng5 faa3 gaap3
+10	110000	41.6C.28.4F.48.29.2083	氫氧化鋁	hing1 joeng5 faa3 leoi5
+10	110000	46.65.28.4F.48.29.2083	氫氧化鐵	hing1 joeng5 faa3 tit3
+10	110000	46.65.28.4F.48.29.2082	氫氧化亞鐵	hing1 joeng5 faa3 aa3 tit3
+10	110000	4E.48.2084.4F.48	氫氧化銨	hing1 joeng5 faa3 on2
+10	110000	4B.2082.4F	氧化鉀	joeng5 faa3 gaap3
+10	110000	4C.69.4F.48	氫氧化鋰	hing1 joeng5 faa3 lei5
+10	110000	48.43.6C	氯化氫	luk6 faa3 hing1
+10	110000	48.43.6C	鹽酸	jim4 syun1
+10	110000	4E.61.43.6C	氯化鈉	luk6 faa3 naap6
+10	110000	4B.43.6C	氯化鉀	luk6 faa3 gaap3
+10	110000	4D.67.43.6C.2082	氯化鎂	luk6 faa3 mei5
+10	110000	43.61.43.6C.2082	氯化鈣	luk6 faa3 koi3
+10	110000	43.75.43.6C.2082	氯化銅	luk6 faa3 tung4
+10	110000	5A.6E.43.6C.2082	氯化鋅	luk6 faa3 san1
+10	110000	42.61.43.6C.2082	氯化鋇	luk6 faa3 bui3
+10	110000	41.6C.43.6C.2083	氯化鋁	luk6 faa3 leoi5
+10	110000	46.65.43.6C.2082	氯化亞鐵	luk6 faa3 aa3 tit3
+10	110000	46.65.43.6C.2083	氯化鐵	luk6 faa3 tit3
+10	110000	41.67.43.6C	氯化銀	luk6 faa3 ngan4
+10	110000	4E.48.2084.43.6C	氯化銨	luk6 faa3 on2

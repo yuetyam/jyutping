@@ -205,7 +205,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 suggestionTask?.cancel()
                                 candidates = []
                                 text2mark = String.empty
-                                if keyboardForm == .nineKeyStroke {
+                                if keyboardForm.isNineKeyStroke {
                                         updateKeyboardForm(to: .alphabetic)
                                 }
                                 ensureQwertyForm(to: .primary)
@@ -228,7 +228,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 updateReverseLookupState(to: true)
                                 cangjieReverseLookup()
                         case .letterX:
-                                if strokeLayout.isNineKey && keyboardForm != .nineKeyStroke {
+                                if strokeLayout.isNineKey && keyboardForm.isNineKeyStroke.negative {
                                         updateKeyboardForm(to: .nineKeyStroke)
                                 } else {
                                         ensureQwertyForm(to: .stroke)
@@ -508,7 +508,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 case .clearBuffer:
                         clearBuffer()
                 case .return:
-                        if keyboardForm == .nineKeyStroke, let candidate = candidates.first {
+                        if keyboardForm.isNineKeyStroke, let candidate = candidates.first {
                                 input(candidate.text)
                                 aftercareSelected(candidate)
                         } else if inputStage.isBuffering {
@@ -1211,7 +1211,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         private func updateSpaceKeyForm() {
                 let newForm: SpaceKeyForm = {
                         guard inputMethodMode.isCantonese else { return .english }
-                        guard keyboardForm != .nineKeyNumeric else { return .fallback }
+                        guard keyboardForm.isNineKeyNumeric.negative else { return .fallback }
                         let isMutilated: Bool = characterStandard.isMutilated
                         if inputStage.isBuffering {
                                 if candidates.isEmpty {

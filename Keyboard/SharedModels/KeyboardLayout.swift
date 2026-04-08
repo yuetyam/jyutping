@@ -93,7 +93,7 @@ enum StrokeLayout: Int, CaseIterable {
         /// QWERTY layout
         case `default` = 1
 
-        /// 10 Key KeyPad
+        /// 10-key layout
         case nineKey = 2
 
         /// Read StrokeLayout from UserDefaults
@@ -102,6 +102,6 @@ enum StrokeLayout: Int, CaseIterable {
                 return allCases.first(where: { $0.rawValue == savedValue }) ?? .default
         }
 
-        /// 10 Key KeyPad
+        /// 10-key layout
         var isNineKey: Bool { self == .nineKey }
 }
