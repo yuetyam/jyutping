@@ -340,16 +340,26 @@ struct DatabasePreparer {
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
                 sqlite3_finalize(createStatement)
-                let sources: [TextMarkLexicon] = TextMarkLexicon.convert()
-                let entries = sources.map { entry -> String in
-                        return "('\(entry.input)', '\(entry.mark)', \(entry.spellCode), \(entry.charCode), \(entry.nineKeyCharCode))"
+                let sourceEntries: [TextMarkLexicon] = TextMarkLexicon.convert()
+                func insert(values: String) {
+                        let insert: String = "INSERT INTO mark_table (input, mark, spell, code, nine_key_code) VALUES \(values);"
+                        var insertStatement: OpaquePointer? = nil
+                        defer { sqlite3_finalize(insertStatement) }
+                        guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }
+                        guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
                 }
-                let values: String = entries.joined(separator: ", ")
-                let insert: String = "INSERT INTO mark_table (input, mark, spell, code, nine_key_code) VALUES \(values);"
-                var insertStatement: OpaquePointer? = nil
-                defer { sqlite3_finalize(insertStatement) }
-                guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }
-                guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
+                let range: Range<Int> = 0..<200
+                let distance: Int = sourceEntries.count / 200
+                for number in range {
+                        let bound: Int = (number == 199) ? sourceEntries.count : ((number + 1) * distance)
+                        let part = sourceEntries[(number * distance)..<bound]
+                        let entries = part.map { entry -> String in
+                                let escapedMark: String = entry.mark.contains(String.apostrophe) ? entry.mark.replacingOccurrences(of: "'", with: "''") : entry.mark
+                                return "('\(entry.input)', '\(escapedMark)', \(entry.spellCode), \(entry.charCode), \(entry.nineKeyCharCode))"
+                        }
+                        let values: String = entries.joined(separator: ", ")
+                        insert(values: values)
+                }
         }
         private static func createSyllableTable() async {
                 let createTable: String = "CREATE TABLE syllable_table(alias_code INTEGER NOT NULL PRIMARY KEY, origin_code INTEGER NOT NULL, nine_key_alias_code INTEGER NOT NULL, nine_key_origin_code INTEGER NOT NULL, alias TEXT NOT NULL, origin TEXT NOT NULL);"
