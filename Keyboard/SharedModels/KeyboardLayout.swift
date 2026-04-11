@@ -1,4 +1,5 @@
 import Foundation
+import CommonExtensions
 
 /// Cantonese Keyboard Layout
 enum KeyboardLayout: Int, CaseIterable {
@@ -29,7 +30,22 @@ enum KeyboardLayout: Int, CaseIterable {
 
         /// Read KeyboardLayout from UserDefaults
         static func fetchSavedLayout() -> KeyboardLayout {
-                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.KeyboardLayout)
+                let hasSavedValue: Bool = UserDefaults.standard.object(forKey: OptionsKey.KeyboardLayout) != nil
+                let hasLegacySavedValue: Bool = UserDefaults.standard.object(forKey: LegacyOptionsKey.KeyboardLayout) != nil
+                defer {
+                        if hasLegacySavedValue {
+                                UserDefaults.standard.removeObject(forKey: LegacyOptionsKey.KeyboardLayout)
+                        }
+                }
+                let savedValue: Int = {
+                        if hasSavedValue.negative && hasLegacySavedValue {
+                                let oldValue: Int = UserDefaults.standard.integer(forKey: LegacyOptionsKey.KeyboardLayout)
+                                UserDefaults.standard.set(oldValue, forKey: OptionsKey.KeyboardLayout)
+                                return oldValue
+                        } else {
+                                return UserDefaults.standard.integer(forKey: OptionsKey.KeyboardLayout)
+                        }
+                }()
                 return allCases.first(where: { $0.rawValue == savedValue }) ?? .qwerty
         }
 
