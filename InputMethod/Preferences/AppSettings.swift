@@ -17,7 +17,8 @@ private struct SettingsKey {
         static let LabelLast: String = "LabelLast"
 
         static let CangjieVariant: String = "CangjieVariant"
-        static let EmojiSuggestions: String = "emoji"
+        static let LegacyEmojiSuggestions: String = "emoji"
+        static let EmojiSuggestions: String = "EmojiSuggestions"
         static let EnglishSuggestions: String = "EnglishSuggestions"
         static let SystemLexicon: String = "SystemLexicon"
         static let SchemeRules: String = "SchemeRules"
@@ -425,8 +426,21 @@ struct AppSettings {
         // MARK: - Input Options
 
         private(set) static var isEmojiSuggestionsOn: Bool = {
-                let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.EmojiSuggestions)
-                return savedValue != 2
+                let hasSavedValue: Bool = UserDefaults.standard.object(forKey: SettingsKey.EmojiSuggestions) != nil
+                let hasLegacySavedValue: Bool = UserDefaults.standard.object(forKey: SettingsKey.LegacyEmojiSuggestions) != nil
+                defer {
+                        if hasLegacySavedValue {
+                                UserDefaults.standard.removeObject(forKey: SettingsKey.LegacyEmojiSuggestions)
+                        }
+                }
+                if hasSavedValue.negative && hasLegacySavedValue {
+                        let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.LegacyEmojiSuggestions)
+                        UserDefaults.standard.set(savedValue, forKey: SettingsKey.EmojiSuggestions)
+                        return savedValue != 2
+                } else {
+                        let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.EmojiSuggestions)
+                        return savedValue != 2
+                }
         }()
         static func updateEmojiSuggestions(to isOn: Bool) {
                 isEmojiSuggestionsOn = isOn

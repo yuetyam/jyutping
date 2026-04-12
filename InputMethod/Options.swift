@@ -18,8 +18,21 @@ struct Options {
 
         /// 字形標準
         nonisolated(unsafe) private(set) static var legacyCharacterStandard: CharacterStandard = {
-                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.LegacyCharacterStandard)
-                return CharacterStandard.allCases.first(where: { $0.legacyRawValue == savedValue }) ?? .preset
+                let hasSavedValue: Bool = UserDefaults.standard.object(forKey: OptionsKey.LegacyCharacterStandard) != nil
+                let hasOldKeySavedValue: Bool = UserDefaults.standard.object(forKey: LegacyOptionsKey.OldCharacterStandardKey) != nil
+                defer {
+                        if hasOldKeySavedValue {
+                                UserDefaults.standard.removeObject(forKey: LegacyOptionsKey.OldCharacterStandardKey)
+                        }
+                }
+                if hasSavedValue.negative && hasOldKeySavedValue {
+                        let savedValue: Int = UserDefaults.standard.integer(forKey: LegacyOptionsKey.OldCharacterStandardKey)
+                        UserDefaults.standard.set(savedValue, forKey: OptionsKey.LegacyCharacterStandard)
+                        return CharacterStandard.allCases.first(where: { $0.legacyRawValue == savedValue }) ?? .preset
+                } else {
+                        let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.LegacyCharacterStandard)
+                        return CharacterStandard.allCases.first(where: { $0.legacyRawValue == savedValue }) ?? .preset
+                }
         }()
         static func updateLegacyCharacterStandard(to standard: CharacterStandard) {
                 legacyCharacterStandard = standard
@@ -40,8 +53,21 @@ struct Options {
 
         /// 半寬／全寬數字、字母
         nonisolated(unsafe) private(set) static var characterForm: CharacterForm = {
-                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.CharacterForm)
-                return (savedValue == CharacterForm.fullWidth.rawValue) ? .fullWidth : .halfWidth
+                let hasSavedValue: Bool = UserDefaults.standard.object(forKey: OptionsKey.CharacterForm) != nil
+                let hasLegacySavedValue: Bool = UserDefaults.standard.object(forKey: LegacyOptionsKey.CharacterForm) != nil
+                defer {
+                        if hasLegacySavedValue {
+                                UserDefaults.standard.removeObject(forKey: LegacyOptionsKey.CharacterForm)
+                        }
+                }
+                if hasSavedValue.negative && hasLegacySavedValue {
+                        let savedValue: Int = UserDefaults.standard.integer(forKey: LegacyOptionsKey.CharacterForm)
+                        UserDefaults.standard.set(savedValue, forKey: OptionsKey.CharacterForm)
+                        return CharacterForm.allCases.first(where: { $0.rawValue == savedValue }) ?? .halfWidth
+                } else {
+                        let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.CharacterForm)
+                        return CharacterForm.allCases.first(where: { $0.rawValue == savedValue }) ?? .halfWidth
+                }
         }()
         static func updateCharacterForm(to form: CharacterForm) {
                 characterForm = form
@@ -51,8 +77,21 @@ struct Options {
 
         /// 標點符號形態. 粵文句讀／英文標點
         nonisolated(unsafe) private(set) static var punctuationForm: PunctuationForm = {
-                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.PunctuationForm)
-                return (savedValue == PunctuationForm.english.rawValue) ? .english : .cantonese
+                let hasSavedValue: Bool = UserDefaults.standard.object(forKey: OptionsKey.PunctuationForm) != nil
+                let hasLegacySavedValue: Bool = UserDefaults.standard.object(forKey: LegacyOptionsKey.PunctuationForm) != nil
+                defer {
+                        if hasLegacySavedValue {
+                                UserDefaults.standard.removeObject(forKey: LegacyOptionsKey.PunctuationForm)
+                        }
+                }
+                if hasSavedValue.negative && hasLegacySavedValue {
+                        let savedValue: Int = UserDefaults.standard.integer(forKey: LegacyOptionsKey.PunctuationForm)
+                        UserDefaults.standard.set(savedValue, forKey: OptionsKey.PunctuationForm)
+                        return PunctuationForm.allCases.first(where: { $0.rawValue == savedValue }) ?? .cantonese
+                } else {
+                        let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.PunctuationForm)
+                        return PunctuationForm.allCases.first(where: { $0.rawValue == savedValue }) ?? .cantonese
+                }
         }()
         static func updatePunctuationForm(to form: PunctuationForm) {
                 punctuationForm = form
@@ -73,45 +112,38 @@ struct Options {
 }
 
 private struct OptionsKey {
-        static let LegacyCharacterStandard: String = "characters"
+        static let LegacyCharacterStandard: String = "LegacyCharacterStandard"
         static let TraditionalCharacterStandard: String = "TraditionalCharacterStandard"
+        static let CharacterForm: String = "CharacterForm"
+        static let PunctuationForm: String = "PunctuationForm"
+        static let InputMethodMode: String = "InputMethodMode"
+}
+private struct LegacyOptionsKey {
+        static let OldCharacterStandardKey: String = "characters"
         static let CharacterForm: String = "character_form"
         static let PunctuationForm: String = "punctuation"
-        static let InputMethodMode: String = "InputMethodMode"
 }
 
 /// 半寬／全寬數字、字母
-enum CharacterForm: Int {
+enum CharacterForm: Int, CaseIterable {
         case halfWidth = 1
         case fullWidth = 2
-        var isHalfWidth: Bool {
-                return self == .halfWidth
-        }
-        var isFullWidth: Bool {
-                return self == .fullWidth
-        }
+        var isHalfWidth: Bool { self == .halfWidth }
+        var isFullWidth: Bool { self == .fullWidth }
 }
 
 /// 標點符號形態
-enum PunctuationForm: Int {
+enum PunctuationForm: Int, CaseIterable {
         case cantonese = 1
         case english = 2
-        var isCantoneseMode: Bool {
-                return self == .cantonese
-        }
-        var isEnglishMode: Bool {
-                return self == .english
-        }
+        var isCantoneseMode: Bool { self == .cantonese }
+        var isEnglishMode: Bool { self == .english }
 }
 
-/// Cantonese / ABC
-enum InputMethodMode: Int {
+/// Cantonese / ABC input mode
+enum InputMethodMode: Int, CaseIterable {
         case cantonese = 1
         case abc = 2
-        var isCantonese: Bool {
-                return self == .cantonese
-        }
-        var isABC: Bool {
-                return self == .abc
-        }
+        var isCantonese: Bool { self == .cantonese }
+        var isABC: Bool { self == .abc }
 }
