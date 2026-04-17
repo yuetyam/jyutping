@@ -117,7 +117,7 @@ struct MacExpressionsView: View {
                                 .block()
                                 HStack {
                                         VStack(alignment: .leading, spacing: 10) {
-                                                Text(verbatim: "區分【諗】以及【冧】").font(.significant)
+                                                Text(verbatim: "區分【諗】【冧】【霖】").font(.significant)
                                                 HStack(spacing: 16) {
                                                         Text(verbatim: "諗")
                                                         HStack(spacing: 4) {
@@ -134,6 +134,14 @@ struct MacExpressionsView: View {
                                                         }
                                                         Text(verbatim: "表示倒塌、倒下。")
                                                 }
+                                                HStack(spacing: 16) {
+                                                        Text(verbatim: "霖")
+                                                        HStack(spacing: 4) {
+                                                                Text(verbatim: "lam4").font(.fixedWidth)
+                                                                Speaker("lam4")
+                                                        }
+                                                        Text(verbatim: "本義連綿落雨，多見於人名。")
+                                                }
                                                 HStack {
                                                         Text(verbatim: "例：我諗緊今晚食咩。")
                                                         Speaker("我諗緊今晚食咩。")
@@ -141,6 +149,10 @@ struct MacExpressionsView: View {
                                                 HStack {
                                                         Text(verbatim: "例：佢畀人㨃冧咗。")
                                                         Speaker("佢畀人㨃冧咗。")
+                                                }
+                                                HStack {
+                                                        Text(verbatim: "例：甘霖時雨。")
+                                                        Speaker("甘霖時雨。")
                                                 }
                                         }
                                         Spacer()

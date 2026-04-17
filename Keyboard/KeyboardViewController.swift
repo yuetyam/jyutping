@@ -696,7 +696,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         if Task.isCancelled.negative {
                                 await MainActor.run { [weak self] in
                                         guard let self else { return }
-                                        self.text2mark = {
+                                        text2mark = {
                                                 guard let firstCandidate = suggestions.first else { return combos.compactMap(\.letters.first).joined() }
                                                 let userInputCount = combos.count
                                                 let firstInputCount = firstCandidate.lexicon.inputCount
@@ -705,8 +705,8 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                                 let tailText = tailCombos.compactMap(\.letters.first).joined()
                                                 return firstCandidate.lexicon.mark + String.space + tailText
                                         }()
-                                        self.nineKeyCachedCandidates = suggestions
-                                        self.updateSidebarSyllables()
+                                        nineKeyCachedCandidates = suggestions
+                                        updateSidebarSyllables()
                                 }
                         }
                 }
@@ -738,8 +738,8 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                                 let tailText = tailCombos.compactMap(\.letters.first).joined()
                                                 return firstCandidate.lexicon.mark + String.space + tailText
                                         }()
-                                        self.text2mark = VirtualInputKey.letterR.text + String.space + tailMark
-                                        self.candidates = suggestions
+                                        text2mark = VirtualInputKey.letterR.text + String.space + tailMark
+                                        candidates = suggestions
                                 }
                         }
                 }
@@ -813,14 +813,15 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         if Task.isCancelled.negative {
                                 await MainActor.run { [weak self] in
                                         guard let self else { return }
-                                        self.text2mark = {
+                                        text2mark = {
                                                 lazy var text: String = joinedBufferTexts()
+                                                guard (suggestions.first?.isCantonese ?? false) else { return text }
                                                 guard isPeculiar.negative else { return text.toneConverted().markFormatted() }
                                                 guard let firstCandidate = suggestions.first else { return text }
                                                 guard firstCandidate.lexicon.inputCount != inputLength else { return firstCandidate.lexicon.mark }
                                                 return text
                                         }()
-                                        self.candidates = suggestions
+                                        candidates = suggestions
                                 }
                         }
                 }
@@ -849,8 +850,9 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         if Task.isCancelled.negative {
                                 await MainActor.run { [weak self] in
                                         guard let self else { return }
-                                        self.text2mark = {
+                                        text2mark = {
                                                 lazy var text: String = joinedBufferTexts()
+                                                guard (suggestions.first?.isCantonese ?? false) else { return text }
                                                 guard isPeculiar.negative else { return text.toneConverted().markFormatted() }
                                                 guard let firstCandidate = suggestions.first else { return text }
                                                 guard firstCandidate.lexicon.inputCount != keys.count else { return firstCandidate.lexicon.mark }
@@ -859,7 +861,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                                 guard leadingLength < keys.count else { return bestScheme.mark }
                                                 return bestScheme.mark + String.space + text.dropFirst(leadingLength)
                                         }()
-                                        self.candidates = suggestions
+                                        candidates = suggestions
                                 }
                         }
                 }
@@ -891,17 +893,20 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 await MainActor.run { [weak self] in
                                         guard let self else { return }
                                         let bufferText = joinedBufferTexts()
-                                        let tailMark: String = {
+                                        text2mark = {
                                                 // TODO: Handle separators
-                                                guard let firstCandidate = suggestions.first else { return String(bufferText.dropFirst()) }
-                                                guard firstCandidate.lexicon.inputCount != keys.count else { return firstCandidate.lexicon.mark }
-                                                guard let bestScheme = segmentation.first else { return String(bufferText.dropFirst()) }
-                                                let leadingLength: Int = bestScheme.length
-                                                guard leadingLength < keys.count else { return bestScheme.mark }
-                                                return bestScheme.mark + String.space + bufferText.dropFirst(leadingLength + 1)
+                                                guard let firstCandidate = suggestions.first else { return bufferText }
+                                                guard firstCandidate.isCantonese else { return bufferText }
+                                                let tailMark: String = {
+                                                        guard firstCandidate.lexicon.inputCount != keys.count else { return firstCandidate.lexicon.mark }
+                                                        guard let bestScheme = segmentation.first else { return String(bufferText.dropFirst()) }
+                                                        let leadingLength: Int = bestScheme.length
+                                                        guard leadingLength < keys.count else { return bestScheme.mark }
+                                                        return bestScheme.mark + String.space + bufferText.dropFirst(leadingLength + 1)
+                                                }()
+                                                return bufferText.prefix(1) + String.space + tailMark
                                         }()
-                                        self.text2mark = bufferText.prefix(1) + String.space + tailMark
-                                        self.candidates = suggestions
+                                        candidates = suggestions
                                 }
                         }
                 }
@@ -918,7 +923,6 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         let textMarks: [Candidate] = Options.isEnglishSuggestionsOn.negative ? [] : Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
                         candidates = (defined + textMarks).distinct()
                 } else {
-                        text2mark = String(cangjieRadicals)
                         let commentForm: RomanizationForm = {
                                 guard Options.commentScene != .noneOfAll else { return .nothing }
                                 return (Options.commentToneStyle == .noTones) ? .toneless : .full
@@ -935,6 +939,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 if Task.isCancelled.negative {
                                         await MainActor.run { [weak self] in
                                                 guard let self else { return }
+                                                text2mark = (suggestions.first?.isCantonese ?? false) ? String(cangjieRadicals) : joinedBufferTexts()
                                                 candidates = suggestions
                                         }
                                 }
@@ -951,7 +956,6 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         let textMarks: [Candidate] = Options.isEnglishSuggestionsOn.negative ? [] : Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
                         candidates = (defined + textMarks).distinct()
                 } else {
-                        text2mark = StrokeVirtualKey.displayText(from: keys)
                         let commentForm: RomanizationForm = {
                                 guard Options.commentScene != .noneOfAll else { return .nothing }
                                 return (Options.commentToneStyle == .noTones) ? .toneless : .full
@@ -966,6 +970,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 if Task.isCancelled.negative {
                                         await MainActor.run { [weak self] in
                                                 guard let self else { return }
+                                                text2mark = (suggestions.first?.isCantonese ?? false) ? StrokeVirtualKey.displayText(from: keys) : joinedBufferTexts()
                                                 candidates = suggestions
                                         }
                                 }
@@ -1000,16 +1005,19 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                         await MainActor.run { [weak self] in
                                                 guard let self else { return }
                                                 let bufferText = joinedBufferTexts()
-                                                let tailMark: String = {
-                                                        let isPeculiar: Bool = keys.contains(where: \.isSyllableLetter.negative)
-                                                        guard isPeculiar.negative else { return bufferText.dropFirst().toneConverted().markFormatted() }
-                                                        guard let bestScheme = segmentation.first else { return bufferText.dropFirst().toneConverted().markFormatted() }
-                                                        let leadingLength: Int = bestScheme.length
-                                                        guard leadingLength < keys.count else { return bestScheme.mark }
-                                                        let tailText = keys.dropFirst(leadingLength).map(\.text).joined()
-                                                        return bestScheme.mark + String.space + tailText
+                                                text2mark = {
+                                                        guard (suggestions.first?.isCantonese ?? false) else { return bufferText }
+                                                        let tailMark: String = {
+                                                                let isPeculiar: Bool = keys.contains(where: \.isSyllableLetter.negative)
+                                                                guard isPeculiar.negative else { return bufferText.dropFirst().toneConverted().markFormatted() }
+                                                                guard let bestScheme = segmentation.first else { return String(bufferText.dropFirst()) }
+                                                                let leadingLength: Int = bestScheme.length
+                                                                guard leadingLength < keys.count else { return bestScheme.mark }
+                                                                let tailText = keys.dropFirst(leadingLength).map(\.text).joined()
+                                                                return bestScheme.mark + String.space + tailText
+                                                        }()
+                                                        return bufferText.prefix(1) + String.space + tailMark
                                                 }()
-                                                text2mark = bufferText.prefix(1) + String.space + tailMark
                                                 candidates = suggestions
                                         }
                                 }
@@ -1084,14 +1092,17 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 await MainActor.run { [weak self] in
                                         guard let self else { return }
                                         let text: String = joinedBufferTexts()
-                                        let tailMark: String = {
-                                                guard isPeculiar.negative else { return text.dropFirst().toneConverted().markFormatted() }
-                                                guard let firstCandidate = suggestions.first else { return String(text.dropFirst()) }
-                                                guard firstCandidate.lexicon.inputCount != inputLength else { return firstCandidate.lexicon.mark }
-                                                return String(text.dropFirst())
+                                        text2mark = {
+                                                guard (suggestions.first?.isCantonese ?? false) else { return text }
+                                                let tailMark: String = {
+                                                        guard isPeculiar.negative else { return text.dropFirst().toneConverted().markFormatted() }
+                                                        guard let firstCandidate = suggestions.first else { return String(text.dropFirst()) }
+                                                        guard firstCandidate.lexicon.inputCount != inputLength else { return firstCandidate.lexicon.mark }
+                                                        return String(text.dropFirst())
+                                                }()
+                                                return text.prefix(1) + String.space + tailMark
                                         }()
-                                        self.text2mark = text.prefix(1) + String.space + tailMark
-                                        self.candidates = suggestions
+                                        candidates = suggestions
                                 }
                         }
                 }

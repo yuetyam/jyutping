@@ -489,6 +489,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                 await MainActor.run { [weak self] in
                                         guard let self else { return }
                                         let text2mark: String = {
+                                                guard (suggestions.first?.isCantonese ?? false) else { return joinedBufferTexts() }
                                                 guard isPeculiar.negative else { return joinedBufferTexts().toneConverted().markFormatted() }
                                                 guard let firstCandidate = suggestions.first else { return joinedBufferTexts() }
                                                 guard firstCandidate.lexicon.inputCount != keys.count else { return firstCandidate.lexicon.mark }
@@ -497,8 +498,8 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                                 guard leadingLength < keys.count else { return bestScheme.mark }
                                                 return bestScheme.mark + String.space + joinedBufferTexts().dropFirst(leadingLength)
                                         }()
-                                        self.mark(text: text2mark)
-                                        self.candidates = suggestions
+                                        mark(text: text2mark)
+                                        candidates = suggestions
                                 }
                         }
                 }
@@ -531,18 +532,21 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                 await MainActor.run { [weak self] in
                                         guard let self else { return }
                                         let bufferText = joinedBufferTexts()
-                                        let headMark: String = bufferText.prefix(1) + String.space
-                                        let tailMark: String = {
+                                        let text2mark: String = {
                                                 // TODO: Handle separators
-                                                guard let firstCandidate = suggestions.first else { return String(bufferText.dropFirst()) }
-                                                guard firstCandidate.lexicon.inputCount != keys.count else { return firstCandidate.lexicon.mark }
-                                                guard let bestScheme = segmentation.first else { return String(bufferText.dropFirst()) }
-                                                let leadingLength: Int = bestScheme.length
-                                                guard leadingLength < keys.count else { return bestScheme.mark }
-                                                return bestScheme.mark + String.space + bufferText.dropFirst(leadingLength + 1)
+                                                guard let firstCandidate = suggestions.first else { return bufferText }
+                                                guard firstCandidate.isCantonese else { return bufferText }
+                                                let tailMark: String = {
+                                                        guard firstCandidate.lexicon.inputCount != keys.count else { return firstCandidate.lexicon.mark }
+                                                        guard let bestScheme = segmentation.first else { return String(bufferText.dropFirst()) }
+                                                        let leadingLength: Int = bestScheme.length
+                                                        guard leadingLength < keys.count else { return bestScheme.mark }
+                                                        return bestScheme.mark + String.space + bufferText.dropFirst(leadingLength + 1)
+                                                }()
+                                                return bufferText.prefix(1) + String.space + tailMark
                                         }()
-                                        mark(text: headMark + tailMark)
-                                        self.candidates = suggestions
+                                        mark(text: text2mark)
+                                        candidates = suggestions
                                 }
                         }
                 }
@@ -559,7 +563,6 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         let textMarks: [Candidate] = AppSettings.isEnglishSuggestionsOn.negative ? [] : Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
                         candidates = (defined + textMarks).distinct()
                 } else {
-                        mark(text: String(cangjieRadicals))
                         let commentForm: RomanizationForm = {
                                 guard AppSettings.commentDisplayScene != .noneOfAll else { return .nothing }
                                 return (AppSettings.toneDisplayStyle == .noTones) ? .toneless : .full
@@ -577,6 +580,8 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                 if Task.isCancelled.negative {
                                         await MainActor.run { [weak self] in
                                                 guard let self else { return }
+                                                let text2mark: String = (suggestions.first?.isCantonese ?? false) ? String(cangjieRadicals) : joinedBufferTexts()
+                                                mark(text: text2mark)
                                                 candidates = suggestions
                                         }
                                 }
@@ -593,7 +598,6 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         let textMarks: [Candidate] = AppSettings.isEnglishSuggestionsOn.negative ? [] : Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
                         candidates = (defined + textMarks).distinct()
                 } else {
-                        mark(text: StrokeVirtualKey.displayText(from: keys))
                         let commentForm: RomanizationForm = {
                                 guard AppSettings.commentDisplayScene != .noneOfAll else { return .nothing }
                                 return (AppSettings.toneDisplayStyle == .noTones) ? .toneless : .full
@@ -609,6 +613,8 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                 if Task.isCancelled.negative {
                                         await MainActor.run { [weak self] in
                                                 guard let self else { return }
+                                                let text2mark: String = (suggestions.first?.isCantonese ?? false) ? StrokeVirtualKey.displayText(from: keys) : joinedBufferTexts()
+                                                mark(text: text2mark)
                                                 candidates = suggestions
                                         }
                                 }
@@ -644,16 +650,19 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                         await MainActor.run { [weak self] in
                                                 guard let self else { return }
                                                 let bufferText = joinedBufferTexts()
-                                                let tailMark: String = {
-                                                        let isPeculiar: Bool = keys.contains(where: \.isSyllableLetter.negative)
-                                                        guard isPeculiar.negative else { return bufferText.dropFirst().toneConverted().markFormatted() }
-                                                        guard let bestScheme = segmentation.first else { return bufferText.dropFirst().toneConverted().markFormatted() }
-                                                        let leadingLength: Int = bestScheme.length
-                                                        guard leadingLength < keys.count else { return bestScheme.mark }
-                                                        let tailText = keys.dropFirst(leadingLength).map(\.text).joined()
-                                                        return bestScheme.mark + String.space + tailText
+                                                let text2mark: String = {
+                                                        guard (suggestions.first?.isCantonese ?? false) else { return bufferText }
+                                                        let tailMark: String = {
+                                                                let isPeculiar: Bool = keys.contains(where: \.isSyllableLetter.negative)
+                                                                guard isPeculiar.negative else { return bufferText.dropFirst().toneConverted().markFormatted() }
+                                                                guard let bestScheme = segmentation.first else { return String(bufferText.dropFirst()) }
+                                                                let leadingLength: Int = bestScheme.length
+                                                                guard leadingLength < keys.count else { return bestScheme.mark }
+                                                                let tailText = keys.dropFirst(leadingLength).map(\.text).joined()
+                                                                return bestScheme.mark + String.space + tailText
+                                                        }()
+                                                        return bufferText.prefix(1) + String.space + tailMark
                                                 }()
-                                                let text2mark: String = bufferText.prefix(1) + String.space + tailMark
                                                 mark(text: text2mark)
                                                 candidates = suggestions
                                         }

@@ -104,7 +104,7 @@ struct IOSExpressionsView: View {
                                         }
                                 }
                                 Section {
-                                        Text(verbatim: "區分【諗】以及【冧】").font(.headline)
+                                        Text(verbatim: "區分【諗】【冧】【霖】").font(.headline)
                                         HStack(spacing: 16) {
                                                 Text(verbatim: "諗")
                                                 HStack(spacing: 2) {
@@ -123,6 +123,15 @@ struct IOSExpressionsView: View {
                                                 Text(verbatim: "表示倒塌、倒下")
                                                 Spacer()
                                         }
+                                        HStack(spacing: 16) {
+                                                Text(verbatim: "霖")
+                                                HStack(spacing: 2) {
+                                                        Text(verbatim: "lam4").monospaced()
+                                                        Speaker("lam4")
+                                                }
+                                                Text(verbatim: "本義連綿落雨，多見於人名")
+                                                Spacer()
+                                        }
                                         HStack {
                                                 Text(verbatim: "例：我諗緊今晚食咩。")
                                                 Speaker("我諗緊今晚食咩。")
@@ -131,6 +140,11 @@ struct IOSExpressionsView: View {
                                         HStack {
                                                 Text(verbatim: "例：佢畀人㨃冧咗。")
                                                 Speaker("佢畀人㨃冧咗。")
+                                                Spacer()
+                                        }
+                                        HStack {
+                                                Text(verbatim: "例：甘霖時雨。")
+                                                Speaker("甘霖時雨。")
                                                 Spacer()
                                         }
                                 }
