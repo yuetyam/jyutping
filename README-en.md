@@ -77,7 +77,7 @@ FAQ: [FAQ](https://jyutping.app/faq)
 ## How to build
 Build requirements:
 - macOS 26.0+
-- Xcode 26.0+
+- Xcode 26.4+
 
 Clone with `--depth` to reduce code size:
 ~~~bash
@@ -110,11 +110,11 @@ osascript -e 'tell application id "org.jyutping.inputmethod.Jyutping" to quit'
 ## Thank you for your support
 Website: https://jyutping.app/donate
 
-Patreon: https://patreon.com/bingzheung
-
 愛發電: https://afdian.com/a/jyutping
 
 Ko-fi: https://ko-fi.com/zheung
+
+Patreon: https://patreon.com/bingzheung
 
 PayPal: https://paypal.me/bingzheung
 
