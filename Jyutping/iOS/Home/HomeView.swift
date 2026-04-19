@@ -81,7 +81,7 @@ struct HomeView: View {
                                 }
                                 Section {
                                         NavigationLink(destination: EnablingKeyboardView()) {
-                                                Label("IOSHomeTab.LabelTitle.ProblemsWithEnablingKeyboard", systemImage: "info.circle").labelStyle(.titleOnly)
+                                                Label("IOSHomeTab.LabelTitle.ProblemsWithEnablingKeyboard", systemImage: "info.circle") // .labelStyle(.titleOnly)
                                         }
                                 }
 
@@ -134,6 +134,13 @@ struct HomeView: View {
                                                 Label("IOSHomeTab.LabelTitle.FAQ", systemImage: "questionmark.circle")
                                         }
                                 }
+                                #if DEBUG
+                                Section {
+                                        NavigationLink(destination: InputTestView()) {
+                                                Label("IOSHomeTab.LabelTitle.InputTest", systemImage: "keyboard")
+                                        }
+                                }
+                                #endif
                         }
                         .animation(.default, value: animationState)
                         .animation(.default, value: isGuideViewExpanded)
