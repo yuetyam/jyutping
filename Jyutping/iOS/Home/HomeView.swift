@@ -29,7 +29,7 @@ struct HomeView: View {
                                                         isGuideViewExpanded.toggle()
                                                 } label: {
                                                         HStack {
-                                                                Text("IOSHomeTab.Heading.HowToEnableThisKeyboard")
+                                                                HeadlineLabel(title: "IOSHomeTab.Heading.HowToEnableThisKeyboard", titleFont: .body, icon: "keyboard")
                                                                 Spacer()
                                                                 if isGuideViewExpanded {
                                                                         Image.downChevron
@@ -41,7 +41,7 @@ struct HomeView: View {
                                                 }
                                                 .buttonStyle(.plain)
                                         } else {
-                                                Text("IOSHomeTab.Heading.HowToEnableThisKeyboard").font(.headline)
+                                                HeadlineLabel(title: "IOSHomeTab.Heading.HowToEnableThisKeyboard", icon: "keyboard")
                                         }
                                         if (isKeyboardEnabled.negative || isGuideViewExpanded) {
                                                 VStack(spacing: 5) {
@@ -81,36 +81,37 @@ struct HomeView: View {
                                 }
                                 Section {
                                         NavigationLink(destination: EnablingKeyboardView()) {
-                                                Label("IOSHomeTab.LabelTitle.ProblemsWithEnablingKeyboard", systemImage: "info.circle") // .labelStyle(.titleOnly)
+                                                HeadlineLabel(title: "IOSHomeTab.LabelTitle.ProblemsWithEnablingKeyboard", titleFont: .body, icon: "info.circle")
                                         }
                                 }
 
                                 Group {
                                         Section {
-                                                Text("Shared.Guide.AbbreviatedInput.Heading").font(.headline)
+                                                HeadlineLabel(title: "Shared.Guide.AbbreviatedInput.Heading", icon: "sparkles", iconTint: .green)
                                                 Text("Shared.Guide.AbbreviatedInput.Body.Row1")
                                                 Text("Shared.Guide.AbbreviatedInput.Body.Row2")
                                         }
                                         Section {
-                                                Text("Shared.Guide.PinyinReverseLookup.Heading").font(.headline)
+                                                HeadlineLabel(title: "Shared.Guide.PinyinReverseLookup.Heading", icon: "r.square", iconTint: .red)
                                                 Text("Shared.Guide.PinyinReverseLookup.Body")
                                         }
                                         Section {
-                                                Text("Shared.Guide.CangjieReverseLookup.Heading").font(.headline)
+                                                HeadlineLabel(title: "Shared.Guide.CangjieReverseLookup.Heading", icon: "v.square", iconTint: .blue)
                                                 Text("Shared.Guide.CangjieReverseLookup.Body")
-                                                Text("Shared.Guide.CangjieReverseLookup.Note")
+                                        } footer: {
+                                                Text("Shared.Guide.CangjieReverseLookup.Note").textCase(nil)
                                         }
                                         Section {
-                                                Text("Shared.Guide.StrokeReverseLookup.Heading").font(.headline)
+                                                HeadlineLabel(title: "Shared.Guide.StrokeReverseLookup.Heading", icon: "x.square", iconTint: .purple)
                                                 Text("Shared.Guide.StrokeReverseLookup.Body")
                                                 Text("Shared.Guide.StrokeReverseLookup.Examples").monospaced()
                                         }
                                         Section {
-                                                Text("Shared.Guide.StructureReverseLookup.Heading").font(.headline)
+                                                HeadlineLabel(title: "Shared.Guide.StructureReverseLookup.Heading", icon: "q.square", iconTint: .mint)
                                                 Text("Shared.Guide.StructureReverseLookup.Body")
                                         }
                                         Section {
-                                                Text("Shared.Guide.TonesInput.Heading").font(.headline)
+                                                HeadlineLabel(title: "Shared.Guide.TonesInput.Heading", icon: "bell", iconTint: .orange)
                                                 Text("Shared.Guide.TonesInput.Body").monospaced()
                                                 Text("Shared.Guide.TonesInput.Examples")
                                         }
