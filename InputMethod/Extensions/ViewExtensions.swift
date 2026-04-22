@@ -13,8 +13,8 @@ extension View {
                 background(Color.textBackgroundColor.opacity(0.5), in: RoundedRectangle(cornerRadius: cornerRadius, style: .continuous))
         }
 
-        /// Disable animation when condition is true
-        func disableAnimation(when condition: Bool = true) -> some View {
+        /// Disable animations when condition is true
+        func disableAnimations(when condition: Bool = true) -> some View {
                 transaction { transaction in
                         if condition {
                                 transaction.animation = nil
@@ -22,8 +22,8 @@ extension View {
                 }
         }
 
-        /// Apply animation only when condition is true
-        func applyAnimation(if condition: Bool) -> some View {
+        /// Apply animations only when condition is true
+        func applyAnimations(onlyIf condition: Bool) -> some View {
                 transaction { transaction in
                         if condition.negative {
                                 transaction.animation = nil
