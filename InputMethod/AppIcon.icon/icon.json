@@ -4,24 +4,9 @@
     {
       "layers" : [
         {
-          "fill-specializations" : [
-            {
-              "appearance" : "dark",
-              "value" : "automatic"
-            }
-          ],
-          "glass" : true,
-          "hidden" : false,
           "image-name" : "foreground-dark.png",
           "name" : "foreground-dark",
           "opacity-specializations" : [
-            {
-              "value" : 1
-            },
-            {
-              "appearance" : "dark",
-              "value" : 1
-            },
             {
               "appearance" : "tinted",
               "value" : 0.85
@@ -29,58 +14,32 @@
           ]
         },
         {
-          "fill-specializations" : [
+          "hidden-specializations" : [
             {
               "appearance" : "dark",
-              "value" : "automatic"
+              "value" : true
+            },
+            {
+              "appearance" : "tinted",
+              "value" : true
             }
           ],
-          "image-name" : "foreground-light.png",
-          "name" : "foreground-light",
-          "opacity-specializations" : [
-            {
-              "value" : 0
-            },
-            {
-              "appearance" : "dark",
-              "value" : 0
-            },
-            {
-              "appearance" : "tinted",
-              "value" : 0
-            }
-          ]
+          "image-name" : "background-gray-light.png",
+          "name" : "background-gray-light"
         },
         {
-          "glass" : true,
-          "hidden" : false,
-          "image-name" : "background-dark.png",
-          "name" : "background-dark",
-          "opacity-specializations" : [
+          "hidden-specializations" : [
             {
-              "value" : 0
-            },
-            {
-              "appearance" : "dark",
-              "value" : 1
-            },
-            {
-              "appearance" : "tinted",
-              "value" : 0.8
+              "appearance" : "light",
+              "value" : true
             }
-          ]
-        },
-        {
-          "image-name" : "background-light.png",
-          "name" : "background-light",
+          ],
+          "image-name" : "background-gray-dark.png",
+          "name" : "background-gray-dark",
           "opacity-specializations" : [
             {
-              "appearance" : "dark",
-              "value" : 0
-            },
-            {
               "appearance" : "tinted",
-              "value" : 0
+              "value" : 0.85
             }
           ]
         }
@@ -89,23 +48,7 @@
         "kind" : "none",
         "opacity" : 0.5
       },
-      "specular-specializations" : [
-        {
-          "value" : false
-        },
-        {
-          "appearance" : "light",
-          "value" : false
-        },
-        {
-          "appearance" : "dark",
-          "value" : false
-        },
-        {
-          "appearance" : "tinted",
-          "value" : false
-        }
-      ],
+      "specular" : false,
       "translucency" : {
         "enabled" : false,
         "value" : 0.5
@@ -113,6 +56,8 @@
     }
   ],
   "supported-platforms" : {
-    "squares" : "shared"
+    "squares" : [
+      "macOS"
+    ]
   }
 }
