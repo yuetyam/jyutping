@@ -47,7 +47,7 @@ Under `Modules/`, the local packages are:
 6. `Preparing`: a build-time executable that generates data used by other modules
 
 ## Build requirements and environments
-- macOS 26.0+
+- macOS 26.2+
 - Xcode 26.4+
 - Swift 6.3+
 
