@@ -16,7 +16,6 @@ struct SettingsView: View {
         @State private var isAudioFeedbackOn: Bool = Options.isAudioFeedbackOn
         @State private var hapticFeedback: HapticFeedback = HapticFeedback.fetchSavedMode()
         @State private var traditionalCharacterStandard: CharacterStandard = Options.traditionalCharacterStandard
-        @State private var keyboardLayout: KeyboardLayout = KeyboardLayout.fetchSavedLayout()
         @State private var isKeyPadNumericLayout: Bool = NumericLayout.fetchSavedLayout().isNumberKeyPad
         @State private var isNineKeyStrokeLayout: Bool = StrokeLayout.fetchSavedLayout().isNineKey
         @State private var needsNumberRow: Bool = Options.needsNumberRow
@@ -108,21 +107,6 @@ struct SettingsView: View {
                                         Text("SettingsView.TraditionalCharacterStandard.SectionHeader").textCase(nil)
                                 } footer: {
                                         Text("SettingsView.TraditionalCharacterStandard.SectionFooter").textCase(nil)
-                                }
-
-                                if context.keyboardInterface.isPadFloating {
-                                        Picker("SettingsView.KeyboardLayout.PickerTitle", selection: $keyboardLayout) {
-                                                Text("SettingsView.KeyboardLayout.Option.QWERTY").tag(KeyboardLayout.qwerty)
-                                                Text("SettingsView.KeyboardLayout.Option.TripleStroke").tag(KeyboardLayout.tripleStroke)
-                                                Text("SettingsView.KeyboardLayout.Option.NineKey").tag(KeyboardLayout.nineKey)
-                                        }
-                                        .pickerStyle(.inline)
-                                        .textCase(nil)
-                                        .onChange(of: keyboardLayout) { newLayout in
-                                                AudioFeedback.modified()
-                                                context.triggerSelectionHapticFeedback()
-                                                context.updateKeyboardLayout(to: newLayout)
-                                        }
                                 }
 
                                 Section {

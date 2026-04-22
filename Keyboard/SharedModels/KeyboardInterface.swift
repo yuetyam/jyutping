@@ -88,6 +88,7 @@ extension KeyboardInterface {
                 case .padFloating:
                         return 48
                 case .phoneOnPadPortrait:
+                        // TODO: Handle Larger Text mode Display Zoom
                         let isLargeScreenPad: Bool = min(screenSize.width, screenSize.height) > 840
                         return isLargeScreenPad ? 54 : 53
                 case .phoneOnPadLandscape:
@@ -96,9 +97,8 @@ extension KeyboardInterface {
                         return 36
                 case .phonePortrait:
                         let minDimension: CGFloat = min(screenSize.width, screenSize.height)
-                        if minDimension > 300 && minDimension < 350 {
-                                // iPhone SE1, iPod touch 7 (320 x 480)
-                                // Some devices on Larger Text mode
+                        if minDimension < 355 {
+                                // Some devices on Larger Text mode Display Zoom
                                 return 48
                         } else if minDimension < 385 {
                                 // iPhone 8, SE2, SE3 (375 x 667)

@@ -5,14 +5,24 @@ import SwiftUI
 @available(iOSApplicationExtension, deprecated: 26.0, message: "Use InputModeSwitch instead")
 struct LegacyInputModeSwitch: View {
 
-        let isCantoneseMode: Bool
-        let isMutilatedMode: Bool
+        init(width: CGFloat, isCantoneseMode: Bool, isMutilatedMode: Bool) {
+                let isDenseMode: Bool = (width < 59)
+                self.isCantoneseMode = isCantoneseMode
+                self.isMutilatedMode = isMutilatedMode
+                self.width = width
+                self.height = 26
+                self.partialWidth = isDenseMode ? 34 : 36
+                self.characterOffset = isDenseMode ? 6 : 4
+        }
+
+        private let isCantoneseMode: Bool
+        private let isMutilatedMode: Bool
+        private let width: CGFloat
+        private let height: CGFloat
+        private let partialWidth: CGFloat
+        private let characterOffset: CGFloat
 
         @Environment(\.colorScheme) private var colorScheme
-
-        private let height: CGFloat = 26
-        private let partialWidth: CGFloat = 36
-        private let totalWidth: CGFloat = 60
 
         var body: some View {
                 ZStack {
@@ -21,7 +31,7 @@ struct LegacyInputModeSwitch: View {
                                 Color.clear
                                 Text(verbatim: isMutilatedMode ? "粤" : "粵")
                                         .font(isCantoneseMode ? .staticBody : .mini)
-                                        .padding(.trailing, isCantoneseMode ? 0 : 4)
+                                        .padding(.trailing, isCantoneseMode ? 0 : characterOffset)
                                         .frame(width: partialWidth, height: height)
                                         .background(isCantoneseMode ? colorScheme.inputKeyColor : Color.clear, in: .capsule)
                         }
@@ -29,12 +39,12 @@ struct LegacyInputModeSwitch: View {
                                 Color.clear
                                 Text(verbatim: "A")
                                         .font(isCantoneseMode ? .mini : .staticBody)
-                                        .padding(.leading, isCantoneseMode ? 4 : 0)
+                                        .padding(.leading, isCantoneseMode ? characterOffset : 0)
                                         .frame(width: partialWidth, height: height)
                                         .background(isCantoneseMode ? Color.clear : colorScheme.inputKeyColor, in: .capsule)
                         }
                 }
-                .frame(width: totalWidth, height: height)
+                .frame(width: width, height: height)
                 .background(colorScheme.activeInputKeyColor, in: .capsule)
         }
 }
@@ -44,14 +54,24 @@ struct LegacyInputModeSwitch: View {
 @available(iOSApplicationExtension 26.0, *)
 struct InputModeSwitch: View {
 
-        let isCantoneseMode: Bool
-        let isMutilatedMode: Bool
+        init(width: CGFloat, isCantoneseMode: Bool, isMutilatedMode: Bool) {
+                let isDenseMode: Bool = (width < 59)
+                self.isCantoneseMode = isCantoneseMode
+                self.isMutilatedMode = isMutilatedMode
+                self.width = width
+                self.height = 26
+                self.partialWidth = isDenseMode ? 34 : 36
+                self.characterOffset = isDenseMode ? 6 : 4
+        }
+
+        private let isCantoneseMode: Bool
+        private let isMutilatedMode: Bool
+        private let width: CGFloat
+        private let height: CGFloat
+        private let partialWidth: CGFloat
+        private let characterOffset: CGFloat
 
         @Environment(\.colorScheme) private var colorScheme
-
-        private let height: CGFloat = 26
-        private let partialWidth: CGFloat = 36
-        private let totalWidth: CGFloat = 60
 
         var body: some View {
                 ZStack {
@@ -64,7 +84,7 @@ struct InputModeSwitch: View {
                                                 .shadow(color: isCantoneseMode ? Color.clear : Color.shadowGray, radius: 0.5)
                                         Text(verbatim: isMutilatedMode ? "粤" : "粵")
                                                 .font(isCantoneseMode ? .staticBody : .mini)
-                                                .padding(.trailing, isCantoneseMode ? 0 : 4)
+                                                .padding(.trailing, isCantoneseMode ? 0 : characterOffset)
                                 }
                                 .frame(width: partialWidth, height: height)
                         }
@@ -76,12 +96,12 @@ struct InputModeSwitch: View {
                                                 .shadow(color: isCantoneseMode ? Color.clear : Color.shadowGray, radius: 0.5)
                                         Text(verbatim: "A")
                                                 .font(isCantoneseMode ? .mini : .staticBody)
-                                                .padding(.leading, isCantoneseMode ? 4 : 0)
+                                                .padding(.leading, isCantoneseMode ? characterOffset : 0)
                                 }
                                 .frame(width: partialWidth, height: height)
                         }
                 }
-                .frame(width: totalWidth, height: height)
+                .frame(width: width, height: height)
                 .background(Material.thin, in: .capsule)
         }
 }

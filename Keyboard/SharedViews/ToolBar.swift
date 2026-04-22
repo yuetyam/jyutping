@@ -6,10 +6,16 @@ struct ToolBar: View {
 
         @EnvironmentObject private var context: KeyboardViewController
 
-        private let width: CGFloat = 48
         private let height: CGFloat = PresetConstant.toolBarHeight
 
         var body: some View {
+                let isDenseMode: Bool = switch context.keyboardInterface {
+                case .padFloating: true
+                case .phonePortrait where (context.keyboardWidth < 359): true
+                case .phoneOnPadPortrait where (context.keyboardWidth < 359): true
+                default: false
+                }
+                let width: CGFloat = isDenseMode ? 44 : 48
                 HStack(spacing: 0) {
                         ToolBarButton(
                                 imageName: "gear",
@@ -22,19 +28,16 @@ struct ToolBar: View {
                                 context.updateKeyboardForm(to: .settings)
                         }
 
-                        if context.keyboardInterface.isPadFloating.negative {
-                                Spacer().frame(minWidth: 0, maxWidth: .infinity)
-                                ToolBarButton(
-                                        imageName: "keyboard",
-                                        width: width,
-                                        height: height,
-                                        insets: EdgeInsets(top: 19, leading: 0, bottom: 19, trailing: 0)
-                                ) {
-                                        AudioFeedback.modified()
-                                        context.triggerHapticFeedback()
-                                        let newForm: KeyboardForm = (context.keyboardForm == .layoutPicker) ? context.previousKeyboardForm : .layoutPicker
-                                        context.updateKeyboardForm(to: newForm)
-                                }
+                        Spacer().frame(minWidth: 0, maxWidth: .infinity)
+                        ToolBarButton(
+                                imageName: "keyboard",
+                                width: width,
+                                height: height,
+                                insets: EdgeInsets(top: 19, leading: 0, bottom: 19, trailing: 0)
+                        ) {
+                                AudioFeedback.modified()
+                                context.triggerHapticFeedback()
+                                context.updateKeyboardForm(to: .layoutPicker)
                         }
 
                         Spacer().frame(minWidth: 0, maxWidth: .infinity)
@@ -64,12 +67,12 @@ struct ToolBar: View {
                                 ZStack {
                                         Color.interactiveClear
                                         if #available(iOSApplicationExtension 26.0, *) {
-                                                InputModeSwitch(isCantoneseMode: context.inputMethodMode.isCantonese, isMutilatedMode: context.characterStandard.isMutilated)
+                                                InputModeSwitch(width: isDenseMode ? 56 : 60, isCantoneseMode: context.inputMethodMode.isCantonese, isMutilatedMode: context.characterStandard.isMutilated)
                                         } else {
-                                                LegacyInputModeSwitch(isCantoneseMode: context.inputMethodMode.isCantonese, isMutilatedMode: context.characterStandard.isMutilated)
+                                                LegacyInputModeSwitch(width: isDenseMode ? 56 : 60, isCantoneseMode: context.inputMethodMode.isCantonese, isMutilatedMode: context.characterStandard.isMutilated)
                                         }
                                 }
-                                .frame(width: 64, height: height)
+                                .frame(width: isDenseMode ? 56 : 64, height: height)
                         }
                         .buttonStyle(.plain)
 
@@ -94,27 +97,25 @@ struct ToolBar: View {
                                 ZStack {
                                         Color.interactiveClear
                                         if #available(iOSApplicationExtension 26.0, *) {
-                                                CharacterSetSwitch(isMutilatedMode: context.characterStandard.isMutilated).disableAnimations()
+                                                CharacterSetSwitch(width: width, isMutilatedMode: context.characterStandard.isMutilated).disableAnimations()
                                         } else {
-                                                LegacyCharacterSetSwitch(isMutilatedMode: context.characterStandard.isMutilated).disableAnimations()
+                                                LegacyCharacterSetSwitch(width: width, isMutilatedMode: context.characterStandard.isMutilated).disableAnimations()
                                         }
                                 }
                                 .frame(width: width, height: height)
                         }
                         .buttonStyle(.plain)
 
-                        if context.keyboardInterface.isPadFloating.negative {
-                                Spacer().frame(minWidth: 0, maxWidth: .infinity)
-                                ToolBarButton(
-                                        imageName: "keyboard.chevron.compact.down",
-                                        width: width,
-                                        height: height,
-                                        insets: EdgeInsets(top: 18, leading: 0, bottom: 18, trailing: 0)
-                                ) {
-                                        AudioFeedback.modified()
-                                        context.triggerHapticFeedback()
-                                        context.dismissKeyboard()
-                                }
+                        Spacer().frame(minWidth: 0, maxWidth: .infinity)
+                        ToolBarButton(
+                                imageName: "keyboard.chevron.compact.down",
+                                width: width,
+                                height: height,
+                                insets: EdgeInsets(top: 18, leading: 0, bottom: 18, trailing: 0)
+                        ) {
+                                AudioFeedback.modified()
+                                context.triggerHapticFeedback()
+                                context.dismissKeyboard()
                         }
                 }
                 .frame(height: context.topBarHeight)
