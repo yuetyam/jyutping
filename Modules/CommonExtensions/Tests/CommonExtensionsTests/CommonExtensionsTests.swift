@@ -130,19 +130,19 @@ struct CommonExtensionsTests {
         @Test("Character codePoints")
         func characterCodePoints() {
                 let char: Character = "A"
-                #expect(char.codePoints == ["U+41"])
+                #expect(char.codePoints == ["U+0041"])
 
                 let emoji: Character = "👋"
                 #expect(emoji.codePoints == ["U+1F44B"])
 
                 let composed: Character = "é"
-                #expect(composed.codePoints.contains("U+E9") || composed.codePoints.contains("U+65"))
+                #expect(composed.codePoints.contains("U+00E9") || composed.codePoints.contains("U+0065"))
         }
 
         @Test("Character codePointsText")
         func characterCodePointsText() {
                 let char: Character = "A"
-                #expect(char.codePointsText == "U+41")
+                #expect(char.codePointsText == "U+0041")
 
                 let cjkvChar: Character = "東"
                 #expect(cjkvChar.codePointsText == "U+6771")

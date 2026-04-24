@@ -1,13 +1,18 @@
 extension Character {
 
-        /// Unicode code points. Example: é = `["U+65", "U+301"]`
+        /// Unicode code points. Example: é = `["U+0065", "U+0301"]`
         public var codePoints: [String] {
-                return self.unicodeScalars.map { "U+" + String($0.value, radix: 16, uppercase: true) }
+                // return unicodeScalars.map { "U+" + String($0.value, radix: 16, uppercase: true) }
+                return unicodeScalars.map({ String(format: "U+%04X", $0.value) })
         }
 
-        /// Unicode code points as a String. Example: é = "U+65 U+301"
+        /// A space-separated list of Unicode scalar values in `U+XXXX` notation.
+        ///
+        /// Each Unicode scalar in the string is represented as an uppercase hexadecimal code point, padded to at least four digits.
+        ///
+        /// For example, the character é in decomposed form (e + combining acute accent) is represented as: “U+0065 U+0301”
         public var codePointsText: String {
-                return self.codePoints.joined(separator: String.space)
+                return unicodeScalars.map({ String(format: "U+%04X", $0.value) }).joined(separator: String.space)
         }
 
         /// Create a Character from the given Unicode Code Point String (U+XXXX)
@@ -20,7 +25,7 @@ extension Character {
 
         /// Unicode code point as decimal code
         public var decimalCode: Int? {
-                guard let scalar = self.unicodeScalars.first else { return nil }
+                guard let scalar = unicodeScalars.first else { return nil }
                 let number = Int(scalar.value)
                 return number
         }
