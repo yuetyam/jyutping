@@ -10,6 +10,7 @@ struct ReverseLookupView: View {
                         LazyVStack(spacing: 16) {
                                 VStack {
                                         HStack {
+                                                Image(systemName: "r.square").font(.title3).foregroundStyle(Color.purple)
                                                 Text("ReverseLookupView.PinyinReverseLookup.Heading").font(.headline)
                                                 Spacer()
                                         }
@@ -22,6 +23,7 @@ struct ReverseLookupView: View {
                                 .block()
                                 VStack {
                                         HStack {
+                                                Image(systemName: "v.square").font(.title3).foregroundStyle(Color.blue)
                                                 Text("ReverseLookupView.CangjieReverseLookup.Heading").font(.headline)
                                                 Spacer()
                                         }
@@ -49,6 +51,7 @@ struct ReverseLookupView: View {
                                 .block()
                                 VStack {
                                         HStack {
+                                                Image(systemName: "x.square").font(.title3).foregroundStyle(Color.indigo)
                                                 Text("ReverseLookupView.StrokeReverseLookup.Heading").font(.headline)
                                                 Spacer()
                                         }
@@ -66,6 +69,7 @@ struct ReverseLookupView: View {
                                 .block()
                                 VStack {
                                         HStack {
+                                                Image(systemName: "q.square").font(.title3).foregroundStyle(Color.mint)
                                                 Text("ReverseLookupView.StructureReverseLookup.Heading").font(.headline)
                                                 Spacer()
                                         }
