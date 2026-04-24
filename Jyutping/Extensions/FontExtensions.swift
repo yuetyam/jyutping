@@ -10,7 +10,7 @@ extension Font {
         static let significant: Font = bolderEnhancedFont(size: 14)
         static let copilot: Font = enhancedFont(size: 12)
         static let ipa: Font = enhancedFont(size: 15)
-        static let display: Font = displayFont(size: 16)
+        static let display: Font = displayFont(size: 17)
         #else
         static let master: Font = Font.body
         static let significant: Font = Font.headline
@@ -77,6 +77,11 @@ private extension Font {
                                 break
                         }
                 }
+                if shouldConsiderSupplementaryFonts {
+                        if found(font: BolderFont.HiraginoSans) {
+                                names.append(BolderFont.HiraginoSans)
+                        }
+                }
                 for name in BolderFont.systemCJKVQueue {
                         if found(font: name) {
                                 names.append(name)
@@ -114,6 +119,9 @@ private extension Font {
                         }
                 }
                 if shouldConsiderSupplementaryFonts {
+                        if found(font: PresetConstant.HiraginoSans) {
+                                names.append(PresetConstant.HiraginoSans)
+                        }
                         if found(font: PresetConstant.IMingCP) {
                                 names.append(PresetConstant.IMingCP)
                         } else if found(font: PresetConstant.IMing) {

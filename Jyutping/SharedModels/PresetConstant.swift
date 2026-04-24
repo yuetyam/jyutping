@@ -11,6 +11,7 @@ struct PresetConstant {
         static let MoonStarsKai: String = "Moon Stars Kai"
         static let IMingCP: String = "I.MingCP"
         static let IMing: String = "I.Ming"
+        static let HiraginoSans: String = "Hiragino Sans"
         static let primaryCJKVQueue: [String] = ["Shanggu Sans", "ChiuKong Gothic CL", "LXGW XiHei CL", "Sarasa Gothic CL"]
         static let systemCJKVQueue: [String] = ["PingFang HK", "PingFang MO", "PingFang SC", "PingFang TC"]
         static let supplementaryCJKVQueue: [String] = ["Chiron Hei HK", "Source Han Sans HC", "Noto Sans CJK HK", "Noto Sans HK"]
@@ -23,6 +24,7 @@ struct BolderFont {
         static let Inter: String = "Inter-Medium"
         static let Roboto: String = "Roboto-Medium"
         static let HelveticaNeue: String = "HelveticaNeue-Medium"
+        static let HiraginoSans: String = "HiraginoSans-W5"
         static let primaryCJKVQueue: [String] = ["ShangguSans-Medium", "ChiuKongGothicCL-Medium", "SarasaGothicCL-Medium"]
         static let systemCJKVQueue: [String] = ["PingFangHK-Medium", "PingFangMO-Medium", "PingFangSC-Medium", "PingFangTC-Medium"]
         static let supplementaryCJKVQueue: [String] = ["ChironHeiHK-Medium", "SourceHanSansHC-Medium", "NotoSansCJKhk-Medium", "NotoSansHK-Medium"]

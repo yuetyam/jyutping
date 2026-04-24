@@ -29,7 +29,7 @@ struct HomeView: View {
                                                         isGuideViewExpanded.toggle()
                                                 } label: {
                                                         HStack {
-                                                                HeadlineLabel(title: "IOSHomeTab.Heading.HowToEnableThisKeyboard", titleFont: .body, icon: "keyboard")
+                                                                Label("IOSHomeTab.Heading.HowToEnableThisKeyboard", systemImage: "keyboard")
                                                                 Spacer()
                                                                 if isGuideViewExpanded {
                                                                         Image.downChevron
@@ -41,7 +41,10 @@ struct HomeView: View {
                                                 }
                                                 .buttonStyle(.plain)
                                         } else {
-                                                HeadlineLabel(title: "IOSHomeTab.Heading.HowToEnableThisKeyboard", icon: "keyboard")
+                                                HStack(spacing: 16) {
+                                                        Image(systemName: "keyboard").font(.title3).foregroundStyle(Color.accentColor)
+                                                        Text("IOSHomeTab.Heading.HowToEnableThisKeyboard").font(.headline)
+                                                }
                                         }
                                         if (isKeyboardEnabled.negative || isGuideViewExpanded) {
                                                 VStack(spacing: 5) {
@@ -81,7 +84,7 @@ struct HomeView: View {
                                 }
                                 Section {
                                         NavigationLink(destination: EnablingKeyboardView()) {
-                                                HeadlineLabel(title: "IOSHomeTab.LabelTitle.ProblemsWithEnablingKeyboard", titleFont: .body, icon: "info.circle")
+                                                Label("IOSHomeTab.LabelTitle.ProblemsWithEnablingKeyboard", systemImage: "info.circle")
                                         }
                                 }
 

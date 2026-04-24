@@ -8,6 +8,7 @@ struct MacIntroductionsView: View {
                         LazyVStack(spacing: 12) {
                                 VStack(spacing: 16) {
                                         HStack {
+                                                Image(systemName: "sparkles").font(.title3).foregroundStyle(Color.mint)
                                                 Text("Shared.Guide.AbbreviatedInput.Heading").font(.significant)
                                                 Spacer()
                                         }
@@ -23,6 +24,7 @@ struct MacIntroductionsView: View {
                                 .block()
                                 VStack(spacing: 16) {
                                         HStack {
+                                                Image(systemName: "r.square").font(.title3).foregroundStyle(Color.purple)
                                                 Text("Shared.Guide.PinyinReverseLookup.Heading").font(.significant)
                                                 Spacer()
                                         }
@@ -34,6 +36,7 @@ struct MacIntroductionsView: View {
                                 .block()
                                 VStack(spacing: 16) {
                                         HStack {
+                                                Image(systemName: "v.square").font(.title3).foregroundStyle(Color.blue)
                                                 Text("Shared.Guide.CangjieReverseLookup.Heading").font(.significant)
                                                 Spacer()
                                         }
@@ -49,6 +52,7 @@ struct MacIntroductionsView: View {
                                 .block()
                                 VStack(spacing: 16) {
                                         HStack {
+                                                Image(systemName: "x.square").font(.title3).foregroundStyle(Color.indigo)
                                                 Text("Shared.Guide.StrokeReverseLookup.Heading").font(.significant)
                                                 Spacer()
                                         }
@@ -64,6 +68,7 @@ struct MacIntroductionsView: View {
                                 .block()
                                 VStack(spacing: 16) {
                                         HStack {
+                                                Image(systemName: "q.square").font(.title3).foregroundStyle(Color.pink)
                                                 Text("Shared.Guide.StructureReverseLookup.Heading").font(.significant)
                                                 Spacer()
                                         }
@@ -75,6 +80,7 @@ struct MacIntroductionsView: View {
                                 .block()
                                 VStack(spacing: 16) {
                                         HStack {
+                                                Image(systemName: "bell").font(.title3).foregroundStyle(Color.orange)
                                                 Text("Shared.Guide.TonesInput.Heading").font(.significant)
                                                 Spacer()
                                         }
