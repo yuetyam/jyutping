@@ -131,6 +131,7 @@ private extension Font {
         }
 
         static func combine(fonts names: [String], size: CGFloat) -> Font? {
+                guard names.isNotEmpty else { return nil }
                 let fontNames: [String] = names.filter({ found(font: $0) }).distinct()
                 guard let primary = fontNames.first, let primaryFont = NSFont(name: primary, size: size) else { return nil }
                 let fallbacks = fontNames.dropFirst()

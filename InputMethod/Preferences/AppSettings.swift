@@ -33,9 +33,13 @@ private struct SettingsKey {
         static let CommentFontMode: String = "CommentFontMode"
         static let LabelFontMode: String = "LabelFontMode"
 
-        static let CustomCandidateFontList: String = "CustomCandidateFontList"
-        static let CustomCommentFontList: String = "CustomCommentFontList"
-        static let CustomLabelFontList: String = "CustomLabelFontList"
+        static let CandidateCustomFontList: String = "CandidateFontList"
+        static let CommentCustomFontList: String = "CommentFontList"
+        static let LabelCustomFontList: String = "LabelFontList"
+
+        static let LegacyCustomCandidateFontList: String = "CustomCandidateFontList"
+        static let LegacyCustomCommentFontList: String = "CustomCommentFontList"
+        static let LegacyCustomLabelFontList: String = "CustomLabelFontList"
 
 
         static let PressShiftOnce: String = "PressShiftOnce"
@@ -170,9 +174,7 @@ enum FontMode: Int, CaseIterable {
         case system = 2
         case custom = 3
 
-        var isCustom: Bool {
-                return self == .custom
-        }
+        var isCustom: Bool { self == .custom }
 
         static func mode(of value: Int) -> FontMode {
                 return allCases.first(where: { $0.rawValue == value }) ?? .default
@@ -597,50 +599,89 @@ struct AppSettings {
         // MARK: - Custom Fonts
 
         private(set) static var customCandidateFonts: [String] = {
-                let fallback: [String] = [PresetConstant.PingFangHK]
-                let savedNames: String? = UserDefaults.standard.string(forKey: SettingsKey.CustomCandidateFontList)
-                guard let savedNames else { return fallback }
-                let names: [String] = savedNames.split(separator: ",").map({ $0.trimmed() }).filter(\.isNotEmpty).distinct()
-                guard names.isNotEmpty else { return fallback }
-                return names
+                lazy var fallback: [String] = [PresetConstant.PingFangHK]
+                let hasSavedValue: Bool = UserDefaults.standard.object(forKey: SettingsKey.CandidateCustomFontList) != nil
+                let hasLegacySavedValue: Bool = UserDefaults.standard.object(forKey: SettingsKey.LegacyCustomCandidateFontList) != nil
+                defer {
+                        if hasLegacySavedValue {
+                                UserDefaults.standard.removeObject(forKey: SettingsKey.LegacyCustomCandidateFontList)
+                        }
+                }
+                if hasSavedValue.negative && hasLegacySavedValue {
+                        let savedValue = UserDefaults.standard.string(forKey: SettingsKey.LegacyCustomCandidateFontList)
+                        guard let savedValue else { return fallback }
+                        let names: [String] = savedValue.split(separator: ",").map({ $0.trimmed() }).filter(\.isNotEmpty).distinct()
+                        guard names.isNotEmpty else { return fallback }
+                        UserDefaults.standard.set(names, forKey: SettingsKey.CandidateCustomFontList)
+                        return names
+                } else {
+                        let savedNames: [String] = UserDefaults.standard.stringArray(forKey: SettingsKey.CandidateCustomFontList) ?? Array<String>()
+                        let names: [String] = savedNames.map({ $0.trimmed() }).filter(\.isNotEmpty).distinct()
+                        return names.isNotEmpty ? names : fallback
+                }
         }()
         static func updateCustomCandidateFonts(to fontNames: [String]) {
                 let names: [String] = fontNames.map({ $0.trimmed() }).filter(\.isNotEmpty).distinct()
                 customCandidateFonts = names
-                let fontList: String = names.joined(separator: ",")
-                UserDefaults.standard.set(fontList, forKey: SettingsKey.CustomCandidateFontList)
+                UserDefaults.standard.set(names, forKey: SettingsKey.CandidateCustomFontList)
                 Font.updateCandidateFont()
         }
 
         private(set) static var customCommentFonts: [String] = {
-                let fallback: [String] = [PresetConstant.HelveticaNeue]
-                let savedNames: String? = UserDefaults.standard.string(forKey: SettingsKey.CustomCommentFontList)
-                guard let savedNames else { return fallback }
-                let names: [String] = savedNames.split(separator: ",").map({ $0.trimmed() }).filter(\.isNotEmpty).distinct()
-                guard names.isNotEmpty else { return fallback }
-                return names
+                lazy var fallback: [String] = [PresetConstant.HelveticaNeue]
+                let hasSavedValue: Bool = UserDefaults.standard.object(forKey: SettingsKey.CommentCustomFontList) != nil
+                let hasLegacySavedValue: Bool = UserDefaults.standard.object(forKey: SettingsKey.LegacyCustomCommentFontList) != nil
+                defer {
+                        if hasLegacySavedValue {
+                                UserDefaults.standard.removeObject(forKey: SettingsKey.LegacyCustomCommentFontList)
+                        }
+                }
+                if hasSavedValue.negative && hasLegacySavedValue {
+                        let savedValue = UserDefaults.standard.string(forKey: SettingsKey.LegacyCustomCommentFontList)
+                        guard let savedValue else { return fallback }
+                        let names: [String] = savedValue.split(separator: ",").map({ $0.trimmed() }).filter(\.isNotEmpty).distinct()
+                        guard names.isNotEmpty else { return fallback }
+                        UserDefaults.standard.set(names, forKey: SettingsKey.CommentCustomFontList)
+                        return names
+                } else {
+                        let savedNames: [String] = UserDefaults.standard.stringArray(forKey: SettingsKey.CommentCustomFontList) ?? Array<String>()
+                        let names: [String] = savedNames.map({ $0.trimmed() }).filter(\.isNotEmpty).distinct()
+                        return names.isNotEmpty ? names : fallback
+                }
         }()
         static func updateCustomCommentFonts(to fontNames: [String]) {
                 let names: [String] = fontNames.map({ $0.trimmed() }).filter(\.isNotEmpty).distinct()
                 customCommentFonts = names
-                let fontList: String = names.joined(separator: ",")
-                UserDefaults.standard.set(fontList, forKey: SettingsKey.CustomCommentFontList)
+                UserDefaults.standard.set(names, forKey: SettingsKey.CommentCustomFontList)
                 Font.updateCommentFont()
         }
 
         private(set) static var customLabelFonts: [String] = {
-                let fallback: [String] = [PresetConstant.Menlo]
-                let savedNames = UserDefaults.standard.string(forKey: SettingsKey.CustomLabelFontList)
-                guard let savedNames else { return fallback }
-                let names: [String] = savedNames.split(separator: ",").map({ $0.trimmed() }).filter(\.isNotEmpty).distinct()
-                guard names.isNotEmpty else { return fallback }
-                return names
+                lazy var fallback: [String] = [PresetConstant.Menlo]
+                let hasSavedValue: Bool = UserDefaults.standard.object(forKey: SettingsKey.LabelCustomFontList) != nil
+                let hasLegacySavedValue: Bool = UserDefaults.standard.object(forKey: SettingsKey.LegacyCustomLabelFontList) != nil
+                defer {
+                        if hasLegacySavedValue {
+                                UserDefaults.standard.removeObject(forKey: SettingsKey.LegacyCustomLabelFontList)
+                        }
+                }
+                if hasSavedValue.negative && hasLegacySavedValue {
+                        let savedValue = UserDefaults.standard.string(forKey: SettingsKey.LegacyCustomLabelFontList)
+                        guard let savedValue else { return fallback }
+                        let names: [String] = savedValue.split(separator: ",").map({ $0.trimmed() }).filter(\.isNotEmpty).distinct()
+                        guard names.isNotEmpty else { return fallback }
+                        UserDefaults.standard.set(names, forKey: SettingsKey.LabelCustomFontList)
+                        return names
+                } else {
+                        let savedNames: [String] = UserDefaults.standard.stringArray(forKey: SettingsKey.LabelCustomFontList) ?? Array<String>()
+                        let names: [String] = savedNames.map({ $0.trimmed() }).filter(\.isNotEmpty).distinct()
+                        return names.isNotEmpty ? names : fallback
+                }
         }()
         static func updateCustomLabelFonts(to fontNames: [String]) {
                 let names: [String] = fontNames.map({ $0.trimmed() }).filter(\.isNotEmpty).distinct()
                 customLabelFonts = names
-                let fontList: String = names.joined(separator: ",")
-                UserDefaults.standard.set(fontList, forKey: SettingsKey.CustomLabelFontList)
+                UserDefaults.standard.set(names, forKey: SettingsKey.LabelCustomFontList)
                 Font.updateLabelFont()
         }
 
@@ -713,7 +754,7 @@ extension LabelSet {
         private static let fallbackText: String = "?"
 
         static func labelText(for index: Int, labelSet: LabelSet, isLabelLastZero: Bool) -> String {
-                let shouldBeZero: Bool = isLabelLastZero && index == 9
+                let shouldBeZero: Bool = isLabelLastZero && (index == 9)
                 switch labelSet {
                 case .arabic:
                         return shouldBeZero ? "0" : "\(index + 1)"

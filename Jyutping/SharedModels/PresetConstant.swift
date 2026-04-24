@@ -24,7 +24,7 @@ struct BolderFont {
         static let Inter: String = "Inter-Medium"
         static let Roboto: String = "Roboto-Medium"
         static let HelveticaNeue: String = "HelveticaNeue-Medium"
-        static let HiraginoSans: String = "HiraginoSans-W5"
+        // static let HiraginoSans: String = "HiraginoSans-W5"
         static let primaryCJKVQueue: [String] = ["ShangguSans-Medium", "ChiuKongGothicCL-Medium", "SarasaGothicCL-Medium"]
         static let systemCJKVQueue: [String] = ["PingFangHK-Medium", "PingFangMO-Medium", "PingFangSC-Medium", "PingFangTC-Medium"]
         static let supplementaryCJKVQueue: [String] = ["ChironHeiHK-Medium", "SourceHanSansHC-Medium", "NotoSansCJKhk-Medium", "NotoSansHK-Medium"]

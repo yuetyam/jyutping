@@ -77,11 +77,6 @@ private extension Font {
                                 break
                         }
                 }
-                if shouldConsiderSupplementaryFonts {
-                        if found(font: BolderFont.HiraginoSans) {
-                                names.append(BolderFont.HiraginoSans)
-                        }
-                }
                 for name in BolderFont.systemCJKVQueue {
                         if found(font: name) {
                                 names.append(name)

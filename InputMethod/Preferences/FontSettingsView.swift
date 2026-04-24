@@ -3,10 +3,6 @@ import CommonExtensions
 
 struct FontSettingsView: View {
 
-        private let minusImage: Image = Image(systemName: "minus.circle.fill")
-        private let plusImage: Image = Image(systemName: "plus.circle.fill")
-        private let buttonLength: CGFloat = 16
-
         @State private var candidateFontSize: Int = Int(AppSettings.candidateFontSize)
         @State private var commentFontSize: Int = Int(AppSettings.commentFontSize)
         @State private var labelFontSize: Int = Int(AppSettings.labelFontSize)
@@ -24,6 +20,8 @@ struct FontSettingsView: View {
         private func triggerAnimation() {
                 animationState += 1
         }
+
+        private let buttonLength: CGFloat = 16
 
         var body: some View {
                 ScrollView {
@@ -56,9 +54,10 @@ struct FontSettingsView: View {
                                                                                 customCandidateFonts.remove(at: index)
                                                                                 triggerAnimation()
                                                                         } label: {
-                                                                                minusImage
+                                                                                Image.minus
                                                                                         .resizable()
                                                                                         .scaledToFit()
+                                                                                        .symbolVariant(.circle.fill)
                                                                                         .symbolRenderingMode(.multicolor)
                                                                                         .padding(1)
                                                                                         .frame(width: buttonLength, height: buttonLength)
@@ -71,9 +70,10 @@ struct FontSettingsView: View {
                                                                 customCandidateFonts.append(PresetConstant.PingFangHK)
                                                                 triggerAnimation()
                                                         } label: {
-                                                                plusImage
+                                                                Image.plus
                                                                         .resizable()
                                                                         .scaledToFit()
+                                                                        .symbolVariant(.circle.fill)
                                                                         .symbolRenderingMode(.palette)
                                                                         .foregroundStyle(Color.white, Color.accentColor)
                                                                         .frame(width: buttonLength, height: buttonLength)
@@ -111,9 +111,10 @@ struct FontSettingsView: View {
                                                                                 customCommentFonts.remove(at: index)
                                                                                 triggerAnimation()
                                                                         } label: {
-                                                                                minusImage
+                                                                                Image.minus
                                                                                         .resizable()
                                                                                         .scaledToFit()
+                                                                                        .symbolVariant(.circle.fill)
                                                                                         .symbolRenderingMode(.multicolor)
                                                                                         .padding(1)
                                                                                         .frame(width: buttonLength, height: buttonLength)
@@ -126,9 +127,10 @@ struct FontSettingsView: View {
                                                                 customCommentFonts.append(PresetConstant.HelveticaNeue)
                                                                 triggerAnimation()
                                                         } label: {
-                                                                plusImage
+                                                                Image.plus
                                                                         .resizable()
                                                                         .scaledToFit()
+                                                                        .symbolVariant(.circle.fill)
                                                                         .symbolRenderingMode(.palette)
                                                                         .foregroundStyle(Color.white, Color.accentColor)
                                                                         .frame(width: buttonLength, height: buttonLength)
@@ -166,9 +168,10 @@ struct FontSettingsView: View {
                                                                                 customLabelFonts.remove(at: index)
                                                                                 triggerAnimation()
                                                                         } label: {
-                                                                                minusImage
+                                                                                Image.minus
                                                                                         .resizable()
                                                                                         .scaledToFit()
+                                                                                        .symbolVariant(.circle.fill)
                                                                                         .symbolRenderingMode(.multicolor)
                                                                                         .padding(1)
                                                                                         .frame(width: buttonLength, height: buttonLength)
@@ -181,9 +184,10 @@ struct FontSettingsView: View {
                                                                 customLabelFonts.append(PresetConstant.Menlo)
                                                                 triggerAnimation()
                                                         } label: {
-                                                                plusImage
+                                                                Image.plus
                                                                         .resizable()
                                                                         .scaledToFit()
+                                                                        .symbolVariant(.circle.fill)
                                                                         .symbolRenderingMode(.palette)
                                                                         .foregroundStyle(Color.white, Color.accentColor)
                                                                         .frame(width: buttonLength, height: buttonLength)
