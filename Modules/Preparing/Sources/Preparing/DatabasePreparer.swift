@@ -62,65 +62,64 @@ struct DatabasePreparer {
 
         private static func createIndexes() {
                 let commands: [String] = [
-                        "CREATE INDEX ix_core_lexicon_spell ON core_lexicon(spell);",
-                        "CREATE INDEX ix_core_lexicon_anchors ON core_lexicon(anchors);",
-                        "CREATE INDEX ix_core_lexicon_strict ON core_lexicon(spell, anchors);",
-                        "CREATE INDEX ix_core_lexicon_nine_key_code ON core_lexicon(nine_key_code);",
-                        "CREATE INDEX ix_core_lexicon_nine_key_anchors ON core_lexicon(nine_key_anchors);",
-                        "CREATE INDEX ix_core_lexicon_word ON core_lexicon(word);",
+                        "CREATE INDEX ix_core_lexicon_spell ON core_lexicon (spell);",
+                        "CREATE INDEX ix_core_lexicon_anchors ON core_lexicon (anchors);",
+                        "CREATE INDEX ix_core_lexicon_strict ON core_lexicon (spell, anchors);",
+                        "CREATE INDEX ix_core_lexicon_nine_key_code ON core_lexicon (nine_key_code);",
+                        "CREATE INDEX ix_core_lexicon_nine_key_anchors ON core_lexicon (nine_key_anchors);",
+                        "CREATE INDEX ix_core_lexicon_word ON core_lexicon (word);",
 
-                        "CREATE INDEX ix_structure_spell ON structure_table(spell);",
-                        "CREATE INDEX ix_structure_nine_key_code ON structure_table(nine_key_code);",
+                        "CREATE INDEX ix_structure_spell ON structure_table (spell);",
+                        "CREATE INDEX ix_structure_nine_key_code ON structure_table (nine_key_code);",
 
-                        "CREATE INDEX ix_pinyin_spell ON pinyin_lexicon(spell);",
-                        "CREATE INDEX ix_pinyin_anchors ON pinyin_lexicon(anchors);",
-                        "CREATE INDEX ix_pinyin_strict ON pinyin_lexicon(spell, anchors);",
-                        "CREATE INDEX ix_pinyin_nine_key_code ON pinyin_lexicon(nine_key_code);",
-                        "CREATE INDEX ix_pinyin_nine_key_anchors ON pinyin_lexicon(nine_key_anchors);",
+                        "CREATE INDEX ix_pinyin_spell ON pinyin_lexicon (spell);",
+                        "CREATE INDEX ix_pinyin_anchors ON pinyin_lexicon (anchors);",
+                        "CREATE INDEX ix_pinyin_strict ON pinyin_lexicon (spell, anchors);",
+                        "CREATE INDEX ix_pinyin_nine_key_code ON pinyin_lexicon (nine_key_code);",
+                        "CREATE INDEX ix_pinyin_nine_key_anchors ON pinyin_lexicon (nine_key_anchors);",
 
-                        "CREATE INDEX ix_cangjie_cangjie5 ON cangjie_table(cangjie5);",
-                        "CREATE INDEX ix_cangjie_c5code ON cangjie_table(c5code);",
-                        "CREATE INDEX ix_cangjie_cangjie3 ON cangjie_table(cangjie3);",
-                        "CREATE INDEX ix_cangjie_c3code ON cangjie_table(c3code);",
+                        "CREATE INDEX ix_cangjie_cangjie5 ON cangjie_table (cangjie5);",
+                        "CREATE INDEX ix_cangjie_c5code ON cangjie_table (c5code);",
+                        "CREATE INDEX ix_cangjie_cangjie3 ON cangjie_table (cangjie3);",
+                        "CREATE INDEX ix_cangjie_c3code ON cangjie_table (c3code);",
 
-                        "CREATE INDEX ix_quick_quick5 ON quick_table(quick5);",
-                        "CREATE INDEX ix_quick_q5code ON quick_table(q5code);",
-                        "CREATE INDEX ix_quick_quick3 ON quick_table(quick3);",
-                        "CREATE INDEX ix_quick_c3code ON quick_table(q3code);",
+                        "CREATE INDEX ix_quick_quick5 ON quick_table (quick5);",
+                        "CREATE INDEX ix_quick_q5code ON quick_table (q5code);",
+                        "CREATE INDEX ix_quick_quick3 ON quick_table (quick3);",
+                        "CREATE INDEX ix_quick_q3code ON quick_table (q3code);",
 
-                        "CREATE INDEX ix_stroke_stroke ON stroke_table(stroke);",
-                        "CREATE INDEX ix_stroke_spell ON stroke_table(spell);",
-                        "CREATE INDEX ix_stroke_code ON stroke_table(code);",
+                        "CREATE INDEX ix_stroke_stroke ON stroke_table (stroke);",
+                        "CREATE INDEX ix_stroke_spell ON stroke_table (spell);",
+                        "CREATE INDEX ix_stroke_code ON stroke_table (code);",
 
-                        "CREATE INDEX ix_symbol_spell ON symbol_table(spell);",
-                        "CREATE INDEX ix_symbol_nine_key_code ON symbol_table(nine_key_code);",
-                        "CREATE INDEX ix_emoji_skin_map_source ON emoji_skin_map(source);",
+                        "CREATE INDEX ix_symbol_spell ON symbol_table (spell);",
+                        "CREATE INDEX ix_symbol_nine_key_code ON symbol_table (nine_key_code);",
+                        "CREATE INDEX ix_emoji_skin_map_source ON emoji_skin_map (source);",
 
-                        "CREATE INDEX ix_mark_spell ON mark_table(spell);",
-                        "CREATE INDEX ix_mark_code ON mark_table(code);",
-                        "CREATE INDEX ix_mark_nine_key_code ON mark_table(nine_key_code);",
+                        "CREATE INDEX ix_mark_spell ON mark_table (spell);",
+                        "CREATE INDEX ix_mark_nine_key_code ON mark_table (nine_key_code);",
 
-                        "CREATE INDEX ix_syllable_nine_key_alias_code ON syllable_table(nine_key_alias_code);",
-                        "CREATE INDEX ix_pinyin_syllable_nine_key_code ON pinyin_syllable_table(nine_key_code);",
+                        "CREATE INDEX ix_syllable_nine_key_alias_code ON syllable_table (nine_key_alias_code);",
+                        "CREATE INDEX ix_pinyin_syllable_nine_key_code ON pinyin_syllable_table (nine_key_code);",
 
 
-                        "CREATE INDEX ix_variant_abp_left ON variant_abp(left);",
-                        "CREATE INDEX ix_variant_abp_right ON variant_abp(right);",
+                        "CREATE INDEX ix_variant_abp_left ON variant_abp (left);",
+                        "CREATE INDEX ix_variant_abp_right ON variant_abp (right);",
 
-                        "CREATE INDEX ix_variant_hk_left ON variant_hk(left);",
-                        "CREATE INDEX ix_variant_hk_right ON variant_hk(right);",
+                        "CREATE INDEX ix_variant_hk_left ON variant_hk (left);",
+                        "CREATE INDEX ix_variant_hk_right ON variant_hk (right);",
 
-                        "CREATE INDEX ix_variant_old_left ON variant_old(left);",
-                        "CREATE INDEX ix_variant_old_right ON variant_old(right);",
+                        "CREATE INDEX ix_variant_old_left ON variant_old (left);",
+                        "CREATE INDEX ix_variant_old_right ON variant_old (right);",
 
-                        "CREATE INDEX ix_variant_prc_left ON variant_prc(left);",
-                        "CREATE INDEX ix_variant_prc_right ON variant_prc(right);",
+                        "CREATE INDEX ix_variant_prc_left ON variant_prc (left);",
+                        "CREATE INDEX ix_variant_prc_right ON variant_prc (right);",
 
-                        "CREATE INDEX ix_variant_sim_left ON variant_sim(left);",
-                        "CREATE INDEX ix_variant_sim_right ON variant_sim(right);",
+                        "CREATE INDEX ix_variant_sim_left ON variant_sim (left);",
+                        "CREATE INDEX ix_variant_sim_right ON variant_sim (right);",
 
-                        "CREATE INDEX ix_variant_tw_left ON variant_tw(left);",
-                        "CREATE INDEX ix_variant_tw_right ON variant_tw(right);",
+                        "CREATE INDEX ix_variant_tw_left ON variant_tw (left);",
+                        "CREATE INDEX ix_variant_tw_right ON variant_tw (right);",
                 ]
                 for command in commands {
                         var statement: OpaquePointer? = nil
@@ -131,7 +130,7 @@ struct DatabasePreparer {
         }
 
         private static func createCoreLexiconTable() async {
-                let createTable: String = "CREATE TABLE core_lexicon(word TEXT NOT NULL, romanization TEXT NOT NULL, anchors INTEGER NOT NULL, spell INTEGER NOT NULL, nine_key_anchors INTEGER NOT NULL, nine_key_code INTEGER NOT NULL);"
+                let createTable: String = "CREATE TABLE core_lexicon (id INTEGER PRIMARY KEY AUTOINCREMENT, word TEXT NOT NULL, romanization TEXT NOT NULL, anchors INTEGER NOT NULL, spell INTEGER NOT NULL, nine_key_anchors INTEGER NOT NULL, nine_key_code INTEGER NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
@@ -157,7 +156,7 @@ struct DatabasePreparer {
                 }
         }
         private static func createCharacterVariantTable(fileName: String, tableName: String) async {
-                let createTable: String = "CREATE TABLE \(tableName)(left INTEGER NOT NULL, right INTEGER NOT NULL);"
+                let createTable: String = "CREATE TABLE \(tableName) (id INTEGER PRIMARY KEY AUTOINCREMENT, left INTEGER NOT NULL, right INTEGER NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
@@ -171,7 +170,7 @@ struct DatabasePreparer {
                 guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
         }
         private static func createStructureTable() async {
-                let createTable: String = "CREATE TABLE structure_table(word TEXT NOT NULL, romanization TEXT NOT NULL, spell INTEGER NOT NULL, nine_key_code INTEGER NOT NULL);"
+                let createTable: String = "CREATE TABLE structure_table (id INTEGER PRIMARY KEY AUTOINCREMENT, word TEXT NOT NULL, romanization TEXT NOT NULL, spell INTEGER NOT NULL, nine_key_code INTEGER NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
@@ -188,7 +187,7 @@ struct DatabasePreparer {
                 guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
         }
         private static func createPinyinTable() async {
-                let createTable: String = "CREATE TABLE pinyin_lexicon(word TEXT NOT NULL, romanization TEXT NOT NULL, anchors INTEGER NOT NULL, spell INTEGER NOT NULL, nine_key_anchors INTEGER NOT NULL, nine_key_code INTEGER NOT NULL);"
+                let createTable: String = "CREATE TABLE pinyin_lexicon (id INTEGER PRIMARY KEY AUTOINCREMENT, word TEXT NOT NULL, romanization TEXT NOT NULL, anchors INTEGER NOT NULL, spell INTEGER NOT NULL, nine_key_anchors INTEGER NOT NULL, nine_key_code INTEGER NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
@@ -214,7 +213,7 @@ struct DatabasePreparer {
                 }
         }
         private static func createCangjieTable() async {
-                let createTable: String = "CREATE TABLE cangjie_table(word TEXT NOT NULL, cangjie5 TEXT NOT NULL, c5complex INTEGER NOT NULL, c5code INTEGER NOT NULL, cangjie3 TEXT NOT NULL, c3complex INTEGER NOT NULL, c3code INTEGER NOT NULL);"
+                let createTable: String = "CREATE TABLE cangjie_table (id INTEGER PRIMARY KEY AUTOINCREMENT, word TEXT NOT NULL, cangjie5 TEXT NOT NULL, c5complex INTEGER NOT NULL, c5code INTEGER NOT NULL, cangjie3 TEXT NOT NULL, c3complex INTEGER NOT NULL, c3code INTEGER NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
@@ -231,7 +230,7 @@ struct DatabasePreparer {
                 guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
         }
         private static func createQuickTable() async {
-                let createTable: String = "CREATE TABLE quick_table(word TEXT NOT NULL, quick5 TEXT NOT NULL, q5complex INTEGER NOT NULL, q5code INTEGER NOT NULL, quick3 TEXT NOT NULL, q3complex INTEGER NOT NULL, q3code INTEGER NOT NULL);"
+                let createTable: String = "CREATE TABLE quick_table (id INTEGER PRIMARY KEY AUTOINCREMENT, word TEXT NOT NULL, quick5 TEXT NOT NULL, q5complex INTEGER NOT NULL, q5code INTEGER NOT NULL, quick3 TEXT NOT NULL, q3complex INTEGER NOT NULL, q3code INTEGER NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
@@ -257,7 +256,7 @@ struct DatabasePreparer {
                 }
         }
         private static func createStrokeTable() async {
-                let createTable: String = "CREATE TABLE stroke_table(word TEXT NOT NULL, stroke TEXT NOT NULL, complex INTEGER NOT NULL, spell INTEGER NOT NULL, code INTEGER NOT NULL);"
+                let createTable: String = "CREATE TABLE stroke_table (id INTEGER PRIMARY KEY AUTOINCREMENT, word TEXT NOT NULL, stroke TEXT NOT NULL, complex INTEGER NOT NULL, spell INTEGER NOT NULL, code INTEGER NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
@@ -283,7 +282,7 @@ struct DatabasePreparer {
                 }
         }
         private static func createSymbolTable() async {
-                let createTable: String = "CREATE TABLE symbol_table(category INTEGER NOT NULL, unicode_version INTEGER NOT NULL, code_point TEXT NOT NULL, cantonese TEXT NOT NULL, romanization TEXT NOT NULL, spell INTEGER NOT NULL, nine_key_code INTEGER NOT NULL);"
+                let createTable: String = "CREATE TABLE symbol_table (id INTEGER PRIMARY KEY AUTOINCREMENT, category INTEGER NOT NULL, unicode_version INTEGER NOT NULL, code_point TEXT NOT NULL, cantonese TEXT NOT NULL, romanization TEXT NOT NULL, spell INTEGER NOT NULL, nine_key_code INTEGER NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
@@ -312,7 +311,7 @@ struct DatabasePreparer {
                 guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
         }
         private static func createEmojiSkinMapTable() async {
-                let createTable: String = "CREATE TABLE emoji_skin_map(source TEXT NOT NULL, target TEXT NOT NULL);"
+                let createTable: String = "CREATE TABLE emoji_skin_map (id INTEGER PRIMARY KEY AUTOINCREMENT, source TEXT NOT NULL, target TEXT NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
@@ -335,14 +334,14 @@ struct DatabasePreparer {
                 guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
         }
         private static func createTextMarkTable() async {
-                let createTable: String = "CREATE TABLE mark_table(input TEXT NOT NULL, mark TEXT NOT NULL, spell INTEGER NOT NULL, code INTEGER NOT NULL, nine_key_code INTEGER NOT NULL);"
+                let createTable: String = "CREATE TABLE mark_table (id INTEGER PRIMARY KEY AUTOINCREMENT, input TEXT NOT NULL, mark TEXT NOT NULL, spell INTEGER NOT NULL, nine_key_code INTEGER NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
                 sqlite3_finalize(createStatement)
                 let sourceEntries: [TextMarkLexicon] = TextMarkLexicon.convert()
                 func insert(values: String) {
-                        let insert: String = "INSERT INTO mark_table (input, mark, spell, code, nine_key_code) VALUES \(values);"
+                        let insert: String = "INSERT INTO mark_table (input, mark, spell, nine_key_code) VALUES \(values);"
                         var insertStatement: OpaquePointer? = nil
                         defer { sqlite3_finalize(insertStatement) }
                         guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }
@@ -355,14 +354,14 @@ struct DatabasePreparer {
                         let part = sourceEntries[(number * distance)..<bound]
                         let entries = part.map { entry -> String in
                                 let escapedMark: String = entry.mark.contains(String.apostrophe) ? entry.mark.replacingOccurrences(of: "'", with: "''") : entry.mark
-                                return "('\(entry.input)', '\(escapedMark)', \(entry.spellCode), \(entry.charCode), \(entry.nineKeyCharCode))"
+                                return "('\(entry.input)', '\(escapedMark)', \(entry.spellCode), \(entry.nineKeyCharCode))"
                         }
                         let values: String = entries.joined(separator: ", ")
                         insert(values: values)
                 }
         }
         private static func createSyllableTable() async {
-                let createTable: String = "CREATE TABLE syllable_table(alias_code INTEGER NOT NULL PRIMARY KEY, origin_code INTEGER NOT NULL, nine_key_alias_code INTEGER NOT NULL, nine_key_origin_code INTEGER NOT NULL, alias TEXT NOT NULL, origin TEXT NOT NULL);"
+                let createTable: String = "CREATE TABLE syllable_table (alias_code INTEGER PRIMARY KEY, origin_code INTEGER NOT NULL, nine_key_alias_code INTEGER NOT NULL, nine_key_origin_code INTEGER NOT NULL, alias TEXT NOT NULL, origin TEXT NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
@@ -394,7 +393,7 @@ struct DatabasePreparer {
                 guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
         }
         private static func createPinyinSyllableTable() async {
-                let createTable: String = "CREATE TABLE pinyin_syllable_table(code INTEGER NOT NULL PRIMARY KEY, nine_key_code INTEGER NOT NULL, syllable TEXT NOT NULL);"
+                let createTable: String = "CREATE TABLE pinyin_syllable_table (code INTEGER PRIMARY KEY, nine_key_code INTEGER NOT NULL, syllable TEXT NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
