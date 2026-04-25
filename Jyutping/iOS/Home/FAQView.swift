@@ -26,39 +26,15 @@ struct FAQView: View {
                                         }
                                 }
                         }
-
                         Section {
                                 Text("IOSHomeTab.FAQ.Question.TTS").font(.headline)
-                                HStack {
-                                        Text.dotMark
-                                        Text("IOSHomeTab.Text2Speech.Notice1")
-                                        Spacer()
-                                }
-                                HStack {
-                                        Text.dotMark
-                                        Text("IOSHomeTab.Text2Speech.Notice2")
-                                        Spacer()
-                                }
-                                HStack {
-                                        Text.dotMark
-                                        Text("IOSHomeTab.Text2Speech.Notice3")
-                                        Spacer()
-                                }
-                                HStack {
-                                        Text.dotMark
-                                        Text("IOSHomeTab.Text2Speech.Notice4")
-                                        Spacer()
-                                }
-                                HStack {
-                                        Text.dotMark
-                                        Text("IOSHomeTab.Text2Speech.Notice5")
-                                        Spacer()
-                                }
-                                HStack {
-                                        Text.dotMark
-                                        Text("IOSHomeTab.Text2Speech.Notice6")
-                                        Spacer()
-                                }
+                                Label("IOSHomeTab.Text2Speech.Notice1", systemImage: "1.circle")
+                                Label("IOSHomeTab.Text2Speech.Notice2", systemImage: "2.circle")
+                                Label("IOSHomeTab.Text2Speech.Notice3", systemImage: "3.circle")
+                                Label("IOSHomeTab.Text2Speech.Notice4", systemImage: "4.circle")
+                                Label("IOSHomeTab.Text2Speech.Notice5", systemImage: "5.circle")
+                                Label("IOSHomeTab.Text2Speech.Notice6", systemImage: "6.circle")
+                                Label("IOSHomeTab.Text2Speech.Notice7", systemImage: "7.circle")
                         }
 
                         Section {

@@ -84,7 +84,10 @@ struct HomeView: View {
                                 }
                                 Section {
                                         NavigationLink(destination: EnablingKeyboardView()) {
-                                                Label("IOSHomeTab.LabelTitle.ProblemsWithEnablingKeyboard", systemImage: "info.circle")
+                                                Label("IOSHomeTab.LabelTitle.ProblemsWithEnablingKeyboard", systemImage: "hand.raised")
+                                        }
+                                        NavigationLink(destination: Text2SpeechView()) {
+                                                Label("IOSHomeTab.LabelTitle.TextToSpeech", systemImage: "speaker.wave.2")
                                         }
                                 }
 
@@ -125,9 +128,6 @@ struct HomeView: View {
                                         NavigationLink(destination: IntroductionsView()) {
                                                 Label("IOSHomeTab.LabelTitle.MoreIntroductions", systemImage: "info.circle")
                                         }
-                                        NavigationLink(destination: Text2SpeechView()) {
-                                                Label("IOSHomeTab.LabelTitle.TextToSpeech", systemImage: "speaker.wave.2")
-                                        }
                                         NavigationLink(destination: ClipboardFeaturesView()) {
                                                 Label("IOSHomeTab.LabelTitle.ClipboardFeatures", systemImage: "list.clipboard")
                                         }
@@ -142,6 +142,14 @@ struct HomeView: View {
                                 Section {
                                         NavigationLink(destination: InputTestView()) {
                                                 Label("IOSHomeTab.LabelTitle.InputTest", systemImage: "keyboard")
+                                        }
+                                }
+                                #else
+                                if #available(iOS 1000, *) {
+                                        Section {
+                                                NavigationLink(destination: InputTestView()) {
+                                                        Label("IOSHomeTab.LabelTitle.InputTest", systemImage: "keyboard")
+                                                }
                                         }
                                 }
                                 #endif

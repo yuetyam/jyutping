@@ -6716,55 +6716,55 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "點解我部機文字語音朗讀冇聲音？"
+            "value" : "點解我部機文字轉語音朗讀冇聲音？"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "點解我部機文字語音朗讀冇聲音？"
+            "value" : "點解我部機文字轉語音朗讀冇聲音？"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "點解我部機文字語音朗讀冇聲音？"
+            "value" : "點解我部機文字轉語音朗讀冇聲音？"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "點解我部機文字語音朗讀冇聲音？"
+            "value" : "點解我部機文字轉語音朗讀冇聲音？"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "點解我部機文字語音朗讀冇聲音？"
+            "value" : "點解我部機文字轉語音朗讀冇聲音？"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "點解我部機文字語音朗讀冇聲音？"
+            "value" : "點解我部機文字轉語音朗讀冇聲音？"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "點解我部機文字語音朗讀冇聲音？"
+            "value" : "點解我部機文字轉語音朗讀冇聲音？"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "點解我部機文字語音朗讀冇聲音？"
+            "value" : "點解我部機文字轉語音朗讀冇聲音？"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "點解我部機文字語音朗讀冇聲音？"
+            "value" : "點解我部機文字轉語音朗讀冇聲音？"
           }
         }
       }
@@ -8180,7 +8180,6 @@
       }
     },
     "IOSHomeTab.LabelTitle.InputTest" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8503,55 +8502,55 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "文字語音朗讀"
+            "value" : "文字轉語音朗讀"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "文字語音朗讀"
+            "value" : "文字轉語音朗讀"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "文字語音朗讀"
+            "value" : "文字轉語音朗讀"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "文字語音朗讀"
+            "value" : "文字轉語音朗讀"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "文字語音朗讀"
+            "value" : "文字轉語音朗讀"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "文字語音朗讀"
+            "value" : "文字轉語音朗讀"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "文字語音朗讀"
+            "value" : "文字轉語音朗讀"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "文字語音朗讀"
+            "value" : "文字轉語音朗讀"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "文字語音朗讀"
+            "value" : "文字轉語音朗讀"
           }
         }
       }
@@ -9161,55 +9160,55 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "文字語音朗讀"
+            "value" : "文字轉語音朗讀"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "文字語音朗讀"
+            "value" : "文字轉語音朗讀"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "文字語音朗讀"
+            "value" : "文字轉語音朗讀"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "文字語音朗讀"
+            "value" : "文字轉語音朗讀"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "文字語音朗讀"
+            "value" : "文字轉語音朗讀"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "文字語音朗讀"
+            "value" : "文字轉語音朗讀"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "文字語音朗讀"
+            "value" : "文字轉語音朗讀"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "文字語音朗讀"
+            "value" : "文字轉語音朗讀"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "文字語音朗讀"
+            "value" : "文字轉語音朗讀"
           }
         }
       }
@@ -9255,55 +9254,55 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果遇到文字語音朗讀無法正確朗讀粵拼音節，請截屏本䈎面，然後將截圖分享畀開發者。「關於」䈎面有開發者嘅聯絡方式。"
+            "value" : "如果遇到文字轉語音無法正確朗讀粵拼音節，請截屏本䈎面，然後將截圖分享畀開發者。「關於」䈎面有開發者嘅聯絡方式。"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果遇到文字語音朗讀無法正確朗讀粵拼音節，請截屏本䈎面，然後將截圖分享畀開發者。「關於」䈎面有開發者嘅聯絡方式。"
+            "value" : "如果遇到文字轉語音無法正確朗讀粵拼音節，請截屏本䈎面，然後將截圖分享畀開發者。「關於」䈎面有開發者嘅聯絡方式。"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果遇到文字語音朗讀無法正確朗讀粵拼音節，請截屏本䈎面，然後將截圖分享畀開發者。「關於」䈎面有開發者嘅聯絡方式。"
+            "value" : "如果遇到文字轉語音無法正確朗讀粵拼音節，請截屏本䈎面，然後將截圖分享畀開發者。「關於」䈎面有開發者嘅聯絡方式。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果遇到文字語音朗讀無法正確朗讀粵拼音節，請截屏本䈎面，然後將截圖分享畀開發者。「關於」䈎面有開發者嘅聯絡方式。"
+            "value" : "如果遇到文字轉語音無法正確朗讀粵拼音節，請截屏本䈎面，然後將截圖分享畀開發者。「關於」䈎面有開發者嘅聯絡方式。"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果遇到文字語音朗讀無法正確朗讀粵拼音節，請截屏本䈎面，然後將截圖分享畀開發者。「關於」䈎面有開發者嘅聯絡方式。"
+            "value" : "如果遇到文字轉語音無法正確朗讀粵拼音節，請截屏本䈎面，然後將截圖分享畀開發者。「關於」䈎面有開發者嘅聯絡方式。"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果遇到文字語音朗讀無法正確朗讀粵拼音節，請截屏本䈎面，然後將截圖分享畀開發者。「關於」䈎面有開發者嘅聯絡方式。"
+            "value" : "如果遇到文字轉語音無法正確朗讀粵拼音節，請截屏本䈎面，然後將截圖分享畀開發者。「關於」䈎面有開發者嘅聯絡方式。"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果遇到文字語音朗讀無法正確朗讀粵拼音節，請截屏本䈎面，然後將截圖分享畀開發者。「關於」䈎面有開發者嘅聯絡方式。"
+            "value" : "如果遇到文字轉語音無法正確朗讀粵拼音節，請截屏本䈎面，然後將截圖分享畀開發者。「關於」䈎面有開發者嘅聯絡方式。"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果遇到文字語音朗讀無法正確朗讀粵拼音節，請截屏本䈎面，然後將截圖分享畀開發者。「關於」䈎面有開發者嘅聯絡方式。"
+            "value" : "如果遇到文字轉語音無法正確朗讀粵拼音節，請截屏本䈎面，然後將截圖分享畀開發者。「關於」䈎面有開發者嘅聯絡方式。"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果遇到文字語音朗讀無法正確朗讀粵拼音節，請截屏本䈎面，然後將截圖分享畀開發者。「關於」䈎面有開發者嘅聯絡方式。"
+            "value" : "如果遇到文字轉語音無法正確朗讀粵拼音節，請截屏本䈎面，然後將截圖分享畀開發者。「關於」䈎面有開發者嘅聯絡方式。"
           }
         }
       }
@@ -9349,55 +9348,55 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "應用程式使用嘅係，系統內置提供嘅文字語音朗讀（TTS）功能。"
+            "value" : "應用程式使用嘅係，系統內置提供嘅文字轉語音朗讀（TTS）功能。"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "應用程式使用嘅係，系統內置提供嘅文字語音朗讀（TTS）功能。"
+            "value" : "應用程式使用嘅係，系統內置提供嘅文字轉語音朗讀（TTS）功能。"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "應用程式使用嘅係，系統內置提供嘅文字語音朗讀（TTS）功能。"
+            "value" : "應用程式使用嘅係，系統內置提供嘅文字轉語音朗讀（TTS）功能。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "應用程式使用嘅係，系統內置提供嘅文字語音朗讀（TTS）功能。"
+            "value" : "應用程式使用嘅係，系統內置提供嘅文字轉語音朗讀（TTS）功能。"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "應用程式使用嘅係，系統內置提供嘅文字語音朗讀（TTS）功能。"
+            "value" : "應用程式使用嘅係，系統內置提供嘅文字轉語音朗讀（TTS）功能。"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "應用程式使用嘅係，系統內置提供嘅文字語音朗讀（TTS）功能。"
+            "value" : "應用程式使用嘅係，系統內置提供嘅文字轉語音朗讀（TTS）功能。"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "應用程式使用嘅係，系統內置提供嘅文字語音朗讀（TTS）功能。"
+            "value" : "應用程式使用嘅係，系統內置提供嘅文字轉語音朗讀（TTS）功能。"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "應用程式使用嘅係，系統內置提供嘅文字語音朗讀（TTS）功能。"
+            "value" : "應用程式使用嘅係，系統內置提供嘅文字轉語音朗讀（TTS）功能。"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "應用程式使用嘅係，系統內置提供嘅文字語音朗讀（TTS）功能。"
+            "value" : "應用程式使用嘅係，系統內置提供嘅文字轉語音朗讀（TTS）功能。"
           }
         }
       }
@@ -9443,55 +9442,55 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果本設備處於靜音狀態，文字語音朗讀可能會冇聲音。"
+            "value" : "如果本設備處於靜音狀態，文字轉語音可能會冇聲音。"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果本設備處於靜音狀態，文字語音朗讀可能會冇聲音。"
+            "value" : "如果本設備處於靜音狀態，文字轉語音可能會冇聲音。"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果本設備處於靜音狀態，文字語音朗讀可能會冇聲音。"
+            "value" : "如果本設備處於靜音狀態，文字轉語音可能會冇聲音。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果本設備處於靜音狀態，文字語音朗讀可能會冇聲音。"
+            "value" : "如果本設備處於靜音狀態，文字轉語音可能會冇聲音。"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果本設備處於靜音狀態，文字語音朗讀可能會冇聲音。"
+            "value" : "如果本設備處於靜音狀態，文字轉語音可能會冇聲音。"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果本設備處於靜音狀態，文字語音朗讀可能會冇聲音。"
+            "value" : "如果本設備處於靜音狀態，文字轉語音可能會冇聲音。"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果本設備處於靜音狀態，文字語音朗讀可能會冇聲音。"
+            "value" : "如果本設備處於靜音狀態，文字轉語音可能會冇聲音。"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果本設備處於靜音狀態，文字語音朗讀可能會冇聲音。"
+            "value" : "如果本設備處於靜音狀態，文字轉語音可能會冇聲音。"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果本設備處於靜音狀態，文字語音朗讀可能會冇聲音。"
+            "value" : "如果本設備處於靜音狀態，文字轉語音可能會冇聲音。"
           }
         }
       }
@@ -9689,96 +9688,190 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "If there is occasionally no sound, try to close the this app completely, or restart this device."
+            "value" : "Try closing this app completely once."
           }
         },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "If there is occasionally no sound, try to close the this app completely, or restart this device."
+            "value" : "Try closing this app completely once."
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "If there is occasionally no sound, try to close the this app completely, or restart this device."
+            "value" : "Try closing this app completely once."
           }
         },
         "en-US" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "If there is occasionally no sound, try to close the this app completely, or restart this device."
+            "value" : "Try closing this app completely once."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "S'il n'y a occasionnellement aucun son, essayez de fermer complètement cette application ou de redémarrer cet appareil."
+            "value" : "Essayez de fermer complètement cette application une fois."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "時々音が出ない場合は、このアプリを完全に終了するか、デバイスを再起動してみてください。"
+            "value" : "一度、このアプリを完全に閉じてみてください。"
           }
         },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果係偶爾冇聲音，可以試下將本應用程式徹底關閉再試，或者重啓一下設備。"
+            "value" : "可以試下將本應用程式徹底關閉一次再試。"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果係偶爾冇聲音，可以試下將本應用程式徹底關閉再試，或者重啓一下設備。"
+            "value" : "可以試下將本應用程式徹底關閉一次再試。"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果係偶爾冇聲音，可以試下將本應用程式徹底關閉再試，或者重啓一下設備。"
+            "value" : "可以試下將本應用程式徹底關閉一次再試。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果係偶爾冇聲音，可以試下將本應用程式徹底關閉再試，或者重啓一下設備。"
+            "value" : "可以試下將本應用程式徹底關閉一次再試。"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果係偶爾冇聲音，可以試下將本應用程式徹底關閉再試，或者重啓一下設備。"
+            "value" : "可以試下將本應用程式徹底關閉一次再試。"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果係偶爾冇聲音，可以試下將本應用程式徹底關閉再試，或者重啓一下設備。"
+            "value" : "可以試下將本應用程式徹底關閉一次再試。"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果係偶爾冇聲音，可以試下將本應用程式徹底關閉再試，或者重啓一下設備。"
+            "value" : "可以試下將本應用程式徹底關閉一次再試。"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果係偶爾冇聲音，可以試下將本應用程式徹底關閉再試，或者重啓一下設備。"
+            "value" : "可以試下將本應用程式徹底關閉一次再試。"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果係偶爾冇聲音，可以試下將本應用程式徹底關閉再試，或者重啓一下設備。"
+            "value" : "可以試下將本應用程式徹底關閉一次再試。"
           }
         }
       }
     },
     "IOSHomeTab.Text2Speech.Notice6" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Or maybe try restarting this device."
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Or maybe try restarting this device."
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Or maybe try restarting this device."
+          }
+        },
+        "en-US" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Or maybe try restarting this device."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ou peut-être, essayez de redémarrer cet appareil."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "あるいは、このデバイスを再起動してみてください。"
+          }
+        },
+        "yue" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "或者試下重啓一下設備。"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "或者試下重啓一下設備。"
+          }
+        },
+        "zh-Hans-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "或者試下重啓一下設備。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "或者試下重啓一下設備。"
+          }
+        },
+        "zh-Hant-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "或者試下重啓一下設備。"
+          }
+        },
+        "zh-Hant-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "或者試下重啓一下設備。"
+          }
+        },
+        "zh-Hant-MO" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "或者試下重啓一下設備。"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "或者試下重啓一下設備。"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "或者試下重啓一下設備。"
+          }
+        }
+      }
+    },
+    "IOSHomeTab.Text2Speech.Notice7" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9868,6 +9961,100 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "或者試下將本應用程式卸載，再重新安裝。"
+          }
+        }
+      }
+    },
+    "IOSHomeTab.Text2Speech.NoticeHeader" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "If there is occasionally no sound"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "If there is occasionally no sound"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "If there is occasionally no sound"
+          }
+        },
+        "en-US" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "If there is occasionally no sound"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "S'il n'y a occasionnellement aucun son"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "時折、音が出ない場合"
+          }
+        },
+        "yue" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "如果係偶爾冇聲音"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "如果係偶爾冇聲音"
+          }
+        },
+        "zh-Hans-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "如果係偶爾冇聲音"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "如果係偶爾冇聲音"
+          }
+        },
+        "zh-Hant-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "如果係偶爾冇聲音"
+          }
+        },
+        "zh-Hant-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "如果係偶爾冇聲音"
+          }
+        },
+        "zh-Hant-MO" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "如果係偶爾冇聲音"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "如果係偶爾冇聲音"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "如果係偶爾冇聲音"
           }
         }
       }

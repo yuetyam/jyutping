@@ -7,18 +7,21 @@ struct Text2SpeechView: View {
         var body: some View {
                 List {
                         Section {
-                                Text("IOSHomeTab.Text2Speech.Notice1")
+                                Label("IOSHomeTab.Text2Speech.Notice1", systemImage: "1.circle")
                         }
                         Section {
-                                Text("IOSHomeTab.Text2Speech.Notice2")
+                                Label("IOSHomeTab.Text2Speech.Notice2", systemImage: "2.circle")
                         }
                         Section {
-                                Text("IOSHomeTab.Text2Speech.Notice3")
-                                Text("IOSHomeTab.Text2Speech.Notice4")
+                                Label("IOSHomeTab.Text2Speech.Notice3", systemImage: "3.circle")
+                                Label("IOSHomeTab.Text2Speech.Notice4", systemImage: "4.circle")
                         }
                         Section {
-                                Text("IOSHomeTab.Text2Speech.Notice5")
-                                Text("IOSHomeTab.Text2Speech.Notice6")
+                                Label("IOSHomeTab.Text2Speech.Notice5", systemImage: "5.circle")
+                                Label("IOSHomeTab.Text2Speech.Notice6", systemImage: "6.circle")
+                                Label("IOSHomeTab.Text2Speech.Notice7", systemImage: "7.circle")
+                        } header: {
+                                Text("IOSHomeTab.Text2Speech.NoticeHeader").textCase(nil).font(.footnote)
                         }
                         Section {
                                 HStack {
