@@ -3,12 +3,21 @@ import CommonExtensions
 
 struct LexiconConverter {
 
-        /// Convert jyutping.txt to lexicon entries
-        static func jyutping() -> [LexiconEntry] {
+        /// Source lines read from jyutping.txt
+        static let jyutpingSourceLines: [String] = {
                 guard let url = Bundle.module.url(forResource: "jyutping", withExtension: "txt") else { fatalError("jyutping.txt not found") }
                 guard let sourceContent = try? String(contentsOf: url, encoding: .utf8) else { fatalError("Failed to read jyutping.txt") }
-                let sourceLines: [String] = sourceContent.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
-                return sourceLines.map(convert(_:))
+                return sourceContent.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
+        }()
+        static func prepareJyutpingSourceLines() {
+                if jyutpingSourceLines.isEmpty {
+                        print("jyutpingSourceLines is empty")
+                }
+        }
+
+        /// Convert jyutping.txt to lexicon entries
+        static func jyutping() -> [LexiconEntry] {
+                return jyutpingSourceLines.map(convert(_:))
         }
 
         /// Convert pinyin.txt to lexicon entries

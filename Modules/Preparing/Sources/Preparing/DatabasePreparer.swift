@@ -11,6 +11,8 @@ struct DatabasePreparer {
         }()
 
         static func prepare() async {
+                LexiconConverter.prepareJyutpingSourceLines()
+                Cangjie.prepareCangjieDatabase()
                 await withTaskGroup(of: Void.self) { group in
                         group.addTask { await createCoreLexiconTable() }
                         group.addTask { await createStructureTable() }
@@ -46,6 +48,7 @@ struct DatabasePreparer {
                 createIndexes()
                 backupInMemoryDatabase()
                 sqlite3_close_v2(database)
+                Cangjie.closeCangjieDatabase()
         }
         private static func backupInMemoryDatabase() {
                 let path = "../CoreIME/Sources/CoreIME/Resources/imedb.sqlite3"

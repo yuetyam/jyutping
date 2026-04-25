@@ -5,10 +5,7 @@ import CommonExtensions
 struct UnihanDefinition {
         static func generate() -> [(UInt32, String)] {
                 prepare()
-                guard let url = Bundle.module.url(forResource: "jyutping", withExtension: "txt") else { return [] }
-                guard let sourceContent = try? String(contentsOf: url, encoding: .utf8) else { return [] }
-                let sourceLines: [String] = sourceContent.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
-                let words = sourceLines.compactMap({ line -> String.SubSequence? in
+                let words = LexiconConverter.jyutpingSourceLines.compactMap({ line -> String.SubSequence? in
                         guard let word = line.split(separator: "\t").first else { return nil }
                         return (word.count == 1) ? word : nil
                 })

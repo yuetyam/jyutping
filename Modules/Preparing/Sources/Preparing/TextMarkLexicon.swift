@@ -6,7 +6,7 @@ struct TextMarkLexicon: Hashable {
         let input: String
         let mark: String
         let spellCode: Int32
-        let charCode: Int
+        // let charCode: Int
         let nineKeyCharCode: Int
 
         static func == (lhs: TextMarkLexicon, rhs: TextMarkLexicon) -> Bool {
@@ -33,9 +33,9 @@ struct TextMarkLexicon: Hashable {
                         let input = parts[0]
                         let mark = parts[1]
                         let spellCode = input.hashCode()
-                        let charCode: Int = input.charCode ?? 0
+                        // let charCode: Int = input.charCode ?? 0
                         let nineKeyCharCode: Int = input.nineKeyCharCode ?? 0
-                        return TextMarkLexicon(input: input, mark: mark, spellCode: spellCode, charCode: charCode, nineKeyCharCode: nineKeyCharCode)
+                        return TextMarkLexicon(input: input, mark: mark, spellCode: spellCode, nineKeyCharCode: nineKeyCharCode)
                 }
                 return entries.distinct()
         }

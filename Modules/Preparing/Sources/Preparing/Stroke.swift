@@ -39,18 +39,15 @@ struct Stroke {
         ]
         static func generate() -> [StrokeEntry] {
                 prepare()
-                guard let url = Bundle.module.url(forResource: "jyutping", withExtension: "txt") else { return [] }
-                guard let sourceContent = try? String(contentsOf: url, encoding: .utf8) else { return [] }
-                let sourceLines: [String] = sourceContent.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
-                let characters = sourceLines.compactMap { line -> String? in
+                let characters = LexiconConverter.jyutpingSourceLines.compactMap({ line -> String? in
                         guard let word = line.split(separator: "\t").first else { return nil }
                         guard word.count == 1 else { return nil }
                         return String(word)
-                }
+                }).distinct()
                 defer {
                         sqlite3_close_v2(database)
                 }
-                return characters.distinct().flatMap({ word -> [StrokeEntry] in
+                return characters.flatMap({ word -> [StrokeEntry] in
                         let matches = match(text: word)
                         guard !(matches.isEmpty) else { return [] }
                         let entries = matches.map { text -> StrokeEntry in
@@ -83,13 +80,12 @@ struct Stroke {
                 return db
         }()
         private static func prepare() {
-                // guard sqlite3_open_v2(":memory:", &database, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE, nil) == SQLITE_OK else { return }
                 createTable()
                 insertValues()
                 createIndexes()
         }
         private static func createTable() {
-                let command: String = "CREATE TABLE stroke_table(word TEXT NOT NULL, stroke TEXT NOT NULL);"
+                let command: String = "CREATE TABLE stroke_table (id INTEGER PRIMARY KEY AUTOINCREMENT, word TEXT NOT NULL, stroke TEXT NOT NULL);"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return }
@@ -114,7 +110,7 @@ struct Stroke {
                 guard sqlite3_step(statement) == SQLITE_DONE else { return }
         }
         private static func createIndexes() {
-                let command: String = "CREATE INDEX ix_stroke_word ON stroke_table(word);"
+                let command: String = "CREATE INDEX ix_stroke_word ON stroke_table (word);"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return }
