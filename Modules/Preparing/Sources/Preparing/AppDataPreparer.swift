@@ -2,7 +2,7 @@ import Foundation
 import SQLite3
 
 struct AppDataPreparer {
-        nonisolated(unsafe) fileprivate static let database: OpaquePointer? = {
+        nonisolated(unsafe) private static let database: OpaquePointer? = {
                 var db: OpaquePointer? = nil
                 guard sqlite3_open_v2(":memory:", &db, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE | SQLITE_OPEN_FULLMUTEX, nil) == SQLITE_OK else { return nil }
                 return db
@@ -39,14 +39,10 @@ struct AppDataPreparer {
 private extension AppDataPreparer {
         static func createIndexes() {
                 let commands: [String] = [
-                        "CREATE INDEX ix_jyutping_word ON jyutping_table(word);",
-                        "CREATE INDEX ix_jyutping_romanization ON jyutping_table(romanization);",
+                        "CREATE INDEX ix_jyutping_word ON jyutping_table (word);",
+                        "CREATE INDEX ix_jyutping_romanization ON jyutping_table (romanization);",
 
-                        "CREATE INDEX ix_collocation_word ON collocation_table(word);",
-                        "CREATE INDEX ix_collocation_romanization ON collocation_table(romanization);",
-
-                        "CREATE INDEX ix_dictionary_word ON dictionary_table(word);",
-                        "CREATE INDEX ix_dictionary_romanization ON dictionary_table(romanization);",
+                        "CREATE INDEX ix_dictionary_word_romanization ON dictionary_table (word, romanization);",
 
                         "CREATE INDEX ix_yingwaa_code ON yingwaa_table(code);",
                         "CREATE INDEX ix_yingwaa_romanization ON yingwaa_table(romanization);",
@@ -69,7 +65,7 @@ private extension AppDataPreparer {
 }
 private extension AppDataPreparer {
         static func createJyutpingTable() async {
-                let createTable: String = "CREATE TABLE jyutping_table(word TEXT NOT NULL, romanization TEXT NOT NULL);"
+                let createTable: String = "CREATE TABLE jyutping_table (id INTEGER PRIMARY KEY AUTOINCREMENT, word TEXT NOT NULL, romanization TEXT NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
@@ -94,7 +90,7 @@ private extension AppDataPreparer {
 }
 private extension AppDataPreparer {
         static func createCollocationTable() async {
-                let createTable: String = "CREATE TABLE collocation_table(word TEXT NOT NULL, romanization TEXT NOT NULL, collocation TEXT NOT NULL);"
+                let createTable: String = "CREATE TABLE collocation_table (id INTEGER PRIMARY KEY AUTOINCREMENT, word TEXT NOT NULL, romanization TEXT NOT NULL, collocation TEXT NOT NULL, UNIQUE (word, romanization));"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
@@ -120,7 +116,7 @@ private extension AppDataPreparer {
 }
 private extension AppDataPreparer {
         static func createDictionaryTable() async {
-                let createTable: String = "CREATE TABLE dictionary_table(word TEXT NOT NULL, romanization TEXT NOT NULL, description TEXT NOT NULL);"
+                let createTable: String = "CREATE TABLE dictionary_table (id INTEGER PRIMARY KEY AUTOINCREMENT, word TEXT NOT NULL, romanization TEXT NOT NULL, description TEXT NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
