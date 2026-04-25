@@ -87,24 +87,3 @@ extension KeyboardForm {
                 }
         }
 }
-
-enum QwertyForm: Int {
-
-        /// ANSI layout for typing English
-        case abc
-
-        /// ANSI layout for inputting Cantonese
-        case primary
-
-        /// Cantonese Triple-Stroke. 粵拼三拼
-        case tripleStroke
-
-        /// ANSI layout for reverse lookup using Mandarin Pinyin. 普通話拼音反查粵拼
-        case pinyin
-
-        /// ANSI layout for reverse lookup using Cangjie or Quick. 倉頡或速成反查粵拼
-        case cangjie
-
-        /// ANSI layout for reverse lookup using Stroke. 筆畫反查粵拼
-        case stroke
-}

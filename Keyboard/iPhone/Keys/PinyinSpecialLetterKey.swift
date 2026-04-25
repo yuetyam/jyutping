@@ -1,14 +1,11 @@
 import SwiftUI
-import CoreIME
 import CommonExtensions
+import CoreIME
 
-struct LetterInputKey: View {
+// For the letter V key representing the ü
+struct PinyinSpecialLetterKey: View {
 
-        init(_ virtual: VirtualInputKey) {
-                self.virtual = virtual
-        }
-
-        private let virtual: VirtualInputKey
+        private let virtual: VirtualInputKey = .letterV
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
@@ -51,6 +48,15 @@ struct LetterInputKey: View {
                                         .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                         .padding(.vertical, verticalPadding)
                                         .padding(.horizontal, horizontalPadding)
+                                ZStack(alignment: .bottomTrailing) {
+                                        Color.clear
+                                        Text(verbatim: "ü")
+                                                .textCase(textCase)
+                                                .font(.keyFootnote)
+                                                .shallow()
+                                }
+                                .padding(.vertical, verticalPadding)
+                                .padding(.horizontal, horizontalPadding + 2)
                                 Text(verbatim: virtual.text)
                                         .textCase(textCase)
                                         .font(.letterCompact)
@@ -69,7 +75,7 @@ struct LetterInputKey: View {
                         }
                         .onEnded { _ in
                                 context.handle(virtual)
-                         }
+                        }
                 )
         }
 }

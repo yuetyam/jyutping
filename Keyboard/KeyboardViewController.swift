@@ -208,7 +208,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 if keyboardForm.isNineKeyStroke {
                                         updateKeyboardForm(to: .alphabetic)
                                 }
-                                ensureQwertyForm(to: .primary)
+                                ensureCompositionType(to: .primary)
                                 updateReturnKey()
                                 if Options.isInputMemoryOn && selectedLexicons.isNotEmpty {
                                         let concatenated = selectedLexicons.filter(\.isCantonese).joined()
@@ -220,18 +220,18 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         case .none:
                                 updateReverseLookupState(to: false)
                         case .letterR:
-                                ensureQwertyForm(to: .pinyin)
+                                ensureCompositionType(to: .pinyin)
                                 updateReverseLookupState(to: true)
                                 pinyinReverseLookup()
                         case .letterV:
-                                ensureQwertyForm(to: .cangjie)
+                                ensureCompositionType(to: .cangjie)
                                 updateReverseLookupState(to: true)
                                 cangjieReverseLookup()
                         case .letterX:
                                 if strokeLayout.isNineKey && keyboardForm.isNineKeyStroke.negative {
                                         updateKeyboardForm(to: .nineKeyStroke)
                                 } else {
-                                        ensureQwertyForm(to: .stroke)
+                                        ensureCompositionType(to: .stroke)
                                 }
                                 updateReverseLookupState(to: true)
                                 strokeReverseLookup()
@@ -1188,10 +1188,10 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 }
         }
 
-        @Published private(set) var qwertyForm: QwertyForm = .primary
-        private func ensureQwertyForm(to form: QwertyForm) {
-                guard qwertyForm != form else { return }
-                qwertyForm = form
+        @Published private(set) var compositionType: CompositionType = .primary
+        private func ensureCompositionType(to type: CompositionType) {
+                guard compositionType != type else { return }
+                compositionType = type
         }
 
         @Published private(set) var keyboardCase: KeyboardCase = .lowercased
