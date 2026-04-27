@@ -4,9 +4,6 @@ import CommonExtensions
 /// InputMemory Lexicon Entry
 struct MemoryLexicon: Hashable {
 
-        /// (Candidate.lexiconText + period + Candidate.romanization).hash
-        let identifier: Int
-
         /// Cantonese candidate lexicon text
         let word: String
 
@@ -14,19 +11,16 @@ struct MemoryLexicon: Hashable {
         let romanization: String
 
         /// Count of input selection
-        let frequency: Int
+        let frequency: Int64
 
         /// Most recently updated timestamp, in milliseconds
-        let latest: Int
+        let latest: Int64
 
-        /// romanization.anchorText.CharCode
-        let anchors: Int
+        /// romanization.anchorText.hashCode()
+        let shortcut: Int32
 
-        /// romanization.anchorText.hash
-        let shortcut: Int
-
-        /// romanization.removedTonesAndSpaces.hash
-        let ping: Int
+        /// romanization.removedTonesAndSpaces.hashCode()
+        let spell: Int32
 
         /// romanization.anchorText.NineKeyCharCode
         let nineKeyAnchors: Int
@@ -34,17 +28,15 @@ struct MemoryLexicon: Hashable {
         /// romanization.removedTonesAndSpaces.NineKeyCharCode
         let nineKeyCode: Int
 
-        init(word: String, romanization: String, frequency: Int) {
+        init(word: String, romanization: String, frequency: Int64 = 1, latest: Int64? = nil) {
                 let anchorText: String = String(romanization.split(separator: Character.space).compactMap(\.first))
                 let letterText: String = romanization.filter(\.isLowercaseBasicLatinLetter)
-                self.identifier = (word + String.period + romanization).hash
                 self.word = word
                 self.romanization = romanization
                 self.frequency = frequency
-                self.latest = Int(Date.now.timeIntervalSince1970 * 1000)
-                self.anchors = anchorText.charCode ?? 0
-                self.shortcut = anchorText.hash
-                self.ping = letterText.hash
+                self.latest = latest ?? Int64(Date.now.timeIntervalSince1970 * 1000)
+                self.shortcut = anchorText.hashCode()
+                self.spell = letterText.hashCode()
                 self.nineKeyAnchors = anchorText.nineKeyCharCode ?? 0
                 self.nineKeyCode = letterText.nineKeyCharCode ?? 0
         }

@@ -81,7 +81,7 @@ extension Engine {
                 guard sqlite3_prepare_v2(Engine.database, command, -1, &statement, nil) == SQLITE_OK else { return [] }
                 var emojis: [Emoji] = []
                 while sqlite3_step(statement) == SQLITE_ROW {
-                        let rowid = sqlite3_column_int64(statement, 0)
+                        let rowID = sqlite3_column_int64(statement, 0)
                         let categoryCode = sqlite3_column_int64(statement, 1)
                         let unicodeVersion = sqlite3_column_int64(statement, 2)
                         guard let codePoint = sqlite3_column_text(statement, 3) else { continue }
@@ -89,7 +89,7 @@ extension Engine {
                         guard let romanization = sqlite3_column_text(statement, 5) else { continue }
                         guard let category = Emoji.Category(rawValue: Int(categoryCode)),
                               let text = Emoji.generateSymbol(from: String(cString: codePoint)) else { continue }
-                        let uniqueNumber: Int = 10000 + Int(rowid)
+                        let uniqueNumber: Int = 10000 + Int(rowID)
                         let instance = Emoji(category: category, uniqueNumber: uniqueNumber, unicodeVersion: Int(unicodeVersion), text: text, cantonese: String(cString: cantonese), romanization: String(cString: romanization))
                         emojis.append(instance)
                 }

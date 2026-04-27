@@ -34,13 +34,12 @@ struct UnihanDefinition {
                 return db
         }()
         private static func prepare() {
-                // guard sqlite3_open_v2(":memory:", &database, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE, nil) == SQLITE_OK else { return }
                 createTable()
                 insertValues()
                 createIndexes()
         }
         private static func createTable() {
-                let command: String = "CREATE TABLE definition_table(word TEXT NOT NULL, definition TEXT NOT NULL);"
+                let command: String = "CREATE TABLE definition_table (id INTEGER PRIMARY KEY AUTOINCREMENT, word TEXT NOT NULL, definition TEXT NOT NULL);"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return }

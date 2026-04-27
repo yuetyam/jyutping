@@ -276,7 +276,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                 inputStage = .standby
                         case (true, false):
                                 inputStage = .starting
-                                InputMemory.prepare()
+                                // InputMemory.prepare()
                                 Engine.prepare()
                                 prepareWindow()
                         case (false, false):

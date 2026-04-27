@@ -1480,18 +1480,4 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 AudioFeedback.modified()
                 triggerHapticFeedback()
         }
-
-        private func cleanupObsoleteObjects() {
-                let kDoubleSpaceShortcut: String = "double_space_shortcut"
-                UserDefaults.standard.removeObject(forKey: kDoubleSpaceShortcut)
-
-                let kOldMarker: String = "is_user_lexicon_ready_v0.7"
-                UserDefaults.standard.removeObject(forKey: kOldMarker)
-
-                let oldestDatabase = URL.libraryDirectory.appending(path: "userdb.sqlite3", directoryHint: .notDirectory)
-                try? FileManager.default.removeItem(at: oldestDatabase)
-
-                let previousDatabase = URL.libraryDirectory.appending(path: "userlexicon.sqlite3", directoryHint: .notDirectory)
-                try? FileManager.default.removeItem(at: previousDatabase)
-        }
 }

@@ -13,7 +13,7 @@ public struct Engine {
                 sqlite3_bind_int64(statement, 1, testCode)
                 guard sqlite3_step(statement) == SQLITE_ROW else { return }
         }
-        #if os(macOS)
+        /*
         nonisolated(unsafe) static let database: OpaquePointer? = {
                 var db: OpaquePointer? = nil
                 guard let path: String = Bundle.module.path(forResource: "imedb", ofType: "sqlite3") else { return nil }
@@ -26,14 +26,17 @@ public struct Engine {
                 guard sqlite3_backup_finish(backup) == SQLITE_OK else { return nil }
                 return db
         }()
-        #else
+        */
         nonisolated(unsafe) static let database: OpaquePointer? = {
                 var db: OpaquePointer? = nil
                 guard let path: String = Bundle.module.path(forResource: "imedb", ofType: "sqlite3") else { return nil }
-                guard sqlite3_open_v2(path, &db, SQLITE_OPEN_READONLY | SQLITE_OPEN_FULLMUTEX, nil) == SQLITE_OK else { return nil }
-                return db
+                if sqlite3_open_v2(path, &db, SQLITE_OPEN_READONLY | SQLITE_OPEN_FULLMUTEX, nil) == SQLITE_OK {
+                        return db
+                } else {
+                        sqlite3_close_v2(db)
+                        return nil
+                }
         }()
-        #endif
 
         /// SQLITE_TRANSIENT replacement
         static let transientDestructorType = unsafeBitCast(-1, to: sqlite3_destructor_type.self)
