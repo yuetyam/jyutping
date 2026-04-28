@@ -26,17 +26,18 @@ struct MacSearchView: View {
 
         private func handleSubmission(_ text: String) {
                 let trimmedInput: String = text.trimmed()
-                guard trimmedInput != previousSubmittedText else { return }
-                previousSubmittedText = trimmedInput
-                defer { animationState += 1 }
                 guard trimmedInput.isNotEmpty else {
                         lexicons = []
                         yingWaaLexicons = []
                         choHokLexicons = []
                         fanWanLexicons = []
                         gwongWanLexicons = []
+                        animationState += 1
                         return
                 }
+                guard trimmedInput != previousSubmittedText else { return }
+                previousSubmittedText = trimmedInput
+                defer { animationState += 1 }
                 let ideographicCharacters: [Character] = {
                         let characters = trimmedInput.filter(\.isIdeographic).distinct()
                         guard characters.isNotEmpty && characters.count < 10 else { return [] }
