@@ -26,6 +26,16 @@ struct Options {
                 UserDefaults.standard.set(value, forKey: OptionsKey.AudioFeedback)
         }
 
+        nonisolated(unsafe) private(set) static var preferredInputMode: PreferredInputMode = {
+                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.PreferredInputMethodMode)
+                return PreferredInputMode.mode(of: savedValue)
+        }()
+        static func updatePreferredInputMode(to mode: PreferredInputMode) {
+                preferredInputMode = mode
+                let value: Int = mode.rawValue
+                UserDefaults.standard.set(value, forKey: OptionsKey.PreferredInputMethodMode)
+        }
+
         nonisolated(unsafe) private(set) static var needsNumberRow: Bool = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.NumberRow)
                 return savedValue == 1
@@ -252,6 +262,8 @@ struct OptionsKey {
         static let CharacterScriptVariant: String = "CharacterScriptVariant"
         static let AudioFeedback: String = "AudioFeedback"
         static let HapticFeedback: String = "HapticFeedback"
+        static let PreferredInputMethodMode: String = "PreferredInputMethodMode"
+        static let LatestInputMethodMode: String = "LatestInputMethodMode"
         static let KeyboardLayout: String = "KeyboardLayout"
         static let NumericLayout: String = "NumericLayout"
         static let StrokeLayout: String = "StrokeLayout"
@@ -282,6 +294,18 @@ struct LegacyOptionsKey {
         static let CommentStyle: String = "jyutping_display"
         static let CommentToneStyle: String = "tone_style"
         static let EmojiSuggestions: String = "emoji"
+}
+
+enum PreferredInputMode: Int, CaseIterable {
+
+        // case auto = 0
+        case cantonese = 1
+        case abc = 2
+        case previous = 3
+
+        static func mode(of value: Int) -> PreferredInputMode {
+                return allCases.first(where: { $0.rawValue == value }) ?? .cantonese
+        }
 }
 
 /// Letter input key style

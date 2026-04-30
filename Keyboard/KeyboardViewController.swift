@@ -64,13 +64,15 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         }
         private func responsiveKeyboard(for keyboardType: UIKeyboardType? = nil) {
                 let keyboardType: UIKeyboardType = keyboardType ?? textDocumentProxy.keyboardType ?? .default
-                let newInputMethodMode = keyboardType.inputMethodMode
-                let newKeyboardForm = keyboardType.keyboardForm
-                if inputMethodMode != newInputMethodMode {
-                        inputMethodMode = newInputMethodMode
+                let suitableInputMethodMode = keyboardType.inputMethodMode
+                let suitableKeyboardForm = keyboardType.keyboardForm
+                if inputMethodMode != suitableInputMethodMode {
+                        if suitableInputMethodMode.isABC {
+                                toggleInputMethodMode()
+                        }
                 }
-                if keyboardForm != newKeyboardForm {
-                        updateKeyboardForm(to: newKeyboardForm)
+                if keyboardForm != suitableKeyboardForm {
+                        updateKeyboardForm(to: suitableKeyboardForm)
                 }
         }
 
@@ -629,7 +631,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 case .nineKey:
                         let isReverseLookup: Bool = (bufferCombos.first == .special)
                         if isReverseLookup {
-                                let tailCount: Int = (bufferCombos.count - 1 - candidate.lexicon.inputCount)
+                                let tailCount: Int = (bufferCombos.count - 1) - candidate.lexicon.inputCount
                                 if tailCount > 0 {
                                         bufferCombos = bufferCombos.prefix(1) + bufferCombos.suffix(tailCount)
                                 } else {
@@ -1145,7 +1147,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         }
         private func queryDefinedCandidates(for combos: [Combo]) -> [Lexicon] {
                 guard Options.isTextReplacementsOn else { return [] }
-                let nineKeyCharCode: Int = combos.map(\.code).decimalCombined()
+                let nineKeyCharCode: Int = combos.map(\.digit).decimalCombined()
                 guard nineKeyCharCode > 0 else { return [] }
                 return definedLexicons.filter({ $0.nineKeyCharCode == nineKeyCharCode }).map(\.mappedLexicon)
         }
@@ -1155,7 +1157,15 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
 
         @Published private(set) var isClipboardEmpty: Bool = false
 
-        @Published private(set) var inputMethodMode: InputMethodMode = .cantonese
+        @Published private(set) var inputMethodMode: InputMethodMode = {
+                switch Options.preferredInputMode {
+                case .cantonese: return .cantonese
+                case .abc: return .abc
+                case .previous:
+                        let savedValue = UserDefaults.standard.integer(forKey: OptionsKey.LatestInputMethodMode)
+                        return InputMethodMode.mode(of: savedValue)
+                }
+        }()
         func toggleInputMethodMode() {
                 if inputMethodMode.isCantonese && inputStage.isBuffering {
                         inputBufferText()
@@ -1163,6 +1173,8 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 inputMethodMode = inputMethodMode.isABC ? .cantonese : .abc
                 updateSpaceKeyForm()
                 updateReturnKey()
+                let value: Int = inputMethodMode.rawValue
+                UserDefaults.standard.set(value, forKey: OptionsKey.LatestInputMethodMode)
         }
 
         @Published private(set) var previousKeyboardForm: KeyboardForm = .placeholder

@@ -26,6 +26,7 @@ struct SettingsView: View {
         @State private var commentStyle: CommentStyle = Options.commentStyle
         @State private var commentScene: CommentScene = Options.commentScene
         @State private var commentToneStyle: CommentToneStyle = Options.commentToneStyle
+        @State private var preferredInputMode: PreferredInputMode = Options.preferredInputMode
         @State private var cangjieVariant: CangjieVariant = Options.cangjieVariant
         @State private var isEmojiSuggestionsOn: Bool = Options.isEmojiSuggestionsOn
         @State private var isEnglishSuggestionsOn: Bool = Options.isEnglishSuggestionsOn
@@ -220,6 +221,19 @@ struct SettingsView: View {
                                         AudioFeedback.modified()
                                         context.triggerSelectionHapticFeedback()
                                         Options.updateCommentToneStyle(to: newStyle)
+                                }
+
+                                Picker("SettingsView.PreferredInputMode.PickerTitle", selection: $preferredInputMode) {
+                                        Text("SettingsView.PreferredInputMode.Option1.Cantonese").tag(PreferredInputMode.cantonese)
+                                        Text("SettingsView.PreferredInputMode.Option2.ABC").tag(PreferredInputMode.abc)
+                                        Text("SettingsView.PreferredInputMode.Option3.Previous").tag(PreferredInputMode.previous)
+                                }
+                                .pickerStyle(.inline)
+                                .textCase(nil)
+                                .onChange(of: preferredInputMode) { newMode in
+                                        AudioFeedback.modified()
+                                        context.triggerSelectionHapticFeedback()
+                                        Options.updatePreferredInputMode(to: newMode)
                                 }
 
                                 Picker("SettingsView.CangjieVariant.PickerTitle", selection: $cangjieVariant) {

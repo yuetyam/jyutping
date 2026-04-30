@@ -216,7 +216,7 @@ struct InputMemory {
                 guard sqlite3_step(statement) == SQLITE_DONE else { return }
         }
 
-        /// Delete the given Lexicon from InputMemory
+        /// Delete the given Lexicon from the InputMemory
         static func forget(_ lexicon: Lexicon) {
                 guard isMigrating.negative else { return }
                 guard lexicon.isCantonese else { return }
@@ -603,7 +603,7 @@ struct InputMemory {
                                 .distinct()
                                 .map({ Lexicon(text: $0.word, romanization: $0.romanization, input: $0.input, mark: $0.mark, number: -1) })
                 }
-                let fullCode: Int = combos.map(\.code).decimalCombined()
+                let fullCode: Int = combos.map(\.digit).decimalCombined()
                 let fullCodeMatched = nineKeyCodeMatch(code: fullCode, limit: 100, statement: codeStatement)
                 let fullAnchorsMatched = nineKeyAnchorsMatch(code: fullCode, limit: 5, statement: anchorsStatement)
                 let ideal = (fullCodeMatched.prefix(10) + (fullCodeMatched + fullAnchorsMatched).sorted())
@@ -611,7 +611,7 @@ struct InputMemory {
                         .map({ Lexicon(text: $0.word, romanization: $0.romanization, input: $0.input, mark: $0.mark, number: -1) })
                 let queried = (1..<inputLength)
                         .flatMap({ number -> [InternalLexicon] in
-                                let code = combos.dropLast(number).map(\.code).decimalCombined()
+                                let code = combos.dropLast(number).map(\.digit).decimalCombined()
                                 guard code > 0 else { return [] }
                                 return nineKeyCodeMatch(code: code, limit: 4, statement: codeStatement)
                         })

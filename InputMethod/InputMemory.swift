@@ -204,7 +204,7 @@ struct InputMemory {
                 guard sqlite3_step(statement) == SQLITE_DONE else { return }
         }
 
-        /// Delete the given Lexicon from InputMemory
+        /// Delete the given Lexicon from the InputMemory
         static func forget(_ lexicon: Lexicon) {
                 guard isMigrating.negative else { return }
                 guard lexicon.isCantonese else { return }
