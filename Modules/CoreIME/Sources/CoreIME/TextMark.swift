@@ -18,7 +18,7 @@ extension Engine {
                 return marks.map({ Lexicon(input: text, text: $0) })
         }
         public static func queryTextMarks<T: RandomAccessCollection<Combo>>(for combos: T) -> [Lexicon] {
-                let nineKeyCode = combos.map(\.code).decimalCombined()
+                let nineKeyCode = combos.map(\.digit).decimalCombined()
                 guard nineKeyCode > 0 else { return [] }
                 let command: String = "SELECT input, mark FROM mark_table WHERE nine_key_code = ?;"
                 var statement: OpaquePointer? = nil

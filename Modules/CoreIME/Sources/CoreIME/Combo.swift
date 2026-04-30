@@ -11,9 +11,8 @@ public enum Combo: Int, Sendable {
         case TUV  = 8
         case WXYZ = 9
 
-        // TODO: Rename code to number
         /// Same value as the `self.rawValue`
-        public var code: Int { rawValue }
+        public var digit: Int { rawValue }
 
         /// Key display text
         public var text: String {

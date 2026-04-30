@@ -171,7 +171,7 @@ extension Engine {
         }
 
         public static func nineKeySearchSymbols<T: RandomAccessCollection<Combo>>(combos: T) -> [Lexicon] {
-                let nineKeyCode = combos.map(\.code).decimalCombined()
+                let nineKeyCode = combos.map(\.digit).decimalCombined()
                 guard nineKeyCode > 0 else { return [] }
                 let command: String = "SELECT category, unicode_version, code_point, cantonese, romanization FROM symbol_table WHERE nine_key_code = ?;"
                 var statement: OpaquePointer? = nil

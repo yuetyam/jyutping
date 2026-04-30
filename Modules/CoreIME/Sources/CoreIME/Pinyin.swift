@@ -219,7 +219,7 @@ extension Engine {
         }
         private static func pinyinNineKeySearch<T: RandomAccessCollection<Combo>>(combos: T, limit: Int64? = nil, anchorsStatement: OpaquePointer?, codeMatchStatement: OpaquePointer?) -> [PinyinLexicon] {
                 let inputLength: Int = combos.count
-                let fullCode: Int = combos.map(\.code).decimalCombined()
+                let fullCode: Int = combos.map(\.digit).decimalCombined()
                 guard inputLength > 1 else {
                         return pinyinNineKeyCodeMatch(code: fullCode, limit: limit, statement: codeMatchStatement) + pinyinNineKeyAnchorsMatch(code: fullCode, limit: 100, statement: anchorsStatement)
                 }
@@ -227,13 +227,13 @@ extension Engine {
                 let idealAnchorsMatched = pinyinNineKeyAnchorsMatch(code: fullCode, limit: 4, statement: anchorsStatement)
                 let codeMatched: [PinyinLexicon] = (1..<inputLength)
                         .flatMap({ number -> [PinyinLexicon] in
-                                let code = combos.dropLast(number).map(\.code).decimalCombined()
+                                let code = combos.dropLast(number).map(\.digit).decimalCombined()
                                 guard code > 0 else { return [] }
                                 return pinyinNineKeyCodeMatch(code: code, limit: limit, statement: codeMatchStatement)
                         })
                 let anchorsMatched: [PinyinLexicon] = (0..<inputLength)
                         .flatMap({ number -> [PinyinLexicon] in
-                                let code = combos.dropLast(number).map(\.code).decimalCombined()
+                                let code = combos.dropLast(number).map(\.digit).decimalCombined()
                                 guard code > 0 else { return [] }
                                 return pinyinNineKeyAnchorsMatch(code: code, limit: limit, statement: anchorsStatement)
                         })
@@ -241,7 +241,7 @@ extension Engine {
                 guard let firstInputCount = queried.first?.inputCount else { return [] }
                 guard firstInputCount < inputLength else { return queried }
                 let tailCombos = combos.dropFirst(firstInputCount)
-                let tailCode = tailCombos.map(\.code).decimalCombined()
+                let tailCode = tailCombos.map(\.digit).decimalCombined()
                 guard tailCode > 0 else { return queried }
                 let tailLexicons: [PinyinLexicon] = pinyinNineKeyCodeMatch(code: tailCode, limit: 20, statement: codeMatchStatement) + pinyinNineKeyAnchorsMatch(code: tailCode, limit: 20, statement: anchorsStatement)
                 guard tailLexicons.isNotEmpty, let head = queried.first else { return queried }
