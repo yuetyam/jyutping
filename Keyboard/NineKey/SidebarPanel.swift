@@ -21,15 +21,13 @@ struct GlassSidebarPanel: View {
                                 SymbolSidebarScrollView(texts: texts)
                         }
                 }
-                // .clipShape(RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous))
+                .clipShape(RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous))
                 .glassEffect(.clear, in: RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous))
                 .padding(3)
                 .frame(width: context.nineKeyWidthUnit, height: context.heightUnit * 3)
         }
 }
 
-@available(iOS, introduced: 16.0, deprecated: 26.0, message: "Use GlassSidebarPanel instead")
-@available(iOSApplicationExtension, introduced: 16.0, deprecated: 26.0, message: "Use GlassSidebarPanel instead")
 struct SidebarPanel: View {
 
         @EnvironmentObject private var context: KeyboardViewController

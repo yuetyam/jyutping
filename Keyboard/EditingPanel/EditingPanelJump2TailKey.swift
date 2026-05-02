@@ -1,6 +1,39 @@
 import SwiftUI
 import CommonExtensions
 
+@available(iOS 26.0, *)
+@available(iOSApplicationExtension 26.0, *)
+struct EditingPanelGlassJump2TailKey: View {
+
+        @EnvironmentObject private var context: KeyboardViewController
+        @Environment(\.colorScheme) private var colorScheme
+
+        @GestureState private var isTouching: Bool = false
+
+        var body: some View {
+                ZStack {
+                        Color.interactiveClear
+                        Image(systemName: "arrow.forward.to.line")
+                }
+                .glassEffect(isTouching ? .regular : .clear, in: RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous))
+                .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
+                .padding(4)
+                .contentShape(Rectangle())
+                .gesture(DragGesture(minimumDistance: 0)
+                        .updating($isTouching) { _, tapped, _ in
+                                if tapped.negative {
+                                        AudioFeedback.modified()
+                                        context.triggerHapticFeedback()
+                                        tapped = true
+                                }
+                        }
+                        .onEnded { _ in
+                                context.operate(.jumpToTail)
+                        }
+                )
+        }
+}
+
 struct EditingPanelJump2TailKey: View {
 
         @EnvironmentObject private var context: KeyboardViewController

@@ -48,8 +48,6 @@ struct GlassNineKeyStrokeKeyboard: View {
         }
 }
 
-@available(iOS, introduced: 16.0, deprecated: 26.0, message: "Use GlassNineKeyStrokeKeyboard instead")
-@available(iOSApplicationExtension, introduced: 16.0, deprecated: 26.0, message: "Use GlassNineKeyStrokeKeyboard instead")
 struct NineKeyStrokeKeyboard: View {
         var body: some View {
                 VStack(spacing: 0) {
@@ -134,8 +132,6 @@ private struct GlassStrokeKey: View {
         }
 }
 
-@available(iOS, introduced: 16.0, deprecated: 26.0, message: "Use GlassStrokeKey instead")
-@available(iOSApplicationExtension, introduced: 16.0, deprecated: 26.0, message: "Use GlassStrokeKey instead")
 private struct LegacyStrokeKey: View {
 
         init(_ key: StrokeVirtualKey) {
@@ -193,8 +189,6 @@ private struct GlassStrokePlaceholderKey: View {
         }
 }
 
-@available(iOS, introduced: 16.0, deprecated: 26.0, message: "Use GlassStrokePlaceholderKey instead")
-@available(iOSApplicationExtension, introduced: 16.0, deprecated: 26.0, message: "Use GlassStrokePlaceholderKey instead")
 private struct LegacyStrokePlaceholderKey: View {
         @EnvironmentObject private var context: KeyboardViewController
         init(heightCoefficient: CGFloat = 1) {

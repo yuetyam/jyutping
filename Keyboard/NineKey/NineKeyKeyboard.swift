@@ -3,9 +3,7 @@ import CommonExtensions
 import CoreIME
 
 struct NineKeyKeyboard: View {
-
         @EnvironmentObject private var context: KeyboardViewController
-
         var body: some View {
                 VStack(spacing: 0) {
                         if context.inputStage.isBuffering {
@@ -28,9 +26,7 @@ struct NineKeyKeyboard: View {
 @available(iOS 26.0, *)
 @available(iOSApplicationExtension 26.0, *)
 private struct GlassNineKeyCoreKeyboard: View {
-
         @EnvironmentObject private var context: KeyboardViewController
-
         var body: some View {
                 HStack(spacing: 0) {
                         VStack(spacing: 0) {
@@ -94,12 +90,8 @@ private struct GlassNineKeyCoreKeyboard: View {
         }
 }
 
-@available(iOS, introduced: 16.0, deprecated: 26.0, message: "Use GlassNineKeyCoreKeyboard instead")
-@available(iOSApplicationExtension, introduced: 16.0, deprecated: 26.0, message: "Use GlassNineKeyCoreKeyboard instead")
 private struct LegacyNineKeyCoreKeyboard: View {
-
         @EnvironmentObject private var context: KeyboardViewController
-
         var body: some View {
                 HStack(spacing: 0) {
                         VStack(spacing: 0) {

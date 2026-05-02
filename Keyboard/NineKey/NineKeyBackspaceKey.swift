@@ -54,8 +54,6 @@ struct GlassNineKeyBackspaceKey: View {
         }
 }
 
-@available(iOS, introduced: 16.0, deprecated: 26.0, message: "Use GlassNineKeyBackspaceKey instead")
-@available(iOSApplicationExtension, introduced: 16.0, deprecated: 26.0, message: "Use GlassNineKeyBackspaceKey instead")
 struct NineKeyBackspaceKey: View {
 
         @EnvironmentObject private var context: KeyboardViewController

@@ -54,8 +54,6 @@ struct GlassNineKeyNumericKeyboard: View {
         }
 }
 
-@available(iOS, introduced: 16.0, deprecated: 26.0, message: "Use GlassNineKeyNumericKeyboard instead")
-@available(iOSApplicationExtension, introduced: 16.0, deprecated: 26.0, message: "Use GlassNineKeyNumericKeyboard instead")
 struct NineKeyNumericKeyboard: View {
         @EnvironmentObject private var context: KeyboardViewController
         var body: some View {

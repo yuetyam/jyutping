@@ -16,24 +16,19 @@ struct NineKeySpaceKey: View {
 
         var body: some View {
                 ZStack {
+                        Color.interactiveClear
                         if #available(iOSApplicationExtension 26.0, *) {
-                                ZStack {
-                                        Color.interactiveClear
-                                        Text(isLongPressEngaged ? PresetConstant.spaceKeyLongPressHint : context.spaceKeyForm.attributedText).font(.staticBody)
-                                }
-                                .glassEffect(isTouching ? .regular : .clear, in: RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous))
-                                .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
-                                .padding(3)
+                                Color.clear
+                                        .glassEffect(isTouching ? .regular : .clear, in: RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous))
+                                        .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
+                                        .padding(3)
                         } else {
-                                ZStack {
-                                        Color.interactiveClear
-                                        RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous)
-                                                .fill(isTouching ? colorScheme.activeInputKeyColor : colorScheme.inputKeyColor)
-                                                .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                                .padding(3)
-                                        Text(isLongPressEngaged ? PresetConstant.spaceKeyLongPressHint : context.spaceKeyForm.attributedText).font(.staticBody)
-                                }
+                                RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous)
+                                        .fill(isTouching ? colorScheme.activeInputKeyColor : colorScheme.inputKeyColor)
+                                        .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
+                                        .padding(3)
                         }
+                        Text(isLongPressEngaged ? PresetConstant.spaceKeyLongPressHint : context.spaceKeyForm.attributedText).font(.staticBody)
                 }
                 .frame(height: context.heightUnit)
                 .frame(maxWidth: .infinity)

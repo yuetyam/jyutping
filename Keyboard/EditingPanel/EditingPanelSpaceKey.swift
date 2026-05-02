@@ -17,10 +17,17 @@ struct EditingPanelSpaceKey: View {
         var body: some View {
                 ZStack {
                         Color.interactiveClear
-                        RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous)
-                                .fill(isTouching ? colorScheme.activeActionKeyColor : colorScheme.actionKeyColor)
-                                .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                .padding(4)
+                        if #available(iOSApplicationExtension 26.0, *) {
+                                Color.clear
+                                        .glassEffect(isTouching ? .regular : .clear, in: RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous))
+                                        .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
+                                        .padding(4)
+                        } else {
+                                RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous)
+                                        .fill(isTouching ? colorScheme.activeActionKeyColor : colorScheme.actionKeyColor)
+                                        .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
+                                        .padding(4)
+                        }
                         if isLongPressEngaged {
                                 Text(PresetConstant.spaceKeyLongPressHint)
                         } else {

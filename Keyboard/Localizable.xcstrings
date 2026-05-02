@@ -6210,37 +6210,37 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Show Number Row"
+            "value" : "Top Number Row"
           }
         },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Show Number Row"
+            "value" : "Top Number Row"
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Show Number Row"
+            "value" : "Top Number Row"
           }
         },
         "en-US" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Show Number Row"
+            "value" : "Top Number Row"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Afficher la ligne numérique"
+            "value" : "Rangée de chiffres en haut"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "数字行の表示"
+            "value" : "上部の数字行"
           }
         },
         "yue" : {

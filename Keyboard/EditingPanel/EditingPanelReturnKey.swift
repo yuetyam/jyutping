@@ -11,6 +11,15 @@ struct EditingPanelReturnKey: View {
         var body: some View {
                 let isDefaultReturn: Bool = context.returnKeyType.isDefaultReturn
                 let keyState: ReturnKeyState = context.returnKeyState
+                let glassBackColor: Color = {
+                        guard isTouching.negative else { return Color.clear }
+                        switch keyState {
+                        case .standbyABC, .standbyMutilated, .standbyTraditional:
+                                return isDefaultReturn ? Color.clear : Color.accentColor
+                        default:
+                                return Color.clear
+                        }
+                }()
                 let backColor: Color = {
                         guard isTouching.negative else { return colorScheme.activeActionKeyColor }
                         switch keyState {
@@ -35,10 +44,18 @@ struct EditingPanelReturnKey: View {
                 }()
                 ZStack {
                         Color.interactiveClear
-                        RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous)
-                                .fill(backColor)
-                                .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                .padding(4)
+                        if #available(iOSApplicationExtension 26.0, *) {
+                                glassBackColor
+                                        .clipShape(RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous))
+                                        .glassEffect(isTouching ? .regular : .clear, in: RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous))
+                                        .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
+                                        .padding(4)
+                        } else {
+                                RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous)
+                                        .fill(backColor)
+                                        .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
+                                        .padding(4)
+                        }
                         VStack(spacing: 4) {
                                 switch context.returnKeyType {
                                 case .continue, .next:

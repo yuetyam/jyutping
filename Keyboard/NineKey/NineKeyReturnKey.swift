@@ -12,12 +12,12 @@ struct NineKeyReturnKey: View {
                 let isDefaultReturn: Bool = context.returnKeyType.isDefaultReturn
                 let keyState: ReturnKeyState = context.returnKeyState
                 let glassBackColor: Color = {
-                        guard isTouching.negative else { return Color.interactiveClear }
+                        guard isTouching.negative else { return Color.clear }
                         switch keyState {
                         case .standbyABC, .standbyMutilated, .standbyTraditional:
-                                return isDefaultReturn ? Color.interactiveClear : Color.accentColor
+                                return isDefaultReturn ? Color.clear : Color.accentColor
                         default:
-                                return Color.interactiveClear
+                                return Color.clear
                         }
                 }()
                 let backColor: Color = {
@@ -42,110 +42,64 @@ struct NineKeyReturnKey: View {
                                 return Color.primary.opacity(0.5)
                         }
                 }()
-                if #available(iOSApplicationExtension 26.0, *) {
-                        ZStack {
+                ZStack {
+                        Color.interactiveClear
+                        if #available(iOSApplicationExtension 26.0, *) {
                                 glassBackColor
-                                switch (context.returnKeyState.isBuffering, isDefaultReturn) {
-                                case (true, _):
-                                        Text(context.returnKeyText)
-                                                .font(.staticBody)
-                                                .foregroundStyle(foreColor)
-                                case (false, true):
-                                        Image.return
-                                                .font(.symbol)
-                                                .foregroundStyle(foreColor)
-                                default:
-                                        VStack(spacing: 5) {
-                                                switch context.returnKeyType {
-                                                case .continue, .next:
-                                                        Image.chevronForward
-                                                case .done:
-                                                        Image.checkmark
-                                                case .go, .route, .join:
-                                                        Image.arrowForward
-                                                case .search, .google, .yahoo:
-                                                        Image.search
-                                                case .send:
-                                                        Image.arrowUp
-                                                default:
-                                                        Image.return
-                                                }
-                                                Text(context.returnKeyText).font(.footnote)
-                                        }
-                                        .font(.symbol)
-                                        .foregroundStyle(foreColor)
-                                }
-                        }
-                        .clipShape(RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous))
-                        .glassEffect(isTouching ? .regular : .clear, in: RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous))
-                        .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
-                        .padding(3)
-                        .frame(width: context.nineKeyWidthUnit, height: context.heightUnit * 2)
-                        .contentShape(Rectangle())
-                        .gesture(DragGesture(minimumDistance: 0)
-                                .updating($isTouching) { _, tapped, _ in
-                                        if tapped.negative {
-                                                AudioFeedback.modified()
-                                                context.triggerHapticFeedback()
-                                                tapped = true
-                                        }
-                                }
-                                .onEnded { _ in
-                                        context.operate(.return)
-                                }
-                        )
-                } else {
-                        ZStack {
-                                Color.interactiveClear
+                                        .clipShape(RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous))
+                                        .glassEffect(isTouching ? .regular : .clear, in: RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous))
+                                        .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
+                                        .padding(3)
+                        } else {
                                 RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous)
                                         .fill(backColor)
                                         .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                         .padding(3)
-                                switch (context.returnKeyState.isBuffering, isDefaultReturn) {
-                                case (true, _):
-                                        Text(context.returnKeyText)
-                                                .font(.staticBody)
-                                                .foregroundStyle(foreColor)
-                                case (false, true):
-                                        Image.return
-                                                .font(.symbol)
-                                                .foregroundStyle(foreColor)
-                                default:
-                                        VStack(spacing: 5) {
-                                                switch context.returnKeyType {
-                                                case .continue, .next:
-                                                        Image.chevronForward
-                                                case .done:
-                                                        Image.checkmark
-                                                case .go, .route, .join:
-                                                        Image.arrowForward
-                                                case .search, .google, .yahoo:
-                                                        Image.search
-                                                case .send:
-                                                        Image.arrowUp
-                                                default:
-                                                        Image.return
-                                                }
-                                                Text(context.returnKeyText).font(.footnote)
-                                        }
+                        }
+                        switch (context.returnKeyState.isBuffering, isDefaultReturn) {
+                        case (true, _):
+                                Text(context.returnKeyText)
+                                        .font(.staticBody)
+                                        .foregroundStyle(foreColor)
+                        case (false, true):
+                                Image.return
                                         .font(.symbol)
                                         .foregroundStyle(foreColor)
+                        default:
+                                VStack(spacing: 5) {
+                                        switch context.returnKeyType {
+                                        case .continue, .next:
+                                                Image.chevronForward
+                                        case .done:
+                                                Image.checkmark
+                                        case .go, .route, .join:
+                                                Image.arrowForward
+                                        case .search, .google, .yahoo:
+                                                Image.search
+                                        case .send:
+                                                Image.arrowUp
+                                        default:
+                                                Image.return
+                                        }
+                                        Text(context.returnKeyText).font(.footnote)
+                                }
+                                .font(.symbol)
+                                .foregroundStyle(foreColor)
+                        }
+                }
+                .frame(width: context.nineKeyWidthUnit, height: context.heightUnit * 2)
+                .contentShape(Rectangle())
+                .gesture(DragGesture(minimumDistance: 0)
+                        .updating($isTouching) { _, tapped, _ in
+                                if tapped.negative {
+                                        AudioFeedback.modified()
+                                        context.triggerHapticFeedback()
+                                        tapped = true
                                 }
                         }
-                        .frame(width: context.nineKeyWidthUnit, height: context.heightUnit * 2)
-                        .contentShape(Rectangle())
-                        .gesture(DragGesture(minimumDistance: 0)
-                                .updating($isTouching) { _, tapped, _ in
-                                        if tapped.negative {
-                                                AudioFeedback.modified()
-                                                context.triggerHapticFeedback()
-                                                tapped = true
-                                        }
-                                }
-                                .onEnded { _ in
-                                        context.operate(.return)
-                                }
-                        )
-                }
+                        .onEnded { _ in
+                                context.operate(.return)
+                        }
+                )
         }
 }

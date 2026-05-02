@@ -1,9 +1,8 @@
 import SwiftUI
+import CommonExtensions
 
 struct MotherBoard: View {
-
         @EnvironmentObject private var context: KeyboardViewController
-
         var body: some View {
                 switch context.keyboardForm {
                 case .placeholder:
@@ -11,7 +10,11 @@ struct MotherBoard: View {
                 case .settings:
                         SettingsView().frame(height: context.keyboardHeight)
                 case .editingPanel:
-                        EditingPanel().frame(height: context.keyboardHeight)
+                        if #available(iOSApplicationExtension 26.0, *) {
+                                GlassEditingPanel().frame(height: context.keyboardHeight)
+                        } else {
+                                EditingPanel().frame(height: context.keyboardHeight)
+                        }
                 case .layoutPicker:
                         KeyboardLayoutPickerView().frame(height: context.keyboardHeight)
                 case .candidateBoard:
