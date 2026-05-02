@@ -29,6 +29,10 @@ extension ColorScheme {
         var previewBubbleColor: Color {
                 return isDark ? .solidDarkInput : .solidLightInput
         }
+
+        var glassShadow: Color {
+                return isDark ? Color.clear : Color.black.opacity(0.66)
+        }
 }
 
 extension Color {

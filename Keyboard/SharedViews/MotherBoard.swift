@@ -80,9 +80,17 @@ struct MotherBoard: View {
                                 LargePadNumericKeyboard()
                         }
                 case .nineKeyNumeric:
-                        NineKeyNumericKeyboard()
+                        if #available(iOSApplicationExtension 26.0, *) {
+                                GlassNineKeyNumericKeyboard()
+                        } else {
+                                NineKeyNumericKeyboard()
+                        }
                 case .nineKeyStroke:
-                        NineKeyStrokeKeyboard()
+                        if #available(iOSApplicationExtension 26.0, *) {
+                                GlassNineKeyStrokeKeyboard()
+                        } else {
+                                NineKeyStrokeKeyboard()
+                        }
                 default:
                         switch context.inputMethodMode {
                         case .abc:

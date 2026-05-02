@@ -1,13 +1,32 @@
 import SwiftUI
 
+@available(iOS 26.0, *)
+@available(iOSApplicationExtension 26.0, *)
+struct GlassNineKeyGlobeKey: View {
+
+        @EnvironmentObject private var context: KeyboardViewController
+        @Environment(\.colorScheme) private var colorScheme
+
+        var body: some View {
+                ZStack {
+                        Color.interactiveClear
+                        Image.globe.font(.symbol)
+                        UIGlobeButton()
+                }
+                .glassEffect(.clear, in: RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous))
+                .padding(3)
+                .frame(width: context.nineKeyWidthUnit, height: context.heightUnit)
+        }
+}
+
+@available(iOS, introduced: 16.0, deprecated: 26.0, message: "Use GlassNineKeyGlobeKey instead")
+@available(iOSApplicationExtension, introduced: 16.0, deprecated: 26.0, message: "Use GlassNineKeyGlobeKey instead")
 struct NineKeyGlobeKey: View {
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
 
         var body: some View {
-                let width: CGFloat = context.nineKeyWidthUnit
-                let height: CGFloat = context.heightUnit
                 ZStack {
                         Color.interactiveClear
                         RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous)
@@ -17,6 +36,6 @@ struct NineKeyGlobeKey: View {
                         Image.globe.font(.symbol)
                         UIGlobeButton()
                 }
-                .frame(width: width, height: height)
+                .frame(width: context.nineKeyWidthUnit, height: context.heightUnit)
         }
 }
