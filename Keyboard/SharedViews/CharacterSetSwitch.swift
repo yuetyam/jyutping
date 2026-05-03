@@ -73,9 +73,11 @@ struct CharacterSetSwitch: View {
                         ZStack(alignment: .leading) {
                                 Color.clear
                                 ZStack {
-                                        Capsule()
-                                                .fill(isMutilatedMode ? Color.clear : colorScheme.inputKeyColor)
-                                                .shadow(color: isMutilatedMode ? Color.clear : Color.shadowGray, radius: 0.5)
+                                        if isMutilatedMode {
+                                                Color.clear
+                                        } else {
+                                                Color.clear.glassEffect(.clear, in: .capsule)
+                                        }
                                         Text(verbatim: "繁")
                                                 .font(isMutilatedMode ? .small : .large)
                                                 .padding(.trailing, isMutilatedMode ? characterOffset : 0)
@@ -85,9 +87,11 @@ struct CharacterSetSwitch: View {
                         ZStack(alignment: .trailing) {
                                 Color.clear
                                 ZStack {
-                                        Capsule()
-                                                .fill(isMutilatedMode ? colorScheme.inputKeyColor : Color.clear)
-                                                .shadow(color: isMutilatedMode ? Color.clear : Color.shadowGray, radius: 0.5)
+                                        if isMutilatedMode {
+                                                Color.clear.glassEffect(.clear, in: .capsule)
+                                        } else {
+                                                Color.clear
+                                        }
                                         Text(verbatim: "简")
                                                 .font(isMutilatedMode ? .large : .small)
                                                 .padding(.leading, isMutilatedMode ? 0 : characterOffset)

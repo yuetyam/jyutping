@@ -79,9 +79,11 @@ struct InputModeSwitch: View {
                         ZStack(alignment: .leading) {
                                 Color.clear
                                 ZStack {
-                                        Capsule()
-                                                .fill(isCantoneseMode ? colorScheme.inputKeyColor : Color.clear)
-                                                .shadow(color: isCantoneseMode ? Color.clear : Color.shadowGray, radius: 0.5)
+                                        if isCantoneseMode {
+                                                Color.clear.glassEffect(.clear, in: .capsule)
+                                        } else {
+                                                Color.clear
+                                        }
                                         Text(verbatim: isMutilatedMode ? "粤" : "粵")
                                                 .font(isCantoneseMode ? .staticBody : .mini)
                                                 .padding(.trailing, isCantoneseMode ? 0 : characterOffset)
@@ -91,9 +93,11 @@ struct InputModeSwitch: View {
                         ZStack(alignment: .trailing) {
                                 Color.clear
                                 ZStack {
-                                        Capsule()
-                                                .fill(isCantoneseMode ? Color.clear : colorScheme.inputKeyColor)
-                                                .shadow(color: isCantoneseMode ? Color.clear : Color.shadowGray, radius: 0.5)
+                                        if isCantoneseMode {
+                                                Color.clear
+                                        } else {
+                                                Color.clear.glassEffect(.clear, in: .capsule)
+                                        }
                                         Text(verbatim: "A")
                                                 .font(isCantoneseMode ? .mini : .staticBody)
                                                 .padding(.leading, isCantoneseMode ? characterOffset : 0)
