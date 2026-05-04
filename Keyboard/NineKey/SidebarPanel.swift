@@ -24,7 +24,7 @@ struct GlassSidebarPanel: View {
                 .clipShape(RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous))
                 .glassEffect(.clear, in: RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous))
                 .padding(3)
-                .frame(width: context.nineKeyWidthUnit, height: context.heightUnit * 3)
+                .frame(width: context.nineKeyWidthUnit * 0.94, height: context.heightUnit * 3)
         }
 }
 
@@ -65,6 +65,6 @@ struct SidebarPanel: View {
                 }
                 .clipShape(RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous))
                 .padding(3)
-                .frame(width: context.nineKeyWidthUnit, height: context.heightUnit * 3)
+                .frame(width: context.nineKeyWidthUnit * 0.94, height: context.heightUnit * 3)
         }
 }

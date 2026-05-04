@@ -15,7 +15,7 @@ struct GlassNineKeyGlobeKey: View {
                 }
                 .glassEffect(.clear, in: RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous))
                 .padding(3)
-                .frame(width: context.nineKeyWidthUnit, height: context.heightUnit)
+                .frame(width: context.nineKeyWidthUnit * 0.94, height: context.heightUnit)
         }
 }
 
@@ -34,6 +34,6 @@ struct NineKeyGlobeKey: View {
                         Image.globe.font(.symbol)
                         UIGlobeButton()
                 }
-                .frame(width: context.nineKeyWidthUnit, height: context.heightUnit)
+                .frame(width: context.nineKeyWidthUnit * 0.94, height: context.heightUnit)
         }
 }

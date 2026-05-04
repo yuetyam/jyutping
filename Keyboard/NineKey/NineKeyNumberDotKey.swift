@@ -17,7 +17,7 @@ struct GlassNineKeyNumberDotKey: View {
                 .glassEffect(isTouching ? .regular : .clear, in: RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous))
                 .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
                 .padding(3)
-                .frame(width: context.nineKeyWidthUnit, height: context.heightUnit)
+                .frame(width: context.nineKeyWidthUnit * 1.04, height: context.heightUnit)
                 .contentShape(Rectangle())
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in
@@ -48,7 +48,7 @@ struct NineKeyNumberDotKey: View {
                                 .padding(3)
                         Text(verbatim: keyText).font(.letterCompact)
                 }
-                .frame(width: context.nineKeyWidthUnit, height: context.heightUnit)
+                .frame(width: context.nineKeyWidthUnit * 1.04, height: context.heightUnit)
                 .contentShape(Rectangle())
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in

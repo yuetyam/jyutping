@@ -15,7 +15,6 @@ struct SpaceKey: View {
         @State private var doubleTappingBuffer: Int = 0
 
         var body: some View {
-                let keyHeight: CGFloat = context.heightUnit
                 let isPhoneLandscape: Bool = context.keyboardInterface.isPhoneLandscape
                 let verticalPadding: CGFloat = isPhoneLandscape ? 3 : 6
                 let horizontalPadding: CGFloat = isPhoneLandscape ? 6 : 3
@@ -28,7 +27,7 @@ struct SpaceKey: View {
                                 .padding(.horizontal, horizontalPadding)
                         Text(isLongPressEngaged ? PresetConstant.spaceKeyLongPressHint : context.spaceKeyForm.attributedText).font(.staticBody)
                 }
-                .frame(height: keyHeight)
+                .frame(height: context.heightUnit)
                 .frame(maxWidth: .infinity)
                 .contentShape(Rectangle())
                 .gesture(DragGesture(minimumDistance: 0)

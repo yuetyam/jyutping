@@ -14,7 +14,7 @@ struct GlassNineKeyStrokeKeyboard: View {
                         HStack(spacing: 0) {
                                 VStack(spacing: 0) {
                                         HStack(spacing: 0) {
-                                                GlassStrokePlaceholderKey(heightCoefficient: 3).disabled(true)
+                                                GlassStrokePlaceholderKey(widthCoefficient: 0.94, heightCoefficient: 3).disabled(true)
                                                 VStack(spacing: 0) {
                                                         HStack(spacing: 0) {
                                                                 GlassStrokeKey(.horizontal)
@@ -34,13 +34,13 @@ struct GlassNineKeyStrokeKeyboard: View {
                                                 }
                                         }
                                         HStack(spacing: 0) {
-                                                GlassStrokePlaceholderKey().disabled(true)
+                                                GlassStrokePlaceholderKey(widthCoefficient: 0.94).disabled(true)
                                                 NineKeySpaceKey()
                                         }
                                 }
                                 VStack(spacing: 0) {
                                         GlassNineKeyBackspaceKey()
-                                        GlassStrokePlaceholderKey().disabled(true)
+                                        GlassStrokePlaceholderKey(widthCoefficient: 0.94).disabled(true)
                                         NineKeyReturnKey()
                                 }
                         }
@@ -58,7 +58,7 @@ struct NineKeyStrokeKeyboard: View {
                         HStack(spacing: 0) {
                                 VStack(spacing: 0) {
                                         HStack(spacing: 0) {
-                                                LegacyStrokePlaceholderKey(heightCoefficient: 3).disabled(true)
+                                                LegacyStrokePlaceholderKey(widthCoefficient: 0.94, heightCoefficient: 3).disabled(true)
                                                 VStack(spacing: 0) {
                                                         HStack(spacing: 0) {
                                                                 LegacyStrokeKey(.horizontal)
@@ -78,13 +78,13 @@ struct NineKeyStrokeKeyboard: View {
                                                 }
                                         }
                                         HStack(spacing: 0) {
-                                                LegacyStrokePlaceholderKey().disabled(true)
+                                                LegacyStrokePlaceholderKey(widthCoefficient: 0.94).disabled(true)
                                                 NineKeySpaceKey()
                                         }
                                 }
                                 VStack(spacing: 0) {
                                         NineKeyBackspaceKey()
-                                        LegacyStrokePlaceholderKey().disabled(true)
+                                        LegacyStrokePlaceholderKey(widthCoefficient: 0.94).disabled(true)
                                         NineKeyReturnKey()
                                 }
                         }
@@ -115,7 +115,7 @@ private struct GlassStrokeKey: View {
                 .glassEffect(isTouching ? .regular : .clear, in: RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous))
                 .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
                 .padding(3)
-                .frame(width: context.nineKeyWidthUnit, height: context.heightUnit)
+                .frame(width: context.nineKeyWidthUnit * 1.04, height: context.heightUnit)
                 .contentShape(Rectangle())
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in
@@ -156,7 +156,7 @@ private struct LegacyStrokeKey: View {
                                 .padding(3)
                         Text(verbatim: text).font(.letterCompact)
                 }
-                .frame(width: context.nineKeyWidthUnit, height: context.heightUnit)
+                .frame(width: context.nineKeyWidthUnit * 1.04, height: context.heightUnit)
                 .contentShape(Rectangle())
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in
@@ -177,29 +177,33 @@ private struct LegacyStrokeKey: View {
 @available(iOSApplicationExtension 26.0, *)
 private struct GlassStrokePlaceholderKey: View {
         @EnvironmentObject private var context: KeyboardViewController
-        init(heightCoefficient: CGFloat = 1) {
+        init(widthCoefficient: CGFloat = 1.04, heightCoefficient: CGFloat = 1) {
+                self.widthCoefficient = widthCoefficient
                 self.heightCoefficient = heightCoefficient
         }
+        private let widthCoefficient: CGFloat
         private let heightCoefficient: CGFloat
         var body: some View {
                 Color.interactiveClear
                         .glassEffect(.clear, in: RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous))
                         .padding(3)
-                        .frame(width: context.nineKeyWidthUnit, height: context.heightUnit * heightCoefficient)
+                        .frame(width: context.nineKeyWidthUnit * widthCoefficient, height: context.heightUnit * heightCoefficient)
         }
 }
 
 private struct LegacyStrokePlaceholderKey: View {
         @EnvironmentObject private var context: KeyboardViewController
-        init(heightCoefficient: CGFloat = 1) {
+        init(widthCoefficient: CGFloat = 1.04, heightCoefficient: CGFloat = 1) {
+                self.widthCoefficient = widthCoefficient
                 self.heightCoefficient = heightCoefficient
         }
+        private let widthCoefficient: CGFloat
         private let heightCoefficient: CGFloat
         var body: some View {
                 RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous)
                         .fill(Material.regular)
                         .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                         .padding(3)
-                        .frame(width: context.nineKeyWidthUnit, height: context.heightUnit * heightCoefficient)
+                        .frame(width: context.nineKeyWidthUnit * widthCoefficient, height: context.heightUnit * heightCoefficient)
         }
 }
