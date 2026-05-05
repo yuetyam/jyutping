@@ -7092,7 +7092,7 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果你唔瞭解本項設定嘅作用，千祈唔好開啓。"
+            "value" : "如果你唔瞭解本項設置嘅作用，千祈唔好開啓。"
           }
         },
         "zh-Hans" : {
@@ -7110,7 +7110,7 @@
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果你唔瞭解本項設定嘅作用，千祈唔好開啓。"
+            "value" : "如果你唔瞭解本項設置嘅作用，千祈唔好開啓。"
           }
         },
         "zh-Hant-CN" : {
@@ -7122,25 +7122,25 @@
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果你唔瞭解本項設定嘅作用，千祈唔好開啓。"
+            "value" : "如果你唔瞭解本項設置嘅作用，千祈唔好開啓。"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果你唔瞭解本項設定嘅作用，千祈唔好開啓。"
+            "value" : "如果你唔瞭解本項設置嘅作用，千祈唔好開啓。"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果你唔瞭解本項設定嘅作用，千祈唔好開啓。"
+            "value" : "如果你唔瞭解本項設置嘅作用，千祈唔好開啓。"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果你唔瞭解本項設定嘅作用，千祈唔好開啓。"
+            "value" : "如果你唔瞭解本項設置嘅作用，千祈唔好開啓。"
           }
         }
       }
@@ -9160,7 +9160,7 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "直接選擇某個設定選項"
+            "value" : "直接選擇某個設置選項"
           }
         },
         "zh-Hans" : {
@@ -9178,7 +9178,7 @@
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "直接選擇某個設定選項"
+            "value" : "直接選擇某個設置選項"
           }
         },
         "zh-Hant-CN" : {
@@ -9190,25 +9190,25 @@
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "直接選擇某個設定選項"
+            "value" : "直接選擇某個設置選項"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "直接選擇某個設定選項"
+            "value" : "直接選擇某個設置選項"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "直接選擇某個設定選項"
+            "value" : "直接選擇某個設置選項"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "直接選擇某個設定選項"
+            "value" : "直接選擇某個設置選項"
           }
         }
       }
@@ -9254,7 +9254,7 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "進入／退出設定選項䈎面"
+            "value" : "進入／退出設置選項䈎面"
           }
         },
         "zh-Hans" : {
@@ -9272,7 +9272,7 @@
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "進入／退出設定選項䈎面"
+            "value" : "進入／退出設置選項䈎面"
           }
         },
         "zh-Hant-CN" : {
@@ -9284,25 +9284,25 @@
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "進入／退出設定選項䈎面"
+            "value" : "進入／退出設置選項䈎面"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "進入／退出設定選項䈎面"
+            "value" : "進入／退出設置選項䈎面"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "進入／退出設定選項䈎面"
+            "value" : "進入／退出設置選項䈎面"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "進入／退出設定選項䈎面"
+            "value" : "進入／退出設置選項䈎面"
           }
         }
       }
@@ -10194,7 +10194,7 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "開啓設定視窗（即係當前視窗）"
+            "value" : "開啓設置視窗（即係當前視窗）"
           }
         },
         "zh-Hans" : {
@@ -10212,7 +10212,7 @@
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "開啓設定視窗（即係當前視窗）"
+            "value" : "開啓設置視窗（即係當前視窗）"
           }
         },
         "zh-Hant-CN" : {
@@ -10224,25 +10224,25 @@
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "開啓設定視窗（即係當前視窗）"
+            "value" : "開啓設置視窗（即係當前視窗）"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "開啓設定視窗（即係當前視窗）"
+            "value" : "開啓設置視窗（即係當前視窗）"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "開啓設定視窗（即係當前視窗）"
+            "value" : "開啓設置視窗（即係當前視窗）"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "開啓設定視窗（即係當前視窗）"
+            "value" : "開啓設置視窗（即係當前視窗）"
           }
         }
       }
@@ -12074,7 +12074,7 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "設定…"
+            "value" : "設置…"
           }
         },
         "zh-Hans" : {
@@ -12092,7 +12092,7 @@
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "設定…"
+            "value" : "設置…"
           }
         },
         "zh-Hant-CN" : {
@@ -12104,25 +12104,25 @@
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "設定…"
+            "value" : "設置…"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "設定…"
+            "value" : "設置…"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "設定…"
+            "value" : "設置…"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "設定…"
+            "value" : "設置…"
           }
         }
       }
@@ -15364,7 +15364,7 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "設定"
+            "value" : "設置"
           }
         },
         "zh-Hans" : {
@@ -15382,7 +15382,7 @@
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "設定"
+            "value" : "設置"
           }
         },
         "zh-Hant-CN" : {
@@ -15394,25 +15394,25 @@
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "設定"
+            "value" : "設置"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "設定"
+            "value" : "設置"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "設定"
+            "value" : "設置"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "設定"
+            "value" : "設置"
           }
         }
       }
@@ -15834,7 +15834,7 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "粵拼輸入法設定"
+            "value" : "粵拼輸入法設置"
           }
         },
         "zh-Hans" : {
@@ -15852,7 +15852,7 @@
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "粵拼輸入法設定"
+            "value" : "粵拼輸入法設置"
           }
         },
         "zh-Hant-CN" : {
@@ -15864,25 +15864,25 @@
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "粵拼輸入法設定"
+            "value" : "粵拼輸入法設置"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "粵拼輸入法設定"
+            "value" : "粵拼輸入法設置"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "粵拼輸入法設定"
+            "value" : "粵拼輸入法設置"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "粵拼輸入法設定"
+            "value" : "粵拼輸入法設置"
           }
         }
       }

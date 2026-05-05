@@ -15,7 +15,6 @@ struct SettingsView: View {
 
         @State private var isAudioFeedbackOn: Bool = Options.isAudioFeedbackOn
         @State private var hapticFeedback: HapticFeedback = HapticFeedback.fetchSavedMode()
-        @State private var traditionalCharacterStandard: CharacterStandard = Options.traditionalCharacterStandard
         @State private var isKeyPadNumericLayout: Bool = NumericLayout.fetchSavedLayout().isNumberKeyPad
         @State private var isNineKeyStrokeLayout: Bool = StrokeLayout.fetchSavedLayout().isNineKey
         @State private var needsNumberRow: Bool = Options.needsNumberRow
@@ -27,6 +26,7 @@ struct SettingsView: View {
         @State private var commentScene: CommentScene = Options.commentScene
         @State private var commentToneStyle: CommentToneStyle = Options.commentToneStyle
         @State private var preferredInputMode: PreferredInputMode = Options.preferredInputMode
+        @State private var traditionalCharacterStandard: CharacterStandard = Options.traditionalCharacterStandard
         @State private var cangjieVariant: CangjieVariant = Options.cangjieVariant
         @State private var isEmojiSuggestionsOn: Bool = Options.isEmojiSuggestionsOn
         @State private var isEnglishSuggestionsOn: Bool = Options.isEnglishSuggestionsOn
@@ -85,29 +85,6 @@ struct SettingsView: View {
                                         if context.isRunningOnPhone && context.hasFullAccess.negative {
                                                 Text("SettingsView.KeyboardFeedback.SectionFooter").textCase(nil)
                                         }
-                                }
-
-                                Section {
-                                        Picker("SettingsView.TraditionalCharacterStandard.PickerTitle", selection: $traditionalCharacterStandard) {
-                                                Text("SettingsView.TraditionalCharacterStandard.Option1.Preset").tag(CharacterStandard.preset)
-                                                Text("SettingsView.TraditionalCharacterStandard.Option6.HongKong").tag(CharacterStandard.hongkong)
-                                                Text("SettingsView.TraditionalCharacterStandard.Option7.Taiwan").tag(CharacterStandard.taiwan)
-                                                Text("SettingsView.TraditionalCharacterStandard.Option8.PRCGeneral").tag(CharacterStandard.prcGeneral)
-                                                Text("SettingsView.TraditionalCharacterStandard.Option9.AncientBooksPublishing").tag(CharacterStandard.ancientBooksPublishing)
-                                                Text("SettingsView.TraditionalCharacterStandard.Option3.Inherited").tag(CharacterStandard.inherited)
-                                        }
-                                        .pickerStyle(.inline)
-                                        .labelsHidden()
-                                        .onChange(of: traditionalCharacterStandard) { newStandard in
-                                                AudioFeedback.modified()
-                                                context.triggerSelectionHapticFeedback()
-                                                context.syncTraditionalCharacterStandard(to: newStandard)
-                                                Options.updateTraditionalCharacterStandard(to: newStandard)
-                                        }
-                                } header: {
-                                        Text("SettingsView.TraditionalCharacterStandard.SectionHeader").textCase(nil)
-                                } footer: {
-                                        Text("SettingsView.TraditionalCharacterStandard.SectionFooter").textCase(nil)
                                 }
 
                                 Section {
@@ -234,6 +211,29 @@ struct SettingsView: View {
                                         AudioFeedback.modified()
                                         context.triggerSelectionHapticFeedback()
                                         Options.updatePreferredInputMode(to: newMode)
+                                }
+
+                                Section {
+                                        Picker("SettingsView.TraditionalCharacterStandard.PickerTitle", selection: $traditionalCharacterStandard) {
+                                                Text("SettingsView.TraditionalCharacterStandard.Option1.Preset").tag(CharacterStandard.preset)
+                                                Text("SettingsView.TraditionalCharacterStandard.Option6.HongKong").tag(CharacterStandard.hongkong)
+                                                Text("SettingsView.TraditionalCharacterStandard.Option7.Taiwan").tag(CharacterStandard.taiwan)
+                                                Text("SettingsView.TraditionalCharacterStandard.Option8.PRCGeneral").tag(CharacterStandard.prcGeneral)
+                                                Text("SettingsView.TraditionalCharacterStandard.Option9.AncientBooksPublishing").tag(CharacterStandard.ancientBooksPublishing)
+                                                Text("SettingsView.TraditionalCharacterStandard.Option3.Inherited").tag(CharacterStandard.inherited)
+                                        }
+                                        .pickerStyle(.inline)
+                                        .labelsHidden()
+                                        .onChange(of: traditionalCharacterStandard) { newStandard in
+                                                AudioFeedback.modified()
+                                                context.triggerSelectionHapticFeedback()
+                                                context.syncTraditionalCharacterStandard(to: newStandard)
+                                                Options.updateTraditionalCharacterStandard(to: newStandard)
+                                        }
+                                } header: {
+                                        Text("SettingsView.TraditionalCharacterStandard.SectionHeader").textCase(nil)
+                                } footer: {
+                                        Text("SettingsView.TraditionalCharacterStandard.SectionFooter").textCase(nil)
                                 }
 
                                 Picker("SettingsView.CangjieVariant.PickerTitle", selection: $cangjieVariant) {

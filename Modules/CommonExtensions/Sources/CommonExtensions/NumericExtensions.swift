@@ -5,3 +5,11 @@ extension Sequence where Element: Numeric {
                 return reduce(.zero, +)
         }
 }
+
+extension BinaryInteger {
+        /// Convert to Int64
+        /// - Returns: Converted Int64 value
+        public func toInt64() -> Int64 {
+                return Int64(self)
+        }
+}

@@ -4084,7 +4084,7 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "從鍵盤左上角嘅齒輪入到設定䈎面，搵到「鍵盤介面顯示語言」，然後選擇語言。"
+            "value" : "從鍵盤左上角嘅齒輪入到設置䈎面，搵到「鍵盤介面顯示語言」，然後選擇語言。"
           }
         },
         "zh-Hans" : {
@@ -4102,7 +4102,7 @@
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "從鍵盤左上角嘅齒輪入到設定䈎面，搵到「鍵盤介面顯示語言」，然後選擇語言。"
+            "value" : "從鍵盤左上角嘅齒輪入到設置䈎面，搵到「鍵盤介面顯示語言」，然後選擇語言。"
           }
         },
         "zh-Hant-CN" : {
@@ -4114,25 +4114,25 @@
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "從鍵盤左上角嘅齒輪入到設定䈎面，搵到「鍵盤介面顯示語言」，然後選擇語言。"
+            "value" : "從鍵盤左上角嘅齒輪入到設置䈎面，搵到「鍵盤介面顯示語言」，然後選擇語言。"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "從鍵盤左上角嘅齒輪入到設定䈎面，搵到「鍵盤介面顯示語言」，然後選擇語言。"
+            "value" : "從鍵盤左上角嘅齒輪入到設置䈎面，搵到「鍵盤介面顯示語言」，然後選擇語言。"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "從鍵盤左上角嘅齒輪入到設定䈎面，搵到「鍵盤介面顯示語言」，然後選擇語言。"
+            "value" : "從鍵盤左上角嘅齒輪入到設置䈎面，搵到「鍵盤介面顯示語言」，然後選擇語言。"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "從鍵盤左上角嘅齒輪入到設定䈎面，搵到「鍵盤介面顯示語言」，然後選擇語言。"
+            "value" : "從鍵盤左上角嘅齒輪入到設置䈎面，搵到「鍵盤介面顯示語言」，然後選擇語言。"
           }
         }
       }
@@ -15834,7 +15834,7 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "輸入法鍵盤設定䈎面可以揀倉頡、速成版本。"
+            "value" : "輸入法鍵盤設置䈎面可以揀倉頡、速成版本。"
           }
         },
         "zh-Hans" : {
@@ -15852,7 +15852,7 @@
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "輸入法鍵盤設定䈎面可以揀倉頡、速成版本。"
+            "value" : "輸入法鍵盤設置䈎面可以揀倉頡、速成版本。"
           }
         },
         "zh-Hant-CN" : {
@@ -15864,25 +15864,25 @@
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "輸入法鍵盤設定䈎面可以揀倉頡、速成版本。"
+            "value" : "輸入法鍵盤設置䈎面可以揀倉頡、速成版本。"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "輸入法鍵盤設定䈎面可以揀倉頡、速成版本。"
+            "value" : "輸入法鍵盤設置䈎面可以揀倉頡、速成版本。"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "輸入法鍵盤設定䈎面可以揀倉頡、速成版本。"
+            "value" : "輸入法鍵盤設置䈎面可以揀倉頡、速成版本。"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "輸入法鍵盤設定䈎面可以揀倉頡、速成版本。"
+            "value" : "輸入法鍵盤設置䈎面可以揀倉頡、速成版本。"
           }
         }
       }

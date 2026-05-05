@@ -355,11 +355,12 @@ struct InputMemory {
                 })
                 let queried = query(segmentation: segmentation, idealSchemes: idealSchemes, strictStatement: strictStatement)
                 guard fullMatched.isEmpty && idealQueried.isEmpty else {
-                        return (fullMatched + idealQueried).distinct().map({ Lexicon(text: $0.word, romanization: $0.romanization, input: $0.input, mark: $0.mark, number: -1) }) + queried
+                        return (fullMatched + idealQueried).advancedSorted(inputLength: inputLength).distinct().map({ Lexicon(text: $0.word, romanization: $0.romanization, input: $0.input, mark: $0.mark, number: -1) }) + queried
                 }
-                let shortcuts = shortcutMatch(text: text, input: text, limit: 5, statement: shortcutStatement)
+                let shortcutLimit: Int64 = (segmentation.first?.isEmpty ?? true) ? 100 : 5
+                let shortcuts = shortcutMatch(text: text, input: text, limit: shortcutLimit, statement: shortcutStatement)
                 guard shortcuts.isEmpty else {
-                        return shortcuts.map({ Lexicon(text: $0.word, romanization: $0.romanization, input: $0.input, mark: $0.mark, number: -1) }) + queried
+                        return shortcuts.advancedSorted(inputLength: inputLength).map({ Lexicon(text: $0.word, romanization: $0.romanization, input: $0.input, mark: $0.mark, number: -1) }) + queried
                 }
                 let shouldPartiallyMatch: Bool = idealSchemes.isEmpty || (keys.last == VirtualInputKey.letterM) || (keys.first == VirtualInputKey.letterM)
                 guard shouldPartiallyMatch else { return queried }
@@ -410,7 +411,7 @@ struct InputMemory {
                                 }
                         })
                 let partialMatched = (prefixMatched + gainedMatched)
-                        .sorted()
+                        .advancedSorted(inputLength: inputLength)
                         .distinct()
                         .prefix(5)
                         .map({ Lexicon(text: $0.word, romanization: $0.romanization, input: text, mark: $0.mark, number: -1) })
@@ -420,7 +421,7 @@ struct InputMemory {
                 guard segmentation.isNotEmpty else { return [] }
                 if idealSchemes.isEmpty {
                         return segmentation.flatMap({ perform(scheme: $0, strictStatement: strictStatement) })
-                                .sorted()
+                                .timeSorted()
                                 .distinct()
                                 .prefix(6)
                                 .map({ Lexicon(text: $0.word, romanization: $0.romanization, input: $0.input, mark: $0.mark, number: -2) })
@@ -429,7 +430,7 @@ struct InputMemory {
                                 guard scheme.count > 1 else { return [] }
                                 return (1..<scheme.count).reversed().map({ scheme.prefix($0) }).flatMap({ perform(scheme: $0, strictStatement: strictStatement) })
                         })
-                        .sorted()
+                        .timeSorted()
                         .distinct()
                         .prefix(6)
                         .map({ Lexicon(text: $0.word, romanization: $0.romanization, input: $0.input, mark: $0.mark, number: -2) })
@@ -441,11 +442,11 @@ struct InputMemory {
                 return strictMatch(spell: spellCode, shortcut: shortcutCode, input: scheme.aliasText, mark: scheme.mark, limit: 5, statement: strictStatement)
         }
 
-        private static func shortcutMatch<T: StringProtocol>(text: T, input: String, limit: Int64? = nil, statement: OpaquePointer?) -> [InternalLexicon] {
+        private static func shortcutMatch<T: StringProtocol>(text: T, input: String, limit: Int64 = 100, statement: OpaquePointer?) -> [InternalLexicon] {
                 let code = text.replacingOccurrences(of: "y", with: "j").hashCode()
                 sqlite3_reset(statement)
                 sqlite3_bind_int64(statement, 1, Int64(code))
-                sqlite3_bind_int64(statement, 2, (limit ?? 100))
+                sqlite3_bind_int64(statement, 2, limit)
                 var items: [InternalLexicon] = []
                 while sqlite3_step(statement) == SQLITE_ROW {
                         guard let word = sqlite3_column_text(statement, 0) else { continue }
@@ -458,10 +459,10 @@ struct InputMemory {
                 }
                 return items
         }
-        private static func spellMatch<T: StringProtocol>(text: T, input: String, mark: String? = nil, limit: Int64? = nil, statement: OpaquePointer?) -> [InternalLexicon] {
+        private static func spellMatch<T: StringProtocol>(text: T, input: String, mark: String? = nil, limit: Int64 = 100, statement: OpaquePointer?) -> [InternalLexicon] {
                 sqlite3_reset(statement)
                 sqlite3_bind_int64(statement, 1, Int64(text.hashCode()))
-                sqlite3_bind_int64(statement, 2, (limit ?? 100))
+                sqlite3_bind_int64(statement, 2, limit)
                 var items: [InternalLexicon] = []
                 while sqlite3_step(statement) == SQLITE_ROW {
                         guard let word = sqlite3_column_text(statement, 0) else { continue }
@@ -475,11 +476,11 @@ struct InputMemory {
                 }
                 return items
         }
-        private static func strictMatch(spell: Int32, shortcut: Int32, input: String, mark: String? = nil, limit: Int64? = nil, statement: OpaquePointer?) -> [InternalLexicon] {
+        private static func strictMatch(spell: Int32, shortcut: Int32, input: String, mark: String? = nil, limit: Int64 = 100, statement: OpaquePointer?) -> [InternalLexicon] {
                 sqlite3_reset(statement)
                 sqlite3_bind_int64(statement, 1, Int64(spell))
                 sqlite3_bind_int64(statement, 2, Int64(shortcut))
-                sqlite3_bind_int64(statement, 3, (limit ?? 100))
+                sqlite3_bind_int64(statement, 3, limit)
                 var items: [InternalLexicon] = []
                 while sqlite3_step(statement) == SQLITE_ROW {
                         guard let word = sqlite3_column_text(statement, 0) else { continue }
@@ -542,5 +543,35 @@ private struct InternalLexicon: Hashable, Comparable {
                 guard lhs.inputCount == rhs.inputCount else { return lhs.inputCount > rhs.inputCount }
                 guard lhs.frequency == rhs.frequency else { return lhs.frequency > rhs.frequency }
                 return lhs.latest > rhs.latest
+        }
+}
+
+private extension RandomAccessCollection where Element == InternalLexicon {
+        func advancedSorted(inputLength: Int) -> [InternalLexicon] {
+                let now: Int64 = Int64(Date.now.timeIntervalSince1970 * 1000)
+                // let recentEntries = filter({ ($0.inputCount == inputLength) && ((now - $0.latest) < PresetConstant.dayIntervalMilliseconds) }).sorted(by: { $0.frequency > $1.frequency })
+                let recentEntries = filter({ ($0.inputCount == inputLength) && ((now - $0.latest) < PresetConstant.dayIntervalMilliseconds) }).sorted(by: { $0.latest > $1.latest })
+                guard recentEntries.isNotEmpty else { return timeSorted(with: now) }
+                guard recentEntries.count != count else { return recentEntries }
+                let others = filter({ ($0.inputCount != inputLength) || ((now - $0.latest) >= PresetConstant.dayIntervalMilliseconds) }).timeSorted(with: now)
+                return recentEntries + others
+        }
+        func timeSorted(with now: Int64? = nil) -> [InternalLexicon] {
+                let now: Int64 = now ?? Int64(Date.now.timeIntervalSince1970 * 1000)
+                return sorted(by: { (lhs, rhs) -> Bool in
+                        guard lhs.inputCount == rhs.inputCount else { return lhs.inputCount > rhs.inputCount }
+                        let isLHSRecent: Bool = (now - lhs.latest) < PresetConstant.dayIntervalMilliseconds
+                        let isRHSRecent: Bool = (now - rhs.latest) < PresetConstant.dayIntervalMilliseconds
+                        switch (isLHSRecent, isRHSRecent) {
+                        case (true, true), (false, false):
+                                if lhs.frequency == rhs.frequency {
+                                        return lhs.latest > rhs.latest
+                                } else {
+                                        return lhs.frequency > rhs.frequency
+                                }
+                        case (true, false): return true
+                        case (false, true): return false
+                        }
+                })
         }
 }

@@ -27,4 +27,7 @@ struct PresetConstant {
         static let reverseLookup: String = "反查"
 
         static let spaceKeyLongPressHint: AttributedString = "← →"
+
+        /// Milliseconds in a day
+        static let dayIntervalMilliseconds: Int64 = 86_400_000
 }

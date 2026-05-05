@@ -29,4 +29,7 @@ struct PresetConstant {
         static let systemABCKeyboardLayout: String = "com.apple.keylayout.ABC"
         static let bundleIdentifier: String = "org.jyutping.inputmethod.Jyutping"
         static let connectionName: String = "org.jyutping.inputmethod.Jyutping_Connection"
+
+        /// Milliseconds in a day
+        static let dayIntervalMilliseconds: Int64 = 86_400_000
 }

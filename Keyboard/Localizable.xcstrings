@@ -6810,7 +6810,7 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果你唔瞭解本項設定嘅作用，千祈唔好開啓。"
+            "value" : "如果你唔瞭解本項設置嘅作用，千祈唔好開啓。"
           }
         },
         "zh-Hans" : {
@@ -6828,7 +6828,7 @@
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果你唔瞭解本項設定嘅作用，千祈唔好開啓。"
+            "value" : "如果你唔瞭解本項設置嘅作用，千祈唔好開啓。"
           }
         },
         "zh-Hant-CN" : {
@@ -6840,25 +6840,25 @@
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果你唔瞭解本項設定嘅作用，千祈唔好開啓。"
+            "value" : "如果你唔瞭解本項設置嘅作用，千祈唔好開啓。"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果你唔瞭解本項設定嘅作用，千祈唔好開啓。"
+            "value" : "如果你唔瞭解本項設置嘅作用，千祈唔好開啓。"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果你唔瞭解本項設定嘅作用，千祈唔好開啓。"
+            "value" : "如果你唔瞭解本項設置嘅作用，千祈唔好開啓。"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果你唔瞭解本項設定嘅作用，千祈唔好開啓。"
+            "value" : "如果你唔瞭解本項設置嘅作用，千祈唔好開啓。"
           }
         }
       }
