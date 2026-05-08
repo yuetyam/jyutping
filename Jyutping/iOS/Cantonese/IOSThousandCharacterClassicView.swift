@@ -30,7 +30,6 @@ struct IOSThousandCharacterClassicView: View {
                                 entries = AppMaster.thousandCharacterClassicEntries
                         }
                 }
-                .textSelection(.enabled)
                 .navigationTitle("IOSCantoneseTab.NavigationTitle.ThousandCharacterClassic")
                 .navigationBarTitleDisplayMode(.inline)
         }

@@ -30,7 +30,6 @@ struct IOSHundredFamilySurnamesView: View {
                                 surnames = AppMaster.surnames
                         }
                 }
-                .textSelection(.enabled)
                 .navigationTitle("IOSCantoneseTab.NavigationTitle.HundredFamilySurnames")
                 .navigationBarTitleDisplayMode(.inline)
         }

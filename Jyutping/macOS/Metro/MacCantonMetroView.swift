@@ -6,12 +6,11 @@ import AppDataSource
 struct MacCantonMetroView: View {
 
         @State private var lines: [Metro.Line] = []
-        @State private var expanded: [Bool] = Array(repeating: false, count: 40)
+        @State private var expanded: [Bool] = Array(repeating: false, count: 50)
 
         var body: some View {
                 ScrollView {
-                        LazyVStack(spacing: 12) {
-                                TermView(term: Term(name: "廣州地鐵", romanization: "gwong2 zau1 dei6 tit3")).block()
+                        LazyVStack(spacing: 8) {
                                 ForEach(lines.indices, id: \.self) { index in
                                         MacMetroLineView(line: lines[index], isExpanded: $expanded[index])
                                 }

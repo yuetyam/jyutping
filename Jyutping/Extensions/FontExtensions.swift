@@ -11,12 +11,16 @@ extension Font {
         static let copilot: Font = enhancedFont(size: 12)
         static let ipa: Font = enhancedFont(size: 15)
         static let display: Font = displayFont(size: 17)
+        static let word: Font = displayFont(size: 20)
+        static let annotation: Font = Font.system(size: 12, weight: .medium, design: .monospaced)
         #else
         static let master: Font = Font.body
         static let significant: Font = Font.headline
         static let copilot: Font = Font.subheadline
         static let ipa: Font = enhancedFont(size: 17)
-        static let display: Font = Font.body
+        static let display: Font = Font.title3
+        static let word: Font = Font.title2
+        static let annotation: Font = Font.system(size: 12, weight: .medium, design: .monospaced)
         #endif
 }
 

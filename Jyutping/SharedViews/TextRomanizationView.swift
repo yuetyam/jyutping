@@ -64,26 +64,18 @@ struct TextRomanizationView: View {
 private struct CharacterPronunciationView: View {
         let pronunciation: TextRomanization
         var body: some View {
-                let text = pronunciation.text
-                let romanization = pronunciation.romanization
-                if romanization.isEmpty {
-                        VStack(spacing: 0) {
-                                Text(verbatim: String.space)
-                                        .font(.footnote)
-                                Text(verbatim: text)
-                                        .font(.master)
-                        }
-                } else {
-                        VStack(spacing: 0) {
-                                Text(verbatim: romanization)
-                                        .lineLimit(1)
-                                        .minimumScaleFactor(0.5)
-                                        .font(.footnote)
-                                Text(verbatim: text)
-                                        .font(.master)
-                        }
-                        .frame(width: 40)
+                VStack(spacing: 0) {
+                        Text(verbatim: pronunciation.romanization.isEmpty ? String.space : pronunciation.romanization)
+                                .lineLimit(1)
+                                .minimumScaleFactor(0.2)
+                                .font(.annotation)
+                                .padding(.leading, 2)
+                        Text(verbatim: pronunciation.text)
+                                .lineLimit(1)
+                                .minimumScaleFactor(0.2)
+                                .font(.word)
                 }
+                .frame(width: 38)
         }
 }
 
@@ -96,10 +88,10 @@ private struct FallbackPronunciationView: View {
                                 .lineLimit(1)
                                 .minimumScaleFactor(0.5)
                                 .font(.footnote)
-                                .textSelection(.enabled)
                         Text(verbatim: text)
+                                .lineLimit(1)
+                                .minimumScaleFactor(0.5)
                                 .font(.master)
-                                .textSelection(.enabled)
                 }
         }
 }

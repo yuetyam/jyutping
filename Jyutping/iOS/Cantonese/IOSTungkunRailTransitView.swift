@@ -6,27 +6,41 @@ import AppDataSource
 struct IOSTungkunRailTransitView: View {
 
         @State private var lines: [Metro.Line] = []
-        @State private var expanded: [Bool] = Array(repeating: false, count: 40)
+        @State private var expanded: [Bool] = Array(repeating: false, count: 50)
 
         var body: some View {
-                List {
-                        Section {
-                                TermView(term: Term(name: "東莞軌道交通", romanization: "dung1 gun2 gwai2 dou6 gaau1 tung1"))
-                        }
-                        ForEach(lines.indices, id: \.self) { index in
-                                Section {
-                                        IOSMetroLineView(line: lines[index], isExpanded: $expanded[index])
+                if #available(iOS 17.0, *) {
+                        List {
+                                ForEach(lines.indices, id: \.self) { index in
+                                        Section {
+                                                IOSMetroLineView(line: lines[index], isExpanded: $expanded[index])
+                                        }
                                 }
                         }
+                        .listSectionSpacing(12)
+                        .animation(.default, value: expanded)
+                        .task {
+                                guard lines.isEmpty else { return }
+                                lines = Metro.tungkunRailTransitLines
+                        }
+                        .navigationTitle("IOSCantoneseTab.NavigationTitle.TungkunRailTransit")
+                        .navigationBarTitleDisplayMode(.inline)
+                } else {
+                        List {
+                                ForEach(lines.indices, id: \.self) { index in
+                                        Section {
+                                                IOSMetroLineView(line: lines[index], isExpanded: $expanded[index])
+                                        }
+                                }
+                        }
+                        .animation(.default, value: expanded)
+                        .task {
+                                guard lines.isEmpty else { return }
+                                lines = Metro.tungkunRailTransitLines
+                        }
+                        .navigationTitle("IOSCantoneseTab.NavigationTitle.TungkunRailTransit")
+                        .navigationBarTitleDisplayMode(.inline)
                 }
-                .animation(.default, value: expanded)
-                .textSelection(.enabled)
-                .task {
-                        guard lines.isEmpty else { return }
-                        lines = Metro.tungkunRailTransitLines
-                }
-                .navigationTitle("IOSCantoneseTab.NavigationTitle.TungkunRailTransit")
-                .navigationBarTitleDisplayMode(.inline)
         }
 }
 

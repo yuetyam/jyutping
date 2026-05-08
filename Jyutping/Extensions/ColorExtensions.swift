@@ -16,7 +16,5 @@ extension Color {
 }
 
 extension ColorScheme {
-        var isDark: Bool {
-                return self == .dark
-        }
+        var isDark: Bool { self == .dark }
 }

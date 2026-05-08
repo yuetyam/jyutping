@@ -68,7 +68,7 @@ private struct EntryView: View {
                 }
                 .font(.master)
                 .textSelection(.enabled)
-                .padding(.vertical, 8)
+                .padding(.vertical, 4)
                 .stack()
         }
 }

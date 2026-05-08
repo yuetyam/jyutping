@@ -1,140 +1,140 @@
-# 東鐵綫
-金鐘	gam1 zung1
-會展	wui6 zin2
-紅磡	hung4 ham3
-旺角東	wong6 gok3 dung1
-九龍塘	gau2 lung4 tong4
-大圍	daai6 wai4
-沙田	saa1 tin4
-火炭	fo2 taan3
-馬場	maa5 coeng4
-大學	daai6 hok6
-大埔墟	daai6 bou3 heoi1
-太和	taai3 wo2
-粉嶺	fan2 leng5
-上水	soeng6 seoi2
-羅湖	lo4 wu4
-落馬洲	lok6 maa5 zau1
+## 東鐵綫
+金鐘	gam1 zung1	# ADM	Admiralty	0x3A86D4	0xFFFFFF
+會展	wui6 zin2	# EXC	Exhibition Centre	0x94A8B0	0xFFFFFF
+紅磡	hung4 ham3	# HUH	Hung Hom	0xF08080	0x000000
+旺角東	wong6 gok3 dung1	# MKK	Mong Kok East	0x006400	0xFFFFFF
+九龍塘	gau2 lung4 tong4	# KOT	Kowloon Tong	0x007FFF	0xFFFFFF
+大圍	daai6 wai4	# TAW	Tai Wai	0x05117E	0xFFFFFF
+沙田	saa1 tin4	# SHT	Sha Tin	0xBB7796	0xFFFFFF
+火炭	fo2 taan3	# FOT	Fo Tan	0xFFA500	0xFFFFFF
+馬場	maa5 coeng4	# RAC	Racecourse	0x15AE69	0xFFFFFF
+大學	daai6 hok6	# UNI	University	0xA2D7DD	0xFFFFFF
+大埔墟	daai6 bou3 heoi1	# TAP	Tai Po Market	0x976E9A	0xFFFFFF
+太和	taai3 wo2	# TWO	Tai Wo	0xC89F05	0xFFFFFF
+粉嶺	fan2 leng5	# FAN	Fanling	0x9ACD32	0xFFFFFF
+上水	soeng6 seoi2	# SHS	Sheung Shui	0xF6A600	0xFFFFFF
+羅湖	lo4 wu4	# LOW	Lo Wu	0x8DC476	0xFFFFFF
+落馬洲	lok6 maa5 zau1	# LMC	Lok Ma Chau	0x009E9B	0xFFFFFF
 
-# 觀塘綫
-黃埔	wong4 bou3
-何文田	ho4 man4 tin4
-油麻地	jau4 maa4 dei2
-旺角	wong6 gok3
-太子	taai3 zi2
-石硤尾	sek6 gip3 mei5
-九龍塘	gau2 lung4 tong4
-樂富	lok6 fu3
-黃大仙	wong4 daai6 sin1
-鑽石山	zyun3 sek6 saan1
-彩虹	coi2 hung4
-九龍灣	gau2 lung4 waan1
-牛頭角	ngau4 tau4 gok3
-觀塘	gun1 tong4
-藍田	laam4 tin4
-油塘	jau4 tong4
-調景嶺	tiu4 ging2 leng5
+## 觀塘綫
+黃埔	wong4 bou3	# WHA	Whampoa	0xAECFF0	0x000000
+何文田	ho4 man4 tin4	# HOM	Ho Man Tin	0xA2CF5A	0x000000
+油麻地	jau4 maa4 dei2	# YMT	Yau Ma Tei	0xCCCCCC	0x000000
+旺角	wong6 gok3	# MOK	Mong Kok	0xBE2700	0xFFFFFF
+太子	taai3 zi2	# PRE	Prince Edward	0x8674A1	0xFFFFFF
+石硤尾	sek6 gip3 mei5	# SKM	Shek Kip Mei	0x669933	0xFFFFFF
+九龍塘	gau2 lung4 tong4	# KOT	Kowloon Tong	0x007FFF	0xFFFFFF
+樂富	lok6 fu3	# LOF	Lok Fu	0x579E2F	0x000000
+黃大仙	wong4 daai6 sin1	# WTS	Wong Tai Sin	0xFFFF00	0x000000
+鑽石山	zyun3 sek6 saan1	# DIH	Diamond Hill	0x000000	0xFFFFFF
+彩虹	coi2 hung4	# CHH	Choi Hung	0x27408B	0xFFFFFF
+九龍灣	gau2 lung4 waan1	# KOB	Kowloon Bay	0xC80815	0xFFFFFF
+牛頭角	ngau4 tau4 gok3	# NTK	Ngau Tau Kok	0x92B6A3	0xFFFFFF
+觀塘	gun1 tong4	# KWT	Kwun Tong	0xFFFFFF	0x000000
+藍田	laam4 tin4	# LAT	Lam Tin	0x0083BE	0x000000
+油塘	jau4 tong4	# YAT	Yau Tong	0xFFEF00	0x000000
+調景嶺	tiu4 ging2 leng5	# TIK	Tiu Keng Leng	0xDCD144	0x000000
 
-# 荃灣綫
-中環	zung1 waan4
-金鐘	gam1 zung1
-尖沙咀	zim1 saa1 zeoi2
-佐敦	zo3 deon1
-油麻地	jau4 maa4 dei2
-旺角	wong6 gok3
-太子	taai3 zi2
-深水埗	sam1 seoi2 bou2
-長沙灣	coeng4 saa1 waan4
-荔枝角	lai6 zi1 gok3
-美孚	mei5 fu1
-荔景	lai6 ging2
-葵芳	kwai4 fong1
-葵興	kwai4 hing1
-大窩口	daai6 wo1 hau2
-荃灣	cyun4 waan1
+## 荃灣綫
+中環	zung1 waan4	# CEN	Central	0xAA0000	0xFFFFFF
+金鐘	gam1 zung1	# ADM	Admiralty	0x3A86D4	0xFFFFFF
+尖沙咀	zim1 saa1 zeoi2	# TST	Tsim Sha Tsui	0xFFEF00	0x000000
+佐敦	zo3 deon1	# JOR	Jordan	0x69B72B	0xFFFFFF
+油麻地	jau4 maa4 dei2	# YMT	Yau Ma Tei	0xCCCCCC	0x000000
+旺角	wong6 gok3	# MOK	Mong Kok	0xBE2700	0xFFFFFF
+太子	taai3 zi2	# PRE	Prince Edward	0x8674A1	0xFFFFFF
+深水埗	sam1 seoi2 bou2	# SSP	Sham Shui Po	0x016258	0xFFFFFF
+長沙灣	coeng4 saa1 waan4	# CSW	Cheung Sha Wan	0xB5A265	0x000000
+荔枝角	lai6 zi1 gok3	# LCK	Lai Chi Kok	0xE04300	0xFFFFFF
+美孚	mei5 fu1	# MEF	Mei Foo	0x1E90FF	0xFFFFFF
+荔景	lai6 ging2	# LAK	Lai King	0xBB2200	0xFFFFFF
+葵芳	kwai4 fong1	# KWF	Kwai Fong	0x233D3A	0xFFFFFF
+葵興	kwai4 hing1	# KWH	Kwai Hing	0xF1CC00	0x000000
+大窩口	daai6 wo1 hau2	# TWH	Tai Wo Hau	0xA2B741	0xFFFFFF
+荃灣	cyun4 waan1	# TSW	Tsuen Wan	0xBB2200	0xFFFFFF
 
-# 港島綫
-堅尼地城	gin1 nei4 dei6 sing4
-香港大學	hoeng1 gong2 daai6 hok6
-西營盤	sai1 jing4 pun4
-上環	soeng6 waan4
-中環	zung1 waan4
-金鐘	gam1 zung1
-灣仔	waan1 zai2
-銅鑼灣	tung4 lo4 waan1
-天后	tin1 hau6
-炮台山	paau3 toi4 saan1
-北角	bak1 gok3
-鰂魚涌	zak1 jyu4 cung1
-太古	taai3 gu2
-西灣河	sai1 waan1 ho4
-筲箕灣	saau1 gei1 waan1
-杏花邨	hang6 faa1 cyun1
-柴灣	caai4 waan1
+## 港島綫
+堅尼地城	gin1 nei4 dei6 sing4	# KET	Kennedy Town	0x95D0D0	0x000000
+香港大學	hoeng1 gong2 daai6 hok6	# HKU	HKU	0xB8DA89	0x000000
+西營盤	sai1 jing4 pun4	# SYP	Sai Ying Pun	0x8B7BA0	0x000000
+上環	soeng6 waan4	# SHW	Sheung Wan	0xFFD280	0x6B4513
+中環	zung1 waan4	# CEN	Central	0xAA0000	0xFFFFFF
+金鐘	gam1 zung1	# ADM	Admiralty	0x3A86D4	0xFFFFFF
+灣仔	waan1 zai2	# WAC	Wan Chai	0xE1EB2B	0x000000
+銅鑼灣	tung4 lo4 waan1	# CAB	Causeway Bay	0xC8A2C8	0x000000
+天后	tin1 hau6	# TIH	Tin Hau	0xFF7D00	0x000000
+炮台山	paau3 toi4 saan1	# FOH	Fortress Hill	0x4B8842	0xFFFFFF
+北角	bak1 gok3	# NOP	North Point	0xE86220	0x000000
+鰂魚涌	zak1 jyu4 cung1	# QUB	Quarry Bay	0x00918C	0xFFFFFF
+太古	taai3 gu2	# TAK	Tai Koo	0xBB2200	0xFFFFFF
+西灣河	sai1 waan1 ho4	# SWH	Sai Wan Ho	0xFFCC00	0x000000
+筲箕灣	saau1 gei1 waan1	# SKW	Shau Kei Wan	0x191970	0xFFFFFF
+杏花邨	hang6 faa1 cyun1	# HFC	Heng Fa Chuen	0xC01204	0xFFFFFF
+柴灣	caai4 waan1	# CHW	Chai Wan	0x38510E	0xFFFFFF
 
-# 東涌綫
-東涌	dung1 cung1
-欣澳	jan1 ou3
-青衣	cing1 ji1
-荔景	lai6 ging2
-南昌	naam4 coeng1
-奧運	ou3 wan6
-九龍	gau2 lung4
-香港	hoeng1 gong2
+## 東涌綫
+香港	hoeng1 gong2	# HOK	Hong Kong	0xFFFAFA	0x000000
+九龍	gau2 lung4	# KOW	Kowloon	0xACA28A	0x000000
+奧運	ou3 wan6	# OLY	Olympic	0x4584C4	0x000000
+南昌	naam4 coeng1	# NAC	Nam Cheong	0xF0EE86	0x000000
+荔景	lai6 ging2	# LAK	Lai King	0xBB2200	0xFFFFFF
+青衣	cing1 ji1	# TSY	Tsing Yi	0xA1C6CA	0x000000
+欣澳	jan1 ou3	# SUN	Sunny Bay	0x808080	0xC0C0C0
+東涌	dung1 cung1	# TUC	Tung Chung	0x6A5ACD	0x000000
 
-# 將軍澳綫
-北角	bak1 gok3
-鰂魚涌	zak1 jyu4 cung1
-油塘	jau4 tong4
-調景嶺	tiu4 ging2 leng5
-將軍澳	zoeng1 gwan1 ou3
-坑口	haang1 hau2
-寶琳	bou2 lam4
-康城	hong1 sing4
+## 將軍澳綫
+北角	bak1 gok3	# NOP	North Point	0xE86220	0x000000
+鰂魚涌	zak1 jyu4 cung1	# QUB	Quarry Bay	0x00918C	0xFFFFFF
+油塘	jau4 tong4	# YAT	Yau Tong	0xFFEF00	0x000000
+調景嶺	tiu4 ging2 leng5	# TIK	Tiu Keng Leng	0xDCD144	0x000000
+將軍澳	zoeng1 gwan1 ou3	# TKO	Tseung Kwan O	0xE60012	0xFFFFFF
+坑口	haang1 hau2	# HAH	Hang Hau	0x2EA9DF	0x000000
+寶琳	bou2 lam4	# POA	Po Lam	0xF28500	0x000000
+康城	hong1 sing4	# LHP	LOHAS Park	0x826F79	0xFFFFFF
 
-# 屯馬綫
-屯門	tyun4 mun4
-兆康	siu6 hong1
-天水圍	tin1 seoi2 wai4
-朗屏	long5 ping4
-元朗	jyun4 long5
-錦上路	gam2 soeng6 lou6
-荃灣西	cyun4 waan1 sai1
-美孚	mei5 fu1
-南昌	naam4 coeng1
-柯士甸	o1 si6 din6
-尖東	zim1 dung1
-紅磡	hung4 ham3
-何文田	ho4 man4 tin4
-土瓜灣	tou2 gwaa1 waan4
-宋皇臺	sung3 wong4 toi4
-啟德	kai2 dak1
-鑽石山	zyun3 sek6 saan1
-顯徑	hin2 ging3
-大圍	daai6 wai4
-車公廟	ce1 gung1 miu2
-沙田圍	saa1 tin4 wai4
-第一城	dai6 jat1 sing4
-石門	sek6 mun4
-大水坑	daai6 seoi2 haang1
-恆安	hang4 on1
-馬鞍山	maa5 on1 saan1
-烏溪沙	wu1 kai1 saa1
+## 屯馬綫
+屯門	tyun4 mun4	# TUM	Tuen Mun	0x035F94	0xFFFFFF
+兆康	siu6 hong1	# SIH	Siu Hong	0x7FFFD4	0x000000
+天水圍	tin1 seoi2 wai4	# TIS	Tin Shui Wai	0xFC8A17	0x000000
+朗屏	long5 ping4	# LOP	Long Ping	0xFFB3BF	0x000000
+元朗	jyun4 long5	# YUL	Yuen Long	0x40F5F5	0x000000
+錦上路	gam2 soeng6 lou6	# KSR	Kam Sheung Road	0xCC5500	0xFFFFFF
+荃灣西	cyun4 waan1 sai1	# TWW	Tsuen Wan West	0xA81C07	0xFFFFFF
+美孚	mei5 fu1	# MEF	Mei Foo	0x1E90FF	0xFFFFFF
+南昌	naam4 coeng1	# NAC	Nam Cheong	0xF0EE86	0x000000
+柯士甸	o1 si6 din6	# AUS	Austin	0xB45529	0xFFFFFF
+尖東	zim1 dung1	# ETS	East Tsim Sha Tsui	0xFFFF00	0x000000
+紅磡	hung4 ham3	# HUH	Hung Hom	0xF08080	0x000000
+何文田	ho4 man4 tin4	# HOM	Ho Man Tin	0xA2CF5A	0x000000
+土瓜灣	tou2 gwaa1 waan4	# TKW	To Kwa Wan	0xA9E2F3	0x000000
+宋皇臺	sung3 wong4 toi4	# SUW	Sung Wong Toi	0xD08A00	0x000000
+啟德	kai2 dak1	# KAT	Kai Tak	0xFF8C00	0x000000
+鑽石山	zyun3 sek6 saan1	# DIH	Diamond Hill	0x000000	0xFFFFFF
+顯徑	hin2 ging3	# HIK	Hin Keng	0x8FBE6C	0x182F4F
+大圍	daai6 wai4	# TAW	Tai Wai	0x05117E	0xFFFFFF
+車公廟	ce1 gung1 miu2	# CKT	Che Kung Temple	0xFFD280	0x000000
+沙田圍	saa1 tin4 wai4	# STW	Sha Tin Wai	0xFFC0CB	0x000000
+第一城	dai6 jat1 sing4	# CIO	City One	0xFFBF00	0x000000
+石門	sek6 mun4	# SHM	Shek Mun	0xFBEC5D	0x000000
+大水坑	daai6 seoi2 haang1	# TSH	Tai Shui Hang	0x48D1CC	0x000000
+恆安	hang4 on1	# HEO	Heng On	0x87CEFA	0x000000
+馬鞍山	maa5 on1 saan1	# MOS	Ma On Shan	0xE0B0FF	0x000000
+烏溪沙	wu1 kai1 saa1	# WKS	Wu Kai Sha	0x954535	0xFFFFFF
 
-# 迪士尼綫
-欣澳	jan1 ou3
-迪士尼	dik6 si6 nei4
+## 迪士尼綫
+欣澳	jan1 ou3	# SUN	Sunny Bay	0x808080	0xC0C0C0
+迪士尼	dik6 si6 nei4	# DIS	Disneyland Resort	0x005533	0xD4AF37
 
-# 南港島綫
-金鐘	gam1 zung1
-海洋公園	hoi2 joeng4 gung1 jyun2
-黃竹坑	wong4 zuk1 haang1
-利東	lei6 dung1
-海怡半島	hoi2 ji4 bun3 dou2
+## 南港島綫
+金鐘	gam1 zung1	# ADM	Admiralty	0x3A86D4	0xFFFFFF
+海洋公園	hoi2 joeng4 gung1 jyun2	# OCP	Ocean Park	0x00BFFF	0xFFFFFF
+黃竹坑	wong4 zuk1 haang1	# WCH	Wong Chuk Hang	0xFFFF00	0x000000
+利東	lei6 dung1	# LET	Lei Tung	0xFF7F00	0xFFFFFF
+海怡半島	hoi2 ji4 bun3 dou2	# SOH	South Horizons	0x74B11B	0xFFFFFF
 
-# 機場快綫
-香港	hoeng1 gong2
-九龍	gau2 lung4
-青衣	cing1 ji1
-機場	gei1 coeng4
-博覽館	bok3 laam5 gun2
+## 機場快綫
+香港	hoeng1 gong2	# HOK	Hong Kong	0xFFFAFA	0x000000
+九龍	gau2 lung4	# KOW	Kowloon	0xACA28A	0x000000
+青衣	cing1 ji1	# TSY	Tsing Yi	0xA1C6CA	0x000000
+機場	gei1 coeng4	# AIR	Airport	0x808080	0x000000
+博覽館	bok3 laam5 gun2	# AWE	AsiaWorld-Expo	0xFFFFFF	0x000000

@@ -1,5 +1,8 @@
 import Testing
 @testable import CommonExtensions
+#if canImport(SwiftUI)
+import SwiftUI
+#endif
 
 @Suite("CommonExtensions")
 struct CommonExtensionsTests {
@@ -466,4 +469,65 @@ struct CommonExtensionsTests {
                 }
                 #expect(notExecuted == false)
         }
+
+        // MARK: - ColorExtensions
+
+#if canImport(SwiftUI)
+        @Test("Color init with RGB UInt32 uses correct channels")
+        func colorInitRGB() {
+                #expect(Color(rgb: 0xFF0000) == Color(.sRGB, red: 1.0, green: 0.0, blue: 0.0, opacity: 1.0))
+                #expect(Color(rgb: 0x00FF00) == Color(.sRGB, red: 0.0, green: 1.0, blue: 0.0, opacity: 1.0))
+                #expect(Color(rgb: 0x0000FF) == Color(.sRGB, red: 0.0, green: 0.0, blue: 1.0, opacity: 1.0))
+                #expect(Color(rgb: 0xFFFFFF) == Color(.sRGB, red: 1.0, green: 1.0, blue: 1.0, opacity: 1.0))
+                #expect(Color(rgb: 0x000000) == Color(.sRGB, red: 0.0, green: 0.0, blue: 0.0, opacity: 1.0))
+        }
+
+        @Test("Color init with RGB UInt32 and custom alpha")
+        func colorInitRGBAlpha() {
+                #expect(Color(rgb: 0xFF0000, alpha: 0.5) == Color(.sRGB, red: 1.0, green: 0.0, blue: 0.0, opacity: 0.5))
+                #expect(Color(rgb: 0xFF0000, alpha: 0.0) == Color(.sRGB, red: 1.0, green: 0.0, blue: 0.0, opacity: 0.0))
+                #expect(Color(rgb: 0xFF0000, alpha: 1.0) == Color(.sRGB, red: 1.0, green: 0.0, blue: 0.0, opacity: 1.0))
+        }
+
+        @Test("Color init with ARGB UInt32 uses correct channels")
+        func colorInitARGB() {
+                #expect(Color(argb: 0xFFFF0000) == Color(.sRGB, red: 1.0, green: 0.0, blue: 0.0, opacity: 1.0))
+                #expect(Color(argb: 0xFF00FF00) == Color(.sRGB, red: 0.0, green: 1.0, blue: 0.0, opacity: 1.0))
+                #expect(Color(argb: 0xFF0000FF) == Color(.sRGB, red: 0.0, green: 0.0, blue: 1.0, opacity: 1.0))
+                #expect(Color(argb: 0xFFFFFFFF) == Color(.sRGB, red: 1.0, green: 1.0, blue: 1.0, opacity: 1.0))
+                #expect(Color(argb: 0xFF000000) == Color(.sRGB, red: 0.0, green: 0.0, blue: 0.0, opacity: 1.0))
+                #expect(Color(argb: 0x00FF0000) == Color(.sRGB, red: 1.0, green: 0.0, blue: 0.0, opacity: 0.0))
+        }
+
+        @Test("Color init with RGBA UInt32 uses correct channels")
+        func colorInitRGBA() {
+                #expect(Color(rgba: 0xFF0000FF) == Color(.sRGB, red: 1.0, green: 0.0, blue: 0.0, opacity: 1.0))
+                #expect(Color(rgba: 0x00FF00FF) == Color(.sRGB, red: 0.0, green: 1.0, blue: 0.0, opacity: 1.0))
+                #expect(Color(rgba: 0x0000FFFF) == Color(.sRGB, red: 0.0, green: 0.0, blue: 1.0, opacity: 1.0))
+                #expect(Color(rgba: 0xFFFFFFFF) == Color(.sRGB, red: 1.0, green: 1.0, blue: 1.0, opacity: 1.0))
+                #expect(Color(rgba: 0x000000FF) == Color(.sRGB, red: 0.0, green: 0.0, blue: 0.0, opacity: 1.0))
+                #expect(Color(rgba: 0xFF000000) == Color(.sRGB, red: 1.0, green: 0.0, blue: 0.0, opacity: 0.0))
+        }
+
+        @Test("Color RGB and ARGB produce same result with full alpha")
+        func colorRGBMatchesARGB() {
+                #expect(Color(rgb: 0xFF0000) == Color(argb: 0xFFFF0000))
+                #expect(Color(rgb: 0x00FF00) == Color(argb: 0xFF00FF00))
+                #expect(Color(rgb: 0x0000FF) == Color(argb: 0xFF0000FF))
+        }
+
+        @Test("Color RGB and RGBA produce same result with full alpha")
+        func colorRGBMatchesRGBA() {
+                #expect(Color(rgb: 0xFF0000) == Color(rgba: 0xFF0000FF))
+                #expect(Color(rgb: 0x00FF00) == Color(rgba: 0x00FF00FF))
+                #expect(Color(rgb: 0x0000FF) == Color(rgba: 0x0000FFFF))
+        }
+
+        @Test("Color custom colorSpace is forwarded")
+        func colorInitCustomColorSpace() {
+                #expect(Color(rgb: 0xFF0000, colorSpace: .displayP3) == Color(.displayP3, red: 1.0, green: 0.0, blue: 0.0, opacity: 1.0))
+                #expect(Color(argb: 0xFFFF0000, colorSpace: .displayP3) == Color(.displayP3, red: 1.0, green: 0.0, blue: 0.0, opacity: 1.0))
+                #expect(Color(rgba: 0xFF0000FF, colorSpace: .displayP3) == Color(.displayP3, red: 1.0, green: 0.0, blue: 0.0, opacity: 1.0))
+        }
+#endif
 }

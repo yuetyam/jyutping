@@ -1,497 +1,497 @@
-# 1 號線
-廣州東站	gwong2 zau1 dung1 zaam6
-體育中心	tai2 juk6 zung1 sam1
-體育西路	tai2 juk6 sai1 lou6
-楊箕	joeng2 gei1
-東山口	dung1 saan1 hau2
-烈士陵園	lit6 si6 ling4 jyun4
-農講所	nung4 gong2 so2
-公園前	gung1 jyun2 cin4
-西門口	sai1 mun4 hau2
-陳家祠	can4 gaa1 ci4
-長壽路	coeng4 sau6 lou6
-黃沙	wong2 saa1
-芳村	fong1 cyun1
-花地灣	faa1 dei2 waan1
-坑口	haang1 hau2
-西塱	sai1 long5
+## 1 號線
+西塱	sai1 long5	# 01
+坑口	haang1 hau2	# 02
+花地灣	faa1 dei2 waan1	# 03
+芳村	fong1 cyun1	# 04
+黃沙	wong2 saa1	# 05
+長壽路	coeng4 sau6 lou6	# 06
+陳家祠	can4 gaa1 ci4	# 07
+西門口	sai1 mun4 hau2	# 08
+公園前	gung1 jyun2 cin4	# 09
+農講所	nung4 gong2 so2	# 10
+烈士陵園	lit6 si6 ling4 jyun4	# 11
+東山口	dung1 saan1 hau2	# 12
+楊箕	joeng2 gei1	# 13
+體育西路	tai2 juk6 sai1 lou6	# 14
+體育中心	tai2 juk6 zung1 sam1	# 15
+廣州東站	gwong2 zau1 dung1 zaam6	# 16
 
-# 2 號線
-嘉禾望崗	gaa1 wo4 mong6 gong1
-黃邊	wong2 bin1
-江夏	gong1 haa6
-蕭崗	siu1 gong1
-白雲文化廣場	baak6 wan4 man4 faa3 gwong2 coeng4
-白雲公園	baak6 wan4 gung1 jyun2
-飛翔公園	fei1 coeng4 gung1 jyun2
-三元里	saam1 jyun4 lei2
-廣州火車站	gwong2 zau1 fo2 ce1 zaam6
-越秀公園	jyut6 sau3 gung1 jyun2
-紀念堂	gei2 nim6 tong4
-公園前	gung1 jyun2 cin4
-海珠廣場	hoi2 zyu1 gwong2 coeng4
-市二宮	si5 ji6 gung1
-江南西	gong1 naam4 sai1
-昌崗	coeng1 gong1
-江泰路	gong1 taai3 lou6
-東曉南	dung1 hiu2 naam4
-南洲	naam4 zau1
-洛溪	lok3 kai1
-南浦	naam4 pou2
-會江	wui6 gong1
-石壁	sek6 bek3
-廣州南站	gwong2 zau1 naam4 zaam6
+## 2 號線
+廣州南站	gwong2 zau1 naam4 zaam6	# 01
+石壁	sek6 bek3	# 02
+會江	wui6 gong1	# 03
+南浦	naam4 pou2	# 04
+洛溪	lok3 kai1	# 05
+南洲	naam4 zau1	# 06
+東曉南	dung1 hiu2 naam4	# 07
+江泰路	gong1 taai3 lou6	# 08
+昌崗	coeng1 gong1	# 09
+江南西	gong1 naam4 sai1	# 10
+市二宮	si5 ji6 gung1	# 11
+海珠廣場	hoi2 zyu1 gwong2 coeng4	# 12
+公園前	gung1 jyun2 cin4	# 13
+紀念堂	gei2 nim6 tong4	# 14
+越秀公園	jyut6 sau3 gung1 jyun2	# 15
+廣州火車站	gwong2 zau1 fo2 ce1 zaam6	# 16
+三元里	saam1 jyun4 lei2	# 17
+飛翔公園	fei1 coeng4 gung1 jyun2	# 18
+白雲公園	baak6 wan4 gung1 jyun2	# 19
+白雲文化廣場	baak6 wan4 man4 faa3 gwong2 coeng4	# 20
+蕭崗	siu1 gong1	# 21
+江夏	gong1 haa6	# 22
+黃邊	wong2 bin1	# 23
+嘉禾望崗	gaa1 wo4 mong6 gong1	# 24
 
-# 3 號線・主線
-機場北	gei1 coeng4 bak1
-機場南	gei1 coeng4 naam4
-高增	gou1 zang1
-人和	jan4 wo2
-龍歸	lung4 gwai1
-嘉禾望崗	gaa1 wo4 mong6 gong1
-白雲大道北	baak6 wan4 daai6 dou6 bak1
-永泰	wing5 taai3
-同和	tung4 wo2
-京溪南方醫院	ging1 kai1 naam4 fong1 ji1 jyun2
-梅花園	mui4 faa1 jyun4
-燕塘	jin3 tong4
-廣州東站	gwong2 zau1 dung1 zaam6
-林和西	lam4 wo2 sai1
-體育西路	tai2 juk6 sai1 lou6
-珠江新城	zyu1 gong1 san1 sing4
-廣州塔	gwong2 zau1 taap3
-客村	haak3 cyun1
-大塘	daai6 tong4
-瀝滘	lek6 gaau3
-廈滘	haa6 gaau3
-大石	daai6 sek6
-漢溪長隆	hon3 kai1 coeng4 lung4
-市橋	si5 kiu4
-番禺廣場	pun1 jyu4 gwong2 coeng4
-傍江	bong6 gong1
-石碁南	sek6 kei4 naam4
-海涌路	hoi2 cung1 lou6
-海傍	hoi2 bong6
+## 3 號線・主線
+海傍	hoi2 bong6	# 01-4
+海涌路	hoi2 cung1 lou6	# 01-3
+石碁南	sek6 kei4 naam4	# 01-2
+傍江	bong6 gong1	# 01-1
+番禺廣場	pun1 jyu4 gwong2 coeng4	# 01
+市橋	si5 kiu4	# 02
+漢溪長隆	hon3 kai1 coeng4 lung4	# 03
+大石	daai6 sek6	# 04
+石壁	sek6 bek3	# 05
+廈滘	haa6 gaau3	# 06
+瀝滘	lek6 gaau3	# 07
+大塘	daai6 tong4	# 08
+客村	haak3 cyun1	# 09
+廣州塔	gwong2 zau1 taap3	# 10
+珠江新城	zyu1 gong1 san1 sing4	# 11
+體育西路	tai2 juk6 sai1 lou6	# 12
+林和西	lam4 wo2 sai1	# 17
+廣州東站	gwong2 zau1 dung1 zaam6	# 18
+燕塘	jin3 tong4	# 19
+梅花園	mui4 faa1 jyun4	# 20
+京溪南方醫院	ging1 kai1 naam4 fong1 ji1 jyun2	# 21
+同和	tung4 wo2	# 22
+永泰	wing5 taai3	# 23
+白雲大道北	baak6 wan4 daai6 dou6 bak1	# 24
+嘉禾望崗	gaa1 wo4 mong6 gong1	# 25
+龍歸	lung4 gwai1	# 26
+人和	jan4 wo2	# 27
+高增	gou1 zang1	# 28
+機場南	gei1 coeng4 naam4	# 29
+機場北	gei1 coeng4 bak1	# 30
 
-# 3 號線・支線
-天河客運站	tin1 ho4 haak3 wan6 zaam6
-五山	ng5 saan1
-華師	waa4 si1
-崗頂	gong1 deng2
-石牌橋	sek6 paai4 kiu4
-體育西路	tai2 juk6 sai1 lou6
+## 3 號線・支線
+體育西路	tai2 juk6 sai1 lou6	# 11
+石牌橋	sek6 paai4 kiu4	# 12
+崗頂	gong1 deng2	# 13
+華師	waa4 si1	# 14
+五山	ng5 saan1	# 15
+天河客運站	tin1 ho4 haak3 wan6 zaam6	# 16
 
-# 4 號線
-黃村	wong4 cyun1
-車陂	ce1 bei1
-車陂南	ce1 bei1 naam4
-萬勝圍	maan6 sing3 wai4
-官洲	gun1 zau1
-大學城北	daai6 hok6 sing4 bak1
-大學城南	daai6 hok6 sing4 naam4
-新造	san1 cou3
-官橋	gun1 kiu4
-石碁	sek6 kei4
-海傍	hoi2 bong6
-低涌	dai1 cung1
-東涌	dung1 cung1
-慶盛	hing3 sing6
-黃閣汽車城	wong4 gok3 hei3 ce1 sing4
-黃閣	wong4 gok3
-蕉門	ziu1 mun4
-金洲	gam1 zau1
-飛沙角	fei1 saa1 gok3
-廣隆	gwong2 lung4
-大涌	daai6 cung1
-塘坑	tong4 haang1
-南橫	naam4 waang4
-南沙客運港	naam4 saa1 haak3 wan6 gong2
+## 4 號線
+黃村	wong4 cyun1	# 24
+車陂	ce1 bei1	# 23
+車陂南	ce1 bei1 naam4	# 22
+萬勝圍	maan6 sing3 wai4	# 21
+官洲	gun1 zau1	# 20
+大學城北	daai6 hok6 sing4 bak1	# 19
+大學城南	daai6 hok6 sing4 naam4	# 18
+新造	san1 cou3	# 17
+官橋	gun1 kiu4	# 16
+石碁	sek6 kei4	# 15
+海傍	hoi2 bong6	# 14
+低涌	dai1 cung1	# 13
+東涌	dung1 cung1	# 12
+慶盛	hing3 sing6	# 11
+黃閣汽車城	wong4 gok3 hei3 ce1 sing4	# 10
+黃閣	wong4 gok3	# 09
+蕉門	ziu1 mun4	# 08
+金洲	gam1 zau1	# 07
+飛沙角	fei1 saa1 gok3	# 06
+廣隆	gwong2 lung4	# 05
+大涌	daai6 cung1	# 04
+塘坑	tong4 haang1	# 03
+南橫	naam4 waang4	# 02
+南沙客運港	naam4 saa1 haak3 wan6 gong2	# 01
 
-# 5 號線
-滘口	gaau3 hau2
-坦尾	taan2 mei5
-中山八	zung1 saan1 baat3
-西場	sai1 coeng4
-西村	sai1 cyun1
-廣州火車站	gwong2 zau1 fo2 ce1 zaam6
-小北	siu2 bak1
-淘金	tou4 gam1
-區莊	au1 zong1
-動物園	dung6 mat6 jyun2
-楊箕	joeng2 gei1
-五羊邨	ng5 joeng4 cyun1
-珠江新城	zyu1 gong1 san1 sing4
-獵德	lip6 dak1
-潭村	taam4 cyun1
-員村	jyun4 cyun1
-科韻路	fo1 wan5 lou6
-車陂南	ce1 bei1 naam4
-東圃	dung1 pou2
-三溪	saam1 kai1
-魚珠	jyu4 zyu1
-大沙地	daai6 saa1 dei6
-大沙東	daai6 saa1 dung1
-文沖	man4 cung1
-雙沙	soeng1 saa1
-廟頭	miu2 tau4
-夏園	haa6 jyun4
-保盈大道	bou2 jing4 daai6 dou6
-夏港	haa6 gong2
-黃埔新港	wong4 bou3 san1 gong2
+## 5 號線
+滘口	gaau3 hau2	# 01
+坦尾	taan2 mei5	# 02
+中山八	zung1 saan1 baat3	# 03
+西場	sai1 coeng4	# 04
+西村	sai1 cyun1	# 05
+廣州火車站	gwong2 zau1 fo2 ce1 zaam6	# 06
+小北	siu2 bak1	# 07
+淘金	tou4 gam1	# 08
+區莊	au1 zong1	# 09
+動物園	dung6 mat6 jyun2	# 10
+楊箕	joeng2 gei1	# 11
+五羊邨	ng5 joeng4 cyun1	# 12
+珠江新城	zyu1 gong1 san1 sing4	# 13
+獵德	lip6 dak1	# 14
+潭村	taam4 cyun1	# 15
+員村	jyun4 cyun1	# 16
+科韻路	fo1 wan5 lou6	# 17
+車陂南	ce1 bei1 naam4	# 18
+東圃	dung1 pou2	# 19
+三溪	saam1 kai1	# 20
+魚珠	jyu4 zyu1	# 21
+大沙地	daai6 saa1 dei6	# 22
+大沙東	daai6 saa1 dung1	# 23
+文沖	man4 cung1	# 24
+雙沙	soeng1 saa1	# 25
+廟頭	miu2 tau4	# 26
+夏園	haa6 jyun4	# 27
+保盈大道	bou2 jing4 daai6 dou6	# 28
+夏港	haa6 gong2	# 29
+黃埔新港	wong4 bou3 san1 gong2	# 30
 
-# 6 號線
-潯峯崗	cam4 fung1 gong1
-橫沙	waang4 saa1
-沙貝	saa1 bui3
-河沙	ho4 saa1
-坦尾	taan2 mei5
-如意坊	jyu4 ji3 fong1
-黃沙	wong2 saa1
-文化公園	man4 faa3 gung1 jyun2
-一德路	jat1 dak1 lou6
-海珠廣場	hoi2 zyu1 gwong2 coeng4
-北京路	bak1 ging1 lou6
-團一大廣場	tyun4 jat1 daai6 gwong2 coeng4
-東湖	dung1 wu4
-東山口	dung1 saan1 hau2
-區莊	au1 zong1
-黃花崗	wong4 faa1 gong1
-沙河頂	saa1 ho4 deng2
-沙河	saa1 ho4
-天平架	tin1 ping4 gaa3
-燕塘	jin3 tong4
-天河客運站	tin1 ho4 haak3 wan6 zaam6
-長湴	coeng4 baan6
-植物園	zik6 mat6 jyun4
-龍洞	lung4 dung2
-柯木塱	o1 muk6 long5
-高塘石	gou1 tong4 sek6
-黃陂	wong4 bei1
-金峯	gam1 fung1
-暹崗	cim3 gong1
-蘇元	sou1 jyun4
-蘿崗	lo4 gong1
-香雪	hoeng1 syut3
+## 6 號線
+潯峯崗	cam4 fung1 gong1	# 01
+橫沙	waang4 saa1	# 02
+沙貝	saa1 bui3	# 03
+河沙	ho4 saa1	# 04
+坦尾	taan2 mei5	# 05
+如意坊	jyu4 ji3 fong1	# 06
+黃沙	wong2 saa1	# 07
+文化公園	man4 faa3 gung1 jyun2	# 08
+一德路	jat1 dak1 lou6	# 09
+海珠廣場	hoi2 zyu1 gwong2 coeng4	# 10
+北京路	bak1 ging1 lou6	# 11
+團一大廣場	tyun4 jat1 daai6 gwong2 coeng4	# 12
+東湖	dung1 wu4	# 13
+東山口	dung1 saan1 hau2	# 14
+區莊	au1 zong1	# 15
+黃花崗	wong4 faa1 gong1	# 16
+沙河頂	saa1 ho4 deng2	# 17
+沙河	saa1 ho4	# 18
+天平架	tin1 ping4 gaa3	# 19
+燕塘	jin3 tong4	# 20
+天河客運站	tin1 ho4 haak3 wan6 zaam6	# 21
+長湴	coeng4 baan6	# 22
+植物園	zik6 mat6 jyun4	# 23
+龍洞	lung4 dung2	# 24
+柯木塱	o1 muk6 long5	# 25
+高塘石	gou1 tong4 sek6	# 26
+黃陂	wong4 bei1	# 27
+金峯	gam1 fung1	# 28
+暹崗	cim3 gong1	# 29
+蘇元	sou1 jyun4	# 30
+蘿崗	lo4 gong1	# 31
+香雪	hoeng1 syut3	# 32
 
-# 7 號線
-美的大道	mei5 dik1 daai6 dou6
-北滘公園	bak1 gaau3 gung1 jyun2
-美的	mei5 dik1
-南涌	naam4 cung1
-錦龍	gam2 lung4
-陳村	can4 cyun1
-陳村北	can4 cyun1 bak1
-大洲	daai6 zau1
-廣州南站	gwong2 zau1 naam4 zaam6
-石壁	sek6 bek3
-謝村	ze6 cyun1
-鍾村	zung1 cyun1
-漢溪長隆	hon3 kai1 coeng4 lung4
-南村萬博	naam4 cyun1 maan6 bok3
-員崗	jyun4 gong1
-板橋	baan2 kiu4
-大學城南	daai6 hok6 sing4 naam4
-深井	sam1 zeng2
-長洲	coeng4 zau1
-洪聖沙	hung4 sing3 saa1
-裕豐圍	jyu6 fung1 wai4
-大沙東	daai6 saa1 dung1
-姬堂	gei1 tong4
-加莊	gaa1 zong1
-科豐路	fo1 fung1 lou6
-蘿崗	lo4 gong1
-水西	seoi2 sai1
-燕山	jin3 saan1
+## 7 號線
+美的大道	mei5 dik1 daai6 dou6	# 01-8
+北滘公園	bak1 gaau3 gung1 jyun2	# 01-7
+美的	mei5 dik1	# 01-6
+南涌	naam4 cung1	# 01-5
+錦龍	gam2 lung4	# 01-4
+陳村	can4 cyun1	# 01-3
+陳村北	can4 cyun1 bak1	# 01-2
+大洲	daai6 zau1	# 01-1
+廣州南站	gwong2 zau1 naam4 zaam6	# 01
+石壁	sek6 bek3	# 02
+謝村	ze6 cyun1	# 03
+鍾村	zung1 cyun1	# 04
+漢溪長隆	hon3 kai1 coeng4 lung4	# 05
+南村萬博	naam4 cyun1 maan6 bok3	# 06
+員崗	jyun4 gong1	# 07
+板橋	baan2 kiu4	# 08
+大學城南	daai6 hok6 sing4 naam4	# 09
+深井	sam1 zeng2	# 10
+長洲	coeng4 zau1	# 11
+洪聖沙	hung4 sing3 saa1	# 12
+裕豐圍	jyu6 fung1 wai4	# 13
+大沙東	daai6 saa1 dung1	# 14
+姬堂	gei1 tong4	# 15
+加莊	gaa1 zong1	# 16
+科豐路	fo1 fung1 lou6	# 17
+蘿崗	lo4 gong1	# 18
+水西	seoi2 sai1	# 19
+燕山	jin3 saan1	# 20
 
-# 8 號線
-滘心	gaau3 sam1
-亭崗	ting4 gong1
-石井	sek6 zeng2
-小坪	siu2 ping4
-石潭	sek6 taam4
-聚龍	zeoi6 lung4
-上步	soeng6 bou6
-同德	tung4 dak1
-鵝掌坦	ngo4 zoeng2 taan2
-西村	sai1 cyun1
-彩虹橋	coi2 hung4 kiu4
-陳家祠	can4 gaa1 ci4
-華林寺	waa4 lam4 zi2
-文化公園	man4 faa3 gung1 jyun2
-同福西	tung4 fuk1 sai1
-鳳凰新村	fung6 wong4 san1 cyun1
-沙園	saa1 jyun4
-寶崗大道	bou2 gong1 daai6 dou6
-昌崗	coeng1 gong1
-曉港	hiu2 gong2
-中大	zung1 daai6
-鷺江	lou6 gong1
-客村	haak3 cyun1
-赤崗	cek3 gong1
-磨碟沙	mo4 dip6 saa1
-新港東	san1 gong2 dung1
-琶洲	paa4 zau1
-萬勝圍	maan6 sing3 wai4
+## 8 號線
+滘心	gaau3 sam1	# 01
+亭崗	ting4 gong1	# 02
+石井	sek6 zeng2	# 03
+小坪	siu2 ping4	# 04
+石潭	sek6 taam4	# 05
+聚龍	zeoi6 lung4	# 06
+上步	soeng6 bou6	# 07
+同德	tung4 dak1	# 08
+鵝掌坦	ngo4 zoeng2 taan2	# 09
+西村	sai1 cyun1	# 10
+彩虹橋	coi2 hung4 kiu4	# 11
+陳家祠	can4 gaa1 ci4	# 12
+華林寺	waa4 lam4 zi2	# 13
+文化公園	man4 faa3 gung1 jyun2	# 14
+同福西	tung4 fuk1 sai1	# 15
+鳳凰新村	fung6 wong4 san1 cyun1	# 16
+沙園	saa1 jyun4	# 17
+寶崗大道	bou2 gong1 daai6 dou6	# 18
+昌崗	coeng1 gong1	# 19
+曉港	hiu2 gong2	# 20
+中大	zung1 daai6	# 21
+鷺江	lou6 gong1	# 22
+客村	haak3 cyun1	# 23
+赤崗	cek3 gong1	# 24
+磨碟沙	mo4 dip6 saa1	# 25
+新港東	san1 gong2 dung1	# 26
+琶洲	paa4 zau1	# 27
+萬勝圍	maan6 sing3 wai4	# 28
 
-# 9 號線
-飛鵝嶺	fei1 ngo4 leng5
-花都汽車城	faa1 dou1 hei3 ce1 sing4
-廣州北站	gwong2 zau1 bak1 zaam6
-花城路	faa1 sing4 lou6
-花果山公園	faa1 gwo2 saan1 gung1 jyun2
-花都廣場	faa1 dou1 gwong2 coeng4
-馬鞍山公園	maa5 on1 saan1 gung1 jyun2
-蓮塘	lin4 tong4
-清㘵	cing1 bou3
-清塘	cing1 tong4
-高增	gou1 zang1
+## 9 號線
+飛鵝嶺	fei1 ngo4 leng5	# 01
+花都汽車城	faa1 dou1 hei3 ce1 sing4	# 02
+廣州北站	gwong2 zau1 bak1 zaam6	# 03
+花城路	faa1 sing4 lou6	# 04
+花果山公園	faa1 gwo2 saan1 gung1 jyun2	# 05
+花都廣場	faa1 dou1 gwong2 coeng4	# 06
+馬鞍山公園	maa5 on1 saan1 gung1 jyun2	# 07
+蓮塘	lin4 tong4	# 08
+清㘵	cing1 bou3	# 09
+清塘	cing1 tong4	# 10
+高增	gou1 zang1	# 11
 
-# 10 號線
-西塱	sai1 long5
-花圍	faa1 wai4
-東沙	dung1 saa1
-大幹圍	daai6 gon3 wai4
-工業大道南	gung1 jip6 daai6 dou6 naam4
-東曉南	ce1 hiu2 naam4
-五鳳	ng5 fung6
-中大南門	zung1 daai6 naam4 mun4
-濱江東路	ban1 gong1 dung1 lou6
-東湖	dung1 wu4
-五羊邨	ng5 joeng4 cyun1
-楊箕東	joeng2 gei1 dung1
+## 10 號線
+西塱	sai1 long5	# 01
+花圍	faa1 wai4	# 02
+東沙	dung1 saa1	# 03
+大幹圍	daai6 gon3 wai4	# 04
+工業大道南	gung1 jip6 daai6 dou6 naam4	# 05
+東曉南	ce1 hiu2 naam4	# 06
+五鳳	ng5 fung6	# 07
+中大南門	zung1 daai6 naam4 mun4	# 08
+濱江東路	ban1 gong1 dung1 lou6	# 09
+東湖	dung1 wu4	# 10
+五羊邨	ng5 joeng4 cyun1	# 11
+楊箕東	joeng2 gei1 dung1	# 12
 
-# 11 號線
-赤沙	cek3 saa1
-琶洲	paa4 zau1
-員村	jyun4 cyun1
-天河公園	tin1 ho4 gung1 jyun2
-華景路	waa4 ging2 lou6
-華師	waa4 si1
-龍口西	lung4 hau2 sai1
-廣州東站	gwong2 zau1 dung1 zaam6
-沙河	saa1 ho4
-雲臺花園	wan4 toi4 faa1 jyun2
-大金鐘路	daai6 gam1 zung1 lou6
-中醫藥大學	zung1 ji1 joek6 daai6 hok6
-梓元崗	zi2 jyun4 gong1
-廣州火車站	gwong2 zau1 fo2 ce1 zaam6
-流花	lau4 faa3
-彩虹橋	coi2 hung4 kiu4
-中山八	zung1 saan1 baat3
-如意坊	jyu4 ji3 fong1
-石圍塘	sek6 wai4 tong4
-芳村	fong1 cyun1
-大沖口	daai6 cung1 hau2
-沙涌	saa1 cung1
-鶴洞東	hok6 dung2 dung1
-棣園	dai6 jyun4
-燕崗	jin3 gong1
-江泰路	gong1 taai3 lou6
-五鳳	ng5 fung6
-逸景路	jat6 ging2 lou6
-上涌	soeng6 cung1
-大塘	daai6 tong4
-龍潭	lung4 taam4
+## 11 號線
+赤沙	cek3 saa1	# 01
+琶洲	paa4 zau1	# 02
+員村	jyun4 cyun1	# 03
+天河公園	tin1 ho4 gung1 jyun2	# 04
+華景路	waa4 ging2 lou6	# 05
+華師	waa4 si1	# 06
+龍口西	lung4 hau2 sai1	# 07
+廣州東站	gwong2 zau1 dung1 zaam6	# 08
+沙河	saa1 ho4	# 09
+雲臺花園	wan4 toi4 faa1 jyun2	# 10
+大金鐘路	daai6 gam1 zung1 lou6	# 11
+中醫藥大學	zung1 ji1 joek6 daai6 hok6	# 12
+梓元崗	zi2 jyun4 gong1	# 13
+廣州火車站	gwong2 zau1 fo2 ce1 zaam6	# 14
+流花	lau4 faa3	# 15
+彩虹橋	coi2 hung4 kiu4	# 16
+中山八	zung1 saan1 baat3	# 17
+如意坊	jyu4 ji3 fong1	# 18
+石圍塘	sek6 wai4 tong4	# 19
+芳村	fong1 cyun1	# 20
+大沖口	daai6 cung1 hau2	# 21
+沙涌	saa1 cung1	# 22
+鶴洞東	hok6 dung2 dung1	# 23
+棣園	dai6 jyun4	# 24
+燕崗	jin3 gong1	# 25
+江泰路	gong1 taai3 lou6	# 26
+五鳳	ng5 fung6	# 27
+逸景路	jat6 ging2 lou6	# 28
+上涌	soeng6 cung1	# 29
+大塘	daai6 tong4	# 30
+龍潭	lung4 taam4	# 31
 
-# 12 號線
-潯峯崗	cam4 fung1 gong1
-潯峯崗北	cam4 fung1 gong1 bak1
-西洲	sai1 zau1
-聚龍	zeoi6 lung4
-廣州白雲站	gwong2 zau1 baak6 wan4 zaam6
-棠涌	tong4 cung1
-新市墟	san1 si5 heoi1
-白雲文化廣場	baak6 wan4 man4 faa3 gwong2 coeng4
-廣州體育館	gwong2 zau1 tai2 juk6 gun2
-景泰	ging2 taai3
-柯子嶺	o1 zi2 leng5
-中醫藥大學	zung1 ji1 joek6 daai6 hok6
-麓湖	luk1 wu4
-建設六馬路	gin3 cit3 luk6 maa5 lou6
-烈士陵園	lit6 si6 ling4 jyun4
-東湖	dung1 wu4
-二沙島	ji6 saa1 dou2
-赤崗塔	cek3 gong1 taap3
-赤崗	cek3 gong1
-赤沙北	cek3 saa1 bak1
-赤沙	cek3 saa1
-北山	bak1 saan1
-官洲	gun1 zau1
-大學城北	daai6 hok6 sing4 bak1
-大學城南	daai6 hok6 sing4 naam4
+## 12 號線
+潯峯崗	cam4 fung1 gong1	# 01
+潯峯崗北	cam4 fung1 gong1 bak1	# 02
+西洲	sai1 zau1	# 03
+聚龍	zeoi6 lung4	# 04
+廣州白雲站	gwong2 zau1 baak6 wan4 zaam6	# 05
+棠涌	tong4 cung1	# 06
+新市墟	san1 si5 heoi1	# 07
+白雲文化廣場	baak6 wan4 man4 faa3 gwong2 coeng4	# 08
+廣州體育館	gwong2 zau1 tai2 juk6 gun2	# 09
+景泰	ging2 taai3	# 10
+柯子嶺	o1 zi2 leng5	# 11
+中醫藥大學	zung1 ji1 joek6 daai6 hok6	# 12
+麓湖	luk1 wu4	# 13
+建設六馬路	gin3 cit3 luk6 maa5 lou6	# 14
+烈士陵園	lit6 si6 ling4 jyun4	# 15
+東湖	dung1 wu4	# 16
+二沙島	ji6 saa1 dou2	# 17
+赤崗塔	cek3 gong1 taap3	# 18
+赤崗	cek3 gong1	# 19
+赤沙北	cek3 saa1 bak1	# 20
+赤沙	cek3 saa1	# 21
+北山	bak1 saan1	# 22
+官洲	gun1 zau1	# 23
+大學城北	daai6 hok6 sing4 bak1	# 24
+大學城南	daai6 hok6 sing4 naam4	# 25
 
-# 13 號線
-天河公園	tin1 ho4 gung1 jyun2
-棠下	tong4 haa6
-車陂	ce1 bei1
-天河珠村	tin1 ho4 zyu1 cyun1
-魚珠	jyu4 zyu1
-裕豐圍	jyu6 fung1 wai4
-雙崗	soeng1 gong1
-南海神廟	naam4 hoi2 san4 miu2
-夏園	haa6 jyun4
-南崗	naam4 gong1
-沙村	saa1 cyun1
-白江	baak6 gong1
-新塘	san1 tong4
-官湖	gun1 wu4
-新沙	san1 saa1
+## 13 號線
+天河公園	tin1 ho4 gung1 jyun2	# 20
+棠下	tong4 haa6	# 21
+車陂	ce1 bei1	# 22
+天河珠村	tin1 ho4 zyu1 cyun1	# 23
+魚珠	jyu4 zyu1	# 24
+裕豐圍	jyu6 fung1 wai4	# 25
+雙崗	soeng1 gong1	# 26
+南海神廟	naam4 hoi2 san4 miu2	# 27
+夏園	haa6 jyun4	# 28
+南崗	naam4 gong1	# 29
+沙村	saa1 cyun1	# 30
+白江	baak6 gong1	# 31
+新塘	san1 tong4	# 32
+官湖	gun1 wu4	# 33
+新沙	san1 saa1	# 34
 
-# 14 號線・主線
-樂嘉路	lok6 gaa1 lou6
-雲霄路	wan4 siu1 lou6
-新市墟	san1 si5 heoi1
-馬務	maa5 mou6
-鶴邊	hok6 bin1
-鶴龍	hok6 lung4
-彭邊	paang4 bin1
-嘉禾望崗	gaa1 wo4 mong6 gong1
-白雲東平	baak6 wan4 dung1 ping4
-夏良	haa6 loeng4
-太和	taai3 wo2
-竹料	zuk1 liu2
-鐘落潭	zung1 lok6 taam4
-馬瀝	maa5 lek6
-新和	san1 wo2
-太平	taai3 ping4
-神崗	san4 gong1
-赤草	cek3 cou2
-從化客運站	cung4 faa3 haak3 wan6 zaam6
-東風	dung1 fung1
+## 14 號線・主線
+廣州火車站	gwong2 zau1 fo2 ce1 zaam6	# 01
+樂嘉路	lok6 gaa1 lou6	# 02
+雲霄路	wan4 siu1 lou6	# 03
+新市墟	san1 si5 heoi1	# 04
+馬務	maa5 mou6	# 05
+鶴邊	hok6 bin1	# 06
+鶴龍	hok6 lung4	# 07
+彭邊	paang4 bin1	# 08
+嘉禾望崗	gaa1 wo4 mong6 gong1	# 09
+白雲東平	baak6 wan4 dung1 ping4	# 10
+夏良	haa6 loeng4	# 11
+太和	taai3 wo2	# 12
+竹料	zuk1 liu2	# 13
+鐘落潭	zung1 lok6 taam4	# 14
+馬瀝	maa5 lek6	# 15
+新和	san1 wo2	# 16
+太平	taai3 ping4	# 17
+神崗	san4 gong1	# 18
+赤草	cek3 cou2	# 19
+從化客運站	cung4 faa3 haak3 wan6 zaam6	# 20
+東風	dung1 fung1	# 21
 
-# 14 號線・支線
-新和	san1 wo2
-紅衛	hung4 wai6
-新南	san1 naam4
-楓下	fung1 haa6
-知識城	zi1 sik1 sing4
-何棠下	ho4 tong4 haa6
-旺村	wong6 cyun1
-湯村	tong1 cyun1
-鎮龍北	zan3 lung4 bak1
-鎮龍	zan3 lung4
+## 14 號線・支線
+新和	san1 wo2	# 16
+紅衛	hung4 wai6	# 22
+新南	san1 naam4	# 23
+楓下	fung1 haa6	# 24
+知識城	zi1 sik1 sing4	# 25
+何棠下	ho4 tong4 haa6	# 26
+旺村	wong6 cyun1	# 27
+湯村	tong1 cyun1	# 28
+鎮龍北	zan3 lung4 bak1	# 29
+鎮龍	zan3 lung4	# 30
 
-# 18 號線
-冼村	sin2 cyun1
-磨碟沙	mo4 dip6 saa1
-龍潭	lung4 taam4
-沙溪	saa1 kai1
-南村萬博	naam4 cyun1 maan6 bok3
-番禺廣場	pun1 jyu4 gwong2 coeng4
-橫瀝	waang4 lek6
-萬頃沙	maan6 king2 saa1
+## 18 號線
+萬頃沙	maan6 king2 saa1	# 01
+橫瀝	waang4 lek6	# 02
+番禺廣場	pun1 jyu4 gwong2 coeng4	# 03
+南村萬博	naam4 cyun1 maan6 bok3	# 04
+沙溪	saa1 kai1	# 05
+龍潭	lung4 taam4	# 06
+磨碟沙	mo4 dip6 saa1	# 07
+冼村	sin2 cyun1	# 08
 
-# 21 號線
-天河公園	tin1 ho4 gung1 jyun2
-棠東	tong4 dung1
-黃村	wong4 cyun1
-大觀南路	daai6 gun1 naam4 lou6
-天河智慧城	tin1 ho4 zi3 wai6 sing4
-神舟路	san4 zau1 lou6
-科學城	fo1 hok6 sing4
-蘇元	sou1 jyun4
-水西	seoi2 sai1
-長平	coeng4 ping4
-金坑	gam1 haang1
-鎮龍西	zan3 lung4 sai1
-鎮龍	zan3 lung4
-中新	zung1 san1
-坑貝	haang1 bui3
-鳳崗	fung6 gong1
-朱村	zyu1 cyun1
-山田	saan1 tin4
-鍾崗	zung1 gong1
-增城廣場	zang1 sing4 gwong2 coeng4
+## 21 號線
+天河公園	tin1 ho4 gung1 jyun2	# 02
+棠東	tong4 dung1	# 03
+黃村	wong4 cyun1	# 04
+大觀南路	daai6 gun1 naam4 lou6	# 05
+天河智慧城	tin1 ho4 zi3 wai6 sing4	# 06
+神舟路	san4 zau1 lou6	# 07
+科學城	fo1 hok6 sing4	# 08
+蘇元	sou1 jyun4	# 09
+水西	seoi2 sai1	# 10
+長平	coeng4 ping4	# 11
+金坑	gam1 haang1	# 12
+鎮龍西	zan3 lung4 sai1	# 13
+鎮龍	zan3 lung4	# 14
+中新	zung1 san1	# 15
+坑貝	haang1 bui3	# 16
+鳳崗	fung6 gong1	# 17
+朱村	zyu1 cyun1	# 18
+山田	saan1 tin4	# 19
+鍾崗	zung1 gong1	# 20
+增城廣場	zang1 sing4 gwong2 coeng4	# 21
 
-# 22 號線
-番禺廣場	pun1 jyu4 gwong2 coeng4
-市廣路	si5 gwong2 lou6
-廣州南站	gwong2 zau1 naam4 zaam6
-陳頭崗	can4 tau4 gong1
-南浦西	naam4 pou2 sai1
-南漖	naam4 gaau3
-西塱	sai1 long5
-芳村	fong1 cyun1
+## 22 號線
+番禺廣場	pun1 jyu4 gwong2 coeng4	# 01
+市廣路	si5 gwong2 lou6	# 02
+廣州南站	gwong2 zau1 naam4 zaam6	# 03
+陳頭崗	can4 tau4 gong1	# 04
+南浦西	naam4 pou2 sai1	# 05
+南漖	naam4 gaau3	# 06
+西塱	sai1 long5	# 07
+芳村	fong1 cyun1	# 08
 
-# 廣佛線
-瀝滘	lek6 gaau3
-南洲	naam4 zau1
-石溪	sek6 kai1
-燕崗	jin3 gong1
-沙園	saa1 jyun4
-沙涌	saa1 cung1
-鶴洞	hok6 dung2
-西塱	sai1 long5
-菊樹	guk1 syu6
-龍溪	lung4 kai1
-金融高新區	gam1 jung4 gou1 san1 keoi1
-千燈湖	cin1 dang1 wu4
-𧒽崗	leoi1 gong1
-南桂路	naam4 gwai3 lou6
-桂城	gwai3 sing4
-朝安	ciu4 on1
-普君北路	pou2 gwan1 bak1 lou6
-祖廟	zou2 miu2
-同濟路	tung4 zai3 lou6
-季華園	gwai3 waa4 jyun4
-魁奇路	fui1 kei4 lou6
-瀾石	laan4 sek6
-世紀蓮	sai3 gei2 lin4
-東平	dung1 ping4
-新城東	san1 sing4 dung1
+## GF	廣佛線	廣佛線
+新城東	san1 sing4 dung1	# 01
+東平	dung1 ping4	# 02
+世紀蓮	sai3 gei2 lin4	# 03
+瀾石	laan4 sek6	# 04
+魁奇路	fui1 kei4 lou6	# 05
+季華園	gwai3 waa4 jyun4	# 06
+同濟路	tung4 zai3 lou6	# 07
+祖廟	zou2 miu2	# 08
+普君北路	pou2 gwan1 bak1 lou6	# 09
+朝安	ciu4 on1	# 10
+桂城	gwai3 sing4	# 11
+南桂路	naam4 gwai3 lou6	# 12
+𧒽崗	leoi1 gong1	# 13
+千燈湖	cin1 dang1 wu4	# 14
+金融高新區	gam1 jung4 gou1 san1 keoi1	# 15
+龍溪	lung4 kai1	# 16
+菊樹	guk1 syu6	# 17
+西塱	sai1 long5	# 18
+鶴洞	hok6 dung2	# 19
+沙涌	saa1 cung1	# 20
+沙園	saa1 jyun4	# 21
+燕崗	jin3 gong1	# 22
+石溪	sek6 kai1	# 23
+南洲	naam4 zau1	# 24
+瀝滘	lek6 gaau3	# 25
 
-# APM 線
-林和西	lam4 wo2 sai1
-體育中心南	tai2 juk6 zung1 sam1 naam4
-天河南	tin1 ho4 naam4
-黃埔大道	wong4 bou3 daai6 dou6
-婦兒中心	fu5 ji4 zung1 sam1
-花城大道	faa1 sing4 daai6 dou6
-大劇院	daai6 kek6 jyun2
-海心沙	hoi2 sam1 saa1
-廣州塔	gwong2 zau1 taap3
+## APM	APM 線	APM 線
+廣州塔	gwong2 zau1 taap3	# 01
+海心沙	hoi2 sam1 saa1	# 02
+大劇院	daai6 kek6 jyun2	# 03
+花城大道	faa1 sing4 daai6 dou6	# 04
+婦兒中心	fu5 ji4 zung1 sam1	# 05
+黃埔大道	wong4 bou3 daai6 dou6	# 06
+天河南	tin1 ho4 naam4	# 07
+體育中心南	tai2 juk6 zung1 sam1 naam4	# 08
+林和西	lam4 wo2 sai1	# 09
 
-# 海珠有軌 1 號線
-廣州塔	gwong2 zau1 taap3
-廣州塔東	gwong2 zau1 taap3 dung1
-獵德大橋南	lip6 dak1 daai6 kiu4 naam4
-琶醍	paa4 tai4
-南風	naam4 fung1
-會展西	wui6 zin2 sai1
-會展中	wui6 zin2 zung1
-會展東	wui6 zin2 dung1
-琶洲大橋南	paa4 zau1 daai6 kiu4 naam4
-琶洲塔	paa4 zau1 taap3
-萬勝圍	maan6 sing3 wai4
+## THZ1	海珠有軌 1 號線	海珠有軌 1 號線
+廣州塔	gwong2 zau1 taap3	# 01
+獵德大橋南	lip6 dak1 daai6 kiu4 naam4	# 02
+琶醍	paa4 tai4	# 03
+南風	naam4 fung1	# 04
+會展西	wui6 zin2 sai1	# 05
+會展中	wui6 zin2 zung1	# 06
+會展東	wui6 zin2 dung1	# 07
+琶洲大橋南	paa4 zau1 daai6 kiu4 naam4	# 08
+琶洲塔	paa4 zau1 taap3	# 09
+萬勝圍	maan6 sing3 wai4	# 10
 
-# 黃埔有軌 1 號線
-新豐路	san1 fung1 lou6
-賢江	jin4 gong1
-賢江公園	jin4 gong1 gung1 jyun2
-賢江西	jin4 gong1 sai1
-嶺頭東	ling5 tau4 dung1
-幹部健康中心	gon3 bou6 gin6 hong1 zung1 sam1
-嶺頭	ling5 tau4
-長嶺居小學	coeng4 ling5 geoi1 siu2 hok6
-羌洞	goeng1 dung2
-地鐵長平	dei6 tit3 coeng4 ping4
-北師大實驗學校	bak1 si1 daai6 sat6 jim6 hok6 haau6
-水西	seoi2 sai1
-峻泰路	zeon3 taai3 lou6
-地鐵水西	dei6 tit3 seoi2 sai1
-會議中心	wui6 ji5 zung1 sam1
-市民廣場	si5 man4 gwong2 coeng4
-線坑	sin3 haang1
-區少年宮	keoi1 siu3 nin4 gung1
-開蘿大道	hoi1 lo4 daai6 dou6
-地鐵香雪	dei6 tit3 hoeng1 syut3
+## THP1	黃埔有軌 1 號線	黃埔有軌 1 號線
+地鐵香雪	dei6 tit3 hoeng1 syut3	# 01
+區少年宮	keoi1 siu3 nin4 gung1	# 02
+線坑	sin3 haang1	# 03
+市民廣場	si5 man4 gwong2 coeng4	# 04
+會議中心	wui6 ji5 zung1 sam1	# 05
+地鐵水西	dei6 tit3 seoi2 sai1	# 06
+峻泰路	zeon3 taai3 lou6	# 07
+水西	seoi2 sai1	# 08
+北師大實驗學校	bak1 si1 daai6 sat6 jim6 hok6 haau6	# 09
+地鐵長平	dei6 tit3 coeng4 ping4	# 10
+羌洞	goeng1 dung2	# 11
+長嶺居小學	coeng4 ling5 geoi1 siu2 hok6	# 12
+嶺頭	ling5 tau4	# 13
+幹部健康中心	gon3 bou6 gin6 hong1 zung1 sam1	# 14
+嶺頭東	ling5 tau4 dung1	# 15
+賢江西	jin4 gong1 sai1	# 16
+賢江公園	jin4 gong1 gung1 jyun2	# 17
+賢江	jin4 gong1	# 18
+新豐路	san1 fung1 lou6	# 19
 
-# 黃埔有軌 2 號線
-地鐵香雪	dei6 tit3 hoeng1 syut3
-黃埔圖書館	wong4 bou3 tou4 syu1 gun2
-下中路	haa6 zung1 lou6
-蘿峯	lo4 fung1
-香雪大道東	hoeng1 syut3 daai6 dou6 dung1
-香雪公園	hoeng1 syut3 gung1 jyun2
-玉岩路	juk6 ngaam4 lou6
-開源大道東	hoi1 jyun4 daai6 dou6 dung1
+## THP2	黃埔有軌 2 號線	黃埔有軌 2 號線
+地鐵香雪	dei6 tit3 hoeng1 syut3	# 01
+黃埔圖書館	wong4 bou3 tou4 syu1 gun2	# 02
+下中路	haa6 zung1 lou6	# 03
+蘿峯	lo4 fung1	# 04
+香雪大道東	hoeng1 syut3 daai6 dou6 dung1	# 05
+香雪公園	hoeng1 syut3 gung1 jyun2	# 06
+玉岩路	juk6 ngaam4 lou6	# 07
+開源大道東	hoi1 jyun4 daai6 dou6 dung1	# 08

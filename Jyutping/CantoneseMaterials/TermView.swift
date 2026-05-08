@@ -8,7 +8,7 @@ struct TermView: View {
                         Speaker(term.romanization)
                         if let emoji = term.emoji {
                                 Text(verbatim: emoji)
-                                        .font(.title3)
+                                        .font(.title2)
                                         .textSelection(.enabled)
                         }
                         if let comment = term.comment {
