@@ -92,7 +92,7 @@ private struct MTRStationLabel: View {
                                 MTRStationIndicatorView(code: station.code, back: station.background, fore: station.foreground)
                         }
                         .padding(.trailing, 4)
-                        TextRomanizationView(text: station.name, romanization: station.romanization)
+                        RubyStackView(text: station.name, romanization: station.romanization)
                         Spacer()
                         Speaker(station.romanization)
                 }

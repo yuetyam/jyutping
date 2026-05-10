@@ -84,6 +84,7 @@ extension Metro.Line {
         var foregroundColor: Color {
                 switch (group, name) {
                 case ("CantonMetro", "1 號線"): Color.black
+                case ("ShamChunMetro", "20 號線"): Color.black
                 default: Color.white
                 }
         }

@@ -2,7 +2,7 @@ import SwiftUI
 import CommonExtensions
 import AppDataSource
 
-struct TextRomanizationView: View {
+struct RubyStackView: View {
         init(text: String, romanization: String) {
                 let characters = text.map({ $0 })
                 let ideographicCharacters = text.filter(\.isIdeographic).map({ String($0) })
@@ -29,25 +29,25 @@ struct TextRomanizationView: View {
                         self.text = text
                         self.romanization = romanization
                         self.isMatched = isEqual
-                        self.pronunciations = pronunciations
+                        self.units = pronunciations
                 } else {
                         self.text = text
                         self.romanization = romanization
                         self.isMatched = isEqual
-                        self.pronunciations = []
+                        self.units = []
                 }
         }
 
         private let text: String
         private let romanization: String
         private let isMatched: Bool
-        private let pronunciations: [TextRomanization]
+        private let units: [TextRomanization]
 
         var body: some View {
                 if isMatched {
                         HStack(spacing: 1) {
-                                ForEach(pronunciations.indices, id: \.self) { index in
-                                        CharacterPronunciationView(pronunciation: pronunciations[index])
+                                ForEach(units.indices, id: \.self) { index in
+                                        CharacterPronunciationView(unit: units[index])
                                 }
                         }
                         .contentShape(Rectangle())
@@ -62,15 +62,15 @@ struct TextRomanizationView: View {
 }
 
 private struct CharacterPronunciationView: View {
-        let pronunciation: TextRomanization
+        let unit: TextRomanization
         var body: some View {
                 VStack(spacing: 0) {
-                        Text(verbatim: pronunciation.romanization.isEmpty ? String.space : pronunciation.romanization)
+                        Text(verbatim: unit.romanization.isEmpty ? String.space : unit.romanization)
                                 .lineLimit(1)
                                 .minimumScaleFactor(0.2)
                                 .font(.annotation)
                                 .padding(.leading, 2)
-                        Text(verbatim: pronunciation.text)
+                        Text(verbatim: unit.text)
                                 .lineLimit(1)
                                 .minimumScaleFactor(0.2)
                                 .font(.word)
@@ -88,10 +88,12 @@ private struct FallbackPronunciationView: View {
                                 .lineLimit(1)
                                 .minimumScaleFactor(0.5)
                                 .font(.footnote)
+                                .textSelection(.enabled)
                         Text(verbatim: text)
                                 .lineLimit(1)
                                 .minimumScaleFactor(0.5)
                                 .font(.master)
+                                .textSelection(.enabled)
                 }
         }
 }

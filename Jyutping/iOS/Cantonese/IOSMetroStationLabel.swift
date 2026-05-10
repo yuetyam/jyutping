@@ -10,7 +10,7 @@ struct IOSMetroStationLabel: View {
         var body: some View {
                 HStack {
                         StationIndicatorView(indicator: line.indicator, label: station.label, color: indicatingColor).padding(.top, 2)
-                        TextRomanizationView(text: station.name, romanization: station.romanization)
+                        RubyStackView(text: station.name, romanization: station.romanization)
                         Spacer()
                         Speaker(station.romanization)
                 }
