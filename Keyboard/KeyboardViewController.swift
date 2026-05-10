@@ -394,8 +394,8 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 }
                 updateSidebarSyllables()
         }
-        private func updateSidebarSyllables() {
-                guard selectedSyllables.isNotEmpty else {
+        private func updateSidebarSyllables(shouldRefresh: Bool = false) {
+                guard shouldRefresh.negative && selectedSyllables.isNotEmpty else {
                         candidates = nineKeyCachedCandidates
                         sidebarSyllables = candidates.compactMap({ $0.isNotCantonese ? nil : $0.lexicon.romanization.split(separator: Character.space).first?.dropLast() })
                                 .distinct()
@@ -708,7 +708,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                                 return firstCandidate.lexicon.mark + String.space + tailText
                                         }()
                                         nineKeyCachedCandidates = suggestions
-                                        updateSidebarSyllables()
+                                        updateSidebarSyllables(shouldRefresh: true)
                                 }
                         }
                 }

@@ -44,7 +44,7 @@ struct MacTextRomanizationLabel: View {
                                 let text = texts[index]
                                 let romanization = romanizations[index]
                                 HStack(alignment: .bottom, spacing: 18) {
-                                        TextRomanizationView(text: text, romanization: romanization)
+                                        RubyStackView(text: text, romanization: romanization)
                                         Speaker(romanization)
                                         Spacer()
                                 }

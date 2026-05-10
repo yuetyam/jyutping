@@ -11,7 +11,7 @@ struct MacMetroStationLabel: View {
         var body: some View {
                 HStack {
                         MacStationIndicatorView(indicator: line.indicator, label: station.label, color: indicatingColor).padding(.top, 4).padding(.trailing, 4)
-                        TextRomanizationView(text: station.name, romanization: station.romanization)
+                        RubyStackView(text: station.name, romanization: station.romanization)
                         Spacer()
                         Speaker(station.romanization)
                 }
