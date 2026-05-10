@@ -14,36 +14,17 @@ struct Speaker: View {
         #if os(iOS)
         private let length: CGFloat = 32
         private let speakerLength: CGFloat = 20
-        private let speakingLeading: CGFloat = 6
+        private let speakingLeadingPadding: CGFloat = 6
         #else
         private let length: CGFloat = 24
         private let speakerLength: CGFloat = 16
-        private let speakingLeading: CGFloat = 4
+        private let speakingLeadingPadding: CGFloat = 4
         #endif
 
         @State private var isSpeaking: Bool = false
 
         var body: some View {
-                if isSpeaking {
-                        Image.speaking
-                                .resizable()
-                                .scaledToFit()
-                                .padding(.leading, speakingLeading)
-                                .frame(width: length, height: length)
-                                .foregroundStyle(Color.accentColor)
-                                .onTapGesture {
-                                        Speech.stop()
-                                        isSpeaking = false
-                                }
-                                .task {
-                                        while Task.isCancelled.negative {
-                                                try? await Task.sleep(for: .milliseconds(100)) // 0.1s
-                                                if isSpeaking && Speech.isSpeaking.negative {
-                                                        isSpeaking = false
-                                                }
-                                        }
-                                }
-                } else {
+                Button(action: handleTap) {
                         ZStack {
                                 Circle()
                                         #if os(macOS)
@@ -51,22 +32,48 @@ struct Speaker: View {
                                         #else
                                         .fill(Material.regular)
                                         #endif
+                                        .opacity(isSpeaking ? 0 : 1)
+                                Image.speaking
+                                        .resizable()
+                                        .scaledToFit()
+                                        .padding(.leading, speakingLeadingPadding)
+                                        .foregroundStyle(Color.accentColor)
+                                        .opacity(isSpeaking ? 1 : 0)
                                 Image.speaker
                                         .resizable()
                                         .scaledToFit()
                                         .frame(width: speakerLength, height: speakerLength)
                                         .foregroundStyle(Color.accentColor)
+                                        .opacity(isSpeaking ? 0 : 1)
                         }
                         .frame(width: length, height: length)
                         .contentShape(Rectangle())
-                        .onTapGesture {
-                                isSpeaking = true
-                                if let text {
-                                        Speech.speak(text)
+                }
+                .buttonStyle(.plain)
+                .animation(.default, value: isSpeaking)
+                .task(id: isSpeaking) {
+                        guard isSpeaking else { return }
+                        while Task.isCancelled.negative {
+                                try? await Task.sleep(for: .milliseconds(100)) // 0.1s
+                                if Speech.isSpeaking.negative {
+                                        isSpeaking = false
+                                        break
                                 }
-                                if let action {
-                                        action()
-                                }
+                        }
+                }
+        }
+
+        private func handleTap() {
+                if isSpeaking {
+                        Speech.stop()
+                        isSpeaking = false
+                } else {
+                        isSpeaking = true
+                        if let text {
+                                Speech.speak(text)
+                        }
+                        if let action {
+                                action()
                         }
                 }
         }
