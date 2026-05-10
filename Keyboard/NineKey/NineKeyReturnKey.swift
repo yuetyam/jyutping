@@ -88,7 +88,7 @@ struct NineKeyReturnKey: View {
                         }
                 }
                 .frame(width: context.nineKeyWidthUnit * 0.94, height: context.heightUnit * 2)
-                .contentShape(Rectangle())
+                .contentShape(.rect)
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in
                                 if tapped.negative {

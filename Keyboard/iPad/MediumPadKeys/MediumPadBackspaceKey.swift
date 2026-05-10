@@ -38,7 +38,7 @@ struct MediumPadBackspaceKey: View {
                         .padding(.horizontal, horizontalPadding + 5)
                 }
                 .frame(width: keyWidth, height: keyHeight)
-                .contentShape(Rectangle())
+                .contentShape(.rect)
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in
                                 guard tapped.negative else { return }

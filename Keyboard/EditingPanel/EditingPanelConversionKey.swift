@@ -25,7 +25,7 @@ struct EditingPanelGlassConversionKey: View {
                 .glassEffect(isTouching ? .regular : .clear, in: RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous))
                 .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
                 .padding(4)
-                .contentShape(Rectangle())
+                .contentShape(.rect)
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in
                                 if tapped.negative {
@@ -64,7 +64,7 @@ struct EditingPanelConversionKey: View {
                                         .padding(.horizontal, 4)
                         }
                 }
-                .contentShape(Rectangle())
+                .contentShape(.rect)
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in
                                 if tapped.negative {

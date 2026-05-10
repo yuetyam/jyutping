@@ -83,7 +83,7 @@ private struct OptionLabel: View {
                 .padding(.vertical, verticalPadding)
                 .foregroundStyle(isHighlighted ? Color.white : Color.primary)
                 .background(isHighlighted ? Color.accentColor : Color.clear, in: RoundedRectangle(cornerRadius: cornerRadius, style: .continuous))
-                .contentShape(Rectangle())
+                .contentShape(.rect)
                 .onHover { isHovering in
                         guard isHovering else { return }
                         guard isHighlighted.negative else { return }

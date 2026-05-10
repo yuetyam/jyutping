@@ -34,7 +34,7 @@ struct EditingPanelSpaceKey: View {
                                 Text("EditingPanel.Space").font(.staticBody)
                         }
                 }
-                .contentShape(Rectangle())
+                .contentShape(.rect)
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in
                                 guard tapped.negative else { return }

@@ -53,7 +53,7 @@ private struct MacMTRLineView: View {
                                         }
                                         .textSelection(.disabled)
                                         .padding(.vertical, 8)
-                                        .contentShape(Rectangle())
+                                        .contentShape(.rect)
                                 }
                                 .buttonStyle(.plain)
                                 VStack(alignment: .leading) {
@@ -88,7 +88,7 @@ private struct MacMTRLineView: View {
                                 }
                                 .textSelection(.disabled)
                                 .block()
-                                .contentShape(Rectangle())
+                                .contentShape(.rect)
                         }
                         .buttonStyle(.plain)
                 }

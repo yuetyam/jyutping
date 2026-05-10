@@ -36,7 +36,7 @@ struct GlassNineKeyNavigateKey: View {
                 .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
                 .padding(3)
                 .frame(width: context.nineKeyWidthUnit * 0.94, height: context.heightUnit)
-                .contentShape(Rectangle())
+                .contentShape(.rect)
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in
                                 if tapped.negative {
@@ -86,7 +86,7 @@ struct NineKeyNavigateKey: View {
                         Text(verbatim: keyText).font(.staticBody)
                 }
                 .frame(width: context.nineKeyWidthUnit * 0.94, height: context.heightUnit)
-                .contentShape(Rectangle())
+                .contentShape(.rect)
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in
                                 if tapped.negative {

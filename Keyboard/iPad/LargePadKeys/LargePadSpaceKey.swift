@@ -31,7 +31,7 @@ struct LargePadSpaceKey: View {
                 }
                 .frame(height: keyHeight)
                 .frame(maxWidth: .infinity)
-                .contentShape(Rectangle())
+                .contentShape(.rect)
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in
                                 guard tapped.negative else { return }

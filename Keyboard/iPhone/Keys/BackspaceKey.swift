@@ -30,7 +30,7 @@ struct BackspaceKey: View {
                         Image.backspace.symbolVariant(isTouching ? .fill : .none).font(.symbol)
                 }
                 .frame(width: keyWidth, height: keyHeight)
-                .contentShape(Rectangle())
+                .contentShape(.rect)
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in
                                 guard tapped.negative else { return }

@@ -50,7 +50,7 @@ struct RubyStackView: View {
                                         CharacterPronunciationView(unit: units[index])
                                 }
                         }
-                        .contentShape(Rectangle())
+                        .contentShape(.rect)
                         .contextMenu {
                                 MenuCopyButton(text, title: "General.CopyCantoneseText")
                                 MenuCopyButton(romanization, title: "General.CopyJyutpingText")

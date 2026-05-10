@@ -37,7 +37,7 @@ struct HomeView: View {
                                                                         Image.backwardChevron
                                                                 }
                                                         }
-                                                        .contentShape(Rectangle())
+                                                        .contentShape(.rect)
                                                 }
                                                 .buttonStyle(.plain)
                                         } else {

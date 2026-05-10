@@ -45,7 +45,7 @@ struct CandidateBoard: View {
                                         .padding(.horizontal, lineSpacing / 2.0)
                                         .foregroundStyle(index == highlightedIndex ? Color.white : Color.primary)
                                         .background(index == highlightedIndex ? Color.accentColor : Color.clear, in: RoundedRectangle(cornerRadius: innerCornerRadius, style: .continuous))
-                                        .contentShape(Rectangle())
+                                        .contentShape(.rect)
                                         .onHover { isHovering in
                                                 guard isHovering else { return }
                                                 guard index != highlightedIndex else { return }
@@ -85,7 +85,7 @@ struct CandidateBoard: View {
                                                 .foregroundStyle(index == highlightedIndex ? Color.white : Color.primary)
                                                 .fixedSize()
                                         }
-                                        .contentShape(Rectangle())
+                                        .contentShape(.rect)
                                         .onHover { isHovering in
                                                 guard isHovering else { return }
                                                 guard index != highlightedIndex else { return }

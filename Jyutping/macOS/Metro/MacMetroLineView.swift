@@ -36,7 +36,7 @@ struct MacMetroLineView: View {
                                         }
                                         .textSelection(.disabled)
                                         .padding(.vertical, 8)
-                                        .contentShape(Rectangle())
+                                        .contentShape(.rect)
                                 }
                                 .buttonStyle(.plain)
                                 VStack(alignment: .leading) {
@@ -73,7 +73,7 @@ struct MacMetroLineView: View {
                                 }
                                 .textSelection(.disabled)
                                 .block()
-                                .contentShape(Rectangle())
+                                .contentShape(.rect)
                         }
                         .buttonStyle(.plain)
                 }

@@ -26,7 +26,7 @@ struct EditingPanelGlassBackspaceKey: View {
                 .glassEffect(isTouching ? .regular : .clear, in: RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous))
                 .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
                 .padding(4)
-                .contentShape(Rectangle())
+                .contentShape(.rect)
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in
                                 guard tapped.negative else { return }
@@ -80,7 +80,7 @@ struct EditingPanelBackspaceKey: View {
                                         .padding(.horizontal, 4)
                         }
                 }
-                .contentShape(Rectangle())
+                .contentShape(.rect)
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in
                                 guard tapped.negative else { return }

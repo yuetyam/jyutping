@@ -64,7 +64,7 @@ private struct NumberPadKey: View {
                         }
                 }
                 .frame(width: width, height: height)
-                .contentShape(Rectangle())
+                .contentShape(.rect)
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in
                                 guard tapped.negative else { return }
@@ -125,7 +125,7 @@ private struct NumberPadBackspaceKey: View {
                         Image.backspace.symbolVariant(isTouching ? .fill : .none)
                 }
                 .frame(width: width, height: height)
-                .contentShape(Rectangle())
+                .contentShape(.rect)
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in
                                 guard tapped.negative else { return }

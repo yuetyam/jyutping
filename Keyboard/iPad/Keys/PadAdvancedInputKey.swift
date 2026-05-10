@@ -143,7 +143,7 @@ struct PadAdvancedInputKey: View {
                         }
                 }
                 .frame(width: keyWidth, height: keyHeight)
-                .contentShape(Rectangle())
+                .contentShape(.rect)
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in
                                 if tapped.negative {

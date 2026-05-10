@@ -140,7 +140,7 @@ struct EmojiBoard: View {
                                                 .frame(width: 24, height: 24)
                                 }
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                                .contentShape(Rectangle())
+                                .contentShape(.rect)
                                 .gesture(DragGesture(minimumDistance: 0)
                                         .updating($isBackspacing) { _, tapped, _ in
                                                 if tapped.negative {

@@ -29,7 +29,7 @@ struct PadBackspaceKey: View {
                                 .font(.title3)
                 }
                 .frame(width: keyWidth, height: keyHeight)
-                .contentShape(Rectangle())
+                .contentShape(.rect)
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in
                                 guard tapped.negative else { return }

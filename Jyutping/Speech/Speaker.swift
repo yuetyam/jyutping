@@ -47,7 +47,7 @@ struct Speaker: View {
                                         .opacity(isSpeaking ? 0 : 1)
                         }
                         .frame(width: length, height: length)
-                        .contentShape(Rectangle())
+                        .contentShape(.rect)
                 }
                 .buttonStyle(.plain)
                 .animation(.default, value: isSpeaking)

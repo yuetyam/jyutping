@@ -20,7 +20,7 @@ struct GlassNineKeyBackspaceKey: View {
                 .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
                 .padding(3)
                 .frame(width: context.nineKeyWidthUnit * 0.94, height: context.heightUnit)
-                .contentShape(Rectangle())
+                .contentShape(.rect)
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in
                                 guard tapped.negative else { return }
@@ -72,7 +72,7 @@ struct NineKeyBackspaceKey: View {
                         Image.backspace.symbolVariant(isTouching ? .fill : .none).font(.symbol)
                 }
                 .frame(width: context.nineKeyWidthUnit * 0.94, height: context.heightUnit)
-                .contentShape(Rectangle())
+                .contentShape(.rect)
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in
                                 guard tapped.negative else { return }

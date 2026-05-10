@@ -25,7 +25,7 @@ struct GlassNineKeyInputKey: View {
                 .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
                 .padding(3)
                 .frame(width: context.nineKeyWidthUnit * 1.04, height: context.heightUnit)
-                .contentShape(Rectangle())
+                .contentShape(.rect)
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in
                                 if tapped.negative {
@@ -65,7 +65,7 @@ struct NineKeyInputKey: View {
                         Text(verbatim: combo.text)
                 }
                 .frame(width: context.nineKeyWidthUnit * 1.04, height: context.heightUnit)
-                .contentShape(Rectangle())
+                .contentShape(.rect)
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in
                                 if tapped.negative {

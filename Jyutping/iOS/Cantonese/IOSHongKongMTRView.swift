@@ -68,7 +68,7 @@ private struct MTRLineView: View {
                                 Image(systemName: isExpanded ? "chevron.down" : "chevron.backward")
                         }
                         .textSelection(.disabled)
-                        .contentShape(Rectangle())
+                        .contentShape(.rect)
                 }
                 .buttonStyle(.plain)
                 if isExpanded {

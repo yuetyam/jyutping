@@ -41,7 +41,7 @@ struct ShiftKey: View {
                 }
                 .font(.symbol)
                 .frame(width: keyWidth, height: keyHeight)
-                .contentShape(Rectangle())
+                .contentShape(.rect)
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, touched, _ in
                                 if touched.negative {
