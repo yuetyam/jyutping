@@ -367,12 +367,12 @@ struct InputMemory {
                 })
                 let queried = query(segmentation: segmentation, idealSchemes: idealSchemes, deepSearch: deepSearch, strictStatement: strictStatement)
                 guard fullMatched.isEmpty && idealQueried.isEmpty else {
-                        return (fullMatched + idealQueried).advancedSorted(inputLength: inputLength).distinct().map({ Lexicon(text: $0.word, romanization: $0.romanization, input: text, mark: $0.mark, number: -1) }) + queried
+                        return (fullMatched + idealQueried).regularSorted().map({ Lexicon(text: $0.word, romanization: $0.romanization, input: text, mark: $0.mark, number: -1) }) + queried
                 }
                 let shortcutLimit: Int64 = (segmentation.first?.isEmpty ?? true) ? 100 : 5
                 let shortcuts = shortcutMatch(text: text, input: text, limit: shortcutLimit, statement: shortcutStatement)
                 guard shortcuts.isEmpty else {
-                        return shortcuts.advancedSorted(inputLength: inputLength).map({ Lexicon(text: $0.word, romanization: $0.romanization, input: text, mark: $0.mark, number: -1) }) + queried
+                        return shortcuts.regularSorted().map({ Lexicon(text: $0.word, romanization: $0.romanization, input: text, mark: $0.mark, number: -1) }) + queried
                 }
                 guard deepSearch else { return queried }
                 let shouldPartiallyMatch: Bool = idealSchemes.isEmpty || (keys.last == VirtualInputKey.letterM) || (keys.first == VirtualInputKey.letterM)
@@ -424,25 +424,17 @@ struct InputMemory {
                                 }
                         })
                 let partialMatched = (prefixMatched + gainedMatched)
-                        .advancedSorted(inputLength: inputLength)
-                        .distinct()
+                        .peculiarSorted()
                         .prefix(5)
                         .map({ Lexicon(text: $0.word, romanization: $0.romanization, input: text, mark: $0.mark, number: -1) })
                 return partialMatched + queried
         }
         private static func query(segmentation: Segmentation, idealSchemes: [Scheme], deepSearch: Bool, strictStatement: OpaquePointer?) -> [Lexicon] {
+                guard deepSearch else { return [] }
                 guard segmentation.isNotEmpty else { return [] }
-                guard deepSearch else {
-                        return idealSchemes.flatMap({ perform(scheme: $0, strictStatement: strictStatement) })
-                                .timeSorted()
-                                .distinct()
-                                .prefix(6)
-                                .map({ Lexicon(text: $0.word, romanization: $0.romanization, input: $0.input, mark: $0.mark, number: -2) })
-                }
                 if idealSchemes.isEmpty {
                         return segmentation.flatMap({ perform(scheme: $0, strictStatement: strictStatement) })
-                                .timeSorted()
-                                .distinct()
+                                .peculiarSorted()
                                 .prefix(6)
                                 .map({ Lexicon(text: $0.word, romanization: $0.romanization, input: $0.input, mark: $0.mark, number: -2) })
                 } else {
@@ -450,8 +442,7 @@ struct InputMemory {
                                 guard scheme.count > 1 else { return [] }
                                 return (1..<scheme.count).reversed().map({ scheme.prefix($0) }).flatMap({ perform(scheme: $0, strictStatement: strictStatement) })
                         })
-                        .timeSorted()
-                        .distinct()
+                        .peculiarSorted()
                         .prefix(6)
                         .map({ Lexicon(text: $0.word, romanization: $0.romanization, input: $0.input, mark: $0.mark, number: -2) })
                 }
@@ -605,9 +596,9 @@ struct InputMemory {
                                 .map({ Lexicon(text: $0.word, romanization: $0.romanization, input: $0.input, mark: $0.mark, number: -1) })
                 }
                 let fullCode: Int = combos.map(\.digit).decimalCombined()
-                let fullCodeMatched = nineKeyCodeMatch(code: fullCode, limit: 100, statement: codeStatement).advancedSorted(inputLength: inputLength)
-                let fullAnchorsMatched = nineKeyAnchorsMatch(code: fullCode, limit: 100, statement: anchorsStatement).advancedSorted(inputLength: inputLength).prefix(5)
-                let ideal = (fullCodeMatched.prefix(10) + (fullCodeMatched + fullAnchorsMatched).advancedSorted(inputLength: inputLength))
+                let fullCodeMatched = nineKeyCodeMatch(code: fullCode, limit: 100, statement: codeStatement).regularSorted()
+                let fullAnchorsMatched = nineKeyAnchorsMatch(code: fullCode, limit: 100, statement: anchorsStatement).regularSorted()
+                let ideal = (fullCodeMatched.prefix(10) + (fullCodeMatched + fullAnchorsMatched.prefix(5)).regularSorted())
                         .distinct()
                         .map({ Lexicon(text: $0.word, romanization: $0.romanization, input: $0.input, mark: $0.mark, number: -1) })
                 let queried = (1..<inputLength)
@@ -616,7 +607,7 @@ struct InputMemory {
                                 guard code > 0 else { return [] }
                                 return nineKeyCodeMatch(code: code, limit: 4, statement: codeStatement)
                         })
-                        .distinct()
+                        .peculiarSorted()
                         .prefix(6)
                         .map({ Lexicon(text: $0.word, romanization: $0.romanization, input: $0.input, mark: $0.mark, number: -2) })
                 return ideal + queried
@@ -655,31 +646,14 @@ private struct InternalLexicon: Hashable, Comparable {
 }
 
 private extension RandomAccessCollection where Element == InternalLexicon {
-        func advancedSorted(inputLength: Int) -> [InternalLexicon] {
-                let now: Int64 = Int64(Date.now.timeIntervalSince1970 * 1000)
-                // let recentEntries = filter({ ($0.inputCount == inputLength) && ((now - $0.latest) < PresetConstant.dayIntervalMilliseconds) }).sorted(by: { $0.frequency > $1.frequency })
-                let recentEntries = filter({ ($0.inputCount == inputLength) && ((now - $0.latest) < PresetConstant.dayIntervalMilliseconds) }).sorted(by: { $0.latest > $1.latest })
-                guard recentEntries.isNotEmpty else { return timeSorted(with: now) }
-                guard recentEntries.count != count else { return recentEntries }
-                let others = filter({ ($0.inputCount != inputLength) || ((now - $0.latest) >= PresetConstant.dayIntervalMilliseconds) }).timeSorted(with: now)
-                return recentEntries + others
+        func regularSorted() -> [InternalLexicon] {
+                let frequencyPreferred = sorted(by: { $0.frequency > $1.frequency })
+                let datePreferred = sorted(by: { $0.latest > $1.latest })
+                return (frequencyPreferred.prefix(3) + datePreferred.prefix(5) + frequencyPreferred).distinct()
         }
-        func timeSorted(with now: Int64? = nil) -> [InternalLexicon] {
-                let now: Int64 = now ?? Int64(Date.now.timeIntervalSince1970 * 1000)
-                return sorted(by: { (lhs, rhs) -> Bool in
-                        guard lhs.inputCount == rhs.inputCount else { return lhs.inputCount > rhs.inputCount }
-                        let isLHSRecent: Bool = (now - lhs.latest) < PresetConstant.dayIntervalMilliseconds
-                        let isRHSRecent: Bool = (now - rhs.latest) < PresetConstant.dayIntervalMilliseconds
-                        switch (isLHSRecent, isRHSRecent) {
-                        case (true, true), (false, false):
-                                if lhs.frequency == rhs.frequency {
-                                        return lhs.latest > rhs.latest
-                                } else {
-                                        return lhs.frequency > rhs.frequency
-                                }
-                        case (true, false): return true
-                        case (false, true): return false
-                        }
+        func peculiarSorted() -> [InternalLexicon] {
+                return map(\.inputCount).distinct().sorted(by: >).flatMap({ inputCount -> [InternalLexicon] in
+                        return filter({ $0.inputCount == inputCount }).regularSorted()
                 })
         }
 }

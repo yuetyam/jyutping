@@ -21,7 +21,7 @@ struct GlassNineKeySpecialKey: View {
                                         .font(.keyFootnote)
                                         .opacity(isBuffering ? 0 : 0.35)
                         }
-                        .padding(.bottom, 5)
+                        .padding(.bottom, 2)
                         Text(verbatim: isBuffering ? String.apostrophe : Combo.special.text)
                                 .opacity(isBuffering ? 0 : 1)
                 }
