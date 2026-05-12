@@ -35,6 +35,7 @@ struct FAQView: View {
                                 Label("IOSHomeTab.Text2Speech.Notice5", systemImage: "5.circle")
                                 Label("IOSHomeTab.Text2Speech.Notice6", systemImage: "6.circle")
                                 Label("IOSHomeTab.Text2Speech.Notice7", systemImage: "7.circle")
+                                Label("IOSHomeTab.Text2Speech.Notice8", systemImage: "8.circle")
                         }
 
                         Section {

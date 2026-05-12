@@ -86,6 +86,8 @@ struct HomeView: View {
                                         NavigationLink(destination: EnablingKeyboardView()) {
                                                 Label("IOSHomeTab.LabelTitle.ProblemsWithEnablingKeyboard", systemImage: "hand.raised")
                                         }
+                                }
+                                Section {
                                         NavigationLink(destination: Text2SpeechView()) {
                                                 Label("IOSHomeTab.LabelTitle.TextToSpeech", systemImage: "speaker.wave.2")
                                         }

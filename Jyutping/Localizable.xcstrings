@@ -9876,6 +9876,100 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Or maybe try setting system language to be **Chinese, Traditional (Hong Kong)**."
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Or maybe try setting system language to be **Chinese, Traditional (Hong Kong)**."
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Or maybe try setting system language to be **Chinese, Traditional (Hong Kong)**."
+          }
+        },
+        "en-US" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Or maybe try setting system language to be **Chinese, Traditional (Hong Kong)**."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ou essayez de définir la langue du système sur **chinois traditionnel (Hong Kong)**."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "または、システム言語を **繁体字中国語（香港）** に変更してみてください。"
+          }
+        },
+        "yue" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "或者試下將系統語言切換成 **繁體中文（香港）** 。"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "或者試下將系統語言切換成 **繁體中文（香港）** 。"
+          }
+        },
+        "zh-Hans-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "或者試下將系統語言切換成 **繁體中文（香港）** 。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "或者試下將系統語言切換成 **繁體中文（香港）** 。"
+          }
+        },
+        "zh-Hant-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "或者試下將系統語言切換成 **繁體中文（香港）** 。"
+          }
+        },
+        "zh-Hant-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "或者試下將系統語言切換成 **繁體中文（香港）** 。"
+          }
+        },
+        "zh-Hant-MO" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "或者試下將系統語言切換成 **繁體中文（香港）** 。"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "或者試下將系統語言切換成 **繁體中文（香港）** 。"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "或者試下將系統語言切換成 **繁體中文（香港）** 。"
+          }
+        }
+      }
+    },
+    "IOSHomeTab.Text2Speech.Notice8" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
             "value" : "Or maybe try uninstalling and reinstalling this app."
           }
         },
@@ -9970,91 +10064,91 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "If there is occasionally no sound"
+            "value" : "If there is occasionally not working"
           }
         },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "If there is occasionally no sound"
+            "value" : "If there is occasionally not working"
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "If there is occasionally no sound"
+            "value" : "If there is occasionally not working"
           }
         },
         "en-US" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "If there is occasionally no sound"
+            "value" : "If there is occasionally not working"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "S'il n'y a occasionnellement aucun son"
+            "value" : "Si cela ne fonctionne pas de temps en temps"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "時折、音が出ない場合"
+            "value" : "たまに動かない場合"
           }
         },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果係偶爾冇聲音"
+            "value" : "如果係偶爾出問題"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果係偶爾冇聲音"
+            "value" : "如果係偶爾出問題"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果係偶爾冇聲音"
+            "value" : "如果係偶爾出問題"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果係偶爾冇聲音"
+            "value" : "如果係偶爾出問題"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果係偶爾冇聲音"
+            "value" : "如果係偶爾出問題"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果係偶爾冇聲音"
+            "value" : "如果係偶爾出問題"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果係偶爾冇聲音"
+            "value" : "如果係偶爾出問題"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果係偶爾冇聲音"
+            "value" : "如果係偶爾出問題"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果係偶爾冇聲音"
+            "value" : "如果係偶爾出問題"
           }
         }
       }
