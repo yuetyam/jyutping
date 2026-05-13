@@ -3,7 +3,7 @@ import CoreIME
 
 @available(iOS 26.0, *)
 @available(iOSApplicationExtension 26.0, *)
-struct GlassNineKeyNumericKeyboard: View {
+struct GlassTailoredNumericKeyboard: View {
         @EnvironmentObject private var context: KeyboardViewController
         var body: some View {
                 VStack(spacing: 0) {
@@ -21,40 +21,40 @@ struct GlassNineKeyNumericKeyboard: View {
                                                 GlassSidebarPanel()
                                                 VStack(spacing: 0) {
                                                         HStack(spacing: 0) {
-                                                                GlassNineKeyNumberKey(.number1)
-                                                                GlassNineKeyNumberKey(.number2)
-                                                                GlassNineKeyNumberKey(.number3)
+                                                                GlassTailoredNumberKey(.number1)
+                                                                GlassTailoredNumberKey(.number2)
+                                                                GlassTailoredNumberKey(.number3)
                                                         }
                                                         HStack(spacing: 0) {
-                                                                GlassNineKeyNumberKey(.number4)
-                                                                GlassNineKeyNumberKey(.number5)
-                                                                GlassNineKeyNumberKey(.number6)
+                                                                GlassTailoredNumberKey(.number4)
+                                                                GlassTailoredNumberKey(.number5)
+                                                                GlassTailoredNumberKey(.number6)
                                                         }
                                                         HStack(spacing: 0) {
-                                                                GlassNineKeyNumberKey(.number7)
-                                                                GlassNineKeyNumberKey(.number8)
-                                                                GlassNineKeyNumberKey(.number9)
+                                                                GlassTailoredNumberKey(.number7)
+                                                                GlassTailoredNumberKey(.number8)
+                                                                GlassTailoredNumberKey(.number9)
                                                         }
                                                 }
                                         }
                                         HStack(spacing: 0) {
-                                                GlassNineKeyNavigateKey(destination: .alphabetic)
-                                                GlassNineKeyNumberDotKey()
-                                                GlassNineKeyNumberKey(.number0)
-                                                NineKeySpaceKey()
+                                                GlassTailoredNavigateKey(destination: .alphabetic)
+                                                GlassTailoredNumberDotKey()
+                                                GlassTailoredNumberKey(.number0)
+                                                TailoredSpaceKey()
                                         }
                                 }
                                 VStack(spacing: 0) {
-                                        GlassNineKeyBackspaceKey()
-                                        GlassNineKeyNavigateKey(destination: .numeric)
-                                        NineKeyReturnKey()
+                                        GlassTailoredBackspaceKey()
+                                        GlassTailoredNavigateKey(destination: .numeric)
+                                        TailoredReturnKey()
                                 }
                         }
                 }
         }
 }
 
-struct NineKeyNumericKeyboard: View {
+struct TailoredNumericKeyboard: View {
         @EnvironmentObject private var context: KeyboardViewController
         var body: some View {
                 VStack(spacing: 0) {
@@ -72,33 +72,33 @@ struct NineKeyNumericKeyboard: View {
                                                 SidebarPanel()
                                                 VStack(spacing: 0) {
                                                         HStack(spacing: 0) {
-                                                                NineKeyNumberKey(.number1)
-                                                                NineKeyNumberKey(.number2)
-                                                                NineKeyNumberKey(.number3)
+                                                                TailoredNumberKey(.number1)
+                                                                TailoredNumberKey(.number2)
+                                                                TailoredNumberKey(.number3)
                                                         }
                                                         HStack(spacing: 0) {
-                                                                NineKeyNumberKey(.number4)
-                                                                NineKeyNumberKey(.number5)
-                                                                NineKeyNumberKey(.number6)
+                                                                TailoredNumberKey(.number4)
+                                                                TailoredNumberKey(.number5)
+                                                                TailoredNumberKey(.number6)
                                                         }
                                                         HStack(spacing: 0) {
-                                                                NineKeyNumberKey(.number7)
-                                                                NineKeyNumberKey(.number8)
-                                                                NineKeyNumberKey(.number9)
+                                                                TailoredNumberKey(.number7)
+                                                                TailoredNumberKey(.number8)
+                                                                TailoredNumberKey(.number9)
                                                         }
                                                 }
                                         }
                                         HStack(spacing: 0) {
-                                                NineKeyNavigateKey(destination: .alphabetic)
-                                                NineKeyNumberDotKey()
-                                                NineKeyNumberKey(.number0)
-                                                NineKeySpaceKey()
+                                                TailoredNavigateKey(destination: .alphabetic)
+                                                TailoredNumberDotKey()
+                                                TailoredNumberKey(.number0)
+                                                TailoredSpaceKey()
                                         }
                                 }
                                 VStack(spacing: 0) {
-                                        NineKeyBackspaceKey()
-                                        NineKeyNavigateKey(destination: .numeric)
-                                        NineKeyReturnKey()
+                                        TailoredBackspaceKey()
+                                        TailoredNavigateKey(destination: .numeric)
+                                        TailoredReturnKey()
                                 }
                         }
                 }

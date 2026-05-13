@@ -53,38 +53,38 @@ private struct GlassNineKeyCoreKeyboard: View {
                                 switch (context.isRunningOnPhone, context.needsInputModeSwitchKey) {
                                 case (true, true):
                                         HStack(spacing: 0) {
-                                                GlassNineKeyNavigateKey(destination: context.preferredNumericForm)
-                                                GlassNineKeyGlobeKey()
-                                                NineKeySpaceKey()
+                                                GlassTailoredNavigateKey(destination: context.preferredNumericForm)
+                                                GlassTailoredGlobeKey()
+                                                TailoredSpaceKey()
                                         }
                                 case (true, false):
                                         HStack(spacing: 0) {
-                                                GlassNineKeyNavigateKey(destination: context.preferredNumericForm)
-                                                NineKeySpaceKey()
+                                                GlassTailoredNavigateKey(destination: context.preferredNumericForm)
+                                                TailoredSpaceKey()
                                         }
                                 case (false, true) where context.keyboardInterface.isPadFloating:
                                         HStack(spacing: 0) {
-                                                GlassNineKeyGlobeKey()
-                                                GlassNineKeyNavigateKey(destination: context.preferredNumericForm)
-                                                NineKeySpaceKey()
+                                                GlassTailoredGlobeKey()
+                                                GlassTailoredNavigateKey(destination: context.preferredNumericForm)
+                                                TailoredSpaceKey()
                                         }
                                 case (false, true):
                                         HStack(spacing: 0) {
-                                                GlassNineKeyGlobeKey()
-                                                GlassNineKeyNavigateKey(destination: context.preferredNumericForm)
-                                                NineKeySpaceKey()
+                                                GlassTailoredGlobeKey()
+                                                GlassTailoredNavigateKey(destination: context.preferredNumericForm)
+                                                TailoredSpaceKey()
                                         }
                                 case (false, false):
                                         HStack(spacing: 0) {
-                                                GlassNineKeyNavigateKey(destination: context.preferredNumericForm)
-                                                NineKeySpaceKey()
+                                                GlassTailoredNavigateKey(destination: context.preferredNumericForm)
+                                                TailoredSpaceKey()
                                         }
                                 }
                         }
                         VStack(spacing: 0) {
-                                GlassNineKeyBackspaceKey()
-                                GlassNineKeyNavigateKey(destination: context.preferredNumericForm.isNineKeyNumeric ? .numeric : .symbolic)
-                                NineKeyReturnKey()
+                                GlassTailoredBackspaceKey()
+                                GlassTailoredNavigateKey(destination: context.preferredNumericForm.isNineKeyNumeric ? .numeric : .symbolic)
+                                TailoredReturnKey()
                         }
                 }
         }
@@ -118,38 +118,38 @@ private struct LegacyNineKeyCoreKeyboard: View {
                                 switch (context.isRunningOnPhone, context.needsInputModeSwitchKey) {
                                 case (true, true):
                                         HStack(spacing: 0) {
-                                                NineKeyNavigateKey(destination: context.preferredNumericForm)
-                                                NineKeyGlobeKey()
-                                                NineKeySpaceKey()
+                                                TailoredNavigateKey(destination: context.preferredNumericForm)
+                                                TailoredGlobeKey()
+                                                TailoredSpaceKey()
                                         }
                                 case (true, false):
                                         HStack(spacing: 0) {
-                                                NineKeyNavigateKey(destination: context.preferredNumericForm)
-                                                NineKeySpaceKey()
+                                                TailoredNavigateKey(destination: context.preferredNumericForm)
+                                                TailoredSpaceKey()
                                         }
                                 case (false, true) where context.keyboardInterface.isPadFloating:
                                         HStack(spacing: 0) {
-                                                NineKeyGlobeKey()
-                                                NineKeyNavigateKey(destination: context.preferredNumericForm)
-                                                NineKeySpaceKey()
+                                                TailoredGlobeKey()
+                                                TailoredNavigateKey(destination: context.preferredNumericForm)
+                                                TailoredSpaceKey()
                                         }
                                 case (false, true):
                                         HStack(spacing: 0) {
-                                                NineKeyGlobeKey()
-                                                NineKeyNavigateKey(destination: context.preferredNumericForm)
-                                                NineKeySpaceKey()
+                                                TailoredGlobeKey()
+                                                TailoredNavigateKey(destination: context.preferredNumericForm)
+                                                TailoredSpaceKey()
                                         }
                                 case (false, false):
                                         HStack(spacing: 0) {
-                                                NineKeyNavigateKey(destination: context.preferredNumericForm)
-                                                NineKeySpaceKey()
+                                                TailoredNavigateKey(destination: context.preferredNumericForm)
+                                                TailoredSpaceKey()
                                         }
                                 }
                         }
                         VStack(spacing: 0) {
-                                NineKeyBackspaceKey()
-                                NineKeyNavigateKey(destination: context.preferredNumericForm.isNineKeyNumeric ? .numeric : .symbolic)
-                                NineKeyReturnKey()
+                                TailoredBackspaceKey()
+                                TailoredNavigateKey(destination: context.preferredNumericForm.isNineKeyNumeric ? .numeric : .symbolic)
+                                TailoredReturnKey()
                         }
                 }
         }

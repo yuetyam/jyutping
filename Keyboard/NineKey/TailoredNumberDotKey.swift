@@ -4,22 +4,15 @@ import CoreIME
 
 @available(iOS 26.0, *)
 @available(iOSApplicationExtension 26.0, *)
-struct GlassNineKeyNumberKey: View {
-
-        init(_ virtualKey: VirtualInputKey) {
-                self.virtualKey = virtualKey
-        }
-        private let virtualKey: VirtualInputKey
-
+struct GlassTailoredNumberDotKey: View {
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
-
         @GestureState private var isTouching: Bool = false
-
+        private let keyText: String = String.period
         var body: some View {
                 ZStack {
                         Color.interactiveClear
-                        Text(verbatim: virtualKey.text).font(.letterCompact)
+                        Text(verbatim: keyText).font(.letterCompact)
                 }
                 .glassEffect(isTouching ? .regular : .clear, in: RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous))
                 .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
@@ -35,24 +28,17 @@ struct GlassNineKeyNumberKey: View {
                                 }
                         }
                         .onEnded { _ in
-                                context.handle(virtualKey)
+                                context.operate(.input(keyText))
                         }
                 )
         }
 }
 
-struct NineKeyNumberKey: View {
-
-        init(_ virtualKey: VirtualInputKey) {
-                self.virtualKey = virtualKey
-        }
-        private let virtualKey: VirtualInputKey
-
+struct TailoredNumberDotKey: View {
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
-
         @GestureState private var isTouching: Bool = false
-
+        private let keyText: String = String.period
         var body: some View {
                 ZStack {
                         Color.interactiveClear
@@ -60,7 +46,7 @@ struct NineKeyNumberKey: View {
                                 .fill(isTouching ? colorScheme.activeInputKeyColor : colorScheme.inputKeyColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(3)
-                        Text(verbatim: virtualKey.text).font(.letterCompact)
+                        Text(verbatim: keyText).font(.letterCompact)
                 }
                 .frame(width: context.nineKeyWidthUnit * 1.04, height: context.heightUnit)
                 .contentShape(.rect)
@@ -73,7 +59,7 @@ struct NineKeyNumberKey: View {
                                 }
                         }
                         .onEnded { _ in
-                                context.handle(virtualKey)
+                                context.operate(.input(keyText))
                         }
                 )
         }

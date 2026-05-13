@@ -84,15 +84,15 @@ struct MotherBoard: View {
                         }
                 case .nineKeyNumeric:
                         if #available(iOSApplicationExtension 26.0, *) {
-                                GlassNineKeyNumericKeyboard()
+                                GlassTailoredNumericKeyboard()
                         } else {
-                                NineKeyNumericKeyboard()
+                                TailoredNumericKeyboard()
                         }
                 case .nineKeyStroke:
                         if #available(iOSApplicationExtension 26.0, *) {
-                                GlassNineKeyStrokeKeyboard()
+                                GlassTailoredStrokeKeyboard()
                         } else {
-                                NineKeyStrokeKeyboard()
+                                TailoredStrokeKeyboard()
                         }
                 default:
                         switch context.inputMethodMode {

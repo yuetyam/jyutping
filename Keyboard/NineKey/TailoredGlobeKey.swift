@@ -2,7 +2,7 @@ import SwiftUI
 
 @available(iOS 26.0, *)
 @available(iOSApplicationExtension 26.0, *)
-struct GlassNineKeyGlobeKey: View {
+struct GlassTailoredGlobeKey: View {
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
@@ -19,7 +19,7 @@ struct GlassNineKeyGlobeKey: View {
         }
 }
 
-struct NineKeyGlobeKey: View {
+struct TailoredGlobeKey: View {
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme

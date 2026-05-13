@@ -1,41 +1,30 @@
 import SwiftUI
 import CommonExtensions
+import CoreIME
 
 @available(iOS 26.0, *)
 @available(iOSApplicationExtension 26.0, *)
-struct GlassNineKeyNavigateKey: View {
+struct GlassTailoredNumberKey: View {
 
-        let destination: KeyboardForm
+        init(_ virtualKey: VirtualInputKey) {
+                self.virtualKey = virtualKey
+        }
+        private let virtualKey: VirtualInputKey
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
-
-        private var keyText: String {
-                switch destination {
-                case .alphabetic:
-                        return "ABC"
-                case .numeric:
-                        return context.preferredNumericForm.isNineKeyNumeric ? "#@$" : "123"
-                case .symbolic:
-                        return "#+="
-                case .nineKeyNumeric:
-                        return "123"
-                default:
-                        return "???"
-                }
-        }
 
         @GestureState private var isTouching: Bool = false
 
         var body: some View {
                 ZStack {
                         Color.interactiveClear
-                        Text(verbatim: keyText).font(.staticBody)
+                        Text(verbatim: virtualKey.text).font(.letterCompact)
                 }
                 .glassEffect(isTouching ? .regular : .clear, in: RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous))
                 .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
                 .padding(3)
-                .frame(width: context.nineKeyWidthUnit * 0.94, height: context.heightUnit)
+                .frame(width: context.nineKeyWidthUnit * 1.04, height: context.heightUnit)
                 .contentShape(.rect)
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in
@@ -46,33 +35,21 @@ struct GlassNineKeyNavigateKey: View {
                                 }
                         }
                         .onEnded { _ in
-                                context.updateKeyboardForm(to: destination)
+                                context.handle(virtualKey)
                         }
                 )
         }
 }
 
-struct NineKeyNavigateKey: View {
+struct TailoredNumberKey: View {
 
-        let destination: KeyboardForm
+        init(_ virtualKey: VirtualInputKey) {
+                self.virtualKey = virtualKey
+        }
+        private let virtualKey: VirtualInputKey
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
-
-        private var keyText: String {
-                switch destination {
-                case .alphabetic:
-                        return "ABC"
-                case .numeric:
-                        return context.preferredNumericForm.isNineKeyNumeric ? "#@$" : "123"
-                case .symbolic:
-                        return "#+="
-                case .nineKeyNumeric:
-                        return "123"
-                default:
-                        return "???"
-                }
-        }
 
         @GestureState private var isTouching: Bool = false
 
@@ -80,23 +57,23 @@ struct NineKeyNavigateKey: View {
                 ZStack {
                         Color.interactiveClear
                         RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous)
-                                .fill(isTouching ? colorScheme.activeActionKeyColor : colorScheme.actionKeyColor)
+                                .fill(isTouching ? colorScheme.activeInputKeyColor : colorScheme.inputKeyColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(3)
-                        Text(verbatim: keyText).font(.staticBody)
+                        Text(verbatim: virtualKey.text).font(.letterCompact)
                 }
-                .frame(width: context.nineKeyWidthUnit * 0.94, height: context.heightUnit)
+                .frame(width: context.nineKeyWidthUnit * 1.04, height: context.heightUnit)
                 .contentShape(.rect)
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in
                                 if tapped.negative {
-                                        AudioFeedback.modified()
+                                        AudioFeedback.inputed()
                                         context.triggerHapticFeedback()
                                         tapped = true
                                 }
                         }
                         .onEnded { _ in
-                                context.updateKeyboardForm(to: destination)
+                                context.handle(virtualKey)
                         }
                 )
         }

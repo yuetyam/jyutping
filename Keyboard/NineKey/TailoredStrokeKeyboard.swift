@@ -4,7 +4,7 @@ import CommonExtensions
 
 @available(iOS 26.0, *)
 @available(iOSApplicationExtension 26.0, *)
-struct GlassNineKeyStrokeKeyboard: View {
+struct GlassTailoredStrokeKeyboard: View {
         var body: some View {
                 VStack(spacing: 0) {
                         CandidateBar()
@@ -35,20 +35,20 @@ struct GlassNineKeyStrokeKeyboard: View {
                                         }
                                         HStack(spacing: 0) {
                                                 GlassStrokePlaceholderKey(widthCoefficient: 0.94).disabled(true)
-                                                NineKeySpaceKey()
+                                                TailoredSpaceKey()
                                         }
                                 }
                                 VStack(spacing: 0) {
-                                        GlassNineKeyBackspaceKey()
+                                        GlassTailoredBackspaceKey()
                                         GlassStrokePlaceholderKey(widthCoefficient: 0.94).disabled(true)
-                                        NineKeyReturnKey()
+                                        TailoredReturnKey()
                                 }
                         }
                 }
         }
 }
 
-struct NineKeyStrokeKeyboard: View {
+struct TailoredStrokeKeyboard: View {
         var body: some View {
                 VStack(spacing: 0) {
                         CandidateBar()
@@ -79,13 +79,13 @@ struct NineKeyStrokeKeyboard: View {
                                         }
                                         HStack(spacing: 0) {
                                                 LegacyStrokePlaceholderKey(widthCoefficient: 0.94).disabled(true)
-                                                NineKeySpaceKey()
+                                                TailoredSpaceKey()
                                         }
                                 }
                                 VStack(spacing: 0) {
-                                        NineKeyBackspaceKey()
+                                        TailoredBackspaceKey()
                                         LegacyStrokePlaceholderKey(widthCoefficient: 0.94).disabled(true)
-                                        NineKeyReturnKey()
+                                        TailoredReturnKey()
                                 }
                         }
                 }

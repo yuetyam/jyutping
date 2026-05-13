@@ -3,7 +3,7 @@ import CommonExtensions
 
 @available(iOS 26.0, *)
 @available(iOSApplicationExtension 26.0, *)
-struct GlassNineKeyBackspaceKey: View {
+struct GlassTailoredBackspaceKey: View {
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
@@ -54,7 +54,7 @@ struct GlassNineKeyBackspaceKey: View {
         }
 }
 
-struct NineKeyBackspaceKey: View {
+struct TailoredBackspaceKey: View {
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
