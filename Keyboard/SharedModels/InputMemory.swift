@@ -372,7 +372,7 @@ struct InputMemory {
                 let shortcutLimit: Int64 = (segmentation.first?.isEmpty ?? true) ? 100 : 5
                 let shortcuts = shortcutMatch(text: text, input: text, limit: shortcutLimit, statement: shortcutStatement)
                 guard shortcuts.isEmpty else {
-                        return shortcuts.regularSorted().map({ Lexicon(text: $0.word, romanization: $0.romanization, input: text, mark: $0.mark, number: -1) }) + queried
+                        return shortcuts.regularSorted(isOrdered: true).map({ Lexicon(text: $0.word, romanization: $0.romanization, input: text, mark: $0.mark, number: -1) }) + queried
                 }
                 guard deepSearch else { return queried }
                 let shouldPartiallyMatch: Bool = idealSchemes.isEmpty || (keys.last == VirtualInputKey.letterM) || (keys.first == VirtualInputKey.letterM)
@@ -591,13 +591,11 @@ struct InputMemory {
                         guard let code = combos.first?.rawValue else { return [] }
                         let codeMatched = nineKeyCodeMatch(code: code, limit: 100, statement: codeStatement)
                         let anchorsMatched = nineKeyAnchorsMatch(code: code, limit: 100, statement: anchorsStatement)
-                        return (codeMatched + anchorsMatched)
-                                .distinct()
-                                .map({ Lexicon(text: $0.word, romanization: $0.romanization, input: $0.input, mark: $0.mark, number: -1) })
+                        return (codeMatched + anchorsMatched).map({ Lexicon(text: $0.word, romanization: $0.romanization, input: $0.input, mark: $0.mark, number: -1) })
                 }
                 let fullCode: Int = combos.map(\.digit).decimalCombined()
-                let fullCodeMatched = nineKeyCodeMatch(code: fullCode, limit: 100, statement: codeStatement).regularSorted()
-                let fullAnchorsMatched = nineKeyAnchorsMatch(code: fullCode, limit: 100, statement: anchorsStatement).regularSorted()
+                let fullCodeMatched = nineKeyCodeMatch(code: fullCode, limit: 100, statement: codeStatement).regularSorted(isOrdered: true)
+                let fullAnchorsMatched = nineKeyAnchorsMatch(code: fullCode, limit: 100, statement: anchorsStatement).regularSorted(isOrdered: true)
                 let ideal = (fullCodeMatched.prefix(10) + (fullCodeMatched + fullAnchorsMatched.prefix(5)).regularSorted())
                         .distinct()
                         .map({ Lexicon(text: $0.word, romanization: $0.romanization, input: $0.input, mark: $0.mark, number: -1) })
@@ -645,9 +643,9 @@ private struct InternalLexicon: Hashable, Comparable {
         }
 }
 
-private extension RandomAccessCollection where Element == InternalLexicon {
-        func regularSorted() -> [InternalLexicon] {
-                let frequencyPreferred = sorted(by: { $0.frequency > $1.frequency })
+private extension Array where Element == InternalLexicon {
+        func regularSorted(isOrdered: Bool = false) -> [InternalLexicon] {
+                let frequencyPreferred = isOrdered ? self : sorted(by: { $0.frequency > $1.frequency })
                 let datePreferred = sorted(by: { $0.latest > $1.latest })
                 return (frequencyPreferred.prefix(3) + datePreferred.prefix(5) + frequencyPreferred).distinct()
         }

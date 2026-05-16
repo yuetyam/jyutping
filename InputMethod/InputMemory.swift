@@ -360,7 +360,7 @@ struct InputMemory {
                 let shortcutLimit: Int64 = (segmentation.first?.isEmpty ?? true) ? 100 : 5
                 let shortcuts = shortcutMatch(text: text, input: text, limit: shortcutLimit, statement: shortcutStatement)
                 guard shortcuts.isEmpty else {
-                        return shortcuts.regularSorted().map({ Lexicon(text: $0.word, romanization: $0.romanization, input: $0.input, mark: $0.mark, number: -1) }) + queried
+                        return shortcuts.regularSorted(isOrdered: true).map({ Lexicon(text: $0.word, romanization: $0.romanization, input: $0.input, mark: $0.mark, number: -1) }) + queried
                 }
                 let shouldPartiallyMatch: Bool = idealSchemes.isEmpty || (keys.last == VirtualInputKey.letterM) || (keys.first == VirtualInputKey.letterM)
                 guard shouldPartiallyMatch else { return queried }
@@ -543,9 +543,9 @@ private struct InternalLexicon: Hashable, Comparable {
         }
 }
 
-private extension RandomAccessCollection where Element == InternalLexicon {
-        func regularSorted() -> [InternalLexicon] {
-                let frequencyPreferred = sorted(by: { $0.frequency > $1.frequency })
+private extension Array where Element == InternalLexicon {
+        func regularSorted(isOrdered: Bool = false) -> [InternalLexicon] {
+                let frequencyPreferred = isOrdered ? self : sorted(by: { $0.frequency > $1.frequency })
                 let datePreferred = sorted(by: { $0.latest > $1.latest })
                 return (frequencyPreferred.prefix(3) + datePreferred.prefix(5) + frequencyPreferred).distinct()
         }
