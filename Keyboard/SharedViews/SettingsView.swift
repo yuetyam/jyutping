@@ -42,9 +42,7 @@ struct SettingsView: View {
         var body: some View {
                 VStack(spacing: 0) {
                         ZStack {
-                                Text("SettingsView.NavigationBar.HintText")
-                                        .font(.footnote)
-                                        .shallow()
+                                Text("SettingsView.NavigationBar.HintText").font(.footnote).shallow()
                                 HStack {
                                         NavigationLeadingBackButton()
                                         Spacer()

@@ -5,66 +5,44 @@ struct KeyboardLayoutPickerView: View {
         @EnvironmentObject private var context: KeyboardViewController
         var body: some View {
                 let selectedLayout = context.keyboardLayout
+                let isRunningOnPhone = context.isRunningOnPhone
                 VStack(spacing: 0) {
-                        HStack {
-                                NavigationLeadingBackButton()
-                                Spacer()
+                        ZStack {
+                                Text("SettingsView.NavigationBar.HintText").font(.footnote).shallow().hidden()
+                                HStack {
+                                        NavigationLeadingBackButton()
+                                        Spacer()
+                                        NavigationTrailingExpansionButton().hidden()
+                                }
                         }
-                        if context.keyboardInterface.isPhoneLandscape {
-                                VStack(alignment: .leading) {
-                                        HStack {
-                                                LayoutOptionView(layout: .qwerty, isSelected: selectedLayout.isQwerty)
-                                                LayoutOptionView(layout: .tripleStroke, isSelected: selectedLayout.isTripleStroke)
-                                                LayoutOptionView(layout: .nineKey, isSelected: selectedLayout.isNineKey)
-                                                #if DEBUG
-                                                LayoutOptionView(layout: .fourteenKey, isSelected: selectedLayout.isFourteenKey)
-                                                #else
-                                                LayoutOptionView(layout: .twentyOneKey, isSelected: selectedLayout.isTwentyOneKey)
-                                                #endif
-                                        }
-                                        #if DEBUG
-                                        HStack {
-                                                LayoutOptionView(layout: .fifteenKey, isSelected: selectedLayout.isFifteenKey)
-                                                LayoutOptionView(layout: .eighteenKey, isSelected: selectedLayout.isEighteenKey)
-                                                LayoutOptionView(layout: .nineteenKey, isSelected: selectedLayout.isNineteenKey)
-                                                LayoutOptionView(layout: .twentyOneKey, isSelected: selectedLayout.isTwentyOneKey)
-                                        }
-                                        #else
-                                        HStack {
-                                                LayoutOptionView(layout: .eighteenKey, isSelected: selectedLayout.isEighteenKey)
-                                                LayoutOptionView(layout: .nineteenKey, isSelected: selectedLayout.isNineteenKey)
-                                        }
-                                        #endif
-                                }
-                                .frame(maxHeight: .infinity)
-                        } else {
-                                VStack(alignment: .leading) {
-                                        HStack {
-                                                LayoutOptionView(layout: .qwerty, isSelected: selectedLayout.isQwerty)
-                                                LayoutOptionView(layout: .tripleStroke, isSelected: selectedLayout.isTripleStroke)
-                                                LayoutOptionView(layout: .nineKey, isSelected: selectedLayout.isNineKey)
-                                        }
-                                        if context.isRunningOnPhone {
-                                                #if DEBUG
-                                                HStack {
-                                                        LayoutOptionView(layout: .fourteenKey, isSelected: selectedLayout.isFourteenKey)
-                                                        LayoutOptionView(layout: .fifteenKey, isSelected: selectedLayout.isFifteenKey)
-                                                        LayoutOptionView(layout: .eighteenKey, isSelected: selectedLayout.isEighteenKey)
+                        .frame(height: PresetConstant.buttonLength)
+                        ScrollView(.vertical) {
+                                LazyVStack(spacing: 0) {
+                                        ZStack {
+                                                Color.interactiveClear
+                                                ZStack {
+                                                        RoundedRectangle(cornerRadius: 24, style: .continuous).stroke(Material.regular, lineWidth: 1)
+                                                        Grid(verticalSpacing: 16) {
+                                                                GridRow {
+                                                                        LayoutOptionView(layout: .qwerty, isSelected: selectedLayout.isQwerty)
+                                                                        LayoutOptionView(layout: .tripleStroke, isSelected: selectedLayout.isTripleStroke)
+                                                                        LayoutOptionView(layout: .nineKey, isSelected: selectedLayout.isNineKey)
+                                                                        LayoutOptionView(layout: .fourteenKey, isSelected: selectedLayout.isFourteenKey).opacity(isRunningOnPhone ? 1 : 0)
+                                                                }
+                                                                GridRow {
+                                                                        LayoutOptionView(layout: .fifteenKey, isSelected: selectedLayout.isFifteenKey)
+                                                                        LayoutOptionView(layout: .eighteenKey, isSelected: selectedLayout.isEighteenKey)
+                                                                        LayoutOptionView(layout: .nineteenKey, isSelected: selectedLayout.isNineteenKey)
+                                                                        LayoutOptionView(layout: .twentyOneKey, isSelected: selectedLayout.isTwentyOneKey)
+                                                                }
+                                                                .opacity(isRunningOnPhone ? 1 : 0)
+                                                        }
+                                                        .padding(8)
                                                 }
-                                                HStack {
-                                                        LayoutOptionView(layout: .nineteenKey, isSelected: selectedLayout.isNineteenKey)
-                                                        LayoutOptionView(layout: .twentyOneKey, isSelected: selectedLayout.isTwentyOneKey)
-                                                }
-                                                #else
-                                                HStack {
-                                                        LayoutOptionView(layout: .eighteenKey, isSelected: selectedLayout.isEighteenKey)
-                                                        LayoutOptionView(layout: .nineteenKey, isSelected: selectedLayout.isNineteenKey)
-                                                        LayoutOptionView(layout: .twentyOneKey, isSelected: selectedLayout.isTwentyOneKey)
-                                                }
-                                                #endif
+                                                .padding(.vertical, 8)
+                                                .padding(.horizontal, 16)
                                         }
                                 }
-                                .frame(maxHeight: .infinity)
                         }
                 }
         }
@@ -112,7 +90,6 @@ private struct LayoutOptionView: View {
                                                 .foregroundStyle(isSelected ? Color.accentColor : Color.primary)
                                 }
                         }
-                        .frame(width: 100, height: 68)
                 }
                 .buttonStyle(.plain)
         }
