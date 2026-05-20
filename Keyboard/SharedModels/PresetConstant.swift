@@ -13,13 +13,16 @@ struct PresetConstant {
         static let collapseHeight: CGFloat = 44
 
         /// KeyView corner radius
-        static let keyCornerRadius: CGFloat = 7
+        static let keyCornerRadius: CGFloat = 8
 
-        /// Large size KeyView corner radius
-        static let largeKeyCornerRadius: CGFloat = 8
+        /// Larger KeyView corner radius
+        static let largeKeyCornerRadius: CGFloat = 10
 
-        /// Highlighted selection view inside the key bubble preview
-        static let innerLargeKeyCornerRadius: CGFloat = 5
+        /// Largest KeyView corner radius
+        static let ultraKeyCornerRadius: CGFloat = 12
+
+        /// Highlighted selection view inside the key bubble preview (iPad)
+        static let innerLargeKeyCornerRadius: CGFloat = 6
 
         static let halfWidth: String = "半寬"
         static let fullWidth: String = "全寬"

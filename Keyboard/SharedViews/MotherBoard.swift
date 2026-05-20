@@ -74,7 +74,11 @@ struct MotherBoard: View {
                 case .numberPad, .decimalPad:
                         switch context.keyboardInterface {
                         case .phonePortrait, .phoneLandscape, .phoneOnPadPortrait, .phoneOnPadLandscape, .padFloating:
-                                NumberPad(isDecimalPad: context.keyboardForm == .decimalPad)
+                                if #available(iOSApplicationExtension 26.0, *) {
+                                        GlassNumberPad(isDecimalPad: context.keyboardForm.isDecimalPad)
+                                } else {
+                                        NumberPad(isDecimalPad: context.keyboardForm.isDecimalPad)
+                                }
                         case .padPortraitSmall, .padLandscapeSmall:
                                 PadNumericKeyboard()
                         case .padPortraitMedium, .padLandscapeMedium:

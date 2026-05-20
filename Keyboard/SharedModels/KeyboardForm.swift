@@ -59,6 +59,7 @@ extension KeyboardForm {
 
         var isNineKeyNumeric: Bool { self == .nineKeyNumeric }
         var isNineKeyStroke: Bool { self == .nineKeyStroke }
+        var isDecimalPad: Bool { self == .decimalPad }
 
         /// Should stay buffering, should keep the bufferText
         var isBufferable: Bool {
