@@ -16,7 +16,7 @@ struct EditingPanelGlassConversionKey: View {
                         VStack(spacing: 4) {
                                 Image(systemName: "arrow.left.arrow.right")
                                 Text("EditingPanel.HantHansConversion")
-                                        .font(.keyCaption)
+                                        .font(.labelCaption)
                                         .lineLimit(1)
                                         .minimumScaleFactor(0.5)
                                         .padding(.horizontal, 4)
@@ -58,7 +58,7 @@ struct EditingPanelConversionKey: View {
                         VStack(spacing: 4) {
                                 Image(systemName: "arrow.left.arrow.right")
                                 Text("EditingPanel.HantHansConversion")
-                                        .font(.keyCaption)
+                                        .font(.labelCaption)
                                         .lineLimit(1)
                                         .minimumScaleFactor(0.5)
                                         .padding(.horizontal, 4)

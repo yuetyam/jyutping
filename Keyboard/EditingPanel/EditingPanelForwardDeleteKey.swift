@@ -17,7 +17,7 @@ struct EditingPanelGlassForwardDeleteKey: View {
                         VStack(spacing: 4) {
                                 Image.forwardDelete.symbolVariant(isTouching ? .fill : .none)
                                 Text("EditingPanel.ForwardDelete")
-                                        .font(.keyCaption)
+                                        .font(.labelCaption)
                                         .lineLimit(1)
                                         .minimumScaleFactor(0.5)
                                         .padding(.horizontal, 4)
@@ -74,7 +74,7 @@ struct EditingPanelForwardDeleteKey: View {
                         VStack(spacing: 4) {
                                 Image.forwardDelete.symbolVariant(isTouching ? .fill : .none)
                                 Text("EditingPanel.ForwardDelete")
-                                        .font(.keyCaption)
+                                        .font(.labelCaption)
                                         .lineLimit(1)
                                         .minimumScaleFactor(0.5)
                                         .padding(.horizontal, 4)

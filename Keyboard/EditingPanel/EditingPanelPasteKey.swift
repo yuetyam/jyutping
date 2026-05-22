@@ -16,7 +16,7 @@ struct EditingPanelGlassPasteKey: View {
                         VStack(spacing: 4) {
                                 Image(systemName: "doc.on.clipboard")
                                 Text("EditingPanel.Paste")
-                                        .font(.keyCaption)
+                                        .font(.labelCaption)
                                         .lineLimit(1)
                                         .minimumScaleFactor(0.5)
                                         .padding(.horizontal, 4)
@@ -59,7 +59,7 @@ struct EditingPanelPasteKey: View {
                         VStack(spacing: 4) {
                                 Image(systemName: "doc.on.clipboard")
                                 Text("EditingPanel.Paste")
-                                        .font(.keyCaption)
+                                        .font(.labelCaption)
                                         .lineLimit(1)
                                         .minimumScaleFactor(0.5)
                                         .padding(.horizontal, 4)

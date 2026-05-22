@@ -77,7 +77,7 @@ struct ABCRightKey: View {
                                         .padding(.horizontal, horizontalPadding)
                                 ZStack(alignment: .topTrailing) {
                                         Color.clear
-                                        Text(verbatim: headerText).font(.keyFootnote)
+                                        Text(verbatim: headerText).font(.labelCaption)
                                 }
                                 .padding(.vertical, verticalPadding)
                                 .padding(.horizontal, horizontalPadding + 2)

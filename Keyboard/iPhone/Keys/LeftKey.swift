@@ -55,7 +55,7 @@ struct LeftKey: View {
                                                                         ZStack(alignment: .top) {
                                                                                 Color.interactiveClear
                                                                                 Text(verbatim: element.header ?? String.space)
-                                                                                        .font(.keyFootnote)
+                                                                                        .font(.labelCaption)
                                                                                         .shallow()
                                                                         }
                                                                         Text(verbatim: element.text)
@@ -90,14 +90,14 @@ struct LeftKey: View {
                                         .padding(.horizontal, horizontalPadding)
                                 ZStack(alignment: .topTrailing) {
                                         Color.clear
-                                        Text(verbatim: headerText).font(.keyFootnote)
+                                        Text(verbatim: headerText).font(.labelCaption)
                                 }
                                 .padding(.vertical, verticalPadding)
                                 .padding(.horizontal, horizontalPadding + 2)
                                 .opacity((shouldShowExtraHeader && context.inputStage.isBuffering.negative) ? 0.5 : 0)
                                 ZStack(alignment: .bottom) {
                                         Color.clear
-                                        Text(verbatim: PresetConstant.separate).font(.keyFootnote)
+                                        Text(verbatim: PresetConstant.separate).font(.labelCaption)
                                 }
                                 .padding(.vertical, verticalPadding + 2)
                                 .opacity(context.inputStage.isBuffering ? 0.5 : 0)

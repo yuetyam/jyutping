@@ -67,14 +67,14 @@ struct LargePadUpperLowerInputKey: View {
                                                                         ZStack(alignment: .top) {
                                                                                 Color.clear
                                                                                 Text(verbatim: element.header ?? String.space)
-                                                                                        .font(.keyFootnote)
+                                                                                        .font(.labelCaption)
                                                                                         .shallow()
                                                                         }
                                                                         .padding(2)
                                                                         ZStack(alignment: .bottom) {
                                                                                 Color.clear
                                                                                 Text(verbatim: element.footer ?? String.space)
-                                                                                        .font(.keyFootnote)
+                                                                                        .font(.labelCaption)
                                                                                         .shallow()
                                                                         }
                                                                         .padding(2)

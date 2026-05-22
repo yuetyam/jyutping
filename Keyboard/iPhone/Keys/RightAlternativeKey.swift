@@ -57,7 +57,7 @@ struct RightAlternativeKey: View {
                                                                         ZStack(alignment: .top) {
                                                                                 Color.interactiveClear
                                                                                 Text(verbatim: element.header ?? String.space)
-                                                                                        .font(.keyFootnote)
+                                                                                        .font(.labelCaption)
                                                                                         .shallow()
                                                                         }
                                                                         Text(verbatim: element.text)
@@ -92,14 +92,14 @@ struct RightAlternativeKey: View {
                                         .padding(.horizontal, horizontalPadding)
                                 ZStack(alignment: .bottomTrailing) {
                                         Color.clear
-                                        Text(verbatim: String.cantonesePeriod).font(.keyFootnote)
+                                        Text(verbatim: String.cantonesePeriod).font(.labelCaption)
                                 }
                                 .padding(.vertical, verticalPadding + 2)
                                 .padding(.horizontal, horizontalPadding + 4)
                                 .opacity((shouldShowExtraFooter && context.inputStage.isBuffering.negative) ? 0.5 : 0)
                                 ZStack(alignment: .bottom) {
                                         Color.clear
-                                        Text(verbatim: PresetConstant.separate).font(.keyFootnote)
+                                        Text(verbatim: PresetConstant.separate).font(.labelCaption)
                                 }
                                 .padding(.vertical, verticalPadding + 2)
                                 .opacity(context.inputStage.isBuffering ? 0.5 : 0)

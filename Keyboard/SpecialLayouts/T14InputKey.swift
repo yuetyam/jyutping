@@ -70,7 +70,7 @@ struct T14InputKey: View {
                                                                                 ZStack(alignment: extra.alignment) {
                                                                                         Color.clear
                                                                                         Text(verbatim: extra.text)
-                                                                                                .font(.keyFootnote)
+                                                                                                .font(.labelCaption)
                                                                                                 .shallow()
                                                                                 }
                                                                         }
@@ -101,7 +101,7 @@ struct T14InputKey: View {
                                                 Color.clear
                                                 Text(verbatim: extra.text)
                                                         .textCase(textCase)
-                                                        .font(.largerKeyFootnote)
+                                                        .font(.labelLargerCaption)
                                                         .shallow()
                                         }
                                         .padding(.vertical, verticalPadding + 1)

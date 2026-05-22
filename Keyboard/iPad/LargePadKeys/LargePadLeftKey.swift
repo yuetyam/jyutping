@@ -28,7 +28,7 @@ struct LargePadLeftKey: View {
                                 ZStack(alignment: .bottom) {
                                         Color.clear
                                         Text(verbatim: PresetConstant.separate)
-                                                .font(.keyFootnote)
+                                                .font(.labelCaption)
                                                 .shallow()
                                 }
                                 .padding(.vertical, verticalPadding + 7)

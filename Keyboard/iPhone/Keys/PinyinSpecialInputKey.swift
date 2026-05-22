@@ -85,7 +85,7 @@ struct PinyinSpecialInputKey: View {
                                         Color.clear
                                         Text(verbatim: "…")
                                                 .textCase(textCase)
-                                                .font(.keyFootnote)
+                                                .font(.labelCaption)
                                                 .shallow()
                                 }
                                 .padding(.vertical, verticalPadding)
@@ -94,7 +94,7 @@ struct PinyinSpecialInputKey: View {
                                         Color.clear
                                         Text(verbatim: "ü")
                                                 .textCase(textCase)
-                                                .font(.keyFootnote)
+                                                .font(.labelCaption)
                                                 .shallow()
                                 }
                                 .padding(.vertical, verticalPadding)

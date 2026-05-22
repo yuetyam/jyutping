@@ -52,7 +52,7 @@ struct ReturnKey: View {
                         default:
                                 ZStack(alignment: .bottomTrailing) {
                                         Color.clear
-                                        Text(context.returnKeyText).font(.keyCaption)
+                                        Text(context.returnKeyText).font(.labelCaption)
                                 }
                                 .padding(.vertical, verticalPadding + 1)
                                 .padding(.horizontal, horizontalPadding + 1)

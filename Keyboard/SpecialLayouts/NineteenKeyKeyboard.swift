@@ -175,7 +175,14 @@ private struct SecondLetterRow: View {
                         T18EnhancedInputKey(side: .leading, unit: KeyModel(primary: KeyElement("df"), members: [KeyElement("d"), KeyElement("f")]))
                         T18LetterInputKey(.letterG)
                         T18LetterInputKey(.letterH)
-                        T18EnhancedInputKey(side: .trailing, unit: KeyModel(primary: KeyElement("jk"), members: [KeyElement("k"), KeyElement("j")]))
+                        T18EnhancedInputKey(
+                                side: .trailing,
+                                virtual: .letterK,
+                                unit: KeyUnit(
+                                        primary: KeyElement("k", extras: [.init("j", alignment: .bottomLeading)]),
+                                        members: [KeyElement("k"), KeyElement("j")]
+                                )
+                        )
                         T18LetterInputKey(.letterL)
                 }
         }
@@ -218,7 +225,14 @@ private struct AltSecondLetterRow: View {
                         )
                         T18LetterInputKey(.letterG)
                         T18LetterInputKey(.letterH)
-                        T18EnhancedInputKey(side: .trailing, unit: KeyModel(primary: KeyElement("jk"), members: [KeyElement("k"), KeyElement("j")]))
+                        T18EnhancedInputKey(
+                                side: .trailing,
+                                virtual: .letterK,
+                                unit: KeyUnit(
+                                        primary: KeyElement("k", extras: [.init("j", alignment: .bottomLeading)]),
+                                        members: [KeyElement("k"), KeyElement("j")]
+                                )
+                        )
                         T18LetterInputKey(.letterL)
                 }
         }
@@ -283,8 +297,9 @@ private struct SecondEnhancedLetterRow: View {
                         )
                         T18EnhancedInputKey(
                                 side: .trailing,
+                                virtual: .letterK,
                                 unit: KeyUnit(
-                                        primary: KeyElement("jk", extras: [.init("「", alignment: .topTrailing)]),
+                                        primary: KeyElement("k", extras: [.init("j", alignment: .bottomLeading), .init("「", alignment: .topTrailing)]),
                                         members: [
                                                 KeyElement("k"),
                                                 KeyElement("j"),

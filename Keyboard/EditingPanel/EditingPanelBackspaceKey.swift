@@ -17,7 +17,7 @@ struct EditingPanelGlassBackspaceKey: View {
                         VStack(spacing: 4) {
                                 Image.backspace.symbolVariant(isTouching ? .fill : .none)
                                 Text("EditingPanel.Backspace")
-                                        .font(.keyCaption)
+                                        .font(.labelCaption)
                                         .lineLimit(1)
                                         .minimumScaleFactor(0.5)
                                         .padding(.horizontal, 4)
@@ -74,7 +74,7 @@ struct EditingPanelBackspaceKey: View {
                         VStack(spacing: 4) {
                                 Image.backspace.symbolVariant(isTouching ? .fill : .none)
                                 Text("EditingPanel.Backspace")
-                                        .font(.keyCaption)
+                                        .font(.labelCaption)
                                         .lineLimit(1)
                                         .minimumScaleFactor(0.5)
                                         .padding(.horizontal, 4)

@@ -51,7 +51,7 @@ struct PinyinSpecialLetterKey: View {
                                         Color.clear
                                         Text(verbatim: "ü")
                                                 .textCase(textCase)
-                                                .font(.keyFootnote)
+                                                .font(.labelCaption)
                                                 .shallow()
                                 }
                                 .padding(.vertical, verticalPadding)

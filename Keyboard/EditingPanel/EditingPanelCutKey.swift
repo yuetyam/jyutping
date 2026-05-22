@@ -16,7 +16,7 @@ struct EditingPanelGlassCutKey: View {
                         VStack(spacing: 4) {
                                 Image(systemName: "scissors")
                                 Text("EditingPanel.Cut")
-                                        .font(.keyCaption)
+                                        .font(.labelCaption)
                                         .lineLimit(1)
                                         .minimumScaleFactor(0.5)
                                         .padding(.horizontal, 4)
@@ -58,7 +58,7 @@ struct EditingPanelCutKey: View {
                         VStack(spacing: 4) {
                                 Image(systemName: "scissors")
                                 Text("EditingPanel.Cut")
-                                        .font(.keyCaption)
+                                        .font(.labelCaption)
                                         .lineLimit(1)
                                         .minimumScaleFactor(0.5)
                                         .padding(.horizontal, 4)

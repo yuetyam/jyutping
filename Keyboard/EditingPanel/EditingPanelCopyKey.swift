@@ -16,7 +16,7 @@ struct EditingPanelGlassCopyKey: View {
                         VStack(spacing: 4) {
                                 Image(systemName: "doc.on.doc")
                                 Text("EditingPanel.Copy")
-                                        .font(.keyCaption)
+                                        .font(.labelCaption)
                                         .lineLimit(1)
                                         .minimumScaleFactor(0.5)
                                         .padding(.horizontal, 4)
@@ -58,7 +58,7 @@ struct EditingPanelCopyKey: View {
                         VStack(spacing: 4) {
                                 Image(systemName: "doc.on.doc")
                                 Text("EditingPanel.Copy")
-                                        .font(.keyCaption)
+                                        .font(.labelCaption)
                                         .lineLimit(1)
                                         .minimumScaleFactor(0.5)
                                         .padding(.horizontal, 4)

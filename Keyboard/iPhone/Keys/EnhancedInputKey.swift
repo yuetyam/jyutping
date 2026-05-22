@@ -70,13 +70,13 @@ struct EnhancedInputKey: View {
                                                                         ZStack(alignment: .top) {
                                                                                 Color.interactiveClear
                                                                                 Text(verbatim: element.header ?? String.space)
-                                                                                        .font(.keyFootnote)
+                                                                                        .font(.labelCaption)
                                                                                         .shallow()
                                                                         }
                                                                         ZStack(alignment: .bottom) {
                                                                                 Color.interactiveClear
                                                                                 Text(verbatim: element.footer ?? String.space)
-                                                                                        .font(.keyFootnote)
+                                                                                        .font(.labelCaption)
                                                                                         .shallow()
                                                                         }
                                                                         Text(verbatim: element.text)
@@ -116,7 +116,7 @@ struct EnhancedInputKey: View {
                                         Color.clear
                                         Text(verbatim: keyModel.primary.header ?? String.space)
                                                 .textCase(textCase)
-                                                .font(.keyFootnote)
+                                                .font(.labelCaption)
                                                 .shallow()
                                 }
                                 .padding(.vertical, verticalPadding)
@@ -125,7 +125,7 @@ struct EnhancedInputKey: View {
                                         Color.clear
                                         Text(verbatim: keyModel.primary.footer ?? String.space)
                                                 .textCase(textCase)
-                                                .font(.keyFootnote)
+                                                .font(.labelCaption)
                                                 .shallow()
                                 }
                                 .padding(.vertical, verticalPadding)

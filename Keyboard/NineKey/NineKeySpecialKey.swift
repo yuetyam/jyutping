@@ -17,7 +17,7 @@ struct GlassNineKeySpecialKey: View {
                         ZStack(alignment: .bottom) {
                                 Color.clear
                                 Text(verbatim: isBuffering ? PresetConstant.separate : PresetConstant.reverseLookup)
-                                        .font(.keyFootnote)
+                                        .font(.labelCaption)
                                         .opacity(isBuffering ? 0 : 0.35)
                         }
                         .padding(.bottom, 2)
@@ -61,7 +61,7 @@ struct NineKeySpecialKey: View {
                         ZStack(alignment: .bottom) {
                                 Color.clear
                                 Text(verbatim: isBuffering ? PresetConstant.separate : PresetConstant.reverseLookup)
-                                        .font(.keyFootnote)
+                                        .font(.labelCaption)
                                         .opacity(isBuffering ? 0 : 0.35)
                         }
                         .padding(.bottom, 5)

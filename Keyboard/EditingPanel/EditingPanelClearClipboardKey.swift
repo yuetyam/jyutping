@@ -16,7 +16,7 @@ struct EditingPanelGlassClearClipboardKey: View {
                         VStack(spacing: 4) {
                                 Image(systemName: "clipboard")
                                 Text("EditingPanel.ClearSystemClipboard")
-                                        .font(.keyCaption)
+                                        .font(.labelCaption)
                                         .lineLimit(1)
                                         .minimumScaleFactor(0.5)
                                         .padding(.horizontal, 4)
@@ -58,7 +58,7 @@ struct EditingPanelClearClipboardKey: View {
                         VStack(spacing: 4) {
                                 Image(systemName: "clipboard")
                                 Text("EditingPanel.ClearSystemClipboard")
-                                        .font(.keyCaption)
+                                        .font(.labelCaption)
                                         .lineLimit(1)
                                         .minimumScaleFactor(0.5)
                                         .padding(.horizontal, 4)

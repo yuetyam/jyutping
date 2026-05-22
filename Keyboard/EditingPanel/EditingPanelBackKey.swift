@@ -16,7 +16,7 @@ struct EditingPanelGlassBackKey: View {
                         VStack(spacing: 4) {
                                 Image.chevronUp
                                 Text("EditingPanel.Back")
-                                        .font(.keyCaption)
+                                        .font(.labelCaption)
                                         .lineLimit(1)
                                         .minimumScaleFactor(0.5)
                                         .padding(.horizontal, 4)
@@ -58,7 +58,7 @@ struct EditingPanelBackKey: View {
                         VStack(spacing: 4) {
                                 Image.chevronUp
                                 Text("EditingPanel.Back")
-                                        .font(.keyCaption)
+                                        .font(.labelCaption)
                                         .lineLimit(1)
                                         .minimumScaleFactor(0.5)
                                         .padding(.horizontal, 4)

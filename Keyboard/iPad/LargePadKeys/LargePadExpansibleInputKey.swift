@@ -61,14 +61,14 @@ struct LargePadExpansibleInputKey: View {
                                                                         ZStack(alignment: .top) {
                                                                                 Color.clear
                                                                                 Text(verbatim: element.header ?? String.space)
-                                                                                        .font(.keyFootnote)
+                                                                                        .font(.labelCaption)
                                                                                         .shallow()
                                                                         }
                                                                         .padding(2)
                                                                         ZStack(alignment: .bottom) {
                                                                                 Color.clear
                                                                                 Text(verbatim: element.footer ?? String.space)
-                                                                                        .font(.keyFootnote)
+                                                                                        .font(.labelCaption)
                                                                                         .shallow()
                                                                         }
                                                                         .padding(2)
@@ -98,7 +98,7 @@ struct LargePadExpansibleInputKey: View {
                                         Color.clear
                                         Text(verbatim: keyModel.primary.header ?? String.space)
                                                 .textCase(textCase)
-                                                .font(.keyFootnote)
+                                                .font(.labelCaption)
                                                 .shallow()
                                 }
                                 .padding(.vertical, verticalPadding + 2)
@@ -107,7 +107,7 @@ struct LargePadExpansibleInputKey: View {
                                         Color.clear
                                         Text(verbatim: keyModel.primary.footer ?? String.space)
                                                 .textCase(textCase)
-                                                .font(.keyFootnote)
+                                                .font(.labelCaption)
                                                 .shallow()
                                 }
                                 .padding(.vertical, verticalPadding + 2)
