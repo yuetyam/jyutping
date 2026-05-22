@@ -5,17 +5,13 @@ import CommonExtensions
 /// iPhone number row key view
 struct NumberInputKey: View {
 
-        init(_ event: VirtualInputKey) {
-                self.event = event
-                self.keyText = event.text
+        init(_ virtual: VirtualInputKey) {
+                self.virtual = virtual
         }
-
-        private let event: VirtualInputKey
-        private let keyText: String
+        private let virtual: VirtualInputKey
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
-
         @GestureState private var isTouching: Bool = false
 
         var body: some View {
@@ -38,7 +34,7 @@ struct NumberInputKey: View {
                                         .fill(colorScheme.previewBubbleColor)
                                         .shadow(color: .shadowGray, radius: 1)
                                         .overlay {
-                                                Text(verbatim: keyText)
+                                                Text(verbatim: virtual.text)
                                                         .font(.largeTitle)
                                                         .padding(.bottom, previewBottomOffset)
                                         }
@@ -50,23 +46,21 @@ struct NumberInputKey: View {
                                         .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                         .padding(.vertical, verticalPadding)
                                         .padding(.horizontal, horizontalPadding)
-                                Text(verbatim: keyText)
+                                Text(verbatim: virtual.text)
                                         .font(.letterCompact)
                         }
                 }
                 .frame(width: keyWidth, height: keyHeight)
                 .contentShape(.rect)
                 .gesture(DragGesture(minimumDistance: 0)
-                        .updating($isTouching) { _, tapped, _ in
-                                if tapped.negative {
+                        .updating($isTouching) { _, isTouched, _ in
+                                if isTouched.negative {
+                                        isTouched = true
                                         AudioFeedback.inputed()
                                         context.triggerHapticFeedback()
-                                        tapped = true
+                                        context.handle(virtual, isCapitalized: false)
                                 }
                         }
-                        .onEnded { _ in
-                                context.handle(event, isCapitalized: false)
-                         }
                 )
         }
 }

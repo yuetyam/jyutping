@@ -95,22 +95,21 @@ struct TailoredStrokeKeyboard: View {
 @available(iOS 26.0, *)
 @available(iOSApplicationExtension 26.0, *)
 private struct GlassStrokeKey: View {
-        init(_ key: StrokeVirtualKey) {
-                self.key = key
-                self.text = key.strokeText ?? "?"
+        init(_ stroke: StrokeVirtualKey) {
+                self.stroke = stroke
+                self.keyText = stroke.strokeText ?? "?"
         }
-        private let key: StrokeVirtualKey
-        private let text: String
+        private let stroke: StrokeVirtualKey
+        private let keyText: String
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
-
         @GestureState private var isTouching: Bool = false
 
         var body: some View {
                 ZStack {
                         Color.interactiveClear
-                        Text(verbatim: text).font(.letterCompact)
+                        Text(verbatim: keyText).font(.letterCompact)
                 }
                 .glassEffect(isTouching ? .regular : .clear, in: RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous))
                 .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
@@ -118,15 +117,13 @@ private struct GlassStrokeKey: View {
                 .frame(width: context.nineKeyWidthUnit * 1.04, height: context.heightUnit)
                 .contentShape(.rect)
                 .gesture(DragGesture(minimumDistance: 0)
-                        .updating($isTouching) { _, tapped, _ in
-                                if tapped.negative {
+                        .updating($isTouching) { _, isTouched, _ in
+                                if isTouched.negative {
+                                        isTouched = true
                                         AudioFeedback.inputed()
                                         context.triggerHapticFeedback()
-                                        tapped = true
+                                        context.handle(stroke.virtualInputKey)
                                 }
-                        }
-                        .onEnded { _ in
-                                context.handle(key.virtualInputKey)
                         }
                 )
         }
@@ -134,17 +131,15 @@ private struct GlassStrokeKey: View {
 
 private struct LegacyStrokeKey: View {
 
-        init(_ key: StrokeVirtualKey) {
-                self.key = key
-                self.text = key.strokeText ?? "?"
+        init(_ stroke: StrokeVirtualKey) {
+                self.stroke = stroke
+                self.keyText = stroke.strokeText ?? "?"
         }
-
-        private let key: StrokeVirtualKey
-        private let text: String
+        private let stroke: StrokeVirtualKey
+        private let keyText: String
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
-
         @GestureState private var isTouching: Bool = false
 
         var body: some View {
@@ -154,21 +149,19 @@ private struct LegacyStrokeKey: View {
                                 .fill(isTouching ? colorScheme.activeInputKeyColor : colorScheme.inputKeyColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(3)
-                        Text(verbatim: text).font(.letterCompact)
+                        Text(verbatim: keyText).font(.letterCompact)
                 }
                 .frame(width: context.nineKeyWidthUnit * 1.04, height: context.heightUnit)
                 .contentShape(.rect)
                 .gesture(DragGesture(minimumDistance: 0)
-                        .updating($isTouching) { _, tapped, _ in
-                                if tapped.negative {
+                        .updating($isTouching) { _, isTouched, _ in
+                                if isTouched.negative {
+                                        isTouched = true
                                         AudioFeedback.inputed()
                                         context.triggerHapticFeedback()
-                                        tapped = true
+                                        context.handle(stroke.virtualInputKey)
                                 }
                         }
-                        .onEnded { _ in
-                                context.handle(key.virtualInputKey)
-                         }
                 )
         }
 }

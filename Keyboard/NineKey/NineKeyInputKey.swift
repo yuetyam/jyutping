@@ -13,7 +13,6 @@ struct GlassNineKeyInputKey: View {
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
-
         @GestureState private var isTouching: Bool = false
 
         var body: some View {
@@ -27,15 +26,13 @@ struct GlassNineKeyInputKey: View {
                 .frame(width: context.nineKeyWidthUnit * 1.04, height: context.heightUnit)
                 .contentShape(.rect)
                 .gesture(DragGesture(minimumDistance: 0)
-                        .updating($isTouching) { _, tapped, _ in
-                                if tapped.negative {
+                        .updating($isTouching) { _, isTouched, _ in
+                                if isTouched.negative {
+                                        isTouched = true
                                         AudioFeedback.inputed()
                                         context.triggerHapticFeedback()
-                                        tapped = true
+                                        context.nineKeyProcess(combo)
                                 }
-                        }
-                        .onEnded { _ in
-                                context.nineKeyProcess(combo)
                         }
                 )
         }
@@ -65,15 +62,13 @@ struct NineKeyInputKey: View {
                 .frame(width: context.nineKeyWidthUnit * 1.04, height: context.heightUnit)
                 .contentShape(.rect)
                 .gesture(DragGesture(minimumDistance: 0)
-                        .updating($isTouching) { _, tapped, _ in
-                                if tapped.negative {
+                        .updating($isTouching) { _, isTouched, _ in
+                                if isTouched.negative {
+                                        isTouched = true
                                         AudioFeedback.inputed()
                                         context.triggerHapticFeedback()
-                                        tapped = true
+                                        context.nineKeyProcess(combo)
                                 }
-                        }
-                        .onEnded { _ in
-                                context.nineKeyProcess(combo)
                         }
                 )
         }

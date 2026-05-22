@@ -4,20 +4,18 @@ import CommonExtensions
 
 struct CangjieInputKey: View {
 
-        init(_ event: VirtualInputKey) {
-                self.event = event
-                self.letter = event.text
-                let root: Character = Converter.cangjie(of: event) ?? "?"
+        init(_ virtual: VirtualInputKey) {
+                self.virtual = virtual
+                self.letter = virtual.text
+                let root: Character = Converter.cangjie(of: virtual) ?? "?"
                 self.radical = String(root)
         }
-
-        private let event: VirtualInputKey
+        private let virtual: VirtualInputKey
         private let letter: String
         private let radical: String
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
-
         @GestureState private var isTouching: Bool = false
 
         var body: some View {
@@ -69,16 +67,14 @@ struct CangjieInputKey: View {
                 .frame(width: keyWidth, height: keyHeight)
                 .contentShape(.rect)
                 .gesture(DragGesture(minimumDistance: 0)
-                        .updating($isTouching) { _, tapped, _ in
-                                if tapped.negative {
+                        .updating($isTouching) { _, isTouched, _ in
+                                if isTouched.negative {
+                                        isTouched = true
                                         AudioFeedback.inputed()
                                         context.triggerHapticFeedback()
-                                        tapped = true
+                                        context.handle(virtual)
                                 }
                         }
-                        .onEnded { _ in
-                                context.handle(event)
-                         }
                 )
         }
 }

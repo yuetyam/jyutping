@@ -7,12 +7,10 @@ struct LetterInputKey: View {
         init(_ virtual: VirtualInputKey) {
                 self.virtual = virtual
         }
-
         private let virtual: VirtualInputKey
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
-
         @GestureState private var isTouching: Bool = false
 
         var body: some View {
@@ -60,16 +58,14 @@ struct LetterInputKey: View {
                 .frame(width: keyWidth, height: keyHeight)
                 .contentShape(.rect)
                 .gesture(DragGesture(minimumDistance: 0)
-                        .updating($isTouching) { _, tapped, _ in
-                                if tapped.negative {
+                        .updating($isTouching) { _, isTouched, _ in
+                                if isTouched.negative {
+                                        isTouched = true
                                         AudioFeedback.inputed()
                                         context.triggerHapticFeedback()
-                                        tapped = true
+                                        context.handle(virtual)
                                 }
                         }
-                        .onEnded { _ in
-                                context.handle(virtual)
-                         }
                 )
         }
 }

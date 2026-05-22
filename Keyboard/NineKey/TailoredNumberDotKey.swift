@@ -20,15 +20,13 @@ struct GlassTailoredNumberDotKey: View {
                 .frame(width: context.nineKeyWidthUnit * 1.04, height: context.heightUnit)
                 .contentShape(.rect)
                 .gesture(DragGesture(minimumDistance: 0)
-                        .updating($isTouching) { _, tapped, _ in
-                                if tapped.negative {
+                        .updating($isTouching) { _, isTouched, _ in
+                                if isTouched.negative {
+                                        isTouched = true
                                         AudioFeedback.inputed()
                                         context.triggerHapticFeedback()
-                                        tapped = true
+                                        context.operate(.input(keyText))
                                 }
-                        }
-                        .onEnded { _ in
-                                context.operate(.input(keyText))
                         }
                 )
         }
@@ -51,15 +49,13 @@ struct TailoredNumberDotKey: View {
                 .frame(width: context.nineKeyWidthUnit * 1.04, height: context.heightUnit)
                 .contentShape(.rect)
                 .gesture(DragGesture(minimumDistance: 0)
-                        .updating($isTouching) { _, tapped, _ in
-                                if tapped.negative {
+                        .updating($isTouching) { _, isTouched, _ in
+                                if isTouched.negative {
+                                        isTouched = true
                                         AudioFeedback.inputed()
                                         context.triggerHapticFeedback()
-                                        tapped = true
+                                        context.operate(.input(keyText))
                                 }
-                        }
-                        .onEnded { _ in
-                                context.operate(.input(keyText))
                         }
                 )
         }

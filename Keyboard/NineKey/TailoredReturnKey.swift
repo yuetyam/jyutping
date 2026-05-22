@@ -5,7 +5,6 @@ struct TailoredReturnKey: View {
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
-
         @GestureState private var isTouching: Bool = false
 
         var body: some View {
@@ -90,15 +89,13 @@ struct TailoredReturnKey: View {
                 .frame(width: context.nineKeyWidthUnit * 0.94, height: context.heightUnit * 2)
                 .contentShape(.rect)
                 .gesture(DragGesture(minimumDistance: 0)
-                        .updating($isTouching) { _, tapped, _ in
-                                if tapped.negative {
+                        .updating($isTouching) { _, isTouched, _ in
+                                if isTouched.negative {
+                                        isTouched = true
                                         AudioFeedback.modified()
                                         context.triggerHapticFeedback()
-                                        tapped = true
+                                        context.operate(.return)
                                 }
-                        }
-                        .onEnded { _ in
-                                context.operate(.return)
                         }
                 )
         }

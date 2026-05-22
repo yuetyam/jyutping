@@ -6,20 +6,19 @@ import CoreIME
 @available(iOSApplicationExtension 26.0, *)
 struct GlassTailoredNumberKey: View {
 
-        init(_ virtualKey: VirtualInputKey) {
-                self.virtualKey = virtualKey
+        init(_ virtual: VirtualInputKey) {
+                self.virtual = virtual
         }
-        private let virtualKey: VirtualInputKey
+        private let virtual: VirtualInputKey
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
-
         @GestureState private var isTouching: Bool = false
 
         var body: some View {
                 ZStack {
                         Color.interactiveClear
-                        Text(verbatim: virtualKey.text).font(.letterCompact)
+                        Text(verbatim: virtual.text).font(.letterCompact)
                 }
                 .glassEffect(isTouching ? .regular : .clear, in: RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous))
                 .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
@@ -27,15 +26,13 @@ struct GlassTailoredNumberKey: View {
                 .frame(width: context.nineKeyWidthUnit * 1.04, height: context.heightUnit)
                 .contentShape(.rect)
                 .gesture(DragGesture(minimumDistance: 0)
-                        .updating($isTouching) { _, tapped, _ in
-                                if tapped.negative {
+                        .updating($isTouching) { _, isTouched, _ in
+                                if isTouched.negative {
+                                        isTouched = true
                                         AudioFeedback.inputed()
                                         context.triggerHapticFeedback()
-                                        tapped = true
+                                        context.handle(virtual)
                                 }
-                        }
-                        .onEnded { _ in
-                                context.handle(virtualKey)
                         }
                 )
         }
@@ -43,14 +40,13 @@ struct GlassTailoredNumberKey: View {
 
 struct TailoredNumberKey: View {
 
-        init(_ virtualKey: VirtualInputKey) {
-                self.virtualKey = virtualKey
+        init(_ virtual: VirtualInputKey) {
+                self.virtual = virtual
         }
-        private let virtualKey: VirtualInputKey
+        private let virtual: VirtualInputKey
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
-
         @GestureState private var isTouching: Bool = false
 
         var body: some View {
@@ -60,20 +56,18 @@ struct TailoredNumberKey: View {
                                 .fill(isTouching ? colorScheme.activeInputKeyColor : colorScheme.inputKeyColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(3)
-                        Text(verbatim: virtualKey.text).font(.letterCompact)
+                        Text(verbatim: virtual.text).font(.letterCompact)
                 }
                 .frame(width: context.nineKeyWidthUnit * 1.04, height: context.heightUnit)
                 .contentShape(.rect)
                 .gesture(DragGesture(minimumDistance: 0)
-                        .updating($isTouching) { _, tapped, _ in
-                                if tapped.negative {
+                        .updating($isTouching) { _, isTouched, _ in
+                                if isTouched.negative {
+                                        isTouched = true
                                         AudioFeedback.inputed()
                                         context.triggerHapticFeedback()
-                                        tapped = true
+                                        context.handle(virtual)
                                 }
-                        }
-                        .onEnded { _ in
-                                context.handle(virtualKey)
                         }
                 )
         }

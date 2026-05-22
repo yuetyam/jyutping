@@ -8,13 +8,11 @@ struct SymbolInputKey: View {
                 self.text = text
                 self.widthUnitTimes = widthUnitTimes
         }
-
         private let text: String
         private let widthUnitTimes: CGFloat
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
-
         @GestureState private var isTouching: Bool = false
 
         var body: some View {
@@ -56,16 +54,14 @@ struct SymbolInputKey: View {
                 .frame(width: keyWidth, height: keyHeight)
                 .contentShape(.rect)
                 .gesture(DragGesture(minimumDistance: 0)
-                        .updating($isTouching) { _, tapped, _ in
-                                if tapped.negative {
+                        .updating($isTouching) { _, isTouched, _ in
+                                if isTouched.negative {
+                                        isTouched = true
                                         AudioFeedback.inputed()
                                         context.triggerHapticFeedback()
-                                        tapped = true
+                                        context.operate(.process(text))
                                 }
                         }
-                        .onEnded { _ in
-                                context.operate(.process(text))
-                         }
                 )
         }
 }

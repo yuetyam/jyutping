@@ -8,7 +8,6 @@ struct GlassNineKeySpecialKey: View {
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
-
         @GestureState private var isTouching: Bool = false
 
         var body: some View {
@@ -31,16 +30,14 @@ struct GlassNineKeySpecialKey: View {
                 .frame(width: context.nineKeyWidthUnit * 1.04, height: context.heightUnit)
                 .contentShape(.rect)
                 .gesture(DragGesture(minimumDistance: 0)
-                        .updating($isTouching) { _, tapped, _ in
-                                if tapped.negative {
+                        .updating($isTouching) { _, isTouched, _ in
+                                if isTouched.negative {
+                                        isTouched = true
                                         AudioFeedback.inputed()
                                         context.triggerHapticFeedback()
-                                        tapped = true
-                                }
-                        }
-                        .onEnded { _ in
-                                if context.inputStage.isBuffering.negative {
-                                        context.nineKeyProcess(.special)
+                                        if context.inputStage.isBuffering.negative {
+                                                context.nineKeyProcess(.special)
+                                        }
                                 }
                         }
                 )
@@ -51,7 +48,6 @@ struct NineKeySpecialKey: View {
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
-
         @GestureState private var isTouching: Bool = false
 
         var body: some View {
@@ -75,16 +71,14 @@ struct NineKeySpecialKey: View {
                 .frame(width: context.nineKeyWidthUnit * 1.04, height: context.heightUnit)
                 .contentShape(.rect)
                 .gesture(DragGesture(minimumDistance: 0)
-                        .updating($isTouching) { _, tapped, _ in
-                                if tapped.negative {
+                        .updating($isTouching) { _, isTouched, _ in
+                                if isTouched.negative {
+                                        isTouched = true
                                         AudioFeedback.inputed()
                                         context.triggerHapticFeedback()
-                                        tapped = true
-                                }
-                        }
-                        .onEnded { _ in
-                                if context.inputStage.isBuffering.negative {
-                                        context.nineKeyProcess(.special)
+                                        if context.inputStage.isBuffering.negative {
+                                                context.nineKeyProcess(.special)
+                                        }
                                 }
                         }
                 )

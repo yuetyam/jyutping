@@ -38,15 +38,13 @@ struct GlassTailoredNavigateKey: View {
                 .frame(width: context.nineKeyWidthUnit * 0.94, height: context.heightUnit)
                 .contentShape(.rect)
                 .gesture(DragGesture(minimumDistance: 0)
-                        .updating($isTouching) { _, tapped, _ in
-                                if tapped.negative {
-                                        AudioFeedback.inputed()
+                        .updating($isTouching) { _, isTouched, _ in
+                                if isTouched.negative {
+                                        isTouched = true
+                                        AudioFeedback.modified()
                                         context.triggerHapticFeedback()
-                                        tapped = true
+                                        context.updateKeyboardForm(to: destination)
                                 }
-                        }
-                        .onEnded { _ in
-                                context.updateKeyboardForm(to: destination)
                         }
                 )
         }
@@ -88,15 +86,13 @@ struct TailoredNavigateKey: View {
                 .frame(width: context.nineKeyWidthUnit * 0.94, height: context.heightUnit)
                 .contentShape(.rect)
                 .gesture(DragGesture(minimumDistance: 0)
-                        .updating($isTouching) { _, tapped, _ in
-                                if tapped.negative {
+                        .updating($isTouching) { _, isTouched, _ in
+                                if isTouched.negative {
+                                        isTouched = true
                                         AudioFeedback.modified()
                                         context.triggerHapticFeedback()
-                                        tapped = true
+                                        context.updateKeyboardForm(to: destination)
                                 }
-                        }
-                        .onEnded { _ in
-                                context.updateKeyboardForm(to: destination)
                         }
                 )
         }
