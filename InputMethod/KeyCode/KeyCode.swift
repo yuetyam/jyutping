@@ -298,7 +298,7 @@ struct KeyCode {
         ]
 
         @available(*, unavailable, message: "Unknown")
-        struct Feature {
+        private struct Feature {
                 static let VK_BRIGHTNESS_DOWN: UInt16 = 0x91
                 static let VK_BRIGHTNESS_UP  : UInt16 = 0x90
                 static let VK_DASHBOARD      : UInt16 = 0x82
@@ -309,7 +309,7 @@ struct KeyCode {
 
         // https://en.wikipedia.org/wiki/IBM_PC_keyboard
         @available(*, unavailable)
-        struct PCKey {
+        private struct PCKey {
                 static let VK_PC_APPLICATION   : UInt16 = 0x6e
                 static let VK_PC_INSERT        : UInt16 = 0x72
                 static let VK_PC_KEYPAD_NUMLOCK: UInt16 = 0x47
@@ -320,7 +320,7 @@ struct KeyCode {
         }
 
         @available(*, unavailable)
-        struct International {
+        private struct International {
                 static let VK_DANISH_DOLLAR   : UInt16 = 0xa
                 static let VK_DANISH_LESS_THAN: UInt16 = 0x32
 
