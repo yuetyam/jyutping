@@ -57,7 +57,7 @@ extension RandomAccessCollection where Element == Lexicon {
                         return map({ Candidate(text: $0.text, lexicon: $0, commentForm: commentForm, charset: charset) })
                 case .inherited, .hongkong, .taiwan, .ancientBooksPublishing:
                         let statement: OpaquePointer? = {
-                                let query: String = "SELECT right FROM \(charset.variantTableName) WHERE left = ? LIMIT 1;"
+                                let query: String = "SELECT target FROM \(charset.variantTableName) WHERE source = ? LIMIT 1;"
                                 var pointer: OpaquePointer? = nil
                                 guard sqlite3_prepare_v2(Engine.database, query, -1, &pointer, nil) == SQLITE_OK else { return nil }
                                 return pointer
@@ -72,7 +72,7 @@ extension RandomAccessCollection where Element == Lexicon {
                         })
                 case .prcGeneral:
                         let statement: OpaquePointer? = {
-                                let query: String = "SELECT right FROM \(charset.variantTableName) WHERE left = ? LIMIT 1;"
+                                let query: String = "SELECT target FROM \(charset.variantTableName) WHERE source = ? LIMIT 1;"
                                 var pointer: OpaquePointer? = nil
                                 guard sqlite3_prepare_v2(Engine.database, query, -1, &pointer, nil) == SQLITE_OK else { return nil }
                                 return pointer
@@ -87,7 +87,7 @@ extension RandomAccessCollection where Element == Lexicon {
                         })
                 case .mutilated:
                         let statement: OpaquePointer? = {
-                                let query: String = "SELECT right FROM \(charset.variantTableName) WHERE left = ? LIMIT 1;"
+                                let query: String = "SELECT target FROM \(charset.variantTableName) WHERE source = ? LIMIT 1;"
                                 var pointer: OpaquePointer? = nil
                                 guard sqlite3_prepare_v2(Engine.database, query, -1, &pointer, nil) == SQLITE_OK else { return nil }
                                 return pointer
@@ -116,26 +116,20 @@ public struct Converter {
                 switch variant {
                 case .preset, .custom, .etymology, .opencc:
                         return text
-                case .inherited:
-                        return variantMap(text: text, tableName: variant.variantTableName)
-                case .hongkong:
-                        return variantMap(text: text, tableName: variant.variantTableName)
-                case .taiwan:
+                case .inherited, .hongkong, .taiwan, .ancientBooksPublishing:
                         return variantMap(text: text, tableName: variant.variantTableName)
                 case .prcGeneral:
                         let statement: OpaquePointer? = {
-                                let query: String = "SELECT right FROM \(variant.variantTableName) WHERE left = ? LIMIT 1;"
+                                let query: String = "SELECT target FROM \(variant.variantTableName) WHERE source = ? LIMIT 1;"
                                 var pointer: OpaquePointer? = nil
                                 guard sqlite3_prepare_v2(Engine.database, query, -1, &pointer, nil) == SQLITE_OK else { return nil }
                                 return pointer
                         }()
                         defer { sqlite3_finalize(statement) }
                         return Converter.prcGeneralConvert(text, statement: statement)
-                case .ancientBooksPublishing:
-                        return variantMap(text: text, tableName: variant.variantTableName)
                 case .mutilated:
                         let statement: OpaquePointer? = {
-                                let query: String = "SELECT right FROM \(variant.variantTableName) WHERE left = ? LIMIT 1;"
+                                let query: String = "SELECT target FROM \(variant.variantTableName) WHERE source = ? LIMIT 1;"
                                 var pointer: OpaquePointer? = nil
                                 guard sqlite3_prepare_v2(Engine.database, query, -1, &pointer, nil) == SQLITE_OK else { return nil }
                                 return pointer
@@ -146,7 +140,7 @@ public struct Converter {
         }
         private static func variantMap(text: String, tableName: String) -> String {
                 let statement: OpaquePointer? = {
-                        let query: String = "SELECT right FROM \(tableName) WHERE left = ? LIMIT 1;"
+                        let query: String = "SELECT target FROM \(tableName) WHERE source = ? LIMIT 1;"
                         var pointer: OpaquePointer? = nil
                         guard sqlite3_prepare_v2(Engine.database, query, -1, &pointer, nil) == SQLITE_OK else { return nil }
                         return pointer
