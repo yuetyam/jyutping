@@ -64,6 +64,17 @@ private struct LayoutOptionView: View {
                                         if #available(iOSApplicationExtension 26.0, *) {
                                                 ZStack {
                                                         Color.clear
+                                                        ZStack(alignment: .bottomTrailing) {
+                                                                Color.clear
+                                                                Image(systemName: "checkmark.circle.fill")
+                                                                        .resizable()
+                                                                        .scaledToFit()
+                                                                        .symbolRenderingMode(.multicolor)
+                                                                        .frame(width: 11, height: 11)
+                                                                        .padding(.bottom, 7)
+                                                                        .padding(.trailing, 6)
+                                                        }
+                                                        .opacity(isSelected ? 1 : 0)
                                                         Image(systemName: layout.isNineKey ? "square.grid.3x3" : "keyboard")
                                                                 .resizable()
                                                                 .scaledToFit()
@@ -75,6 +86,17 @@ private struct LayoutOptionView: View {
                                         } else {
                                                 ZStack {
                                                         Circle().fill(isSelected ? Material.regular : Material.ultraThick)
+                                                        ZStack(alignment: .bottomTrailing) {
+                                                                Color.clear
+                                                                Image(systemName: "checkmark.circle.fill")
+                                                                        .resizable()
+                                                                        .scaledToFit()
+                                                                        .symbolRenderingMode(.multicolor)
+                                                                        .frame(width: 11, height: 11)
+                                                                        .padding(.bottom, 7)
+                                                                        .padding(.trailing, 6)
+                                                        }
+                                                        .opacity(isSelected ? 1 : 0)
                                                         Image(systemName: layout.isNineKey ? "square.grid.3x3" : "keyboard")
                                                                 .resizable()
                                                                 .scaledToFit()
@@ -87,7 +109,6 @@ private struct LayoutOptionView: View {
                                                 .font(.footnote)
                                                 .minimumScaleFactor(0.5)
                                                 .lineLimit(1)
-                                                .foregroundStyle(isSelected ? Color.accentColor : Color.primary)
                                 }
                         }
                 }
