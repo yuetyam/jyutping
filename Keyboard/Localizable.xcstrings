@@ -2638,25 +2638,25 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Above Candidates"
+            "value" : "Top"
           }
         },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Above Candidates"
+            "value" : "Top"
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Above Candidates"
+            "value" : "Top"
           }
         },
         "en-US" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Above Candidates"
+            "value" : "Top"
           }
         },
         "fr" : {
@@ -2668,61 +2668,61 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候補の上部"
+            "value" : "上部"
           }
         },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞上邊"
+            "value" : "上邊"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞上邊"
+            "value" : "上邊"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞上邊"
+            "value" : "上邊"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞上邊"
+            "value" : "上邊"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞上邊"
+            "value" : "上邊"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞上邊"
+            "value" : "上邊"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞上邊"
+            "value" : "上邊"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞上邊"
+            "value" : "上邊"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞上邊"
+            "value" : "上邊"
           }
         }
       }
@@ -2732,25 +2732,25 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Below Candidates"
+            "value" : "Bottom"
           }
         },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Below Candidates"
+            "value" : "Bottom"
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Below Candidates"
+            "value" : "Bottom"
           }
         },
         "en-US" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Below Candidates"
+            "value" : "Bottom"
           }
         },
         "fr" : {
@@ -2762,61 +2762,61 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候補の下部"
+            "value" : "下部"
           }
         },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞下邊"
+            "value" : "下邊"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞下邊"
+            "value" : "下邊"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞下邊"
+            "value" : "下邊"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞下邊"
+            "value" : "下邊"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞下邊"
+            "value" : "下邊"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞下邊"
+            "value" : "下邊"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞下邊"
+            "value" : "下邊"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞下邊"
+            "value" : "下邊"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "候選詞下邊"
+            "value" : "下邊"
           }
         }
       }
@@ -2826,25 +2826,25 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Jyutping Display"
+            "value" : "Jyutping Hints"
           }
         },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Jyutping Display"
+            "value" : "Jyutping Hints"
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Jyutping Display"
+            "value" : "Jyutping Hints"
           }
         },
         "en-US" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Jyutping Display"
+            "value" : "Jyutping Hints"
           }
         },
         "fr" : {
@@ -2856,61 +2856,61 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "発音記号表示"
+            "value" : "粵拼表記"
           }
         },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "粵拼標示"
+            "value" : "候選詞粵拼標示"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "粵拼標示"
+            "value" : "候選詞粵拼標示"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "粵拼標示"
+            "value" : "候選詞粵拼標示"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "粵拼標示"
+            "value" : "候選詞粵拼標示"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "粵拼標示"
+            "value" : "候選詞粵拼標示"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "粵拼標示"
+            "value" : "候選詞粵拼標示"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "粵拼標示"
+            "value" : "候選詞粵拼標示"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "粵拼標示"
+            "value" : "候選詞粵拼標示"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "粵拼標示"
+            "value" : "候選詞粵拼標示"
           }
         }
       }
@@ -3573,7 +3573,7 @@
         }
       }
     },
-    "SettingsView.InputKeyStyle.Option.None" : {
+    "SettingsView.InputKeyStyle.Option1.None" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3667,7 +3667,7 @@
         }
       }
     },
-    "SettingsView.InputKeyStyle.Option.Numbers" : {
+    "SettingsView.InputKeyStyle.Option2.Numbers" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3761,96 +3761,96 @@
         }
       }
     },
-    "SettingsView.InputKeyStyle.Option.NumbersAndSymbols" : {
+    "SettingsView.InputKeyStyle.Option3.NumbersAndSymbols" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Numbers and Symbols"
+            "value" : "Symbols"
           }
         },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Numbers and Symbols"
+            "value" : "Symbols"
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Numbers and Symbols"
+            "value" : "Symbols"
           }
         },
         "en-US" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Numbers and Symbols"
+            "value" : "Symbols"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Chiffres et symboles"
+            "value" : "Symboles"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "数字・記号"
+            "value" : "記号"
           }
         },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "數字與標點"
+            "value" : "符號"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "數字與標點"
+            "value" : "符號"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "數字與標點"
+            "value" : "符號"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "數字與標點"
+            "value" : "符號"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "數字與標點"
+            "value" : "符號"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "數字與標點"
+            "value" : "符號"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "數字與標點"
+            "value" : "符號"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "數字與標點"
+            "value" : "符號"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "數字與標點"
+            "value" : "符號"
           }
         }
       }
@@ -3860,37 +3860,37 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Letter Key Extra Symbols"
+            "value" : "Key Symbols"
           }
         },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Letter Key Extra Symbols"
+            "value" : "Key Symbols"
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Letter Key Extra Symbols"
+            "value" : "Key Symbols"
           }
         },
         "en-US" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Letter Key Extra Symbols"
+            "value" : "Key Symbols"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Symboles lettres"
+            "value" : "Symboles"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "文字キーの追加記号"
+            "value" : "入力キー記号"
           }
         },
         "yue" : {
@@ -4983,100 +4983,6 @@
         }
       }
     },
-    "SettingsView.KeyboardFeedback.SectionHeader" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Keyboard Feedback"
-          }
-        },
-        "en-CA" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Keyboard Feedback"
-          }
-        },
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Keyboard Feedback"
-          }
-        },
-        "en-US" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Keyboard Feedback"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Rétroaction du clavier"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "キーボード応答"
-          }
-        },
-        "yue" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "鍵盤回應"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "鍵盤回應"
-          }
-        },
-        "zh-Hans-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "鍵盤回應"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "鍵盤回應"
-          }
-        },
-        "zh-Hant-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "鍵盤回應"
-          }
-        },
-        "zh-Hant-HK" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "鍵盤回應"
-          }
-        },
-        "zh-Hant-MO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "鍵盤回應"
-          }
-        },
-        "zh-Hant-TW" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "鍵盤回應"
-          }
-        },
-        "zh-HK" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "鍵盤回應"
-          }
-        }
-      }
-    },
     "SettingsView.KeyboardFeedback.Sound.ToggleTitle" : {
       "localizations" : {
         "en" : {
@@ -5676,7 +5582,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "QWERTY"
+            "value" : "26キー"
           }
         },
         "yue" : {
@@ -5952,7 +5858,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ajustement de la hauteur des touches"
+            "value" : "Hauteur des touches"
           }
         },
         "ja" : {
@@ -6398,25 +6304,25 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cantonese Jyutping"
+            "value" : "Jyutping"
           }
         },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cantonese Jyutping"
+            "value" : "Jyutping"
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cantonese Jyutping"
+            "value" : "Jyutping"
           }
         },
         "en-US" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cantonese Jyutping"
+            "value" : "Jyutping"
           }
         },
         "fr" : {
@@ -6586,91 +6492,91 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Same as Last Used"
+            "value" : "Recent"
           }
         },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Same as Last Used"
+            "value" : "Recent"
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Same as Last Used"
+            "value" : "Recent"
           }
         },
         "en-US" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Same as Last Used"
+            "value" : "Recent"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Identique à la dernière utilisation"
+            "value" : "Récent"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "前回と同じ"
+            "value" : "最近"
           }
         },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "上一次輸入模式"
+            "value" : "最近"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "上一次輸入模式"
+            "value" : "最近"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "上一次輸入模式"
+            "value" : "最近"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "上一次輸入模式"
+            "value" : "最近"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "上一次輸入模式"
+            "value" : "最近"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "上一次輸入模式"
+            "value" : "最近"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "上一次輸入模式"
+            "value" : "最近"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "上一次輸入模式"
+            "value" : "最近"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "上一次輸入模式"
+            "value" : "最近"
           }
         }
       }
@@ -6680,31 +6586,31 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Default Input Mode"
+            "value" : "Input Mode"
           }
         },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Default Input Mode"
+            "value" : "Input Mode"
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Default Input Mode"
+            "value" : "Input Mode"
           }
         },
         "en-US" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Default Input Mode"
+            "value" : "Input Mode"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mode de saisie par défaut"
+            "value" : "Mode de saisie"
           }
         },
         "ja" : {
@@ -6716,55 +6622,55 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "鍵盤彈出時初始輸入模式"
+            "value" : "鍵盤初始輸入模式"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "鍵盤彈出時初始輸入模式"
+            "value" : "鍵盤初始輸入模式"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "鍵盤彈出時初始輸入模式"
+            "value" : "鍵盤初始輸入模式"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "鍵盤彈出時初始輸入模式"
+            "value" : "鍵盤初始輸入模式"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "鍵盤彈出時初始輸入模式"
+            "value" : "鍵盤初始輸入模式"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "鍵盤彈出時初始輸入模式"
+            "value" : "鍵盤初始輸入模式"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "鍵盤彈出時初始輸入模式"
+            "value" : "鍵盤初始輸入模式"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "鍵盤彈出時初始輸入模式"
+            "value" : "鍵盤初始輸入模式"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "鍵盤彈出時初始輸入模式"
+            "value" : "鍵盤初始輸入模式"
           }
         }
       }

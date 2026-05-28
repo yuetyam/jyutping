@@ -20,12 +20,12 @@ struct SettingsView: View {
         @State private var needsNumberRow: Bool = Options.needsNumberRow
         @State private var showLowercaseKeys: Bool = Options.showLowercaseKeys
         @State private var keyTextPreview: Bool = Options.keyTextPreview
-        @State private var inputKeyStyle: InputKeyStyle = Options.inputKeyStyle
         @State private var keyHeightOffset: CGFloat = Options.fetchKeyHeightOffset()
+        @State private var inputKeyStyle: InputKeyStyle = Options.inputKeyStyle
+        @State private var preferredInputMode: PreferredInputMode = Options.preferredInputMode
         @State private var commentStyle: CommentStyle = Options.commentStyle
         @State private var commentScene: CommentScene = Options.commentScene
         @State private var commentToneStyle: CommentToneStyle = Options.commentToneStyle
-        @State private var preferredInputMode: PreferredInputMode = Options.preferredInputMode
         @State private var traditionalCharacterStandard: CharacterStandard = Options.traditionalCharacterStandard
         @State private var cangjieVariant: CangjieVariant = Options.cangjieVariant
         @State private var isEmojiSuggestionsOn: Bool = Options.isEmojiSuggestionsOn
@@ -58,7 +58,7 @@ struct SettingsView: View {
                                                 }
                                         if context.isRunningOnPhone {
                                                 HStack(spacing: 0) {
-                                                        Text("SettingsView.KeyboardFeedback.Haptic.PickerTitle").minimumScaleFactor(0.5).lineLimit(1)
+                                                        Text("SettingsView.KeyboardFeedback.Haptic.PickerTitle").minimumScaleFactor(0.4).lineLimit(1)
                                                         Spacer()
                                                         Picker("SettingsView.KeyboardFeedback.Haptic.PickerTitle", selection: $hapticFeedback) {
                                                                 Text("SettingsView.KeyboardFeedback.Haptic.Option.None").tag(HapticFeedback.disabled)
@@ -77,8 +77,6 @@ struct SettingsView: View {
                                                 }
                                                 .disabled(context.hasFullAccess.negative)
                                         }
-                                } header: {
-                                        Text("SettingsView.KeyboardFeedback.SectionHeader").textCase(nil)
                                 } footer: {
                                         if context.isRunningOnPhone && context.hasFullAccess.negative {
                                                 Text("SettingsView.KeyboardFeedback.SectionFooter").textCase(nil)
@@ -117,28 +115,8 @@ struct SettingsView: View {
                                                 }
                                 }
 
-                                if context.isRunningOnPhone {
-                                        Picker("SettingsView.InputKeyStyle.PickerTitle", selection: $inputKeyStyle) {
-                                                Text("SettingsView.InputKeyStyle.Option.None").tag(InputKeyStyle.clear)
-                                                Text("SettingsView.InputKeyStyle.Option.Numbers").tag(InputKeyStyle.numbers)
-                                                Text("SettingsView.InputKeyStyle.Option.NumbersAndSymbols").tag(InputKeyStyle.numbersAndSymbols)
-                                        }
-                                        .pickerStyle(.inline)
-                                        .textCase(nil)
-                                        .onChange(of: inputKeyStyle) { newStyle in
-                                                AudioFeedback.modified()
-                                                context.triggerSelectionHapticFeedback()
-                                                Options.updateInputKeyStyle(to: newStyle)
-                                        }
-                                }
-
                                 Section {
-                                        HStack(spacing: 2) {
-                                                Text("SettingsView.KeyHeightOffset.SliderTitle")
-                                                Text(verbatim: ": ").foregroundStyle(Color.secondary)
-                                                Text(keyHeightOffset, format: .number.sign(strategy: .always()).grouping(.never))
-                                        }
-                                        Slider(value: $keyHeightOffset, in: -7...7, step: 1) {
+                                        Slider(value: $keyHeightOffset, in: (-7...7), step: 1) {
                                                 Text("SettingsView.KeyHeightOffset.SliderTitle")
                                         } minimumValueLabel: {
                                                 Text(verbatim: "-7")
@@ -149,22 +127,76 @@ struct SettingsView: View {
                                                         context.updateKeyHeightOffset(to: keyHeightOffset)
                                                 }
                                         }
+                                } header: {
+                                        HStack(spacing: 2) {
+                                                Text("SettingsView.KeyHeightOffset.SliderTitle")
+                                                Text(verbatim: ": ")
+                                                Text(keyHeightOffset, format: .number.sign(strategy: .always()).grouping(.never))
+                                        }
+                                        .textCase(nil)
+                                }
+
+                                if context.isRunningOnPhone {
+                                        Section {
+                                                HStack(spacing: 0) {
+                                                        Text("SettingsView.InputKeyStyle.PickerTitle").minimumScaleFactor(0.4).lineLimit(1)
+                                                        Spacer()
+                                                        Picker("SettingsView.InputKeyStyle.PickerTitle", selection: $inputKeyStyle) {
+                                                                Text("SettingsView.InputKeyStyle.Option1.None").tag(InputKeyStyle.clear)
+                                                                Text("SettingsView.InputKeyStyle.Option2.Numbers").tag(InputKeyStyle.numbers)
+                                                                Text("SettingsView.InputKeyStyle.Option3.NumbersAndSymbols").tag(InputKeyStyle.numbersAndSymbols)
+                                                        }
+                                                        .pickerStyle(.segmented)
+                                                        .labelsHidden()
+                                                        .fixedSize()
+                                                        .onChange(of: inputKeyStyle) { newStyle in
+                                                                AudioFeedback.modified()
+                                                                context.triggerSelectionHapticFeedback()
+                                                                Options.updateInputKeyStyle(to: newStyle)
+                                                        }
+                                                }
+                                        }
                                 }
 
                                 Section {
-                                        Picker("SettingsView.CommentStyle.PickerTitle", selection: $commentStyle) {
-                                                Text("SettingsView.CommentStyle.Option.Above").tag(CommentStyle.aboveCandidates)
-                                                Text("SettingsView.CommentStyle.Option.Below").tag(CommentStyle.belowCandidates)
+                                        HStack(spacing: 0) {
+                                                Text("SettingsView.PreferredInputMode.PickerTitle").minimumScaleFactor(0.4).lineLimit(1)
+                                                Spacer()
+                                                Picker("SettingsView.PreferredInputMode.PickerTitle", selection: $preferredInputMode) {
+                                                        Text("SettingsView.PreferredInputMode.Option1.Cantonese").tag(PreferredInputMode.cantonese)
+                                                        Text("SettingsView.PreferredInputMode.Option2.ABC").tag(PreferredInputMode.abc)
+                                                        Text("SettingsView.PreferredInputMode.Option3.Previous").tag(PreferredInputMode.previous)
+                                                }
+                                                .pickerStyle(.segmented)
+                                                .labelsHidden()
+                                                .fixedSize()
+                                                .onChange(of: preferredInputMode) { newMode in
+                                                        AudioFeedback.modified()
+                                                        context.triggerSelectionHapticFeedback()
+                                                        Options.updatePreferredInputMode(to: newMode)
+                                                }
                                         }
-                                        .pickerStyle(.inline)
-                                        .labelsHidden()
-                                        .onChange(of: commentStyle) { newStyle in
-                                                AudioFeedback.modified()
-                                                context.triggerSelectionHapticFeedback()
-                                                Options.updateCommentStyle(to: newStyle)
+                                }
+
+                                Section {
+                                        HStack(spacing: 0) {
+                                                Text("SettingsView.CommentStyle.PickerTitle").minimumScaleFactor(0.4).lineLimit(1)
+                                                Spacer()
+                                                Picker("SettingsView.CommentStyle.PickerTitle", selection: $commentStyle) {
+                                                        Text("SettingsView.CommentStyle.Option.Above").tag(CommentStyle.aboveCandidates)
+                                                        Text("SettingsView.CommentStyle.Option.Below").tag(CommentStyle.belowCandidates)
+                                                }
+                                                .pickerStyle(.segmented)
+                                                .labelsHidden()
+                                                .fixedSize()
+                                                .onChange(of: commentStyle) { newStyle in
+                                                        AudioFeedback.modified()
+                                                        context.triggerSelectionHapticFeedback()
+                                                        Options.updateCommentStyle(to: newStyle)
+                                                }
                                         }
                                         HStack(spacing: 0) {
-                                                Text("SettingsView.CommentScene.PickerTitle").minimumScaleFactor(0.5).lineLimit(1)
+                                                Text("SettingsView.CommentScene.PickerTitle").minimumScaleFactor(0.4).lineLimit(1)
                                                 Spacer()
                                                 Picker("SettingsView.CommentScene.PickerTitle", selection: $commentScene) {
                                                         Text("SettingsView.CommentScene.Option.All").tag(CommentScene.all)
@@ -180,35 +212,24 @@ struct SettingsView: View {
                                                         Options.updateCommentScene(to: scene)
                                                 }
                                         }
+                                }
+
+                                Section {
+                                        Picker("SettingsView.CommentToneStyle.PickerTitle", selection: $commentToneStyle) {
+                                                Text("SettingsView.CommentToneStyle.PickerOption1").tag(CommentToneStyle.normal)
+                                                Text("SettingsView.CommentToneStyle.PickerOption2").tag(CommentToneStyle.noTones)
+                                                Text("SettingsView.CommentToneStyle.PickerOption3").tag(CommentToneStyle.superscript)
+                                                Text("SettingsView.CommentToneStyle.PickerOption4").tag(CommentToneStyle.subscript)
+                                        }
+                                        .pickerStyle(.inline)
+                                        .labelsHidden()
+                                        .onChange(of: commentToneStyle) { newStyle in
+                                                AudioFeedback.modified()
+                                                context.triggerSelectionHapticFeedback()
+                                                Options.updateCommentToneStyle(to: newStyle)
+                                        }
                                 } header: {
-                                        Text("SettingsView.CommentStyle.PickerTitle").textCase(nil)
-                                }
-
-                                Picker("SettingsView.CommentToneStyle.PickerTitle", selection: $commentToneStyle) {
-                                        Text("SettingsView.CommentToneStyle.PickerOption1").tag(CommentToneStyle.normal)
-                                        Text("SettingsView.CommentToneStyle.PickerOption2").tag(CommentToneStyle.noTones)
-                                        Text("SettingsView.CommentToneStyle.PickerOption3").tag(CommentToneStyle.superscript)
-                                        Text("SettingsView.CommentToneStyle.PickerOption4").tag(CommentToneStyle.subscript)
-                                }
-                                .pickerStyle(.inline)
-                                .textCase(nil)
-                                .onChange(of: commentToneStyle) { newStyle in
-                                        AudioFeedback.modified()
-                                        context.triggerSelectionHapticFeedback()
-                                        Options.updateCommentToneStyle(to: newStyle)
-                                }
-
-                                Picker("SettingsView.PreferredInputMode.PickerTitle", selection: $preferredInputMode) {
-                                        Text("SettingsView.PreferredInputMode.Option1.Cantonese").tag(PreferredInputMode.cantonese)
-                                        Text("SettingsView.PreferredInputMode.Option2.ABC").tag(PreferredInputMode.abc)
-                                        Text("SettingsView.PreferredInputMode.Option3.Previous").tag(PreferredInputMode.previous)
-                                }
-                                .pickerStyle(.inline)
-                                .textCase(nil)
-                                .onChange(of: preferredInputMode) { newMode in
-                                        AudioFeedback.modified()
-                                        context.triggerSelectionHapticFeedback()
-                                        Options.updatePreferredInputMode(to: newMode)
+                                        Text("SettingsView.CommentToneStyle.PickerTitle").textCase(nil)
                                 }
 
                                 Section {
@@ -234,19 +255,23 @@ struct SettingsView: View {
                                         Text("SettingsView.TraditionalCharacterStandard.SectionFooter").textCase(nil)
                                 }
 
-                                Picker("SettingsView.CangjieVariant.PickerTitle", selection: $cangjieVariant) {
-                                        Text("SettingsView.CangjieVariant.PickerOption1").tag(CangjieVariant.cangjie5)
-                                        Text("SettingsView.CangjieVariant.PickerOption2").tag(CangjieVariant.cangjie3)
-                                        Text("SettingsView.CangjieVariant.PickerOption3").tag(CangjieVariant.quick5)
-                                        Text("SettingsView.CangjieVariant.PickerOption4").tag(CangjieVariant.quick3)
+                                Section {
+                                        Picker("SettingsView.CangjieVariant.PickerTitle", selection: $cangjieVariant) {
+                                                Text("SettingsView.CangjieVariant.PickerOption1").tag(CangjieVariant.cangjie5)
+                                                Text("SettingsView.CangjieVariant.PickerOption2").tag(CangjieVariant.cangjie3)
+                                                Text("SettingsView.CangjieVariant.PickerOption3").tag(CangjieVariant.quick5)
+                                                Text("SettingsView.CangjieVariant.PickerOption4").tag(CangjieVariant.quick3)
 
-                                }
-                                .pickerStyle(.inline)
-                                .textCase(nil)
-                                .onChange(of: cangjieVariant) { newVariant in
-                                        AudioFeedback.modified()
-                                        context.triggerSelectionHapticFeedback()
-                                        Options.updateCangjieVariant(to: newVariant)
+                                        }
+                                        .pickerStyle(.inline)
+                                        .labelsHidden()
+                                        .onChange(of: cangjieVariant) { newVariant in
+                                                AudioFeedback.modified()
+                                                context.triggerSelectionHapticFeedback()
+                                                Options.updateCangjieVariant(to: newVariant)
+                                        }
+                                } header: {
+                                        Text("SettingsView.CangjieVariant.PickerTitle").textCase(nil)
                                 }
 
                                 Section {
