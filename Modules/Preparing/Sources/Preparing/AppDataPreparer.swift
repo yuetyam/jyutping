@@ -42,6 +42,8 @@ private extension AppDataPreparer {
                         "CREATE INDEX ix_jyutping_word ON jyutping_table (word);",
                         "CREATE INDEX ix_jyutping_romanization ON jyutping_table (romanization);",
 
+                        "CREATE INDEX ix_collocation_word_romanization ON collocation_table (word, romanization);",
+
                         "CREATE INDEX ix_dictionary_word_romanization ON dictionary_table (word, romanization);",
 
                         "CREATE INDEX ix_yingwaa_code ON yingwaa_table(code);",
@@ -65,7 +67,7 @@ private extension AppDataPreparer {
 }
 private extension AppDataPreparer {
         static func createJyutpingTable() async {
-                let createTable: String = "CREATE TABLE jyutping_table (id INTEGER PRIMARY KEY AUTOINCREMENT, word TEXT NOT NULL, romanization TEXT NOT NULL);"
+                let createTable: String = "CREATE TABLE jyutping_table (id INTEGER PRIMARY KEY AUTOINCREMENT, word TEXT NOT NULL, romanization TEXT NOT NULL, UNIQUE (word, romanization));"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }

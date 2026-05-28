@@ -13,6 +13,6 @@ struct DataMaster {
                 }
         }()
 
-        /// SQLITE_TRANSIENT replacement
-        static let transientDestructorType = unsafeBitCast(-1, to: sqlite3_destructor_type.self)
+        /// The missing SQLITE_TRANSIENT
+        static let DEFINED_SQLITE_TRANSIENT = unsafeBitCast(-1, to: sqlite3_destructor_type.self)
 }

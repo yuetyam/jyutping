@@ -6,7 +6,7 @@ import CommonExtensions
 struct InputMemory {
 
         /// SQLITE_TRANSIENT replacement
-        private static let transientDestructorType = unsafeBitCast(-1, to: sqlite3_destructor_type.self)
+        private static let DEFINED_SQLITE_TRANSIENT = unsafeBitCast(-1, to: sqlite3_destructor_type.self)
 
 
         // MARK: - Memory Migration
@@ -50,8 +50,8 @@ struct InputMemory {
                 sqlite3_exec(database, "BEGIN;", nil, nil, nil)
                 fetchedEntries.forEach({ entry in
                         sqlite3_reset(statement)
-                        sqlite3_bind_text(statement, 1, (entry.word as NSString).utf8String, -1, transientDestructorType)
-                        sqlite3_bind_text(statement, 2, (entry.romanization as NSString).utf8String, -1, transientDestructorType)
+                        sqlite3_bind_text(statement, 1, (entry.word as NSString).utf8String, -1, DEFINED_SQLITE_TRANSIENT)
+                        sqlite3_bind_text(statement, 2, (entry.romanization as NSString).utf8String, -1, DEFINED_SQLITE_TRANSIENT)
                         sqlite3_bind_int64(statement, 3, entry.frequency)
                         sqlite3_bind_int64(statement, 4, entry.latest)
                         sqlite3_bind_int64(statement, 5, Int64(entry.shortcut))
@@ -172,8 +172,8 @@ struct InputMemory {
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return nil }
-                guard sqlite3_bind_text(statement, 1, (word as NSString).utf8String, -1, transientDestructorType) == SQLITE_OK else { return nil }
-                guard sqlite3_bind_text(statement, 2, (romanization as NSString).utf8String, -1, transientDestructorType) == SQLITE_OK else { return nil }
+                guard sqlite3_bind_text(statement, 1, (word as NSString).utf8String, -1, DEFINED_SQLITE_TRANSIENT) == SQLITE_OK else { return nil }
+                guard sqlite3_bind_text(statement, 2, (romanization as NSString).utf8String, -1, DEFINED_SQLITE_TRANSIENT) == SQLITE_OK else { return nil }
                 guard sqlite3_step(statement) == SQLITE_ROW else { return nil }
                 let id: Int64 = sqlite3_column_int64(statement, 0)
                 let frequency: Int64 = sqlite3_column_int64(statement, 1)
@@ -195,8 +195,8 @@ struct InputMemory {
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return }
-                sqlite3_bind_text(statement, 1, (entry.word as NSString).utf8String, -1, transientDestructorType)
-                sqlite3_bind_text(statement, 2, (entry.romanization as NSString).utf8String, -1, transientDestructorType)
+                sqlite3_bind_text(statement, 1, (entry.word as NSString).utf8String, -1, DEFINED_SQLITE_TRANSIENT)
+                sqlite3_bind_text(statement, 2, (entry.romanization as NSString).utf8String, -1, DEFINED_SQLITE_TRANSIENT)
                 sqlite3_bind_int64(statement, 3, entry.frequency)
                 sqlite3_bind_int64(statement, 4, entry.latest)
                 sqlite3_bind_int64(statement, 5, Int64(entry.shortcut))
@@ -212,8 +212,8 @@ struct InputMemory {
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return }
-                sqlite3_bind_text(statement, 1, (lexicon.text as NSString).utf8String, -1, transientDestructorType)
-                sqlite3_bind_text(statement, 2, (lexicon.romanization as NSString).utf8String, -1, transientDestructorType)
+                sqlite3_bind_text(statement, 1, (lexicon.text as NSString).utf8String, -1, DEFINED_SQLITE_TRANSIENT)
+                sqlite3_bind_text(statement, 2, (lexicon.romanization as NSString).utf8String, -1, DEFINED_SQLITE_TRANSIENT)
                 guard sqlite3_step(statement) == SQLITE_DONE else { return }
         }
 

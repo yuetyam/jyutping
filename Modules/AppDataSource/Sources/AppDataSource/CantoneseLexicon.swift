@@ -128,36 +128,37 @@ public struct CantoneseLexicon: Hashable, Identifiable {
 private extension DataMaster {
 
         /// Fetch Jyutping romanizations for text
-        /// - Parameter text: Cantonese text
+        /// - Parameter text: Cantonese word
         /// - Returns: An Array of Jyutping
         static func fetchRomanizations(for text: String) -> [String] {
-                let command: String = "SELECT romanization FROM jyutping_table WHERE word = ?;"
+                let command: String = "SELECT romanization FROM jyutping_table WHERE word = ? ORDER BY rowid;"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return [] }
-                guard sqlite3_bind_text(statement, 1, (text as NSString).utf8String, -1, transientDestructorType) == SQLITE_OK else { return [] }
+                guard sqlite3_bind_text(statement, 1, (text as NSString).utf8String, -1, DEFINED_SQLITE_TRANSIENT) == SQLITE_OK else { return [] }
                 var romanizations: [String] = []
                 while sqlite3_step(statement) == SQLITE_ROW {
-                        if let columnText = sqlite3_column_text(statement, 0) {
-                                let romanization = String(cString: columnText)
-                                romanizations.append(romanization)
+                        if let queried = sqlite3_column_text(statement, 0) {
+                                romanizations.append(String(cString: queried))
                         }
                 }
                 return romanizations
         }
 
         /// Fetch homophone characters
-        /// - Parameter romanization: Jyutping romanization syllable
+        /// - Parameter romanization: Jyutping syllable
         /// - Returns: Homophone characters
         static func fetchHomophones(for romanization: String) -> [String] {
-                var homophones: [String] = []
-                let query = "SELECT word FROM jyutping_table WHERE romanization = '\(romanization)' LIMIT 11;"
+                let command: String = "SELECT word FROM jyutping_table WHERE romanization = ? ORDER BY rowid LIMIT 11;"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
-                guard sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK else { return homophones }
+                guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return [] }
+                guard sqlite3_bind_text(statement, 1, (romanization as NSString).utf8String, -1, DEFINED_SQLITE_TRANSIENT) == SQLITE_OK else { return [] }
+                var homophones: [String] = []
                 while sqlite3_step(statement) == SQLITE_ROW {
-                        let homophone: String = String(cString: sqlite3_column_text(statement, 0))
-                        homophones.append(homophone)
+                        if let queried = sqlite3_column_text(statement, 0) {
+                                homophones.append(String(cString: queried))
+                        }
                 }
                 return homophones
         }
@@ -165,17 +166,20 @@ private extension DataMaster {
         /// Fetch collocation words
         /// - Parameters:
         ///   - word: Cantonese character
-        ///   - romanization: Jyutping
+        ///   - romanization: Jyutping syllable
         /// - Returns: Collocation words
         static func fetchCollocations(word: String, romanization: String) -> [String] {
-                let command: String = "SELECT collocation FROM collocation_table WHERE word = '\(word)' AND romanization = '\(romanization)' LIMIT 1;"
+                let command: String = "SELECT collocation FROM collocation_table WHERE word = ? AND romanization = ? ORDER BY rowid LIMIT 1;"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return [] }
+                guard sqlite3_bind_text(statement, 1, (word as NSString).utf8String, -1, DEFINED_SQLITE_TRANSIENT) == SQLITE_OK else { return [] }
+                guard sqlite3_bind_text(statement, 2, (romanization as NSString).utf8String, -1, DEFINED_SQLITE_TRANSIENT) == SQLITE_OK else { return [] }
                 guard sqlite3_step(statement) == SQLITE_ROW else { return [] }
-                let text: String = String(cString: sqlite3_column_text(statement, 0))
-                guard text != "X" else { return [] }
-                let collocations: [String] = text.split(separator: ";").map({ $0.trimmingCharacters(in: .whitespaces) })
+                guard let queried = sqlite3_column_text(statement, 0) else { return [] }
+                let collocationText = String(cString: queried)
+                guard collocationText != String.uppercasedLetterX else { return [] }
+                let collocations = collocationText.split(separator: ";").map({ $0.trimmingCharacters(in: .whitespaces) })
                 return collocations
         }
 
@@ -185,14 +189,17 @@ private extension DataMaster {
         ///   - romanization: Jyutping
         /// - Returns: Description texts
         static func fetchDescriptions(word: String, romanization: String) -> [String] {
-                var items: [String] = []
-                let command: String = "SELECT description FROM dictionary_table WHERE word = '\(word)' AND romanization = '\(romanization)';"
+                let command: String = "SELECT description FROM dictionary_table WHERE word = ? AND romanization = ? ORDER BY rowid;"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
-                guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return items }
+                guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return [] }
+                guard sqlite3_bind_text(statement, 1, (word as NSString).utf8String, -1, DEFINED_SQLITE_TRANSIENT) == SQLITE_OK else { return [] }
+                guard sqlite3_bind_text(statement, 2, (romanization as NSString).utf8String, -1, DEFINED_SQLITE_TRANSIENT) == SQLITE_OK else { return [] }
+                var items: [String] = []
                 while sqlite3_step(statement) == SQLITE_ROW {
-                        let item: String = String(cString: sqlite3_column_text(statement, 0))
-                        items.append(item)
+                        if let queried = sqlite3_column_text(statement, 0) {
+                                items.append(String(cString: queried))
+                        }
                 }
                 return items
         }

@@ -38,8 +38,8 @@ public struct Engine {
                 }
         }()
 
-        /// SQLITE_TRANSIENT replacement
-        static let transientDestructorType = unsafeBitCast(-1, to: sqlite3_destructor_type.self)
+        /// The missing SQLITE_TRANSIENT
+        static let DEFINED_SQLITE_TRANSIENT = unsafeBitCast(-1, to: sqlite3_destructor_type.self)
 }
 
 
@@ -408,7 +408,7 @@ extension Engine {
                 }
         }
         private static func perform<T: RandomAccessCollection<Syllable>>(scheme: T, limit: Int64? = nil, strictStatement: OpaquePointer?) -> [Lexicon] {
-                let anchorsCode = scheme.aliasAnchors.anchorsCode
+                let anchorsCode = scheme.originAnchors.combinedCode
                 guard anchorsCode > 0 else { return [] }
                 let spellCode = scheme.originText.hashCode()
                 return strictMatch(anchors: anchorsCode, spell: spellCode, input: scheme.aliasText, mark: scheme.mark, limit: limit, statement: strictStatement)

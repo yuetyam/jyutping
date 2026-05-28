@@ -164,7 +164,7 @@ extension Engine {
         }
         private static func mapSkinTone(source: String, statement: OpaquePointer?) -> String? {
                 sqlite3_reset(statement)
-                guard sqlite3_bind_text(statement, 1, (source as NSString).utf8String, -1, transientDestructorType) == SQLITE_OK else { return nil }
+                guard sqlite3_bind_text(statement, 1, (source as NSString).utf8String, -1, DEFINED_SQLITE_TRANSIENT) == SQLITE_OK else { return nil }
                 guard sqlite3_step(statement) == SQLITE_ROW else { return nil }
                 guard let target = sqlite3_column_text(statement, 0) else { return nil }
                 return String(cString: target)
