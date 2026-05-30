@@ -375,6 +375,7 @@ struct InputMemory {
                         return shortcuts.regularSorted(isOrdered: true).map({ Lexicon(text: $0.word, romanization: $0.romanization, input: text, mark: $0.mark, number: -1) }) + queried
                 }
                 guard deepSearch else { return queried }
+                guard (inputLength > 2 && inputLength < 25) else { return queried }
                 let shouldPartiallyMatch: Bool = idealSchemes.isEmpty || (keys.last == VirtualInputKey.letterM) || (keys.first == VirtualInputKey.letterM)
                 guard shouldPartiallyMatch else { return queried }
                 let prefixMatched: [InternalLexicon] = segmentation.flatMap({ scheme -> [InternalLexicon] in

@@ -761,33 +761,11 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 }()
                 suggestionTask = Task.detached(priority: .high) { [weak self] in
                         guard let self else { return }
-                        let sequences: [[VirtualInputKey]] = {
-                                var result: [[VirtualInputKey]] = [[]]
-                                var count = 1
-                                for keys in keySetArray {
-                                        let keyCount = keys.count
-                                        let nextCount = count * keyCount
-                                        var newResult: [[VirtualInputKey]] = []
-                                        newResult.reserveCapacity(nextCount)
-                                        for existing in result {
-                                                for key in keys {
-                                                        var sequence = existing
-                                                        sequence.append(key)
-                                                        newResult.append(sequence)
-                                                }
-                                        }
-                                        result = newResult
-                                        count = nextCount
-                                }
-                                return result
-                        }()
+                        let segmentedKeys = Segmenter.bestSegmentedKeys(from: keySetArray)
                         let results = await withTaskGroup(of: (memory: [Lexicon], defined: [Lexicon], marks: [Lexicon], symbols: [Lexicon], queried: [Lexicon]).self) { group in
-                                var maxLength: Int = 0
-                                for keys in sequences {
-                                        let segmentation = Segmenter.segment(keys)
-                                        let length = (segmentation.first?.length ?? 0)
-                                        guard length >= maxLength else { continue }
-                                        maxLength = length
+                                for item in segmentedKeys {
+                                        let keys = item.keys
+                                        let segmentation = item.segmentation
                                         group.addTask {
                                                 let memory: [Lexicon] = isInputMemoryOn ? await InputMemory.suggest(keys, segmentation: segmentation, deepSearch: inputLength < 6) : []
                                                 let defined: [Lexicon] = await self.searchDefinedCandidates(for: keys)
@@ -1044,33 +1022,11 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let isEnglishSuggestionsOn: Bool = Options.isEnglishSuggestionsOn
                 suggestionTask = Task.detached(priority: .high) { [weak self] in
                         guard let self else { return }
-                        let sequences: [[VirtualInputKey]] = {
-                                var result: [[VirtualInputKey]] = [[]]
-                                var count = 1
-                                for keys in keySetArray {
-                                        let keyCount = keys.count
-                                        let nextCount = count * keyCount
-                                        var newResult: [[VirtualInputKey]] = []
-                                        newResult.reserveCapacity(nextCount)
-                                        for existing in result {
-                                                for key in keys {
-                                                        var sequence = existing
-                                                        sequence.append(key)
-                                                        newResult.append(sequence)
-                                                }
-                                        }
-                                        result = newResult
-                                        count = nextCount
-                                }
-                                return result
-                        }()
+                        let segmentedKeys = Segmenter.bestSegmentedKeys(from: keySetArray)
                         let results = await withTaskGroup(of: (defined: [Candidate], marks: [Candidate], queried: [Candidate]).self) { group in
-                                var maxLength: Int = 0
-                                for keys in sequences {
-                                        let segmentation = Segmenter.segment(keys)
-                                        let length = (segmentation.first?.length ?? 0)
-                                        guard length >= maxLength else { continue }
-                                        maxLength = length
+                                for item in segmentedKeys {
+                                        let keys = item.keys
+                                        let segmentation = item.segmentation
                                         let allKeys: [VirtualInputKey] = [VirtualInputKey.letterQ] + keys
                                         group.addTask {
                                                 let defined: [Candidate] = await self.searchDefinedCandidates(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })

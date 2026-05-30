@@ -118,15 +118,20 @@ private extension Sequence where Element == Scheme {
 
 public struct Segmenter {
 
-        public static func syllableText<T: RandomAccessCollection<VirtualInputKey>>(of keys: T) -> String? {
+        public static func syllableText<T: RandomAccessCollection<VirtualInputKey>>(of keys: T, statement: OpaquePointer? = nil) -> String? {
                 guard keys.count <= 6 else { return nil }
-                let statement = prepareStatement()
-                defer { sqlite3_finalize(statement) }
-                return match(code: keys.combinedCode, statement: statement)?.originText
+                let shouldPrepareStatement: Bool = (statement == nil)
+                let stm = shouldPrepareStatement ? prepareStatement() : statement
+                defer {
+                        if shouldPrepareStatement {
+                                sqlite3_finalize(stm)
+                        }
+                }
+                return match(code: keys.combinedCode, statement: stm)?.originText
         }
 
         private static let queryCommand: String = "SELECT origin_code FROM syllable_table WHERE alias_code = ? LIMIT 1;"
-        private static func prepareStatement() -> OpaquePointer? {
+        static func prepareStatement() -> OpaquePointer? {
                 var statement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(Engine.database, queryCommand, -1, &statement, nil) == SQLITE_OK else { return nil }
                 return statement
@@ -173,7 +178,7 @@ public struct Segmenter {
                 return segmentation.filter(\.isValid).descended()
         }
 
-        public static func segment<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T) -> Segmentation {
+        public static func segment<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T, statement: OpaquePointer? = nil) -> Segmentation {
                 switch keys.count {
                 case 0: return []
                 case 1:
@@ -188,15 +193,55 @@ public struct Segmenter {
                         case 32203220: return mama
                         case 32203228: return mami
                         default:
-                                let statement = prepareStatement()
-                                defer { sqlite3_finalize(statement) }
-                                return split(keys.filter(\.isSyllableLetter), statement: statement)
+                                let shouldPrepareStatement: Bool = (statement == nil)
+                                let stm = shouldPrepareStatement ? prepareStatement() : statement
+                                defer {
+                                        if shouldPrepareStatement {
+                                                sqlite3_finalize(stm)
+                                        }
+                                }
+                                return split(keys.filter(\.isSyllableLetter), statement: stm)
                         }
                 default:
-                        let statement = prepareStatement()
-                        defer { sqlite3_finalize(statement) }
-                        return split(keys.filter(\.isSyllableLetter), statement: statement)
+                        let shouldPrepareStatement: Bool = (statement == nil)
+                        let stm = shouldPrepareStatement ? prepareStatement() : statement
+                        defer {
+                                if shouldPrepareStatement {
+                                        sqlite3_finalize(stm)
+                                }
+                        }
+                        return split(keys.filter(\.isSyllableLetter), statement: stm)
                 }
+        }
+
+        public static func bestSegmentedKeys(from keySets: [Set<VirtualInputKey>]) -> [(keys: [VirtualInputKey], segmentation: Segmentation)] {
+                guard keySets.isNotEmpty else { return [] }
+                let statement = prepareStatement()
+                defer { sqlite3_finalize(statement) }
+                var bestLength: Int = 0
+                var items: [(keys: [VirtualInputKey], segmentation: Segmentation)] = []
+                var keys: [VirtualInputKey] = []
+                keys.reserveCapacity(keySets.count)
+                func appendKeys(at index: Int) {
+                        guard index < keySets.count else {
+                                let segmentation = segment(keys, statement: statement)
+                                let length = segmentation.first?.length ?? 0
+                                guard length >= bestLength else { return }
+                                if length > bestLength {
+                                        bestLength = length
+                                        items.removeAll(keepingCapacity: true)
+                                }
+                                items.append((keys, segmentation))
+                                return
+                        }
+                        for key in keySets[index] {
+                                keys.append(key)
+                                appendKeys(at: index + 1)
+                                keys.removeLast()
+                        }
+                }
+                appendKeys(at: 0)
+                return items
         }
 
         private static let letterA: Segmentation = [[Syllable(aliasCode: 20, originCode: 2020)]]
