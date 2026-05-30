@@ -23,7 +23,7 @@ struct DatabasePreparer {
                         group.addTask { await createSymbolTable() }
                         group.addTask { await createEmojiSkinMapTable() }
                         group.addTask { await createTextMarkTable() }
-                        group.addTask { await createSyllableTable() }
+                        group.addTask { await createCoreSyllableTable() }
                         group.addTask { await createPinyinSyllableTable() }
                         group.addTask {
                                 await createCharacterVariantTable(fileName: "CharacterVariant.AncientBooksPublishing", tableName: "variant_abp")
@@ -102,7 +102,7 @@ struct DatabasePreparer {
                         "CREATE INDEX ix_mark_spell ON mark_table (spell);",
                         "CREATE INDEX ix_mark_nine_key_code ON mark_table (nine_key_code);",
 
-                        "CREATE INDEX ix_syllable_nine_key_alias_code ON syllable_table (nine_key_alias_code);",
+                        "CREATE INDEX ix_core_syllable_nine_key_alias_code ON core_syllable_table (nine_key_alias_code);",
                         "CREATE INDEX ix_pinyin_syllable_nine_key_code ON pinyin_syllable_table (nine_key_code);",
 
 
@@ -363,8 +363,8 @@ struct DatabasePreparer {
                         insert(values: values)
                 }
         }
-        private static func createSyllableTable() async {
-                let createTable: String = "CREATE TABLE syllable_table (alias_code INTEGER PRIMARY KEY, origin_code INTEGER NOT NULL, nine_key_alias_code INTEGER NOT NULL, nine_key_origin_code INTEGER NOT NULL, alias TEXT NOT NULL, origin TEXT NOT NULL);"
+        private static func createCoreSyllableTable() async {
+                let createTable: String = "CREATE TABLE core_syllable_table (alias_code INTEGER PRIMARY KEY, origin_code INTEGER NOT NULL, nine_key_alias_code INTEGER NOT NULL, nine_key_origin_code INTEGER NOT NULL, alias TEXT NOT NULL, origin TEXT NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
@@ -389,7 +389,7 @@ struct DatabasePreparer {
                         return "(\(aliasCode), \(originCode), \(nineKeyAliasCode), \(nineKeyOriginCode), '\(alias)', '\(origin)')"
                 }
                 let values: String = entries.joined(separator: ", ")
-                let insertValues: String = "INSERT INTO syllable_table (alias_code, origin_code, nine_key_alias_code, nine_key_origin_code, alias, origin) VALUES \(values);"
+                let insertValues: String = "INSERT INTO core_syllable_table (alias_code, origin_code, nine_key_alias_code, nine_key_origin_code, alias, origin) VALUES \(values);"
                 var insertStatement: OpaquePointer? = nil
                 defer { sqlite3_finalize(insertStatement) }
                 guard sqlite3_prepare_v2(database, insertValues, -1, &insertStatement, nil) == SQLITE_OK else { return }

@@ -1,6 +1,7 @@
 import Foundation
 import SQLite3
 import CommonExtensions
+import os.log
 
 public struct Syllable: Hashable, Comparable, Sendable {
 
@@ -121,7 +122,7 @@ private extension Scheme {
                 for syllable in self {
                         var syllableCode = syllable[keyPath: keyPath]
                         var divisor: Int = 1
-                        while syllableCode / divisor >= 100 {
+                        while (syllableCode / divisor) >= 100 {
                                 divisor *= 100
                         }
                         while divisor > 0 {
@@ -158,67 +159,67 @@ private extension Sequence where Element == Scheme {
 
 public struct Segmenter {
 
-        public static func syllableText<T: RandomAccessCollection<VirtualInputKey>>(of keys: T, statement: OpaquePointer? = nil) -> String? {
-                guard keys.count <= 6 else { return nil }
-                let shouldPrepareStatement: Bool = (statement == nil)
-                let stm = shouldPrepareStatement ? prepareStatement() : statement
-                defer {
-                        if shouldPrepareStatement {
-                                sqlite3_finalize(stm)
-                        }
-                }
-                return match(code: keys.combinedCode, statement: stm)?.originText
-        }
+        private static let logger = Logger(subsystem: "org.jyutping.Jyutping.CoreIME", category: "Segmenter")
 
-        private static let queryCommand: String = "SELECT origin_code FROM syllable_table WHERE alias_code = ? LIMIT 1;"
-        static func prepareStatement() -> OpaquePointer? {
+        private static let syllableCodeMap: Dictionary<Int, Syllable> = {
+                let command: String = "SELECT alias_code, origin_code FROM core_syllable_table;"
                 var statement: OpaquePointer? = nil
-                guard sqlite3_prepare_v2(Engine.database, queryCommand, -1, &statement, nil) == SQLITE_OK else { return nil }
-                return statement
+                defer { sqlite3_finalize(statement) }
+                guard sqlite3_prepare_v2(Engine.database, command, -1, &statement, nil) == SQLITE_OK else { return [:] }
+                var dict: [Int: Syllable] = [:]
+                dict.reserveCapacity(1200)
+                while sqlite3_step(statement) == SQLITE_ROW {
+                        let aliasCode = Int(sqlite3_column_int64(statement, 0))
+                        let originCode = Int(sqlite3_column_int64(statement, 1))
+                        dict[aliasCode] = Syllable(aliasCode: aliasCode, originCode: originCode)
+                }
+                return dict
+        }()
+        static func prepare() {
+                if syllableCodeMap.count == 0 {
+                        logger.warning("Syllable Dictionary is Empty")
+                }
         }
 
-        private static func match(code: Int, statement: OpaquePointer?) -> Syllable? {
-                sqlite3_reset(statement)
-                sqlite3_bind_int64(statement, 1, Int64(code))
-                guard sqlite3_step(statement) == SQLITE_ROW else { return nil }
-                let originCode = Int(sqlite3_column_int64(statement, 0))
-                return Syllable(aliasCode: code, originCode: originCode)
+        private static func lookup(by code: Int) -> Syllable? {
+                return syllableCodeMap[code]
         }
-
-        private static func splitLeading<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T, statement: OpaquePointer?) -> [Syllable] {
+        private static func splitLeading<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T) -> [Syllable] {
                 let maxLength: Int = min(keys.count, 6)
                 guard maxLength > 0 else { return [] }
-                return (1...maxLength).reversed().compactMap({ match(code: keys.prefix($0).combinedCode, statement: statement) })
+                return (1...maxLength).reversed().compactMap({ lookup(by: keys.prefix($0).combinedCode) })
         }
-
-        private static func split<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T, statement: OpaquePointer?) -> Segmentation {
-                let headSyllables = splitLeading(keys, statement: statement)
+        private static func split<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T) -> Segmentation {
+                let headSyllables = splitLeading(keys)
                 guard headSyllables.isNotEmpty else { return [] }
                 let inputLength = keys.count
-                var segmentation: Set<Scheme> = Set(headSyllables.map({ [$0] }))
-                var previousSyllableCount = segmentation.flattenedCount
-                var shouldContinue: Bool = true
-                while shouldContinue {
-                        for scheme in segmentation {
+                var segmentation: Set<Scheme> = []
+                var frontier: [Scheme] = []
+                for syllable in headSyllables {
+                        let scheme: Scheme = [syllable]
+                        if segmentation.insert(scheme).inserted {
+                                frontier.append(scheme)
+                        }
+                }
+                while frontier.isNotEmpty {
+                        var nextFrontier: [Scheme] = []
+                        for scheme in frontier {
                                 let schemeLength = scheme.length
                                 guard schemeLength < inputLength else { continue }
                                 let tailKeys = keys.dropFirst(schemeLength)
-                                let tailSyllables = splitLeading(tailKeys, statement: statement)
-                                guard tailSyllables.isNotEmpty else { continue }
-                                let newSegmentation = tailSyllables.map({ scheme + [$0] })
-                                newSegmentation.forEach({ segmentation.insert($0) })
+                                let tailSyllables = splitLeading(tailKeys)
+                                for tail in tailSyllables {
+                                        let newScheme = scheme + [tail]
+                                        if segmentation.insert(newScheme).inserted {
+                                                nextFrontier.append(newScheme)
+                                        }
+                                }
                         }
-                        let currentSyllableCount = segmentation.flattenedCount
-                        if currentSyllableCount != previousSyllableCount {
-                                previousSyllableCount = currentSyllableCount
-                        } else {
-                                shouldContinue = false
-                        }
+                        frontier = nextFrontier
                 }
                 return segmentation.filter(\.isValid).descended()
         }
-
-        public static func segment<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T, statement: OpaquePointer? = nil) -> Segmentation {
+        public static func segment<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T) -> Segmentation {
                 switch keys.count {
                 case 0: return []
                 case 1:
@@ -233,38 +234,22 @@ public struct Segmenter {
                         case 32203220: return mama
                         case 32203228: return mami
                         default:
-                                let shouldPrepareStatement: Bool = (statement == nil)
-                                let stm = shouldPrepareStatement ? prepareStatement() : statement
-                                defer {
-                                        if shouldPrepareStatement {
-                                                sqlite3_finalize(stm)
-                                        }
-                                }
-                                return split(keys.filter(\.isSyllableLetter), statement: stm)
+                                return split(keys.filter(\.isSyllableLetter))
                         }
                 default:
-                        let shouldPrepareStatement: Bool = (statement == nil)
-                        let stm = shouldPrepareStatement ? prepareStatement() : statement
-                        defer {
-                                if shouldPrepareStatement {
-                                        sqlite3_finalize(stm)
-                                }
-                        }
-                        return split(keys.filter(\.isSyllableLetter), statement: stm)
+                        return split(keys.filter(\.isSyllableLetter))
                 }
         }
 
         public static func bestSegmentedKeys(from keySets: [Set<VirtualInputKey>]) -> [(keys: [VirtualInputKey], segmentation: Segmentation)] {
                 guard keySets.isNotEmpty else { return [] }
-                let statement = prepareStatement()
-                defer { sqlite3_finalize(statement) }
                 var bestLength: Int = 0
                 var items: [(keys: [VirtualInputKey], segmentation: Segmentation)] = []
                 var keys: [VirtualInputKey] = []
                 keys.reserveCapacity(keySets.count)
                 func appendKeys(at index: Int) {
                         guard index < keySets.count else {
-                                let segmentation = segment(keys, statement: statement)
+                                let segmentation = segment(keys)
                                 let length = segmentation.first?.length ?? 0
                                 guard length >= bestLength else { return }
                                 if length > bestLength {
@@ -295,4 +280,9 @@ public struct Segmenter {
                 Syllable(aliasCode: 3220, originCode: 322020),
                 Syllable(aliasCode: 3228, originCode: 3228)
         ]]
+
+        public static func syllableText<T: RandomAccessCollection<VirtualInputKey>>(of keys: T) -> String? {
+                guard keys.count <= 6 else { return nil }
+                return lookup(by: keys.combinedCode)?.originText
+        }
 }

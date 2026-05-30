@@ -1,17 +1,28 @@
 import Foundation
 import SQLite3
 import CommonExtensions
+import os.log
 
 // MARK: - Preparing Databases
 
 public struct Engine {
+
+        static let logger = Logger(subsystem: "org.jyutping.Jyutping.CoreIME", category: "Engine")
+
         public static func prepare() {
+                defer { Segmenter.prepare() }
                 let statement = prepareAnchorsStatement()
                 defer { sqlite3_finalize(statement) }
                 let testCode: Int64 = 20
+                let limit: Int64 = 1
                 sqlite3_reset(statement)
                 sqlite3_bind_int64(statement, 1, testCode)
-                guard sqlite3_step(statement) == SQLITE_ROW else { return }
+                sqlite3_bind_int64(statement, 2, limit)
+                if sqlite3_step(statement) == SQLITE_ROW {
+                        logger.debug("Prepared primary database")
+                } else {
+                        logger.warning("Primary database is not ready")
+                }
         }
         /*
         nonisolated(unsafe) static let database: OpaquePointer? = {
@@ -31,9 +42,11 @@ public struct Engine {
                 var db: OpaquePointer? = nil
                 guard let path: String = Bundle.module.path(forResource: "imedb", ofType: "sqlite3") else { return nil }
                 if sqlite3_open_v2(path, &db, SQLITE_OPEN_READONLY | SQLITE_OPEN_FULLMUTEX, nil) == SQLITE_OK {
+                        logger.debug("Connected primary database")
                         return db
                 } else {
                         sqlite3_close_v2(db)
+                        logger.warning("Failed to connect primary database")
                         return nil
                 }
         }()
@@ -78,29 +91,27 @@ extension Engine {
                         let anchorsStatement = prepareAnchorsStatement()
                         let spellStatement = prepareSpellStatement()
                         let strictStatement = prepareStrictStatement()
-                        let syllableStatement = Segmenter.prepareStatement()
                         defer {
                                 sqlite3_finalize(anchorsStatement)
                                 sqlite3_finalize(spellStatement)
                                 sqlite3_finalize(strictStatement)
-                                sqlite3_finalize(syllableStatement)
                         }
-                        return dispatch(keys, segmentation: segmentation, deepSearch: deepSearch, anchorsStatement: anchorsStatement, spellStatement: spellStatement, strictStatement: strictStatement, syllableStatement: syllableStatement)
+                        return dispatch(keys, segmentation: segmentation, deepSearch: deepSearch, anchorsStatement: anchorsStatement, spellStatement: spellStatement, strictStatement: strictStatement)
                 }
         }
 
-        private static func dispatch<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T, segmentation: Segmentation, deepSearch: Bool, anchorsStatement: OpaquePointer?, spellStatement: OpaquePointer?, strictStatement: OpaquePointer?, syllableStatement: OpaquePointer?) -> [Lexicon] {
+        private static func dispatch<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T, segmentation: Segmentation, deepSearch: Bool, anchorsStatement: OpaquePointer?, spellStatement: OpaquePointer?, strictStatement: OpaquePointer?) -> [Lexicon] {
                 let syllableKeys = keys.filter(\.isSyllableLetter)
                 let lexicons: [Lexicon] = switch (segmentation.first?.first?.alias.count ?? 0) {
                 case 0 where deepSearch:
-                        processSlices(of: syllableKeys, text: syllableKeys.map(\.text).joined(), anchorsStatement: anchorsStatement, spellStatement: spellStatement, syllableStatement: syllableStatement)
+                        processSlices(of: syllableKeys, text: syllableKeys.map(\.text).joined(), anchorsStatement: anchorsStatement, spellStatement: spellStatement)
                 case 0:
                         anchorsMatch(keys: syllableKeys, input: syllableKeys.map(\.text).joined(), statement: anchorsStatement)
                 case 1 where syllableKeys.count > 1,
                         _ where syllableKeys.count != keys.count :
-                        search(syllableKeys, segmentation: segmentation, deepSearch: deepSearch, anchorsStatement: anchorsStatement, spellStatement: spellStatement, strictStatement: strictStatement, syllableStatement: syllableStatement) + processSlices(of: syllableKeys, text: syllableKeys.map(\.text).joined(), anchorsStatement: anchorsStatement, spellStatement: spellStatement, syllableStatement: syllableStatement)
+                        search(syllableKeys, segmentation: segmentation, deepSearch: deepSearch, anchorsStatement: anchorsStatement, spellStatement: spellStatement, strictStatement: strictStatement) + processSlices(of: syllableKeys, text: syllableKeys.map(\.text).joined(), anchorsStatement: anchorsStatement, spellStatement: spellStatement)
                 default:
-                        search(syllableKeys, segmentation: segmentation, deepSearch: deepSearch, anchorsStatement: anchorsStatement, spellStatement: spellStatement, strictStatement: strictStatement, syllableStatement: syllableStatement)
+                        search(syllableKeys, segmentation: segmentation, deepSearch: deepSearch, anchorsStatement: anchorsStatement, spellStatement: spellStatement, strictStatement: strictStatement)
                 }
                 switch (keys.contains(where: \.isApostrophe), keys.contains(where: \.isToneInputKey)) {
                 case (false, false):
@@ -286,16 +297,16 @@ extension Engine {
                 }
         }
 
-        private static func processSlices<T: RandomAccessCollection<VirtualInputKey>>(of keys: T, text: String, limit: Int64? = nil, anchorsStatement: OpaquePointer?, spellStatement: OpaquePointer?, syllableStatement: OpaquePointer?) -> [Lexicon] {
+        private static func processSlices<T: RandomAccessCollection<VirtualInputKey>>(of keys: T, text: String, limit: Int64? = nil, anchorsStatement: OpaquePointer?, spellStatement: OpaquePointer?) -> [Lexicon] {
                 let adjustedLimit: Int64 = (limit == nil) ? 300 : 100
                 let inputLength: Int = keys.count
                 return (0..<inputLength).flatMap({ number -> [Lexicon] in
                         let leadingKeys = keys.dropLast(number)
                         let leadingText = leadingKeys.map(\.text).joined()
                         let spellMatched = spellMatch(text: leadingText, input: leadingText, limit: limit, statement: spellStatement)
-                                .map({ modify($0, keys: keys, text: text, inputLength: inputLength, syllableStatement: syllableStatement) })
+                                .map({ modify($0, keys: keys, text: text, inputLength: inputLength) })
                         let anchorsMatched = anchorsMatch(keys: leadingKeys, input: leadingText, limit: adjustedLimit, statement: anchorsStatement)
-                                .map({ modify($0, keys: keys, text: text, inputLength: inputLength, syllableStatement: syllableStatement) })
+                                .map({ modify($0, keys: keys, text: text, inputLength: inputLength) })
                                 .sorted()
                                 .prefix(72)
                         return spellMatched + anchorsMatched
@@ -303,7 +314,7 @@ extension Engine {
                 .distinct()
                 .sorted()
         }
-        private static func modify<T: RandomAccessCollection<VirtualInputKey>>(_ item: Lexicon, keys: T, text: String, inputLength: Int, syllableStatement: OpaquePointer?) -> Lexicon {
+        private static func modify<T: RandomAccessCollection<VirtualInputKey>>(_ item: Lexicon, keys: T, text: String, inputLength: Int) -> Lexicon {
                 guard inputLength > 1 else { return item }
                 guard item.inputCount != inputLength else { return item }
                 lazy var converted: Lexicon = Lexicon(text: item.text, romanization: item.romanization, input: text, mark: text, number: item.number)
@@ -311,7 +322,7 @@ extension Engine {
                 guard let lastSyllable = item.romanization.split(separator: Character.space).last?.filter(\.isCantoneseToneDigit.negative) else { return item }
                 let tail = keys.dropFirst(item.inputCount - 1)
                 guard tail.count <= 6 else { return item }
-                if let tailSyllable = Segmenter.syllableText(of: tail, statement: syllableStatement) {
+                if let tailSyllable = Segmenter.syllableText(of: tail) {
                         return lastSyllable == tailSyllable ? converted : item
                 } else {
                         let tailText = tail.map(\.text).joined()
@@ -319,7 +330,7 @@ extension Engine {
                 }
         }
 
-        private static func search<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T, segmentation: Segmentation, limit: Int64? = nil, deepSearch: Bool, anchorsStatement: OpaquePointer?, spellStatement: OpaquePointer?, strictStatement: OpaquePointer?, syllableStatement: OpaquePointer?) -> [Lexicon] {
+        private static func search<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T, segmentation: Segmentation, limit: Int64? = nil, deepSearch: Bool, anchorsStatement: OpaquePointer?, spellStatement: OpaquePointer?, strictStatement: OpaquePointer?) -> [Lexicon] {
                 let inputLength: Int = keys.count
                 let text: String = keys.map(\.text).joined()
                 let spellMatched = spellMatch(text: text, input: text, limit: limit, statement: spellStatement)
@@ -372,7 +383,7 @@ extension Engine {
                         lazy var converted: Lexicon = Lexicon(text: item.text, romanization: item.romanization, input: text, mark: text, number: item.number)
                         guard item.romanization.removedSpacesTones().hasPrefix(text).negative else { return converted }
                         guard let lastSyllable = item.romanization.split(separator: Character.space).last?.filter(\.isCantoneseToneDigit.negative) else { return nil }
-                        if let tailSyllable = Segmenter.syllableText(of: tail, statement: syllableStatement) {
+                        if let tailSyllable = Segmenter.syllableText(of: tail) {
                                 return lastSyllable == tailSyllable ? converted : nil
                         } else {
                                 let tailText = tail.map(\.text).joined()
@@ -391,7 +402,7 @@ extension Engine {
                 }()
                 guard let firstInputCount = fetched.first?.inputCount else {
                         if deepSearch {
-                                return processSlices(of: keys, text: text, limit: limit, anchorsStatement: anchorsStatement, spellStatement: spellStatement, syllableStatement: syllableStatement)
+                                return processSlices(of: keys, text: text, limit: limit, anchorsStatement: anchorsStatement, spellStatement: spellStatement)
                         } else {
                                 return anchorsMatch(keys: keys, input: text, limit: limit, statement: anchorsStatement)
                         }
@@ -401,8 +412,8 @@ extension Engine {
                 let headInputLengths = fetched.map(\.inputCount).distinct()
                 let concatenated = headInputLengths.compactMap({ headLength -> Lexicon? in
                         let tailKeys = keys.dropFirst(headLength)
-                        let tailSegmentation = Segmenter.segment(tailKeys, statement: syllableStatement)
-                        guard let tailLexicon = search(tailKeys, segmentation: tailSegmentation, limit: 50, deepSearch: deepSearch, anchorsStatement: anchorsStatement, spellStatement: spellStatement, strictStatement: strictStatement, syllableStatement: syllableStatement).first else { return nil }
+                        let tailSegmentation = Segmenter.segment(tailKeys)
+                        guard let tailLexicon = search(tailKeys, segmentation: tailSegmentation, limit: 50, deepSearch: deepSearch, anchorsStatement: anchorsStatement, spellStatement: spellStatement, strictStatement: strictStatement).first else { return nil }
                         guard let headLexicon = fetched.first(where: { $0.inputCount == headLength }) else { return nil }
                         return headLexicon + tailLexicon
                 }).distinct().sorted().prefix(1)
