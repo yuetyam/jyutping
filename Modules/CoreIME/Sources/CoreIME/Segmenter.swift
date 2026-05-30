@@ -90,8 +90,8 @@ extension RandomAccessCollection where Element == Syllable {
 }
 
 private extension Scheme {
-        // REASON: *am => [*aa, m] => *aam
-        var isValid: Bool {
+        @available(*, unavailable, renamed: "isValid", message: "Use isValid instead. This old one just for documentation reference.")
+        private var isValid_OLD: Bool {
                 guard self.count > 1 else { return true }
                 guard self.dropLast().contains(where: { $0.origin.last == VirtualInputKey.letterA }) else { return true }
                 let originNumber = self.flatMap(\.origin).map(\.text).joined().occurrenceCount(pattern: "aa(m|ng)")
@@ -99,6 +99,46 @@ private extension Scheme {
                 let aliasNumber = self.flatMap(\.alias).map(\.text).joined().occurrenceCount(pattern: "aa(m|ng)")
                 guard aliasNumber > 0 else { return false }
                 return originNumber == aliasNumber
+        }
+
+        // REASON: *am => [*aa, m] => *aam
+        var isValid: Bool {
+                guard self.count > 1 else { return true }
+                guard self.dropLast().contains(where: { $0.origin.last == VirtualInputKey.letterA }) else { return true }
+                let originCount = longAEndingCount(in: \.originCode)
+                guard originCount > 0 else { return true }
+                return originCount == longAEndingCount(in: \.aliasCode)
+        }
+        private func longAEndingCount(in keyPath: KeyPath<Syllable, Int>) -> Int {
+                let letterACode = VirtualInputKey.letterA.code
+                let letterGCode = VirtualInputKey.letterG.code
+                let letterMCode = VirtualInputKey.letterM.code
+                let letterNCode = VirtualInputKey.letterN.code
+                var count: Int = 0
+                var thirdLastCode: Int = 0
+                var secondLastCode: Int = 0
+                var lastCode: Int = 0
+                for syllable in self {
+                        var syllableCode = syllable[keyPath: keyPath]
+                        var divisor: Int = 1
+                        while syllableCode / divisor >= 100 {
+                                divisor *= 100
+                        }
+                        while divisor > 0 {
+                                let keyCode = syllableCode / divisor
+                                if secondLastCode == letterACode && lastCode == letterACode && keyCode == letterMCode {
+                                        count += 1
+                                } else if thirdLastCode == letterACode && secondLastCode == letterACode && lastCode == letterNCode && keyCode == letterGCode {
+                                        count += 1
+                                }
+                                syllableCode %= divisor
+                                divisor /= 100
+                                thirdLastCode = secondLastCode
+                                secondLastCode = lastCode
+                                lastCode = keyCode
+                        }
+                }
+                return count
         }
 }
 

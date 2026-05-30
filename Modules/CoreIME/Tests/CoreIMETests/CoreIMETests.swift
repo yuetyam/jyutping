@@ -1,17 +1,44 @@
 import Testing
-import XCTest
+@testable import CommonExtensions
 @testable import CoreIME
 
-@Test func example() async throws {
-    // Write your test here and use APIs like `#expect(...)` to check expected conditions.
-}
+@Suite("CoreIME")
+struct CoreIMETests {
+        @Test("Segmenter rejects cross-syllable long-a matches")
+        func segmenterRejectsCrossSyllableLongA() {
+                let gamSchemes = Segmenter.segment([
+                        .letterG,
+                        .letterA,
+                        .letterM
+                ])
+                #expect(gamSchemes.contains(where: { $0.syllableText == "gaa m" }).negative)
 
-final class CoreIMETests: XCTestCase {
-    func testExample() throws {
-        // XCTest Documentation
-        // https://developer.apple.com/documentation/xctest
+                let gangSchemes = Segmenter.segment([
+                        .letterG,
+                        .letterA,
+                        .letterN,
+                        .letterG
+                ])
+                #expect(gangSchemes.contains(where: { $0.syllableText == "gaa ng" }).negative)
+        }
 
-        // Defining Test Cases and Test Methods
-        // https://developer.apple.com/documentation/xctest/defining_test_cases_and_test_methods
-    }
+        @Test("Segmenter accepts explicit long-a syllables")
+        func segmenterAcceptsExplicitLongA() {
+                let gaamSchemes = Segmenter.segment([
+                        .letterG,
+                        .letterA,
+                        .letterA,
+                        .letterM
+                ])
+                #expect(gaamSchemes.contains(where: { $0.syllableText == "gaam" }))
+
+                let gaangSchemes = Segmenter.segment([
+                        .letterG,
+                        .letterA,
+                        .letterA,
+                        .letterN,
+                        .letterG
+                ])
+                #expect(gaangSchemes.contains(where: { $0.syllableText == "gaang" }))
+        }
 }
