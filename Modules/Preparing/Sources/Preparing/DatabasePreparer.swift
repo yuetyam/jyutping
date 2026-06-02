@@ -51,7 +51,7 @@ struct DatabasePreparer {
                 Cangjie.closeCangjieDatabase()
         }
         private static func backupInMemoryDatabase() {
-                let path = "../CoreIME/Sources/CoreIME/Resources/imedb.sqlite3"
+                let path = "../CoreIME/Sources/CoreIME/Resources/ime.sqlite3"
                 if FileManager.default.fileExists(atPath: path) {
                         try? FileManager.default.removeItem(atPath: path)
                 }
@@ -61,6 +61,18 @@ struct DatabasePreparer {
                 let backup = sqlite3_backup_init(destination, "main", database, "main")
                 guard sqlite3_backup_step(backup, -1) == SQLITE_DONE else { return }
                 guard sqlite3_backup_finish(backup) == SQLITE_OK else { return }
+                let commands: [String] = [
+                        "PRAGMA page_size = 16384;",
+                        "PRAGMA journal_mode = DELETE;",
+                        "VACUUM;",
+                        "ANALYZE;",
+                ]
+                for command in commands {
+                        var statement: OpaquePointer?
+                        sqlite3_prepare_v2(destination, command, -1, &statement, nil)
+                        sqlite3_step(statement)
+                        sqlite3_finalize(statement)
+                }
         }
 
         private static func createIndexes() {

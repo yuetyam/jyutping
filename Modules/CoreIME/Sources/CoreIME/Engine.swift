@@ -24,25 +24,12 @@ public struct Engine {
                         logger.warning("Primary database is not ready")
                 }
         }
-        /*
         nonisolated(unsafe) static let database: OpaquePointer? = {
+                guard let path: String = Bundle.module.path(forResource: "ime", ofType: "sqlite3") else { return nil }
                 var db: OpaquePointer? = nil
-                guard let path: String = Bundle.module.path(forResource: "imedb", ofType: "sqlite3") else { return nil }
-                var storageDatabase: OpaquePointer? = nil
-                defer { sqlite3_close_v2(storageDatabase) }
-                guard sqlite3_open_v2(path, &storageDatabase, SQLITE_OPEN_READONLY, nil) == SQLITE_OK else { return nil }
-                guard sqlite3_open_v2(":memory:", &db, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE | SQLITE_OPEN_FULLMUTEX, nil) == SQLITE_OK else { return nil }
-                let backup = sqlite3_backup_init(db, "main", storageDatabase, "main")
-                guard sqlite3_backup_step(backup, -1) == SQLITE_DONE else { return nil }
-                guard sqlite3_backup_finish(backup) == SQLITE_OK else { return nil }
-                return db
-        }()
-        */
-        nonisolated(unsafe) static let database: OpaquePointer? = {
-                var db: OpaquePointer? = nil
-                guard let path: String = Bundle.module.path(forResource: "imedb", ofType: "sqlite3") else { return nil }
-                if sqlite3_open_v2(path, &db, SQLITE_OPEN_READONLY | SQLITE_OPEN_FULLMUTEX, nil) == SQLITE_OK {
-                        logger.debug("Connected primary database")
+                let flags = SQLITE_OPEN_READONLY | SQLITE_OPEN_FULLMUTEX
+                if sqlite3_open_v2(path, &db, flags, nil) == SQLITE_OK {
+                        logger.debug("Primary database connected")
                         return db
                 } else {
                         sqlite3_close_v2(db)
