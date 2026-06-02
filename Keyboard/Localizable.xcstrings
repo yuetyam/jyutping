@@ -6304,91 +6304,91 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Jyutping"
+            "value" : "Chinese"
           }
         },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Jyutping"
+            "value" : "Chinese"
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Jyutping"
+            "value" : "Chinese"
           }
         },
         "en-US" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Jyutping"
+            "value" : "Chinese"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Jyutping"
+            "value" : "chinois"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "粵拼"
+            "value" : "中文"
           }
         },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "粵拼"
+            "value" : "中文"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "粵拼"
+            "value" : "中文"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "粵拼"
+            "value" : "中文"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "粵拼"
+            "value" : "中文"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "粵拼"
+            "value" : "中文"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "粵拼"
+            "value" : "中文"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "粵拼"
+            "value" : "中文"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "粵拼"
+            "value" : "中文"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "粵拼"
+            "value" : "中文"
           }
         }
       }

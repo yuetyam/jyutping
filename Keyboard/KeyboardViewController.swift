@@ -809,8 +809,8 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
 
         private func suggest() {
                 suggestionTask?.cancel()
-                let keys = bufferEvents.compactMap(\.keys.first)
-                let isPeculiar: Bool = bufferEvents.contains(where: \.case.isCapitalized) || keys.contains(where: \.isSyllableLetter.negative)
+                let events = bufferEvents.basicTransformed()
+                let keys = events.map(\.key)
                 let isInputMemoryOn: Bool = Options.isInputMemoryOn
                 let isEmojiSuggestionsOn: Bool = Options.isEmojiSuggestionsOn
                 let isEnglishSuggestionsOn: Bool = Options.isEnglishSuggestionsOn
@@ -831,15 +831,15 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 await MainActor.run { [weak self] in
                                         guard let self else { return }
                                         text2mark = {
-                                                lazy var text: String = joinedBufferTexts()
-                                                guard (suggestions.first?.isCantonese ?? false) else { return text }
-                                                guard isPeculiar.negative else { return text.toneConverted().markFormatted() }
-                                                guard let firstCandidate = suggestions.first else { return text }
+                                                guard (suggestions.first?.isCantonese ?? false) else { return joinedBufferTexts() }
+                                                let isPeculiar: Bool = events.contains(where: { $0.isCapitalized || $0.key.isSyllableLetter.negative })
+                                                guard isPeculiar.negative else { return events.previewMarkNormalized() }
+                                                guard let firstCandidate = suggestions.first else { return joinedBufferTexts() }
                                                 guard firstCandidate.lexicon.inputCount != keys.count else { return firstCandidate.lexicon.mark }
-                                                guard let bestScheme = segmentation.first else { return text }
+                                                guard let bestScheme = segmentation.first else { return joinedBufferTexts() }
                                                 let leadingLength: Int = bestScheme.length
                                                 guard leadingLength < keys.count else { return bestScheme.mark }
-                                                return bestScheme.mark + String.space + text.dropFirst(leadingLength)
+                                                return bestScheme.mark + String.space + joinedBufferTexts().dropFirst(leadingLength)
                                         }()
                                         candidates = suggestions
                                 }
@@ -993,8 +993,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                                                 guard let bestScheme = segmentation.first else { return String(bufferText.dropFirst()) }
                                                                 let leadingLength: Int = bestScheme.length
                                                                 guard leadingLength < keys.count else { return bestScheme.mark }
-                                                                let tailText = keys.dropFirst(leadingLength).map(\.text).joined()
-                                                                return bestScheme.mark + String.space + tailText
+                                                                return bestScheme.mark + String.space + bufferText.dropFirst(leadingLength + 1)
                                                         }()
                                                         return bufferText.prefix(1) + String.space + tailMark
                                                 }()

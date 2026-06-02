@@ -466,7 +466,6 @@ final class JyutpingInputController: IMKInputController, Sendable {
         private lazy var suggestionTask: Task<Void, Never>? = nil
         private func suggest() {
                 suggestionTask?.cancel()
-                let isPeculiar: Bool = bufferEvents.contains(where: { $0.isCapitalized || $0.key.isSyllableLetter.negative })
                 let keys = bufferEvents.map(\.key)
                 let isInputMemoryOn = AppSettings.isInputMemoryOn
                 let isEmojiSuggestionsOn = AppSettings.isEmojiSuggestionsOn
@@ -490,7 +489,8 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                         guard let self else { return }
                                         let text2mark: String = {
                                                 guard (suggestions.first?.isCantonese ?? false) else { return joinedBufferTexts() }
-                                                guard isPeculiar.negative else { return joinedBufferTexts().toneConverted().markFormatted() }
+                                                let isPeculiar: Bool = bufferEvents.contains(where: { $0.isCapitalized || $0.key.isSyllableLetter.negative })
+                                                guard isPeculiar.negative else { return bufferEvents.previewMarkNormalized() }
                                                 guard let firstCandidate = suggestions.first else { return joinedBufferTexts() }
                                                 guard firstCandidate.lexicon.inputCount != keys.count else { return firstCandidate.lexicon.mark }
                                                 guard let bestScheme = segmentation.first else { return joinedBufferTexts() }
@@ -658,8 +658,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                                                 guard let bestScheme = segmentation.first else { return String(bufferText.dropFirst()) }
                                                                 let leadingLength: Int = bestScheme.length
                                                                 guard leadingLength < keys.count else { return bestScheme.mark }
-                                                                let tailText = keys.dropFirst(leadingLength).map(\.text).joined()
-                                                                return bestScheme.mark + String.space + tailText
+                                                                return bestScheme.mark + String.space + bufferText.dropFirst(leadingLength + 1)
                                                         }()
                                                         return bufferText.prefix(1) + String.space + tailMark
                                                 }()
