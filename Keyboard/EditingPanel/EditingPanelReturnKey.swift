@@ -5,7 +5,6 @@ struct EditingPanelReturnKey: View {
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
-
         @GestureState private var isTouching: Bool = false
 
         var body: some View {
@@ -49,12 +48,12 @@ struct EditingPanelReturnKey: View {
                                         .clipShape(RoundedRectangle(cornerRadius: PresetConstant.ultraKeyCornerRadius, style: .continuous))
                                         .glassEffect(isTouching ? .regular : .clear, in: RoundedRectangle(cornerRadius: PresetConstant.ultraKeyCornerRadius, style: .continuous))
                                         .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
-                                        .padding(4)
+                                        .padding(isTouching ? 2 : 4)
                         } else {
                                 RoundedRectangle(cornerRadius: PresetConstant.ultraKeyCornerRadius, style: .continuous)
                                         .fill(backColor)
                                         .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                        .padding(4)
+                                        .padding(isTouching ? 2 : 4)
                         }
                         VStack(spacing: 4) {
                                 switch context.returnKeyType {
@@ -77,11 +76,11 @@ struct EditingPanelReturnKey: View {
                 }
                 .contentShape(.rect)
                 .gesture(DragGesture(minimumDistance: 0)
-                        .updating($isTouching) { _, tapped, _ in
-                                if tapped.negative {
+                        .updating($isTouching) { _, isTouchBegan, _ in
+                                if isTouchBegan.negative {
+                                        isTouchBegan = true
                                         AudioFeedback.modified()
                                         context.triggerHapticFeedback()
-                                        tapped = true
                                 }
                         }
                         .onEnded { _ in

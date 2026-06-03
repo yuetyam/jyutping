@@ -17,7 +17,7 @@ struct GlassEditingPanel: View {
                         VStack(spacing: 0) {
                                 HStack(spacing: 0) {
                                         EditingPanelGlassClearClipboardKey().frame(maxWidth: .infinity)
-                                        EditingPanelGlassPasteKey().frame(maxWidth: .infinity)
+                                        EditingPanelGlassSystemPasteKey().frame(maxWidth: .infinity)
                                 }
                                 .frame(maxHeight: .infinity)
                                 HStack(spacing: 0) {

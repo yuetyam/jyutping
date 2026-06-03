@@ -21,12 +21,12 @@ struct TailoredSpaceKey: View {
                                 Color.clear
                                         .glassEffect(isTouching ? .regular : .clear, in: RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous))
                                         .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
-                                        .padding(3)
+                                        .padding(isTouching ? 1 : 3)
                         } else {
                                 RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous)
                                         .fill(isTouching ? colorScheme.activeInputKeyColor : colorScheme.inputKeyColor)
                                         .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                        .padding(3)
+                                        .padding(isTouching ? 1 : 3)
                         }
                         Text(isLongPressEngaged ? PresetConstant.spaceKeyLongPressHint : context.spaceKeyForm.attributedText).font(.staticBody)
                 }
@@ -34,11 +34,12 @@ struct TailoredSpaceKey: View {
                 .frame(maxWidth: .infinity)
                 .contentShape(.rect)
                 .gesture(DragGesture(minimumDistance: 0)
-                        .updating($isTouching) { _, tapped, _ in
-                                guard tapped.negative else { return }
-                                AudioFeedback.modified()
-                                context.triggerHapticFeedback()
-                                tapped = true
+                        .updating($isTouching) { _, isTouchBegan, _ in
+                                if isTouchBegan.negative {
+                                        isTouchBegan = true
+                                        AudioFeedback.modified()
+                                        context.triggerHapticFeedback()
+                                }
                         }
                         .onChanged { value in
                                 guard isTouching else { return }

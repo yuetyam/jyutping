@@ -14,6 +14,10 @@ struct EditingPanelGlassForwardDeleteKey: View {
         var body: some View {
                 ZStack {
                         Color.interactiveClear
+                        Color.clear
+                                .glassEffect(isTouching ? .regular : .clear, in: RoundedRectangle(cornerRadius: PresetConstant.ultraKeyCornerRadius, style: .continuous))
+                                .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
+                                .padding(isTouching ? 2 : 4)
                         VStack(spacing: 4) {
                                 Image.forwardDelete.symbolVariant(isTouching ? .fill : .none)
                                 Text("EditingPanel.ForwardDelete")
@@ -23,17 +27,15 @@ struct EditingPanelGlassForwardDeleteKey: View {
                                         .padding(.horizontal, 4)
                         }
                 }
-                .glassEffect(isTouching ? .regular : .clear, in: RoundedRectangle(cornerRadius: PresetConstant.ultraKeyCornerRadius, style: .continuous))
-                .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
-                .padding(4)
                 .contentShape(.rect)
                 .gesture(DragGesture(minimumDistance: 0)
-                        .updating($isTouching) { _, tapped, _ in
-                                guard tapped.negative else { return }
-                                AudioFeedback.deleted()
-                                context.triggerHapticFeedback()
-                                context.operate(.forwardDelete)
-                                tapped = true
+                        .updating($isTouching) { _, isTouchBegan, _ in
+                                if isTouchBegan.negative {
+                                        isTouchBegan = true
+                                        AudioFeedback.deleted()
+                                        context.triggerHapticFeedback()
+                                        context.operate(.forwardDelete)
+                                }
                         }
                         .onEnded { _ in
                                 buffer = 0
@@ -70,7 +72,7 @@ struct EditingPanelForwardDeleteKey: View {
                         RoundedRectangle(cornerRadius: PresetConstant.ultraKeyCornerRadius, style: .continuous)
                                 .fill(isTouching ? colorScheme.activeActionKeyColor : colorScheme.actionKeyColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                .padding(4)
+                                .padding(isTouching ? 2 : 4)
                         VStack(spacing: 4) {
                                 Image.forwardDelete.symbolVariant(isTouching ? .fill : .none)
                                 Text("EditingPanel.ForwardDelete")
@@ -82,12 +84,13 @@ struct EditingPanelForwardDeleteKey: View {
                 }
                 .contentShape(.rect)
                 .gesture(DragGesture(minimumDistance: 0)
-                        .updating($isTouching) { _, tapped, _ in
-                                guard tapped.negative else { return }
-                                AudioFeedback.deleted()
-                                context.triggerHapticFeedback()
-                                context.operate(.forwardDelete)
-                                tapped = true
+                        .updating($isTouching) { _, isTouchBegan, _ in
+                                if isTouchBegan.negative {
+                                        isTouchBegan = true
+                                        AudioFeedback.deleted()
+                                        context.triggerHapticFeedback()
+                                        context.operate(.forwardDelete)
+                                }
                         }
                         .onEnded { _ in
                                 buffer = 0

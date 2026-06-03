@@ -14,20 +14,24 @@ struct GlassTailoredBackspaceKey: View {
         var body: some View {
                 ZStack {
                         Color.interactiveClear
-                        Image.backspace.symbolVariant(isTouching ? .fill : .none).font(.symbol)
+                        ZStack {
+                                Color.clear
+                                Image.backspace.symbolVariant(isTouching ? .fill : .none).font(.symbol)
+                        }
+                        .glassEffect(isTouching ? .regular : .clear, in: RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous))
+                        .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
+                        .padding(isTouching ? 1 : 3)
                 }
-                .glassEffect(isTouching ? .regular : .clear, in: RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous))
-                .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
-                .padding(3)
                 .frame(width: context.nineKeyWidthUnit * 0.94, height: context.heightUnit)
                 .contentShape(.rect)
                 .gesture(DragGesture(minimumDistance: 0)
-                        .updating($isTouching) { _, tapped, _ in
-                                guard tapped.negative else { return }
-                                AudioFeedback.deleted()
-                                context.triggerHapticFeedback()
-                                context.operate(.backspace)
-                                tapped = true
+                        .updating($isTouching) { _, isTouchBegan, _ in
+                                if isTouchBegan.negative {
+                                        isTouchBegan = true
+                                        AudioFeedback.deleted()
+                                        context.triggerHapticFeedback()
+                                        context.operate(.backspace)
+                                }
                         }
                         .onEnded { value in
                                 buffer = 0
@@ -68,18 +72,19 @@ struct TailoredBackspaceKey: View {
                         RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous)
                                 .fill(isTouching ? colorScheme.activeActionKeyColor : colorScheme.actionKeyColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                .padding(3)
+                                .padding(isTouching ? 1 : 3)
                         Image.backspace.symbolVariant(isTouching ? .fill : .none).font(.symbol)
                 }
                 .frame(width: context.nineKeyWidthUnit * 0.94, height: context.heightUnit)
                 .contentShape(.rect)
                 .gesture(DragGesture(minimumDistance: 0)
-                        .updating($isTouching) { _, tapped, _ in
-                                guard tapped.negative else { return }
-                                AudioFeedback.deleted()
-                                context.triggerHapticFeedback()
-                                context.operate(.backspace)
-                                tapped = true
+                        .updating($isTouching) { _, isTouchBegan, _ in
+                                if isTouchBegan.negative {
+                                        isTouchBegan = true
+                                        AudioFeedback.deleted()
+                                        context.triggerHapticFeedback()
+                                        context.operate(.backspace)
+                                }
                         }
                         .onEnded { value in
                                 buffer = 0

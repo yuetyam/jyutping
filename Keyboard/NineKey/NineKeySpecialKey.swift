@@ -18,26 +18,28 @@ struct GlassNineKeySpecialKey: View {
                                 Color.clear
                                 Text(verbatim: isBuffering ? PresetConstant.separate : PresetConstant.reverseLookup)
                                         .font(.labelCaption)
+                                        .padding(.bottom, 2)
                                         .opacity(isBuffering ? 0 : 0.35)
                         }
-                        .padding(.bottom, 2)
+                        .glassEffect(isTouching ? .regular : .clear, in: RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous))
+                        .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
+                        .padding(isTouching ? 1 : 3)
                         Text(verbatim: isBuffering ? String.apostrophe : Combo.special.text)
                                 .opacity(isBuffering ? 0 : 1)
                 }
-                .glassEffect(isTouching ? .regular : .clear, in: RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous))
-                .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
-                .padding(3)
                 .frame(width: context.nineKeyWidthUnit * 1.04, height: context.heightUnit)
                 .contentShape(.rect)
                 .gesture(DragGesture(minimumDistance: 0)
-                        .updating($isTouching) { _, isTouched, _ in
-                                if isTouched.negative {
-                                        isTouched = true
+                        .updating($isTouching) { _, isTouchBegan, _ in
+                                if isTouchBegan.negative {
+                                        isTouchBegan = true
                                         AudioFeedback.inputed()
                                         context.triggerHapticFeedback()
-                                        if context.inputStage.isBuffering.negative {
-                                                context.nineKeyProcess(.special)
-                                        }
+                                }
+                        }
+                        .onEnded { _ in
+                                if context.inputStage.isBuffering.negative {
+                                        context.nineKeyProcess(.special)
                                 }
                         }
                 )
@@ -54,31 +56,32 @@ struct NineKeySpecialKey: View {
                 let isBuffering: Bool = context.inputStage.isBuffering
                 ZStack {
                         Color.interactiveClear
-                        RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous)
-                                .fill(isTouching ? colorScheme.activeInputKeyColor : colorScheme.inputKeyColor)
-                                .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                .padding(3)
                         ZStack(alignment: .bottom) {
-                                Color.clear
+                                RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous)
+                                        .fill(isTouching ? colorScheme.activeInputKeyColor : colorScheme.inputKeyColor)
+                                        .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 Text(verbatim: isBuffering ? PresetConstant.separate : PresetConstant.reverseLookup)
                                         .font(.labelCaption)
+                                        .padding(.bottom, 2)
                                         .opacity(isBuffering ? 0 : 0.35)
                         }
-                        .padding(.bottom, 5)
+                        .padding(isTouching ? 1 : 3)
                         Text(verbatim: isBuffering ? String.apostrophe : Combo.special.text)
                                 .opacity(isBuffering ? 0 : 1)
                 }
                 .frame(width: context.nineKeyWidthUnit * 1.04, height: context.heightUnit)
                 .contentShape(.rect)
                 .gesture(DragGesture(minimumDistance: 0)
-                        .updating($isTouching) { _, isTouched, _ in
-                                if isTouched.negative {
-                                        isTouched = true
+                        .updating($isTouching) { _, isTouchBegan, _ in
+                                if isTouchBegan.negative {
+                                        isTouchBegan = true
                                         AudioFeedback.inputed()
                                         context.triggerHapticFeedback()
-                                        if context.inputStage.isBuffering.negative {
-                                                context.nineKeyProcess(.special)
-                                        }
+                                }
+                        }
+                        .onEnded { _ in
+                                if context.inputStage.isBuffering.negative {
+                                        context.nineKeyProcess(.special)
                                 }
                         }
                 )

@@ -18,17 +18,20 @@ struct GlassTailoredNumberKey: View {
         var body: some View {
                 ZStack {
                         Color.interactiveClear
-                        Text(verbatim: virtual.text).font(.letterCompact)
+                        ZStack {
+                                Color.clear
+                                Text(verbatim: virtual.text).font(.letterCompact)
+                        }
+                        .glassEffect(isTouching ? .regular : .clear, in: RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous))
+                        .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
+                        .padding(isTouching ? 1 : 3)
                 }
-                .glassEffect(isTouching ? .regular : .clear, in: RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous))
-                .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
-                .padding(3)
                 .frame(width: context.nineKeyWidthUnit * 1.04, height: context.heightUnit)
                 .contentShape(.rect)
                 .gesture(DragGesture(minimumDistance: 0)
-                        .updating($isTouching) { _, isTouched, _ in
-                                if isTouched.negative {
-                                        isTouched = true
+                        .updating($isTouching) { _, isTouchBegan, _ in
+                                if isTouchBegan.negative {
+                                        isTouchBegan = true
                                         AudioFeedback.inputed()
                                         context.triggerHapticFeedback()
                                         context.handle(virtual)
@@ -55,15 +58,15 @@ struct TailoredNumberKey: View {
                         RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous)
                                 .fill(isTouching ? colorScheme.activeInputKeyColor : colorScheme.inputKeyColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                .padding(3)
+                                .padding(isTouching ? 1 : 3)
                         Text(verbatim: virtual.text).font(.letterCompact)
                 }
                 .frame(width: context.nineKeyWidthUnit * 1.04, height: context.heightUnit)
                 .contentShape(.rect)
                 .gesture(DragGesture(minimumDistance: 0)
-                        .updating($isTouching) { _, isTouched, _ in
-                                if isTouched.negative {
-                                        isTouched = true
+                        .updating($isTouching) { _, isTouchBegan, _ in
+                                if isTouchBegan.negative {
+                                        isTouchBegan = true
                                         AudioFeedback.inputed()
                                         context.triggerHapticFeedback()
                                         context.handle(virtual)

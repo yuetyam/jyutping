@@ -10,11 +10,12 @@ struct GlassTailoredGlobeKey: View {
         var body: some View {
                 ZStack {
                         Color.interactiveClear
+                        Color.clear
+                                .glassEffect(.clear, in: RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous))
+                                .padding(3)
                         Image.globe.font(.symbol)
                         UIGlobeButton()
                 }
-                .glassEffect(.clear, in: RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous))
-                .padding(3)
                 .frame(width: context.nineKeyWidthUnit * 0.94, height: context.heightUnit)
         }
 }

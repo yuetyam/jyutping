@@ -48,12 +48,12 @@ struct TailoredReturnKey: View {
                                         .clipShape(RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous))
                                         .glassEffect(isTouching ? .regular : .clear, in: RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous))
                                         .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
-                                        .padding(3)
+                                        .padding(isTouching ? 1 : 3)
                         } else {
                                 RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous)
                                         .fill(backColor)
                                         .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                        .padding(3)
+                                        .padding(isTouching ? 1 : 3)
                         }
                         switch (context.returnKeyState.isBuffering, isDefaultReturn) {
                         case (true, _):
@@ -89,13 +89,15 @@ struct TailoredReturnKey: View {
                 .frame(width: context.nineKeyWidthUnit * 0.94, height: context.heightUnit * 2)
                 .contentShape(.rect)
                 .gesture(DragGesture(minimumDistance: 0)
-                        .updating($isTouching) { _, isTouched, _ in
-                                if isTouched.negative {
-                                        isTouched = true
+                        .updating($isTouching) { _, isTouchBegan, _ in
+                                if isTouchBegan.negative {
+                                        isTouchBegan = true
                                         AudioFeedback.modified()
                                         context.triggerHapticFeedback()
-                                        context.operate(.return)
                                 }
+                        }
+                        .onEnded { _ in
+                                context.operate(.return)
                         }
                 )
         }
