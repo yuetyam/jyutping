@@ -9,19 +9,22 @@ struct ToolBar: View {
         private let height: CGFloat = PresetConstant.toolBarHeight
 
         var body: some View {
-                let isDenseMode: Bool = switch context.keyboardInterface {
+                let keyboardInterface = context.keyboardInterface
+                let isDenseMode: Bool = switch keyboardInterface {
                 case .padFloating: true
                 case .phonePortrait where (context.keyboardWidth < 359): true
                 case .phoneOnPadPortrait where (context.keyboardWidth < 359): true
                 default: false
                 }
                 let width: CGFloat = isDenseMode ? 44 : 48
+                let isCompactMode: Bool = keyboardInterface.isCompact
+                let extra: CGFloat = isCompactMode ? 0 : 2
                 HStack(spacing: 0) {
                         ToolBarButton(
                                 imageName: "gear",
                                 width: width,
                                 height: height,
-                                insets: EdgeInsets(top: 16, leading: 0, bottom: 16, trailing: 0)
+                                insets: EdgeInsets(top: 17 - extra, leading: 0, bottom: 17 - extra, trailing: 0)
                         ) {
                                 AudioFeedback.modified()
                                 context.triggerHapticFeedback()
@@ -33,7 +36,7 @@ struct ToolBar: View {
                                 imageName: "keyboard",
                                 width: width,
                                 height: height,
-                                insets: EdgeInsets(top: 19, leading: 0, bottom: 19, trailing: 0)
+                                insets: EdgeInsets(top: 19 - extra, leading: 0, bottom: 20 - extra, trailing: 0)
                         ) {
                                 AudioFeedback.modified()
                                 context.triggerHapticFeedback()
@@ -51,12 +54,11 @@ struct ToolBar: View {
                                         Image.smiley
                                                 .resizable()
                                                 .scaledToFit()
-                                                .frame(width: 24, height: 24)
+                                                .frame(width: 22 + (extra * 2), height: 22 + (extra * 2))
                                 }
                                 .frame(width: width, height: height)
                         }
                         .buttonStyle(.plain)
-
 
                         Spacer().frame(minWidth: 0, maxWidth: .infinity)
                         Button {
@@ -67,9 +69,9 @@ struct ToolBar: View {
                                 ZStack {
                                         Color.interactiveClear
                                         if #available(iOSApplicationExtension 26.0, *) {
-                                                InputModeSwitch(width: isDenseMode ? 56 : 60, isCantoneseMode: context.inputMethodMode.isCantonese, isMutilatedMode: context.characterStandard.isMutilated)
+                                                InputModeSwitch(isDenseMode: isDenseMode, isCompactMode: isCompactMode, isCantoneseMode: context.inputMethodMode.isCantonese, isMutilatedMode: context.characterStandard.isMutilated)
                                         } else {
-                                                LegacyInputModeSwitch(width: isDenseMode ? 56 : 60, isCantoneseMode: context.inputMethodMode.isCantonese, isMutilatedMode: context.characterStandard.isMutilated)
+                                                LegacyInputModeSwitch(isDenseMode: isDenseMode, isCompactMode: isCompactMode, isCantoneseMode: context.inputMethodMode.isCantonese, isMutilatedMode: context.characterStandard.isMutilated)
                                         }
                                 }
                                 .frame(width: isDenseMode ? 56 : 64, height: height)
@@ -81,7 +83,7 @@ struct ToolBar: View {
                                 imageName: "arrow.left.and.line.vertical.and.arrow.right",
                                 width: width,
                                 height: height,
-                                insets: EdgeInsets(top: 19, leading: 0, bottom: 19, trailing: 0)
+                                insets: EdgeInsets(top: 20 - extra, leading: 0, bottom: 19 - extra, trailing: 0)
                         ) {
                                 AudioFeedback.modified()
                                 context.triggerHapticFeedback()
@@ -97,9 +99,9 @@ struct ToolBar: View {
                                 ZStack {
                                         Color.interactiveClear
                                         if #available(iOSApplicationExtension 26.0, *) {
-                                                CharacterSetSwitch(width: width, isMutilatedMode: context.characterStandard.isMutilated).disableAnimations()
+                                                CharacterSetSwitch(width: width, isCompactMode: isCompactMode, isMutilatedMode: context.characterStandard.isMutilated).disableAnimations()
                                         } else {
-                                                LegacyCharacterSetSwitch(width: width, isMutilatedMode: context.characterStandard.isMutilated).disableAnimations()
+                                                LegacyCharacterSetSwitch(width: width, isCompactMode: isCompactMode, isMutilatedMode: context.characterStandard.isMutilated).disableAnimations()
                                         }
                                 }
                                 .frame(width: width, height: height)
@@ -111,7 +113,7 @@ struct ToolBar: View {
                                 imageName: "keyboard.chevron.compact.down",
                                 width: width,
                                 height: height,
-                                insets: EdgeInsets(top: 18, leading: 0, bottom: 18, trailing: 0)
+                                insets: EdgeInsets(top: 19 - extra, leading: 0, bottom: 18 - extra, trailing: 0)
                         ) {
                                 AudioFeedback.modified()
                                 context.triggerHapticFeedback()

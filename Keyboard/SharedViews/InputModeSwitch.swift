@@ -5,12 +5,11 @@ import SwiftUI
 @available(iOSApplicationExtension, deprecated: 26.0, message: "Use InputModeSwitch instead")
 struct LegacyInputModeSwitch: View {
 
-        init(width: CGFloat, isCantoneseMode: Bool, isMutilatedMode: Bool) {
-                let isDenseMode: Bool = (width < 59)
+        init(isDenseMode: Bool, isCompactMode: Bool, isCantoneseMode: Bool, isMutilatedMode: Bool) {
                 self.isCantoneseMode = isCantoneseMode
                 self.isMutilatedMode = isMutilatedMode
-                self.width = width
-                self.height = 26
+                self.width = isDenseMode ? 56 : 60
+                self.height = isCompactMode ? 25 : 28
                 self.partialWidth = isDenseMode ? 34 : 36
                 self.characterOffset = isDenseMode ? 6 : 4
         }
@@ -54,12 +53,11 @@ struct LegacyInputModeSwitch: View {
 @available(iOSApplicationExtension 26.0, *)
 struct InputModeSwitch: View {
 
-        init(width: CGFloat, isCantoneseMode: Bool, isMutilatedMode: Bool) {
-                let isDenseMode: Bool = (width < 59)
+        init(isDenseMode: Bool, isCompactMode: Bool, isCantoneseMode: Bool, isMutilatedMode: Bool) {
                 self.isCantoneseMode = isCantoneseMode
                 self.isMutilatedMode = isMutilatedMode
-                self.width = width
-                self.height = 26
+                self.width = isDenseMode ? 56 : 60
+                self.height = isCompactMode ? 25 : 28
                 self.partialWidth = isDenseMode ? 34 : 36
                 self.characterOffset = isDenseMode ? 6 : 4
         }

@@ -4,11 +4,11 @@ import SwiftUI
 @available(iOSApplicationExtension, deprecated: 26.0, message: "Use CharacterSetSwitch instead")
 struct LegacyCharacterSetSwitch: View {
 
-        init(width: CGFloat, isMutilatedMode: Bool) {
+        init(width: CGFloat, isCompactMode: Bool, isMutilatedMode: Bool) {
                 let isDenseMode: Bool = (width < 47)
                 self.isMutilatedMode = isMutilatedMode
                 self.width = width
-                self.height = 26
+                self.height = isCompactMode ? 25 : 28
                 self.partialWidth = isDenseMode ? 26 : 28
                 self.characterOffset = isDenseMode ? 5 : 4
         }
@@ -50,11 +50,11 @@ struct LegacyCharacterSetSwitch: View {
 @available(iOSApplicationExtension 26.0, *)
 struct CharacterSetSwitch: View {
 
-        init(width: CGFloat, isMutilatedMode: Bool) {
+        init(width: CGFloat, isCompactMode: Bool, isMutilatedMode: Bool) {
                 let isDenseMode: Bool = (width < 47)
                 self.isMutilatedMode = isMutilatedMode
                 self.width = width
-                self.height = 26
+                self.height = isCompactMode ? 25 : 28
                 self.partialWidth = isDenseMode ? 26 : 28
                 self.characterOffset = isDenseMode ? 5 : 4
         }

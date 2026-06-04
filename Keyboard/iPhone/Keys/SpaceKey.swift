@@ -15,27 +15,24 @@ struct SpaceKey: View {
         @State private var doubleTappingBuffer: Int = 0
 
         var body: some View {
-                let isPhoneLandscape: Bool = context.keyboardInterface.isPhoneLandscape
-                let verticalPadding: CGFloat = isPhoneLandscape ? 3 : 6
-                let horizontalPadding: CGFloat = isPhoneLandscape ? 6 : 3
                 ZStack {
                         Color.interactiveClear
                         RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius, style: .continuous)
                                 .fill(isTouching ? colorScheme.activeInputKeyColor : colorScheme.inputKeyColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                .padding(.vertical, verticalPadding)
-                                .padding(.horizontal, horizontalPadding)
+                                .padding(context.keyboardInterface.keyShapeInsets)
                         Text(isLongPressEngaged ? PresetConstant.spaceKeyLongPressHint : context.spaceKeyForm.attributedText).font(.staticBody)
                 }
                 .frame(height: context.heightUnit)
                 .frame(maxWidth: .infinity)
                 .contentShape(.rect)
                 .gesture(DragGesture(minimumDistance: 0)
-                        .updating($isTouching) { _, tapped, _ in
-                                guard tapped.negative else { return }
-                                AudioFeedback.modified()
-                                context.triggerHapticFeedback()
-                                tapped = true
+                        .updating($isTouching) { _, isTouchBegan, _ in
+                                if isTouchBegan.negative {
+                                        isTouchBegan = true
+                                        AudioFeedback.modified()
+                                        context.triggerHapticFeedback()
+                                }
                         }
                         .onChanged { value in
                                 guard isTouching else { return }
