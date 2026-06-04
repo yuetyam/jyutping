@@ -10,9 +10,9 @@ struct GlassTailoredNumericKeyboard: View {
                         ToolBar()
                         if Options.needsNumberRow {
                                 if context.inputMethodMode.isABC {
-                                        ABCNumberRow()
+                                        ABCGlassNumberRow()
                                 } else {
-                                        CantoneseNumberRow()
+                                        CantoneseGlassNumberRow()
                                 }
                         }
                         HStack(spacing: 0) {

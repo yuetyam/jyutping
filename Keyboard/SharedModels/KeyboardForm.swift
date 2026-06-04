@@ -1,7 +1,10 @@
 import SwiftUI
 
 enum KeyboardForm: Int {
+
+        // TODO: Rename to be primary
         case alphabetic
+
         case candidateBoard
         case decimalPad
         case editingPanel
@@ -57,6 +60,7 @@ extension UIKeyboardType {
 
 extension KeyboardForm {
 
+        var isPrimary: Bool { self == .alphabetic }
         var isNineKeyNumeric: Bool { self == .nineKeyNumeric }
         var isNineKeyStroke: Bool { self == .nineKeyStroke }
         var isDecimalPad: Bool { self == .decimalPad }

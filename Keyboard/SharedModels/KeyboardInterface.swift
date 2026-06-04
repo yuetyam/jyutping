@@ -51,10 +51,7 @@ extension KeyboardInterface {
                         return false
                 }
         }
-        var isPadFloating: Bool {
-                return self == .padFloating
-        }
-
+        var isPadFloating: Bool { self == .padFloating }
         var isPadPortrait: Bool {
                 switch self {
                 case .padPortraitSmall, .padPortraitMedium, .padPortraitLarge:
@@ -73,7 +70,14 @@ extension KeyboardInterface {
         }
 
         /// 13-inch iPad
-        var isLargePad: Bool { self == .padPortraitLarge || self == .padLandscapeLarge }
+        var isLargePad: Bool {
+                switch self {
+                case .padPortraitLarge, .padLandscapeLarge:
+                        return true
+                default:
+                        return false
+                }
+        }
 }
 
 extension KeyboardInterface {
@@ -155,5 +159,39 @@ extension KeyboardInterface {
                 case .padLandscapeLarge:
                         return 14.5
                 }
+        }
+}
+
+extension KeyboardInterface {
+        var keyShapeInsets: EdgeInsets {
+                switch self {
+                case .phonePortrait, .phoneOnPadPortrait, .padFloating:
+                        EdgeInsets(top: 6, leading: 3, bottom: 6, trailing: 3)
+                case .phoneLandscape, .phoneOnPadLandscape:
+                        EdgeInsets(top: 3, leading: 6, bottom: 3, trailing: 6)
+                case .padPortraitSmall, .padPortraitMedium:
+                        EdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
+                case .padLandscapeSmall, .padLandscapeMedium:
+                        EdgeInsets(top: 7, leading: 7, bottom: 7, trailing: 7)
+                case .padPortraitLarge:
+                        EdgeInsets(top: 4, leading: 4, bottom: 4, trailing: 4)
+                case .padLandscapeLarge:
+                        EdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
+                }
+        }
+        func previewBottomOffset(keyWidth: CGFloat, keyHeight: CGFloat, insets: EdgeInsets? = nil) -> CGFloat {
+                let insets = insets ?? keyShapeInsets
+                let baseHeight: CGFloat = keyHeight - (insets.top + insets.bottom)
+                let shapeHeight: CGFloat = isPhoneLandscape ? (baseHeight / (2 / 6.0)) : baseHeight / ((2.5 / 6.0))
+                let curveHeight: CGFloat = isPhoneLandscape ? (shapeHeight / 3.0) : (shapeHeight / 6.0)
+                return (baseHeight * 2) + (curveHeight * 1.5)
+        }
+}
+extension EdgeInsets {
+        func adjusted(horizontal: CGFloat = 0, vertical: CGFloat = 0) -> EdgeInsets {
+                return EdgeInsets(top: top + vertical, leading: leading + horizontal, bottom: bottom + vertical, trailing: trailing + horizontal)
+        }
+        func plused(_ value: CGFloat) -> EdgeInsets {
+                return EdgeInsets(top: top + value, leading: leading + value, bottom: bottom + value, trailing: trailing + value)
         }
 }

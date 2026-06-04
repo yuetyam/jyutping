@@ -1,4 +1,6 @@
 import SwiftUI
+import CommonExtensions
+import CoreIME
 
 extension Alignment {
         var isTopEdge: Bool {
@@ -38,6 +40,13 @@ struct KeyElement: Hashable {
                 self.extras = extras
         }
 
+        init(virtual: VirtualInputKey) {
+                self.text = virtual.text
+                self.header = nil
+                self.footer = nil
+                self.extras = []
+        }
+
         static func == (lhs: KeyElement, rhs: KeyElement) -> Bool {
                 return lhs.text == rhs.text
         }
@@ -45,9 +54,7 @@ struct KeyElement: Hashable {
                 hasher.combine(text)
         }
 
-        var isTextSingular: Bool {
-                return text.count == 1
-        }
+        var isTextSingular: Bool { text.count == 1 }
 }
 
 struct KeyModel: Hashable {
@@ -55,9 +62,7 @@ struct KeyModel: Hashable {
         let primary: KeyElement
         let members: [KeyElement]
 
-        var isExpansible: Bool {
-                return members.count > 1
-        }
+        var isExpansible: Bool { members.count > 1 }
 }
 
 typealias KeyUnit = KeyModel

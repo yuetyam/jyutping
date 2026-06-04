@@ -11,12 +11,15 @@ struct NineKeyKeyboard: View {
                         } else {
                                 ToolBar()
                         }
-                        if Options.needsNumberRow {
-                                CantoneseNumberRow()
-                        }
                         if #available(iOSApplicationExtension 26.0, *) {
+                                if Options.needsNumberRow {
+                                        CantoneseGlassNumberRow()
+                                }
                                 GlassNineKeyCoreKeyboard()
                         } else {
+                                if Options.needsNumberRow {
+                                        CantoneseNumberRow()
+                                }
                                 LegacyNineKeyCoreKeyboard()
                         }
                 }

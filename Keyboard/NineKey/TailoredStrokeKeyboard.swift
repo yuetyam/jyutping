@@ -9,7 +9,7 @@ struct GlassTailoredStrokeKeyboard: View {
                 VStack(spacing: 0) {
                         CandidateBar()
                         if Options.needsNumberRow {
-                                CantoneseNumberRow()
+                                CantoneseGlassNumberRow()
                         }
                         HStack(spacing: 0) {
                                 VStack(spacing: 0) {
