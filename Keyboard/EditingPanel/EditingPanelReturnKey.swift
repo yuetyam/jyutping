@@ -8,6 +8,7 @@ struct EditingPanelReturnKey: View {
         @GestureState private var isTouching: Bool = false
 
         var body: some View {
+                let inset = context.keyboardInterface.editingKeyInset
                 let isDefaultReturn: Bool = context.returnKeyType.isDefaultReturn
                 let keyState: ReturnKeyState = context.returnKeyState
                 let glassBackColor: Color = {
@@ -48,12 +49,12 @@ struct EditingPanelReturnKey: View {
                                         .clipShape(RoundedRectangle(cornerRadius: PresetConstant.ultraKeyCornerRadius, style: .continuous))
                                         .glassEffect(isTouching ? .regular : .clear, in: RoundedRectangle(cornerRadius: PresetConstant.ultraKeyCornerRadius, style: .continuous))
                                         .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
-                                        .padding(isTouching ? 2 : 4)
+                                        .padding(isTouching ? (inset - 2) : inset)
                         } else {
                                 RoundedRectangle(cornerRadius: PresetConstant.ultraKeyCornerRadius, style: .continuous)
                                         .fill(backColor)
                                         .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                        .padding(isTouching ? 2 : 4)
+                                        .padding(isTouching ? (inset - 2) : inset)
                         }
                         VStack(spacing: 4) {
                                 switch context.returnKeyType {

@@ -163,6 +163,21 @@ extension KeyboardInterface {
 }
 
 extension KeyboardInterface {
+        var editingKeyInset: CGFloat {
+                switch self {
+                case .padFloating: 2
+                case .phonePortrait,
+                .phoneLandscape,
+                .phoneOnPadPortrait,
+                .phoneOnPadLandscape: 3
+                case .padPortraitSmall,
+                .padLandscapeSmall,
+                .padPortraitMedium,
+                .padLandscapeMedium,
+                .padPortraitLarge,
+                .padLandscapeLarge: 5
+                }
+        }
         var keyShapeInsets: EdgeInsets {
                 switch self {
                 case .phonePortrait, .phoneOnPadPortrait, .padFloating:

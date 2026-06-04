@@ -15,18 +15,19 @@ struct EditingPanelSpaceKey: View {
         @State private var doubleTappingBuffer: Int = 0
 
         var body: some View {
+                let inset = context.keyboardInterface.editingKeyInset
                 ZStack {
                         Color.interactiveClear
                         if #available(iOSApplicationExtension 26.0, *) {
                                 Color.clear
                                         .glassEffect(isTouching ? .regular : .clear, in: RoundedRectangle(cornerRadius: PresetConstant.ultraKeyCornerRadius, style: .continuous))
                                         .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
-                                        .padding(isTouching ? 2 : 4)
+                                        .padding(isTouching ? (inset - 2) : inset)
                         } else {
                                 RoundedRectangle(cornerRadius: PresetConstant.ultraKeyCornerRadius, style: .continuous)
                                         .fill(isTouching ? colorScheme.activeActionKeyColor : colorScheme.actionKeyColor)
                                         .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                        .padding(isTouching ? 2 : 4)
+                                        .padding(isTouching ? (inset - 2) : inset)
                         }
                         if isLongPressEngaged {
                                 Text(PresetConstant.spaceKeyLongPressHint)

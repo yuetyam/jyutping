@@ -5,7 +5,7 @@ import SwiftUI
 struct GlassEditingPanel: View {
         @EnvironmentObject private var context: KeyboardViewController
         var body: some View {
-                let edgeKeyWidth: CGFloat = min(context.keyboardWidth / 4.0, 128)
+                let edgeKeyWidth: CGFloat = min(context.keyboardWidth / 4.0, 144)
                 HStack(spacing: 0) {
                         VStack(spacing: 0) {
                                 EditingPanelGlassCopyKey().frame(maxHeight: .infinity)
@@ -17,7 +17,11 @@ struct GlassEditingPanel: View {
                         VStack(spacing: 0) {
                                 HStack(spacing: 0) {
                                         EditingPanelGlassClearClipboardKey().frame(maxWidth: .infinity)
-                                        EditingPanelGlassSystemPasteKey().frame(maxWidth: .infinity)
+                                        if context.keyboardInterface.isPadFloating {
+                                                EditingPanelPadFloatingGlassSystemPasteKey().frame(maxWidth: .infinity)
+                                        } else {
+                                                EditingPanelGlassSystemPasteKey().frame(maxWidth: .infinity)
+                                        }
                                 }
                                 .frame(maxHeight: .infinity)
                                 HStack(spacing: 0) {
@@ -47,7 +51,7 @@ struct GlassEditingPanel: View {
 struct EditingPanel: View {
         @EnvironmentObject private var context: KeyboardViewController
         var body: some View {
-                let edgeKeyWidth: CGFloat = min(context.keyboardWidth / 4.0, 128)
+                let edgeKeyWidth: CGFloat = min(context.keyboardWidth / 4.0, 144)
                 HStack(spacing: 0) {
                         VStack(spacing: 0) {
                                 EditingPanelCopyKey().frame(maxHeight: .infinity)

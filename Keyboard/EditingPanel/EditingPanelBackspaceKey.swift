@@ -12,12 +12,13 @@ struct EditingPanelGlassBackspaceKey: View {
         @State private var buffer: Int = 0
 
         var body: some View {
+                let inset = context.keyboardInterface.editingKeyInset
                 ZStack {
                         Color.interactiveClear
                         Color.clear
                                 .glassEffect(isTouching ? .regular : .clear, in: RoundedRectangle(cornerRadius: PresetConstant.ultraKeyCornerRadius, style: .continuous))
                                 .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
-                                .padding(isTouching ? 2 : 4)
+                                .padding(isTouching ? (inset - 2) : inset)
                         VStack(spacing: 4) {
                                 Image.backspace.symbolVariant(isTouching ? .fill : .none)
                                 Text("EditingPanel.Backspace")
@@ -67,12 +68,13 @@ struct EditingPanelBackspaceKey: View {
         @State private var buffer: Int = 0
 
         var body: some View {
+                let inset = context.keyboardInterface.editingKeyInset
                 ZStack {
                         Color.interactiveClear
                         RoundedRectangle(cornerRadius: PresetConstant.ultraKeyCornerRadius, style: .continuous)
                                 .fill(isTouching ? colorScheme.activeActionKeyColor : colorScheme.actionKeyColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                .padding(isTouching ? 2 : 4)
+                                .padding(isTouching ? (inset - 2) : inset)
                         VStack(spacing: 4) {
                                 Image.backspace.symbolVariant(isTouching ? .fill : .none)
                                 Text("EditingPanel.Backspace")
