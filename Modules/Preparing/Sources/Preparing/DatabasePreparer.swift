@@ -118,22 +118,22 @@ struct DatabasePreparer {
                         "CREATE INDEX ix_pinyin_syllable_nine_key_code ON pinyin_syllable_table (nine_key_code);",
 
 
-                        "CREATE INDEX ix_variant_abp_source ON variant_abp (source);",
+                        // "CREATE INDEX ix_variant_abp_source ON variant_abp (source);",
                         "CREATE INDEX ix_variant_abp_target ON variant_abp (target);",
 
-                        "CREATE INDEX ix_variant_hk_source ON variant_hk (source);",
+                        // "CREATE INDEX ix_variant_hk_source ON variant_hk (source);",
                         "CREATE INDEX ix_variant_hk_target ON variant_hk (target);",
 
-                        "CREATE INDEX ix_variant_old_source ON variant_old (source);",
+                        // "CREATE INDEX ix_variant_old_source ON variant_old (source);",
                         "CREATE INDEX ix_variant_old_target ON variant_old (target);",
 
-                        "CREATE INDEX ix_variant_prc_source ON variant_prc (source);",
+                        // "CREATE INDEX ix_variant_prc_source ON variant_prc (source);",
                         "CREATE INDEX ix_variant_prc_target ON variant_prc (target);",
 
-                        "CREATE INDEX ix_variant_sim_source ON variant_sim (source);",
+                        // "CREATE INDEX ix_variant_sim_source ON variant_sim (source);",
                         "CREATE INDEX ix_variant_sim_target ON variant_sim (target);",
 
-                        "CREATE INDEX ix_variant_tw_source ON variant_tw (source);",
+                        // "CREATE INDEX ix_variant_tw_source ON variant_tw (source);",
                         "CREATE INDEX ix_variant_tw_target ON variant_tw (target);",
                 ]
                 for command in commands {
@@ -171,13 +171,13 @@ struct DatabasePreparer {
                 }
         }
         private static func createCharacterVariantTable(fileName: String, tableName: String) async {
-                let createTable: String = "CREATE TABLE \(tableName) (id INTEGER PRIMARY KEY AUTOINCREMENT, source INTEGER NOT NULL, target INTEGER NOT NULL);"
+                let createTable: String = "CREATE TABLE \(tableName) (source INTEGER PRIMARY KEY, target INTEGER NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
                 sqlite3_finalize(createStatement)
                 guard let sourceUrl: URL = Bundle.module.url(forResource: fileName, withExtension: "txt") else { fatalError("Can not load file \(fileName).txt") }
-                let values: String = CharacterVariant.process(sourceUrl).map({ "(\($0.left), \($0.right))" }).joined(separator: ", ")
+                let values: String = CharacterVariant.generate(sourceUrl).map({ "(\($0.left), \($0.right))" }).joined(separator: ", ")
                 let insert: String = "INSERT INTO \(tableName) (source, target) VALUES \(values);"
                 var insertStatement: OpaquePointer? = nil
                 defer { sqlite3_finalize(insertStatement) }
