@@ -27,8 +27,7 @@ struct IndicatorBar: View {
                         .background(VisualEffectView())
                         .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
                         .shadow(radius: 2)
-                        .padding(.horizontal, 8)
-                        .padding(.top, 8)
+                        .padding(8)
                         .fixedSize()
                 }
         }

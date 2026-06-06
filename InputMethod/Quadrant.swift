@@ -18,28 +18,20 @@ enum Quadrant: Int, Sendable {
         /// From right to left
         var isNegativeHorizontal: Bool {
                 switch self {
-                case .upperRight:
-                        return false
-                case .upperLeft:
-                        return true
-                case .bottomLeft:
-                        return true
-                case .bottomRight:
-                        return false
+                case .upperRight : false
+                case .upperLeft  : true
+                case .bottomLeft : true
+                case .bottomRight: false
                 }
         }
 
         /// From top to bottom
         var isNegativeVertical: Bool {
                 switch self {
-                case .upperRight:
-                        return false
-                case .upperLeft:
-                        return false
-                case .bottomLeft:
-                        return true
-                case .bottomRight:
-                        return true
+                case .upperRight : false
+                case .upperLeft  : false
+                case .bottomLeft : true
+                case .bottomRight: true
                 }
         }
 

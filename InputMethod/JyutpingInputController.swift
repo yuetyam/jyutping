@@ -1554,7 +1554,14 @@ final class JyutpingInputController: IMKInputController, Sendable {
         private func displaySettingsView() {
                 guard inputStage.isBuffering.negative else { return }
                 guard SettingsWindow.shared.isVisible.negative else { return }
-                SettingsWindow.shared.level = window.level
+                let maxValue: Int = Int(CGShieldingWindowLevel())
+                let minValue: Int = NSWindow.Level.floating.rawValue
+                let levelValue: Int = {
+                        guard let clientLevel = currentClient?.windowLevel() else { return maxValue }
+                        let relatedValue: Int = Int(clientLevel) + 1
+                        return min(max(minValue, relatedValue), maxValue)
+                }()
+                SettingsWindow.shared.level = NSWindow.Level(levelValue)
                 SettingsWindow.shared.contentViewController = NSHostingController(rootView: SettingsContentView())
                 SettingsWindow.shared.setFrame(settingsWindowFrame(), display: true)
                 SettingsWindow.shared.orderFrontRegardless()
