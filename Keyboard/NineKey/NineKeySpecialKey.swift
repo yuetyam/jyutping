@@ -27,7 +27,7 @@ struct GlassNineKeySpecialKey: View {
                         Text(verbatim: isBuffering ? String.apostrophe : Combo.special.text)
                                 .opacity(isBuffering ? 0 : 1)
                 }
-                .frame(width: context.nineKeyWidthUnit * 1.04, height: context.heightUnit)
+                .frame(width: context.nineKeyWidthUnit * 1.06, height: context.heightUnit)
                 .contentShape(.rect)
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, isTouchBegan, _ in
@@ -69,7 +69,7 @@ struct NineKeySpecialKey: View {
                         Text(verbatim: isBuffering ? String.apostrophe : Combo.special.text)
                                 .opacity(isBuffering ? 0 : 1)
                 }
-                .frame(width: context.nineKeyWidthUnit * 1.04, height: context.heightUnit)
+                .frame(width: context.nineKeyWidthUnit * 1.06, height: context.heightUnit)
                 .contentShape(.rect)
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, isTouchBegan, _ in

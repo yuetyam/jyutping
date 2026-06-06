@@ -20,7 +20,7 @@ struct GlassTailoredNumberDotKey: View {
                         .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
                         .padding(isTouching ? 1 : 3)
                 }
-                .frame(width: context.nineKeyWidthUnit * 1.04, height: context.heightUnit)
+                .frame(width: context.nineKeyWidthUnit * 1.06, height: context.heightUnit)
                 .contentShape(.rect)
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, isTouchBegan, _ in
@@ -49,7 +49,7 @@ struct TailoredNumberDotKey: View {
                                 .padding(isTouching ? 1 : 3)
                         Text(verbatim: keyText).font(.letterCompact)
                 }
-                .frame(width: context.nineKeyWidthUnit * 1.04, height: context.heightUnit)
+                .frame(width: context.nineKeyWidthUnit * 1.06, height: context.heightUnit)
                 .contentShape(.rect)
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, isTouchBegan, _ in

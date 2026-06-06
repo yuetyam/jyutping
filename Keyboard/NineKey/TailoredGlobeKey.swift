@@ -16,7 +16,7 @@ struct GlassTailoredGlobeKey: View {
                         Image.globe.font(.symbol)
                         UIGlobeButton()
                 }
-                .frame(width: context.nineKeyWidthUnit * 0.94, height: context.heightUnit)
+                .frame(width: context.nineKeyWidthUnit * 0.91, height: context.heightUnit)
         }
 }
 
@@ -35,6 +35,6 @@ struct TailoredGlobeKey: View {
                         Image.globe.font(.symbol)
                         UIGlobeButton()
                 }
-                .frame(width: context.nineKeyWidthUnit * 0.94, height: context.heightUnit)
+                .frame(width: context.nineKeyWidthUnit * 0.91, height: context.heightUnit)
         }
 }
