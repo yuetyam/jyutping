@@ -16,7 +16,7 @@ struct MotherBoard: View {
                                 EditingPanel().frame(height: context.keyboardHeight)
                         }
                 case .layoutPicker:
-                        KeyboardLayoutPickerView().frame(height: context.keyboardHeight)
+                        LayoutPickerView().frame(height: context.keyboardHeight)
                 case .candidateBoard:
                         CandidateBoard().frame(height: context.keyboardHeight)
                 case .emojiBoard:

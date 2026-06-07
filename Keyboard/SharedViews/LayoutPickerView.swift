@@ -1,7 +1,7 @@
 import SwiftUI
 import CommonExtensions
 
-struct KeyboardLayoutPickerView: View {
+struct LayoutPickerView: View {
         @EnvironmentObject private var context: KeyboardViewController
         var body: some View {
                 let selectedLayout = context.keyboardLayout
@@ -22,7 +22,7 @@ struct KeyboardLayoutPickerView: View {
                                                 Color.interactiveClear
                                                 ZStack {
                                                         RoundedRectangle(cornerRadius: 24, style: .continuous).stroke(Material.regular, lineWidth: 1)
-                                                        Grid(verticalSpacing: 16) {
+                                                        Grid(verticalSpacing: 14) {
                                                                 GridRow {
                                                                         LayoutOptionView(layout: .qwerty, isSelected: selectedLayout.isQwerty)
                                                                         LayoutOptionView(layout: .tripleStroke, isSelected: selectedLayout.isTripleStroke)
@@ -40,7 +40,7 @@ struct KeyboardLayoutPickerView: View {
                                                         .padding(8)
                                                 }
                                                 .padding(.vertical, 8)
-                                                .padding(.horizontal, 16)
+                                                .padding(.horizontal, 14)
                                         }
                                 }
                         }
