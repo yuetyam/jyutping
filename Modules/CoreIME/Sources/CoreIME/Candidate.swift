@@ -65,11 +65,12 @@ public struct Candidate: Hashable, Sendable {
 
         // Equatable
         public static func == (lhs: Candidate, rhs: Candidate) -> Bool {
-                return lhs.text == rhs.text && lhs.comment == rhs.comment
+                return lhs.lexicon.inputCount == rhs.lexicon.inputCount && lhs.text == rhs.text && lhs.comment == rhs.comment
         }
 
         // Hashable
         public func hash(into hasher: inout Hasher) {
+                hasher.combine(lexicon.inputCount)
                 hasher.combine(text)
                 hasher.combine(comment)
         }
