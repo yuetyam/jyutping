@@ -19,6 +19,8 @@ struct MotherBoard: View {
                         LayoutPickerView().frame(height: context.keyboardHeight)
                 case .candidateBoard:
                         CandidateBoard().frame(height: context.keyboardHeight)
+                case .detailInspecting:
+                        DetailInspectingView().frame(height: context.keyboardHeight)
                 case .emojiBoard:
                         EmojiBoard().frame(height: context.keyboardHeight)
                 case .numeric:
@@ -86,13 +88,13 @@ struct MotherBoard: View {
                         case .padPortraitLarge, .padLandscapeLarge:
                                 LargePadNumericKeyboard()
                         }
-                case .nineKeyNumeric:
+                case .tailoredNumbers:
                         if #available(iOSApplicationExtension 26.0, *) {
                                 GlassTailoredNumericKeyboard()
                         } else {
                                 TailoredNumericKeyboard()
                         }
-                case .nineKeyStroke:
+                case .tailoredStroke:
                         if #available(iOSApplicationExtension 26.0, *) {
                                 GlassTailoredStrokeKeyboard()
                         } else {

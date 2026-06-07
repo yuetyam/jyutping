@@ -55,7 +55,7 @@ struct EmojiBoard: View {
                                 Button {
                                         AudioFeedback.modified()
                                         context.triggerHapticFeedback()
-                                        context.updateKeyboardForm(to: context.previousKeyboardForm)
+                                        context.routeBackKeyboardForm()
                                 } label: {
                                         ZStack {
                                                 Color.interactiveClear

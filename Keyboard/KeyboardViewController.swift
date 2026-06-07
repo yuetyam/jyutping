@@ -207,8 +207,8 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 suggestionTask?.cancel()
                                 candidates = []
                                 text2mark = String.empty
-                                if keyboardForm.isNineKeyStroke {
-                                        updateKeyboardForm(to: .alphabetic)
+                                if keyboardForm.isTailoredStroke {
+                                        updateKeyboardForm(to: .primary)
                                 }
                                 ensureCompositionType(to: .primary)
                                 updateReturnKey()
@@ -230,8 +230,8 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 updateReverseLookupState(to: true)
                                 cangjieReverseLookup()
                         case .letterX:
-                                if strokeLayout.isNineKey && keyboardForm.isNineKeyStroke.negative {
-                                        updateKeyboardForm(to: .nineKeyStroke)
+                                if strokeLayout.isNineKey && keyboardForm.isTailoredStroke.negative {
+                                        updateKeyboardForm(to: .tailoredStroke)
                                 } else {
                                         ensureCompositionType(to: .stroke)
                                 }
@@ -510,7 +510,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 case .clearBuffer:
                         clearBuffer()
                 case .return:
-                        if keyboardForm.isNineKeyStroke, let candidate = candidates.first {
+                        if keyboardForm.isTailoredStroke, let candidate = candidates.first {
                                 input(candidate.text)
                                 aftercareSelected(candidate)
                         } else if inputStage.isBuffering {
@@ -655,7 +655,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 switch keyboardForm {
                 case .candidateBoard:
                         if candidates.isEmpty {
-                                updateKeyboardForm(to: previousKeyboardForm)
+                                routeBackKeyboardForm(from: .candidateBoard)
                         }
                 default:
                         break
@@ -1100,6 +1100,12 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
 
         // MARK: - Properties
 
+        @Published private(set) var inspectingCandidate: Candidate = .sample
+        func inspect(_ candidate: Candidate) {
+                inspectingCandidate = candidate
+                updateKeyboardForm(to: .detailInspecting)
+        }
+
         @Published private(set) var inputMethodMode: InputMethodMode = {
                 switch Options.preferredInputMode {
                 case .cantonese: return .cantonese
@@ -1120,23 +1126,33 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 UserDefaults.standard.set(value, forKey: OptionsKey.LatestInputMethodMode)
         }
 
-        @Published private(set) var previousKeyboardForm: KeyboardForm = .placeholder
+        @Published private(set) var sequencedKeyboardForms: [KeyboardForm] = []
         @Published private(set) var keyboardForm: KeyboardForm = .placeholder
         func updateKeyboardForm(to form: KeyboardForm) {
                 let shouldStayBuffering: Bool = inputMethodMode.isCantonese && form.isBufferable
                 if inputStage.isBuffering && shouldStayBuffering.negative {
                         inputBufferText()
                 }
-                let shouldAdjustKeyboardCase: Bool = (keyboardForm == .alphabetic) && (keyboardCase != .lowercased)
+                let shouldAdjustKeyboardCase: Bool = (keyboardForm == .primary) && (keyboardCase != .lowercased)
                 if shouldAdjustKeyboardCase {
                         keyboardCase = .lowercased
                 }
-                previousKeyboardForm = keyboardForm
+                sequencedKeyboardForms.append(keyboardForm)
                 keyboardForm = form
                 updateReturnKey()
                 updateSpaceKeyForm()
                 if isKeyboardHeightExpanded {
                         toggleKeyboardHeight()
+                }
+        }
+        func routeBackKeyboardForm(from form: KeyboardForm? = nil) {
+                let current: KeyboardForm = form ?? keyboardForm
+                if current == .candidateBoard {
+                        let previous: KeyboardForm = sequencedKeyboardForms.last(where: { $0 != .detailInspecting && $0 != .candidateBoard }) ?? .primary
+                        updateKeyboardForm(to: previous)
+                } else {
+                        let previous: KeyboardForm = sequencedKeyboardForms.last ?? .primary
+                        updateKeyboardForm(to: previous)
                 }
         }
 
@@ -1174,7 +1190,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         private func updateSpaceKeyForm() {
                 let newForm: SpaceKeyForm = {
                         guard inputMethodMode.isCantonese else { return .english }
-                        guard keyboardForm.isNineKeyNumeric.negative else { return .fallback }
+                        guard keyboardForm.isTailoredNumbers.negative else { return .fallback }
                         let isMutilated: Bool = characterStandard.isMutilated
                         if inputStage.isBuffering {
                                 if candidates.isEmpty {
@@ -1315,11 +1331,11 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         // @Published private(set) var numericLayout: NumericLayout = NumericLayout.fetchSavedLayout()
         func updateNumericLayout(to layout: NumericLayout) {
                 // numericLayout = layout
-                preferredNumericForm = layout.isNumberKeyPad ? .nineKeyNumeric : .numeric
+                preferredNumericForm = layout.isNumberKeyPad ? .tailoredNumbers : .numeric
                 let value: Int = layout.rawValue
                 UserDefaults.standard.set(value, forKey: OptionsKey.NumericLayout)
         }
-        @Published private(set) var preferredNumericForm: KeyboardForm = NumericLayout.fetchSavedLayout().isNumberKeyPad ? .nineKeyNumeric : .numeric
+        @Published private(set) var preferredNumericForm: KeyboardForm = NumericLayout.fetchSavedLayout().isNumberKeyPad ? .tailoredNumbers : .numeric
 
         /// Keyboard Layout for Stroke Reverse Lookup
         @Published private(set) var strokeLayout: StrokeLayout = StrokeLayout.fetchSavedLayout()

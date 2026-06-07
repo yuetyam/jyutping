@@ -76,10 +76,11 @@ enum KeyboardLayout: Int, CaseIterable {
         /// Should use AmbiguousInputEvent
         var isAmbiguous: Bool {
                 switch self {
-                case .fourteenKey, .fifteenKey, .eighteenKey, .nineteenKey:
-                        true
-                default:
-                        false
+                case .fourteenKey,
+                .fifteenKey,
+                .eighteenKey,
+                .nineteenKey: true
+                default: false
                 }
         }
 }

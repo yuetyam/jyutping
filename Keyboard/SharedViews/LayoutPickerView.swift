@@ -8,7 +8,7 @@ struct LayoutPickerView: View {
                 let isRunningOnPhone = context.isRunningOnPhone
                 VStack(spacing: 0) {
                         ZStack {
-                                Text("SettingsView.NavigationBar.HintText").font(.footnote).shallow().hidden()
+                                Text("SettingsView.NavigationBar.HintText").font(.footnote).shallow()
                                 HStack {
                                         NavigationLeadingBackButton()
                                         Spacer()
@@ -21,8 +21,8 @@ struct LayoutPickerView: View {
                                         ZStack {
                                                 Color.interactiveClear
                                                 ZStack {
-                                                        RoundedRectangle(cornerRadius: 24, style: .continuous).stroke(Material.regular, lineWidth: 1)
-                                                        Grid(verticalSpacing: 14) {
+                                                        RoundedRectangle(cornerRadius: 20).stroke(Material.regular, lineWidth: 1)
+                                                        Grid(verticalSpacing: 12) {
                                                                 GridRow {
                                                                         LayoutOptionView(layout: .qwerty, isSelected: selectedLayout.isQwerty)
                                                                         LayoutOptionView(layout: .tripleStroke, isSelected: selectedLayout.isTripleStroke)
@@ -40,7 +40,7 @@ struct LayoutPickerView: View {
                                                         .padding(8)
                                                 }
                                                 .padding(.vertical, 8)
-                                                .padding(.horizontal, 14)
+                                                .padding(.horizontal, 12)
                                         }
                                 }
                         }

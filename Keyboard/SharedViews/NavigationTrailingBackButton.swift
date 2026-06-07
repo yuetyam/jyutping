@@ -38,6 +38,6 @@ struct NavigationTrailingBackButton: View {
         private func action() {
                 AudioFeedback.modified()
                 context.triggerHapticFeedback()
-                context.updateKeyboardForm(to: context.previousKeyboardForm)
+                context.routeBackKeyboardForm()
         }
 }

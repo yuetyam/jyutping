@@ -2,40 +2,66 @@ import SwiftUI
 
 enum KeyboardForm: Int {
 
-        // TODO: Rename to be primary
-        case alphabetic
-
+        /// Expanded Candidate page
         case candidateBoard
+
+        /// 10-key digit keypad with an additional “dot” key
         case decimalPad
+
+        /// Candidate detail page
+        case detailInspecting
+
+        /// Button page for copy, cut, clear, etc.
         case editingPanel
+
+        /// Emoji keyboard
         case emojiBoard
+
+        /// KeyboardLayout picking page
         case layoutPicker
+
+        /// 10-key digit keypad
         case numberPad
+
+        /// Numbers and symbols
         case numeric
+
+        /// Not a real view
         case placeholder
+
+        /// Main keyboard; alphabetic; letters or 9-key (T9)
+        case primary
+
+        /// Keyboard settings page
         case settings
+
+        /// Extra symbols
         case symbolic
-        case nineKeyNumeric
-        case nineKeyStroke
+
+        /// 10-key keypad-style digit keyboard with a symbol sidebar and some other keys
+        case tailoredNumbers
+
+        /// 9-key (T9) Stroke keyboard for reverse lookup
+        case tailoredStroke
 }
 
 extension UIKeyboardType {
         var keyboardForm: KeyboardForm {
                 switch self {
-                case .default:               .alphabetic
-                case .asciiCapable:          .alphabetic
+                case .default:               .primary
+                case .asciiCapable:          .primary
                 case .numbersAndPunctuation: .numeric
-                case .URL:                   .alphabetic
+                case .URL:                   .primary
                 case .numberPad:             .numberPad
                 case .phonePad:              .numeric
-                case .namePhonePad:          .alphabetic
-                case .emailAddress:          .alphabetic
+                case .namePhonePad:          .primary
+                case .emailAddress:          .primary
                 case .decimalPad:            .decimalPad
-                case .twitter:               .alphabetic
-                case .webSearch:             .alphabetic
-                case .asciiCapableNumberPad: .alphabetic
-                case .alphabet:              .alphabetic
-                @unknown default:            .alphabetic
+                case .twitter:               .primary
+                case .webSearch:             .primary
+                case .asciiCapableNumberPad: .primary
+                case .alphabet:              .primary
+                @unknown default:            .primary
                 }
         }
         var inputMethodMode: InputMethodMode {
@@ -60,15 +86,25 @@ extension UIKeyboardType {
 
 extension KeyboardForm {
 
-        var isPrimary: Bool { self == .alphabetic }
-        var isNineKeyNumeric: Bool { self == .nineKeyNumeric }
-        var isNineKeyStroke: Bool { self == .nineKeyStroke }
+        /// Main keyboard; alphabetic; letters or 9-key (T9)
+        var isPrimary: Bool { self == .primary }
+
+        /// 10-key keypad-style digit keyboard with a symbol sidebar and some other keys
+        var isTailoredNumbers: Bool { self == .tailoredNumbers }
+
+        /// 9-key (T9) Stroke keyboard for reverse lookup
+        var isTailoredStroke: Bool { self == .tailoredStroke }
+
+        /// 10-key digit keypad with an additional “dot” key
         var isDecimalPad: Bool { self == .decimalPad }
 
         /// Should stay buffering, should keep the bufferText
         var isBufferable: Bool {
                 switch self {
-                case .alphabetic, .candidateBoard, .nineKeyStroke: true
+                case .primary,
+                .candidateBoard,
+                .detailInspecting,
+                .tailoredStroke: true
                 default: false
                 }
         }
@@ -76,19 +112,19 @@ extension KeyboardForm {
         /// Phone, PhoneOnPad, PadFloating
         var compactTransformKeyTex: String {
                 switch self {
-                case .alphabetic:     "ABC"
+                case .primary   : "ABC"
                 case .numeric,
-                     .nineKeyNumeric: "123"
-                case .symbolic:       "#+="
-                default:              "???"
+                .tailoredNumbers: "123"
+                case .symbolic  : "#+="
+                default         : "???"
                 }
         }
         var padTransformKeyText: String {
                 switch self {
-                case .alphabetic: "ABC"
-                case .numeric   : ".?123"
-                case .symbolic  : "#+="
-                default         : "???"
+                case .primary : "ABC"
+                case .numeric : ".?123"
+                case .symbolic: "#+="
+                default       : "???"
                 }
         }
 }

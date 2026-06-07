@@ -38,7 +38,7 @@ struct GlassTailoredNumericKeyboard: View {
                                                 }
                                         }
                                         HStack(spacing: 0) {
-                                                GlassTailoredNavigateKey(destination: .alphabetic)
+                                                GlassTailoredNavigateKey(destination: .primary)
                                                 GlassTailoredNumberDotKey()
                                                 GlassTailoredNumberKey(.number0)
                                                 TailoredSpaceKey()
@@ -89,7 +89,7 @@ struct TailoredNumericKeyboard: View {
                                                 }
                                         }
                                         HStack(spacing: 0) {
-                                                TailoredNavigateKey(destination: .alphabetic)
+                                                TailoredNavigateKey(destination: .primary)
                                                 TailoredNumberDotKey()
                                                 TailoredNumberKey(.number0)
                                                 TailoredSpaceKey()

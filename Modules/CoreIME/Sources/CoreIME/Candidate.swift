@@ -28,8 +28,8 @@ public struct Candidate: Hashable, Sendable {
         /// Internal candidate lexicon.
         public let lexicon: Lexicon
 
-        public init(text: String, lexicon: Lexicon, commentForm: RomanizationForm = .full, charset: CharacterStandard = .preset) {
-                self.text = text
+        public init(text: String? = nil, lexicon: Lexicon, commentForm: RomanizationForm = .full, charset: CharacterStandard = .preset) {
+                self.text = text ?? lexicon.text
                 self.lexicon = lexicon
                 switch lexicon.type {
                 case .cantonese:
@@ -77,4 +77,6 @@ public struct Candidate: Hashable, Sendable {
 
         public var isCantonese: Bool { lexicon.isCantonese }
         public var isNotCantonese: Bool { lexicon.isNotCantonese }
+
+        public static let sample: Candidate = Candidate(lexicon: .sample)
 }

@@ -63,14 +63,14 @@ struct SymbolicKeyboard: View {
                         case (true, true):
                                 HStack(spacing: 0) {
                                         GlobeKey()
-                                        TransformKey(destination: .alphabetic, widthUnitTimes: 2)
+                                        TransformKey(destination: .primary, widthUnitTimes: 2)
                                         SpaceKey()
                                         SharedBottomKeys.altPeriod
                                         ReturnKey()
                                 }
                         case (true, false):
                                 HStack(spacing: 0) {
-                                        TransformKey(destination: .alphabetic, widthUnitTimes: 2)
+                                        TransformKey(destination: .primary, widthUnitTimes: 2)
                                         SharedBottomKeys.comma
                                         SpaceKey()
                                         SharedBottomKeys.period
@@ -78,7 +78,7 @@ struct SymbolicKeyboard: View {
                                 }
                         case (false, true):
                                 HStack(spacing: 0) {
-                                        TransformKey(destination: .alphabetic, widthUnitTimes: 2)
+                                        TransformKey(destination: .primary, widthUnitTimes: 2)
                                         GlobeKey()
                                         SpaceKey()
                                         SharedBottomKeys.altPeriod
@@ -86,7 +86,7 @@ struct SymbolicKeyboard: View {
                                 }
                         case (false, false):
                                 HStack(spacing: 0) {
-                                        TransformKey(destination: .alphabetic, widthUnitTimes: 2)
+                                        TransformKey(destination: .primary, widthUnitTimes: 2)
                                         SharedBottomKeys.comma
                                         SpaceKey()
                                         SharedBottomKeys.period

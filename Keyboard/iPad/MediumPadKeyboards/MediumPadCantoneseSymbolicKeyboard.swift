@@ -80,11 +80,11 @@ struct MediumPadCantoneseSymbolicKeyboard: View {
                                 if context.needsInputModeSwitchKey {
                                         MediumPadGlobeKey(widthUnitTimes: 1.5)
                                 } else {
-                                        MediumPadTransformKey(destination: .alphabetic, keyLocale: .leading, widthUnitTimes: 1.5)
+                                        MediumPadTransformKey(destination: .primary, keyLocale: .leading, widthUnitTimes: 1.5)
                                 }
-                                MediumPadTransformKey(destination: .alphabetic, keyLocale: .leading, widthUnitTimes: 1.5)
+                                MediumPadTransformKey(destination: .primary, keyLocale: .leading, widthUnitTimes: 1.5)
                                 PadSpaceKey()
-                                MediumPadTransformKey(destination: .alphabetic, keyLocale: .trailing, widthUnitTimes: 1.5)
+                                MediumPadTransformKey(destination: .primary, keyLocale: .trailing, widthUnitTimes: 1.5)
                                 MediumPadDismissKey(widthUnitTimes: 1.5)
                         }
                 }

@@ -37,7 +37,7 @@ struct EditingPanelGlassBackKey: View {
                                 }
                         }
                         .onEnded { _ in
-                                context.updateKeyboardForm(to: context.previousKeyboardForm)
+                                context.routeBackKeyboardForm()
                         }
                 )
         }
@@ -77,7 +77,7 @@ struct EditingPanelBackKey: View {
                                 }
                         }
                         .onEnded { _ in
-                                context.updateKeyboardForm(to: context.previousKeyboardForm)
+                                context.routeBackKeyboardForm()
                         }
                 )
         }

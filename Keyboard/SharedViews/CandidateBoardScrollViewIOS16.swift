@@ -47,9 +47,9 @@ struct CandidateBoardScrollViewIOS16: View {
                                                                         longPressAction: {
                                                                                 guard isReleaseActionTriggered.negative else { return }
                                                                                 defer { isLongPressActionTriggered = true }
-                                                                                AudioFeedback.deleted()
+                                                                                AudioFeedback.modified()
                                                                                 context.triggerHapticFeedback()
-                                                                                InputMemory.forget(candidate.lexicon)
+                                                                                context.inspect(candidate)
                                                                         },
                                                                         endAction: {
                                                                                 Task {

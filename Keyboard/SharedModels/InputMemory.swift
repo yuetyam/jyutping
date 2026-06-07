@@ -239,6 +239,19 @@ struct InputMemory {
                 guard sqlite3_step(statement) == SQLITE_DONE else { return }
         }
 
+        static func inspect(lexicon: Lexicon) -> (frequency: Int64, latest: Int64) {
+                let command: String = "SELECT frequency, latest FROM core_memory WHERE word = ? AND romanization = ? LIMIT 1;"
+                var statement: OpaquePointer? = nil
+                defer { sqlite3_finalize(statement) }
+                guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return (0, 0) }
+                guard sqlite3_bind_text(statement, 1, (lexicon.text as NSString).utf8String, -1, DEFINED_SQLITE_TRANSIENT) == SQLITE_OK else { return (0, 0) }
+                guard sqlite3_bind_text(statement, 2, (lexicon.romanization as NSString).utf8String, -1, DEFINED_SQLITE_TRANSIENT) == SQLITE_OK else { return (0, 0) }
+                guard sqlite3_step(statement) == SQLITE_ROW else { return (0, 0) }
+                let frequency: Int64 = sqlite3_column_int64(statement, 0)
+                let latest: Int64 = sqlite3_column_int64(statement, 1)
+                return (frequency, latest)
+        }
+
 
         // MARK: - Suggestions
 

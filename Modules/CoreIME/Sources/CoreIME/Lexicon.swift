@@ -200,4 +200,6 @@ extension Lexicon {
                 self.number = 0
                 self.attached = comment
         }
+
+        public static let sample: Lexicon = Lexicon(text: "例", romanization: "lai6", input: "lai")
 }

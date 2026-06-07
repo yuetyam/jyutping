@@ -54,7 +54,7 @@ extension RandomAccessCollection where Element == Lexicon {
         public func transformed(commentForm: RomanizationForm, charset: CharacterStandard) -> [Candidate] {
                 switch charset {
                 case .preset, .custom, .etymology, .opencc:
-                        return map({ Candidate(text: $0.text, lexicon: $0, commentForm: commentForm, charset: charset) })
+                        return map({ Candidate(lexicon: $0, commentForm: commentForm, charset: charset) })
                 case .inherited, .hongkong, .taiwan, .ancientBooksPublishing:
                         let statement: OpaquePointer? = {
                                 let query: String = "SELECT target FROM \(charset.variantTableName) WHERE source = ? LIMIT 1;"

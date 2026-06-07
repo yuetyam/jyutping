@@ -110,6 +110,6 @@ struct CandidateBoard: View {
         private func back() {
                 AudioFeedback.modified()
                 context.triggerHapticFeedback()
-                context.updateKeyboardForm(to: context.previousKeyboardForm)
+                context.routeBackKeyboardForm(from: .candidateBoard)
         }
 }

@@ -227,11 +227,11 @@ struct PadCantoneseNumericKeyboard: View {
                                 if context.needsInputModeSwitchKey {
                                         PadGlobeKey(widthUnitTimes: 1.5)
                                 } else {
-                                        PadTransformKey(destination: .alphabetic, widthUnitTimes: 1.5)
+                                        PadTransformKey(destination: .primary, widthUnitTimes: 1.5)
                                 }
-                                PadTransformKey(destination: .alphabetic, widthUnitTimes: 1.5)
+                                PadTransformKey(destination: .primary, widthUnitTimes: 1.5)
                                 PadSpaceKey()
-                                PadTransformKey(destination: .alphabetic, widthUnitTimes: 1.5)
+                                PadTransformKey(destination: .primary, widthUnitTimes: 1.5)
                                 PadDismissKey(widthUnitTimes: 1.5)
                         }
                 }

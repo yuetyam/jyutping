@@ -86,7 +86,7 @@ private struct GlassNineKeyCoreKeyboard: View {
                         }
                         VStack(spacing: 0) {
                                 GlassTailoredBackspaceKey()
-                                GlassTailoredNavigateKey(destination: context.preferredNumericForm.isNineKeyNumeric ? .numeric : .symbolic)
+                                GlassTailoredNavigateKey(destination: context.preferredNumericForm.isTailoredNumbers ? .numeric : .symbolic)
                                 TailoredReturnKey()
                         }
                 }
@@ -151,7 +151,7 @@ private struct LegacyNineKeyCoreKeyboard: View {
                         }
                         VStack(spacing: 0) {
                                 TailoredBackspaceKey()
-                                TailoredNavigateKey(destination: context.preferredNumericForm.isNineKeyNumeric ? .numeric : .symbolic)
+                                TailoredNavigateKey(destination: context.preferredNumericForm.isTailoredNumbers ? .numeric : .symbolic)
                                 TailoredReturnKey()
                         }
                 }

@@ -13,13 +13,13 @@ struct GlassTailoredNavigateKey: View {
 
         private var keyText: String {
                 switch destination {
-                case .alphabetic:
+                case .primary:
                         return "ABC"
                 case .numeric:
-                        return context.preferredNumericForm.isNineKeyNumeric ? "#@$" : "123"
+                        return context.preferredNumericForm.isTailoredNumbers ? "#@$" : "123"
                 case .symbolic:
                         return "#+="
-                case .nineKeyNumeric:
+                case .tailoredNumbers:
                         return "123"
                 default:
                         return "???"
@@ -64,13 +64,13 @@ struct TailoredNavigateKey: View {
 
         private var keyText: String {
                 switch destination {
-                case .alphabetic:
+                case .primary:
                         return "ABC"
                 case .numeric:
-                        return context.preferredNumericForm.isNineKeyNumeric ? "#@$" : "123"
+                        return context.preferredNumericForm.isTailoredNumbers ? "#@$" : "123"
                 case .symbolic:
                         return "#+="
-                case .nineKeyNumeric:
+                case .tailoredNumbers:
                         return "123"
                 default:
                         return "???"

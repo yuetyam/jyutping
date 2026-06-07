@@ -43,9 +43,9 @@ struct CandidateBarScrollViewIOS17: View {
                                                 longPressAction: {
                                                         guard isReleaseActionTriggered.negative else { return }
                                                         defer { isLongPressActionTriggered = true }
-                                                        AudioFeedback.deleted()
+                                                        AudioFeedback.modified()
                                                         // context.triggerHapticFeedback()
-                                                        InputMemory.forget(candidate.lexicon)
+                                                        context.inspect(candidate)
                                                 },
                                                 endAction: {
                                                         Task {
@@ -91,7 +91,7 @@ struct CandidateBarScrollViewIOS17: View {
                                 positionID = leadingPointID
                         }
                 }
-                .sensoryFeedback(.success, trigger: isLongPressActionTriggered, condition: { $0.negative && $1 })
+                .sensoryFeedback(.selection, trigger: isLongPressActionTriggered, condition: { $0.negative && $1 })
                 .sensoryFeedback(.selection, trigger: isReleaseActionTriggered, condition: { $0.negative && $1 })
         }
 }

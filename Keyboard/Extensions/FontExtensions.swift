@@ -74,7 +74,7 @@ extension String {
                 case .enUS:
                         return AttributedString(self)
                 case .jaJP:
-                        return AttributedString(self)
+                        return attributedJA()
                 }
         }
         func attributed(for characterStandard: CharacterStandard) -> AttributedString {
