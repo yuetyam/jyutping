@@ -230,7 +230,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 updateReverseLookupState(to: true)
                                 cangjieReverseLookup()
                         case .letterX:
-                                if strokeLayout.isNineKey && keyboardForm.isTailoredStroke.negative {
+                                if strokeLayout.isTailored && keyboardForm.isTailoredStroke.negative {
                                         updateKeyboardForm(to: .tailoredStroke)
                                 } else {
                                         ensureCompositionType(to: .stroke)
@@ -1133,7 +1133,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 if inputStage.isBuffering && shouldStayBuffering.negative {
                         inputBufferText()
                 }
-                let shouldAdjustKeyboardCase: Bool = (keyboardForm == .primary) && (keyboardCase != .lowercased)
+                let shouldAdjustKeyboardCase: Bool = keyboardForm.isPrimary && keyboardCase.isCapitalized
                 if shouldAdjustKeyboardCase {
                         keyboardCase = .lowercased
                 }
@@ -1331,11 +1331,11 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         // @Published private(set) var numericLayout: NumericLayout = NumericLayout.fetchSavedLayout()
         func updateNumericLayout(to layout: NumericLayout) {
                 // numericLayout = layout
-                preferredNumericForm = layout.isNumberKeyPad ? .tailoredNumbers : .numeric
+                preferredNumericForm = layout.isTailored ? .tailoredNumbers : .numeric
                 let value: Int = layout.rawValue
                 UserDefaults.standard.set(value, forKey: OptionsKey.NumericLayout)
         }
-        @Published private(set) var preferredNumericForm: KeyboardForm = NumericLayout.fetchSavedLayout().isNumberKeyPad ? .tailoredNumbers : .numeric
+        @Published private(set) var preferredNumericForm: KeyboardForm = NumericLayout.fetchSavedLayout().isTailored ? .tailoredNumbers : .numeric
 
         /// Keyboard Layout for Stroke Reverse Lookup
         @Published private(set) var strokeLayout: StrokeLayout = StrokeLayout.fetchSavedLayout()
