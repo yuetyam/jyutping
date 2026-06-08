@@ -49,7 +49,7 @@ struct SettingsView: View {
                                         NavigationTrailingExpansionButton()
                                 }
                         }
-                        .frame(height: PresetConstant.buttonLength)
+                        .frame(height: context.keyboardInterface.isCompact ? PresetConstant.buttonLength : PresetConstant.buttonLengthXL)
                         List {
                                 Section {
                                         Toggle("SettingsView.KeyboardFeedback.Sound.ToggleTitle", isOn: $isAudioFeedbackOn)

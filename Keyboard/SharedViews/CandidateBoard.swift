@@ -64,9 +64,8 @@ extension Array where Element == Candidate {
 }
 
 struct CandidateBoard: View {
-
         @EnvironmentObject private var context: KeyboardViewController
-
+        private let buttonLength = PresetConstant.buttonLength - 1
         var body: some View {
                 ZStack(alignment: .topTrailing) {
                         if #available(iOSApplicationExtension 18.0, *) {
@@ -83,12 +82,14 @@ struct CandidateBoard: View {
                                                 Image.chevronUp
                                                         .resizable()
                                                         .scaledToFit()
-                                                        .padding(12)
+                                                        .padding(11)
                                         }
-                                        .frame(width: PresetConstant.buttonLength, height: PresetConstant.buttonLength)
+                                        .frame(width: buttonLength, height: buttonLength)
                                 }
                                 .buttonStyle(.plain)
                                 .glassEffect(.clear, in: .circle)
+                                .padding(.trailing, 1)
+                                .padding(.top, context.keyboardInterface.isCompact ? 1 : 3)
                         } else {
                                 Button(action: back) {
                                         ZStack {
@@ -99,11 +100,11 @@ struct CandidateBoard: View {
                                                         .scaledToFit()
                                                         .padding(11)
                                         }
-                                        .padding(.top, 2)
-                                        .padding(.trailing, 2)
-                                        .frame(width: PresetConstant.buttonLength, height: PresetConstant.buttonLength)
+                                        .frame(width: buttonLength, height: buttonLength)
                                 }
                                 .buttonStyle(.plain)
+                                .padding(.trailing, 1)
+                                .padding(.top, context.keyboardInterface.isCompact ? 1 : 3)
                         }
                 }
         }

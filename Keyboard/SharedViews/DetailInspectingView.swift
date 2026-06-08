@@ -19,7 +19,7 @@ struct DetailInspectingView: View {
                                         NavigationTrailingExpansionButton().hidden()
                                 }
                         }
-                        .frame(height: PresetConstant.buttonLength)
+                        .frame(height: context.keyboardInterface.isCompact ? PresetConstant.buttonLength : PresetConstant.buttonLengthXL)
                         ScrollView(.vertical) {
                                 LazyVStack(alignment: .leading, spacing: 16) {
                                         switch candidate.lexicon.type {

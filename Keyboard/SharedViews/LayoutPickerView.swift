@@ -15,7 +15,7 @@ struct LayoutPickerView: View {
                                         NavigationTrailingExpansionButton().hidden()
                                 }
                         }
-                        .frame(height: PresetConstant.buttonLength)
+                        .frame(height: context.keyboardInterface.isCompact ? PresetConstant.buttonLength : PresetConstant.buttonLengthXL)
                         ScrollView(.vertical) {
                                 LazyVStack(spacing: 0) {
                                         ZStack {
