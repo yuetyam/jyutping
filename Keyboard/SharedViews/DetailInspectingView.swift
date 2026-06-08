@@ -84,8 +84,8 @@ struct DetailInspectingView: View {
                                                                                 Text("DetailInspectingView.ForgetCandidate.ButtonTitle").foregroundStyle(Color.red)
                                                                                 Spacer()
                                                                         }
-                                                                        .padding(.vertical, 10)
-                                                                        .glassEffect()
+                                                                        .frame(minHeight: 44)
+                                                                        .glassEffect(.clear, in: .capsule)
                                                                         .contentShape(.rect)
                                                                 } else {
                                                                         HStack {
@@ -93,7 +93,7 @@ struct DetailInspectingView: View {
                                                                                 Text("DetailInspectingView.ForgetCandidate.ButtonTitle").foregroundStyle(Color.red)
                                                                                 Spacer()
                                                                         }
-                                                                        .padding(.vertical, 10)
+                                                                        .frame(minHeight: 44)
                                                                         .background(Material.regular, in: .capsule)
                                                                         .contentShape(.rect)
                                                                 }

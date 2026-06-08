@@ -13,6 +13,9 @@ struct HomeView: View {
         }()
         @State private var isGuideViewExpanded: Bool = false
 
+        private var shouldExpandGuidView: Bool {
+                return isKeyboardEnabled.negative || isGuideViewExpanded
+        }
         private var shouldDisplayHapticFeedbackTip: Bool {
                 guard Device.isPhone else { return false }
                 return isKeyboardEnabled.negative || isGuideViewExpanded
@@ -46,45 +49,31 @@ struct HomeView: View {
                                                         Text("IOSHomeTab.Heading.HowToEnableThisKeyboard").font(.headline)
                                                 }
                                         }
-                                        if (isKeyboardEnabled.negative || isGuideViewExpanded) {
-                                                VStack(spacing: 5) {
-                                                        HStack {
-                                                                Text.dotMark
-                                                                Text("IOSHomeTab.EnablingKeyboard.Step1")
-                                                                Spacer()
-                                                        }
-                                                        HStack {
-                                                                Text.dotMark
-                                                                Text("IOSHomeTab.EnablingKeyboard.Step2")
-                                                                Spacer()
-                                                        }
-                                                        HStack {
-                                                                Text.dotMark
-                                                                Text("IOSHomeTab.EnablingKeyboard.Step3")
-                                                                Spacer()
-                                                        }
-                                                        HStack {
-                                                                Text.dotMark
-                                                                Text("IOSHomeTab.EnablingKeyboard.Step4")
-                                                                Spacer()
-                                                        }
+                                        if shouldExpandGuidView {
+                                                VStack(alignment: .leading, spacing: 10) {
+                                                        Label("IOSHomeTab.EnablingKeyboard.Step1", systemImage: "1.circle")
+                                                        Label("IOSHomeTab.EnablingKeyboard.Step2", systemImage: "2.circle")
+                                                        Label("IOSHomeTab.EnablingKeyboard.Step3", systemImage: "3.circle")
+                                                        Label("IOSHomeTab.EnablingKeyboard.Step4", systemImage: "4.circle")
+                                                }
+                                        } else {
+                                                NavigationLink(destination: EnablingKeyboardView()) {
+                                                        Label("IOSHomeTab.LabelTitle.ProblemsWithEnablingKeyboard", systemImage: "hand.raised")
                                                 }
                                         }
                                 } footer: {
                                         if shouldDisplayHapticFeedbackTip {
                                                 Text("IOSHomeTab.EnablingKeyboard.Footer").textCase(nil)
-                                        } else {
-                                                EmptyView()
                                         }
                                 }
-                                if (isKeyboardEnabled.negative || isGuideViewExpanded) {
+                                if shouldExpandGuidView {
                                         Section {
                                                 GoToSettingsLinkView()
                                         }
-                                }
-                                Section {
-                                        NavigationLink(destination: EnablingKeyboardView()) {
-                                                Label("IOSHomeTab.LabelTitle.ProblemsWithEnablingKeyboard", systemImage: "hand.raised")
+                                        Section {
+                                                NavigationLink(destination: EnablingKeyboardView()) {
+                                                        Label("IOSHomeTab.LabelTitle.ProblemsWithEnablingKeyboard", systemImage: "hand.raised")
+                                                }
                                         }
                                 }
                                 Section {
