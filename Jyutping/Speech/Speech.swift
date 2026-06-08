@@ -26,7 +26,10 @@ struct Speech {
         static func stop() {
                 synthesizer.stopSpeaking(at: .immediate)
         }
+
+        // FIXME: - Hang Risk
         static var isSpeaking: Bool {
+                // WARNING: [Internal] Thread running at User-interactive quality-of-service class waiting on a lower QoS thread running at Default quality-of-service class. Investigate ways to avoid priority inversions
                 return synthesizer.isSpeaking
         }
         static var voiceIdentifier: String? {
