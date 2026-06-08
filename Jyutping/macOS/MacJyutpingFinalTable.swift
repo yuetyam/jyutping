@@ -52,7 +52,6 @@ struct MacJyutpingFinalTable: View {
                                 VStack(alignment: .leading, spacing: 2) {
                                         VStack {
                                                 MacFinalLabel(word: "嘅", syllable: "ge3", jyutping: "e", ipa: "[ ɛː ]")
-                                                MacFinalLabel(word: "記", syllable: "gei3", jyutping: "ei", ipa: "[ ei ]")
                                                 MacFinalLabel(word: "掉", syllable: "deu6", jyutping: "eu", ipa: "[ ɛːu ]")
                                                 MacFinalLabel(word: "𦧷", syllable: "lem2", jyutping: "em", ipa: "[ ɛːm ]")
                                                 MacFinalLabel(word: "鏡", syllable: "geng3", jyutping: "eng", ipa: "[ ɛːŋ ]")
@@ -67,20 +66,23 @@ struct MacJyutpingFinalTable: View {
                                                 .padding(.horizontal, 8)
                                 }
                                 VStack {
+                                        MacFinalLabel(word: "記", syllable: "gei3", jyutping: "ei", ipa: "[ ei ]")
+                                        MacFinalLabel(word: "敬", syllable: "ging3", jyutping: "ing", ipa: "[ eŋ ]")
+                                        MacFinalLabel(word: "極", syllable: "gik6", jyutping: "ik", ipa: "[ ek̚ ]")
+                                }
+                                .block()
+                                VStack {
                                         MacFinalLabel(word: "意", syllable: "ji3", jyutping: "i", ipa: "[ iː ]")
                                         MacFinalLabel(word: "叫", syllable: "giu3", jyutping: "iu", ipa: "[ iːu ]")
                                         MacFinalLabel(word: "劍", syllable: "gim3", jyutping: "im", ipa: "[ iːm ]")
                                         MacFinalLabel(word: "見", syllable: "gin3", jyutping: "in", ipa: "[ iːn ]")
-                                        MacFinalLabel(word: "敬", syllable: "ging3", jyutping: "ing", ipa: "[ eŋ ]")
                                         MacFinalLabel(word: "劫", syllable: "gip3", jyutping: "ip", ipa: "[ iːp̚ ]")
                                         MacFinalLabel(word: "結", syllable: "git3", jyutping: "it", ipa: "[ iːt̚ ]")
-                                        MacFinalLabel(word: "極", syllable: "gik6", jyutping: "ik", ipa: "[ ek̚ ]")
                                 }
                                 .block()
                                 VStack {
                                         MacFinalLabel(word: "個", syllable: "go3", jyutping: "o", ipa: "[ ɔː ]")
                                         MacFinalLabel(word: "蓋", syllable: "goi3", jyutping: "oi", ipa: "[ ɔːi ]")
-                                        MacFinalLabel(word: "告", syllable: "gou3", jyutping: "ou", ipa: "[ ou ]")
                                         MacFinalLabel(word: "幹", syllable: "gon3", jyutping: "on", ipa: "[ ɔːn ]")
                                         MacFinalLabel(word: "鋼", syllable: "gong3", jyutping: "ong", ipa: "[ ɔːŋ ]")
                                         MacFinalLabel(word: "割", syllable: "got3", jyutping: "ot", ipa: "[ ɔːt̚ ]")
@@ -88,12 +90,16 @@ struct MacJyutpingFinalTable: View {
                                 }
                                 .block()
                                 VStack {
+                                        MacFinalLabel(word: "告", syllable: "gou3", jyutping: "ou", ipa: "[ ou ]")
+                                        MacFinalLabel(word: "貢", syllable: "gung3", jyutping: "ung", ipa: "[ oŋ ]")
+                                        MacFinalLabel(word: "谷", syllable: "guk1", jyutping: "uk", ipa: "[ ok̚ ]")
+                                }
+                                .block()
+                                VStack {
                                         MacFinalLabel(word: "夫", syllable: "fu1", jyutping: "u", ipa: "[ uː ]")
                                         MacFinalLabel(word: "灰", syllable: "fui1", jyutping: "ui", ipa: "[ uːi ]")
                                         MacFinalLabel(word: "寬", syllable: "fun1", jyutping: "un", ipa: "[ uːn ]")
-                                        MacFinalLabel(word: "封", syllable: "fung1", jyutping: "ung", ipa: "[ oŋ ]")
                                         MacFinalLabel(word: "闊", syllable: "fut3", jyutping: "ut", ipa: "[ uːt̚ ]")
-                                        MacFinalLabel(word: "福", syllable: "fuk1", jyutping: "uk", ipa: "[ ok̚ ]")
                                 }
                                 .block()
                                 VStack(alignment: .leading, spacing: 2) {

@@ -46,7 +46,6 @@ struct IOSJyutpingFinalTable: View {
                         }
                         Section {
                                 IOSFinalLabel(word: "嘅", syllable: "ge3", jyutping: "e", ipa: "[ ɛː ]")
-                                IOSFinalLabel(word: "記", syllable: "gei3", jyutping: "ei", ipa: "[ ei ]")
                                 IOSFinalLabel(word: "掉", syllable: "deu6", jyutping: "eu", ipa: "[ ɛːu ]")
                                 IOSFinalLabel(word: "𦧷", syllable: "lem2", jyutping: "em", ipa: "[ ɛːm ]")
                                 IOSFinalLabel(word: "鏡", syllable: "geng3", jyutping: "eng", ipa: "[ ɛːŋ ]")
@@ -57,31 +56,36 @@ struct IOSJyutpingFinalTable: View {
                                 Text(verbatim: "韻母 -eu, -em, -ep, -et 通常只見於口語白讀。韻母 -ing/-eng, -ik/-ek 部分字音係文白異讀關係。").textCase(nil)
                         }
                         Section {
+                                IOSFinalLabel(word: "記", syllable: "gei3", jyutping: "ei", ipa: "[ ei ]")
+                                IOSFinalLabel(word: "敬", syllable: "ging3", jyutping: "ing", ipa: "[ eŋ ]")
+                                IOSFinalLabel(word: "極", syllable: "gik6", jyutping: "ik", ipa: "[ ek̚ ]")
+                        }
+                        Section {
                                 IOSFinalLabel(word: "意", syllable: "ji3", jyutping: "i", ipa: "[ iː ]")
                                 IOSFinalLabel(word: "叫", syllable: "giu3", jyutping: "iu", ipa: "[ iːu ]")
                                 IOSFinalLabel(word: "劍", syllable: "gim3", jyutping: "im", ipa: "[ iːm ]")
                                 IOSFinalLabel(word: "見", syllable: "gin3", jyutping: "in", ipa: "[ iːn ]")
-                                IOSFinalLabel(word: "敬", syllable: "ging3", jyutping: "ing", ipa: "[ eŋ ]")
                                 IOSFinalLabel(word: "劫", syllable: "gip3", jyutping: "ip", ipa: "[ iːp̚ ]")
                                 IOSFinalLabel(word: "結", syllable: "git3", jyutping: "it", ipa: "[ iːt̚ ]")
-                                IOSFinalLabel(word: "極", syllable: "gik6", jyutping: "ik", ipa: "[ ek̚ ]")
                         }
                         Section {
                                 IOSFinalLabel(word: "個", syllable: "go3", jyutping: "o", ipa: "[ ɔː ]")
                                 IOSFinalLabel(word: "蓋", syllable: "goi3", jyutping: "oi", ipa: "[ ɔːi ]")
-                                IOSFinalLabel(word: "告", syllable: "gou3", jyutping: "ou", ipa: "[ ou ]")
                                 IOSFinalLabel(word: "幹", syllable: "gon3", jyutping: "on", ipa: "[ ɔːn ]")
                                 IOSFinalLabel(word: "鋼", syllable: "gong3", jyutping: "ong", ipa: "[ ɔːŋ ]")
                                 IOSFinalLabel(word: "割", syllable: "got3", jyutping: "ot", ipa: "[ ɔːt̚ ]")
                                 IOSFinalLabel(word: "各", syllable: "gok3", jyutping: "ok", ipa: "[ ɔːk̚ ]")
                         }
                         Section {
+                                IOSFinalLabel(word: "告", syllable: "gou3", jyutping: "ou", ipa: "[ ou ]")
+                                IOSFinalLabel(word: "貢", syllable: "gung3", jyutping: "ung", ipa: "[ oŋ ]")
+                                IOSFinalLabel(word: "谷", syllable: "guk1", jyutping: "uk", ipa: "[ ok̚ ]")
+                        }
+                        Section {
                                 IOSFinalLabel(word: "夫", syllable: "fu1", jyutping: "u", ipa: "[ uː ]")
                                 IOSFinalLabel(word: "灰", syllable: "fui1", jyutping: "ui", ipa: "[ uːi ]")
                                 IOSFinalLabel(word: "寬", syllable: "fun1", jyutping: "un", ipa: "[ uːn ]")
-                                IOSFinalLabel(word: "封", syllable: "fung1", jyutping: "ung", ipa: "[ oŋ ]")
                                 IOSFinalLabel(word: "闊", syllable: "fut3", jyutping: "ut", ipa: "[ uːt̚ ]")
-                                IOSFinalLabel(word: "福", syllable: "fuk1", jyutping: "uk", ipa: "[ ok̚ ]")
                         }
                         Section {
                                 IOSFinalLabel(word: "鋸", syllable: "goe3", jyutping: "oe", ipa: "[ œː ]")
