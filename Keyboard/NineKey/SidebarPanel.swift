@@ -12,7 +12,7 @@ struct GlassSidebarPanel: View {
         private let symbols: [String] = ["+", "-", "*", "/", "=", "%", ":", "@", "#", ",", "$", "~", "≈"]
 
         var body: some View {
-                let texts: [String] = context.keyboardForm.isTailoredNumbers ? symbols : punctuation
+                let texts: [String] = context.keyboardForm.isDedicatedNumbers ? symbols : punctuation
                 ZStack {
                         Color.clear
                         if context.inputStage.isBuffering {
@@ -38,7 +38,7 @@ struct SidebarPanel: View {
         private let symbols: [String] = ["+", "-", "*", "/", "=", "%", ":", "@", "#", ",", "$", "~", "≈"]
 
         var body: some View {
-                let texts: [String] = context.keyboardForm.isTailoredNumbers ? symbols : punctuation
+                let texts: [String] = context.keyboardForm.isDedicatedNumbers ? symbols : punctuation
                 ZStack {
                         RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous)
                                 .fill(colorScheme.actionKeyColor)

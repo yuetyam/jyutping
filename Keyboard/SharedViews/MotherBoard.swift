@@ -88,13 +88,13 @@ struct MotherBoard: View {
                         case .padPortraitLarge, .padLandscapeLarge:
                                 LargePadNumericKeyboard()
                         }
-                case .tailoredNumbers:
+                case .dedicatedNumbers:
                         if #available(iOSApplicationExtension 26.0, *) {
                                 GlassTailoredNumericKeyboard()
                         } else {
                                 TailoredNumericKeyboard()
                         }
-                case .tailoredStroke:
+                case .dedicatedStroke:
                         if #available(iOSApplicationExtension 26.0, *) {
                                 GlassTailoredStrokeKeyboard()
                         } else {

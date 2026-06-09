@@ -8,6 +8,12 @@ enum KeyboardForm: Int {
         /// 10-key digit keypad with an additional “dot” key
         case decimalPad
 
+        /// 10-key keypad-style digit keyboard with a symbol sidebar and some other keys
+        case dedicatedNumbers
+
+        /// 9-key (T9) Stroke keyboard for reverse lookup
+        case dedicatedStroke
+
         /// Candidate detail page
         case detailInspecting
 
@@ -37,12 +43,6 @@ enum KeyboardForm: Int {
 
         /// Extra symbols
         case symbolic
-
-        /// 10-key keypad-style digit keyboard with a symbol sidebar and some other keys
-        case tailoredNumbers
-
-        /// 9-key (T9) Stroke keyboard for reverse lookup
-        case tailoredStroke
 }
 
 extension UIKeyboardType {
@@ -90,10 +90,10 @@ extension KeyboardForm {
         var isPrimary: Bool { self == .primary }
 
         /// 10-key keypad-style digit keyboard with a symbol sidebar and some other keys
-        var isTailoredNumbers: Bool { self == .tailoredNumbers }
+        var isDedicatedNumbers: Bool { self == .dedicatedNumbers }
 
         /// 9-key (T9) Stroke keyboard for reverse lookup
-        var isTailoredStroke: Bool { self == .tailoredStroke }
+        var isDedicatedStroke: Bool { self == .dedicatedStroke }
 
         /// 10-key digit keypad with an additional “dot” key
         var isDecimalPad: Bool { self == .decimalPad }
@@ -104,7 +104,7 @@ extension KeyboardForm {
                 case .primary,
                 .candidateBoard,
                 .detailInspecting,
-                .tailoredStroke: true
+                .dedicatedStroke: true
                 default: false
                 }
         }
@@ -112,11 +112,11 @@ extension KeyboardForm {
         /// Phone, PhoneOnPad, PadFloating
         var compactTransformKeyTex: String {
                 switch self {
-                case .primary   : "ABC"
+                case .primary    : "ABC"
                 case .numeric,
-                .tailoredNumbers: "123"
-                case .symbolic  : "#+="
-                default         : "???"
+                .dedicatedNumbers: "123"
+                case .symbolic   : "#+="
+                default          : "???"
                 }
         }
         var padTransformKeyText: String {

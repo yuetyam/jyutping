@@ -207,7 +207,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 suggestionTask?.cancel()
                                 candidates = []
                                 text2mark = String.empty
-                                if keyboardForm.isTailoredStroke {
+                                if keyboardForm.isDedicatedStroke {
                                         updateKeyboardForm(to: .primary)
                                 }
                                 ensureCompositionType(to: .primary)
@@ -230,8 +230,8 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 updateReverseLookupState(to: true)
                                 cangjieReverseLookup()
                         case .letterX:
-                                if strokeLayout.isTailored && keyboardForm.isTailoredStroke.negative {
-                                        updateKeyboardForm(to: .tailoredStroke)
+                                if strokeLayout.isDedicated && keyboardForm.isDedicatedStroke.negative {
+                                        updateKeyboardForm(to: .dedicatedStroke)
                                 } else {
                                         ensureCompositionType(to: .stroke)
                                 }
@@ -510,7 +510,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 case .clearBuffer:
                         clearBuffer()
                 case .return:
-                        if keyboardForm.isTailoredStroke, let candidate = candidates.first {
+                        if keyboardForm.isDedicatedStroke, let candidate = candidates.first {
                                 input(candidate.text)
                                 aftercareSelected(candidate)
                         } else if inputStage.isBuffering {
@@ -1190,7 +1190,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         private func updateSpaceKeyForm() {
                 let newForm: SpaceKeyForm = {
                         guard inputMethodMode.isCantonese else { return .english }
-                        guard keyboardForm.isTailoredNumbers.negative else { return .fallback }
+                        guard keyboardForm.isDedicatedNumbers.negative else { return .fallback }
                         let isMutilated: Bool = characterStandard.isMutilated
                         if inputStage.isBuffering {
                                 if candidates.isEmpty {
@@ -1331,11 +1331,11 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         // @Published private(set) var numericLayout: NumericLayout = NumericLayout.fetchSavedLayout()
         func updateNumericLayout(to layout: NumericLayout) {
                 // numericLayout = layout
-                preferredNumericForm = layout.isTailored ? .tailoredNumbers : .numeric
+                preferredNumericForm = layout.isDedicated ? .dedicatedNumbers : .numeric
                 let value: Int = layout.rawValue
                 UserDefaults.standard.set(value, forKey: OptionsKey.NumericLayout)
         }
-        @Published private(set) var preferredNumericForm: KeyboardForm = NumericLayout.fetchSavedLayout().isTailored ? .tailoredNumbers : .numeric
+        @Published private(set) var preferredNumericForm: KeyboardForm = NumericLayout.fetchSavedLayout().isDedicated ? .dedicatedNumbers : .numeric
 
         /// Keyboard Layout for Stroke Reverse Lookup
         @Published private(set) var strokeLayout: StrokeLayout = StrokeLayout.fetchSavedLayout()

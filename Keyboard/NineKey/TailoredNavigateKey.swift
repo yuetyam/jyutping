@@ -16,10 +16,10 @@ struct GlassTailoredNavigateKey: View {
                 case .primary:
                         return "ABC"
                 case .numeric:
-                        return context.preferredNumericForm.isTailoredNumbers ? "#@$" : "123"
+                        return context.preferredNumericForm.isDedicatedNumbers ? "#@$" : "123"
                 case .symbolic:
                         return "#+="
-                case .tailoredNumbers:
+                case .dedicatedNumbers:
                         return "123"
                 default:
                         return "???"
@@ -67,10 +67,10 @@ struct TailoredNavigateKey: View {
                 case .primary:
                         return "ABC"
                 case .numeric:
-                        return context.preferredNumericForm.isTailoredNumbers ? "#@$" : "123"
+                        return context.preferredNumericForm.isDedicatedNumbers ? "#@$" : "123"
                 case .symbolic:
                         return "#+="
-                case .tailoredNumbers:
+                case .dedicatedNumbers:
                         return "123"
                 default:
                         return "???"

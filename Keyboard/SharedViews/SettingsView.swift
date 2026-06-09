@@ -15,8 +15,8 @@ struct SettingsView: View {
 
         @State private var isAudioFeedbackOn: Bool = Options.isAudioFeedbackOn
         @State private var hapticFeedback: HapticFeedback = HapticFeedback.fetchSavedMode()
-        @State private var isKeyPadNumericLayout: Bool = NumericLayout.fetchSavedLayout().isTailored
-        @State private var isNineKeyStrokeLayout: Bool = StrokeLayout.fetchSavedLayout().isTailored
+        @State private var useKeyPadNumericLayout: Bool = NumericLayout.fetchSavedLayout().isDedicated
+        @State private var useDedicatedStrokeLayout: Bool = StrokeLayout.fetchSavedLayout().isDedicated
         @State private var needsNumberRow: Bool = Options.needsNumberRow
         @State private var showLowercaseKeys: Bool = Options.showLowercaseKeys
         @State private var keyTextPreview: Bool = Options.keyTextPreview
@@ -85,16 +85,16 @@ struct SettingsView: View {
 
                                 Section {
                                         if context.isRunningOnPhone {
-                                                Toggle("SettingsView.NumericLayout.ToggleTitle", isOn: $isKeyPadNumericLayout)
-                                                        .onChange(of: isKeyPadNumericLayout) { isOn in
+                                                Toggle("SettingsView.NumericLayout.ToggleTitle", isOn: $useKeyPadNumericLayout)
+                                                        .onChange(of: useKeyPadNumericLayout) { isOn in
                                                                 AudioFeedback.modified()
-                                                                let newLayout: NumericLayout = isOn ? .tailored : .default
+                                                                let newLayout: NumericLayout = isOn ? .dedicated : .default
                                                                 context.updateNumericLayout(to: newLayout)
                                                         }
-                                                Toggle("SettingsView.StrokeLayout.ToggleTitle", isOn: $isNineKeyStrokeLayout)
-                                                        .onChange(of: isNineKeyStrokeLayout) { isOn in
+                                                Toggle("SettingsView.StrokeLayout.ToggleTitle", isOn: $useDedicatedStrokeLayout)
+                                                        .onChange(of: useDedicatedStrokeLayout) { isOn in
                                                                 AudioFeedback.modified()
-                                                                let newLayout: StrokeLayout = isOn ? .tailored : .default
+                                                                let newLayout: StrokeLayout = isOn ? .dedicated : .default
                                                                 context.updateStrokeLayout(to: newLayout)
                                                         }
                                                 Toggle("SettingsView.NumberRow.ToggleTitle", isOn: $needsNumberRow)

@@ -92,7 +92,7 @@ enum NumericLayout: Int, CaseIterable {
         case `default` = 1
 
         /// 10-key keypad-style digit keyboard with a symbol sidebar and some other keys
-        case tailored = 2
+        case dedicated = 2
 
         /// Read NumericLayout from UserDefaults
         static func fetchSavedLayout() -> NumericLayout {
@@ -101,7 +101,7 @@ enum NumericLayout: Int, CaseIterable {
         }
 
         /// 10-key keypad-style digit keyboard with a symbol sidebar and some other keys
-        var isTailored: Bool { self == .tailored }
+        var isDedicated: Bool { self == .dedicated }
 }
 
 /// Keyboard Layout for Stroke Reverse Lookup
@@ -111,7 +111,7 @@ enum StrokeLayout: Int, CaseIterable {
         case `default` = 1
 
         /// 9-key (T9) layout
-        case tailored = 2
+        case dedicated = 2
 
         /// Read StrokeLayout from UserDefaults
         static func fetchSavedLayout() -> StrokeLayout {
@@ -120,5 +120,5 @@ enum StrokeLayout: Int, CaseIterable {
         }
 
         /// 9-key (T9) layout
-        var isTailored: Bool { self == .tailored }
+        var isDedicated: Bool { self == .dedicated }
 }
