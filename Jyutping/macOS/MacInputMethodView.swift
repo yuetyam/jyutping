@@ -24,31 +24,42 @@ struct MacInputMethodView: View {
                                 }
                                 .block()
 
-                                HStack(spacing: 16) {
-                                        Link("Shared.About.Website", destination: About.WebsiteURL)
-                                                .font(.master)
-                                                .foregroundStyle(Color.accentColor)
-                                        Text(verbatim: About.WebsiteAddress).monospaced()
+                                HStack(spacing: 20) {
+                                        HStack(spacing: 8) {
+                                                HStack(spacing: 4) {
+                                                        Text("Shared.About.Website").font(.master)
+                                                        Text.separator
+                                                }
+                                                Link(About.WebsiteAddress, destination: About.WebsiteURL).monospaced()
+                                        }
                                         Button {
                                                 AppMaster.copy(About.WebsiteAddress)
                                                 isWebsiteAddressCopied = true
                                                 Task {
-                                                        try? await Task.sleep(for: .seconds(2))
+                                                        try? await Task.sleep(for: .seconds(1))
                                                         isWebsiteAddressCopied = false
                                                 }
                                         } label: {
-                                                HStack(spacing: 4) {
-                                                        Image(systemName: isWebsiteAddressCopied ? "text.badge.checkmark" : "doc.on.doc")
-                                                                .resizable()
-                                                                .scaledToFit()
-                                                                .frame(width: 16, height: 16)
-                                                        if isWebsiteAddressCopied {
-                                                                Text("General.Copied").font(.master)
-                                                        } else {
-                                                                Text("General.Copy").font(.master)
+                                                ZStack {
+                                                        Capsule()
+                                                                .fill(Color.textBackgroundColor.opacity(0.9))
+                                                                .frame(width: 88, height: 28)
+                                                        HStack(spacing: 4) {
+                                                                Image(systemName: isWebsiteAddressCopied ? "text.badge.checkmark" : "doc.on.doc")
+                                                                        .resizable()
+                                                                        .scaledToFit()
+                                                                        .frame(width: 16, height: 16)
+                                                                if isWebsiteAddressCopied {
+                                                                        Text("General.Copied").font(.master)
+                                                                } else {
+                                                                        Text("General.Copy").font(.master)
+                                                                }
                                                         }
+                                                        .textSelection(.disabled)
                                                 }
+                                                .contentShape(.rect)
                                         }
+                                        .buttonStyle(.plain)
                                         Spacer()
                                 }
                                 .block()
