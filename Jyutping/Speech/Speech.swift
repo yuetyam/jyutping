@@ -1,9 +1,15 @@
 import AVFoundation
 import CommonExtensions
+import os
 
 struct Speech {
 
-        nonisolated(unsafe) private static let synthesizer: AVSpeechSynthesizer = AVSpeechSynthesizer()
+        nonisolated private static let delegate: SpeechDelegate = SpeechDelegate()
+        nonisolated(unsafe) private static let synthesizer: AVSpeechSynthesizer = {
+                let synthesizer = AVSpeechSynthesizer()
+                synthesizer.delegate = delegate
+                return synthesizer
+        }()
         private static let voice: AVSpeechSynthesisVoice? = preferredCantoneseVoice()
 
         static func speak(_ text: String, isRomanization: Bool = true) {
@@ -14,6 +20,7 @@ struct Speech {
                 let utterance: AVSpeechUtterance = AVSpeechUtterance(string: text)
                 utterance.voice = voice
                 utterance.rate = AVSpeechUtteranceDefaultSpeechRate * 0.85
+                delegate.markStarted()
                 synthesizer.speak(utterance)
         }
         static func speak(text: String, ipa: String) {
@@ -21,16 +28,16 @@ struct Speech {
                 let attributedString = NSMutableAttributedString(string: text, attributes: [pronunciationKey: ipa])
                 let utterance = AVSpeechUtterance(attributedString: attributedString)
                 utterance.voice = voice
+                delegate.markStarted()
                 synthesizer.speak(utterance)
         }
         static func stop() {
                 synthesizer.stopSpeaking(at: .immediate)
+                delegate.markStopped()
         }
 
-        // FIXME: - Hang Risk
         static var isSpeaking: Bool {
-                // WARNING: [Internal] Thread running at User-interactive quality-of-service class waiting on a lower QoS thread running at Default quality-of-service class. Investigate ways to avoid priority inversions
-                return synthesizer.isSpeaking
+                return delegate.isSpeaking
         }
         static var voiceIdentifier: String? {
                 return voice?.identifier
@@ -146,5 +153,30 @@ private enum SpeechLanguage: Int {
                 case .mandarinTaiwan: "zh-TW"
                 case .mandarinPeking: "zh-CN"
                 }
+        }
+}
+
+private final class SpeechDelegate: NSObject, AVSpeechSynthesizerDelegate, @unchecked Sendable {
+
+        private let state: OSAllocatedUnfairLock<Bool> = OSAllocatedUnfairLock(initialState: false)
+
+        var isSpeaking: Bool {
+                return state.withLock { $0 }
+        }
+        func markStarted() {
+                state.withLock { $0 = true }
+        }
+        func markStopped() {
+                state.withLock { $0 = false }
+        }
+
+        func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didStart utterance: AVSpeechUtterance) {
+                markStarted()
+        }
+        func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
+                markStopped()
+        }
+        func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didCancel utterance: AVSpeechUtterance) {
+                markStopped()
         }
 }
