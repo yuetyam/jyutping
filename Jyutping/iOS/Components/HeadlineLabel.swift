@@ -1,6 +1,7 @@
 import SwiftUI
 import CommonExtensions
 
+// TODO: Use HeadlineLabelStyle instead
 struct HeadlineLabel: View {
         init(title: LocalizedStringKey, icon: String, iconTint: Color = .accentColor) {
                 self.title = title

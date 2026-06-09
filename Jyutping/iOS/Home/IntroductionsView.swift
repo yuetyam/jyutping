@@ -6,28 +6,19 @@ struct IntroductionsView: View {
         var body: some View {
                 List {
                         Section {
-                                Text("IOSHomeTab.IntroductionsView.Heading.ClearPreEdit").font(.headline)
+                                Label("IOSHomeTab.IntroductionsView.Heading.ClearPreEdit", systemImage: "clear").labelStyle(.headline(iconColor: .green))
                                 Text("IOSHomeTab.IntroductionsView.Body.ClearPreEdit")
                         }
                         Section {
-                                Text("IOSHomeTab.IntroductionsView.Heading.ForgetCandidate").font(.headline)
+                                Label("IOSHomeTab.IntroductionsView.Heading.ForgetCandidate", systemImage: "trash").labelStyle(.headline(iconColor: .red))
                                 Text("IOSHomeTab.IntroductionsView.Body.ForgetCandidate")
                         }
                         Section {
-                                Text("IOSHomeTab.IntroductionsView.Heading.PositionInsertionPoint").font(.headline)
+                                Label("IOSHomeTab.IntroductionsView.Heading.PositionInsertionPoint", systemImage: "arrow.left.and.line.vertical.and.arrow.right").labelStyle(.headline(iconColor: .blue))
                                 Text("IOSHomeTab.IntroductionsView.Body.PositionInsertionPoint")
                         }
-
-                        // TODO: Double-space shortcut
-                        if #available(iOS 1000.0, *) {
-                                Section {
-                                        Text("IOSHomeTab.IntroductionsView.Heading.SpaceDoubleTapping").font(.headline)
-                                        Text("IOSHomeTab.IntroductionsView.Body.SpaceDoubleTapping")
-                                }
-                        }
-
                         Section {
-                                Text("IOSHomeTab.IntroductionsView.Heading.TripleStrokeKeyboard").font(.headline)
+                                Label("IOSHomeTab.IntroductionsView.Heading.TripleStrokeKeyboard", systemImage: "t.square").labelStyle(.headline(iconColor: .purple))
                                 Text("IOSHomeTab.IntroductionsView.Body.TripleStrokeKeyboard.Row1")
                                 Text("IOSHomeTab.IntroductionsView.Body.TripleStrokeKeyboard.Row2")
                         }

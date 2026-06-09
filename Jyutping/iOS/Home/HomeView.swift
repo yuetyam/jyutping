@@ -51,10 +51,10 @@ struct HomeView: View {
                                         }
                                         if shouldExpandGuidView {
                                                 VStack(alignment: .leading, spacing: 10) {
-                                                        Label("IOSHomeTab.EnablingKeyboard.Step1", systemImage: "1.circle")
-                                                        Label("IOSHomeTab.EnablingKeyboard.Step2", systemImage: "2.circle")
-                                                        Label("IOSHomeTab.EnablingKeyboard.Step3", systemImage: "3.circle")
-                                                        Label("IOSHomeTab.EnablingKeyboard.Step4", systemImage: "4.circle")
+                                                        Label("IOSHomeTab.EnablingKeyboard.Step1", systemImage: "1.circle").labelStyle(.iconTint(.indigo))
+                                                        Label("IOSHomeTab.EnablingKeyboard.Step2", systemImage: "2.circle").labelStyle(.iconTint(.indigo))
+                                                        Label("IOSHomeTab.EnablingKeyboard.Step3", systemImage: "3.circle").labelStyle(.iconTint(.indigo))
+                                                        Label("IOSHomeTab.EnablingKeyboard.Step4", systemImage: "4.circle").labelStyle(.iconTint(.indigo))
                                                 }
                                         } else {
                                                 NavigationLink(destination: EnablingKeyboardView()) {
