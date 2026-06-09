@@ -4,8 +4,6 @@ import CoreIME
 
 struct DetailInspectingView: View {
         @EnvironmentObject private var context: KeyboardViewController
-        @State private var isTextTransformed: Bool = false
-        @State private var isSingleCharacter: Bool = false
         @State private var inputFrequency: Int64 = 0
         @State private var latestDate: String? = nil
         var body: some View {
@@ -28,44 +26,16 @@ struct DetailInspectingView: View {
                                         case .emoji, .symbol:
                                                 SymbolCandidateDetailView(candidate: candidate)
                                         case .cantonese:
-                                                VStack(alignment: .leading, spacing: 12) {
-                                                        HStack {
-                                                                HStack(alignment: .bottom) {
-                                                                        RubyStackRow(text: candidate.lexicon.text, romanization: candidate.lexicon.romanization)
-                                                                        if isTextTransformed {
-                                                                                Text(verbatim: candidate.text).font(.title3).shallow()
-                                                                        }
-                                                                }
-                                                                Spacer()
-                                                                Speaker(candidate.lexicon.romanization)
+                                                ZStack {
+                                                        if #available(iOS 26.0, *) {
+                                                                Color.clear.glassEffect(.clear, in: RoundedRectangle(cornerRadius: 20))
+                                                        } else {
+                                                                RoundedRectangle(cornerRadius: 20).fill(Material.thin)
                                                         }
-                                                        if isSingleCharacter, let unicode = candidate.lexicon.text.first?.codePointsText {
-                                                                HStack(spacing: 2) {
-                                                                        Text(verbatim: "Unicode")
-                                                                        Text.separator
-                                                                        Text(verbatim: unicode).monospaced().textSelection(.enabled)
-                                                                }
-                                                                .font(.footnote)
-                                                        }
-                                                        HStack(spacing: 2) {
-                                                                Text("DetailInspectingView.Summary.InputCount")
-                                                                Text.separator
-                                                                Text(verbatim: inputFrequency.description).monospacedDigit()
-                                                        }
-                                                        .font(.footnote)
-                                                        if let latestDate {
-                                                                HStack(spacing: 2) {
-                                                                        Text("DetailInspectingView.Summary.Latest")
-                                                                        Text.separator
-                                                                        Text(verbatim: latestDate).monospacedDigit()
-                                                                }
-                                                                .font(.footnote)
-                                                        }
+                                                        CandidateDetailSummaryView(candidate: candidate, inputFrequency: inputFrequency, latestDate: latestDate).padding(10)
                                                 }
-                                                .padding(8)
-                                                .background(Material.thin, in: RoundedRectangle(cornerRadius: 20))
                                                 .padding(.horizontal, 10)
-                                                .padding(.top, 8)
+                                                .padding(.top, 10)
                                                 if inputFrequency > 0 {
                                                         Menu {
                                                                 Button(role: .destructive) {
@@ -105,8 +75,6 @@ struct DetailInspectingView: View {
                         }
                 }
                 .task {
-                        isTextTransformed = (candidate.text != candidate.lexicon.text)
-                        isSingleCharacter = (candidate.text.count == 1)
                         let inspected = InputMemory.inspect(lexicon: candidate.lexicon)
                         if inspected.frequency > 0 {
                                 inputFrequency = inspected.frequency
@@ -122,6 +90,50 @@ struct DetailInspectingView: View {
                 dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
                 let formattedDate = dateFormatter.string(from: date)
                 return formattedDate
+        }
+}
+
+private struct CandidateDetailSummaryView: View {
+        let candidate: Candidate
+        let inputFrequency: Int64
+        let latestDate: String?
+        var body: some View {
+                let isTextTransformed = (candidate.text != candidate.lexicon.text)
+                let isSingleCharacter = (candidate.text.count == 1)
+                VStack(alignment: .leading, spacing: 12) {
+                        HStack {
+                                HStack(alignment: .bottom) {
+                                        RubyStackRow(text: candidate.lexicon.text, romanization: candidate.lexicon.romanization)
+                                        if isTextTransformed {
+                                                Text(verbatim: candidate.text).font(.title3).shallow()
+                                        }
+                                }
+                                Spacer()
+                                Speaker(candidate.lexicon.romanization)
+                        }
+                        if isSingleCharacter, let unicode = candidate.lexicon.text.first?.codePointsText {
+                                HStack(spacing: 2) {
+                                        Text(verbatim: "Unicode")
+                                        Text.separator
+                                        Text(verbatim: unicode).monospaced().textSelection(.enabled)
+                                }
+                                .font(.footnote)
+                        }
+                        HStack(spacing: 2) {
+                                Text("DetailInspectingView.Summary.InputCount")
+                                Text.separator
+                                Text(verbatim: inputFrequency.description).monospacedDigit()
+                        }
+                        .font(.footnote)
+                        if let latestDate {
+                                HStack(spacing: 2) {
+                                        Text("DetailInspectingView.Summary.Latest")
+                                        Text.separator
+                                        Text(verbatim: latestDate).monospacedDigit()
+                                }
+                                .font(.footnote)
+                        }
+                }
         }
 }
 
@@ -167,21 +179,27 @@ private struct CharacterSyllableView: View {
 private struct SymbolCandidateDetailView: View {
         let candidate: Candidate
         var body: some View {
-                VStack(alignment: .leading, spacing: 16) {
-                        HStack {
-                                Text(verbatim: candidate.text).font(.largeTitle)
-                                Spacer()
+                ZStack {
+                        if #available(iOS 26.0, *) {
+                                Color.clear.glassEffect(.clear, in: RoundedRectangle(cornerRadius: 20))
+                        } else {
+                                RoundedRectangle(cornerRadius: 20).fill(Material.thin)
                         }
-                        HStack(spacing: 2) {
-                                Text(verbatim: "Unicode")
-                                Text.separator
-                                Text(verbatim: candidate.text.map(\.codePointsText).joined(separator: ", ")).monospaced().textSelection(.enabled)
+                        VStack(alignment: .leading, spacing: 16) {
+                                HStack {
+                                        Text(verbatim: candidate.text).font(.largeTitle)
+                                        Spacer()
+                                }
+                                HStack(spacing: 2) {
+                                        Text(verbatim: "Unicode")
+                                        Text.separator
+                                        Text(verbatim: candidate.text.map(\.codePointsText).joined(separator: ", ")).monospaced().textSelection(.enabled)
+                                }
+                                .font(.footnote)
                         }
-                        .font(.footnote)
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 16)
                 }
-                .padding(.horizontal, 12)
-                .padding(.vertical, 16)
-                .background(Material.regular, in: RoundedRectangle(cornerRadius: 20))
                 .padding(10)
         }
 }

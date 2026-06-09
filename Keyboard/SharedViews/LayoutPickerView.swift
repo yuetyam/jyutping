@@ -37,10 +37,10 @@ struct LayoutPickerView: View {
                                                                 }
                                                                 .opacity(isRunningOnPhone ? 1 : 0)
                                                         }
-                                                        .padding(8)
+                                                        .padding(10)
                                                 }
-                                                .padding(.vertical, 8)
                                                 .padding(.horizontal, 12)
+                                                .padding(.vertical, 10)
                                         }
                                 }
                         }

@@ -3,13 +3,14 @@ import CommonExtensions
 
 struct Speaker: View {
 
-        private let text: String?
-        private let action: (() -> Void)?
+        @Environment(\.colorScheme) private var colorScheme
 
         init(_ text: String? = nil, action: (() -> Void)? = nil) {
                 self.text = text
                 self.action = action
         }
+        private let text: String?
+        private let action: (() -> Void)?
 
         private let length: CGFloat = 32
         private let speakerLength: CGFloat = 20
@@ -22,7 +23,7 @@ struct Speaker: View {
                 Button(action: handleTap) {
                         ZStack {
                                 if #available(iOSApplicationExtension 17.0, *) {
-                                        Circle().fill(Material.ultraThick)
+                                        Circle().fill(colorScheme.isDark ? Color.black : Color.white)
                                         Image.speaking
                                                 .resizable()
                                                 .scaledToFit()
@@ -32,7 +33,7 @@ struct Speaker: View {
                                                 .padding(.trailing, speakingTrailingPadding)
                                                 .opacity(isSpeaking ? 1 : 0)
                                 } else {
-                                        Circle().fill(Material.ultraThick)
+                                        Circle().fill(colorScheme.isDark ? Color.black : Color.white)
                                                 .opacity(isSpeaking ? 0 : 1)
                                         Image.speaking
                                                 .resizable()
