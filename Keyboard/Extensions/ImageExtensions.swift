@@ -22,6 +22,9 @@ extension Image {
         static let shiftUppercased: Image = Image(systemName: "shift.fill")
         static let shiftCapsLocked: Image = Image(systemName: "capslock.fill")
 
+        static let speaker: Image = Image(systemName: "speaker.wave.2")
+        static let speaking: Image = Image(systemName: "speaker.wave.3.fill")
+
         /// Emoji Smiley Face
         @MainActor static let smiley: Image = Image(uiImage: UIImage.emojiSmiley.cropped()?.withRenderingMode(.alwaysTemplate) ?? UIImage.emojiSmiley)
 }

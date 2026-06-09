@@ -37,7 +37,7 @@ struct DetailInspectingView: View {
                                                                         }
                                                                 }
                                                                 Spacer()
-                                                                // TODO: Speaker
+                                                                Speaker(candidate.lexicon.romanization)
                                                         }
                                                         if isSingleCharacter, let unicode = candidate.lexicon.text.first?.codePointsText {
                                                                 HStack(spacing: 2) {
@@ -63,7 +63,7 @@ struct DetailInspectingView: View {
                                                         }
                                                 }
                                                 .padding(8)
-                                                .background(Material.regular, in: RoundedRectangle(cornerRadius: 20))
+                                                .background(Material.thin, in: RoundedRectangle(cornerRadius: 20))
                                                 .padding(.horizontal, 10)
                                                 .padding(.top, 8)
                                                 if inputFrequency > 0 {

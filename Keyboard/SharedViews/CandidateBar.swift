@@ -19,8 +19,9 @@ struct CandidateBar: View {
                                 context.updateKeyboardForm(to: .candidateBoard)
                         } label: {
                                 ZStack {
+                                        Color.interactiveClear
                                         ZStack(alignment: .leading) {
-                                                Color.interactiveClear
+                                                Color.clear
                                                 Rectangle()
                                                         .fill(Color.primary.opacity(0.3))
                                                         .frame(width: 1, height: 24)
@@ -30,10 +31,10 @@ struct CandidateBar: View {
                                                 .scaledToFit()
                                                 .frame(width: 20, height: 20)
                                 }
+                                .frame(width: PresetConstant.collapseWidth)
+                                .frame(maxHeight: .infinity)
                         }
                         .buttonStyle(.plain)
-                        .frame(width: PresetConstant.collapseWidth)
-                        .frame(maxHeight: .infinity)
                 }
                 .frame(height: context.topBarHeight)
         }

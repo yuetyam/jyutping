@@ -1126,7 +1126,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 UserDefaults.standard.set(value, forKey: OptionsKey.LatestInputMethodMode)
         }
 
-        @Published private(set) var sequencedKeyboardForms: [KeyboardForm] = []
+        private lazy var sequencedKeyboardForms: [KeyboardForm] = []
         @Published private(set) var keyboardForm: KeyboardForm = .placeholder
         func updateKeyboardForm(to form: KeyboardForm) {
                 let shouldStayBuffering: Bool = inputMethodMode.isCantonese && form.isBufferable

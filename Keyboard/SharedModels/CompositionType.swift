@@ -1,7 +1,7 @@
 /// InputMethodType
 enum CompositionType: Int {
 
-        /// Jyutping and reverse lookup using character components. 粵拼以及兩分拆字反查粵拼
+        /// Jyutping, and reverse lookup using character components. 粵拼以及兩分拆字反查粵拼
         case primary
 
         /// Reverse lookup using Mandarin Pinyin. 普通話拼音反查粵拼
