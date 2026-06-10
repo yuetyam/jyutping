@@ -405,7 +405,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let selected = selectedSyllables.map(\.text)
                 let selectedCount: Int = selectedSyllables.count
                 candidates = nineKeyCachedCandidates.filter({ item -> Bool in
-                        let syllables = item.lexicon.romanization.removedTones().split(separator: Character.space).map({ String($0) })
+                        let syllables = item.lexicon.romanization.strippedTones().split(separator: Character.space).map({ String($0) })
                         return (syllables.count < selectedCount) ? selected.starts(with: syllables) : syllables.starts(with: selected)
                 })
                 let selectedLength = selected.reduce(0, { $0 + $1.count })
@@ -414,7 +414,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         return
                 }
                 let leadingLength = selectedLength + selectedCount
-                let newSyllables = candidates.compactMap({ $0.lexicon.romanization.removedTones().dropFirst(leadingLength).split(separator: Character.space).first })
+                let newSyllables = candidates.compactMap({ $0.lexicon.romanization.strippedTones().dropFirst(leadingLength).split(separator: Character.space).first })
                         .distinct()
                         .map({ SidebarSyllable(text: String($0), isSelected: false) })
                 sidebarSyllables = selectedSyllables + newSyllables
@@ -443,7 +443,8 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 textDocumentProxy.insertText(text)
                                 return
                         }
-                        let shouldAppendText: Bool = text.isLetters || (inputStage.isBuffering && (text.first?.isCantoneseToneDigit ?? false))
+                        let isLetters: Bool = text.first?.isBasicLatinLetter ?? false
+                        let shouldAppendText: Bool = isLetters || (inputStage.isBuffering && (text.first?.isCantoneseToneDigit ?? false))
                         if shouldAppendText {
                                 appendBufferText(text)
                         } else if inputStage.isBuffering {

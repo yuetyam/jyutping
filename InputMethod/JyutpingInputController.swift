@@ -976,7 +976,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                         aftercareSelection(selectedItem)
                                 } else {
                                         let keyText: String = numberKey.text
-                                        let inputText: String = Options.characterForm.isHalfWidth ? keyText : keyText.fullWidth()
+                                        let inputText: String = Options.characterForm.isHalfWidth ? keyText : keyText.toFullWidth()
                                         insert(inputText)
                                 }
                         case .transparent:
@@ -1363,7 +1363,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 placeholderText.flatMap(insert(_:))
                 guard bufferEvents.isNotEmpty else { return }
                 let joinedTexts: String = joinedBufferTexts()
-                let text: String = Options.characterForm.isHalfWidth ? joinedTexts : joinedTexts.fullWidth()
+                let text: String = Options.characterForm.isHalfWidth ? joinedTexts : joinedTexts.toFullWidth()
                 insert(text)
         }
 

@@ -26,8 +26,7 @@ extension Character {
         /// Unicode code point as decimal code
         public var decimalCode: Int? {
                 guard let scalar = unicodeScalars.first else { return nil }
-                let number = Int(scalar.value)
-                return number
+                return Int(scalar.value)
         }
 
         /// Create a Character from the given Unicode code point (decimal)

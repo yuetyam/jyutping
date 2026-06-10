@@ -42,7 +42,7 @@ extension Engine {
         }
         private static func modify(_ item: PinyinLexicon, text: String, textLength: Int) -> PinyinLexicon {
                 guard item.inputCount != textLength else { return item }
-                guard item.pinyin.removedSpaces().hasPrefix(text).negative else {
+                guard item.pinyin.strippedSpaces().hasPrefix(text).negative else {
                         return PinyinLexicon(text: item.text, pinyin: item.pinyin, input: text, mark: text, order: item.order)
                 }
                 let syllables = item.pinyin.split(separator: Character.space)
@@ -91,7 +91,7 @@ extension Engine {
                         let leadingText = leadingKeys.map(\.text).joined()
                         return pinyinAnchorsMatch(keys: leadingKeys, input: leadingText, limit: 300, statement: anchorsStatement)
                 }).compactMap({ item -> PinyinLexicon? in
-                        guard item.pinyin.removedSpaces().hasPrefix(text).negative else {
+                        guard item.pinyin.strippedSpaces().hasPrefix(text).negative else {
                                 return PinyinLexicon(text: item.text, pinyin: item.pinyin, input: text, mark: text, order: item.order)
                         }
                         let syllables = item.pinyin.split(separator: Character.space)
@@ -275,7 +275,7 @@ extension Engine {
                         let order: Int = Int(sqlite3_column_int64(statement, 0))
                         let word: String = String(cString: sqlite3_column_text(statement, 1))
                         let romanization: String = String(cString: sqlite3_column_text(statement, 2))
-                        let instance = PinyinLexicon(text: word, pinyin: romanization, input: romanization.removedSpaces(), mark: romanization, order: order)
+                        let instance = PinyinLexicon(text: word, pinyin: romanization, input: romanization.strippedSpaces(), mark: romanization, order: order)
                         instances.append(instance)
                 }
                 return instances

@@ -2,7 +2,7 @@ import Foundation
 import RegexBuilder
 
 extension StringProtocol {
-        /// Produces the same value as Kotlin's hashCode()
+        /// Produces the same value as Kotlin / Java `hashCode()`
         public func hashCode() -> Int32 {
                 return utf16.reduce(Int32(0)) { $0 &* 31 &+ Int32($1) }
         }
@@ -72,23 +72,73 @@ extension String {
         public static let hashtag: String = numberSign
 }
 
-extension StringTransform {
+extension String {
+
+        /// Filter out Cantonese tone digits (1-6)
+        /// - Returns: A new String with Cantonese tone digits (1-6) excluded
+        public func strippedTones() -> String {
+                return filter(\.isCantoneseToneDigit.negative)
+        }
+
+        /// Filter out spaces
+        /// - Returns: A new String with spaces excluded
+        public func strippedSpaces() -> String {
+                return filter(\.isSpace.negative)
+        }
+
+        /// Filter out all other elements but Cantonese tone digits (1-6)
+        /// - Returns: A subsequence that only containing Cantonese tone digits (1-6)
+        public func toneDigitOnly() -> String {
+                return filter(\.isCantoneseToneDigit)
+        }
+
+        /// Filter out all other elements but basic latin letters (a-z and A-Z)
+        /// - Returns: A subsequence that only containing basic latin letters (a-z and A-Z)
+        public func latinLetterOnly() -> String {
+                return filter(\.isBasicLatinLetter)
+        }
+}
+
+private extension StringTransform {
         /// A constant containing the transformation of a string from simplified Chinese characters to traditional forms.
-        public static let simplifiedToTraditional: StringTransform = StringTransform("Simplified-Traditional")
+        static let simplifiedToTraditional: StringTransform = StringTransform("Simplified-Traditional")
 }
 
 extension StringProtocol {
 
         /// Convert simplified CJKV characters to traditional
         /// - Returns: Traditional CJKV characters
-        public func convertedS2T() -> String {
+        public func toTraditional() -> String {
                 return applyingTransform(.simplifiedToTraditional, reverse: false) ?? (self as? String) ?? String(self)
         }
 
         /// Convert traditional CJKV characters to simplified
         /// - Returns: Simplified CJKV characters
-        public func convertedT2S() -> String {
+        public func toSimplified() -> String {
                 return applyingTransform(.simplifiedToTraditional, reverse: true) ?? (self as? String) ?? String(self)
+        }
+
+        /// Transform CJKV characters to Mandarin Pinyin
+        /// - Parameter withToneDiacritics: True for the tone-marked Pinyin form, false for the pure-ASCII Pinyin form.
+        /// - Returns: Mandarin Pinyin syllables
+        public func toPinyin(withToneDiacritics: Bool = true) -> String {
+                if withToneDiacritics {
+                        return applyingTransform(.mandarinToLatin, reverse: false) ?? (self as? String) ?? String(self)
+                } else {
+                        return applyingTransform(.mandarinToLatin, reverse: false)?.applyingTransform(.stripDiacritics, reverse: false) ?? (self as? String) ?? String(self)
+                }
+        }
+
+        /// Convert full-width CJKV characters to half-width forms.
+        /// - Returns: Full-width form characters
+        public func toFullWidth() -> String {
+                return applyingTransform(.fullwidthToHalfwidth, reverse: true) ?? (self as? String) ?? String(self)
+        }
+
+        /// Convert half-width CJKV characters to full-width forms.
+        /// - Returns: Half-width form characters
+        public func toHalfWidth() -> String {
+                return applyingTransform(.fullwidthToHalfwidth, reverse: false) ?? (self as? String) ?? String(self)
         }
 
         /// Returns a new String made by removing `.whitespacesAndNewlines` & `.controlCharacters` from both ends of the String.
@@ -118,47 +168,4 @@ extension String {
                 guard let regex = try? Regex(pattern) else { return 0 }
                 return matches(of: regex).count
         }
-}
-
-extension String {
-
-        /// CJKV && !CJKV
-        public var textBlocks: [TextUnit] {
-                var blocks: [TextUnit] = []
-                var ideographicCache: String = String.empty
-                var otherCache: String = String.empty
-                var wasLastIdeographic: Bool = true
-                for character in self {
-                        if character.isIdeographic {
-                                if wasLastIdeographic.negative && otherCache.isNotEmpty {
-                                        let newElement: TextUnit = TextUnit(text: otherCache, isIdeographic: false)
-                                        blocks.append(newElement)
-                                        otherCache = String.empty
-                                }
-                                ideographicCache.append(character)
-                                wasLastIdeographic = true
-                        } else {
-                                if wasLastIdeographic && ideographicCache.isNotEmpty {
-                                        let newElement: TextUnit = TextUnit(text: ideographicCache, isIdeographic: true)
-                                        blocks.append(newElement)
-                                        ideographicCache = String.empty
-                                }
-                                otherCache.append(character)
-                                wasLastIdeographic = false
-                        }
-                }
-                if ideographicCache.isNotEmpty {
-                        let tailElement: TextUnit = TextUnit(text: ideographicCache, isIdeographic: true)
-                        blocks.append(tailElement)
-                } else if otherCache.isNotEmpty {
-                        let tailElement: TextUnit = TextUnit(text: otherCache, isIdeographic: false)
-                        blocks.append(tailElement)
-                }
-                return blocks
-        }
-}
-
-public struct TextUnit {
-        public let text: String
-        public let isIdeographic: Bool
 }

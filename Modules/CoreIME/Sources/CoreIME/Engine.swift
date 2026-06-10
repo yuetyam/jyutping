@@ -114,11 +114,11 @@ extension Engine {
                         let inputText = keys.map(\.text).joined()
                         let toneInput = keys.filter(\.isSyllableLetter.negative).map(\.text).joined()
                         let text = inputText.toneConverted()
-                        let textTones = text.tones
+                        let textTones = text.toneDigitOnly()
                         let qualified: [Lexicon] = lexicons.compactMap({ item -> Lexicon? in
-                                let syllableText = item.romanization.removedSpaces()
+                                let syllableText = item.romanization.strippedSpaces()
                                 guard syllableText.hasPrefix(text).negative else { return item.replacedInput(with: inputText) }
-                                let tones = syllableText.tones
+                                let tones = syllableText.toneDigitOnly()
                                 switch (textTones.count, tones.count) {
                                 case (1, 1):
                                         guard textTones == tones else { return nil }
@@ -188,7 +188,7 @@ extension Engine {
                         let text = keys.map(\.text).joined()
                         let textParts = text.split(separator: Character.apostrophe)
                         let qualified: [Lexicon] = lexicons.compactMap({ item -> Lexicon? in
-                                let syllables = item.romanization.removedTones().split(separator: Character.space)
+                                let syllables = item.romanization.strippedTones().split(separator: Character.space)
                                 guard syllables != textParts else { return item.replacedInput(with: text) }
                                 switch inputSeparatorCount {
                                 case 1 where isTrailingSeparator:
@@ -305,7 +305,7 @@ extension Engine {
                 guard inputLength > 1 else { return item }
                 guard item.inputCount != inputLength else { return item }
                 lazy var converted: Lexicon = Lexicon(text: item.text, romanization: item.romanization, input: text, mark: text, number: item.number)
-                guard item.romanization.removedSpacesTones().hasPrefix(text).negative else { return converted }
+                guard item.romanization.latinLetterOnly().hasPrefix(text).negative else { return converted }
                 guard let lastSyllable = item.romanization.split(separator: Character.space).last?.filter(\.isCantoneseToneDigit.negative) else { return item }
                 let tail = keys.dropFirst(item.inputCount - 1)
                 guard tail.count <= 6 else { return item }
@@ -344,7 +344,7 @@ extension Engine {
                         let tailAsAnchorText = tail.compactMap({ $0.isYLetterY ? VirtualInputKey.letterJ.text.first : $0.text.first })
                         let conjoinedMatched = anchorsMatch(keys: conjoined, limit: prefixesLimit, statement: anchorsStatement)
                                 .compactMap({ item -> Lexicon? in
-                                        let toneFreeRomanization = item.romanization.removedTones()
+                                        let toneFreeRomanization = item.romanization.strippedTones()
                                         guard toneFreeRomanization.hasPrefix(schemeSyllableText) else { return nil }
                                         let suffixAnchorText = toneFreeRomanization.dropFirst(schemeSyllableText.count).split(separator: Character.space).compactMap(\.first)
                                         guard suffixAnchorText == tailAsAnchorText else { return nil }
@@ -354,7 +354,7 @@ extension Engine {
                         let syllables: String = schemeSyllableText + String.space + transformedTailText
                         let anchorsMatched = anchorsMatch(keys: anchors, limit: prefixesLimit, statement: anchorsStatement)
                                 .compactMap({ item -> Lexicon? in
-                                        guard item.romanization.removedTones().hasPrefix(syllables) else { return nil }
+                                        guard item.romanization.strippedTones().hasPrefix(syllables) else { return nil }
                                         return Lexicon(text: item.text, romanization: item.romanization, input: text, mark: mark, number: item.number)
                                 })
                         return conjoinedMatched + anchorsMatched
@@ -368,7 +368,7 @@ extension Engine {
                         let tail = keys.dropFirst(item.inputCount - 1)
                         guard tail.count <= 6 else { return nil }
                         lazy var converted: Lexicon = Lexicon(text: item.text, romanization: item.romanization, input: text, mark: text, number: item.number)
-                        guard item.romanization.removedSpacesTones().hasPrefix(text).negative else { return converted }
+                        guard item.romanization.latinLetterOnly().hasPrefix(text).negative else { return converted }
                         guard let lastSyllable = item.romanization.split(separator: Character.space).last?.filter(\.isCantoneseToneDigit.negative) else { return nil }
                         if let tailSyllable = Segmenter.syllableText(of: tail) {
                                 return lastSyllable == tailSyllable ? converted : nil
@@ -501,7 +501,7 @@ private extension Engine {
                         let number: Int = Int(sqlite3_column_int64(statement, 0))
                         let word: String = String(cString: sqlite3_column_text(statement, 1))
                         let romanization: String = String(cString: sqlite3_column_text(statement, 2))
-                        let mark: String = mark ?? romanization.removedTones()
+                        let mark: String = mark ?? romanization.strippedTones()
                         let instance = Lexicon(text: word, romanization: romanization, input: input, mark: mark, number: number)
                         items.append(instance)
                 }
@@ -517,7 +517,7 @@ private extension Engine {
                         let number: Int = Int(sqlite3_column_int64(statement, 0))
                         let word: String = String(cString: sqlite3_column_text(statement, 1))
                         let romanization: String = String(cString: sqlite3_column_text(statement, 2))
-                        let mark: String = mark ?? romanization.removedTones()
+                        let mark: String = mark ?? romanization.strippedTones()
                         let instance = Lexicon(text: word, romanization: romanization, input: input, mark: mark, number: number)
                         items.append(instance)
                 }
@@ -607,8 +607,8 @@ extension Engine {
                         let number: Int = Int(sqlite3_column_int64(statement, 0))
                         let word: String = String(cString: sqlite3_column_text(statement, 1))
                         let romanization: String = String(cString: sqlite3_column_text(statement, 2))
-                        let mark: String = romanization.removedTones()
-                        let instance = Lexicon(text: word, romanization: romanization, input: mark.removedSpaces(), mark: mark, number: number)
+                        let mark: String = romanization.strippedTones()
+                        let instance = Lexicon(text: word, romanization: romanization, input: mark.strippedSpaces(), mark: mark, number: number)
                         items.append(instance)
                 }
                 return items

@@ -48,17 +48,32 @@ struct CommonExtensionsTests {
                 #expect(String.hashtag == "\u{23}")
         }
 
+        @Test("String strippedTones removes Cantonese tone digits")
+        func stringStrippedTones() {
+                #expect("nei5 hou2".strippedTones() == "nei hou")
+        }
+
+        @Test("String strippedSpaces removes spaces")
+        func stringStrippedSpaces() {
+                #expect("nei5 hou2".strippedSpaces() == "nei5hou2")
+        }
+
+        @Test("String latinLetterOnly removes spaces and Cantonese tone digits")
+        func stringLatinLetterOnly() {
+                #expect("nei5 hou2".latinLetterOnly() == "neihou")
+        }
+
         @Test("Convert simplified to traditional Chinese")
         func convertedS2T() {
                 let simplified = "测试"
-                let traditional = simplified.convertedS2T()
+                let traditional = simplified.toTraditional()
                 #expect(traditional == "測試")
         }
 
         @Test("Convert traditional to simplified Chinese")
         func convertedT2S() {
                 let traditional = "測試"
-                let simplified = traditional.convertedT2S()
+                let simplified = traditional.toSimplified()
                 #expect(simplified == "测试")
         }
 
@@ -88,45 +103,6 @@ struct CommonExtensionsTests {
                 #expect("test123test456".occurrenceCount(pattern: "[0-9]+") == 2)
         }
 
-        @Test("String textBlocks with mixed content")
-        func textBlocksMixed() {
-                let mixed = "你好world測試123"
-                let blocks = mixed.textBlocks
-                #expect(blocks.count == 4)
-                #expect(blocks[0].text == "你好")
-                #expect(blocks[0].isIdeographic == true)
-                #expect(blocks[1].text == "world")
-                #expect(blocks[1].isIdeographic == false)
-                #expect(blocks[2].text == "測試")
-                #expect(blocks[2].isIdeographic == true)
-                #expect(blocks[3].text == "123")
-                #expect(blocks[3].isIdeographic == false)
-        }
-
-        @Test("String textBlocks with only ideographic")
-        func textBlocksOnlyIdeographic() {
-                let text = "你好"
-                let blocks = text.textBlocks
-                #expect(blocks.count == 1)
-                #expect(blocks[0].text == "你好")
-                #expect(blocks[0].isIdeographic == true)
-        }
-
-        @Test("String textBlocks with only non-ideographic")
-        func textBlocksOnlyNonIdeographic() {
-                let text = "hello123"
-                let blocks = text.textBlocks
-                #expect(blocks.count == 1)
-                #expect(blocks[0].text == "hello123")
-                #expect(blocks[0].isIdeographic == false)
-        }
-
-        @Test("String textBlocks empty")
-        func textBlocksEmpty() {
-                let text = ""
-                let blocks = text.textBlocks
-                #expect(blocks.count == 0)
-        }
 
         // MARK: - CharacterExtensions
 

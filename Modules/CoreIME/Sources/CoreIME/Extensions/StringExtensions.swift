@@ -1,32 +1,6 @@
 import Foundation
 import CommonExtensions
 
-extension String {
-
-        /// A subsequence that only contains tones (1-6)
-        var tones: String {
-                return filter(\.isCantoneseToneDigit)
-        }
-
-        /// Remove all tone digits (1-6)
-        /// - Returns: A subsequence that leaves off tones.
-        func removedTones() -> String {
-                return filter(\.isCantoneseToneDigit.negative)
-        }
-
-        /// Remove all spaces
-        /// - Returns: A subsequence that leaves off spaces.
-        func removedSpaces() -> String {
-                return filter(\.isSpace.negative)
-        }
-
-        /// Remove all spaces and tone digits
-        /// - Returns: A subsequence that leaves off spaces and tone digits.
-        func removedSpacesTones() -> String {
-                return filter({ $0.isSpace.negative && $0.isCantoneseToneDigit.negative })
-        }
-}
-
 private extension Character {
         static let letterV: Character = "v"
         static let letterX: Character = "x"

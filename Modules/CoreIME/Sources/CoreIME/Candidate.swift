@@ -66,7 +66,7 @@ public struct Candidate: Hashable, Sendable {
         // Equatable
         public static func == (lhs: Candidate, rhs: Candidate) -> Bool {
                 if lhs.isCantonese && rhs.isCantonese && (lhs.comment == nil) {
-                        return lhs.text == rhs.text && lhs.lexicon.romanization.removedTones() == rhs.lexicon.romanization.removedTones()
+                        return lhs.text == rhs.text && lhs.lexicon.romanization.strippedTones() == rhs.lexicon.romanization.strippedTones()
                 } else {
                         return lhs.text == rhs.text && lhs.comment == rhs.comment
                 }
@@ -76,7 +76,7 @@ public struct Candidate: Hashable, Sendable {
         public func hash(into hasher: inout Hasher) {
                 if isCantonese && (comment == nil) {
                         hasher.combine(text)
-                        hasher.combine(lexicon.romanization.removedTones())
+                        hasher.combine(lexicon.romanization.strippedTones())
                 } else {
                         hasher.combine(text)
                         hasher.combine(comment)

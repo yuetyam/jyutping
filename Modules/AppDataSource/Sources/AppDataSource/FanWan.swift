@@ -81,7 +81,7 @@ public struct FanWan {
                 if let fetched = DataMaster.matchFanWan(for: character) {
                         return process(lexicon: fetched)
                 } else {
-                        guard let traditional = String(character).convertedS2T().first else { return nil }
+                        guard let traditional = String(character).toTraditional().first else { return nil }
                         guard traditional != character else { return nil }
                         guard let fetched = DataMaster.matchFanWan(for: traditional) else { return nil }
                         return process(lexicon: fetched)

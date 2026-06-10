@@ -760,7 +760,7 @@ extension LabelSet {
                         return shouldBeZero ? "0" : "\(index + 1)"
                 case .fullWidthArabic:
                         let numberText: String = "\(index + 1)"
-                        return shouldBeZero ? "０" : numberText.fullWidth()
+                        return shouldBeZero ? "０" : numberText.toFullWidth()
                 case .chinese:
                         return shouldBeZero ? "〇" : (chineseLabels.fetch(index) ?? fallbackText)
                 case .capitalizedChinese:

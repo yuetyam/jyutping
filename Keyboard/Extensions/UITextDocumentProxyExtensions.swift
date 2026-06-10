@@ -74,7 +74,7 @@ extension UITextDocumentProxy {
                 let text: String = head + tail
                 guard text.isNotEmpty else { return }
                 let mutilated: String = Converter.convert(text, to: .mutilated)
-                let converted: String = (mutilated == text) ? text.convertedS2T() : mutilated
+                let converted: String = (mutilated == text) ? text.toTraditional() : mutilated
                 insertText(converted)
         }
 

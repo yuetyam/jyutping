@@ -32,7 +32,7 @@ public struct YingWaaFanWan: Hashable {
                 guard let character = text.first else { return [] }
                 let fetched = fetch(for: character)
                 guard fetched.isEmpty else { return fetched }
-                let traditionalCharacter: Character = text.convertedS2T().first ?? character
+                let traditionalCharacter: Character = text.toTraditional().first ?? character
                 return fetch(for: traditionalCharacter)
         }
         private static func fetch(for character: Character) -> [YingWaaFanWan] {

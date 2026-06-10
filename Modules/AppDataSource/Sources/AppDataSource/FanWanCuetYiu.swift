@@ -90,7 +90,7 @@ public struct FanWanCuetYiu: Hashable {
                 guard let character = text.first else { return [] }
                 let match = DataMaster.matchFanWanCuetYiu(for: character).distinct()
                 guard match.isEmpty else { return match }
-                let traditionalCharacter: Character = text.convertedS2T().first ?? character
+                let traditionalCharacter: Character = text.toTraditional().first ?? character
                 return DataMaster.matchFanWanCuetYiu(for: traditionalCharacter).distinct()
         }
 }

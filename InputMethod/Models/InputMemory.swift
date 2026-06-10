@@ -249,11 +249,11 @@ struct InputMemory {
                         let candidates = search(syllableKeys, segmentation: segmentation)
                         let inputText = keys.map(\.text).joined()
                         let text = inputText.toneConverted()
-                        let textTones = text.tones
+                        let textTones = text.toneDigitOnly()
                         let qualified: [Lexicon] = candidates.compactMap({ item -> Lexicon? in
                                 let syllableText = item.romanization.filter(\.isSpace.negative)
                                 guard syllableText != text else { return item.replacedInput(with: inputText) }
-                                let tones = syllableText.tones
+                                let tones = syllableText.toneDigitOnly()
                                 switch (textTones.count, tones.count) {
                                 case (1, 1):
                                         guard text.count == (item.inputCount + 1) else { return nil }
@@ -293,7 +293,7 @@ struct InputMemory {
                         let text = keys.map(\.text).joined()
                         let textParts = text.split(separator: Character.apostrophe)
                         let qualified: [Lexicon] = candidates.compactMap({ item -> Lexicon? in
-                                let syllables = item.romanization.removedTones().split(separator: Character.space)
+                                let syllables = item.romanization.strippedTones().split(separator: Character.space)
                                 guard syllables != textParts else { return item.replacedInput(with: text) }
                                 switch inputSeparatorCount {
                                 case 1 where isTrailingSeparator:
@@ -376,7 +376,7 @@ struct InputMemory {
                         let tailAsAnchorText = tail.compactMap({ $0.isYLetterY ? VirtualInputKey.letterJ.text.first : $0.text.first })
                         let conjoinedMatched = shortcutMatch(text: conjoinedText, input: conjoinedText, statement: shortcutStatement)
                                 .compactMap({ item -> InternalLexicon? in
-                                        let toneFreeRomanization = item.romanization.removedTones()
+                                        let toneFreeRomanization = item.romanization.strippedTones()
                                         guard toneFreeRomanization.hasPrefix(schemeSyllableText) else { return nil }
                                         let suffixAnchorText = toneFreeRomanization.dropFirst(schemeSyllableText.count).split(separator: Character.space).compactMap(\.first)
                                         guard suffixAnchorText == tailAsAnchorText else { return nil }
@@ -387,7 +387,7 @@ struct InputMemory {
                         let anchorsText: String = schemeAnchors.map(\.text).joined() + (tail.first?.text ?? String.empty)
                         let anchorsMatched = shortcutMatch(text: anchorsText, input: anchorsText, statement: shortcutStatement)
                                 .compactMap({ item -> InternalLexicon? in
-                                        guard item.romanization.removedTones().hasPrefix(syllableText) else { return nil }
+                                        guard item.romanization.strippedTones().hasPrefix(syllableText) else { return nil }
                                         return InternalLexicon(word: item.word, romanization: item.romanization, frequency: item.frequency, latest: item.latest, input: text, mark: mark)
                                 })
                         return conjoinedMatched + anchorsMatched
@@ -402,7 +402,7 @@ struct InputMemory {
                                 let tail = keys.dropFirst(item.inputCount - 1)
                                 guard tail.count <= 6 else { return nil }
                                 lazy var converted: InternalLexicon = InternalLexicon(word: item.word, romanization: item.romanization, frequency: item.frequency, latest: item.latest, input: text, mark: text)
-                                guard item.romanization.removedSpacesTones().hasPrefix(text).negative else { return converted }
+                                guard item.romanization.latinLetterOnly().hasPrefix(text).negative else { return converted }
                                 guard let lastSyllable = item.romanization.split(separator: Character.space).last?.filter(\.isCantoneseToneDigit.negative) else { return nil }
                                 if let tailSyllable = Segmenter.syllableText(of: tail) {
                                         return lastSyllable == tailSyllable ? converted : nil
@@ -468,7 +468,7 @@ struct InputMemory {
                         let frequency = sqlite3_column_int64(statement, 2)
                         let latest = sqlite3_column_int64(statement, 3)
                         let romanization: String = String(cString: romanizationText)
-                        let mark: String = mark ?? romanization.removedTones()
+                        let mark: String = mark ?? romanization.strippedTones()
                         let instance = InternalLexicon(word: String(cString: word), romanization: romanization, frequency: frequency, latest: latest, input: input, mark: mark)
                         items.append(instance)
                 }
@@ -486,7 +486,7 @@ struct InputMemory {
                         let frequency = sqlite3_column_int64(statement, 2)
                         let latest = sqlite3_column_int64(statement, 3)
                         let romanization: String = String(cString: romanizationText)
-                        let mark: String = mark ?? romanization.removedTones()
+                        let mark: String = mark ?? romanization.strippedTones()
                         let instance = InternalLexicon(word: String(cString: word), romanization: romanization, frequency: frequency, latest: latest, input: input, mark: mark)
                         items.append(instance)
                 }

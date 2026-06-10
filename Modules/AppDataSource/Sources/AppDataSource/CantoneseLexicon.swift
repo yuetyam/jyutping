@@ -64,7 +64,7 @@ public struct CantoneseLexicon: Hashable, Identifiable {
                         let unihanDefinition = UnihanDefinition.match(text: text)?.definition
                         return CantoneseLexicon(text: text, pronunciations: pronunciations, unihanDefinition: unihanDefinition)
                 }
-                let traditionalText: String = text.convertedS2T()
+                let traditionalText: String = text.toTraditional()
                 let tryMatched = DataMaster.fetchRomanizations(for: traditionalText)
                 guard tryMatched.isEmpty else {
                         let pronunciations = tryMatched.map { romanization -> Pronunciation in
@@ -82,7 +82,7 @@ public struct CantoneseLexicon: Hashable, Identifiable {
                 lazy var newText: String = ""
                 while chars.isNotEmpty {
                         let leading = fetchLeading(for: chars)
-                        lazy var traditionalChars: String = chars.convertedS2T()
+                        lazy var traditionalChars: String = chars.toTraditional()
                         lazy var tryLeading = fetchLeading(for: traditionalChars)
                         if let romanization: String = leading.romanization {
                                 fetches.append(romanization)

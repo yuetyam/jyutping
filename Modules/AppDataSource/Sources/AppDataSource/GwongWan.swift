@@ -39,7 +39,7 @@ public struct GwongWan {
                 if let matched = DataMaster.matchGwongWan(for: character) {
                         return matched
                 } else {
-                        guard let traditional = String(character).convertedS2T().first else { return nil }
+                        guard let traditional = String(character).toTraditional().first else { return nil }
                         guard traditional != character else { return nil }
                         return DataMaster.matchGwongWan(for: traditional)
                 }

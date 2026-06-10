@@ -32,27 +32,27 @@ extension Engine {
                         case 1:
                                 let isToneInTail: Bool = text.last?.isCantoneseToneDigit ?? false
                                 let filtered = searched.filter({ item -> Bool in
-                                        guard item.romanization.removedSpaces().hasPrefix(text).negative else { return true }
+                                        guard item.romanization.strippedSpaces().hasPrefix(text).negative else { return true }
                                         let tones = item.romanization.filter(\.isCantoneseToneDigit)
                                         return isToneInTail ? tones.hasSuffix(textTones) : tones.hasPrefix(textTones)
                                 })
                                 return filtered.map(\.text).flatMap({ Engine.reveresLookup(text: $0, input: inputText) })
                         case 2:
                                 let filtered = searched.filter({ item -> Bool in
-                                        guard item.romanization.removedSpaces().hasPrefix(text).negative else { return true }
+                                        guard item.romanization.strippedSpaces().hasPrefix(text).negative else { return true }
                                         return textTones == item.romanization.filter(\.isCantoneseToneDigit)
                                 })
                                 return filtered.map(\.text).flatMap({ Engine.reveresLookup(text: $0, input: inputText) })
                         default:
                                 let filtered = searched.filter({ item -> Bool in
-                                        return item.romanization.removedSpaces().hasPrefix(text)
+                                        return item.romanization.strippedSpaces().hasPrefix(text)
                                 })
                                 return filtered.map(\.text).flatMap({ Engine.reveresLookup(text: $0, input: inputText) })
                         }
                 case (true, false):
                         let textParts = inputText.split(separator: String.apostrophe)
                         let filtered = searched.filter({ item -> Bool in
-                                let syllables = item.romanization.removedTones().split(separator: String.space)
+                                let syllables = item.romanization.strippedTones().split(separator: String.space)
                                 return syllables == textParts
                         })
                         return filtered.map(\.text).flatMap({ Engine.reveresLookup(text: $0, input: inputText) })

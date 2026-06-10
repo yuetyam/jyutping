@@ -76,7 +76,7 @@ public struct YingWaa {
                 if let fetched = fetch(for: character) {
                         return fetched
                 } else {
-                        guard let traditional = String(character).convertedS2T().first else { return nil }
+                        guard let traditional = String(character).toTraditional().first else { return nil }
                         guard traditional != character else { return nil }
                         return fetch(for: traditional)
                 }

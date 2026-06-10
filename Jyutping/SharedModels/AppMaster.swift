@@ -97,6 +97,47 @@ extension AppMaster {
         }
 }
 
+private extension String {
+        /// CJKV && non-CJKV
+        var textBlocks: [TextUnit] {
+                var blocks: [TextUnit] = []
+                var ideographicCache: String = String.empty
+                var otherCache: String = String.empty
+                var wasLastIdeographic: Bool = true
+                for character in self {
+                        if character.isIdeographic {
+                                if wasLastIdeographic.negative && otherCache.isNotEmpty {
+                                        let newElement: TextUnit = TextUnit(text: otherCache, isIdeographic: false)
+                                        blocks.append(newElement)
+                                        otherCache = String.empty
+                                }
+                                ideographicCache.append(character)
+                                wasLastIdeographic = true
+                        } else {
+                                if wasLastIdeographic && ideographicCache.isNotEmpty {
+                                        let newElement: TextUnit = TextUnit(text: ideographicCache, isIdeographic: true)
+                                        blocks.append(newElement)
+                                        ideographicCache = String.empty
+                                }
+                                otherCache.append(character)
+                                wasLastIdeographic = false
+                        }
+                }
+                if ideographicCache.isNotEmpty {
+                        let tailElement: TextUnit = TextUnit(text: ideographicCache, isIdeographic: true)
+                        blocks.append(tailElement)
+                } else if otherCache.isNotEmpty {
+                        let tailElement: TextUnit = TextUnit(text: otherCache, isIdeographic: false)
+                        blocks.append(tailElement)
+                }
+                return blocks
+        }
+}
+private struct TextUnit {
+        let text: String
+        let isIdeographic: Bool
+}
+
 extension AppMaster {
         nonisolated(unsafe) private(set) static var confusionEntries: [ConfusionEntry] = []
         static func fetchConfusionEntries() {

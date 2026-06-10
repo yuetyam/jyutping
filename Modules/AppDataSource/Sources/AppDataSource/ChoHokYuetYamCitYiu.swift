@@ -78,7 +78,7 @@ public struct ChoHokYuetYamCitYiu: Hashable {
                 guard let character = text.first else { return [] }
                 let matched = DataMaster.matchChoHokYuetYamCitYiu(for: character).distinct()
                 guard matched.isEmpty else { return matched }
-                let traditionalCharacter: Character = text.convertedS2T().first ?? character
+                let traditionalCharacter: Character = text.toTraditional().first ?? character
                 return DataMaster.matchChoHokYuetYamCitYiu(for: traditionalCharacter).distinct()
         }
 }
