@@ -65,14 +65,22 @@ public struct Candidate: Hashable, Sendable {
 
         // Equatable
         public static func == (lhs: Candidate, rhs: Candidate) -> Bool {
-                return lhs.lexicon.inputCount == rhs.lexicon.inputCount && lhs.text == rhs.text && lhs.comment == rhs.comment
+                if lhs.isCantonese && rhs.isCantonese && (lhs.comment == nil) {
+                        return lhs.text == rhs.text && lhs.lexicon.romanization.removedTones() == rhs.lexicon.romanization.removedTones()
+                } else {
+                        return lhs.text == rhs.text && lhs.comment == rhs.comment
+                }
         }
 
         // Hashable
         public func hash(into hasher: inout Hasher) {
-                hasher.combine(lexicon.inputCount)
-                hasher.combine(text)
-                hasher.combine(comment)
+                if isCantonese && (comment == nil) {
+                        hasher.combine(text)
+                        hasher.combine(lexicon.romanization.removedTones())
+                } else {
+                        hasher.combine(text)
+                        hasher.combine(comment)
+                }
         }
 
         public var isCantonese: Bool { lexicon.isCantonese }

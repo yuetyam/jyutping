@@ -62,23 +62,26 @@ extension Character {
 
         /// a-z or A-Z
         public var isBasicLatinLetter: Bool {
-                return ("a"..."z") ~= self || ("A"..."Z") ~= self
+                return isLowercaseBasicLatinLetter || isUppercaseBasicLatinLetter
         }
 
         /// a-z
         public var isLowercaseBasicLatinLetter: Bool {
-                return ("a"..."z") ~= self
+                return Self.lowercaseBasicLatinLetters ~= self
         }
+        private static let lowercaseBasicLatinLetters: ClosedRange<Character> = "a"..."z"
 
         /// A-Z
         public var isUppercaseBasicLatinLetter: Bool {
-                return ("A"..."Z") ~= self
+                return Self.uppercaseBasicLatinLetters ~= self
         }
+        private static let uppercaseBasicLatinLetters: ClosedRange<Character> = "A"..."Z"
 
         /// 0-9
         public var isBasicDigit: Bool {
-                return ("0"..."9") ~= self
+                return Self.basicDigits ~= self
         }
+        private static let basicDigits: ClosedRange<Character> = "0"..."9"
 
         /// a-z, A-Z, or 0-9
         public var isAlphanumeric: Bool {
@@ -87,8 +90,9 @@ extension Character {
 
         /// 1-6
         public var isCantoneseToneDigit: Bool {
-                return ("1"..."6") ~= self
+                return Self.toneDigits ~= self
         }
+        private static let toneDigits: ClosedRange<Character> = "1"..."6"
 
         /// is CJKV character
         public var isIdeographic: Bool {

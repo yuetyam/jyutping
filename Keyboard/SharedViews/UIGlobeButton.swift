@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// UIButton wrapper for globe keys
+/// UIButton wrapper for the “globe” keys
 struct UIGlobeButton: UIViewRepresentable {
 
         @EnvironmentObject private var controller: KeyboardViewController
@@ -11,5 +11,6 @@ struct UIGlobeButton: UIViewRepresentable {
                 button.addTarget(controller, action: #selector(controller.globeKeyFeedback), for: .touchDown)
                 return button
         }
+
         func updateUIView(_ uiView: UIViewType, context: Context) {}
 }

@@ -5,25 +5,25 @@ extension String {
 
         /// A subsequence that only contains tones (1-6)
         var tones: String {
-                return self.filter(\.isCantoneseToneDigit)
+                return filter(\.isCantoneseToneDigit)
         }
 
-        /// Remove all tones (1-6)
+        /// Remove all tone digits (1-6)
         /// - Returns: A subsequence that leaves off tones.
         func removedTones() -> String {
-                return self.filter(\.isCantoneseToneDigit.negative)
+                return filter(\.isCantoneseToneDigit.negative)
         }
 
         /// Remove all spaces
         /// - Returns: A subsequence that leaves off spaces.
         func removedSpaces() -> String {
-                return self.filter(\.isSpace.negative)
+                return filter(\.isSpace.negative)
         }
 
-        /// Remove all spaces and tones
-        /// - Returns: A subsequence that leaves off spaces and tones.
+        /// Remove all spaces and tone digits
+        /// - Returns: A subsequence that leaves off spaces and tone digits.
         func removedSpacesTones() -> String {
-                return self.filter({ $0.isSpace.negative && $0.isCantoneseToneDigit.negative })
+                return filter({ $0.isSpace.negative && $0.isCantoneseToneDigit.negative })
         }
 }
 
