@@ -27,8 +27,8 @@ private struct YingWaaPronunciationUnitView: View {
                                         Text.separator
                                         Text(verbatim: entry.pronunciation)
                                 }
-                                if let pronunciationMark = entry.pronunciationMark {
-                                        Text(verbatim: pronunciationMark).font(.footnote).italic()
+                                if let note = entry.note {
+                                        Text(verbatim: note).font(.footnote).italic()
                                 }
                         }
                         HStack(spacing: 16) {

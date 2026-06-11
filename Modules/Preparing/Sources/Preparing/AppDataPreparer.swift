@@ -165,7 +165,7 @@ private extension AppDataPreparer {
 }
 private extension AppDataPreparer {
         static func createYingWaaTable() async {
-                let createTable: String = "CREATE TABLE yingwaa_table(code INTEGER NOT NULL, word TEXT NOT NULL, romanization TEXT NOT NULL, pronunciation TEXT NOT NULL, pronunciationmark TEXT NOT NULL, interpretation TEXT NOT NULL);"
+                let createTable: String = "CREATE TABLE yingwaa_table(code INTEGER NOT NULL, word TEXT NOT NULL, romanization TEXT NOT NULL, pronunciation TEXT NOT NULL, note TEXT NOT NULL, interpretation TEXT NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { return }
@@ -175,24 +175,24 @@ private extension AppDataPreparer {
                 let sourceLines: [String] = content.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
                 let entries = sourceLines.compactMap { sourceLine -> String? in
                         let parts = sourceLine.split(separator: "\t")
-                        guard parts.count == 6 else { return nil }
-                        let code = parts[0]
-                        let word = parts[1]
-                        let romanization = parts[2]
-                        let pronunciation = parts[3]
-                        let pronunciationmark = parts[4]
-                        let interpretation = parts[5]
-                        return "(\(code), '\(word)', '\(romanization)', '\(pronunciation)', '\(pronunciationmark)', '\(interpretation)')"
+                        guard parts.count == 5 else { return nil }
+                        let word = parts[0]
+                        guard let code = word.first?.decimalCode else { return nil }
+                        let romanization = parts[1]
+                        let pronunciation = parts[2]
+                        let note = parts[3]
+                        let interpretation = parts[4]
+                        return "(\(code), '\(word)', '\(romanization)', '\(pronunciation)', '\(note)', '\(interpretation)')"
                 }
                 let values: String = entries.joined(separator: ", ")
-                let insert: String = "INSERT INTO yingwaa_table (code, word, romanization, pronunciation, pronunciationmark, interpretation) VALUES \(values);"
+                let insert: String = "INSERT INTO yingwaa_table (code, word, romanization, pronunciation, note, interpretation) VALUES \(values);"
                 var insertStatement: OpaquePointer? = nil
                 defer { sqlite3_finalize(insertStatement) }
                 guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }
                 guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
         }
         static func createChoHokTable() async {
-                let createTable: String = "CREATE TABLE chohok_table(code INTEGER NOT NULL, word TEXT NOT NULL, romanization TEXT NOT NULL, initial TEXT NOT NULL, final TEXT NOT NULL, tone TEXT NOT NULL, faancit TEXT NOT NULL);"
+                let createTable: String = "CREATE TABLE chohok_table(code INTEGER NOT NULL, word TEXT NOT NULL, romanization TEXT NOT NULL, phone TEXT NOT NULL, tone TEXT NOT NULL, faancit TEXT NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
@@ -202,18 +202,17 @@ private extension AppDataPreparer {
                 let sourceLines: [String] = content.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
                 let entries = sourceLines.compactMap { sourceLine -> String? in
                         let parts = sourceLine.split(separator: "\t")
-                        guard parts.count == 7 else { return nil }
-                        let code = parts[0]
-                        let word = parts[1]
-                        let romanization = parts[2]
-                        let initial = parts[3]
-                        let final = parts[4]
-                        let tone = parts[5]
-                        let faancit = parts[6]
-                        return "(\(code), '\(word)', '\(romanization)', '\(initial)', '\(final)', '\(tone)', '\(faancit)')"
+                        guard parts.count == 5 else { return nil }
+                        let word = parts[0]
+                        guard let code = word.first?.decimalCode else { return nil }
+                        let romanization = parts[1]
+                        let phone = parts[2]
+                        let tone = parts[3]
+                        let faancit = parts[4]
+                        return "(\(code), '\(word)', '\(romanization)', '\(phone)', '\(tone)', '\(faancit)')"
                 }
                 let values: String = entries.joined(separator: ", ")
-                let insert: String = "INSERT INTO chohok_table (code, word, romanization, initial, final, tone, faancit) VALUES \(values);"
+                let insert: String = "INSERT INTO chohok_table (code, word, romanization, phone, tone, faancit) VALUES \(values);"
                 var insertStatement: OpaquePointer? = nil
                 defer { sqlite3_finalize(insertStatement) }
                 guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }
@@ -230,16 +229,16 @@ private extension AppDataPreparer {
                 let sourceLines: [String] = content.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
                 let entries = sourceLines.compactMap { sourceLine -> String? in
                         let parts = sourceLine.split(separator: "\t")
-                        guard parts.count == 9 else { return nil }
-                        let code = parts[0]
-                        let word = parts[1]
-                        let romanization = parts[2]
-                        let initial = parts[3]
-                        let final = parts[4]
-                        let yamyeung = parts[5]
-                        let tone = parts[6]
-                        let rhyme = parts[7]
-                        let interpretation = parts[8]
+                        guard parts.count == 8 else { return nil }
+                        let word = parts[0]
+                        guard let code = word.first?.decimalCode else { return nil }
+                        let romanization = parts[1]
+                        let initial = parts[2]
+                        let final = parts[3]
+                        let yamyeung = parts[4]
+                        let tone = parts[5]
+                        let rhyme = parts[6]
+                        let interpretation = parts[7]
                         return "(\(code), '\(word)', '\(romanization)', '\(initial)', '\(final)', '\(yamyeung)', '\(tone)', '\(rhyme)', '\(interpretation)')"
                 }
                 let values: String = entries.joined(separator: ", ")
@@ -260,22 +259,22 @@ private extension AppDataPreparer {
                 let sourceLines: [String] = content.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
                 let entries = sourceLines.compactMap { sourceLine -> String? in
                         let parts = sourceLine.split(separator: ",")
-                        guard parts.count == 15 else { return nil }
-                        let code = parts[0]
-                        let word = parts[1]
-                        let rhyme = parts[2]
-                        let subrhyme = parts[3]
-                        let subrhymeserial = parts[4]
-                        let subrhymenumber = parts[5]
-                        let upper = parts[6]
-                        let lower = parts[7]
-                        let initial = parts[8]
-                        let rounding = parts[9]
-                        let division = parts[10]
-                        let rhymeclass = parts[11]
-                        let repeating = parts[12]
-                        let tone = parts[13]
-                        let interpretation = parts[14]
+                        guard parts.count == 14 else { return nil }
+                        let word = parts[0]
+                        guard let code = word.first?.decimalCode else { return nil }
+                        let rhyme = parts[1]
+                        let subrhyme = parts[2]
+                        let subrhymeserial = parts[3]
+                        let subrhymenumber = parts[4]
+                        let upper = parts[5]
+                        let lower = parts[6]
+                        let initial = parts[7]
+                        let rounding = parts[8]
+                        let division = parts[9]
+                        let rhymeclass = parts[10]
+                        let repeating = parts[11]
+                        let tone = parts[12]
+                        let interpretation = parts[13]
                         return "(\(code), '\(word)', '\(rhyme)', '\(subrhyme)', \(subrhymeserial), \(subrhymenumber), '\(upper)', '\(lower)', '\(initial)', '\(rounding)', '\(division)', '\(rhymeclass)', '\(repeating)', '\(tone)', '\(interpretation)')"
                 }
                 let values: String = entries.joined(separator: ", ")

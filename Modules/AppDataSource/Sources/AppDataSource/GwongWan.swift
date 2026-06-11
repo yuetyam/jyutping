@@ -58,7 +58,7 @@ public struct GwongWanLexicon: Hashable, Identifiable {
         public let id: UUID = UUID()
 }
 
-/// 字頭,韻目,小韻,小韻號,小韻內序,反切上字,反切下字,聲母,呼,等,韻系,重紐,聲調,釋義
+// 字頭,韻目,小韻,小韻號,小韻內序,反切上字,反切下字,聲母,呼,等,韻系,重紐,聲調,釋義
 public struct GwongWanCharacter: Hashable, Identifiable {
 
         /// 字頭
@@ -117,14 +117,17 @@ extension GwongWanCharacter {
 
         /// 音韻位屬. 例: 端母　東韻　平聲　一等
         public var hierarchy: String {
-                let leading: String = "\(initial)母　\(rhyme)韻　\(tone)聲"
-                var parts: [String] = [leading]
+                var parts: [String] = [initial, "母", String.fullWidthSpace, rhyme, "韻", String.fullWidthSpace, tone, "聲"]
                 if division != "X" {
-                        parts.append("\(division)等")
+                        parts.append(String.fullWidthSpace)
+                        parts.append(division)
+                        parts.append("等")
                 }
                 if rounding != "X" {
-                        parts.append("\(rounding)口")
+                        parts.append(String.fullWidthSpace)
+                        parts.append(rounding)
+                        parts.append("口")
                 }
-                return parts.joined(separator: "　")
+                return parts.joined()
         }
 }

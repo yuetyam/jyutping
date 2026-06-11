@@ -25,7 +25,7 @@ private struct ChoHokPronunciationUnitView: View {
                                 HStack(spacing: 2) {
                                         Text(verbatim: "讀音").font(.copilot).shallow()
                                         Text.separator
-                                        Text(verbatim: entry.pronunciation)
+                                        Text(verbatim: entry.phone)
                                 }
                                 Text(verbatim: entry.tone)
                                 Text(verbatim: entry.faancit)

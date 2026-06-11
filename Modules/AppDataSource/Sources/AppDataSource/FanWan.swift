@@ -63,14 +63,16 @@ private extension DataMaster {
                 return FanWanLexicon(word: word, units: entries)
         }
         static func fetchFanWanHomophones(for romanization: String) -> [String] {
-                var homophones: [String] = []
-                let command: String = "SELECT word FROM fanwan_table WHERE romanization = '\(romanization)' LIMIT 11;"
+                let command: String = "SELECT word FROM fanwan_table WHERE romanization = ? LIMIT 11;"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
-                guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return homophones }
+                guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return [] }
+                guard sqlite3_bind_text(statement, 1, (romanization as NSString).utf8String, -1, DEFINED_SQLITE_TRANSIENT) == SQLITE_OK else { return [] }
+                var homophones: [String] = []
                 while sqlite3_step(statement) == SQLITE_ROW {
-                        let homophone: String = String(cString: sqlite3_column_text(statement, 0))
-                        homophones.append(homophone)
+                        if let queried = sqlite3_column_text(statement, 0) {
+                                homophones.append(String(cString: queried))
+                        }
                 }
                 return homophones
         }

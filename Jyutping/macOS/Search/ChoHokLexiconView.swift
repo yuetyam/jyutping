@@ -34,7 +34,7 @@ private struct ChoHokView: View {
                                 HStack {
                                         Text(verbatim: "讀音").shallow()
                                         Text.separator
-                                        Text(verbatim: entry.pronunciation).font(.title3)
+                                        Text(verbatim: entry.phone).font(.title3)
                                 }
                                 Text(verbatim: entry.tone)
                                 Text(verbatim: entry.faancit)
