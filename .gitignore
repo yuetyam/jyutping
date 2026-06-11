@@ -27,7 +27,7 @@ Temporary Items
 ### Xcode ###
 *.xcworkspace/
 xcuserdata/
-xcshareddata/
+# xcshareddata/
 DerivedData/
 
 ## GCC Patch
