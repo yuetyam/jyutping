@@ -82,14 +82,10 @@ struct DetailInspectingView: View {
                         }
                 }
         }
-
         private func convert(latest: Int64) -> String {
                 let timestamp: TimeInterval = Double(latest) / 1000.0
                 let date = Date(timeIntervalSince1970: timestamp)
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-                let formattedDate = dateFormatter.string(from: date)
-                return formattedDate
+                return DateFormatter.humanFriendly.string(from: date)
         }
 }
 

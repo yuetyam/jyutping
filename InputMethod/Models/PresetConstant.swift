@@ -32,4 +32,7 @@ struct PresetConstant {
 
         /// Milliseconds in a day
         static let dayIntervalMilliseconds: Int64 = 86_400_000
+
+        /// The padding between the MotherBoard content view and the CandidateWindow edges
+        static let contentWindowGap: CGFloat = 8
 }

@@ -17,7 +17,7 @@ private struct SafariView: UIViewControllerRepresentable {
 
 struct SafariLink<Content: View>: View {
 
-        init(_ address: String, @ViewBuilder label: () -> Content) {
+        init(_ address: String, @ContentBuilder label: () -> Content) {
                 self.address = address
                 self.label = label()
         }

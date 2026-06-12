@@ -5,10 +5,11 @@ struct MotherBoard: View {
         @EnvironmentObject private var context: InputContext
         private let pageCornerRadius: CGFloat = CGFloat(AppSettings.pageCornerRadius)
         private let contentInsets: CGFloat = CGFloat(AppSettings.contentInsets)
+        private let verticalSpacing: CGFloat = -((PresetConstant.contentWindowGap * 2) - 4)
         var body: some View {
                 ZStack(alignment: context.quadrant.alignment) {
                         Color.clear
-                        VStack(alignment: .leading, spacing: -12) {
+                        VStack(alignment: .leading, spacing: verticalSpacing) {
                                 if #available(macOS 26.0, *) {
                                         switch context.quadrant {
                                         case .upperRight, .upperLeft:
@@ -28,7 +29,7 @@ struct MotherBoard: View {
                                                                 .padding(contentInsets)
                                                                 .background(Color.clear, in: RoundedRectangle(cornerRadius: pageCornerRadius))
                                                 }
-                                                .padding(8)
+                                                .padding(PresetConstant.contentWindowGap)
                                                 .fixedSize()
                                         case .cantonese where context.displayCandidates.isNotEmpty:
                                                 ZStack {
@@ -37,7 +38,7 @@ struct MotherBoard: View {
                                                                 .padding(contentInsets)
                                                                 .background(Color.clear, in: RoundedRectangle(cornerRadius: pageCornerRadius))
                                                 }
-                                                .padding(8)
+                                                .padding(PresetConstant.contentWindowGap)
                                                 .fixedSize()
                                         default:
                                                 Color.clear
@@ -70,7 +71,7 @@ struct MotherBoard: View {
                                                         .background(VisualEffectView())
                                                         .clipShape(RoundedRectangle(cornerRadius: pageCornerRadius))
                                                         .shadow(radius: 2)
-                                                        .padding(8)
+                                                        .padding(PresetConstant.contentWindowGap)
                                                         .fixedSize()
                                         case .cantonese where context.displayCandidates.isNotEmpty:
                                                 CandidateBoard()
@@ -78,7 +79,7 @@ struct MotherBoard: View {
                                                         .background(VisualEffectView())
                                                         .clipShape(RoundedRectangle(cornerRadius: pageCornerRadius))
                                                         .shadow(radius: 2)
-                                                        .padding(8)
+                                                        .padding(PresetConstant.contentWindowGap)
                                                         .fixedSize()
                                         default:
                                                 Color.clear

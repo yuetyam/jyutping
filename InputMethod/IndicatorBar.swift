@@ -28,7 +28,7 @@ struct GlassIndicatorBar: View {
                                 .padding(2)
                                 .background(Color.clear, in: RoundedRectangle(cornerRadius: 8))
                         }
-                        .padding(8)
+                        .padding(PresetConstant.contentWindowGap)
                         .fixedSize()
                 }
         }
@@ -60,7 +60,7 @@ struct IndicatorBar: View {
                         .background(VisualEffectView())
                         .clipShape(RoundedRectangle(cornerRadius: 8))
                         .shadow(radius: 2)
-                        .padding(8)
+                        .padding(PresetConstant.contentWindowGap)
                         .fixedSize()
                 }
         }
