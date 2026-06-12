@@ -3,36 +3,95 @@ import CommonExtensions
 
 struct MotherBoard: View {
         @EnvironmentObject private var context: InputContext
+        private let pageCornerRadius: CGFloat = CGFloat(AppSettings.pageCornerRadius)
+        private let contentInsets: CGFloat = CGFloat(AppSettings.contentInsets)
         var body: some View {
                 ZStack(alignment: context.quadrant.alignment) {
                         Color.clear
                         VStack(alignment: .leading, spacing: -12) {
-                                switch context.quadrant {
-                                case .upperRight, .upperLeft:
-                                        if context.isReverseLookup.negative {
-                                                IndicatorBar()
+                                if #available(macOS 26.0, *) {
+                                        switch context.quadrant {
+                                        case .upperRight, .upperLeft:
+                                                if context.isReverseLookup.negative {
+                                                        GlassIndicatorBar()
+                                                }
+                                        case .bottomLeft, .bottomRight:
+                                                if context.isReverseLookup {
+                                                        GlassIndicatorBar()
+                                                }
                                         }
-                                case .bottomLeft, .bottomRight:
-                                        if context.isReverseLookup {
-                                                IndicatorBar()
+                                        switch context.inputForm {
+                                        case .options:
+                                                ZStack {
+                                                        Color.clear.glassEffect(.regular, in: RoundedRectangle(cornerRadius: pageCornerRadius))
+                                                        OptionsView()
+                                                                .padding(contentInsets)
+                                                                .background(Color.clear, in: RoundedRectangle(cornerRadius: pageCornerRadius))
+                                                }
+                                                .padding(8)
+                                                .fixedSize()
+                                        case .cantonese where context.displayCandidates.isNotEmpty:
+                                                ZStack {
+                                                        Color.clear.glassEffect(.regular, in: RoundedRectangle(cornerRadius: pageCornerRadius))
+                                                        CandidateBoard()
+                                                                .padding(contentInsets)
+                                                                .background(Color.clear, in: RoundedRectangle(cornerRadius: pageCornerRadius))
+                                                }
+                                                .padding(8)
+                                                .fixedSize()
+                                        default:
+                                                Color.clear
                                         }
-                                }
-                                switch context.inputForm {
-                                case .options:
-                                        OptionsView()
-                                case .cantonese where context.displayCandidates.isNotEmpty:
-                                        CandidateBoard()
-                                default:
-                                        Color.clear
-                                }
-                                switch context.quadrant {
-                                case .upperRight, .upperLeft:
-                                        if context.isReverseLookup {
-                                                IndicatorBar()
+                                        switch context.quadrant {
+                                        case .upperRight, .upperLeft:
+                                                if context.isReverseLookup {
+                                                        GlassIndicatorBar()
+                                                }
+                                        case .bottomLeft, .bottomRight:
+                                                if context.isReverseLookup.negative {
+                                                        GlassIndicatorBar()
+                                                }
                                         }
-                                case .bottomLeft, .bottomRight:
-                                        if context.isReverseLookup.negative {
-                                                IndicatorBar()
+                                } else {
+                                        switch context.quadrant {
+                                        case .upperRight, .upperLeft:
+                                                if context.isReverseLookup.negative {
+                                                        IndicatorBar()
+                                                }
+                                        case .bottomLeft, .bottomRight:
+                                                if context.isReverseLookup {
+                                                        IndicatorBar()
+                                                }
+                                        }
+                                        switch context.inputForm {
+                                        case .options:
+                                                OptionsView()
+                                                        .padding(contentInsets)
+                                                        .background(VisualEffectView())
+                                                        .clipShape(RoundedRectangle(cornerRadius: pageCornerRadius))
+                                                        .shadow(radius: 2)
+                                                        .padding(8)
+                                                        .fixedSize()
+                                        case .cantonese where context.displayCandidates.isNotEmpty:
+                                                CandidateBoard()
+                                                        .padding(contentInsets)
+                                                        .background(VisualEffectView())
+                                                        .clipShape(RoundedRectangle(cornerRadius: pageCornerRadius))
+                                                        .shadow(radius: 2)
+                                                        .padding(8)
+                                                        .fixedSize()
+                                        default:
+                                                Color.clear
+                                        }
+                                        switch context.quadrant {
+                                        case .upperRight, .upperLeft:
+                                                if context.isReverseLookup {
+                                                        IndicatorBar()
+                                                }
+                                        case .bottomLeft, .bottomRight:
+                                                if context.isReverseLookup.negative {
+                                                        IndicatorBar()
+                                                }
                                         }
                                 }
                         }

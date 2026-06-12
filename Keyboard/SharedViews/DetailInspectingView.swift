@@ -98,13 +98,14 @@ private struct CandidateDetailSummaryView: View {
         let inputFrequency: Int64
         let latestDate: String?
         var body: some View {
-                let isTextTransformed = (candidate.text != candidate.lexicon.text)
                 let isSingleCharacter = (candidate.text.count == 1)
+                let isSuitableTextLength = (candidate.text.count <= 6)
+                let isTextTransformed = (candidate.text != candidate.lexicon.text)
                 VStack(alignment: .leading, spacing: 12) {
                         HStack {
                                 HStack(alignment: .bottom) {
                                         RubyStackRow(text: candidate.lexicon.text, romanization: candidate.lexicon.romanization)
-                                        if isTextTransformed {
+                                        if isSuitableTextLength && isTextTransformed {
                                                 Text(verbatim: candidate.text).font(.title3).shallow()
                                         }
                                 }

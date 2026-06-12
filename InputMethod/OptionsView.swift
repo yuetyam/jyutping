@@ -6,8 +6,6 @@ struct OptionsView: View {
 
         @EnvironmentObject private var context: InputContext
 
-        private let pageCornerRadius: CGFloat = CGFloat(AppSettings.pageCornerRadius)
-        private let contentInsets: CGFloat = CGFloat(AppSettings.contentInsets)
         private let innerCornerRadius: CGFloat = CGFloat(AppSettings.innerCornerRadius)
         private let verticalPadding: CGFloat = CGFloat(AppSettings.candidateLineSpacing) / 2.0
         private let labelSet: LabelSet = AppSettings.labelSet
@@ -43,12 +41,6 @@ struct OptionsView: View {
                                 OptionLabel(cornerRadius: innerCornerRadius, verticalPadding: verticalPadding, labelSet: labelSet, isLabelLastZero: isLabelLastZero, index: 9, highlightedIndex: highlightedIndex, checked: inputMethodMode.isABC)
                         }
                 }
-                .padding(contentInsets)
-                .background(VisualEffectView())
-                .clipShape(RoundedRectangle(cornerRadius: pageCornerRadius, style: .continuous))
-                .shadow(radius: 2)
-                .padding(8)
-                .fixedSize()
         }
 }
 
