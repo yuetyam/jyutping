@@ -8,25 +8,27 @@ struct GlassIndicatorBar: View {
                 if let texts = context.indicatorTexts {
                         ZStack {
                                 Color.clear.glassEffect(.regular, in: RoundedRectangle(cornerRadius: 8))
-                                HStack(spacing: 2) {
-                                        ZStack {
-                                                RoundedRectangle(cornerRadius: 6).fill(colorScheme.isDark ? Color.white : Color.black)
-                                                Text(texts.short)
+                                ZStack {
+                                        Color.clear
+                                        HStack(spacing: 2) {
+                                                ZStack {
+                                                        RoundedRectangle(cornerRadius: 6).fill(colorScheme.isDark ? Color.white : Color.black)
+                                                        Text(texts.short)
+                                                                .lineLimit(1)
+                                                                .minimumScaleFactor(0.1)
+                                                                .foregroundStyle(colorScheme.isDark ? Color.black : Color.white)
+                                                                .padding(2)
+                                                }
+                                                .frame(width: 26, height: 26)
+                                                Text(texts.long)
                                                         .lineLimit(1)
                                                         .minimumScaleFactor(0.1)
-                                                        .foregroundStyle(colorScheme.isDark ? Color.black : Color.white)
                                                         .padding(2)
                                         }
-                                        .frame(width: 26, height: 26)
-                                        Text(texts.long)
-                                                .lineLimit(1)
-                                                .minimumScaleFactor(0.1)
-                                                .padding(2)
+                                        .font(.candidate)
                                 }
-                                .font(.candidate)
                                 .frame(height: 26)
                                 .padding(2)
-                                .background(Color.clear, in: RoundedRectangle(cornerRadius: 8))
                         }
                         .padding(PresetConstant.contentWindowGap)
                         .fixedSize()

@@ -34,7 +34,7 @@ struct MotherBoard: View {
                                         case .cantonese where context.displayCandidates.isNotEmpty:
                                                 ZStack {
                                                         Color.clear.glassEffect(.regular, in: RoundedRectangle(cornerRadius: pageCornerRadius))
-                                                        CandidateBoard()
+                                                        CandidateStackView()
                                                                 .padding(contentInsets)
                                                                 .background(Color.clear, in: RoundedRectangle(cornerRadius: pageCornerRadius))
                                                 }
@@ -74,7 +74,7 @@ struct MotherBoard: View {
                                                         .padding(PresetConstant.contentWindowGap)
                                                         .fixedSize()
                                         case .cantonese where context.displayCandidates.isNotEmpty:
-                                                CandidateBoard()
+                                                CandidateStackView()
                                                         .padding(contentInsets)
                                                         .background(VisualEffectView())
                                                         .clipShape(RoundedRectangle(cornerRadius: pageCornerRadius))

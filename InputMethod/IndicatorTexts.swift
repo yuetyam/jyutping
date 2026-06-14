@@ -73,7 +73,8 @@ struct IndicatorTexts: Hashable, Identifiable {
         static let quick5ReverseLookup = IndicatorTexts(short: "速", long: "速成五代反查粵拼", isFlash: false, identifier: 121)
         static let quick3ReverseLookup = IndicatorTexts(short: "速", long: "速成三代反查粵拼", isFlash: false, identifier: 122)
 
-        static let pinyinReverseLookup = IndicatorTexts(short: "普", long: "普拼反查粵拼", isFlash: false, identifier: 201)
-        static let strokeReverseLookup = IndicatorTexts(short: "筆", long: "筆畫反查粵拼", isFlash: false, identifier: 202)
-        static let structureReverseLookup = IndicatorTexts(short: "拆", long: "兩分反查粵拼", isFlash: false, identifier: 203)
+        static let pinyinReverseLookup = IndicatorTexts(short: "拼", long: "普通話反查粵拼", isFlash: false, identifier: 211)
+        static let mutilatedPinyinReverseLookup = IndicatorTexts(short: "拼", long: "普通话反查粤拼", isFlash: false, identifier: 212)
+        static let strokeReverseLookup = IndicatorTexts(short: "筆", long: "筆畫反查粵拼", isFlash: false, identifier: 221)
+        static let structureReverseLookup = IndicatorTexts(short: "字", long: "拆字反查粵拼", isFlash: false, identifier: 231)
 }

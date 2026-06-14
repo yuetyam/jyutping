@@ -297,7 +297,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                 clearMarkedText()
                                 candidates = []
                         case VirtualInputKey.letterR:
-                                context.updateIndicatorTexts(to: .pinyinReverseLookup)
+                                context.updateIndicatorTexts(to: Options.legacyCharacterStandard.isMutilated ? .mutilatedPinyinReverseLookup : .pinyinReverseLookup)
                                 context.updateReverseLookupState(to: true)
                                 pinyinReverseLookup()
                         case VirtualInputKey.letterV:

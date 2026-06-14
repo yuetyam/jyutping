@@ -1,8 +1,7 @@
 import SwiftUI
 import CommonExtensions
 
-// TODO: Rename to CandidateStackView (maybe)
-struct CandidateBoard: View {
+struct CandidateStackView: View {
 
         @EnvironmentObject private var context: InputContext
 
@@ -28,22 +27,25 @@ struct CandidateBoard: View {
                 case .horizontal:
                         HStack(alignment: commentStyle.horizontalPageAlignment, spacing: 0) {
                                 ForEach(context.displayCandidates.indices, id: \.self) { index in
-                                        HorizontalPageCandidateLabel(
-                                                isHighlighted: index == highlightedIndex,
-                                                index: index,
-                                                candidate: context.displayCandidates[index],
-                                                commentStyle: commentStyle,
-                                                toneStyle: toneStyle,
-                                                toneColor: toneColor,
-                                                labelSet: labelSet,
-                                                isLabelLastZero: isLabelLastZero,
-                                                compatibleMode: isCompatibleModeOn
-                                        )
-                                        .padding(.vertical, 2)
-                                        .padding(.trailing, 3)
-                                        .padding(.horizontal, lineSpacing / 2.0)
-                                        .foregroundStyle(index == highlightedIndex ? Color.white : Color.primary)
-                                        .background(index == highlightedIndex ? Color.accentColor : Color.clear, in: RoundedRectangle(cornerRadius: innerCornerRadius))
+                                        ZStack {
+                                                RoundedRectangle(cornerRadius: innerCornerRadius)
+                                                        .fill(index == highlightedIndex ? Color.accentColor : Color.clear)
+                                                HorizontalPageCandidateLabel(
+                                                        isHighlighted: index == highlightedIndex,
+                                                        index: index,
+                                                        candidate: context.displayCandidates[index],
+                                                        commentStyle: commentStyle,
+                                                        toneStyle: toneStyle,
+                                                        toneColor: toneColor,
+                                                        labelSet: labelSet,
+                                                        isLabelLastZero: isLabelLastZero,
+                                                        compatibleMode: isCompatibleModeOn
+                                                )
+                                                .foregroundStyle(index == highlightedIndex ? Color.white : Color.primary)
+                                                .padding(.vertical, 2)
+                                                .padding(.trailing, 3)
+                                                .padding(.horizontal, lineSpacing / 2.0)
+                                        }
                                         .contentShape(.rect)
                                         .onHover { isHovering in
                                                 guard isHovering else { return }
@@ -73,9 +75,9 @@ struct CandidateBoard: View {
                                                         isLabelLastZero: isLabelLastZero,
                                                         compatibleMode: isCompatibleModeOn
                                                 )
+                                                .foregroundStyle(index == highlightedIndex ? Color.white : Color.primary)
                                                 .padding(.horizontal, 3)
                                                 .padding(.vertical, lineSpacing / 2.0)
-                                                .foregroundStyle(index == highlightedIndex ? Color.white : Color.primary)
                                                 .fixedSize()
                                         }
                                         .contentShape(.rect)

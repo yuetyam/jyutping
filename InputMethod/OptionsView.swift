@@ -54,7 +54,6 @@ private struct OptionLabel: View {
                 self.isHighlighted = index == highlightedIndex
                 self.checked = checked
         }
-
         private let cornerRadius: CGFloat
         private let verticalPadding: CGFloat
         private let index: Int
@@ -63,18 +62,21 @@ private struct OptionLabel: View {
         private let checked: Bool
 
         var body: some View {
-                HStack(spacing: 0) {
-                        HStack(spacing: 6) {
-                                Text(labelText).font(.label).opacity(isHighlighted ? 1 : 0.75)
-                                Text(PresetConstant.optionsViewTexts[index] ?? "?").font(.candidate)
+                ZStack {
+                        RoundedRectangle(cornerRadius: cornerRadius)
+                                .fill(isHighlighted ? Color.accentColor : Color.clear)
+                        HStack(spacing: 0) {
+                                HStack(spacing: 6) {
+                                        Text(labelText).font(.label).opacity(isHighlighted ? 1 : 0.75)
+                                        Text(PresetConstant.optionsViewTexts[index] ?? "?").font(.candidate)
+                                }
+                                Spacer()
+                                Image(systemName: "checkmark").font(.title3).opacity(checked ? 1 : 0)
                         }
-                        Spacer()
-                        Image(systemName: "checkmark").font(.title3).opacity(checked ? 1 : 0)
+                        .foregroundStyle(isHighlighted ? Color.white : Color.primary)
+                        .padding(.horizontal, 3)
+                        .padding(.vertical, verticalPadding)
                 }
-                .padding(.horizontal, 3)
-                .padding(.vertical, verticalPadding)
-                .foregroundStyle(isHighlighted ? Color.white : Color.primary)
-                .background(isHighlighted ? Color.accentColor : Color.clear, in: RoundedRectangle(cornerRadius: cornerRadius, style: .continuous))
                 .contentShape(.rect)
                 .onHover { isHovering in
                         guard isHovering else { return }
