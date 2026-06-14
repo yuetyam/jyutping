@@ -14,10 +14,10 @@ private struct SafariView: UIViewControllerRepresentable {
         func updateUIViewController(_ uiViewController: SFSafariViewController, context: Context) {}
 }
 
-
 struct SafariLink<Content: View>: View {
 
-        init(_ address: String, @ContentBuilder label: () -> Content) {
+        // TODO: Use @ContentBuilder instead
+        init(_ address: String, @ViewBuilder label: () -> Content) {
                 self.address = address
                 self.label = label()
         }
@@ -41,7 +41,6 @@ struct SafariLink<Content: View>: View {
                 }
         }
 }
-
 
 struct ExtendedLinkLabel: View {
 
