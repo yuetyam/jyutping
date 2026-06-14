@@ -33,7 +33,11 @@ struct LexiconConverter {
                 guard let url = Bundle.module.url(forResource: "structure", withExtension: "txt") else { fatalError("structure.txt not found") }
                 guard let sourceContent = try? String(contentsOf: url, encoding: .utf8) else { fatalError("Failed to read structure.txt") }
                 let sourceLines: [String] = sourceContent.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
-                return sourceLines.map(convert(_:))
+                let transformedLines = sourceLines.map({ line -> String in
+                        let parts = line.split(separator: "\t")
+                        return parts[0] + "\t" + parts[2]
+                })
+                return transformedLines.map(convert(_:))
         }
 
         private static func convert(_ text: String) -> LexiconEntry {
