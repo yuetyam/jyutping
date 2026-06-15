@@ -142,24 +142,22 @@ extension Engine {
                                         guard textTones.hasPrefix(tones) else { return nil }
                                         let isCorrectPosition: Bool = text.dropFirst(item.inputCount).first?.isCantoneseToneDigit ?? false
                                         guard isCorrectPosition else { return nil }
-                                        var firstSyllableKeys: [VirtualInputKey] = []
+                                        var leadingKeys: [VirtualInputKey] = []
                                         for key in keys {
                                                 if key.isSyllableLetter {
-                                                        firstSyllableKeys.append(key)
+                                                        leadingKeys.append(key)
                                                 } else {
                                                         break
                                                 }
                                         }
-                                        var firstToneKeys: [VirtualInputKey] = []
-                                        for key in keys.dropFirst(firstSyllableKeys.count) {
+                                        for key in keys.dropFirst(leadingKeys.count) {
                                                 if key.isSyllableLetter.negative {
-                                                        firstToneKeys.append(key)
+                                                        leadingKeys.append(key)
                                                 } else {
                                                         break
                                                 }
                                         }
-                                        let combinedInput: String = (firstSyllableKeys + firstToneKeys).map(\.text).joined()
-                                        return item.replacedInput(with: combinedInput)
+                                        return item.replacedInput(with: leadingKeys.map(\.text).joined())
                                 case (2, 2):
                                         guard textTones == tones else { return nil }
                                         let isToneLast: Bool = text.last?.isCantoneseToneDigit ?? false
@@ -255,13 +253,10 @@ extension Engine {
                                         let textPartCount = textParts.count
                                         let syllableCount = syllables.count
                                         guard syllableCount < textPartCount else { return nil }
-                                        let checks = (0..<syllableCount).map { index -> Bool in
-                                                return syllables[index] == textParts[index]
-                                        }
-                                        let isMatched = checks.reduce(true, { $0 && $1 })
+                                        let isMatched = (0..<syllableCount).allSatisfy({ syllables[$0] == textParts[$0] })
                                         guard isMatched else { return nil }
                                         let separatorCount = syllableCount - 1
-                                        let tail: [Character] = Array(repeating: "i", count: separatorCount)
+                                        let tail = String(repeating: "i", count: separatorCount)
                                         let combinedInput: String = item.input + tail
                                         return item.replacedInput(with: combinedInput)
                                 }
@@ -273,12 +268,12 @@ extension Engine {
                                 .compactMap({ item -> Lexicon? in
                                         let syllables = item.romanization.split(separator: Character.space).map({ $0.dropLast() })
                                         guard syllables.count == anchorCount else { return nil }
-                                        let checks = (0..<anchorCount).map({ index -> Bool in
+                                        let isMatched = (0..<anchorCount).allSatisfy({ index -> Bool in
                                                 let part = textParts[index]
-                                                let isAnchorOnly = part.count == 1
+                                                let isAnchorOnly = (part.count == 1)
                                                 return isAnchorOnly ? syllables[index].hasPrefix(part) : (syllables[index] == part)
                                         })
-                                        guard checks.reduce(true, { $0 && $1 }) else { return nil }
+                                        guard isMatched else { return nil }
                                         return item.replacedInput(with: text)
                                 })
                 }
