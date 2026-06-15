@@ -37,7 +37,7 @@ private struct ChoHokView: View {
                                         Text(verbatim: entry.phone).font(.title3)
                                 }
                                 Text(verbatim: entry.tone)
-                                Text(verbatim: entry.faancit)
+                                Text(verbatim: entry.faancit + "切")
                         }
                         HStack(spacing: 16) {
                                 HStack {

@@ -48,8 +48,7 @@ private extension DataMaster {
                         let phone: String = String(cString: sqlite3_column_text(statement, 2))
                         let tone: String = String(cString: sqlite3_column_text(statement, 3))
                         let faancit: String = String(cString: sqlite3_column_text(statement, 4))
-                        let faanCitText: String = faancit + "切"
-                        let instance = ChoHokUnit(word: word, romanization: romanization, phone: phone, tone: tone, faancit: faanCitText, homophones: [])
+                        let instance = ChoHokUnit(word: word, romanization: romanization, phone: phone, tone: tone, faancit: faancit, homophones: [])
                         entries.append(instance)
                 }
                 guard let word = entries.first?.word else { return nil }

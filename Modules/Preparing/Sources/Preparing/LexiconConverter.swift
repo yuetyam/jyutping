@@ -37,7 +37,7 @@ struct LexiconConverter {
                         let parts = line.split(separator: "\t")
                         return parts[0] + "\t" + parts[2]
                 })
-                return transformedLines.map(convert(_:))
+                return transformedLines.distinct().map(convert(_:))
         }
 
         private static func convert(_ text: String) -> LexiconEntry {
