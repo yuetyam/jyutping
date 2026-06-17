@@ -148,7 +148,7 @@ private struct RubyStackRow: View {
         }
         private let units: Array<(character: String, syllable: String)>
         var body: some View {
-                HStack(spacing: 1) {
+                HStack(alignment: .lastTextBaseline, spacing: 1) {
                         ForEach(units.indices, id: \.self) { index in
                                 CharacterSyllableView(unit: units[index])
                         }

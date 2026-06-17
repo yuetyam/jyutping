@@ -41,4 +41,32 @@ struct CoreIMETests {
                 ])
                 #expect(gaangSchemes.contains(where: { $0.syllableText == "gaang" }))
         }
+
+        @Test("Segmenter returns full and prefix schemes")
+        func segmenterReturnsFullAndPrefixSchemes() {
+                let schemes = Segmenter.segment([
+                        .letterG,
+                        .letterO,
+                        .letterN,
+                        .letterG
+                ])
+
+                #expect(schemes.contains(where: { $0.syllableText == "gong" }))
+                #expect(schemes.contains(where: { $0.syllableText == "go ng" }))
+                #expect(schemes.contains(where: { $0.syllableText == "go" }))
+        }
+
+        @Test("Segmenter returns ambiguous full schemes")
+        func segmenterReturnsAmbiguousFullSchemes() {
+                let schemes = Segmenter.segment([
+                        .letterN,
+                        .letterG,
+                        .letterO,
+                        .letterN,
+                        .letterG
+                ])
+
+                #expect(schemes.contains(where: { $0.syllableText == "ng ong" }))
+                #expect(schemes.contains(where: { $0.syllableText == "ngo ng" }))
+        }
 }

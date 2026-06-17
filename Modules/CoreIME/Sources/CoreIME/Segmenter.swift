@@ -161,6 +161,11 @@ public struct Segmenter {
 
         private static let logger = Logger(subsystem: "org.jyutping.Jyutping.CoreIME", category: "Segmenter")
 
+        static func prepare() {
+                if syllableCodeMap.count == 0 {
+                        logger.warning("Syllable Dictionary is Empty")
+                }
+        }
         private static let syllableCodeMap: Dictionary<Int, Syllable> = {
                 let command: String = "SELECT alias_code, origin_code FROM core_syllable_table;"
                 var statement: OpaquePointer? = nil
@@ -175,50 +180,85 @@ public struct Segmenter {
                 }
                 return dict
         }()
-        static func prepare() {
-                if syllableCodeMap.count == 0 {
-                        logger.warning("Syllable Dictionary is Empty")
-                }
-        }
-
         private static func lookup(by code: Int) -> Syllable? {
                 return syllableCodeMap[code]
         }
-        private static func splitLeading<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T) -> [Syllable] {
-                let maxLength: Int = min(keys.count, 6)
-                guard maxLength > 0 else { return [] }
-                return (1...maxLength).reversed().compactMap({ lookup(by: keys.prefix($0).combinedCode) })
+
+        private struct SplitEdge {
+                let syllable: Syllable
+                let endIndex: Int
         }
-        private static func split<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T) -> Segmentation {
-                let headSyllables = splitLeading(keys)
-                guard headSyllables.isNotEmpty else { return [] }
+        private struct SplitNode {
+                let syllable: Syllable
+                let previousIndex: Int?
+                let length: Int
+                let count: Int
+        }
+        private static func splitEdges(for keys: [VirtualInputKey]) -> [[SplitEdge]] {
                 let inputLength = keys.count
-                var segmentation: Set<Scheme> = []
-                var frontier: [Scheme] = []
-                for syllable in headSyllables {
-                        let scheme: Scheme = [syllable]
-                        if segmentation.insert(scheme).inserted {
-                                frontier.append(scheme)
+                var edges = Array(repeating: Array<SplitEdge>(), count: inputLength)
+                for startIndex in 0..<inputLength {
+                        var code: Int = 0
+                        let endIndexLimit = min(inputLength, startIndex + 6)
+                        for endIndex in startIndex..<endIndexLimit {
+                                code = code * 100 + keys[endIndex].code
+                                guard let syllable = lookup(by: code) else { continue }
+                                edges[startIndex].append(SplitEdge(syllable: syllable, endIndex: endIndex + 1))
                         }
                 }
+                return edges
+        }
+        private static func scheme(at nodeIndex: Int, in nodes: [SplitNode]) -> Scheme {
+                var syllables: Scheme = []
+                syllables.reserveCapacity(nodes[nodeIndex].count)
+                var currentIndex: Int? = nodeIndex
+                while let index = currentIndex {
+                        let node = nodes[index]
+                        syllables.append(node.syllable)
+                        currentIndex = node.previousIndex
+                }
+                syllables.reverse()
+                return syllables
+        }
+        private static func split(_ keys: [VirtualInputKey]) -> Segmentation {
+                let inputLength = keys.count
+                guard inputLength > 0 else { return [] }
+                let edges = splitEdges(for: keys)
+                guard (edges.first?.isNotEmpty ?? false) else { return [] }
+                var nodes: [SplitNode] = []
+                var frontier: [Int] = []
+                for edge in edges[0] {
+                        let node = SplitNode(syllable: edge.syllable, previousIndex: nil, length: edge.endIndex, count: 1)
+                        nodes.append(node)
+                        frontier.append(nodes.endIndex - 1)
+                }
                 while frontier.isNotEmpty {
-                        var nextFrontier: [Scheme] = []
-                        for scheme in frontier {
-                                let schemeLength = scheme.length
-                                guard schemeLength < inputLength else { continue }
-                                let tailKeys = keys.dropFirst(schemeLength)
-                                let tailSyllables = splitLeading(tailKeys)
-                                for tail in tailSyllables {
-                                        let newScheme = scheme + [tail]
-                                        if segmentation.insert(newScheme).inserted {
-                                                nextFrontier.append(newScheme)
-                                        }
+                        var nextFrontier: [Int] = []
+                        for nodeIndex in frontier {
+                                let node = nodes[nodeIndex]
+                                guard node.length < inputLength else { continue }
+                                for edge in edges[node.length] {
+                                        let nextNode = SplitNode(syllable: edge.syllable, previousIndex: nodeIndex, length: edge.endIndex, count: node.count + 1)
+                                        nodes.append(nextNode)
+                                        nextFrontier.append(nodes.endIndex - 1)
                                 }
                         }
                         frontier = nextFrontier
                 }
-                return segmentation.filter(\.isValid).descended()
+                return nodes.indices.compactMap({ nodeIndex -> (scheme: Scheme, length: Int, count: Int)? in
+                        let node = nodes[nodeIndex]
+                        let scheme = scheme(at: nodeIndex, in: nodes)
+                        guard scheme.isValid else { return nil }
+                        return (scheme, node.length, node.count)
+                }).sorted(by: {
+                        if $0.length == $1.length {
+                                return $0.count < $1.count
+                        } else {
+                                return $0.length > $1.length
+                        }
+                }).map(\.scheme)
         }
+
         public static func segment<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T) -> Segmentation {
                 switch keys.count {
                 case 0: return []
