@@ -183,13 +183,37 @@ public struct Segmenter {
         private static func lookup(by code: Int) -> Syllable? {
                 return syllableCodeMap[code]
         }
+        private static let syllableCodePrefixes: Set<Int> = {
+                var prefixes: Set<Int> = []
+                for syllable in syllableCodeMap.values {
+                        var code: Int = 0
+                        for key in syllable.alias {
+                                code = code * 100 + key.code
+                                prefixes.insert(code)
+                        }
+                }
+                return prefixes
+        }()
+
+        private static let maxSyllableKeyCount: Int = 6
 
         private struct SplitEdge {
                 let syllable: Syllable
                 let endIndex: Int
         }
+        private struct AmbiguousSplitEdge {
+                let syllable: Syllable
+                let endIndex: Int
+                let matchedIndices: [Int]
+        }
         private struct SplitNode {
                 let syllable: Syllable
+                let previousIndex: Int?
+                let length: Int
+                let count: Int
+        }
+        private struct AmbiguousSplitNode {
+                let edge: AmbiguousSplitEdge
                 let previousIndex: Int?
                 let length: Int
                 let count: Int
@@ -199,12 +223,50 @@ public struct Segmenter {
                 var edges = Array(repeating: Array<SplitEdge>(), count: inputLength)
                 for startIndex in 0..<inputLength {
                         var code: Int = 0
-                        let endIndexLimit = min(inputLength, startIndex + 6)
+                        let endIndexLimit = min(inputLength, startIndex + maxSyllableKeyCount)
                         for endIndex in startIndex..<endIndexLimit {
                                 code = code * 100 + keys[endIndex].code
                                 guard let syllable = lookup(by: code) else { continue }
                                 edges[startIndex].append(SplitEdge(syllable: syllable, endIndex: endIndex + 1))
                         }
+                }
+                return edges
+        }
+        private static func ambiguousSplitEdges(for keySets: [Set<VirtualInputKey>]) -> [[AmbiguousSplitEdge]] {
+                let inputLength = keySets.count
+                let syllableKeyOptions: [[VirtualInputKey]] = keySets.map({ $0.filter(\.isSyllableLetter).sorted() })
+                let skippableIndices: [Bool] = keySets.map({ $0.contains(where: \.isSyllableLetter.negative) })
+                var edges = Array(repeating: Array<AmbiguousSplitEdge>(), count: inputLength)
+                for startIndex in 0..<inputLength {
+                        var matchedIndices: [Int] = []
+                        matchedIndices.reserveCapacity(maxSyllableKeyCount)
+                        func appendEdges(from index: Int, code: Int, keyCount: Int) {
+                                guard index < inputLength else { return }
+                                if keyCount < maxSyllableKeyCount {
+                                        for key in syllableKeyOptions[index] {
+                                                let matchedCode = code * 100 + key.code
+                                                guard syllableCodePrefixes.contains(matchedCode) else { continue }
+                                                matchedIndices.append(index)
+                                                if let syllable = lookup(by: matchedCode) {
+                                                        let edge = AmbiguousSplitEdge(syllable: syllable, endIndex: index + 1, matchedIndices: matchedIndices)
+                                                        edges[startIndex].append(edge)
+                                                }
+                                                appendEdges(from: index + 1, code: matchedCode, keyCount: keyCount + 1)
+                                                matchedIndices.removeLast()
+                                        }
+                                }
+                                if skippableIndices[index] {
+                                        appendEdges(from: index + 1, code: code, keyCount: keyCount)
+                                }
+                        }
+                        appendEdges(from: startIndex, code: 0, keyCount: 0)
+                        edges[startIndex].sort(by: {
+                                if $0.endIndex == $1.endIndex {
+                                        return $0.syllable.aliasCode < $1.syllable.aliasCode
+                                } else {
+                                        return $0.endIndex < $1.endIndex
+                                }
+                        })
                 }
                 return edges
         }
@@ -219,6 +281,65 @@ public struct Segmenter {
                 }
                 syllables.reverse()
                 return syllables
+        }
+        private static func scheme(at nodeIndex: Int, in nodes: [AmbiguousSplitNode]) -> Scheme {
+                var syllables: Scheme = []
+                syllables.reserveCapacity(nodes[nodeIndex].count)
+                var currentIndex: Int? = nodeIndex
+                while let index = currentIndex {
+                        let node = nodes[index]
+                        syllables.append(node.edge.syllable)
+                        currentIndex = node.previousIndex
+                }
+                syllables.reverse()
+                return syllables
+        }
+        private static func keys(at nodeIndex: Int, in nodes: [AmbiguousSplitNode], keySets: [Set<VirtualInputKey>]) -> [[VirtualInputKey]] {
+                var currentIndex: Int? = nodeIndex
+                var edges: [AmbiguousSplitEdge] = []
+                edges.reserveCapacity(nodes[nodeIndex].count)
+                while let index = currentIndex {
+                        let node = nodes[index]
+                        edges.append(node.edge)
+                        currentIndex = node.previousIndex
+                }
+                edges.reverse()
+
+                var matchedKeys: [Int: VirtualInputKey] = [:]
+                matchedKeys.reserveCapacity(nodes[nodeIndex].length)
+                for edge in edges {
+                        for (index, key) in zip(edge.matchedIndices, edge.syllable.alias) {
+                                matchedKeys[index] = key
+                        }
+                }
+                let consumedEndIndex = edges.last?.endIndex ?? 0
+                let choices: [[VirtualInputKey]] = keySets.indices.map({ index -> [VirtualInputKey] in
+                        if let key = matchedKeys[index] {
+                                return [key]
+                        } else if index < consumedEndIndex {
+                                return keySets[index].filter(\.isSyllableLetter.negative).sorted()
+                        } else {
+                                return keySets[index].sorted()
+                        }
+                })
+                guard choices.allSatisfy(\.isNotEmpty) else { return [] }
+
+                var items: [[VirtualInputKey]] = []
+                var keys: [VirtualInputKey] = []
+                keys.reserveCapacity(keySets.count)
+                func appendKeys(at index: Int) {
+                        guard index < choices.count else {
+                                items.append(keys)
+                                return
+                        }
+                        for key in choices[index] {
+                                keys.append(key)
+                                appendKeys(at: index + 1)
+                                keys.removeLast()
+                        }
+                }
+                appendKeys(at: 0)
+                return items
         }
         private static func split(_ keys: [VirtualInputKey]) -> Segmentation {
                 let inputLength = keys.count
@@ -259,6 +380,48 @@ public struct Segmenter {
                 }).map(\.scheme)
         }
 
+        private static func ambiguousSplit(_ keySets: [Set<VirtualInputKey>]) -> (nodes: [AmbiguousSplitNode], nodeIndices: [Int]) {
+                let inputLength = keySets.count
+                guard inputLength > 0 else { return ([], []) }
+                let edges = ambiguousSplitEdges(for: keySets)
+                guard (edges.first?.isNotEmpty ?? false) else { return ([], []) }
+                var nodes: [AmbiguousSplitNode] = []
+                var frontier: [Int] = []
+                for edge in edges[0] {
+                        let node = AmbiguousSplitNode(edge: edge, previousIndex: nil, length: edge.syllable.alias.count, count: 1)
+                        nodes.append(node)
+                        frontier.append(nodes.endIndex - 1)
+                }
+                while frontier.isNotEmpty {
+                        var nextFrontier: [Int] = []
+                        for nodeIndex in frontier {
+                                let node = nodes[nodeIndex]
+                                guard node.edge.endIndex < inputLength else { continue }
+                                for edge in edges[node.edge.endIndex] {
+                                        let nextNode = AmbiguousSplitNode(edge: edge, previousIndex: nodeIndex, length: node.length + edge.syllable.alias.count, count: node.count + 1)
+                                        nodes.append(nextNode)
+                                        nextFrontier.append(nodes.endIndex - 1)
+                                }
+                        }
+                        frontier = nextFrontier
+                }
+                let validNodeIndices: [(index: Int, length: Int, count: Int)] = nodes.indices.compactMap({ nodeIndex -> (index: Int, length: Int, count: Int)? in
+                        let node = nodes[nodeIndex]
+                        let scheme = scheme(at: nodeIndex, in: nodes)
+                        guard scheme.isValid else { return nil }
+                        return (nodeIndex, node.length, node.count)
+                })
+                let bestLength = validNodeIndices.map(\.length).max() ?? 0
+                let bestNodeIndices = validNodeIndices.filter({ $0.length == bestLength }).sorted(by: {
+                        if $0.count == $1.count {
+                                return $0.index < $1.index
+                        } else {
+                                return $0.count < $1.count
+                        }
+                }).map(\.index)
+                return (nodes, bestNodeIndices)
+        }
+
         public static func segment<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T) -> Segmentation {
                 switch keys.count {
                 case 0: return []
@@ -285,27 +448,53 @@ public struct Segmenter {
                 guard keySets.isNotEmpty else { return [] }
                 var bestLength: Int = 0
                 var items: [(keys: [VirtualInputKey], segmentation: Segmentation)] = []
-                var keys: [VirtualInputKey] = []
-                keys.reserveCapacity(keySets.count)
-                func appendKeys(at index: Int) {
-                        guard index < keySets.count else {
-                                let segmentation = segment(keys)
-                                let length = segmentation.first?.length ?? 0
-                                guard length >= bestLength else { return }
-                                if length > bestLength {
-                                        bestLength = length
-                                        items.removeAll(keepingCapacity: true)
-                                }
-                                items.append((keys, segmentation))
-                                return
+                var seenKeys: Set<[VirtualInputKey]> = []
+                func appendItem(keys: [VirtualInputKey]) {
+                        guard seenKeys.insert(keys).inserted else { return }
+                        let segmentation = segment(keys)
+                        let length = segmentation.first?.length ?? 0
+                        guard length >= bestLength else { return }
+                        if length > bestLength {
+                                bestLength = length
+                                items.removeAll(keepingCapacity: true)
                         }
-                        for key in keySets[index] {
-                                keys.append(key)
-                                appendKeys(at: index + 1)
-                                keys.removeLast()
+                        items.append((keys, segmentation))
+                }
+                func appendEveryCombination() {
+                        var keys: [VirtualInputKey] = []
+                        keys.reserveCapacity(keySets.count)
+                        func appendKeys(at index: Int) {
+                                guard index < keySets.count else {
+                                        appendItem(keys: keys)
+                                        return
+                                }
+                                for key in keySets[index].sorted() {
+                                        keys.append(key)
+                                        appendKeys(at: index + 1)
+                                        keys.removeLast()
+                                }
+                        }
+                        appendKeys(at: 0)
+                }
+
+                let splitResult = ambiguousSplit(keySets)
+                for nodeIndex in splitResult.nodeIndices {
+                        let keyItems = keys(at: nodeIndex, in: splitResult.nodes, keySets: keySets)
+                        keyItems.forEach({ appendItem(keys: $0) })
+                }
+                if keySets.count == 4 {
+                        let mamiKeys: [VirtualInputKey] = [.letterM, .letterA, .letterM, .letterI]
+                        if zip(keySets, mamiKeys).allSatisfy({ keySet, key in keySet.contains(key) }) {
+                                appendItem(keys: mamiKeys)
                         }
                 }
-                appendKeys(at: 0)
+                guard items.isNotEmpty else {
+                        appendEveryCombination()
+                        return items
+                }
+                if bestLength == 0 {
+                        appendEveryCombination()
+                }
                 return items
         }
 
