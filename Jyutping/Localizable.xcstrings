@@ -15540,13 +15540,13 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Commencez par « v », puis entrez le code Cangjie ou Quick. Par exemple, entrez « vdd », le candidat « 林 » apparaîtra. Les candidats seront affichés avec le Jyutping correspondant."
+            "value" : "Saisissez d’abord « v », puis le code Cangjie ou Quick. Par exemple, « vdd » → « 林 »."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "「v」で始めて、倉頡または速成コードを入力します。例：「vdd」と入力すると、候補「林」が表示されます。候補には対応するJyutpingが表示されます。"
+            "value" : "「v」で始めて、倉頡または速成コードを入力します。例: vdd → 林。"
           }
         },
         "yue" : {
@@ -15798,37 +15798,37 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Start with “r”, then enter Pinyin code. For example, “rlin” → “林”."
+            "value" : "Start with “r”, then enter Pinyin. For example, “rlin” → “林”."
           }
         },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Start with “r”, then enter Pinyin code. For example, “rlin” → “林”."
+            "value" : "Start with “r”, then enter Pinyin. For example, “rlin” → “林”."
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Start with “r”, then enter Pinyin code. For example, “rlin” → “林”."
+            "value" : "Start with “r”, then enter Pinyin. For example, “rlin” → “林”."
           }
         },
         "en-US" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Start with “r”, then enter Pinyin code. For example, “rlin” → “林”."
+            "value" : "Start with “r”, then enter Pinyin. For example, “rlin” → “林”."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Commencez par « r », puis entrez le code Pinyin. Par exemple, entrez « rlin », le candidat « 林 » apparaîtra. Les candidats seront affichés avec le Jyutping correspondant."
+            "value" : "Saisissez d’abord « r », puis le pinyin. Par exemple, « rlin » → « 林 »."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "「r」で始めて、ピンインコードを入力します。例：「rlin」と入力すると、候補「林」が表示されます。候補には対応するJyutpingが表示されます。"
+            "value" : "「r」から始め、ピンインを入力します。例: rlin → 林。"
           }
         },
         "yue" : {
@@ -16010,13 +16010,13 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Commencez par « x », puis entrez le code des traits. Par exemple, entrez « xwsad », le candidat « 木 » apparaîtra. Les candidats seront affichés avec le Jyutping correspondant."
+            "value" : "Saisissez d’abord « x », puis le code de traits. Par exemple, « xwsad » → « 木 »."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "「x」で始めて、筆画コードを入力します。例：「xwsad」と入力すると、候補「木」が表示されます。候補には対応するJyutpingが表示されます。"
+            "value" : "「x」から始め、画のコードを入力します。例: xwsad → 林。"
           }
         },
         "yue" : {
@@ -16268,91 +16268,91 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Start with “q”, then enter two components' Jyutping. For example, “qmukmuk” → “林”."
+            "value" : "Start with “q”, then enter the Jyutping of the components. For example, “qmukmuk” → “林”."
           }
         },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Start with “q”, then enter two components' Jyutping. For example, “qmukmuk” → “林”."
+            "value" : "Start with “q”, then enter the Jyutping of the components. For example, “qmukmuk” → “林”."
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Start with “q”, then enter two components' Jyutping. For example, “qmukmuk” → “林”."
+            "value" : "Start with “q”, then enter the Jyutping of the components. For example, “qmukmuk” → “林”."
           }
         },
         "en-US" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Start with “q”, then enter two components' Jyutping. For example, “qmukmuk” → “林”."
+            "value" : "Start with “q”, then enter the Jyutping of the components. For example, “qmukmuk” → “林”."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Commencez par « q », puis entrez le Jyutping de deux composants. Par exemple, entrez « qmukmuk », le candidat « 林 » apparaîtra. Les candidats seront affichés avec le Jyutping correspondant."
+            "value" : "Commencez par « q », puis saisissez le jyutping des éléments constitutifs. Par exemple, « qmukmuk » → « 林 »."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "「q」で始めて、2つの部品のJyutpingを入力します。例：「qmukmuk」と入力すると、候補「林」が表示されます。候補には対応するJyutpingが表示されます。"
+            "value" : "「q」の後に、構成部品の粤拼を入力します。例: qmukmuk → 林。"
           }
         },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "兩分即係將一個字分成兩部分，比如【林 = 木, 木】。以 q 開始，再輸入兩個字嘅粵拼，例如 qmukmuk → 林。"
+            "value" : "拆字例如【林 = 木, 木】，以 q 開始，再輸入兩個字嘅粵拼: qmukmuk → 林。"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "兩分即係將一個字分成兩部分，比如【林 = 木, 木】。以 q 開始，再輸入兩個字嘅粵拼，例如 qmukmuk → 林。"
+            "value" : "拆字例如【林 = 木, 木】，以 q 開始，再輸入兩個字嘅粵拼: qmukmuk → 林。"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "兩分即係將一個字分成兩部分，比如【林 = 木, 木】。以 q 開始，再輸入兩個字嘅粵拼，例如 qmukmuk → 林。"
+            "value" : "拆字例如【林 = 木, 木】，以 q 開始，再輸入兩個字嘅粵拼: qmukmuk → 林。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "兩分即係將一個字分成兩部分，比如【林 = 木, 木】。以 q 開始，再輸入兩個字嘅粵拼，例如 qmukmuk → 林。"
+            "value" : "拆字例如【林 = 木, 木】，以 q 開始，再輸入兩個字嘅粵拼: qmukmuk → 林。"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "兩分即係將一個字分成兩部分，比如【林 = 木, 木】。以 q 開始，再輸入兩個字嘅粵拼，例如 qmukmuk → 林。"
+            "value" : "拆字例如【林 = 木, 木】，以 q 開始，再輸入兩個字嘅粵拼: qmukmuk → 林。"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "兩分即係將一個字分成兩部分，比如【林 = 木, 木】。以 q 開始，再輸入兩個字嘅粵拼，例如 qmukmuk → 林。"
+            "value" : "拆字例如【林 = 木, 木】，以 q 開始，再輸入兩個字嘅粵拼: qmukmuk → 林。"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "兩分即係將一個字分成兩部分，比如【林 = 木, 木】。以 q 開始，再輸入兩個字嘅粵拼，例如 qmukmuk → 林。"
+            "value" : "拆字例如【林 = 木, 木】，以 q 開始，再輸入兩個字嘅粵拼: qmukmuk → 林。"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "兩分即係將一個字分成兩部分，比如【林 = 木, 木】。以 q 開始，再輸入兩個字嘅粵拼，例如 qmukmuk → 林。"
+            "value" : "拆字例如【林 = 木, 木】，以 q 開始，再輸入兩個字嘅粵拼: qmukmuk → 林。"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "兩分即係將一個字分成兩部分，比如【林 = 木, 木】。以 q 開始，再輸入兩個字嘅粵拼，例如 qmukmuk → 林。"
+            "value" : "拆字例如【林 = 木, 木】，以 q 開始，再輸入兩個字嘅粵拼: qmukmuk → 林。"
           }
         }
       }
@@ -16398,55 +16398,55 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "用兩分拆字反查粵拼"
+            "value" : "用拆字輸入反查粵拼"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "用兩分拆字反查粵拼"
+            "value" : "用拆字輸入反查粵拼"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "用兩分拆字反查粵拼"
+            "value" : "用拆字輸入反查粵拼"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "用兩分拆字反查粵拼"
+            "value" : "用拆字輸入反查粵拼"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "用兩分拆字反查粵拼"
+            "value" : "用拆字輸入反查粵拼"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "用兩分拆字反查粵拼"
+            "value" : "用拆字輸入反查粵拼"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "用兩分拆字反查粵拼"
+            "value" : "用拆字輸入反查粵拼"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "用兩分拆字反查粵拼"
+            "value" : "用拆字輸入反查粵拼"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "用兩分拆字反查粵拼"
+            "value" : "用拆字輸入反查粵拼"
           }
         }
       }

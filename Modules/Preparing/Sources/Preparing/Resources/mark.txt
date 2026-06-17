@@ -95,6 +95,7 @@ compose	Compose
 copilot	Copilot
 coretext	Core Text
 costco	Costco
+cowork	Cowork
 cpu	CPU
 css	CSS
 cuda	CUDA
@@ -548,7 +549,9 @@ winui	WinUI
 word	Word
 word	word
 wordpress	WordPress
+wwdc	WWDC
 wwe	WWE
+www	www
 xbox	Xbox
 xcod	Xcode
 xcode	Xcode
@@ -625,6 +628,7 @@ goodman	Goodman
 lgbt	LGBT
 lgbtq	LGBTQ
 lgbtqia	LGBTQIA
+mamba	mamba
 momo	momo
 ootd	ootd
 pinkman	Pinkman
@@ -3097,7 +3101,6 @@ pain	pain
 particularly	particularly
 factors	factors
 coffee	coffee
-www	www
 settings	settings
 cum	cum
 buyer	buyer
@@ -15295,4 +15298,5 @@ doubtful	doubtful
 dysfunction	dysfunction
 padding	padding
 cameraman	cameraman
+trillionaire	trillionaire
 ecosystems	ecosystems

@@ -1918,6 +1918,7 @@
 1	110000	1F45C	手提包	sau2 tai4 baau1
 1	110000	1F45C	挎包	kwaa3 baau1
 1	110000	1F45C	包	baau1
+1	110000	1F45C	包包	baau1 baau1
 1	110000	1F45C	手袋	sau2 doi2
 1	110000	1F45C	袋	doi2
 1	110000	1F4BC	公文包	gung1 man4 baau1
@@ -6058,10 +6059,22 @@
 10	110000	2ECD	撐艇	caang1 teng5
 10	110000	2ECD	撐艇仔	caang1 teng5 zai2
 10	110000	2ECD	走之底	zau2 zi1 dai2
+10	110000	2ECD	走字底	zau2 zi6 dai2
+10	110000	2ECD	走字邊	zau2 zi6 bin1
+10	110000	2ECD	走字旁	zau2 zi6 pong4
+10	110000	2ECD	之字底	zi1 zi6 dai2
+10	110000	2ECD	之字邊	zi1 zi6 bin1
+10	110000	2ECD	之字旁	zi1 zi6 pong4
 10	110000	2ECD	辵部	coek3 bou6
 10	110000	8FB6	撐艇	caang1 teng5
 10	110000	8FB6	撐艇仔	caang1 teng5 zai2
 10	110000	8FB6	走之底	zau2 zi1 dai2
+10	110000	8FB6	走字底	zau2 zi6 dai2
+10	110000	8FB6	走字邊	zau2 zi6 bin1
+10	110000	8FB6	走字旁	zau2 zi6 pong4
+10	110000	8FB6	之字底	zi1 zi6 dai2
+10	110000	8FB6	之字邊	zi1 zi6 bin1
+10	110000	8FB6	之字旁	zi1 zi6 pong4
 10	110000	8FB6	辵部	coek3 bou6
 10	110000	5EF4	建字底	gin3 zi6 dai2
 10	110000	56D7	國字框	gwok3 zi6 hong1
