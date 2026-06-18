@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<installer-gui-script minSpecVersion="1">
+        <title>Jyutping</title>
+        <conclusion file="conclusion.html" mime-type="text/html" />
+        <pkg-ref id="org.jyutping.inputmethod.Jyutping" />
+        <options customize="never" require-scripts="false" rootVolumeOnly="true" />
+        <choices-outline>
+                <line choice="default">
+                        <line choice="org.jyutping.inputmethod.Jyutping" />
+                </line>
+        </choices-outline>
+        <choice id="default" />
+        <choice id="org.jyutping.inputmethod.Jyutping" visible="false">
+                <pkg-ref id="org.jyutping.inputmethod.Jyutping" />
+        </choice>
+        <pkg-ref id="org.jyutping.inputmethod.Jyutping" onConclusion="RequireLogout">Jyutping-component.pkg</pkg-ref>
+</installer-gui-script>
