@@ -138,38 +138,59 @@ private struct RubyStackRow: View {
         init(text: String, romanization: String) {
                 let characters = text.map({ String($0) })
                 let syllables = romanization.split(separator: Character.space).map({ String($0) })
-                var mapped: Array<(character: String, syllable: String)> = []
+                var units: Array<DisplayUnit> = []
                 for index in characters.indices {
                         if let character = characters.fetch(index), let syllable = syllables.fetch(index) {
-                                mapped.append((character, syllable))
+                                let unit = DisplayUnit(character: character, syllable: syllable, id: index)
+                                units.append(unit)
                         }
                 }
-                self.units = mapped
+                self.units = units
+                self.annotationLength = syllables.map(\.count).max() ?? 7
         }
-        private let units: Array<(character: String, syllable: String)>
+        private let units: [DisplayUnit]
+        private let annotationLength: Int
         var body: some View {
-                HStack(alignment: .lastTextBaseline, spacing: 1) {
-                        ForEach(units.indices, id: \.self) { index in
-                                CharacterSyllableView(unit: units[index])
+                HStack(alignment: .lastTextBaseline, spacing: 2) {
+                        ForEach(units) { unit in
+                                CharacterSyllableView(unit: unit, annotationLength: annotationLength)
                         }
                 }
         }
 }
+private struct DisplayUnit: Hashable, Identifiable {
+        let character: String
+        let syllable: String
+        let id: Int
+}
 private struct CharacterSyllableView: View {
-        let unit: (character: String, syllable: String)
+        init(unit: DisplayUnit, annotationLength: Int) {
+                self.character = unit.character
+                self.annotation = {
+                        let shortAmount = (annotationLength - unit.syllable.count)
+                        guard shortAmount > 0 else { return unit.syllable }
+                        guard shortAmount > 1 else { return String.space + unit.syllable }
+                        let trailing = (shortAmount / 2)
+                        let leading = (shortAmount - trailing)
+                        return String(repeating: Character.space, count: leading) + unit.syllable + String(repeating: Character.space, count: trailing)
+                }()
+        }
+        private let character: String
+        private let annotation: String
         var body: some View {
                 VStack(spacing: -2) {
-                        Text(verbatim: unit.syllable.isEmpty ? String.space : unit.syllable)
+                        Text(verbatim: annotation)
                                 .lineLimit(1)
                                 .minimumScaleFactor(0.2)
                                 .font(.footnote)
-                                .padding(.leading, 2)
-                        Text(verbatim: unit.character)
+                                .monospaced()
+                        Text(verbatim: character)
                                 .lineLimit(1)
                                 .minimumScaleFactor(0.2)
                                 .font(.title)
+                                .padding(.horizontal, 2)
                 }
-                .frame(width: 32)
+                .frame(width: 36)
         }
 }
 
