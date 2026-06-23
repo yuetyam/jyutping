@@ -744,6 +744,7 @@
 1	110000	1F44D	叻	lek1
 1	110000	1F44D	好叻	hou2 lek1
 1	110000	1F44D	叻叻豬	lek1 lek1 zyu1
+1	110000	1F44D	叻豬	lek1 zyu1
 1	110000	1F44D	掂	dim6
 1	110000	1F44D	勁	ging6
 1	110000	1F44D	好勁	hou2 ging6
@@ -4383,15 +4384,7 @@
 6	110000	1F6AC	紙菸	zi2 jin1
 6	110000	1F6AC	旱菸	hon5 jin1
 6	110000	1F6AC	食菸	sik6 jin1
-6	110000	1F6AC	食支菸	sik6 zi1 jin1
-6	110000	1F6AC	嗦菸	sok3 jin1
-6	110000	1F6AC	嗦啖菸	sok3 daam6 jin1
-6	110000	1F6AC	嗦支菸	sok3 zi1 jin1
 6	110000	1F6AC	吸菸	kap1 jin1
-6	110000	1F6AC	一支菸	jat1 zi1 jin1
-6	110000	1F6AC	支菸	zi1 jin1
-6	110000	1F6AC	一啖菸	jat1 daam6 jin1
-6	110000	1F6AC	一口菸	jat1 hau2 jin1
 6	110000	26B0.FE0F	棺材	gun1 coi4
 6	110000	26B0.FE0F	棺	gun1
 6	110000	26B0.FE0F	棺木	gun1 muk6
@@ -6077,6 +6070,8 @@
 10	110000	8FB6	之字旁	zi1 zi6 pong4
 10	110000	8FB6	辵部	coek3 bou6
 10	110000	5EF4	建字底	gin3 zi6 dai2
+10	110000	5EF4	建字邊	gin3 zi6 bin1
+10	110000	5EF4	建字旁	gin3 zi6 pong4
 10	110000	56D7	國字框	gwok3 zi6 hong1
 10	110000	56D7	圍字框	wai4 zi6 hong1
 10	110000	56D7	口字框	hau2 zi6 hong1
