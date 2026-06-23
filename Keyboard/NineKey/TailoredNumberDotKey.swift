@@ -28,8 +28,10 @@ struct GlassTailoredNumberDotKey: View {
                                         isTouchBegan = true
                                         AudioFeedback.inputed()
                                         context.triggerHapticFeedback()
-                                        context.operate(.input(keyText))
                                 }
+                        }
+                        .onEnded { _ in
+                                context.operate(.input(keyText))
                         }
                 )
         }
@@ -57,8 +59,10 @@ struct TailoredNumberDotKey: View {
                                         isTouchBegan = true
                                         AudioFeedback.inputed()
                                         context.triggerHapticFeedback()
-                                        context.operate(.input(keyText))
                                 }
+                        }
+                        .onEnded { _ in
+                                context.operate(.input(keyText))
                         }
                 )
         }

@@ -119,8 +119,10 @@ struct HomeView: View {
                                         NavigationLink(destination: IntroductionsView()) {
                                                 Label("IOSHomeTab.LabelTitle.MoreIntroductions", systemImage: "info.circle")
                                         }
-                                        NavigationLink(destination: ClipboardFeaturesView()) {
-                                                Label("IOSHomeTab.LabelTitle.ClipboardFeatures", systemImage: "list.clipboard")
+                                        if #available(iOS 1000, *) {
+                                                NavigationLink(destination: ClipboardFeaturesView()) {
+                                                        Label("IOSHomeTab.LabelTitle.ClipboardFeatures", systemImage: "list.clipboard")
+                                                }
                                         }
                                         NavigationLink(destination: ChangeDisplayLanguageView()) {
                                                 Label("IOSHomeTab.LabelTitle.ChangeDisplayLanguage", systemImage: "globe.asia.australia")

@@ -34,8 +34,10 @@ struct GlassTailoredNumberKey: View {
                                         isTouchBegan = true
                                         AudioFeedback.inputed()
                                         context.triggerHapticFeedback()
-                                        context.handle(virtual)
                                 }
+                        }
+                        .onEnded { _ in
+                                context.handle(virtual)
                         }
                 )
         }
@@ -69,8 +71,10 @@ struct TailoredNumberKey: View {
                                         isTouchBegan = true
                                         AudioFeedback.inputed()
                                         context.triggerHapticFeedback()
-                                        context.handle(virtual)
                                 }
+                        }
+                        .onEnded { _ in
+                                context.handle(virtual)
                         }
                 )
         }

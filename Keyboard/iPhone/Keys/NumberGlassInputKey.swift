@@ -52,8 +52,10 @@ struct NumberGlassInputKey: View {
                                         isTouchBegan = true
                                         AudioFeedback.inputed()
                                         context.triggerHapticFeedback()
-                                        context.handle(virtual, isCapitalized: false)
                                 }
+                        }
+                        .onEnded { _ in
+                                context.handle(virtual, isCapitalized: false)
                         }
                 )
         }

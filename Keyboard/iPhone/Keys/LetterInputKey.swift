@@ -58,13 +58,15 @@ struct LetterInputKey: View {
                 .frame(width: keyWidth, height: keyHeight)
                 .contentShape(.rect)
                 .gesture(DragGesture(minimumDistance: 0)
-                        .updating($isTouching) { _, isTouched, _ in
-                                if isTouched.negative {
-                                        isTouched = true
+                        .updating($isTouching) { _, isTouchBegan, _ in
+                                if isTouchBegan.negative {
+                                        isTouchBegan = true
                                         AudioFeedback.inputed()
                                         context.triggerHapticFeedback()
-                                        context.handle(virtual)
                                 }
+                        }
+                        .onEnded { _ in
+                                context.handle(virtual)
                         }
                 )
         }

@@ -34,8 +34,10 @@ struct GlassNineKeyInputKey: View {
                                         isTouchBegan = true
                                         AudioFeedback.inputed()
                                         context.triggerHapticFeedback()
-                                        context.nineKeyProcess(combo)
                                 }
+                        }
+                        .onEnded { _ in
+                                context.nineKeyProcess(combo)
                         }
                 )
         }
@@ -70,8 +72,10 @@ struct NineKeyInputKey: View {
                                         isTouchBegan = true
                                         AudioFeedback.inputed()
                                         context.triggerHapticFeedback()
-                                        context.nineKeyProcess(combo)
                                 }
+                        }
+                        .onEnded { _ in
+                                context.nineKeyProcess(combo)
                         }
                 )
         }

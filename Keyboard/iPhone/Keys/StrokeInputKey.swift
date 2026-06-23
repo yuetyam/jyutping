@@ -78,8 +78,10 @@ struct StrokeInputKey: View {
                                         isTouchBegan = true
                                         AudioFeedback.inputed()
                                         context.triggerHapticFeedback()
-                                        context.handle(virtual)
                                 }
+                        }
+                        .onEnded { _ in
+                                context.handle(virtual)
                         }
                 )
         }

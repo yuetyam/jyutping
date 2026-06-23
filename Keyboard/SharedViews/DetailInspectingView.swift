@@ -151,7 +151,7 @@ private struct RubyStackRow: View {
         private let units: [DisplayUnit]
         private let annotationLength: Int
         var body: some View {
-                HStack(alignment: .lastTextBaseline, spacing: 2) {
+                HStack(spacing: 2) {
                         ForEach(units) { unit in
                                 CharacterSyllableView(unit: unit, annotationLength: annotationLength)
                         }

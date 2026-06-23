@@ -120,13 +120,15 @@ private struct GlassStrokeKey: View {
                 .frame(width: context.nineKeyWidthUnit * 1.06, height: context.heightUnit)
                 .contentShape(.rect)
                 .gesture(DragGesture(minimumDistance: 0)
-                        .updating($isTouching) { _, isTouched, _ in
-                                if isTouched.negative {
-                                        isTouched = true
+                        .updating($isTouching) { _, isTouchBegan, _ in
+                                if isTouchBegan.negative {
+                                        isTouchBegan = true
                                         AudioFeedback.inputed()
                                         context.triggerHapticFeedback()
-                                        context.handle(stroke.virtualInputKey)
                                 }
+                        }
+                        .onEnded { _ in
+                                context.handle(stroke.virtualInputKey)
                         }
                 )
         }
@@ -157,13 +159,15 @@ private struct LegacyStrokeKey: View {
                 .frame(width: context.nineKeyWidthUnit * 1.06, height: context.heightUnit)
                 .contentShape(.rect)
                 .gesture(DragGesture(minimumDistance: 0)
-                        .updating($isTouching) { _, isTouched, _ in
-                                if isTouched.negative {
-                                        isTouched = true
+                        .updating($isTouching) { _, isTouchBegan, _ in
+                                if isTouchBegan.negative {
+                                        isTouchBegan = true
                                         AudioFeedback.inputed()
                                         context.triggerHapticFeedback()
-                                        context.handle(stroke.virtualInputKey)
                                 }
+                        }
+                        .onEnded { _ in
+                                context.handle(stroke.virtualInputKey)
                         }
                 )
         }
