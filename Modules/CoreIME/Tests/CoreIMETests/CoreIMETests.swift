@@ -4,6 +4,67 @@ import Testing
 
 @Suite("CoreIME")
 struct CoreIMETests {
+        @Test("String tone conversion maps tone letters")
+        func stringToneConversionMapsToneLetters() {
+                #expect("gwongv".toneConverted() == "gwong1")
+                #expect("gwongx".toneConverted() == "gwong2")
+                #expect("gwongq".toneConverted() == "gwong3")
+                #expect("gwongvv".toneConverted() == "gwong4")
+                #expect("gwongxx".toneConverted() == "gwong5")
+                #expect("gwongqq".toneConverted() == "gwong6")
+        }
+
+        @Test("String tone conversion consumes paired tone letters")
+        func stringToneConversionConsumesPairedToneLetters() {
+                #expect("vxqvvxxqq".toneConverted() == "123456")
+                #expect("vvvxxxqqq".toneConverted() == "415263")
+        }
+
+        @Test("String mark formatting spaces non-letters")
+        func stringMarkFormattingSpacesNonLetters() {
+                #expect("gwong2".markFormatted() == "gwong2 ")
+                #expect("ngo5'aa3".markFormatted() == "ngo5 ' aa3 ")
+                #expect("AaZz".markFormatted() == "AaZz")
+        }
+
+        @Test("Preview mark normalization maps tone keys")
+        func previewMarkNormalizationMapsToneKeys() {
+                let events: [BasicInputEvent] = [
+                        .init(key: .letterG, case: .lowercased),
+                        .init(key: .letterW, case: .lowercased),
+                        .init(key: .letterO, case: .lowercased),
+                        .init(key: .letterN, case: .lowercased),
+                        .init(key: .letterG, case: .lowercased),
+                        .init(key: .letterV, case: .lowercased),
+                        .init(key: .letterX, case: .lowercased),
+                        .init(key: .letterQ, case: .lowercased),
+                        .init(key: .letterV, case: .lowercased),
+                        .init(key: .letterV, case: .lowercased),
+                        .init(key: .letterX, case: .lowercased),
+                        .init(key: .letterX, case: .lowercased),
+                        .init(key: .letterQ, case: .lowercased),
+                        .init(key: .letterQ, case: .lowercased)
+                ]
+
+                #expect(events.previewMarkNormalized() == "gwong1 2 3 4 5 6")
+        }
+
+        @Test("Preview mark normalization preserves letters and spaces non-letters")
+        func previewMarkNormalizationPreservesLettersAndSpacesNonLetters() {
+                let events: [BasicInputEvent] = [
+                        .init(key: .letterN, case: .uppercased),
+                        .init(key: .letterG, case: .lowercased),
+                        .init(key: .number5, case: .lowercased),
+                        .init(key: .apostrophe, case: .lowercased),
+                        .init(key: .letterA, case: .lowercased),
+                        .init(key: .letterA, case: .lowercased),
+                        .init(key: .number3, case: .lowercased)
+                ]
+
+                #expect(events.previewMarkNormalized() == "Ng5 ' aa3")
+                #expect([BasicInputEvent]().previewMarkNormalized().isEmpty)
+        }
+
         @Test("Segmenter rejects cross-syllable long-a matches")
         func segmenterRejectsCrossSyllableLongA() {
                 let gamSchemes = Segmenter.segment([
