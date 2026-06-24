@@ -1,75 +1,99 @@
 name: CI
 on: [push, pull_request, release]
 
-env:
-  DEVELOPER_DIR: /Applications/Xcode_26.5.app/Contents/Developer
+# env:
+#   DEVELOPER_DIR: /Applications/Xcode_26.6.app/Contents/Developer
 
 jobs:
-  build_preparing:
-    name: Build Preparing
+  build_common_extensions:
+    name: Build CommonExtensions
     runs-on: macos-26
     steps:
-      - uses: actions/checkout@v6
-      - name: Swift Build Preparing
+      - uses: actions/checkout@v7
+      - name: Swift Build CommonExtensions
         run: swift build
-        working-directory: ./Modules/Preparing
+        working-directory: ./Modules/CommonExtensions
   test_common_extensions:
     name: CommonExtensions Tests
+    needs: [build_common_extensions]
     runs-on: macos-26
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: CommonExtensions SwiftTest
         run: swift test
         working-directory: ./Modules/CommonExtensions
-  build_aboutkit:
+  prepare_databases:
+    name: Prepare Databases
+    needs: [build_common_extensions]
+    runs-on: macos-26
+    steps:
+      - uses: actions/checkout@v7
+      - name: Swift Run Preparing
+        run: swift run -c release
+        working-directory: ./Modules/Preparing
+  build_about_kit:
     name: Build AboutKit
     runs-on: macos-26
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Swift Build AboutKit
         run: swift build
         working-directory: ./Modules/AboutKit
-  build_app_data_source:
-    name: Build AppDataSource
+  build_linguistics:
+    name: Build Linguistics
     runs-on: macos-26
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
+      - name: Swift Build Linguistics
+        run: swift build
+        working-directory: ./Modules/Linguistics
+  build_app_data_source:
+    name: Build AppDataSource
+    needs: [prepare_databases]
+    runs-on: macos-26
+    steps:
+      - uses: actions/checkout@v7
       - name: Swift Build AppDataSource
         run: swift build
         working-directory: ./Modules/AppDataSource
-  build_coreime:
+  build_core_ime:
     name: Build CoreIME
+    needs: [prepare_databases]
     runs-on: macos-26
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Swift Build CoreIME
         run: swift build
         working-directory: ./Modules/CoreIME
   build_input_method:
     name: Build InputMethod
+    needs: [build_core_ime]
     runs-on: macos-26
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Build InputMethod Scheme
         run: set -o pipefail && xcodebuild clean build -project Jyutping.xcodeproj -scheme InputMethod -configuration Debug -destination "platform=macOS" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO ONLY_ACTIVE_ARCH=NO | xcpretty
   build_mac_app:
     name: Build macOS App
+    needs: [build_app_data_source]
     runs-on: macos-26
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Build macOS App Scheme
         run: set -o pipefail && xcodebuild clean build -project Jyutping.xcodeproj -scheme Jyutping -configuration Debug -destination "platform=macOS" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO ONLY_ACTIVE_ARCH=NO | xcpretty
   build_ios_app:
     name: Build iOS App
+    needs: [build_app_data_source, build_core_ime]
     runs-on: macos-26
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Build iOS App Scheme
         run: set -o pipefail && xcodebuild clean build -project Jyutping.xcodeproj -scheme Jyutping -configuration Debug -destination "platform=iOS Simulator,name=iPhone 17" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO ONLY_ACTIVE_ARCH=NO | xcpretty
-  build_keyboard:
+  build_ios_keyboard:
     name: Build Keyboard
+    needs: [build_app_data_source, build_core_ime]
     runs-on: macos-26
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Build Keyboard Scheme
         run: set -o pipefail && xcodebuild clean build -project Jyutping.xcodeproj -scheme Keyboard -configuration Debug -destination "platform=iOS Simulator,name=iPhone 17" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO ONLY_ACTIVE_ARCH=NO | xcpretty
