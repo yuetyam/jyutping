@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<installer-gui-script minSpecVersion="1">
+<installer-gui-script minSpecVersion="2">
         <title>Jyutping</title>
         <conclusion file="conclusion.html" mime-type="text/html" />
         <pkg-ref id="org.jyutping.inputmethod.Jyutping" />
         <options customize="never" require-scripts="false" rootVolumeOnly="true" />
+        <allowed-os-versions>
+                <os-version min="13.0" />
+        </allowed-os-versions>
         <choices-outline>
                 <line choice="default">
                         <line choice="org.jyutping.inputmethod.Jyutping" />
