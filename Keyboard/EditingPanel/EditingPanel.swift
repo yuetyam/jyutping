@@ -17,11 +17,7 @@ struct GlassEditingPanel: View {
                         VStack(spacing: 0) {
                                 HStack(spacing: 0) {
                                         EditingPanelGlassClearClipboardKey().frame(maxWidth: .infinity)
-                                        if context.keyboardInterface.isPadFloating {
-                                                EditingPanelPadFloatingGlassPasteKey().frame(maxWidth: .infinity)
-                                        } else {
-                                                EditingPanelGlassPasteKey().frame(maxWidth: .infinity)
-                                        }
+                                        EditingPanelGlassPasteKey().frame(maxWidth: .infinity)
                                 }
                                 .frame(maxHeight: .infinity)
                                 HStack(spacing: 0) {
@@ -63,11 +59,7 @@ struct EditingPanel: View {
                         VStack(spacing: 0) {
                                 HStack(spacing: 0) {
                                         EditingPanelClearClipboardKey().frame(maxWidth: .infinity)
-                                        if context.keyboardInterface.isPadFloating {
-                                                EditingPanelPadFloatingLegacyPasteKey().frame(maxWidth: .infinity)
-                                        } else {
-                                                EditingPanelLegacyPasteKey().frame(maxWidth: .infinity)
-                                        }
+                                        EditingPanelPasteKey().frame(maxWidth: .infinity)
                                 }
                                 .frame(maxHeight: .infinity)
                                 HStack(spacing: 0) {

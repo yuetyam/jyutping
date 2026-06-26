@@ -98,6 +98,9 @@ extension KeyboardForm {
         /// 10-key digit keypad with an additional “dot” key
         var isDecimalPad: Bool { self == .decimalPad }
 
+        /// Button page for copy, cut, clear, etc.
+        var isEditingPanel: Bool { self == .editingPanel }
+
         /// Should stay buffering, should keep the bufferText
         var isBufferable: Bool {
                 switch self {

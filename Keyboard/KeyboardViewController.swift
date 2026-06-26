@@ -559,17 +559,36 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         input(candidate.text)
                         aftercareSelected(candidate)
                 case .copyAllText:
-                        _ = textDocumentProxy.copyAllText()
+                        let didCopyText: Bool = textDocumentProxy.copyAllText()
+                        if didCopyText {
+                                updateClipboardEmpty(to: false)
+                        }
                         shouldAdjustKeyboard = false
                 case .cutAllText:
-                        _ = textDocumentProxy.cutAllText()
+                        let didCutText: Bool = textDocumentProxy.cutAllText()
+                        if didCutText {
+                                updateClipboardEmpty(to: false)
+                        }
                 case .clearAllText:
                         textDocumentProxy.clearAllText()
                 case .convertAllText:
                         textDocumentProxy.convertAllText()
                 case .clearClipboard:
                         UIPasteboard.general.items.removeAll()
+                        updateClipboardEmpty(to: true)
                         shouldAdjustKeyboard = false
+                case .paste:
+                        if UIPasteboard.general.hasStrings {
+                                if let text = UIPasteboard.general.string, text.isNotEmpty {
+                                        textDocumentProxy.insertText(text)
+                                        updateClipboardEmpty(to: false)
+                                } else {
+                                        shouldAdjustKeyboard = false
+                                }
+                        } else {
+                                updateClipboardEmpty(to: true)
+                                shouldAdjustKeyboard = false
+                        }
                 case .moveCursorBackward:
                         textDocumentProxy.moveBackward()
                 case .moveCursorForward:
@@ -1101,6 +1120,12 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
 
         // MARK: - Properties
 
+        @Published private(set) var isClipboardEmpty: Bool = false
+        private func updateClipboardEmpty(to isEmpty: Bool) {
+                guard isClipboardEmpty != isEmpty else { return }
+                isClipboardEmpty = isEmpty
+        }
+
         @Published private(set) var inspectingCandidate: Candidate = .sample
         func inspect(_ candidate: Candidate) {
                 inspectingCandidate = candidate
@@ -1137,6 +1162,10 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let shouldAdjustKeyboardCase: Bool = keyboardForm.isPrimary && keyboardCase.isCapitalized
                 if shouldAdjustKeyboardCase {
                         keyboardCase = .lowercased
+                }
+                if form.isEditingPanel {
+                        let isEmpty = UIPasteboard.general.hasStrings.negative
+                        updateClipboardEmpty(to: isEmpty)
                 }
                 sequencedKeyboardForms.append(keyboardForm)
                 keyboardForm = form
