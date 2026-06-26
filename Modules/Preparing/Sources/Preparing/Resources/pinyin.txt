@@ -26874,9 +26874,9 @@
 笑容轉移	xiao rong zhuan yi
 到店	dao dian
 到店自取	dao dian zi qu
+無孩	wu hai
 無孩愛貓	wu hai ai mao
 無孩愛貓女	wu hai ai mao nv
-無孩	wu hai
 愛貓	ai mao
 愛狗	ai gou
 羣文件	qun wen jian
@@ -31811,6 +31811,40 @@
 再三提醒	zai san ti xing
 再三斟酌	zai san zhen zhuo
 腰窩	yao wo
+吊水	diao shui
+吊水魚	diao shui yu
+瘦身魚	shou shen yu
+唔該睇睇	wu gai di di
+唔該睇下	wu gai di xia
+既係	ji xi
+常用字	chang yong zi
+常用詞	chang yong ci
+常用語	chang yong yu
+常用語句	chang yong yu ju
+常用句式	chang yong ju shi
+透明色	tou ming se
+似我	shi wo
+似你	shi ni
+好似我	hao shi wo
+好似你	hao shi ni
+左起	zuo qi
+右起	you qi
+冇乜用	mao mie yong
+有乜用	you mie yong
+有乜嘢	you mie ye
+冇乜人	mao mie ren
+有乜人	you mie ren
+彈窗	dan chuang
+彈提示	dan ti shi
+咁死鬼	gan si gui
+交晒畀	jiao shai bi
+交晒畀我	jiao shai bi wo
+交晒畀你	jiao shai bi ni
+交晒畀佢	jiao shai bi qu
+所賜	suo ci
+次冪	ci mi
+冪次	mi ci
+王天下	wang tian xia
 頭頂光環	tou ding guang huan
 得意洋洋	de yi yang yang
 閃閃心	shan shan xin
@@ -34615,26 +34649,36 @@
 大寫千	da xie qian
 上標零	shang biao ling
 零次方	ling ci fang
+零次冪	ling ci mi
 上標一	shang biao yi
 一次方	yi ci fang
+一次冪	yi ci mi
 上標二	shang biao er
 二次方	er ci fang
 兩次方	liang ci fang
+二次冪	er ci mi
 上標三	shang biao san
 三次方	san ci fang
 立方	li fang
+三次冪	san ci mi
 上標四	shang biao si
 四次方	si ci fang
+四次冪	si ci mi
 上標五	shang biao wu
 五次方	wu ci fang
+五次冪	wu ci mi
 上標六	shang biao liu
 六次方	liu ci fang
+六次冪	liu ci mi
 上標七	shang biao qi
 七次方	qi ci fang
+七次冪	qi ci mi
 上標八	shang biao ba
 八次方	ba ci fang
+八次冪	ba ci mi
 上標九	shang biao jiu
 九次方	jiu ci fang
+九次冪	jiu ci mi
 下標零	xia biao ling
 腳標零	jiao biao ling
 下標一	xia biao yi
@@ -35265,7 +35309,6 @@
 噶	ga
 對不起	dui bu qi
 檯面	tai mian
-女孩子	nv hai zi
 算是	suan shi
 食得	shi de
 有陣	you zhen
@@ -35465,7 +35508,6 @@
 送到	song dao
 大眼	da yan
 癡漢	chi han
-男孩子	nan hai zi
 麼麼	me me
 註冊表	zhu ce biao
 覈算	he suan
@@ -35593,7 +35635,6 @@
 新浪網	xin lang wang
 仍未	reng wei
 乃是	nai shi
-好孩子	hao hai zi
 與我	yu wo
 製藥	zhi yao
 王力宏	wang li hong
@@ -38723,7 +38764,6 @@
 一幢	yi chuang
 舋	xin
 怎	zen
-并	bing
 巍	wei
 娓	wei
 俟	qi
@@ -38764,7 +38804,6 @@
 期望值	qi wang zhi
 暢銷書	chang xiao shu
 峨眉山	e mei shan
-孩子氣	hai zi qi
 司法部	si fa bu
 賴斯	lai si
 許昌	xu chang
@@ -39375,7 +39414,6 @@
 歌謠	ge yao
 植樹	zhi shu
 彎道	wan dao
-孩兒	hai er
 始發	shi fa
 天門	tian men
 喫屎	chi shi
@@ -41061,7 +41099,6 @@
 東西方	dong xi fang
 文學史	wen xue shi
 拉齊奧	la qi ao
-孩子們	hai zi men
 大躍進	da yue jin
 同學錄	tong xue lu
 助學金	zhu xue jin
@@ -48911,7 +48948,6 @@
 新澤西	xin ze xi
 支公司	zhi gong si
 換完衫	huan wan shan
-小孩子	xiao hai zi
 外向型	wai xiang xing
 免疫性	mian yi xing
 不公正	bu gong zheng
@@ -53593,7 +53629,6 @@
 憲兵	xian bing
 怡情	yi qing
 彭陽	peng yang
-并州	bing zhou
 師承	shi cheng
 市況	shi kuang
 嶙峋	lin xun
@@ -55877,6 +55912,7 @@
 合陽	he yang
 受教	shou jiao
 原陽	yuan yang
+匠人	jiang ren
 北亞	bei ya
 剪成	jian cheng
 削除	xue chu
@@ -57685,7 +57721,6 @@
 水盆	shui pen
 氣韻	qi yun
 款額	kuan e
-榮縣	rong xian
 果酒	guo jiu
 日增	ri zeng
 斯密	si mi
@@ -60380,7 +60415,6 @@
 風馬牛	feng ma niu
 風油精	feng you jing
 門到門	men dao men
-野孩子	ye hai zi
 退燒藥	tui shao yao
 贊成票	zan cheng piao
 說大話	shuo da hua
@@ -64421,7 +64455,6 @@
 復興區	fu xing qu
 強迫性	qiang po xing
 延展性	yan zhan xing
-常用字	chang yong zi
 巡邏車	xun luo che
 少年人	shao nian ren
 對撞機	dui zhuang ji
@@ -79143,7 +79176,6 @@
 生造	sheng zao
 瓦利	wa li
 玄石	xuan shi
-狼孩	lang hai
 牧養	mu yang
 牙垢	ya gou
 溺斃	ni bi
@@ -82389,7 +82421,6 @@
 潮間帶	chao jian dai
 波哥大	bo ge da
 氣壓計	qi ya ji
-毛孩子	mao hai zi
 橘子汁	ju zi zhi
 杜尚別	du shang bie
 有年頭	you nian tou
@@ -88208,7 +88239,6 @@
 塟	zang
 咥	xi
 大難不死必有後福	da nan bu si bi you hou fu
-老婆孩子熱炕頭	lao po hai zi re kang tou
 橫眉冷對千夫指	heng mei leng dui qian fu zhi
 奧斯威辛集中營	ao si wei xin ji zhong ying
 內閣總理大臣	nei ge zong li da chen
@@ -89112,6 +89142,7 @@
 紗籠	sha long
 糧行	liang xing
 籌算	chou suan
+篾匠	mie jiang
 符水	fu shui
 社學	she xue
 璨璨	can can
@@ -99009,7 +99040,6 @@
 工具書	gong ju shu
 峯火臺	feng huo tai
 層積雲	ceng ji yun
-小屁孩	xiao pi hai
 對偶性	dui ou xing
 孤零零	gu ling ling
 天貓座	tian mao zuo
@@ -99073,7 +99103,6 @@
 預支	yu zhi
 預想	yu xiang
 頂層	ding ceng
-鞋子	xie zi
 面額	mian e
 面巾	mian jin
 青苔	qing tai
@@ -100634,7 +100663,6 @@
 國際特赦組織	guo ji te she zu zhi
 阿芙樂爾號	a fu le er hao
 異卵雙胞胎	yi luan shuang bao tai
-以老大自居	yi lao da zi ju
 不期然而然	bu qi ran er ran
 香火不絕	xiang huo bu jue
 錒系元素	a xi yuan su
@@ -102721,7 +102749,6 @@
 網路環境	wang lu huan jing
 眼觀四面	yan guan si mian
 盤根問底	pan gen wen di
-男孩樂隊	nan hai le dui
 無形貿易	wu xing mao yi
 步罡踏斗	bu gang ta dou
 書不盡言	shu bu jin yan
@@ -106014,7 +106041,6 @@
 癔病	yi bing
 痘皰	dou pao
 焦炙	jiao zhi
-泥孩	ni hai
 母蜂	mu feng
 廟塔	miao ta
 庚糖	geng tang
@@ -109588,7 +109614,6 @@
 氣量	qi liang
 氣虛	qi xu
 氣壓	qi ya
-毛孩	mao hai
 比劃	bi hua
 毒殺	du sha
 殺敵	sha di
@@ -114226,7 +114251,6 @@
 樓閣塔	lou ge ta
 春日鄉	chun ri xiang
 推斥力	tui chi li
-三次冪	san ci mi
 遐布	xia bu
 蠹弊	du bi
 虛腕	xu wan
@@ -115304,6 +115328,7 @@
 交響樂	jiao xiang le
 交叉點	jiao cha dian
 五指山	wu zhi shan
+五千年	wu qian nian
 五五波	wu wu bo
 乜東東	mie dong dong
 下輩子	xia bei zi
@@ -116482,7 +116507,6 @@
 居留	ju liu
 居所	ju suo
 屁眼	pi yan
-屁孩	pi hai
 局促	ju cu
 局住	ju zhu
 就座	jiu zuo
@@ -124484,6 +124508,7 @@
 籠嘴	long zui
 籌馬	chou ma
 篾青	mie qing
+篾席	mie xi
 篦頭	bi tou
 管弦	guan xian
 箜簧	kong huang
@@ -125333,7 +125358,6 @@
 抴	ye
 慇	yin
 弑	shi
-幷	bing
 幞	fu
 帮	bang
 岙	ao
@@ -132548,6 +132572,7 @@
 兵頭花園	bing tou hua yuan
 冰廳	bing ting
 冰碴	bing cha
+幷州	bing zhou
 冰袖	bing xiu
 冰墊	bing dian
 丙到飛起	bing dao fei qi
@@ -134031,6 +134056,8 @@
 次被告	ci bei gao
 廁蓋	ce gai
 刺鋼絲	ci gang si
+賜你	ci ni
+賜我	ci wo
 廁所板	ce suo ban
 廁所水	ce suo shui
 廁所位	ce suo wei
@@ -137143,6 +137170,7 @@
 塊面紅紅地	kuai mian hong hong di
 快手啲	kuai shou di
 快線	kuai xian
+快熟	kuai shu
 快熟麪	kuai shu mian
 快活谷	kuai huo gu
 快活谷馬場	kuai huo gu ma chang
@@ -140883,7 +140911,6 @@
 鞋楦	xie xuan
 鞋履	xie lv
 鞋碼	xie ma
-孩奴	hai nu
 鞋鋪	xie pu
 諧星	xie xing
 鞋踭	xie zheng
@@ -141514,6 +141541,7 @@
 喉嚨錠	hou long ding
 喉腩	hou nan
 喉核	hou he
+喉仔	hou zai
 喉嘴	hou zui
 猴子採	hou zi cai
 猴子偷桃	hou zi tou tao
@@ -142271,7 +142299,6 @@
 好似噉	hao shi dan
 好似狗竇	hao shi gou dou
 好似係	hao shi xi
-好似你	hao shi ni
 好似豬咁蠢	hao shi zhu gan chun
 好前	hao qian
 好前邊	hao qian bian
@@ -142565,7 +142592,6 @@
 洪棍	hong gun
 紅棍	hong gun
 紅轟轟	hong hong hong
-熊孩子	xiong hai zi
 紅磡海底隧道	hong kan hai di sui dao
 紅磡碼頭	hong kan ma tou
 紅脅繡眼鳥	hong xie xiu yan niao
@@ -143536,7 +143562,6 @@
 有乜咁出奇	you mie gan chu qi
 有乜好傾	you mie hao qing
 有乜咿喐	you mie yi yu
-有乜用	you mie yong
 有乜唔妥	you mie wu tuo
 有乜噏乜	you mie xi mie
 有乜事幹	you mie shi gan
@@ -146721,7 +146746,6 @@
 老婆除褲	lao po chu ku
 老婆大人	lao po da ren
 老婆擔遮	lao po dan zhe
-老婆孩子	lao po hai zi
 老婆乸	lao po na
 姥鯊	lao sha
 老散	lao san
@@ -148410,6 +148434,8 @@
 搣咗	mie zuo
 滅除	mie chu
 滅火喉	mie huo hou
+篾編	mie bian
+篾織	mie zhi
 喵星人	miao xing ren
 廟細燈籠大	miao xi deng long da
 藐嘴	miao zui
@@ -149521,6 +149547,7 @@
 梧桐山	wu tong shan
 五餅二魚	wu bing er yu
 午餐肉	wu can rou
+五千年來	wu qian nian lai
 五打一	wu da yi
 五噸半	wu dun ban
 五花茶	wu hua cha
@@ -150762,6 +150789,7 @@
 辟腥	pi xing
 辟暑	pi shu
 鸊鷉	pi ti
+編篾	bian mie
 犏牛	pian niu
 偏旁部首	pian pang bu shou
 篇韻	pian yun
@@ -153755,7 +153783,6 @@
 小攻	xiao gong
 小拐	xiao guai
 小軍艦鳥	xiao jun jian niao
-小孩堤防	xiao hai di fang
 小器鬼	xiao qi gui
 小學而大遺	xiao xue er da yi
 少好多	shao hao duo
@@ -154293,7 +154320,6 @@
 送暖	song nuan
 送頭	song tou
 餸頭餸尾	song tou song wei
-宋王臺	song wang tai
 宋制	song zhi
 宋制漢服	song zhi han fu
 送咗	song zuo
@@ -157699,6 +157725,7 @@
 織籮	zhi luo
 積埋啲錢	ji mai di qian
 即晚	ji wan
+織篾	zhi mie
 織衫	zhi shan
 即使間	ji shi jian
 即時傳譯	ji shi chuan yi
@@ -158842,6 +158869,7 @@
 絕世美人	jue shi mei ren
 絕詩	jue shi
 絕章	jue zhang
+并	bing
 𥕏	kuo
 丨	gun
 噚	xun
@@ -159007,6 +159035,7 @@
 仌	bing
 仒	bing
 屛	ping
+幷	bing
 氷	bing
 鋲	bing
 偋	bing
@@ -165551,7 +165580,6 @@
 德安縣	de an xian
 德惠市	de hui shi
 德宏州	de hong zhou
-得榮縣	de rong xian
 德州市	de zhou shi
 登封市	deng feng shi
 燈塔市	deng ta shi
@@ -166511,7 +166539,6 @@
 萬寧市	wan ning shi
 萬安縣	wan an xian
 慢城市	man cheng shi
-萬榮縣	wan rong xian
 萬載縣	wan zai xian
 勐海縣	meng hai xian
 勐臘縣	meng la xian
@@ -166707,7 +166734,6 @@
 寧城縣	ning cheng xian
 寧津縣	ning jin xian
 寧晉縣	ning jin xian
-聶榮縣	nie rong xian
 鳥取縣	niao qu xian
 內江市	nei jiang shi
 內鄉縣	nei xiang xian
@@ -167379,7 +167405,6 @@
 酒泉市	jiu quan shi
 岫岩縣	xiu yan xian
 柘城縣	zhe cheng xian
-柘榮縣	zhe rong xian
 井研縣	jing yan xian
 井陘縣	jing xing xian
 漵浦縣	xu pu xian
@@ -167777,6 +167802,10 @@
 下雪	xia xue
 下頭	xia tou
 下午好	xia wu hao
+孩兒	hai er
+鞋子	xie zi
+孩子氣	hai zi qi
+孩子們	hai zi men
 掐死	qia si
 掐算	qia suan
 掐斷	qia duan
@@ -167837,6 +167866,7 @@
 好多遍	hao duo bian
 好久	hao jiu
 好久不見	hao jiu bu jian
+好孩子	hao hai zi
 好戲還在後頭	hao xi hai zai hou tou
 好看	hao kan
 好好的	hao hao de
@@ -167850,9 +167880,11 @@
 好小	hao xiao
 哭了	ku le
 兇巴巴	xiong ba ba
+熊孩子	xiong hai zi
 也曾	ye ceng
 也曾說過	ye ceng shuo guo
 也沒有	ye mei you
+也是	ye shi
 也就	ye jiu
 也就是	ye jiu shi
 也就是說	ye jiu shi shuo
@@ -167885,6 +167917,7 @@
 有些	you xie
 有些人	you xie ren
 又不	you bu
+野孩子	ye hai zi
 依舊是	yi jiu shi
 椅子	yi zi
 而不是	er bu shi
@@ -167940,6 +167973,8 @@
 了麼	le me
 來了	lai le
 老毛子	lao mao zi
+老婆孩子	lao po hai zi
+老婆孩子熱炕頭	lao po hai zi re kang tou
 老頭子	lao tou zi
 綠帽子	lv mao zi
 弄髒	nong zang
@@ -167963,6 +167998,8 @@
 忙不迭	mang bu die
 忙不過來	mang bu guo lai
 忘不了	wang bu le
+毛孩	mao hai
+毛孩子	mao hai zi
 毛小孩	mao xiao hai
 模子	mo zi
 毛子	mao zi
@@ -168016,6 +168053,7 @@
 那是	na shi
 那就	na jiu
 那就是	na jiu shi
+男孩子	nan hai zi
 難不倒	nan bu dao
 難不成	nan bu cheng
 難混	nan hun
@@ -168038,6 +168076,7 @@
 你在哪	ni zai na
 你在哪兒	ni zai na er
 你在哪裏	ni zai na li
+女孩子	nv hai zi
 女兒奴	nv er nu
 捂嘴	wu zui
 牛逼	niu bi
@@ -168141,10 +168180,12 @@
 小雞雞	xiao ji ji
 小九九	xiao jiu jiu
 小哥	xiao ge
+小孩子	xiao hai zi
 小舅	xiao jiu
 小舅子	xiao jiu zi
 小媽	xiao ma
 小賣部	xiao mai bu
+小屁孩	xiao pi hai
 笑一個	xiao yi ge
 笑了	xiao le
 傻子	sha zi

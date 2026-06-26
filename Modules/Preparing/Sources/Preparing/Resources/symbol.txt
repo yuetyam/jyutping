@@ -6474,27 +6474,37 @@
 10	110000	4EDF	大寫千	daai6 se2 cin1
 10	110000	2070	上標零	soeng6 biu1 ling4
 10	110000	2070	零次方	ling4 ci3 fong1
+10	110000	2070	零次冪	ling4 ci3 mik6
 10	110000	B9	上標一	soeng6 biu1 jat1
 10	110000	B9	一次方	jat1 ci3 fong1
+10	110000	B9	一次冪	jat1 ci3 mik6
 10	110000	B2	上標二	soeng6 biu1 ji6
 10	110000	B2	二次方	ji6 ci3 fong1
 10	110000	B2	兩次方	loeng5 ci3 fong1
 10	110000	B2	平方	ping4 fong1
+10	110000	B2	二次冪	ji6 ci3 mik6
 10	110000	B3	上標三	soeng6 biu1 saam1
 10	110000	B3	三次方	saam1 ci3 fong1
 10	110000	B3	立方	lap6 fong1
+10	110000	B3	三次冪	saam1 ci3 mik6
 10	110000	2074	上標四	soeng6 biu1 sei3
 10	110000	2074	四次方	sei3 ci3 fong1
+10	110000	2074	四次冪	sei3 ci3 mik6
 10	110000	2075	上標五	soeng6 biu1 ng5
 10	110000	2075	五次方	ng5 ci3 fong1
+10	110000	2075	五次冪	ng5 ci3 mik6
 10	110000	2076	上標六	soeng6 biu1 luk6
 10	110000	2076	六次方	luk6 ci3 fong1
+10	110000	2076	六次冪	luk6 ci3 mik6
 10	110000	2077	上標七	soeng6 biu1 cat1
 10	110000	2077	七次方	cat1 ci3 fong1
+10	110000	2077	七次冪	cat1 ci3 mik6
 10	110000	2078	上標八	soeng6 biu1 baat3
 10	110000	2078	八次方	baat3 ci3 fong1
+10	110000	2078	八次冪	baat3 ci3 mik6
 10	110000	2079	上標九	soeng6 biu1 gau2
 10	110000	2079	九次方	gau2 ci3 fong1
+10	110000	2079	九次冪	gau2 ci3 mik6
 10	110000	2080	下標零	haa6 biu1 ling4
 10	110000	2080	腳標零	goek3 biu1 ling4
 10	110000	2081	下標一	haa6 biu1 jat1

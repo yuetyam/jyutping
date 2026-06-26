@@ -166,10 +166,8 @@ extension KeyboardInterface {
         var editingKeyInset: CGFloat {
                 switch self {
                 case .padFloating: 2
-                case .phonePortrait,
-                .phoneLandscape,
-                .phoneOnPadPortrait,
-                .phoneOnPadLandscape: 3
+                case .phoneLandscape, .phoneOnPadLandscape: 2
+                case .phonePortrait, .phoneOnPadPortrait: 3
                 case .padPortraitSmall,
                 .padLandscapeSmall,
                 .padPortraitMedium,

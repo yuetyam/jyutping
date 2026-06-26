@@ -392,6 +392,7 @@ perplexity	Perplexity
 philips	Philips
 photokit	PhotoKit
 pinterest	Pinterest
+pixelos	PixelOS
 pkg	pkg
 playstore	Play Store
 pm	pm
@@ -634,6 +635,7 @@ momo	momo
 ootd	ootd
 pinkman	Pinkman
 qwerty	qwerty
+refactor	refactor
 saul	Saul
 skyler	Skyler
 tint	tint
@@ -3358,7 +3360,6 @@ racing	racing
 religious	religious
 facts	facts
 breakfast	breakfast
-kong	kong
 column	column
 plants	plants
 faith	faith
@@ -3564,7 +3565,6 @@ criteria	criteria
 pubmed	pubmed
 dave	dave
 diego	diego
-hong	hong
 vice	vice
 associate	associate
 truck	truck
@@ -5499,7 +5499,6 @@ ghost	ghost
 violation	violation
 configure	configure
 stability	stability
-mit	mit
 applying	applying
 southwest	southwest
 boss	boss
@@ -14412,7 +14411,6 @@ installment	installment
 isles	isles
 judaism	judaism
 keller	keller
-kung	kung
 larvae	larvae
 liaison	liaison
 lima	lima
