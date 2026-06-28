@@ -12,7 +12,7 @@ private struct EditingPanelGlassSystemPasteKey: View {
                 let inset = context.keyboardInterface.editingKeyInset
                 ZStack {
                         Color.clear
-                                .glassEffect(isPasting ? .regular : .clear, in: RoundedRectangle(cornerRadius: PresetConstant.ultraKeyCornerRadius, style: .continuous))
+                                .glassEffect(isPasting ? .regular : .clear, in: .rect(cornerRadius: PresetConstant.ultraKeyCornerRadius))
                                 .shadow(color: isPasting ? colorScheme.glassShadow : Color.clear, radius: 0.5)
                                 .padding(isPasting ? (inset - 2) : inset)
                         PasteButton(payloadType: String.self) { strings in
@@ -55,7 +55,7 @@ struct EditingPanelGlassPasteKey: View {
                 ZStack {
                         Color.interactiveClear
                         Color.clear
-                                .glassEffect(isTouching ? .regular : .clear, in: RoundedRectangle(cornerRadius: PresetConstant.ultraKeyCornerRadius, style: .continuous))
+                                .glassEffect(isTouching ? .regular : .clear, in: .rect(cornerRadius: PresetConstant.ultraKeyCornerRadius))
                                 .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
                                 .padding(isTouching ? (inset - 2) : inset)
                         VStack(spacing: 4) {
@@ -92,7 +92,7 @@ struct EditingPanelPasteKey: View {
                 let inset = context.keyboardInterface.editingKeyInset
                 ZStack {
                         Color.interactiveClear
-                        RoundedRectangle(cornerRadius: PresetConstant.ultraKeyCornerRadius, style: .continuous)
+                        RoundedRectangle(cornerRadius: PresetConstant.ultraKeyCornerRadius)
                                 .fill(isTouching ? colorScheme.activeActionKeyColor : colorScheme.actionKeyColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(isTouching ? (inset - 2) : inset)

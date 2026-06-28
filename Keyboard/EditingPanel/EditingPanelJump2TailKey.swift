@@ -14,7 +14,7 @@ struct EditingPanelGlassJump2TailKey: View {
                 ZStack {
                         Color.interactiveClear
                         Color.clear
-                                .glassEffect(isTouching ? .regular : .clear, in: RoundedRectangle(cornerRadius: PresetConstant.ultraKeyCornerRadius, style: .continuous))
+                                .glassEffect(isTouching ? .regular : .clear, in: .rect(cornerRadius: PresetConstant.ultraKeyCornerRadius))
                                 .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
                                 .padding(isTouching ? (inset - 2) : inset)
                         Image(systemName: "arrow.forward.to.line")
@@ -45,7 +45,7 @@ struct EditingPanelJump2TailKey: View {
                 let inset = context.keyboardInterface.editingKeyInset
                 ZStack {
                         Color.interactiveClear
-                        RoundedRectangle(cornerRadius: PresetConstant.ultraKeyCornerRadius, style: .continuous)
+                        RoundedRectangle(cornerRadius: PresetConstant.ultraKeyCornerRadius)
                                 .fill(isTouching ? colorScheme.activeActionKeyColor : colorScheme.actionKeyColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(isTouching ? (inset - 2) : inset)

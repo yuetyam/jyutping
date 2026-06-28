@@ -20,11 +20,11 @@ struct EditingPanelSpaceKey: View {
                         Color.interactiveClear
                         if #available(iOSApplicationExtension 26.0, *) {
                                 Color.clear
-                                        .glassEffect(isTouching ? .regular : .clear, in: RoundedRectangle(cornerRadius: PresetConstant.ultraKeyCornerRadius, style: .continuous))
+                                        .glassEffect(isTouching ? .regular : .clear, in: .rect(cornerRadius: PresetConstant.ultraKeyCornerRadius))
                                         .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
                                         .padding(isTouching ? (inset - 2) : inset)
                         } else {
-                                RoundedRectangle(cornerRadius: PresetConstant.ultraKeyCornerRadius, style: .continuous)
+                                RoundedRectangle(cornerRadius: PresetConstant.ultraKeyCornerRadius)
                                         .fill(isTouching ? colorScheme.activeActionKeyColor : colorScheme.actionKeyColor)
                                         .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                         .padding(isTouching ? (inset - 2) : inset)

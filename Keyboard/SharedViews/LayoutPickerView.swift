@@ -21,7 +21,7 @@ struct LayoutPickerView: View {
                                         ZStack {
                                                 Color.interactiveClear
                                                 ZStack {
-                                                        RoundedRectangle(cornerRadius: 20).stroke(Material.regular, lineWidth: 1)
+                                                        RoundedRectangle(cornerRadius: PresetConstant.sectionCornerRadius).stroke(Material.regular, lineWidth: 1)
                                                         Grid(verticalSpacing: 12) {
                                                                 GridRow {
                                                                         LayoutOptionView(layout: .qwerty, isSelected: selectedLayout.isQwerty)

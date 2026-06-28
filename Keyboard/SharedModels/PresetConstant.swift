@@ -25,6 +25,9 @@ struct PresetConstant {
         /// Highlighted selection view inside the key bubble preview (iPad)
         static let innerLargeKeyCornerRadius: CGFloat = 6
 
+        /// Rounded rectangle for CardView, BlockView, StackView, etc.
+        static let sectionCornerRadius: CGFloat = 20
+
         static let halfWidth: String = "半寬"
         static let fullWidth: String = "全寬"
         static let separate: String = "分隔"

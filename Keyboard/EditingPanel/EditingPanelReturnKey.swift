@@ -46,12 +46,12 @@ struct EditingPanelReturnKey: View {
                         Color.interactiveClear
                         if #available(iOSApplicationExtension 26.0, *) {
                                 glassBackColor
-                                        .clipShape(RoundedRectangle(cornerRadius: PresetConstant.ultraKeyCornerRadius, style: .continuous))
-                                        .glassEffect(isTouching ? .regular : .clear, in: RoundedRectangle(cornerRadius: PresetConstant.ultraKeyCornerRadius, style: .continuous))
+                                        .clipShape(.rect(cornerRadius: PresetConstant.ultraKeyCornerRadius))
+                                        .glassEffect(isTouching ? .regular : .clear, in: .rect(cornerRadius: PresetConstant.ultraKeyCornerRadius))
                                         .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
                                         .padding(isTouching ? (inset - 2) : inset)
                         } else {
-                                RoundedRectangle(cornerRadius: PresetConstant.ultraKeyCornerRadius, style: .continuous)
+                                RoundedRectangle(cornerRadius: PresetConstant.ultraKeyCornerRadius)
                                         .fill(backColor)
                                         .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                         .padding(isTouching ? (inset - 2) : inset)

@@ -28,9 +28,9 @@ struct DetailInspectingView: View {
                                         case .cantonese:
                                                 ZStack {
                                                         if #available(iOS 26.0, *) {
-                                                                Color.clear.glassEffect(.clear, in: RoundedRectangle(cornerRadius: 20))
+                                                                Color.clear.glassEffect(.clear, in: .rect(cornerRadius: PresetConstant.sectionCornerRadius))
                                                         } else {
-                                                                RoundedRectangle(cornerRadius: 20).fill(Material.thin)
+                                                                RoundedRectangle(cornerRadius: PresetConstant.sectionCornerRadius).fill(Material.thin)
                                                         }
                                                         CandidateDetailSummaryView(candidate: candidate, inputFrequency: inputFrequency, latestDate: latestDate).padding(10)
                                                 }
@@ -199,9 +199,9 @@ private struct SymbolCandidateDetailView: View {
         var body: some View {
                 ZStack {
                         if #available(iOS 26.0, *) {
-                                Color.clear.glassEffect(.clear, in: RoundedRectangle(cornerRadius: 20))
+                                Color.clear.glassEffect(.clear, in: .rect(cornerRadius: PresetConstant.sectionCornerRadius))
                         } else {
-                                RoundedRectangle(cornerRadius: 20).fill(Material.thin)
+                                RoundedRectangle(cornerRadius: PresetConstant.sectionCornerRadius).fill(Material.thin)
                         }
                         VStack(alignment: .leading, spacing: 16) {
                                 HStack {
