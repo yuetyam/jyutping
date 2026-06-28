@@ -4648,154 +4648,60 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "由於系統限制，需要開啓「允許全權取用」權限，鍵盤「貼上」掣先可以正常使用。"
+            "value" : "由於系統限制，需要開啓 **允許全權取用** 權限，鍵盤 **貼上** 掣先可以正常使用。"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "由於系統限制，需要開啓「允許完全訪問」權限，鍵盤「貼上」掣先可以正常使用。"
+            "value" : "由於系統限制，需要開啓 **允許完全訪問** 權限，鍵盤 **貼上** 掣先可以正常使用。"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "由於系統限制，需要開啓「允許完全訪問」權限，鍵盤「貼上」掣先可以正常使用。"
+            "value" : "由於系統限制，需要開啓 **允許完全訪問** 權限，鍵盤 **貼上** 掣先可以正常使用。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "由於系統限制，需要開啓「允許完整取用」權限，鍵盤「貼上」掣先可以正常使用。"
+            "value" : "由於系統限制，需要開啓 **允許完整取用** 權限，鍵盤 **貼上** 掣先可以正常使用。"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "由於系統限制，需要開啓「允許完全訪問」權限，鍵盤「貼上」掣先可以正常使用。"
+            "value" : "由於系統限制，需要開啓 **允許完全訪問** 權限，鍵盤 **貼上** 掣先可以正常使用。"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "由於系統限制，需要開啓「允許全權取用」權限，鍵盤「貼上」掣先可以正常使用。"
+            "value" : "由於系統限制，需要開啓 **允許全權取用** 權限，鍵盤 **貼上** 掣先可以正常使用。"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "由於系統限制，需要開啓「允許全權取用」權限，鍵盤「貼上」掣先可以正常使用。"
+            "value" : "由於系統限制，需要開啓 **允許全權取用** 權限，鍵盤 **貼上** 掣先可以正常使用。"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "由於系統限制，需要開啓「允許完整取用」權限，鍵盤「貼上」掣先可以正常使用。"
+            "value" : "由於系統限制，需要開啓 **允許完整取用** 權限，鍵盤 **貼上** 掣先可以正常使用。"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "由於系統限制，需要開啓「允許全權取用」權限，鍵盤「貼上」掣先可以正常使用。"
+            "value" : "由於系統限制，需要開啓 **允許全權取用** 權限，鍵盤 **貼上** 掣先可以正常使用。"
           }
         }
       }
     },
     "IOSHomeTab.ClipboardFeaturesView.Notice2" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The keyboard itself would not store any content of the system clipboard."
-          }
-        },
-        "en-CA" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The keyboard itself would not store any content of the system clipboard."
-          }
-        },
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The keyboard itself would not store any content of the system clipboard."
-          }
-        },
-        "en-US" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The keyboard itself would not store any content of the system clipboard."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Le clavier lui-même ne stockera aucun contenu du presse-papiers système."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "キーボード自体は、システムのクリップボードのいかなる内容も保存しません。"
-          }
-        },
-        "yue" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "鍵盤自身冇儲存系統剪貼板或者輸入框嘅任何內容。"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "鍵盤自身冇儲存系統剪貼板或者輸入框嘅任何內容。"
-          }
-        },
-        "zh-Hans-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "鍵盤自身冇儲存系統剪貼板或者輸入框嘅任何內容。"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "鍵盤自身冇儲存系統剪貼板或者輸入框嘅任何內容。"
-          }
-        },
-        "zh-Hant-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "鍵盤自身冇儲存系統剪貼板或者輸入框嘅任何內容。"
-          }
-        },
-        "zh-Hant-HK" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "鍵盤自身冇儲存系統剪貼板或者輸入框嘅任何內容。"
-          }
-        },
-        "zh-Hant-MO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "鍵盤自身冇儲存系統剪貼板或者輸入框嘅任何內容。"
-          }
-        },
-        "zh-Hant-TW" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "鍵盤自身冇儲存系統剪貼板或者輸入框嘅任何內容。"
-          }
-        },
-        "zh-HK" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "鍵盤自身冇儲存系統剪貼板或者輸入框嘅任何內容。"
-          }
-        }
-      }
-    },
-    "IOSHomeTab.ClipboardFeaturesView.Notice3" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4836,60 +4742,60 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "撳「貼上」或者「清空系統剪貼板」掣時，系統可能會彈提示，詢問是否允許貼上。"
+            "value" : "撳 **貼上** 或者 **清空系統剪貼板** 掣時，系統可能會彈提示，詢問是否允許貼上。"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "撳「貼上」或者「清空系統剪貼板」掣時，系統可能會彈提示，詢問是否允許貼上。"
+            "value" : "撳 **貼上** 或者 **清空系統剪貼板** 掣時，系統可能會彈提示，詢問是否允許貼上。"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "撳「貼上」或者「清空系統剪貼板」掣時，系統可能會彈提示，詢問是否允許貼上。"
+            "value" : "撳 **貼上** 或者 **清空系統剪貼板** 掣時，系統可能會彈提示，詢問是否允許貼上。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "撳「貼上」或者「清空系統剪貼板」掣時，系統可能會彈提示，詢問是否允許貼上。"
+            "value" : "撳 **貼上** 或者 **清空系統剪貼板** 掣時，系統可能會彈提示，詢問是否允許貼上。"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "撳「貼上」或者「清空系統剪貼板」掣時，系統可能會彈提示，詢問是否允許貼上。"
+            "value" : "撳 **貼上** 或者 **清空系統剪貼板** 掣時，系統可能會彈提示，詢問是否允許貼上。"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "撳「貼上」或者「清空系統剪貼板」掣時，系統可能會彈提示，詢問是否允許貼上。"
+            "value" : "撳 **貼上** 或者 **清空系統剪貼板** 掣時，系統可能會彈提示，詢問是否允許貼上。"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "撳「貼上」或者「清空系統剪貼板」掣時，系統可能會彈提示，詢問是否允許貼上。"
+            "value" : "撳 **貼上** 或者 **清空系統剪貼板** 掣時，系統可能會彈提示，詢問是否允許貼上。"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "撳「貼上」或者「清空系統剪貼板」掣時，系統可能會彈提示，詢問是否允許貼上。"
+            "value" : "撳 **貼上** 或者 **清空系統剪貼板** 掣時，系統可能會彈提示，詢問是否允許貼上。"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "撳「貼上」或者「清空系統剪貼板」掣時，系統可能會彈提示，詢問是否允許貼上。"
+            "value" : "撳 **貼上** 或者 **清空系統剪貼板** 掣時，系統可能會彈提示，詢問是否允許貼上。"
           }
         }
       }
     },
-    "IOSHomeTab.ClipboardFeaturesView.Notice4" : {
+    "IOSHomeTab.ClipboardFeaturesView.Notice3" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4930,55 +4836,55 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果覺得經常彈提示好煩，可以去系統設定App嘅「粵拼」䈎面；將設定項「從其他App貼上」，由「詢問」改爲「允許」。"
+            "value" : "如果覺得經常彈提示好煩，可以去系統設定App嘅 **粵拼** 䈎面；將設定項 **從其他App貼上**，由 **詢問** 改爲 **允許**。"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果覺得經常彈提示好煩，可以去系統設置App嘅「粵拼」䈎面；將設置項「從其他App貼上」，由「詢問」改爲「允許」。"
+            "value" : "如果覺得經常彈提示好煩，可以去系統設置App嘅 **粵拼** 䈎面；將設置項 **從其他App貼上**，由 **詢問** 改爲 **允許**。"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果覺得經常彈提示好煩，可以去系統設置App嘅「粵拼」䈎面；將設置項「從其他App貼上」，由「詢問」改爲「允許」。"
+            "value" : "如果覺得經常彈提示好煩，可以去系統設置App嘅 **粵拼** 䈎面；將設置項 **從其他App貼上**，由 **詢問** 改爲 **允許**。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果覺得經常彈提示好煩，可以去系統設定App嘅「粵拼」䈎面；將設定項「從其他App貼上」，由「詢問」改爲「允許」。"
+            "value" : "如果覺得經常彈提示好煩，可以去系統設定App嘅 **粵拼** 䈎面；將設定項 **從其他App貼上**，由 **詢問** 改爲 **允許**。"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果覺得經常彈提示好煩，可以去系統設置App嘅「粵拼」䈎面；將設置項「從其他App貼上」，由「詢問」改爲「允許」。"
+            "value" : "如果覺得經常彈提示好煩，可以去系統設置App嘅 **粵拼** 䈎面；將設置項 **從其他App貼上**，由 **詢問** 改爲 **允許**。"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果覺得經常彈提示好煩，可以去系統設定App嘅「粵拼」䈎面；將設定項「從其他App貼上」，由「詢問」改爲「允許」。"
+            "value" : "如果覺得經常彈提示好煩，可以去系統設定App嘅 **粵拼** 䈎面；將設定項 **從其他App貼上**，由 **詢問** 改爲 **允許**。"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果覺得經常彈提示好煩，可以去系統設定App嘅「粵拼」䈎面；將設定項「從其他App貼上」，由「詢問」改爲「允許」。"
+            "value" : "如果覺得經常彈提示好煩，可以去系統設定App嘅 **粵拼** 䈎面；將設定項 **從其他App貼上**，由 **詢問** 改爲 **允許**。"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果覺得經常彈提示好煩，可以去系統設定App嘅「粵拼」䈎面；將設定項「從其他App貼上」，由「詢問」改爲「允許」。"
+            "value" : "如果覺得經常彈提示好煩，可以去系統設定App嘅 **粵拼** 䈎面；將設定項 **從其他App貼上**，由 **詢問** 改爲 **允許**。"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果覺得經常彈提示好煩，可以去系統設定App嘅「粵拼」䈎面；將設定項「從其他App貼上」，由「詢問」改爲「允許」。"
+            "value" : "如果覺得經常彈提示好煩，可以去系統設定App嘅 **粵拼** 䈎面；將設定項 **從其他App貼上**，由 **詢問** 改爲 **允許**。"
           }
         }
       }

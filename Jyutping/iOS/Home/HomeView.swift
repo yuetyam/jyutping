@@ -119,10 +119,8 @@ struct HomeView: View {
                                         NavigationLink(destination: IntroductionsView()) {
                                                 Label("IOSHomeTab.LabelTitle.MoreIntroductions", systemImage: "info.circle")
                                         }
-                                        if #available(iOS 1000, *) {
-                                                NavigationLink(destination: ClipboardFeaturesView()) {
-                                                        Label("IOSHomeTab.LabelTitle.ClipboardFeatures", systemImage: "list.clipboard")
-                                                }
+                                        NavigationLink(destination: ClipboardFeaturesView()) {
+                                                Label("IOSHomeTab.LabelTitle.ClipboardFeatures", systemImage: "list.clipboard")
                                         }
                                         NavigationLink(destination: ChangeDisplayLanguageView()) {
                                                 Label("IOSHomeTab.LabelTitle.ChangeDisplayLanguage", systemImage: "globe.asia.australia")
@@ -131,21 +129,11 @@ struct HomeView: View {
                                                 Label("IOSHomeTab.LabelTitle.FAQ", systemImage: "questionmark.circle")
                                         }
                                 }
-                                #if DEBUG
                                 Section {
                                         NavigationLink(destination: InputTestView()) {
                                                 Label("IOSHomeTab.LabelTitle.InputTest", systemImage: "keyboard")
                                         }
                                 }
-                                #else
-                                if #available(iOS 1000, *) {
-                                        Section {
-                                                NavigationLink(destination: InputTestView()) {
-                                                        Label("IOSHomeTab.LabelTitle.InputTest", systemImage: "keyboard")
-                                                }
-                                        }
-                                }
-                                #endif
                         }
                         .animation(.default, value: animationState)
                         .animation(.default, value: isGuideViewExpanded)
