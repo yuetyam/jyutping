@@ -19,11 +19,11 @@ struct TailoredSpaceKey: View {
                         Color.interactiveClear
                         if #available(iOSApplicationExtension 26.0, *) {
                                 Color.clear
-                                        .glassEffect(isTouching ? .regular : .clear, in: RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous))
+                                        .glassEffect(isTouching ? .regular : .clear, in: .rect(cornerRadius: PresetConstant.largeKeyCornerRadius))
                                         .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
                                         .padding(isTouching ? 1 : 3)
                         } else {
-                                RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous)
+                                RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius)
                                         .fill(isTouching ? colorScheme.activeInputKeyColor : colorScheme.inputKeyColor)
                                         .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                         .padding(isTouching ? 1 : 3)

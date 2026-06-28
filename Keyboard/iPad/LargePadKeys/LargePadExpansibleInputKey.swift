@@ -56,7 +56,7 @@ struct LargePadExpansibleInputKey: View {
                                                                 let elementIndex: Int = keyLocale.isLeading ? index : ((memberCount - 1) - index)
                                                                 let element: KeyElement = keyModel.members[elementIndex]
                                                                 ZStack {
-                                                                        RoundedRectangle(cornerRadius: PresetConstant.innerLargeKeyCornerRadius, style: .continuous)
+                                                                        RoundedRectangle(cornerRadius: PresetConstant.innerLargeKeyCornerRadius)
                                                                                 .fill(selectedIndex == elementIndex ? Color.accentColor : Color.clear)
                                                                         ZStack(alignment: .top) {
                                                                                 Color.clear
@@ -89,7 +89,7 @@ struct LargePadExpansibleInputKey: View {
                                         .padding(.vertical, verticalPadding)
                                         .padding(.horizontal, horizontalPadding)
                         } else {
-                                RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous)
+                                RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius)
                                         .fill(isTouching ? colorScheme.activeInputKeyColor : colorScheme.inputKeyColor)
                                         .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                         .padding(.vertical, verticalPadding)

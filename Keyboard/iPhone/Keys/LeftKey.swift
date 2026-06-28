@@ -50,7 +50,7 @@ struct LeftKey: View {
                                                         ForEach(elements.indices, id: \.self) { index in
                                                                 let element = elements[index]
                                                                 ZStack {
-                                                                        RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius, style: .continuous)
+                                                                        RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
                                                                                 .fill(selectedIndex == index ? Color.accentColor : Color.clear)
                                                                         ZStack(alignment: .top) {
                                                                                 Color.interactiveClear
@@ -83,7 +83,7 @@ struct LeftKey: View {
                                         .padding(.vertical, verticalPadding)
                                         .padding(.horizontal, horizontalPadding)
                         } else {
-                                RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius, style: .continuous)
+                                RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
                                         .fill(isTouching ? activeColor : colorScheme.inputKeyColor)
                                         .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                         .padding(.vertical, verticalPadding)

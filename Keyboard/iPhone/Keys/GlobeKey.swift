@@ -13,7 +13,7 @@ struct GlobeKey: View {
                 let horizontalPadding: CGFloat = isPhoneLandscape ? 6 : 3
                 ZStack {
                         Color.interactiveClear
-                        RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius, style: .continuous)
+                        RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
                                 .fill(colorScheme.isDark ? Color.darkAction : Color.lightAction)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(.vertical, verticalPadding)

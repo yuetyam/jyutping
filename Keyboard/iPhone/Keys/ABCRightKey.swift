@@ -43,7 +43,7 @@ struct ABCRightKey: View {
                                                         ForEach(symbols.indices, id: \.self) { index in
                                                                 let reversedIndex = (symbolCount - 1) - index
                                                                 ZStack {
-                                                                        RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius, style: .continuous)
+                                                                        RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
                                                                                 .fill(selectedIndex == reversedIndex ? Color.accentColor : Color.clear)
                                                                         Text(verbatim: symbols[reversedIndex])
                                                                                 .font(.title2)
@@ -70,7 +70,7 @@ struct ABCRightKey: View {
                                         .padding(.vertical, verticalPadding)
                                         .padding(.horizontal, horizontalPadding)
                         } else {
-                                RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius, style: .continuous)
+                                RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
                                         .fill(isTouching ? activeColor : colorScheme.inputKeyColor)
                                         .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                         .padding(.vertical, verticalPadding)

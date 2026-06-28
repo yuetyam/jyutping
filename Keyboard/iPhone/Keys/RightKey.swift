@@ -51,7 +51,7 @@ struct RightKey: View {
                                                                 let reversedIndex = (symbolCount - 1) - index
                                                                 let element = elements[reversedIndex]
                                                                 ZStack {
-                                                                        RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius, style: .continuous)
+                                                                        RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
                                                                                 .fill(selectedIndex == reversedIndex ? Color.accentColor : Color.clear)
                                                                         ZStack(alignment: .top) {
                                                                                 Color.interactiveClear
@@ -84,7 +84,7 @@ struct RightKey: View {
                                         .padding(.vertical, verticalPadding)
                                         .padding(.horizontal, horizontalPadding)
                         } else {
-                                RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius, style: .continuous)
+                                RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
                                         .fill(isTouching ? activeColor : colorScheme.inputKeyColor)
                                         .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                         .padding(.vertical, verticalPadding)

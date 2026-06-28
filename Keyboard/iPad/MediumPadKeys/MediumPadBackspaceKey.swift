@@ -19,7 +19,7 @@ struct MediumPadBackspaceKey: View {
                 let horizontalPadding: CGFloat = isLandscape ? 7 : 5
                 ZStack {
                         Color.interactiveClear
-                        RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous)
+                        RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius)
                                 .fill(isTouching ? colorScheme.activeActionKeyColor : colorScheme.actionKeyColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(.vertical, verticalPadding)

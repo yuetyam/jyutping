@@ -15,7 +15,7 @@ struct MediumPadGlobeKey: View {
                 let horizontalPadding: CGFloat = isLandscape ? 7 : 5
                 ZStack {
                         Color.interactiveClear
-                        RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous)
+                        RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius)
                                 .fill(colorScheme.isDark ? Color.darkAction : Color.lightAction)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(.vertical, verticalPadding)

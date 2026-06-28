@@ -115,7 +115,7 @@ struct GlassEnhancedInputKey: View {
                                                 .font(unit.primary.isTextSingular ? .letterCompact : .dualLettersCompact)
                                                 .padding(.bottom, keyTextBottomInset)
                                 }
-                                .glassEffect(displayForm.isReflecting ? .regular : .clear, in: RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius))
+                                .glassEffect(displayForm.isReflecting ? .regular : .clear, in: .rect(cornerRadius: PresetConstant.keyCornerRadius))
                                 .shadow(color: displayForm.isReflecting ? colorScheme.glassShadow : Color.clear, radius: 0.5)
                                 .padding(displayForm.isReflecting ? insets.plused(-2) : insets)
                         }

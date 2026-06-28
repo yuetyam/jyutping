@@ -47,7 +47,7 @@ struct PinyinSpecialInputKey: View {
                                                         ForEach(unit.members.indices, id: \.self) { elementIndex in
                                                                 let element: KeyElement = unit.members[elementIndex]
                                                                 ZStack {
-                                                                        RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius, style: .continuous)
+                                                                        RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
                                                                                 .fill(selectedIndex == elementIndex ? Color.accentColor : Color.clear)
                                                                         Text(verbatim: element.text)
                                                                                 .textCase(textCase)
@@ -76,7 +76,7 @@ struct PinyinSpecialInputKey: View {
                                         .padding(.vertical, verticalPadding)
                                         .padding(.horizontal, horizontalPadding)
                         } else {
-                                RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius, style: .continuous)
+                                RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
                                         .fill(isTouching ? activeColor : colorScheme.inputKeyColor)
                                         .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                         .padding(.vertical, verticalPadding)

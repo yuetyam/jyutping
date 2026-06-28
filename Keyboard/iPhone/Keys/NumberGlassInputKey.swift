@@ -39,7 +39,7 @@ struct NumberGlassInputKey: View {
                                         Color.clear
                                         Text(verbatim: virtual.text).font(.letterCompact)
                                 }
-                                .glassEffect(displayForm.isReflecting ? .regular : .clear, in: RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius))
+                                .glassEffect(displayForm.isReflecting ? .regular : .clear, in: .rect(cornerRadius: PresetConstant.keyCornerRadius))
                                 .shadow(color: displayForm.isReflecting ? colorScheme.glassShadow : Color.clear, radius: 0.5)
                                 .padding(displayForm.isReflecting ? insets.plused(-2) : insets)
                         }

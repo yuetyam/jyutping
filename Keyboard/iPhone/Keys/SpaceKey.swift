@@ -17,7 +17,7 @@ struct SpaceKey: View {
         var body: some View {
                 ZStack {
                         Color.interactiveClear
-                        RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius, style: .continuous)
+                        RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
                                 .fill(isTouching ? colorScheme.activeInputKeyColor : colorScheme.inputKeyColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(context.keyboardInterface.keyShapeInsets)

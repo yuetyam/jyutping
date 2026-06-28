@@ -113,7 +113,7 @@ private struct GlassStrokeKey: View {
                                 Color.clear
                                 Text(verbatim: keyText).font(.letterCompact)
                         }
-                        .glassEffect(isTouching ? .regular : .clear, in: RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous))
+                        .glassEffect(isTouching ? .regular : .clear, in: .rect(cornerRadius: PresetConstant.largeKeyCornerRadius))
                         .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
                         .padding(isTouching ? 1 : 3)
                 }
@@ -150,7 +150,7 @@ private struct LegacyStrokeKey: View {
         var body: some View {
                 ZStack {
                         Color.interactiveClear
-                        RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous)
+                        RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius)
                                 .fill(isTouching ? colorScheme.activeInputKeyColor : colorScheme.inputKeyColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(isTouching ? 1 : 3)
@@ -185,7 +185,7 @@ private struct GlassStrokePlaceholderKey: View {
         private let heightCoefficient: CGFloat
         var body: some View {
                 Color.interactiveClear
-                        .glassEffect(.clear, in: RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous))
+                        .glassEffect(.clear, in: .rect(cornerRadius: PresetConstant.largeKeyCornerRadius))
                         .padding(3)
                         .frame(width: context.nineKeyWidthUnit * widthCoefficient, height: context.heightUnit * heightCoefficient)
         }
@@ -200,7 +200,7 @@ private struct LegacyStrokePlaceholderKey: View {
         private let widthCoefficient: CGFloat
         private let heightCoefficient: CGFloat
         var body: some View {
-                RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous)
+                RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius)
                         .fill(Material.regular)
                         .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                         .padding(3)

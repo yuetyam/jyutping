@@ -62,7 +62,7 @@ private struct GlassNumberPadKey: View {
                                         .tracking(1.5)
                         }
                 }
-                .glassEffect(isTouching ? .regular : .clear, in: RoundedRectangle(cornerRadius: PresetConstant.ultraKeyCornerRadius, style: .continuous))
+                .glassEffect(isTouching ? .regular : .clear, in: .rect(cornerRadius: PresetConstant.ultraKeyCornerRadius))
                 .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
                 .padding(4)
                 .frame(width: width, height: height)
@@ -129,7 +129,7 @@ private struct LegacyNumberPadKey: View {
         var body: some View {
                 ZStack {
                         Color.interactiveClear
-                        RoundedRectangle(cornerRadius: PresetConstant.ultraKeyCornerRadius, style: .continuous)
+                        RoundedRectangle(cornerRadius: PresetConstant.ultraKeyCornerRadius)
                                 .fill(isTouching ? colorScheme.activeInputKeyColor : colorScheme.inputKeyColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(4)

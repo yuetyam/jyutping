@@ -11,7 +11,7 @@ struct GlassTailoredGlobeKey: View {
                 ZStack {
                         Color.interactiveClear
                         Color.clear
-                                .glassEffect(.clear, in: RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous))
+                                .glassEffect(.clear, in: .rect(cornerRadius: PresetConstant.largeKeyCornerRadius))
                                 .padding(3)
                         Image.globe.font(.symbol)
                         UIGlobeButton()
@@ -28,7 +28,7 @@ struct TailoredGlobeKey: View {
         var body: some View {
                 ZStack {
                         Color.interactiveClear
-                        RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous)
+                        RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius)
                                 .fill(colorScheme.actionKeyColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(3)

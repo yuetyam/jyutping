@@ -21,8 +21,8 @@ struct GlassSidebarPanel: View {
                                 SymbolSidebarScrollView(texts: texts)
                         }
                 }
-                .clipShape(RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous))
-                .glassEffect(.clear, in: RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous))
+                .clipShape(.rect(cornerRadius: PresetConstant.largeKeyCornerRadius))
+                .glassEffect(.clear, in: .rect(cornerRadius: PresetConstant.largeKeyCornerRadius))
                 .padding(3)
                 .frame(width: context.nineKeyWidthUnit * 0.91, height: context.heightUnit * 3)
         }
@@ -40,7 +40,7 @@ struct SidebarPanel: View {
         var body: some View {
                 let texts: [String] = context.keyboardForm.isDedicatedNumbers ? symbols : punctuation
                 ZStack {
-                        RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous)
+                        RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius)
                                 .fill(colorScheme.actionKeyColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                         if #available(iOSApplicationExtension 18.0, *) {
@@ -63,7 +63,7 @@ struct SidebarPanel: View {
                                 }
                         }
                 }
-                .clipShape(RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous))
+                .clipShape(.rect(cornerRadius: PresetConstant.largeKeyCornerRadius))
                 .padding(3)
                 .frame(width: context.nineKeyWidthUnit * 0.91, height: context.heightUnit * 3)
         }

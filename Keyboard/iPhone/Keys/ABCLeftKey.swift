@@ -42,7 +42,7 @@ struct ABCLeftKey: View {
                                                 HStack(spacing: 0) {
                                                         ForEach(symbols.indices, id: \.self) { index in
                                                                 ZStack {
-                                                                        RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius, style: .continuous)
+                                                                        RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
                                                                                 .fill(selectedIndex == index ? Color.accentColor : Color.clear)
                                                                         Text(verbatim: symbols[index])
                                                                                 .font(.title2)
@@ -69,7 +69,7 @@ struct ABCLeftKey: View {
                                         .padding(.vertical, verticalPadding)
                                         .padding(.horizontal, horizontalPadding)
                         } else {
-                                RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius, style: .continuous)
+                                RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
                                         .fill(isTouching ? activeColor : colorScheme.inputKeyColor)
                                         .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                         .padding(.vertical, verticalPadding)

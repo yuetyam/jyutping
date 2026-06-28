@@ -65,7 +65,7 @@ struct T21EnhancedInputKey: View {
                                                                 let elementIndex: Int = side.isLeading ? index : ((memberCount - 1) - index)
                                                                 let element: KeyElement = keyUnit.members[elementIndex]
                                                                 ZStack {
-                                                                        RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius, style: .continuous)
+                                                                        RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
                                                                                 .fill(selectedIndex == elementIndex ? Color.accentColor : Color.clear)
                                                                         ForEach(element.extras.indices, id: \.self) { extraIndex in
                                                                                 let extra = element.extras[extraIndex]
@@ -104,7 +104,7 @@ struct T21EnhancedInputKey: View {
                                         .padding(.vertical, verticalPadding)
                                         .padding(.horizontal, horizontalPadding)
                         } else {
-                                RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius, style: .continuous)
+                                RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
                                         .fill(isTouching ? activeColor : colorScheme.inputKeyColor)
                                         .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                         .padding(.vertical, verticalPadding)

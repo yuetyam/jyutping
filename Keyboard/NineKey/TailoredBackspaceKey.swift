@@ -18,7 +18,7 @@ struct GlassTailoredBackspaceKey: View {
                                 Color.clear
                                 Image.backspace.symbolVariant(isTouching ? .fill : .none).font(.symbol)
                         }
-                        .glassEffect(isTouching ? .regular : .clear, in: RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous))
+                        .glassEffect(isTouching ? .regular : .clear, in: .rect(cornerRadius: PresetConstant.largeKeyCornerRadius))
                         .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
                         .padding(isTouching ? 1 : 3)
                 }
@@ -69,7 +69,7 @@ struct TailoredBackspaceKey: View {
         var body: some View {
                 ZStack {
                         Color.interactiveClear
-                        RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous)
+                        RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius)
                                 .fill(isTouching ? colorScheme.activeActionKeyColor : colorScheme.actionKeyColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(isTouching ? 1 : 3)

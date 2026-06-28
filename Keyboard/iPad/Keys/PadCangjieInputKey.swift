@@ -30,7 +30,7 @@ struct PadCangjieInputKey: View {
                 let textCase: Text.Case = shouldShowLowercaseKeys ? .lowercase : .uppercase
                 ZStack {
                         Color.interactiveClear
-                        RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius, style: .continuous)
+                        RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius)
                                 .fill(isTouching ? colorScheme.activeInputKeyColor : colorScheme.inputKeyColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(.vertical, verticalPadding)
