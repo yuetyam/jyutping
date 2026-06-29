@@ -4,22 +4,26 @@ Guidance for AI Agents working in this repository.
 
 ## Scope
 
-This is a mixed Xcode + SwiftPM project for a Cantonese input method adpting the Jyutping romanization scheme:
+This is a mixed Xcode + SwiftPM project for a Cantonese input method adopting the Jyutping romanization scheme:
 
-- `Jyutping/`: the main app for iOS and macOS
-- `Keyboard/`: the iOS keyboard extension
-- `InputMethod/`: the macOS input method target
+- `Jyutping/`: the SwiftUI reference app for iOS, macOS, and visionOS-compatible app builds
+- `Keyboard/`: the iOS/iPadOS keyboard extension
+- `InputMethod/`: the macOS InputMethodKit target
 - `Modules/`: local Swift packages shared by the app and input targets
+- `packaging/`: macOS package resources and installer scripts
+- `ci_scripts/` and `.github/workflows/`: CI support
 
 ## Formatting and editing rules
 
 Read `.editorconfig` before editing.
 
+Current editor settings are UTF-8, LF line endings, and for Swift files: spaces, indent size 8, tab width 8, trim trailing whitespace, and insert a final newline.
+
 Make narrow, surgical edits and follow the surrounding style instead of reformatting files wholesale.
 
 ## What is in the project
 
-`xcodebuild -list -project Jyutping.xcodeproj` reports these main Xcode targets:
+`xcodebuild -project Jyutping.xcodeproj -list` currently reports these Xcode targets:
 
 - `Jyutping`
 - `JyutpingTests`
@@ -29,27 +33,31 @@ Make narrow, surgical edits and follow the surrounding style instead of reformat
 - `InputMethodTests`
 - `InputMethodUITests`
 
-It also exposes local package schemes for:
+It currently exposes these schemes:
 
 - `AboutKit`
 - `AppDataSource`
 - `CommonExtensions`
 - `CoreIME`
+- `InputMethod`
+- `Jyutping`
+- `Keyboard`
 - `Linguistics`
 
-Under `Modules/`, the local packages are:
+Under `Modules/`, the local Swift packages are:
 
 1. `CommonExtensions`: shared Foundation-style helpers and extensions
 2. `CoreIME`: the core input engine and bundled SQLite lexicon
 3. `Linguistics`: Jyutping/IPA and related language helpers
 4. `AppDataSource`: searchable reference datasets used by the app
 5. `AboutKit`: about/info UI support
-6. `Preparing`: a build-time executable that generates data used by other modules
+6. `Preparing`: a SwiftPM-only build-time executable that generates data used by other modules
 
 ## Build requirements and environments
-- macOS 26.2+
-- Xcode 26.4+
-- Swift 6.3+
+- Current local environment observed while updating this file: macOS 27.0, Xcode 27.0, Apple Swift 6.4.
+- Package manifests use `swift-tools-version: 6.3` and `swiftLanguageModes: [.v6]`.
+- Xcode project settings use Swift 6 for the app, keyboard, input method, and project-level settings.
+- The `Preparing` package declares macOS 26+ because it is a local database-generation tool.
 
 Targeted platforms:
 - iOS/iPadOS 16.0+
@@ -64,7 +72,10 @@ cd Modules/Preparing
 swift run -c release
 ```
 
-This is not optional for a clean checkout. The executable entry point is `Modules/Preparing/Sources/Preparing/Preparing.swift`, and it generated the SQLite databases `Modules/CoreIME/Sources/CoreIME/Resources/imedb.sqlite3` and `Modules/AppDataSource/Sources/AppDataSource/Resources/appdb.sqlite3`.
+This is not optional for a clean checkout. The executable entry point is `Modules/Preparing/Sources/Preparing/Preparing.swift`, which runs `AppDataPreparer.prepare()` and `DatabasePreparer.prepare()` concurrently. It generates these packaged SQLite databases:
+
+- `Modules/CoreIME/Sources/CoreIME/Resources/ime.sqlite3`
+- `Modules/AppDataSource/Sources/AppDataSource/Resources/app.sqlite3`
 
 ## Runtime architecture
 
@@ -72,15 +83,17 @@ This is not optional for a clean checkout. The executable entry point is `Module
 
 - Entry point: `Jyutping/JyutpingApp.swift`
 - The app has separate `iOS/` and `macOS/` trees plus shared views/models.
-- Code under `Jyutping/iOS/Search`, `Jyutping/macOS/Search`, and `Jyutping/SharedViews` is the main search/reference UI surface.
+- Code under `Jyutping/iOS/Search`, `Jyutping/macOS/Search`, `Jyutping/iOS/Cantonese`, `Jyutping/macOS/Metro`, `Jyutping/CantoneseMaterials`, and `Jyutping/SharedViews` is the main search/reference UI surface.
 - Imports across the app show that it primarily consumes `AppDataSource`, `Linguistics`, `CommonExtensions`, and `AboutKit`.
 
 Useful places:
 
 - `Jyutping/SharedModels/AppMaster.swift`
+- `Jyutping/iOS/Home/`
 - `Jyutping/iOS/Search/`
-- `Jyutping/macOS/Search/`
+- `Jyutping/iOS/Romanization/`
 - `Jyutping/iOS/Cantonese/`
+- `Jyutping/macOS/Search/`
 - `Jyutping/macOS/Metro/`
 
 ### iOS keyboard extension (`Keyboard/`)
@@ -90,6 +103,7 @@ Useful places:
 - Shared keyboard UI is under `Keyboard/SharedViews/`.
 - Keyboard state, layouts, and behavior enums live under `Keyboard/SharedModels/`.
 - Device/layout-specific keyboards are split across `iPhone/`, `iPad/`, `NineKey/`, and `SpecialLayouts/`.
+- The iPad implementation has separate large, medium, and small key/keyboards folders. The keyboard target also includes emoji, editing-panel, speech, image, and shape support.
 
 Useful places:
 
@@ -101,18 +115,21 @@ Useful places:
 
 ### macOS input method (`InputMethod/`)
 
-- Entry point: `InputMethod/main.swift`
+- SwiftUI app entry point: `InputMethod/InputMethodApp.swift`
+- App delegate and IMK server setup: `InputMethod/AppDelegate.swift`
 - Main controller: `InputMethod/JyutpingInputController.swift`
 - The controller activates the IME server, prepares `InputMemory` and `Engine`, manages the candidate window, and reacts to selection/highlight notifications.
-- Candidate UI lives in `InputMethod/CandidateViews/`.
+- Candidate UI lives in `InputMethod/CandidateViews/`, `InputMethod/CandidateWindow.swift`, and `InputMethod/MotherBoard.swift`.
 - Preferences UI lives in `InputMethod/Preferences/`.
+- The target also links Sparkle for update support; see `Sparkle.framework` and the app delegate.
 
 Useful places:
 
 - `InputMethod/JyutpingInputController.swift`
 - `InputMethod/InputContext.swift`
-- `InputMethod/InputMemory.swift`
-- `InputMethod/CandidateViews/MotherBoard.swift`
+- `InputMethod/Models/InputMemory.swift`
+- `InputMethod/MotherBoard.swift`
+- `InputMethod/CandidateViews/`
 - `InputMethod/Preferences/`
 
 **Important**: Never *run* the `InputMethod` target directly. It's an InputMethodKit program that must be archived and installed by the developer. You can build it to check for compile errors, but do not run it.
@@ -125,7 +142,8 @@ Useful places:
 
 - `Engine.prepare()` opens the packaged SQLite database
 - `Engine.suggest(...)` is the main suggestion entry point
-- the engine handles anchors, strict matches, tone input, apostrophes, partial matches, and segmentation-aware lookup
+- `Engine.nineKeySuggest(...)` handles nine-key combo lookup
+- the engine handles anchors, strict matches, tone input, apostrophes, partial matches, segmentation-aware lookup, pinyin, cangjie, quick, stroke, structure, emoji, and text-mark lookup
 
 Closely related files include:
 
@@ -151,9 +169,9 @@ If a task changes lexicon contents, schema, or generated resources, update the g
 The keyboard and macOS input method keep separate SQLite-backed learning stores:
 
 - iOS keyboard: `Keyboard/SharedModels/InputMemory.swift`
-- macOS input method: `InputMethod/InputMemory.swift`
+- macOS input method: `InputMethod/Models/InputMemory.swift`
 
-They are similar but not identical. For example, the keyboard memory schema stores extra ten-key fields that are not present in the macOS input memory table. Keep platform-specific differences in mind before copying logic between them.
+They are similar but not identical. For example, the keyboard memory schema stores extra 9-key fields that are not present in the macOS input memory table. Keep platform-specific differences in mind before copying logic between them.
 
 ## How packages are used
 
@@ -164,9 +182,10 @@ From the package manifests and import graph:
 - `Linguistics` depends on `CommonExtensions`.
 - `AppDataSource` depends on `CommonExtensions`.
 - `Preparing` depends on `CommonExtensions`.
+- `AboutKit` currently has no local package dependencies.
 - `Jyutping` primarily uses `AppDataSource`, `Linguistics`, `CommonExtensions`, and `AboutKit`.
 - `Keyboard` primarily uses `CoreIME` and `CommonExtensions`.
-- `InputMethod` primarily uses `CoreIME`, `CommonExtensions`, and `AboutKit`.
+- `InputMethod` primarily uses `CoreIME`, `CommonExtensions`, `AboutKit`, and Sparkle-backed update support.
 
 When a change belongs in a reusable module, prefer editing the package instead of duplicating logic in an app target.
 
@@ -233,7 +252,7 @@ Regenerate the databases afterward.
 Start with both:
 
 - `Keyboard/SharedModels/InputMemory.swift`
-- `InputMethod/InputMemory.swift`
+- `InputMethod/Models/InputMemory.swift`
 
 ### Change keyboard layouts or key behavior
 
@@ -246,6 +265,8 @@ Start with:
 - `Keyboard/iPad/`
 - `Keyboard/NineKey/`
 - `Keyboard/SpecialLayouts/`
+- `Keyboard/EditingPanel/`
+- `Keyboard/Emoji/`
 
 ### Change app reference/search screens
 
