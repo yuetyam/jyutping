@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <installer-gui-script minSpecVersion="2">
         <title>Jyutping</title>
+        <welcome file="welcome.html" mime-type="text/html" />
+        <readme file="readme.html" mime-type="text/html" />
+        <license file="COPYING.txt" mime-type="text/plain" />
         <conclusion file="conclusion.html" mime-type="text/html" />
         <pkg-ref id="org.jyutping.inputmethod.Jyutping" />
         <options customize="never" require-scripts="false" rootVolumeOnly="true" />
