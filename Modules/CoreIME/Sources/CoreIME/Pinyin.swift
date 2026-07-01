@@ -318,8 +318,7 @@ private extension Array where Element == PinyinLexicon {
                                 switch syllables.count {
                                 case 1:
                                         guard item.inputCount == textParts.first?.count else { return nil }
-                                        let combinedInput = item.input + String.apostrophe
-                                        return item.replacedInput(with: combinedInput)
+                                        return item.replacedInput(with: item.input + String.apostrophe)
                                 case 2:
                                         let isMatched: Bool = {
                                                 guard inputLength != 3 else { return true }
@@ -330,14 +329,54 @@ private extension Array where Element == PinyinLexicon {
                                                 return textParts.last?.hasPrefix(lastSyllable) ?? false
                                         }()
                                         guard isMatched else { return nil }
-                                        let combinedInput = item.input + String.apostrophe
-                                        return item.replacedInput(with: combinedInput)
+                                        return item.replacedInput(with: item.input + String.apostrophe)
                                 default:
                                         return nil
                                 }
-                        // TODO: Handle more separators
+                        case 2 where hasTrailingSeparator:
+                                switch syllables.count {
+                                case 1:
+                                        guard item.inputCount == textParts.first?.count else { return nil }
+                                        return item.replacedInput(with: item.input + String.apostrophe)
+                                case 2:
+                                        guard item.inputCount == (inputLength - 2) else { return nil }
+                                        let isMatched: Bool = {
+                                                guard inputLength != 4 else { return true }
+                                                guard syllables.first != textParts.first else { return true }
+                                                guard textParts.first?.count == 1 else { return false }
+                                                guard textParts.first?.first == syllables.first?.first else { return false }
+                                                return textParts.last == syllables.last
+                                        }()
+                                        guard isMatched else { return nil }
+                                        return item.replacedInput(with: text)
+                                default:
+                                        return nil
+                                }
+                        case 2 where inputLength == 5 && textParts.count == 3,
+                             3 where inputLength == 6 && textParts.count == 3:
+                                switch syllables.count {
+                                case 1:
+                                        guard item.inputCount == 1 else { return nil }
+                                        return item.replacedInput(with: item.input + String.apostrophe)
+                                case 2:
+                                        guard item.inputCount == 2 else { return nil }
+                                        let combinedInput = item.input + String.apostrophe + String.apostrophe
+                                        return item.replacedInput(with: combinedInput)
+                                case 3:
+                                        return item.replacedInput(with: text)
+                                default:
+                                        return nil
+                                }
                         default:
-                                return nil
+                                let textPartCount = textParts.count
+                                let syllableCount = syllables.count
+                                guard syllableCount < textPartCount else { return nil }
+                                let isMatched = (0..<syllableCount).allSatisfy({ syllables[$0] == textParts[$0] })
+                                guard isMatched else { return nil }
+                                let separatorCount = syllableCount - 1
+                                let tail = String(repeating: "i", count: separatorCount)
+                                let combinedInput = item.input + tail
+                                return item.replacedInput(with: combinedInput)
                         }
                 })
                 return filtered.sorted()
