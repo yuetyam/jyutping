@@ -16,9 +16,9 @@ extension Engine {
                 guard sqlite3_prepare_v2(Engine.database, command, -1, &statement, nil) == SQLITE_OK else { return [] }
                 var items: [ShapeLexicon] = []
                 while sqlite3_step(statement) == SQLITE_ROW {
-                        let order: Int = Int(sqlite3_column_int64(statement, 0))
+                        let rowID: Int = Int(sqlite3_column_int64(statement, 0))
                         guard let word = sqlite3_column_text(statement, 1) else { continue }
-                        let instance = ShapeLexicon(text: String(cString: word), input: text, complex: text.count, order: order)
+                        let instance = ShapeLexicon(text: String(cString: word), input: text, complex: text.count, number: rowID)
                         items.append(instance)
                 }
                 return items
@@ -30,10 +30,10 @@ extension Engine {
                 guard sqlite3_prepare_v2(Engine.database, command, -1, &statement, nil) == SQLITE_OK else { return [] }
                 var items: [ShapeLexicon] = []
                 while sqlite3_step(statement) == SQLITE_ROW {
-                        let order: Int = Int(sqlite3_column_int64(statement, 0))
+                        let rowID: Int = Int(sqlite3_column_int64(statement, 0))
                         guard let word = sqlite3_column_text(statement, 1) else { continue }
                         let complex: Int = Int(sqlite3_column_int64(statement, 2))
-                        let instance = ShapeLexicon(text: String(cString: word), input: text, complex: complex, order: order)
+                        let instance = ShapeLexicon(text: String(cString: word), input: text, complex: complex, number: rowID)
                         items.append(instance)
                 }
                 return items.sorted()
@@ -54,9 +54,9 @@ extension Engine {
                 guard sqlite3_prepare_v2(Engine.database, command, -1, &statement, nil) == SQLITE_OK else { return [] }
                 var items: [ShapeLexicon] = []
                 while sqlite3_step(statement) == SQLITE_ROW {
-                        let order: Int = Int(sqlite3_column_int64(statement, 0))
+                        let rowID: Int = Int(sqlite3_column_int64(statement, 0))
                         guard let word = sqlite3_column_text(statement, 1) else { continue }
-                        let instance = ShapeLexicon(text: String(cString: word), input: text, complex: text.count, order: order)
+                        let instance = ShapeLexicon(text: String(cString: word), input: text, complex: text.count, number: rowID)
                         items.append(instance)
                 }
                 return items
@@ -68,10 +68,10 @@ extension Engine {
                 guard sqlite3_prepare_v2(Engine.database, command, -1, &statement, nil) == SQLITE_OK else { return [] }
                 var items: [ShapeLexicon] = []
                 while sqlite3_step(statement) == SQLITE_ROW {
-                        let order: Int = Int(sqlite3_column_int64(statement, 0))
+                        let rowID: Int = Int(sqlite3_column_int64(statement, 0))
                         guard let word = sqlite3_column_text(statement, 1) else { continue }
                         let complex: Int = Int(sqlite3_column_int64(statement, 2))
-                        let instance = ShapeLexicon(text: String(cString: word), input: text, complex: complex, order: order)
+                        let instance = ShapeLexicon(text: String(cString: word), input: text, complex: complex, number: rowID)
                         items.append(instance)
                 }
                 return items.sorted()

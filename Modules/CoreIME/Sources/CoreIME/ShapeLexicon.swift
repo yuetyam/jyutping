@@ -4,14 +4,14 @@ struct ShapeLexicon: Hashable, Comparable {
         /// Cantonese word
         let text: String
 
-        /// User input
+        /// User input text
         let input: String
 
-        /// Complexity, the count of Cangjie/Quick/Stroke code
+        /// Complexity, the length of the Cangjie/Quick/Stroke code.
         let complex: Int
 
-        /// Rank. Smaller is preferred.
-        let order: Int
+        /// Rank; order. Smaller is preferred.
+        let number: Int
 
         // Equatable
         static func ==(lhs: ShapeLexicon, rhs: ShapeLexicon) -> Bool {
@@ -25,7 +25,10 @@ struct ShapeLexicon: Hashable, Comparable {
 
         // Comparable
         static func < (lhs: ShapeLexicon, rhs: ShapeLexicon) -> Bool {
-                guard lhs.complex == rhs.complex else { return lhs.complex < rhs.complex }
-                return lhs.order < rhs.order
+                if lhs.complex == rhs.complex {
+                        return lhs.number < rhs.number
+                } else {
+                        return lhs.complex < rhs.complex
+                }
         }
 }
