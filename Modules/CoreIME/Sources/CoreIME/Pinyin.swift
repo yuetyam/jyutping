@@ -4,9 +4,13 @@ import CommonExtensions
 
 extension Engine {
         public static func pinyinReverseLookup<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T, segmentation: PinyinSegmentation) async -> [Lexicon] {
+
+                // TODO: - Handle syllable separators.
+                // If the input keys containing apostrophes ( ' ), filter the searched lexicons to match the separated syllables.
+                // For example: xi'an'shi for 西安市(xi an shi), not 現實(xian shi).
                 let isLetterKeyOnly: Bool = keys.contains(where: \.isLetter.negative).negative
-                // TODO: Handle separators
                 guard isLetterKeyOnly else { return [] }
+
                 lazy var anchorsStatement: OpaquePointer? = preparePinyinAnchorsStatement()
                 lazy var spellStatement: OpaquePointer? = preparePinyinStatement()
                 defer {
@@ -43,13 +47,13 @@ extension Engine {
         private static func modify(_ item: PinyinLexicon, text: String, textLength: Int) -> PinyinLexicon {
                 guard item.inputCount != textLength else { return item }
                 guard item.pinyin.strippedSpaces().hasPrefix(text).negative else {
-                        return PinyinLexicon(text: item.text, pinyin: item.pinyin, input: text, mark: text, order: item.order)
+                        return PinyinLexicon(text: item.text, pinyin: item.pinyin, input: text, mark: text, number: item.number)
                 }
                 let syllables = item.pinyin.split(separator: Character.space)
                 guard let lastSyllable = syllables.last, text.hasSuffix(lastSyllable) else { return item }
                 let isMatched: Bool = ((syllables.count - 1) + lastSyllable.count) == textLength
                 guard isMatched else { return item }
-                return PinyinLexicon(text: item.text, pinyin: item.pinyin, input: text, mark: text, order: item.order)
+                return PinyinLexicon(text: item.text, pinyin: item.pinyin, input: text, mark: text, number: item.number)
         }
 
         private static func pinyinSearch<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T, segmentation: PinyinSegmentation, limit: Int64? = nil, anchorsStatement: OpaquePointer?, spellStatement: OpaquePointer?) -> [PinyinLexicon] {
@@ -77,12 +81,12 @@ extension Engine {
                                         guard item.pinyin.hasPrefix(schemeMark) else { return nil }
                                         let tailAnchors = item.pinyin.dropFirst(schemeMark.count).split(separator: Character.space).compactMap(\.first)
                                         guard tailAnchors == tail.compactMap(\.text.first) else { return nil }
-                                        return PinyinLexicon(text: item.text, pinyin: item.pinyin, input: text, mark: mark, order: item.order)
+                                        return PinyinLexicon(text: item.text, pinyin: item.pinyin, input: text, mark: mark, number: item.number)
                                 })
                         let anchorsMatched = pinyinAnchorsMatch(keys: anchors, limit: prefixesLimit, statement: anchorsStatement)
                                 .compactMap({ item -> PinyinLexicon? in
                                         guard item.pinyin.hasPrefix(mark) else { return nil }
-                                        return PinyinLexicon(text: item.text, pinyin: item.pinyin, input: text, mark: mark, order: item.order)
+                                        return PinyinLexicon(text: item.text, pinyin: item.pinyin, input: text, mark: mark, number: item.number)
                                 })
                         return conjoinedMatched + anchorsMatched
                 })
@@ -92,22 +96,22 @@ extension Engine {
                         return pinyinAnchorsMatch(keys: leadingKeys, input: leadingText, limit: 300, statement: anchorsStatement)
                 }).compactMap({ item -> PinyinLexicon? in
                         guard item.pinyin.strippedSpaces().hasPrefix(text).negative else {
-                                return PinyinLexicon(text: item.text, pinyin: item.pinyin, input: text, mark: text, order: item.order)
+                                return PinyinLexicon(text: item.text, pinyin: item.pinyin, input: text, mark: text, number: item.number)
                         }
                         let syllables = item.pinyin.split(separator: Character.space)
                         guard let lastSyllable = syllables.last, text.hasSuffix(lastSyllable) else { return nil }
                         let isMatched: Bool = ((syllables.count - 1) + lastSyllable.count) == inputLength
                         guard isMatched else { return nil }
-                        return PinyinLexicon(text: item.text, pinyin: item.pinyin, input: text, mark: text, order: item.order)
+                        return PinyinLexicon(text: item.text, pinyin: item.pinyin, input: text, mark: text, number: item.number)
                 })
                 let fetched: [PinyinLexicon] = {
-                        let idealQueried = queried.filter({ $0.inputCount == inputLength }).sorted(by: { $0.order < $1.order }).distinct()
+                        let idealQueried = queried.filter({ $0.inputCount == inputLength }).sorted(by: { $0.number < $1.number }).distinct()
                         let notIdealQueried = queried.filter({ $0.inputCount < inputLength }).sorted().distinct()
                         let fullInput = (spellMatched + idealQueried + anchorsMatched + prefixMatched + gainedMatched).distinct()
                         let primary = fullInput.prefix(10)
                         let secondary = fullInput.sorted().prefix(10)
                         let tertiary = notIdealQueried.prefix(10)
-                        let quaternary = notIdealQueried.sorted(by: { $0.order < $1.order }).prefix(10)
+                        let quaternary = notIdealQueried.sorted(by: { $0.number < $1.number }).prefix(10)
                         return (primary + secondary + tertiary + quaternary + fullInput + notIdealQueried).distinct()
                 }()
                 guard let firstInputCount = fetched.first?.inputCount else {
@@ -163,7 +167,7 @@ extension Engine {
                         guard let word = sqlite3_column_text(statement, 1) else { continue }
                         guard let romanization = sqlite3_column_text(statement, 2) else { continue }
                         let pinyin = String(cString: romanization)
-                        let instance = PinyinLexicon(text: String(cString: word), pinyin: pinyin, input: text, mark: pinyin, order: Int(rowID))
+                        let instance = PinyinLexicon(text: String(cString: word), pinyin: pinyin, input: text, mark: pinyin, number: Int(rowID))
                         instances.append(instance)
                 }
                 return instances
@@ -186,7 +190,7 @@ extension Engine {
                         let rowID = sqlite3_column_int64(statement, 0)
                         guard let word = sqlite3_column_text(statement, 1) else { continue }
                         guard let romanization = sqlite3_column_text(statement, 2) else { continue }
-                        let instance = PinyinLexicon(text: String(cString: word), pinyin: String(cString: romanization), input: inputText, mark: inputText, order: Int(rowID))
+                        let instance = PinyinLexicon(text: String(cString: word), pinyin: String(cString: romanization), input: inputText, mark: inputText, number: Int(rowID))
                         instances.append(instance)
                 }
                 return instances
@@ -255,12 +259,12 @@ extension Engine {
                 sqlite3_bind_int64(statement, 2, (limit ?? 30))
                 var instances: [PinyinLexicon] = []
                 while sqlite3_step(statement) == SQLITE_ROW {
-                        let order: Int = Int(sqlite3_column_int64(statement, 0))
+                        let rowID: Int = Int(sqlite3_column_int64(statement, 0))
                         let word: String = String(cString: sqlite3_column_text(statement, 1))
                         let romanization: String = String(cString: sqlite3_column_text(statement, 2))
                         let anchors = romanization.split(separator: Character.space).compactMap(\.first)
                         let anchorText = String(anchors)
-                        let instance = PinyinLexicon(text: word, pinyin: romanization, input: anchorText, mark: anchorText, order: order)
+                        let instance = PinyinLexicon(text: word, pinyin: romanization, input: anchorText, mark: anchorText, number: rowID)
                         instances.append(instance)
                 }
                 return instances
@@ -272,10 +276,10 @@ extension Engine {
                 sqlite3_bind_int64(statement, 2, (limit ?? -1))
                 var instances: [PinyinLexicon] = []
                 while sqlite3_step(statement) == SQLITE_ROW {
-                        let order: Int = Int(sqlite3_column_int64(statement, 0))
+                        let rowID: Int = Int(sqlite3_column_int64(statement, 0))
                         let word: String = String(cString: sqlite3_column_text(statement, 1))
                         let romanization: String = String(cString: sqlite3_column_text(statement, 2))
-                        let instance = PinyinLexicon(text: word, pinyin: romanization, input: romanization.strippedSpaces(), mark: romanization, order: order)
+                        let instance = PinyinLexicon(text: word, pinyin: romanization, input: romanization.strippedSpaces(), mark: romanization, number: rowID)
                         instances.append(instance)
                 }
                 return instances
@@ -284,11 +288,11 @@ extension Engine {
 
 private extension Array where Element == PinyinLexicon {
         func ordered(with textCount: Int) -> [PinyinLexicon] {
-                let matched = filter({ $0.inputCount == textCount }).sorted(by: { $0.order < $1.order }).distinct()
+                let matched = filter({ $0.inputCount == textCount }).sorted(by: { $0.number < $1.number }).distinct()
                 let others = filter({ $0.inputCount != textCount }).sorted().distinct()
                 let primary = matched.prefix(15)
                 let secondary = others.prefix(10)
-                let tertiary = others.sorted(by: { $0.order < $1.order }).prefix(7)
+                let tertiary = others.sorted(by: { $0.number < $1.number }).prefix(7)
                 return (primary + secondary + tertiary + matched + others).distinct()
         }
 }
@@ -298,34 +302,34 @@ private struct PinyinLexicon: Hashable, Comparable {
         /// Cantonese Chinese word.
         let text: String
 
-        /// Pinyin romanization for word text.
+        /// Mandarin Pinyin romanization for the `word`.
         let pinyin: String
 
         /// User input.
         let input: String
 
-        /// Character count of self.input
+        /// Character count of the `input`
         let inputCount: Int
 
         /// Formatted user input for pre-edit display
         let mark: String
 
-        /// Rank, smaller is preferred.
-        let order: Int
+        /// Rank; order. Smaller is preferred.
+        let number: Int
 
-        /// Create a PinyinLexicon.
+        /// Create a PinyinLexicon instance.
         /// - Parameters:
         ///   - text: Cantonese Chinese word.
-        ///   - pinyin: Pinyin romanization for word text.
+        ///   - pinyin: Mandarin Pinyin romanization for the `word`.
         ///   - input: User input.
-        ///   - order: Rank, smaller is preferred.
-        init(text: String, pinyin: String? = nil, input: String, mark: String? = nil, order: Int? = nil) {
+        ///   - number: Rank; order. Smaller is preferred.
+        init(text: String, pinyin: String? = nil, input: String, mark: String? = nil, number: Int? = nil) {
                 self.text = text
                 self.pinyin = pinyin ?? input
                 self.input = input
                 self.inputCount = input.count
                 self.mark = mark ?? input
-                self.order = order ?? 0
+                self.number = number ?? 0
         }
 
         // Equatable
@@ -341,10 +345,14 @@ private struct PinyinLexicon: Hashable, Comparable {
 
         // Comparable
         static func <(lhs: PinyinLexicon, rhs: PinyinLexicon) -> Bool {
-                guard lhs.inputCount == rhs.inputCount else { return lhs.inputCount > rhs.inputCount }
-                return lhs.order < rhs.order
+                if lhs.inputCount == rhs.inputCount {
+                        return lhs.number < rhs.number
+                } else {
+                        return lhs.inputCount > rhs.inputCount
+                }
         }
 
+        // Conjoining
         static func +(lhs: PinyinLexicon, rhs: PinyinLexicon) -> PinyinLexicon {
                 let newText: String = lhs.text + rhs.text
                 let newPinyin: String = lhs.pinyin + String.space + rhs.pinyin

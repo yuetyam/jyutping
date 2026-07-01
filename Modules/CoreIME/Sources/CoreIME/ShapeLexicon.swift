@@ -4,7 +4,7 @@ struct ShapeLexicon: Hashable, Comparable {
         /// Cantonese word
         let text: String
 
-        /// User input text
+        /// User input
         let input: String
 
         /// Complexity, the length of the Cangjie/Quick/Stroke code.
