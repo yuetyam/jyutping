@@ -175,6 +175,43 @@ struct CoreIMETests {
                 #expect(normalized(optimized) == normalized(bruteForced))
         }
 
+        @Test("Pinyin reverse lookup respects syllable separators")
+        func pinyinReverseLookupRespectsSyllableSeparators() async {
+                let keys: [VirtualInputKey] = [
+                        .letterX,
+                        .letterI,
+                        .apostrophe,
+                        .letterA,
+                        .letterN,
+                        .apostrophe,
+                        .letterS,
+                        .letterH,
+                        .letterI
+                ]
+                let suggestions = await Engine.pinyinReverseLookup(keys, segmentation: PinyinSegmenter.segment(keys))
+
+                #expect(suggestions.contains(where: { $0.text == "西安市" }))
+                #expect(suggestions.contains(where: { $0.text == "現實" }).negative)
+                #expect(suggestions.first(where: { $0.text == "西安市" })?.input == "xi'an'shi")
+                #expect(suggestions.first(where: { $0.text == "西安市" })?.mark == "xi an shi")
+        }
+
+        @Test("Pinyin reverse lookup keeps unseparated pinyin matches")
+        func pinyinReverseLookupKeepsUnseparatedPinyinMatches() async {
+                let keys: [VirtualInputKey] = [
+                        .letterX,
+                        .letterI,
+                        .letterA,
+                        .letterN,
+                        .letterS,
+                        .letterH,
+                        .letterI
+                ]
+                let suggestions = await Engine.pinyinReverseLookup(keys, segmentation: PinyinSegmenter.segment(keys))
+
+                #expect(suggestions.contains(where: { $0.text == "現實" }))
+        }
+
         private func bruteForceBestSegmentedKeys(from keySets: [Set<VirtualInputKey>]) -> [(keys: [VirtualInputKey], segmentation: Segmentation)] {
                 guard keySets.isNotEmpty else { return [] }
                 var bestLength: Int = 0

@@ -4,13 +4,17 @@ import CommonExtensions
 
 extension Engine {
         public static func pinyinReverseLookup<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T, segmentation: PinyinSegmentation) async -> [Lexicon] {
-
-                // TODO: - Handle syllable separators.
-                // If the input keys containing apostrophes ( ' ), filter the searched lexicons to match the separated syllables.
-                // For example: xi'an'shi for 西安市(xi an shi), not 現實(xian shi).
-                let isLetterKeyOnly: Bool = keys.contains(where: \.isLetter.negative).negative
-                guard isLetterKeyOnly else { return [] }
-
+                let hasSeparators: Bool = keys.contains(where: \.isApostrophe)
+                if hasSeparators {
+                        return letterKeysSearch(keys.filter(\.isLetter), segmentation: segmentation)
+                                .filteredSyllableSeparators(for: keys)
+                                .flatMap({ Engine.reveresLookup(text: $0.text, input: $0.input, mark: $0.mark) })
+                } else {
+                        return letterKeysSearch(keys, segmentation: segmentation)
+                                .flatMap({ Engine.reveresLookup(text: $0.text, input: $0.input, mark: $0.mark) })
+                }
+        }
+        private static func letterKeysSearch<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T, segmentation: PinyinSegmentation) -> [PinyinLexicon] {
                 lazy var anchorsStatement: OpaquePointer? = preparePinyinAnchorsStatement()
                 lazy var spellStatement: OpaquePointer? = preparePinyinStatement()
                 defer {
@@ -20,10 +24,8 @@ extension Engine {
                 let canSegment: Bool = segmentation.flattenedCount > 0
                 if canSegment {
                         return pinyinSearch(keys, segmentation: segmentation, anchorsStatement: anchorsStatement, spellStatement: spellStatement)
-                                .flatMap({ Engine.reveresLookup(text: $0.text, input: $0.input, mark: $0.mark) })
                 } else {
                         return processPinyinSlices(of: keys, text: keys.map(\.text).joined(), anchorsStatement: anchorsStatement, spellStatement: spellStatement)
-                                .flatMap({ Engine.reveresLookup(text: $0.text, input: $0.input, mark: $0.mark) })
                 }
         }
 
@@ -295,6 +297,51 @@ private extension Array where Element == PinyinLexicon {
                 let tertiary = others.sorted(by: { $0.number < $1.number }).prefix(7)
                 return (primary + secondary + tertiary + matched + others).distinct()
         }
+
+        func filteredSyllableSeparators<T: RandomAccessCollection<VirtualInputKey>>(for keys: T) -> [PinyinLexicon] {
+                let hasLeadingSeparator: Bool = keys.first?.isApostrophe ?? false
+                guard hasLeadingSeparator.negative else { return [] }
+                let hasTrailingSeparator: Bool = keys.last?.isApostrophe ?? false
+                let inputSeparatorCount = keys.count(where: \.isApostrophe)
+                let inputLength = keys.count
+                let text = keys.map(\.text).joined()
+                let textParts = text.split(separator: Character.apostrophe)
+                let filtered: [PinyinLexicon] = compactMap({ item -> PinyinLexicon? in
+                        let syllables = item.pinyin.split(separator: Character.space)
+                        guard syllables != textParts else { return item.replacedInput(with: text) }
+                        switch inputSeparatorCount {
+                        case 1 where hasTrailingSeparator:
+                                guard syllables.count == 1 else { return nil }
+                                guard item.inputCount == (inputLength - 1) else { return nil }
+                                return item.replacedInput(with: text)
+                        case 1:
+                                switch syllables.count {
+                                case 1:
+                                        guard item.inputCount == textParts.first?.count else { return nil }
+                                        let combinedInput = item.input + String.apostrophe
+                                        return item.replacedInput(with: combinedInput)
+                                case 2:
+                                        let isMatched: Bool = {
+                                                guard inputLength != 3 else { return true }
+                                                guard syllables.first != textParts.first else { return true }
+                                                guard textParts.first?.count == 1 else { return false }
+                                                guard textParts.first?.first == syllables.first?.first else { return false }
+                                                guard let lastSyllable = syllables.last else { return false }
+                                                return textParts.last?.hasPrefix(lastSyllable) ?? false
+                                        }()
+                                        guard isMatched else { return nil }
+                                        let combinedInput = item.input + String.apostrophe
+                                        return item.replacedInput(with: combinedInput)
+                                default:
+                                        return nil
+                                }
+                        // TODO: Handle more separators
+                        default:
+                                return nil
+                        }
+                })
+                return filtered.sorted()
+        }
 }
 
 private struct PinyinLexicon: Hashable, Comparable {
@@ -359,5 +406,9 @@ private struct PinyinLexicon: Hashable, Comparable {
                 let newInput: String = lhs.input + rhs.input
                 let newMark: String = lhs.mark + String.space + rhs.mark
                 return PinyinLexicon(text: newText, pinyin: newPinyin, input: newInput, mark: newMark)
+        }
+
+        func replacedInput(with newInput: String) -> PinyinLexicon {
+                return PinyinLexicon(text: text, pinyin: pinyin, input: newInput, mark: mark, number: number)
         }
 }
