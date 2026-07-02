@@ -10,7 +10,10 @@ public struct Engine {
         static let logger = Logger(subsystem: "org.jyutping.Jyutping.CoreIME", category: "Engine")
 
         public static func prepare() {
-                defer { Segmenter.prepare() }
+                defer {
+                        Segmenter.prepare()
+                        PinyinSegmenter.prepare()
+                }
                 let statement = prepareAnchorsStatement()
                 defer { sqlite3_finalize(statement) }
                 let testCode: Int64 = 20
