@@ -143,26 +143,11 @@ private extension Scheme {
         }
 }
 
-private extension Sequence where Element == Scheme {
-        func descended() -> Segmentation {
-                return self.sorted(by: {
-                        let lhsLength = $0.length
-                        let rhsLength = $1.length
-                        if lhsLength == rhsLength {
-                                return $0.count < $1.count
-                        } else {
-                                return lhsLength > rhsLength
-                        }
-                })
-        }
-}
-
 public struct Segmenter {
 
         private static let logger = Logger(subsystem: "org.jyutping.Jyutping.CoreIME", category: "Segmenter")
-
         static func prepare() {
-                if syllableCodeMap.count == 0 {
+                if syllableCodeMap.isEmpty {
                         logger.warning("Syllable Dictionary is Empty")
                 }
         }

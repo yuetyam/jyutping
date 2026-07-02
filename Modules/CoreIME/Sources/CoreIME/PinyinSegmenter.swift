@@ -1,12 +1,19 @@
 import Foundation
 import SQLite3
 import CommonExtensions
+import os.log
 
 public struct PinyinSyllable: Hashable, Comparable, Sendable {
 
         let code: Int
         let keys: Array<VirtualInputKey>
         let text: String
+
+        init(code: Int, text: String) {
+                self.code = code
+                self.keys = code.matchedInputKeys
+                self.text = text
+        }
 
         public static func ==(lhs: PinyinSyllable, rhs: PinyinSyllable) -> Bool {
                 return lhs.code == rhs.code
@@ -31,76 +38,107 @@ extension PinyinScheme {
         }
 }
 
-private extension Sequence where Element == PinyinScheme {
-        func descended() -> PinyinSegmentation {
-                return self.sorted(by: {
-                        let lhsLength = $0.length
-                        let rhsLength = $1.length
-                        if lhsLength == rhsLength {
-                                return $0.count < $1.count
-                        } else {
-                                return lhsLength > rhsLength
-                        }
-                })
-        }
-}
-
 public struct PinyinSegmenter {
 
-        public static func segment<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T) -> PinyinSegmentation {
-                let statement = prepareStatement()
-                defer { sqlite3_finalize(statement) }
-                return split(keys.filter(\.isLetter), statement: statement)
+        private static let logger = Logger(subsystem: "org.jyutping.Jyutping.CoreIME", category: "PinyinSegmenter")
+        static func prepare() {
+                if pinyinSyllableMap.isEmpty {
+                        logger.warning("PinyinSyllable Dictionary is Empty")
+                }
         }
-        private static func split<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T, statement: OpaquePointer?) -> PinyinSegmentation {
-                let headSyllables = splitLeading(keys, statement: statement)
-                guard headSyllables.isNotEmpty else { return [] }
+        private static let pinyinSyllableMap: Dictionary<Int, PinyinSyllable> = {
+                let command: String = "SELECT code, syllable FROM pinyin_syllable_table;"
+                var statement: OpaquePointer? = nil
+                defer { sqlite3_finalize(statement) }
+                guard sqlite3_prepare_v2(Engine.database, command, -1, &statement, nil) == SQLITE_OK else { return [:] }
+                var dict: [Int: PinyinSyllable] = [:]
+                dict.reserveCapacity(500)
+                while sqlite3_step(statement) == SQLITE_ROW {
+                        let code = Int(sqlite3_column_int64(statement, 0))
+                        guard let syllable = sqlite3_column_text(statement, 1) else { continue }
+                        dict[code] = PinyinSyllable(code: code, text: String(cString: syllable))
+                }
+                return dict
+        }()
+        private static func lookup(by code: Int) -> PinyinSyllable? {
+                return pinyinSyllableMap[code]
+        }
+
+        private static let maxSyllableKeyCount: Int = 6
+
+        private struct SplitEdge {
+                let syllable: PinyinSyllable
+                let endIndex: Int
+        }
+        private struct SplitNode {
+                let syllable: PinyinSyllable
+                let previousIndex: Int?
+                let length: Int
+                let count: Int
+        }
+        private static func splitEdges(for keys: [VirtualInputKey]) -> [[SplitEdge]] {
                 let inputLength = keys.count
-                var segmentation: Set<PinyinScheme> = Set(headSyllables.map({ [$0] }))
-                var previousSyllableCount = segmentation.flattenedCount
-                var shouldContinue: Bool = true
-                while shouldContinue {
-                        for scheme in segmentation {
-                                let schemeLength: Int = scheme.length
-                                guard schemeLength < inputLength else { continue }
-                                let tailKeys = keys.dropFirst(schemeLength)
-                                let tailSyllables = splitLeading(tailKeys, statement: statement)
-                                guard tailSyllables.isNotEmpty else { continue }
-                                let newSegmentation = tailSyllables.map({ scheme + [$0] })
-                                newSegmentation.forEach({ segmentation.insert($0) })
-                        }
-                        let currentSyllableCount = segmentation.flattenedCount
-                        if currentSyllableCount != previousSyllableCount {
-                                previousSyllableCount = currentSyllableCount
-                        } else {
-                                shouldContinue = false
+                var edges = Array(repeating: Array<SplitEdge>(), count: inputLength)
+                for startIndex in 0..<inputLength {
+                        var code: Int = 0
+                        let endIndexLimit = min(inputLength, startIndex + maxSyllableKeyCount)
+                        for endIndex in startIndex..<endIndexLimit {
+                                code = code * 100 + keys[endIndex].code
+                                guard let syllable = lookup(by: code) else { continue }
+                                edges[startIndex].append(SplitEdge(syllable: syllable, endIndex: endIndex + 1))
                         }
                 }
-                return segmentation.descended()
+                return edges
         }
-        private static func splitLeading<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T, statement: OpaquePointer?) -> [PinyinSyllable] {
-                let maxLength: Int = min(keys.count, 6)
-                guard maxLength > 0 else { return [] }
-                return (1...maxLength).reversed().compactMap({ number -> PinyinSyllable? in
-                        let leadingKeys = keys.prefix(number)
-                        let code = leadingKeys.combinedCode
-                        guard let text = match(code: code, statement: statement) else { return nil }
-                        return PinyinSyllable(code: code, keys: Array<VirtualInputKey>(leadingKeys), text: text)
-                })
+        private static func scheme(at nodeIndex: Int, in nodes: [SplitNode]) -> PinyinScheme {
+                var syllables: PinyinScheme = []
+                syllables.reserveCapacity(nodes[nodeIndex].count)
+                var currentIndex: Int? = nodeIndex
+                while let index = currentIndex {
+                        let node = nodes[index]
+                        syllables.append(node.syllable)
+                        currentIndex = node.previousIndex
+                }
+                syllables.reverse()
+                return syllables
         }
-
-        private static func match(code: Int, statement: OpaquePointer?) -> String? {
-                sqlite3_reset(statement)
-                sqlite3_bind_int64(statement, 1, Int64(code))
-                guard sqlite3_step(statement) == SQLITE_ROW else { return nil }
-                guard let syllable = sqlite3_column_text(statement, 0) else { return nil }
-                return String(cString: syllable)
+        private static func split(_ keys: [VirtualInputKey]) -> PinyinSegmentation {
+                let inputLength = keys.count
+                guard inputLength > 0 else { return [] }
+                let edges = splitEdges(for: keys)
+                guard (edges.first?.isNotEmpty ?? false) else { return [] }
+                var nodes: [SplitNode] = []
+                var frontier: [Int] = []
+                for edge in edges[0] {
+                        let node = SplitNode(syllable: edge.syllable, previousIndex: nil, length: edge.endIndex, count: 1)
+                        nodes.append(node)
+                        frontier.append(nodes.endIndex - 1)
+                }
+                while frontier.isNotEmpty {
+                        var nextFrontier: [Int] = []
+                        for nodeIndex in frontier {
+                                let node = nodes[nodeIndex]
+                                guard node.length < inputLength else { continue }
+                                for edge in edges[node.length] {
+                                        let nextNode = SplitNode(syllable: edge.syllable, previousIndex: nodeIndex, length: edge.endIndex, count: node.count + 1)
+                                        nodes.append(nextNode)
+                                        nextFrontier.append(nodes.endIndex - 1)
+                                }
+                        }
+                        frontier = nextFrontier
+                }
+                return nodes.indices.map({ nodeIndex -> (scheme: PinyinScheme, length: Int, count: Int) in
+                        let node = nodes[nodeIndex]
+                        return (scheme(at: nodeIndex, in: nodes), node.length, node.count)
+                }).sorted(by: {
+                        if $0.length == $1.length {
+                                return $0.count < $1.count
+                        } else {
+                                return $0.length > $1.length
+                        }
+                }).map(\.scheme)
         }
-
-        private static let queryCommand: String = "SELECT syllable FROM pinyin_syllable_table WHERE code = ? LIMIT 1;"
-        private static func prepareStatement() -> OpaquePointer? {
-                var statement: OpaquePointer?
-                guard sqlite3_prepare_v2(Engine.database, queryCommand, -1, &statement, nil) == SQLITE_OK else { return nil }
-                return statement
+        public static func segment<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T) -> PinyinSegmentation {
+                return split(keys.filter(\.isLetter))
         }
 }
