@@ -506,7 +506,8 @@ final class JyutpingInputController: IMKInputController, Sendable {
         }
         private func pinyinReverseLookup() {
                 suggestionTask?.cancel()
-                let allKeys = bufferEvents.map(\.key)
+                let events = bufferEvents
+                let allKeys = events.map(\.key)
                 guard allKeys.count > 1 else {
                         mark(text: joinedBufferTexts())
                         let defined = searchDefined(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
@@ -533,10 +534,11 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                         guard let self else { return }
                                         let bufferText = joinedBufferTexts()
                                         let text2mark: String = {
-                                                // TODO: Handle separators
                                                 guard let firstCandidate = suggestions.first else { return bufferText }
                                                 guard firstCandidate.isCantonese else { return bufferText }
                                                 let tailMark: String = {
+                                                        let isPeculiar: Bool = events.contains(where: { $0.isCapitalized || $0.key.isLetter.negative })
+                                                        guard isPeculiar.negative else { return bufferText.dropFirst().markFormatted() }
                                                         guard firstCandidate.lexicon.inputCount != keys.count else { return firstCandidate.lexicon.mark }
                                                         guard let bestScheme = segmentation.first else { return String(bufferText.dropFirst()) }
                                                         let leadingLength: Int = bestScheme.length

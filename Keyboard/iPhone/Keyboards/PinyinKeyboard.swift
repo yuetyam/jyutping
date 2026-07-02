@@ -50,7 +50,9 @@ struct PinyinKeyboard: View {
                         }
                         HStack(spacing: 0) {
                                 TransformKey(destination: context.preferredNumericForm, widthUnitTimes: 2)
+                                LeftKey()
                                 SpaceKey()
+                                RightKey()
                                 ReturnKey()
                         }
                 }
