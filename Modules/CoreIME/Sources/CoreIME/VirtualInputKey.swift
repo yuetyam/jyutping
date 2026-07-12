@@ -100,7 +100,7 @@ extension VirtualInputKey {
                 return Self.alphabetSet.contains(self)
         }
 
-        /// Letters [a-z] excluded tone letters [vxq]
+        /// Letters [a-z] excluding tone letters [vxq]
         public var isSyllableLetter: Bool {
                 return isLetter && !(isToneLetter)
         }
@@ -166,8 +166,7 @@ extension VirtualInputKey {
                 return alphabetSet.first(where: { $0.code == code }) ?? digitSet.first(where: { $0.code == code })
         }
         public static func matchInputKey(for character: Character) -> VirtualInputKey? {
-                guard let code = character.virtualKeyInputCode else { return nil }
-                return alphabetSet.first(where: { $0.code == code }) ?? digitSet.first(where: { $0.code == code })
+                return alphabetSet.first(where: { $0.character == character }) ?? digitSet.first(where: { $0.character == character })
         }
 
         public static let GWInputKeys: [VirtualInputKey] = [letterG, letterW]
@@ -175,13 +174,15 @@ extension VirtualInputKey {
 }
 
 extension RandomAccessCollection where Element == VirtualInputKey {
-        /// radix100Combined
-        var combinedCode: Int {
-                guard count < 10 else { return 0 }
-                return reduce(0, { $0 * 100 + $1.code })
+
+        /// Combines the element codes as base-100 digits using wrapping arithmetic.
+        var conjoinedCode: Int {
+                return reduce(0, { $0 &* 100 &+ $1.code })
         }
-        var anchorsCode: Int {
-                return map({ $0.isYLetterY ? VirtualInputKey.letterJ : $0 }).combinedCode
+
+        /// Replace letter Y with letter J
+        var anchorNormalized: [VirtualInputKey] {
+                return map({ $0.isYLetterY ? VirtualInputKey.letterJ : $0 })
         }
 }
 

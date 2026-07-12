@@ -45,6 +45,7 @@ struct CandidateStackView: View {
                                                 .padding(.vertical, 2)
                                                 .padding(.trailing, 3)
                                                 .padding(.horizontal, lineSpacing / 2.0)
+                                                .fixedSize()
                                         }
                                         .contentShape(.rect)
                                         .onHover { isHovering in

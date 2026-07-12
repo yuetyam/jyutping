@@ -35,7 +35,7 @@ extension Engine {
                 return (0..<inputLength).flatMap({ number -> [PinyinLexicon] in
                         let leadingKeys = keys.dropLast(number)
                         let leadingText = leadingKeys.map(\.text).joined()
-                        let spellMatched = pinyinSpellMatch(text: leadingText, limit: limit, statement: spellStatement)
+                        let spellMatched = pinyinSpellMatch(keys: leadingKeys, input: leadingText, limit: limit, statement: spellStatement)
                                 .map({ modify($0, text: text, textLength: inputLength) })
                         let anchorsMatched = pinyinAnchorsMatch(keys: leadingKeys, input: leadingText, limit: adjustedLimit, statement: anchorsStatement)
                                 .map({ modify($0, text: text, textLength: inputLength) })
@@ -61,7 +61,7 @@ extension Engine {
         private static func pinyinSearch<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T, segmentation: PinyinSegmentation, limit: Int64? = nil, anchorsStatement: OpaquePointer?, spellStatement: OpaquePointer?) -> [PinyinLexicon] {
                 let inputLength: Int = keys.count
                 let text: String = keys.map(\.text).joined()
-                let spellMatched = pinyinSpellMatch(text: text, limit: limit, statement: spellStatement)
+                let spellMatched = pinyinSpellMatch(keys: keys, input: text, limit: limit, statement: spellStatement)
                 let anchorsMatched = pinyinAnchorsMatch(keys: keys, input: text, limit: limit, statement: anchorsStatement)
                 let queried = pinyinQuery(inputLength: inputLength, segmentation: segmentation, limit: limit, statement: spellStatement)
                 let shouldMatchPrefixes: Bool = {
@@ -135,7 +135,7 @@ extension Engine {
                 let idealSchemes = segmentation.filter({ $0.length == inputLength })
                 if idealSchemes.isEmpty {
                         return segmentation.flatMap({ scheme -> [PinyinLexicon] in
-                                return pinyinSpellMatch(text: scheme.map(\.text).joined(), limit: limit, statement: statement)
+                                return pinyinSpellMatch(keys: scheme.flatMap(\.keys), limit: limit, statement: statement)
                         })
                 } else {
                         return idealSchemes.flatMap({ scheme -> [PinyinLexicon] in
@@ -143,10 +143,10 @@ extension Engine {
                                 case 0:
                                         return []
                                 case 1:
-                                        return pinyinSpellMatch(text: scheme.map(\.text).joined(), limit: limit, statement: statement)
+                                        return pinyinSpellMatch(keys: scheme.flatMap(\.keys), limit: limit, statement: statement)
                                 default:
                                         return (1...scheme.count).reversed().map({ scheme.prefix($0) }).flatMap({ slice -> [PinyinLexicon] in
-                                                return pinyinSpellMatch(text: slice.map(\.text).joined(), limit: limit, statement: statement)
+                                                return pinyinSpellMatch(keys: slice.flatMap(\.keys), limit: limit, statement: statement)
                                         })
                                 }
                         })
@@ -154,45 +154,53 @@ extension Engine {
         }
 
         private static func preparePinyinStatement() -> OpaquePointer? {
-                let command: String = "SELECT rowid, word, romanization FROM pinyin_lexicon WHERE spell = ? LIMIT ?;"
+                let command: String = "SELECT rowid, word, romanization FROM pinyin_lexicon WHERE spell = ? AND complex = ? ORDER BY rowid LIMIT ?;"
                 var statement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(Engine.database, command, -1, &statement, nil) == SQLITE_OK else { return nil }
                 return statement
         }
-        private static func pinyinSpellMatch(text: String, limit: Int64? = nil, statement: OpaquePointer?) -> [PinyinLexicon] {
+        private static func pinyinSpellMatch<T: RandomAccessCollection<VirtualInputKey>>(keys: T, input: String? = nil, limit: Int64? = nil, statement: OpaquePointer?) -> [PinyinLexicon] {
                 sqlite3_reset(statement)
-                sqlite3_bind_int64(statement, 1, Int64(text.hashCode()))
-                sqlite3_bind_int64(statement, 2, (limit ?? -1))
+                let spell: Int64 = keys.conjoinedCode.toInt64()
+                let complex: Int64 = keys.count.toInt64()
+                let limit: Int64 = limit ?? -1
+                sqlite3_bind_int64(statement, 1, spell)
+                sqlite3_bind_int64(statement, 2, complex)
+                sqlite3_bind_int64(statement, 3, limit)
+                let input: String = input ?? keys.map(\.text).joined()
                 var instances: [PinyinLexicon] = []
                 while sqlite3_step(statement) == SQLITE_ROW {
                         let rowID = sqlite3_column_int64(statement, 0)
                         guard let word = sqlite3_column_text(statement, 1) else { continue }
                         guard let romanization = sqlite3_column_text(statement, 2) else { continue }
                         let pinyin = String(cString: romanization)
-                        let instance = PinyinLexicon(text: String(cString: word), pinyin: pinyin, input: text, mark: pinyin, number: Int(rowID))
+                        let instance = PinyinLexicon(text: String(cString: word), pinyin: pinyin, input: input, mark: pinyin, number: Int(rowID))
                         instances.append(instance)
                 }
                 return instances
         }
+
         private static func preparePinyinAnchorsStatement() -> OpaquePointer? {
-                let command: String = "SELECT rowid, word, romanization FROM pinyin_lexicon WHERE anchors = ? LIMIT ?;"
+                let command: String = "SELECT rowid, word, romanization FROM pinyin_lexicon WHERE anchors = ? AND char_count = ? ORDER BY rowid LIMIT ?;"
                 var statement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(Engine.database, command, -1, &statement, nil) == SQLITE_OK else { return nil }
                 return statement
         }
         private static func pinyinAnchorsMatch<T: RandomAccessCollection<VirtualInputKey>>(keys: T, input: String? = nil, limit: Int64? = nil, statement: OpaquePointer?) -> [PinyinLexicon] {
-                let code = keys.combinedCode
-                guard code > 0 else { return [] }
                 sqlite3_reset(statement)
-                sqlite3_bind_int64(statement, 1, Int64(code))
-                sqlite3_bind_int64(statement, 2, (limit ?? 100))
-                let inputText: String = input ?? keys.map(\.text).joined()
+                let code: Int64 = keys.conjoinedCode.toInt64()
+                let charCount: Int64 = keys.count.toInt64()
+                let limit: Int64 = limit ?? 100
+                sqlite3_bind_int64(statement, 1, code)
+                sqlite3_bind_int64(statement, 2, charCount)
+                sqlite3_bind_int64(statement, 3, limit)
+                let input: String = input ?? keys.map(\.text).joined()
                 var instances: [PinyinLexicon] = []
                 while sqlite3_step(statement) == SQLITE_ROW {
                         let rowID = sqlite3_column_int64(statement, 0)
                         guard let word = sqlite3_column_text(statement, 1) else { continue }
                         guard let romanization = sqlite3_column_text(statement, 2) else { continue }
-                        let instance = PinyinLexicon(text: String(cString: word), pinyin: String(cString: romanization), input: inputText, mark: inputText, number: Int(rowID))
+                        let instance = PinyinLexicon(text: String(cString: word), pinyin: String(cString: romanization), input: input, mark: input, number: Int(rowID))
                         instances.append(instance)
                 }
                 return instances
@@ -200,13 +208,13 @@ extension Engine {
 }
 
 extension Engine {
-        private static let pinyinNineKeyAnchorsQuery: String = "SELECT rowid, word, romanization FROM pinyin_lexicon WHERE nine_key_anchors = ? LIMIT ?;"
+        private static let pinyinNineKeyAnchorsQuery: String = "SELECT rowid, word, romanization FROM pinyin_lexicon WHERE nine_key_anchors = ? AND char_count = ? ORDER BY rowid LIMIT ?;"
         private static func preparePinyinNineKeyAnchorsStatement() -> OpaquePointer? {
                 var statement: OpaquePointer?
                 guard sqlite3_prepare_v2(database, pinyinNineKeyAnchorsQuery, -1, &statement, nil) == SQLITE_OK else { return nil }
                 return statement
         }
-        private static let pinyinNineKeyCodeQuery: String = "SELECT rowid, word, romanization FROM pinyin_lexicon WHERE nine_key_code = ? LIMIT ?;"
+        private static let pinyinNineKeyCodeQuery: String = "SELECT rowid, word, romanization FROM pinyin_lexicon WHERE nine_key_code = ? AND complex = ? ORDER BY rowid LIMIT ?;"
         private static func preparePinyinNineKeyCodeStatement() -> OpaquePointer? {
                 var statement: OpaquePointer?
                 guard sqlite3_prepare_v2(database, pinyinNineKeyCodeQuery, -1, &statement, nil) == SQLITE_OK else { return nil }
@@ -225,40 +233,39 @@ extension Engine {
         }
         private static func pinyinNineKeySearch<T: RandomAccessCollection<Combo>>(combos: T, limit: Int64? = nil, anchorsStatement: OpaquePointer?, codeMatchStatement: OpaquePointer?) -> [PinyinLexicon] {
                 let inputLength: Int = combos.count
-                let fullCode: Int = combos.map(\.digit).decimalCombined()
+                let fullCode: Int = combos.decimalCombinedCode
                 guard inputLength > 1 else {
-                        return pinyinNineKeyCodeMatch(code: fullCode, limit: limit, statement: codeMatchStatement) + pinyinNineKeyAnchorsMatch(code: fullCode, limit: 100, statement: anchorsStatement)
+                        return pinyinNineKeyCodeMatch(code: fullCode, complex: inputLength, limit: limit, statement: codeMatchStatement) + pinyinNineKeyAnchorsMatch(code: fullCode, charCount: inputLength, limit: 100, statement: anchorsStatement)
                 }
-                let fullMatched = pinyinNineKeyCodeMatch(code: fullCode, limit: limit, statement: codeMatchStatement)
-                let idealAnchorsMatched = pinyinNineKeyAnchorsMatch(code: fullCode, limit: 4, statement: anchorsStatement)
+                let fullMatched = pinyinNineKeyCodeMatch(code: fullCode, complex: inputLength, limit: limit, statement: codeMatchStatement)
+                let idealAnchorsMatched = pinyinNineKeyAnchorsMatch(code: fullCode, charCount: inputLength, limit: 4, statement: anchorsStatement)
                 let codeMatched: [PinyinLexicon] = (1..<inputLength)
                         .flatMap({ number -> [PinyinLexicon] in
-                                let code = combos.dropLast(number).map(\.digit).decimalCombined()
-                                guard code > 0 else { return [] }
-                                return pinyinNineKeyCodeMatch(code: code, limit: limit, statement: codeMatchStatement)
+                                let code = combos.dropLast(number).decimalCombinedCode
+                                let complex = (inputLength - number)
+                                return pinyinNineKeyCodeMatch(code: code, complex: complex, limit: limit, statement: codeMatchStatement)
                         })
                 let anchorsMatched: [PinyinLexicon] = (0..<inputLength)
                         .flatMap({ number -> [PinyinLexicon] in
-                                let code = combos.dropLast(number).map(\.digit).decimalCombined()
-                                guard code > 0 else { return [] }
-                                return pinyinNineKeyAnchorsMatch(code: code, limit: limit, statement: anchorsStatement)
+                                let code = combos.dropLast(number).decimalCombinedCode
+                                let charCount = (inputLength - number)
+                                return pinyinNineKeyAnchorsMatch(code: code, charCount: charCount, limit: limit, statement: anchorsStatement)
                         })
                 let queried = (fullMatched + idealAnchorsMatched + codeMatched + anchorsMatched)
                 guard let firstInputCount = queried.first?.inputCount else { return [] }
                 guard firstInputCount < inputLength else { return queried }
-                let tailCombos = combos.dropFirst(firstInputCount)
-                let tailCode = tailCombos.map(\.digit).decimalCombined()
-                guard tailCode > 0 else { return queried }
-                let tailLexicons: [PinyinLexicon] = pinyinNineKeyCodeMatch(code: tailCode, limit: 20, statement: codeMatchStatement) + pinyinNineKeyAnchorsMatch(code: tailCode, limit: 20, statement: anchorsStatement)
+                let tailLength = (inputLength - firstInputCount)
+                let tailCode = combos.dropFirst(firstInputCount).decimalCombinedCode
+                let tailLexicons: [PinyinLexicon] = pinyinNineKeyCodeMatch(code: tailCode, complex: tailLength, limit: 20, statement: codeMatchStatement) + pinyinNineKeyAnchorsMatch(code: tailCode, charCount: tailLength, limit: 20, statement: anchorsStatement)
                 guard tailLexicons.isNotEmpty, let head = queried.first else { return queried }
                 let concatenated = tailLexicons.compactMap({ head + $0 }).sorted().prefix(1)
                 return concatenated + queried
         }
-        private static func pinyinNineKeyAnchorsMatch(code: Int, limit: Int64? = nil, statement: OpaquePointer?) -> [PinyinLexicon] {
-                guard code > 0 else { return [] }
+        private static func pinyinNineKeyAnchorsMatch<T: BinaryInteger>(code: T, charCount: T, limit: Int64? = nil, statement: OpaquePointer?) -> [PinyinLexicon] {
                 sqlite3_reset(statement)
-                sqlite3_bind_int64(statement, 1, Int64(code))
-                sqlite3_bind_int64(statement, 2, (limit ?? 30))
+                sqlite3_bind_int64(statement, 1, code.toInt64())
+                sqlite3_bind_int64(statement, 2, charCount.toInt64())
+                sqlite3_bind_int64(statement, 3, (limit ?? 30))
                 var instances: [PinyinLexicon] = []
                 while sqlite3_step(statement) == SQLITE_ROW {
                         let rowID: Int = Int(sqlite3_column_int64(statement, 0))
@@ -271,11 +278,11 @@ extension Engine {
                 }
                 return instances
         }
-        private static func pinyinNineKeyCodeMatch(code: Int, limit: Int64? = nil, statement: OpaquePointer?) -> [PinyinLexicon] {
-                guard code > 0 else { return [] }
+        private static func pinyinNineKeyCodeMatch<T: BinaryInteger>(code: T, complex: T, limit: Int64? = nil, statement: OpaquePointer?) -> [PinyinLexicon] {
                 sqlite3_reset(statement)
-                sqlite3_bind_int64(statement, 1, Int64(code))
-                sqlite3_bind_int64(statement, 2, (limit ?? -1))
+                sqlite3_bind_int64(statement, 1, code.toInt64())
+                sqlite3_bind_int64(statement, 2, complex.toInt64())
+                sqlite3_bind_int64(statement, 3, (limit ?? -1))
                 var instances: [PinyinLexicon] = []
                 while sqlite3_step(statement) == SQLITE_ROW {
                         let rowID: Int = Int(sqlite3_column_int64(statement, 0))

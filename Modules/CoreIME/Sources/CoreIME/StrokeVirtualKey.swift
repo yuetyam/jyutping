@@ -44,6 +44,11 @@ extension StrokeVirtualKey {
                 .wildcard     : "＊"
         ]
 
+        /// `code` as String text
+        var digitText: String {
+                return virtualInputKey.text
+        }
+
         public var virtualInputKey: VirtualInputKey {
                 switch self {
                 case .horizontal  : .number1

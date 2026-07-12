@@ -34,7 +34,10 @@ Feature highlights:
 - Easy ways to Copy, Cut, Paste and moving cursor backward/forward.
 - Audio and Haptic feedbacks.
 
-Jyutping for Android: [yuetyam/jyutping-android](https://github.com/yuetyam/jyutping-android)
+See also:
+- [Android](https://github.com/yuetyam/jyutping-android)
+- [Windows](https://github.com/yuetyam/jyutping-windows)
+- [HarmonyOS](https://github.com/yuetyam/jyutping-harmony)
 
 ## Screenshots
 <a href="https://apps.apple.com/hk/app/id1509367629">

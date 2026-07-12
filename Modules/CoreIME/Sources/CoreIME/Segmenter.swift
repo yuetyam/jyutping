@@ -418,7 +418,7 @@ public struct Segmenter {
                         default: return []
                         }
                 case 4:
-                        switch keys.combinedCode {
+                        switch keys.conjoinedCode {
                         case 32203220: return mama
                         case 32203228: return mami
                         default:
@@ -497,6 +497,6 @@ public struct Segmenter {
 
         public static func syllableText<T: RandomAccessCollection<VirtualInputKey>>(of keys: T) -> String? {
                 guard keys.count <= 6 else { return nil }
-                return lookup(by: keys.combinedCode)?.originText
+                return lookup(by: keys.conjoinedCode)?.originText
         }
 }

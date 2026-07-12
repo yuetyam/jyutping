@@ -6,7 +6,6 @@ struct StrokeEntry: Hashable {
         let word: String
         let stroke: String
         let complex: Int
-        let spell: Int
         let code: Int
         static func == (lhs: StrokeEntry, rhs: StrokeEntry) -> Bool {
                 return lhs.word == rhs.word && lhs.stroke == rhs.stroke
@@ -50,12 +49,14 @@ struct Stroke {
                 return characters.flatMap({ word -> [StrokeEntry] in
                         let matches = match(text: word)
                         guard !(matches.isEmpty) else { return [] }
-                        let entries = matches.map { text -> StrokeEntry in
+                        let entries = matches.compactMap { text -> StrokeEntry? in
                                 let codes = text.compactMap({ codeMap[$0] })
-                                guard codes.count == text.count else { fatalError("bad stroke format: \(word) = \(text)") }
+                                let complex = codes.count
+                                guard complex <= 30 else { return nil }
+                                guard complex == text.count else { fatalError("bad stroke format: \(word) = \(text)") }
                                 let stroke = codes.map({ String($0) }).joined()
-                                let code = codes.decimalCombined()
-                                return StrokeEntry(word: word, stroke: stroke, complex: stroke.count, spell: Int(stroke.hashCode()), code: code)
+                                let code = codes.decimalOverflowed()
+                                return StrokeEntry(word: word, stroke: stroke, complex: complex, code: code)
                         }
                         return entries
                 }).distinct()

@@ -77,21 +77,19 @@ struct DatabasePreparer {
 
         private static func createIndexes() {
                 let commands: [String] = [
-                        "CREATE INDEX ix_core_lexicon_spell ON core_lexicon (spell);",
-                        "CREATE INDEX ix_core_lexicon_anchors ON core_lexicon (anchors);",
-                        "CREATE INDEX ix_core_lexicon_strict ON core_lexicon (spell, anchors);",
-                        "CREATE INDEX ix_core_lexicon_nine_key_code ON core_lexicon (nine_key_code);",
-                        "CREATE INDEX ix_core_lexicon_nine_key_anchors ON core_lexicon (nine_key_anchors);",
+                        "CREATE INDEX ix_core_lexicon_anchors ON core_lexicon (anchors, char_count);",
+                        "CREATE INDEX ix_core_lexicon_spell ON core_lexicon (spell, complex);",
+                        "CREATE INDEX ix_core_lexicon_nine_key_anchors ON core_lexicon (nine_key_anchors, char_count);",
+                        "CREATE INDEX ix_core_lexicon_nine_key_code ON core_lexicon (nine_key_code, complex);",
                         "CREATE INDEX ix_core_lexicon_word ON core_lexicon (word);",
 
-                        "CREATE INDEX ix_structure_spell ON structure_table (spell);",
-                        "CREATE INDEX ix_structure_nine_key_code ON structure_table (nine_key_code);",
+                        "CREATE INDEX ix_structure_spell ON structure_table (spell, complex);",
+                        "CREATE INDEX ix_structure_nine_key_code ON structure_table (nine_key_code, complex);",
 
-                        "CREATE INDEX ix_pinyin_spell ON pinyin_lexicon (spell);",
-                        "CREATE INDEX ix_pinyin_anchors ON pinyin_lexicon (anchors);",
-                        "CREATE INDEX ix_pinyin_strict ON pinyin_lexicon (spell, anchors);",
-                        "CREATE INDEX ix_pinyin_nine_key_code ON pinyin_lexicon (nine_key_code);",
-                        "CREATE INDEX ix_pinyin_nine_key_anchors ON pinyin_lexicon (nine_key_anchors);",
+                        "CREATE INDEX ix_pinyin_anchors ON pinyin_lexicon (anchors, char_count);",
+                        "CREATE INDEX ix_pinyin_spell ON pinyin_lexicon (spell, complex);",
+                        "CREATE INDEX ix_pinyin_nine_key_anchors ON pinyin_lexicon (nine_key_anchors, char_count);",
+                        "CREATE INDEX ix_pinyin_nine_key_code ON pinyin_lexicon (nine_key_code, complex);",
 
                         "CREATE INDEX ix_cangjie_cangjie5 ON cangjie_table (cangjie5);",
                         "CREATE INDEX ix_cangjie_c5code ON cangjie_table (c5code);",
@@ -104,15 +102,14 @@ struct DatabasePreparer {
                         "CREATE INDEX ix_quick_q3code ON quick_table (q3code);",
 
                         "CREATE INDEX ix_stroke_stroke ON stroke_table (stroke);",
-                        "CREATE INDEX ix_stroke_spell ON stroke_table (spell);",
-                        "CREATE INDEX ix_stroke_code ON stroke_table (code);",
+                        "CREATE INDEX ix_stroke_code ON stroke_table (code, complex);",
 
-                        "CREATE INDEX ix_symbol_spell ON symbol_table (spell);",
-                        "CREATE INDEX ix_symbol_nine_key_code ON symbol_table (nine_key_code);",
+                        "CREATE INDEX ix_symbol_spell ON symbol_table (spell, complex);",
+                        "CREATE INDEX ix_symbol_nine_key_code ON symbol_table (nine_key_code, complex);",
                         "CREATE INDEX ix_emoji_skin_map_source ON emoji_skin_map (source);",
 
-                        "CREATE INDEX ix_mark_spell ON mark_table (spell);",
-                        "CREATE INDEX ix_mark_nine_key_code ON mark_table (nine_key_code);",
+                        "CREATE INDEX ix_mark_spell ON mark_table (spell, complex);",
+                        "CREATE INDEX ix_mark_nine_key_code ON mark_table (nine_key_code, complex);",
 
                         "CREATE INDEX ix_core_syllable_nine_key_alias_code ON core_syllable_table (nine_key_alias_code);",
                         "CREATE INDEX ix_pinyin_syllable_nine_key_code ON pinyin_syllable_table (nine_key_code);",
@@ -145,14 +142,14 @@ struct DatabasePreparer {
         }
 
         private static func createCoreLexiconTable() async {
-                let createTable: String = "CREATE TABLE core_lexicon (id INTEGER PRIMARY KEY AUTOINCREMENT, word TEXT NOT NULL, romanization TEXT NOT NULL, anchors INTEGER NOT NULL, spell INTEGER NOT NULL, nine_key_anchors INTEGER NOT NULL, nine_key_code INTEGER NOT NULL, UNIQUE (word, romanization));"
+                let createTable: String = "CREATE TABLE core_lexicon (id INTEGER PRIMARY KEY AUTOINCREMENT, word TEXT NOT NULL, romanization TEXT NOT NULL, char_count INTEGER NOT NULL, complex INTEGER NOT NULL, anchors INTEGER NOT NULL, spell INTEGER NOT NULL, nine_key_anchors INTEGER NOT NULL, nine_key_code INTEGER NOT NULL, UNIQUE (word, romanization));"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
                 sqlite3_finalize(createStatement)
                 let sourceEntries: [LexiconEntry] = LexiconConverter.jyutping()
                 func insert(values: String) {
-                        let insert: String = "INSERT INTO core_lexicon (word, romanization, anchors, spell, nine_key_anchors, nine_key_code) VALUES \(values);"
+                        let insert: String = "INSERT INTO core_lexicon (word, romanization, char_count, complex, anchors, spell, nine_key_anchors, nine_key_code) VALUES \(values);"
                         var insertStatement: OpaquePointer? = nil
                         defer { sqlite3_finalize(insertStatement) }
                         guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }
@@ -163,9 +160,9 @@ struct DatabasePreparer {
                 for number in range {
                         let bound: Int = (number == 1999) ? sourceEntries.count : ((number + 1) * distance)
                         let part = sourceEntries[(number * distance)..<bound]
-                        let entries = part.map { entry -> String in
-                                return "('\(entry.word)', '\(entry.romanization)', \(entry.anchors), \(entry.spell), \(entry.nineKeyAnchors), \(entry.nineKeyCode))"
-                        }
+                        let entries = part.map({ entry -> String in
+                                return "('\(entry.word)', '\(entry.romanization)', \(entry.charCount), \(entry.complex), \(entry.anchors), \(entry.spell), \(entry.nineKeyAnchors), \(entry.nineKeyCode))"
+                        })
                         let values: String = entries.joined(separator: ", ")
                         insert(values: values)
                 }
@@ -185,31 +182,40 @@ struct DatabasePreparer {
                 guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
         }
         private static func createStructureTable() async {
-                let createTable: String = "CREATE TABLE structure_table (id INTEGER PRIMARY KEY AUTOINCREMENT, word TEXT NOT NULL, romanization TEXT NOT NULL, spell INTEGER NOT NULL, nine_key_code INTEGER NOT NULL);"
+                let createTable: String = "CREATE TABLE structure_table (id INTEGER PRIMARY KEY AUTOINCREMENT, word TEXT NOT NULL, romanization TEXT NOT NULL, char_count INTEGER NOT NULL, complex INTEGER NOT NULL, spell INTEGER NOT NULL, nine_key_code INTEGER NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
                 sqlite3_finalize(createStatement)
                 let sourceEntries: [LexiconEntry] = LexiconConverter.structure()
-                let entries = sourceEntries.map { entry -> String in
-                        return "('\(entry.word)', '\(entry.romanization)', \(entry.spell), \(entry.nineKeyCode))"
+                func insert(values: String) {
+                        let insert: String = "INSERT INTO structure_table (word, romanization, char_count, complex, spell, nine_key_code) VALUES \(values);"
+                        var insertStatement: OpaquePointer? = nil
+                        defer { sqlite3_finalize(insertStatement) }
+                        guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }
+                        guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
                 }
-                let values: String = entries.joined(separator: ", ")
-                let insert: String = "INSERT INTO structure_table (word, romanization, spell, nine_key_code) VALUES \(values);"
-                var insertStatement: OpaquePointer? = nil
-                defer { sqlite3_finalize(insertStatement) }
-                guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }
-                guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
+                let range: Range<Int> = 0..<200
+                let distance: Int = sourceEntries.count / 200
+                for number in range {
+                        let bound: Int = (number == 199) ? sourceEntries.count : ((number + 1) * distance)
+                        let part = sourceEntries[(number * distance)..<bound]
+                        let entries = part.map({ entry -> String in
+                                return "('\(entry.word)', '\(entry.romanization)', \(entry.charCount), \(entry.complex), \(entry.spell), \(entry.nineKeyCode))"
+                        })
+                        let values: String = entries.joined(separator: ", ")
+                        insert(values: values)
+                }
         }
         private static func createPinyinTable() async {
-                let createTable: String = "CREATE TABLE pinyin_lexicon (id INTEGER PRIMARY KEY AUTOINCREMENT, word TEXT NOT NULL, romanization TEXT NOT NULL, anchors INTEGER NOT NULL, spell INTEGER NOT NULL, nine_key_anchors INTEGER NOT NULL, nine_key_code INTEGER NOT NULL);"
+                let createTable: String = "CREATE TABLE pinyin_lexicon (id INTEGER PRIMARY KEY AUTOINCREMENT, word TEXT NOT NULL, romanization TEXT NOT NULL, char_count INTEGER NOT NULL, complex INTEGER NOT NULL, anchors INTEGER NOT NULL, spell INTEGER NOT NULL, nine_key_anchors INTEGER NOT NULL, nine_key_code INTEGER NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
                 sqlite3_finalize(createStatement)
                 let sourceEntries: [LexiconEntry] = LexiconConverter.pinyin()
                 func insert(values: String) {
-                        let insert: String = "INSERT INTO pinyin_lexicon (word, romanization, anchors, spell, nine_key_anchors, nine_key_code) VALUES \(values);"
+                        let insert: String = "INSERT INTO pinyin_lexicon (word, romanization, char_count, complex, anchors, spell, nine_key_anchors, nine_key_code) VALUES \(values);"
                         var insertStatement: OpaquePointer? = nil
                         defer { sqlite3_finalize(insertStatement) }
                         guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }
@@ -220,9 +226,9 @@ struct DatabasePreparer {
                 for number in range {
                         let bound: Int = (number == 1999) ? sourceEntries.count : ((number + 1) * distance)
                         let part = sourceEntries[(number * distance)..<bound]
-                        let entries = part.map { entry -> String in
-                                return "('\(entry.word)', '\(entry.romanization)', \(entry.anchors), \(entry.spell), \(entry.nineKeyAnchors), \(entry.nineKeyCode))"
-                        }
+                        let entries = part.map({ entry -> String in
+                                return "('\(entry.word)', '\(entry.romanization)', \(entry.charCount), \(entry.complex), \(entry.anchors), \(entry.spell), \(entry.nineKeyAnchors), \(entry.nineKeyCode))"
+                        })
                         let values: String = entries.joined(separator: ", ")
                         insert(values: values)
                 }
@@ -271,14 +277,14 @@ struct DatabasePreparer {
                 }
         }
         private static func createStrokeTable() async {
-                let createTable: String = "CREATE TABLE stroke_table (id INTEGER PRIMARY KEY AUTOINCREMENT, word TEXT NOT NULL, stroke TEXT NOT NULL, complex INTEGER NOT NULL, spell INTEGER NOT NULL, code INTEGER NOT NULL);"
+                let createTable: String = "CREATE TABLE stroke_table (id INTEGER PRIMARY KEY AUTOINCREMENT, word TEXT NOT NULL, stroke TEXT NOT NULL, complex INTEGER NOT NULL, code INTEGER NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
                 sqlite3_finalize(createStatement)
                 let sourceEntries = Stroke.generate()
                 func insert(values: String) {
-                        let insert: String = "INSERT INTO stroke_table (word, stroke, complex, spell, code) VALUES \(values);"
+                        let insert: String = "INSERT INTO stroke_table (word, stroke, complex, code) VALUES \(values);"
                         var insertStatement: OpaquePointer? = nil
                         defer { sqlite3_finalize(insertStatement) }
                         guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }
@@ -290,14 +296,14 @@ struct DatabasePreparer {
                         let bound: Int = number == 1999 ? sourceEntries.count : ((number + 1) * distance)
                         let part = sourceEntries[(number * distance)..<bound]
                         let entries = part.map { entry -> String in
-                                return "('\(entry.word)', '\(entry.stroke)', \(entry.complex), \(entry.spell), \(entry.code))"
+                                return "('\(entry.word)', '\(entry.stroke)', \(entry.complex), \(entry.code))"
                         }
                         let values: String = entries.joined(separator: ", ")
                         insert(values: values)
                 }
         }
         private static func createSymbolTable() async {
-                let createTable: String = "CREATE TABLE symbol_table (id INTEGER PRIMARY KEY AUTOINCREMENT, category INTEGER NOT NULL, unicode_version INTEGER NOT NULL, code_point TEXT NOT NULL, cantonese TEXT NOT NULL, romanization TEXT NOT NULL, spell INTEGER NOT NULL, nine_key_code INTEGER NOT NULL);"
+                let createTable: String = "CREATE TABLE symbol_table (id INTEGER PRIMARY KEY AUTOINCREMENT, category INTEGER NOT NULL, unicode_version INTEGER NOT NULL, code_point TEXT NOT NULL, cantonese TEXT NOT NULL, romanization TEXT NOT NULL, complex INTEGER NOT NULL, spell INTEGER NOT NULL, nine_key_code INTEGER NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
@@ -314,12 +320,13 @@ struct DatabasePreparer {
                         let cantonese = parts[3]
                         let romanization = parts[4]
                         let syllableText = romanization.filter(\.isLowercaseBasicLatinLetter)
-                        let spellCode = syllableText.hashCode()
-                        let nineKeyCode = syllableText.nineKeyCharCode ?? 0
-                        return "(\(category), \(version), '\(codePoint)', '\(cantonese)', '\(romanization)', \(spellCode), \(nineKeyCode))"
+                        let complex = syllableText.count
+                        let spellCode = syllableText.serialCode
+                        let nineKeyCode = syllableText.keypadCode
+                        return "(\(category), \(version), '\(codePoint)', '\(cantonese)', '\(romanization)', \(complex), \(spellCode), \(nineKeyCode))"
                 }
                 let values: String = entries.joined(separator: ", ")
-                let insert: String = "INSERT INTO symbol_table (category, unicode_version, code_point, cantonese, romanization, spell, nine_key_code) VALUES \(values);"
+                let insert: String = "INSERT INTO symbol_table (category, unicode_version, code_point, cantonese, romanization, complex, spell, nine_key_code) VALUES \(values);"
                 var insertStatement: OpaquePointer? = nil
                 defer { sqlite3_finalize(insertStatement) }
                 guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }
@@ -349,14 +356,14 @@ struct DatabasePreparer {
                 guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
         }
         private static func createTextMarkTable() async {
-                let createTable: String = "CREATE TABLE mark_table (id INTEGER PRIMARY KEY AUTOINCREMENT, input TEXT NOT NULL, mark TEXT NOT NULL, spell INTEGER NOT NULL, nine_key_code INTEGER NOT NULL);"
+                let createTable: String = "CREATE TABLE mark_table (id INTEGER PRIMARY KEY AUTOINCREMENT, input TEXT NOT NULL, mark TEXT NOT NULL, complex INTEGER NOT NULL, spell INTEGER NOT NULL, nine_key_code INTEGER NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
                 sqlite3_finalize(createStatement)
                 let sourceEntries: [TextMarkLexicon] = TextMarkLexicon.convert()
                 func insert(values: String) {
-                        let insert: String = "INSERT INTO mark_table (input, mark, spell, nine_key_code) VALUES \(values);"
+                        let insert: String = "INSERT INTO mark_table (input, mark, complex, spell, nine_key_code) VALUES \(values);"
                         var insertStatement: OpaquePointer? = nil
                         defer { sqlite3_finalize(insertStatement) }
                         guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }
@@ -367,10 +374,10 @@ struct DatabasePreparer {
                 for number in range {
                         let bound: Int = (number == 199) ? sourceEntries.count : ((number + 1) * distance)
                         let part = sourceEntries[(number * distance)..<bound]
-                        let entries = part.map { entry -> String in
+                        let entries = part.map({ entry -> String in
                                 let escapedMark: String = entry.mark.contains(String.apostrophe) ? entry.mark.replacingOccurrences(of: "'", with: "''") : entry.mark
-                                return "('\(entry.input)', '\(escapedMark)', \(entry.spellCode), \(entry.nineKeyCharCode))"
-                        }
+                                return "('\(entry.input)', '\(escapedMark)', \(entry.complex), \(entry.spellCode), \(entry.nineKeyCode))"
+                        })
                         let values: String = entries.joined(separator: ", ")
                         insert(values: values)
                 }
@@ -394,10 +401,10 @@ struct DatabasePreparer {
                         guard parts.count == 2 else { fatalError(errorMessage) }
                         let alias = parts[0]
                         let origin = parts[1]
-                        guard let aliasCode = alias.charCode, aliasCode > 0 else { fatalError(errorMessage) }
-                        guard let originCode = origin.charCode, originCode > 0 else { fatalError(errorMessage) }
-                        guard let nineKeyAliasCode = alias.nineKeyCharCode, nineKeyAliasCode > 0 else { fatalError(errorMessage) }
-                        guard let nineKeyOriginCode = origin.nineKeyCharCode, nineKeyOriginCode > 0 else { fatalError(errorMessage) }
+                        let aliasCode = alias.serialCode
+                        let originCode = origin.serialCode
+                        let nineKeyAliasCode = alias.keypadCode
+                        let nineKeyOriginCode = origin.keypadCode
                         return "(\(aliasCode), \(originCode), \(nineKeyAliasCode), \(nineKeyOriginCode), '\(alias)', '\(origin)')"
                 }
                 let values: String = entries.joined(separator: ", ")
@@ -422,9 +429,7 @@ struct DatabasePreparer {
                         .filter(\.isNotEmpty)
                 let entries = sourceLines.compactMap { syllable -> String? in
                         lazy var errorMessage: String = "pinyin-syllable.txt : bad format : \(syllable)"
-                        guard let code = syllable.charCode, code > 0 else { fatalError(errorMessage) }
-                        guard let nineKeyCode = syllable.nineKeyCharCode, nineKeyCode > 0 else { fatalError(errorMessage) }
-                        return "(\(code), \(nineKeyCode), '\(syllable)')"
+                        return "(\(syllable.serialCode), \(syllable.keypadCode), '\(syllable)')"
                 }
                 let values: String = entries.joined(separator: ", ")
                 let insertValues: String = "INSERT INTO pinyin_syllable_table (code, nine_key_code, syllable) VALUES \(values);"

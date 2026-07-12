@@ -6,7 +6,7 @@
         <license file="COPYING.txt" mime-type="text/plain" />
         <conclusion file="conclusion.html" mime-type="text/html" />
         <pkg-ref id="org.jyutping.inputmethod.Jyutping" />
-        <options customize="never" require-scripts="false" rootVolumeOnly="true" />
+        <options customize="never" hostArchitectures="arm64,x86_64" require-scripts="false" rootVolumeOnly="true" />
         <allowed-os-versions>
                 <os-version min="13.0" />
         </allowed-os-versions>

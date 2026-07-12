@@ -7,6 +7,28 @@ import SwiftUI
 @Suite("CommonExtensions")
 struct CommonExtensionsTests {
 
+        // MARK: - NumericExtensions
+
+        @Test("Collection radix100Overflowed combines base-100 digits")
+        func radix100Overflowed() {
+                #expect([20, 21, 22].radix100Overflowed() == 202122)
+                #expect([Int]().radix100Overflowed() == 0)
+
+                let overflowing = Array(repeating: 99, count: 10)
+                let expected = overflowing.reduce(0, { $0 &* 100 &+ $1 })
+                #expect(overflowing.radix100Overflowed() == expected)
+        }
+
+        @Test("Collection decimalOverflowed combines decimal digits")
+        func decimalOverflowed() {
+                #expect([2, 3, 4].decimalOverflowed() == 234)
+                #expect([Int]().decimalOverflowed() == 0)
+
+                let overflowing = Array(repeating: 9, count: 20)
+                let expected = overflowing.reduce(0, { $0 &* 10 &+ $1 })
+                #expect(overflowing.decimalOverflowed() == expected)
+        }
+
         // MARK: - StringExtensions
 
         @Test("String hashCode produces consistent results")

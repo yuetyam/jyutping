@@ -50,12 +50,12 @@ struct LexiconConverter {
                 let anchors = romanization.split(separator: Character.space).compactMap(\.first)
                 guard anchors.isNotEmpty else { fatalError(errorMessage) }
                 let syllableText = romanization.filter(\.isLowercaseBasicLatinLetter)
-                guard syllableText.isNotEmpty else { fatalError(errorMessage) }
-                let anchorText = String(anchors)
-                guard let anchorCode: Int = anchorText.charCode else { fatalError(errorMessage) }
-                let spellCode = syllableText.hashCode()
-                guard let nineKeyAnchorsCode: Int = anchorText.nineKeyCharCode else { fatalError(errorMessage) }
-                let nineKeyCode: Int = syllableText.nineKeyCharCode ?? 0
-                return LexiconEntry(word: word, romanization: romanization, anchors: anchorCode, spell: spellCode, nineKeyAnchors: nineKeyAnchorsCode, nineKeyCode: nineKeyCode)
+                let complex = syllableText.count
+                guard complex > 0 else { fatalError(errorMessage) }
+                let anchorCode: Int = anchors.serialCode
+                let spellCode = syllableText.serialCode
+                let nineKeyAnchorsCode: Int = anchors.keypadCode
+                let nineKeyCode: Int = syllableText.keypadCode
+                return LexiconEntry(word: word, romanization: romanization, complex: complex, anchors: anchorCode, spell: spellCode, nineKeyAnchors: nineKeyAnchorsCode, nineKeyCode: nineKeyCode)
         }
 }

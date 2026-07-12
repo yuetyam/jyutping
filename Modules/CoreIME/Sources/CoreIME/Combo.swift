@@ -1,4 +1,4 @@
-/// 10-key / T9 keyboard element
+/// 9-key / T9 keypad element
 public enum Combo: Int, Sendable {
 
         case special = 1
@@ -45,4 +45,11 @@ public enum Combo: Int, Sendable {
                 TUV : ["t", "u"],
                 WXYZ: ["w", "y", "z"]
         ]
+}
+
+extension RandomAccessCollection where Element == Combo {
+        /// Combines the decimal digit codes using wrapping arithmetic.
+        var decimalCombinedCode: Int {
+                return reduce(0, { $0 &* 10 &+ $1.digit })
+        }
 }

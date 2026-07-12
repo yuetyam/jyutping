@@ -919,14 +919,13 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 guard Options.commentScene != .noneOfAll else { return .nothing }
                                 return (Options.commentToneStyle == .noTones) ? .toneless : .full
                         }()
-                        let text: String = keys.map(\.text).joined()
                         let cangjieVariant = Options.cangjieVariant
                         let isEnglishSuggestionsOn: Bool = Options.isEnglishSuggestionsOn
                         suggestionTask = Task.detached(priority: .high) { [weak self] in
                                 guard let self else { return }
                                 async let defined = searchDefinedCandidates(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
                                 async let textMarks: [Candidate] = isEnglishSuggestionsOn.negative ? [] : Engine.searchTextMarks(for: allKeys).map({ Candidate(text: $0.text, lexicon: $0) })
-                                async let lookup = Engine.cangjieReverseLookup(text: text, variant: cangjieVariant).transformed(commentForm: commentForm, charset: characterStandard)
+                                async let lookup = Engine.cangjieReverseLookup(keys: keys, variant: cangjieVariant).transformed(commentForm: commentForm, charset: characterStandard)
                                 let suggestions = await (defined + textMarks + lookup).distinct()
                                 if Task.isCancelled.negative {
                                         await MainActor.run { [weak self] in

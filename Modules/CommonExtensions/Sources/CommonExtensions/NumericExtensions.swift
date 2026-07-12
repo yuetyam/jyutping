@@ -13,3 +13,24 @@ extension BinaryInteger {
                 return Int64(self)
         }
 }
+
+extension RandomAccessCollection where Element == Int {
+
+        /// Combines the elements as base-100 digits using wrapping arithmetic.
+        ///
+        /// For example, `[20, 21, 22]` produces `202122`. An empty collection produces `0`.
+        /// If the result exceeds the range of `Int` (aka. `Int64`), arithmetic wraps instead of trapping.
+        /// - Returns: The base-100 representation of the collection.
+        public func radix100Overflowed() -> Int {
+                return reduce(0, { $0 &* 100 &+ $1 })
+        }
+
+        /// Combines the elements as decimal digits using wrapping arithmetic.
+        ///
+        /// For example, `[2, 3, 4]` produces `234`. An empty collection produces `0`.
+        /// If the result exceeds the range of `Int` (aka. `Int64`), arithmetic wraps instead of trapping.
+        /// - Returns: The decimal representation of the collection.
+        public func decimalOverflowed() -> Int {
+                return reduce(0, { $0 &* 10 &+ $1 })
+        }
+}

@@ -10,8 +10,8 @@ extension Engine {
         ///   - segmentation: Segmentation
         /// - Returns: Lookup transformed Lexicons
         public static func structureReverseLookup<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T, segmentation: Segmentation) -> [Lexicon] {
-                let markFreeText = keys.filter(\.isSyllableLetter).map(\.text).joined()
-                let searched = search(text: markFreeText, segmentation: segmentation)
+                let syllableKeys = keys.filter(\.isSyllableLetter)
+                let searched = search(keys: syllableKeys, segmentation: segmentation)
                 guard searched.isNotEmpty else { return [] }
                 let inputText = keys.map(\.text).joined()
                 switch (keys.contains(where: \.isApostrophe), keys.contains(where: \.isToneLetter)) {
@@ -60,22 +60,31 @@ extension Engine {
                         return searched.map(\.text).flatMap({ Engine.reveresLookup(text: $0, input: inputText) })
                 }
         }
-        private static func search(text: String, segmentation: Segmentation) -> [Lexicon] {
-                let matched = match(text: text)
-                let textCount = text.count
-                let queried = segmentation.filter({ $0.length == textCount }).flatMap({ match(text: $0.originText) })
+
+        private static func search<T: RandomAccessCollection<VirtualInputKey>>(keys: T, segmentation: Segmentation) -> [Lexicon] {
+                let command: String = "SELECT word, romanization FROM structure_table WHERE spell = ? AND complex = ? ORDER BY rowid LIMIT ?;"
+                var statement: OpaquePointer?
+                guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return [] }
+                defer { sqlite3_finalize(statement) }
+                let matched = match(keys: keys, statement: statement)
+                let inputLength = keys.count
+                let queried = segmentation.filter({ $0.length == inputLength }).flatMap({ match(keys: $0.flatMap(\.origin), statement: statement) })
                 return matched + queried
         }
-        private static func match(text: String) -> [Lexicon] {
-                let command: String = "SELECT word, romanization FROM structure_table WHERE spell = \(text.hashCode());"
-                var statement: OpaquePointer? = nil
-                defer { sqlite3_finalize(statement) }
-                guard sqlite3_prepare_v2(Engine.database, command, -1, &statement, nil) == SQLITE_OK else { return [] }
+        private static func match<T: RandomAccessCollection<VirtualInputKey>>(keys: T, input: String? = nil, limit: Int64? = nil, statement: OpaquePointer?) -> [Lexicon] {
+                sqlite3_reset(statement)
+                let spell: Int64 = keys.conjoinedCode.toInt64()
+                let complex: Int64 = keys.count.toInt64()
+                let limit: Int64 = limit ?? -1
+                sqlite3_bind_int64(statement, 1, spell)
+                sqlite3_bind_int64(statement, 2, complex)
+                sqlite3_bind_int64(statement, 3, limit)
+                let input: String = input ?? keys.map(\.text).joined()
                 var items: [Lexicon] = []
                 while sqlite3_step(statement) == SQLITE_ROW {
                         let word: String = String(cString: sqlite3_column_text(statement, 0))
                         let romanization: String = String(cString: sqlite3_column_text(statement, 1))
-                        let instance = Lexicon(text: word, romanization: romanization, input: text)
+                        let instance = Lexicon(text: word, romanization: romanization, input: input)
                         items.append(instance)
                 }
                 return items

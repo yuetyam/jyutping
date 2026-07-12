@@ -1,37 +1,47 @@
-/// Lexicon Object
+import CommonExtensions
+
 struct LexiconEntry: Hashable {
 
         /// Chinese text
         let word: String
 
-        /// Jyutping, Pinyin, ...
+        /// Jyutping, Pinyin, etc.
         let romanization: String
 
-        /// CharCode of initials
+        /// Element/character count of the `word`
+        let charCount: Int
+
+        /// Complexity. Letter count (length) of the letter-only romanization (no tones & no spaces)
+        let complex: Int
+
+        /// Conjoined code of initials/anchors
         let anchors: Int
 
-        /// Letter-only romanization hash code
+        /// Conjoined code of the letter-only romanization (no tones & no spaces)
         let spell: Int
 
-        /// NineKeyCharCode of initials
+        /// Conjoined keypad code of initials/anchors
         let nineKeyAnchors: Int
 
-        /// Letter-only romanization NineKeyCharCode
+        /// Conjoined keypad code of the letter-only romanization (no tones & no spaces)
         let nineKeyCode: Int
 
         /// Create a lexicon entry
         /// - Parameters:
         ///   - word: Chinese text
-        ///   - romanization: Jyutping, Pinyin, ...
-        ///   - anchors: CharCode of initials
-        ///   - ping: Letter-only romanization hash code
-        ///   - nineKeyAnchors: NineKeyCharCode of initials
-        ///   - nineKeyCode: Letter-only romanization NineKeyCharCode
-        init(word: String, romanization: String, anchors: Int, spell: Int32, nineKeyAnchors: Int, nineKeyCode: Int) {
+        ///   - romanization: Jyutping, Pinyin, etc.
+        ///   - complex: Complexity. Letter count (length) of the letter-only romanization (no tones & no spaces)
+        ///   - anchors: Conjoined code of initials/anchors
+        ///   - spell: Conjoined code of the letter-only romanization (no tones & no spaces)
+        ///   - nineKeyAnchors: Conjoined keypad code of initials/anchors
+        ///   - nineKeyCode: Conjoined keypad code of the letter-only romanization (no tones & no spaces)
+        init(word: String, romanization: String, complex: Int? = nil, anchors: Int, spell: Int, nineKeyAnchors: Int, nineKeyCode: Int) {
                 self.word = word
                 self.romanization = romanization
+                self.charCount = word.count
+                self.complex = complex ?? romanization.count(where: \.isLowercaseBasicLatinLetter)
                 self.anchors = anchors
-                self.spell = Int(spell)
+                self.spell = spell
                 self.nineKeyAnchors = nineKeyAnchors
                 self.nineKeyCode = nineKeyCode
         }
