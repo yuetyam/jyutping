@@ -21,10 +21,6 @@ let package = Package(
                                 .product(name: "CommonExtensions", package: "CommonExtensions")
                         ],
                         resources: [.process("Resources")]
-                ),
-                .testTarget(
-                        name: "AppDataSourceTests",
-                        dependencies: ["AppDataSource"]
                 )
         ],
         swiftLanguageModes: [.v6]

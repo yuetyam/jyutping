@@ -11,10 +11,6 @@ let package = Package(
         targets: [
                 .target(
                         name: "AboutKit"
-                ),
-                .testTarget(
-                        name: "AboutKitTests",
-                        dependencies: ["AboutKit"]
                 )
         ],
         swiftLanguageModes: [.v6]

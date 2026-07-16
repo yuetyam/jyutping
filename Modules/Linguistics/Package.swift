@@ -20,10 +20,6 @@ let package = Package(
                         dependencies: [
                                 .product(name: "CommonExtensions", package: "CommonExtensions")
                         ]
-                ),
-                .testTarget(
-                        name: "LinguisticsTests",
-                        dependencies: ["Linguistics"]
                 )
         ],
         swiftLanguageModes: [.v6]

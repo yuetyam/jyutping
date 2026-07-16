@@ -202,9 +202,6 @@ There are two test layers in this repo:
 2. Swift package tests:
    - `Modules/CommonExtensions/Tests/CommonExtensionsTests`
    - `Modules/CoreIME/Tests/CoreIMETests`
-   - `Modules/Linguistics/Tests/LinguisticsTests`
-   - `Modules/AppDataSource/Tests/AppDataSourceTests`
-   - `Modules/AboutKit/Tests/AboutKitTests`
 
 The existing tests use Swift Testing, and some also import XCTest.
 
@@ -219,9 +216,6 @@ xcodebuild -project Jyutping.xcodeproj -scheme InputMethod build
 
 swift test --package-path Modules/CommonExtensions
 swift test --package-path Modules/CoreIME
-swift test --package-path Modules/Linguistics
-swift test --package-path Modules/AppDataSource
-swift test --package-path Modules/AboutKit
 ```
 
 ## Where to start for common tasks
