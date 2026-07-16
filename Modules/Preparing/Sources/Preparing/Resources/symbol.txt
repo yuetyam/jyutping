@@ -211,6 +211,8 @@
 1	110000	1F60E	墨超	mak6 ciu1
 1	110000	1F60E	型	jing4
 1	110000	1F60E	有型	jau5 jing4
+1	110000	1F60E	威水	wai1 seoi2
+1	110000	1F60E	威	wai1
 1	110000	1F978	僞裝	ngai6 zong1
 1	110000	1F978	虛僞	heoi1 ngai6
 1	110000	1F929	開心	hoi1 sam1
@@ -1001,6 +1003,7 @@
 1	110000	1F467	細呅	sai3 man1
 1	110000	1F467	細呅女	sai3 man1 neoi2
 1	110000	1F467	細呅仔	sai3 man1 zai2
+1	110000	1F467	妹豬	mui1 zyu1
 1	110000	1F467	小朋友	siu2 pang4 jau5
 1	110000	1F467	叉燒	caa1 siu1
 1	110000	1F467	叉燒包	caa1 siu1 baau1
@@ -2947,7 +2950,6 @@
 3	110000	1F33D	粟米	suk1 mai5
 3	110000	1F33D	包粟	baau1 suk1
 3	110000	1F33D	玉米	juk6 mai5
-3	110000	1F33D	六穀	luk6 guk1
 3	110000	1F955	胡蘿蔔	wu4 lo4 baak6
 3	110000	1F955	紅蘿蔔	hung4 lo4 baak6
 3	110000	1F955	紅菜頭	hung4 coi3 tau4
@@ -4593,6 +4595,7 @@
 6	110000	1F9E7	利是	lai6 si6
 6	110000	1F9E7	封包	fung1 baau1
 6	110000	1F9E7	紅包	hung4 baau1
+6	110000	1F9E7	恭喜發財	gung1 hei2 faat3 coi4
 6	110000	2709.FE0F	郵件	jau4 gin2
 6	110000	2709.FE0F	郵件	jau4 gin6
 6	110000	2709.FE0F	信	seon3
@@ -5879,7 +5882,7 @@
 8	110000	1F1F9.1F1F3	突尼斯	dat6 nei5 si1
 8	110000	1F1F9.1F1F7	土耳其	tou2 ji5 kei4
 8	110000	1F1F9.1F1F2	土庫曼斯坦	tou2 fu3 maan6 si1 taan2
-8	110000	1F1F9.1F1E8	特克斯及凱科斯羣島	dak6 hak1 si1 kap6 hoi2 fo1 si1 kwan4 dou2
+8	110000	1F1F9.1F1E8	特克斯及凱科斯	dak6 hak1 si1 kap6 hoi2 fo1 si1
 8	110000	1F1F9.1F1FB	圖瓦盧	tou4 ngaa5 lou4
 8	110000	1F1FA.1F1EC	烏干達	wu1 gon1 daat6
 8	110000	1F1FA.1F1E6	烏克蘭	wu1 hak1 laan4
@@ -5890,7 +5893,6 @@
 8	110000	1F1EC.1F1E7	英吉利	jing1 gat1 lei6
 8	110000	1F1EC.1F1E7	大不列顛	daai6 bat1 lit6 din1
 8	110000	1F1EC.1F1E7	聯合王國	lyun4 hap6 wong4 gwok3
-8	110000	1F1EC.1F1E7	大英帝國	daai6 jing1 dai3 gwok3
 8	110000	1F3F4.E0067.E0062.E0065.E006E.E0067.E007F	英格蘭	jing1 gaak3 laan4
 8	110000	1F3F4.E0067.E0062.E0073.E0063.E0074.E007F	蘇格蘭	sou1 gaak3 laan4
 8	110000	1F3F4.E0067.E0062.E0077.E006C.E0073.E007F	威爾士	wai1 ji5 si6
@@ -5911,7 +5913,7 @@
 8	110000	1F1FB.1F1EA	委內瑞拉	wai2 noi6 seoi6 laai1
 8	110000	1F1FB.1F1F3	越南	jyut6 naam4
 8	110000	1F1FB.1F1F3	安南	on1 naam4
-8	110000	1F1FC.1F1EB	瓦利斯及富圖納羣島	ngaa5 lei6 si1 kap6 fu3 tou4 naap6 kwan4 dou2
+8	110000	1F1FC.1F1EB	瓦利斯及富圖納	ngaa5 lei6 si1 kap6 fu3 tou4 naap6
 8	110000	1F1EA.1F1ED	西撒哈拉	sai1 saat3 haa1 laai1
 8	110000	1F1FE.1F1EA	也門	jaa5 mun4
 8	110000	1F1FF.1F1F2	贊比亞	zaan3 bei2 aa3
@@ -5968,10 +5970,15 @@
 9	110000	1F478	王妃	wong4 fei1
 9	110000	1F478	王女	wong4 neoi5
 10	110000	2F00	橫	waang4
+10	110000	2F00	一橫	jat1 waang4
 10	110000	2F01	豎	syu6
+10	110000	2F01	一豎	jat1 syu6
 10	110000	2F02	點	dim2
 10	110000	2F02	捺	naat6
+10	110000	2F02	一點	jat1 dim2
+10	110000	2F02	一捺	jat1 naat6
 10	110000	2F03	撇	pit3
+10	110000	2F03	一撇	jat1 pit3
 10	110000	2F04	折	zit3
 10	110000	2F04	彎鉤	waan1 ngau1
 10	110000	4E5B	折	zit3
@@ -6003,6 +6010,7 @@
 10	110000	5F73	雙企人	soeng1 kei5 jan2
 10	110000	5F73	雙企人	soeng1 kei5 jan4
 10	110000	5F73	雙人旁	soeng1 jan4 pong4
+10	110000	5F73	雙人邊	soeng1 jan4 bin1
 10	110000	5F73	雙立人	soeng1 lap6 jan4
 10	110000	7CF9	絲字邊	si1 zi6 bin1
 10	110000	7CF9	絲字旁	si1 zi6 pong4
@@ -6094,6 +6102,20 @@
 10	110000	7F52	四字頭	sei3 zi6 tau4
 10	110000	7F52	網字頭	mong5 zi6 tau4
 10	110000	8980	西字頭	sai1 zi6 tau4
+10	110000	5B80	寶蓋頭	bou2 goi3 tau4
+10	110000	5B80	冧寶頭	lam1 bou4 tau4
+10	110000	5E7F	广字邊	jim2 zi6 bin1
+10	110000	5E7F	广字旁	jim2 zi6 pong4
+10	110000	5E7F	广字頭	jim2 zi6 tau4
+10	110000	5E7F	廣字邊	gwong2 zi6 bin1
+10	110000	5E7F	廣字旁	gwong2 zi6 pong4
+10	110000	5E7F	廣字頭	gwong2 zi6 tau4
+10	110000	5382	厂字邊	hon3 zi6 bin1
+10	110000	5382	厂字旁	hon3 zi6 pong4
+10	110000	5382	厂字頭	hon3 zi6 tau4
+10	110000	5382	廠字邊	cong2 zi6 bin1
+10	110000	5382	廠字旁	cong2 zi6 pong4
+10	110000	5382	廠字頭	cong2 zi6 tau4
 10	110000	393	大寫伽瑪	daai6 se2 gaa1 maa5
 10	110000	393	伽瑪	gaa1 maa5
 10	110000	3B3	小寫伽瑪	siu2 se2 gaa1 maa5
@@ -6784,7 +6806,8 @@
 10	110000	25AD	長方形	coeng4 fong1 jing4
 10	110000	25AD	長方	coeng4 fong1
 10	110000	25AD	矩形	geoi2 jing4
-10	110000	25B1	梯形	tai1 jing4
+10	110000	25B1	平行四邊形	ping4 hang4 sei3 bin1 jing4
+10	110000	25B1	四邊形	sei3 bin1 jing4
 10	110000	25B2	黑三角	hak1 saam1 gok3
 10	110000	25B2	黑色三角形	hak1 sik1 saam1 gok3 jing4
 10	110000	25B2	三角形	saam1 gok3 jing4
@@ -6837,16 +6860,10 @@
 10	110000	2FF7	左包右結構	zo2 baau1 jau6 git3 kau3
 10	110000	2FF7	左包右結構	zo2 baau1 jau6 git3 gau3
 10	110000	2FF7	左包右	zo2 baau1 jau6
-10	110000	2FF8	左上包右下結構	zo2 soeng6 baau1 jau6 haa6 git3 kau3
-10	110000	2FF8	左上包右下結構	zo2 soeng6 baau1 jau6 haa6 git3 gau3
 10	110000	2FF8	左上包右下	zo2 soeng6 baau1 jau6 haa6
 10	110000	2FF8	左上環繞	zo2 soeng6 waan4 jiu2
-10	110000	2FF9	右上包左下結構	jau6 soeng6 baau1 zo2 haa6 git3 kau3
-10	110000	2FF9	右上包左下結構	jau6 soeng6 baau1 zo2 haa6 git3 gau3
 10	110000	2FF9	右上包左下	jau6 soeng6 baau1 zo2 haa6
 10	110000	2FF9	右上環繞	jau6 soeng6 waan4 jiu2
-10	110000	2FFA	左下包右上結構	zo2 haa6 baau1 jau6 soeng6 git3 kau3
-10	110000	2FFA	左下包右上結構	zo2 haa6 baau1 jau6 soeng6 git3 gau3
 10	110000	2FFA	左下包右上	zo2 haa6 baau1 jau6 soeng6
 10	110000	2FFA	左下環繞	zo2 haa6 waan4 jiu2
 10	110000	2FFB	重疊結構	cung4 dip6 git3 kau3
@@ -6856,15 +6873,9 @@
 10	110000	2FFC	右包左結構	jau6 baau1 zo2 git3 kau3
 10	110000	2FFC	右包左結構	jau6 baau1 zo2 git3 gau3
 10	110000	2FFC	右包左	jau6 baau1 zo2
-10	110000	2FFD	右下包左上結構	jau6 haa6 baau1 zo2 soeng6 git3 kau3
-10	110000	2FFD	右下包左上結構	jau6 haa6 baau1 zo2 soeng6 git3 gau3
 10	110000	2FFD	右下包左上	jau6 haa6 baau1 zo2 soeng6
 10	110000	2FFD	右下環繞	jau6 haa6 waan4 jiu2
-10	110000	2FFE	左右顛倒結構	zo2 jau6 din1 dou2 git3 kau3
-10	110000	2FFE	左右顛倒結構	zo2 jau6 din1 dou2 git3 gau3
 10	110000	2FFE	左右顛倒	zo2 jau6 din1 dou2
-10	110000	2FFF	上下顛倒結構	soeng6 haa6 din1 dou2 git3 kau3
-10	110000	2FFF	上下顛倒結構	soeng6 haa6 din1 dou2 git3 gau3
 10	110000	2FFF	上下顛倒	soeng6 haa6 din1 dou2
 10	110000	303E	相似結構	soeng1 ci5 git3 kau3
 10	110000	303E	相似結構	soeng1 ci5 git3 gau3

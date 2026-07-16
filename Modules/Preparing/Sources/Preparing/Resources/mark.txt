@@ -4,6 +4,7 @@ ac	AC
 acer	Acer
 activitykit	ActivityKit
 adobe	Adobe
+agentsmd	AGENTS.md
 agi	AGI
 ai	AI
 airbnb	Airbnb
@@ -265,6 +266,7 @@ jpeg	JPEG
 jpegxl	JPEG XL
 jpg	JPG
 json	json
+jyutping	Jyutping
 keyboard	keyboard
 keynote	Keynote
 kia	KIA
@@ -401,6 +403,7 @@ png	PNG
 porsche	Porsche
 postgresql	PostgreSQL
 powerpoint	PowerPoint
+powershell	PowerShell
 ppi	PPI
 ppt	PPT
 promotion	ProMotion
@@ -418,6 +421,7 @@ quora	Quora
 ram	RAM
 raytheon	Raytheon
 readme	README
+readmemd	README.md
 realme	realme
 realmeui	realme UI
 reddit	Reddit
@@ -625,6 +629,8 @@ bbq	BBQ
 boomer	boomer
 boomers	boomers
 cnn	CNN
+codebase	codebase
+codebases	codebases
 genz	Gen Z
 goodman	Goodman
 lgbt	LGBT
@@ -4006,7 +4012,6 @@ pair	pair
 ideal	ideal
 specs	specs
 recorded	recorded
-don	don
 pieces	pieces
 finished	finished
 parks	parks
@@ -8421,7 +8426,6 @@ grave	grave
 legitimate	legitimate
 biographies	biographies
 burner	burner
-foo	foo
 investigator	investigator
 plaintiff	plaintiff
 finnish	finnish
@@ -8675,7 +8679,6 @@ peninsula	peninsula
 chelsea	chelsea
 boring	boring
 reynolds	reynolds
-dom	dom
 jill	jill
 accurately	accurately
 speeches	speeches
@@ -9669,7 +9672,6 @@ compromise	compromise
 masturbation	masturbation
 optimize	optimize
 stating	stating
-dome	dome
 caroline	caroline
 expiration	expiration
 namespace	namespace
