@@ -208,6 +208,8 @@ There are two test layers in this repo:
 
 The existing tests use Swift Testing, and some also import XCTest.
 
+When updating source code in `Modules/CommonExtensions/Sources/CommonExtensions/`, also update the related Swift Testing suites in `Modules/CommonExtensions/Tests/CommonExtensionsTests` so the package retains full coverage of its behavior. Verify the change with `swift test --package-path Modules/CommonExtensions --enable-code-coverage`.
+
 Useful commands:
 
 ```bash
