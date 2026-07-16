@@ -604,61 +604,53 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 }
         }
         private func aftercareSelected(_ candidate: Candidate) {
+                if candidate.isCantonese {
+                        selectedLexicons.append(candidate.lexicon)
+                } else {
+                        selectedLexicons = []
+                }
                 switch keyboardLayout {
                 case .qwerty, .tripleStroke, .fourteenKey, .fifteenKey, .eighteenKey, .nineteenKey, .twentyOneKey:
-                        switch bufferEvents.first?.keys.first {
-                        case .some(let key) where key.isReverseLookupTrigger:
-                                selectedLexicons = []
+                        if isReverseLookup {
                                 var tail = bufferEvents.dropFirst(candidate.lexicon.inputCount + 1)
                                 while (tail.first?.keys.first?.isApostrophe ?? false) {
                                         tail = tail.dropFirst()
                                 }
                                 let tailLength = tail.count
-                                guard tailLength > 0 else {
-                                        clearBuffer()
-                                        return
-                                }
-                                inputLengthSequence = inputLengthSequence.prefix(1) + inputLengthSequence.suffix(tailLength)
-                                bufferEvents = bufferEvents.prefix(1) + bufferEvents.suffix(tailLength)
-                        default:
-                                if candidate.isCantonese {
-                                        selectedLexicons.append(candidate.lexicon)
+                                if tailLength > 0 {
+                                        inputLengthSequence = inputLengthSequence.prefix(1) + inputLengthSequence.suffix(tailLength)
+                                        bufferEvents = bufferEvents.prefix(1) + bufferEvents.suffix(tailLength)
                                 } else {
-                                        selectedLexicons = []
+                                        clearBuffer()
                                 }
+                        } else {
                                 var tail = bufferEvents.dropFirst(candidate.lexicon.inputCount)
                                 while (tail.first?.keys.first?.isApostrophe ?? false) {
                                         tail = tail.dropFirst()
                                 }
                                 let tailLength = tail.count
-                                guard tailLength > 0 else {
+                                if tailLength > 0 {
+                                        inputLengthSequence = inputLengthSequence.suffix(tailLength)
+                                        bufferEvents = bufferEvents.suffix(tailLength)
+                                } else {
                                         clearBuffer()
-                                        return
                                 }
-                                inputLengthSequence = inputLengthSequence.suffix(tailLength)
-                                bufferEvents = bufferEvents.suffix(tailLength)
                         }
                 case .nineKey:
-                        let isReverseLookup: Bool = (bufferCombos.first == .special)
                         if isReverseLookup {
                                 let tailCount: Int = (bufferCombos.count - 1) - candidate.lexicon.inputCount
                                 if tailCount > 0 {
                                         bufferCombos = bufferCombos.prefix(1) + bufferCombos.suffix(tailCount)
                                 } else {
-                                        bufferCombos = []
+                                        clearBuffer()
                                 }
                         } else {
-                                if candidate.isCantonese {
-                                        selectedLexicons.append(candidate.lexicon)
-                                } else {
-                                        selectedLexicons = []
-                                }
                                 selectedSyllables = []
                                 let tailCount: Int = bufferCombos.count - candidate.lexicon.inputCount
                                 if tailCount > 0 {
                                         bufferCombos = bufferCombos.suffix(tailCount)
                                 } else {
-                                        bufferCombos = []
+                                        clearBuffer()
                                 }
                         }
                 }

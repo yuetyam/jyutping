@@ -1427,17 +1427,21 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         selectedSequence = []
                         clearBuffer()
                 case .some(let key) where key.isReverseLookupTrigger:
-                        selectedSequence = []
+                        if shouldRememberSelected {
+                                appendSelected(candidate.lexicon)
+                        } else {
+                                selectedSequence = []
+                        }
                         var tail = bufferEvents.dropFirst(candidate.lexicon.inputCount + 1)
                         while (tail.first?.key.isApostrophe ?? false) {
                                 tail = tail.dropFirst()
                         }
                         let tailLength = tail.count
-                        guard tailLength > 0 else {
+                        if tailLength > 0 {
+                                bufferEvents = bufferEvents.prefix(1) + bufferEvents.suffix(tailLength)
+                        } else {
                                 clearBuffer()
-                                return
                         }
-                        bufferEvents = bufferEvents.prefix(1) + bufferEvents.suffix(tailLength)
                 default:
                         if shouldRememberSelected {
                                 appendSelected(candidate.lexicon)
@@ -1449,11 +1453,11 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                 tail = tail.dropFirst()
                         }
                         let tailLength = tail.count
-                        guard tailLength > 0 else {
+                        if tailLength > 0 {
+                                bufferEvents = bufferEvents.suffix(tailLength)
+                        } else {
                                 clearBuffer()
-                                return
                         }
-                        bufferEvents = bufferEvents.suffix(tailLength)
                 }
         }
 
