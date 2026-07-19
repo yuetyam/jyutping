@@ -49,7 +49,7 @@ public enum Combo: Int, Sendable {
 
 extension RandomAccessCollection where Element == Combo {
         /// Combines the decimal digit codes using wrapping arithmetic.
-        var decimalCombinedCode: Int {
+        public var decimalCombinedCode: Int {
                 return reduce(0, { $0 &* 10 &+ $1.digit })
         }
 }

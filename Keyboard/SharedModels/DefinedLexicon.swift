@@ -6,15 +6,15 @@ import CoreIME
 struct DefinedLexicon: Hashable {
         let input: String
         let text: String
-        let keys: [VirtualInputKey]
-        let charCode: Int
-        let nineKeyCharCode: Int
-        init(input: String, text: String, keys: [VirtualInputKey]) {
+        let complex: Int
+        let spell: Int
+        let nineKeyCode: Int
+        init(input: String, text: String) {
                 self.input = input
                 self.text = text
-                self.keys = keys
-                self.charCode = keys.map(\.code).radix100Combined()
-                self.nineKeyCharCode = input.nineKeyCharCode ?? 0
+                self.complex = input.count
+                self.spell = input.serialCode
+                self.nineKeyCode = input.keypadCode
         }
         static func ==(lhs: DefinedLexicon, rhs: DefinedLexicon) -> Bool {
                 return lhs.input == rhs.input && lhs.text == rhs.text

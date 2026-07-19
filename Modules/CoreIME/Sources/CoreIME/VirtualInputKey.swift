@@ -176,12 +176,12 @@ extension VirtualInputKey {
 extension RandomAccessCollection where Element == VirtualInputKey {
 
         /// Combines the element codes as base-100 digits using wrapping arithmetic.
-        var conjoinedCode: Int {
+        public var conjoinedCode: Int {
                 return reduce(0, { $0 &* 100 &+ $1.code })
         }
 
         /// Replace letter Y with letter J
-        var anchorNormalized: [VirtualInputKey] {
+        public var anchorNormalized: [VirtualInputKey] {
                 return map({ $0.isYLetterY ? VirtualInputKey.letterJ : $0 })
         }
 }

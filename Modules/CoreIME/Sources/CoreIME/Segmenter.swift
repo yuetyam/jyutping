@@ -49,6 +49,11 @@ extension RandomAccessCollection where Element == Syllable {
                 return map(\.alias.count).summation
         }
 
+        /// Origin keys conjoined as sequence
+        public var originKeys: [VirtualInputKey] {
+                return flatMap(\.origin)
+        }
+
         /// Alias texts conjoined as one text
         public var aliasText: String {
                 return flatMap(\.alias).map(\.text).joined()

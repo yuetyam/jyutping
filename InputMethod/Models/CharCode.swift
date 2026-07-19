@@ -1,18 +1,15 @@
 import Foundation
+import CommonExtensions
 
 extension StringProtocol {
-        var charCode: Int? {
-                guard count < 10 else { return nil }
-                let codes: [Int] = compactMap(\.interCode)
-                guard codes.count == count else { return nil }
-                return codes.radix100Combined()
+        var serialCode: Int {
+                return compactMap(\.interCode).radix100Overflowed()
         }
 }
 
-extension RandomAccessCollection where Element == Int {
-        func radix100Combined() -> Int {
-                guard count < 10 else { return 0 }
-                return reduce(0, { $0 * 100 + $1 })
+extension RandomAccessCollection where Element == Character {
+        var serialCode: Int {
+                return compactMap(\.interCode).radix100Overflowed()
         }
 }
 

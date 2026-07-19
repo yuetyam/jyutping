@@ -397,20 +397,16 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         let isDisabled: Bool = (dict[kOn] as? Bool) == false || (dict[kOn] as? Int) == 0
                         guard isDisabled.negative else { return nil }
                         guard let input = (dict[kReplace] as? String)?.lowercased(), input.isNotEmpty else { return nil }
-                        let keys = input.lowercased().compactMap(VirtualInputKey.matchInputKey(for:))
-                        guard keys.count == input.count else { return nil }
+                        guard input.contains(where: \.isLowercaseBasicLatinLetter.negative).negative else { return nil }
                         guard let text = (dict[kWith] as? String), text.isNotEmpty else { return nil }
-                        return DefinedLexicon(input: input, text: text, keys: keys)
+                        return DefinedLexicon(input: input, text: text)
                 }).distinct()
         }
-        private func searchDefined(for keys: [VirtualInputKey]) -> [Lexicon] {
+        private func searchDefined<T: RandomAccessCollection<VirtualInputKey>>(for keys: T) -> [Lexicon] {
                 guard AppSettings.isTextReplacementsOn else { return [] }
-                if keys.count < 10 {
-                        let charCode: Int = keys.map(\.code).radix100Combined()
-                        return definedLexicons.filter({ $0.charCode == charCode }).map(\.mappedLexicon)
-                } else {
-                        return definedLexicons.filter({ $0.keys == keys }).map(\.mappedLexicon)
-                }
+                let complex = keys.count
+                let spell = keys.conjoinedCode
+                return definedLexicons.filter({ $0.spell == spell && $0.complex == complex }).map(\.mappedLexicon)
         }
 
         /// Cached Lexicon sequence for InputMemory

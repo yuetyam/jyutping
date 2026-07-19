@@ -1,36 +1,30 @@
-import Foundation
+import CommonExtensions
 
 extension StringProtocol {
-        var charCode: Int? {
-                guard count < 10 else { return nil }
-                let codes: [Int] = compactMap(\.interCode)
-                guard codes.count == count else { return nil }
-                return codes.radix100Combined()
+        var serialCode: Int {
+                return compactMap(\.interCode).radix100Overflowed()
         }
-        var nineKeyCharCode: Int? {
-                guard count < 19 else { return nil }
-                let codes: [Int] = compactMap(\.nineKeyInterCode)
-                guard codes.count == count else { return nil }
-                return codes.decimalCombined()
+        var keypadCode: Int {
+                return compactMap(\.keypadCharCode).decimalOverflowed()
         }
 }
 
-extension RandomAccessCollection where Element == Int {
-        func radix100Combined() -> Int {
-                guard count < 10 else { return 0 }
-                return reduce(0, { $0 * 100 + $1 })
+extension RandomAccessCollection where Element == Character {
+        var serialCode: Int {
+                return compactMap(\.interCode).radix100Overflowed()
         }
-        func decimalCombined() -> Int {
-                guard count < 19 else { return 0 }
-                return reduce(0, { $0 * 10 + $1 })
+        var keypadCode: Int {
+                return compactMap(\.keypadCharCode).decimalOverflowed()
         }
 }
 
 private extension Character {
+
         var interCode: Int? {
-                return Self.letterCodeMap[self]
+                return Self.codeMap[self]
         }
-        private static let letterCodeMap: [Character : Int] = [
+
+        private static let codeMap: [Character : Int] = [
                 letterA : 20,
                 letterB : 21,
                 letterC : 22,
@@ -58,11 +52,15 @@ private extension Character {
                 letterY : 44,
                 letterZ : 45,
         ]
+}
 
-        var nineKeyInterCode: Int? {
-                return Self.nineKeyCodeMap[self]
+private extension Character {
+
+        var keypadCharCode: Int? {
+                return Self.keypadCodeMap[self]
         }
-        private static let nineKeyCodeMap: [Character : Int] = [
+
+        private static let keypadCodeMap: [Character : Int] = [
                 letterA : 2,
                 letterB : 2,
                 letterC : 2,

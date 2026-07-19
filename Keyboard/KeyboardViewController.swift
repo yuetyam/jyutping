@@ -1087,27 +1087,23 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 definedLexicons = lexicon.entries.compactMap({ entry -> DefinedLexicon? in
                         let input = entry.userInput.lowercased()
                         guard input.isNotEmpty else { return nil }
-                        let keys = input.compactMap(VirtualInputKey.matchInputKey(for:))
-                        guard keys.count == input.count else { return nil }
+                        guard input.contains(where: \.isLowercaseBasicLatinLetter.negative).negative else { return nil }
                         let text = entry.documentText
                         guard text.isNotEmpty else { return nil }
-                        return DefinedLexicon(input: input, text: text, keys: keys)
+                        return DefinedLexicon(input: input, text: text)
                 }).distinct()
         }
-        private func searchDefinedCandidates(for keys: [VirtualInputKey]) -> [Lexicon] {
+        private func searchDefinedCandidates<T: RandomAccessCollection<VirtualInputKey>>(for keys: T) -> [Lexicon] {
                 guard Options.isTextReplacementsOn else { return [] }
-                if keys.count < 10 {
-                        let charCode: Int = keys.map(\.code).radix100Combined()
-                        return definedLexicons.filter({ $0.charCode == charCode }).map(\.mappedLexicon)
-                } else {
-                        return definedLexicons.filter({ $0.keys == keys }).map(\.mappedLexicon)
-                }
+                let complex = keys.count
+                let spell = keys.conjoinedCode
+                return definedLexicons.filter({ $0.spell == spell && $0.complex == complex }).map(\.mappedLexicon)
         }
-        private func queryDefinedCandidates(for combos: [Combo]) -> [Lexicon] {
+        private func queryDefinedCandidates<T: RandomAccessCollection<Combo>>(for combos: T) -> [Lexicon] {
                 guard Options.isTextReplacementsOn else { return [] }
-                let nineKeyCharCode: Int = combos.map(\.digit).decimalCombined()
-                guard nineKeyCharCode > 0 else { return [] }
-                return definedLexicons.filter({ $0.nineKeyCharCode == nineKeyCharCode }).map(\.mappedLexicon)
+                let complex = combos.count
+                let nineKeyCode = combos.decimalCombinedCode
+                return definedLexicons.filter({ $0.nineKeyCode == nineKeyCode && $0.complex == complex }).map(\.mappedLexicon)
         }
 
 

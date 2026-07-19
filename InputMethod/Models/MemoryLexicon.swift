@@ -16,21 +16,29 @@ struct MemoryLexicon: Hashable {
         /// Most recently updated timestamp, in milliseconds
         let latest: Int64
 
-        /// romanization.anchorText.hashCode()
-        let shortcut: Int32
+        /// Element/character count of the `word`
+        let charCount: Int
 
-        /// romanization.removedTonesAndSpaces.hashCode()
-        let spell: Int32
+        /// Complexity. Letter count (length) of the letter-only romanization (no tones & no spaces)
+        let complex: Int
+
+        /// Conjoined code of initials/anchors
+        let anchors: Int
+
+        /// Conjoined code of the letter-only romanization (no tones & no spaces)
+        let spell: Int
 
         init(word: String, romanization: String, frequency: Int64 = 1, latest: Int64? = nil) {
-                let anchorText: String = String(romanization.split(separator: Character.space).compactMap(\.first))
-                let letterText: String = romanization.filter(\.isLowercaseBasicLatinLetter)
+                let anchorText = romanization.split(separator: Character.space).compactMap(\.first)
+                let letterText = romanization.filter(\.isLowercaseBasicLatinLetter)
                 self.word = word
                 self.romanization = romanization
                 self.frequency = frequency
                 self.latest = latest ?? Int64(Date.now.timeIntervalSince1970 * 1000)
-                self.shortcut = anchorText.hashCode()
-                self.spell = letterText.hashCode()
+                self.charCount = word.count
+                self.complex = letterText.count
+                self.anchors = anchorText.serialCode
+                self.spell = letterText.serialCode
         }
 
         // Equatable
