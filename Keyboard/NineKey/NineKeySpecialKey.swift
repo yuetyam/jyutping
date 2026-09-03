@@ -8,41 +8,35 @@ struct GlassNineKeySpecialKey: View {
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
-        @GestureState private var isTouching: Bool = false
+        @State private var isTouching: Bool = false
 
         var body: some View {
                 let isBuffering: Bool = context.inputStage.isBuffering
-                ZStack {
-                        Color.interactiveClear
-                        ZStack(alignment: .bottom) {
-                                Color.clear
-                                Text(verbatim: isBuffering ? PresetConstant.separate : PresetConstant.reverseLookup)
-                                        .font(.labelCaption)
-                                        .padding(.bottom, 2)
-                                        .opacity(isBuffering ? 0 : 0.35)
+                Button(action: {}) {
+                        ZStack {
+                                Color.interactiveClear
+                                ZStack(alignment: .bottom) {
+                                        Color.clear
+                                        Text(verbatim: isBuffering ? PresetConstant.separate : PresetConstant.reverseLookup)
+                                                .font(.labelCaption)
+                                                .padding(.bottom, 2)
+                                                .opacity(isBuffering ? 0 : 0.35)
+                                }
+                                .glassEffect(isTouching ? .regular : .clear, in: .rect(cornerRadius: PresetConstant.largeKeyCornerRadius))
+                                .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
+                                .padding(isTouching ? 1 : 3)
+                                Text(verbatim: isBuffering ? String.apostrophe : Combo.special.text)
+                                        .opacity(isBuffering ? 0 : 1)
                         }
-                        .glassEffect(isTouching ? .regular : .clear, in: .rect(cornerRadius: PresetConstant.largeKeyCornerRadius))
-                        .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
-                        .padding(isTouching ? 1 : 3)
-                        Text(verbatim: isBuffering ? String.apostrophe : Combo.special.text)
-                                .opacity(isBuffering ? 0 : 1)
+                        .frame(width: context.nineKeyWidthUnit * 1.06, height: context.heightUnit)
                 }
-                .frame(width: context.nineKeyWidthUnit * 1.06, height: context.heightUnit)
-                .contentShape(.rect)
-                .gesture(DragGesture(minimumDistance: 0)
-                        .updating($isTouching) { _, isTouchBegan, _ in
-                                if isTouchBegan.negative {
-                                        isTouchBegan = true
-                                        AudioFeedback.inputed()
-                                        context.triggerHapticFeedback()
-                                }
+                .buttonStyle(PressButtonStyle($isTouching) {
+                        AudioFeedback.inputed()
+                        context.triggerHapticFeedback()
+                        if context.inputStage.isBuffering.negative {
+                                context.nineKeyProcess(.special)
                         }
-                        .onEnded { _ in
-                                if context.inputStage.isBuffering.negative {
-                                        context.nineKeyProcess(.special)
-                                }
-                        }
-                )
+                })
         }
 }
 
@@ -50,40 +44,34 @@ struct NineKeySpecialKey: View {
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
-        @GestureState private var isTouching: Bool = false
+        @State private var isTouching: Bool = false
 
         var body: some View {
                 let isBuffering: Bool = context.inputStage.isBuffering
-                ZStack {
-                        Color.interactiveClear
-                        ZStack(alignment: .bottom) {
-                                RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius)
-                                        .fill(isTouching ? colorScheme.activeInputKeyColor : colorScheme.inputKeyColor)
-                                        .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                Text(verbatim: isBuffering ? PresetConstant.separate : PresetConstant.reverseLookup)
-                                        .font(.labelCaption)
-                                        .padding(.bottom, 2)
-                                        .opacity(isBuffering ? 0 : 0.35)
+                Button(action: {}) {
+                        ZStack {
+                                Color.interactiveClear
+                                ZStack(alignment: .bottom) {
+                                        RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius)
+                                                .fill(isTouching ? colorScheme.activeInputKeyColor : colorScheme.inputKeyColor)
+                                                .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
+                                        Text(verbatim: isBuffering ? PresetConstant.separate : PresetConstant.reverseLookup)
+                                                .font(.labelCaption)
+                                                .padding(.bottom, 2)
+                                                .opacity(isBuffering ? 0 : 0.35)
+                                }
+                                .padding(isTouching ? 1 : 3)
+                                Text(verbatim: isBuffering ? String.apostrophe : Combo.special.text)
+                                        .opacity(isBuffering ? 0 : 1)
                         }
-                        .padding(isTouching ? 1 : 3)
-                        Text(verbatim: isBuffering ? String.apostrophe : Combo.special.text)
-                                .opacity(isBuffering ? 0 : 1)
+                        .frame(width: context.nineKeyWidthUnit * 1.06, height: context.heightUnit)
                 }
-                .frame(width: context.nineKeyWidthUnit * 1.06, height: context.heightUnit)
-                .contentShape(.rect)
-                .gesture(DragGesture(minimumDistance: 0)
-                        .updating($isTouching) { _, isTouchBegan, _ in
-                                if isTouchBegan.negative {
-                                        isTouchBegan = true
-                                        AudioFeedback.inputed()
-                                        context.triggerHapticFeedback()
-                                }
+                .buttonStyle(PressButtonStyle($isTouching) {
+                        AudioFeedback.inputed()
+                        context.triggerHapticFeedback()
+                        if context.inputStage.isBuffering.negative {
+                                context.nineKeyProcess(.special)
                         }
-                        .onEnded { _ in
-                                if context.inputStage.isBuffering.negative {
-                                        context.nineKeyProcess(.special)
-                                }
-                        }
-                )
+                })
         }
 }

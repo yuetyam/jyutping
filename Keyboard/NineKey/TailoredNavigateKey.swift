@@ -9,7 +9,7 @@ struct GlassTailoredNavigateKey: View {
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
-        @GestureState private var isTouching: Bool = false
+        @State private var isTouching: Bool = false
 
         private var keyText: String {
                 switch destination {
@@ -27,30 +27,24 @@ struct GlassTailoredNavigateKey: View {
         }
 
         var body: some View {
-                ZStack {
-                        Color.interactiveClear
+                Button(action: {}) {
                         ZStack {
-                                Color.clear
-                                Text(verbatim: keyText).font(.staticBody)
-                        }
-                        .glassEffect(isTouching ? .regular : .clear, in: .rect(cornerRadius: PresetConstant.largeKeyCornerRadius))
-                        .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
-                        .padding(isTouching ? 1 : 3)
-                }
-                .frame(width: context.nineKeyWidthUnit * 0.91, height: context.heightUnit)
-                .contentShape(.rect)
-                .gesture(DragGesture(minimumDistance: 0)
-                        .updating($isTouching) { _, isTouchBegan, _ in
-                                if isTouchBegan.negative {
-                                        isTouchBegan = true
-                                        AudioFeedback.modified()
-                                        context.triggerHapticFeedback()
+                                Color.interactiveClear
+                                ZStack {
+                                        Color.clear
+                                        Text(verbatim: keyText).font(.staticBody)
                                 }
+                                .glassEffect(isTouching ? .regular : .clear, in: .rect(cornerRadius: PresetConstant.largeKeyCornerRadius))
+                                .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
+                                .padding(isTouching ? 1 : 3)
                         }
-                        .onEnded { _ in
-                                context.updateKeyboardForm(to: destination)
-                        }
-                )
+                        .frame(width: context.nineKeyWidthUnit * 0.91, height: context.heightUnit)
+                }
+                .buttonStyle(PressButtonStyle($isTouching) {
+                        AudioFeedback.modified()
+                        context.triggerHapticFeedback()
+                        context.updateKeyboardForm(to: destination)
+                })
         }
 }
 
@@ -60,7 +54,7 @@ struct TailoredNavigateKey: View {
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
-        @GestureState private var isTouching: Bool = false
+        @State private var isTouching: Bool = false
 
         private var keyText: String {
                 switch destination {
@@ -78,27 +72,21 @@ struct TailoredNavigateKey: View {
         }
 
         var body: some View {
-                ZStack {
-                        Color.interactiveClear
-                        RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius)
-                                .fill(isTouching ? colorScheme.activeActionKeyColor : colorScheme.actionKeyColor)
-                                .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                .padding(isTouching ? 1 : 3)
-                        Text(verbatim: keyText).font(.staticBody)
+                Button(action: {}) {
+                        ZStack {
+                                Color.interactiveClear
+                                RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius)
+                                        .fill(isTouching ? colorScheme.activeActionKeyColor : colorScheme.actionKeyColor)
+                                        .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
+                                        .padding(isTouching ? 1 : 3)
+                                Text(verbatim: keyText).font(.staticBody)
+                        }
+                        .frame(width: context.nineKeyWidthUnit * 0.91, height: context.heightUnit)
                 }
-                .frame(width: context.nineKeyWidthUnit * 0.91, height: context.heightUnit)
-                .contentShape(.rect)
-                .gesture(DragGesture(minimumDistance: 0)
-                        .updating($isTouching) { _, isTouchBegan, _ in
-                                if isTouchBegan.negative {
-                                        isTouchBegan = true
-                                        AudioFeedback.modified()
-                                        context.triggerHapticFeedback()
-                                }
-                        }
-                        .onEnded { _ in
-                                context.updateKeyboardForm(to: destination)
-                        }
-                )
+                .buttonStyle(PressButtonStyle($isTouching) {
+                        AudioFeedback.modified()
+                        context.triggerHapticFeedback()
+                        context.updateKeyboardForm(to: destination)
+                })
         }
 }

@@ -5,7 +5,7 @@ struct TailoredReturnKey: View {
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
-        @GestureState private var isTouching: Bool = false
+        @State private var isTouching: Bool = false
 
         var body: some View {
                 let isDefaultReturn: Bool = context.returnKeyType.isDefaultReturn
@@ -41,64 +41,58 @@ struct TailoredReturnKey: View {
                                 return Color.primary.opacity(0.5)
                         }
                 }()
-                ZStack {
-                        Color.interactiveClear
-                        if #available(iOSApplicationExtension 26.0, *) {
-                                glassBackColor
-                                        .clipShape(.rect(cornerRadius: PresetConstant.largeKeyCornerRadius))
-                                        .glassEffect(isTouching ? .regular : .clear, in: .rect(cornerRadius: PresetConstant.largeKeyCornerRadius))
-                                        .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
-                                        .padding(isTouching ? 1 : 3)
-                        } else {
-                                RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius)
-                                        .fill(backColor)
-                                        .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                        .padding(isTouching ? 1 : 3)
-                        }
-                        switch (context.returnKeyState.isBuffering, isDefaultReturn) {
-                        case (true, _):
-                                Text(context.returnKeyText)
-                                        .font(.staticBody)
-                                        .foregroundStyle(foreColor)
-                        case (false, true):
-                                Image.return
+                Button(action: {}) {
+                        ZStack {
+                                Color.interactiveClear
+                                if #available(iOSApplicationExtension 26.0, *) {
+                                        glassBackColor
+                                                .clipShape(.rect(cornerRadius: PresetConstant.largeKeyCornerRadius))
+                                                .glassEffect(isTouching ? .regular : .clear, in: .rect(cornerRadius: PresetConstant.largeKeyCornerRadius))
+                                                .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
+                                                .padding(isTouching ? 1 : 3)
+                                } else {
+                                        RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius)
+                                                .fill(backColor)
+                                                .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
+                                                .padding(isTouching ? 1 : 3)
+                                }
+                                switch (context.returnKeyState.isBuffering, isDefaultReturn) {
+                                case (true, _):
+                                        Text(context.returnKeyText)
+                                                .font(.staticBody)
+                                                .foregroundStyle(foreColor)
+                                case (false, true):
+                                        Image.return
+                                                .font(.symbol)
+                                                .foregroundStyle(foreColor)
+                                default:
+                                        VStack(spacing: 5) {
+                                                switch context.returnKeyType {
+                                                case .continue, .next:
+                                                        Image.chevronForward
+                                                case .done:
+                                                        Image.checkmark
+                                                case .go, .route, .join:
+                                                        Image.arrowForward
+                                                case .search, .google, .yahoo:
+                                                        Image.search
+                                                case .send:
+                                                        Image.arrowUp
+                                                default:
+                                                        Image.return
+                                                }
+                                                Text(context.returnKeyText).font(.footnote)
+                                        }
                                         .font(.symbol)
                                         .foregroundStyle(foreColor)
-                        default:
-                                VStack(spacing: 5) {
-                                        switch context.returnKeyType {
-                                        case .continue, .next:
-                                                Image.chevronForward
-                                        case .done:
-                                                Image.checkmark
-                                        case .go, .route, .join:
-                                                Image.arrowForward
-                                        case .search, .google, .yahoo:
-                                                Image.search
-                                        case .send:
-                                                Image.arrowUp
-                                        default:
-                                                Image.return
-                                        }
-                                        Text(context.returnKeyText).font(.footnote)
                                 }
-                                .font(.symbol)
-                                .foregroundStyle(foreColor)
                         }
+                        .frame(width: context.nineKeyWidthUnit * 0.91, height: context.heightUnit * 2)
                 }
-                .frame(width: context.nineKeyWidthUnit * 0.91, height: context.heightUnit * 2)
-                .contentShape(.rect)
-                .gesture(DragGesture(minimumDistance: 0)
-                        .updating($isTouching) { _, isTouchBegan, _ in
-                                if isTouchBegan.negative {
-                                        isTouchBegan = true
-                                        AudioFeedback.modified()
-                                        context.triggerHapticFeedback()
-                                }
-                        }
-                        .onEnded { _ in
-                                context.operate(.return)
-                        }
-                )
+                .buttonStyle(PressButtonStyle($isTouching) {
+                        AudioFeedback.modified()
+                        context.triggerHapticFeedback()
+                        context.operate(.return)
+                })
         }
 }
