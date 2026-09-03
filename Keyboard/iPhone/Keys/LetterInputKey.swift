@@ -57,7 +57,6 @@ struct LetterInputKey: View {
                                 }
                         }
                         .frame(width: keyWidth, height: keyHeight)
-                        .contentShape(.rect)
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
                         AudioFeedback.inputed()
