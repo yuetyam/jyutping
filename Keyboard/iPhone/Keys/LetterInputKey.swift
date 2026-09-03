@@ -11,7 +11,7 @@ struct LetterInputKey: View {
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
-        @GestureState private var isTouching: Bool = false
+        @State private var isTouching: Bool = false
 
         var body: some View {
                 let keyWidth: CGFloat = context.widthUnit
@@ -29,45 +29,40 @@ struct LetterInputKey: View {
                 let shouldShowLowercaseKeys: Bool = Options.showLowercaseKeys && context.keyboardCase.isLowercased
                 let textCase: Text.Case = shouldShowLowercaseKeys ? .lowercase : .uppercase
                 let keyTextBottomInset: CGFloat = shouldShowLowercaseKeys ? 3 : 0
-                ZStack {
-                        Color.interactiveClear
-                        if (isTouching && shouldPreviewKey) {
-                                BubbleShape()
-                                        .fill(colorScheme.previewBubbleColor)
-                                        .shadow(color: .shadowGray, radius: 1)
-                                        .overlay {
-                                                Text(verbatim: virtual.text)
-                                                        .textCase(textCase)
-                                                        .font(.largeTitle)
-                                                        .padding(.bottom, previewBottomOffset)
-                                        }
-                                        .padding(.vertical, verticalPadding)
-                                        .padding(.horizontal, horizontalPadding)
-                        } else {
-                                RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
-                                        .fill(isTouching ? activeColor : colorScheme.inputKeyColor)
-                                        .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                        .padding(.vertical, verticalPadding)
-                                        .padding(.horizontal, horizontalPadding)
-                                Text(verbatim: virtual.text)
-                                        .textCase(textCase)
-                                        .font(.letterCompact)
-                                        .padding(.bottom, keyTextBottomInset)
-                        }
-                }
-                .frame(width: keyWidth, height: keyHeight)
-                .contentShape(.rect)
-                .gesture(DragGesture(minimumDistance: 0)
-                        .updating($isTouching) { _, isTouchBegan, _ in
-                                if isTouchBegan.negative {
-                                        isTouchBegan = true
-                                        AudioFeedback.inputed()
-                                        context.triggerHapticFeedback()
+                Button(action: {}) {
+                        ZStack {
+                                Color.interactiveClear
+                                if (shouldPreviewKey && isTouching) {
+                                        BubbleShape()
+                                                .fill(colorScheme.previewBubbleColor)
+                                                .shadow(color: .shadowGray, radius: 1)
+                                                .overlay {
+                                                        Text(verbatim: virtual.text)
+                                                                .textCase(textCase)
+                                                                .font(.largeTitle)
+                                                                .padding(.bottom, previewBottomOffset)
+                                                }
+                                                .padding(.vertical, verticalPadding)
+                                                .padding(.horizontal, horizontalPadding)
+                                } else {
+                                        RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
+                                                .fill(isTouching ? activeColor : colorScheme.inputKeyColor)
+                                                .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
+                                                .padding(.vertical, verticalPadding)
+                                                .padding(.horizontal, horizontalPadding)
+                                        Text(verbatim: virtual.text)
+                                                .textCase(textCase)
+                                                .font(.letterCompact)
+                                                .padding(.bottom, keyTextBottomInset)
                                 }
                         }
-                        .onEnded { _ in
-                                context.handle(virtual)
-                        }
-                )
+                        .frame(width: keyWidth, height: keyHeight)
+                        .contentShape(.rect)
+                }
+                .buttonStyle(PressButtonStyle($isTouching) {
+                        AudioFeedback.inputed()
+                        context.triggerHapticFeedback()
+                        context.handle(virtual)
+                })
         }
 }
