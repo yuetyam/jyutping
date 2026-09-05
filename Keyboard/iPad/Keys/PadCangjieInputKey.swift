@@ -18,7 +18,7 @@ struct PadCangjieInputKey: View {
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
 
-        @GestureState private var isTouching: Bool = false
+        @State private var isTouching: Bool = false
 
         var body: some View {
                 let keyWidth: CGFloat = context.widthUnit
@@ -28,36 +28,30 @@ struct PadCangjieInputKey: View {
                 let horizontalPadding: CGFloat = isLandscape ? 7 : 5
                 let shouldShowLowercaseKeys: Bool = Options.showLowercaseKeys && context.keyboardCase.isLowercased
                 let textCase: Text.Case = shouldShowLowercaseKeys ? .lowercase : .uppercase
-                ZStack {
-                        Color.interactiveClear
-                        RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius)
-                                .fill(isTouching ? colorScheme.activeInputKeyColor : colorScheme.inputKeyColor)
-                                .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                .padding(.vertical, verticalPadding)
-                                .padding(.horizontal, horizontalPadding)
-                        ZStack(alignment: .topTrailing) {
-                                Color.clear
-                                Text(verbatim: letter)
-                                        .textCase(textCase)
-                                        .font(.footnote)
-                                        .shallow()
-                        }
-                        .padding(.vertical, verticalPadding + 1)
-                        .padding(.horizontal, horizontalPadding + 3)
-                        Text(verbatim: radical)
-                }
-                .frame(width: keyWidth, height: keyHeight)
-                .contentShape(.rect)
-                .gesture(DragGesture(minimumDistance: 0)
-                        .updating($isTouching) { _, tapped, _ in
-                                if tapped.negative {
-                                        AudioFeedback.inputed()
-                                        tapped = true
+                Button(action: {}) {
+                        ZStack {
+                                Color.interactiveClear
+                                RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius)
+                                        .fill(isTouching ? colorScheme.activeInputKeyColor : colorScheme.inputKeyColor)
+                                        .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
+                                        .padding(.vertical, verticalPadding)
+                                        .padding(.horizontal, horizontalPadding)
+                                ZStack(alignment: .topTrailing) {
+                                        Color.clear
+                                        Text(verbatim: letter)
+                                                .textCase(textCase)
+                                                .font(.footnote)
+                                                .shallow()
                                 }
+                                .padding(.vertical, verticalPadding + 1)
+                                .padding(.horizontal, horizontalPadding + 3)
+                                Text(verbatim: radical)
                         }
-                        .onEnded { _ in
-                                context.handle(event)
-                         }
-                )
+                        .frame(width: keyWidth, height: keyHeight)
+                }
+                .buttonStyle(PressButtonStyle($isTouching) {
+                        AudioFeedback.inputed()
+                        context.handle(event)
+                })
         }
 }

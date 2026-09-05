@@ -8,7 +8,7 @@ struct LargePadReturnKey: View {
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
 
-        @GestureState private var isTouching: Bool = false
+        @State private var isTouching: Bool = false
 
         var body: some View {
                 let keyWidth: CGFloat = context.widthUnit * widthUnitTimes
@@ -40,68 +40,62 @@ struct LargePadReturnKey: View {
                                 return Color.primary.opacity(0.5)
                         }
                 }()
-                ZStack {
-                        Color.interactiveClear
-                        RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius)
-                                .fill(backColor)
-                                .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                .padding(.vertical, verticalPadding)
-                                .padding(.horizontal, horizontalPadding)
-                        switch (keyState.isBuffering, isDefaultReturn) {
-                        case (true, _):
-                                ZStack(alignment: .bottomTrailing) {
-                                        Color.clear
-                                        Text(context.returnKeyText).foregroundStyle(foreColor)
-                                }
-                                .padding(.vertical, verticalPadding + 7)
-                                .padding(.horizontal, horizontalPadding + 7)
-                        case (false, true):
-                                ZStack(alignment: .bottomTrailing) {
-                                        Color.clear
-                                        Image.return.foregroundStyle(foreColor)
-                                }
-                                .padding(.vertical, verticalPadding + 7)
-                                .padding(.horizontal, horizontalPadding + 7)
-                        default:
-                                ZStack(alignment: .bottomTrailing) {
-                                        Color.clear
-                                        Text(context.returnKeyText).foregroundStyle(foreColor)
-                                }
-                                .padding(.vertical, verticalPadding + 7)
-                                .padding(.horizontal, horizontalPadding + 7)
-                                ZStack(alignment: .topTrailing) {
-                                        Color.clear
-                                        switch context.returnKeyType {
-                                        case .continue, .next:
-                                                Image.chevronForward.foregroundStyle(foreColor)
-                                        case .done:
-                                                Image.checkmark.foregroundStyle(foreColor)
-                                        case .go, .route, .join:
-                                                Image.arrowForward.foregroundStyle(foreColor)
-                                        case .search, .google, .yahoo:
-                                                Image.search.foregroundStyle(foreColor)
-                                        case .send:
-                                                Image.arrowUp.foregroundStyle(foreColor)
-                                        default:
+                Button(action: {}) {
+                        ZStack {
+                                Color.interactiveClear
+                                RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius)
+                                        .fill(backColor)
+                                        .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
+                                        .padding(.vertical, verticalPadding)
+                                        .padding(.horizontal, horizontalPadding)
+                                switch (keyState.isBuffering, isDefaultReturn) {
+                                case (true, _):
+                                        ZStack(alignment: .bottomTrailing) {
+                                                Color.clear
+                                                Text(context.returnKeyText).foregroundStyle(foreColor)
+                                        }
+                                        .padding(.vertical, verticalPadding + 7)
+                                        .padding(.horizontal, horizontalPadding + 7)
+                                case (false, true):
+                                        ZStack(alignment: .bottomTrailing) {
+                                                Color.clear
                                                 Image.return.foregroundStyle(foreColor)
                                         }
+                                        .padding(.vertical, verticalPadding + 7)
+                                        .padding(.horizontal, horizontalPadding + 7)
+                                default:
+                                        ZStack(alignment: .bottomTrailing) {
+                                                Color.clear
+                                                Text(context.returnKeyText).foregroundStyle(foreColor)
+                                        }
+                                        .padding(.vertical, verticalPadding + 7)
+                                        .padding(.horizontal, horizontalPadding + 7)
+                                        ZStack(alignment: .topTrailing) {
+                                                Color.clear
+                                                switch context.returnKeyType {
+                                                case .continue, .next:
+                                                        Image.chevronForward.foregroundStyle(foreColor)
+                                                case .done:
+                                                        Image.checkmark.foregroundStyle(foreColor)
+                                                case .go, .route, .join:
+                                                        Image.arrowForward.foregroundStyle(foreColor)
+                                                case .search, .google, .yahoo:
+                                                        Image.search.foregroundStyle(foreColor)
+                                                case .send:
+                                                        Image.arrowUp.foregroundStyle(foreColor)
+                                                default:
+                                                        Image.return.foregroundStyle(foreColor)
+                                                }
+                                        }
+                                        .padding(.vertical, verticalPadding + 7)
+                                        .padding(.horizontal, horizontalPadding + 7)
                                 }
-                                .padding(.vertical, verticalPadding + 7)
-                                .padding(.horizontal, horizontalPadding + 7)
                         }
+                        .frame(width: keyWidth, height: keyHeight)
                 }
-                .frame(width: keyWidth, height: keyHeight)
-                .contentShape(.rect)
-                .gesture(DragGesture(minimumDistance: 0)
-                        .updating($isTouching) { _, tapped, _ in
-                                if tapped.negative {
-                                        AudioFeedback.modified()
-                                        tapped = true
-                                }
-                        }
-                        .onEnded { _ in
-                                context.operate(.return)
-                        }
-                )
+                .buttonStyle(PressButtonStyle($isTouching) {
+                        AudioFeedback.modified()
+                        context.operate(.return)
+                })
         }
 }

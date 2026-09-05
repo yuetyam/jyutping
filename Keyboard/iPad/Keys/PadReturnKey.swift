@@ -8,7 +8,7 @@ struct PadReturnKey: View {
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
 
-        @GestureState private var isTouching: Bool = false
+        @State private var isTouching: Bool = false
 
         var body: some View {
                 let keyWidth: CGFloat = context.widthUnit * widthUnitTimes
@@ -40,55 +40,49 @@ struct PadReturnKey: View {
                                 return Color.primary.opacity(0.5)
                         }
                 }()
-                ZStack {
-                        Color.interactiveClear
-                        RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius)
-                                .fill(backColor)
-                                .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                .padding(.vertical, verticalPadding)
-                                .padding(.horizontal, horizontalPadding)
-                        switch (keyState.isBuffering, isDefaultReturn) {
-                        case (true, _):
-                                Text(context.returnKeyText).foregroundStyle(foreColor)
-                        case (false, true):
-                                Image.return.foregroundStyle(foreColor)
-                        default:
-                                ZStack(alignment: .bottomTrailing) {
-                                        Color.clear
-                                        Text(context.returnKeyText)
-                                                .font(.labelCaption)
-                                                .foregroundStyle(foreColor)
-                                }
-                                .padding(.vertical, verticalPadding + 2)
-                                .padding(.horizontal, horizontalPadding + 4)
-                                switch context.returnKeyType {
-                                case .continue, .next:
-                                        Image.chevronForward.foregroundStyle(foreColor)
-                                case .done:
-                                        Image.checkmark.font(.title3).foregroundStyle(foreColor)
-                                case .go, .route, .join:
-                                        Image.arrowForward.font(.title3).foregroundStyle(foreColor)
-                                case .search, .google, .yahoo:
-                                        Image.search.font(.title3).foregroundStyle(foreColor)
-                                case .send:
-                                        Image.arrowUp.font(.title3).foregroundStyle(foreColor)
+                Button(action: {}) {
+                        ZStack {
+                                Color.interactiveClear
+                                RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius)
+                                        .fill(backColor)
+                                        .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
+                                        .padding(.vertical, verticalPadding)
+                                        .padding(.horizontal, horizontalPadding)
+                                switch (keyState.isBuffering, isDefaultReturn) {
+                                case (true, _):
+                                        Text(context.returnKeyText).foregroundStyle(foreColor)
+                                case (false, true):
+                                        Image.return.foregroundStyle(foreColor)
                                 default:
-                                        Image.return.font(.title3).foregroundStyle(foreColor)
+                                        ZStack(alignment: .bottomTrailing) {
+                                                Color.clear
+                                                Text(context.returnKeyText)
+                                                        .font(.labelCaption)
+                                                        .foregroundStyle(foreColor)
+                                        }
+                                        .padding(.vertical, verticalPadding + 2)
+                                        .padding(.horizontal, horizontalPadding + 4)
+                                        switch context.returnKeyType {
+                                        case .continue, .next:
+                                                Image.chevronForward.foregroundStyle(foreColor)
+                                        case .done:
+                                                Image.checkmark.font(.title3).foregroundStyle(foreColor)
+                                        case .go, .route, .join:
+                                                Image.arrowForward.font(.title3).foregroundStyle(foreColor)
+                                        case .search, .google, .yahoo:
+                                                Image.search.font(.title3).foregroundStyle(foreColor)
+                                        case .send:
+                                                Image.arrowUp.font(.title3).foregroundStyle(foreColor)
+                                        default:
+                                                Image.return.font(.title3).foregroundStyle(foreColor)
+                                        }
                                 }
                         }
+                        .frame(width: keyWidth, height: keyHeight)
                 }
-                .frame(width: keyWidth, height: keyHeight)
-                .contentShape(.rect)
-                .gesture(DragGesture(minimumDistance: 0)
-                        .updating($isTouching) { _, tapped, _ in
-                                if tapped.negative {
-                                        AudioFeedback.modified()
-                                        tapped = true
-                                }
-                        }
-                        .onEnded { _ in
-                                context.operate(.return)
-                        }
-                )
+                .buttonStyle(PressButtonStyle($isTouching) {
+                        AudioFeedback.modified()
+                        context.operate(.return)
+                })
         }
 }
