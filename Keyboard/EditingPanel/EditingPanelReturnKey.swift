@@ -5,7 +5,7 @@ struct EditingPanelReturnKey: View {
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
-        @GestureState private var isTouching: Bool = false
+        @State private var isTouching: Bool = false
 
         var body: some View {
                 let inset = context.keyboardInterface.editingKeyInset
@@ -42,51 +42,45 @@ struct EditingPanelReturnKey: View {
                                 return Color.primary.opacity(0.5)
                         }
                 }()
-                ZStack {
-                        Color.interactiveClear
-                        if #available(iOSApplicationExtension 26.0, *) {
-                                glassBackColor
-                                        .clipShape(.rect(cornerRadius: PresetConstant.ultraKeyCornerRadius))
-                                        .glassEffect(isTouching ? .regular : .clear, in: .rect(cornerRadius: PresetConstant.ultraKeyCornerRadius))
-                                        .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
-                                        .padding(isTouching ? (inset - 2) : inset)
-                        } else {
-                                RoundedRectangle(cornerRadius: PresetConstant.ultraKeyCornerRadius)
-                                        .fill(backColor)
-                                        .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                        .padding(isTouching ? (inset - 2) : inset)
-                        }
-                        VStack(spacing: 4) {
-                                switch context.returnKeyType {
-                                case .continue, .next:
-                                        Image.chevronForward
-                                case .done:
-                                        Image.checkmark
-                                case .go, .route, .join:
-                                        Image.arrowForward
-                                case .search, .google, .yahoo:
-                                        Image.search
-                                case .send:
-                                        Image.arrowUp
-                                default:
-                                        Image.return
+                Button(action: {}) {
+                        ZStack {
+                                Color.interactiveClear
+                                if #available(iOSApplicationExtension 26.0, *) {
+                                        glassBackColor
+                                                .clipShape(.rect(cornerRadius: PresetConstant.ultraKeyCornerRadius))
+                                                .glassEffect(isTouching ? .regular : .clear, in: .rect(cornerRadius: PresetConstant.ultraKeyCornerRadius))
+                                                .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
+                                                .padding(isTouching ? (inset - 2) : inset)
+                                } else {
+                                        RoundedRectangle(cornerRadius: PresetConstant.ultraKeyCornerRadius)
+                                                .fill(backColor)
+                                                .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
+                                                .padding(isTouching ? (inset - 2) : inset)
                                 }
-                                Text(context.returnKeyText).font(.labelCaption)
+                                VStack(spacing: 4) {
+                                        switch context.returnKeyType {
+                                        case .continue, .next:
+                                                Image.chevronForward
+                                        case .done:
+                                                Image.checkmark
+                                        case .go, .route, .join:
+                                                Image.arrowForward
+                                        case .search, .google, .yahoo:
+                                                Image.search
+                                        case .send:
+                                                Image.arrowUp
+                                        default:
+                                                Image.return
+                                        }
+                                        Text(context.returnKeyText).font(.labelCaption)
+                                }
+                                .foregroundStyle(foreColor)
                         }
-                        .foregroundStyle(foreColor)
                 }
-                .contentShape(.rect)
-                .gesture(DragGesture(minimumDistance: 0)
-                        .updating($isTouching) { _, isTouchBegan, _ in
-                                if isTouchBegan.negative {
-                                        isTouchBegan = true
-                                        AudioFeedback.modified()
-                                        context.triggerHapticFeedback()
-                                }
-                        }
-                        .onEnded { _ in
-                                context.operate(.return)
-                        }
-                )
+                .buttonStyle(PressButtonStyle($isTouching) {
+                        AudioFeedback.modified()
+                        context.triggerHapticFeedback()
+                        context.operate(.return)
+                })
         }
 }
