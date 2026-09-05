@@ -9,7 +9,7 @@ struct PinyinSpecialLetterKey: View {
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
-        @GestureState private var isTouching: Bool = false
+        @State private var isTouching: Bool = false
 
         var body: some View {
                 let keyWidth: CGFloat = context.widthUnit
@@ -27,52 +27,48 @@ struct PinyinSpecialLetterKey: View {
                 let shouldShowLowercaseKeys: Bool = Options.showLowercaseKeys && context.keyboardCase.isLowercased
                 let textCase: Text.Case = shouldShowLowercaseKeys ? .lowercase : .uppercase
                 let keyTextBottomInset: CGFloat = shouldShowLowercaseKeys ? 3 : 0
-                ZStack {
-                        Color.interactiveClear
-                        if (isTouching && shouldPreviewKey) {
-                                BubbleShape()
-                                        .fill(colorScheme.previewBubbleColor)
-                                        .shadow(color: .shadowGray, radius: 1)
-                                        .overlay {
-                                                Text(verbatim: virtual.text)
+                Button(action: {}) {
+                        ZStack {
+                                Color.interactiveClear
+                                if (shouldPreviewKey && isTouching) {
+                                        BubbleShape()
+                                                .fill(colorScheme.previewBubbleColor)
+                                                .shadow(color: .shadowGray, radius: 1)
+                                                .overlay {
+                                                        Text(verbatim: virtual.text)
+                                                                .textCase(textCase)
+                                                                .font(.largeTitle)
+                                                                .padding(.bottom, previewBottomOffset)
+                                                }
+                                                .padding(.vertical, verticalPadding)
+                                                .padding(.horizontal, horizontalPadding)
+                                } else {
+                                        RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
+                                                .fill(isTouching ? activeColor : colorScheme.inputKeyColor)
+                                                .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
+                                                .padding(.vertical, verticalPadding)
+                                                .padding(.horizontal, horizontalPadding)
+                                        ZStack(alignment: .bottomTrailing) {
+                                                Color.clear
+                                                Text(verbatim: "ü")
                                                         .textCase(textCase)
-                                                        .font(.largeTitle)
-                                                        .padding(.bottom, previewBottomOffset)
+                                                        .font(.labelCaption)
+                                                        .shallow()
                                         }
                                         .padding(.vertical, verticalPadding)
-                                        .padding(.horizontal, horizontalPadding)
-                        } else {
-                                RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
-                                        .fill(isTouching ? activeColor : colorScheme.inputKeyColor)
-                                        .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                        .padding(.vertical, verticalPadding)
-                                        .padding(.horizontal, horizontalPadding)
-                                ZStack(alignment: .bottomTrailing) {
-                                        Color.clear
-                                        Text(verbatim: "ü")
+                                        .padding(.horizontal, horizontalPadding + 2)
+                                        Text(verbatim: virtual.text)
                                                 .textCase(textCase)
-                                                .font(.labelCaption)
-                                                .shallow()
+                                                .font(.letterCompact)
+                                                .padding(.bottom, keyTextBottomInset)
                                 }
-                                .padding(.vertical, verticalPadding)
-                                .padding(.horizontal, horizontalPadding + 2)
-                                Text(verbatim: virtual.text)
-                                        .textCase(textCase)
-                                        .font(.letterCompact)
-                                        .padding(.bottom, keyTextBottomInset)
                         }
+                        .frame(width: keyWidth, height: keyHeight)
                 }
-                .frame(width: keyWidth, height: keyHeight)
-                .contentShape(.rect)
-                .gesture(DragGesture(minimumDistance: 0)
-                        .updating($isTouching) { _, isTouched, _ in
-                                if isTouched.negative {
-                                        isTouched = true
-                                        AudioFeedback.inputed()
-                                        context.triggerHapticFeedback()
-                                        context.handle(virtual)
-                                }
-                        }
-                )
+                .buttonStyle(PressButtonStyle($isTouching) {
+                        AudioFeedback.inputed()
+                        context.triggerHapticFeedback()
+                        context.handle(virtual)
+                })
         }
 }

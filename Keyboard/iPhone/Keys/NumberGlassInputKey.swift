@@ -14,7 +14,7 @@ struct NumberGlassInputKey: View {
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
-        @GestureState private var isTouching: Bool = false
+        @State private var isTouching: Bool = false
 
         var body: some View {
                 let keyWidth = context.widthUnit
@@ -23,40 +23,34 @@ struct NumberGlassInputKey: View {
                 let insets = keyboardInterface.keyShapeInsets
                 lazy var previewBottomOffset = keyboardInterface.previewBottomOffset(keyWidth: keyWidth, keyHeight: keyHeight, insets: insets)
                 let displayForm = KeyDisplayForm.responsive(isInteracting: isTouching, shouldPreview: Options.keyTextPreview)
-                ZStack {
-                        Color.interactiveClear
-                        if displayForm.isPreviewing {
-                                Color.clear
-                                        .glassEffect(.regular, in: BubbleShape())
-                                        .overlay {
-                                                Text(verbatim: virtual.text)
-                                                        .font(.largeTitle)
-                                                        .padding(.bottom, previewBottomOffset)
-                                        }
-                                        .padding(insets)
-                        } else {
-                                ZStack {
+                Button(action: {}) {
+                        ZStack {
+                                Color.interactiveClear
+                                if displayForm.isPreviewing {
                                         Color.clear
-                                        Text(verbatim: virtual.text).font(.letterCompact)
+                                                .glassEffect(.regular, in: BubbleShape())
+                                                .overlay {
+                                                        Text(verbatim: virtual.text)
+                                                                .font(.largeTitle)
+                                                                .padding(.bottom, previewBottomOffset)
+                                                }
+                                                .padding(insets)
+                                } else {
+                                        ZStack {
+                                                Color.clear
+                                                Text(verbatim: virtual.text).font(.letterCompact)
+                                        }
+                                        .glassEffect(displayForm.isReflecting ? .regular : .clear, in: .rect(cornerRadius: PresetConstant.keyCornerRadius))
+                                        .shadow(color: displayForm.isReflecting ? colorScheme.glassShadow : Color.clear, radius: 0.5)
+                                        .padding(displayForm.isReflecting ? insets.plused(-2) : insets)
                                 }
-                                .glassEffect(displayForm.isReflecting ? .regular : .clear, in: .rect(cornerRadius: PresetConstant.keyCornerRadius))
-                                .shadow(color: displayForm.isReflecting ? colorScheme.glassShadow : Color.clear, radius: 0.5)
-                                .padding(displayForm.isReflecting ? insets.plused(-2) : insets)
                         }
+                        .frame(width: keyWidth, height: keyHeight)
                 }
-                .frame(width: keyWidth, height: keyHeight)
-                .contentShape(.rect)
-                .gesture(DragGesture(minimumDistance: 0)
-                        .updating($isTouching) { _, isTouchBegan, _ in
-                                if isTouchBegan.negative {
-                                        isTouchBegan = true
-                                        AudioFeedback.inputed()
-                                        context.triggerHapticFeedback()
-                                }
-                        }
-                        .onEnded { _ in
-                                context.handle(virtual, isCapitalized: false)
-                        }
-                )
+                .buttonStyle(PressButtonStyle($isTouching) {
+                        AudioFeedback.inputed()
+                        context.triggerHapticFeedback()
+                        context.handle(virtual, isCapitalized: false)
+                })
         }
 }

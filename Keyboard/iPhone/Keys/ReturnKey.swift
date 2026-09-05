@@ -5,7 +5,7 @@ struct ReturnKey: View {
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
-        @GestureState private var isTouching: Bool = false
+        @State private var isTouching: Bool = false
 
         var body: some View {
                 let keyWidth: CGFloat = context.widthUnit * 2
@@ -37,54 +37,50 @@ struct ReturnKey: View {
                                 return Color.primary.opacity(0.5)
                         }
                 }()
-                ZStack {
-                        Color.interactiveClear
-                        RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
-                                .fill(backColor)
-                                .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                .padding(.vertical, verticalPadding)
-                                .padding(.horizontal, horizontalPadding)
-                        switch (keyState.isBuffering, isDefaultReturn) {
-                        case (true, _):
-                                Text(context.returnKeyText).font(.staticBody)
-                        case (false, true):
-                                Image.return
-                        default:
-                                ZStack(alignment: .bottomTrailing) {
-                                        Color.clear
-                                        Text(context.returnKeyText).font(.labelCaption)
-                                }
-                                .padding(.vertical, verticalPadding + 1)
-                                .padding(.horizontal, horizontalPadding + 1)
-                                switch context.returnKeyType {
-                                case .continue, .next:
-                                        Image.chevronForward
-                                case .done:
-                                        Image.checkmark
-                                case .go, .route, .join:
-                                        Image.arrowForward
-                                case .search, .google, .yahoo:
-                                        Image.search
-                                case .send:
-                                        Image.arrowUp
-                                default:
+                Button(action: {}) {
+                        ZStack {
+                                Color.interactiveClear
+                                RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
+                                        .fill(backColor)
+                                        .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
+                                        .padding(.vertical, verticalPadding)
+                                        .padding(.horizontal, horizontalPadding)
+                                switch (keyState.isBuffering, isDefaultReturn) {
+                                case (true, _):
+                                        Text(context.returnKeyText).font(.staticBody)
+                                case (false, true):
                                         Image.return
+                                default:
+                                        ZStack(alignment: .bottomTrailing) {
+                                                Color.clear
+                                                Text(context.returnKeyText).font(.labelCaption)
+                                        }
+                                        .padding(.vertical, verticalPadding + 1)
+                                        .padding(.horizontal, horizontalPadding + 1)
+                                        switch context.returnKeyType {
+                                        case .continue, .next:
+                                                Image.chevronForward
+                                        case .done:
+                                                Image.checkmark
+                                        case .go, .route, .join:
+                                                Image.arrowForward
+                                        case .search, .google, .yahoo:
+                                                Image.search
+                                        case .send:
+                                                Image.arrowUp
+                                        default:
+                                                Image.return
+                                        }
                                 }
                         }
+                        .font(.symbol)
+                        .foregroundStyle(foreColor)
+                        .frame(width: keyWidth, height: keyHeight)
                 }
-                .font(.symbol)
-                .foregroundStyle(foreColor)
-                .frame(width: keyWidth, height: keyHeight)
-                .contentShape(.rect)
-                .gesture(DragGesture(minimumDistance: 0)
-                        .updating($isTouching) { _, isTouched, _ in
-                                if isTouched.negative {
-                                        isTouched = true
-                                        AudioFeedback.modified()
-                                        context.triggerHapticFeedback()
-                                        context.operate(.return)
-                                }
-                        }
-                )
+                .buttonStyle(PressButtonStyle($isTouching) {
+                        AudioFeedback.modified()
+                        context.triggerHapticFeedback()
+                        context.operate(.return)
+                })
         }
 }
