@@ -49,34 +49,30 @@ private struct GlassNumberPadKey: View {
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
-        @GestureState private var isTouching: Bool = false
+        @State private var isTouching: Bool = false
 
         var body: some View {
-                ZStack {
-                        Color.interactiveClear
-                        VStack {
-                                Text(verbatim: digit)
-                                        .font(.title)
-                                Text(verbatim: letters ?? String.space)
-                                        .font(.caption2.weight(.semibold))
-                                        .tracking(1.5)
-                        }
-                }
-                .glassEffect(isTouching ? .regular : .clear, in: .rect(cornerRadius: PresetConstant.ultraKeyCornerRadius))
-                .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
-                .padding(4)
-                .frame(width: width, height: height)
-                .contentShape(.rect)
-                .gesture(DragGesture(minimumDistance: 0)
-                        .updating($isTouching) { _, tapped, _ in
-                                if tapped.negative {
-                                        tapped = true
-                                        AudioFeedback.inputed()
-                                        context.triggerHapticFeedback()
-                                        context.operate(.input(digit))
+                Button(action: {}) {
+                        ZStack {
+                                Color.interactiveClear
+                                VStack {
+                                        Text(verbatim: digit)
+                                                .font(.title)
+                                        Text(verbatim: letters ?? String.space)
+                                                .font(.caption2.weight(.semibold))
+                                                .tracking(1.5)
                                 }
                         }
-                )
+                        .glassEffect(isTouching ? .regular : .clear, in: .rect(cornerRadius: PresetConstant.ultraKeyCornerRadius))
+                        .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
+                        .padding(4)
+                        .frame(width: width, height: height)
+                }
+                .buttonStyle(PressButtonStyle($isTouching) {
+                        AudioFeedback.inputed()
+                        context.triggerHapticFeedback()
+                        context.operate(.input(digit))
+                })
         }
 }
 
@@ -124,35 +120,31 @@ private struct LegacyNumberPadKey: View {
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
-        @GestureState private var isTouching: Bool = false
+        @State private var isTouching: Bool = false
 
         var body: some View {
-                ZStack {
-                        Color.interactiveClear
-                        RoundedRectangle(cornerRadius: PresetConstant.ultraKeyCornerRadius)
-                                .fill(isTouching ? colorScheme.activeInputKeyColor : colorScheme.inputKeyColor)
-                                .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                .padding(4)
-                        VStack {
-                                Text(verbatim: digit)
-                                        .font(.title)
-                                Text(verbatim: letters ?? String.space)
-                                        .font(.caption2.weight(.semibold))
-                                        .tracking(1.5)
-                        }
-                }
-                .frame(width: width, height: height)
-                .contentShape(.rect)
-                .gesture(DragGesture(minimumDistance: 0)
-                        .updating($isTouching) { _, tapped, _ in
-                                if tapped.negative {
-                                        tapped = true
-                                        AudioFeedback.inputed()
-                                        context.triggerHapticFeedback()
-                                        context.operate(.input(digit))
+                Button(action: {}) {
+                        ZStack {
+                                Color.interactiveClear
+                                RoundedRectangle(cornerRadius: PresetConstant.ultraKeyCornerRadius)
+                                        .fill(isTouching ? colorScheme.activeInputKeyColor : colorScheme.inputKeyColor)
+                                        .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
+                                        .padding(4)
+                                VStack {
+                                        Text(verbatim: digit)
+                                                .font(.title)
+                                        Text(verbatim: letters ?? String.space)
+                                                .font(.caption2.weight(.semibold))
+                                                .tracking(1.5)
                                 }
                         }
-                )
+                        .frame(width: width, height: height)
+                }
+                .buttonStyle(PressButtonStyle($isTouching) {
+                        AudioFeedback.inputed()
+                        context.triggerHapticFeedback()
+                        context.operate(.input(digit))
+                })
         }
 }
 
@@ -162,7 +154,6 @@ private struct DecimalPadPointKey: View {
         let height: CGFloat
 
         @EnvironmentObject private var context: KeyboardViewController
-        @GestureState private var isTouching: Bool = false
         private let keyText: String = String.period
 
         var body: some View {

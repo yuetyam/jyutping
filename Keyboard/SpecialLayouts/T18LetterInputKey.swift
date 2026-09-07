@@ -11,8 +11,7 @@ struct T18LetterInputKey: View {
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
-
-        @GestureState private var isTouching: Bool = false
+        @State private var isTouching: Bool = false
 
         var body: some View {
                 let keyWidth: CGFloat = context.widthUnit * 1.42
@@ -23,31 +22,25 @@ struct T18LetterInputKey: View {
                 let shouldShowLowercaseKeys: Bool = Options.showLowercaseKeys && context.keyboardCase.isLowercased
                 let textCase: Text.Case = shouldShowLowercaseKeys ? .lowercase : .uppercase
                 let keyTextBottomInset: CGFloat = shouldShowLowercaseKeys ? 3 : 0
-                ZStack {
-                        Color.interactiveClear
-                        RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
-                                .fill(isTouching ? colorScheme.activeInputKeyColor : colorScheme.inputKeyColor)
-                                .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                .padding(.vertical, verticalPadding)
-                                .padding(.horizontal, horizontalPadding)
-                        Text(verbatim: virtualKey.text)
-                                .textCase(textCase)
-                                .font(.letterCompact)
-                                .padding(.bottom, keyTextBottomInset)
+                Button(action: {}) {
+                        ZStack {
+                                Color.interactiveClear
+                                RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
+                                        .fill(isTouching ? colorScheme.activeInputKeyColor : colorScheme.inputKeyColor)
+                                        .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
+                                        .padding(.vertical, verticalPadding)
+                                        .padding(.horizontal, horizontalPadding)
+                                Text(verbatim: virtualKey.text)
+                                        .textCase(textCase)
+                                        .font(.letterCompact)
+                                        .padding(.bottom, keyTextBottomInset)
+                        }
+                        .frame(width: keyWidth, height: keyHeight)
                 }
-                .frame(width: keyWidth, height: keyHeight)
-                .contentShape(.rect)
-                .gesture(DragGesture(minimumDistance: 0)
-                        .updating($isTouching) { _, tapped, _ in
-                                if tapped.negative {
-                                        AudioFeedback.inputed()
-                                        context.triggerHapticFeedback()
-                                        tapped = true
-                                }
-                        }
-                        .onEnded { _ in
-                                context.handle(virtualKey)
-                        }
-                )
+                .buttonStyle(PressButtonStyle($isTouching) {
+                        AudioFeedback.inputed()
+                        context.triggerHapticFeedback()
+                        context.handle(virtualKey)
+                })
         }
 }
