@@ -6,7 +6,7 @@ struct ABCLeftKey: View {
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
 
-        @GestureState private var isTouching: Bool = false
+        @State private var isTouching: Bool = false
         @State private var buffer: Int = 0
         @State private var isLongPressing: Bool = false
         @State private var selectedIndex: Int = 0
@@ -29,71 +29,69 @@ struct ABCLeftKey: View {
                 let shouldPreviewKey: Bool = Options.keyTextPreview
                 let activeColor: Color = shouldPreviewKey ? colorScheme.inputKeyColor : colorScheme.activeInputKeyColor
                 let shouldShowExtraHeader: Bool = (Options.inputKeyStyle == .numbersAndSymbols)
-                ZStack {
-                        Color.interactiveClear
-                        if isLongPressing {
-                                let symbolCount: Int = symbols.count
-                                let expansionCount: Int = symbolCount - 1
-                                let leadingOffset: CGFloat = baseWidth * CGFloat(expansionCount)
-                                ExpansiveBubbleShape(keyLocale: .leading, expansionCount: expansionCount)
-                                        .fill(colorScheme.previewBubbleColor)
-                                        .shadow(color: .shadowGray, radius: 1)
-                                        .overlay {
-                                                HStack(spacing: 0) {
-                                                        ForEach(symbols.indices, id: \.self) { index in
-                                                                ZStack {
-                                                                        RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
-                                                                                .fill(selectedIndex == index ? Color.accentColor : Color.clear)
-                                                                        Text(verbatim: symbols[index])
-                                                                                .font(.title2)
-                                                                                .foregroundStyle(selectedIndex == index ? Color.white : Color.primary)
+                Button(action: {}) {
+                        ZStack {
+                                Color.interactiveClear
+                                if isLongPressing {
+                                        let symbolCount: Int = symbols.count
+                                        let expansionCount: Int = symbolCount - 1
+                                        let leadingOffset: CGFloat = baseWidth * CGFloat(expansionCount)
+                                        ExpansiveBubbleShape(keyLocale: .leading, expansionCount: expansionCount)
+                                                .fill(colorScheme.previewBubbleColor)
+                                                .shadow(color: .shadowGray, radius: 1)
+                                                .overlay {
+                                                        HStack(spacing: 0) {
+                                                                ForEach(symbols.indices, id: \.self) { index in
+                                                                        ZStack {
+                                                                                RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
+                                                                                        .fill(selectedIndex == index ? Color.accentColor : Color.clear)
+                                                                                Text(verbatim: symbols[index])
+                                                                                        .font(.title2)
+                                                                                        .foregroundStyle(selectedIndex == index ? Color.white : Color.primary)
+                                                                        }
+                                                                        .frame(maxWidth: .infinity)
                                                                 }
-                                                                .frame(maxWidth: .infinity)
                                                         }
-                                                }
-                                                .frame(width: baseWidth * CGFloat(symbolCount), height: baseHeight)
-                                                .padding(.bottom, previewBottomOffset)
-                                                .padding(.leading, leadingOffset)
-                                        }
-                                        .padding(.vertical, verticalPadding)
-                                        .padding(.horizontal, horizontalPadding)
-                        } else if (isTouching && shouldPreviewKey) {
-                                BubbleShape()
-                                        .fill(colorScheme.previewBubbleColor)
-                                        .shadow(color: .shadowGray, radius: 1)
-                                        .overlay {
-                                                Text(verbatim: pulled ?? String.comma)
-                                                        .font(.largeTitle)
+                                                        .frame(width: baseWidth * CGFloat(symbolCount), height: baseHeight)
                                                         .padding(.bottom, previewBottomOffset)
+                                                        .padding(.leading, leadingOffset)
+                                                }
+                                                .padding(.vertical, verticalPadding)
+                                                .padding(.horizontal, horizontalPadding)
+                                } else if (isTouching && shouldPreviewKey) {
+                                        BubbleShape()
+                                                .fill(colorScheme.previewBubbleColor)
+                                                .shadow(color: .shadowGray, radius: 1)
+                                                .overlay {
+                                                        Text(verbatim: pulled ?? String.comma)
+                                                                .font(.largeTitle)
+                                                                .padding(.bottom, previewBottomOffset)
+                                                }
+                                                .padding(.vertical, verticalPadding)
+                                                .padding(.horizontal, horizontalPadding)
+                                } else {
+                                        RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
+                                                .fill(isTouching ? activeColor : colorScheme.inputKeyColor)
+                                                .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
+                                                .padding(.vertical, verticalPadding)
+                                                .padding(.horizontal, horizontalPadding)
+                                        ZStack(alignment: .topTrailing) {
+                                                Color.clear
+                                                Text(verbatim: headerText).font(.labelCaption)
                                         }
                                         .padding(.vertical, verticalPadding)
-                                        .padding(.horizontal, horizontalPadding)
-                        } else {
-                                RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
-                                        .fill(isTouching ? activeColor : colorScheme.inputKeyColor)
-                                        .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                        .padding(.vertical, verticalPadding)
-                                        .padding(.horizontal, horizontalPadding)
-                                ZStack(alignment: .topTrailing) {
-                                        Color.clear
-                                        Text(verbatim: headerText).font(.labelCaption)
+                                        .padding(.horizontal, horizontalPadding + 2)
+                                        .opacity(shouldShowExtraHeader ? 0.5 : 0)
+                                        Text(verbatim: String.comma).font(.letterCompact)
                                 }
-                                .padding(.vertical, verticalPadding)
-                                .padding(.horizontal, horizontalPadding + 2)
-                                .opacity(shouldShowExtraHeader ? 0.5 : 0)
-                                Text(verbatim: String.comma).font(.letterCompact)
                         }
+                        .frame(width: keyWidth, height: keyHeight)
                 }
-                .frame(width: keyWidth, height: keyHeight)
-                .contentShape(.rect)
-                .gesture(DragGesture(minimumDistance: 0)
-                        .updating($isTouching) { _, tapped, _ in
-                                if tapped.negative {
-                                        AudioFeedback.inputed()
-                                        context.triggerHapticFeedback()
-                                        tapped = true
-                                }
-                        }
+                .buttonStyle(PressButtonStyle($isTouching) {
+                        AudioFeedback.inputed()
+                        context.triggerHapticFeedback()
+                })
+                .simultaneousGesture(DragGesture(minimumDistance: 0)
                         .onChanged { state in
                                 if isLongPressing {
                                         let memberCount: Int = symbols.count
@@ -138,12 +136,13 @@ struct ABCLeftKey: View {
                                 }
                         }
                 )
-                .task {
+                .task(id: isTouching) {
+                        guard isTouching else { return }
                         while Task.isCancelled.negative {
                                 try? await Task.sleep(for: .milliseconds(100)) // 0.1s
                                 if isTouching {
                                         if isLongPressing.negative {
-                                                let shouldTriggerLongPress: Bool = buffer > 6 || (buffer > 3 && pulled == nil)
+                                                let shouldTriggerLongPress: Bool = (buffer >= 6) || (buffer >= 3 && pulled == nil)
                                                 if shouldTriggerLongPress {
                                                         isLongPressing = true
                                                 } else {
