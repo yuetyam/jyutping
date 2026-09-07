@@ -25,7 +25,7 @@ struct EnhancedInputKey: View {
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
 
-        @GestureState private var isTouching: Bool = false
+        @State private var isTouching: Bool = false
         @State private var buffer: Int = 0
         @State private var isLongPressing: Bool = false
         @State private var selectedIndex: Int = 0
@@ -48,104 +48,102 @@ struct EnhancedInputKey: View {
                 let textCase: Text.Case = shouldShowLowercaseKeys ? .lowercase : .uppercase
                 let shouldAdjustKeyTextPosition: Bool = shouldShowLowercaseKeys && context.keyboardForm.isPrimary && (event?.isNumber.negative ?? true)
                 let keyTextBottomInset: CGFloat = shouldAdjustKeyTextPosition ? 3 : 0
-                ZStack {
-                        Color.interactiveClear
-                        if isLongPressing {
-                                let memberCount: Int = keyModel.members.count
-                                let expansionCount: Int = memberCount - 1
-                                let offsetX: CGFloat = baseWidth * CGFloat(expansionCount)
-                                let leadingOffset: CGFloat = keyLocale.isLeading ? offsetX : 0
-                                let trailingOffset: CGFloat = keyLocale.isTrailing ? offsetX : 0
-                                ExpansiveBubbleShape(keyLocale: keyLocale, expansionCount: expansionCount)
-                                        .fill(colorScheme.previewBubbleColor)
-                                        .shadow(color: .shadowGray, radius: 1)
-                                        .overlay {
-                                                HStack(spacing: 0) {
-                                                        ForEach(keyModel.members.indices, id: \.self) { index in
-                                                                let elementIndex: Int = keyLocale.isLeading ? index : ((memberCount - 1) - index)
-                                                                let element: KeyElement = keyModel.members[elementIndex]
-                                                                ZStack {
-                                                                        RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
-                                                                                .fill(selectedIndex == elementIndex ? Color.accentColor : Color.clear)
-                                                                        ZStack(alignment: .top) {
-                                                                                Color.interactiveClear
-                                                                                Text(verbatim: element.header ?? String.space)
-                                                                                        .font(.labelCaption)
-                                                                                        .shallow()
+                Button(action: {}) {
+                        ZStack {
+                                Color.interactiveClear
+                                if isLongPressing {
+                                        let memberCount: Int = keyModel.members.count
+                                        let expansionCount: Int = memberCount - 1
+                                        let offsetX: CGFloat = baseWidth * CGFloat(expansionCount)
+                                        let leadingOffset: CGFloat = keyLocale.isLeading ? offsetX : 0
+                                        let trailingOffset: CGFloat = keyLocale.isTrailing ? offsetX : 0
+                                        ExpansiveBubbleShape(keyLocale: keyLocale, expansionCount: expansionCount)
+                                                .fill(colorScheme.previewBubbleColor)
+                                                .shadow(color: .shadowGray, radius: 1)
+                                                .overlay {
+                                                        HStack(spacing: 0) {
+                                                                ForEach(keyModel.members.indices, id: \.self) { index in
+                                                                        let elementIndex: Int = keyLocale.isLeading ? index : ((memberCount - 1) - index)
+                                                                        let element: KeyElement = keyModel.members[elementIndex]
+                                                                        ZStack {
+                                                                                RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
+                                                                                        .fill(selectedIndex == elementIndex ? Color.accentColor : Color.clear)
+                                                                                ZStack(alignment: .top) {
+                                                                                        Color.interactiveClear
+                                                                                        Text(verbatim: element.header ?? String.space)
+                                                                                                .font(.labelCaption)
+                                                                                                .shallow()
+                                                                                }
+                                                                                ZStack(alignment: .bottom) {
+                                                                                        Color.interactiveClear
+                                                                                        Text(verbatim: element.footer ?? String.space)
+                                                                                                .font(.labelCaption)
+                                                                                                .shallow()
+                                                                                }
+                                                                                Text(verbatim: element.text)
+                                                                                        .textCase(textCase)
+                                                                                        .font(element.isTextSingular ? .title2 : .title3)
+                                                                                        .foregroundStyle(selectedIndex == elementIndex ? Color.white : Color.primary)
                                                                         }
-                                                                        ZStack(alignment: .bottom) {
-                                                                                Color.interactiveClear
-                                                                                Text(verbatim: element.footer ?? String.space)
-                                                                                        .font(.labelCaption)
-                                                                                        .shallow()
-                                                                        }
-                                                                        Text(verbatim: element.text)
-                                                                                .textCase(textCase)
-                                                                                .font(element.isTextSingular ? .title2 : .title3)
-                                                                                .foregroundStyle(selectedIndex == elementIndex ? Color.white : Color.primary)
+                                                                        .frame(maxWidth: .infinity)
                                                                 }
-                                                                .frame(maxWidth: .infinity)
                                                         }
-                                                }
-                                                .frame(width: baseWidth * CGFloat(memberCount), height: baseHeight)
-                                                .padding(.bottom, previewBottomOffset)
-                                                .padding(.leading, leadingOffset)
-                                                .padding(.trailing, trailingOffset)
-                                        }
-                                        .padding(.vertical, verticalPadding)
-                                        .padding(.horizontal, horizontalPadding)
-                        } else if (isTouching && shouldPreviewKey) {
-                                BubbleShape()
-                                        .fill(colorScheme.previewBubbleColor)
-                                        .shadow(color: .shadowGray, radius: 1)
-                                        .overlay {
-                                                Text(verbatim: pulled ?? keyModel.primary.text)
-                                                        .textCase(textCase)
-                                                        .font(keyModel.primary.isTextSingular ? .title : .title3)
+                                                        .frame(width: baseWidth * CGFloat(memberCount), height: baseHeight)
                                                         .padding(.bottom, previewBottomOffset)
+                                                        .padding(.leading, leadingOffset)
+                                                        .padding(.trailing, trailingOffset)
+                                                }
+                                                .padding(.vertical, verticalPadding)
+                                                .padding(.horizontal, horizontalPadding)
+                                } else if (isTouching && shouldPreviewKey) {
+                                        BubbleShape()
+                                                .fill(colorScheme.previewBubbleColor)
+                                                .shadow(color: .shadowGray, radius: 1)
+                                                .overlay {
+                                                        Text(verbatim: pulled ?? keyModel.primary.text)
+                                                                .textCase(textCase)
+                                                                .font(keyModel.primary.isTextSingular ? .title : .title3)
+                                                                .padding(.bottom, previewBottomOffset)
+                                                }
+                                                .padding(.vertical, verticalPadding)
+                                                .padding(.horizontal, horizontalPadding)
+                                } else {
+                                        RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
+                                                .fill(isTouching ? activeColor : colorScheme.inputKeyColor)
+                                                .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
+                                                .padding(.vertical, verticalPadding)
+                                                .padding(.horizontal, horizontalPadding)
+                                        ZStack(alignment: .topTrailing) {
+                                                Color.clear
+                                                Text(verbatim: keyModel.primary.header ?? String.space)
+                                                        .textCase(textCase)
+                                                        .font(.labelCaption)
+                                                        .shallow()
                                         }
                                         .padding(.vertical, verticalPadding)
-                                        .padding(.horizontal, horizontalPadding)
-                        } else {
-                                RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
-                                        .fill(isTouching ? activeColor : colorScheme.inputKeyColor)
-                                        .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
+                                        .padding(.horizontal, horizontalPadding + 2)
+                                        ZStack(alignment: .bottomTrailing) {
+                                                Color.clear
+                                                Text(verbatim: keyModel.primary.footer ?? String.space)
+                                                        .textCase(textCase)
+                                                        .font(.labelCaption)
+                                                        .shallow()
+                                        }
                                         .padding(.vertical, verticalPadding)
-                                        .padding(.horizontal, horizontalPadding)
-                                ZStack(alignment: .topTrailing) {
-                                        Color.clear
-                                        Text(verbatim: keyModel.primary.header ?? String.space)
+                                        .padding(.horizontal, horizontalPadding + 2)
+                                        Text(verbatim: keyModel.primary.text)
                                                 .textCase(textCase)
-                                                .font(.labelCaption)
-                                                .shallow()
+                                                .font(keyModel.primary.isTextSingular ? .letterCompact : .dualLettersCompact)
+                                                .padding(.bottom, keyTextBottomInset)
                                 }
-                                .padding(.vertical, verticalPadding)
-                                .padding(.horizontal, horizontalPadding + 2)
-                                ZStack(alignment: .bottomTrailing) {
-                                        Color.clear
-                                        Text(verbatim: keyModel.primary.footer ?? String.space)
-                                                .textCase(textCase)
-                                                .font(.labelCaption)
-                                                .shallow()
-                                }
-                                .padding(.vertical, verticalPadding)
-                                .padding(.horizontal, horizontalPadding + 2)
-                                Text(verbatim: keyModel.primary.text)
-                                        .textCase(textCase)
-                                        .font(keyModel.primary.isTextSingular ? .letterCompact : .dualLettersCompact)
-                                        .padding(.bottom, keyTextBottomInset)
                         }
+                        .frame(width: keyWidth, height: keyHeight)
                 }
-                .frame(width: keyWidth, height: keyHeight)
-                .contentShape(.rect)
-                .gesture(DragGesture(minimumDistance: 0)
-                        .updating($isTouching) { _, tapped, _ in
-                                if tapped.negative {
-                                        AudioFeedback.inputed()
-                                        context.triggerHapticFeedback()
-                                        tapped = true
-                                }
-                        }
+                .buttonStyle(PressButtonStyle($isTouching) {
+                        AudioFeedback.inputed()
+                        context.triggerHapticFeedback()
+                })
+                .simultaneousGesture(DragGesture(minimumDistance: 0)
                         .onChanged { state in
                                 if isLongPressing {
                                         let memberCount: Int = keyModel.members.count
@@ -199,14 +197,15 @@ struct EnhancedInputKey: View {
                                         let text: String = context.keyboardCase.isLowercased ? keyModel.primary.text : keyModel.primary.text.uppercased()
                                         context.operate(.process(text))
                                 }
-                         }
+                        }
                 )
-                .task {
+                .task(id: isTouching) {
+                        guard isTouching else { return }
                         while Task.isCancelled.negative {
                                 try? await Task.sleep(for: .milliseconds(100)) // 0.1s
                                 if isTouching {
                                         if isLongPressing.negative {
-                                                let shouldTriggerLongPress: Bool = buffer > 6 || (buffer > 3 && pulled == nil)
+                                                let shouldTriggerLongPress: Bool = (buffer >= 6) || (buffer >= 3 && pulled == nil)
                                                 if shouldTriggerLongPress {
                                                         isLongPressing = true
                                                 } else {
