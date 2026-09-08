@@ -65,7 +65,7 @@ struct NumericKeyboard: View {
                                 )
                         }
                         HStack(spacing: 0) {
-                                TransformKey(destination: .symbolic, widthUnitTimes: 1.3)
+                                TransformKey(destination: .symbolic, coefficient: 1.3)
                                 Spacer()
                                 EnhancedInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("."), members: [KeyElement("."), KeyElement("…")]))
                                 SymbolInputKey(",")
@@ -92,14 +92,14 @@ struct NumericKeyboard: View {
                         case (true, true):
                                 HStack(spacing: 0) {
                                         GlobeKey()
-                                        TransformKey(destination: .primary, widthUnitTimes: 2)
+                                        TransformKey(destination: .primary, coefficient: 2)
                                         SpaceKey()
                                         SharedBottomKeys.altPeriod
                                         ReturnKey()
                                 }
                         case (true, false):
                                 HStack(spacing: 0) {
-                                        TransformKey(destination: .primary, widthUnitTimes: 2)
+                                        TransformKey(destination: .primary, coefficient: 2)
                                         SharedBottomKeys.comma
                                         SpaceKey()
                                         SharedBottomKeys.period
@@ -107,7 +107,7 @@ struct NumericKeyboard: View {
                                 }
                         case (false, true):
                                 HStack(spacing: 0) {
-                                        TransformKey(destination: .primary, widthUnitTimes: 2)
+                                        TransformKey(destination: .primary, coefficient: 2)
                                         GlobeKey()
                                         SpaceKey()
                                         SharedBottomKeys.altPeriod
@@ -115,7 +115,7 @@ struct NumericKeyboard: View {
                                 }
                         case (false, false):
                                 HStack(spacing: 0) {
-                                        TransformKey(destination: .primary, widthUnitTimes: 2)
+                                        TransformKey(destination: .primary, coefficient: 2)
                                         SharedBottomKeys.comma
                                         SpaceKey()
                                         SharedBottomKeys.period

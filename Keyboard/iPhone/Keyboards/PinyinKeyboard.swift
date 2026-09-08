@@ -49,7 +49,7 @@ struct PinyinKeyboard: View {
                                 BackspaceKey()
                         }
                         HStack(spacing: 0) {
-                                TransformKey(destination: context.preferredNumericForm, widthUnitTimes: 2)
+                                TransformKey(destination: context.preferredNumericForm, coefficient: 2)
                                 LeftKey()
                                 SpaceKey()
                                 RightKey()

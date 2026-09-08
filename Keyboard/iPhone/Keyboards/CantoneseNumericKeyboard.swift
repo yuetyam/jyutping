@@ -110,7 +110,7 @@ struct CantoneseNumericKeyboard: View {
                                 )
                         }
                         HStack(spacing: 0) {
-                                TransformKey(destination: .symbolic, widthUnitTimes: 1.3)
+                                TransformKey(destination: .symbolic, coefficient: 1.3)
                                 Spacer()
                                 EnhancedInputKey(
                                         keyLocale: .leading,
@@ -180,14 +180,14 @@ struct CantoneseNumericKeyboard: View {
                         case (true, true):
                                 HStack(spacing: 0) {
                                         GlobeKey()
-                                        TransformKey(destination: .primary, widthUnitTimes: 2)
+                                        TransformKey(destination: .primary, coefficient: 2)
                                         SpaceKey()
                                         SharedBottomKeys.altCantoneseComma
                                         ReturnKey()
                                 }
                         case (true, false):
                                 HStack(spacing: 0) {
-                                        TransformKey(destination: .primary, widthUnitTimes: 2)
+                                        TransformKey(destination: .primary, coefficient: 2)
                                         SharedBottomKeys.cantoneseComma
                                         SpaceKey()
                                         SharedBottomKeys.cantonesePeriod
@@ -195,7 +195,7 @@ struct CantoneseNumericKeyboard: View {
                                 }
                         case (false, true):
                                 HStack(spacing: 0) {
-                                        TransformKey(destination: .primary, widthUnitTimes: 2)
+                                        TransformKey(destination: .primary, coefficient: 2)
                                         GlobeKey()
                                         SpaceKey()
                                         SharedBottomKeys.altCantoneseComma
@@ -203,7 +203,7 @@ struct CantoneseNumericKeyboard: View {
                                 }
                         case (false, false):
                                 HStack(spacing: 0) {
-                                        TransformKey(destination: .primary, widthUnitTimes: 2)
+                                        TransformKey(destination: .primary, coefficient: 2)
                                         SharedBottomKeys.cantoneseComma
                                         SpaceKey()
                                         SharedBottomKeys.cantonesePeriod
