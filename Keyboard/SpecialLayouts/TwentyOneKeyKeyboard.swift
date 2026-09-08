@@ -38,7 +38,7 @@ struct TwentyOneKeyKeyboard: View {
                                         ThirdEnhancedLetterRow()
                                 }
                                 HiddenKey(key: .letterM)
-                                BackspaceKey(widthUnitTimes: 1.6)
+                                BackspaceKey(coefficient: 1.6)
                         }
                         switch (context.keyboardInterface.isPadFloating, context.needsInputModeSwitchKey) {
                         case (true, true):

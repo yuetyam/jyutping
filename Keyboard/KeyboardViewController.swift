@@ -1278,7 +1278,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 }()
                 */
                 keyboardWidth = view.frame.width
-                widthUnit = keyboardWidth / keyboardInterface.widthUnitTimes
+                widthUnit = keyboardWidth / keyboardInterface.coefficient
                 nineKeyWidthUnit = keyboardWidth / 5.0
 
                 let baseHeight = keyboardInterface.keyHeightUnit(of: screenSize)

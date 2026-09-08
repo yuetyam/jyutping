@@ -133,31 +133,20 @@ extension KeyboardInterface {
 
 extension KeyboardInterface {
 
-        /// Key count per row
-        var widthUnitTimes: CGFloat {
+        /// Key count per row; multiplier to the `widthUnit`
+        var coefficient: CGFloat {
                 switch self {
-                case .phonePortrait:
-                        return 10
-                case .phoneLandscape:
-                        return 10
-                case .phoneOnPadPortrait:
-                        return 10
-                case .phoneOnPadLandscape:
-                        return 10
-                case .padFloating:
-                        return 10
-                case .padPortraitSmall:
-                        return 11
-                case .padPortraitMedium:
-                        return 12
-                case .padPortraitLarge:
-                        return 14.5
-                case .padLandscapeSmall:
-                        return 11
-                case .padLandscapeMedium:
-                        return 12
-                case .padLandscapeLarge:
-                        return 14.5
+                case .phonePortrait      : 10
+                case .phoneLandscape     : 10
+                case .phoneOnPadPortrait : 10
+                case .phoneOnPadLandscape: 10
+                case .padFloating        : 10
+                case .padPortraitSmall   : 11
+                case .padPortraitMedium  : 12
+                case .padPortraitLarge   : 14.5
+                case .padLandscapeSmall  : 11
+                case .padLandscapeMedium : 12
+                case .padLandscapeLarge  : 14.5
                 }
         }
 }

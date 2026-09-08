@@ -3,10 +3,12 @@ import CommonExtensions
 
 struct BackspaceKey: View {
 
-        init(widthUnitTimes: CGFloat = 1.3) {
-                self.widthUnitTimes = widthUnitTimes
+        /// Create a backspace key
+        /// - Parameter coefficient: Multiplier to the `widthUnit`
+        init(coefficient: CGFloat = 1.3) {
+                self.coefficient = coefficient
         }
-        private let widthUnitTimes: CGFloat
+        private let coefficient: CGFloat
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
@@ -15,7 +17,7 @@ struct BackspaceKey: View {
         @State private var buffer: Int = 0
 
         var body: some View {
-                let keyWidth: CGFloat = context.widthUnit * widthUnitTimes
+                let keyWidth: CGFloat = context.widthUnit * coefficient
                 let keyHeight: CGFloat = context.heightUnit
                 let isPhoneLandscape: Bool = context.keyboardInterface.isPhoneLandscape
                 let verticalPadding: CGFloat = isPhoneLandscape ? 3 : 6

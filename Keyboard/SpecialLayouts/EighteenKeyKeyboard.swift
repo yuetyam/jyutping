@@ -41,7 +41,7 @@ struct EighteenKeyKeyboard: View {
                                 case .numbersAndSymbols:
                                         T18T19ThirdEnhancedLetterRow()
                                 }
-                                BackspaceKey(widthUnitTimes: 1.42)
+                                BackspaceKey(coefficient: 1.42)
                         }
                         switch (context.keyboardInterface.isPadFloating, context.needsInputModeSwitchKey) {
                         case (true, true):

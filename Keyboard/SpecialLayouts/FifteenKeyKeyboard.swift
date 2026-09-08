@@ -37,7 +37,7 @@ struct FifteenKeyKeyboard: View {
                                         ThirdEnhancedLetterRow()
                                 }
                                 Spacer().frame(minWidth: 0, maxWidth: .infinity)
-                                BackspaceKey(widthUnitTimes: 1.66)
+                                BackspaceKey(coefficient: 1.66)
                         }
                         switch (context.keyboardInterface.isPadFloating, context.needsInputModeSwitchKey) {
                         case (true, true):
