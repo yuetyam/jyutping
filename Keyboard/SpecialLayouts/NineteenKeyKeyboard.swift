@@ -31,7 +31,7 @@ struct NineteenKeyKeyboard: View {
                                 SecondEnhancedLetterRow()
                         }
                         HStack(spacing: 0) {
-                                ShiftKey(widthUnitTimes: 1.42)
+                                ShiftKey(coefficient: 1.42)
                                 switch Options.inputKeyStyle {
                                 case .clear, .numbers:
                                         T18T19ThirdLetterRow()

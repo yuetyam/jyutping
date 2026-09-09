@@ -3,11 +3,13 @@ import CommonExtensions
 import CoreIME
 
 struct ShiftKey: View {
-
-        init(widthUnitTimes: CGFloat = 1.3) {
-                self.widthUnitTimes = widthUnitTimes
+        
+        /// Create a Shift key
+        /// - Parameter coefficient: Multiplier to the `widthUnit`
+        init(coefficient: CGFloat = 1.3) {
+                self.coefficient = coefficient
         }
-        private let widthUnitTimes: CGFloat
+        private let coefficient: CGFloat
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
@@ -17,26 +19,21 @@ struct ShiftKey: View {
         @State private var isInTheMediumOfDoubleTapping: Bool = false
         @State private var doubleTappingBuffer: Int = 0
 
+        @State private var longPressBuffer: Int = 0
         var body: some View {
-                let keyWidth: CGFloat = context.widthUnit * widthUnitTimes
+                let keyWidth: CGFloat = context.widthUnit * coefficient
                 let keyHeight: CGFloat = context.heightUnit
-                let isPhoneLandscape: Bool = context.keyboardInterface.isPhoneLandscape
-                let verticalPadding: CGFloat = isPhoneLandscape ? 3 : 6
-                let horizontalPadding: CGFloat = isPhoneLandscape ? 6 : 3
+                let keyboardInterface = context.keyboardInterface
                 ZStack {
                         Color.interactiveClear
                         RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
                                 .fill(isTouching ? colorScheme.activeActionKeyColor : colorScheme.actionKeyColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                .padding(.vertical, verticalPadding)
-                                .padding(.horizontal, horizontalPadding)
+                                .padding(keyboardInterface.keyShapeInsets)
                         switch context.keyboardCase {
-                        case .lowercased:
-                                Image.shiftLowercased
-                        case .uppercased:
-                                Image.shiftUppercased
-                        case .capsLocked:
-                                Image.shiftCapsLocked
+                        case .lowercased: Image.shiftLowercased
+                        case .uppercased: Image.shiftUppercased
+                        case .capsLocked: Image.shiftCapsLocked
                         }
                 }
                 .font(.symbol)

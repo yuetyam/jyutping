@@ -29,7 +29,7 @@ struct TwentyOneKeyKeyboard: View {
                                 SecondEnhancedLetterRow()
                         }
                         HStack(spacing: 0) {
-                                ShiftKey(widthUnitTimes: 1.6)
+                                ShiftKey(coefficient: 1.6)
                                 HiddenKey(key: .letterZ)
                                 switch Options.inputKeyStyle {
                                 case .clear, .numbers:

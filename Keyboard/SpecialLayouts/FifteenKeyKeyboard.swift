@@ -28,7 +28,7 @@ struct FifteenKeyKeyboard: View {
                                 SecondEnhancedLetterRow()
                         }
                         HStack(spacing: 0) {
-                                ShiftKey(widthUnitTimes: 1.66)
+                                ShiftKey(coefficient: 1.66)
                                 Spacer().frame(minWidth: 0, maxWidth: .infinity)
                                 switch Options.inputKeyStyle {
                                 case .clear, .numbers:
