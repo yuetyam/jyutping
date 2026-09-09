@@ -12,7 +12,7 @@ struct EmojiBoard: View {
 
         @EnvironmentObject private var context: KeyboardViewController
 
-        @GestureState private var isBackspacing: Bool = false
+        @State private var isBackspacing: Bool = false
         @State private var buffer: Int = 0
 
         @State private var currentCategory: Emoji.Category = .frequent
@@ -159,29 +159,25 @@ struct EmojiBoard: View {
                                         }
                                         .foregroundStyle((currentCategory == .flags) ? Color.primary : Color.secondary)
                                 }
-                                ZStack {
-                                        Color.interactiveClear
-                                        Image.backspace
-                                                .resizable()
-                                                .scaledToFit()
-                                                .frame(width: 24, height: 24)
+                                Button(action: {}) {
+                                        ZStack {
+                                                Color.interactiveClear
+                                                Image.backspace
+                                                        .resizable()
+                                                        .scaledToFit()
+                                                        .frame(width: 24, height: 24)
+                                        }
+                                        .frame(maxWidth: .infinity, maxHeight: .infinity)
                                 }
+                                .buttonStyle(PressButtonStyle($isBackspacing) {
+                                        buffer = 0
+                                        AudioFeedback.deleted()
+                                        context.triggerHapticFeedback()
+                                        context.operate(.backspace)
+                                })
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                                .contentShape(.rect)
-                                .gesture(DragGesture(minimumDistance: 0)
-                                        .updating($isBackspacing) { _, tapped, _ in
-                                                if tapped.negative {
-                                                        AudioFeedback.deleted()
-                                                        context.triggerHapticFeedback()
-                                                        context.operate(.backspace)
-                                                        tapped = true
-                                                }
-                                        }
-                                        .onEnded { _ in
-                                                buffer = 0
-                                        }
-                                )
-                                .task {
+                                .task(id: isBackspacing) {
+                                        guard isBackspacing else { return }
                                         while Task.isCancelled.negative {
                                                 try? await Task.sleep(for: .milliseconds(100)) // 0.1s
                                                 if isBackspacing {

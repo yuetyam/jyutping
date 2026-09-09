@@ -14,10 +14,10 @@ struct HiddenKey: View {
                                 AudioFeedback.deleted()
                                 context.triggerHapticFeedback()
                                 context.operate(.backspace)
-                        } else if let event = key.inputEvent {
+                        } else if let virtualKey = key.virtualKey {
                                 AudioFeedback.inputed()
                                 context.triggerHapticFeedback()
-                                context.handle(event)
+                                context.handle(virtualKey)
                         }
                 } label: {
                         Color.interactiveClear
@@ -36,7 +36,7 @@ enum HiddenEvent: Int {
         case letterM
         case backspace
 
-        var inputEvent: VirtualInputKey? {
+        var virtualKey: VirtualInputKey? {
                 switch self {
                 case .letterA: .letterA
                 case .letterL: .letterL

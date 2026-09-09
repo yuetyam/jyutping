@@ -184,32 +184,27 @@ private struct NumberPadBackspaceKey: View {
         let height: CGFloat
 
         @EnvironmentObject private var context: KeyboardViewController
-        @GestureState private var isTouching: Bool = false
+        @State private var isTouching: Bool = false
         @State private var buffer: Int = 0
 
         var body: some View {
-                ZStack {
-                        Color.interactiveClear
-                        Image.backspace
-                                .symbolVariant(isTouching ? .fill : .none)
-                                .font(.title2)
+                Button(action: {}) {
+                        ZStack {
+                                Color.interactiveClear
+                                Image.backspace
+                                        .symbolVariant(isTouching ? .fill : .none)
+                                        .font(.title2)
+                        }
+                        .frame(width: width, height: height)
                 }
-                .frame(width: width, height: height)
-                .contentShape(.rect)
-                .gesture(DragGesture(minimumDistance: 0)
-                        .updating($isTouching) { _, tapped, _ in
-                                if tapped.negative {
-                                        tapped = true
-                                        AudioFeedback.deleted()
-                                        context.triggerHapticFeedback()
-                                        context.operate(.backspace)
-                                }
-                        }
-                        .onEnded { _ in
-                                buffer = 0
-                        }
-                )
-                .task {
+                .buttonStyle(PressButtonStyle($isTouching) {
+                        buffer = 0
+                        AudioFeedback.deleted()
+                        context.triggerHapticFeedback()
+                        context.operate(.backspace)
+                })
+                .task(id: isTouching) {
+                        guard isTouching else { return }
                         while Task.isCancelled.negative {
                                 try? await Task.sleep(for: .milliseconds(100)) // 0.1s
                                 if isTouching {
