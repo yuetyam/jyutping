@@ -4,8 +4,16 @@ import CoreIME
 
 struct LargePadShiftKey: View {
 
-        let keyLocale: HorizontalEdge
-        let widthUnitTimes: CGFloat
+        /// Create a LargePadShiftKey
+        /// - Parameters:
+        ///   - side: Key location, left half screen (leading) or right half screen (trailing).
+        ///   - coefficient: Multiplier to the `widthUnit`
+        init(side: HorizontalEdge, coefficient: CGFloat = 1) {
+                self.side = side
+                self.coefficient = coefficient
+        }
+        private let side: HorizontalEdge
+        private let coefficient: CGFloat
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
@@ -30,7 +38,7 @@ struct LargePadShiftKey: View {
         @State private var doubleTappingBuffer: Int = 0
 
         var body: some View {
-                let keyWidth: CGFloat = context.widthUnit * widthUnitTimes
+                let keyWidth: CGFloat = context.widthUnit * coefficient
                 let keyHeight: CGFloat = context.heightUnit
                 let keyboardInterface = context.keyboardInterface
                 Button(action: {}) {
@@ -40,7 +48,7 @@ struct LargePadShiftKey: View {
                                         .fill(backColor)
                                         .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                         .padding(keyboardInterface.keyShapeInsets)
-                                ZStack(alignment: keyLocale.isLeading ? .topLeading : .topTrailing) {
+                                ZStack(alignment: side.isLeading ? .topLeading : .topTrailing) {
                                         Color.clear
                                         switch context.keyboardCase {
                                         case .lowercased: Image.shiftLowercased
@@ -49,7 +57,7 @@ struct LargePadShiftKey: View {
                                         }
                                 }
                                 .padding(keyboardInterface.keyShapeInsets.plused(7))
-                                ZStack(alignment: keyLocale.isLeading ? .bottomLeading : .bottomTrailing) {
+                                ZStack(alignment: side.isLeading ? .bottomLeading : .bottomTrailing) {
                                         Color.clear
                                         Text(verbatim: "shift")
                                 }

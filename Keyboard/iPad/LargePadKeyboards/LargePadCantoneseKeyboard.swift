@@ -410,7 +410,7 @@ struct LargePadCantoneseKeyboard: View {
                                 LargePadReturnKey(widthUnitTimes: 1.75)
                         }
                         HStack(spacing: 0) {
-                                LargePadShiftKey(keyLocale: .leading, widthUnitTimes: 2.25)
+                                LargePadShiftKey(side: .leading, coefficient: 2.25)
                                 Group {
                                         LargePadLetterInputKey(.letterZ)
                                         LargePadLetterInputKey(.letterX)
@@ -429,7 +429,7 @@ struct LargePadCantoneseKeyboard: View {
                                         LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "》", lower: "。", keyModel: KeyModel(primary: KeyElement("。"), members: [KeyElement("。"), KeyElement("》")]))
                                         LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "？", lower: "/", keyModel: KeyModel(primary: KeyElement("/"), members: [KeyElement("/"), KeyElement("？"), KeyElement("／", header: PresetConstant.fullWidth)]))
                                 }
-                                LargePadShiftKey(keyLocale: .trailing, widthUnitTimes: 2.25)
+                                LargePadShiftKey(side: .trailing, coefficient: 2.25)
                         }
                         HStack(spacing: 0) {
                                 if context.needsInputModeSwitchKey {

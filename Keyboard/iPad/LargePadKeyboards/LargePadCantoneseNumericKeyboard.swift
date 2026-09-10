@@ -474,7 +474,7 @@ struct LargePadCantoneseNumericKeyboard: View {
                                 LargePadReturnKey(widthUnitTimes: 1.75)
                         }
                         HStack(spacing: 0) {
-                                LargePadShiftKey(keyLocale: .leading, widthUnitTimes: 2.25).hidden()
+                                LargePadShiftKey(side: .leading, coefficient: 2.25).hidden()
                                 Group {
                                         LargePadExpansibleInputKey(
                                                 keyLocale: .leading,
