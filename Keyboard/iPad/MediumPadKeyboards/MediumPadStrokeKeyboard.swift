@@ -40,7 +40,7 @@ struct MediumPadStrokeKeyboard: View {
                                 MediumPadReturnKey(widthUnitTimes: 1.5)
                         }
                         HStack(spacing: 0) {
-                                MediumPadShiftKey(keyLocale: .leading, widthUnitTimes: 1.75)
+                                MediumPadShiftKey(side: .leading, coefficient: 1.75)
                                 Group {
                                         PadStrokeInputKey(.letterZ)
                                         PadStrokeInputKey(.letterX)
@@ -72,7 +72,7 @@ struct MediumPadStrokeKeyboard: View {
                                                 )
                                         )
                                 }
-                                MediumPadShiftKey(keyLocale: .trailing, widthUnitTimes: 1.25)
+                                MediumPadShiftKey(side: .trailing, coefficient: 1.25)
                         }
                         HStack(spacing: 0) {
                                 if context.needsInputModeSwitchKey {
