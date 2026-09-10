@@ -431,11 +431,11 @@ struct LargePadCangjieKeyboard: View {
                                 if context.needsInputModeSwitchKey {
                                         LargePadGlobeKey(widthUnitTimes: 2.125)
                                 } else {
-                                        LargePadTransformKey(destination: .numeric, keyLocale: .leading, widthUnitTimes: 2.125)
+                                        LargePadTransformKey(destination: .numeric, side: .leading, coefficient: 2.125)
                                 }
-                                LargePadTransformKey(destination: .numeric, keyLocale: .leading, widthUnitTimes: 2.125)
+                                LargePadTransformKey(destination: .numeric, side: .leading, coefficient: 2.125)
                                 LargePadSpaceKey()
-                                LargePadTransformKey(destination: .numeric, keyLocale: .trailing, widthUnitTimes: 2.125)
+                                LargePadTransformKey(destination: .numeric, side: .trailing, coefficient: 2.125)
                                 LargePadDismissKey(widthUnitTimes: 2.125)
                         }
                 }

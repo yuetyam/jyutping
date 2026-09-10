@@ -150,11 +150,11 @@ struct LargePadNumericKeyboard: View {
                                 if context.needsInputModeSwitchKey {
                                         LargePadGlobeKey(widthUnitTimes: 2.125)
                                 } else {
-                                        LargePadTransformKey(destination: .primary, keyLocale: .leading, widthUnitTimes: 2.125)
+                                        LargePadTransformKey(destination: .primary, side: .leading, coefficient: 2.125)
                                 }
-                                LargePadTransformKey(destination: .primary, keyLocale: .leading, widthUnitTimes: 2.125)
+                                LargePadTransformKey(destination: .primary, side: .leading, coefficient: 2.125)
                                 LargePadSpaceKey()
-                                LargePadTransformKey(destination: .primary, keyLocale: .trailing, widthUnitTimes: 2.125)
+                                LargePadTransformKey(destination: .primary, side: .trailing, coefficient: 2.125)
                                 LargePadDismissKey(widthUnitTimes: 2.125)
                         }
                 }
