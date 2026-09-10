@@ -82,7 +82,7 @@ struct MediumPadTripleStrokeKeyboard: View {
                                 if context.needsInputModeSwitchKey {
                                         MediumPadGlobeKey(widthUnitTimes: 1.5)
                                 } else {
-                                        MediumPadTransformKey(destination: .numeric, keyLocale: .leading, widthUnitTimes: 1.5)
+                                        MediumPadTransformKey(destination: .numeric, side: .leading, coefficient: 1.5)
                                 }
                                 MediumPadLeftKey(widthUnitTimes: 1.5)
                                 PadSpaceKey()

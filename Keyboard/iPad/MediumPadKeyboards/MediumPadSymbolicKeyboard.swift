@@ -39,7 +39,7 @@ struct MediumPadSymbolicKeyboard: View {
                                 MediumPadReturnKey(widthUnitTimes: 1.5)
                         }
                         HStack(spacing: 0) {
-                                MediumPadTransformKey(destination: .numeric, keyLocale: .leading, widthUnitTimes: 1.75)
+                                MediumPadTransformKey(destination: .numeric, side: .leading, coefficient: 1.75)
                                 Group {
                                         PadSymbolInputKey("§")
                                         PadSymbolInputKey("|")
@@ -51,17 +51,17 @@ struct MediumPadSymbolicKeyboard: View {
                                         PadSymbolInputKey("!")
                                         PadSymbolInputKey("?")
                                 }
-                                MediumPadTransformKey(destination: .numeric, keyLocale: .trailing, widthUnitTimes: 1.25)
+                                MediumPadTransformKey(destination: .numeric, side: .trailing, coefficient: 1.25)
                         }
                         HStack(spacing: 0) {
                                 if context.needsInputModeSwitchKey {
                                         MediumPadGlobeKey(widthUnitTimes: 1.5)
                                 } else {
-                                        MediumPadTransformKey(destination: .primary, keyLocale: .leading, widthUnitTimes: 1.5)
+                                        MediumPadTransformKey(destination: .primary, side: .leading, coefficient: 1.5)
                                 }
-                                MediumPadTransformKey(destination: .primary, keyLocale: .leading, widthUnitTimes: 1.5)
+                                MediumPadTransformKey(destination: .primary, side: .leading, coefficient: 1.5)
                                 PadSpaceKey()
-                                MediumPadTransformKey(destination: .primary, keyLocale: .trailing, widthUnitTimes: 1.5)
+                                MediumPadTransformKey(destination: .primary, side: .trailing, coefficient: 1.5)
                                 MediumPadDismissKey(widthUnitTimes: 1.5)
                         }
                 }

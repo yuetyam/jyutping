@@ -159,11 +159,11 @@ struct MediumPadABCKeyboard: View {
                                 if context.needsInputModeSwitchKey {
                                         MediumPadGlobeKey(widthUnitTimes: 1.5)
                                 } else {
-                                        MediumPadTransformKey(destination: .numeric, keyLocale: .leading, widthUnitTimes: 1.5)
+                                        MediumPadTransformKey(destination: .numeric, side: .leading, coefficient: 1.5)
                                 }
-                                MediumPadTransformKey(destination: .numeric, keyLocale: .leading, widthUnitTimes: 1.5)
+                                MediumPadTransformKey(destination: .numeric, side: .leading, coefficient: 1.5)
                                 PadSpaceKey()
-                                MediumPadTransformKey(destination: .numeric, keyLocale: .trailing, widthUnitTimes: 1.5)
+                                MediumPadTransformKey(destination: .numeric, side: .trailing, coefficient: 1.5)
                                 MediumPadDismissKey(widthUnitTimes: 1.5)
                         }
                 }

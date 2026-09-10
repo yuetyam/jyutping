@@ -39,7 +39,7 @@ struct MediumPadNumericKeyboard: View {
                                 MediumPadReturnKey(widthUnitTimes: 1.5)
                         }
                         HStack(spacing: 0) {
-                                MediumPadTransformKey(destination: .symbolic, keyLocale: .leading, widthUnitTimes: 1.75)
+                                MediumPadTransformKey(destination: .symbolic, side: .leading, coefficient: 1.75)
                                 Group {
                                         PadAdvancedInputKey(keyLocale: .leading, upper: "§", keyModel: KeyModel(primary: KeyElement("%"), members: [KeyElement("%"), KeyElement("§")]))
                                         PadAdvancedInputKey(keyLocale: .leading, upper: "|", keyModel: KeyModel(primary: KeyElement("-"), members: [KeyElement("-"), KeyElement("|")]))
@@ -51,17 +51,17 @@ struct MediumPadNumericKeyboard: View {
                                 }
                                 PadUpperLowerInputKey(keyLocale: .trailing, upper: "!", lower: ",", keyModel: KeyModel(primary: KeyElement(","), members: [KeyElement(","), KeyElement("!"), KeyElement("¡")]))
                                 PadUpperLowerInputKey(keyLocale: .trailing, upper: "?", lower: ".", keyModel: KeyModel(primary: KeyElement("."), members: [KeyElement("."), KeyElement("?"), KeyElement("¿")]))
-                                MediumPadTransformKey(destination: .symbolic, keyLocale: .trailing, widthUnitTimes: 1.25)
+                                MediumPadTransformKey(destination: .symbolic, side: .trailing, coefficient: 1.25)
                         }
                         HStack(spacing: 0) {
                                 if context.needsInputModeSwitchKey {
                                         MediumPadGlobeKey(widthUnitTimes: 1.5)
                                 } else {
-                                        MediumPadTransformKey(destination: .primary, keyLocale: .leading, widthUnitTimes: 1.5)
+                                        MediumPadTransformKey(destination: .primary, side: .leading, coefficient: 1.5)
                                 }
-                                MediumPadTransformKey(destination: .primary, keyLocale: .leading, widthUnitTimes: 1.5)
+                                MediumPadTransformKey(destination: .primary, side: .leading, coefficient: 1.5)
                                 PadSpaceKey()
-                                MediumPadTransformKey(destination: .primary, keyLocale: .trailing, widthUnitTimes: 1.5)
+                                MediumPadTransformKey(destination: .primary, side: .trailing, coefficient: 1.5)
                                 MediumPadDismissKey(widthUnitTimes: 1.5)
                         }
                 }
