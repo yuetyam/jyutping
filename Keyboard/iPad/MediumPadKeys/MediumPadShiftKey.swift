@@ -18,7 +18,13 @@ struct MediumPadShiftKey: View {
                 }
         }
 
-        @GestureState private var isTouching: Bool = false
+        /// From idle to the first touch
+        @State private var isInteracted: Bool = false
+
+        @State private var isTouching: Bool = false
+        @State private var isLongPressEngaged: Bool = false
+        @State private var longPressBuffer: Int = 0
+
         @State private var previousKeyboardCase: KeyboardCase = .lowercased
         @State private var isInTheMediumOfDoubleTapping: Bool = false
         @State private var doubleTappingBuffer: Int = 0
@@ -26,64 +32,69 @@ struct MediumPadShiftKey: View {
         var body: some View {
                 let keyWidth: CGFloat = context.widthUnit * widthUnitTimes
                 let keyHeight: CGFloat = context.heightUnit
-                let isLandscape: Bool = context.keyboardInterface.isPadLandscape
-                let verticalPadding: CGFloat = isLandscape ? 7 : 5
-                let horizontalPadding: CGFloat = isLandscape ? 7 : 5
-                ZStack {
-                        Color.interactiveClear
-                        RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius)
-                                .fill(backColor)
-                                .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                .padding(.vertical, verticalPadding)
-                                .padding(.horizontal, horizontalPadding)
-                        ZStack(alignment: keyLocale.isLeading ? .topLeading : .topTrailing) {
-                                Color.clear
-                                switch context.keyboardCase {
-                                case .lowercased:
-                                        Image.shiftLowercased
-                                case .uppercased:
-                                        Image.shiftUppercased
-                                case .capsLocked:
-                                        Image.shiftCapsLocked
+                let keyboardInterface = context.keyboardInterface
+                Button(action: {}) {
+                        ZStack {
+                                Color.interactiveClear
+                                RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius)
+                                        .fill(backColor)
+                                        .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
+                                        .padding(keyboardInterface.keyShapeInsets)
+                                ZStack(alignment: keyLocale.isLeading ? .topLeading : .topTrailing) {
+                                        Color.clear
+                                        switch context.keyboardCase {
+                                        case .lowercased: Image.shiftLowercased
+                                        case .uppercased: Image.shiftUppercased
+                                        case .capsLocked: Image.shiftCapsLocked
+                                        }
                                 }
+                                .padding(keyboardInterface.keyShapeInsets.plused(5))
+                                ZStack(alignment: keyLocale.isLeading ? .bottomLeading : .bottomTrailing) {
+                                        Color.clear
+                                        Text(verbatim: "shift").font(.footnote)
+                                }
+                                .padding(keyboardInterface.keyShapeInsets.plused(5))
                         }
-                        .padding(.vertical, verticalPadding + 5)
-                        .padding(.horizontal, horizontalPadding + 5)
-                        ZStack(alignment: keyLocale.isLeading ? .bottomLeading : .bottomTrailing) {
-                                Color.clear
-                                Text(verbatim: "shift").font(.footnote)
-                        }
-                        .padding(.vertical, verticalPadding + 5)
-                        .padding(.horizontal, horizontalPadding + 5)
+                        .frame(width: keyWidth, height: keyHeight)
                 }
-                .frame(width: keyWidth, height: keyHeight)
-                .contentShape(.rect)
-                .gesture(DragGesture(minimumDistance: 0)
-                        .updating($isTouching) { _, touched, _ in
-                                if touched.negative {
-                                        AudioFeedback.modified()
-                                        touched = true
-                                }
+                .buttonStyle(PressButtonStyle($isTouching) {
+                        longPressBuffer = 0
+                        doubleTappingBuffer = 0
+                        AudioFeedback.modified()
+                        context.triggerHapticFeedback()
+                        isLongPressEngaged = false
+                        if isInteracted.negative {
+                                isInteracted = true
                         }
-                        .onEnded { _ in
-                                let currentKeyboardCase: KeyboardCase = context.keyboardCase
-                                let didKeyboardCaseSwitchBack: Bool = (currentKeyboardCase == previousKeyboardCase)
-                                let shouldPerformDoubleTapping: Bool = isInTheMediumOfDoubleTapping && didKeyboardCaseSwitchBack.negative
-                                doubleTappingBuffer = 0
-                                previousKeyboardCase = currentKeyboardCase
-                                if shouldPerformDoubleTapping {
-                                        isInTheMediumOfDoubleTapping = false
-                                        context.operate(.doubleShift)
-                                } else {
-                                        isInTheMediumOfDoubleTapping = true
-                                        context.operate(.shift)
-                                }
+                        let currentKeyboardCase = context.keyboardCase
+                        let didKeyboardCaseSwitchBack: Bool = (currentKeyboardCase == previousKeyboardCase)
+                        let shouldPerformDoubleTapping: Bool = isInTheMediumOfDoubleTapping && didKeyboardCaseSwitchBack.negative
+                        previousKeyboardCase = currentKeyboardCase
+                        if shouldPerformDoubleTapping {
+                                isInTheMediumOfDoubleTapping = false
+                                context.operate(.doubleShift)
+                        } else {
+                                isInTheMediumOfDoubleTapping = true
+                                context.operate(.shift)
                         }
-                )
-                .task {
+                })
+                .task(id: isInteracted) {
+                        guard isInteracted else { return }
                         while Task.isCancelled.negative {
                                 try? await Task.sleep(for: .milliseconds(100)) // 0.1s
-                                if isInTheMediumOfDoubleTapping {
+                                if isTouching {
+                                        if longPressBuffer > 3 {
+                                                if isLongPressEngaged.negative {
+                                                        isLongPressEngaged = true
+                                                        isInTheMediumOfDoubleTapping = false
+                                                        AudioFeedback.modified()
+                                                        context.triggerHapticFeedback()
+                                                        context.operate(.doubleShift)
+                                                }
+                                        } else {
+                                                longPressBuffer += 1
+                                        }
+                                } else if isInTheMediumOfDoubleTapping {
                                         if doubleTappingBuffer >= 3 {
                                                 doubleTappingBuffer = 0
                                                 isInTheMediumOfDoubleTapping = false
