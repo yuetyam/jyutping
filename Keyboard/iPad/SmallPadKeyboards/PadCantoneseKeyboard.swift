@@ -43,7 +43,7 @@ struct PadCantoneseKeyboard: View {
                                 PadReturnKey(widthUnitTimes: 1.5)
                         }
                         HStack(spacing: 0) {
-                                PadShiftKey(widthUnitTimes: 1)
+                                PadShiftKey()
                                 Group {
                                         PadPullableInputKey(event: .letterZ, upper: "%", lower: "z")
                                         PadPullableInputKey(event: .letterX, upper: "-", lower: "x")
@@ -75,7 +75,7 @@ struct PadCantoneseKeyboard: View {
                                                 )
                                         )
                                 }
-                                PadShiftKey(widthUnitTimes: 1)
+                                PadShiftKey()
                         }
                         HStack(spacing: 0) {
                                 if context.needsInputModeSwitchKey {

@@ -44,7 +44,7 @@ struct PadTripleStrokeKeyboard: View {
                                 PadReturnKey(widthUnitTimes: 1.5)
                         }
                         HStack(spacing: 0) {
-                                PadShiftKey(widthUnitTimes: 1)
+                                PadShiftKey()
                                 Group {
                                         PadPullableInputKey(event: .letterZ, upper: "%", lower: "z")
                                         PadAdvancedInputKey(keyLocale: .leading, upper: "-", keyModel: KeyModel(primary: KeyElement("gw", footer: "kw"), members: [KeyElement("gw"), KeyElement("x"), KeyElement("kw")]))
@@ -76,7 +76,7 @@ struct PadTripleStrokeKeyboard: View {
                                                 )
                                         )
                                 }
-                                PadShiftKey(widthUnitTimes: 1)
+                                PadShiftKey()
                         }
                         HStack(spacing: 0) {
                                 if context.needsInputModeSwitchKey {

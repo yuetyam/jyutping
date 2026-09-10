@@ -4,7 +4,12 @@ import CoreIME
 
 struct PadShiftKey: View {
 
-        let widthUnitTimes: CGFloat
+        /// Create a PadShiftKey
+        /// - Parameter coefficient: Multiplier to the `widthUnit`
+        init(coefficient: CGFloat = 1) {
+                self.coefficient = coefficient
+        }
+        private let coefficient: CGFloat
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
@@ -29,7 +34,7 @@ struct PadShiftKey: View {
         @State private var doubleTappingBuffer: Int = 0
 
         var body: some View {
-                let keyWidth: CGFloat = context.widthUnit * widthUnitTimes
+                let keyWidth: CGFloat = context.widthUnit * coefficient
                 let keyHeight: CGFloat = context.heightUnit
                 let keyboardInterface = context.keyboardInterface
                 Button(action: {}) {

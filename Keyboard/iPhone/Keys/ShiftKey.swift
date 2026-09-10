@@ -3,7 +3,7 @@ import CommonExtensions
 import CoreIME
 
 struct ShiftKey: View {
-        
+
         /// Create a Shift key
         /// - Parameter coefficient: Multiplier to the `widthUnit`
         init(coefficient: CGFloat = 1.3) {

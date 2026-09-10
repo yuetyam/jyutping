@@ -39,7 +39,7 @@ struct PadStrokeKeyboard: View {
                                 PadReturnKey(widthUnitTimes: 1.5)
                         }
                         HStack(spacing: 0) {
-                                PadShiftKey(widthUnitTimes: 1).hidden()
+                                PadShiftKey().hidden()
                                 Group {
                                         PadStrokeInputKey(.letterZ)
                                         PadStrokeInputKey(.letterX)
@@ -51,7 +51,7 @@ struct PadStrokeKeyboard: View {
                                 }
                                 PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("，"), members: [KeyElement("，"), KeyElement("！")])).hidden()
                                 PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("。"), members: [KeyElement("。"), KeyElement("？")])).hidden()
-                                PadShiftKey(widthUnitTimes: 1).hidden()
+                                PadShiftKey().hidden()
                         }
                         HStack(spacing: 0) {
                                 if context.needsInputModeSwitchKey {

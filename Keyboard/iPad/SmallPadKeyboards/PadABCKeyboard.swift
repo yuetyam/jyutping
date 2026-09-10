@@ -119,7 +119,7 @@ struct PadABCKeyboard: View {
                                 PadReturnKey(widthUnitTimes: 1.5)
                         }
                         HStack(spacing: 0) {
-                                PadShiftKey(widthUnitTimes: 1)
+                                PadShiftKey()
                                 Group {
                                         PadPullableInputKey(event: .letterZ, upper: "%", lower: "z")
                                         PadPullableInputKey(event: .letterX, upper: "-", lower: "x")
@@ -152,7 +152,7 @@ struct PadABCKeyboard: View {
                                         PadUpperLowerInputKey(keyLocale: .trailing, upper: "!", lower: ",", keyModel: KeyModel(primary: KeyElement(","), members: [KeyElement(","), KeyElement("!"), KeyElement("'"), KeyElement("¡")]))
                                         PadUpperLowerInputKey(keyLocale: .trailing, upper: "?", lower: ".", keyModel: KeyModel(primary: KeyElement("."), members: [KeyElement("."), KeyElement("?"), KeyElement("\""), KeyElement("…"), KeyElement("¿")]))
                                 }
-                                PadShiftKey(widthUnitTimes: 1)
+                                PadShiftKey()
                         }
                         HStack(spacing: 0) {
                                 if context.needsInputModeSwitchKey {
