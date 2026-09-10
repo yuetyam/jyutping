@@ -49,7 +49,7 @@ struct PadCantoneseSymbolicKeyboard: View {
                                 PadReturnKey(widthUnitTimes: 1.5)
                         }
                         HStack(spacing: 0) {
-                                PadTransformKey(destination: .numeric, widthUnitTimes: 1)
+                                PadTransformKey(destination: .numeric, coefficient: 1)
                                 Group {
                                         PadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("§"), members: [KeyElement("§"), KeyElement("&")]))
                                         PadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("\u{2014}"), members: [KeyElement("\u{2014}", footer: "2014"), KeyElement("-")]))
@@ -73,17 +73,17 @@ struct PadCantoneseSymbolicKeyboard: View {
                                         PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("！"), members: [KeyElement("！"), KeyElement("!", header: PresetConstant.halfWidth)]))
                                         PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("？"), members: [KeyElement("？"), KeyElement("?", header: PresetConstant.halfWidth)]))
                                 }
-                                PadTransformKey(destination: .numeric, widthUnitTimes: 1)
+                                PadTransformKey(destination: .numeric, coefficient: 1)
                         }
                         HStack(spacing: 0) {
                                 if context.needsInputModeSwitchKey {
                                         PadGlobeKey(widthUnitTimes: 1.5)
                                 } else {
-                                        PadTransformKey(destination: .primary, widthUnitTimes: 1.5)
+                                        PadTransformKey(destination: .primary, coefficient: 1.5)
                                 }
-                                PadTransformKey(destination: .primary, widthUnitTimes: 1.5)
+                                PadTransformKey(destination: .primary, coefficient: 1.5)
                                 PadSpaceKey()
-                                PadTransformKey(destination: .primary, widthUnitTimes: 1.5)
+                                PadTransformKey(destination: .primary, coefficient: 1.5)
                                 PadDismissKey(widthUnitTimes: 1.5)
                         }
                 }

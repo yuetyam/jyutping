@@ -158,11 +158,11 @@ struct PadABCKeyboard: View {
                                 if context.needsInputModeSwitchKey {
                                         PadGlobeKey(widthUnitTimes: 1.5)
                                 } else {
-                                        PadTransformKey(destination: .numeric, widthUnitTimes: 1.5)
+                                        PadTransformKey(destination: .numeric, coefficient: 1.5)
                                 }
-                                PadTransformKey(destination: .numeric, widthUnitTimes: 1.5)
+                                PadTransformKey(destination: .numeric, coefficient: 1.5)
                                 PadSpaceKey()
-                                PadTransformKey(destination: .numeric, widthUnitTimes: 1.5)
+                                PadTransformKey(destination: .numeric, coefficient: 1.5)
                                 PadDismissKey(widthUnitTimes: 1.5)
                         }
                 }

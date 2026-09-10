@@ -82,7 +82,7 @@ struct PadTripleStrokeKeyboard: View {
                                 if context.needsInputModeSwitchKey {
                                         PadGlobeKey(widthUnitTimes: 1.5)
                                 } else {
-                                        PadTransformKey(destination: .numeric, widthUnitTimes: 1.5)
+                                        PadTransformKey(destination: .numeric, coefficient: 1.5)
                                 }
                                 PadLeftKey(widthUnitTimes: 1.5)
                                 PadSpaceKey()
