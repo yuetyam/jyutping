@@ -6,7 +6,10 @@ struct EditingPanelSpaceKey: View {
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
 
-        @GestureState private var isTouching: Bool = false
+        /// From idle to the very first touch
+        @State private var isInteracted: Bool = false
+
+        @State private var isTouching: Bool = false
         @State private var isLongPressEngaged: Bool = false
         @State private var longPressBuffer: Int = 0
         @State private var previousDraggingDistance: CGFloat = 0
@@ -16,34 +19,39 @@ struct EditingPanelSpaceKey: View {
 
         var body: some View {
                 let inset = context.keyboardInterface.editingKeyInset
-                ZStack {
-                        Color.interactiveClear
-                        if #available(iOSApplicationExtension 26.0, *) {
-                                Color.clear
-                                        .glassEffect(isTouching ? .regular : .clear, in: .rect(cornerRadius: PresetConstant.ultraKeyCornerRadius))
-                                        .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
-                                        .padding(isTouching ? (inset - 2) : inset)
-                        } else {
-                                RoundedRectangle(cornerRadius: PresetConstant.ultraKeyCornerRadius)
-                                        .fill(isTouching ? colorScheme.activeActionKeyColor : colorScheme.actionKeyColor)
-                                        .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                        .padding(isTouching ? (inset - 2) : inset)
-                        }
-                        if isLongPressEngaged {
-                                Text(PresetConstant.spaceKeyLongPressHint)
-                        } else {
-                                Text("EditingPanel.Space").font(.staticBody)
-                        }
-                }
-                .contentShape(.rect)
-                .gesture(DragGesture(minimumDistance: 0)
-                        .updating($isTouching) { _, isTouchBegan, _ in
-                                if isTouchBegan.negative {
-                                        isTouchBegan = true
-                                        AudioFeedback.modified()
-                                        context.triggerHapticFeedback()
+                Button(action: {}) {
+                        ZStack {
+                                Color.interactiveClear
+                                if #available(iOSApplicationExtension 26.0, *) {
+                                        Color.clear
+                                                .glassEffect(isTouching ? .regular : .clear, in: .rect(cornerRadius: PresetConstant.ultraKeyCornerRadius))
+                                                .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
+                                                .padding(isTouching ? (inset - 2) : inset)
+                                } else {
+                                        RoundedRectangle(cornerRadius: PresetConstant.ultraKeyCornerRadius)
+                                                .fill(isTouching ? colorScheme.activeActionKeyColor : colorScheme.actionKeyColor)
+                                                .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
+                                                .padding(isTouching ? (inset - 2) : inset)
+                                }
+                                if isLongPressEngaged {
+                                        Text(PresetConstant.spaceKeyLongPressHint)
+                                } else {
+                                        Text("EditingPanel.Space").font(.staticBody)
                                 }
                         }
+                }
+                .buttonStyle(PressButtonStyle($isTouching) {
+                        longPressBuffer = 0
+                        doubleTappingBuffer = 0
+                        previousDraggingDistance = 0
+                        AudioFeedback.modified()
+                        context.triggerHapticFeedback()
+                        isLongPressEngaged = false
+                        if isInteracted.negative {
+                                isInteracted = true
+                        }
+                })
+                .simultaneousGesture(DragGesture(minimumDistance: 0)
                         .onChanged { value in
                                 guard isTouching else { return }
                                 guard isLongPressEngaged else { return }
@@ -71,7 +79,8 @@ struct EditingPanelSpaceKey: View {
                                 }
                         }
                 )
-                .task {
+                .task(id: isInteracted) {
+                        guard isInteracted else { return }
                         while Task.isCancelled.negative {
                                 try? await Task.sleep(for: .milliseconds(100)) // 0.1s
                                 if isTouching {

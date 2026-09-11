@@ -6,7 +6,10 @@ struct LargePadSpaceKey: View {
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
 
-        @GestureState private var isTouching: Bool = false
+        /// From idle to the very first touch
+        @State private var isInteracted: Bool = false
+
+        @State private var isTouching: Bool = false
         @State private var isLongPressEngaged: Bool = false
         @State private var longPressBuffer: Int = 0
         @State private var previousDraggingDistance: CGFloat = 0
@@ -15,29 +18,29 @@ struct LargePadSpaceKey: View {
         @State private var doubleTappingBuffer: Int = 0
 
         var body: some View {
-                // let keyWidth: CGFloat = context.widthUnit * widthUnitTimes
-                let keyHeight: CGFloat = context.heightUnit
-                let isLandscape: Bool = context.keyboardInterface.isPadLandscape
-                let verticalPadding: CGFloat = isLandscape ? 5 : 4
-                let horizontalPadding: CGFloat = isLandscape ? 5 : 4
-                ZStack {
-                        Color.interactiveClear
-                        RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius)
-                                .fill(isTouching ? colorScheme.activeInputKeyColor : colorScheme.inputKeyColor)
-                                .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                .padding(.vertical, verticalPadding)
-                                .padding(.horizontal, horizontalPadding)
-                        Text(isLongPressEngaged ? PresetConstant.spaceKeyLongPressHint : context.spaceKeyForm.attributedText)
-                }
-                .frame(height: keyHeight)
-                .frame(maxWidth: .infinity)
-                .contentShape(.rect)
-                .gesture(DragGesture(minimumDistance: 0)
-                        .updating($isTouching) { _, tapped, _ in
-                                guard tapped.negative else { return }
-                                AudioFeedback.modified()
-                                tapped = true
+                Button(action: {}) {
+                        ZStack {
+                                Color.interactiveClear
+                                RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius)
+                                        .fill(isTouching ? colorScheme.activeInputKeyColor : colorScheme.inputKeyColor)
+                                        .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
+                                        .padding(context.keyboardInterface.keyShapeInsets)
+                                Text(isLongPressEngaged ? PresetConstant.spaceKeyLongPressHint : context.spaceKeyForm.attributedText)
                         }
+                        .frame(height: context.heightUnit)
+                        .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(PressButtonStyle($isTouching) {
+                        longPressBuffer = 0
+                        doubleTappingBuffer = 0
+                        previousDraggingDistance = 0
+                        AudioFeedback.modified()
+                        isLongPressEngaged = false
+                        if isInteracted.negative {
+                                isInteracted = true
+                        }
+                })
+                .simultaneousGesture(DragGesture(minimumDistance: 0)
                         .onChanged { value in
                                 guard isTouching else { return }
                                 guard isLongPressEngaged else { return }
@@ -69,7 +72,8 @@ struct LargePadSpaceKey: View {
                                 }
                         }
                 )
-                .task {
+                .task(id: isInteracted) {
+                        guard isInteracted else { return }
                         while Task.isCancelled.negative {
                                 try? await Task.sleep(for: .milliseconds(100)) // 0.1s
                                 if isTouching {

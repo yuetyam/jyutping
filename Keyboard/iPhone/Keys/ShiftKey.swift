@@ -14,7 +14,7 @@ struct ShiftKey: View {
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
 
-        /// From idle to the first touch
+        /// From idle to the very first touch
         @State private var isInteracted: Bool = false
 
         @State private var isTouching: Bool = false
