@@ -17,7 +17,7 @@ struct PadPullableInputKey: View {
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
 
-        @GestureState private var isTouching: Bool = false
+        @State private var isTouching: Bool = false
         @State private var buffer: Int = 0
         @State private var isPullingDown: Bool = false
 
@@ -29,46 +29,44 @@ struct PadPullableInputKey: View {
                 let horizontalPadding: CGFloat = isLandscape ? 7 : 5
                 let shouldShowLowercaseKeys: Bool = Options.showLowercaseKeys && context.keyboardCase.isLowercased
                 let textCase: Text.Case = shouldShowLowercaseKeys ? .lowercase : .uppercase
-                ZStack {
-                        Color.interactiveClear
-                        RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius)
-                                .fill(isTouching ? colorScheme.activeInputKeyColor : colorScheme.inputKeyColor)
-                                .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                .padding(.vertical, verticalPadding)
-                                .padding(.horizontal, horizontalPadding)
-                        if isPullingDown {
-                                Text(verbatim: upper)
-                                        .textCase(textCase)
-                                        .font(.title2)
-                        } else {
-                                ZStack(alignment: .top) {
-                                        Color.clear
+                Button(action: {}) {
+                        ZStack {
+                                Color.interactiveClear
+                                RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius)
+                                        .fill(isTouching ? colorScheme.activeInputKeyColor : colorScheme.inputKeyColor)
+                                        .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
+                                        .padding(.vertical, verticalPadding)
+                                        .padding(.horizontal, horizontalPadding)
+                                if isPullingDown {
                                         Text(verbatim: upper)
                                                 .textCase(textCase)
-                                                .font(.footnote)
-                                                .opacity(0.3)
-                                }
-                                .padding(.vertical, verticalPadding + 5)
-                                .padding(.horizontal, horizontalPadding + 5)
-                                ZStack(alignment: .bottom) {
-                                        Color.clear
-                                        Text(verbatim: lower)
-                                                .textCase(textCase)
                                                 .font(.title2)
+                                } else {
+                                        ZStack(alignment: .top) {
+                                                Color.clear
+                                                Text(verbatim: upper)
+                                                        .textCase(textCase)
+                                                        .font(.footnote)
+                                                        .opacity(0.3)
+                                        }
+                                        .padding(.vertical, verticalPadding + 5)
+                                        .padding(.horizontal, horizontalPadding + 5)
+                                        ZStack(alignment: .bottom) {
+                                                Color.clear
+                                                Text(verbatim: lower)
+                                                        .textCase(textCase)
+                                                        .font(.title2)
+                                        }
+                                        .padding(.vertical, verticalPadding + 7)
+                                        .padding(.horizontal, horizontalPadding + 7)
                                 }
-                                .padding(.vertical, verticalPadding + 7)
-                                .padding(.horizontal, horizontalPadding + 7)
                         }
+                        .frame(width: keyWidth, height: keyHeight)
                 }
-                .frame(width: keyWidth, height: keyHeight)
-                .contentShape(.rect)
-                .gesture(DragGesture(minimumDistance: 0)
-                        .updating($isTouching) { _, tapped, _ in
-                                if tapped.negative {
-                                        AudioFeedback.inputed()
-                                        tapped = true
-                                }
-                        }
+                .buttonStyle(PressButtonStyle($isTouching) {
+                        AudioFeedback.inputed()
+                })
+                .simultaneousGesture(DragGesture(minimumDistance: 0)
                         .onChanged { state in
                                 guard isPullingDown.negative else { return }
                                 let distance: CGFloat = state.translation.height
@@ -88,9 +86,10 @@ struct PadPullableInputKey: View {
                                         let text: String = context.keyboardCase.isLowercased ? lower : lower.uppercased()
                                         context.operate(.process(text))
                                 }
-                         }
+                        }
                 )
-                .task {
+                .task(id: isTouching) {
+                        guard isTouching else { return }
                         while Task.isCancelled.negative {
                                 try? await Task.sleep(for: .milliseconds(100)) // 0.1s
                                 if isTouching {
