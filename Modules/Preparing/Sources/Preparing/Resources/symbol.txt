@@ -192,7 +192,7 @@
 1	110000	1F928	面目猙獰	min6 muk6 zang1 ning4
 1	110000	1F928	猙獰	zang1 ning4
 1	110000	1F928	不悅	bat1 jyut6
-1	110000	1F928	憤怒	fan5 nou6
+1	110000	1F928	質疑	zat1 ji4
 1	110000	1F9D0	單片眼鏡	daan1 pin3 ngaan5 geng3
 1	110000	1F9D0	檢查	gim2 caa4
 1	110000	1F9D0	睇過	tai2 gwo3
@@ -327,10 +327,7 @@
 1	110000	1F62D	哭泣	huk1 jap1
 1	110000	1F62D	悲傷	bei1 soeng1
 1	110000	1F62D	牢大	lou4 daai6
-1	110000	1F624	唔忿	m4 fan5
 1	110000	1F624	氣憤	hei3 fan5
-1	110000	1F624	怒	nou6
-1	110000	1F624	惱	nou5
 1	110000	1F624	惱	nau1
 1	110000	1F624	嬲	nau1
 1	110000	1F624	激死	gik1 sei2
@@ -763,13 +760,11 @@
 1	110000	1F91B	打拳	daa2 kyun2
 1	110000	1F91B	拳頭	kyun4 tau4
 1	110000	1F91B	拳擊	kyun4 gik1
-1	110000	1F91B	拳	kyun4
 1	110000	1F91C	左拳	zo2 kyun4
 1	110000	1F91C	打拳	daa2 kyun4
 1	110000	1F91C	打拳	daa2 kyun2
 1	110000	1F91C	拳頭	kyun4 tau4
 1	110000	1F91C	拳擊	kyun4 gik1
-1	110000	1F91C	拳	kyun4
 1	150000	1FAF7	向左推	hoeng3 zo2 teoi1
 1	150000	1FAF8	向右推	hoeng3 jau6 teoi1
 1	110000	1F91E	交叉手指	gaau1 caa1 sau2 zi2
@@ -3724,10 +3719,13 @@
 5	110000	1F6B2	單車	daan1 ce1
 5	110000	1F6B2	腳踏車	goek3 daap6 ce1
 5	110000	1F6B2	自行車	zi6 hang4 ce1
+5	110000	1F6B2	人力車	jan4 lik6 ce1
 5	110000	1F6F5	電動單車	din6 dung6 daan1 ce1
 5	110000	1F6F5	電動自行車	din6 dung6 zi6 hang4 ce1
 5	110000	1F6F5	電動車	din6 dung6 ce1
 5	110000	1F6F5	電雞	din6 gai1
+5	110000	1F6F5	電驢	din6 leoi4
+5	110000	1F6F5	電驢	din6 lou4
 5	110000	1F3CD	摩托車	mo1 tok3 ce1
 5	110000	1F3CD	摩托	mo1 tok3
 5	110000	1F3CD	電單車	din6 daan1 ce1
@@ -5211,9 +5209,9 @@
 7	110000	1F6AE	垃圾	laap6 saap3
 7	110000	1F3A6	電影院	din6 jing2 jyun2
 7	110000	1F3A6	睇電影	tai2 din6 jing2
+7	110000	1F3A6	影院	jing2 jyun2
 7	110000	1F3A6	戲院	hei3 jyun2
 7	110000	1F3A6	睇戲	tai2 hei3
-7	110000	1F3A6	戲	hei3
 7	110000	1F3A6	電影	din6 jing2
 7	110000	1F4F6	信號	seon3 hou6
 7	110000	1F4F6	訊號	seon3 hou6

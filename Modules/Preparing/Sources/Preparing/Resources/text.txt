@@ -233,6 +233,7 @@ ipados	iPadOS
 ipadpro	iPad Pro
 iphone	iPhone
 iphoneair	iPhone Air
+iphoneduo	iPhone Duo
 iphonemini	iPhone mini
 iphoneplus	iPhone Plus
 iphonepro	iPhone Pro
@@ -633,6 +634,7 @@ seadog	seadog
 skyler	Skyler
 tint	tint
 tv	TV
+utc	UTC
 watsons	Watsons
 wink	wink
 zed	zed
@@ -1523,7 +1525,6 @@ after	after
 best	best
 software	software
 then	then
-jan	jan
 good	good
 video	video
 well	well
@@ -4160,7 +4161,6 @@ blonde	blonde
 proceedings	proceedings
 favourite	favourite
 transmission	transmission
-utc	utc
 characteristics	characteristics
 lose	lose
 organic	organic
@@ -4569,7 +4569,6 @@ constitution	constitution
 packaging	packaging
 solar	solar
 catch	catch
-jane	jane
 reliable	reliable
 consultation	consultation
 northwest	northwest
@@ -6874,7 +6873,6 @@ stamp	stamp
 lotus	lotus
 salmon	salmon
 separated	separated
-proc	proc
 cargo	cargo
 tan	tan
 directive	directive
@@ -6914,15 +6912,12 @@ spec	spec
 finest	finest
 realty	realty
 bow	bow
-penn	penn
 recruiting	recruiting
 apparent	apparent
 instructional	instructional
-phpbb	phpbb
 autumn	autumn
 traveling	traveling
 probe	probe
-midi	midi
 permissions	permissions
 biotechnology	biotechnology
 toilet	toilet
@@ -8804,7 +8799,6 @@ prominent	prominent
 retrieve	retrieve
 lexington	lexington
 vernon	vernon
-sans	sans
 worldcat	worldcat
 titanium	titanium
 irs	irs
@@ -15285,4 +15279,6 @@ cameraman	cameraman
 trillionaire	trillionaire
 yosemite	yosemite
 mavericks	mavericks
+astral	astral
+fuckable	fuckable
 ecosystems	ecosystems
