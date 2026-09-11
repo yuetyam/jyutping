@@ -111,7 +111,7 @@ extension KeyboardInterface {
                         } else if minDimension < 405 {
                                 // iPhone 12, 12 Pro, 13, 13 Pro, 14, 16e (390 x 844)
                                 // iPhone 14 Pro, 15, 15 Pro, 16 (393 x 852)
-                                // iPhone 16 Pro, 17, 17 Pro (402 x 874)
+                                // iPhone 16 Pro, 17, 17 Pro, 18 Pro (402 x 874)
                                 return 54
                         } else if minDimension < 425 {
                                 // iPhone 8 Plus (414 x 836)
@@ -121,7 +121,7 @@ extension KeyboardInterface {
                         } else if minDimension < 445 {
                                 // iPhone 12 Pro Max, 13 Pro Max, 14 Plus (428 x 926)
                                 // iPhone 14 Pro Max, 15 Plus, 15 Pro Max, 16 Plus (430 x 932)
-                                // iPhone 16 Pro Max, 17 Pro Max (440 x 956)
+                                // iPhone 16 Pro Max, 17 Pro Max, 18 Pro Max (440 x 956)
                                 return 56
                         } else {
                                 let extra: Int = Int(minDimension - 300) / 20

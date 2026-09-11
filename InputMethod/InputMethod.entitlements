@@ -13,7 +13,7 @@
 	<key>com.apple.security.hardened-process.checked-allocations.soft-mode</key>
 	<true/>
 	<key>com.apple.security.hardened-process.enhanced-security-version-string</key>
-	<string>1</string>
+	<string>2</string>
 	<key>com.apple.security.hardened-process.hardened-heap</key>
 	<true/>
 	<key>com.apple.security.temporary-exception.mach-lookup.global-name</key>
