@@ -79,8 +79,8 @@ FAQ: [FAQ](https://jyutping.app/faq)
 
 ## How to build
 Build requirements:
-- macOS 26.2+
-- Xcode 26.4+
+- macOS 27.0+
+- Xcode 27.0+
 
 Clone with `--depth` to reduce code size:
 ~~~bash

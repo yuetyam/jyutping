@@ -2,12 +2,12 @@ name: CI
 on: [push, pull_request, release]
 
 # env:
-#   DEVELOPER_DIR: /Applications/Xcode_26.6.app/Contents/Developer
+#   DEVELOPER_DIR: /Applications/Xcode_27.0.app/Contents/Developer
 
 jobs:
   build_common_extensions:
     name: Build CommonExtensions
-    runs-on: macos-26
+    runs-on: xcode-27
     steps:
       - uses: actions/checkout@v7
       - name: Swift Build CommonExtensions
@@ -16,7 +16,7 @@ jobs:
   test_common_extensions:
     name: CommonExtensions Tests
     needs: [build_common_extensions]
-    runs-on: macos-26
+    runs-on: xcode-27
     steps:
       - uses: actions/checkout@v7
       - name: CommonExtensions SwiftTest
@@ -25,7 +25,7 @@ jobs:
   prepare_databases:
     name: Prepare Databases
     needs: [build_common_extensions]
-    runs-on: macos-26
+    runs-on: xcode-27
     steps:
       - uses: actions/checkout@v7
       - name: Swift Run Preparing
@@ -36,7 +36,7 @@ jobs:
           test -s Modules/CoreIME/Sources/CoreIMEMobileData/Resources/mobile.sqlite3
           test -s Modules/CoreIME/Sources/CoreIMEDesktopData/Resources/desktop.sqlite3
           test -s Modules/AppDataSource/Sources/AppDataSource/Resources/app.sqlite3
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: prepared-databases
           path: |
@@ -47,7 +47,7 @@ jobs:
           retention-days: 1
   build_about_kit:
     name: Build AboutKit
-    runs-on: macos-26
+    runs-on: xcode-27
     steps:
       - uses: actions/checkout@v7
       - name: Swift Build AboutKit
@@ -55,7 +55,7 @@ jobs:
         working-directory: ./Modules/AboutKit
   build_linguistics:
     name: Build Linguistics
-    runs-on: macos-26
+    runs-on: xcode-27
     steps:
       - uses: actions/checkout@v7
       - name: Swift Build Linguistics
@@ -64,10 +64,10 @@ jobs:
   build_app_data_source:
     name: Build AppDataSource
     needs: [prepare_databases]
-    runs-on: macos-26
+    runs-on: xcode-27
     steps:
       - uses: actions/checkout@v7
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           name: prepared-databases
           path: Modules
@@ -77,10 +77,10 @@ jobs:
   build_core_ime:
     name: Build CoreIME
     needs: [prepare_databases]
-    runs-on: macos-26
+    runs-on: xcode-27
     steps:
       - uses: actions/checkout@v7
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           name: prepared-databases
           path: Modules
@@ -90,10 +90,10 @@ jobs:
   test_core_ime:
     name: CoreIME Tests
     needs: [build_core_ime]
-    runs-on: macos-26
+    runs-on: xcode-27
     steps:
       - uses: actions/checkout@v7
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           name: prepared-databases
           path: Modules
@@ -103,10 +103,10 @@ jobs:
   benchmark_core_ime:
     name: CoreIME Benchmarks
     needs: [build_core_ime]
-    runs-on: macos-26
+    runs-on: xcode-27
     steps:
       - uses: actions/checkout@v7
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           name: prepared-databases
           path: Modules
@@ -116,10 +116,10 @@ jobs:
   build_input_method:
     name: Build InputMethod
     needs: [build_core_ime]
-    runs-on: macos-26
+    runs-on: xcode-27
     steps:
       - uses: actions/checkout@v7
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           name: prepared-databases
           path: Modules
@@ -128,10 +128,10 @@ jobs:
   build_mac_app:
     name: Build macOS App
     needs: [build_app_data_source]
-    runs-on: macos-26
+    runs-on: xcode-27
     steps:
       - uses: actions/checkout@v7
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           name: prepared-databases
           path: Modules
@@ -140,10 +140,10 @@ jobs:
   build_ios_app:
     name: Build iOS App
     needs: [build_app_data_source, build_core_ime]
-    runs-on: macos-26
+    runs-on: xcode-27
     steps:
       - uses: actions/checkout@v7
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           name: prepared-databases
           path: Modules
@@ -152,10 +152,10 @@ jobs:
   build_ios_keyboard:
     name: Build Keyboard
     needs: [build_app_data_source, build_core_ime]
-    runs-on: macos-26
+    runs-on: xcode-27
     steps:
       - uses: actions/checkout@v7
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           name: prepared-databases
           path: Modules

@@ -65,9 +65,9 @@ Under `Modules/`, the local Swift packages are:
 
 ## Build requirements and environments
 - Current local environment observed while updating this file: macOS 27.0, Xcode 27.0, Apple Swift 6.4.
-- Package manifests use `swift-tools-version: 6.3` and `swiftLanguageModes: [.v6]`.
+- Package manifests use `swift-tools-version: 6.4` and `swiftLanguageModes: [.v6]`.
 - Xcode project settings use Swift 6 for the app, keyboard, input method, and project-level settings.
-- The `Preparing` package declares macOS 26+ because it is a local database-generation tool.
+- The `Preparing` package declares macOS 27+ because it is a local database-generation tool.
 
 Targeted platforms:
 - iOS/iPadOS 16.0+
