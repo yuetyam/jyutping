@@ -21,6 +21,8 @@ Current editor settings are UTF-8, LF line endings, and for Swift files: spaces,
 
 Make narrow, surgical edits and follow the surrounding style instead of reformatting files wholesale.
 
+Do not wrap long single-line code unless necessary. Preserve unrelated worktree changes. Do not commit, revert, or push changes unless the user explicitly asks.
+
 ## Localization and translation rules
 
 1. Use Traditional Chinese characters for the `zh-Hans` and `zh-Hans-CN` locales.
@@ -33,7 +35,7 @@ Make narrow, surgical edits and follow the surrounding style instead of reformat
 
 ## What is in the project
 
-`xcodebuild -project Jyutping.xcodeproj -list` currently reports these Xcode targets:
+The Xcode project contains these targets:
 
 - `Jyutping`
 - `JyutpingTests`
@@ -43,52 +45,56 @@ Make narrow, surgical edits and follow the surrounding style instead of reformat
 - `InputMethodTests`
 - `InputMethodUITests`
 
-It currently exposes these schemes:
+`xcodebuild -project Jyutping.xcodeproj -list` currently exposes these project schemes:
 
-- `AboutKit`
-- `AppDataSource`
-- `CommonExtensions`
-- `CoreIME`
 - `InputMethod`
 - `Jyutping`
 - `Keyboard`
-- `Linguistics`
+
+Use SwiftPM commands for individual packages; do not assume their schemes appear in the project listing.
 
 Under `Modules/`, the local Swift packages are:
 
 1. `CommonExtensions`: shared Foundation-style helpers and extensions
-2. `CoreIME`: the core input engine and bundled SQLite lexicon
+2. `CoreIME`: the core input engine, platform-specific SQLite resource targets, tests, and the `CoreIMEBenchmarks` executable
 3. `Linguistics`: Jyutping/IPA and related language helpers
 4. `AppDataSource`: searchable reference datasets used by the app
 5. `AboutKit`: about/info UI support
 6. `Preparing`: a SwiftPM-only build-time executable that generates data used by other modules
 
 ## Build requirements and environments
-- Current local environment observed while updating this file: macOS 27.0, Xcode 27.0, Apple Swift 6.4.
+
+- Local environment verified on 2026-09-12: macOS 27.0, Xcode 27.0, Apple Swift 6.4. Check `swift --version` and `xcodebuild -version` when diagnosing toolchain differences.
 - Package manifests use `swift-tools-version: 6.4` and `swiftLanguageModes: [.v6]`.
 - Xcode project settings use Swift 6 for the app, keyboard, input method, and project-level settings.
 - The `Preparing` package declares macOS 27+ because it is a local database-generation tool.
 
 Targeted platforms:
+
 - iOS/iPadOS 16.0+
 - macOS 13+ (Ventura or above)
+- The reference app also declares visionOS 1.0+ in the Xcode project; the keyboard and macOS input method have separate platform targets.
 
 ## First build step: generate databases
 
-Before building the Xcode project, generate the packaged databases:
+On a clean checkout, generate the packaged databases before building the Xcode project or building/testing the data-dependent packages (`CoreIME` and `AppDataSource`):
 
 ```bash
 cd Modules/Preparing
 swift run -c release
 ```
 
-This is not optional for a clean checkout. The executable entry point is `Modules/Preparing/Sources/Preparing/Preparing.swift`, which runs `AppDataPreparer.prepare()` and `DatabasePreparer.prepare()` concurrently. It generates these packaged SQLite databases:
+Run this command from `Modules/Preparing`: the app database output uses a relative path. Generated SQLite files are ignored by Git. The executable entry point is `Modules/Preparing/Sources/Preparing/Preparing.swift`, which runs `AppDataPreparer.prepare()` and `DatabasePreparer.prepare()` concurrently. It generates these packaged SQLite databases:
 
 - `Modules/CoreIME/Sources/CoreIMEMobileData/Resources/mobile.sqlite3`
 - `Modules/CoreIME/Sources/CoreIMEDesktopData/Resources/desktop.sqlite3`
 - `Modules/AppDataSource/Sources/AppDataSource/Resources/app.sqlite3`
 
 The mobile CoreIME database contains the complete schema. The desktop database is copied from it and then stripped of 9-key-specific tables, columns, and indexes.
+
+`Modules/CoreIME/Package.swift` selects `CoreIMEMobileData` for iOS and `CoreIMEDesktopData` for macOS. `Engine.prepare()` opens the platform's bundled database; `Engine.prepare(databaseURL:includesNineKeyData:)` supports an explicit database, including the mobile database used by tests and benchmarks on macOS.
+
+For lexicon or schema changes, edit the source resources/generator in `Modules/Preparing/Sources/Preparing/`, regenerate the databases, and validate the affected schema and contents as well as SQLite integrity. Existing generated files can be reused for unrelated source-only changes.
 
 ## Runtime architecture
 
@@ -116,7 +122,7 @@ Useful places:
 - Shared keyboard UI is under `Keyboard/SharedViews/`.
 - Keyboard state, layouts, and behavior enums live under `Keyboard/SharedModels/`.
 - Device/layout-specific keyboards are split across `iPhone/`, `iPad/`, `NineKey/`, and `SpecialLayouts/`.
-- The iPad implementation has separate large, medium, and small key/keyboards folders. The keyboard target also includes emoji, editing-panel, speech, image, and shape support.
+- The iPad implementation has large, medium, and small keyboard folders, with shared keys under `iPad/Keys/` and size-specific keys under `LargePadKeys/` and `MediumPadKeys/`. The keyboard target also includes emoji, editing-panel, speech, image, and shape support.
 
 Useful places:
 
@@ -125,6 +131,9 @@ Useful places:
 - `Keyboard/SharedModels/InputMemory.swift`
 - `Keyboard/SharedViews/MotherBoard.swift`
 - `Keyboard/SharedViews/CandidateBoard.swift`
+- `Keyboard/SharedViews/PressButtonStyle.swift`: synchronizes a key's touch state and runs its action on press-down. Follow the relevant sibling key when changing press, repeat, or long-press behavior.
+
+For changes to all keyboard variants, inspect iPhone, all iPad sizes, nine-key, special layouts, editing-panel, and emoji surfaces.
 
 ### macOS input method (`InputMethod/`)
 
@@ -153,7 +162,7 @@ Useful places:
 
 `Modules/CoreIME/Sources/CoreIME/Engine.swift` is the main place to start for input behavior:
 
-- `Engine.prepare()` opens the packaged SQLite database
+- `Engine.prepare()` opens the packaged SQLite database and prepares segmentation data
 - `Engine.suggest(...)` is the main suggestion entry point
 - `Engine.nineKeySuggest(...)` handles nine-key combo lookup
 - the engine handles anchors, strict matches, tone input, apostrophes, partial matches, segmentation-aware lookup, pinyin, cangjie, quick, stroke, structure, emoji, and text-mark lookup
@@ -163,19 +172,9 @@ Closely related files include:
 - `Candidate.swift`
 - `Lexicon.swift`
 - `Segmenter.swift`
+- `NineKeySegmenter.swift`, `PinyinSegmenter.swift`, `PinyinNineKeySegmenter.swift`
 - `VirtualInputKey.swift`
 - `Pinyin*.swift`, `Cangjie*.swift`, `Quick.swift`, `Stroke*.swift`
-
-### Generated lexicon database
-
-The packaged IME database is assembled by the `Preparing` executable:
-
-- `Modules/Preparing/Sources/Preparing/Preparing.swift`
-- `Modules/Preparing/Sources/Preparing/DatabasePreparer.swift`
-- `Modules/Preparing/Sources/Preparing/AppDataPreparer.swift`
-- `Modules/Preparing/Sources/Preparing/Resources/`
-
-If a task changes lexicon contents, schema, or generated resources, update the generator and rerun `swift run -c release` in `Modules/Preparing`.
 
 ### Learned candidate memory
 
@@ -184,7 +183,7 @@ The keyboard and macOS input method keep separate SQLite-backed learning stores:
 - iOS keyboard: `Keyboard/SharedModels/InputMemory.swift`
 - macOS input method: `InputMethod/Models/InputMemory.swift`
 
-They are similar but not identical. For example, the keyboard memory schema stores extra 9-key fields that are not present in the macOS input memory table. Keep platform-specific differences in mind before copying logic between them.
+Both currently use the `memory2608` table and migration key `Migration2608`, with migration from older `memory`/`core_memory` tables. The keyboard schema additionally stores `anchors_9key` and `spell_9key`. Inspect both implementations for learning or migration changes, while preserving platform-specific behavior. These writable user databases are separate from the generated, read-only lexicon databases.
 
 ## How packages are used
 
@@ -216,79 +215,34 @@ There are two test layers in this repo:
    - `Modules/CommonExtensions/Tests/CommonExtensionsTests`
    - `Modules/CoreIME/Tests/CoreIMETests`
 
-The existing tests use Swift Testing, and some also import XCTest.
+The package suites use Swift Testing. CoreIME has coverage for candidate generation, segmentation, reverse lookup, nine-key input, conversion, and packaged database schemas. `Tests/CoreIMETests/TestSupport.swift` loads the generated mobile database explicitly, so macOS tests can exercise nine-key behavior; `DatabaseTests.swift` checks both mobile and desktop schemas. The Xcode unit-test files currently contain placeholder example tests; the UI-test targets use XCTest.
 
 When updating source code in `Modules/CommonExtensions/Sources/CommonExtensions/`, also update the related Swift Testing suites in `Modules/CommonExtensions/Tests/CommonExtensionsTests` so the package retains full coverage of its behavior. Verify the change with `swift test --package-path Modules/CommonExtensions --enable-code-coverage`.
 
-Useful commands:
+Run package checks from the repository root after generating databases where required:
 
 ```bash
-xcodebuild -project Jyutping.xcodeproj -scheme Jyutping build
-xcodebuild -project Jyutping.xcodeproj -scheme Keyboard build
-xcodebuild -project Jyutping.xcodeproj -scheme InputMethod build
-
-swift test --package-path Modules/CommonExtensions
-swift test --package-path Modules/CoreIME
+swift test --package-path Modules/CommonExtensions --enable-code-coverage
+swift test --package-path Modules/CoreIME --enable-code-coverage
+swift run --package-path Modules/CoreIME -c release CoreIMEBenchmarks
 ```
 
-## Where to start for common tasks
+The benchmark source is `Modules/CoreIME/Sources/CoreIMEBenchmarks/CoreIMEBenchmarks.swift`. It supports `--list`, `--filter <text>`, `--iterations <count>`, and `--warmup <count>`, and reports median and p95 timings. Use release builds for performance comparisons.
 
-### Change candidate generation or ranking
+For compilation checks, choose the affected target and an explicit destination, with a writable DerivedData directory:
 
-Start with:
+```bash
+xcodebuild -project Jyutping.xcodeproj -scheme Keyboard -configuration Debug -destination 'generic/platform=iOS Simulator' -derivedDataPath /tmp/Jyutping-Keyboard-DerivedData CODE_SIGNING_ALLOWED=NO build
+xcodebuild -project Jyutping.xcodeproj -scheme InputMethod -configuration Debug -destination 'platform=macOS' -derivedDataPath /tmp/Jyutping-InputMethod-DerivedData CODE_SIGNING_ALLOWED=NO build
+xcodebuild -project Jyutping.xcodeproj -scheme Jyutping -configuration Debug -destination 'platform=macOS' -derivedDataPath /tmp/Jyutping-App-DerivedData CODE_SIGNING_ALLOWED=NO build
+```
 
-- `Modules/CoreIME/Sources/CoreIME/Engine.swift`
-- `Modules/CoreIME/Sources/CoreIME/Lexicon.swift`
-- `Modules/CoreIME/Sources/CoreIME/Segmenter.swift`
+For the iOS reference app, use the `Jyutping` scheme with `generic/platform=iOS Simulator`. A successful build or package test does not verify keyboard touch behavior or InputMethodKit lifecycle behavior. Report compilation, automated tests, and runtime checks separately, and distinguish environment failures from code failures.
 
-Then inspect the platform-specific display layer:
+## CI and packaging
 
-- `Keyboard/SharedViews/CandidateBoard.swift`
-- `InputMethod/CandidateViews/CandidateBoard.swift`
-
-### Change generated data or lexicons
-
-Start with:
-
-- `Modules/Preparing/Sources/Preparing/DatabasePreparer.swift`
-- `Modules/Preparing/Sources/Preparing/AppDataPreparer.swift`
-- `Modules/Preparing/Sources/Preparing/Resources/`
-
-Regenerate the databases afterward.
-
-### Change learning / personalization
-
-Start with both:
-
-- `Keyboard/SharedModels/InputMemory.swift`
-- `InputMethod/Models/InputMemory.swift`
-
-### Change keyboard layouts or key behavior
-
-Start with:
-
-- `Keyboard/KeyboardViewController.swift`
-- `Keyboard/SharedModels/`
-- `Keyboard/SharedViews/`
-- `Keyboard/iPhone/`
-- `Keyboard/iPad/`
-- `Keyboard/NineKey/`
-- `Keyboard/SpecialLayouts/`
-- `Keyboard/EditingPanel/`
-- `Keyboard/Emoji/`
-
-### Change app reference/search screens
-
-Start with:
-
-- `Jyutping/iOS/Search/`
-- `Jyutping/macOS/Search/`
-- `Jyutping/SharedModels/AppMaster.swift`
-- `Modules/AppDataSource/Sources/AppDataSource/`
-
-## Agent tips
-
-- Prefer searching the relevant package or target first; the repo is split cleanly by responsibility.
-- Do not assume the iOS keyboard and macOS input method share identical persistence or UI behavior.
-- If a change touches generated resources, regenerate them before concluding the work.
-- If a change belongs to shared logic, look in `Modules/` before editing app-target code.
+- `.github/workflows/ci.yaml` uses the `xcode-27` runner label. It builds the shared packages, tests CommonExtensions and CoreIME, runs CoreIME benchmarks, and compiles the macOS app, macOS input method, iOS app, and keyboard.
+- The database preparation job generates all three SQLite files once and uploads them as `prepared-databases`; dependent jobs download the artifact into `Modules/`. Keep artifact paths and consumers aligned when changing generation.
+- `ci_scripts/ci_post_clone.sh` runs the generator for Xcode Cloud after changing to `Modules/Preparing`.
+- `packaging/` contains macOS installer resources and scripts; packaged apps and archives are ignored by Git.
+- Use `actionlint` when editing GitHub Actions workflows and `git diff --check` for changed files.
