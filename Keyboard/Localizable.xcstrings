@@ -9,6 +9,12 @@
             "value" : "Remove from Input Memory"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remove from Input Memory"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -16,12 +22,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Remove from Input Memory"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Remove from Input Memory"
@@ -115,6 +115,12 @@
             "value" : "Input Count"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Input Count"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -122,12 +128,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Input Count"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Input Count"
@@ -221,6 +221,12 @@
             "value" : "Latest Input"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Latest Input"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -228,12 +234,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Latest Input"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Latest Input"
@@ -327,6 +327,12 @@
             "value" : "Back"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Back"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -334,12 +340,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Back"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Back"
@@ -433,6 +433,12 @@
             "value" : "Delete"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -440,12 +446,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Delete"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Delete"
@@ -539,6 +539,12 @@
             "value" : "Clear"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clear"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -546,12 +552,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Clear"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Clear"
@@ -645,6 +645,12 @@
             "value" : "Clear System Clipboard"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clear System Clipboard"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -652,12 +658,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Clear System Clipboard"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Clear System Clipboard"
@@ -751,6 +751,12 @@
             "value" : "Copy"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copy"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -758,12 +764,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Copy"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Copy"
@@ -857,6 +857,12 @@
             "value" : "Cut"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cut"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -864,12 +870,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cut"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cut"
@@ -963,6 +963,12 @@
             "value" : "Forward Delete"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Forward Delete"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -970,12 +976,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Forward Delete"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Forward Delete"
@@ -1069,6 +1069,12 @@
             "value" : "简↔繁"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "简↔繁"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1076,12 +1082,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "简↔繁"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "简↔繁"
@@ -1175,6 +1175,12 @@
             "value" : "Paste"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Paste"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1182,12 +1188,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Paste"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Paste"
@@ -1281,6 +1281,12 @@
             "value" : "space"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "space"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1288,12 +1294,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "space"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "space"
@@ -1387,6 +1387,12 @@
             "value" : "Activity"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activity"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1394,12 +1400,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Activity"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Activity"
@@ -1493,6 +1493,12 @@
             "value" : "Animals & Nature"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Animals & Nature"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1500,12 +1506,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Animals & Nature"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Animals & Nature"
@@ -1599,6 +1599,12 @@
             "value" : "Flags"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Flags"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1606,12 +1612,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Flags"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Flags"
@@ -1705,6 +1705,12 @@
             "value" : "Food & Drink"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Food & Drink"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1712,12 +1718,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Food & Drink"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Food & Drink"
@@ -1811,6 +1811,12 @@
             "value" : "Frequently Used"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Frequently Used"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1818,12 +1824,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Frequently Used"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Frequently Used"
@@ -1917,6 +1917,12 @@
             "value" : "Objects"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Objects"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1924,12 +1930,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Objects"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Objects"
@@ -2023,6 +2023,12 @@
             "value" : "Smileys & People"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Smileys & People"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2030,12 +2036,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Smileys & People"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Smileys & People"
@@ -2129,6 +2129,12 @@
             "value" : "Symbols"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Symbols"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2136,12 +2142,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Symbols"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Symbols"
@@ -2235,6 +2235,12 @@
             "value" : "Travel & Places"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Travel & Places"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2242,12 +2248,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Travel & Places"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Travel & Places"
@@ -2341,6 +2341,12 @@
             "value" : "Cangjie5 (倉頡五代)"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cangjie5 (倉頡五代)"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2348,12 +2354,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cangjie5 (倉頡五代)"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cangjie5 (倉頡五代)"
@@ -2447,6 +2447,12 @@
             "value" : "Cangjie3 (倉頡三代)"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cangjie3 (倉頡三代)"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2454,12 +2460,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cangjie3 (倉頡三代)"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cangjie3 (倉頡三代)"
@@ -2553,6 +2553,12 @@
             "value" : "Quick5 (速成五代)"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quick5 (速成五代)"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2560,12 +2566,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Quick5 (速成五代)"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Quick5 (速成五代)"
@@ -2659,6 +2659,12 @@
             "value" : "Quick3 (速成三代)"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quick3 (速成三代)"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2666,12 +2672,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Quick3 (速成三代)"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Quick3 (速成三代)"
@@ -2765,6 +2765,12 @@
             "value" : "Cangjie / Sucheng Reverse Lookup"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cangjie / Sucheng Reverse Lookup"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2772,12 +2778,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cangjie / Sucheng Reverse Lookup"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cangjie / Sucheng Reverse Lookup"
@@ -2871,6 +2871,12 @@
             "value" : "All"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2878,12 +2884,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "All"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "All"
@@ -2977,6 +2977,12 @@
             "value" : "Lookup"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lookup"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2984,12 +2990,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lookup"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lookup"
@@ -3083,6 +3083,12 @@
             "value" : "None"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "None"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3090,12 +3096,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "None"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "None"
@@ -3189,6 +3189,12 @@
             "value" : "Scenes"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scenes"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3196,12 +3202,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Scenes"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Scenes"
@@ -3295,6 +3295,12 @@
             "value" : "Top"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Top"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3302,12 +3308,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Top"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Top"
@@ -3401,6 +3401,12 @@
             "value" : "Bottom"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bottom"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3408,12 +3414,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bottom"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bottom"
@@ -3507,6 +3507,12 @@
             "value" : "Jyutping Hints"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jyutping Hints"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3514,12 +3520,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Jyutping Hints"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Jyutping Hints"
@@ -3613,6 +3613,12 @@
             "value" : "Normal        : nei5 hou2"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Normal        : nei5 hou2"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3620,12 +3626,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Normal        : nei5 hou2"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Normal        : nei5 hou2"
@@ -3719,6 +3719,12 @@
             "value" : "No Tones    : nei hou"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No Tones    : nei hou"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3726,12 +3732,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No Tones    : nei hou"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "No Tones    : nei hou"
@@ -3825,6 +3825,12 @@
             "value" : "Superscript: nei⁵ hou²"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Superscript: nei⁵ hou²"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3832,12 +3838,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Superscript: nei⁵ hou²"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Superscript: nei⁵ hou²"
@@ -3931,6 +3931,12 @@
             "value" : "Subscript   : nei₅ hou₂"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Subscript   : nei₅ hou₂"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3938,12 +3944,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Subscript   : nei₅ hou₂"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Subscript   : nei₅ hou₂"
@@ -4037,6 +4037,12 @@
             "value" : "Jyutping Tones"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jyutping Tones"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4044,12 +4050,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Jyutping Tones"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Jyutping Tones"
@@ -4143,6 +4143,12 @@
             "value" : "Emoji Suggestions"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Emoji Suggestions"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4150,12 +4156,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Emoji Suggestions"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Emoji Suggestions"
@@ -4249,6 +4249,12 @@
             "value" : "English Suggestions"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "English Suggestions"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4256,12 +4262,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "English Suggestions"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "English Suggestions"
@@ -4355,6 +4355,12 @@
             "value" : "None"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "None"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4362,12 +4368,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "None"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "None"
@@ -4461,6 +4461,12 @@
             "value" : "Numbers"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Numbers"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4468,12 +4474,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Numbers"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Numbers"
@@ -4560,8 +4560,15 @@
       }
     },
     "SettingsView.InputKeyStyle.Option3.NumbersAndSymbols" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Symbols"
+          }
+        },
+        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Symbols"
@@ -4574,12 +4581,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Symbols"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Symbols"
@@ -4665,9 +4666,18 @@
         }
       }
     },
+    "SettingsView.InputKeyStyle.Option3.Symbols" : {
+
+    },
     "SettingsView.InputKeyStyle.PickerTitle" : {
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Key Symbols"
+          }
+        },
+        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Key Symbols"
@@ -4680,12 +4690,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Key Symbols"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Key Symbols"
@@ -4779,6 +4783,12 @@
             "value" : "Clear Input Memory"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clear Input Memory"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4786,12 +4796,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Clear Input Memory"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Clear Input Memory"
@@ -4885,6 +4889,12 @@
             "value" : "Input Memory"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Input Memory"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4892,12 +4902,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Input Memory"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Input Memory"
@@ -4991,6 +4995,12 @@
             "value" : "Auto"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auto"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4998,12 +5008,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Auto"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Auto"
@@ -5097,6 +5101,12 @@
             "value" : "Keyboard Language"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keyboard Language"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5104,12 +5114,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Keyboard Language"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Keyboard Language"
@@ -5203,6 +5207,12 @@
             "value" : "To apply this change, toggle Full Access in the system Settings to restart this keyboard."
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "To apply this change, toggle Full Access in the system Settings to restart this keyboard."
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5210,12 +5220,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "To apply this change, toggle Full Access in the system Settings to restart this keyboard."
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "To apply this change, toggle Full Access in the system Settings to restart this keyboard."
@@ -5309,6 +5313,12 @@
             "value" : "Heavy"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Heavy"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5316,12 +5326,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Heavy"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Heavy"
@@ -5415,6 +5419,12 @@
             "value" : "Light"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Light"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5422,12 +5432,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Light"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Light"
@@ -5521,6 +5525,12 @@
             "value" : "Medium"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Medium"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5528,12 +5538,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Medium"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Medium"
@@ -5627,6 +5631,12 @@
             "value" : "None"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "None"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5634,12 +5644,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "None"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "None"
@@ -5733,6 +5737,12 @@
             "value" : "Haptic"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Haptic"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5740,12 +5750,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Haptic"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Haptic"
@@ -5839,6 +5843,12 @@
             "value" : "Haptic Feedback requires Full Access"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Haptic Feedback requires Full Access"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5846,12 +5856,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Haptic Feedback requires Full Access"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Haptic Feedback requires Full Access"
@@ -5945,6 +5949,12 @@
             "value" : "Sound"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sound"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5952,12 +5962,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sound"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sound"
@@ -6051,6 +6055,12 @@
             "value" : "18 Key"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "18 Key"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6058,12 +6068,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "18 Key"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "18 Key"
@@ -6157,6 +6161,12 @@
             "value" : "15 Key"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "15 Key"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6164,12 +6174,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "15 Key"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "15 Key"
@@ -6263,6 +6267,12 @@
             "value" : "14 Key"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "14 Key"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6270,12 +6280,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "14 Key"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "14 Key"
@@ -6369,6 +6373,12 @@
             "value" : "9 Key"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "9 Key"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6376,12 +6386,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "9 Key"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "9 Key"
@@ -6475,6 +6479,12 @@
             "value" : "19 Key"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "19 Key"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6482,12 +6492,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "19 Key"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "19 Key"
@@ -6581,6 +6585,12 @@
             "value" : "QWERTY"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "QWERTY"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6588,12 +6598,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "QWERTY"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "QWERTY"
@@ -6687,6 +6691,12 @@
             "value" : "Triple-Stroke"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Triple-Stroke"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6694,12 +6704,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Triple-Stroke"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Triple-Stroke"
@@ -6793,6 +6797,12 @@
             "value" : "21 Key"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "21 Key"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6800,12 +6810,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "21 Key"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "21 Key"
@@ -6899,6 +6903,12 @@
             "value" : "Key Height Offset"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Key Height Offset"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6906,12 +6916,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Key Height Offset"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Key Height Offset"
@@ -7005,6 +7009,12 @@
             "value" : "Key Text Preview"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Key Text Preview"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7012,12 +7022,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Key Text Preview"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Key Text Preview"
@@ -7111,6 +7115,12 @@
             "value" : "This page is scrollable"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This page is scrollable"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7118,12 +7128,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "This page is scrollable"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "This page is scrollable"
@@ -7217,6 +7221,12 @@
             "value" : "Top Number Row"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Top Number Row"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7224,12 +7234,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Top Number Row"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Top Number Row"
@@ -7323,6 +7327,12 @@
             "value" : "Use 10 Key Number Pad"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Use 10 Key Number Pad"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7330,12 +7340,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Use 10 Key Number Pad"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Use 10 Key Number Pad"
@@ -7429,6 +7433,12 @@
             "value" : "Chinese"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chinese"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7436,12 +7446,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Chinese"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Chinese"
@@ -7535,6 +7539,12 @@
             "value" : "ABC"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ABC"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7542,12 +7552,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ABC"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "ABC"
@@ -7641,6 +7645,12 @@
             "value" : "Recent"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recent"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7648,12 +7658,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Recent"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Recent"
@@ -7747,6 +7751,12 @@
             "value" : "Input Mode"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Input Mode"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7754,12 +7764,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Input Mode"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Input Mode"
@@ -7853,6 +7857,12 @@
             "value" : "Do NOT enable this unless you understand what this setting does."
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Do NOT enable this unless you understand what this setting does."
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7860,12 +7870,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Do NOT enable this unless you understand what this setting does."
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Do NOT enable this unless you understand what this setting does."
@@ -7959,6 +7963,12 @@
             "value" : "Compatible with Common Spellings"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compatible with Common Spellings"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7966,12 +7976,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Compatible with Common Spellings"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Compatible with Common Spellings"
@@ -8065,6 +8069,12 @@
             "value" : "Show Lowercase Keys"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show Lowercase Keys"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8072,12 +8082,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show Lowercase Keys"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Show Lowercase Keys"
@@ -8171,6 +8175,12 @@
             "value" : "Use 10 Key Stroke Keyboard"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Use 10 Key Stroke Keyboard"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8178,12 +8188,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Use 10 Key Stroke Keyboard"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Use 10 Key Stroke Keyboard"
@@ -8277,6 +8281,12 @@
             "value" : "System Text Replacements"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "System Text Replacements"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8284,12 +8294,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "System Text Replacements"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "System Text Replacements"
@@ -8383,6 +8387,12 @@
             "value" : "Default"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Default"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8390,12 +8400,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Default"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Default"
@@ -8489,6 +8493,12 @@
             "value" : "Inherited"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inherited"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8496,12 +8506,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Inherited"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Inherited"
@@ -8595,6 +8599,12 @@
             "value" : "Hong Kong"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hong Kong"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8602,12 +8612,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hong Kong"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hong Kong"
@@ -8701,6 +8705,12 @@
             "value" : "Taiwan"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Taiwan"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8708,12 +8718,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Taiwan"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Taiwan"
@@ -8807,6 +8811,12 @@
             "value" : "Mainland China"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mainland China"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8814,12 +8824,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mainland China"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mainland China"
@@ -8913,6 +8917,12 @@
             "value" : "Mainland China (Ancient Books Publishing)"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mainland China (Ancient Books Publishing)"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8920,12 +8930,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mainland China (Ancient Books Publishing)"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mainland China (Ancient Books Publishing)"
@@ -9019,6 +9023,12 @@
             "value" : "Traditional Character Set"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Traditional Character Set"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9026,12 +9036,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Traditional Character Set"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Traditional Character Set"
@@ -9125,6 +9129,12 @@
             "value" : "The Inherited option uses rare characters and may have limited compatibility. Use it with caution."
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The Inherited option uses rare characters and may have limited compatibility. Use it with caution."
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9132,12 +9142,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The Inherited option uses rare characters and may have limited compatibility. Use it with caution."
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "The Inherited option uses rare characters and may have limited compatibility. Use it with caution."
@@ -9231,6 +9235,12 @@
             "value" : "Traditional Character Set"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Traditional Character Set"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9238,12 +9248,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Traditional Character Set"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Traditional Character Set"
@@ -9337,6 +9341,12 @@
             "value" : "Copy"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copy"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9344,12 +9354,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Copy"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Copy"
@@ -9443,6 +9447,12 @@
             "value" : "Version"
           }
         },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Version"
+          }
+        },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9450,12 +9460,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Version"
-          }
-        },
-        "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Version"

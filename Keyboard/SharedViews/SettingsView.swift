@@ -144,7 +144,7 @@ struct SettingsView: View {
                                                         Picker("SettingsView.InputKeyStyle.PickerTitle", selection: $inputKeyStyle) {
                                                                 Text("SettingsView.InputKeyStyle.Option1.None").tag(InputKeyStyle.clear)
                                                                 Text("SettingsView.InputKeyStyle.Option2.Numbers").tag(InputKeyStyle.numbers)
-                                                                Text("SettingsView.InputKeyStyle.Option3.NumbersAndSymbols").tag(InputKeyStyle.numbersAndSymbols)
+                                                                Text("SettingsView.InputKeyStyle.Option3.Symbols").tag(InputKeyStyle.symbols)
                                                         }
                                                         .pickerStyle(.segmented)
                                                         .labelsHidden()

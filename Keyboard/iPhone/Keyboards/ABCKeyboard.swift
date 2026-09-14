@@ -14,7 +14,7 @@ struct ABCKeyboard: View {
                         switch Options.inputKeyStyle {
                         case .clear:
                                 FirstInputKeyRow()
-                        case .numbers, .numbersAndSymbols:
+                        case .numbers, .symbols:
                                 FirstEnhancedInputKeyRow()
                         }
                         HStack(spacing: 0) {
@@ -22,7 +22,7 @@ struct ABCKeyboard: View {
                                 switch Options.inputKeyStyle {
                                 case .clear, .numbers:
                                         SecondInputKeyRow()
-                                case .numbersAndSymbols:
+                                case .symbols:
                                         SecondEnhancedInputKeyRow()
                                 }
                                 HiddenKey(key: .letterL)
@@ -33,7 +33,7 @@ struct ABCKeyboard: View {
                                 switch Options.inputKeyStyle {
                                 case .clear, .numbers:
                                         ThirdInputKeyRow()
-                                case .numbersAndSymbols:
+                                case .symbols:
                                         ThirdEnhancedInputKeyRow()
                                 }
                                 HiddenKey(key: .backspace)

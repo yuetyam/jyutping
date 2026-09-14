@@ -18,13 +18,13 @@ struct FifteenKeyKeyboard: View {
                         switch Options.inputKeyStyle {
                         case .clear:
                                 FirstLetterRow()
-                        case .numbers, .numbersAndSymbols:
+                        case .numbers, .symbols:
                                 FirstEnhancedLetterRow()
                         }
                         switch Options.inputKeyStyle {
                         case .clear:
                                 SecondLetterRow()
-                        case .numbers, .numbersAndSymbols:
+                        case .numbers, .symbols:
                                 SecondEnhancedLetterRow()
                         }
                         HStack(spacing: 0) {
@@ -33,7 +33,7 @@ struct FifteenKeyKeyboard: View {
                                 switch Options.inputKeyStyle {
                                 case .clear, .numbers:
                                         ThirdLetterRow()
-                                case .numbersAndSymbols:
+                                case .symbols:
                                         ThirdEnhancedLetterRow()
                                 }
                                 Spacer().frame(minWidth: 0, maxWidth: .infinity)

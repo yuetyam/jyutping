@@ -18,7 +18,7 @@ struct EighteenKeyKeyboard: View {
                         switch Options.inputKeyStyle {
                         case .clear:
                                 T18T19FirstLetterRow()
-                        case .numbers, .numbersAndSymbols:
+                        case .numbers, .symbols:
                                 T18T19FirstEnhancedLetterRow()
                         }
                         HStack(spacing: 0) {
@@ -28,7 +28,7 @@ struct EighteenKeyKeyboard: View {
                                         SecondLetterRow()
                                 case .numbers:
                                         AltSecondLetterRow()
-                                case .numbersAndSymbols:
+                                case .symbols:
                                         SecondEnhancedLetterRow()
                                 }
                                 HiddenKey(key: .letterL)
@@ -38,7 +38,7 @@ struct EighteenKeyKeyboard: View {
                                 switch Options.inputKeyStyle {
                                 case .clear, .numbers:
                                         T18T19ThirdLetterRow()
-                                case .numbersAndSymbols:
+                                case .symbols:
                                         T18T19ThirdEnhancedLetterRow()
                                 }
                                 BackspaceKey(coefficient: 1.42)

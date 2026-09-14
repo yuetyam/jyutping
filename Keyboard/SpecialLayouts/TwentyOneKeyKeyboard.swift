@@ -17,7 +17,7 @@ struct TwentyOneKeyKeyboard: View {
                         switch Options.inputKeyStyle {
                         case .clear:
                                 FirstLetterRow()
-                        case .numbers, .numbersAndSymbols:
+                        case .numbers, .symbols:
                                 FirstEnhancedLetterRow()
                         }
                         switch Options.inputKeyStyle {
@@ -25,7 +25,7 @@ struct TwentyOneKeyKeyboard: View {
                                 SecondLetterRow(needsNumbers: false)
                         case .numbers:
                                 SecondLetterRow(needsNumbers: true)
-                        case .numbersAndSymbols:
+                        case .symbols:
                                 SecondEnhancedLetterRow()
                         }
                         HStack(spacing: 0) {
@@ -34,7 +34,7 @@ struct TwentyOneKeyKeyboard: View {
                                 switch Options.inputKeyStyle {
                                 case .clear, .numbers:
                                         ThirdLetterRow()
-                                case .numbersAndSymbols:
+                                case .symbols:
                                         ThirdEnhancedLetterRow()
                                 }
                                 HiddenKey(key: .letterM)

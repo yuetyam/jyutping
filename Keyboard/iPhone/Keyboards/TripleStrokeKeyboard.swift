@@ -19,7 +19,7 @@ struct TripleStrokeKeyboard: View {
                         switch Options.inputKeyStyle {
                         case .clear:
                                 FirstKeyRow()
-                        case .numbers, .numbersAndSymbols:
+                        case .numbers, .symbols:
                                 FirstEnhancedKeyRow()
                         }
                         HStack(spacing: 0) {
@@ -27,7 +27,7 @@ struct TripleStrokeKeyboard: View {
                                 switch Options.inputKeyStyle {
                                 case .clear, .numbers:
                                         SecondKeyRow()
-                                case .numbersAndSymbols:
+                                case .symbols:
                                         SecondEnhancedKeyRow()
                                 }
                                 HiddenKey(key: .letterL)
@@ -38,7 +38,7 @@ struct TripleStrokeKeyboard: View {
                                 switch Options.inputKeyStyle {
                                 case .clear, .numbers:
                                         ThirdKeyRow()
-                                case .numbersAndSymbols:
+                                case .symbols:
                                         ThirdEnhancedKeyRow()
                                 }
                                 HiddenKey(key: .backspace)

@@ -19,7 +19,7 @@ struct NineteenKeyKeyboard: View {
                         switch Options.inputKeyStyle {
                         case .clear:
                                 T18T19FirstLetterRow()
-                        case .numbers, .numbersAndSymbols:
+                        case .numbers, .symbols:
                                 T18T19FirstEnhancedLetterRow()
                         }
                         switch Options.inputKeyStyle {
@@ -27,7 +27,7 @@ struct NineteenKeyKeyboard: View {
                                 SecondLetterRow()
                         case .numbers:
                                 AltSecondLetterRow()
-                        case .numbersAndSymbols:
+                        case .symbols:
                                 SecondEnhancedLetterRow()
                         }
                         HStack(spacing: 0) {
@@ -35,7 +35,7 @@ struct NineteenKeyKeyboard: View {
                                 switch Options.inputKeyStyle {
                                 case .clear, .numbers:
                                         T18T19ThirdLetterRow()
-                                case .numbersAndSymbols:
+                                case .symbols:
                                         T18T19ThirdEnhancedLetterRow()
                                 }
                                 BackspaceKey(coefficient: 1.42)

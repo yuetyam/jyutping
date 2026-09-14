@@ -15,7 +15,7 @@ struct PinyinKeyboard: View {
                         switch Options.inputKeyStyle {
                         case .clear:
                                 FirstLetterKeyRow()
-                        case .numbers, .numbersAndSymbols:
+                        case .numbers, .symbols:
                                 FirstEnhancedLetterKeyRow()
                         }
                         */
@@ -26,7 +26,7 @@ struct PinyinKeyboard: View {
                                 switch Options.inputKeyStyle {
                                 case .clear, .numbers:
                                         SecondLetterKeyRow()
-                                case .numbersAndSymbols:
+                                case .symbols:
                                         SecondEnhancedLetterKeyRow()
                                 }
                                 */
@@ -40,7 +40,7 @@ struct PinyinKeyboard: View {
                                 switch Options.inputKeyStyle {
                                 case .clear, .numbers:
                                         PinyinThirdLetterKeyRow()
-                                case .numbersAndSymbols:
+                                case .symbols:
                                         PinyinThirdEnhancedLetterRow()
                                 }
                                 */
