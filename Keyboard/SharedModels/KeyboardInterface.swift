@@ -190,10 +190,12 @@ extension KeyboardInterface {
         }
 }
 extension EdgeInsets {
-        func adjusted(horizontal: CGFloat = 0, vertical: CGFloat = 0) -> EdgeInsets {
+        func plused(horizontal: CGFloat = 0, vertical: CGFloat = 0) -> EdgeInsets {
                 return EdgeInsets(top: top + vertical, leading: leading + horizontal, bottom: bottom + vertical, trailing: trailing + horizontal)
         }
         func plused(_ value: CGFloat) -> EdgeInsets {
                 return EdgeInsets(top: top + value, leading: leading + value, bottom: bottom + value, trailing: trailing + value)
         }
+        var horizontalTotal: CGFloat { leading + trailing }
+        var verticalTotal: CGFloat { top + bottom }
 }

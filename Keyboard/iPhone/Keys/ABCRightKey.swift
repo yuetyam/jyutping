@@ -18,17 +18,14 @@ struct ABCRightKey: View {
         var body: some View {
                 let keyWidth: CGFloat = context.widthUnit
                 let keyHeight: CGFloat = context.heightUnit
-                let isPhoneLandscape: Bool = context.keyboardInterface.isPhoneLandscape
-                let verticalPadding: CGFloat = isPhoneLandscape ? 3 : 6
-                let horizontalPadding: CGFloat = isPhoneLandscape ? 6 : 3
-                let baseWidth: CGFloat = keyWidth - (horizontalPadding * 2)
-                let baseHeight: CGFloat = keyHeight - (verticalPadding * 2)
-                let shapeHeight: CGFloat = isPhoneLandscape ? (baseHeight / (2 / 6.0)) : baseHeight / ((2.5 / 6.0))
-                let curveHeight: CGFloat = isPhoneLandscape ? (shapeHeight / 3.0) : (shapeHeight / 6.0)
-                let previewBottomOffset: CGFloat = (baseHeight * 2) + (curveHeight * 1.5)
+                let keyboardInterface = context.keyboardInterface
+                let keyShapeInsets = keyboardInterface.keyShapeInsets
+                let baseWidth: CGFloat = keyWidth - keyShapeInsets.horizontalTotal
+                let baseHeight: CGFloat = keyHeight - keyShapeInsets.verticalTotal
+                let previewBottomOffset: CGFloat = keyboardInterface.previewBottomOffset(keyWidth: keyWidth, keyHeight: keyHeight, insets: keyShapeInsets)
                 let shouldPreviewKey: Bool = Options.keyTextPreview
                 let activeColor: Color = shouldPreviewKey ? colorScheme.inputKeyColor : colorScheme.activeInputKeyColor
-                let shouldShowExtraHeader: Bool = (Options.inputKeyStyle == .numbersAndSymbols)
+                let shouldShowExtraSymbols: Bool = Options.inputKeyStyle.isSymbolApplied
                 Button(action: {}) {
                         ZStack {
                                 Color.interactiveClear
@@ -57,8 +54,7 @@ struct ABCRightKey: View {
                                                         .padding(.bottom, previewBottomOffset)
                                                         .padding(.trailing, trailingOffset)
                                                 }
-                                                .padding(.vertical, verticalPadding)
-                                                .padding(.horizontal, horizontalPadding)
+                                                .padding(keyShapeInsets)
                                 } else if (isTouching && shouldPreviewKey) {
                                         BubbleShape()
                                                 .fill(colorScheme.previewBubbleColor)
@@ -68,21 +64,18 @@ struct ABCRightKey: View {
                                                                 .font(.largeTitle)
                                                                 .padding(.bottom, previewBottomOffset)
                                                 }
-                                                .padding(.vertical, verticalPadding)
-                                                .padding(.horizontal, horizontalPadding)
+                                                .padding(keyShapeInsets)
                                 } else {
                                         RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
                                                 .fill(isTouching ? activeColor : colorScheme.inputKeyColor)
                                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                                .padding(.vertical, verticalPadding)
-                                                .padding(.horizontal, horizontalPadding)
+                                                .padding(keyShapeInsets)
                                         ZStack(alignment: .topTrailing) {
                                                 Color.clear
                                                 Text(verbatim: headerText).font(.labelCaption)
                                         }
-                                        .padding(.vertical, verticalPadding)
-                                        .padding(.horizontal, horizontalPadding + 2)
-                                        .opacity(shouldShowExtraHeader ? 0.5 : 0)
+                                        .padding(keyShapeInsets.plused(horizontal: 2))
+                                        .opacity(shouldShowExtraSymbols ? 0.5 : 0)
                                         Text(verbatim: String.period).font(.letterCompact)
                                 }
                         }
@@ -111,7 +104,7 @@ struct ABCRightKey: View {
                                                 }
                                         }
                                 } else {
-                                        guard shouldShowExtraHeader && (pulled == nil) else { return }
+                                        guard shouldShowExtraSymbols && (pulled == nil) else { return }
                                         let distance: CGFloat = state.translation.height
                                         let isSatisfied: Bool = abs(distance) > 36 || (buffer > 1 && abs(distance) > 24)
                                         guard isSatisfied else { return }

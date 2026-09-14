@@ -109,7 +109,7 @@ struct GlassEnhancedInputKey: View {
                                                                         .font(.labelCaption)
                                                                         .shallow()
                                                         }
-                                                        .padding(insets.adjusted(horizontal: 2))
+                                                        .padding(insets.plused(horizontal: 2))
                                                 }
                                                 Text(verbatim: unit.primary.text)
                                                         .textCase(textCase)

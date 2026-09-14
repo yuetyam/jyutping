@@ -317,7 +317,8 @@ enum InputKeyStyle: Int, CaseIterable {
         /// Letters with extra digits (number row)
         case numbers = 2
 
-        /// Letters with extra digits (number row) and symbols
+        // TODO: Rename to `symbols`
+        /// Letters with extra digits (number row) and punctuation symbols
         case numbersAndSymbols = 3
 
         static func style(of value: Int) -> InputKeyStyle {
@@ -326,6 +327,12 @@ enum InputKeyStyle: Int, CaseIterable {
 
         /// Letters only
         var isClear: Bool { self == .clear }
+
+        /// Letters with extra digits (number row)
+        var isNumberApplied: Bool { self == .numbers }
+
+        /// Letters with extra digits (number row) and punctuation symbols
+        var isSymbolApplied: Bool { self == .numbersAndSymbols }
 }
 
 enum CommentScene: Int, CaseIterable {
