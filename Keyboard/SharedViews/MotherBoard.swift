@@ -16,13 +16,25 @@ struct MotherBoard: View {
                                 EditingPanel().frame(height: context.keyboardHeight)
                         }
                 case .layoutPicker:
-                        LayoutPickerView().frame(height: context.keyboardHeight)
+                        if #available(iOSApplicationExtension 26.0, *) {
+                                LayoutPickerView().scrollEdgeEffectHidden().frame(height: context.keyboardHeight)
+                        } else {
+                                LayoutPickerView().frame(height: context.keyboardHeight)
+                        }
+                case .detailInspecting:
+                        if #available(iOSApplicationExtension 26.0, *) {
+                                DetailInspectingView().scrollEdgeEffectHidden().frame(height: context.keyboardHeight)
+                        } else {
+                                DetailInspectingView().frame(height: context.keyboardHeight)
+                        }
+                case .emojiBoard:
+                        if #available(iOSApplicationExtension 26.0, *) {
+                                EmojiBoard().scrollEdgeEffectHidden().frame(height: context.keyboardHeight)
+                        } else {
+                                EmojiBoard().frame(height: context.keyboardHeight)
+                        }
                 case .candidateBoard:
                         CandidateBoard().frame(height: context.keyboardHeight)
-                case .detailInspecting:
-                        DetailInspectingView().frame(height: context.keyboardHeight)
-                case .emojiBoard:
-                        EmojiBoard().frame(height: context.keyboardHeight)
                 case .numeric:
                         switch context.inputMethodMode {
                         case .abc:

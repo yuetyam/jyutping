@@ -28,56 +28,29 @@ struct EmojiBoard: View {
                                 Spacer()
                         }
                         .frame(height: 20)
-                        if #available(iOSApplicationExtension 26.0, *) {
-                                ScrollView(.horizontal) {
-                                        LazyHGrid(rows: rows) {
-                                                ForEach(Emoji.Category.allCases) { category in
-                                                        if let emojis: [Emoji] = EmojiMaster.emojis[category] {
-                                                                Section {
-                                                                        ForEach(emojis) { emoji in
-                                                                                ScrollViewButton {
-                                                                                        AudioFeedback.inputed()
-                                                                                        context.triggerSelectionHapticFeedback()
-                                                                                        context.operate(.input(emoji.text))
-                                                                                        EmojiMaster.updateFrequent(latest: emoji)
-                                                                                } label: {
-                                                                                        Text(verbatim: emoji.text).font(.emoji)
-                                                                                }
-                                                                                .id(emoji.id)
+                        ScrollView(.horizontal) {
+                                LazyHGrid(rows: rows) {
+                                        ForEach(Emoji.Category.allCases) { category in
+                                                if let emojis: [Emoji] = EmojiMaster.emojis[category] {
+                                                        Section {
+                                                                ForEach(emojis) { emoji in
+                                                                        ScrollViewButton {
+                                                                                AudioFeedback.inputed()
+                                                                                context.triggerSelectionHapticFeedback()
+                                                                                context.operate(.input(emoji.text))
+                                                                                EmojiMaster.updateFrequent(latest: emoji)
+                                                                        } label: {
+                                                                                Text(verbatim: emoji.text).font(.emoji)
                                                                         }
+                                                                        .id(emoji.id)
                                                                 }
-                                                                .id(category.viewID)
                                                         }
+                                                        .id(category.viewID)
                                                 }
                                         }
                                 }
-                                .scrollEdgeEffectHidden()
-                                .frame(maxHeight: .infinity)
-                        } else {
-                                ScrollView(.horizontal) {
-                                        LazyHGrid(rows: rows) {
-                                                ForEach(Emoji.Category.allCases) { category in
-                                                        if let emojis: [Emoji] = EmojiMaster.emojis[category] {
-                                                                Section {
-                                                                        ForEach(emojis) { emoji in
-                                                                                ScrollViewButton {
-                                                                                        AudioFeedback.inputed()
-                                                                                        context.triggerSelectionHapticFeedback()
-                                                                                        context.operate(.input(emoji.text))
-                                                                                        EmojiMaster.updateFrequent(latest: emoji)
-                                                                                } label: {
-                                                                                        Text(verbatim: emoji.text).font(.emoji)
-                                                                                }
-                                                                                .id(emoji.id)
-                                                                        }
-                                                                }
-                                                                .id(category.viewID)
-                                                        }
-                                                }
-                                        }
-                                }
-                                .frame(maxHeight: .infinity)
                         }
+                        .frame(maxHeight: .infinity)
                         HStack(spacing: 0) {
                                 Button {
                                         AudioFeedback.modified()

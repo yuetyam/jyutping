@@ -4559,8 +4559,7 @@
         }
       }
     },
-    "SettingsView.InputKeyStyle.Option3.NumbersAndSymbols" : {
-      "extractionState" : "stale",
+    "SettingsView.InputKeyStyle.Option3.Symbols" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4665,9 +4664,6 @@
           }
         }
       }
-    },
-    "SettingsView.InputKeyStyle.Option3.Symbols" : {
-
     },
     "SettingsView.InputKeyStyle.PickerTitle" : {
       "localizations" : {
