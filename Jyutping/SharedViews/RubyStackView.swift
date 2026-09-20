@@ -75,7 +75,7 @@ private struct CharacterPronunciationView: View {
                                 .minimumScaleFactor(0.2)
                                 .font(.word)
                 }
-                .frame(width: 38)
+                .frame(width: 36)
         }
 }
 

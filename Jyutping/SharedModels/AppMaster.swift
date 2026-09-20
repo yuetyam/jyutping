@@ -153,4 +153,19 @@ extension AppMaster {
         static func fetchThousandCharacterClassic() {
                 thousandCharacterClassicEntries = ThousandCharacterClassic.fetch()
         }
+
+        nonisolated(unsafe) private(set) static var lyricsLokYuDaai: [TextRomanization] = []
+        static func fetchLokYuDaai() {
+                lyricsLokYuDaai = Lyrics.fetchLokYuDaai()
+        }
+
+        nonisolated(unsafe) private(set) static var lyricsYuetGwongGwong: [TextRomanization] = []
+        static func fetchYuetGwongGwong() {
+                lyricsYuetGwongGwong = Lyrics.fetchYuetGwongGwong()
+        }
+
+        nonisolated(unsafe) private(set) static var lyricsSinFaMunYuetLau: [TextRomanization] = []
+        static func fetchSinFaMunYuetLau() {
+                lyricsSinFaMunYuetLau = Lyrics.fetchSinFaMunYuetLau()
+        }
 }

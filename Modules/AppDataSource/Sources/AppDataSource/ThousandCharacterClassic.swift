@@ -2,7 +2,7 @@ import Foundation
 import CommonExtensions
 
 /// 千字文
-public struct ThousandCharacterClassic: Hashable {
+public struct ThousandCharacterClassic {
         public static func fetch() -> [TextRomanization] {
                 guard let url = Bundle.module.url(forResource: "char1000", withExtension: "txt") else { return [] }
                 guard let content: String = try? String(contentsOf: url) else { return [] }

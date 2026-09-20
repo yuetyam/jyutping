@@ -68,6 +68,17 @@ struct CantoneseView: View {
                                                 Label("IOSCantoneseTab.LabelTitle.HongKongMTR", systemImage: "tram.circle")
                                         }
                                 }
+                                Section {
+                                        NavigationLink(destination: IOSLyricsLokYuDaaiView()) {
+                                                Label("IOSCantoneseTab.LabelTitle.LyricsLokYuDaai", systemImage: "music.note.list")
+                                        }
+                                        NavigationLink(destination: IOSLyricsYuetGwongGwongView()) {
+                                                Label("IOSCantoneseTab.LabelTitle.LyricsYuetGwongGwong", systemImage: "music.note.list")
+                                        }
+                                        NavigationLink(destination: IOSLyricsSinFaMunYuetLauView()) {
+                                                Label("IOSCantoneseTab.LabelTitle.LyricsSinFaMunYuetLau", systemImage: "music.note.list")
+                                        }
+                                }
 
                                 Section {
                                         ExtendedLinkLabel(title: "懶音診療室 - PolyU", footnote: "polyu.edu.hk/clc/pronunciation", address: "https://www.polyu.edu.hk/clc/pronunciation")

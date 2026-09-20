@@ -58,6 +58,14 @@ struct MacContentView: View {
                                 }
                                 .font(.master)
                                 Section {
+                                        Label("MacSidebar.NavigationTitle.LyricsLokYuDaai", systemImage: "music.note.list").tag(ViewIdentifier.lyricsLokYuDaai)
+                                        Label("MacSidebar.NavigationTitle.LyricsYuetGwongGwong", systemImage: "music.note.list").tag(ViewIdentifier.lyricsYuetGwongGwong)
+                                        Label("MacSidebar.NavigationTitle.LyricsSinFaMunYuetLau", systemImage: "music.note.list").tag(ViewIdentifier.lyricsSinFaMunYuetLau)
+                                } header: {
+                                        Text("MacSidebar.SectionHeader.Lyrics").textCase(nil).font(.copilot)
+                                }
+                                .font(.master)
+                                Section {
                                         Label("MacSidebar.NavigationTitle.Resources", systemImage: "globe.asia.australia").tag(ViewIdentifier.resources)
                                         Label("MacSidebar.NavigationTitle.About", systemImage: "info.circle").tag(ViewIdentifier.about)
                                 } header: {
@@ -115,6 +123,12 @@ struct MacContentView: View {
                                 MacShamChunMetroView()
                         case .hongkongMTR:
                                 MacHongKongMTRView()
+                        case .lyricsLokYuDaai:
+                                MacLyricsLokYuDaaiView()
+                        case .lyricsYuetGwongGwong:
+                                MacLyricsYuetGwongGwongView()
+                        case .lyricsSinFaMunYuetLau:
+                                MacLyricsSinFaMunYuetLauView()
                         case .resources:
                                 MacResourcesView()
                         case .about:
@@ -148,6 +162,10 @@ private enum ViewIdentifier: Int, Hashable, Identifiable {
         case tungkunRailTransit
         case shamchunMetro
         case hongkongMTR
+
+        case lyricsLokYuDaai
+        case lyricsYuetGwongGwong
+        case lyricsSinFaMunYuetLau
 
         case resources
         case about

@@ -19,7 +19,7 @@ struct Speech {
                 }
                 let utterance: AVSpeechUtterance = AVSpeechUtterance(string: text)
                 utterance.voice = voice
-                utterance.rate = AVSpeechUtteranceDefaultSpeechRate * 0.85
+                utterance.rate = AVSpeechUtteranceDefaultSpeechRate * 0.8
                 delegate.markStarted()
                 synthesizer.speak(utterance)
         }
