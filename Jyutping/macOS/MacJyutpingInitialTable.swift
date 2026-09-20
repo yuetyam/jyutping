@@ -84,6 +84,11 @@ struct MacJyutpingInitialTable: View {
                                                 .padding(.horizontal, 8)
                                 }
                                 OnsetGridView().padding(.vertical)
+                                Text(verbatim: PresetConstant.IPANote)
+                                        .font(.copilot)
+                                        .foregroundStyle(Color.secondary)
+                                        .padding(.vertical)
+                                        .padding(.horizontal, 8)
                         }
                         .textSelection(.enabled)
                         .padding()

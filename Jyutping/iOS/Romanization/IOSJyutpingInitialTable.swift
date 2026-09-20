@@ -79,6 +79,10 @@ struct IOSJyutpingInitialTable: View {
                                 .listRowBackground(Color.clear)
                                 .listRowInsets(EdgeInsets(top: 16, leading: 0, bottom: 32, trailing: 0))
                         }
+                        Section {
+                                Text(verbatim: PresetConstant.IPANote).font(.copilot).foregroundStyle(Color.secondary)
+                        }
+                        .listRowBackground(Color.clear)
                 }
                 .textSelection(.enabled)
                 .navigationTitle("IOSJyutpingTab.NavigationTitle.JyutpingInitials")

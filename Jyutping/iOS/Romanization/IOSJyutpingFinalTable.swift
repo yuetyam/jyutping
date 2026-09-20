@@ -114,6 +114,10 @@ struct IOSJyutpingFinalTable: View {
                         } header: {
                                 Text(verbatim: "鼻音單獨成韻").textCase(nil)
                         }
+                        Section {
+                                Text(verbatim: PresetConstant.IPANote).font(.copilot).foregroundStyle(Color.secondary)
+                        }
+                        .listRowBackground(Color.clear)
                 }
                 .navigationTitle("IOSJyutpingTab.NavigationTitle.JyutpingFinals")
                 .navigationBarTitleDisplayMode(.inline)

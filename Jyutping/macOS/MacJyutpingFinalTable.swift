@@ -5,7 +5,7 @@ import SwiftUI
 struct MacJyutpingFinalTable: View {
         var body: some View {
                 ScrollView {
-                        LazyVStack(spacing: 12) {
+                        LazyVStack(alignment: .leading, spacing: 12) {
                                 VStack(spacing: 2) {
                                         HStack(spacing: 44) {
                                                 HStack {
@@ -144,6 +144,11 @@ struct MacJyutpingFinalTable: View {
                                         }
                                         .block()
                                 }
+                                Text(verbatim: PresetConstant.IPANote)
+                                        .font(.copilot)
+                                        .foregroundStyle(Color.secondary)
+                                        .padding(.vertical)
+                                        .padding(.horizontal, 8)
                         }
                         .textSelection(.enabled)
                         .padding()
