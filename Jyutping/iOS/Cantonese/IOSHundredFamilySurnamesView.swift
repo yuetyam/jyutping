@@ -26,7 +26,7 @@ struct IOSHundredFamilySurnamesView: View {
                         if AppMaster.surnames.isEmpty {
                                 AppMaster.fetchSurnames()
                                 surnames = HundredFamilySurnames.fetch()
-                        } else {
+                        } else if surnames.isEmpty {
                                 surnames = AppMaster.surnames
                         }
                 }

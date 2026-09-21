@@ -26,7 +26,7 @@ struct IOSThousandCharacterClassicView: View {
                         if AppMaster.thousandCharacterClassicEntries.isEmpty {
                                 AppMaster.fetchThousandCharacterClassic()
                                 entries = ThousandCharacterClassic.fetch()
-                        } else {
+                        } else if entries.isEmpty {
                                 entries = AppMaster.thousandCharacterClassicEntries
                         }
                 }

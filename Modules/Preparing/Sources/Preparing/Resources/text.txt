@@ -1932,7 +1932,6 @@ audio	audio
 light	light
 write	write
 war	war
-nov	nov
 offer	offer
 blue	blue
 groups	groups

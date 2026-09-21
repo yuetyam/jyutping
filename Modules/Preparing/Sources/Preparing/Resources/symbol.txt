@@ -2146,7 +2146,6 @@
 2	110000	1FAB2	甲殼蟲	gaap3 hok3 cung4
 2	110000	1FAB2	金龜子	gam1 gwai1 zi2
 2	110000	1FAB3	曱甴	gaat6 zaat6
-2	110000	1FAB3	曱甴	gaat6 zaat2
 2	110000	1FAB3	蟑螂	zoeng1 long4
 2	110000	1FAB3	蟑	zoeng1
 2	110000	1FAB3	小強	siu2 koeng4
@@ -2290,6 +2289,7 @@
 2	110000	1F402	牯	gu2
 2	110000	1F402	牛	ngau4
 2	110000	1F404	奶牛	naai5 ngau4
+2	110000	1F404	乳牛	jyu5 ngau4
 2	150000	1FACF	驢	leoi4
 2	150000	1FACF	驢	lou4
 2	150000	1FACF	驢仔	leoi4 zai2
@@ -5484,6 +5484,7 @@
 7	110000	1F3B4	花紙牌	faa1 zi2 paai4
 7	110000	1F3B4	遊戲牌	jau4 hei3 paai4
 7	110000	1F004	紅中	hung4 zung1
+7	110000	1F004	中字	zung1 zi6
 7	110000	1F550	一點正	jat1 dim2 zing3
 7	110000	1F550	一點鐘	jat1 dim2 zung1
 7	110000	1F550	一點	jat1 dim2
@@ -5766,6 +5767,7 @@
 8	110000	1F1F4.1F1F2	阿曼	aa3 maan6
 8	110000	1F1F5.1F1F0	巴基斯坦	baa1 gei1 si1 taan2
 8	110000	1F1F5.1F1FC	帕勞	paak3 lou4
+8	110000	1F1F5.1F1FC	帛琉	baak6 lau4
 8	110000	1F1F5.1F1F8	巴勒斯坦	baa1 lak6 si1 taan2
 8	110000	1F1F5.1F1E6	巴拿馬	baa1 naa4 maa5
 8	110000	1F1F5.1F1EC	巴布亞新幾內亞	baa1 bou3 aa3 san1 gei2 noi6 aa3
