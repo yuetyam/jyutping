@@ -19,8 +19,8 @@ struct CharacterExtensionsTests {
                 #expect(Character(codePoint: " U+2512B ") == "𥄫")
                 #expect(Character(codePoint: "u+41") == "A")
                 #expect(Character(codePoint: "41") == "A")
-                #expect(Character(codePoint: "invalid") == nil)
-                #expect(Character(codePoint: "U+110000") == nil)
+                #expect(Character(codePoint: "invalid").isNil)
+                #expect(Character(codePoint: "U+110000").isNil)
         }
 
         @Test("decimal initializer and decimal code round-trip Unicode scalars")
@@ -28,7 +28,7 @@ struct CharacterExtensionsTests {
                 #expect(Character("𥄫").decimalCode == 151851)
                 #expect(Character(decimal: 151851) == "𥄫")
                 #expect(Character(decimal: 65) == "A")
-                #expect(Character(decimal: -1) == nil)
+                #expect(Character(decimal: -1).isNil)
         }
 
         @Test("ASCII character constants and predicates identify only their documented characters")

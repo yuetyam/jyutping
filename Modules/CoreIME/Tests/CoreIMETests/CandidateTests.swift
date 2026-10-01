@@ -1,5 +1,6 @@
 import Testing
 @testable import CoreIME
+import CommonExtensions
 
 @Suite("Candidates")
 struct CandidateTests {
@@ -10,7 +11,7 @@ struct CandidateTests {
 
                 #expect(Candidate(lexicon: lexicon, commentForm: .full).comment == "nei5 hou2")
                 #expect(Candidate(lexicon: lexicon, commentForm: .toneless).comment == "nei hou")
-                #expect(Candidate(lexicon: lexicon, commentForm: .nothing).comment == nil)
+                #expect(Candidate(lexicon: lexicon, commentForm: .nothing).comment.isNil)
         }
 
         @Test("non-Cantonese candidates expose type-specific comments")
@@ -20,12 +21,12 @@ struct CandidateTests {
                 let composed = Candidate(lexicon: Lexicon(text: "é", comment: "acute", secondaryComment: "U+00E9", input: "e"))
                 let emptyComposed = Candidate(lexicon: Lexicon(text: "x", comment: nil, secondaryComment: nil, input: "x"))
 
-                #expect(text.comment == nil)
-                #expect(emoji.comment == nil)
+                #expect(text.comment.isNil)
+                #expect(emoji.comment.isNil)
                 #expect(composed.comment == "acute")
                 #expect(composed.secondaryComment == "U+00E9")
-                #expect(emptyComposed.comment == nil)
-                #expect(emptyComposed.secondaryComment == nil)
+                #expect(emptyComposed.comment.isNil)
+                #expect(emptyComposed.secondaryComment.isNil)
         }
 
         @Test("candidate equality follows visible comments and toneless Cantonese readings")

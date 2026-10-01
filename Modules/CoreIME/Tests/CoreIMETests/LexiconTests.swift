@@ -1,5 +1,6 @@
 import Testing
 @testable import CoreIME
+import CommonExtensions
 
 @Suite("Lexicons")
 struct LexiconTests {
@@ -58,7 +59,7 @@ struct LexiconTests {
                 #expect(combined.input == "neihou")
                 #expect(combined.mark == "nei hou")
                 #expect(combined.number == 2_000_003)
-                #expect((first + Lexicon(input: "text", text: "Text")) == nil)
+                #expect((first + Lexicon(input: "text", text: "Text")).isNil)
         }
 
         @Test("collection joining preserves order and rejects non-Cantonese entries")
@@ -73,7 +74,7 @@ struct LexiconTests {
                 #expect(joined.romanization == "hoeng1 gong2")
                 #expect(joined.number == 2_000_003)
                 #expect([Lexicon]().joined()?.text == "")
-                #expect((entries + [Lexicon(input: "app", text: "App")]).joined() == nil)
+                #expect((entries + [Lexicon(input: "app", text: "App")]).joined().isNil)
         }
 
         @Test("type and memory predicates classify lexicons")

@@ -125,7 +125,7 @@ struct RightAlternativeKey: View {
                                                 }
                                         }
                                 } else {
-                                        guard shouldShowExtraSymbols && (pulled == nil) else { return }
+                                        guard shouldShowExtraSymbols && pulled.isNil else { return }
                                         guard context.inputStage.isBuffering.negative else { return }
                                         let distance: CGFloat = state.translation.height
                                         let isSatisfied: Bool = abs(distance) > 36 || (buffer > 1 && abs(distance) > 24)
@@ -160,7 +160,7 @@ struct RightAlternativeKey: View {
                                 try? await Task.sleep(for: .milliseconds(100)) // 0.1s
                                 if isTouching {
                                         if isLongPressing.negative {
-                                                let shouldTriggerLongPress: Bool = (buffer >= 6) || (buffer >= 3 && pulled == nil)
+                                                let shouldTriggerLongPress: Bool = (buffer >= 6) || (buffer >= 3 && pulled.isNil)
                                                 if shouldTriggerLongPress {
                                                         if context.inputStage.isBuffering.negative {
                                                                 isLongPressing = true

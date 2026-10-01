@@ -18,8 +18,8 @@ struct Options {
 
         /// 字形標準
         nonisolated(unsafe) private(set) static var legacyCharacterStandard: CharacterStandard = {
-                let hasSavedValue: Bool = UserDefaults.standard.object(forKey: OptionsKey.LegacyCharacterStandard) != nil
-                let hasOldKeySavedValue: Bool = UserDefaults.standard.object(forKey: LegacyOptionsKey.OldCharacterStandardKey) != nil
+                let hasSavedValue: Bool = UserDefaults.standard.object(forKey: OptionsKey.LegacyCharacterStandard).isNotNil
+                let hasOldKeySavedValue: Bool = UserDefaults.standard.object(forKey: LegacyOptionsKey.OldCharacterStandardKey).isNotNil
                 defer {
                         if hasOldKeySavedValue {
                                 UserDefaults.standard.removeObject(forKey: LegacyOptionsKey.OldCharacterStandardKey)
@@ -53,8 +53,8 @@ struct Options {
 
         /// 半寬／全寬數字、字母
         nonisolated(unsafe) private(set) static var characterForm: CharacterForm = {
-                let hasSavedValue: Bool = UserDefaults.standard.object(forKey: OptionsKey.CharacterForm) != nil
-                let hasLegacySavedValue: Bool = UserDefaults.standard.object(forKey: LegacyOptionsKey.CharacterForm) != nil
+                let hasSavedValue: Bool = UserDefaults.standard.object(forKey: OptionsKey.CharacterForm).isNotNil
+                let hasLegacySavedValue: Bool = UserDefaults.standard.object(forKey: LegacyOptionsKey.CharacterForm).isNotNil
                 defer {
                         if hasLegacySavedValue {
                                 UserDefaults.standard.removeObject(forKey: LegacyOptionsKey.CharacterForm)
@@ -77,8 +77,8 @@ struct Options {
 
         /// 標點符號形態. 粵文句讀／英文標點
         nonisolated(unsafe) private(set) static var punctuationForm: PunctuationForm = {
-                let hasSavedValue: Bool = UserDefaults.standard.object(forKey: OptionsKey.PunctuationForm) != nil
-                let hasLegacySavedValue: Bool = UserDefaults.standard.object(forKey: LegacyOptionsKey.PunctuationForm) != nil
+                let hasSavedValue: Bool = UserDefaults.standard.object(forKey: OptionsKey.PunctuationForm).isNotNil
+                let hasLegacySavedValue: Bool = UserDefaults.standard.object(forKey: LegacyOptionsKey.PunctuationForm).isNotNil
                 defer {
                         if hasLegacySavedValue {
                                 UserDefaults.standard.removeObject(forKey: LegacyOptionsKey.PunctuationForm)

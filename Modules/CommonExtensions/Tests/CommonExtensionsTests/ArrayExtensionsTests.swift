@@ -16,9 +16,9 @@ struct ArrayExtensionsTests {
         func fetchInvalidIndex() {
                 let values = [10, 20, 30]
 
-                #expect(values.fetch(-1) == nil)
-                #expect(values.fetch(3) == nil)
-                #expect([Int]().fetch(0) == nil)
+                #expect(values.fetch(-1).isNil)
+                #expect(values.fetch(3).isNil)
+                #expect([Int]().fetch(0).isNil)
         }
 
         @Test("chunked splits arrays into fixed-size chunks")

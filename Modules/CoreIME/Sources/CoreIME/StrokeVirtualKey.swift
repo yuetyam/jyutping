@@ -61,7 +61,7 @@ extension StrokeVirtualKey {
         }
 
         public static func isValidStrokes<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T) -> Bool {
-                return keys.contains(where: { $0.strokeKey == nil }).negative
+                return keys.contains(where: { $0.strokeKey.isNil }).negative
         }
 }
 

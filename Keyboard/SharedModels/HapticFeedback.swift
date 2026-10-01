@@ -11,8 +11,8 @@ enum HapticFeedback: Int, CaseIterable {
 extension HapticFeedback {
         /// Read HapticFeedback mode from UserDefaults
         static func fetchSavedMode() -> HapticFeedback {
-                let hasSavedValue: Bool = UserDefaults.standard.object(forKey: OptionsKey.HapticFeedback) != nil
-                let hasLegacySavedValue: Bool = UserDefaults.standard.object(forKey: LegacyOptionsKey.HapticFeedback) != nil
+                let hasSavedValue: Bool = UserDefaults.standard.object(forKey: OptionsKey.HapticFeedback).isNotNil
+                let hasLegacySavedValue: Bool = UserDefaults.standard.object(forKey: LegacyOptionsKey.HapticFeedback).isNotNil
                 defer {
                         if hasLegacySavedValue {
                                 UserDefaults.standard.removeObject(forKey: LegacyOptionsKey.HapticFeedback)

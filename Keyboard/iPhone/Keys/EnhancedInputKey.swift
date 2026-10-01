@@ -162,7 +162,7 @@ struct EnhancedInputKey: View {
                                                         selectedIndex = newSelectedIndex
                                                 }
                                         }
-                                } else if (pulled == nil) {
+                                } else if pulled.isNil {
                                         let distance: CGFloat = state.translation.height
                                         let isSatisfied: Bool = abs(distance) > 36 || (buffer > 1 && abs(distance) > 24)
                                         guard isSatisfied else { return }
@@ -205,7 +205,7 @@ struct EnhancedInputKey: View {
                                 try? await Task.sleep(for: .milliseconds(100)) // 0.1s
                                 if isTouching {
                                         if isLongPressing.negative {
-                                                let shouldTriggerLongPress: Bool = (buffer >= 6) || (buffer >= 3 && pulled == nil)
+                                                let shouldTriggerLongPress: Bool = (buffer >= 6) || (buffer >= 3 && pulled.isNil)
                                                 if shouldTriggerLongPress {
                                                         isLongPressing = true
                                                 } else {

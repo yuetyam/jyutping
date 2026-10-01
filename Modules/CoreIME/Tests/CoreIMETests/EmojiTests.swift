@@ -1,5 +1,6 @@
 import Testing
 @testable import CoreIME
+import CommonExtensions
 
 @Suite("Emoji and symbols")
 struct EmojiTests {
@@ -37,9 +38,9 @@ struct EmojiTests {
                 #expect(Emoji.generateSymbol(from: "1F600") == "😀")
                 #expect(Emoji.generateSymbol(from: "270C.FE0F") == "✌️")
                 #expect(Emoji.generateSymbol(from: "1F468.200D.1F9B0") == "👨‍🦰")
-                #expect(Emoji.generateSymbol(from: "") == nil)
-                #expect(Emoji.generateSymbol(from: "NOTHEX") == nil)
-                #expect(Emoji.generateSymbol(from: "110000") == nil)
+                #expect(Emoji.generateSymbol(from: "").isNil)
+                #expect(Emoji.generateSymbol(from: "NOTHEX").isNil)
+                #expect(Emoji.generateSymbol(from: "110000").isNil)
                 #expect(Emoji.generateSymbol(from: "1F600.INVALID") == "😀")
         }
 

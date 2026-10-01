@@ -3,6 +3,7 @@ import AppKit
 import InputMethodKit
 import os.log
 import Sparkle
+import CommonExtensions
 
 @MainActor
 final class AppDelegate: NSObject, NSApplicationDelegate {
@@ -29,7 +30,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
         private lazy var updaterController: SPUStandardUpdaterController? = nil
         private func prepareUpdaterController() {
-                if updaterController == nil {
+                if updaterController.isNil {
                         updaterController = SPUStandardUpdaterController(startingUpdater: true, updaterDelegate: nil, userDriverDelegate: nil)
                 }
         }

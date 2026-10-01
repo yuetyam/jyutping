@@ -147,9 +147,9 @@ private extension Font {
 
         private static func found(font name: String) -> Bool {
                 #if os(macOS)
-                return NSFont(name: name, size: 15) != nil
+                return NSFont(name: name, size: 15).isNotNil
                 #else
-                return UIFont(name: name, size: 15) != nil
+                return UIFont(name: name, size: 15).isNotNil
                 #endif
         }
 

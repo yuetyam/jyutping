@@ -43,7 +43,7 @@ extension Engine {
                 var chars: String = word
                 var romanization: String? = nil
                 var matchedLength: Int = 0
-                while (romanization == nil) && chars.isNotEmpty {
+                while romanization.isNil && chars.isNotEmpty {
                         romanization = match(for: chars).first
                         matchedLength = chars.count
                         chars = String(chars.dropLast())

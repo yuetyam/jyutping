@@ -40,5 +40,5 @@ static let etymologyNote: String = """
 }
 
 extension PresetConstant {
-        static let IPANote: String = "本表所用國際音標爲寬式轉寫，着重於輔助粵拼標示，而非精確描述發音。"
+        static let IPANote: String = "本表所用國際音標爲寬式轉寫，旨在輔助粵拼標示，而非精確描述發音。"
 }

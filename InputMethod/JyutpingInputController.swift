@@ -1108,7 +1108,7 @@ final class JyutpingInputController: IMKInputController, @unchecked Sendable {
                         guard currentInputForm.isCantonese else { return }
                         let highlighted = context.displayCandidates.fetch(context.highlightedIndex)
                         if isBuffering && isShifting.negative {
-                                let hasHighlighted: Bool = (highlighted != nil)
+                                let hasHighlighted: Bool = highlighted.isNotNil
                                 let bracketKeysMode = AppSettings.bracketKeysMode
                                 let commaPeriodKeysMode = AppSettings.commaPeriodKeysMode
                                 switch punctuationKey {

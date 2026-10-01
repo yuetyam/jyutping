@@ -315,7 +315,7 @@ struct AppSettings {
 
         /// Candidate count per page
         private(set) static var displayCandidatePageSize: Int = {
-                let hasSavedValue: Bool = UserDefaults.standard.object(forKey: SettingsKey.CandidatePageSize) != nil
+                let hasSavedValue: Bool = UserDefaults.standard.object(forKey: SettingsKey.CandidatePageSize).isNotNil
                 guard hasSavedValue else { return defaultCandidatePageSize }
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.CandidatePageSize)
                 guard candidatePageSizeRange.contains(savedValue) else { return defaultCandidatePageSize }
@@ -333,7 +333,7 @@ struct AppSettings {
         // MARK: - Line Spacing
 
         private(set) static var candidateLineSpacing: Int = {
-                let hasSavedValue: Bool = UserDefaults.standard.object(forKey: SettingsKey.CandidateLineSpacing) != nil
+                let hasSavedValue: Bool = UserDefaults.standard.object(forKey: SettingsKey.CandidateLineSpacing).isNotNil
                 guard hasSavedValue else { return defaultCandidateLineSpacing }
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.CandidateLineSpacing)
                 guard candidateLineSpacingRange.contains(savedValue) else { return defaultCandidateLineSpacing }
@@ -352,7 +352,7 @@ struct AppSettings {
 
         /// Corner radius of CandidateBoard
         private(set) static var pageCornerRadius: Int = {
-                let hasSavedValue: Bool = UserDefaults.standard.object(forKey: SettingsKey.CandidatePageCornerRadius) != nil
+                let hasSavedValue: Bool = UserDefaults.standard.object(forKey: SettingsKey.CandidatePageCornerRadius).isNotNil
                 guard hasSavedValue else { return defaultPageCornerRadius }
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.CandidatePageCornerRadius)
                 guard cornerRadiusRange.contains(savedValue) else { return defaultPageCornerRadius }
@@ -366,7 +366,7 @@ struct AppSettings {
 
         /// CandidateBoard border width
         private(set) static var contentInsets: Int = {
-                let hasSavedValue: Bool = UserDefaults.standard.object(forKey: SettingsKey.CandidatePageInsets) != nil
+                let hasSavedValue: Bool = UserDefaults.standard.object(forKey: SettingsKey.CandidatePageInsets).isNotNil
                 guard hasSavedValue else { return defaultContentInsets }
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.CandidatePageInsets)
                 guard cornerRadiusRange.contains(savedValue) else { return defaultContentInsets }
@@ -380,7 +380,7 @@ struct AppSettings {
 
         /// Corner radius of highlighted Candidate view
         private(set) static var innerCornerRadius: Int = {
-                let hasSavedValue: Bool = UserDefaults.standard.object(forKey: SettingsKey.CandidateCornerRadius) != nil
+                let hasSavedValue: Bool = UserDefaults.standard.object(forKey: SettingsKey.CandidateCornerRadius).isNotNil
                 guard hasSavedValue else { return defaultInnerCornerRadius }
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.CandidateCornerRadius)
                 guard cornerRadiusRange.contains(savedValue) else { return defaultInnerCornerRadius }
@@ -498,8 +498,8 @@ struct AppSettings {
         // MARK: - Input Options
 
         private(set) static var isEmojiSuggestionsOn: Bool = {
-                let hasSavedValue: Bool = UserDefaults.standard.object(forKey: SettingsKey.EmojiSuggestions) != nil
-                let hasLegacySavedValue: Bool = UserDefaults.standard.object(forKey: SettingsKey.LegacyEmojiSuggestions) != nil
+                let hasSavedValue: Bool = UserDefaults.standard.object(forKey: SettingsKey.EmojiSuggestions).isNotNil
+                let hasLegacySavedValue: Bool = UserDefaults.standard.object(forKey: SettingsKey.LegacyEmojiSuggestions).isNotNil
                 defer {
                         if hasLegacySavedValue {
                                 UserDefaults.standard.removeObject(forKey: SettingsKey.LegacyEmojiSuggestions)
@@ -670,8 +670,8 @@ struct AppSettings {
 
         private(set) static var customCandidateFonts: [String] = {
                 lazy var fallback: [String] = [PresetConstant.PingFangHK]
-                let hasSavedValue: Bool = UserDefaults.standard.object(forKey: SettingsKey.CandidateCustomFontList) != nil
-                let hasLegacySavedValue: Bool = UserDefaults.standard.object(forKey: SettingsKey.LegacyCustomCandidateFontList) != nil
+                let hasSavedValue: Bool = UserDefaults.standard.object(forKey: SettingsKey.CandidateCustomFontList).isNotNil
+                let hasLegacySavedValue: Bool = UserDefaults.standard.object(forKey: SettingsKey.LegacyCustomCandidateFontList).isNotNil
                 defer {
                         if hasLegacySavedValue {
                                 UserDefaults.standard.removeObject(forKey: SettingsKey.LegacyCustomCandidateFontList)
@@ -699,8 +699,8 @@ struct AppSettings {
 
         private(set) static var customCommentFonts: [String] = {
                 lazy var fallback: [String] = [PresetConstant.HelveticaNeue]
-                let hasSavedValue: Bool = UserDefaults.standard.object(forKey: SettingsKey.CommentCustomFontList) != nil
-                let hasLegacySavedValue: Bool = UserDefaults.standard.object(forKey: SettingsKey.LegacyCustomCommentFontList) != nil
+                let hasSavedValue: Bool = UserDefaults.standard.object(forKey: SettingsKey.CommentCustomFontList).isNotNil
+                let hasLegacySavedValue: Bool = UserDefaults.standard.object(forKey: SettingsKey.LegacyCustomCommentFontList).isNotNil
                 defer {
                         if hasLegacySavedValue {
                                 UserDefaults.standard.removeObject(forKey: SettingsKey.LegacyCustomCommentFontList)
@@ -728,8 +728,8 @@ struct AppSettings {
 
         private(set) static var customLabelFonts: [String] = {
                 lazy var fallback: [String] = [PresetConstant.Menlo]
-                let hasSavedValue: Bool = UserDefaults.standard.object(forKey: SettingsKey.LabelCustomFontList) != nil
-                let hasLegacySavedValue: Bool = UserDefaults.standard.object(forKey: SettingsKey.LegacyCustomLabelFontList) != nil
+                let hasSavedValue: Bool = UserDefaults.standard.object(forKey: SettingsKey.LabelCustomFontList).isNotNil
+                let hasLegacySavedValue: Bool = UserDefaults.standard.object(forKey: SettingsKey.LegacyCustomLabelFontList).isNotNil
                 defer {
                         if hasLegacySavedValue {
                                 UserDefaults.standard.removeObject(forKey: SettingsKey.LegacyCustomLabelFontList)

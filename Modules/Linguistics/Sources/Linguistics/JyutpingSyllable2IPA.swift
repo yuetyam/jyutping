@@ -1,3 +1,5 @@
+import CommonExtensions
+
 /// Jyutping romanization syllable to IPA
 public struct JyutpingSyllable2IPA {
         public static func IPAText(of syllable: String) -> String {
@@ -25,7 +27,7 @@ public struct JyutpingSyllable2IPA {
                         return "\u{6D}\u{329}" // { m̩ }
                 case "ng":
                         return "\u{14B}\u{329}" // { ŋ̩ }
-                case let text where dualInitialsMap[text.prefix(2)] != nil:
+                case let text where dualInitialsMap[text.prefix(2)].isNotNil:
                         guard let initial = dualInitialsMap[text.prefix(2)] else { return nil }
                         guard let final = FinalMap[text.dropFirst(2)] else { return nil }
                         return initial + final

@@ -88,7 +88,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         }
         private lazy var hasText: Bool? = nil {
                 didSet {
-                        guard oldValue != nil else { return }
+                        guard oldValue.isNotNil else { return }
                         guard hasText != oldValue else { return }
                         updateReturnKey()
                 }

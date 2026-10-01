@@ -1,5 +1,6 @@
 import Testing
 @testable import CoreIME
+import CommonExtensions
 
 @Suite("Character conversion")
 struct ConverterTests {
@@ -40,7 +41,7 @@ struct ConverterTests {
         func CangjieRoots() {
                 let roots = "日月金木水火土竹戈十大中一弓人心手口尸廿山女田難卜重"
                 #expect(VirtualInputKey.alphabetSet.sorted().compactMap(Converter.cangjie(of:)).map(String.init).joined() == roots)
-                #expect(Converter.cangjie(of: .number1) == nil)
+                #expect(Converter.cangjie(of: .number1).isNil)
         }
 
         @Test("candidate transformation converts only Cantonese text")

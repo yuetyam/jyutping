@@ -1,5 +1,6 @@
 import Testing
 @testable import CoreIME
+import CommonExtensions
 
 @Suite("Virtual input keys")
 struct VirtualInputKeyTests {
@@ -38,7 +39,7 @@ struct VirtualInputKeyTests {
         func digits() {
                 #expect(VirtualInputKey.number0.digit == 0)
                 #expect(VirtualInputKey.number9.digit == 9)
-                #expect(VirtualInputKey.letterA.digit == nil)
+                #expect(VirtualInputKey.letterA.digit.isNil)
         }
 
         @Test("matching accepts hardware codes internal codes and characters")
@@ -51,11 +52,11 @@ struct VirtualInputKeyTests {
                 #expect(VirtualInputKey.matchInputKey(for: VirtualInputKey.grave.keyCode) == .grave)
                 #expect(VirtualInputKey.matchInputKey(for: VirtualInputKey.letterG.keyCode) == .letterG)
                 #expect(VirtualInputKey.matchInputKey(for: VirtualInputKey.number8.keyCode) == .number8)
-                #expect(VirtualInputKey.matchInputKey(for: UInt16.max) == nil)
+                #expect(VirtualInputKey.matchInputKey(for: UInt16.max).isNil)
                 #expect(VirtualInputKey.matchInputKey(for: VirtualInputKey.letterG.code) == .letterG)
-                #expect(VirtualInputKey.matchInputKey(for: -1) == nil)
+                #expect(VirtualInputKey.matchInputKey(for: -1).isNil)
                 #expect(VirtualInputKey.matchInputKey(for: Character("g")) == .letterG)
-                #expect(VirtualInputKey.matchInputKey(for: Character("G")) == nil)
+                #expect(VirtualInputKey.matchInputKey(for: Character("G")).isNil)
         }
 
         @Test("key collections expose stable encodings and anchor normalization")

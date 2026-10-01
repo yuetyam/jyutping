@@ -30,7 +30,7 @@ extension Engine {
         }
 
         private static func processPinyinSlices<T: RandomAccessCollection<VirtualInputKey>>(of keys: T, text: String, limit: Int64? = nil, anchorsStatement: OpaquePointer?, spellStatement: OpaquePointer?) -> [PinyinLexicon] {
-                let adjustedLimit: Int64 = (limit == nil) ? 300 : 100
+                let adjustedLimit: Int64 = limit.isNil ? 300 : 100
                 let inputLength: Int = keys.count
                 return (0..<inputLength).flatMap({ number -> [PinyinLexicon] in
                         let leadingKeys = keys.dropLast(number)
@@ -67,7 +67,7 @@ extension Engine {
                         guard queried.contains(where: { $0.inputCount == inputLength }).negative else { return false }
                         return segmentation.contains(where: { $0.length == inputLength }).negative
                 }()
-                let prefixesLimit: Int64 = (limit == nil) ? 500 : 200
+                let prefixesLimit: Int64 = limit.isNil ? 500 : 200
                 let prefixMatched: [PinyinLexicon] = shouldMatchPrefixes.negative ? [] : segmentation.flatMap({ scheme -> [PinyinLexicon] in
                         let tail = keys.dropFirst(scheme.length)
                         guard let lastAnchor = tail.first else { return [] }

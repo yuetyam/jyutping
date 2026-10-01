@@ -4,8 +4,8 @@ import CommonExtensions
 
 struct Options {
         nonisolated(unsafe) private(set) static var isAudioFeedbackOn: Bool = {
-                let hasSavedValue: Bool = UserDefaults.standard.object(forKey: OptionsKey.AudioFeedback) != nil
-                let hasLegacySavedValue: Bool = UserDefaults.standard.object(forKey: LegacyOptionsKey.AudioFeedback) != nil
+                let hasSavedValue: Bool = UserDefaults.standard.object(forKey: OptionsKey.AudioFeedback).isNotNil
+                let hasLegacySavedValue: Bool = UserDefaults.standard.object(forKey: LegacyOptionsKey.AudioFeedback).isNotNil
                 defer {
                         if hasLegacySavedValue {
                                 UserDefaults.standard.removeObject(forKey: LegacyOptionsKey.AudioFeedback)
@@ -81,8 +81,8 @@ struct Options {
         }
 
         nonisolated(unsafe) private(set) static var commentStyle: CommentStyle = {
-                let hasSavedValue: Bool = UserDefaults.standard.object(forKey: OptionsKey.CommentStyle) != nil
-                let hasLegacySavedValue: Bool = UserDefaults.standard.object(forKey: LegacyOptionsKey.CommentStyle) != nil
+                let hasSavedValue: Bool = UserDefaults.standard.object(forKey: OptionsKey.CommentStyle).isNotNil
+                let hasLegacySavedValue: Bool = UserDefaults.standard.object(forKey: LegacyOptionsKey.CommentStyle).isNotNil
                 defer {
                         if hasLegacySavedValue {
                                 UserDefaults.standard.removeObject(forKey: LegacyOptionsKey.CommentStyle)
@@ -114,8 +114,8 @@ struct Options {
         }
 
         nonisolated(unsafe) private(set) static var commentToneStyle: CommentToneStyle = {
-                let hasSavedValue: Bool = UserDefaults.standard.object(forKey: OptionsKey.CommentToneStyle) != nil
-                let hasLegacySavedValue: Bool = UserDefaults.standard.object(forKey: LegacyOptionsKey.CommentToneStyle) != nil
+                let hasSavedValue: Bool = UserDefaults.standard.object(forKey: OptionsKey.CommentToneStyle).isNotNil
+                let hasLegacySavedValue: Bool = UserDefaults.standard.object(forKey: LegacyOptionsKey.CommentToneStyle).isNotNil
                 defer {
                         if hasLegacySavedValue {
                                 UserDefaults.standard.removeObject(forKey: LegacyOptionsKey.CommentToneStyle)
@@ -137,8 +137,8 @@ struct Options {
         }
 
         nonisolated(unsafe) private(set) static var traditionalCharacterStandard: CharacterStandard = {
-                let hasSavedValue: Bool = UserDefaults.standard.object(forKey: OptionsKey.TraditionalCharacterStandard) != nil
-                let hasLegacySavedValue: Bool = UserDefaults.standard.object(forKey: LegacyOptionsKey.CharacterStandard) != nil
+                let hasSavedValue: Bool = UserDefaults.standard.object(forKey: OptionsKey.TraditionalCharacterStandard).isNotNil
+                let hasLegacySavedValue: Bool = UserDefaults.standard.object(forKey: LegacyOptionsKey.CharacterStandard).isNotNil
                 defer {
                         if hasLegacySavedValue {
                                 UserDefaults.standard.removeObject(forKey: LegacyOptionsKey.CharacterStandard)
@@ -175,8 +175,8 @@ struct Options {
         }
 
         nonisolated(unsafe) private(set) static var isEmojiSuggestionsOn: Bool = {
-                let hasSavedValue: Bool = UserDefaults.standard.object(forKey: OptionsKey.EmojiSuggestions) != nil
-                let hasLegacySavedValue: Bool = UserDefaults.standard.object(forKey: LegacyOptionsKey.EmojiSuggestions) != nil
+                let hasSavedValue: Bool = UserDefaults.standard.object(forKey: OptionsKey.EmojiSuggestions).isNotNil
+                let hasLegacySavedValue: Bool = UserDefaults.standard.object(forKey: LegacyOptionsKey.EmojiSuggestions).isNotNil
                 defer {
                         if hasLegacySavedValue {
                                 UserDefaults.standard.removeObject(forKey: LegacyOptionsKey.EmojiSuggestions)

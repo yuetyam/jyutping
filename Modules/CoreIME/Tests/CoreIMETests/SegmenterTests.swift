@@ -1,5 +1,6 @@
 import Testing
 @testable import CoreIME
+import CommonExtensions
 
 @Suite("Jyutping segmenter")
 struct SegmenterTests {
@@ -65,7 +66,7 @@ struct SegmenterTests {
                 #expect(Segmenter.segment([VirtualInputKey]()).isEmpty)
                 #expect(Segmenter.segment([.number1, .grave]).isEmpty)
                 #expect(Segmenter.syllableText(of: inputKeys("gwong")) == "gwong")
-                #expect(Segmenter.syllableText(of: inputKeys("zzzzzz")) == nil)
+                #expect(Segmenter.syllableText(of: inputKeys("zzzzzz")).isNil)
         }
 
         @Test("ambiguous segmentation keeps only best key coverage")

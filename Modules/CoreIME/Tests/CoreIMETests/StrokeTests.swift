@@ -1,5 +1,6 @@
 import Testing
 @testable import CoreIME
+import CommonExtensions
 
 @Suite("Stroke input")
 struct StrokeTests {
@@ -29,7 +30,7 @@ struct StrokeTests {
                 #expect(VirtualInputKey.letterP.strokeKey == .leftFalling)
                 #expect(VirtualInputKey.letterN.strokeKey == .rightFalling)
                 #expect(VirtualInputKey.letterW.displayStrokeKeyText == "⼀")
-                #expect(VirtualInputKey.letterH.displayStrokeKeyText == nil)
+                #expect(VirtualInputKey.letterH.displayStrokeKeyText.isNil)
                 #expect(StrokeVirtualKey.isValidStrokes(inputKeys("wsadzx")))
                 #expect(StrokeVirtualKey.isValidStrokes(inputKeys("wg")) == false)
         }

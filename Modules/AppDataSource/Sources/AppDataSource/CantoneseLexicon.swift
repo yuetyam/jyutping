@@ -113,7 +113,7 @@ public struct CantoneseLexicon: Hashable, Identifiable {
                 var chars: String = word
                 var romanization: String? = nil
                 var matchedCount: Int = 0
-                while romanization == nil && !chars.isEmpty {
+                while romanization.isNil && !chars.isEmpty {
                         romanization = DataMaster.fetchRomanizations(for: chars).first
                         matchedCount = chars.count
                         chars = String(chars.dropLast())

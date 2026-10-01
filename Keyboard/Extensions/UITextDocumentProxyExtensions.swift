@@ -6,7 +6,7 @@ extension UITextDocumentProxy {
 
         /// Clear(delete) the text to the left of the cursor.
         func clearAllText() {
-                if selectedText != nil {
+                if selectedText.isNotNil {
                         deleteBackward()
                 }
                 if let textCount = documentContextBeforeInput?.count, textCount > 0 {
@@ -31,7 +31,7 @@ extension UITextDocumentProxy {
         /// Copy all text to the system clipboard, and clear the text-entry object content.
         /// - Returns: Did copy text to the system clipboard?
         func cutAllText() -> Bool {
-                if selectedText != nil {
+                if selectedText.isNotNil {
                         adjustTextPosition(byCharacterOffset: 1)
                 }
                 let head: String = documentContextBeforeInput ?? String.empty
@@ -55,7 +55,7 @@ extension UITextDocumentProxy {
 
         /// Hant ↔ Hans conversion. 簡繁轉換
         func convertAllText() {
-                if selectedText != nil {
+                if selectedText.isNotNil {
                         adjustTextPosition(byCharacterOffset: 1)
                 }
                 let head: String = documentContextBeforeInput ?? String.empty
@@ -87,14 +87,14 @@ extension UITextDocumentProxy {
                 adjustTextPosition(byCharacterOffset: offset)
         }
         func jumpToHead() {
-                if selectedText != nil {
+                if selectedText.isNotNil {
                         adjustTextPosition(byCharacterOffset: -1)
                 }
                 let headOffset: Int = documentContextBeforeInput?.utf16.count ?? 1
                 adjustTextPosition(byCharacterOffset: -headOffset)
         }
         func jumpToTail() {
-                if selectedText != nil {
+                if selectedText.isNotNil {
                         adjustTextPosition(byCharacterOffset: 1)
                 }
                 let tailOffset: Int = documentContextAfterInput?.utf16.count ?? 1

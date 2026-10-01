@@ -30,8 +30,8 @@ enum KeyboardLayout: Int, CaseIterable {
 
         /// Read KeyboardLayout from UserDefaults
         static func fetchSavedLayout() -> KeyboardLayout {
-                let hasSavedValue: Bool = UserDefaults.standard.object(forKey: OptionsKey.KeyboardLayout) != nil
-                let hasLegacySavedValue: Bool = UserDefaults.standard.object(forKey: LegacyOptionsKey.KeyboardLayout) != nil
+                let hasSavedValue: Bool = UserDefaults.standard.object(forKey: OptionsKey.KeyboardLayout).isNotNil
+                let hasLegacySavedValue: Bool = UserDefaults.standard.object(forKey: LegacyOptionsKey.KeyboardLayout).isNotNil
                 defer {
                         if hasLegacySavedValue {
                                 UserDefaults.standard.removeObject(forKey: LegacyOptionsKey.KeyboardLayout)

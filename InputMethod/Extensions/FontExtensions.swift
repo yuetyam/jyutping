@@ -127,7 +127,7 @@ extension Font {
 private extension Font {
 
         static func found(font name: String) -> Bool {
-                return NSFont(name: name, size: 15) != nil
+                return NSFont(name: name, size: 15).isNotNil
         }
 
         static func combine(fonts names: [String], size: CGFloat) -> Font? {
