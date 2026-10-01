@@ -61,16 +61,13 @@ struct GlassEnhancedInputKey: View {
         @State private var pulled: String? = nil
 
         var body: some View {
-
-                // Keeps the preview and long-press timer active while the finger slides outside the button.
-                let isInteracting: Bool = isTouching || isDragging
-
+                let isInteracting: Bool = isTouching || isDragging // isTouching may be false while the finger slides outside the button
                 let keyWidth: CGFloat = context.widthUnit * widthCoefficient
                 let keyHeight: CGFloat = context.heightUnit
                 let keyboardInterface = context.keyboardInterface
                 let insets = keyboardInterface.keyShapeInsets
-                let baseWidth: CGFloat = keyWidth - (insets.leading + insets.trailing)
-                let baseHeight: CGFloat = keyHeight - (insets.top + insets.bottom)
+                let baseWidth: CGFloat = keyWidth - insets.horizontalTotal
+                let baseHeight: CGFloat = keyHeight - insets.verticalTotal
                 let previewBottomOffset = keyboardInterface.previewBottomOffset(keyWidth: keyWidth, keyHeight: keyHeight, insets: insets)
                 let displayForm = KeyDisplayForm.responsive(isInteracting: isInteracting, isLongPressing: isLongPressing, shouldPreview: Options.keyTextPreview)
                 let shouldShowLowercaseKeys: Bool = Options.showLowercaseKeys && context.keyboardCase.isLowercased
@@ -80,7 +77,8 @@ struct GlassEnhancedInputKey: View {
                 Button(action: {}) {
                         ZStack {
                                 Color.interactiveClear
-                                if displayForm.isExpanding {
+                                switch displayForm {
+                                case .expanding:
                                         let memberCount: Int = unit.members.count
                                         let expansionCount: Int = memberCount - 1
                                         let offsetX: CGFloat = baseWidth * CGFloat(expansionCount)
@@ -93,9 +91,10 @@ struct GlassEnhancedInputKey: View {
                                                                 ForEach(unit.members.indices, id: \.self) { index in
                                                                         let elementIndex: Int = side.isLeading ? index : ((memberCount - 1) - index)
                                                                         let element: KeyElement = unit.members[elementIndex]
+                                                                        let isSelected: Bool = selectedIndex == elementIndex
                                                                         ZStack {
                                                                                 RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
-                                                                                        .fill(selectedIndex == elementIndex ? Color.accentColor : Color.clear)
+                                                                                        .fill(isSelected ? Color.accentColor : Color.clear)
                                                                                 ForEach(element.extras.indices, id: \.self) { extraIndex in
                                                                                         let extra = element.extras[extraIndex]
                                                                                         ZStack(alignment: extra.alignment) {
@@ -108,7 +107,7 @@ struct GlassEnhancedInputKey: View {
                                                                                 Text(verbatim: element.text)
                                                                                         .textCase(textCase)
                                                                                         .font(element.isTextSingular ? .title2 : .title3)
-                                                                                        .foregroundStyle(selectedIndex == elementIndex ? Color.white : Color.primary)
+                                                                                        .foregroundStyle(isSelected ? Color.white : Color.primary)
                                                                         }
                                                                         .frame(maxWidth: .infinity)
                                                                 }
@@ -119,7 +118,7 @@ struct GlassEnhancedInputKey: View {
                                                         .padding(.trailing, trailingOffset)
                                                 }
                                                 .padding(insets)
-                                } else if displayForm.isPreviewing {
+                                case .previewing:
                                         Color.clear
                                                 .glassEffect(.regular, in: BubbleShape())
                                                 .overlay {
@@ -129,7 +128,7 @@ struct GlassEnhancedInputKey: View {
                                                                 .padding(.bottom, previewBottomOffset)
                                                 }
                                                 .padding(insets)
-                                } else {
+                                case .normal, .reflecting:
                                         ZStack {
                                                 Color.clear
                                                 ForEach(unit.primary.extras.indices, id: \.self) { index in
@@ -224,17 +223,14 @@ struct GlassEnhancedInputKey: View {
                 )
                 .task(id: isInteracting) {
                         guard isInteracting else { return }
-                        while Task.isCancelled.negative {
-                                try? await Task.sleep(for: .milliseconds(100)) // 0.1s
-                                if isInteracting {
-                                        if isLongPressing.negative {
-                                                let shouldTriggerLongPress: Bool = (buffer >= 6) || (buffer >= 3 && pulled == nil)
-                                                if shouldTriggerLongPress {
-                                                        isLongPressing = true
-                                                } else {
-                                                        buffer += 1
-                                                }
-                                        }
+                        while isLongPressing.negative {
+                                try? await Task.sleep(for: .milliseconds(100))
+                                guard Task.isCancelled.negative else { break }
+                                let shouldTriggerLongPress: Bool = (buffer >= 6) || (buffer >= 3 && pulled == nil)
+                                if shouldTriggerLongPress {
+                                        isLongPressing = true
+                                } else {
+                                        buffer += 1
                                 }
                         }
                 }
