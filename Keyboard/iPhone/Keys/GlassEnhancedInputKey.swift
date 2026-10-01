@@ -2,37 +2,69 @@ import SwiftUI
 import CommonExtensions
 import CoreIME
 
+/// A glass-styled input key supporting vertical pulls and long-press alternative selection.
+///
+/// Holding the key expands its alternatives; sliding selects an element and releasing commits it.
+/// Drag tracking keeps the selector active when the finger moves outside the original button.
 @available(iOS 26.0, *)
 @available(iOSApplicationExtension 26.0, *)
 struct GlassEnhancedInputKey: View {
 
-        /// Create a GlassEnhancedInputKey
+        /// Creates a glass-styled key with primary content and selectable alternatives.
+        ///
         /// - Parameters:
-        ///   - side: Key location, left half screen (leading) or right half screen (trailing).
-        ///   - widthCoefficient: Times of widthUnit
-        ///   - virtual: VirtualInputKey
-        ///   - unit: KeyUnit
+        ///   - side: Key location in the leading or trailing half of the keyboard. Alternatives expand toward the opposite side.
+        ///   - widthCoefficient: Key width as a multiple of the keyboard's width unit.
+        ///   - virtual: Optional event handled on an ordinary release. When nil, the primary text is processed instead.
+        ///   - unit: Primary content, vertical-pull extras, and alternatives for long-press selection.
         init(side: HorizontalEdge, widthCoefficient: CGFloat = 1, virtual: VirtualInputKey? = nil, unit: KeyUnit) {
                 self.side = side
                 self.widthCoefficient = widthCoefficient
                 self.virtual = virtual
                 self.unit = unit
         }
-        private let side: HorizontalEdge
-        private let widthCoefficient: CGFloat
-        private let virtual: VirtualInputKey?
-        private let unit: KeyModel
 
+        /// Determines the direction of expansion and slide selection.
+        private let side: HorizontalEdge
+
+        /// Key width as a multiple of the keyboard's width unit.
+        private let widthCoefficient: CGFloat
+
+        /// Event handled on release when no alternative or pulled text is selected.
+        private let virtual: VirtualInputKey?
+
+        /// Primary key content and alternatives shown in the expanded selector.
+        private let unit: KeyUnit
+
+        /// Keyboard properties and handlers.
         @EnvironmentObject private var context: KeyboardViewController
+
+        /// Retrieves the current system color scheme (light or dark mode) from the environment.
         @Environment(\.colorScheme) private var colorScheme
 
+        /// Button press state reported by PressButtonStyle; may end when sliding outside the key.
         @State private var isTouching: Bool = false
+
+        /// Tracks the entire drag and resets automatically when the gesture ends or is cancelled.
+        @GestureState private var isDragging: Bool = false
+
+        /// Number of elapsed 100 ms checkpoints used for pull and long-press thresholds.
         @State private var buffer: Int = 0
+
+        /// Indicates that the expanded alternative selector has been activated.
         @State private var isLongPressing: Bool = false
+
+        /// Selected index in unit.members, independent of the visual expansion direction.
         @State private var selectedIndex: Int = 0
+
+        /// Extra text selected by a vertical pull before long-press expansion.
         @State private var pulled: String? = nil
 
         var body: some View {
+
+                // Keeps the preview and long-press timer active while the finger slides outside the button.
+                let isInteracting: Bool = isTouching || isDragging
+
                 let keyWidth: CGFloat = context.widthUnit * widthCoefficient
                 let keyHeight: CGFloat = context.heightUnit
                 let keyboardInterface = context.keyboardInterface
@@ -40,7 +72,7 @@ struct GlassEnhancedInputKey: View {
                 let baseWidth: CGFloat = keyWidth - (insets.leading + insets.trailing)
                 let baseHeight: CGFloat = keyHeight - (insets.top + insets.bottom)
                 let previewBottomOffset = keyboardInterface.previewBottomOffset(keyWidth: keyWidth, keyHeight: keyHeight, insets: insets)
-                let displayForm = KeyDisplayForm.responsive(isInteracting: isTouching, isLongPressing: isLongPressing, shouldPreview: Options.keyTextPreview)
+                let displayForm = KeyDisplayForm.responsive(isInteracting: isInteracting, isLongPressing: isLongPressing, shouldPreview: Options.keyTextPreview)
                 let shouldShowLowercaseKeys: Bool = Options.showLowercaseKeys && context.keyboardCase.isLowercased
                 let textCase: Text.Case = shouldShowLowercaseKeys ? .lowercase : .uppercase
                 let shouldAdjustKeyTextPosition: Bool = shouldShowLowercaseKeys && context.keyboardForm.isPrimary && (virtual?.isNumber.negative ?? true)
@@ -128,6 +160,11 @@ struct GlassEnhancedInputKey: View {
                         context.triggerHapticFeedback()
                 })
                 .simultaneousGesture(DragGesture(minimumDistance: 0)
+                        .updating($isDragging) { _, isDragging, _ in
+                                if isDragging.negative {
+                                        isDragging = true
+                                }
+                        }
                         .onChanged { state in
                                 if isLongPressing {
                                         let memberCount: Int = unit.members.count
@@ -185,11 +222,11 @@ struct GlassEnhancedInputKey: View {
                                 }
                         }
                 )
-                .task(id: isTouching) {
-                        guard isTouching else { return }
+                .task(id: isInteracting) {
+                        guard isInteracting else { return }
                         while Task.isCancelled.negative {
                                 try? await Task.sleep(for: .milliseconds(100)) // 0.1s
-                                if isTouching {
+                                if isInteracting {
                                         if isLongPressing.negative {
                                                 let shouldTriggerLongPress: Bool = (buffer >= 6) || (buffer >= 3 && pulled == nil)
                                                 if shouldTriggerLongPress {
