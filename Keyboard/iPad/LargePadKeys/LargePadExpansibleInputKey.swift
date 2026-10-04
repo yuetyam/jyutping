@@ -2,39 +2,57 @@ import SwiftUI
 import CommonExtensions
 import CoreIME
 
+/// A large-iPad input key supporting long-press alternative selection.
+///
+/// Holding the key expands its alternatives; sliding selects an element and releasing commits it.
+/// Drag tracking keeps the selector active when the finger moves outside the original button.
 struct LargePadExpansibleInputKey: View {
 
-        /// Create a LargePadExpansibleInputKey
+        /// Creates a LargePadExpansibleInputKey with primary content and selectable alternatives.
+        ///
         /// - Parameters:
-        ///   - side: Key location, left half (leading) or right half (trailing).
-        ///   - virtual: VirtualInputKey
-        ///   - unit: KeyUnit
+        ///   - side: Key location in the leading or trailing half of the keyboard. Alternatives expand toward the opposite side.
+        ///   - virtual: Optional event handled on an ordinary release. When nil, the primary text is processed instead.
+        ///   - unit: Primary content and alternatives for long-press selection.
         init(side: HorizontalEdge, virtual: VirtualInputKey? = nil, unit: KeyUnit) {
                 self.side = side
                 self.virtual = virtual
                 self.unit = unit
         }
 
+        /// Determines the direction of expansion and slide selection.
         private let side: HorizontalEdge
+
+        /// Event handled on release when no alternative is selected.
         private let virtual: VirtualInputKey?
+
+        /// Primary key content and alternatives shown in the expanded selector.
         private let unit: KeyUnit
 
+        /// Keyboard properties and handlers.
         @EnvironmentObject private var context: KeyboardViewController
+
+        /// Retrieves the current system color scheme (light or dark mode) from the environment.
         @Environment(\.colorScheme) private var colorScheme
 
+        /// Button press state reported by PressButtonStyle; may end when sliding outside the key.
         @State private var isTouching: Bool = false
+
+        /// Number of elapsed 100 ms checkpoints used for long-press thresholds.
         @State private var buffer: Int = 0
+
+        /// Indicates that the expanded alternative selector has been activated.
         @State private var isLongPressing: Bool = false
+
+        /// Selected index in unit.members, independent of the visual expansion direction.
         @State private var selectedIndex: Int = 0
 
         var body: some View {
                 let keyWidth: CGFloat = context.widthUnit
                 let keyHeight: CGFloat = context.heightUnit
-                let isLandscape: Bool = context.keyboardInterface.isPadLandscape
-                let verticalPadding: CGFloat = isLandscape ? 5 : 4
-                let horizontalPadding: CGFloat = isLandscape ? 5 : 4
-                let baseWidth: CGFloat = keyWidth - (horizontalPadding * 2)
-                let baseHeight: CGFloat = keyHeight - (verticalPadding * 2)
+                let insets = context.keyboardInterface.keyShapeInsets
+                let baseWidth: CGFloat = keyWidth - insets.horizontalTotal
+                let baseHeight: CGFloat = keyHeight - insets.verticalTotal
                 let extraHeight: CGFloat = 4
                 let previewBottomOffset: CGFloat = (baseHeight + extraHeight) * 2
                 let shouldShowLowercaseKeys: Bool = Options.showLowercaseKeys && context.keyboardCase.isLowercased
@@ -56,28 +74,25 @@ struct LargePadExpansibleInputKey: View {
                                                                 ForEach(unit.members.indices, id: \.self) { index in
                                                                         let elementIndex: Int = side.isLeading ? index : ((memberCount - 1) - index)
                                                                         let element: KeyElement = unit.members[elementIndex]
+                                                                        let isSelected: Bool = selectedIndex == elementIndex
                                                                         ZStack {
                                                                                 RoundedRectangle(cornerRadius: PresetConstant.innerLargeKeyCornerRadius)
-                                                                                        .fill(selectedIndex == elementIndex ? Color.accentColor : Color.clear)
-                                                                                ZStack(alignment: .top) {
-                                                                                        Color.clear
-                                                                                        Text(verbatim: element.extras.first(where: \.alignment.isTopEdge)?.text ?? String.space)
-                                                                                                .font(.labelCaption)
-                                                                                                .shallow()
+                                                                                        .fill(isSelected ? Color.accentColor : Color.clear)
+                                                                                ForEach(element.extras.indices, id: \.self) { extraIndex in
+                                                                                        let extra = element.extras[extraIndex]
+                                                                                        ZStack(alignment: extra.alignment) {
+                                                                                                Color.clear
+                                                                                                Text(verbatim: extra.text)
+                                                                                                        .font(.labelCaption)
+                                                                                                        .shallow()
+                                                                                        }
+                                                                                        .padding(2)
                                                                                 }
-                                                                                .padding(2)
-                                                                                ZStack(alignment: .bottom) {
-                                                                                        Color.clear
-                                                                                        Text(verbatim: element.extras.first(where: \.alignment.isBottomEdge)?.text ?? String.space)
-                                                                                                .font(.labelCaption)
-                                                                                                .shallow()
-                                                                                }
-                                                                                .padding(2)
                                                                                 Text(verbatim: element.text)
                                                                                         .textCase(textCase)
                                                                                         .font(.title2)
                                                                         }
-                                                                        .foregroundStyle(selectedIndex == elementIndex ? Color.white : Color.primary)
+                                                                        .foregroundStyle(isSelected ? Color.white : Color.primary)
                                                                         .padding(4)
                                                                         .frame(maxWidth: .infinity)
                                                                 }
@@ -87,32 +102,23 @@ struct LargePadExpansibleInputKey: View {
                                                         .padding(.leading, leadingOffset)
                                                         .padding(.trailing, trailingOffset)
                                                 }
-                                                .padding(.vertical, verticalPadding)
-                                                .padding(.horizontal, horizontalPadding)
+                                                .padding(insets)
                                 } else {
                                         RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius)
                                                 .fill(isTouching ? colorScheme.activeInputKeyColor : colorScheme.inputKeyColor)
                                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                                .padding(.vertical, verticalPadding)
-                                                .padding(.horizontal, horizontalPadding)
-                                        ZStack(alignment: .topTrailing) {
-                                                Color.clear
-                                                Text(verbatim: unit.primary.extras.first(where: \.alignment.isTopEdge)?.text ?? String.space)
-                                                        .textCase(textCase)
-                                                        .font(.labelCaption)
-                                                        .shallow()
+                                                .padding(insets)
+                                        ForEach(unit.primary.extras.indices, id: \.self) { index in
+                                                let extra = unit.primary.extras[index]
+                                                ZStack(alignment: extra.alignment) {
+                                                        Color.clear
+                                                        Text(verbatim: extra.text)
+                                                                .textCase(textCase)
+                                                                .font(.labelCaption)
+                                                                .shallow()
+                                                }
+                                                .padding(insets.plused(horizontal: 4, vertical: 2))
                                         }
-                                        .padding(.vertical, verticalPadding + 2)
-                                        .padding(.horizontal, horizontalPadding + 4)
-                                        ZStack(alignment: .bottomTrailing) {
-                                                Color.clear
-                                                Text(verbatim: unit.primary.extras.first(where: \.alignment.isBottomEdge)?.text ?? String.space)
-                                                        .textCase(textCase)
-                                                        .font(.labelCaption)
-                                                        .shallow()
-                                        }
-                                        .padding(.vertical, verticalPadding + 2)
-                                        .padding(.horizontal, horizontalPadding + 4)
                                         Text(verbatim: unit.primary.text)
                                                 .textCase(textCase)
                                                 .font(.title2)
@@ -137,16 +143,19 @@ struct LargePadExpansibleInputKey: View {
                                         let maxPoint: CGFloat = baseWidth * CGFloat(memberCount)
                                         let endIndex: Int = memberCount - 1
                                         let index = memberCount - Int((maxPoint - distance) / baseWidth)
-                                        selectedIndex = min(endIndex, max(0, index))
+                                        let newSelectedIndex = min(endIndex, max(0, index))
+                                        if selectedIndex != newSelectedIndex {
+                                                selectedIndex = newSelectedIndex
+                                        }
                                 }
                         }
                         .onEnded { _ in
                                 buffer = 0
+                                defer {
+                                        selectedIndex = 0
+                                        isLongPressing = false
+                                }
                                 if isLongPressing {
-                                        defer {
-                                                selectedIndex = 0
-                                                isLongPressing = false
-                                        }
                                         guard let selectedElement = unit.members.fetch(selectedIndex) else { return }
                                         let text: String = context.keyboardCase.isLowercased ? selectedElement.text : selectedElement.text.uppercased()
                                         AudioFeedback.inputed()
@@ -161,16 +170,13 @@ struct LargePadExpansibleInputKey: View {
                 )
                 .task(id: isTouching) {
                         guard isTouching else { return }
-                        while Task.isCancelled.negative {
-                                try? await Task.sleep(for: .milliseconds(100)) // 0.1s
-                                if isTouching {
-                                        if isLongPressing.negative {
-                                                if buffer >= 3 {
-                                                        isLongPressing = true
-                                                } else {
-                                                        buffer += 1
-                                                }
-                                        }
+                        while isLongPressing.negative {
+                                try? await Task.sleep(for: .milliseconds(100))
+                                guard Task.isCancelled.negative else { break }
+                                if buffer >= 3 {
+                                        isLongPressing = true
+                                } else {
+                                        buffer += 1
                                 }
                         }
                 }

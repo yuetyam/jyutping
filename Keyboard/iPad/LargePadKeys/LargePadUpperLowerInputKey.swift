@@ -2,15 +2,20 @@ import SwiftUI
 import CommonExtensions
 import CoreIME
 
+/// A large-iPad punctuation key supporting a downward pull and long-press alternative selection.
+///
+/// Holding the key expands its alternatives; sliding selects an element and releasing commits it.
+/// Drag tracking keeps the selector active when the finger moves outside the original button.
 struct LargePadUpperLowerInputKey: View {
 
-        /// Create a LargePadUpperLowerInputKey
+        /// Creates a LargePadUpperLowerInputKey with primary content and selectable alternatives.
+        ///
         /// - Parameters:
-        ///   - side: Key location, left half screen (leading) or right half screen (trailing)
-        ///   - upper: Key upper text
-        ///   - lower: Key lower text
-        ///   - virtual: VirtualInputKey, corresponding to the lower text
-        ///   - unit: KeyUnit
+        ///   - side: Key location in the leading or trailing half of the keyboard. Alternatives expand toward the opposite side.
+        ///   - upper: Text shown above the primary content and committed by a downward pull.
+        ///   - lower: Text committed on an ordinary release when no virtual event is supplied.
+        ///   - virtual: Optional event handled on an ordinary release. When nil, the lower text is processed instead.
+        ///   - unit: Primary content and alternatives for long-press selection.
         init(side: HorizontalEdge, upper: String, lower: String, virtual: VirtualInputKey? = nil, unit: KeyUnit) {
                 self.side = side
                 self.upper = upper
@@ -19,29 +24,48 @@ struct LargePadUpperLowerInputKey: View {
                 self.unit = unit
         }
 
+        /// Determines the direction of expansion and slide selection.
         private let side: HorizontalEdge
+
+        /// Text selected by a downward pull.
         private let upper: String
+
+        /// Text committed on an ordinary release when no pull or virtual event is selected.
         private let lower: String
+
+        /// Event handled on release when no alternative or pulled text is selected.
         private let virtual: VirtualInputKey?
+
+        /// Primary key content and alternatives shown in the expanded selector.
         private let unit: KeyUnit
 
+        /// Keyboard properties and handlers.
         @EnvironmentObject private var context: KeyboardViewController
+
+        /// Retrieves the current system color scheme (light or dark mode) from the environment.
         @Environment(\.colorScheme) private var colorScheme
 
+        /// Button press state reported by PressButtonStyle; may end when sliding outside the key.
         @State private var isTouching: Bool = false
+
+        /// Number of elapsed 100 ms checkpoints used for pull and long-press thresholds.
         @State private var buffer: Int = 0
+
+        /// Indicates that the expanded alternative selector has been activated.
         @State private var isLongPressing: Bool = false
+
+        /// Selected index in unit.members, independent of the visual expansion direction.
         @State private var selectedIndex: Int = 0
+
+        /// Indicates that a downward pull has selected the upper text.
         @State private var isPullingDown: Bool = false
 
         var body: some View {
                 let keyWidth: CGFloat = context.widthUnit
                 let keyHeight: CGFloat = context.heightUnit
-                let isLandscape: Bool = context.keyboardInterface.isPadLandscape
-                let verticalPadding: CGFloat = isLandscape ? 5 : 4
-                let horizontalPadding: CGFloat = isLandscape ? 5 : 4
-                let baseWidth: CGFloat = keyWidth - (horizontalPadding * 2)
-                let baseHeight: CGFloat = keyHeight - (verticalPadding * 2)
+                let insets = context.keyboardInterface.keyShapeInsets
+                let baseWidth: CGFloat = keyWidth - insets.horizontalTotal
+                let baseHeight: CGFloat = keyHeight - insets.verticalTotal
                 let extraHeight: CGFloat = 4
                 let previewBottomOffset: CGFloat = (baseHeight + extraHeight) * 2
                 Button(action: {}) {
@@ -61,28 +85,24 @@ struct LargePadUpperLowerInputKey: View {
                                                                 ForEach(unit.members.indices, id: \.self) { index in
                                                                         let elementIndex: Int = side.isLeading ? index : ((memberCount - 1) - index)
                                                                         let element: KeyElement = unit.members[elementIndex]
-                                                                        let isHighlighted: Bool = (selectedIndex == elementIndex)
+                                                                        let isSelected: Bool = selectedIndex == elementIndex
                                                                         ZStack {
                                                                                 RoundedRectangle(cornerRadius: PresetConstant.innerLargeKeyCornerRadius)
-                                                                                        .fill(isHighlighted ? Color.accentColor : Color.clear)
-                                                                                ZStack(alignment: .top) {
-                                                                                        Color.clear
-                                                                                        Text(verbatim: element.extras.first(where: \.alignment.isTopEdge)?.text ?? String.space)
-                                                                                                .font(.labelCaption)
-                                                                                                .shallow()
+                                                                                        .fill(isSelected ? Color.accentColor : Color.clear)
+                                                                                ForEach(element.extras.indices, id: \.self) { extraIndex in
+                                                                                        let extra = element.extras[extraIndex]
+                                                                                        ZStack(alignment: extra.alignment) {
+                                                                                                Color.clear
+                                                                                                Text(verbatim: extra.text)
+                                                                                                        .font(.labelCaption)
+                                                                                                        .shallow()
+                                                                                        }
+                                                                                        .padding(2)
                                                                                 }
-                                                                                .padding(2)
-                                                                                ZStack(alignment: .bottom) {
-                                                                                        Color.clear
-                                                                                        Text(verbatim: element.extras.first(where: \.alignment.isBottomEdge)?.text ?? String.space)
-                                                                                                .font(.labelCaption)
-                                                                                                .shallow()
-                                                                                }
-                                                                                .padding(2)
                                                                                 Text(verbatim: element.text)
                                                                                         .font(.title2)
                                                                         }
-                                                                        .foregroundStyle(isHighlighted ? Color.white : Color.primary)
+                                                                        .foregroundStyle(isSelected ? Color.white : Color.primary)
                                                                         .padding(4)
                                                                         .frame(maxWidth: .infinity)
                                                                 }
@@ -92,14 +112,12 @@ struct LargePadUpperLowerInputKey: View {
                                                         .padding(.leading, leadingOffset)
                                                         .padding(.trailing, trailingOffset)
                                                 }
-                                                .padding(.vertical, verticalPadding)
-                                                .padding(.horizontal, horizontalPadding)
+                                                .padding(insets)
                                 } else {
                                         RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius)
                                                 .fill(isTouching ? colorScheme.activeInputKeyColor : colorScheme.inputKeyColor)
                                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                                .padding(.vertical, verticalPadding)
-                                                .padding(.horizontal, horizontalPadding)
+                                                .padding(insets)
                                         if isPullingDown {
                                                 Text(verbatim: upper).font(.title2)
                                         } else {
@@ -107,14 +125,12 @@ struct LargePadUpperLowerInputKey: View {
                                                         Color.clear
                                                         Text(verbatim: upper)
                                                 }
-                                                .padding(.vertical, verticalPadding + 6)
-                                                .padding(.horizontal, horizontalPadding + 6)
+                                                .padding(insets.plused(horizontal: 6, vertical: 6))
                                                 ZStack(alignment: .bottom) {
                                                         Color.clear
                                                         Text(verbatim: lower)
                                                 }
-                                                .padding(.vertical, verticalPadding + 6)
-                                                .padding(.horizontal, horizontalPadding + 6)
+                                                .padding(insets.plused(horizontal: 6, vertical: 6))
                                         }
                                 }
                         }
@@ -137,7 +153,10 @@ struct LargePadUpperLowerInputKey: View {
                                                 let maxPoint: CGFloat = baseWidth * CGFloat(memberCount)
                                                 let endIndex: Int = memberCount - 1
                                                 let index = memberCount - Int((maxPoint - distance) / baseWidth)
-                                                selectedIndex = min(endIndex, max(0, index))
+                                                let newSelectedIndex = min(endIndex, max(0, index))
+                                                if selectedIndex != newSelectedIndex {
+                                                        selectedIndex = newSelectedIndex
+                                                }
                                         }
                                 } else if isPullingDown.negative {
                                         let distance: CGFloat = state.translation.height
@@ -171,16 +190,14 @@ struct LargePadUpperLowerInputKey: View {
                 )
                 .task(id: isTouching) {
                         guard isTouching else { return }
-                        while Task.isCancelled.negative {
-                                try? await Task.sleep(for: .milliseconds(100)) // 0.1s
-                                if isTouching {
-                                        if isLongPressing.negative && isPullingDown.negative {
-                                                if buffer >= 3 {
-                                                        isLongPressing = true
-                                                } else {
-                                                        buffer += 1
-                                                }
-                                        }
+                        while isLongPressing.negative {
+                                try? await Task.sleep(for: .milliseconds(100))
+                                guard Task.isCancelled.negative else { break }
+                                guard isPullingDown.negative else { break }
+                                if buffer >= 3 {
+                                        isLongPressing = true
+                                } else {
+                                        buffer += 1
                                 }
                         }
                 }

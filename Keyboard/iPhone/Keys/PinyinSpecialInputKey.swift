@@ -2,41 +2,58 @@ import SwiftUI
 import CommonExtensions
 import CoreIME
 
-// For the letter V key representing the ü
+/// A Pinyin V key with an umlaut hint, vertical pulls, and long-press alternative selection.
+///
+/// Holding the key expands its alternatives; sliding selects an element and releasing commits it.
+/// Drag tracking keeps the selector active when the finger moves outside the original button.
 struct PinyinSpecialInputKey: View {
 
+        /// Virtual V input handled on release when no alternative or pulled text is selected.
         private let virtual: VirtualInputKey = .letterV
+
+        /// Primary key content and alternatives shown in the expanded selector.
         private let unit: KeyUnit = KeyUnit(primary: KeyElement("v", extras: [.init("…", alignment: .topTrailing)]), members: [KeyElement("v"), KeyElement("…")])
 
+        /// Keyboard properties and handlers.
         @EnvironmentObject private var context: KeyboardViewController
+
+        /// Retrieves the current system color scheme (light or dark mode) from the environment.
         @Environment(\.colorScheme) private var colorScheme
 
+        /// Button press state reported by PressButtonStyle; may end when sliding outside the key.
         @State private var isTouching: Bool = false
+
+        /// Number of elapsed 100 ms checkpoints used for pull and long-press thresholds.
         @State private var buffer: Int = 0
+
+        /// Indicates that the expanded alternative selector has been activated.
         @State private var isLongPressing: Bool = false
+
+        /// Selected index in unit.members, independent of the visual expansion direction.
         @State private var selectedIndex: Int = 0
+
+        /// Extra text selected by a vertical pull before long-press expansion.
         @State private var pulled: String? = nil
 
         var body: some View {
                 let keyWidth: CGFloat = context.widthUnit
                 let keyHeight: CGFloat = context.heightUnit
-                let isPhoneLandscape: Bool = context.keyboardInterface.isPhoneLandscape
-                let verticalPadding: CGFloat = isPhoneLandscape ? 3 : 6
-                let horizontalPadding: CGFloat = isPhoneLandscape ? 6 : 3
-                let baseWidth: CGFloat = keyWidth - (horizontalPadding * 2)
-                let baseHeight: CGFloat = keyHeight - (verticalPadding * 2)
-                let shapeHeight: CGFloat = isPhoneLandscape ? (baseHeight / (2 / 6.0)) : baseHeight / ((2.5 / 6.0))
-                let curveHeight: CGFloat = isPhoneLandscape ? (shapeHeight / 3.0) : (shapeHeight / 6.0)
-                let previewBottomOffset: CGFloat = (baseHeight * 2) + (curveHeight * 1.5)
+                let keyboardInterface = context.keyboardInterface
+                let insets = keyboardInterface.keyShapeInsets
+                let baseWidth: CGFloat = keyWidth - insets.horizontalTotal
+                let baseHeight: CGFloat = keyHeight - insets.verticalTotal
+                let previewBottomOffset = keyboardInterface.previewBottomOffset(keyWidth: keyWidth, keyHeight: keyHeight, insets: insets)
                 let shouldPreviewKey: Bool = Options.keyTextPreview
                 let activeColor: Color = shouldPreviewKey ? colorScheme.inputKeyColor : colorScheme.activeInputKeyColor
+                let displayForm = KeyDisplayForm.responsive(isInteracting: isTouching, isLongPressing: isLongPressing, shouldPreview: shouldPreviewKey)
                 let shouldShowLowercaseKeys: Bool = Options.showLowercaseKeys && context.keyboardCase.isLowercased
                 let textCase: Text.Case = shouldShowLowercaseKeys ? .lowercase : .uppercase
                 let keyTextBottomInset: CGFloat = shouldShowLowercaseKeys ? 3 : 0
                 Button(action: {}) {
                         ZStack {
                                 Color.interactiveClear
-                                if isLongPressing {
+                                switch displayForm {
+                                case .expanding:
                                         let memberCount: Int = unit.members.count
                                         let expansionCount: Int = memberCount - 1
                                         let leadingOffset: CGFloat = baseWidth * CGFloat(expansionCount)
@@ -47,13 +64,14 @@ struct PinyinSpecialInputKey: View {
                                                         HStack(spacing: 0) {
                                                                 ForEach(unit.members.indices, id: \.self) { elementIndex in
                                                                         let element: KeyElement = unit.members[elementIndex]
+                                                                        let isSelected: Bool = selectedIndex == elementIndex
                                                                         ZStack {
                                                                                 RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
-                                                                                        .fill(selectedIndex == elementIndex ? Color.accentColor : Color.clear)
+                                                                                        .fill(isSelected ? Color.accentColor : Color.clear)
                                                                                 Text(verbatim: element.text)
                                                                                         .textCase(textCase)
                                                                                         .font(.title2)
-                                                                                        .foregroundStyle(selectedIndex == elementIndex ? Color.white : Color.primary)
+                                                                                        .foregroundStyle(isSelected ? Color.white : Color.primary)
                                                                         }
                                                                         .frame(maxWidth: .infinity)
                                                                 }
@@ -62,9 +80,8 @@ struct PinyinSpecialInputKey: View {
                                                         .padding(.bottom, previewBottomOffset)
                                                         .padding(.leading, leadingOffset)
                                                 }
-                                                .padding(.vertical, verticalPadding)
-                                                .padding(.horizontal, horizontalPadding)
-                                } else if (isTouching && shouldPreviewKey) {
+                                                .padding(insets)
+                                case .previewing:
                                         BubbleShape()
                                                 .fill(colorScheme.previewBubbleColor)
                                                 .shadow(color: .shadowGray, radius: 1)
@@ -74,23 +91,23 @@ struct PinyinSpecialInputKey: View {
                                                                 .font(.title)
                                                                 .padding(.bottom, previewBottomOffset)
                                                 }
-                                                .padding(.vertical, verticalPadding)
-                                                .padding(.horizontal, horizontalPadding)
-                                } else {
+                                                .padding(insets)
+                                case .normal, .reflecting:
                                         RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
                                                 .fill(isTouching ? activeColor : colorScheme.inputKeyColor)
                                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                                .padding(.vertical, verticalPadding)
-                                                .padding(.horizontal, horizontalPadding)
-                                        ZStack(alignment: .topTrailing) {
-                                                Color.clear
-                                                Text(verbatim: "…")
-                                                        .textCase(textCase)
-                                                        .font(.labelCaption)
-                                                        .shallow()
+                                                .padding(insets)
+                                        ForEach(unit.primary.extras.indices, id: \.self) { index in
+                                                let extra = unit.primary.extras[index]
+                                                ZStack(alignment: extra.alignment) {
+                                                        Color.clear
+                                                        Text(verbatim: extra.text)
+                                                                .textCase(textCase)
+                                                                .font(.labelCaption)
+                                                                .shallow()
+                                                }
+                                                .padding(insets.plused(horizontal: 2))
                                         }
-                                        .padding(.vertical, verticalPadding)
-                                        .padding(.horizontal, horizontalPadding + 2)
                                         ZStack(alignment: .bottomTrailing) {
                                                 Color.clear
                                                 Text(verbatim: "ü")
@@ -98,8 +115,7 @@ struct PinyinSpecialInputKey: View {
                                                         .font(.labelCaption)
                                                         .shallow()
                                         }
-                                        .padding(.vertical, verticalPadding)
-                                        .padding(.horizontal, horizontalPadding + 2)
+                                        .padding(insets.plused(horizontal: 2))
                                         Text(verbatim: unit.primary.text)
                                                 .textCase(textCase)
                                                 .font(.letterCompact)
@@ -160,17 +176,14 @@ struct PinyinSpecialInputKey: View {
                 )
                 .task(id: isTouching) {
                         guard isTouching else { return }
-                        while Task.isCancelled.negative {
-                                try? await Task.sleep(for: .milliseconds(100)) // 0.1s
-                                if isTouching {
-                                        if isLongPressing.negative {
-                                                let shouldTriggerLongPress: Bool = (buffer >= 6) || (buffer >= 3 && pulled.isNil)
-                                                if shouldTriggerLongPress {
-                                                        isLongPressing = true
-                                                } else {
-                                                        buffer += 1
-                                                }
-                                        }
+                        while isLongPressing.negative {
+                                try? await Task.sleep(for: .milliseconds(100))
+                                guard Task.isCancelled.negative else { break }
+                                let shouldTriggerLongPress: Bool = (buffer >= 6) || (buffer >= 3 && pulled.isNil)
+                                if shouldTriggerLongPress {
+                                        isLongPressing = true
+                                } else {
+                                        buffer += 1
                                 }
                         }
                 }

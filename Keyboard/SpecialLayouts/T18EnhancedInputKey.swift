@@ -2,43 +2,62 @@ import SwiftUI
 import CommonExtensions
 import CoreIME
 
+/// An input key for eighteen- and nineteen-key layouts supporting vertical pulls and long-press alternative selection.
+///
+/// Holding the key expands its alternatives; sliding selects an element and releasing commits it.
+/// Drag tracking keeps the selector active when the finger moves outside the original button.
 struct T18EnhancedInputKey: View {
 
-        /// Create a T18EnhancedInputKey
+        /// Creates a T18EnhancedInputKey with primary content and selectable alternatives.
+        ///
         /// - Parameters:
-        ///   - side: Key location, left half screen (leading) or right half screen (trailing).
-        ///   - virtual: VirtualInputKey
-        ///   - unit: KeyUnit
+        ///   - side: Key location in the leading or trailing half of the keyboard. Alternatives expand toward the opposite side.
+        ///   - virtual: Optional event handled on an ordinary release. When nil, the primary text is processed instead.
+        ///   - unit: Primary content, vertical-pull extras, and alternatives for long-press selection.
         init(side: HorizontalEdge, virtual: VirtualInputKey? = nil, unit: KeyUnit) {
                 self.side = side
                 self.virtual = virtual
                 self.unit = unit
         }
 
+        /// Determines the direction of expansion and slide selection.
         private let side: HorizontalEdge
+
+        /// Event handled on release when no alternative or pulled text is selected.
         private let virtual: VirtualInputKey?
+
+        /// Primary key content and alternatives shown in the expanded selector.
         private let unit: KeyUnit
 
+        /// Keyboard properties and handlers.
         @EnvironmentObject private var context: KeyboardViewController
+
+        /// Retrieves the current system color scheme (light or dark mode) from the environment.
         @Environment(\.colorScheme) private var colorScheme
 
+        /// Button press state reported by PressButtonStyle; may end when sliding outside the key.
         @State private var isTouching: Bool = false
+
+        /// Number of elapsed 100 ms checkpoints used for pull and long-press thresholds.
         @State private var buffer: Int = 0
+
+        /// Indicates that the expanded alternative selector has been activated.
         @State private var isLongPressing: Bool = false
+
+        /// Selected index in unit.members, independent of the visual expansion direction.
         @State private var selectedIndex: Int = 0
+
+        /// Extra text selected by a vertical pull before long-press expansion.
         @State private var pulled: String? = nil
 
         var body: some View {
                 let keyWidth: CGFloat = context.widthUnit * 1.42
                 let keyHeight: CGFloat = context.heightUnit
-                let isPhoneLandscape: Bool = context.keyboardInterface.isPhoneLandscape
-                let verticalPadding: CGFloat = isPhoneLandscape ? 3 : 6
-                let horizontalPadding: CGFloat = isPhoneLandscape ? 6 : 3
-                let baseWidth: CGFloat = keyWidth - (horizontalPadding * 2)
-                let baseHeight: CGFloat = keyHeight - (verticalPadding * 2)
-                let shapeHeight: CGFloat = isPhoneLandscape ? (baseHeight / (2 / 6.0)) : baseHeight / ((2.5 / 6.0))
-                let curveHeight: CGFloat = isPhoneLandscape ? (shapeHeight / 3.0) : (shapeHeight / 6.0)
-                let previewBottomOffset: CGFloat = (baseHeight * 2) + (curveHeight * 1.5)
+                let keyboardInterface = context.keyboardInterface
+                let insets = keyboardInterface.keyShapeInsets
+                let baseWidth: CGFloat = keyWidth - insets.horizontalTotal
+                let baseHeight: CGFloat = keyHeight - insets.verticalTotal
+                let previewBottomOffset = keyboardInterface.previewBottomOffset(keyWidth: keyWidth, keyHeight: keyHeight, insets: insets)
                 let shouldShowLowercaseKeys: Bool = Options.showLowercaseKeys && context.keyboardCase.isLowercased
                 let textCase: Text.Case = shouldShowLowercaseKeys ? .lowercase : .uppercase
                 let shouldAdjustKeyTextPosition: Bool = shouldShowLowercaseKeys && context.keyboardForm.isPrimary && (virtual?.isNumber.negative ?? true)
@@ -60,9 +79,10 @@ struct T18EnhancedInputKey: View {
                                                                 ForEach(unit.members.indices, id: \.self) { index in
                                                                         let elementIndex: Int = side.isLeading ? index : ((memberCount - 1) - index)
                                                                         let element: KeyElement = unit.members[elementIndex]
+                                                                        let isSelected: Bool = selectedIndex == elementIndex
                                                                         ZStack {
                                                                                 RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
-                                                                                        .fill(selectedIndex == elementIndex ? Color.accentColor : Color.clear)
+                                                                                        .fill(isSelected ? Color.accentColor : Color.clear)
                                                                                 ForEach(element.extras.indices, id: \.self) { extraIndex in
                                                                                         let extra = element.extras[extraIndex]
                                                                                         ZStack(alignment: extra.alignment) {
@@ -75,7 +95,7 @@ struct T18EnhancedInputKey: View {
                                                                                 Text(verbatim: element.text)
                                                                                         .textCase(textCase)
                                                                                         .font(element.isTextSingular ? .title2 : .title3)
-                                                                                        .foregroundStyle(selectedIndex == elementIndex ? Color.white : Color.primary)
+                                                                                        .foregroundStyle(isSelected ? Color.white : Color.primary)
                                                                         }
                                                                         .frame(maxWidth: .infinity)
                                                                 }
@@ -85,14 +105,12 @@ struct T18EnhancedInputKey: View {
                                                         .padding(.leading, leadingOffset)
                                                         .padding(.trailing, trailingOffset)
                                                 }
-                                                .padding(.vertical, verticalPadding)
-                                                .padding(.horizontal, horizontalPadding)
+                                                .padding(insets)
                                 } else {
                                         RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
                                                 .fill(isTouching ? colorScheme.activeInputKeyColor : colorScheme.inputKeyColor)
                                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                                .padding(.vertical, verticalPadding)
-                                                .padding(.horizontal, horizontalPadding)
+                                                .padding(insets)
                                         ForEach(unit.primary.extras.indices, id: \.self) { index in
                                                 let extra = unit.primary.extras[index]
                                                 ZStack(alignment: extra.alignment) {
@@ -102,8 +120,7 @@ struct T18EnhancedInputKey: View {
                                                                 .font(.labelLargerCaption)
                                                                 .shallow()
                                                 }
-                                                .padding(.vertical, verticalPadding + 1)
-                                                .padding(.horizontal, horizontalPadding + 3)
+                                                .padding(insets.plused(horizontal: 3, vertical: 1))
                                         }
                                         if unit.primary.isTextSingular {
                                                 Text(verbatim: unit.primary.text)
@@ -184,17 +201,14 @@ struct T18EnhancedInputKey: View {
                 )
                 .task(id: isTouching) {
                         guard isTouching else { return }
-                        while Task.isCancelled.negative {
-                                try? await Task.sleep(for: .milliseconds(100)) // 0.1s
-                                if isTouching {
-                                        if isLongPressing.negative {
-                                                let shouldTriggerLongPress: Bool = (buffer >= 6) || (buffer >= 3 && pulled.isNil)
-                                                if shouldTriggerLongPress {
-                                                        isLongPressing = true
-                                                } else {
-                                                        buffer += 1
-                                                }
-                                        }
+                        while isLongPressing.negative {
+                                try? await Task.sleep(for: .milliseconds(100))
+                                guard Task.isCancelled.negative else { break }
+                                let shouldTriggerLongPress: Bool = (buffer >= 6) || (buffer >= 3 && pulled.isNil)
+                                if shouldTriggerLongPress {
+                                        isLongPressing = true
+                                } else {
+                                        buffer += 1
                                 }
                         }
                 }
