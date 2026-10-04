@@ -36,6 +36,7 @@ struct GlassEnhancedInputKey: View {
         /// Primary key content and alternatives shown in the expanded selector.
         private let unit: KeyUnit
 
+
         /// Keyboard properties and handlers.
         @EnvironmentObject private var context: KeyboardViewController
 
@@ -44,9 +45,6 @@ struct GlassEnhancedInputKey: View {
 
         /// Button press state reported by PressButtonStyle; may end when sliding outside the key.
         @State private var isTouching: Bool = false
-
-        /// Tracks the entire drag and resets automatically when the gesture ends or is cancelled.
-        @GestureState private var isDragging: Bool = false
 
         /// Number of elapsed 100 ms checkpoints used for pull and long-press thresholds.
         @State private var buffer: Int = 0
@@ -61,15 +59,14 @@ struct GlassEnhancedInputKey: View {
         @State private var pulled: String? = nil
 
         var body: some View {
-                let isInteracting: Bool = isTouching || isDragging // isTouching may be false while the finger slides outside the button
                 let keyWidth: CGFloat = context.widthUnit * widthCoefficient
                 let keyHeight: CGFloat = context.heightUnit
                 let keyboardInterface = context.keyboardInterface
                 let insets = keyboardInterface.keyShapeInsets
-                let baseWidth: CGFloat = keyWidth - insets.horizontalTotal
-                let baseHeight: CGFloat = keyHeight - insets.verticalTotal
+                let baseWidth: CGFloat = keyWidth - insets.horizontalTotal  // The visual width of the key shape in `KeyDisplayForm.normal` form
+                let baseHeight: CGFloat = keyHeight - insets.verticalTotal  // The visual height of the key shape in `KeyDisplayForm.normal` form
                 let previewBottomOffset = keyboardInterface.previewBottomOffset(keyWidth: keyWidth, keyHeight: keyHeight, insets: insets)
-                let displayForm = KeyDisplayForm.responsive(isInteracting: isInteracting, isLongPressing: isLongPressing, shouldPreview: Options.keyTextPreview)
+                let displayForm = KeyDisplayForm.responsive(isInteracting: isTouching, isLongPressing: isLongPressing, shouldPreview: Options.keyTextPreview)
                 let shouldShowLowercaseKeys: Bool = Options.showLowercaseKeys && context.keyboardCase.isLowercased
                 let textCase: Text.Case = shouldShowLowercaseKeys ? .lowercase : .uppercase
                 let shouldAdjustKeyTextPosition: Bool = shouldShowLowercaseKeys && context.keyboardForm.isPrimary && (virtual?.isNumber.negative ?? true)
@@ -159,11 +156,6 @@ struct GlassEnhancedInputKey: View {
                         context.triggerHapticFeedback()
                 })
                 .simultaneousGesture(DragGesture(minimumDistance: 0)
-                        .updating($isDragging) { _, isDragging, _ in
-                                if isDragging.negative {
-                                        isDragging = true
-                                }
-                        }
                         .onChanged { state in
                                 if isLongPressing {
                                         let memberCount: Int = unit.members.count
@@ -221,8 +213,8 @@ struct GlassEnhancedInputKey: View {
                                 }
                         }
                 )
-                .task(id: isInteracting) {
-                        guard isInteracting else { return }
+                .task(id: isTouching) {
+                        guard isTouching else { return }
                         while isLongPressing.negative {
                                 try? await Task.sleep(for: .milliseconds(100))
                                 guard Task.isCancelled.negative else { break }
