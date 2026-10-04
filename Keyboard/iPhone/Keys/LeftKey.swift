@@ -18,7 +18,7 @@ struct LeftKey: View {
                 KeyElement("！"),
                 KeyElement("？"),
                 KeyElement("、"),
-                KeyElement(",", extras: [.init("英文", alignment: .topTrailing)])
+                KeyElement(",", extras: [.init("英文", alignment: .top)])
         ]
         private let headerText: String = "！"
 
@@ -40,7 +40,7 @@ struct LeftKey: View {
                                         let symbolCount: Int = elements.count
                                         let expansionCount: Int = symbolCount - 1
                                         let leadingOffset: CGFloat = baseWidth * CGFloat(expansionCount)
-                                        ExpansiveBubbleShape(keyLocale: .leading, expansionCount: expansionCount)
+                                        ExpansiveBubbleShape(side: .leading, expansionCount: expansionCount)
                                                 .fill(colorScheme.previewBubbleColor)
                                                 .shadow(color: .shadowGray, radius: 1)
                                                 .overlay {

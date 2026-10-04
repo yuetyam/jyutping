@@ -5,11 +5,11 @@ import CoreIME
 struct LargePadInstantInputKey: View {
 
         private let keyText: String
-        private let event: VirtualInputKey?
+        private let virtual: VirtualInputKey?
 
-        init(_ keyText: String, event: VirtualInputKey? = nil) {
+        init(_ keyText: String, virtual: VirtualInputKey? = nil) {
                 self.keyText = keyText
-                self.event = event
+                self.virtual = virtual
         }
 
         @EnvironmentObject private var context: KeyboardViewController
@@ -41,8 +41,8 @@ struct LargePadInstantInputKey: View {
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
                         AudioFeedback.inputed()
-                        if let event {
-                                context.handle(event)
+                        if let virtual {
+                                context.handle(virtual)
                         } else {
                                 let text: String = context.keyboardCase.isLowercased ? keyText : keyText.uppercased()
                                 context.operate(.input(text))

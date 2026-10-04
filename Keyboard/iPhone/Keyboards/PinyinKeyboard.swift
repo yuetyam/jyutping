@@ -83,13 +83,13 @@ private struct PinyinThirdEnhancedLetterRow: View {
                                         members: [
                                                 KeyElement("z"),
                                                 KeyElement("%"),
-                                                KeyElement("％", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
+                                                KeyElement("％", extras: [.init(PresetConstant.fullWidth, alignment: .top)]),
                                                 KeyElement("‰")
                                         ]
                                 )
                         )
                         EnhancedInputKey(side: .leading, virtual: .letterX, unit: KeyUnit(primary: KeyElement("x", extras: [.init("-", alignment: .topTrailing)]), members: [KeyElement("x"), KeyElement("-")]))
-                        EnhancedInputKey(side: .leading, virtual: .letterC, unit: KeyUnit(primary: KeyElement("c", extras: [.init("～", alignment: .topTrailing)]), members: [KeyElement("c"), KeyElement("～"), KeyElement("~", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)])]))
+                        EnhancedInputKey(side: .leading, virtual: .letterC, unit: KeyUnit(primary: KeyElement("c", extras: [.init("～", alignment: .topTrailing)]), members: [KeyElement("c"), KeyElement("～"), KeyElement("~", extras: [.init(PresetConstant.halfWidth, alignment: .top)])]))
                         PinyinSpecialInputKey()
                         EnhancedInputKey(side: .leading, virtual: .letterB, unit: KeyUnit(primary: KeyElement("b", extras: [.init("、", alignment: .topTrailing)]), members: [KeyElement("b"), KeyElement("、")]))
                         EnhancedInputKey(side: .trailing, virtual: .letterN, unit: KeyUnit(primary: KeyElement("n", extras: [.init("；", alignment: .topTrailing)]), members: [KeyElement("n"), KeyElement("；")]))

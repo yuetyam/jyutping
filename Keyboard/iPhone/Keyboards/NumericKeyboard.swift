@@ -21,9 +21,9 @@ struct NumericKeyboard: View {
                                                 primary: KeyElement("-"),
                                                 members: [
                                                         KeyElement("-"),
-                                                        KeyElement("–", extras: [.init("2013", alignment: .bottomTrailing)]),
-                                                        KeyElement("—", extras: [.init("2014", alignment: .bottomTrailing)]),
-                                                        KeyElement("•", extras: [.init("2022", alignment: .bottomTrailing)])
+                                                        KeyElement("–", extras: [.init("2013", alignment: .bottom)]),
+                                                        KeyElement("—", extras: [.init("2014", alignment: .bottom)]),
+                                                        KeyElement("•", extras: [.init("2022", alignment: .bottom)])
                                                 ]
                                         )
                                 )
@@ -54,12 +54,12 @@ struct NumericKeyboard: View {
                                         unit: KeyUnit(
                                                 primary: KeyElement("\u{0022}"),
                                                 members: [
-                                                        KeyElement("\u{0022}", extras: [.init("0022", alignment: .bottomTrailing)]),
-                                                        KeyElement("\u{201D}", extras: [.init("201D", alignment: .bottomTrailing)]),
-                                                        KeyElement("\u{201C}", extras: [.init("201C", alignment: .bottomTrailing)]),
-                                                        KeyElement("\u{201E}", extras: [.init("201E", alignment: .bottomTrailing)]),
-                                                        KeyElement("\u{00BB}", extras: [.init("00BB", alignment: .bottomTrailing)]),
-                                                        KeyElement("\u{00AB}", extras: [.init("00AB", alignment: .bottomTrailing)])
+                                                        KeyElement("\u{0022}", extras: [.init("0022", alignment: .bottom)]),
+                                                        KeyElement("\u{201D}", extras: [.init("201D", alignment: .bottom)]),
+                                                        KeyElement("\u{201C}", extras: [.init("201C", alignment: .bottom)]),
+                                                        KeyElement("\u{201E}", extras: [.init("201E", alignment: .bottom)]),
+                                                        KeyElement("\u{00BB}", extras: [.init("00BB", alignment: .bottom)]),
+                                                        KeyElement("\u{00AB}", extras: [.init("00AB", alignment: .bottom)])
                                                 ]
                                         )
                                 )
@@ -78,10 +78,10 @@ struct NumericKeyboard: View {
                                         unit: KeyUnit(
                                                 primary: KeyElement("\u{0027}"),
                                                 members: [
-                                                        KeyElement("\u{0027}", extras: [.init("0027", alignment: .bottomTrailing)]),
-                                                        KeyElement("\u{2019}", extras: [.init("2019", alignment: .bottomTrailing)]),
-                                                        KeyElement("\u{2018}", extras: [.init("2018", alignment: .bottomTrailing)]),
-                                                        KeyElement("\u{0060}", extras: [.init("0060", alignment: .bottomTrailing)])
+                                                        KeyElement("\u{0027}", extras: [.init("0027", alignment: .bottom)]),
+                                                        KeyElement("\u{2019}", extras: [.init("2019", alignment: .bottom)]),
+                                                        KeyElement("\u{2018}", extras: [.init("2018", alignment: .bottom)]),
+                                                        KeyElement("\u{0060}", extras: [.init("0060", alignment: .bottom)])
                                                 ]
                                         )
                                 )

@@ -13,8 +13,8 @@ struct LargePadABCKeyboard: View {
                                         LargePadInstantInputKey("~")
                                         Group {
                                                 LargePadExpansibleInputKey(
-                                                        keyLocale: .leading,
-                                                        keyModel: KeyUnit(
+                                                        side: .leading,
+                                                        unit: KeyUnit(
                                                                 primary: KeyElement("!"),
                                                                 members: [
                                                                         KeyElement("!"),
@@ -25,8 +25,8 @@ struct LargePadABCKeyboard: View {
                                                 LargePadInstantInputKey("@")
                                                 LargePadInstantInputKey("#")
                                                 LargePadExpansibleInputKey(
-                                                        keyLocale: .leading,
-                                                        keyModel: KeyUnit(
+                                                        side: .leading,
+                                                        unit: KeyUnit(
                                                                 primary: KeyElement("$"),
                                                                 members: [
                                                                         KeyElement("$"),
@@ -40,8 +40,8 @@ struct LargePadABCKeyboard: View {
                                                         )
                                                 )
                                                 LargePadExpansibleInputKey(
-                                                        keyLocale: .leading,
-                                                        keyModel: KeyUnit(
+                                                        side: .leading,
+                                                        unit: KeyUnit(
                                                                 primary: KeyElement("%"),
                                                                 members: [
                                                                         KeyElement("%"),
@@ -51,8 +51,8 @@ struct LargePadABCKeyboard: View {
                                                 )
                                                 LargePadInstantInputKey("^")
                                                 LargePadExpansibleInputKey(
-                                                        keyLocale: .trailing,
-                                                        keyModel: KeyUnit(
+                                                        side: .trailing,
+                                                        unit: KeyUnit(
                                                                 primary: KeyElement("&"),
                                                                 members: [
                                                                         KeyElement("&"),
@@ -61,8 +61,8 @@ struct LargePadABCKeyboard: View {
                                                         )
                                                 )
                                                 LargePadExpansibleInputKey(
-                                                        keyLocale: .trailing,
-                                                        keyModel: KeyUnit(
+                                                        side: .trailing,
+                                                        unit: KeyUnit(
                                                                 primary: KeyElement("*"),
                                                                 members: [
                                                                         KeyElement("*"),
@@ -81,10 +81,10 @@ struct LargePadABCKeyboard: View {
                         } else {
                                 HStack(spacing: 0 ) {
                                         LargePadUpperLowerInputKey(
-                                                keyLocale: .leading,
+                                                side: .leading,
                                                 upper: "~",
                                                 lower: "`",
-                                                keyModel: KeyUnit(
+                                                unit: KeyUnit(
                                                         primary: KeyElement("`"),
                                                         members: [
                                                                 KeyElement("`"),
@@ -94,11 +94,11 @@ struct LargePadABCKeyboard: View {
                                         )
                                         Group {
                                                 LargePadUpperLowerInputKey(
-                                                        keyLocale: .leading,
+                                                        side: .leading,
                                                         upper: "!",
                                                         lower: "1",
-                                                        event: .number1,
-                                                        keyModel: KeyUnit(
+                                                        virtual: .number1,
+                                                        unit: KeyUnit(
                                                                 primary: KeyElement("1"),
                                                                 members: [
                                                                         KeyElement("1"),
@@ -108,11 +108,11 @@ struct LargePadABCKeyboard: View {
                                                         )
                                                 )
                                                 LargePadUpperLowerInputKey(
-                                                        keyLocale: .leading,
+                                                        side: .leading,
                                                         upper: "@",
                                                         lower: "2",
-                                                        event: .number2,
-                                                        keyModel: KeyUnit(
+                                                        virtual: .number2,
+                                                        unit: KeyUnit(
                                                                 primary: KeyElement("2"),
                                                                 members: [
                                                                         KeyElement("2"),
@@ -121,11 +121,11 @@ struct LargePadABCKeyboard: View {
                                                         )
                                                 )
                                                 LargePadUpperLowerInputKey(
-                                                        keyLocale: .leading,
+                                                        side: .leading,
                                                         upper: "#",
                                                         lower: "3",
-                                                        event: .number3,
-                                                        keyModel: KeyUnit(
+                                                        virtual: .number3,
+                                                        unit: KeyUnit(
                                                                 primary: KeyElement("3"),
                                                                 members: [
                                                                         KeyElement("3"),
@@ -134,11 +134,11 @@ struct LargePadABCKeyboard: View {
                                                         )
                                                 )
                                                 LargePadUpperLowerInputKey(
-                                                        keyLocale: .leading,
+                                                        side: .leading,
                                                         upper: "$",
                                                         lower: "4",
-                                                        event: .number4,
-                                                        keyModel: KeyUnit(
+                                                        virtual: .number4,
+                                                        unit: KeyUnit(
                                                                 primary: KeyElement("4"),
                                                                 members: [
                                                                         KeyElement("4"),
@@ -147,11 +147,11 @@ struct LargePadABCKeyboard: View {
                                                         )
                                                 )
                                                 LargePadUpperLowerInputKey(
-                                                        keyLocale: .leading,
+                                                        side: .leading,
                                                         upper: "%",
                                                         lower: "5",
-                                                        event: .number5,
-                                                        keyModel: KeyUnit(
+                                                        virtual: .number5,
+                                                        unit: KeyUnit(
                                                                 primary: KeyElement("5"),
                                                                 members: [
                                                                         KeyElement("5"),
@@ -161,11 +161,11 @@ struct LargePadABCKeyboard: View {
                                                         )
                                                 )
                                                 LargePadUpperLowerInputKey(
-                                                        keyLocale: .leading,
+                                                        side: .leading,
                                                         upper: "^",
                                                         lower: "6",
-                                                        event: .number6,
-                                                        keyModel: KeyUnit(
+                                                        virtual: .number6,
+                                                        unit: KeyUnit(
                                                                 primary: KeyElement("6"),
                                                                 members: [
                                                                         KeyElement("6"),
@@ -174,11 +174,11 @@ struct LargePadABCKeyboard: View {
                                                         )
                                                 )
                                                 LargePadUpperLowerInputKey(
-                                                        keyLocale: .trailing,
+                                                        side: .trailing,
                                                         upper: "&",
                                                         lower: "7",
-                                                        event: .number7,
-                                                        keyModel: KeyUnit(
+                                                        virtual: .number7,
+                                                        unit: KeyUnit(
                                                                 primary: KeyElement("7"),
                                                                 members: [
                                                                         KeyElement("7"),
@@ -188,11 +188,11 @@ struct LargePadABCKeyboard: View {
                                                         )
                                                 )
                                                 LargePadUpperLowerInputKey(
-                                                        keyLocale: .trailing,
+                                                        side: .trailing,
                                                         upper: "*",
                                                         lower: "8",
-                                                        event: .number8,
-                                                        keyModel: KeyUnit(
+                                                        virtual: .number8,
+                                                        unit: KeyUnit(
                                                                 primary: KeyElement("8"),
                                                                 members: [
                                                                         KeyElement("8"),
@@ -202,11 +202,11 @@ struct LargePadABCKeyboard: View {
                                                         )
                                                 )
                                                 LargePadUpperLowerInputKey(
-                                                        keyLocale: .trailing,
+                                                        side: .trailing,
                                                         upper: "(",
                                                         lower: "9",
-                                                        event: .number9,
-                                                        keyModel: KeyUnit(
+                                                        virtual: .number9,
+                                                        unit: KeyUnit(
                                                                 primary: KeyElement("9"),
                                                                 members: [
                                                                         KeyElement("9"),
@@ -215,11 +215,11 @@ struct LargePadABCKeyboard: View {
                                                         )
                                                 )
                                                 LargePadUpperLowerInputKey(
-                                                        keyLocale: .trailing,
+                                                        side: .trailing,
                                                         upper: ")",
                                                         lower: "0",
-                                                        event: .number0,
-                                                        keyModel: KeyUnit(
+                                                        virtual: .number0,
+                                                        unit: KeyUnit(
                                                                 primary: KeyElement("0"),
                                                                 members: [
                                                                         KeyElement("0"),
@@ -229,10 +229,10 @@ struct LargePadABCKeyboard: View {
                                                 )
                                         }
                                         LargePadUpperLowerInputKey(
-                                                keyLocale: .trailing,
+                                                side: .trailing,
                                                 upper: "_",
                                                 lower: "-",
-                                                keyModel: KeyUnit(
+                                                unit: KeyUnit(
                                                         primary: KeyElement("-"),
                                                         members: [
                                                                 KeyElement("-"),
@@ -241,10 +241,10 @@ struct LargePadABCKeyboard: View {
                                                 )
                                         )
                                         LargePadUpperLowerInputKey(
-                                                keyLocale: .trailing,
+                                                side: .trailing,
                                                 upper: "+",
                                                 lower: "=",
-                                                keyModel: KeyUnit(
+                                                unit: KeyUnit(
                                                         primary: KeyElement("="),
                                                         members: [
                                                                 KeyElement("="),
@@ -261,9 +261,9 @@ struct LargePadABCKeyboard: View {
                                         LargePadLetterInputKey(.letterQ)
                                         LargePadLetterInputKey(.letterW)
                                         LargePadExpansibleInputKey(
-                                                keyLocale: .leading,
-                                                event: .letterE,
-                                                keyModel:
+                                                side: .leading,
+                                                virtual: .letterE,
+                                                unit:
                                                         KeyUnit(
                                                                 primary: KeyElement("e"),
                                                                 members: [
@@ -280,9 +280,9 @@ struct LargePadABCKeyboard: View {
                                         LargePadLetterInputKey(.letterT)
                                         LargePadLetterInputKey(.letterY)
                                         LargePadExpansibleInputKey(
-                                                keyLocale: .trailing,
-                                                event: .letterU,
-                                                keyModel:
+                                                side: .trailing,
+                                                virtual: .letterU,
+                                                unit:
                                                         KeyUnit(
                                                                 primary: KeyElement("u"),
                                                                 members: [
@@ -296,9 +296,9 @@ struct LargePadABCKeyboard: View {
                                                         )
                                         )
                                         LargePadExpansibleInputKey(
-                                                keyLocale: .trailing,
-                                                event: .letterI,
-                                                keyModel:
+                                                side: .trailing,
+                                                virtual: .letterI,
+                                                unit:
                                                         KeyUnit(
                                                                 primary: KeyElement("i"),
                                                                 members: [
@@ -312,9 +312,9 @@ struct LargePadABCKeyboard: View {
                                                         )
                                         )
                                         LargePadExpansibleInputKey(
-                                                keyLocale: .trailing,
-                                                event: .letterO,
-                                                keyModel:
+                                                side: .trailing,
+                                                virtual: .letterO,
+                                                unit:
                                                         KeyUnit(
                                                                 primary: KeyElement("o"),
                                                                 members: [
@@ -334,18 +334,18 @@ struct LargePadABCKeyboard: View {
                                         LargePadInstantInputKey("}")
                                         LargePadInstantInputKey("|")
                                 } else {
-                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "{", lower: "[", keyModel: KeyUnit(primary: KeyElement("["), members: [KeyElement("["), KeyElement("{")]))
-                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "}", lower: "]", keyModel: KeyUnit(primary: KeyElement("]"), members: [KeyElement("]"), KeyElement("}")]))
-                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "|", lower: "\\", keyModel: KeyUnit(primary: KeyElement("\\"), members: [KeyElement("\\"), KeyElement("|")]))
+                                        LargePadUpperLowerInputKey(side: .trailing, upper: "{", lower: "[", unit: KeyUnit(primary: KeyElement("["), members: [KeyElement("["), KeyElement("{")]))
+                                        LargePadUpperLowerInputKey(side: .trailing, upper: "}", lower: "]", unit: KeyUnit(primary: KeyElement("]"), members: [KeyElement("]"), KeyElement("}")]))
+                                        LargePadUpperLowerInputKey(side: .trailing, upper: "|", lower: "\\", unit: KeyUnit(primary: KeyElement("\\"), members: [KeyElement("\\"), KeyElement("|")]))
                                 }
                         }
                         HStack(spacing: 0) {
                                 LargePadCapsLockKey(widthUnitTimes: 1.75)
                                 Group {
                                         LargePadExpansibleInputKey(
-                                                keyLocale: .leading,
-                                                event: .letterA,
-                                                keyModel:
+                                                side: .leading,
+                                                virtual: .letterA,
+                                                unit:
                                                         KeyUnit(
                                                                 primary: KeyElement("a"),
                                                                 members: [
@@ -369,20 +369,20 @@ struct LargePadABCKeyboard: View {
                                 }
                                 if context.keyboardCase.isUppercased {
                                         LargePadInstantInputKey(":")
-                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyUnit(primary: KeyElement("\""), members: [KeyElement("\""), KeyElement("\u{201D}", extras: [.init("201D", alignment: .bottomTrailing)]), KeyElement("\u{201C}", extras: [.init("201C", alignment: .bottomTrailing)])]))
+                                        LargePadExpansibleInputKey(side: .trailing, unit: KeyUnit(primary: KeyElement("\""), members: [KeyElement("\""), KeyElement("\u{201D}", extras: [.init("201D", alignment: .bottom)]), KeyElement("\u{201C}", extras: [.init("201C", alignment: .bottom)])]))
                                 } else {
-                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: ":", lower: ";", keyModel: KeyUnit(primary: KeyElement(";"), members: [KeyElement(";"), KeyElement(":")]))
+                                        LargePadUpperLowerInputKey(side: .trailing, upper: ":", lower: ";", unit: KeyUnit(primary: KeyElement(";"), members: [KeyElement(";"), KeyElement(":")]))
                                         LargePadUpperLowerInputKey(
-                                                keyLocale: .trailing,
+                                                side: .trailing,
                                                 upper: "\"",
                                                 lower: "'",
-                                                keyModel: KeyUnit(
+                                                unit: KeyUnit(
                                                         primary: KeyElement("'"),
                                                         members: [
                                                                 KeyElement("'"),
                                                                 KeyElement("\""),
-                                                                KeyElement("\u{2019}", extras: [.init("2019", alignment: .bottomTrailing)]),
-                                                                KeyElement("\u{2018}", extras: [.init("2018", alignment: .bottomTrailing)])
+                                                                KeyElement("\u{2019}", extras: [.init("2019", alignment: .bottom)]),
+                                                                KeyElement("\u{2018}", extras: [.init("2018", alignment: .bottom)])
                                                         ]
                                                 )
                                         )
@@ -396,9 +396,9 @@ struct LargePadABCKeyboard: View {
                                         LargePadLetterInputKey(.letterX)
                                         LargePadLetterInputKey(.letterC)
                                         LargePadExpansibleInputKey(
-                                                keyLocale: .leading,
-                                                event: .letterV,
-                                                keyModel:
+                                                side: .leading,
+                                                virtual: .letterV,
+                                                unit:
                                                         KeyUnit(
                                                                 primary: KeyElement("v"),
                                                                 members: [
@@ -418,11 +418,11 @@ struct LargePadABCKeyboard: View {
                                 if context.keyboardCase.isUppercased {
                                         LargePadInstantInputKey("<")
                                         LargePadInstantInputKey(">")
-                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyUnit(primary: KeyElement("?"), members: [KeyElement("?"), KeyElement("¿")]))
+                                        LargePadExpansibleInputKey(side: .trailing, unit: KeyUnit(primary: KeyElement("?"), members: [KeyElement("?"), KeyElement("¿")]))
                                 } else {
-                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "<", lower: ",", keyModel: KeyUnit(primary: KeyElement(","), members: [KeyElement(","), KeyElement("<")]))
-                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: ">", lower: ".", keyModel: KeyUnit(primary: KeyElement("."), members: [KeyElement("."), KeyElement(">")]))
-                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "?", lower: "/", keyModel: KeyUnit(primary: KeyElement("/"), members: [KeyElement("/"), KeyElement("?"), KeyElement("¿")]))
+                                        LargePadUpperLowerInputKey(side: .trailing, upper: "<", lower: ",", unit: KeyUnit(primary: KeyElement(","), members: [KeyElement(","), KeyElement("<")]))
+                                        LargePadUpperLowerInputKey(side: .trailing, upper: ">", lower: ".", unit: KeyUnit(primary: KeyElement("."), members: [KeyElement("."), KeyElement(">")]))
+                                        LargePadUpperLowerInputKey(side: .trailing, upper: "?", lower: "/", unit: KeyUnit(primary: KeyElement("/"), members: [KeyElement("/"), KeyElement("?"), KeyElement("¿")]))
                                 }
                                 LargePadShiftKey(side: .trailing, coefficient: 2.25)
                         }

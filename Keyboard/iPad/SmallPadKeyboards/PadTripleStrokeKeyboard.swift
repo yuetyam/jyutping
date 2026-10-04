@@ -15,63 +15,63 @@ struct PadTripleStrokeKeyboard: View {
                         }
                         HStack(spacing: 0 ) {
                                 Group {
-                                        PadAdvancedInputKey(keyLocale: .leading, upper: "1", keyModel: KeyUnit(primary: KeyElement("aa"), members: [KeyElement("aa"), KeyElement("q")]))
-                                        PadPullableInputKey(event: .letterW, upper: "2", lower: "w")
-                                        PadPullableInputKey(event: .letterE, upper: "3", lower: "e")
-                                        PadAdvancedInputKey(keyLocale: .leading, upper: "4", keyModel: KeyUnit(primary: KeyElement("oe", extras: [.init("eo", alignment: .bottomTrailing)]), members: [KeyElement("oe"), KeyElement("r"), KeyElement("eo")]))
-                                        PadPullableInputKey(event: .letterT, upper: "5", lower: "t")
-                                        PadAdvancedInputKey(keyLocale: .leading, upper: "6", keyModel: KeyUnit(primary: KeyElement("yu"), members: [KeyElement("yu"), KeyElement("y")]))
-                                        PadPullableInputKey(event: .letterU, upper: "7", lower: "u")
-                                        PadPullableInputKey(event: .letterI, upper: "8", lower: "i")
-                                        PadPullableInputKey(event: .letterO, upper: "9", lower: "o")
-                                        PadPullableInputKey(event: .letterP, upper: "0", lower: "p")
+                                        PadAdvancedInputKey(side: .leading, upper: "1", unit: KeyUnit(primary: KeyElement("aa"), members: [KeyElement("aa"), KeyElement("q")]))
+                                        PadPullableInputKey(virtual: .letterW, upper: "2", lower: "w")
+                                        PadPullableInputKey(virtual: .letterE, upper: "3", lower: "e")
+                                        PadAdvancedInputKey(side: .leading, upper: "4", unit: KeyUnit(primary: KeyElement("oe", extras: [.init("eo", alignment: .bottomTrailing)]), members: [KeyElement("oe"), KeyElement("r"), KeyElement("eo")]))
+                                        PadPullableInputKey(virtual: .letterT, upper: "5", lower: "t")
+                                        PadAdvancedInputKey(side: .leading, upper: "6", unit: KeyUnit(primary: KeyElement("yu"), members: [KeyElement("yu"), KeyElement("y")]))
+                                        PadPullableInputKey(virtual: .letterU, upper: "7", lower: "u")
+                                        PadPullableInputKey(virtual: .letterI, upper: "8", lower: "i")
+                                        PadPullableInputKey(virtual: .letterO, upper: "9", lower: "o")
+                                        PadPullableInputKey(virtual: .letterP, upper: "0", lower: "p")
                                 }
                                 PadBackspaceKey(widthUnitTimes: 1)
                         }
                         HStack(spacing: 0) {
                                 Spacer()
                                 Group {
-                                        PadPullableInputKey(event: .letterA, upper: "@", lower: "a")
-                                        PadPullableInputKey(event: .letterS, upper: "#", lower: "s")
-                                        PadPullableInputKey(event: .letterD, upper: "$", lower: "d")
-                                        PadPullableInputKey(event: .letterF, upper: "/", lower: "f")
-                                        PadAdvancedInputKey(keyLocale: .leading, event: .letterG, upper: "（", keyModel: KeyUnit(primary: KeyElement("g"), members: [KeyElement("g"), KeyElement("gw")]))
-                                        PadPullableInputKey(event: .letterH, upper: "）", lower: "h")
-                                        PadPullableInputKey(event: .letterJ, upper: "「", lower: "j")
-                                        PadAdvancedInputKey(keyLocale: .trailing, event: .letterK, upper: "」", keyModel: KeyUnit(primary: KeyElement("k"), members: [KeyElement("k"), KeyElement("kw")]))
-                                        PadPullableInputKey(event: .letterL, upper: "'", lower: "l")
+                                        PadPullableInputKey(virtual: .letterA, upper: "@", lower: "a")
+                                        PadPullableInputKey(virtual: .letterS, upper: "#", lower: "s")
+                                        PadPullableInputKey(virtual: .letterD, upper: "$", lower: "d")
+                                        PadPullableInputKey(virtual: .letterF, upper: "/", lower: "f")
+                                        PadAdvancedInputKey(side: .leading, virtual: .letterG, upper: "（", unit: KeyUnit(primary: KeyElement("g"), members: [KeyElement("g"), KeyElement("gw")]))
+                                        PadPullableInputKey(virtual: .letterH, upper: "）", lower: "h")
+                                        PadPullableInputKey(virtual: .letterJ, upper: "「", lower: "j")
+                                        PadAdvancedInputKey(side: .trailing, virtual: .letterK, upper: "」", unit: KeyUnit(primary: KeyElement("k"), members: [KeyElement("k"), KeyElement("kw")]))
+                                        PadPullableInputKey(virtual: .letterL, upper: "'", lower: "l")
                                 }
                                 PadReturnKey(widthUnitTimes: 1.5)
                         }
                         HStack(spacing: 0) {
                                 PadShiftKey()
                                 Group {
-                                        PadPullableInputKey(event: .letterZ, upper: "%", lower: "z")
-                                        PadAdvancedInputKey(keyLocale: .leading, upper: "-", keyModel: KeyUnit(primary: KeyElement("gw", extras: [.init("kw", alignment: .bottomTrailing)]), members: [KeyElement("gw"), KeyElement("x"), KeyElement("kw")]))
-                                        PadPullableInputKey(event: .letterC, upper: "～", lower: "c")
-                                        PadAdvancedInputKey(keyLocale: .leading, upper: "…", keyModel: KeyUnit(primary: KeyElement("ng"), members: [KeyElement("ng"), KeyElement("v")]))
-                                        PadPullableInputKey(event: .letterB, upper: "、", lower: "b")
-                                        PadPullableInputKey(event: .letterN, upper: "；", lower: "n")
-                                        PadPullableInputKey(event: .letterM, upper: "：", lower: "m")
+                                        PadPullableInputKey(virtual: .letterZ, upper: "%", lower: "z")
+                                        PadAdvancedInputKey(side: .leading, upper: "-", unit: KeyUnit(primary: KeyElement("gw", extras: [.init("kw", alignment: .bottomTrailing)]), members: [KeyElement("gw"), KeyElement("x"), KeyElement("kw")]))
+                                        PadPullableInputKey(virtual: .letterC, upper: "～", lower: "c")
+                                        PadAdvancedInputKey(side: .leading, upper: "…", unit: KeyUnit(primary: KeyElement("ng"), members: [KeyElement("ng"), KeyElement("v")]))
+                                        PadPullableInputKey(virtual: .letterB, upper: "、", lower: "b")
+                                        PadPullableInputKey(virtual: .letterN, upper: "；", lower: "n")
+                                        PadPullableInputKey(virtual: .letterM, upper: "：", lower: "m")
                                 }
                                 if context.keyboardCase.isUppercased {
-                                        PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyUnit(primary: KeyElement("！"), members: [KeyElement("！"), KeyElement("!", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)])]))
-                                        PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyUnit(primary: KeyElement("？"), members: [KeyElement("？"), KeyElement("?", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)])]))
+                                        PadExpansibleInputKey(side: .trailing, unit: KeyUnit(primary: KeyElement("！"), members: [KeyElement("！"), KeyElement("!", extras: [.init(PresetConstant.halfWidth, alignment: .top)])]))
+                                        PadExpansibleInputKey(side: .trailing, unit: KeyUnit(primary: KeyElement("？"), members: [KeyElement("？"), KeyElement("?", extras: [.init(PresetConstant.halfWidth, alignment: .top)])]))
                                 } else {
-                                        PadUpperLowerInputKey(keyLocale: .trailing, upper: "！", lower: "，", keyModel: KeyUnit(primary: KeyElement("，"), members: [KeyElement("，"), KeyElement("！"), KeyElement(",", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)]), KeyElement("!", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)])]))
+                                        PadUpperLowerInputKey(side: .trailing, upper: "！", lower: "，", unit: KeyUnit(primary: KeyElement("，"), members: [KeyElement("，"), KeyElement("！"), KeyElement(",", extras: [.init(PresetConstant.halfWidth, alignment: .top)]), KeyElement("!", extras: [.init(PresetConstant.halfWidth, alignment: .top)])]))
                                         PadUpperLowerInputKey(
-                                                keyLocale: .trailing,
+                                                side: .trailing,
                                                 upper: "？",
                                                 lower: "。",
-                                                keyModel: KeyUnit(
+                                                unit: KeyUnit(
                                                         primary: KeyElement("。"),
                                                         members: [
                                                                 KeyElement("。"),
                                                                 KeyElement("？"),
-                                                                KeyElement("｡", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)]),
-                                                                KeyElement("?", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)]),
+                                                                KeyElement("｡", extras: [.init(PresetConstant.halfWidth, alignment: .top)]),
+                                                                KeyElement("?", extras: [.init(PresetConstant.halfWidth, alignment: .top)]),
                                                                 KeyElement("."),
-                                                                KeyElement("．", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
+                                                                KeyElement("．", extras: [.init(PresetConstant.fullWidth, alignment: .top)]),
                                                         ]
                                                 )
                                         )

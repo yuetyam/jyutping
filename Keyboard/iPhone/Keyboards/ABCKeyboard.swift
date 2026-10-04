@@ -297,9 +297,9 @@ private struct SecondEnhancedInputKeyRow: View {
                                         primary: KeyElement("k", extras: [.init("'", alignment: .topTrailing)]),
                                         members: [
                                                 KeyElement("k"),
-                                                KeyElement("'", extras: [.init("0027", alignment: .bottomTrailing)]),
-                                                KeyElement("’", extras: [.init("2019", alignment: .bottomTrailing)]),
-                                                KeyElement("‘", extras: [.init("2018", alignment: .bottomTrailing)])
+                                                KeyElement("'", extras: [.init("0027", alignment: .bottom)]),
+                                                KeyElement("’", extras: [.init("2019", alignment: .bottom)]),
+                                                KeyElement("‘", extras: [.init("2018", alignment: .bottom)])
                                         ]
                                 )
                         )
@@ -310,9 +310,9 @@ private struct SecondEnhancedInputKeyRow: View {
                                         primary: KeyElement("l", extras: [.init("\"", alignment: .topTrailing)]),
                                         members: [
                                                 KeyElement("l"),
-                                                KeyElement("\"", extras: [.init("0022", alignment: .bottomTrailing)]),
-                                                KeyElement("”", extras: [.init("201D", alignment: .bottomTrailing)]),
-                                                KeyElement("“", extras: [.init("201C", alignment: .bottomTrailing)])
+                                                KeyElement("\"", extras: [.init("0022", alignment: .bottom)]),
+                                                KeyElement("”", extras: [.init("201D", alignment: .bottom)]),
+                                                KeyElement("“", extras: [.init("201C", alignment: .bottom)])
                                         ]
                                 )
                         )

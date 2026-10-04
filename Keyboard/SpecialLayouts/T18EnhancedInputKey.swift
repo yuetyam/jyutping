@@ -52,7 +52,7 @@ struct T18EnhancedInputKey: View {
                                         let offsetX: CGFloat = baseWidth * CGFloat(expansionCount)
                                         let leadingOffset: CGFloat = side.isLeading ? offsetX : 0
                                         let trailingOffset: CGFloat = side.isTrailing ? offsetX : 0
-                                        ExpansiveBubbleShape(keyLocale: side, expansionCount: expansionCount)
+                                        ExpansiveBubbleShape(side: side, expansionCount: expansionCount)
                                                 .fill(colorScheme.previewBubbleColor)
                                                 .shadow(color: .shadowGray, radius: 1)
                                                 .overlay {

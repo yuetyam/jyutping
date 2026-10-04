@@ -4,13 +4,13 @@ import CoreIME
 
 struct PadPullableInputKey: View {
 
-        init(event: VirtualInputKey? = nil, upper: String, lower: String) {
-                self.event = event
+        init(virtual: VirtualInputKey? = nil, upper: String, lower: String) {
+                self.virtual = virtual
                 self.upper = upper
                 self.lower = lower
         }
 
-        private let event: VirtualInputKey?
+        private let virtual: VirtualInputKey?
         private let upper: String
         private let lower: String
 
@@ -80,8 +80,8 @@ struct PadPullableInputKey: View {
                                         let text: String = context.keyboardCase.isLowercased ? upper : upper.uppercased()
                                         context.operate(.process(text))
                                         isPullingDown = false
-                                } else if let event {
-                                        context.handle(event)
+                                } else if let virtual {
+                                        context.handle(virtual)
                                 } else {
                                         let text: String = context.keyboardCase.isLowercased ? lower : lower.uppercased()
                                         context.operate(.process(text))

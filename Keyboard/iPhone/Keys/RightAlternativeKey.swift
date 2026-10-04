@@ -19,8 +19,8 @@ struct RightAlternativeKey: View {
                 KeyElement("。"),
                 KeyElement("？"),
                 KeyElement("！"),
-                KeyElement(",", extras: [.init("英文", alignment: .topTrailing)]),
-                KeyElement(".", extras: [.init("英文", alignment: .topTrailing)])
+                KeyElement(",", extras: [.init("英文", alignment: .top)]),
+                KeyElement(".", extras: [.init("英文", alignment: .top)])
         ]
 
         var body: some View {
@@ -41,7 +41,7 @@ struct RightAlternativeKey: View {
                                         let symbolCount: Int = elements.count
                                         let expansionCount: Int = symbolCount - 1
                                         let trailingOffset: CGFloat = baseWidth * CGFloat(expansionCount)
-                                        ExpansiveBubbleShape(keyLocale: .trailing, expansionCount: expansionCount)
+                                        ExpansiveBubbleShape(side: .trailing, expansionCount: expansionCount)
                                                 .fill(colorScheme.previewBubbleColor)
                                                 .shadow(color: .shadowGray, radius: 1)
                                                 .overlay {

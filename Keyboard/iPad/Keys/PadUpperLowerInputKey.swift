@@ -5,21 +5,21 @@ struct PadUpperLowerInputKey: View {
 
         /// Create a PadUpperLowerInputKey
         /// - Parameters:
-        ///   - keyLocale: Key location, left half (leading) or right half (trailing).
+        ///   - side: Key location, left half (leading) or right half (trailing).
         ///   - upper: Key upper text
         ///   - lower: Key lower text
-        ///   - keyModel: KeyElements
-        init(keyLocale: HorizontalEdge, upper: String, lower: String, keyModel: KeyUnit) {
-                self.keyLocale = keyLocale
+        ///   - unit: KeyUnit
+        init(side: HorizontalEdge, upper: String, lower: String, unit: KeyUnit) {
+                self.side = side
                 self.upper = upper
                 self.lower = lower
-                self.keyModel = keyModel
+                self.unit = unit
         }
 
-        private let keyLocale: HorizontalEdge
+        private let side: HorizontalEdge
         private let upper: String
         private let lower: String
-        private let keyModel: KeyUnit
+        private let unit: KeyUnit
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
@@ -44,19 +44,19 @@ struct PadUpperLowerInputKey: View {
                         ZStack {
                                 Color.interactiveClear
                                 if isLongPressing {
-                                        let memberCount: Int = keyModel.members.count
+                                        let memberCount: Int = unit.members.count
                                         let expansionCount: Int = memberCount - 1
                                         let offsetX: CGFloat = baseWidth * CGFloat(expansionCount)
-                                        let leadingOffset: CGFloat = keyLocale.isLeading ? offsetX : 0
-                                        let trailingOffset: CGFloat = keyLocale.isTrailing ? offsetX : 0
-                                        PadExpansiveBubbleShape(keyLocale: keyLocale, expansionCount: expansionCount)
+                                        let leadingOffset: CGFloat = side.isLeading ? offsetX : 0
+                                        let trailingOffset: CGFloat = side.isTrailing ? offsetX : 0
+                                        PadExpansiveBubbleShape(side: side, expansionCount: expansionCount)
                                                 .fill(colorScheme.previewBubbleColor)
                                                 .shadow(color: .shadowGray, radius: 1)
                                                 .overlay {
                                                         HStack(spacing: 0) {
-                                                                ForEach(keyModel.members.indices, id: \.self) { index in
-                                                                        let elementIndex: Int = keyLocale.isLeading ? index : ((memberCount - 1) - index)
-                                                                        let element: KeyElement = keyModel.members[elementIndex]
+                                                                ForEach(unit.members.indices, id: \.self) { index in
+                                                                        let elementIndex: Int = side.isLeading ? index : ((memberCount - 1) - index)
+                                                                        let element: KeyElement = unit.members[elementIndex]
                                                                         ZStack {
                                                                                 RoundedRectangle(cornerRadius: PresetConstant.innerLargeKeyCornerRadius)
                                                                                         .fill(selectedIndex == elementIndex ? Color.accentColor : Color.clear)
@@ -123,9 +123,9 @@ struct PadUpperLowerInputKey: View {
                 .simultaneousGesture(DragGesture(minimumDistance: 0)
                         .onChanged { state in
                                 if isLongPressing {
-                                        let memberCount: Int = keyModel.members.count
+                                        let memberCount: Int = unit.members.count
                                         guard memberCount > 1 else { return }
-                                        let distance: CGFloat = keyLocale.isLeading ? state.translation.width : -(state.translation.width)
+                                        let distance: CGFloat = side.isLeading ? state.translation.width : -(state.translation.width)
                                         if distance < (baseWidth / 2.0) {
                                                 if selectedIndex != 0 {
                                                         selectedIndex = 0
@@ -150,7 +150,7 @@ struct PadUpperLowerInputKey: View {
                                                 selectedIndex = 0
                                                 isLongPressing = false
                                         }
-                                        guard let selectedElement = keyModel.members.fetch(selectedIndex) else { return }
+                                        guard let selectedElement = unit.members.fetch(selectedIndex) else { return }
                                         let text: String = selectedElement.text
                                         AudioFeedback.inputed()
                                         context.operate(.process(text))

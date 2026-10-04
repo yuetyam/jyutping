@@ -13,10 +13,10 @@ struct CantoneseNumberRow: View {
                                         primary: KeyElement("1"),
                                         members: [
                                                 KeyElement("1"),
-                                                KeyElement("１", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
+                                                KeyElement("１", extras: [.init(PresetConstant.fullWidth, alignment: .top)]),
                                                 KeyElement("壹"),
-                                                KeyElement("¹", extras: [.init("上標", alignment: .topTrailing)]),
-                                                KeyElement("₁", extras: [.init("下標", alignment: .topTrailing)]),
+                                                KeyElement("¹", extras: [.init("上標", alignment: .top)]),
+                                                KeyElement("₁", extras: [.init("下標", alignment: .top)]),
                                                 KeyElement("①")
                                         ]
                                 )
@@ -28,10 +28,10 @@ struct CantoneseNumberRow: View {
                                         primary: KeyElement("2"),
                                         members: [
                                                 KeyElement("2"),
-                                                KeyElement("２", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
+                                                KeyElement("２", extras: [.init(PresetConstant.fullWidth, alignment: .top)]),
                                                 KeyElement("貳"),
-                                                KeyElement("²", extras: [.init("上標", alignment: .topTrailing)]),
-                                                KeyElement("₂", extras: [.init("下標", alignment: .topTrailing)]),
+                                                KeyElement("²", extras: [.init("上標", alignment: .top)]),
+                                                KeyElement("₂", extras: [.init("下標", alignment: .top)]),
                                                 KeyElement("②")
                                         ]
                                 )
@@ -43,10 +43,10 @@ struct CantoneseNumberRow: View {
                                         primary: KeyElement("3"),
                                         members: [
                                                 KeyElement("3"),
-                                                KeyElement("３", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
+                                                KeyElement("３", extras: [.init(PresetConstant.fullWidth, alignment: .top)]),
                                                 KeyElement("叁"),
-                                                KeyElement("³", extras: [.init("上標", alignment: .topTrailing)]),
-                                                KeyElement("₃", extras: [.init("下標", alignment: .topTrailing)]),
+                                                KeyElement("³", extras: [.init("上標", alignment: .top)]),
+                                                KeyElement("₃", extras: [.init("下標", alignment: .top)]),
                                                 KeyElement("③")
                                         ]
                                 )
@@ -58,10 +58,10 @@ struct CantoneseNumberRow: View {
                                         primary: KeyElement("4"),
                                         members: [
                                                 KeyElement("4"),
-                                                KeyElement("４", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
+                                                KeyElement("４", extras: [.init(PresetConstant.fullWidth, alignment: .top)]),
                                                 KeyElement("肆"),
-                                                KeyElement("⁴", extras: [.init("上標", alignment: .topTrailing)]),
-                                                KeyElement("₄", extras: [.init("下標", alignment: .topTrailing)]),
+                                                KeyElement("⁴", extras: [.init("上標", alignment: .top)]),
+                                                KeyElement("₄", extras: [.init("下標", alignment: .top)]),
                                                 KeyElement("④")
                                         ]
                                 )
@@ -73,10 +73,10 @@ struct CantoneseNumberRow: View {
                                         primary: KeyElement("5"),
                                         members: [
                                                 KeyElement("5"),
-                                                KeyElement("５", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
+                                                KeyElement("５", extras: [.init(PresetConstant.fullWidth, alignment: .top)]),
                                                 KeyElement("伍"),
-                                                KeyElement("⁵", extras: [.init("上標", alignment: .topTrailing)]),
-                                                KeyElement("₅", extras: [.init("下標", alignment: .topTrailing)]),
+                                                KeyElement("⁵", extras: [.init("上標", alignment: .top)]),
+                                                KeyElement("₅", extras: [.init("下標", alignment: .top)]),
                                                 KeyElement("⑤")
                                         ]
                                 )
@@ -88,10 +88,10 @@ struct CantoneseNumberRow: View {
                                         primary: KeyElement("6"),
                                         members: [
                                                 KeyElement("6"),
-                                                KeyElement("６", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
+                                                KeyElement("６", extras: [.init(PresetConstant.fullWidth, alignment: .top)]),
                                                 KeyElement("陸"),
-                                                KeyElement("⁶", extras: [.init("上標", alignment: .topTrailing)]),
-                                                KeyElement("₆", extras: [.init("下標", alignment: .topTrailing)]),
+                                                KeyElement("⁶", extras: [.init("上標", alignment: .top)]),
+                                                KeyElement("₆", extras: [.init("下標", alignment: .top)]),
                                                 KeyElement("⑥")
                                         ]
                                 )
@@ -103,10 +103,10 @@ struct CantoneseNumberRow: View {
                                         primary: KeyElement("7"),
                                         members: [
                                                 KeyElement("7"),
-                                                KeyElement("７", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
+                                                KeyElement("７", extras: [.init(PresetConstant.fullWidth, alignment: .top)]),
                                                 KeyElement("柒"),
-                                                KeyElement("⁷", extras: [.init("上標", alignment: .topTrailing)]),
-                                                KeyElement("₇", extras: [.init("下標", alignment: .topTrailing)]),
+                                                KeyElement("⁷", extras: [.init("上標", alignment: .top)]),
+                                                KeyElement("₇", extras: [.init("下標", alignment: .top)]),
                                                 KeyElement("⑦")
                                         ]
                                 )
@@ -118,10 +118,10 @@ struct CantoneseNumberRow: View {
                                         primary: KeyElement("8"),
                                         members: [
                                                 KeyElement("8"),
-                                                KeyElement("８", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
+                                                KeyElement("８", extras: [.init(PresetConstant.fullWidth, alignment: .top)]),
                                                 KeyElement("捌"),
-                                                KeyElement("⁸", extras: [.init("上標", alignment: .topTrailing)]),
-                                                KeyElement("₈", extras: [.init("下標", alignment: .topTrailing)]),
+                                                KeyElement("⁸", extras: [.init("上標", alignment: .top)]),
+                                                KeyElement("₈", extras: [.init("下標", alignment: .top)]),
                                                 KeyElement("⑧")
                                         ]
                                 )
@@ -133,10 +133,10 @@ struct CantoneseNumberRow: View {
                                         primary: KeyElement("9"),
                                         members: [
                                                 KeyElement("9"),
-                                                KeyElement("９", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
+                                                KeyElement("９", extras: [.init(PresetConstant.fullWidth, alignment: .top)]),
                                                 KeyElement("玖"),
-                                                KeyElement("⁹", extras: [.init("上標", alignment: .topTrailing)]),
-                                                KeyElement("₉", extras: [.init("下標", alignment: .topTrailing)]),
+                                                KeyElement("⁹", extras: [.init("上標", alignment: .top)]),
+                                                KeyElement("₉", extras: [.init("下標", alignment: .top)]),
                                                 KeyElement("⑨")
                                         ]
                                 )
@@ -148,13 +148,13 @@ struct CantoneseNumberRow: View {
                                         primary: KeyElement("0"),
                                         members: [
                                                 KeyElement("0"),
-                                                KeyElement("０", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
+                                                KeyElement("０", extras: [.init(PresetConstant.fullWidth, alignment: .top)]),
                                                 KeyElement("零"),
-                                                KeyElement("⁰", extras: [.init("上標", alignment: .topTrailing)]),
-                                                KeyElement("₀", extras: [.init("下標", alignment: .topTrailing)]),
+                                                KeyElement("⁰", extras: [.init("上標", alignment: .top)]),
+                                                KeyElement("₀", extras: [.init("下標", alignment: .top)]),
                                                 KeyElement("⓪"),
                                                 KeyElement("拾"),
-                                                KeyElement("°", extras: [.init("度", alignment: .topTrailing)])
+                                                KeyElement("°", extras: [.init("度", alignment: .top)])
                                         ]
                                 )
                         )

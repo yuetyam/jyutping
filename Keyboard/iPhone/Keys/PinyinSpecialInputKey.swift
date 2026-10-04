@@ -40,7 +40,7 @@ struct PinyinSpecialInputKey: View {
                                         let memberCount: Int = unit.members.count
                                         let expansionCount: Int = memberCount - 1
                                         let leadingOffset: CGFloat = baseWidth * CGFloat(expansionCount)
-                                        ExpansiveBubbleShape(keyLocale: .leading, expansionCount: expansionCount)
+                                        ExpansiveBubbleShape(side: .leading, expansionCount: expansionCount)
                                                 .fill(colorScheme.previewBubbleColor)
                                                 .shadow(color: .shadowGray, radius: 1)
                                                 .overlay {

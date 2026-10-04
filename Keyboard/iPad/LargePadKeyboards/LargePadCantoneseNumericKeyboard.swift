@@ -11,187 +11,187 @@ struct LargePadCantoneseNumericKeyboard: View {
                         ToolBar()
                         HStack(spacing: 0 ) {
                                 LargePadExpansibleInputKey(
-                                        keyLocale: .leading,
-                                        keyModel: KeyUnit(
+                                        side: .leading,
+                                        unit: KeyUnit(
                                                 primary: KeyElement("."),
                                                 members: [
-                                                        KeyElement(".", extras: [.init("002E", alignment: .bottomTrailing)]),
-                                                        KeyElement("．", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing), .init("FF0E", alignment: .bottomTrailing)]),
+                                                        KeyElement(".", extras: [.init("002E", alignment: .bottom)]),
+                                                        KeyElement("．", extras: [.init(PresetConstant.fullWidth, alignment: .top), .init("FF0E", alignment: .bottom)]),
                                                         KeyElement("…"),
                                                 ]
                                         )
                                 )
                                 Group {
                                         LargePadExpansibleInputKey(
-                                                keyLocale: .leading,
-                                                event: .number1,
-                                                keyModel: KeyUnit(
+                                                side: .leading,
+                                                virtual: .number1,
+                                                unit: KeyUnit(
                                                         primary: KeyElement("1"),
                                                         members: [
                                                                 KeyElement("1"),
-                                                                KeyElement("１", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
+                                                                KeyElement("１", extras: [.init(PresetConstant.fullWidth, alignment: .top)]),
                                                                 KeyElement("壹"),
-                                                                KeyElement("¹", extras: [.init("上標", alignment: .topTrailing)]),
-                                                                KeyElement("₁", extras: [.init("下標", alignment: .topTrailing)]),
+                                                                KeyElement("¹", extras: [.init("上標", alignment: .top)]),
+                                                                KeyElement("₁", extras: [.init("下標", alignment: .top)]),
                                                                 KeyElement("①")
                                                         ]
                                                 )
                                         )
                                         LargePadExpansibleInputKey(
-                                                keyLocale: .leading,
-                                                event: .number2,
-                                                keyModel: KeyUnit(
+                                                side: .leading,
+                                                virtual: .number2,
+                                                unit: KeyUnit(
                                                         primary: KeyElement("2"),
                                                         members: [
                                                                 KeyElement("2"),
-                                                                KeyElement("２", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
+                                                                KeyElement("２", extras: [.init(PresetConstant.fullWidth, alignment: .top)]),
                                                                 KeyElement("貳"),
-                                                                KeyElement("²", extras: [.init("上標", alignment: .topTrailing)]),
-                                                                KeyElement("₂", extras: [.init("下標", alignment: .topTrailing)]),
+                                                                KeyElement("²", extras: [.init("上標", alignment: .top)]),
+                                                                KeyElement("₂", extras: [.init("下標", alignment: .top)]),
                                                                 KeyElement("②")
                                                         ]
                                                 )
                                         )
                                         LargePadExpansibleInputKey(
-                                                keyLocale: .leading,
-                                                event: .number3,
-                                                keyModel: KeyUnit(
+                                                side: .leading,
+                                                virtual: .number3,
+                                                unit: KeyUnit(
                                                         primary: KeyElement("3"),
                                                         members: [
                                                                 KeyElement("3"),
-                                                                KeyElement("３", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
+                                                                KeyElement("３", extras: [.init(PresetConstant.fullWidth, alignment: .top)]),
                                                                 KeyElement("叁"),
-                                                                KeyElement("³", extras: [.init("上標", alignment: .topTrailing)]),
-                                                                KeyElement("₃", extras: [.init("下標", alignment: .topTrailing)]),
+                                                                KeyElement("³", extras: [.init("上標", alignment: .top)]),
+                                                                KeyElement("₃", extras: [.init("下標", alignment: .top)]),
                                                                 KeyElement("③")
                                                         ]
                                                 )
                                         )
                                         LargePadExpansibleInputKey(
-                                                keyLocale: .leading,
-                                                event: .number4,
-                                                keyModel: KeyUnit(
+                                                side: .leading,
+                                                virtual: .number4,
+                                                unit: KeyUnit(
                                                         primary: KeyElement("4"),
                                                         members: [
                                                                 KeyElement("4"),
-                                                                KeyElement("４", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
+                                                                KeyElement("４", extras: [.init(PresetConstant.fullWidth, alignment: .top)]),
                                                                 KeyElement("肆"),
-                                                                KeyElement("⁴", extras: [.init("上標", alignment: .topTrailing)]),
-                                                                KeyElement("₄", extras: [.init("下標", alignment: .topTrailing)]),
+                                                                KeyElement("⁴", extras: [.init("上標", alignment: .top)]),
+                                                                KeyElement("₄", extras: [.init("下標", alignment: .top)]),
                                                                 KeyElement("④")
                                                         ]
                                                 )
                                         )
                                         LargePadExpansibleInputKey(
-                                                keyLocale: .leading,
-                                                event: .number5,
-                                                keyModel: KeyUnit(
+                                                side: .leading,
+                                                virtual: .number5,
+                                                unit: KeyUnit(
                                                         primary: KeyElement("5"),
                                                         members: [
                                                                 KeyElement("5"),
-                                                                KeyElement("５", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
+                                                                KeyElement("５", extras: [.init(PresetConstant.fullWidth, alignment: .top)]),
                                                                 KeyElement("伍"),
-                                                                KeyElement("⁵", extras: [.init("上標", alignment: .topTrailing)]),
-                                                                KeyElement("₅", extras: [.init("下標", alignment: .topTrailing)]),
+                                                                KeyElement("⁵", extras: [.init("上標", alignment: .top)]),
+                                                                KeyElement("₅", extras: [.init("下標", alignment: .top)]),
                                                                 KeyElement("⑤")
                                                         ]
                                                 )
                                         )
                                         LargePadExpansibleInputKey(
-                                                keyLocale: .leading,
-                                                event: .number6,
-                                                keyModel: KeyUnit(
+                                                side: .leading,
+                                                virtual: .number6,
+                                                unit: KeyUnit(
                                                         primary: KeyElement("6"),
                                                         members: [
                                                                 KeyElement("6"),
-                                                                KeyElement("６", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
+                                                                KeyElement("６", extras: [.init(PresetConstant.fullWidth, alignment: .top)]),
                                                                 KeyElement("陸"),
-                                                                KeyElement("⁶", extras: [.init("上標", alignment: .topTrailing)]),
-                                                                KeyElement("₆", extras: [.init("下標", alignment: .topTrailing)]),
+                                                                KeyElement("⁶", extras: [.init("上標", alignment: .top)]),
+                                                                KeyElement("₆", extras: [.init("下標", alignment: .top)]),
                                                                 KeyElement("⑥")
                                                         ]
                                                 )
                                         )
                                         LargePadExpansibleInputKey(
-                                                keyLocale: .trailing,
-                                                event: .number7,
-                                                keyModel: KeyUnit(
+                                                side: .trailing,
+                                                virtual: .number7,
+                                                unit: KeyUnit(
                                                         primary: KeyElement("7"),
                                                         members: [
                                                                 KeyElement("7"),
-                                                                KeyElement("７", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
+                                                                KeyElement("７", extras: [.init(PresetConstant.fullWidth, alignment: .top)]),
                                                                 KeyElement("柒"),
-                                                                KeyElement("⁷", extras: [.init("上標", alignment: .topTrailing)]),
-                                                                KeyElement("₇", extras: [.init("下標", alignment: .topTrailing)]),
+                                                                KeyElement("⁷", extras: [.init("上標", alignment: .top)]),
+                                                                KeyElement("₇", extras: [.init("下標", alignment: .top)]),
                                                                 KeyElement("⑦")
                                                         ]
                                                 )
                                         )
                                         LargePadExpansibleInputKey(
-                                                keyLocale: .trailing,
-                                                event: .number8,
-                                                keyModel: KeyUnit(
+                                                side: .trailing,
+                                                virtual: .number8,
+                                                unit: KeyUnit(
                                                         primary: KeyElement("8"),
                                                         members: [
                                                                 KeyElement("8"),
-                                                                KeyElement("８", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
+                                                                KeyElement("８", extras: [.init(PresetConstant.fullWidth, alignment: .top)]),
                                                                 KeyElement("捌"),
-                                                                KeyElement("⁸", extras: [.init("上標", alignment: .topTrailing)]),
-                                                                KeyElement("₈", extras: [.init("下標", alignment: .topTrailing)]),
+                                                                KeyElement("⁸", extras: [.init("上標", alignment: .top)]),
+                                                                KeyElement("₈", extras: [.init("下標", alignment: .top)]),
                                                                 KeyElement("⑧")
                                                         ]
                                                 )
                                         )
                                         LargePadExpansibleInputKey(
-                                                keyLocale: .trailing,
-                                                event: .number9,
-                                                keyModel: KeyUnit(
+                                                side: .trailing,
+                                                virtual: .number9,
+                                                unit: KeyUnit(
                                                         primary: KeyElement("9"),
                                                         members: [
                                                                 KeyElement("9"),
-                                                                KeyElement("９", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
+                                                                KeyElement("９", extras: [.init(PresetConstant.fullWidth, alignment: .top)]),
                                                                 KeyElement("玖"),
-                                                                KeyElement("⁹", extras: [.init("上標", alignment: .topTrailing)]),
-                                                                KeyElement("₉", extras: [.init("下標", alignment: .topTrailing)]),
+                                                                KeyElement("⁹", extras: [.init("上標", alignment: .top)]),
+                                                                KeyElement("₉", extras: [.init("下標", alignment: .top)]),
                                                                 KeyElement("⑨")
                                                         ]
                                                 )
                                         )
                                         LargePadExpansibleInputKey(
-                                                keyLocale: .trailing,
-                                                event: .number0,
-                                                keyModel: KeyUnit(
+                                                side: .trailing,
+                                                virtual: .number0,
+                                                unit: KeyUnit(
                                                         primary: KeyElement("0"),
                                                         members: [
                                                                 KeyElement("0"),
-                                                                KeyElement("０", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
+                                                                KeyElement("０", extras: [.init(PresetConstant.fullWidth, alignment: .top)]),
                                                                 KeyElement("零"),
-                                                                KeyElement("⁰", extras: [.init("上標", alignment: .topTrailing)]),
-                                                                KeyElement("₀", extras: [.init("下標", alignment: .topTrailing)]),
+                                                                KeyElement("⁰", extras: [.init("上標", alignment: .top)]),
+                                                                KeyElement("₀", extras: [.init("下標", alignment: .top)]),
                                                                 KeyElement("⓪"),
                                                                 KeyElement("拾"),
-                                                                KeyElement("°", extras: [.init("度", alignment: .topTrailing)])
+                                                                KeyElement("°", extras: [.init("度", alignment: .top)])
                                                         ]
                                                 )
                                         )
                                 }
                                 LargePadExpansibleInputKey(
-                                        keyLocale: .trailing,
-                                        keyModel: KeyUnit(
+                                        side: .trailing,
+                                        unit: KeyUnit(
                                                 primary: KeyElement("<"),
                                                 members: [
                                                         KeyElement("<"),
-                                                        KeyElement("＜", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)])
+                                                        KeyElement("＜", extras: [.init(PresetConstant.fullWidth, alignment: .top)])
                                                 ]
                                         )
                                 )
                                 LargePadExpansibleInputKey(
-                                        keyLocale: .trailing,
-                                        keyModel: KeyUnit(
+                                        side: .trailing,
+                                        unit: KeyUnit(
                                                 primary: KeyElement(">"),
                                                 members: [
                                                         KeyElement(">"),
-                                                        KeyElement("＞", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)])
+                                                        KeyElement("＞", extras: [.init(PresetConstant.fullWidth, alignment: .top)])
                                                 ]
                                         )
                                 )
@@ -201,12 +201,12 @@ struct LargePadCantoneseNumericKeyboard: View {
                                 LargePadTabKey(widthUnitTimes: 1.5)
                                 Group {
                                         LargePadExpansibleInputKey(
-                                                keyLocale: .leading,
-                                                keyModel: KeyUnit(
+                                                side: .leading,
+                                                unit: KeyUnit(
                                                         primary: KeyElement("［"),
                                                         members: [
                                                                 KeyElement("［"),
-                                                                KeyElement("[", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)]),
+                                                                KeyElement("[", extras: [.init(PresetConstant.halfWidth, alignment: .top)]),
                                                                 KeyElement("【"),
                                                                 KeyElement("〖"),
                                                                 KeyElement("〔")
@@ -214,12 +214,12 @@ struct LargePadCantoneseNumericKeyboard: View {
                                                 )
                                         )
                                         LargePadExpansibleInputKey(
-                                                keyLocale: .leading,
-                                                keyModel: KeyUnit(
+                                                side: .leading,
+                                                unit: KeyUnit(
                                                         primary: KeyElement("］"),
                                                         members: [
                                                                 KeyElement("］"),
-                                                                KeyElement("]", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)]),
+                                                                KeyElement("]", extras: [.init(PresetConstant.halfWidth, alignment: .top)]),
                                                                 KeyElement("】"),
                                                                 KeyElement("〗"),
                                                                 KeyElement("〕")
@@ -227,84 +227,84 @@ struct LargePadCantoneseNumericKeyboard: View {
                                                 )
                                         )
                                         LargePadExpansibleInputKey(
-                                                keyLocale: .leading,
-                                                keyModel: KeyUnit(
+                                                side: .leading,
+                                                unit: KeyUnit(
                                                         primary: KeyElement("｛"),
                                                         members: [
                                                                 KeyElement("｛"),
-                                                                KeyElement("{", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)])
+                                                                KeyElement("{", extras: [.init(PresetConstant.halfWidth, alignment: .top)])
                                                         ]
                                                 )
                                         )
                                         LargePadExpansibleInputKey(
-                                                keyLocale: .leading,
-                                                keyModel: KeyUnit(
+                                                side: .leading,
+                                                unit: KeyUnit(
                                                         primary: KeyElement("｝"),
                                                         members: [
                                                                 KeyElement("｝"),
-                                                                KeyElement("}", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)])
+                                                                KeyElement("}", extras: [.init(PresetConstant.halfWidth, alignment: .top)])
                                                         ]
                                                 )
                                         )
                                         LargePadExpansibleInputKey(
-                                                keyLocale: .leading,
-                                                keyModel: KeyUnit(
+                                                side: .leading,
+                                                unit: KeyUnit(
                                                         primary: KeyElement("#"),
                                                         members: [
                                                                 KeyElement("#"),
-                                                                KeyElement("＃", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)])
+                                                                KeyElement("＃", extras: [.init(PresetConstant.fullWidth, alignment: .top)])
                                                         ]
                                                 )
                                         )
                                         LargePadExpansibleInputKey(
-                                                keyLocale: .trailing,
-                                                keyModel: KeyUnit(
+                                                side: .trailing,
+                                                unit: KeyUnit(
                                                         primary: KeyElement("%"),
                                                         members: [
                                                                 KeyElement("%"),
-                                                                KeyElement("％", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
+                                                                KeyElement("％", extras: [.init(PresetConstant.fullWidth, alignment: .top)]),
                                                                 KeyElement("‰")
                                                         ]
                                                 )
                                         )
                                         LargePadExpansibleInputKey(
-                                                keyLocale: .trailing,
-                                                keyModel: KeyUnit(
+                                                side: .trailing,
+                                                unit: KeyUnit(
                                                         primary: KeyElement("^"),
                                                         members: [
                                                                 KeyElement("^"),
-                                                                KeyElement("＾", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
+                                                                KeyElement("＾", extras: [.init(PresetConstant.fullWidth, alignment: .top)]),
                                                         ]
                                                 )
                                         )
                                         LargePadExpansibleInputKey(
-                                                keyLocale: .trailing,
-                                                keyModel: KeyUnit(
+                                                side: .trailing,
+                                                unit: KeyUnit(
                                                         primary: KeyElement("*"),
                                                         members: [
                                                                 KeyElement("*"),
-                                                                KeyElement("＊", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
+                                                                KeyElement("＊", extras: [.init(PresetConstant.fullWidth, alignment: .top)]),
                                                                 KeyElement("×"),
                                                         ]
                                                 )
                                         )
                                         LargePadExpansibleInputKey(
-                                                keyLocale: .trailing,
-                                                keyModel: KeyUnit(
+                                                side: .trailing,
+                                                unit: KeyUnit(
                                                         primary: KeyElement("+"),
                                                         members: [
                                                                 KeyElement("+"),
-                                                                KeyElement("＋", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
+                                                                KeyElement("＋", extras: [.init(PresetConstant.fullWidth, alignment: .top)]),
                                                         ]
                                                 )
                                         )
                                         LargePadExpansibleInputKey(
-                                                keyLocale: .trailing,
-                                                keyModel: KeyUnit(
+                                                side: .trailing,
+                                                unit: KeyUnit(
                                                         primary: KeyElement("="),
                                                         members: [
                                                                 KeyElement("="),
-                                                                KeyElement("＝", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
+                                                                KeyElement("＝", extras: [.init(PresetConstant.fullWidth, alignment: .top)]),
                                                                 KeyElement("≠"),
                                                                 KeyElement("≈")
                                                         ]
@@ -312,32 +312,32 @@ struct LargePadCantoneseNumericKeyboard: View {
                                         )
                                 }
                                 LargePadExpansibleInputKey(
-                                        keyLocale: .trailing,
-                                        keyModel: KeyUnit(
+                                        side: .trailing,
+                                        unit: KeyUnit(
                                                 primary: KeyElement("\\"),
                                                 members: [
                                                         KeyElement("\\"),
-                                                        KeyElement("＼", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)])
+                                                        KeyElement("＼", extras: [.init(PresetConstant.fullWidth, alignment: .top)])
                                                 ]
                                         )
                                 )
                                 LargePadExpansibleInputKey(
-                                        keyLocale: .trailing,
-                                        keyModel: KeyUnit(
+                                        side: .trailing,
+                                        unit: KeyUnit(
                                                 primary: KeyElement("|"),
                                                 members: [
                                                         KeyElement("|"),
-                                                        KeyElement("｜", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)])
+                                                        KeyElement("｜", extras: [.init(PresetConstant.fullWidth, alignment: .top)])
                                                 ]
                                         )
                                 )
                                 LargePadExpansibleInputKey(
-                                        keyLocale: .trailing,
-                                        keyModel: KeyUnit(
+                                        side: .trailing,
+                                        unit: KeyUnit(
                                                 primary: KeyElement("_"),
                                                 members: [
                                                         KeyElement("_"),
-                                                        KeyElement("＿", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing), .init("FF3F", alignment: .bottomTrailing)])
+                                                        KeyElement("＿", extras: [.init(PresetConstant.fullWidth, alignment: .top), .init("FF3F", alignment: .bottom)])
                                                 ]
                                         )
                                 )
@@ -346,74 +346,74 @@ struct LargePadCantoneseNumericKeyboard: View {
                                 LargePadCapsLockKey(widthUnitTimes: 1.75).hidden()
                                 Group {
                                         LargePadExpansibleInputKey(
-                                                keyLocale: .leading,
-                                                keyModel: KeyUnit(
+                                                side: .leading,
+                                                unit: KeyUnit(
                                                         primary: KeyElement("-"),
                                                         members: [
                                                                 KeyElement("-"),
-                                                                KeyElement("\u{FF0D}", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing), .init("FF0D", alignment: .bottomTrailing)]),
-                                                                KeyElement("\u{2013}", extras: [.init("2013", alignment: .bottomTrailing)]),
-                                                                KeyElement("\u{2014}", extras: [.init("2014", alignment: .bottomTrailing)]),
-                                                                KeyElement("•", extras: [.init("項目符號", alignment: .topTrailing), .init("2022", alignment: .bottomTrailing)]),
-                                                                KeyElement("\u{2027}", extras: [.init("連字點", alignment: .topTrailing), .init("2027", alignment: .bottomTrailing)]),
-                                                                KeyElement("\u{FF65}", extras: [.init("半寬中點", alignment: .topTrailing), .init("FF65", alignment: .bottomTrailing)]),
-                                                                KeyElement("\u{30FB}", extras: [.init("全寬中點", alignment: .topTrailing), .init("30FB", alignment: .bottomTrailing)])
+                                                                KeyElement("\u{FF0D}", extras: [.init(PresetConstant.fullWidth, alignment: .top), .init("FF0D", alignment: .bottom)]),
+                                                                KeyElement("\u{2013}", extras: [.init("2013", alignment: .bottom)]),
+                                                                KeyElement("\u{2014}", extras: [.init("2014", alignment: .bottom)]),
+                                                                KeyElement("•", extras: [.init("項目符號", alignment: .top), .init("2022", alignment: .bottom)]),
+                                                                KeyElement("\u{2027}", extras: [.init("連字點", alignment: .top), .init("2027", alignment: .bottom)]),
+                                                                KeyElement("\u{FF65}", extras: [.init("半寬中點", alignment: .top), .init("FF65", alignment: .bottom)]),
+                                                                KeyElement("\u{30FB}", extras: [.init("全寬中點", alignment: .top), .init("30FB", alignment: .bottom)])
                                                         ]
                                                 )
                                         )
                                         LargePadExpansibleInputKey(
-                                                keyLocale: .leading,
-                                                keyModel: KeyUnit(
+                                                side: .leading,
+                                                unit: KeyUnit(
                                                         primary: KeyElement("/"),
                                                         members: [
                                                                 KeyElement("/"),
-                                                                KeyElement("／", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)])
+                                                                KeyElement("／", extras: [.init(PresetConstant.fullWidth, alignment: .top)])
                                                         ]
                                                 )
                                         )
                                         LargePadExpansibleInputKey(
-                                                keyLocale: .leading,
-                                                keyModel: KeyUnit(
+                                                side: .leading,
+                                                unit: KeyUnit(
                                                         primary: KeyElement("："),
                                                         members: [
                                                                 KeyElement("："),
-                                                                KeyElement(":", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)])
+                                                                KeyElement(":", extras: [.init(PresetConstant.halfWidth, alignment: .top)])
                                                         ]
                                                 )
                                         )
                                         LargePadExpansibleInputKey(
-                                                keyLocale: .leading,
-                                                keyModel: KeyUnit(
+                                                side: .leading,
+                                                unit: KeyUnit(
                                                         primary: KeyElement("；"),
                                                         members: [
                                                                 KeyElement("；"),
-                                                                KeyElement(";", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)])
+                                                                KeyElement(";", extras: [.init(PresetConstant.halfWidth, alignment: .top)])
                                                         ]
                                                 )
                                         )
                                         LargePadExpansibleInputKey(
-                                                keyLocale: .leading,
-                                                keyModel: KeyUnit(
+                                                side: .leading,
+                                                unit: KeyUnit(
                                                         primary: KeyElement("）"),
                                                         members: [
                                                                 KeyElement("）"),
-                                                                KeyElement("(", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)])
+                                                                KeyElement("(", extras: [.init(PresetConstant.halfWidth, alignment: .top)])
                                                         ]
                                                 )
                                         )
                                         LargePadExpansibleInputKey(
-                                                keyLocale: .leading,
-                                                keyModel: KeyUnit(
+                                                side: .leading,
+                                                unit: KeyUnit(
                                                         primary: KeyElement("）"),
                                                         members: [
                                                                 KeyElement("）"),
-                                                                KeyElement(")", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)])
+                                                                KeyElement(")", extras: [.init(PresetConstant.halfWidth, alignment: .top)])
                                                         ]
                                                 )
                                         )
                                         LargePadExpansibleInputKey(
-                                                keyLocale: .trailing,
-                                                keyModel: KeyUnit(
+                                                side: .trailing,
+                                                unit: KeyUnit(
                                                         primary: KeyElement("$"),
                                                         members: [
                                                                 KeyElement("$"),
@@ -427,47 +427,47 @@ struct LargePadCantoneseNumericKeyboard: View {
                                                 )
                                         )
                                         LargePadExpansibleInputKey(
-                                                keyLocale: .trailing,
-                                                keyModel: KeyUnit(
+                                                side: .trailing,
+                                                unit: KeyUnit(
                                                         primary: KeyElement("&"),
                                                         members: [
                                                                 KeyElement("&"),
-                                                                KeyElement("＆", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
+                                                                KeyElement("＆", extras: [.init(PresetConstant.fullWidth, alignment: .top)]),
                                                                 KeyElement("§")
                                                         ]
                                                 )
                                         )
                                         LargePadExpansibleInputKey(
-                                                keyLocale: .trailing,
-                                                keyModel: KeyUnit(
+                                                side: .trailing,
+                                                unit: KeyUnit(
                                                         primary: KeyElement("@"),
                                                         members: [
                                                                 KeyElement("@"),
-                                                                KeyElement("＠", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)])
+                                                                KeyElement("＠", extras: [.init(PresetConstant.fullWidth, alignment: .top)])
                                                         ]
                                                 )
                                         )
                                 }
                                 LargePadExpansibleInputKey(
-                                        keyLocale: .trailing,
-                                        keyModel: KeyUnit(
+                                        side: .trailing,
+                                        unit: KeyUnit(
                                                 primary: KeyElement("'"),
                                                 members: [
-                                                        KeyElement("'", extras: [.init("0027", alignment: .bottomTrailing)]),
-                                                        KeyElement("\u{2019}", extras: [.init("右", alignment: .topTrailing), .init("2019", alignment: .bottomTrailing)]),
-                                                        KeyElement("\u{2018}", extras: [.init("左", alignment: .topTrailing), .init("2018", alignment: .bottomTrailing)]),
-                                                        KeyElement("\u{FF07}", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing), .init("FF07", alignment: .bottomTrailing)]),
-                                                        KeyElement("\u{0060}", extras: [.init("重音符", alignment: .topTrailing), .init("0060", alignment: .bottomTrailing)])
+                                                        KeyElement("'", extras: [.init("0027", alignment: .bottom)]),
+                                                        KeyElement("\u{2019}", extras: [.init("右", alignment: .top), .init("2019", alignment: .bottom)]),
+                                                        KeyElement("\u{2018}", extras: [.init("左", alignment: .top), .init("2018", alignment: .bottom)]),
+                                                        KeyElement("\u{FF07}", extras: [.init(PresetConstant.fullWidth, alignment: .top), .init("FF07", alignment: .bottom)]),
+                                                        KeyElement("\u{0060}", extras: [.init("重音符", alignment: .top), .init("0060", alignment: .bottom)])
                                                 ]
                                         )
                                 )
                                 LargePadExpansibleInputKey(
-                                        keyLocale: .trailing,
-                                        keyModel: KeyUnit(
+                                        side: .trailing,
+                                        unit: KeyUnit(
                                                 primary: KeyElement("¥"),
                                                 members: [
                                                         KeyElement("¥"),
-                                                        KeyElement("￥", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)])
+                                                        KeyElement("￥", extras: [.init(PresetConstant.fullWidth, alignment: .top)])
                                                 ]
                                         )
                                 )
@@ -477,8 +477,8 @@ struct LargePadCantoneseNumericKeyboard: View {
                                 LargePadShiftKey(side: .leading, coefficient: 2.25).hidden()
                                 Group {
                                         LargePadExpansibleInputKey(
-                                                keyLocale: .leading,
-                                                keyModel: KeyUnit(
+                                                side: .leading,
+                                                unit: KeyUnit(
                                                         primary: KeyElement("©"),
                                                         members: [
                                                                 KeyElement("©"),
@@ -489,105 +489,105 @@ struct LargePadCantoneseNumericKeyboard: View {
                                                 )
                                         )
                                         LargePadExpansibleInputKey(
-                                                keyLocale: .leading,
-                                                keyModel: KeyUnit(
+                                                side: .leading,
+                                                unit: KeyUnit(
                                                         primary: KeyElement("…"),
                                                         members: [
-                                                                KeyElement("…", extras: [.init("2026", alignment: .bottomTrailing)]),
-                                                                KeyElement("⋯", extras: [.init("22EF", alignment: .bottomTrailing)])
+                                                                KeyElement("…", extras: [.init("2026", alignment: .bottom)]),
+                                                                KeyElement("⋯", extras: [.init("22EF", alignment: .bottom)])
                                                         ]
                                                 )
                                         )
                                         LargePadExpansibleInputKey(
-                                                keyLocale: .leading,
-                                                keyModel: KeyUnit(
+                                                side: .leading,
+                                                unit: KeyUnit(
                                                         primary: KeyElement("。"),
                                                         members: [
                                                                 KeyElement("。"),
-                                                                KeyElement("｡", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)])
+                                                                KeyElement("｡", extras: [.init(PresetConstant.halfWidth, alignment: .top)])
                                                         ]
                                                 )
                                         )
                                         LargePadExpansibleInputKey(
-                                                keyLocale: .leading,
-                                                keyModel: KeyUnit(
+                                                side: .leading,
+                                                unit: KeyUnit(
                                                         primary: KeyElement("，"),
                                                         members: [
                                                                 KeyElement("，"),
-                                                                KeyElement(",", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)])
+                                                                KeyElement(",", extras: [.init(PresetConstant.halfWidth, alignment: .top)])
                                                         ]
                                                 )
                                         )
                                         LargePadExpansibleInputKey(
-                                                keyLocale: .leading,
-                                                keyModel: KeyUnit(
+                                                side: .leading,
+                                                unit: KeyUnit(
                                                         primary: KeyElement("、"),
                                                         members: [
                                                                 KeyElement("、"),
-                                                                KeyElement("､", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)]),
-                                                                KeyElement("･", extras: [.init("半寬中點", alignment: .topTrailing), .init("FF65", alignment: .bottomTrailing)]),
-                                                                KeyElement("・", extras: [.init("全寬中點", alignment: .topTrailing), .init("30FB", alignment: .bottomTrailing)]),
+                                                                KeyElement("､", extras: [.init(PresetConstant.halfWidth, alignment: .top)]),
+                                                                KeyElement("･", extras: [.init("半寬中點", alignment: .top), .init("FF65", alignment: .bottom)]),
+                                                                KeyElement("・", extras: [.init("全寬中點", alignment: .top), .init("30FB", alignment: .bottom)]),
                                                         ]
                                                 )
                                         )
                                         LargePadExpansibleInputKey(
-                                                keyLocale: .trailing,
-                                                keyModel: KeyUnit(
+                                                side: .trailing,
+                                                unit: KeyUnit(
                                                         primary: KeyElement("？"),
                                                         members: [
                                                                 KeyElement("？"),
-                                                                KeyElement("?", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)]),
+                                                                KeyElement("?", extras: [.init(PresetConstant.halfWidth, alignment: .top)]),
                                                                 KeyElement("¿")
                                                         ]
                                                 )
                                         )
                                         LargePadExpansibleInputKey(
-                                                keyLocale: .trailing,
-                                                keyModel: KeyUnit(
+                                                side: .trailing,
+                                                unit: KeyUnit(
                                                         primary: KeyElement("！"),
                                                         members: [
                                                                 KeyElement("！"),
-                                                                KeyElement("!", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)]),
+                                                                KeyElement("!", extras: [.init(PresetConstant.halfWidth, alignment: .top)]),
                                                                 KeyElement("¡")
                                                         ]
                                                 )
                                         )
                                 }
                                 LargePadExpansibleInputKey(
-                                        keyLocale: .trailing,
-                                        keyModel: KeyUnit(
+                                        side: .trailing,
+                                        unit: KeyUnit(
                                                 primary: KeyElement("～"),
                                                 members: [
                                                         KeyElement("～"),
-                                                        KeyElement("~", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)])
+                                                        KeyElement("~", extras: [.init(PresetConstant.halfWidth, alignment: .top)])
                                                 ]
                                         )
                                 )
                                 LargePadExpansibleInputKey(
-                                        keyLocale: .trailing,
-                                        keyModel: KeyUnit(
+                                        side: .trailing,
+                                        unit: KeyUnit(
                                                 primary: KeyElement("\u{201C}"),
                                                 members: [
-                                                        KeyElement("\u{201C}", extras: [.init("201C", alignment: .bottomTrailing)]),
-                                                        KeyElement("\u{0022}", extras: [.init("0022", alignment: .bottomTrailing)]),
-                                                        KeyElement("\u{FF02}", extras: [.init("FF02", alignment: .bottomTrailing)])
+                                                        KeyElement("\u{201C}", extras: [.init("201C", alignment: .bottom)]),
+                                                        KeyElement("\u{0022}", extras: [.init("0022", alignment: .bottom)]),
+                                                        KeyElement("\u{FF02}", extras: [.init("FF02", alignment: .bottom)])
                                                 ]
                                         )
                                 )
                                 LargePadExpansibleInputKey(
-                                        keyLocale: .trailing,
-                                        keyModel: KeyUnit(
+                                        side: .trailing,
+                                        unit: KeyUnit(
                                                 primary: KeyElement("\u{201D}"),
                                                 members: [
-                                                        KeyElement("\u{201D}", extras: [.init("201D", alignment: .bottomTrailing)]),
-                                                        KeyElement("\u{0022}", extras: [.init("0022", alignment: .bottomTrailing)]),
-                                                        KeyElement("\u{FF02}", extras: [.init("FF02", alignment: .bottomTrailing)])
+                                                        KeyElement("\u{201D}", extras: [.init("201D", alignment: .bottom)]),
+                                                        KeyElement("\u{0022}", extras: [.init("0022", alignment: .bottom)]),
+                                                        KeyElement("\u{FF02}", extras: [.init("FF02", alignment: .bottom)])
                                                 ]
                                         )
                                 )
                                 LargePadExpansibleInputKey(
-                                        keyLocale: .trailing,
-                                        keyModel: KeyUnit(
+                                        side: .trailing,
+                                        unit: KeyUnit(
                                                 primary: KeyElement("「"),
                                                            members: [
                                                                 KeyElement("「"),
@@ -596,8 +596,8 @@ struct LargePadCantoneseNumericKeyboard: View {
                                         )
                                 )
                                 LargePadExpansibleInputKey(
-                                        keyLocale: .trailing,
-                                        keyModel: KeyUnit(
+                                        side: .trailing,
+                                        unit: KeyUnit(
                                                 primary: KeyElement("」"),
                                                            members: [
                                                                 KeyElement("」"),

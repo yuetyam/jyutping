@@ -10,13 +10,13 @@ struct PadABCKeyboard: View {
                         ToolBar()
                         HStack(spacing: 0 ) {
                                 Group {
-                                        PadPullableInputKey(event: .letterQ, upper: "1", lower: "q")
-                                        PadPullableInputKey(event: .letterW, upper: "2", lower: "w")
+                                        PadPullableInputKey(virtual: .letterQ, upper: "1", lower: "q")
+                                        PadPullableInputKey(virtual: .letterW, upper: "2", lower: "w")
                                         PadAdvancedInputKey(
-                                                keyLocale: .leading,
-                                                event: .letterE,
+                                                side: .leading,
+                                                virtual: .letterE,
                                                 upper: "3",
-                                                keyModel:
+                                                unit:
                                                         KeyUnit(
                                                                 primary: KeyElement("e"),
                                                                 members: [
@@ -29,14 +29,14 @@ struct PadABCKeyboard: View {
                                                                 ]
                                                         )
                                         )
-                                        PadPullableInputKey(event: .letterR, upper: "4", lower: "r")
-                                        PadPullableInputKey(event: .letterT, upper: "5", lower: "t")
-                                        PadPullableInputKey(event: .letterY, upper: "6", lower: "y")
+                                        PadPullableInputKey(virtual: .letterR, upper: "4", lower: "r")
+                                        PadPullableInputKey(virtual: .letterT, upper: "5", lower: "t")
+                                        PadPullableInputKey(virtual: .letterY, upper: "6", lower: "y")
                                         PadAdvancedInputKey(
-                                                keyLocale: .trailing,
-                                                event: .letterU,
+                                                side: .trailing,
+                                                virtual: .letterU,
                                                 upper: "7",
-                                                keyModel:
+                                                unit:
                                                         KeyUnit(
                                                                 primary: KeyElement("u"),
                                                                 members: [
@@ -50,10 +50,10 @@ struct PadABCKeyboard: View {
                                                         )
                                         )
                                         PadAdvancedInputKey(
-                                                keyLocale: .trailing,
-                                                event: .letterI,
+                                                side: .trailing,
+                                                virtual: .letterI,
                                                 upper: "8",
-                                                keyModel:
+                                                unit:
                                                         KeyUnit(
                                                                 primary: KeyElement("i"),
                                                                 members: [
@@ -67,10 +67,10 @@ struct PadABCKeyboard: View {
                                                         )
                                         )
                                         PadAdvancedInputKey(
-                                                keyLocale: .trailing,
-                                                event: .letterO,
+                                                side: .trailing,
+                                                virtual: .letterO,
                                                 upper: "9",
-                                                keyModel:
+                                                unit:
                                                         KeyUnit(
                                                                 primary: KeyElement("o"),
                                                                 members: [
@@ -83,7 +83,7 @@ struct PadABCKeyboard: View {
                                                                 ]
                                                         )
                                         )
-                                        PadPullableInputKey(event: .letterP, upper: "0", lower: "p")
+                                        PadPullableInputKey(virtual: .letterP, upper: "0", lower: "p")
                                 }
                                 PadBackspaceKey(widthUnitTimes: 1)
                         }
@@ -91,10 +91,10 @@ struct PadABCKeyboard: View {
                                 Spacer()
                                 Group {
                                         PadAdvancedInputKey(
-                                                keyLocale: .leading,
-                                                event: .letterA,
+                                                side: .leading,
+                                                virtual: .letterA,
                                                 upper: "@",
-                                                keyModel:
+                                                unit:
                                                         KeyUnit(
                                                                 primary: KeyElement("a"),
                                                                 members: [
@@ -107,28 +107,28 @@ struct PadABCKeyboard: View {
                                                                 ]
                                                         )
                                         )
-                                        PadPullableInputKey(event: .letterS, upper: "#", lower: "s")
-                                        PadPullableInputKey(event: .letterD, upper: "$", lower: "d")
-                                        PadPullableInputKey(event: .letterF, upper: "&", lower: "f")
-                                        PadPullableInputKey(event: .letterG, upper: "*", lower: "g")
-                                        PadPullableInputKey(event: .letterH, upper: "(", lower: "h")
-                                        PadPullableInputKey(event: .letterJ, upper: ")", lower: "j")
-                                        PadPullableInputKey(event: .letterK, upper: "'", lower: "k")
-                                        PadPullableInputKey(event: .letterL, upper: "\"", lower: "l")
+                                        PadPullableInputKey(virtual: .letterS, upper: "#", lower: "s")
+                                        PadPullableInputKey(virtual: .letterD, upper: "$", lower: "d")
+                                        PadPullableInputKey(virtual: .letterF, upper: "&", lower: "f")
+                                        PadPullableInputKey(virtual: .letterG, upper: "*", lower: "g")
+                                        PadPullableInputKey(virtual: .letterH, upper: "(", lower: "h")
+                                        PadPullableInputKey(virtual: .letterJ, upper: ")", lower: "j")
+                                        PadPullableInputKey(virtual: .letterK, upper: "'", lower: "k")
+                                        PadPullableInputKey(virtual: .letterL, upper: "\"", lower: "l")
                                 }
                                 PadReturnKey(widthUnitTimes: 1.5)
                         }
                         HStack(spacing: 0) {
                                 PadShiftKey()
                                 Group {
-                                        PadPullableInputKey(event: .letterZ, upper: "%", lower: "z")
-                                        PadPullableInputKey(event: .letterX, upper: "-", lower: "x")
-                                        PadPullableInputKey(event: .letterC, upper: "+", lower: "c")
+                                        PadPullableInputKey(virtual: .letterZ, upper: "%", lower: "z")
+                                        PadPullableInputKey(virtual: .letterX, upper: "-", lower: "x")
+                                        PadPullableInputKey(virtual: .letterC, upper: "+", lower: "c")
                                         PadAdvancedInputKey(
-                                                keyLocale: .leading,
-                                                event: .letterV,
+                                                side: .leading,
+                                                virtual: .letterV,
                                                 upper: "=",
-                                                keyModel:
+                                                unit:
                                                         KeyUnit(
                                                                 primary: KeyElement("v"),
                                                                 members: [
@@ -141,16 +141,16 @@ struct PadABCKeyboard: View {
                                                                 ]
                                                         )
                                         )
-                                        PadPullableInputKey(event: .letterB, upper: "/", lower: "b")
-                                        PadPullableInputKey(event: .letterN, upper: ";", lower: "n")
-                                        PadPullableInputKey(event: .letterM, upper: ":", lower: "m")
+                                        PadPullableInputKey(virtual: .letterB, upper: "/", lower: "b")
+                                        PadPullableInputKey(virtual: .letterN, upper: ";", lower: "n")
+                                        PadPullableInputKey(virtual: .letterM, upper: ":", lower: "m")
                                 }
                                 if context.keyboardCase.isUppercased {
-                                        PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyUnit(primary: KeyElement("!"), members: [KeyElement("!"), KeyElement("'"), KeyElement("¡")]))
-                                        PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyUnit(primary: KeyElement("?"), members: [KeyElement("?"), KeyElement("\""), KeyElement("…"), KeyElement("¿")]))
+                                        PadExpansibleInputKey(side: .trailing, unit: KeyUnit(primary: KeyElement("!"), members: [KeyElement("!"), KeyElement("'"), KeyElement("¡")]))
+                                        PadExpansibleInputKey(side: .trailing, unit: KeyUnit(primary: KeyElement("?"), members: [KeyElement("?"), KeyElement("\""), KeyElement("…"), KeyElement("¿")]))
                                 } else {
-                                        PadUpperLowerInputKey(keyLocale: .trailing, upper: "!", lower: ",", keyModel: KeyUnit(primary: KeyElement(","), members: [KeyElement(","), KeyElement("!"), KeyElement("'"), KeyElement("¡")]))
-                                        PadUpperLowerInputKey(keyLocale: .trailing, upper: "?", lower: ".", keyModel: KeyUnit(primary: KeyElement("."), members: [KeyElement("."), KeyElement("?"), KeyElement("\""), KeyElement("…"), KeyElement("¿")]))
+                                        PadUpperLowerInputKey(side: .trailing, upper: "!", lower: ",", unit: KeyUnit(primary: KeyElement(","), members: [KeyElement(","), KeyElement("!"), KeyElement("'"), KeyElement("¡")]))
+                                        PadUpperLowerInputKey(side: .trailing, upper: "?", lower: ".", unit: KeyUnit(primary: KeyElement("."), members: [KeyElement("."), KeyElement("?"), KeyElement("\""), KeyElement("…"), KeyElement("¿")]))
                                 }
                                 PadShiftKey()
                         }

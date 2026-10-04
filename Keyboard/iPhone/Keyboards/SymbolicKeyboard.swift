@@ -49,10 +49,10 @@ struct SymbolicKeyboard: View {
                                         unit: KeyUnit(
                                                 primary: KeyElement("\u{0027}"),
                                                 members: [
-                                                        KeyElement("\u{0027}", extras: [.init("0027", alignment: .bottomTrailing)]),
-                                                        KeyElement("\u{2019}", extras: [.init("2019", alignment: .bottomTrailing)]),
-                                                        KeyElement("\u{2018}", extras: [.init("2018", alignment: .bottomTrailing)]),
-                                                        KeyElement("\u{0060}", extras: [.init("0060", alignment: .bottomTrailing)])
+                                                        KeyElement("\u{0027}", extras: [.init("0027", alignment: .bottom)]),
+                                                        KeyElement("\u{2019}", extras: [.init("2019", alignment: .bottom)]),
+                                                        KeyElement("\u{2018}", extras: [.init("2018", alignment: .bottom)]),
+                                                        KeyElement("\u{0060}", extras: [.init("0060", alignment: .bottom)])
                                                 ]
                                         )
                                 )

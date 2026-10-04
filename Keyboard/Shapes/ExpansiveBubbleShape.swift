@@ -13,25 +13,25 @@ struct ExpansiveBubbleShape: Shape {
         
         /// Create an expansive bubble Shape
         /// - Parameters:
-        ///   - keyLocale: Key location, left half (leading) or right half (trailing).
+        ///   - side: Key location, left half (leading) or right half (trailing).
         ///   - expansionCount: Count of the extra blocks
         ///   - keyCornerRadius: Base view corner radius
         ///   - previewCornerRadius: Bubble preview corner radius
-        init(keyLocale: HorizontalEdge, expansionCount: Int, keyCornerRadius: CGFloat = PresetConstant.keyCornerRadius, previewCornerRadius: CGFloat = PresetConstant.keyCornerRadius * 1.62) {
-                self.keyLocale = keyLocale
+        init(side: HorizontalEdge, expansionCount: Int, keyCornerRadius: CGFloat = PresetConstant.keyCornerRadius, previewCornerRadius: CGFloat = PresetConstant.keyCornerRadius * 1.62) {
+                self.side = side
                 self.expansionCount = expansionCount
                 self.keyCornerRadius = keyCornerRadius
                 self.previewCornerRadius = previewCornerRadius
         }
 
-        private let keyLocale: HorizontalEdge
+        private let side: HorizontalEdge
         private let expansionCount: Int
         private let keyCornerRadius: CGFloat
         private let previewCornerRadius: CGFloat
 
         func path(in rect: CGRect) -> Path {
                 let origin: CGPoint = CGPoint(x: rect.midX, y: rect.maxY)
-                switch keyLocale {
+                switch side {
                 case .leading:
                         return Path.rightExpansionBubblePath(origin: origin, baseWidth: rect.size.width, baseHeight: rect.size.height, keyCornerRadius: keyCornerRadius, previewCornerRadius: previewCornerRadius, expansionCount: expansionCount)
                 case .trailing:

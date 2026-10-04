@@ -11,16 +11,16 @@ struct LargePadNumericKeyboard: View {
                         HStack(spacing: 0 ) {
                                 LargePadInstantInputKey("`")
                                 Group {
-                                        LargePadInstantInputKey("1", event: .number1)
-                                        LargePadInstantInputKey("2", event: .number2)
-                                        LargePadInstantInputKey("3", event: .number3)
-                                        LargePadInstantInputKey("4", event: .number4)
-                                        LargePadInstantInputKey("5", event: .number5)
-                                        LargePadInstantInputKey("6", event: .number6)
-                                        LargePadInstantInputKey("7", event: .number7)
-                                        LargePadInstantInputKey("8", event: .number8)
-                                        LargePadInstantInputKey("9", event: .number9)
-                                        LargePadExpansibleInputKey(keyLocale: .trailing, event: .number0, keyModel: KeyUnit(primary: KeyElement("0"), members: [KeyElement("0"), KeyElement("°")]))
+                                        LargePadInstantInputKey("1", virtual: .number1)
+                                        LargePadInstantInputKey("2", virtual: .number2)
+                                        LargePadInstantInputKey("3", virtual: .number3)
+                                        LargePadInstantInputKey("4", virtual: .number4)
+                                        LargePadInstantInputKey("5", virtual: .number5)
+                                        LargePadInstantInputKey("6", virtual: .number6)
+                                        LargePadInstantInputKey("7", virtual: .number7)
+                                        LargePadInstantInputKey("8", virtual: .number8)
+                                        LargePadInstantInputKey("9", virtual: .number9)
+                                        LargePadExpansibleInputKey(side: .trailing, virtual: .number0, unit: KeyUnit(primary: KeyElement("0"), members: [KeyElement("0"), KeyElement("°")]))
                                 }
                                 LargePadInstantInputKey("<")
                                 LargePadInstantInputKey(">")
@@ -34,11 +34,11 @@ struct LargePadNumericKeyboard: View {
                                         LargePadInstantInputKey("{")
                                         LargePadInstantInputKey("}")
                                         LargePadInstantInputKey("#")
-                                        LargePadExpansibleInputKey(keyLocale: .leading, keyModel: KeyUnit(primary: KeyElement("%"), members: [KeyElement("%"), KeyElement("‰")]))
+                                        LargePadExpansibleInputKey(side: .leading, unit: KeyUnit(primary: KeyElement("%"), members: [KeyElement("%"), KeyElement("‰")]))
                                         LargePadInstantInputKey("^")
                                         LargePadInstantInputKey("*")
                                         LargePadInstantInputKey("+")
-                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyUnit(primary: KeyElement("="), members: [KeyElement("="), KeyElement("≠"), KeyElement("≈")]))
+                                        LargePadExpansibleInputKey(side: .trailing, unit: KeyUnit(primary: KeyElement("="), members: [KeyElement("="), KeyElement("≠"), KeyElement("≈")]))
                                 }
                                 LargePadInstantInputKey("\\")
                                 LargePadInstantInputKey("|")
@@ -48,13 +48,13 @@ struct LargePadNumericKeyboard: View {
                                 LargePadCapsLockKey(widthUnitTimes: 1.75).hidden()
                                 Group {
                                         LargePadExpansibleInputKey(
-                                                keyLocale: .leading,
-                                                keyModel: KeyUnit(
+                                                side: .leading,
+                                                unit: KeyUnit(
                                                         primary: KeyElement("-"),
                                                         members: [
                                                                 KeyElement("-"),
-                                                                KeyElement("\u{2013}", extras: [.init("2013", alignment: .bottomTrailing)]),
-                                                                KeyElement("\u{2014}", extras: [.init("2014", alignment: .bottomTrailing)]),
+                                                                KeyElement("\u{2013}", extras: [.init("2013", alignment: .bottom)]),
+                                                                KeyElement("\u{2014}", extras: [.init("2014", alignment: .bottom)]),
                                                                 KeyElement("•")
                                                         ]
                                                 )
@@ -65,8 +65,8 @@ struct LargePadNumericKeyboard: View {
                                         LargePadInstantInputKey("(")
                                         LargePadInstantInputKey(")")
                                         LargePadExpansibleInputKey(
-                                                keyLocale: .trailing,
-                                                keyModel: KeyUnit(
+                                                side: .trailing,
+                                                unit: KeyUnit(
                                                         primary: KeyElement("$"),
                                                         members: [
                                                                 KeyElement("$"),
@@ -77,8 +77,8 @@ struct LargePadNumericKeyboard: View {
                                                 )
                                         )
                                         LargePadExpansibleInputKey(
-                                                keyLocale: .trailing,
-                                                keyModel: KeyUnit(
+                                                side: .trailing,
+                                                unit: KeyUnit(
                                                         primary: KeyElement("&"),
                                                         members: [
                                                                 KeyElement("&"),
@@ -100,8 +100,8 @@ struct LargePadNumericKeyboard: View {
                                         LargePadInstantInputKey(".")
                                         LargePadInstantInputKey(",")
                                         LargePadExpansibleInputKey(
-                                                keyLocale: .leading,
-                                                keyModel: KeyUnit(
+                                                side: .leading,
+                                                unit: KeyUnit(
                                                         primary: KeyElement("?"),
                                                         members: [
                                                                 KeyElement("?"),
@@ -110,8 +110,8 @@ struct LargePadNumericKeyboard: View {
                                                 )
                                         )
                                         LargePadExpansibleInputKey(
-                                                keyLocale: .trailing,
-                                                keyModel: KeyUnit(
+                                                side: .trailing,
+                                                unit: KeyUnit(
                                                         primary: KeyElement("!"),
                                                         members: [
                                                                 KeyElement("!"),
@@ -120,25 +120,25 @@ struct LargePadNumericKeyboard: View {
                                                 )
                                         )
                                         LargePadExpansibleInputKey(
-                                                keyLocale: .trailing,
-                                                keyModel: KeyUnit(
+                                                side: .trailing,
+                                                unit: KeyUnit(
                                                         primary: KeyElement("'"),
                                                         members: [
-                                                                KeyElement("'", extras: [.init("0027", alignment: .bottomTrailing)]),
-                                                                KeyElement("\u{2019}", extras: [.init("2019", alignment: .bottomTrailing)]),
-                                                                KeyElement("\u{2018}", extras: [.init("2018", alignment: .bottomTrailing)])
+                                                                KeyElement("'", extras: [.init("0027", alignment: .bottom)]),
+                                                                KeyElement("\u{2019}", extras: [.init("2019", alignment: .bottom)]),
+                                                                KeyElement("\u{2018}", extras: [.init("2018", alignment: .bottom)])
                                                         ]
                                                 )
                                         )
                                 }
                                 LargePadExpansibleInputKey(
-                                        keyLocale: .trailing,
-                                        keyModel: KeyUnit(
+                                        side: .trailing,
+                                        unit: KeyUnit(
                                                 primary: KeyElement("\""),
                                                 members: [
-                                                        KeyElement("\"", extras: [.init("0022", alignment: .bottomTrailing)]),
-                                                        KeyElement("\u{201D}", extras: [.init("201D", alignment: .bottomTrailing)]),
-                                                        KeyElement("\u{201C}", extras: [.init("201C", alignment: .bottomTrailing)])
+                                                        KeyElement("\"", extras: [.init("0022", alignment: .bottom)]),
+                                                        KeyElement("\u{201D}", extras: [.init("201D", alignment: .bottom)]),
+                                                        KeyElement("\u{201C}", extras: [.init("201C", alignment: .bottom)])
                                                 ]
                                         )
                                 )

@@ -64,9 +64,9 @@ struct SecondEnhancedLetterKeyRow: View {
                                         members: [
                                                 KeyElement("f"),
                                                 KeyElement("/"),
-                                                KeyElement("／", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
+                                                KeyElement("／", extras: [.init(PresetConstant.fullWidth, alignment: .top)]),
                                                 KeyElement("\\"),
-                                                KeyElement("＼", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)])
+                                                KeyElement("＼", extras: [.init(PresetConstant.fullWidth, alignment: .top)])
                                         ]
                                 )
                         )
@@ -81,12 +81,12 @@ struct SecondEnhancedLetterKeyRow: View {
                                         primary: KeyElement("l", extras: [.init("'", alignment: .topTrailing)]),
                                         members: [
                                                 KeyElement("l"),
-                                                KeyElement("'", extras: [.init("0027", alignment: .bottomTrailing)]),
-                                                KeyElement("’", extras: [.init("右", alignment: .topTrailing), .init("2019", alignment: .bottomTrailing)]),
-                                                KeyElement("‘", extras: [.init("左", alignment: .topTrailing), .init("2018", alignment: .bottomTrailing)]),
-                                                KeyElement("\"", extras: [.init("0022", alignment: .bottomTrailing)]),
-                                                KeyElement("”", extras: [.init("右", alignment: .topTrailing), .init("201D", alignment: .bottomTrailing)]),
-                                                KeyElement("“", extras: [.init("左", alignment: .topTrailing), .init("201C", alignment: .bottomTrailing)])
+                                                KeyElement("'", extras: [.init("0027", alignment: .bottom)]),
+                                                KeyElement("’", extras: [.init("右", alignment: .top), .init("2019", alignment: .bottom)]),
+                                                KeyElement("‘", extras: [.init("左", alignment: .top), .init("2018", alignment: .bottom)]),
+                                                KeyElement("\"", extras: [.init("0022", alignment: .bottom)]),
+                                                KeyElement("”", extras: [.init("右", alignment: .top), .init("201D", alignment: .bottom)]),
+                                                KeyElement("“", extras: [.init("左", alignment: .top), .init("201C", alignment: .bottom)])
                                         ]
                                 )
                         )
@@ -118,13 +118,13 @@ struct ThirdEnhancedLetterKeyRow: View {
                                         members: [
                                                 KeyElement("z"),
                                                 KeyElement("%"),
-                                                KeyElement("％", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
+                                                KeyElement("％", extras: [.init(PresetConstant.fullWidth, alignment: .top)]),
                                                 KeyElement("‰")
                                         ]
                                 )
                         )
                         EnhancedInputKey(side: .leading, virtual: .letterX, unit: KeyUnit(primary: KeyElement("x", extras: [.init("-", alignment: .topTrailing)]), members: [KeyElement("x"), KeyElement("-")]))
-                        EnhancedInputKey(side: .leading, virtual: .letterC, unit: KeyUnit(primary: KeyElement("c", extras: [.init("～", alignment: .topTrailing)]), members: [KeyElement("c"), KeyElement("～"), KeyElement("~", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)])]))
+                        EnhancedInputKey(side: .leading, virtual: .letterC, unit: KeyUnit(primary: KeyElement("c", extras: [.init("～", alignment: .topTrailing)]), members: [KeyElement("c"), KeyElement("～"), KeyElement("~", extras: [.init(PresetConstant.halfWidth, alignment: .top)])]))
                         EnhancedInputKey(side: .leading, virtual: .letterV, unit: KeyUnit(primary: KeyElement("v", extras: [.init("…", alignment: .topTrailing)]), members: [KeyElement("v"), KeyElement("…")]))
                         EnhancedInputKey(side: .leading, virtual: .letterB, unit: KeyUnit(primary: KeyElement("b", extras: [.init("、", alignment: .topTrailing)]), members: [KeyElement("b"), KeyElement("、")]))
                         EnhancedInputKey(side: .trailing, virtual: .letterN, unit: KeyUnit(primary: KeyElement("n", extras: [.init("；", alignment: .topTrailing)]), members: [KeyElement("n"), KeyElement("；")]))

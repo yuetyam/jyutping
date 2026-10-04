@@ -82,7 +82,7 @@ struct GlassEnhancedInputKey: View {
                                         let leadingOffset: CGFloat = side.isLeading ? offsetX : 0
                                         let trailingOffset: CGFloat = side.isTrailing ? offsetX : 0
                                         Color.clear
-                                                .glassEffect(.regular, in: ExpansiveBubbleShape(keyLocale: side, expansionCount: expansionCount))
+                                                .glassEffect(.regular, in: ExpansiveBubbleShape(side: side, expansionCount: expansionCount))
                                                 .overlay {
                                                         HStack(spacing: 0) {
                                                                 ForEach(unit.members.indices, id: \.self) { index in

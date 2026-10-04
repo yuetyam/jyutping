@@ -33,7 +33,7 @@ struct ABCRightKey: View {
                                         let symbolCount: Int = symbols.count
                                         let expansionCount: Int = symbolCount - 1
                                         let trailingOffset: CGFloat = baseWidth * CGFloat(expansionCount)
-                                        ExpansiveBubbleShape(keyLocale: .trailing, expansionCount: expansionCount)
+                                        ExpansiveBubbleShape(side: .trailing, expansionCount: expansionCount)
                                                 .fill(colorScheme.previewBubbleColor)
                                                 .shadow(color: .shadowGray, radius: 1)
                                                 .overlay {

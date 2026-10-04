@@ -4,22 +4,22 @@ struct PadExpansiveBubbleShape: Shape {
 
         /// Create an expansive bubble Shape
         /// - Parameters:
-        ///   - keyLocale: Key location, left half (leading) or right half (trailing).
+        ///   - side: Key location, left half (leading) or right half (trailing).
         ///   - expansionCount: Count of the extra blocks.
         ///   - cornerRadius: Arc corner radius.
-        init(keyLocale: HorizontalEdge, expansionCount: Int, cornerRadius: CGFloat = PresetConstant.largeKeyCornerRadius) {
-                self.keyLocale = keyLocale
+        init(side: HorizontalEdge, expansionCount: Int, cornerRadius: CGFloat = PresetConstant.largeKeyCornerRadius) {
+                self.side = side
                 self.expansionCount = expansionCount
                 self.cornerRadius = cornerRadius
         }
 
-        private let keyLocale: HorizontalEdge
+        private let side: HorizontalEdge
         private let expansionCount: Int
         private let cornerRadius: CGFloat
 
         func path(in rect: CGRect) -> Path {
                 let origin: CGPoint = CGPoint(x: rect.midX, y: rect.maxY)
-                switch keyLocale {
+                switch side {
                 case .leading:
                         return Path.padRightExpansionBubblePath(origin: origin, baseWidth: rect.size.width, baseHeight: rect.size.height, cornerRadius: cornerRadius, expansionCount: expansionCount)
                 case .trailing:

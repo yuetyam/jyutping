@@ -4,12 +4,12 @@ import CoreIME
 
 struct LargePadLetterInputKey: View {
 
-        init(_ event: VirtualInputKey) {
-                self.event = event
-                self.keyText = event.text
+        init(_ virtual: VirtualInputKey) {
+                self.virtual = virtual
+                self.keyText = virtual.text
         }
 
-        private let event: VirtualInputKey
+        private let virtual: VirtualInputKey
         private let keyText: String
 
         @EnvironmentObject private var context: KeyboardViewController
@@ -41,7 +41,7 @@ struct LargePadLetterInputKey: View {
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
                         AudioFeedback.inputed()
-                        context.handle(event)
+                        context.handle(virtual)
                 })
         }
 }

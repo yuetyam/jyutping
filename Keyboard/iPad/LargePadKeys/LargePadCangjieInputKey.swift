@@ -4,14 +4,14 @@ import CommonExtensions
 
 struct LargePadCangjieInputKey: View {
 
-        init(_ event: VirtualInputKey) {
-                self.event = event
-                self.letter = event.text
-                let root: Character = Converter.cangjie(of: event) ?? "?"
+        init(_ virtual: VirtualInputKey) {
+                self.virtual = virtual
+                self.letter = virtual.text
+                let root: Character = Converter.cangjie(of: virtual) ?? "?"
                 self.radical = String(root)
         }
 
-        private let event: VirtualInputKey
+        private let virtual: VirtualInputKey
         private let letter: String
         private let radical: String
 
@@ -51,7 +51,7 @@ struct LargePadCangjieInputKey: View {
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
                         AudioFeedback.inputed()
-                        context.handle(event)
+                        context.handle(virtual)
                 })
         }
 }

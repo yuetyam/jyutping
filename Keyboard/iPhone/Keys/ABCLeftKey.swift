@@ -33,7 +33,7 @@ struct ABCLeftKey: View {
                                         let symbolCount: Int = symbols.count
                                         let expansionCount: Int = symbolCount - 1
                                         let leadingOffset: CGFloat = baseWidth * CGFloat(expansionCount)
-                                        ExpansiveBubbleShape(keyLocale: .leading, expansionCount: expansionCount)
+                                        ExpansiveBubbleShape(side: .leading, expansionCount: expansionCount)
                                                 .fill(colorScheme.previewBubbleColor)
                                                 .shadow(color: .shadowGray, radius: 1)
                                                 .overlay {

@@ -11,50 +11,50 @@ struct LargePadStrokeKeyboard: View {
                         if context.keyboardCase.isUppercased {
                                 HStack(spacing: 0 ) {
                                         LargePadExpansibleInputKey(
-                                                keyLocale: .leading,
-                                                keyModel: KeyUnit(
+                                                side: .leading,
+                                                unit: KeyUnit(
                                                         primary: KeyElement("～"),
                                                         members: [
                                                                 KeyElement("～"),
-                                                                KeyElement("~", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)]),
+                                                                KeyElement("~", extras: [.init(PresetConstant.halfWidth, alignment: .top)]),
                                                                 KeyElement("≈")
                                                         ]
                                                 )
                                         )
                                         Group {
                                                 LargePadExpansibleInputKey(
-                                                        keyLocale: .leading,
-                                                        keyModel: KeyUnit(
+                                                        side: .leading,
+                                                        unit: KeyUnit(
                                                                 primary: KeyElement("！"),
                                                                 members: [
                                                                         KeyElement("！"),
-                                                                        KeyElement("!", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)])
+                                                                        KeyElement("!", extras: [.init(PresetConstant.halfWidth, alignment: .top)])
                                                                 ]
                                                         )
                                                 )
                                                 LargePadExpansibleInputKey(
-                                                        keyLocale: .leading,
-                                                        keyModel: KeyUnit(
+                                                        side: .leading,
+                                                        unit: KeyUnit(
                                                                 primary: KeyElement("@"),
                                                                 members: [
                                                                         KeyElement("@"),
-                                                                        KeyElement("＠", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)])
+                                                                        KeyElement("＠", extras: [.init(PresetConstant.fullWidth, alignment: .top)])
                                                                 ]
                                                         )
                                                 )
                                                 LargePadExpansibleInputKey(
-                                                        keyLocale: .leading,
-                                                        keyModel: KeyUnit(
+                                                        side: .leading,
+                                                        unit: KeyUnit(
                                                                 primary: KeyElement("#"),
                                                                 members: [
                                                                         KeyElement("#"),
-                                                                        KeyElement("＃", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)])
+                                                                        KeyElement("＃", extras: [.init(PresetConstant.fullWidth, alignment: .top)])
                                                                 ]
                                                         )
                                                 )
                                                 LargePadExpansibleInputKey(
-                                                        keyLocale: .leading,
-                                                        keyModel: KeyUnit(
+                                                        side: .leading,
+                                                        unit: KeyUnit(
                                                                 primary: KeyElement("$"),
                                                                 members: [
                                                                         KeyElement("$"),
@@ -68,19 +68,19 @@ struct LargePadStrokeKeyboard: View {
                                                         )
                                                 )
                                                 LargePadExpansibleInputKey(
-                                                        keyLocale: .leading,
-                                                        keyModel: KeyUnit(
+                                                        side: .leading,
+                                                        unit: KeyUnit(
                                                                 primary: KeyElement("%"),
                                                                 members: [
                                                                         KeyElement("%"),
-                                                                        KeyElement("％", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
+                                                                        KeyElement("％", extras: [.init(PresetConstant.fullWidth, alignment: .top)]),
                                                                         KeyElement("‰")
                                                                 ]
                                                         )
                                                 )
                                                 LargePadExpansibleInputKey(
-                                                        keyLocale: .leading,
-                                                        keyModel: KeyUnit(
+                                                        side: .leading,
+                                                        unit: KeyUnit(
                                                                 primary: KeyElement("……"),
                                                                 members: [
                                                                         KeyElement("……"),
@@ -89,65 +89,65 @@ struct LargePadStrokeKeyboard: View {
                                                         )
                                                 )
                                                 LargePadExpansibleInputKey(
-                                                        keyLocale: .trailing,
-                                                        keyModel: KeyUnit(
+                                                        side: .trailing,
+                                                        unit: KeyUnit(
                                                                 primary: KeyElement("&"),
                                                                 members: [
                                                                         KeyElement("&"),
-                                                                        KeyElement("＆", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
+                                                                        KeyElement("＆", extras: [.init(PresetConstant.fullWidth, alignment: .top)]),
                                                                         KeyElement("§")
                                                                 ]
                                                         )
                                                 )
                                                 LargePadExpansibleInputKey(
-                                                        keyLocale: .trailing,
-                                                        keyModel: KeyUnit(
+                                                        side: .trailing,
+                                                        unit: KeyUnit(
                                                                 primary: KeyElement("*"),
                                                                 members: [
                                                                         KeyElement("*"),
-                                                                        KeyElement("＊", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
+                                                                        KeyElement("＊", extras: [.init(PresetConstant.fullWidth, alignment: .top)]),
                                                                         KeyElement("×"),
                                                                 ]
                                                         )
                                                 )
                                                 LargePadExpansibleInputKey(
-                                                        keyLocale: .trailing,
-                                                        keyModel: KeyUnit(
+                                                        side: .trailing,
+                                                        unit: KeyUnit(
                                                                 primary: KeyElement("（"),
                                                                 members: [
                                                                         KeyElement("（"),
-                                                                        KeyElement("(", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)])
+                                                                        KeyElement("(", extras: [.init(PresetConstant.halfWidth, alignment: .top)])
                                                                 ]
                                                         )
                                                 )
                                                 LargePadExpansibleInputKey(
-                                                        keyLocale: .trailing,
-                                                        keyModel: KeyUnit(
+                                                        side: .trailing,
+                                                        unit: KeyUnit(
                                                                 primary: KeyElement("）"),
                                                                 members: [
                                                                         KeyElement("）"),
-                                                                        KeyElement(")", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)])
+                                                                        KeyElement(")", extras: [.init(PresetConstant.halfWidth, alignment: .top)])
                                                                 ]
                                                         )
                                                 )
                                         }
                                         LargePadExpansibleInputKey(
-                                                keyLocale: .trailing,
-                                                keyModel: KeyUnit(
+                                                side: .trailing,
+                                                unit: KeyUnit(
                                                         primary: KeyElement("——"),
                                                         members: [
                                                                 KeyElement("——"),
-                                                                KeyElement("⸺", extras: [.init("2E3A", alignment: .bottomTrailing)])
+                                                                KeyElement("⸺", extras: [.init("2E3A", alignment: .bottom)])
                                                         ]
                                                 )
                                         )
                                         LargePadExpansibleInputKey(
-                                                keyLocale: .trailing,
-                                                keyModel: KeyUnit(
+                                                side: .trailing,
+                                                unit: KeyUnit(
                                                         primary: KeyElement("+"),
                                                         members: [
                                                                 KeyElement("+"),
-                                                                KeyElement("＋", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)])
+                                                                KeyElement("＋", extras: [.init(PresetConstant.fullWidth, alignment: .top)])
                                                         ]
                                                 )
                                         )
@@ -156,72 +156,72 @@ struct LargePadStrokeKeyboard: View {
                         } else {
                                 HStack(spacing: 0 ) {
                                         LargePadUpperLowerInputKey(
-                                                keyLocale: .leading,
+                                                side: .leading,
                                                 upper: "～",
                                                 lower: "·",
-                                                keyModel: KeyUnit(
+                                                unit: KeyUnit(
                                                         primary: KeyElement("·"),
                                                         members: [
-                                                                KeyElement("·", extras: [.init("間隔號", alignment: .topTrailing), .init("00B7", alignment: .bottomTrailing)]),
+                                                                KeyElement("·", extras: [.init("間隔號", alignment: .top), .init("00B7", alignment: .bottom)]),
                                                                 KeyElement("～"),
-                                                                KeyElement("~", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)]),
-                                                                KeyElement("`", extras: [.init("重音符", alignment: .topTrailing), .init("0060", alignment: .bottomTrailing)]),
-                                                                KeyElement("•", extras: [.init("項目符號", alignment: .topTrailing), .init("2022", alignment: .bottomTrailing)]),
-                                                                KeyElement("‧", extras: [.init("連字點", alignment: .topTrailing), .init("2027", alignment: .bottomTrailing)]),
-                                                                KeyElement("･", extras: [.init("半寬中點", alignment: .topTrailing), .init("FF65", alignment: .bottomTrailing)]),
-                                                                KeyElement("・", extras: [.init("全寬中點", alignment: .topTrailing), .init("30FB", alignment: .bottomTrailing)])
+                                                                KeyElement("~", extras: [.init(PresetConstant.halfWidth, alignment: .top)]),
+                                                                KeyElement("`", extras: [.init("重音符", alignment: .top), .init("0060", alignment: .bottom)]),
+                                                                KeyElement("•", extras: [.init("項目符號", alignment: .top), .init("2022", alignment: .bottom)]),
+                                                                KeyElement("‧", extras: [.init("連字點", alignment: .top), .init("2027", alignment: .bottom)]),
+                                                                KeyElement("･", extras: [.init("半寬中點", alignment: .top), .init("FF65", alignment: .bottom)]),
+                                                                KeyElement("・", extras: [.init("全寬中點", alignment: .top), .init("30FB", alignment: .bottom)])
                                                         ]
                                                 )
                                         )
                                         Group {
                                                 LargePadUpperLowerInputKey(
-                                                        keyLocale: .leading,
+                                                        side: .leading,
                                                         upper: "！",
                                                         lower: "1",
-                                                        event: .number1,
-                                                        keyModel: KeyUnit(
+                                                        virtual: .number1,
+                                                        unit: KeyUnit(
                                                                 primary: KeyElement("1"),
                                                                 members: [
                                                                         KeyElement("1"),
                                                                         KeyElement("！"),
-                                                                        KeyElement("!", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)])
+                                                                        KeyElement("!", extras: [.init(PresetConstant.halfWidth, alignment: .top)])
                                                                 ]
                                                         )
                                                 )
                                                 LargePadUpperLowerInputKey(
-                                                        keyLocale: .leading,
+                                                        side: .leading,
                                                         upper: "@",
                                                         lower: "2",
-                                                        event: .number2,
-                                                        keyModel: KeyUnit(
+                                                        virtual: .number2,
+                                                        unit: KeyUnit(
                                                                 primary: KeyElement("2"),
                                                                 members: [
                                                                         KeyElement("2"),
                                                                         KeyElement("@"),
-                                                                        KeyElement("＠", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)])
+                                                                        KeyElement("＠", extras: [.init(PresetConstant.fullWidth, alignment: .top)])
                                                                 ]
                                                         )
                                                 )
                                                 LargePadUpperLowerInputKey(
-                                                        keyLocale: .leading,
+                                                        side: .leading,
                                                         upper: "#",
                                                         lower: "3",
-                                                        event: .number3,
-                                                        keyModel: KeyUnit(
+                                                        virtual: .number3,
+                                                        unit: KeyUnit(
                                                                 primary: KeyElement("3"),
                                                                 members: [
                                                                         KeyElement("3"),
                                                                         KeyElement("#"),
-                                                                        KeyElement("＃", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)])
+                                                                        KeyElement("＃", extras: [.init(PresetConstant.fullWidth, alignment: .top)])
                                                                 ]
                                                         )
                                                 )
                                                 LargePadUpperLowerInputKey(
-                                                        keyLocale: .leading,
+                                                        side: .leading,
                                                         upper: "$",
                                                         lower: "4",
-                                                        event: .number4,
-                                                        keyModel: KeyUnit(
+                                                        virtual: .number4,
+                                                        unit: KeyUnit(
                                                                 primary: KeyElement("4"),
                                                                 members: [
                                                                         KeyElement("4"),
@@ -230,26 +230,26 @@ struct LargePadStrokeKeyboard: View {
                                                         )
                                                 )
                                                 LargePadUpperLowerInputKey(
-                                                        keyLocale: .leading,
+                                                        side: .leading,
                                                         upper: "%",
                                                         lower: "5",
-                                                        event: .number5,
-                                                        keyModel: KeyUnit(
+                                                        virtual: .number5,
+                                                        unit: KeyUnit(
                                                                 primary: KeyElement("5"),
                                                                 members: [
                                                                         KeyElement("5"),
                                                                         KeyElement("%"),
-                                                                        KeyElement("％", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
+                                                                        KeyElement("％", extras: [.init(PresetConstant.fullWidth, alignment: .top)]),
                                                                         KeyElement("‰")
                                                                 ]
                                                         )
                                                 )
                                                 LargePadUpperLowerInputKey(
-                                                        keyLocale: .leading,
+                                                        side: .leading,
                                                         upper: "……",
                                                         lower: "6",
-                                                        event: .number6,
-                                                        keyModel: KeyUnit(
+                                                        virtual: .number6,
+                                                        unit: KeyUnit(
                                                                 primary: KeyElement("6"),
                                                                 members: [
                                                                         KeyElement("6"),
@@ -259,87 +259,87 @@ struct LargePadStrokeKeyboard: View {
                                                         )
                                                 )
                                                 LargePadUpperLowerInputKey(
-                                                        keyLocale: .trailing,
+                                                        side: .trailing,
                                                         upper: "&",
                                                         lower: "7",
-                                                        event: .number7,
-                                                        keyModel: KeyUnit(
+                                                        virtual: .number7,
+                                                        unit: KeyUnit(
                                                                 primary: KeyElement("7"),
                                                                 members: [
                                                                         KeyElement("7"),
                                                                         KeyElement("&"),
-                                                                        KeyElement("＆", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
+                                                                        KeyElement("＆", extras: [.init(PresetConstant.fullWidth, alignment: .top)]),
                                                                         KeyElement("§")
                                                                 ]
                                                         )
                                                 )
                                                 LargePadUpperLowerInputKey(
-                                                        keyLocale: .trailing,
+                                                        side: .trailing,
                                                         upper: "*",
                                                         lower: "8",
-                                                        event: .number8,
-                                                        keyModel: KeyUnit(
+                                                        virtual: .number8,
+                                                        unit: KeyUnit(
                                                                 primary: KeyElement("8"),
                                                                 members: [
                                                                         KeyElement("8"),
                                                                         KeyElement("*"),
-                                                                        KeyElement("＊", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)])
+                                                                        KeyElement("＊", extras: [.init(PresetConstant.fullWidth, alignment: .top)])
                                                                 ]
                                                         )
                                                 )
                                                 LargePadUpperLowerInputKey(
-                                                        keyLocale: .trailing,
+                                                        side: .trailing,
                                                         upper: "（",
                                                         lower: "9",
-                                                        event: .number9,
-                                                        keyModel: KeyUnit(
+                                                        virtual: .number9,
+                                                        unit: KeyUnit(
                                                                 primary: KeyElement("9"),
                                                                 members: [
                                                                         KeyElement("9"),
                                                                         KeyElement("（"),
-                                                                        KeyElement("(", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)])
+                                                                        KeyElement("(", extras: [.init(PresetConstant.halfWidth, alignment: .top)])
                                                                 ]
                                                         )
                                                 )
                                                 LargePadUpperLowerInputKey(
-                                                        keyLocale: .trailing,
+                                                        side: .trailing,
                                                         upper: "）",
                                                         lower: "0",
-                                                        event: .number0,
-                                                        keyModel: KeyUnit(
+                                                        virtual: .number0,
+                                                        unit: KeyUnit(
                                                                 primary: KeyElement("0"),
                                                                 members: [
                                                                         KeyElement("0"),
                                                                         KeyElement("）"),
-                                                                        KeyElement(")", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)])
+                                                                        KeyElement(")", extras: [.init(PresetConstant.halfWidth, alignment: .top)])
                                                                 ]
                                                         )
                                                 )
                                         }
                                         LargePadUpperLowerInputKey(
-                                                keyLocale: .trailing,
+                                                side: .trailing,
                                                 upper: "——",
                                                 lower: "-",
-                                                keyModel: KeyUnit(
+                                                unit: KeyUnit(
                                                         primary: KeyElement("-"),
                                                         members: [
                                                                 KeyElement("-"),
                                                                 KeyElement("——"),
-                                                                KeyElement("⸺", extras: [.init("2E3A", alignment: .bottomTrailing)])
+                                                                KeyElement("⸺", extras: [.init("2E3A", alignment: .bottom)])
                                                         ]
                                                 )
                                         )
                                         LargePadUpperLowerInputKey(
-                                                keyLocale: .trailing,
+                                                side: .trailing,
                                                 upper: "+",
                                                 lower: "=",
-                                                keyModel: KeyUnit(
+                                                unit: KeyUnit(
                                                         primary: KeyElement("="),
                                                         members: [
                                                                 KeyElement("="),
                                                                 KeyElement("+"),
-                                                                KeyElement("＋", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
-                                                                KeyElement("＝", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)])
+                                                                KeyElement("＋", extras: [.init(PresetConstant.fullWidth, alignment: .top)]),
+                                                                KeyElement("＝", extras: [.init(PresetConstant.fullWidth, alignment: .top)])
                                                         ]
                                                 )
                                         )
@@ -361,13 +361,13 @@ struct LargePadStrokeKeyboard: View {
                                         LargePadStrokeInputKey(.letterP)
                                 }
                                 if context.keyboardCase.isUppercased {
-                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyUnit(primary: KeyElement("『"), members: [KeyElement("『"), KeyElement("「")]))
-                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyUnit(primary: KeyElement("』"), members: [KeyElement("』"), KeyElement("」")]))
-                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyUnit(primary: KeyElement("｜"), members: [KeyElement("｜"), KeyElement("|", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)])]))
+                                        LargePadExpansibleInputKey(side: .trailing, unit: KeyUnit(primary: KeyElement("『"), members: [KeyElement("『"), KeyElement("「")]))
+                                        LargePadExpansibleInputKey(side: .trailing, unit: KeyUnit(primary: KeyElement("』"), members: [KeyElement("』"), KeyElement("」")]))
+                                        LargePadExpansibleInputKey(side: .trailing, unit: KeyUnit(primary: KeyElement("｜"), members: [KeyElement("｜"), KeyElement("|", extras: [.init(PresetConstant.halfWidth, alignment: .top)])]))
                                 } else {
-                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "『", lower: "「", keyModel: KeyUnit(primary: KeyElement("「"), members: [KeyElement("「"), KeyElement("『")]))
-                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "』", lower: "」", keyModel: KeyUnit(primary: KeyElement("」"), members: [KeyElement("」"), KeyElement("』")]))
-                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "｜", lower: "、", keyModel: KeyUnit(primary: KeyElement("、"), members: [KeyElement("、"), KeyElement("｜"), KeyElement("|", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)]), KeyElement("､", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)])]))
+                                        LargePadUpperLowerInputKey(side: .trailing, upper: "『", lower: "「", unit: KeyUnit(primary: KeyElement("「"), members: [KeyElement("「"), KeyElement("『")]))
+                                        LargePadUpperLowerInputKey(side: .trailing, upper: "』", lower: "」", unit: KeyUnit(primary: KeyElement("」"), members: [KeyElement("」"), KeyElement("』")]))
+                                        LargePadUpperLowerInputKey(side: .trailing, upper: "｜", lower: "、", unit: KeyUnit(primary: KeyElement("、"), members: [KeyElement("、"), KeyElement("｜"), KeyElement("|", extras: [.init(PresetConstant.halfWidth, alignment: .top)]), KeyElement("､", extras: [.init(PresetConstant.halfWidth, alignment: .top)])]))
                                 }
                         }
                         HStack(spacing: 0) {
@@ -384,21 +384,21 @@ struct LargePadStrokeKeyboard: View {
                                         LargePadStrokeInputKey(.letterL)
                                 }
                                 if context.keyboardCase.isUppercased {
-                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyUnit(primary: KeyElement("："), members: [KeyElement("："), KeyElement(":", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)])]))
-                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyUnit(primary: KeyElement("\""), members: [KeyElement("\""), KeyElement("\u{201D}", extras: [.init("右", alignment: .topTrailing), .init("201D", alignment: .bottomTrailing)]), KeyElement("\u{201C}", extras: [.init("左", alignment: .topTrailing), .init("201C", alignment: .bottomTrailing)])]))
+                                        LargePadExpansibleInputKey(side: .trailing, unit: KeyUnit(primary: KeyElement("："), members: [KeyElement("："), KeyElement(":", extras: [.init(PresetConstant.halfWidth, alignment: .top)])]))
+                                        LargePadExpansibleInputKey(side: .trailing, unit: KeyUnit(primary: KeyElement("\""), members: [KeyElement("\""), KeyElement("\u{201D}", extras: [.init("右", alignment: .top), .init("201D", alignment: .bottom)]), KeyElement("\u{201C}", extras: [.init("左", alignment: .top), .init("201C", alignment: .bottom)])]))
                                 } else {
-                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "：", lower: "；", keyModel: KeyUnit(primary: KeyElement("；"), members: [KeyElement("；"), KeyElement("："), KeyElement(";", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)]), KeyElement(":", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)])]))
+                                        LargePadUpperLowerInputKey(side: .trailing, upper: "：", lower: "；", unit: KeyUnit(primary: KeyElement("；"), members: [KeyElement("；"), KeyElement("："), KeyElement(";", extras: [.init(PresetConstant.halfWidth, alignment: .top)]), KeyElement(":", extras: [.init(PresetConstant.halfWidth, alignment: .top)])]))
                                         LargePadUpperLowerInputKey(
-                                                keyLocale: .trailing,
+                                                side: .trailing,
                                                 upper: "\"",
                                                 lower: "'",
-                                                keyModel: KeyUnit(
+                                                unit: KeyUnit(
                                                         primary: KeyElement("'"),
                                                         members: [
                                                                 KeyElement("'"),
                                                                 KeyElement("\""),
-                                                                KeyElement("\u{2019}", extras: [.init("右", alignment: .topTrailing), .init("2019", alignment: .bottomTrailing)]),
-                                                                KeyElement("\u{2018}", extras: [.init("左", alignment: .topTrailing), .init("2018", alignment: .bottomTrailing)])
+                                                                KeyElement("\u{2019}", extras: [.init("右", alignment: .top), .init("2019", alignment: .bottom)]),
+                                                                KeyElement("\u{2018}", extras: [.init("左", alignment: .top), .init("2018", alignment: .bottom)])
                                                         ]
                                                 )
                                         )
@@ -417,13 +417,13 @@ struct LargePadStrokeKeyboard: View {
                                         LargePadStrokeInputKey(.letterM)
                                 }
                                 if context.keyboardCase.isUppercased {
-                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyUnit(primary: KeyElement("《"), members: [KeyElement("《"), KeyElement("〈"), KeyElement("<"), KeyElement("＜", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)])]))
-                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyUnit(primary: KeyElement("》"), members: [KeyElement("》"), KeyElement("〉"), KeyElement(">"), KeyElement("＞", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)])]))
-                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyUnit(primary: KeyElement("？"), members: [KeyElement("？"), KeyElement("?", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)])]))
+                                        LargePadExpansibleInputKey(side: .trailing, unit: KeyUnit(primary: KeyElement("《"), members: [KeyElement("《"), KeyElement("〈"), KeyElement("<"), KeyElement("＜", extras: [.init(PresetConstant.fullWidth, alignment: .top)])]))
+                                        LargePadExpansibleInputKey(side: .trailing, unit: KeyUnit(primary: KeyElement("》"), members: [KeyElement("》"), KeyElement("〉"), KeyElement(">"), KeyElement("＞", extras: [.init(PresetConstant.fullWidth, alignment: .top)])]))
+                                        LargePadExpansibleInputKey(side: .trailing, unit: KeyUnit(primary: KeyElement("？"), members: [KeyElement("？"), KeyElement("?", extras: [.init(PresetConstant.halfWidth, alignment: .top)])]))
                                 } else {
-                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "《", lower: "，", keyModel: KeyUnit(primary: KeyElement("，"), members: [KeyElement("，"), KeyElement("《")]))
-                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "》", lower: "。", keyModel: KeyUnit(primary: KeyElement("。"), members: [KeyElement("。"), KeyElement("》")]))
-                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "？", lower: "/", keyModel: KeyUnit(primary: KeyElement("/"), members: [KeyElement("/"), KeyElement("？"), KeyElement("／", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)])]))
+                                        LargePadUpperLowerInputKey(side: .trailing, upper: "《", lower: "，", unit: KeyUnit(primary: KeyElement("，"), members: [KeyElement("，"), KeyElement("《")]))
+                                        LargePadUpperLowerInputKey(side: .trailing, upper: "》", lower: "。", unit: KeyUnit(primary: KeyElement("。"), members: [KeyElement("。"), KeyElement("》")]))
+                                        LargePadUpperLowerInputKey(side: .trailing, upper: "？", lower: "/", unit: KeyUnit(primary: KeyElement("/"), members: [KeyElement("/"), KeyElement("？"), KeyElement("／", extras: [.init(PresetConstant.fullWidth, alignment: .top)])]))
                                 }
                                 LargePadShiftKey(side: .trailing, coefficient: 2.25)
                         }
