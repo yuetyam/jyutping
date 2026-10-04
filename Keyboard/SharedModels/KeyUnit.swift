@@ -29,22 +29,15 @@ struct KeyElement: Hashable {
         }
 
         let text: String
-        let header: String?
-        let footer: String?
         let extras: [Extra]
 
-        init(_ text: String, header: String? = nil, footer: String? = nil, extras: [Extra] = []) {
+        init(_ text: String, extras: [Extra] = []) {
                 self.text = text
-                self.header = header
-                self.footer = footer
                 self.extras = extras
         }
 
         init(virtual: VirtualInputKey) {
-                self.text = virtual.text
-                self.header = nil
-                self.footer = nil
-                self.extras = []
+                self.init(virtual.text)
         }
 
         static func == (lhs: KeyElement, rhs: KeyElement) -> Bool {
@@ -57,12 +50,10 @@ struct KeyElement: Hashable {
         var isTextSingular: Bool { text.count == 1 }
 }
 
-struct KeyModel: Hashable {
+struct KeyUnit: Hashable {
 
         let primary: KeyElement
         let members: [KeyElement]
 
         var isExpansible: Bool { members.count > 1 }
 }
-
-typealias KeyUnit = KeyModel

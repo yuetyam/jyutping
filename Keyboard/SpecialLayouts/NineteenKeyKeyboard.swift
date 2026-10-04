@@ -84,7 +84,7 @@ struct T18T19FirstLetterRow: View {
                         T18EnhancedInputKey(
                                 side: .leading,
                                 virtual: .letterW,
-                                unit: KeyModel(
+                                unit: KeyUnit(
                                         primary: KeyElement("w", extras: [.init("q", alignment: .bottomLeading)]),
                                         members: [KeyElement("q"), KeyElement("w")]
                                 )
@@ -92,7 +92,7 @@ struct T18T19FirstLetterRow: View {
                         T18EnhancedInputKey(
                                 side: .leading,
                                 virtual: .letterE,
-                                unit: KeyModel(
+                                unit: KeyUnit(
                                         primary: KeyElement("e", extras: [.init("r", alignment: .bottomTrailing)]),
                                         members: [KeyElement("e"), KeyElement("r")]
                                 )
@@ -100,7 +100,7 @@ struct T18T19FirstLetterRow: View {
                         T18LetterInputKey(.letterT)
                         T18LetterInputKey(.letterY)
                         T18LetterInputKey(.letterU)
-                        T18EnhancedInputKey(side: .trailing, unit: KeyModel(primary: KeyElement("io"), members: [KeyElement("o"), KeyElement("i")]))
+                        T18EnhancedInputKey(side: .trailing, unit: KeyUnit(primary: KeyElement("io"), members: [KeyElement("o"), KeyElement("i")]))
                         T18LetterInputKey(.letterP)
                 }
         }
@@ -111,7 +111,7 @@ struct T18T19FirstEnhancedLetterRow: View {
                         T18EnhancedInputKey(
                                 side: .leading,
                                 virtual: .letterW,
-                                unit: KeyModel(
+                                unit: KeyUnit(
                                         primary: KeyElement("w", extras: [.init("q", alignment: .bottomLeading), .init("1", alignment: .topTrailing)]),
                                         members: [KeyElement("q"), KeyElement("w"), KeyElement("1")]
                                 )
@@ -119,7 +119,7 @@ struct T18T19FirstEnhancedLetterRow: View {
                         T18EnhancedInputKey(
                                 side: .leading,
                                 virtual: .letterE,
-                                unit: KeyModel(
+                                unit: KeyUnit(
                                         primary: KeyElement("e", extras: [.init("r", alignment: .bottomTrailing), .init("2", alignment: .topTrailing)]),
                                         members: [KeyElement("e"), KeyElement("r"), KeyElement("2")]
                                 )
@@ -127,7 +127,7 @@ struct T18T19FirstEnhancedLetterRow: View {
                         T18EnhancedInputKey(
                                 side: .leading,
                                 virtual: .letterT,
-                                unit: KeyModel(
+                                unit: KeyUnit(
                                         primary: KeyElement("t", extras: [.init("3", alignment: .topTrailing)]),
                                         members: [KeyElement("t"), KeyElement("3")]
                                 )
@@ -135,7 +135,7 @@ struct T18T19FirstEnhancedLetterRow: View {
                         T18EnhancedInputKey(
                                 side: .leading,
                                 virtual: .letterY,
-                                unit: KeyModel(
+                                unit: KeyUnit(
                                         primary: KeyElement("y", extras: [.init("4", alignment: .topTrailing)]),
                                         members: [KeyElement("y"), KeyElement("4")]
                                 )
@@ -143,14 +143,14 @@ struct T18T19FirstEnhancedLetterRow: View {
                         T18EnhancedInputKey(
                                 side: .leading,
                                 virtual: .letterU,
-                                unit: KeyModel(
+                                unit: KeyUnit(
                                         primary: KeyElement("u", extras: [.init("5", alignment: .topTrailing)]),
                                         members: [KeyElement("u"), KeyElement("5")]
                                 )
                         )
                         T18EnhancedInputKey(
                                 side: .trailing,
-                                unit: KeyModel(
+                                unit: KeyUnit(
                                         primary: KeyElement("io", extras: [.init("6", alignment: .topTrailing)]),
                                         members: [KeyElement("o"), KeyElement("i"), KeyElement("6")]
                                 )
@@ -158,7 +158,7 @@ struct T18T19FirstEnhancedLetterRow: View {
                         T18EnhancedInputKey(
                                 side: .trailing,
                                 virtual: .letterP,
-                                unit: KeyModel(
+                                unit: KeyUnit(
                                         primary: KeyElement("p", extras: [.init("7", alignment: .topTrailing)]),
                                         members: [KeyElement("p"), KeyElement("7")]
                                 )
@@ -313,7 +313,7 @@ struct T18T19ThirdLetterRow: View {
                         T18EnhancedInputKey(
                                 side: .leading,
                                 virtual: .letterZ,
-                                unit: KeyModel(
+                                unit: KeyUnit(
                                         primary: KeyElement("z", extras: [.init("x", alignment: .bottomTrailing)]),
                                         members: [KeyElement("z"), KeyElement("x")]
                                 )
@@ -321,7 +321,7 @@ struct T18T19ThirdLetterRow: View {
                         T18EnhancedInputKey(
                                 side: .leading,
                                 virtual: .letterC,
-                                unit: KeyModel(
+                                unit: KeyUnit(
                                         primary: KeyElement("c", extras: [.init("v", alignment: .bottomTrailing)]),
                                         members: [KeyElement("c"), KeyElement("v")]
                                 )

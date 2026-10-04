@@ -14,7 +14,7 @@ struct LargePadABCKeyboard: View {
                                         Group {
                                                 LargePadExpansibleInputKey(
                                                         keyLocale: .leading,
-                                                        keyModel: KeyModel(
+                                                        keyModel: KeyUnit(
                                                                 primary: KeyElement("!"),
                                                                 members: [
                                                                         KeyElement("!"),
@@ -26,7 +26,7 @@ struct LargePadABCKeyboard: View {
                                                 LargePadInstantInputKey("#")
                                                 LargePadExpansibleInputKey(
                                                         keyLocale: .leading,
-                                                        keyModel: KeyModel(
+                                                        keyModel: KeyUnit(
                                                                 primary: KeyElement("$"),
                                                                 members: [
                                                                         KeyElement("$"),
@@ -41,7 +41,7 @@ struct LargePadABCKeyboard: View {
                                                 )
                                                 LargePadExpansibleInputKey(
                                                         keyLocale: .leading,
-                                                        keyModel: KeyModel(
+                                                        keyModel: KeyUnit(
                                                                 primary: KeyElement("%"),
                                                                 members: [
                                                                         KeyElement("%"),
@@ -52,7 +52,7 @@ struct LargePadABCKeyboard: View {
                                                 LargePadInstantInputKey("^")
                                                 LargePadExpansibleInputKey(
                                                         keyLocale: .trailing,
-                                                        keyModel: KeyModel(
+                                                        keyModel: KeyUnit(
                                                                 primary: KeyElement("&"),
                                                                 members: [
                                                                         KeyElement("&"),
@@ -62,7 +62,7 @@ struct LargePadABCKeyboard: View {
                                                 )
                                                 LargePadExpansibleInputKey(
                                                         keyLocale: .trailing,
-                                                        keyModel: KeyModel(
+                                                        keyModel: KeyUnit(
                                                                 primary: KeyElement("*"),
                                                                 members: [
                                                                         KeyElement("*"),
@@ -84,7 +84,7 @@ struct LargePadABCKeyboard: View {
                                                 keyLocale: .leading,
                                                 upper: "~",
                                                 lower: "`",
-                                                keyModel: KeyModel(
+                                                keyModel: KeyUnit(
                                                         primary: KeyElement("`"),
                                                         members: [
                                                                 KeyElement("`"),
@@ -98,7 +98,7 @@ struct LargePadABCKeyboard: View {
                                                         upper: "!",
                                                         lower: "1",
                                                         event: .number1,
-                                                        keyModel: KeyModel(
+                                                        keyModel: KeyUnit(
                                                                 primary: KeyElement("1"),
                                                                 members: [
                                                                         KeyElement("1"),
@@ -112,7 +112,7 @@ struct LargePadABCKeyboard: View {
                                                         upper: "@",
                                                         lower: "2",
                                                         event: .number2,
-                                                        keyModel: KeyModel(
+                                                        keyModel: KeyUnit(
                                                                 primary: KeyElement("2"),
                                                                 members: [
                                                                         KeyElement("2"),
@@ -125,7 +125,7 @@ struct LargePadABCKeyboard: View {
                                                         upper: "#",
                                                         lower: "3",
                                                         event: .number3,
-                                                        keyModel: KeyModel(
+                                                        keyModel: KeyUnit(
                                                                 primary: KeyElement("3"),
                                                                 members: [
                                                                         KeyElement("3"),
@@ -138,7 +138,7 @@ struct LargePadABCKeyboard: View {
                                                         upper: "$",
                                                         lower: "4",
                                                         event: .number4,
-                                                        keyModel: KeyModel(
+                                                        keyModel: KeyUnit(
                                                                 primary: KeyElement("4"),
                                                                 members: [
                                                                         KeyElement("4"),
@@ -151,7 +151,7 @@ struct LargePadABCKeyboard: View {
                                                         upper: "%",
                                                         lower: "5",
                                                         event: .number5,
-                                                        keyModel: KeyModel(
+                                                        keyModel: KeyUnit(
                                                                 primary: KeyElement("5"),
                                                                 members: [
                                                                         KeyElement("5"),
@@ -165,7 +165,7 @@ struct LargePadABCKeyboard: View {
                                                         upper: "^",
                                                         lower: "6",
                                                         event: .number6,
-                                                        keyModel: KeyModel(
+                                                        keyModel: KeyUnit(
                                                                 primary: KeyElement("6"),
                                                                 members: [
                                                                         KeyElement("6"),
@@ -178,7 +178,7 @@ struct LargePadABCKeyboard: View {
                                                         upper: "&",
                                                         lower: "7",
                                                         event: .number7,
-                                                        keyModel: KeyModel(
+                                                        keyModel: KeyUnit(
                                                                 primary: KeyElement("7"),
                                                                 members: [
                                                                         KeyElement("7"),
@@ -192,7 +192,7 @@ struct LargePadABCKeyboard: View {
                                                         upper: "*",
                                                         lower: "8",
                                                         event: .number8,
-                                                        keyModel: KeyModel(
+                                                        keyModel: KeyUnit(
                                                                 primary: KeyElement("8"),
                                                                 members: [
                                                                         KeyElement("8"),
@@ -206,7 +206,7 @@ struct LargePadABCKeyboard: View {
                                                         upper: "(",
                                                         lower: "9",
                                                         event: .number9,
-                                                        keyModel: KeyModel(
+                                                        keyModel: KeyUnit(
                                                                 primary: KeyElement("9"),
                                                                 members: [
                                                                         KeyElement("9"),
@@ -219,7 +219,7 @@ struct LargePadABCKeyboard: View {
                                                         upper: ")",
                                                         lower: "0",
                                                         event: .number0,
-                                                        keyModel: KeyModel(
+                                                        keyModel: KeyUnit(
                                                                 primary: KeyElement("0"),
                                                                 members: [
                                                                         KeyElement("0"),
@@ -232,7 +232,7 @@ struct LargePadABCKeyboard: View {
                                                 keyLocale: .trailing,
                                                 upper: "_",
                                                 lower: "-",
-                                                keyModel: KeyModel(
+                                                keyModel: KeyUnit(
                                                         primary: KeyElement("-"),
                                                         members: [
                                                                 KeyElement("-"),
@@ -244,7 +244,7 @@ struct LargePadABCKeyboard: View {
                                                 keyLocale: .trailing,
                                                 upper: "+",
                                                 lower: "=",
-                                                keyModel: KeyModel(
+                                                keyModel: KeyUnit(
                                                         primary: KeyElement("="),
                                                         members: [
                                                                 KeyElement("="),
@@ -264,7 +264,7 @@ struct LargePadABCKeyboard: View {
                                                 keyLocale: .leading,
                                                 event: .letterE,
                                                 keyModel:
-                                                        KeyModel(
+                                                        KeyUnit(
                                                                 primary: KeyElement("e"),
                                                                 members: [
                                                                         KeyElement("e"),
@@ -283,7 +283,7 @@ struct LargePadABCKeyboard: View {
                                                 keyLocale: .trailing,
                                                 event: .letterU,
                                                 keyModel:
-                                                        KeyModel(
+                                                        KeyUnit(
                                                                 primary: KeyElement("u"),
                                                                 members: [
                                                                         KeyElement("u"),
@@ -299,7 +299,7 @@ struct LargePadABCKeyboard: View {
                                                 keyLocale: .trailing,
                                                 event: .letterI,
                                                 keyModel:
-                                                        KeyModel(
+                                                        KeyUnit(
                                                                 primary: KeyElement("i"),
                                                                 members: [
                                                                         KeyElement("i"),
@@ -315,7 +315,7 @@ struct LargePadABCKeyboard: View {
                                                 keyLocale: .trailing,
                                                 event: .letterO,
                                                 keyModel:
-                                                        KeyModel(
+                                                        KeyUnit(
                                                                 primary: KeyElement("o"),
                                                                 members: [
                                                                         KeyElement("o"),
@@ -334,9 +334,9 @@ struct LargePadABCKeyboard: View {
                                         LargePadInstantInputKey("}")
                                         LargePadInstantInputKey("|")
                                 } else {
-                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "{", lower: "[", keyModel: KeyModel(primary: KeyElement("["), members: [KeyElement("["), KeyElement("{")]))
-                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "}", lower: "]", keyModel: KeyModel(primary: KeyElement("]"), members: [KeyElement("]"), KeyElement("}")]))
-                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "|", lower: "\\", keyModel: KeyModel(primary: KeyElement("\\"), members: [KeyElement("\\"), KeyElement("|")]))
+                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "{", lower: "[", keyModel: KeyUnit(primary: KeyElement("["), members: [KeyElement("["), KeyElement("{")]))
+                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "}", lower: "]", keyModel: KeyUnit(primary: KeyElement("]"), members: [KeyElement("]"), KeyElement("}")]))
+                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "|", lower: "\\", keyModel: KeyUnit(primary: KeyElement("\\"), members: [KeyElement("\\"), KeyElement("|")]))
                                 }
                         }
                         HStack(spacing: 0) {
@@ -346,7 +346,7 @@ struct LargePadABCKeyboard: View {
                                                 keyLocale: .leading,
                                                 event: .letterA,
                                                 keyModel:
-                                                        KeyModel(
+                                                        KeyUnit(
                                                                 primary: KeyElement("a"),
                                                                 members: [
                                                                         KeyElement("a"),
@@ -369,20 +369,20 @@ struct LargePadABCKeyboard: View {
                                 }
                                 if context.keyboardCase.isUppercased {
                                         LargePadInstantInputKey(":")
-                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("\""), members: [KeyElement("\""), KeyElement("\u{201D}", footer: "201D"), KeyElement("\u{201C}", footer: "201C")]))
+                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyUnit(primary: KeyElement("\""), members: [KeyElement("\""), KeyElement("\u{201D}", extras: [.init("201D", alignment: .bottomTrailing)]), KeyElement("\u{201C}", extras: [.init("201C", alignment: .bottomTrailing)])]))
                                 } else {
-                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: ":", lower: ";", keyModel: KeyModel(primary: KeyElement(";"), members: [KeyElement(";"), KeyElement(":")]))
+                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: ":", lower: ";", keyModel: KeyUnit(primary: KeyElement(";"), members: [KeyElement(";"), KeyElement(":")]))
                                         LargePadUpperLowerInputKey(
                                                 keyLocale: .trailing,
                                                 upper: "\"",
                                                 lower: "'",
-                                                keyModel: KeyModel(
+                                                keyModel: KeyUnit(
                                                         primary: KeyElement("'"),
                                                         members: [
                                                                 KeyElement("'"),
                                                                 KeyElement("\""),
-                                                                KeyElement("\u{2019}", footer: "2019"),
-                                                                KeyElement("\u{2018}", footer: "2018")
+                                                                KeyElement("\u{2019}", extras: [.init("2019", alignment: .bottomTrailing)]),
+                                                                KeyElement("\u{2018}", extras: [.init("2018", alignment: .bottomTrailing)])
                                                         ]
                                                 )
                                         )
@@ -399,7 +399,7 @@ struct LargePadABCKeyboard: View {
                                                 keyLocale: .leading,
                                                 event: .letterV,
                                                 keyModel:
-                                                        KeyModel(
+                                                        KeyUnit(
                                                                 primary: KeyElement("v"),
                                                                 members: [
                                                                         KeyElement("v"),
@@ -418,11 +418,11 @@ struct LargePadABCKeyboard: View {
                                 if context.keyboardCase.isUppercased {
                                         LargePadInstantInputKey("<")
                                         LargePadInstantInputKey(">")
-                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("?"), members: [KeyElement("?"), KeyElement("¿")]))
+                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyUnit(primary: KeyElement("?"), members: [KeyElement("?"), KeyElement("¿")]))
                                 } else {
-                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "<", lower: ",", keyModel: KeyModel(primary: KeyElement(","), members: [KeyElement(","), KeyElement("<")]))
-                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: ">", lower: ".", keyModel: KeyModel(primary: KeyElement("."), members: [KeyElement("."), KeyElement(">")]))
-                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "?", lower: "/", keyModel: KeyModel(primary: KeyElement("/"), members: [KeyElement("/"), KeyElement("?"), KeyElement("¿")]))
+                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "<", lower: ",", keyModel: KeyUnit(primary: KeyElement(","), members: [KeyElement(","), KeyElement("<")]))
+                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: ">", lower: ".", keyModel: KeyUnit(primary: KeyElement("."), members: [KeyElement("."), KeyElement(">")]))
+                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "?", lower: "/", keyModel: KeyUnit(primary: KeyElement("/"), members: [KeyElement("/"), KeyElement("?"), KeyElement("¿")]))
                                 }
                                 LargePadShiftKey(side: .trailing, coefficient: 2.25)
                         }

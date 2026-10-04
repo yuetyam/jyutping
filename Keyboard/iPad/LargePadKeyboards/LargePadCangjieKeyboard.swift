@@ -12,11 +12,11 @@ struct LargePadCangjieKeyboard: View {
                                 HStack(spacing: 0 ) {
                                         LargePadExpansibleInputKey(
                                                 keyLocale: .leading,
-                                                keyModel: KeyModel(
+                                                keyModel: KeyUnit(
                                                         primary: KeyElement("～"),
                                                         members: [
                                                                 KeyElement("～"),
-                                                                KeyElement("~", header: PresetConstant.halfWidth),
+                                                                KeyElement("~", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)]),
                                                                 KeyElement("≈")
                                                         ]
                                                 )
@@ -24,37 +24,37 @@ struct LargePadCangjieKeyboard: View {
                                         Group {
                                                 LargePadExpansibleInputKey(
                                                         keyLocale: .leading,
-                                                        keyModel: KeyModel(
+                                                        keyModel: KeyUnit(
                                                                 primary: KeyElement("！"),
                                                                 members: [
                                                                         KeyElement("！"),
-                                                                        KeyElement("!", header: PresetConstant.halfWidth)
+                                                                        KeyElement("!", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)])
                                                                 ]
                                                         )
                                                 )
                                                 LargePadExpansibleInputKey(
                                                         keyLocale: .leading,
-                                                        keyModel: KeyModel(
+                                                        keyModel: KeyUnit(
                                                                 primary: KeyElement("@"),
                                                                 members: [
                                                                         KeyElement("@"),
-                                                                        KeyElement("＠", header: PresetConstant.fullWidth)
+                                                                        KeyElement("＠", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)])
                                                                 ]
                                                         )
                                                 )
                                                 LargePadExpansibleInputKey(
                                                         keyLocale: .leading,
-                                                        keyModel: KeyModel(
+                                                        keyModel: KeyUnit(
                                                                 primary: KeyElement("#"),
                                                                 members: [
                                                                         KeyElement("#"),
-                                                                        KeyElement("＃", header: PresetConstant.fullWidth)
+                                                                        KeyElement("＃", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)])
                                                                 ]
                                                         )
                                                 )
                                                 LargePadExpansibleInputKey(
                                                         keyLocale: .leading,
-                                                        keyModel: KeyModel(
+                                                        keyModel: KeyUnit(
                                                                 primary: KeyElement("$"),
                                                                 members: [
                                                                         KeyElement("$"),
@@ -69,18 +69,18 @@ struct LargePadCangjieKeyboard: View {
                                                 )
                                                 LargePadExpansibleInputKey(
                                                         keyLocale: .leading,
-                                                        keyModel: KeyModel(
+                                                        keyModel: KeyUnit(
                                                                 primary: KeyElement("%"),
                                                                 members: [
                                                                         KeyElement("%"),
-                                                                        KeyElement("％", header: PresetConstant.fullWidth),
+                                                                        KeyElement("％", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
                                                                         KeyElement("‰")
                                                                 ]
                                                         )
                                                 )
                                                 LargePadExpansibleInputKey(
                                                         keyLocale: .leading,
-                                                        keyModel: KeyModel(
+                                                        keyModel: KeyUnit(
                                                                 primary: KeyElement("……"),
                                                                 members: [
                                                                         KeyElement("……"),
@@ -90,64 +90,64 @@ struct LargePadCangjieKeyboard: View {
                                                 )
                                                 LargePadExpansibleInputKey(
                                                         keyLocale: .trailing,
-                                                        keyModel: KeyModel(
+                                                        keyModel: KeyUnit(
                                                                 primary: KeyElement("&"),
                                                                 members: [
                                                                         KeyElement("&"),
-                                                                        KeyElement("＆", header: PresetConstant.fullWidth),
+                                                                        KeyElement("＆", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
                                                                         KeyElement("§")
                                                                 ]
                                                         )
                                                 )
                                                 LargePadExpansibleInputKey(
                                                         keyLocale: .trailing,
-                                                        keyModel: KeyModel(
+                                                        keyModel: KeyUnit(
                                                                 primary: KeyElement("*"),
                                                                 members: [
                                                                         KeyElement("*"),
-                                                                        KeyElement("＊", header: PresetConstant.fullWidth),
+                                                                        KeyElement("＊", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
                                                                         KeyElement("×"),
                                                                 ]
                                                         )
                                                 )
                                                 LargePadExpansibleInputKey(
                                                         keyLocale: .trailing,
-                                                        keyModel: KeyModel(
+                                                        keyModel: KeyUnit(
                                                                 primary: KeyElement("（"),
                                                                 members: [
                                                                         KeyElement("（"),
-                                                                        KeyElement("(", header: PresetConstant.halfWidth)
+                                                                        KeyElement("(", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)])
                                                                 ]
                                                         )
                                                 )
                                                 LargePadExpansibleInputKey(
                                                         keyLocale: .trailing,
-                                                        keyModel: KeyModel(
+                                                        keyModel: KeyUnit(
                                                                 primary: KeyElement("）"),
                                                                 members: [
                                                                         KeyElement("）"),
-                                                                        KeyElement(")", header: PresetConstant.halfWidth)
+                                                                        KeyElement(")", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)])
                                                                 ]
                                                         )
                                                 )
                                         }
                                         LargePadExpansibleInputKey(
                                                 keyLocale: .trailing,
-                                                keyModel: KeyModel(
+                                                keyModel: KeyUnit(
                                                         primary: KeyElement("——"),
                                                         members: [
                                                                 KeyElement("——"),
-                                                                KeyElement("⸺", footer: "2E3A")
+                                                                KeyElement("⸺", extras: [.init("2E3A", alignment: .bottomTrailing)])
                                                         ]
                                                 )
                                         )
                                         LargePadExpansibleInputKey(
                                                 keyLocale: .trailing,
-                                                keyModel: KeyModel(
+                                                keyModel: KeyUnit(
                                                         primary: KeyElement("+"),
                                                         members: [
                                                                 KeyElement("+"),
-                                                                KeyElement("＋", header: PresetConstant.fullWidth)
+                                                                KeyElement("＋", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)])
                                                         ]
                                                 )
                                         )
@@ -159,17 +159,17 @@ struct LargePadCangjieKeyboard: View {
                                                 keyLocale: .leading,
                                                 upper: "～",
                                                 lower: "·",
-                                                keyModel: KeyModel(
+                                                keyModel: KeyUnit(
                                                         primary: KeyElement("·"),
                                                         members: [
-                                                                KeyElement("·", header: "間隔號", footer: "00B7"),
+                                                                KeyElement("·", extras: [.init("間隔號", alignment: .topTrailing), .init("00B7", alignment: .bottomTrailing)]),
                                                                 KeyElement("～"),
-                                                                KeyElement("~", header: PresetConstant.halfWidth),
-                                                                KeyElement("`", header: "重音符", footer: "0060"),
-                                                                KeyElement("•", header: "項目符號", footer: "2022"),
-                                                                KeyElement("‧", header: "連字點", footer: "2027"),
-                                                                KeyElement("･", header: "半寬中點", footer: "FF65"),
-                                                                KeyElement("・", header: "全寬中點", footer: "30FB")
+                                                                KeyElement("~", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)]),
+                                                                KeyElement("`", extras: [.init("重音符", alignment: .topTrailing), .init("0060", alignment: .bottomTrailing)]),
+                                                                KeyElement("•", extras: [.init("項目符號", alignment: .topTrailing), .init("2022", alignment: .bottomTrailing)]),
+                                                                KeyElement("‧", extras: [.init("連字點", alignment: .topTrailing), .init("2027", alignment: .bottomTrailing)]),
+                                                                KeyElement("･", extras: [.init("半寬中點", alignment: .topTrailing), .init("FF65", alignment: .bottomTrailing)]),
+                                                                KeyElement("・", extras: [.init("全寬中點", alignment: .topTrailing), .init("30FB", alignment: .bottomTrailing)])
                                                         ]
                                                 )
                                         )
@@ -179,12 +179,12 @@ struct LargePadCangjieKeyboard: View {
                                                         upper: "！",
                                                         lower: "1",
                                                         event: .number1,
-                                                        keyModel: KeyModel(
+                                                        keyModel: KeyUnit(
                                                                 primary: KeyElement("1"),
                                                                 members: [
                                                                         KeyElement("1"),
                                                                         KeyElement("！"),
-                                                                        KeyElement("!", header: PresetConstant.halfWidth)
+                                                                        KeyElement("!", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)])
                                                                 ]
                                                         )
                                                 )
@@ -193,12 +193,12 @@ struct LargePadCangjieKeyboard: View {
                                                         upper: "@",
                                                         lower: "2",
                                                         event: .number2,
-                                                        keyModel: KeyModel(
+                                                        keyModel: KeyUnit(
                                                                 primary: KeyElement("2"),
                                                                 members: [
                                                                         KeyElement("2"),
                                                                         KeyElement("@"),
-                                                                        KeyElement("＠", header: PresetConstant.fullWidth)
+                                                                        KeyElement("＠", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)])
                                                                 ]
                                                         )
                                                 )
@@ -207,12 +207,12 @@ struct LargePadCangjieKeyboard: View {
                                                         upper: "#",
                                                         lower: "3",
                                                         event: .number3,
-                                                        keyModel: KeyModel(
+                                                        keyModel: KeyUnit(
                                                                 primary: KeyElement("3"),
                                                                 members: [
                                                                         KeyElement("3"),
                                                                         KeyElement("#"),
-                                                                        KeyElement("＃", header: PresetConstant.fullWidth)
+                                                                        KeyElement("＃", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)])
                                                                 ]
                                                         )
                                                 )
@@ -221,7 +221,7 @@ struct LargePadCangjieKeyboard: View {
                                                         upper: "$",
                                                         lower: "4",
                                                         event: .number4,
-                                                        keyModel: KeyModel(
+                                                        keyModel: KeyUnit(
                                                                 primary: KeyElement("4"),
                                                                 members: [
                                                                         KeyElement("4"),
@@ -234,12 +234,12 @@ struct LargePadCangjieKeyboard: View {
                                                         upper: "%",
                                                         lower: "5",
                                                         event: .number5,
-                                                        keyModel: KeyModel(
+                                                        keyModel: KeyUnit(
                                                                 primary: KeyElement("5"),
                                                                 members: [
                                                                         KeyElement("5"),
                                                                         KeyElement("%"),
-                                                                        KeyElement("％", header: PresetConstant.fullWidth),
+                                                                        KeyElement("％", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
                                                                         KeyElement("‰")
                                                                 ]
                                                         )
@@ -249,7 +249,7 @@ struct LargePadCangjieKeyboard: View {
                                                         upper: "……",
                                                         lower: "6",
                                                         event: .number6,
-                                                        keyModel: KeyModel(
+                                                        keyModel: KeyUnit(
                                                                 primary: KeyElement("6"),
                                                                 members: [
                                                                         KeyElement("6"),
@@ -263,12 +263,12 @@ struct LargePadCangjieKeyboard: View {
                                                         upper: "&",
                                                         lower: "7",
                                                         event: .number7,
-                                                        keyModel: KeyModel(
+                                                        keyModel: KeyUnit(
                                                                 primary: KeyElement("7"),
                                                                 members: [
                                                                         KeyElement("7"),
                                                                         KeyElement("&"),
-                                                                        KeyElement("＆", header: PresetConstant.fullWidth),
+                                                                        KeyElement("＆", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
                                                                         KeyElement("§")
                                                                 ]
                                                         )
@@ -278,12 +278,12 @@ struct LargePadCangjieKeyboard: View {
                                                         upper: "*",
                                                         lower: "8",
                                                         event: .number8,
-                                                        keyModel: KeyModel(
+                                                        keyModel: KeyUnit(
                                                                 primary: KeyElement("8"),
                                                                 members: [
                                                                         KeyElement("8"),
                                                                         KeyElement("*"),
-                                                                        KeyElement("＊", header: PresetConstant.fullWidth)
+                                                                        KeyElement("＊", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)])
                                                                 ]
                                                         )
                                                 )
@@ -292,12 +292,12 @@ struct LargePadCangjieKeyboard: View {
                                                         upper: "（",
                                                         lower: "9",
                                                         event: .number9,
-                                                        keyModel: KeyModel(
+                                                        keyModel: KeyUnit(
                                                                 primary: KeyElement("9"),
                                                                 members: [
                                                                         KeyElement("9"),
                                                                         KeyElement("（"),
-                                                                        KeyElement("(", header: PresetConstant.halfWidth)
+                                                                        KeyElement("(", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)])
                                                                 ]
                                                         )
                                                 )
@@ -306,12 +306,12 @@ struct LargePadCangjieKeyboard: View {
                                                         upper: "）",
                                                         lower: "0",
                                                         event: .number0,
-                                                        keyModel: KeyModel(
+                                                        keyModel: KeyUnit(
                                                                 primary: KeyElement("0"),
                                                                 members: [
                                                                         KeyElement("0"),
                                                                         KeyElement("）"),
-                                                                        KeyElement(")", header: PresetConstant.halfWidth)
+                                                                        KeyElement(")", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)])
                                                                 ]
                                                         )
                                                 )
@@ -320,12 +320,12 @@ struct LargePadCangjieKeyboard: View {
                                                 keyLocale: .trailing,
                                                 upper: "——",
                                                 lower: "-",
-                                                keyModel: KeyModel(
+                                                keyModel: KeyUnit(
                                                         primary: KeyElement("-"),
                                                         members: [
                                                                 KeyElement("-"),
                                                                 KeyElement("——"),
-                                                                KeyElement("⸺", footer: "2E3A")
+                                                                KeyElement("⸺", extras: [.init("2E3A", alignment: .bottomTrailing)])
                                                         ]
                                                 )
                                         )
@@ -333,13 +333,13 @@ struct LargePadCangjieKeyboard: View {
                                                 keyLocale: .trailing,
                                                 upper: "+",
                                                 lower: "=",
-                                                keyModel: KeyModel(
+                                                keyModel: KeyUnit(
                                                         primary: KeyElement("="),
                                                         members: [
                                                                 KeyElement("="),
                                                                 KeyElement("+"),
-                                                                KeyElement("＋", header: PresetConstant.fullWidth),
-                                                                KeyElement("＝", header: PresetConstant.fullWidth)
+                                                                KeyElement("＋", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
+                                                                KeyElement("＝", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)])
                                                         ]
                                                 )
                                         )
@@ -361,13 +361,13 @@ struct LargePadCangjieKeyboard: View {
                                         LargePadCangjieInputKey(.letterP)
                                 }
                                 if context.keyboardCase.isUppercased {
-                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("『"), members: [KeyElement("『"), KeyElement("「")]))
-                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("』"), members: [KeyElement("』"), KeyElement("」")]))
-                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("｜"), members: [KeyElement("｜"), KeyElement("|", header: PresetConstant.halfWidth)]))
+                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyUnit(primary: KeyElement("『"), members: [KeyElement("『"), KeyElement("「")]))
+                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyUnit(primary: KeyElement("』"), members: [KeyElement("』"), KeyElement("」")]))
+                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyUnit(primary: KeyElement("｜"), members: [KeyElement("｜"), KeyElement("|", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)])]))
                                 } else {
-                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "『", lower: "「", keyModel: KeyModel(primary: KeyElement("「"), members: [KeyElement("「"), KeyElement("『")]))
-                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "』", lower: "」", keyModel: KeyModel(primary: KeyElement("」"), members: [KeyElement("」"), KeyElement("』")]))
-                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "｜", lower: "、", keyModel: KeyModel(primary: KeyElement("、"), members: [KeyElement("、"), KeyElement("｜"), KeyElement("|", header: PresetConstant.halfWidth), KeyElement("､", header: PresetConstant.halfWidth)]))
+                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "『", lower: "「", keyModel: KeyUnit(primary: KeyElement("「"), members: [KeyElement("「"), KeyElement("『")]))
+                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "』", lower: "」", keyModel: KeyUnit(primary: KeyElement("」"), members: [KeyElement("」"), KeyElement("』")]))
+                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "｜", lower: "、", keyModel: KeyUnit(primary: KeyElement("、"), members: [KeyElement("、"), KeyElement("｜"), KeyElement("|", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)]), KeyElement("､", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)])]))
                                 }
                         }
                         HStack(spacing: 0) {
@@ -384,21 +384,21 @@ struct LargePadCangjieKeyboard: View {
                                         LargePadCangjieInputKey(.letterL)
                                 }
                                 if context.keyboardCase.isUppercased {
-                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("："), members: [KeyElement("："), KeyElement(":", header: PresetConstant.halfWidth)]))
-                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("\""), members: [KeyElement("\""), KeyElement("\u{201D}", header: "右", footer: "201D"), KeyElement("\u{201C}", header: "左", footer: "201C")]))
+                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyUnit(primary: KeyElement("："), members: [KeyElement("："), KeyElement(":", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)])]))
+                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyUnit(primary: KeyElement("\""), members: [KeyElement("\""), KeyElement("\u{201D}", extras: [.init("右", alignment: .topTrailing), .init("201D", alignment: .bottomTrailing)]), KeyElement("\u{201C}", extras: [.init("左", alignment: .topTrailing), .init("201C", alignment: .bottomTrailing)])]))
                                 } else {
-                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "：", lower: "；", keyModel: KeyModel(primary: KeyElement("；"), members: [KeyElement("；"), KeyElement("："), KeyElement(";", header: PresetConstant.halfWidth), KeyElement(":", header: PresetConstant.halfWidth)]))
+                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "：", lower: "；", keyModel: KeyUnit(primary: KeyElement("；"), members: [KeyElement("；"), KeyElement("："), KeyElement(";", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)]), KeyElement(":", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)])]))
                                         LargePadUpperLowerInputKey(
                                                 keyLocale: .trailing,
                                                 upper: "\"",
                                                 lower: "'",
-                                                keyModel: KeyModel(
+                                                keyModel: KeyUnit(
                                                         primary: KeyElement("'"),
                                                         members: [
                                                                 KeyElement("'"),
                                                                 KeyElement("\""),
-                                                                KeyElement("\u{2019}", header: "右", footer: "2019"),
-                                                                KeyElement("\u{2018}", header: "左", footer: "2018")
+                                                                KeyElement("\u{2019}", extras: [.init("右", alignment: .topTrailing), .init("2019", alignment: .bottomTrailing)]),
+                                                                KeyElement("\u{2018}", extras: [.init("左", alignment: .topTrailing), .init("2018", alignment: .bottomTrailing)])
                                                         ]
                                                 )
                                         )
@@ -417,13 +417,13 @@ struct LargePadCangjieKeyboard: View {
                                         LargePadCangjieInputKey(.letterM)
                                 }
                                 if context.keyboardCase.isUppercased {
-                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("《"), members: [KeyElement("《"), KeyElement("〈"), KeyElement("<"), KeyElement("＜", header: PresetConstant.fullWidth)]))
-                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("》"), members: [KeyElement("》"), KeyElement("〉"), KeyElement(">"), KeyElement("＞", header: PresetConstant.fullWidth)]))
-                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("？"), members: [KeyElement("？"), KeyElement("?", header: PresetConstant.halfWidth)]))
+                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyUnit(primary: KeyElement("《"), members: [KeyElement("《"), KeyElement("〈"), KeyElement("<"), KeyElement("＜", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)])]))
+                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyUnit(primary: KeyElement("》"), members: [KeyElement("》"), KeyElement("〉"), KeyElement(">"), KeyElement("＞", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)])]))
+                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyUnit(primary: KeyElement("？"), members: [KeyElement("？"), KeyElement("?", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)])]))
                                 } else {
-                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "《", lower: "，", keyModel: KeyModel(primary: KeyElement("，"), members: [KeyElement("，"), KeyElement("《")]))
-                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "》", lower: "。", keyModel: KeyModel(primary: KeyElement("。"), members: [KeyElement("。"), KeyElement("》")]))
-                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "？", lower: "/", keyModel: KeyModel(primary: KeyElement("/"), members: [KeyElement("/"), KeyElement("？"), KeyElement("／", header: PresetConstant.fullWidth)]))
+                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "《", lower: "，", keyModel: KeyUnit(primary: KeyElement("，"), members: [KeyElement("，"), KeyElement("《")]))
+                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "》", lower: "。", keyModel: KeyUnit(primary: KeyElement("。"), members: [KeyElement("。"), KeyElement("》")]))
+                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "？", lower: "/", keyModel: KeyUnit(primary: KeyElement("/"), members: [KeyElement("/"), KeyElement("？"), KeyElement("／", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)])]))
                                 }
                                 LargePadShiftKey(side: .trailing, coefficient: 2.25)
                         }

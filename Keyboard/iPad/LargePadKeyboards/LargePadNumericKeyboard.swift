@@ -20,7 +20,7 @@ struct LargePadNumericKeyboard: View {
                                         LargePadInstantInputKey("7", event: .number7)
                                         LargePadInstantInputKey("8", event: .number8)
                                         LargePadInstantInputKey("9", event: .number9)
-                                        LargePadExpansibleInputKey(keyLocale: .trailing, event: .number0, keyModel: KeyModel(primary: KeyElement("0"), members: [KeyElement("0"), KeyElement("°")]))
+                                        LargePadExpansibleInputKey(keyLocale: .trailing, event: .number0, keyModel: KeyUnit(primary: KeyElement("0"), members: [KeyElement("0"), KeyElement("°")]))
                                 }
                                 LargePadInstantInputKey("<")
                                 LargePadInstantInputKey(">")
@@ -34,11 +34,11 @@ struct LargePadNumericKeyboard: View {
                                         LargePadInstantInputKey("{")
                                         LargePadInstantInputKey("}")
                                         LargePadInstantInputKey("#")
-                                        LargePadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("%"), members: [KeyElement("%"), KeyElement("‰")]))
+                                        LargePadExpansibleInputKey(keyLocale: .leading, keyModel: KeyUnit(primary: KeyElement("%"), members: [KeyElement("%"), KeyElement("‰")]))
                                         LargePadInstantInputKey("^")
                                         LargePadInstantInputKey("*")
                                         LargePadInstantInputKey("+")
-                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("="), members: [KeyElement("="), KeyElement("≠"), KeyElement("≈")]))
+                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyUnit(primary: KeyElement("="), members: [KeyElement("="), KeyElement("≠"), KeyElement("≈")]))
                                 }
                                 LargePadInstantInputKey("\\")
                                 LargePadInstantInputKey("|")
@@ -49,12 +49,12 @@ struct LargePadNumericKeyboard: View {
                                 Group {
                                         LargePadExpansibleInputKey(
                                                 keyLocale: .leading,
-                                                keyModel: KeyModel(
+                                                keyModel: KeyUnit(
                                                         primary: KeyElement("-"),
                                                         members: [
                                                                 KeyElement("-"),
-                                                                KeyElement("\u{2013}", footer: "2013"),
-                                                                KeyElement("\u{2014}", footer: "2014"),
+                                                                KeyElement("\u{2013}", extras: [.init("2013", alignment: .bottomTrailing)]),
+                                                                KeyElement("\u{2014}", extras: [.init("2014", alignment: .bottomTrailing)]),
                                                                 KeyElement("•")
                                                         ]
                                                 )
@@ -66,7 +66,7 @@ struct LargePadNumericKeyboard: View {
                                         LargePadInstantInputKey(")")
                                         LargePadExpansibleInputKey(
                                                 keyLocale: .trailing,
-                                                keyModel: KeyModel(
+                                                keyModel: KeyUnit(
                                                         primary: KeyElement("$"),
                                                         members: [
                                                                 KeyElement("$"),
@@ -78,7 +78,7 @@ struct LargePadNumericKeyboard: View {
                                         )
                                         LargePadExpansibleInputKey(
                                                 keyLocale: .trailing,
-                                                keyModel: KeyModel(
+                                                keyModel: KeyUnit(
                                                         primary: KeyElement("&"),
                                                         members: [
                                                                 KeyElement("&"),
@@ -101,7 +101,7 @@ struct LargePadNumericKeyboard: View {
                                         LargePadInstantInputKey(",")
                                         LargePadExpansibleInputKey(
                                                 keyLocale: .leading,
-                                                keyModel: KeyModel(
+                                                keyModel: KeyUnit(
                                                         primary: KeyElement("?"),
                                                         members: [
                                                                 KeyElement("?"),
@@ -111,7 +111,7 @@ struct LargePadNumericKeyboard: View {
                                         )
                                         LargePadExpansibleInputKey(
                                                 keyLocale: .trailing,
-                                                keyModel: KeyModel(
+                                                keyModel: KeyUnit(
                                                         primary: KeyElement("!"),
                                                         members: [
                                                                 KeyElement("!"),
@@ -121,24 +121,24 @@ struct LargePadNumericKeyboard: View {
                                         )
                                         LargePadExpansibleInputKey(
                                                 keyLocale: .trailing,
-                                                keyModel: KeyModel(
+                                                keyModel: KeyUnit(
                                                         primary: KeyElement("'"),
                                                         members: [
-                                                                KeyElement("'", footer: "0027"),
-                                                                KeyElement("\u{2019}", footer: "2019"),
-                                                                KeyElement("\u{2018}", footer: "2018")
+                                                                KeyElement("'", extras: [.init("0027", alignment: .bottomTrailing)]),
+                                                                KeyElement("\u{2019}", extras: [.init("2019", alignment: .bottomTrailing)]),
+                                                                KeyElement("\u{2018}", extras: [.init("2018", alignment: .bottomTrailing)])
                                                         ]
                                                 )
                                         )
                                 }
                                 LargePadExpansibleInputKey(
                                         keyLocale: .trailing,
-                                        keyModel: KeyModel(
+                                        keyModel: KeyUnit(
                                                 primary: KeyElement("\""),
                                                 members: [
-                                                        KeyElement("\"", footer: "0022"),
-                                                        KeyElement("\u{201D}", footer: "201D"),
-                                                        KeyElement("\u{201C}", footer: "201C")
+                                                        KeyElement("\"", extras: [.init("0022", alignment: .bottomTrailing)]),
+                                                        KeyElement("\u{201D}", extras: [.init("201D", alignment: .bottomTrailing)]),
+                                                        KeyElement("\u{201C}", extras: [.init("201C", alignment: .bottomTrailing)])
                                                 ]
                                         )
                                 )

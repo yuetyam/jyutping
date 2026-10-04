@@ -45,7 +45,17 @@ struct ABCNumberRow: View {
                     NumberInputKey(.number7)
                     NumberInputKey(.number8)
                     NumberInputKey(.number9)
-                    EnhancedInputKey(keyLocale: .trailing, event: .number0, keyModel: KeyModel(primary: KeyElement("0"), members: [KeyElement("0"), KeyElement("°")]))
+                    EnhancedInputKey(
+                        side: .trailing,
+                        virtual: .number0,
+                        unit: KeyUnit(
+                                primary: KeyElement(virtual: .number0),
+                                members: [
+                                        KeyElement(virtual: .number0),
+                                        KeyElement("°")
+                                ]
+                        )
+                    )
             }
     }
 }

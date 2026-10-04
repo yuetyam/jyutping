@@ -6,7 +6,7 @@ import CoreIME
 struct PinyinSpecialInputKey: View {
 
         private let virtual: VirtualInputKey = .letterV
-        private let unit: KeyUnit = KeyUnit(primary: KeyElement("v", header: "…"), members: [KeyElement("v"), KeyElement("…")])
+        private let unit: KeyUnit = KeyUnit(primary: KeyElement("v", extras: [.init("…", alignment: .topTrailing)]), members: [KeyElement("v"), KeyElement("…")])
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
@@ -134,7 +134,7 @@ struct PinyinSpecialInputKey: View {
                                         let distance: CGFloat = state.translation.height
                                         let isSatisfied: Bool = abs(distance) > 36 || (buffer > 1 && abs(distance) > 24)
                                         guard isSatisfied else { return }
-                                        pulled = unit.primary.header
+                                        pulled = unit.primary.extras.first(where: \.alignment.isTopEdge)?.text
                                 }
                         }
                         .onEnded { _ in

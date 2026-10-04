@@ -17,7 +17,7 @@ struct PadABCKeyboard: View {
                                                 event: .letterE,
                                                 upper: "3",
                                                 keyModel:
-                                                        KeyModel(
+                                                        KeyUnit(
                                                                 primary: KeyElement("e"),
                                                                 members: [
                                                                         KeyElement("e"),
@@ -37,7 +37,7 @@ struct PadABCKeyboard: View {
                                                 event: .letterU,
                                                 upper: "7",
                                                 keyModel:
-                                                        KeyModel(
+                                                        KeyUnit(
                                                                 primary: KeyElement("u"),
                                                                 members: [
                                                                         KeyElement("u"),
@@ -54,7 +54,7 @@ struct PadABCKeyboard: View {
                                                 event: .letterI,
                                                 upper: "8",
                                                 keyModel:
-                                                        KeyModel(
+                                                        KeyUnit(
                                                                 primary: KeyElement("i"),
                                                                 members: [
                                                                         KeyElement("i"),
@@ -71,7 +71,7 @@ struct PadABCKeyboard: View {
                                                 event: .letterO,
                                                 upper: "9",
                                                 keyModel:
-                                                        KeyModel(
+                                                        KeyUnit(
                                                                 primary: KeyElement("o"),
                                                                 members: [
                                                                         KeyElement("o"),
@@ -95,7 +95,7 @@ struct PadABCKeyboard: View {
                                                 event: .letterA,
                                                 upper: "@",
                                                 keyModel:
-                                                        KeyModel(
+                                                        KeyUnit(
                                                                 primary: KeyElement("a"),
                                                                 members: [
                                                                         KeyElement("a"),
@@ -129,7 +129,7 @@ struct PadABCKeyboard: View {
                                                 event: .letterV,
                                                 upper: "=",
                                                 keyModel:
-                                                        KeyModel(
+                                                        KeyUnit(
                                                                 primary: KeyElement("v"),
                                                                 members: [
                                                                         KeyElement("v"),
@@ -146,11 +146,11 @@ struct PadABCKeyboard: View {
                                         PadPullableInputKey(event: .letterM, upper: ":", lower: "m")
                                 }
                                 if context.keyboardCase.isUppercased {
-                                        PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("!"), members: [KeyElement("!"), KeyElement("'"), KeyElement("¡")]))
-                                        PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("?"), members: [KeyElement("?"), KeyElement("\""), KeyElement("…"), KeyElement("¿")]))
+                                        PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyUnit(primary: KeyElement("!"), members: [KeyElement("!"), KeyElement("'"), KeyElement("¡")]))
+                                        PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyUnit(primary: KeyElement("?"), members: [KeyElement("?"), KeyElement("\""), KeyElement("…"), KeyElement("¿")]))
                                 } else {
-                                        PadUpperLowerInputKey(keyLocale: .trailing, upper: "!", lower: ",", keyModel: KeyModel(primary: KeyElement(","), members: [KeyElement(","), KeyElement("!"), KeyElement("'"), KeyElement("¡")]))
-                                        PadUpperLowerInputKey(keyLocale: .trailing, upper: "?", lower: ".", keyModel: KeyModel(primary: KeyElement("."), members: [KeyElement("."), KeyElement("?"), KeyElement("\""), KeyElement("…"), KeyElement("¿")]))
+                                        PadUpperLowerInputKey(keyLocale: .trailing, upper: "!", lower: ",", keyModel: KeyUnit(primary: KeyElement(","), members: [KeyElement(","), KeyElement("!"), KeyElement("'"), KeyElement("¡")]))
+                                        PadUpperLowerInputKey(keyLocale: .trailing, upper: "?", lower: ".", keyModel: KeyUnit(primary: KeyElement("."), members: [KeyElement("."), KeyElement("?"), KeyElement("\""), KeyElement("…"), KeyElement("¿")]))
                                 }
                                 PadShiftKey()
                         }

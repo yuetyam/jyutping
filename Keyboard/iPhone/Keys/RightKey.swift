@@ -17,8 +17,8 @@ struct RightKey: View {
                 KeyElement("。"),
                 KeyElement("？"),
                 KeyElement("！"),
-                KeyElement("…", header: "省略號"),
-                KeyElement(".", header: "英文")
+                KeyElement("…", extras: [.init("省略號", alignment: .topTrailing)]),
+                KeyElement(".", extras: [.init("英文", alignment: .topTrailing)])
         ]
         private let headerText: String = "？"
 
@@ -53,7 +53,7 @@ struct RightKey: View {
                                                                                         .fill(selectedIndex == reversedIndex ? Color.accentColor : Color.clear)
                                                                                 ZStack(alignment: .top) {
                                                                                         Color.interactiveClear
-                                                                                        Text(verbatim: element.header ?? String.space)
+                                                                                        Text(verbatim: element.extras.first(where: \.alignment.isTopEdge)?.text ?? String.space)
                                                                                                 .font(.labelCaption)
                                                                                                 .shallow()
                                                                                 }

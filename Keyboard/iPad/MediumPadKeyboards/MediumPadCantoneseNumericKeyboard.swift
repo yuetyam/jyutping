@@ -13,14 +13,14 @@ struct MediumPadCantoneseNumericKeyboard: View {
                                         PadAdvancedInputKey(
                                                 keyLocale: .leading,
                                                 upper: "^",
-                                                keyModel: KeyModel(
+                                                keyModel: KeyUnit(
                                                         primary: KeyElement("1"),
                                                         members: [
                                                                 KeyElement("1"),
-                                                                KeyElement("１", header: PresetConstant.fullWidth),
+                                                                KeyElement("１", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
                                                                 KeyElement("壹"),
-                                                                KeyElement("¹", header: "上標"),
-                                                                KeyElement("₁", header: "下標"),
+                                                                KeyElement("¹", extras: [.init("上標", alignment: .topTrailing)]),
+                                                                KeyElement("₁", extras: [.init("下標", alignment: .topTrailing)]),
                                                                 KeyElement("①")
                                                         ]
                                                 )
@@ -28,14 +28,14 @@ struct MediumPadCantoneseNumericKeyboard: View {
                                         PadAdvancedInputKey(
                                                 keyLocale: .leading,
                                                 upper: "_",
-                                                keyModel: KeyModel(
+                                                keyModel: KeyUnit(
                                                         primary: KeyElement("2"),
                                                         members: [
                                                                 KeyElement("2"),
-                                                                KeyElement("２", header: PresetConstant.fullWidth),
+                                                                KeyElement("２", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
                                                                 KeyElement("貳"),
-                                                                KeyElement("²", header: "上標"),
-                                                                KeyElement("₂", header: "下標"),
+                                                                KeyElement("²", extras: [.init("上標", alignment: .topTrailing)]),
+                                                                KeyElement("₂", extras: [.init("下標", alignment: .topTrailing)]),
                                                                 KeyElement("②")
                                                         ]
                                                 )
@@ -43,14 +43,14 @@ struct MediumPadCantoneseNumericKeyboard: View {
                                         PadAdvancedInputKey(
                                                 keyLocale: .leading,
                                                 upper: "｜",
-                                                keyModel: KeyModel(
+                                                keyModel: KeyUnit(
                                                         primary: KeyElement("3"),
                                                         members: [
                                                                 KeyElement("3"),
-                                                                KeyElement("３", header: PresetConstant.fullWidth),
+                                                                KeyElement("３", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
                                                                 KeyElement("叁"),
-                                                                KeyElement("³", header: "上標"),
-                                                                KeyElement("₃", header: "下標"),
+                                                                KeyElement("³", extras: [.init("上標", alignment: .topTrailing)]),
+                                                                KeyElement("₃", extras: [.init("下標", alignment: .topTrailing)]),
                                                                 KeyElement("③")
                                                         ]
                                                 )
@@ -58,14 +58,14 @@ struct MediumPadCantoneseNumericKeyboard: View {
                                         PadAdvancedInputKey(
                                                 keyLocale: .leading,
                                                 upper: "\\",
-                                                keyModel: KeyModel(
+                                                keyModel: KeyUnit(
                                                         primary: KeyElement("4"),
                                                         members: [
                                                                 KeyElement("4"),
-                                                                KeyElement("４", header: PresetConstant.fullWidth),
+                                                                KeyElement("４", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
                                                                 KeyElement("肆"),
-                                                                KeyElement("⁴", header: "上標"),
-                                                                KeyElement("₄", header: "下標"),
+                                                                KeyElement("⁴", extras: [.init("上標", alignment: .topTrailing)]),
+                                                                KeyElement("₄", extras: [.init("下標", alignment: .topTrailing)]),
                                                                 KeyElement("④")
                                                         ]
                                                 )
@@ -73,14 +73,14 @@ struct MediumPadCantoneseNumericKeyboard: View {
                                         PadAdvancedInputKey(
                                                 keyLocale: .leading,
                                                 upper: "<",
-                                                keyModel: KeyModel(
+                                                keyModel: KeyUnit(
                                                         primary: KeyElement("5"),
                                                         members: [
                                                                 KeyElement("5"),
-                                                                KeyElement("５", header: PresetConstant.fullWidth),
+                                                                KeyElement("５", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
                                                                 KeyElement("伍"),
-                                                                KeyElement("⁵", header: "上標"),
-                                                                KeyElement("₅", header: "下標"),
+                                                                KeyElement("⁵", extras: [.init("上標", alignment: .topTrailing)]),
+                                                                KeyElement("₅", extras: [.init("下標", alignment: .topTrailing)]),
                                                                 KeyElement("⑤")
                                                         ]
                                                 )
@@ -88,14 +88,14 @@ struct MediumPadCantoneseNumericKeyboard: View {
                                         PadAdvancedInputKey(
                                                 keyLocale: .leading,
                                                 upper: ">",
-                                                keyModel: KeyModel(
+                                                keyModel: KeyUnit(
                                                         primary: KeyElement("6"),
                                                         members: [
                                                                 KeyElement("6"),
-                                                                KeyElement("６", header: PresetConstant.fullWidth),
+                                                                KeyElement("６", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
                                                                 KeyElement("陸"),
-                                                                KeyElement("⁶", header: "上標"),
-                                                                KeyElement("₆", header: "下標"),
+                                                                KeyElement("⁶", extras: [.init("上標", alignment: .topTrailing)]),
+                                                                KeyElement("₆", extras: [.init("下標", alignment: .topTrailing)]),
                                                                 KeyElement("⑥")
                                                         ]
                                                 )
@@ -103,14 +103,14 @@ struct MediumPadCantoneseNumericKeyboard: View {
                                         PadAdvancedInputKey(
                                                 keyLocale: .trailing,
                                                 upper: "{",
-                                                keyModel: KeyModel(
+                                                keyModel: KeyUnit(
                                                         primary: KeyElement("7"),
                                                         members: [
                                                                 KeyElement("7"),
-                                                                KeyElement("７", header: PresetConstant.fullWidth),
+                                                                KeyElement("７", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
                                                                 KeyElement("柒"),
-                                                                KeyElement("⁷", header: "上標"),
-                                                                KeyElement("₇", header: "下標"),
+                                                                KeyElement("⁷", extras: [.init("上標", alignment: .topTrailing)]),
+                                                                KeyElement("₇", extras: [.init("下標", alignment: .topTrailing)]),
                                                                 KeyElement("⑦")
                                                         ]
                                                 )
@@ -118,14 +118,14 @@ struct MediumPadCantoneseNumericKeyboard: View {
                                         PadAdvancedInputKey(
                                                 keyLocale: .trailing,
                                                 upper: "}",
-                                                keyModel: KeyModel(
+                                                keyModel: KeyUnit(
                                                         primary: KeyElement("8"),
                                                         members: [
                                                                 KeyElement("8"),
-                                                                KeyElement("８", header: PresetConstant.fullWidth),
+                                                                KeyElement("８", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
                                                                 KeyElement("捌"),
-                                                                KeyElement("⁸", header: "上標"),
-                                                                KeyElement("₈", header: "下標"),
+                                                                KeyElement("⁸", extras: [.init("上標", alignment: .topTrailing)]),
+                                                                KeyElement("₈", extras: [.init("下標", alignment: .topTrailing)]),
                                                                 KeyElement("⑧")
                                                         ]
                                                 )
@@ -133,14 +133,14 @@ struct MediumPadCantoneseNumericKeyboard: View {
                                         PadAdvancedInputKey(
                                                 keyLocale: .trailing,
                                                 upper: ",",
-                                                keyModel: KeyModel(
+                                                keyModel: KeyUnit(
                                                         primary: KeyElement("9"),
                                                         members: [
                                                                 KeyElement("9"),
-                                                                KeyElement("９", header: PresetConstant.fullWidth),
+                                                                KeyElement("９", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
                                                                 KeyElement("玖"),
-                                                                KeyElement("⁹", header: "上標"),
-                                                                KeyElement("₉", header: "下標"),
+                                                                KeyElement("⁹", extras: [.init("上標", alignment: .topTrailing)]),
+                                                                KeyElement("₉", extras: [.init("下標", alignment: .topTrailing)]),
                                                                 KeyElement("⑨")
                                                         ]
                                                 )
@@ -148,17 +148,17 @@ struct MediumPadCantoneseNumericKeyboard: View {
                                         PadAdvancedInputKey(
                                                 keyLocale: .trailing,
                                                 upper: ".",
-                                                keyModel: KeyModel(
+                                                keyModel: KeyUnit(
                                                         primary: KeyElement("0"),
                                                         members: [
                                                                 KeyElement("0"),
-                                                                KeyElement("０", header: PresetConstant.fullWidth),
+                                                                KeyElement("０", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
                                                                 KeyElement("零"),
-                                                                KeyElement("⁰", header: "上標"),
-                                                                KeyElement("₀", header: "下標"),
+                                                                KeyElement("⁰", extras: [.init("上標", alignment: .topTrailing)]),
+                                                                KeyElement("₀", extras: [.init("下標", alignment: .topTrailing)]),
                                                                 KeyElement("⓪"),
                                                                 KeyElement("拾"),
-                                                                KeyElement("°", header: "度")
+                                                                KeyElement("°", extras: [.init("度", alignment: .topTrailing)])
                                                         ]
                                                 )
                                         )
@@ -168,26 +168,26 @@ struct MediumPadCantoneseNumericKeyboard: View {
                         HStack(spacing: 0) {
                                 Spacer()
                                 Group {
-                                        PadAdvancedInputKey(keyLocale: .leading, upper: "&", keyModel: KeyModel(primary: KeyElement("@"), members: [KeyElement("@"), KeyElement("&"), KeyElement("＠", header: PresetConstant.fullWidth)]))
-                                        PadAdvancedInputKey(keyLocale: .leading, upper: "¥", keyModel: KeyModel(primary: KeyElement("#"), members: [KeyElement("#"), KeyElement("¥"), KeyElement("＃", header: PresetConstant.fullWidth)]))
-                                        PadAdvancedInputKey(keyLocale: .leading, upper: "€", keyModel: KeyModel(primary: KeyElement("$"), members: [KeyElement("$"), KeyElement("€"), KeyElement("£"), KeyElement("¥"), KeyElement("₩"), KeyElement("₽"), KeyElement("¢")]))
-                                        PadAdvancedInputKey(keyLocale: .leading, upper: "*", keyModel: KeyModel(primary: KeyElement("/"), members: [KeyElement("/"), KeyElement("*"), KeyElement("／", header: PresetConstant.fullWidth)]))
-                                        PadAdvancedInputKey(keyLocale: .leading, upper: "【", keyModel: KeyModel(primary: KeyElement("（"), members: [KeyElement("（"), KeyElement("【"), KeyElement("(", header: PresetConstant.halfWidth)]))
-                                        PadAdvancedInputKey(keyLocale: .trailing, upper: "】", keyModel: KeyModel(primary: KeyElement("）"), members: [KeyElement("）"), KeyElement("】"), KeyElement(")", header: PresetConstant.halfWidth)]))
-                                        PadAdvancedInputKey(keyLocale: .trailing, upper: "『", keyModel: KeyModel(primary: KeyElement("「"), members: [KeyElement("「"), KeyElement("『"), KeyElement("\u{201C}"), KeyElement("\u{2018}")]))
-                                        PadAdvancedInputKey(keyLocale: .trailing, upper: "』", keyModel: KeyModel(primary: KeyElement("」"), members: [KeyElement("」"), KeyElement("』"), KeyElement("\u{201D}"), KeyElement("\u{2019}")]))
+                                        PadAdvancedInputKey(keyLocale: .leading, upper: "&", keyModel: KeyUnit(primary: KeyElement("@"), members: [KeyElement("@"), KeyElement("&"), KeyElement("＠", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)])]))
+                                        PadAdvancedInputKey(keyLocale: .leading, upper: "¥", keyModel: KeyUnit(primary: KeyElement("#"), members: [KeyElement("#"), KeyElement("¥"), KeyElement("＃", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)])]))
+                                        PadAdvancedInputKey(keyLocale: .leading, upper: "€", keyModel: KeyUnit(primary: KeyElement("$"), members: [KeyElement("$"), KeyElement("€"), KeyElement("£"), KeyElement("¥"), KeyElement("₩"), KeyElement("₽"), KeyElement("¢")]))
+                                        PadAdvancedInputKey(keyLocale: .leading, upper: "*", keyModel: KeyUnit(primary: KeyElement("/"), members: [KeyElement("/"), KeyElement("*"), KeyElement("／", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)])]))
+                                        PadAdvancedInputKey(keyLocale: .leading, upper: "【", keyModel: KeyUnit(primary: KeyElement("（"), members: [KeyElement("（"), KeyElement("【"), KeyElement("(", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)])]))
+                                        PadAdvancedInputKey(keyLocale: .trailing, upper: "】", keyModel: KeyUnit(primary: KeyElement("）"), members: [KeyElement("）"), KeyElement("】"), KeyElement(")", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)])]))
+                                        PadAdvancedInputKey(keyLocale: .trailing, upper: "『", keyModel: KeyUnit(primary: KeyElement("「"), members: [KeyElement("「"), KeyElement("『"), KeyElement("\u{201C}"), KeyElement("\u{2018}")]))
+                                        PadAdvancedInputKey(keyLocale: .trailing, upper: "』", keyModel: KeyUnit(primary: KeyElement("」"), members: [KeyElement("」"), KeyElement("』"), KeyElement("\u{201D}"), KeyElement("\u{2019}")]))
                                         PadAdvancedInputKey(
                                                 keyLocale: .trailing,
                                                 upper: "\"",
-                                                keyModel: KeyModel(
+                                                keyModel: KeyUnit(
                                                         primary: KeyElement("'"),
                                                         members: [
                                                                 KeyElement("'"),
                                                                 KeyElement("\""),
-                                                                KeyElement("\u{2019}", header: "右", footer: "2019"),
-                                                                KeyElement("\u{2018}", header: "左", footer: "2018"),
-                                                                KeyElement("\u{FF07}", header: PresetConstant.fullWidth, footer: "FF07"),
-                                                                KeyElement("\u{0060}", header: "重音符", footer: "0060")
+                                                                KeyElement("\u{2019}", extras: [.init("右", alignment: .topTrailing), .init("2019", alignment: .bottomTrailing)]),
+                                                                KeyElement("\u{2018}", extras: [.init("左", alignment: .topTrailing), .init("2018", alignment: .bottomTrailing)]),
+                                                                KeyElement("\u{FF07}", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing), .init("FF07", alignment: .bottomTrailing)]),
+                                                                KeyElement("\u{0060}", extras: [.init("重音符", alignment: .topTrailing), .init("0060", alignment: .bottomTrailing)])
                                                         ]
                                                 )
                                         )
@@ -197,28 +197,28 @@ struct MediumPadCantoneseNumericKeyboard: View {
                         HStack(spacing: 0) {
                                 MediumPadTransformKey(destination: .symbolic, side: .leading, coefficient: 1.75)
                                 Group {
-                                        PadAdvancedInputKey(keyLocale: .leading, upper: "§", keyModel: KeyModel(primary: KeyElement("%"), members: [KeyElement("%"), KeyElement("§"), KeyElement("％", header: PresetConstant.fullWidth), KeyElement("‰")]))
-                                        PadAdvancedInputKey(keyLocale: .leading, upper: "\u{2014}", keyModel: KeyModel(primary: KeyElement("-"), members: [KeyElement("-"), KeyElement("\u{2014}", footer: "2014"), KeyElement("\u{FF0D}", header: PresetConstant.fullWidth, footer: "FF0D"), KeyElement("•", header: "項目符號", footer: "2022")]))
-                                        PadAdvancedInputKey(keyLocale: .leading, upper: "+", keyModel: KeyModel(primary: KeyElement("～"), members: [KeyElement("～"), KeyElement("+"), KeyElement("~", header: PresetConstant.halfWidth)]))
-                                        PadAdvancedInputKey(keyLocale: .leading, upper: "=", keyModel: KeyModel(primary: KeyElement("⋯"), members: [KeyElement("⋯"), KeyElement("=")]))
-                                        PadAdvancedInputKey(keyLocale: .leading, upper: "·", keyModel: KeyModel(primary: KeyElement("、"), members: [KeyElement("、"), KeyElement("·", header: "間隔號", footer: "00B7"), KeyElement("､", header: PresetConstant.halfWidth)]))
-                                        PadAdvancedInputKey(keyLocale: .trailing, upper: "《", keyModel: KeyModel(primary: KeyElement("；"), members: [KeyElement("；"), KeyElement("《"), KeyElement(";", header: PresetConstant.halfWidth)]))
-                                        PadAdvancedInputKey(keyLocale: .trailing, upper: "》", keyModel: KeyModel(primary: KeyElement("："), members: [KeyElement("："), KeyElement("》"), KeyElement(":", header: PresetConstant.halfWidth)]))
+                                        PadAdvancedInputKey(keyLocale: .leading, upper: "§", keyModel: KeyUnit(primary: KeyElement("%"), members: [KeyElement("%"), KeyElement("§"), KeyElement("％", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]), KeyElement("‰")]))
+                                        PadAdvancedInputKey(keyLocale: .leading, upper: "\u{2014}", keyModel: KeyUnit(primary: KeyElement("-"), members: [KeyElement("-"), KeyElement("\u{2014}", extras: [.init("2014", alignment: .bottomTrailing)]), KeyElement("\u{FF0D}", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing), .init("FF0D", alignment: .bottomTrailing)]), KeyElement("•", extras: [.init("項目符號", alignment: .topTrailing), .init("2022", alignment: .bottomTrailing)])]))
+                                        PadAdvancedInputKey(keyLocale: .leading, upper: "+", keyModel: KeyUnit(primary: KeyElement("～"), members: [KeyElement("～"), KeyElement("+"), KeyElement("~", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)])]))
+                                        PadAdvancedInputKey(keyLocale: .leading, upper: "=", keyModel: KeyUnit(primary: KeyElement("⋯"), members: [KeyElement("⋯"), KeyElement("=")]))
+                                        PadAdvancedInputKey(keyLocale: .leading, upper: "·", keyModel: KeyUnit(primary: KeyElement("、"), members: [KeyElement("、"), KeyElement("·", extras: [.init("間隔號", alignment: .topTrailing), .init("00B7", alignment: .bottomTrailing)]), KeyElement("､", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)])]))
+                                        PadAdvancedInputKey(keyLocale: .trailing, upper: "《", keyModel: KeyUnit(primary: KeyElement("；"), members: [KeyElement("；"), KeyElement("《"), KeyElement(";", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)])]))
+                                        PadAdvancedInputKey(keyLocale: .trailing, upper: "》", keyModel: KeyUnit(primary: KeyElement("："), members: [KeyElement("："), KeyElement("》"), KeyElement(":", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)])]))
                                 }
-                                PadUpperLowerInputKey(keyLocale: .trailing, upper: "！", lower: "，", keyModel: KeyModel(primary: KeyElement("，"), members: [KeyElement("，"), KeyElement("！"), KeyElement(",", header: PresetConstant.halfWidth), KeyElement("!", header: PresetConstant.halfWidth)]))
+                                PadUpperLowerInputKey(keyLocale: .trailing, upper: "！", lower: "，", keyModel: KeyUnit(primary: KeyElement("，"), members: [KeyElement("，"), KeyElement("！"), KeyElement(",", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)]), KeyElement("!", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)])]))
                                 PadUpperLowerInputKey(
                                         keyLocale: .trailing,
                                         upper: "？",
                                         lower: "。",
-                                        keyModel: KeyModel(
+                                        keyModel: KeyUnit(
                                                 primary: KeyElement("。"),
                                                 members: [
                                                         KeyElement("。"),
                                                         KeyElement("？"),
-                                                        KeyElement("｡", header: PresetConstant.halfWidth),
-                                                        KeyElement("?", header: PresetConstant.halfWidth),
+                                                        KeyElement("｡", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)]),
+                                                        KeyElement("?", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)]),
                                                         KeyElement("."),
-                                                        KeyElement("．", header: PresetConstant.fullWidth),
+                                                        KeyElement("．", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
                                                 ]
                                         )
                                 )

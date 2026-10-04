@@ -17,7 +17,7 @@ struct T18EnhancedInputKey: View {
 
         private let side: HorizontalEdge
         private let virtual: VirtualInputKey?
-        private let unit: KeyModel
+        private let unit: KeyUnit
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme

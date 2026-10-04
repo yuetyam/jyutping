@@ -10,8 +10,8 @@ struct PadAdvancedInputKey: View {
         ///   - keyLocale: Key location, left half (leading) or right half (trailing).
         ///   - event: InputEvent
         ///   - upper: Key upper text for pulling down
-        ///   - keyModel: KeyModel
-        init(keyLocale: HorizontalEdge, event: VirtualInputKey? = nil, upper: String, keyModel: KeyModel) {
+        ///   - keyModel: KeyUnit
+        init(keyLocale: HorizontalEdge, event: VirtualInputKey? = nil, upper: String, keyModel: KeyUnit) {
                 self.keyLocale = keyLocale
                 self.event = event
                 self.upper = upper
@@ -21,7 +21,7 @@ struct PadAdvancedInputKey: View {
         private let keyLocale: HorizontalEdge
         private let event: VirtualInputKey?
         private let upper: String
-        private let keyModel: KeyModel
+        private let keyModel: KeyUnit
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
@@ -66,14 +66,14 @@ struct PadAdvancedInputKey: View {
                                                                                         .fill(selectedIndex == elementIndex ? Color.accentColor : Color.clear)
                                                                                 ZStack(alignment: .top) {
                                                                                         Color.clear
-                                                                                        Text(verbatim: element.header ?? String.space)
+                                                                                        Text(verbatim: element.extras.first(where: \.alignment.isTopEdge)?.text ?? String.space)
                                                                                                 .font(.labelCaption)
                                                                                                 .shallow()
                                                                                 }
                                                                                 .padding(2)
                                                                                 ZStack(alignment: .bottom) {
                                                                                         Color.clear
-                                                                                        Text(verbatim: element.footer ?? String.space)
+                                                                                        Text(verbatim: element.extras.first(where: \.alignment.isBottomEdge)?.text ?? String.space)
                                                                                                 .font(.labelCaption)
                                                                                                 .shallow()
                                                                                 }
@@ -107,7 +107,7 @@ struct PadAdvancedInputKey: View {
                                         } else {
                                                 ZStack(alignment: .topTrailing) {
                                                         Color.clear
-                                                        Text(verbatim: keyModel.primary.header ?? String.space)
+                                                        Text(verbatim: keyModel.primary.extras.first(where: \.alignment.isTopEdge)?.text ?? String.space)
                                                                 .textCase(textCase)
                                                                 .font(.labelCaption)
                                                                 .opacity(0.4)
@@ -116,7 +116,7 @@ struct PadAdvancedInputKey: View {
                                                 .padding(.horizontal, horizontalPadding + 3)
                                                 ZStack(alignment: .bottomTrailing) {
                                                         Color.clear
-                                                        Text(verbatim: keyModel.primary.footer ?? String.space)
+                                                        Text(verbatim: keyModel.primary.extras.first(where: \.alignment.isBottomEdge)?.text ?? String.space)
                                                                 .textCase(textCase)
                                                                 .font(.labelCaption)
                                                                 .opacity(0.4)

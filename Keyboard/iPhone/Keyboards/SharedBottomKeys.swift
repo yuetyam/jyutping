@@ -4,8 +4,8 @@ import CommonExtensions
 @MainActor
 struct SharedBottomKeys {
         static let comma = EnhancedInputKey(
-                keyLocale: .leading,
-                keyModel: KeyModel(
+                side: .leading,
+                unit: KeyUnit(
                         primary: KeyElement(String.comma),
                         members: [
                                 KeyElement(String.comma),
@@ -16,8 +16,8 @@ struct SharedBottomKeys {
                 )
         )
         static let period = EnhancedInputKey(
-                keyLocale: .trailing,
-                keyModel: KeyModel(
+                side: .trailing,
+                unit: KeyUnit(
                         primary: KeyElement(String.period),
                         members: [
                                 KeyElement(String.period),
@@ -28,8 +28,8 @@ struct SharedBottomKeys {
                 )
         )
         static let altPeriod = EnhancedInputKey(
-                keyLocale: .trailing,
-                keyModel: KeyModel(
+                side: .trailing,
+                unit: KeyUnit(
                         primary: KeyElement(String.period),
                         members: [
                                 KeyElement(String.period),
@@ -41,8 +41,8 @@ struct SharedBottomKeys {
         )
 
         static let cantoneseComma = EnhancedInputKey(
-                keyLocale: .leading,
-                keyModel: KeyModel(
+                side: .leading,
+                unit: KeyUnit(
                         primary: KeyElement(String.cantoneseComma),
                         members: [
                                 KeyElement(String.cantoneseComma),
@@ -53,8 +53,8 @@ struct SharedBottomKeys {
                 )
         )
         static let cantonesePeriod = EnhancedInputKey(
-                keyLocale: .trailing,
-                keyModel: KeyModel(
+                side: .trailing,
+                unit: KeyUnit(
                         primary: KeyElement(String.cantonesePeriod),
                         members: [
                                 KeyElement(String.cantonesePeriod),
@@ -65,8 +65,8 @@ struct SharedBottomKeys {
                 )
         )
         static let altCantoneseComma = EnhancedInputKey(
-                keyLocale: .trailing,
-                keyModel: KeyModel(
+                side: .trailing,
+                unit: KeyUnit(
                         primary: KeyElement(String.cantoneseComma),
                         members: [
                                 KeyElement(String.cantoneseComma),

@@ -17,11 +17,11 @@ struct SymbolicKeyboard: View {
                                 SymbolInputKey("{")
                                 SymbolInputKey("}")
                                 SymbolInputKey("#")
-                                EnhancedInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("%"), members: [KeyElement("%"), KeyElement("‰")]))
+                                EnhancedInputKey(side: .trailing, unit: KeyUnit(primary: KeyElement("%"), members: [KeyElement("%"), KeyElement("‰")]))
                                 SymbolInputKey("^")
                                 SymbolInputKey("*")
                                 SymbolInputKey("+")
-                                EnhancedInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("="), members: [KeyElement("="), KeyElement("≠"), KeyElement("≈")]))
+                                EnhancedInputKey(side: .trailing, unit: KeyUnit(primary: KeyElement("="), members: [KeyElement("="), KeyElement("≠"), KeyElement("≈")]))
                         }
                         HStack(spacing: 0) {
                                 SymbolInputKey("_")
@@ -45,14 +45,14 @@ struct SymbolicKeyboard: View {
                                 SymbolInputKey("™")
                                 SymbolInputKey("℠")
                                 EnhancedInputKey(
-                                        keyLocale: .trailing,
-                                        keyModel: KeyModel(
+                                        side: .trailing,
+                                        unit: KeyUnit(
                                                 primary: KeyElement("\u{0027}"),
                                                 members: [
-                                                        KeyElement("\u{0027}", footer: "0027"),
-                                                        KeyElement("\u{2019}", footer: "2019"),
-                                                        KeyElement("\u{2018}", footer: "2018"),
-                                                        KeyElement("\u{0060}", footer: "0060")
+                                                        KeyElement("\u{0027}", extras: [.init("0027", alignment: .bottomTrailing)]),
+                                                        KeyElement("\u{2019}", extras: [.init("2019", alignment: .bottomTrailing)]),
+                                                        KeyElement("\u{2018}", extras: [.init("2018", alignment: .bottomTrailing)]),
+                                                        KeyElement("\u{0060}", extras: [.init("0060", alignment: .bottomTrailing)])
                                                 ]
                                         )
                                 )

@@ -18,7 +18,7 @@ struct LeftKey: View {
                 KeyElement("！"),
                 KeyElement("？"),
                 KeyElement("、"),
-                KeyElement(",", header: "英文")
+                KeyElement(",", extras: [.init("英文", alignment: .topTrailing)])
         ]
         private let headerText: String = "！"
 
@@ -52,7 +52,7 @@ struct LeftKey: View {
                                                                                         .fill(selectedIndex == index ? Color.accentColor : Color.clear)
                                                                                 ZStack(alignment: .top) {
                                                                                         Color.interactiveClear
-                                                                                        Text(verbatim: element.header ?? String.space)
+                                                                                        Text(verbatim: element.extras.first(where: \.alignment.isTopEdge)?.text ?? String.space)
                                                                                                 .font(.labelCaption)
                                                                                                 .shallow()
                                                                                 }

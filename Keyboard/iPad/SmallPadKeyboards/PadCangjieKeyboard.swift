@@ -49,8 +49,8 @@ struct PadCangjieKeyboard: View {
                                         PadCangjieInputKey(.letterN)
                                         PadCangjieInputKey(.letterM)
                                 }
-                                PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("，"), members: [KeyElement("，"), KeyElement("！")])).hidden()
-                                PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("。"), members: [KeyElement("。"), KeyElement("？")])).hidden()
+                                PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyUnit(primary: KeyElement("，"), members: [KeyElement("，"), KeyElement("！")])).hidden()
+                                PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyUnit(primary: KeyElement("。"), members: [KeyElement("。"), KeyElement("？")])).hidden()
                                 PadShiftKey().hidden()
                         }
                         HStack(spacing: 0) {

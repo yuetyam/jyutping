@@ -7,154 +7,154 @@ struct CantoneseNumberRow: View {
         var body: some View {
                 HStack(spacing: 0) {
                         EnhancedInputKey(
-                                keyLocale: .leading,
-                                event: .number1,
-                                keyModel: KeyModel(
+                                side: .leading,
+                                virtual: .number1,
+                                unit: KeyUnit(
                                         primary: KeyElement("1"),
                                         members: [
                                                 KeyElement("1"),
-                                                KeyElement("１", header: PresetConstant.fullWidth),
+                                                KeyElement("１", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
                                                 KeyElement("壹"),
-                                                KeyElement("¹", header: "上標"),
-                                                KeyElement("₁", header: "下標"),
+                                                KeyElement("¹", extras: [.init("上標", alignment: .topTrailing)]),
+                                                KeyElement("₁", extras: [.init("下標", alignment: .topTrailing)]),
                                                 KeyElement("①")
                                         ]
                                 )
                         )
                         EnhancedInputKey(
-                                keyLocale: .leading,
-                                event: .number2,
-                                keyModel: KeyModel(
+                                side: .leading,
+                                virtual: .number2,
+                                unit: KeyUnit(
                                         primary: KeyElement("2"),
                                         members: [
                                                 KeyElement("2"),
-                                                KeyElement("２", header: PresetConstant.fullWidth),
+                                                KeyElement("２", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
                                                 KeyElement("貳"),
-                                                KeyElement("²", header: "上標"),
-                                                KeyElement("₂", header: "下標"),
+                                                KeyElement("²", extras: [.init("上標", alignment: .topTrailing)]),
+                                                KeyElement("₂", extras: [.init("下標", alignment: .topTrailing)]),
                                                 KeyElement("②")
                                         ]
                                 )
                         )
                         EnhancedInputKey(
-                                keyLocale: .leading,
-                                event: .number3,
-                                keyModel: KeyModel(
+                                side: .leading,
+                                virtual: .number3,
+                                unit: KeyUnit(
                                         primary: KeyElement("3"),
                                         members: [
                                                 KeyElement("3"),
-                                                KeyElement("３", header: PresetConstant.fullWidth),
+                                                KeyElement("３", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
                                                 KeyElement("叁"),
-                                                KeyElement("³", header: "上標"),
-                                                KeyElement("₃", header: "下標"),
+                                                KeyElement("³", extras: [.init("上標", alignment: .topTrailing)]),
+                                                KeyElement("₃", extras: [.init("下標", alignment: .topTrailing)]),
                                                 KeyElement("③")
                                         ]
                                 )
                         )
                         EnhancedInputKey(
-                                keyLocale: .leading,
-                                event: .number4,
-                                keyModel: KeyModel(
+                                side: .leading,
+                                virtual: .number4,
+                                unit: KeyUnit(
                                         primary: KeyElement("4"),
                                         members: [
                                                 KeyElement("4"),
-                                                KeyElement("４", header: PresetConstant.fullWidth),
+                                                KeyElement("４", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
                                                 KeyElement("肆"),
-                                                KeyElement("⁴", header: "上標"),
-                                                KeyElement("₄", header: "下標"),
+                                                KeyElement("⁴", extras: [.init("上標", alignment: .topTrailing)]),
+                                                KeyElement("₄", extras: [.init("下標", alignment: .topTrailing)]),
                                                 KeyElement("④")
                                         ]
                                 )
                         )
                         EnhancedInputKey(
-                                keyLocale: .leading,
-                                event: .number5,
-                                keyModel: KeyModel(
+                                side: .leading,
+                                virtual: .number5,
+                                unit: KeyUnit(
                                         primary: KeyElement("5"),
                                         members: [
                                                 KeyElement("5"),
-                                                KeyElement("５", header: PresetConstant.fullWidth),
+                                                KeyElement("５", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
                                                 KeyElement("伍"),
-                                                KeyElement("⁵", header: "上標"),
-                                                KeyElement("₅", header: "下標"),
+                                                KeyElement("⁵", extras: [.init("上標", alignment: .topTrailing)]),
+                                                KeyElement("₅", extras: [.init("下標", alignment: .topTrailing)]),
                                                 KeyElement("⑤")
                                         ]
                                 )
                         )
                         EnhancedInputKey(
-                                keyLocale: .trailing,
-                                event: .number6,
-                                keyModel: KeyModel(
+                                side: .trailing,
+                                virtual: .number6,
+                                unit: KeyUnit(
                                         primary: KeyElement("6"),
                                         members: [
                                                 KeyElement("6"),
-                                                KeyElement("６", header: PresetConstant.fullWidth),
+                                                KeyElement("６", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
                                                 KeyElement("陸"),
-                                                KeyElement("⁶", header: "上標"),
-                                                KeyElement("₆", header: "下標"),
+                                                KeyElement("⁶", extras: [.init("上標", alignment: .topTrailing)]),
+                                                KeyElement("₆", extras: [.init("下標", alignment: .topTrailing)]),
                                                 KeyElement("⑥")
                                         ]
                                 )
                         )
                         EnhancedInputKey(
-                                keyLocale: .trailing,
-                                event: .number7,
-                                keyModel: KeyModel(
+                                side: .trailing,
+                                virtual: .number7,
+                                unit: KeyUnit(
                                         primary: KeyElement("7"),
                                         members: [
                                                 KeyElement("7"),
-                                                KeyElement("７", header: PresetConstant.fullWidth),
+                                                KeyElement("７", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
                                                 KeyElement("柒"),
-                                                KeyElement("⁷", header: "上標"),
-                                                KeyElement("₇", header: "下標"),
+                                                KeyElement("⁷", extras: [.init("上標", alignment: .topTrailing)]),
+                                                KeyElement("₇", extras: [.init("下標", alignment: .topTrailing)]),
                                                 KeyElement("⑦")
                                         ]
                                 )
                         )
                         EnhancedInputKey(
-                                keyLocale: .trailing,
-                                event: .number8,
-                                keyModel: KeyModel(
+                                side: .trailing,
+                                virtual: .number8,
+                                unit: KeyUnit(
                                         primary: KeyElement("8"),
                                         members: [
                                                 KeyElement("8"),
-                                                KeyElement("８", header: PresetConstant.fullWidth),
+                                                KeyElement("８", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
                                                 KeyElement("捌"),
-                                                KeyElement("⁸", header: "上標"),
-                                                KeyElement("₈", header: "下標"),
+                                                KeyElement("⁸", extras: [.init("上標", alignment: .topTrailing)]),
+                                                KeyElement("₈", extras: [.init("下標", alignment: .topTrailing)]),
                                                 KeyElement("⑧")
                                         ]
                                 )
                         )
                         EnhancedInputKey(
-                                keyLocale: .trailing,
-                                event: .number9,
-                                keyModel: KeyModel(
+                                side: .trailing,
+                                virtual: .number9,
+                                unit: KeyUnit(
                                         primary: KeyElement("9"),
                                         members: [
                                                 KeyElement("9"),
-                                                KeyElement("９", header: PresetConstant.fullWidth),
+                                                KeyElement("９", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
                                                 KeyElement("玖"),
-                                                KeyElement("⁹", header: "上標"),
-                                                KeyElement("₉", header: "下標"),
+                                                KeyElement("⁹", extras: [.init("上標", alignment: .topTrailing)]),
+                                                KeyElement("₉", extras: [.init("下標", alignment: .topTrailing)]),
                                                 KeyElement("⑨")
                                         ]
                                 )
                         )
                         EnhancedInputKey(
-                                keyLocale: .trailing,
-                                event: .number0,
-                                keyModel: KeyModel(
+                                side: .trailing,
+                                virtual: .number0,
+                                unit: KeyUnit(
                                         primary: KeyElement("0"),
                                         members: [
                                                 KeyElement("0"),
-                                                KeyElement("０", header: PresetConstant.fullWidth),
+                                                KeyElement("０", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
                                                 KeyElement("零"),
-                                                KeyElement("⁰", header: "上標"),
-                                                KeyElement("₀", header: "下標"),
+                                                KeyElement("⁰", extras: [.init("上標", alignment: .topTrailing)]),
+                                                KeyElement("₀", extras: [.init("下標", alignment: .topTrailing)]),
                                                 KeyElement("⓪"),
                                                 KeyElement("拾"),
-                                                KeyElement("°", header: "度")
+                                                KeyElement("°", extras: [.init("度", alignment: .topTrailing)])
                                         ]
                                 )
                         )

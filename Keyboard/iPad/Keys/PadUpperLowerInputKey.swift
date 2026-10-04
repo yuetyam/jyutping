@@ -9,7 +9,7 @@ struct PadUpperLowerInputKey: View {
         ///   - upper: Key upper text
         ///   - lower: Key lower text
         ///   - keyModel: KeyElements
-        init(keyLocale: HorizontalEdge, upper: String, lower: String, keyModel: KeyModel) {
+        init(keyLocale: HorizontalEdge, upper: String, lower: String, keyModel: KeyUnit) {
                 self.keyLocale = keyLocale
                 self.upper = upper
                 self.lower = lower
@@ -19,7 +19,7 @@ struct PadUpperLowerInputKey: View {
         private let keyLocale: HorizontalEdge
         private let upper: String
         private let lower: String
-        private let keyModel: KeyModel
+        private let keyModel: KeyUnit
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
@@ -62,14 +62,14 @@ struct PadUpperLowerInputKey: View {
                                                                                         .fill(selectedIndex == elementIndex ? Color.accentColor : Color.clear)
                                                                                 ZStack(alignment: .top) {
                                                                                         Color.clear
-                                                                                        Text(verbatim: element.header ?? String.space)
+                                                                                        Text(verbatim: element.extras.first(where: \.alignment.isTopEdge)?.text ?? String.space)
                                                                                                 .font(.labelCaption)
                                                                                                 .shallow()
                                                                                 }
                                                                                 .padding(2)
                                                                                 ZStack(alignment: .bottom) {
                                                                                         Color.clear
-                                                                                        Text(verbatim: element.footer ?? String.space)
+                                                                                        Text(verbatim: element.extras.first(where: \.alignment.isBottomEdge)?.text ?? String.space)
                                                                                                 .font(.labelCaption)
                                                                                                 .shallow()
                                                                                 }

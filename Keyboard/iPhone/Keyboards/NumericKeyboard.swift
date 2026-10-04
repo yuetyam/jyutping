@@ -16,25 +16,25 @@ struct NumericKeyboard: View {
                         ABCNumberRow()
                         HStack(spacing: 0) {
                                 EnhancedInputKey(
-                                        keyLocale: .leading,
-                                        keyModel: KeyModel(
+                                        side: .leading,
+                                        unit: KeyUnit(
                                                 primary: KeyElement("-"),
                                                 members: [
                                                         KeyElement("-"),
-                                                        KeyElement("–", footer: "2013"),
-                                                        KeyElement("—", footer: "2014"),
-                                                        KeyElement("•", footer: "2022")
+                                                        KeyElement("–", extras: [.init("2013", alignment: .bottomTrailing)]),
+                                                        KeyElement("—", extras: [.init("2014", alignment: .bottomTrailing)]),
+                                                        KeyElement("•", extras: [.init("2022", alignment: .bottomTrailing)])
                                                 ]
                                         )
                                 )
-                                EnhancedInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("/"), members: [KeyElement("/"), KeyElement("\\")]))
+                                EnhancedInputKey(side: .leading, unit: KeyUnit(primary: KeyElement("/"), members: [KeyElement("/"), KeyElement("\\")]))
                                 SymbolInputKey(":")
                                 SymbolInputKey(";")
                                 SymbolInputKey("(")
                                 SymbolInputKey(")")
                                 EnhancedInputKey(
-                                        keyLocale: .trailing,
-                                        keyModel: KeyModel(
+                                        side: .trailing,
+                                        unit: KeyUnit(
                                                 primary: KeyElement("$"),
                                                 members: [
                                                         KeyElement("$"),
@@ -47,19 +47,19 @@ struct NumericKeyboard: View {
                                                 ]
                                         )
                                 )
-                                EnhancedInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("&"), members: [KeyElement("&"), KeyElement("§")]))
+                                EnhancedInputKey(side: .trailing, unit: KeyUnit(primary: KeyElement("&"), members: [KeyElement("&"), KeyElement("§")]))
                                 SymbolInputKey("@")
                                 EnhancedInputKey(
-                                        keyLocale: .trailing,
-                                        keyModel: KeyModel(
+                                        side: .trailing,
+                                        unit: KeyUnit(
                                                 primary: KeyElement("\u{0022}"),
                                                 members: [
-                                                        KeyElement("\u{0022}", footer: "0022"),
-                                                        KeyElement("\u{201D}", footer: "201D"),
-                                                        KeyElement("\u{201C}", footer: "201C"),
-                                                        KeyElement("\u{201E}", footer: "201E"),
-                                                        KeyElement("\u{00BB}", footer: "00BB"),
-                                                        KeyElement("\u{00AB}", footer: "00AB")
+                                                        KeyElement("\u{0022}", extras: [.init("0022", alignment: .bottomTrailing)]),
+                                                        KeyElement("\u{201D}", extras: [.init("201D", alignment: .bottomTrailing)]),
+                                                        KeyElement("\u{201C}", extras: [.init("201C", alignment: .bottomTrailing)]),
+                                                        KeyElement("\u{201E}", extras: [.init("201E", alignment: .bottomTrailing)]),
+                                                        KeyElement("\u{00BB}", extras: [.init("00BB", alignment: .bottomTrailing)]),
+                                                        KeyElement("\u{00AB}", extras: [.init("00AB", alignment: .bottomTrailing)])
                                                 ]
                                         )
                                 )
@@ -67,21 +67,21 @@ struct NumericKeyboard: View {
                         HStack(spacing: 0) {
                                 TransformKey(destination: .symbolic, coefficient: 1.3)
                                 Spacer()
-                                EnhancedInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("."), members: [KeyElement("."), KeyElement("…")]))
+                                EnhancedInputKey(side: .leading, unit: KeyUnit(primary: KeyElement("."), members: [KeyElement("."), KeyElement("…")]))
                                 SymbolInputKey(",")
-                                EnhancedInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("?"), members: [KeyElement("?"), KeyElement("¿")]))
-                                EnhancedInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("!"), members: [KeyElement("!"), KeyElement("¡")]))
-                                EnhancedInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("%"), members: [KeyElement("%"), KeyElement("‰")]))
+                                EnhancedInputKey(side: .leading, unit: KeyUnit(primary: KeyElement("?"), members: [KeyElement("?"), KeyElement("¿")]))
+                                EnhancedInputKey(side: .trailing, unit: KeyUnit(primary: KeyElement("!"), members: [KeyElement("!"), KeyElement("¡")]))
+                                EnhancedInputKey(side: .trailing, unit: KeyUnit(primary: KeyElement("%"), members: [KeyElement("%"), KeyElement("‰")]))
                                 SymbolInputKey("*")
                                 EnhancedInputKey(
-                                        keyLocale: .trailing,
-                                        keyModel: KeyModel(
+                                        side: .trailing,
+                                        unit: KeyUnit(
                                                 primary: KeyElement("\u{0027}"),
                                                 members: [
-                                                        KeyElement("\u{0027}", footer: "0027"),
-                                                        KeyElement("\u{2019}", footer: "2019"),
-                                                        KeyElement("\u{2018}", footer: "2018"),
-                                                        KeyElement("\u{0060}", footer: "0060")
+                                                        KeyElement("\u{0027}", extras: [.init("0027", alignment: .bottomTrailing)]),
+                                                        KeyElement("\u{2019}", extras: [.init("2019", alignment: .bottomTrailing)]),
+                                                        KeyElement("\u{2018}", extras: [.init("2018", alignment: .bottomTrailing)]),
+                                                        KeyElement("\u{0060}", extras: [.init("0060", alignment: .bottomTrailing)])
                                                 ]
                                         )
                                 )

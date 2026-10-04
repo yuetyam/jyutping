@@ -8,14 +8,6 @@ import CoreIME
 /// Drag tracking keeps the selector active when the finger moves outside the original button.
 struct EnhancedInputKey: View {
 
-        // TODO: Mark this initializer as deprecated
-        init(keyLocale: HorizontalEdge, widthUnitTimes: CGFloat = 1, event: VirtualInputKey? = nil, keyModel: KeyModel) {
-                self.side = keyLocale
-                self.widthCoefficient = widthUnitTimes
-                self.virtual = event
-                self.unit = keyModel
-        }
-
         /// Creates an EnhancedInputKey with primary content and selectable alternatives.
         ///
         /// - Parameters:
@@ -103,13 +95,13 @@ struct EnhancedInputKey: View {
                                                                                         .fill(isSelected ? Color.accentColor : Color.clear)
                                                                                 ZStack(alignment: .top) {
                                                                                         Color.interactiveClear
-                                                                                        Text(verbatim: element.header ?? String.space)
+                                                                                        Text(verbatim: element.extras.first(where: \.alignment.isTopEdge)?.text ?? String.space)
                                                                                                 .font(.labelCaption)
                                                                                                 .shallow()
                                                                                 }
                                                                                 ZStack(alignment: .bottom) {
                                                                                         Color.interactiveClear
-                                                                                        Text(verbatim: element.footer ?? String.space)
+                                                                                        Text(verbatim: element.extras.first(where: \.alignment.isBottomEdge)?.text ?? String.space)
                                                                                                 .font(.labelCaption)
                                                                                                 .shallow()
                                                                                 }
@@ -143,26 +135,6 @@ struct EnhancedInputKey: View {
                                                 .fill(isTouching ? activeColor : colorScheme.inputKeyColor)
                                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                                 .padding(insets)
-                                        if let header = unit.primary.header {
-                                                ZStack(alignment: .topTrailing) {
-                                                        Color.clear
-                                                        Text(verbatim: header)
-                                                                .textCase(textCase)
-                                                                .font(.labelCaption)
-                                                                .shallow()
-                                                }
-                                                .padding(insets.plused(horizontal: 2))
-                                        }
-                                        if let footer = unit.primary.footer {
-                                                ZStack(alignment: .bottomTrailing) {
-                                                        Color.clear
-                                                        Text(verbatim: footer)
-                                                                .textCase(textCase)
-                                                                .font(.labelCaption)
-                                                                .shallow()
-                                                }
-                                                .padding(insets.plused(horizontal: 2))
-                                        }
                                         ForEach(unit.primary.extras.indices, id: \.self) { index in
                                                 let extra = unit.primary.extras[index]
                                                 ZStack(alignment: extra.alignment) {
@@ -211,10 +183,10 @@ struct EnhancedInputKey: View {
                                         guard isSatisfied else { return }
                                         if distance > 0 {
                                                 // swipe from top to bottom
-                                                pulled = unit.primary.header ?? unit.primary.footer ?? unit.primary.extras.first(where: \.alignment.isTopEdge)?.text ?? unit.primary.extras.first(where: \.alignment.isBottomEdge)?.text
+                                                pulled = unit.primary.extras.first(where: \.alignment.isTopEdge)?.text ?? unit.primary.extras.first(where: \.alignment.isBottomEdge)?.text
                                         } else {
                                                 // swipe from bottom to top
-                                                pulled = unit.primary.footer ?? unit.primary.header ?? unit.primary.extras.first(where: \.alignment.isBottomEdge)?.text ?? unit.primary.extras.first(where: \.alignment.isTopEdge)?.text
+                                                pulled = unit.primary.extras.first(where: \.alignment.isBottomEdge)?.text ?? unit.primary.extras.first(where: \.alignment.isTopEdge)?.text
                                         }
                                 }
                         }

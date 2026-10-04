@@ -76,24 +76,24 @@ private struct PinyinThirdEnhancedLetterRow: View {
         var body: some View {
                 HStack(spacing: 0 ) {
                         EnhancedInputKey(
-                                keyLocale: .leading,
-                                event: .letterZ,
-                                keyModel: KeyModel(
-                                        primary: KeyElement("z", header: "%"),
+                                side: .leading,
+                                virtual: .letterZ,
+                                unit: KeyUnit(
+                                        primary: KeyElement("z", extras: [.init("%", alignment: .topTrailing)]),
                                         members: [
                                                 KeyElement("z"),
                                                 KeyElement("%"),
-                                                KeyElement("％", header: PresetConstant.fullWidth),
+                                                KeyElement("％", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
                                                 KeyElement("‰")
                                         ]
                                 )
                         )
-                        EnhancedInputKey(keyLocale: .leading, event: .letterX, keyModel: KeyModel(primary: KeyElement("x", header: "-"), members: [KeyElement("x"), KeyElement("-")]))
-                        EnhancedInputKey(keyLocale: .leading, event: .letterC, keyModel: KeyModel(primary: KeyElement("c", header: "～"), members: [KeyElement("c"), KeyElement("～"), KeyElement("~", header: PresetConstant.halfWidth)]))
+                        EnhancedInputKey(side: .leading, virtual: .letterX, unit: KeyUnit(primary: KeyElement("x", extras: [.init("-", alignment: .topTrailing)]), members: [KeyElement("x"), KeyElement("-")]))
+                        EnhancedInputKey(side: .leading, virtual: .letterC, unit: KeyUnit(primary: KeyElement("c", extras: [.init("～", alignment: .topTrailing)]), members: [KeyElement("c"), KeyElement("～"), KeyElement("~", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)])]))
                         PinyinSpecialInputKey()
-                        EnhancedInputKey(keyLocale: .leading, event: .letterB, keyModel: KeyModel(primary: KeyElement("b", header: "、"), members: [KeyElement("b"), KeyElement("、")]))
-                        EnhancedInputKey(keyLocale: .trailing, event: .letterN, keyModel: KeyModel(primary: KeyElement("n", header: "；"), members: [KeyElement("n"), KeyElement("；")]))
-                        EnhancedInputKey(keyLocale: .trailing, event: .letterM, keyModel: KeyModel(primary: KeyElement("m", header: "："), members: [KeyElement("m"), KeyElement("：")]))
+                        EnhancedInputKey(side: .leading, virtual: .letterB, unit: KeyUnit(primary: KeyElement("b", extras: [.init("、", alignment: .topTrailing)]), members: [KeyElement("b"), KeyElement("、")]))
+                        EnhancedInputKey(side: .trailing, virtual: .letterN, unit: KeyUnit(primary: KeyElement("n", extras: [.init("；", alignment: .topTrailing)]), members: [KeyElement("n"), KeyElement("；")]))
+                        EnhancedInputKey(side: .trailing, virtual: .letterM, unit: KeyUnit(primary: KeyElement("m", extras: [.init("：", alignment: .topTrailing)]), members: [KeyElement("m"), KeyElement("：")]))
                 }
         }
 }

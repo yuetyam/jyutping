@@ -7,14 +7,14 @@ struct PadExpansibleInputKey: View {
         /// Create a PadExpansibleInputKey
         /// - Parameters:
         ///   - keyLocale: Key location, left half (leading) or right half (trailing).
-        ///   - keyModel: KeyModel
-        init(keyLocale: HorizontalEdge, keyModel: KeyModel) {
+        ///   - keyModel: KeyUnit
+        init(keyLocale: HorizontalEdge, keyModel: KeyUnit) {
                 self.keyLocale = keyLocale
                 self.keyModel = keyModel
         }
 
         private let keyLocale: HorizontalEdge
-        private let keyModel: KeyModel
+        private let keyModel: KeyUnit
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
@@ -58,14 +58,14 @@ struct PadExpansibleInputKey: View {
                                                                                         .fill(selectedIndex == elementIndex ? Color.accentColor : Color.clear)
                                                                                 ZStack(alignment: .top) {
                                                                                         Color.clear
-                                                                                        Text(verbatim: element.header ?? String.space)
+                                                                                        Text(verbatim: element.extras.first(where: \.alignment.isTopEdge)?.text ?? String.space)
                                                                                                 .font(.labelCaption)
                                                                                                 .shallow()
                                                                                 }
                                                                                 .padding(2)
                                                                                 ZStack(alignment: .bottom) {
                                                                                         Color.clear
-                                                                                        Text(verbatim: element.footer ?? String.space)
+                                                                                        Text(verbatim: element.extras.first(where: \.alignment.isBottomEdge)?.text ?? String.space)
                                                                                                 .font(.labelCaption)
                                                                                                 .shallow()
                                                                                 }
@@ -94,7 +94,7 @@ struct PadExpansibleInputKey: View {
                                                 .padding(.horizontal, horizontalPadding)
                                         ZStack(alignment: .topTrailing) {
                                                 Color.clear
-                                                Text(verbatim: keyModel.primary.header ?? String.space)
+                                                Text(verbatim: keyModel.primary.extras.first(where: \.alignment.isTopEdge)?.text ?? String.space)
                                                         .textCase(textCase)
                                                         .font(.labelCaption)
                                                         .shallow()
@@ -103,7 +103,7 @@ struct PadExpansibleInputKey: View {
                                         .padding(.horizontal, horizontalPadding + 3)
                                         ZStack(alignment: .bottomTrailing) {
                                                 Color.clear
-                                                Text(verbatim: keyModel.primary.footer ?? String.space)
+                                                Text(verbatim: keyModel.primary.extras.first(where: \.alignment.isBottomEdge)?.text ?? String.space)
                                                         .textCase(textCase)
                                                         .font(.labelCaption)
                                                         .shallow()

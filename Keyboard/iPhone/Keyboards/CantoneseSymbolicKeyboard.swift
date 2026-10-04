@@ -12,91 +12,91 @@ struct CantoneseSymbolicKeyboard: View {
                         }
                         HStack(spacing: 0) {
                                 EnhancedInputKey(
-                                        keyLocale: .leading,
-                                        keyModel: KeyModel(primary: KeyElement("［"),
+                                        side: .leading,
+                                        unit: KeyUnit(primary: KeyElement("［"),
                                                            members: [
                                                                 KeyElement("［"),
-                                                                KeyElement("[", header: PresetConstant.halfWidth),
+                                                                KeyElement("[", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)]),
                                                                 KeyElement("【"),
                                                                 KeyElement("〖"),
                                                                 KeyElement("〔")
                                                            ])
                                 )
                                 EnhancedInputKey(
-                                        keyLocale: .leading,
-                                        keyModel: KeyModel(primary: KeyElement("］"),
+                                        side: .leading,
+                                        unit: KeyUnit(primary: KeyElement("］"),
                                                            members: [
                                                                 KeyElement("］"),
-                                                                KeyElement("]", header: PresetConstant.halfWidth),
+                                                                KeyElement("]", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)]),
                                                                 KeyElement("】"),
                                                                 KeyElement("〗"),
                                                                 KeyElement("〕")
                                                            ])
                                 )
                                 EnhancedInputKey(
-                                        keyLocale: .leading,
-                                        keyModel: KeyModel(primary: KeyElement("｛"),
+                                        side: .leading,
+                                        unit: KeyUnit(primary: KeyElement("｛"),
                                                            members: [
                                                                 KeyElement("｛"),
-                                                                KeyElement("{", header: PresetConstant.halfWidth)
+                                                                KeyElement("{", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)])
                                                            ])
                                 )
                                 EnhancedInputKey(
-                                        keyLocale: .leading,
-                                        keyModel: KeyModel(primary: KeyElement("｝"),
+                                        side: .leading,
+                                        unit: KeyUnit(primary: KeyElement("｝"),
                                                            members: [
                                                                 KeyElement("｝"),
-                                                                KeyElement("}", header: PresetConstant.halfWidth)
+                                                                KeyElement("}", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)])
                                                            ])
                                 )
                                 EnhancedInputKey(
-                                        keyLocale: .leading,
-                                        keyModel: KeyModel(primary: KeyElement("#"),
+                                        side: .leading,
+                                        unit: KeyUnit(primary: KeyElement("#"),
                                                            members: [
                                                                 KeyElement("#"),
-                                                                KeyElement("＃", header: PresetConstant.fullWidth)
+                                                                KeyElement("＃", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)])
                                                            ])
                                 )
                                 EnhancedInputKey(
-                                        keyLocale: .trailing,
-                                        keyModel: KeyModel(primary: KeyElement("%"),
+                                        side: .trailing,
+                                        unit: KeyUnit(primary: KeyElement("%"),
                                                            members: [
                                                                 KeyElement("%"),
-                                                                KeyElement("％", header: PresetConstant.fullWidth),
+                                                                KeyElement("％", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
                                                                 KeyElement("‰")
                                                            ])
                                 )
                                 EnhancedInputKey(
-                                        keyLocale: .trailing,
-                                        keyModel: KeyModel(primary: KeyElement("^"),
+                                        side: .trailing,
+                                        unit: KeyUnit(primary: KeyElement("^"),
                                                            members: [
                                                                 KeyElement("^"),
-                                                                KeyElement("＾", header: PresetConstant.fullWidth),
+                                                                KeyElement("＾", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
                                                            ])
                                 )
                                 EnhancedInputKey(
-                                        keyLocale: .trailing,
-                                        keyModel: KeyModel(primary: KeyElement("*"),
+                                        side: .trailing,
+                                        unit: KeyUnit(primary: KeyElement("*"),
                                                            members: [
                                                                 KeyElement("*"),
-                                                                KeyElement("＊", header: PresetConstant.fullWidth),
+                                                                KeyElement("＊", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
                                                                 KeyElement("×"),
                                                            ])
                                 )
                                 EnhancedInputKey(
-                                        keyLocale: .trailing,
-                                        keyModel: KeyModel(primary: KeyElement("+"),
+                                        side: .trailing,
+                                        unit: KeyUnit(primary: KeyElement("+"),
                                                            members: [
                                                                 KeyElement("+"),
-                                                                KeyElement("＋", header: PresetConstant.fullWidth),
+                                                                KeyElement("＋", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
                                                            ])
                                 )
                                 EnhancedInputKey(
-                                        keyLocale: .trailing,
-                                        keyModel: KeyModel(primary: KeyElement("="),
+                                        side: .trailing,
+                                        unit: KeyUnit(primary: KeyElement("="),
                                                            members: [
                                                                 KeyElement("="),
-                                                                KeyElement("＝", header: PresetConstant.fullWidth),
+                                                                KeyElement("＝", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
                                                                 KeyElement("≠"),
                                                                 KeyElement("≈")
                                                            ])
@@ -104,85 +104,85 @@ struct CantoneseSymbolicKeyboard: View {
                         }
                         HStack(spacing: 0) {
                                 EnhancedInputKey(
-                                        keyLocale: .leading,
-                                        keyModel: KeyModel(primary: KeyElement("_"),
+                                        side: .leading,
+                                        unit: KeyUnit(primary: KeyElement("_"),
                                                            members: [
                                                                 KeyElement("_"),
-                                                                KeyElement("＿", header: PresetConstant.fullWidth),
+                                                                KeyElement("＿", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
                                                            ])
                                 )
                                 SymbolInputKey("\u{2014}")
                                 EnhancedInputKey(
-                                        keyLocale: .leading,
-                                        keyModel: KeyModel(primary: KeyElement("\\"),
+                                        side: .leading,
+                                        unit: KeyUnit(primary: KeyElement("\\"),
                                                            members: [
                                                                 KeyElement("\\"),
-                                                                KeyElement("＼", header: PresetConstant.fullWidth),
+                                                                KeyElement("＼", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
                                                            ])
                                 )
                                 EnhancedInputKey(
-                                        keyLocale: .leading,
-                                        keyModel: KeyModel(primary: KeyElement("｜"),
+                                        side: .leading,
+                                        unit: KeyUnit(primary: KeyElement("｜"),
                                                            members: [
                                                                 KeyElement("｜"),
-                                                                KeyElement("|", header: PresetConstant.halfWidth),
+                                                                KeyElement("|", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)]),
                                                            ])
                                 )
                                 EnhancedInputKey(
-                                        keyLocale: .leading,
-                                        keyModel: KeyModel(primary: KeyElement("～"),
+                                        side: .leading,
+                                        unit: KeyUnit(primary: KeyElement("～"),
                                                            members: [
                                                                 KeyElement("～"),
-                                                                KeyElement("~", header: PresetConstant.halfWidth),
+                                                                KeyElement("~", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)]),
                                                            ])
                                 )
                                 EnhancedInputKey(
-                                        keyLocale: .trailing,
-                                        keyModel: KeyModel(primary: KeyElement("《"),
+                                        side: .trailing,
+                                        unit: KeyUnit(primary: KeyElement("《"),
                                                            members: [
                                                                 KeyElement("《"),
                                                                 KeyElement("〈"),
-                                                                KeyElement("<", header: PresetConstant.halfWidth),
-                                                                KeyElement("＜", header: PresetConstant.fullWidth)
+                                                                KeyElement("<", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)]),
+                                                                KeyElement("＜", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)])
                                                            ])
                                 )
                                 EnhancedInputKey(
-                                        keyLocale: .trailing,
-                                        keyModel: KeyModel(primary: KeyElement("》"),
+                                        side: .trailing,
+                                        unit: KeyUnit(primary: KeyElement("》"),
                                                            members: [
                                                                 KeyElement("》"),
                                                                 KeyElement("〉"),
-                                                                KeyElement(">", header: PresetConstant.halfWidth),
-                                                                KeyElement("＞", header: PresetConstant.fullWidth)
+                                                                KeyElement(">", extras: [.init(PresetConstant.halfWidth, alignment: .topTrailing)]),
+                                                                KeyElement("＞", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)])
                                                            ])
                                 )
                                 EnhancedInputKey(
-                                        keyLocale: .trailing,
-                                        keyModel: KeyModel(primary: KeyElement("¥"),
+                                        side: .trailing,
+                                        unit: KeyUnit(primary: KeyElement("¥"),
                                                            members: [
                                                                 KeyElement("¥"),
-                                                                KeyElement("￥", header: PresetConstant.fullWidth)
+                                                                KeyElement("￥", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)])
                                                            ])
                                 )
                                 EnhancedInputKey(
-                                        keyLocale: .trailing,
-                                        keyModel: KeyModel(primary: KeyElement("&"),
+                                        side: .trailing,
+                                        unit: KeyUnit(primary: KeyElement("&"),
                                                            members: [
                                                                 KeyElement("&"),
-                                                                KeyElement("＆", header: PresetConstant.fullWidth),
+                                                                KeyElement("＆", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing)]),
                                                                 KeyElement("§"),
                                                            ])
                                 )
                                 EnhancedInputKey(
-                                        keyLocale: .trailing,
-                                        keyModel: KeyModel(primary: KeyElement("\u{00B7}"),
+                                        side: .trailing,
+                                        unit: KeyUnit(primary: KeyElement("\u{00B7}"),
                                                            members: [
-                                                                KeyElement("\u{00B7}", header: "間隔號", footer: "00B7"),
-                                                                KeyElement("\u{2022}", header: "項目符號", footer: "2022"),
-                                                                KeyElement("\u{00B0}", header: "度"),
-                                                                KeyElement("\u{2027}", header: "連字點", footer: "2027"),
-                                                                KeyElement("\u{FF65}", header: "半寬中點", footer: "FF65"),
-                                                                KeyElement("\u{30FB}", header: "全寬中點", footer: "30FB")
+                                                                KeyElement("\u{00B7}", extras: [.init("間隔號", alignment: .topTrailing), .init("00B7", alignment: .bottomTrailing)]),
+                                                                KeyElement("\u{2022}", extras: [.init("項目符號", alignment: .topTrailing), .init("2022", alignment: .bottomTrailing)]),
+                                                                KeyElement("\u{00B0}", extras: [.init("度", alignment: .topTrailing)]),
+                                                                KeyElement("\u{2027}", extras: [.init("連字點", alignment: .topTrailing), .init("2027", alignment: .bottomTrailing)]),
+                                                                KeyElement("\u{FF65}", extras: [.init("半寬中點", alignment: .topTrailing), .init("FF65", alignment: .bottomTrailing)]),
+                                                                KeyElement("\u{30FB}", extras: [.init("全寬中點", alignment: .topTrailing), .init("30FB", alignment: .bottomTrailing)])
                                                            ])
                                 )
                         }
@@ -190,11 +190,11 @@ struct CantoneseSymbolicKeyboard: View {
                                 TransformKey(destination: .numeric, coefficient: 1.3)
                                 Spacer()
                                 EnhancedInputKey(
-                                        keyLocale: .leading,
-                                        keyModel: KeyModel(primary: KeyElement("\u{2026}"),
+                                        side: .leading,
+                                        unit: KeyUnit(primary: KeyElement("\u{2026}"),
                                                            members: [
-                                                                KeyElement("\u{2026}", footer: "2026"),
-                                                                KeyElement("\u{22EF}", footer: "22EF")
+                                                                KeyElement("\u{2026}", extras: [.init("2026", alignment: .bottomTrailing)]),
+                                                                KeyElement("\u{22EF}", extras: [.init("22EF", alignment: .bottomTrailing)])
                                                            ])
                                 )
                                 SymbolInputKey("©")
@@ -203,14 +203,14 @@ struct CantoneseSymbolicKeyboard: View {
                                 SymbolInputKey("™")
                                 SymbolInputKey("℠")
                                 EnhancedInputKey(
-                                        keyLocale: .trailing,
-                                        keyModel: KeyModel(primary: KeyElement("\u{0027}"),
+                                        side: .trailing,
+                                        unit: KeyUnit(primary: KeyElement("\u{0027}"),
                                                            members: [
-                                                                KeyElement("\u{0027}", footer: "0027"),
-                                                                KeyElement("\u{FF07}", header: PresetConstant.fullWidth, footer: "FF07"),
-                                                                KeyElement("\u{2019}", header: "右", footer: "2019"),
-                                                                KeyElement("\u{2018}", header: "左", footer: "2018"),
-                                                                KeyElement("\u{0060}", header: "重音符", footer: "0060")
+                                                                KeyElement("\u{0027}", extras: [.init("0027", alignment: .bottomTrailing)]),
+                                                                KeyElement("\u{FF07}", extras: [.init(PresetConstant.fullWidth, alignment: .topTrailing), .init("FF07", alignment: .bottomTrailing)]),
+                                                                KeyElement("\u{2019}", extras: [.init("右", alignment: .topTrailing), .init("2019", alignment: .bottomTrailing)]),
+                                                                KeyElement("\u{2018}", extras: [.init("左", alignment: .topTrailing), .init("2018", alignment: .bottomTrailing)]),
+                                                                KeyElement("\u{0060}", extras: [.init("重音符", alignment: .topTrailing), .init("0060", alignment: .bottomTrailing)])
                                                            ])
                                 )
                                 Spacer()

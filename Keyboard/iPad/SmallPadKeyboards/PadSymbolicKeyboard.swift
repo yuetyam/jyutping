@@ -19,7 +19,7 @@ struct PadSymbolicKeyboard: View {
                                         PadSymbolInputKey("7")
                                         PadSymbolInputKey("8")
                                         PadSymbolInputKey("9")
-                                        PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("0"), members: [KeyElement("0"), KeyElement("°")]))
+                                        PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyUnit(primary: KeyElement("0"), members: [KeyElement("0"), KeyElement("°")]))
                                 }
                                 PadBackspaceKey(widthUnitTimes: 1)
                         }
