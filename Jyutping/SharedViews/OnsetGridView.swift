@@ -41,10 +41,7 @@ struct CompactOnsetGridView: View {
 private struct OnsetElementCell: View {
 
         @Environment(\.horizontalSizeClass) private var horizontalSize
-
-        #if os(iOS)
         @Environment(\.colorScheme) private var colorScheme
-        #endif
 
         init(onset: String, ipa: String, word: String, syllable: String, poa: String = String.empty, moa: String = String.empty) {
                 self.onset = onset

@@ -173,7 +173,7 @@ struct LeftKey: View {
                                 } else {
                                         context.operate(.input(String.cantoneseComma))
                                 }
-                         }
+                        }
                 )
                 .task(id: isTouching) {
                         guard isTouching else { return }

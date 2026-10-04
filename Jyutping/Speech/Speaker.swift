@@ -28,13 +28,23 @@ struct Speaker: View {
         var body: some View {
                 Button(action: handleTap) {
                         ZStack {
-                                if #available(iOS 17.0, macOS 14.0, *) {
+                                if #available(iOS 17.0, macOS 14.0, visionOS 1.0, *) {
                                         Circle()
                                                 #if os(macOS)
                                                 .fill(Color.textBackgroundColor.opacity(0.66))
                                                 #else
                                                 .fill(Material.regular)
                                                 #endif
+                                } else {
+                                        Circle()
+                                                #if os(macOS)
+                                                .fill(Color.textBackgroundColor.opacity(0.66))
+                                                #else
+                                                .fill(Material.regular)
+                                                #endif
+                                                .opacity(isSpeaking ? 0 : 1)
+                                }
+                                if #available(iOS 17.0, macOS 14.0, visionOS 1.0, *) {
                                         Image.speaking
                                                 .resizable()
                                                 .scaledToFit()
@@ -44,13 +54,6 @@ struct Speaker: View {
                                                 .padding(.trailing, speakingTrailingPadding)
                                                 .opacity(isSpeaking ? 1 : 0)
                                 } else {
-                                        Circle()
-                                                #if os(macOS)
-                                                .fill(Color.textBackgroundColor.opacity(0.66))
-                                                #else
-                                                .fill(Material.regular)
-                                                #endif
-                                                .opacity(isSpeaking ? 0 : 1)
                                         Image.speaking
                                                 .resizable()
                                                 .scaledToFit()

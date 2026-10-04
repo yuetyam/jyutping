@@ -4,7 +4,7 @@ import CommonExtensions
 
 struct AppMaster {
 
-        #if os(iOS)
+        #if canImport(UIKit)
         @MainActor
         static func open(appUrl: URL, webUrl: URL) {
                 UIApplication.shared.open(appUrl) { success in
@@ -16,9 +16,9 @@ struct AppMaster {
         #endif
 
         static func copy(_ content: String) {
-                #if os(iOS)
+                #if canImport(UIKit)
                 UIPasteboard.general.string = content
-                #else
+                #elseif canImport(AppKit)
                 _ = NSPasteboard.general.clearContents()
                 _ = NSPasteboard.general.setString(content, forType: .string)
                 #endif

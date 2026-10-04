@@ -174,7 +174,7 @@ struct RightKey: View {
                                 } else {
                                         context.operate(.input(String.cantonesePeriod))
                                 }
-                         }
+                        }
                 )
                 .task(id: isTouching) {
                         guard isTouching else { return }

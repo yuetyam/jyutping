@@ -84,31 +84,31 @@ struct HomeView: View {
 
                                 Group {
                                         Section {
-                                                HeadlineLabel(title: "Shared.Guide.AbbreviatedInput.Heading", icon: "sparkles", iconTint: .green)
+                                                Label("Shared.Guide.AbbreviatedInput.Heading", systemImage: "sparkles").labelStyle(.headline(iconColor: .green))
                                                 Text("Shared.Guide.AbbreviatedInput.Body.Row1")
                                                 Text("Shared.Guide.AbbreviatedInput.Body.Row2")
                                         }
                                         Section {
-                                                HeadlineLabel(title: "Shared.Guide.PinyinReverseLookup.Heading", icon: "r.square", iconTint: .red)
+                                                Label("Shared.Guide.PinyinReverseLookup.Heading", systemImage: "r.square").labelStyle(.headline(iconColor: .red))
                                                 Text("Shared.Guide.PinyinReverseLookup.Body")
                                         }
                                         Section {
-                                                HeadlineLabel(title: "Shared.Guide.CangjieReverseLookup.Heading", icon: "v.square", iconTint: .blue)
+                                                Label("Shared.Guide.CangjieReverseLookup.Heading", systemImage: "v.square").labelStyle(.headline(iconColor: .blue))
                                                 Text("Shared.Guide.CangjieReverseLookup.Body")
                                         } footer: {
                                                 Text("Shared.Guide.CangjieReverseLookup.Note").textCase(nil)
                                         }
                                         Section {
-                                                HeadlineLabel(title: "Shared.Guide.StrokeReverseLookup.Heading", icon: "x.square", iconTint: .purple)
+                                                Label("Shared.Guide.StrokeReverseLookup.Heading", systemImage: "x.square").labelStyle(.headline(iconColor: .purple))
                                                 Text("Shared.Guide.StrokeReverseLookup.Body")
                                                 Text("Shared.Guide.StrokeReverseLookup.Examples").monospaced()
                                         }
                                         Section {
-                                                HeadlineLabel(title: "Shared.Guide.StructureReverseLookup.Heading", icon: "q.square", iconTint: .mint)
+                                                Label("Shared.Guide.StructureReverseLookup.Heading", systemImage: "q.square").labelStyle(.headline(iconColor: .mint))
                                                 Text("Shared.Guide.StructureReverseLookup.Body")
                                         }
                                         Section {
-                                                HeadlineLabel(title: "Shared.Guide.TonesInput.Heading", icon: "bell", iconTint: .orange)
+                                                Label("Shared.Guide.TonesInput.Heading", systemImage: "bell").labelStyle(.headline(iconColor: .orange))
                                                 Text("Shared.Guide.TonesInput.Body").monospaced()
                                                 Text("Shared.Guide.TonesInput.Examples")
                                         }

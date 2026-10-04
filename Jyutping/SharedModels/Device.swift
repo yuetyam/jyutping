@@ -37,8 +37,10 @@ struct Device {
         static let modelName: String = {
                 #if os(iOS)
                 return UIDevice.modelName
-                #else
+                #elseif os(macOS)
                 return "Mac"
+                #else
+                return "Unknown Device"
                 #endif
         }()
 
