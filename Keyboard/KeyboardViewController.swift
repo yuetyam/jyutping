@@ -6,7 +6,7 @@ import CoreIME
 final class KeyboardViewController: UIInputViewController, ObservableObject {
 
         private func layoutMotherBoard() {
-                let screenSize: CGSize = UIScreen.main.bounds.size
+                let screenSize: CGSize = fetchAvailableSize()
                 adoptKeyboardInterface(screenSize: screenSize)
                 updateTopBarHeight()
                 let rowHeight: CGFloat = keyboardInterface.keyHeightUnit(of: screenSize) + keyHeightOffset
@@ -36,7 +36,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 view.setNeedsLayout()
         }
         private func prepareKeyboard() {
-                let screenSize: CGSize = UIScreen.main.bounds.size
+                let screenSize: CGSize = fetchAvailableSize()
                 adoptKeyboardInterface(screenSize: screenSize)
                 updateKeyboardSize(screenSize: screenSize)
                 responsiveKeyboard()
@@ -1248,35 +1248,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         @Published private(set) var nineKeyWidthUnit: CGFloat = 88
         @Published private(set) var heightUnit: CGFloat = 56
         private func updateKeyboardSize(screenSize: CGSize? = nil) {
-                let screenSize: CGSize = screenSize ?? UIScreen.main.bounds.size
-                /*
-                let newKeyboardWidth: CGFloat = {
-                        switch keyboardInterface {
-                        case .phoneLandscape:
-                                // Screen Aspect Ratio
-                                // iPhone with Face ID would be 19.5:9
-                                // iPhone with Touch ID would be 16:9
-                                let aspectRatio: CGFloat = UIScreen.main.nativeBounds.height / UIScreen.main.nativeBounds.width
-                                let horizontalInset: CGFloat = (aspectRatio > 2) ? (117 * 2) : 0
-                                return screenSize.width - horizontalInset
-                        case .phoneOnPadPortrait:
-                                let small: CGFloat = 375 // Same as iPhone SE3
-                                let large: CGFloat = 390 // Same as iPhone 14
-                                let isLargeScreenPad: Bool = min(screenSize.width, screenSize.height) > 840
-                                return isLargeScreenPad ? large : small
-                        case .phoneOnPadLandscape:
-                                let small: CGFloat = 667 // Same as iPhone SE3
-                                let large: CGFloat = 844 // Same as iPhone 14
-                                let horizontalInset: CGFloat = 75 * 2
-                                let isLargeScreenPad: Bool = min(screenSize.width, screenSize.height) > 840
-                                return isLargeScreenPad ? (large - horizontalInset) : small
-                        case .padFloating:
-                                return 320 // Same as iPhone SE1
-                        default:
-                                return screenSize.width
-                        }
-                }()
-                */
+                let screenSize: CGSize = screenSize ?? fetchAvailableSize()
                 keyboardWidth = view.frame.width
                 widthUnit = keyboardWidth / keyboardInterface.coefficient
                 nineKeyWidthUnit = keyboardWidth / 5.0
@@ -1287,6 +1259,14 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 keyboardHeight = (heightUnit * rowCount) + topBarHeight
                 cachedKeyboardHeight = keyboardHeight
                 updateViewHeightConstraint()
+        }
+        private func fetchAvailableSize() -> CGSize {
+                guard let scene = view.window?.windowScene else { return UIScreen.main.bounds.size}
+                if #available(iOSApplicationExtension 26.0, *) {
+                        return scene.effectiveGeometry.coordinateSpace.bounds.size
+                } else {
+                        return scene.coordinateSpace.bounds.size
+                }
         }
 
         private lazy var cachedKeyboardHeight: CGFloat = 284
@@ -1318,14 +1298,14 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         guard isCompactHorizontal.negative else { return true }
                         let viewWidth = view.frame.width
                         guard viewWidth > 100 else { return false }
-                        let screenSize: CGSize = screenSize ?? UIScreen.main.bounds.size
+                        let screenSize: CGSize = screenSize ?? fetchAvailableSize()
                         return viewWidth < (screenSize.width * 0.75)
                 }()
                 guard isFloatingOnPad.negative else { return .padFloating }
                 switch (isRunningOnPad, isPadInterface) {
                 case (true, true):
                         // iPad
-                        let screenSize: CGSize = screenSize ?? UIScreen.main.bounds.size
+                        let screenSize: CGSize = screenSize ?? fetchAvailableSize()
                         let minDimension: CGFloat = min(screenSize.width, screenSize.height)
                         let isPortrait: Bool = screenSize.width < (minDimension + 2)
                         if minDimension > 840 {
@@ -1381,7 +1361,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         func updateKeyHeightOffset(to offset: CGFloat) {
                 keyHeightOffset = offset
                 updateTopBarHeight()
-                let screenSize: CGSize = UIScreen.main.bounds.size
+                let screenSize: CGSize = fetchAvailableSize()
                 let baseHeight = keyboardInterface.keyHeightUnit(of: screenSize)
                 heightUnit = baseHeight + offset
                 let rowCount: CGFloat = (keyboardInterface.isLargePad || Options.needsNumberRow) ? 5 : 4

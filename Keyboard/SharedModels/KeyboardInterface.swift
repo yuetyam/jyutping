@@ -113,7 +113,11 @@ extension KeyboardInterface {
                                 // iPhone 14 Pro, 15, 15 Pro, 16 (393 x 852)
                                 // iPhone 16 Pro, 17, 17 Pro, 18 Pro (402 x 874)
                                 return 54
-                        } else if minDimension < 425 {
+                        } else {
+                                return 56
+                        }
+                        /*
+                        else if minDimension < 425 {
                                 // iPhone 8 Plus (414 x 836)
                                 // iPhone Xr, Xs Max, 11, 11 Pro Max (414 x 896)
                                 // iPhone Air (420 x 912)
@@ -127,6 +131,7 @@ extension KeyboardInterface {
                                 let extra: Int = Int(minDimension - 300) / 20
                                 return CGFloat(50 + extra)
                         }
+                        */
                 }
         }
 }

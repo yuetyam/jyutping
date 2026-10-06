@@ -5,6 +5,7 @@ import CommonExtensions
 struct ToolBar: View {
 
         @EnvironmentObject private var context: KeyboardViewController
+        @Environment(\.displayScale) private var displayScale
 
         private let height: CGFloat = PresetConstant.toolBarHeight
 
@@ -51,7 +52,7 @@ struct ToolBar: View {
                         } label: {
                                 ZStack {
                                         Color.interactiveClear
-                                        Image.smiley
+                                        Image(uiImage: UIImage.emojiSmiley.cropped(scale: displayScale)?.withRenderingMode(.alwaysTemplate) ?? UIImage.emojiSmiley)
                                                 .resizable()
                                                 .scaledToFit()
                                                 .frame(width: 22 + (extra * 2), height: 22 + (extra * 2))

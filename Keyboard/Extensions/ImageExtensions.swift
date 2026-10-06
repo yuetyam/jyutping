@@ -24,21 +24,18 @@ extension Image {
 
         static let speaker: Image = Image(systemName: "speaker.wave.2")
         static let speaking: Image = Image(systemName: "speaker.wave.3.fill")
-
-        /// Emoji Smiley Face
-        @MainActor static let smiley: Image = Image(uiImage: UIImage.emojiSmiley.cropped()?.withRenderingMode(.alwaysTemplate) ?? UIImage.emojiSmiley)
 }
 
 extension UIImage {
 
         @MainActor
-        func cropped() -> UIImage? {
+        func cropped(scale: CGFloat? = nil) -> UIImage? {
                 guard let sourceCGImage = self.cgImage else { return nil }
                 let sourceSize = self.size
                 let sideLength = min(sourceSize.width, sourceSize.height)
                 let xOffset = (sourceSize.width - sideLength) / 2.0
                 let yOffset = (sourceSize.height - sideLength) / 2.0
-                let scale = UIScreen.main.scale
+                let scale: CGFloat = scale ?? UITraitCollection.current.displayScale
                 let cropRect = CGRect(x: xOffset * scale,
                                       y: yOffset * scale,
                                       width: sideLength * scale,

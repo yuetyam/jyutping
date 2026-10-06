@@ -2,6 +2,8 @@ import SwiftUI
 
 struct EmojiIndicator: View {
 
+        @Environment(\.displayScale) private var displayScale
+
         init(index: Int, imageName: String, action: @escaping () -> Void = {}) {
                 self.index = index
                 self.imageName = imageName
@@ -33,7 +35,7 @@ struct EmojiIndicator: View {
                         ZStack {
                                 Color.interactiveClear
                                 if isCustomImage {
-                                        Image(uiImage: UIImage(named: imageName)?.cropped()?.withRenderingMode(.alwaysTemplate) ?? UIImage())
+                                        Image(uiImage: UIImage(named: imageName)?.cropped(scale: displayScale)?.withRenderingMode(.alwaysTemplate) ?? UIImage())
                                                 .resizable()
                                                 .scaledToFit()
                                                 .padding(.top, topInset)
