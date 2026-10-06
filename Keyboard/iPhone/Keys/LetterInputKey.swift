@@ -16,23 +16,20 @@ struct LetterInputKey: View {
         var body: some View {
                 let keyWidth: CGFloat = context.widthUnit
                 let keyHeight: CGFloat = context.heightUnit
-                let isPhoneLandscape: Bool = context.keyboardInterface.isPhoneLandscape
-                let verticalPadding: CGFloat = isPhoneLandscape ? 3 : 6
-                let horizontalPadding: CGFloat = isPhoneLandscape ? 6 : 3
-                // let baseWidth: CGFloat = keyWidth - (horizontalPadding * 2)
-                let baseHeight: CGFloat = keyHeight - (verticalPadding * 2)
-                let shapeHeight: CGFloat = isPhoneLandscape ? (baseHeight / (2 / 6.0)) : baseHeight / ((2.5 / 6.0))
-                let curveHeight: CGFloat = isPhoneLandscape ? (shapeHeight / 3.0) : (shapeHeight / 6.0)
-                let previewBottomOffset: CGFloat = (baseHeight * 2) + (curveHeight * 1.5)
+                let keyboardInterface = context.keyboardInterface
+                let insets = keyboardInterface.keyShapeInsets
+                let previewBottomOffset = keyboardInterface.previewBottomOffset(keyWidth: keyWidth, keyHeight: keyHeight, insets: insets)
                 let shouldPreviewKey: Bool = Options.keyTextPreview
                 let activeColor: Color = shouldPreviewKey ? colorScheme.inputKeyColor : colorScheme.activeInputKeyColor
+                let displayForm = KeyDisplayForm.responsive(isInteracting: isTouching, isLongPressing: false, shouldPreview: shouldPreviewKey)
                 let shouldShowLowercaseKeys: Bool = Options.showLowercaseKeys && context.keyboardCase.isLowercased
                 let textCase: Text.Case = shouldShowLowercaseKeys ? .lowercase : .uppercase
                 let keyTextBottomInset: CGFloat = shouldShowLowercaseKeys ? 3 : 0
                 Button(action: {}) {
                         ZStack {
                                 Color.interactiveClear
-                                if (shouldPreviewKey && isTouching) {
+                                switch displayForm {
+                                case .previewing, .expanding:
                                         BubbleShape()
                                                 .fill(colorScheme.previewBubbleColor)
                                                 .shadow(color: .shadowGray, radius: 1)
@@ -42,14 +39,12 @@ struct LetterInputKey: View {
                                                                 .font(.largeTitle)
                                                                 .padding(.bottom, previewBottomOffset)
                                                 }
-                                                .padding(.vertical, verticalPadding)
-                                                .padding(.horizontal, horizontalPadding)
-                                } else {
+                                                .padding(insets)
+                                case .normal, .reflecting:
                                         RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
                                                 .fill(isTouching ? activeColor : colorScheme.inputKeyColor)
                                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                                .padding(.vertical, verticalPadding)
-                                                .padding(.horizontal, horizontalPadding)
+                                                .padding(insets)
                                         Text(verbatim: virtual.text)
                                                 .textCase(textCase)
                                                 .font(.letterCompact)
