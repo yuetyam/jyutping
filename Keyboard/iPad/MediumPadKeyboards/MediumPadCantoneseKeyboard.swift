@@ -79,7 +79,7 @@ struct MediumPadCantoneseKeyboard: View {
                                 MediumPadShiftKey(side: .trailing, coefficient: 1.25)
                         }
                         HStack(spacing: 0) {
-                                if context.needsInputModeSwitchKey {
+                                if context.needsGlobeKey {
                                         MediumPadGlobeKey(widthUnitTimes: 1.5)
                                 } else {
                                         MediumPadTransformKey(destination: .numeric, side: .leading, coefficient: 1.5)

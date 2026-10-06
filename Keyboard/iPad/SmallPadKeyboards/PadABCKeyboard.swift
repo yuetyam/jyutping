@@ -155,7 +155,7 @@ struct PadABCKeyboard: View {
                                 PadShiftKey()
                         }
                         HStack(spacing: 0) {
-                                if context.needsInputModeSwitchKey {
+                                if context.needsGlobeKey {
                                         PadGlobeKey(widthUnitTimes: 1.5)
                                 } else {
                                         PadTransformKey(destination: .numeric, coefficient: 1.5)

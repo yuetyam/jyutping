@@ -39,6 +39,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let screenSize: CGSize = fetchAvailableSize()
                 adoptKeyboardInterface(screenSize: screenSize)
                 updateKeyboardSize(screenSize: screenSize)
+                updateGlobeKeyState()
                 responsiveKeyboard()
                 InputMemory.prepare()
                 Engine.prepare()
@@ -99,6 +100,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 guard isKeyboardPrepared else { return }
                 adoptKeyboardInterface()
                 updateKeyboardSize()
+                updateGlobeKeyState()
         }
 
         override func viewWillDisappear(_ animated: Bool) {
@@ -1241,6 +1243,20 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         }
 
         private(set) lazy var isRunningOnPhone: Bool = UIDevice.current.userInterfaceIdiom == .phone
+
+        // iPhone Duo
+        private(set) lazy var isRunningOnFoldablePhone: Bool = {
+                guard isRunningOnPhone else { return false }
+                let screenSize = fetchAvailableSize()
+                let minDimension: CGFloat = min(screenSize.width, screenSize.height)
+                return minDimension > 442 // Largest regular iPhone: iPhone 18 Pro Max = 440 pt
+        }()
+
+        @Published private(set) var needsGlobeKey: Bool = false
+        func updateGlobeKeyState() {
+                // It seems iPhone Duo always needs the globe key. Maybe this's a bug on iOS 27.1
+                needsGlobeKey = needsInputModeSwitchKey || isRunningOnFoldablePhone
+        }
 
         @Published private(set) var keyboardWidth: CGFloat = 440
         @Published private(set) var keyboardHeight: CGFloat = 284

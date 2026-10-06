@@ -147,7 +147,7 @@ struct LargePadNumericKeyboard: View {
                                 LargePadShiftKey(side: .trailing, coefficient: 2.25).hidden()
                         }
                         HStack(spacing: 0) {
-                                if context.needsInputModeSwitchKey {
+                                if context.needsGlobeKey {
                                         LargePadGlobeKey(widthUnitTimes: 2.125)
                                 } else {
                                         LargePadTransformKey(destination: .primary, side: .leading, coefficient: 2.125)

@@ -176,13 +176,14 @@ struct CantoneseNumericKeyboard: View {
                                 Spacer()
                                 BackspaceKey()
                         }
-                        switch (context.keyboardInterface.isPadFloating, context.needsInputModeSwitchKey) {
+                        switch (context.keyboardInterface.isPadFloating, context.needsGlobeKey) {
                         case (true, true):
                                 HStack(spacing: 0) {
                                         GlobeKey()
-                                        TransformKey(destination: .primary, coefficient: 2)
+                                        TransformKey(destination: .primary, coefficient: 1.5)
+                                        SharedBottomKeys.cantoneseComma
                                         SpaceKey()
-                                        SharedBottomKeys.altCantoneseComma
+                                        SharedBottomKeys.cantonesePeriod
                                         ReturnKey()
                                 }
                         case (true, false):
@@ -195,10 +196,11 @@ struct CantoneseNumericKeyboard: View {
                                 }
                         case (false, true):
                                 HStack(spacing: 0) {
-                                        TransformKey(destination: .primary, coefficient: 2)
+                                        TransformKey(destination: .primary, coefficient: 1.5)
                                         GlobeKey()
+                                        SharedBottomKeys.cantoneseComma
                                         SpaceKey()
-                                        SharedBottomKeys.altCantoneseComma
+                                        SharedBottomKeys.cantonesePeriod
                                         ReturnKey()
                                 }
                         case (false, false):

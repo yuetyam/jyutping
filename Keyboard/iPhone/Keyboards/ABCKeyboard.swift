@@ -39,13 +39,14 @@ struct ABCKeyboard: View {
                                 HiddenKey(key: .backspace)
                                 BackspaceKey()
                         }
-                        switch (context.keyboardInterface.isPadFloating, context.needsInputModeSwitchKey) {
+                        switch (context.keyboardInterface.isPadFloating, context.needsGlobeKey) {
                         case (true, true):
                                 HStack(spacing: 0) {
                                         GlobeKey()
-                                        TransformKey(destination: .numeric, coefficient: 2)
+                                        TransformKey(destination: context.preferredNumericForm, coefficient: 1.5)
+                                        ABCLeftKey()
                                         SpaceKey()
-                                        ABCRightAlternativeKey()
+                                        ABCRightKey()
                                         ReturnKey()
                                 }
                         case (true, false):
@@ -58,10 +59,11 @@ struct ABCKeyboard: View {
                                 }
                         case (false, true):
                                 HStack(spacing: 0) {
-                                        TransformKey(destination: context.preferredNumericForm, coefficient: 2)
+                                        TransformKey(destination: context.preferredNumericForm, coefficient: 1.5)
                                         GlobeKey()
+                                        ABCLeftKey()
                                         SpaceKey()
-                                        ABCRightAlternativeKey()
+                                        ABCRightKey()
                                         ReturnKey()
                                 }
                         case (false, false):

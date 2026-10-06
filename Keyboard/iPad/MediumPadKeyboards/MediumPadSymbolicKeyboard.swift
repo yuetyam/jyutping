@@ -54,7 +54,7 @@ struct MediumPadSymbolicKeyboard: View {
                                 MediumPadTransformKey(destination: .numeric, side: .trailing, coefficient: 1.25)
                         }
                         HStack(spacing: 0) {
-                                if context.needsInputModeSwitchKey {
+                                if context.needsGlobeKey {
                                         MediumPadGlobeKey(widthUnitTimes: 1.5)
                                 } else {
                                         MediumPadTransformKey(destination: .primary, side: .leading, coefficient: 1.5)

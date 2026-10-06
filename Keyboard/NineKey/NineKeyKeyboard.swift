@@ -53,7 +53,7 @@ private struct GlassNineKeyCoreKeyboard: View {
                                                 }
                                         }
                                 }
-                                switch (context.isRunningOnPhone, context.needsInputModeSwitchKey) {
+                                switch (context.isRunningOnPhone, context.needsGlobeKey) {
                                 case (true, true):
                                         HStack(spacing: 0) {
                                                 GlassTailoredNavigateKey(destination: context.preferredNumericForm)
@@ -118,7 +118,7 @@ private struct LegacyNineKeyCoreKeyboard: View {
                                                 }
                                         }
                                 }
-                                switch (context.isRunningOnPhone, context.needsInputModeSwitchKey) {
+                                switch (context.isRunningOnPhone, context.needsGlobeKey) {
                                 case (true, true):
                                         HStack(spacing: 0) {
                                                 TailoredNavigateKey(destination: context.preferredNumericForm)

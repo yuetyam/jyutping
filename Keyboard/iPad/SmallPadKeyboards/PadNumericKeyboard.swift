@@ -54,7 +54,7 @@ struct PadNumericKeyboard: View {
                                 PadTransformKey(destination: .symbolic, coefficient: 1)
                         }
                         HStack(spacing: 0) {
-                                if context.needsInputModeSwitchKey {
+                                if context.needsGlobeKey {
                                         PadGlobeKey(widthUnitTimes: 1.5)
                                 } else {
                                         PadTransformKey(destination: .primary, coefficient: 1.5)
