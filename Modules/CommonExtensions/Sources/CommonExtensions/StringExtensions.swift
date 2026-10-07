@@ -53,11 +53,23 @@ extension String {
         /// U+002E. English period (full-stop) mark.
         public static let period: String = "\u{2E}"
 
+        /// U+003F. English question mark.
+        public static let questionMark: String = "\u{3F}"
+
+        /// U+0021. English exclamation mark.
+        public static let exclamationMark: String = "\u{21}"
+
         /// U+FF0C. Chinese comma mark. Full-width comma mark.
         public static let cantoneseComma: String = "\u{FF0C}"
 
         /// U+3002. Chinese period (full-stop) mark. Full-width period mark.
         public static let cantonesePeriod: String = "\u{3002}"
+
+        /// U+FF1F. Chinese question mark.
+        public static let cantoneseQuestionMark: String = "\u{FF1F}"
+
+        /// U+FF01. Chinese exclamation mark.
+        public static let cantoneseExclamationMark: String = "\u{FF01}"
 
         /// U+0028. Left round bracket (
         public static let openingParenthesis: String = "\u{28}"
