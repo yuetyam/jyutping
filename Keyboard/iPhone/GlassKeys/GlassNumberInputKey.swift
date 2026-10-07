@@ -21,12 +21,13 @@ struct GlassNumberInputKey: View {
                 let keyHeight = context.heightUnit
                 let keyboardInterface = context.keyboardInterface
                 let insets = keyboardInterface.keyShapeInsets
-                lazy var previewBottomOffset = keyboardInterface.previewBottomOffset(keyWidth: keyWidth, keyHeight: keyHeight, insets: insets)
+                let previewBottomOffset = keyboardInterface.previewBottomOffset(keyWidth: keyWidth, keyHeight: keyHeight, insets: insets)
                 let displayForm = KeyDisplayForm.responsive(isInteracting: isTouching, shouldPreview: Options.keyTextPreview)
                 Button(action: {}) {
                         ZStack {
                                 Color.interactiveClear
-                                if displayForm.isPreviewing {
+                                switch displayForm {
+                                case .previewing, .expanding:
                                         Color.clear
                                                 .glassEffect(.regular, in: BubbleShape())
                                                 .overlay {
@@ -35,7 +36,7 @@ struct GlassNumberInputKey: View {
                                                                 .padding(.bottom, previewBottomOffset)
                                                 }
                                                 .padding(insets)
-                                } else {
+                                case .normal, .reflecting:
                                         ZStack {
                                                 Color.clear
                                                 Text(verbatim: virtual.text).font(.letterCompact)
