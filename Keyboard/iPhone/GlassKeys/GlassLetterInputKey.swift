@@ -8,7 +8,7 @@ import CommonExtensions
 /// Pressing shows a preview bubble when enabled, or highlights and enlarges the glass key otherwise.
 @available(iOS 26.0, *)
 @available(iOSApplicationExtension 26.0, *)
-struct LetterGlassInputKey: View {
+struct GlassLetterInputKey: View {
 
         /// Creates a glass-styled letter key for the given input event.
         ///

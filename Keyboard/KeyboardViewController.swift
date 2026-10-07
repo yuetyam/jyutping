@@ -14,7 +14,11 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 keyboardHeight = (rowHeight * rowCount) + topBarHeight
                 view.subviews.forEach({ $0.removeFromSuperview() })
                 children.forEach({ $0.removeFromParent() })
-                let board = UIHostingController(rootView: MotherBoard().environmentObject(self))
+                let board = if #available(iOSApplicationExtension 26.0, *) {
+                        UIHostingController(rootView: GlassMotherBoard().environmentObject(self))
+                } else {
+                        UIHostingController(rootView: MotherBoard().environmentObject(self))
+                }
                 board.view.translatesAutoresizingMaskIntoConstraints = false
                 addChild(board)
                 view.addSubview(board.view)

@@ -1,7 +1,9 @@
 import SwiftUI
 import CommonExtensions
 
-struct MotherBoard: View {
+@available(iOS 26.0, *)
+@available(iOSApplicationExtension 26.0, *)
+struct GlassMotherBoard: View {
         @EnvironmentObject private var context: KeyboardViewController
         var body: some View {
                 switch context.keyboardForm {
@@ -10,13 +12,13 @@ struct MotherBoard: View {
                 case .settings:
                         SettingsView().frame(height: context.keyboardHeight)
                 case .editingPanel:
-                        EditingPanel().frame(height: context.keyboardHeight)
+                        GlassEditingPanel().frame(height: context.keyboardHeight)
                 case .layoutPicker:
-                        LayoutPickerView().frame(height: context.keyboardHeight)
+                        LayoutPickerView().scrollEdgeEffectHidden().frame(height: context.keyboardHeight)
                 case .detailInspecting:
-                        DetailInspectingView().frame(height: context.keyboardHeight)
+                        DetailInspectingView().scrollEdgeEffectHidden().frame(height: context.keyboardHeight)
                 case .emojiBoard:
-                        EmojiBoard().frame(height: context.keyboardHeight)
+                        EmojiBoard().scrollEdgeEffectHidden().frame(height: context.keyboardHeight)
                 case .candidateBoard:
                         CandidateBoard().frame(height: context.keyboardHeight)
                 case .numeric:
@@ -72,7 +74,7 @@ struct MotherBoard: View {
                 case .numberPad, .decimalPad:
                         switch context.keyboardInterface {
                         case .phonePortrait, .phoneLandscape, .phoneOnPadPortrait, .phoneOnPadLandscape, .padFloating:
-                                NumberPad(isDecimalPad: context.keyboardForm.isDecimalPad)
+                                GlassNumberPad(isDecimalPad: context.keyboardForm.isDecimalPad)
                         case .padPortraitSmall, .padLandscapeSmall:
                                 PadNumericKeyboard()
                         case .padPortraitMedium, .padLandscapeMedium:
@@ -81,9 +83,9 @@ struct MotherBoard: View {
                                 LargePadNumericKeyboard()
                         }
                 case .dedicatedNumbers:
-                        TailoredNumericKeyboard()
+                        GlassTailoredNumericKeyboard()
                 case .dedicatedStroke:
-                        TailoredStrokeKeyboard()
+                        GlassTailoredStrokeKeyboard()
                 default:
                         switch context.inputMethodMode {
                         case .abc:
@@ -106,7 +108,7 @@ struct MotherBoard: View {
                                         case .stroke : StrokeKeyboard()
                                         case .primary:
                                                 switch context.keyboardLayout {
-                                                case .qwerty      : CantoneseKeyboard()
+                                                case .qwerty      : GlassCantoneseKeyboard()
                                                 case .tripleStroke: TripleStrokeKeyboard()
                                                 case .nineKey     : NineKeyKeyboard()
                                                 case .fourteenKey : FourteenKeyKeyboard()

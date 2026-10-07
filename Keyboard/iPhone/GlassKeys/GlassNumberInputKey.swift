@@ -5,7 +5,7 @@ import CoreIME
 /// iPhone number row key view (ABC keyboards)
 @available(iOS 26.0, *)
 @available(iOSApplicationExtension 26.0, *)
-struct NumberGlassInputKey: View {
+struct GlassNumberInputKey: View {
 
         init(_ virtual: VirtualInputKey) {
                 self.virtual = virtual
