@@ -9,12 +9,13 @@ struct StrokeTests {
                 prepareTestDatabase()
         }
 
-        @Test("stroke keys expose codes display text and virtual keys")
+        @Test("stroke keys expose codes display text names and virtual keys")
         func properties() {
                 let strokes: [StrokeVirtualKey] = [.horizontal, .vertical, .leftFalling, .rightFalling, .turning, .wildcard]
 
                 #expect(strokes.map(\.code) == Array(1...6))
                 #expect(strokes.map(\.strokeText) == ["⼀", "⼁", "⼃", "⼂", "乛", "＊"])
+                #expect(strokes.map(\.strokeName) == ["橫", "豎", "撇", "點", "折", "通配"])
                 #expect(strokes.map(\.virtualInputKey) == inputKeys("123456"))
                 #expect(strokes.map(\.digitText) == ["1", "2", "3", "4", "5", "6"])
                 #expect(StrokeVirtualKey.wildcard.isWildcard)

@@ -97,10 +97,12 @@ struct TailoredStrokeKeyboard: View {
 private struct GlassStrokeKey: View {
         init(_ stroke: StrokeVirtualKey) {
                 self.stroke = stroke
-                self.keyText = stroke.strokeText ?? "?"
+                self.keyText = stroke.strokeText
+                self.keyComment = stroke.strokeName
         }
         private let stroke: StrokeVirtualKey
         private let keyText: String
+        private let keyComment: String
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
@@ -112,6 +114,14 @@ private struct GlassStrokeKey: View {
                                 Color.interactiveClear
                                 ZStack {
                                         Color.clear
+                                        ZStack(alignment: .topTrailing) {
+                                                Color.clear
+                                                Text(verbatim: keyComment)
+                                                        .font(.labelCaption)
+                                                        .shallow()
+                                                        .padding(.vertical, 1)
+                                                        .padding(.horizontal, 3)
+                                        }
                                         Text(verbatim: keyText).font(.letterCompact)
                                 }
                                 .glassEffect(isTouching ? .regular : .clear, in: .rect(cornerRadius: PresetConstant.largeKeyCornerRadius))
@@ -132,10 +142,12 @@ private struct LegacyStrokeKey: View {
 
         init(_ stroke: StrokeVirtualKey) {
                 self.stroke = stroke
-                self.keyText = stroke.strokeText ?? "?"
+                self.keyText = stroke.strokeText
+                self.keyComment = stroke.strokeName
         }
         private let stroke: StrokeVirtualKey
         private let keyText: String
+        private let keyComment: String
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
@@ -149,6 +161,15 @@ private struct LegacyStrokeKey: View {
                                         .fill(isTouching ? colorScheme.activeInputKeyColor : colorScheme.inputKeyColor)
                                         .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                         .padding(isTouching ? 1 : 3)
+                                ZStack(alignment: .topTrailing) {
+                                        Color.clear
+                                        Text(verbatim: keyComment)
+                                                .font(.labelCaption)
+                                                .shallow()
+                                                .padding(.vertical, 1)
+                                                .padding(.horizontal, 3)
+                                }
+                                .padding(3)
                                 Text(verbatim: keyText).font(.letterCompact)
                         }
                         .frame(width: context.nineKeyWidthUnit * 1.06, height: context.heightUnit)

@@ -32,8 +32,8 @@ extension StrokeVirtualKey {
         public static func displayText<T: RandomAccessCollection<VirtualInputKey>>(from keys: T) -> String {
                 return keys.compactMap(\.strokeKey?.strokeText).joined()
         }
-        public var strokeText: String? {
-                return Self.displayMap[self]
+        public var strokeText: String {
+                return Self.displayMap[self] ?? String.questionMark
         }
         private static let displayMap: [StrokeVirtualKey: String] = [
                 .horizontal   : "⼀",
@@ -43,6 +43,17 @@ extension StrokeVirtualKey {
                 .turning      : "乛",
                 .wildcard     : "＊"
         ]
+
+        public var strokeName: String {
+                switch self {
+                case .horizontal   : "橫"
+                case .vertical     : "豎"
+                case .leftFalling  : "撇"
+                case .rightFalling : "點"
+                case .turning      : "折"
+                case .wildcard     : "通配"
+                }
+        }
 
         /// `code` as String text
         var digitText: String {
