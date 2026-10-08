@@ -10,7 +10,7 @@ struct GlassCantoneseBottomKeyRow: View {
                 case (true, true):
                         HStack(spacing: 0) {
                                 GlobeKey()
-                                TransformKey(destination: context.preferredNumericForm, coefficient: 1.5)
+                                GlassTransformKey(context.preferredNumericForm, coefficient: 1.5)
                                 GlassLeftKey()
                                 SpaceKey()
                                 GlassRightKey()
@@ -18,7 +18,7 @@ struct GlassCantoneseBottomKeyRow: View {
                         }
                 case (true, false):
                         HStack(spacing: 0) {
-                                TransformKey(destination: .numeric, coefficient: 2)
+                                GlassTransformKey(.numeric, coefficient: 2)
                                 GlassLeftKey()
                                 SpaceKey()
                                 GlassRightKey()
@@ -26,7 +26,7 @@ struct GlassCantoneseBottomKeyRow: View {
                         }
                 case (false, true):
                         HStack(spacing: 0) {
-                                TransformKey(destination: context.preferredNumericForm, coefficient: 1.5)
+                                GlassTransformKey(context.preferredNumericForm, coefficient: 1.5)
                                 GlobeKey()
                                 GlassLeftKey()
                                 SpaceKey()
@@ -35,7 +35,7 @@ struct GlassCantoneseBottomKeyRow: View {
                         }
                 case (false, false):
                         HStack(spacing: 0) {
-                                TransformKey(destination: context.preferredNumericForm, coefficient: 2)
+                                GlassTransformKey(context.preferredNumericForm, coefficient: 2)
                                 GlassLeftKey()
                                 SpaceKey()
                                 GlassRightKey()
