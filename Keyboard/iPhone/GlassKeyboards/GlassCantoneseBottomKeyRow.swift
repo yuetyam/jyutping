@@ -14,7 +14,7 @@ struct GlassCantoneseBottomKeyRow: View {
                                 GlassLeftKey()
                                 SpaceKey()
                                 GlassRightKey()
-                                ReturnKey()
+                                GlassEnterKey()
                         }
                 case (true, false):
                         HStack(spacing: 0) {
@@ -22,7 +22,7 @@ struct GlassCantoneseBottomKeyRow: View {
                                 GlassLeftKey()
                                 SpaceKey()
                                 GlassRightKey()
-                                ReturnKey()
+                                GlassEnterKey()
                         }
                 case (false, true):
                         HStack(spacing: 0) {
@@ -31,7 +31,7 @@ struct GlassCantoneseBottomKeyRow: View {
                                 GlassLeftKey()
                                 SpaceKey()
                                 GlassRightKey()
-                                ReturnKey()
+                                GlassEnterKey()
                         }
                 case (false, false):
                         HStack(spacing: 0) {
@@ -39,7 +39,7 @@ struct GlassCantoneseBottomKeyRow: View {
                                 GlassLeftKey()
                                 SpaceKey()
                                 GlassRightKey()
-                                ReturnKey()
+                                GlassEnterKey()
                         }
                 }
         }

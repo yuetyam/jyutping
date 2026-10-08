@@ -13,16 +13,11 @@ struct GlassTailoredNavigateKey: View {
 
         private var keyText: String {
                 switch destination {
-                case .primary:
-                        return "ABC"
-                case .numeric:
-                        return context.preferredNumericForm.isDedicatedNumbers ? "#@$" : "123"
-                case .symbolic:
-                        return "#+="
-                case .dedicatedNumbers:
-                        return "123"
-                default:
-                        return "???"
+                case .primary: "ABC"
+                case .numeric: context.preferredNumericForm.isDedicatedNumbers ? "123?!" : "123"
+                case .symbolic: "#+="
+                case .dedicatedNumbers: "123"
+                default: "???"
                 }
         }
 
@@ -58,16 +53,11 @@ struct TailoredNavigateKey: View {
 
         private var keyText: String {
                 switch destination {
-                case .primary:
-                        return "ABC"
-                case .numeric:
-                        return context.preferredNumericForm.isDedicatedNumbers ? "#@$" : "123"
-                case .symbolic:
-                        return "#+="
-                case .dedicatedNumbers:
-                        return "123"
-                default:
-                        return "???"
+                case .primary: "ABC"
+                case .numeric: context.preferredNumericForm.isDedicatedNumbers ? "123?!" : "123"
+                case .symbolic: "#+="
+                case .dedicatedNumbers: "123"
+                default: "???"
                 }
         }
 
