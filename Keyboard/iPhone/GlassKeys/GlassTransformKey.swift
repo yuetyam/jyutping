@@ -13,7 +13,7 @@ struct GlassTransformKey: View {
         /// - Parameters:
         ///   - destination: The keyboard form to route to.
         ///   - coefficient: Multiplier applied to the keyboard's width unit.
-        init(_ destination: KeyboardForm, coefficient: CGFloat = 1) {
+        init(_ destination: KeyboardForm, coefficient: CGFloat = 2) {
                 self.destination = destination
                 self.coefficient = coefficient
         }

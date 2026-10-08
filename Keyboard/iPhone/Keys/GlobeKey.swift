@@ -8,16 +8,13 @@ struct GlobeKey: View {
         var body: some View {
                 let width: CGFloat = context.widthUnit
                 let height: CGFloat = context.heightUnit
-                let isPhoneLandscape: Bool = context.keyboardInterface.isPhoneLandscape
-                let verticalPadding: CGFloat = isPhoneLandscape ? 3 : 6
-                let horizontalPadding: CGFloat = isPhoneLandscape ? 6 : 3
+                let insets = context.keyboardInterface.keyShapeInsets
                 ZStack {
                         Color.interactiveClear
                         RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
                                 .fill(colorScheme.isDark ? Color.darkAction : Color.lightAction)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                .padding(.vertical, verticalPadding)
-                                .padding(.horizontal, horizontalPadding)
+                                .padding(insets)
                         Image.globe.font(.symbol)
                         UIGlobeButton()
                 }
