@@ -73,11 +73,14 @@ struct LeftKey: View {
                                                                         ZStack {
                                                                                 RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
                                                                                         .fill(isSelected ? Color.accentColor : Color.clear)
-                                                                                ZStack(alignment: .top) {
-                                                                                        Color.interactiveClear
-                                                                                        Text(verbatim: element.extras.first(where: \.alignment.isTopEdge)?.text ?? String.space)
-                                                                                                .font(.labelCaption)
-                                                                                                .shallow()
+                                                                                ForEach(element.extras.indices, id: \.self) { extraIndex in
+                                                                                        let extra = element.extras[extraIndex]
+                                                                                        ZStack(alignment: extra.alignment) {
+                                                                                                Color.clear
+                                                                                                Text(verbatim: extra.text)
+                                                                                                        .font(.labelCaption)
+                                                                                                        .shallow()
+                                                                                        }
                                                                                 }
                                                                                 Text(verbatim: element.text)
                                                                                         .font(.title2)

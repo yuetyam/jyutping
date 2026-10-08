@@ -2,12 +2,14 @@ import SwiftUI
 import CommonExtensions
 import CoreIME
 
-/// A Cantonese period key supporting vertical pulls and long-press punctuation selection.
+/// A glass-styled Cantonese comma key supporting vertical pulls and long-press punctuation selection.
 ///
 /// Holding the key expands its alternatives; sliding selects an element and releasing commits it.
 /// Drag tracking keeps the selector active when the finger moves outside the original button.
 /// While composing, ordinary input inserts an apostrophe; pulls and alternative expansion are disabled.
-struct RightKey: View {
+@available(iOS 26.0, *)
+@available(iOSApplicationExtension 26.0, *)
+struct GlassLeftKey: View {
 
         /// Keyboard properties and handlers.
         @EnvironmentObject private var context: KeyboardViewController
@@ -32,15 +34,15 @@ struct RightKey: View {
 
         /// Punctuation alternatives and their labels shown in the expanded selector.
         private let elements: [KeyElement] = [
-                KeyElement("。"),
-                KeyElement("？"),
+                KeyElement("，"),
                 KeyElement("！"),
-                KeyElement("…", extras: [.init("省略號", alignment: .top)]),
-                KeyElement(".", extras: [.init("英文", alignment: .top)])
+                KeyElement("？"),
+                KeyElement("、"),
+                KeyElement(",", extras: [.init("英文", alignment: .top)])
         ]
 
         /// Extra punctuation selected by a vertical pull when symbol input is enabled.
-        private let headerText: String = "？"
+        private let headerText: String = "！"
 
         var body: some View {
                 let keyWidth: CGFloat = context.widthUnit
@@ -51,7 +53,6 @@ struct RightKey: View {
                 let baseHeight: CGFloat = keyHeight - insets.verticalTotal
                 let previewBottomOffset: CGFloat = keyboardInterface.previewBottomOffset(keyWidth: keyWidth, keyHeight: keyHeight, insets: insets)
                 let shouldPreviewKey: Bool = Options.keyTextPreview
-                let activeColor: Color = shouldPreviewKey ? colorScheme.inputKeyColor : colorScheme.activeInputKeyColor
                 let displayForm = KeyDisplayForm.responsive(isInteracting: isTouching, isLongPressing: isLongPressing, shouldPreview: shouldPreviewKey)
                 let shouldShowExtraSymbols: Bool = Options.inputKeyStyle.isSymbolApplied
                 Button(action: {}) {
@@ -61,21 +62,16 @@ struct RightKey: View {
                                 case .expanding:
                                         let symbolCount: Int = elements.count
                                         let expansionCount: Int = symbolCount - 1
-                                        let trailingOffset: CGFloat = baseWidth * CGFloat(expansionCount)
-                                        ExpansiveBubbleShape(side: .trailing, expansionCount: expansionCount)
-                                                .fill(colorScheme.previewBubbleColor)
-                                                .shadow(color: .shadowGray, radius: 1)
+                                        let leadingOffset: CGFloat = baseWidth * CGFloat(expansionCount)
+                                        Color.clear
+                                                .glassEffect(.regular, in: ExpansiveBubbleShape(side: .leading, expansionCount: expansionCount))
                                                 .overlay {
                                                         HStack(spacing: 0) {
-                                                                ForEach(elements.indices, id: \.self) { index in
-                                                                        let reversedIndex = (symbolCount - 1) - index
-                                                                        let element = elements[reversedIndex]
-                                                                        let isSelected: Bool = selectedIndex == reversedIndex
+                                                                ForEach(elements.enumerated(), id: \.element.text) { index, element in
                                                                         ZStack {
                                                                                 RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
-                                                                                        .fill(isSelected ? Color.accentColor : Color.clear)
-                                                                                ForEach(element.extras.indices, id: \.self) { extraIndex in
-                                                                                        let extra = element.extras[extraIndex]
+                                                                                        .fill((selectedIndex == index) ? Color.accentColor : Color.clear)
+                                                                                ForEach(element.extras.enumerated(), id: \.element.text) { _, extra in
                                                                                         ZStack(alignment: extra.alignment) {
                                                                                                 Color.clear
                                                                                                 Text(verbatim: extra.text)
@@ -85,44 +81,43 @@ struct RightKey: View {
                                                                                 }
                                                                                 Text(verbatim: element.text)
                                                                                         .font(.title2)
-                                                                                        .foregroundStyle(isSelected ? Color.white : Color.primary)
+                                                                                        .foregroundStyle((selectedIndex == index) ? Color.white : Color.primary)
                                                                         }
                                                                         .frame(maxWidth: .infinity)
                                                                 }
                                                         }
                                                         .frame(width: baseWidth * CGFloat(symbolCount), height: baseHeight)
                                                         .padding(.bottom, previewBottomOffset)
-                                                        .padding(.trailing, trailingOffset)
+                                                        .padding(.leading, leadingOffset)
                                                 }
                                                 .padding(insets)
                                 case .previewing:
-                                        BubbleShape()
-                                                .fill(colorScheme.previewBubbleColor)
-                                                .shadow(color: .shadowGray, radius: 1)
+                                        Color.clear
+                                                .glassEffect(.regular, in: BubbleShape())
                                                 .overlay {
-                                                        Text(verbatim: pulled ?? (context.inputStage.isBuffering ? String.apostrophe : String.cantonesePeriod))
+                                                        Text(verbatim: pulled ?? (context.inputStage.isBuffering ? String.apostrophe : String.cantoneseComma))
                                                                 .font(.largeTitle)
                                                                 .padding(.bottom, previewBottomOffset)
                                                 }
                                                 .padding(insets)
                                 case .normal, .reflecting:
-                                        RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
-                                                .fill(isTouching ? activeColor : colorScheme.inputKeyColor)
-                                                .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                                .padding(insets)
-                                        ZStack(alignment: .topTrailing) {
+                                        ZStack {
                                                 Color.clear
-                                                Text(verbatim: headerText).font(.labelCaption)
+                                                ZStack(alignment: .topTrailing) {
+                                                        Color.clear
+                                                        Text(verbatim: headerText).font(.labelCaption).padding(.trailing, 2)
+                                                }
+                                                .opacity((shouldShowExtraSymbols && context.inputStage.isBuffering.negative) ? 0.5 : 0)
+                                                ZStack(alignment: .bottom) {
+                                                        Color.clear
+                                                        Text(verbatim: PresetConstant.separate).font(.labelCaption).padding(.bottom, 2)
+                                                }
+                                                .opacity(context.inputStage.isBuffering ? 0.5 : 0)
+                                                Text(verbatim: context.inputStage.isBuffering ? String.apostrophe : String.cantoneseComma).font(.letterCompact)
                                         }
-                                        .padding(insets.plused(horizontal: 2))
-                                        .opacity((shouldShowExtraSymbols && context.inputStage.isBuffering.negative) ? 0.5 : 0)
-                                        ZStack(alignment: .bottom) {
-                                                Color.clear
-                                                Text(verbatim: PresetConstant.separate).font(.labelCaption)
-                                        }
-                                        .padding(insets.plused(vertical: 2))
-                                        .opacity(context.inputStage.isBuffering ? 0.5 : 0)
-                                        Text(verbatim: context.inputStage.isBuffering ? String.apostrophe : String.cantonesePeriod).font(.letterCompact)
+                                        .glassEffect(displayForm.isReflecting ? .regular : .clear, in: .rect(cornerRadius: PresetConstant.keyCornerRadius))
+                                        .shadow(color: displayForm.isReflecting ? colorScheme.glassShadow : Color.clear, radius: 0.5)
+                                        .padding(displayForm.isReflecting ? insets.plused(-2) : insets)
                                 }
                         }
                         .frame(width: keyWidth, height: keyHeight)
@@ -135,7 +130,7 @@ struct RightKey: View {
                         .onChanged { state in
                                 if isLongPressing {
                                         let memberCount: Int = elements.count
-                                        let distance: CGFloat = -(state.translation.width)
+                                        let distance: CGFloat = state.translation.width
                                         if distance < (baseWidth / 2.0) {
                                                 if selectedIndex != 0 {
                                                         selectedIndex = 0
@@ -175,7 +170,7 @@ struct RightKey: View {
                                 } else if context.inputStage.isBuffering {
                                         context.handle(.apostrophe)
                                 } else {
-                                        context.operate(.input(String.cantonesePeriod))
+                                        context.operate(.input(String.cantoneseComma))
                                 }
                         }
                 )

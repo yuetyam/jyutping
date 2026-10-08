@@ -5,6 +5,7 @@ import CommonExtensions
 import AboutKit
 
 struct AboutView: View {
+        private let macIconName: String = if #available(iOS 26.0, *) { "finder" } else { "command.square" }
         var body: some View {
                 NavigationStack {
                         List {
@@ -19,7 +20,7 @@ struct AboutView: View {
                                                 EnhancedLabel("Shared.About.Website", icon: "globe.asia.australia", symbol: .safari)
                                         }
                                         SafariLink(About.Jyutping4MacAddress) {
-                                                EnhancedLabel("IOSAboutTab.LabelTitle.JyutpingForMac", icon: "command.square", symbol: .safari)
+                                                EnhancedLabel("IOSAboutTab.LabelTitle.JyutpingForMac", icon: macIconName, symbol: .safari)
                                         }
                                         SafariLink(About.SourceCodeAddress) {
                                                 EnhancedLabel("Shared.About.SourceCode", icon: "curlybraces.square", symbol: .safari)

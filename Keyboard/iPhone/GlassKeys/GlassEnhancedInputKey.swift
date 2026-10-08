@@ -92,8 +92,7 @@ struct GlassEnhancedInputKey: View {
                                                                         ZStack {
                                                                                 RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
                                                                                         .fill(isSelected ? Color.accentColor : Color.clear)
-                                                                                ForEach(element.extras.indices, id: \.self) { extraIndex in
-                                                                                        let extra = element.extras[extraIndex]
+                                                                                ForEach(element.extras.enumerated(), id: \.element.text) { _, extra in
                                                                                         ZStack(alignment: extra.alignment) {
                                                                                                 Color.clear
                                                                                                 Text(verbatim: extra.text)

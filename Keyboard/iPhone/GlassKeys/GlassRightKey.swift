@@ -2,12 +2,14 @@ import SwiftUI
 import CommonExtensions
 import CoreIME
 
-/// A Cantonese period key supporting vertical pulls and long-press punctuation selection.
+/// A glass-styled Cantonese period key supporting vertical pulls and long-press punctuation selection.
 ///
 /// Holding the key expands its alternatives; sliding selects an element and releasing commits it.
 /// Drag tracking keeps the selector active when the finger moves outside the original button.
 /// While composing, ordinary input inserts an apostrophe; pulls and alternative expansion are disabled.
-struct RightKey: View {
+@available(iOS 26.0, *)
+@available(iOSApplicationExtension 26.0, *)
+struct GlassRightKey: View {
 
         /// Keyboard properties and handlers.
         @EnvironmentObject private var context: KeyboardViewController
@@ -51,7 +53,6 @@ struct RightKey: View {
                 let baseHeight: CGFloat = keyHeight - insets.verticalTotal
                 let previewBottomOffset: CGFloat = keyboardInterface.previewBottomOffset(keyWidth: keyWidth, keyHeight: keyHeight, insets: insets)
                 let shouldPreviewKey: Bool = Options.keyTextPreview
-                let activeColor: Color = shouldPreviewKey ? colorScheme.inputKeyColor : colorScheme.activeInputKeyColor
                 let displayForm = KeyDisplayForm.responsive(isInteracting: isTouching, isLongPressing: isLongPressing, shouldPreview: shouldPreviewKey)
                 let shouldShowExtraSymbols: Bool = Options.inputKeyStyle.isSymbolApplied
                 Button(action: {}) {
@@ -62,20 +63,17 @@ struct RightKey: View {
                                         let symbolCount: Int = elements.count
                                         let expansionCount: Int = symbolCount - 1
                                         let trailingOffset: CGFloat = baseWidth * CGFloat(expansionCount)
-                                        ExpansiveBubbleShape(side: .trailing, expansionCount: expansionCount)
-                                                .fill(colorScheme.previewBubbleColor)
-                                                .shadow(color: .shadowGray, radius: 1)
+                                        Color.clear
+                                                .glassEffect(.regular, in: ExpansiveBubbleShape(side: .trailing, expansionCount: expansionCount))
                                                 .overlay {
                                                         HStack(spacing: 0) {
-                                                                ForEach(elements.indices, id: \.self) { index in
+                                                                ForEach(elements.reversed().enumerated(), id: \.element.text) { index, element in
                                                                         let reversedIndex = (symbolCount - 1) - index
-                                                                        let element = elements[reversedIndex]
                                                                         let isSelected: Bool = selectedIndex == reversedIndex
                                                                         ZStack {
                                                                                 RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
                                                                                         .fill(isSelected ? Color.accentColor : Color.clear)
-                                                                                ForEach(element.extras.indices, id: \.self) { extraIndex in
-                                                                                        let extra = element.extras[extraIndex]
+                                                                                ForEach(element.extras.enumerated(), id: \.element.text) { _, extra in
                                                                                         ZStack(alignment: extra.alignment) {
                                                                                                 Color.clear
                                                                                                 Text(verbatim: extra.text)
@@ -96,9 +94,8 @@ struct RightKey: View {
                                                 }
                                                 .padding(insets)
                                 case .previewing:
-                                        BubbleShape()
-                                                .fill(colorScheme.previewBubbleColor)
-                                                .shadow(color: .shadowGray, radius: 1)
+                                        Color.clear
+                                                .glassEffect(.regular, in: BubbleShape())
                                                 .overlay {
                                                         Text(verbatim: pulled ?? (context.inputStage.isBuffering ? String.apostrophe : String.cantonesePeriod))
                                                                 .font(.largeTitle)
@@ -106,23 +103,23 @@ struct RightKey: View {
                                                 }
                                                 .padding(insets)
                                 case .normal, .reflecting:
-                                        RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
-                                                .fill(isTouching ? activeColor : colorScheme.inputKeyColor)
-                                                .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                                .padding(insets)
-                                        ZStack(alignment: .topTrailing) {
+                                        ZStack {
                                                 Color.clear
-                                                Text(verbatim: headerText).font(.labelCaption)
+                                                ZStack(alignment: .topTrailing) {
+                                                        Color.clear
+                                                        Text(verbatim: headerText).font(.labelCaption).padding(.trailing, 2)
+                                                }
+                                                .opacity((shouldShowExtraSymbols && context.inputStage.isBuffering.negative) ? 0.5 : 0)
+                                                ZStack(alignment: .bottom) {
+                                                        Color.clear
+                                                        Text(verbatim: PresetConstant.separate).font(.labelCaption).padding(.bottom, 2)
+                                                }
+                                                .opacity(context.inputStage.isBuffering ? 0.5 : 0)
+                                                Text(verbatim: context.inputStage.isBuffering ? String.apostrophe : String.cantonesePeriod).font(.letterCompact)
                                         }
-                                        .padding(insets.plused(horizontal: 2))
-                                        .opacity((shouldShowExtraSymbols && context.inputStage.isBuffering.negative) ? 0.5 : 0)
-                                        ZStack(alignment: .bottom) {
-                                                Color.clear
-                                                Text(verbatim: PresetConstant.separate).font(.labelCaption)
-                                        }
-                                        .padding(insets.plused(vertical: 2))
-                                        .opacity(context.inputStage.isBuffering ? 0.5 : 0)
-                                        Text(verbatim: context.inputStage.isBuffering ? String.apostrophe : String.cantonesePeriod).font(.letterCompact)
+                                        .glassEffect(displayForm.isReflecting ? .regular : .clear, in: .rect(cornerRadius: PresetConstant.keyCornerRadius))
+                                        .shadow(color: displayForm.isReflecting ? colorScheme.glassShadow : Color.clear, radius: 0.5)
+                                        .padding(displayForm.isReflecting ? insets.plused(-2) : insets)
                                 }
                         }
                         .frame(width: keyWidth, height: keyHeight)
