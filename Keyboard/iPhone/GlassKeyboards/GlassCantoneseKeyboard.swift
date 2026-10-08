@@ -41,7 +41,7 @@ struct GlassCantoneseKeyboard: View {
                                         GlassThirdEnhancedLetterKeyRow()
                                 }
                                 HiddenKey(key: .backspace)
-                                BackspaceKey()
+                                GlassBackspaceKey()
                         }
                         GlassCantoneseBottomKeyRow()
                 }
