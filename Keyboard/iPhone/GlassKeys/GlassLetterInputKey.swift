@@ -21,10 +21,10 @@ struct GlassLetterInputKey: View {
         private let virtual: VirtualInputKey
 
 
-        /// Keyboard dimensions, case, input handling, and haptic feedback.
+        /// Keyboard properties and handlers.
         @EnvironmentObject private var context: KeyboardViewController
 
-        /// Current color scheme used to choose the pressed key's shadow.
+        /// Retrieves the current system color scheme (light or dark mode) from the environment.
         @Environment(\.colorScheme) private var colorScheme
 
         /// Button press state reported by PressButtonStyle; may end when sliding outside the key.
@@ -32,7 +32,7 @@ struct GlassLetterInputKey: View {
 
         /// Renders the glass key and its optional preview using the current keyboard interface's geometry.
         ///
-        /// PressButtonStyle synchronizes the pressed state and immediately plays input audio, triggers haptic feedback, and sends the event to the controller, which applies the keyboard case.
+        /// PressButtonStyle synchronizes the pressed state and plays sound feedback, triggers haptic feedback, and sends the event to the controller, which applies the keyboard case.
         var body: some View {
                 let keyWidth: CGFloat = context.widthUnit
                 let keyHeight: CGFloat = context.heightUnit

@@ -85,9 +85,8 @@ struct GlassEnhancedInputKey: View {
                                                 .glassEffect(.regular, in: ExpansiveBubbleShape(side: side, expansionCount: expansionCount))
                                                 .overlay {
                                                         HStack(spacing: 0) {
-                                                                ForEach(unit.members.indices, id: \.self) { index in
+                                                                ForEach(unit.members.enumerated(), id: \.element.text) { index, element in
                                                                         let elementIndex: Int = side.isLeading ? index : ((memberCount - 1) - index)
-                                                                        let element: KeyElement = unit.members[elementIndex]
                                                                         let isSelected: Bool = selectedIndex == elementIndex
                                                                         ZStack {
                                                                                 RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
@@ -127,16 +126,15 @@ struct GlassEnhancedInputKey: View {
                                 case .normal, .reflecting:
                                         ZStack {
                                                 Color.clear
-                                                ForEach(unit.primary.extras.indices, id: \.self) { index in
-                                                        let extra = unit.primary.extras[index]
+                                                ForEach(unit.primary.extras.enumerated(), id: \.element.text) { _, extra in
                                                         ZStack(alignment: extra.alignment) {
                                                                 Color.clear
                                                                 Text(verbatim: extra.text)
                                                                         .textCase(textCase)
                                                                         .font(.labelCaption)
                                                                         .shallow()
+                                                                        .padding(.horizontal, 2)
                                                         }
-                                                        .padding(insets.plused(horizontal: 2))
                                                 }
                                                 Text(verbatim: unit.primary.text)
                                                         .textCase(textCase)

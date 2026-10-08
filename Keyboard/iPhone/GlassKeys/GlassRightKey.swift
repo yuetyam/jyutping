@@ -107,12 +107,12 @@ struct GlassRightKey: View {
                                                 Color.clear
                                                 ZStack(alignment: .topTrailing) {
                                                         Color.clear
-                                                        Text(verbatim: headerText).font(.labelCaption).padding(.trailing, 2)
+                                                        Text(verbatim: headerText).font(.labelCaption).padding(.horizontal, 2)
                                                 }
                                                 .opacity((shouldShowExtraSymbols && context.inputStage.isBuffering.negative) ? 0.5 : 0)
                                                 ZStack(alignment: .bottom) {
                                                         Color.clear
-                                                        Text(verbatim: PresetConstant.separate).font(.labelCaption).padding(.bottom, 2)
+                                                        Text(verbatim: PresetConstant.separate).font(.labelCaption).padding(2)
                                                 }
                                                 .opacity(context.inputStage.isBuffering ? 0.5 : 0)
                                                 Text(verbatim: context.inputStage.isBuffering ? String.apostrophe : String.cantonesePeriod).font(.letterCompact)
