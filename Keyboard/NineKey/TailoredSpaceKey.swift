@@ -1,23 +1,44 @@
 import SwiftUI
 import CommonExtensions
 
+/// Space bar with double-tap recognition and hold-to-drag cursor movement.
+///
+/// Taps send space operations on release. A 400 ms hold enables cursor dragging, and successive taps use a 300 ms second-tap window.
 struct TailoredSpaceKey: View {
 
+        /// Keyboard properties and handlers.
         @EnvironmentObject private var context: KeyboardViewController
+
+        /// Retrieves the current system color scheme (light or dark mode) from the environment.
         @Environment(\.colorScheme) private var colorScheme
 
-        /// From idle to the very first touch
-        @State private var isInteracted: Bool = false
+        /// Monotonic clock used to measure interaction deadlines independently of timer scheduling.
+        private let clock = ContinuousClock()
 
+        /// Button press state reported by PressButtonStyle; may end when sliding outside the key.
         @State private var isTouching: Bool = false
+
+        /// Whether the current hold has enabled cursor dragging and suppressed the release's space operation.
         @State private var isLongPressEngaged: Bool = false
-        @State private var longPressBuffer: Int = 0
+
+        /// Deadline for enabling cursor dragging during the current press.
+        @State private var longPressDeadline: ContinuousClock.Instant?
+
+        /// Horizontal translation at the last cursor operation; each subsequent operation requires more than 10 points of movement.
         @State private var previousDraggingDistance: CGFloat = 0
 
+        /// Whether a preceding tap is awaiting a second tap; the window pauses while the key is pressed.
         @State private var isInTheMediumOfDoubleTapping: Bool = false
-        @State private var doubleTappingBuffer: Int = 0
 
+        /// Deadline for expiring a pending second tap while the key is released.
+        @State private var doubleTappingDeadline: ContinuousClock.Instant?
+
+        /// Renders the dedicated background and current space-key label, replacing the label with cursor arrows during a long press.
+        ///
+        /// Press-down provides audio and haptic feedback. A simultaneous drag handles cursor movement and release operations.
+        /// One task sleeps until the active interaction deadline, returns immediately on cancellation, and performs no timed work while idle.
         var body: some View {
+                let interactionDeadline = isTouching ? longPressDeadline : doubleTappingDeadline
                 Button(action: {}) {
                         ZStack {
                                 Color.interactiveClear
@@ -38,15 +59,17 @@ struct TailoredSpaceKey: View {
                         .frame(maxWidth: .infinity)
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
-                        longPressBuffer = 0
-                        doubleTappingBuffer = 0
+                        let now = clock.now
+                        if let deadline = doubleTappingDeadline, now >= deadline {
+                                isInTheMediumOfDoubleTapping = false
+                        }
+                        // Suspend second-tap expiry during the press, even if the previous expiry task has not resumed yet.
+                        doubleTappingDeadline = nil
+                        longPressDeadline = now.advanced(by: .milliseconds(400))
                         previousDraggingDistance = 0
                         AudioFeedback.modified()
                         context.triggerHapticFeedback()
                         isLongPressEngaged = false
-                        if isInteracted.negative {
-                                isInteracted = true
-                        }
                 })
                 .simultaneousGesture(DragGesture(minimumDistance: 0)
                         .onChanged { value in
@@ -66,43 +89,36 @@ struct TailoredSpaceKey: View {
                                 }
                         }
                         .onEnded { _ in
-                                longPressBuffer = 0
+                                longPressDeadline = nil
                                 previousDraggingDistance = 0
                                 if isLongPressEngaged {
                                         isLongPressEngaged = false
                                 } else if isInTheMediumOfDoubleTapping {
-                                        doubleTappingBuffer = 0
                                         isInTheMediumOfDoubleTapping = false
                                         context.operate(.doubleSpace)
                                 } else {
-                                        doubleTappingBuffer = 0
                                         isInTheMediumOfDoubleTapping = true
                                         context.operate(.space)
                                 }
+                                doubleTappingDeadline = isInTheMediumOfDoubleTapping ? clock.now.advanced(by: .milliseconds(300)) : nil
                         }
                 )
-                .task(id: isInteracted) {
-                        guard isInteracted else { return }
-                        while Task.isCancelled.negative {
-                                try? await Task.sleep(for: .milliseconds(100)) // 0.1s
-                                if isTouching {
-                                        if longPressBuffer > 3 {
-                                                if isLongPressEngaged.negative {
-                                                        AudioFeedback.modified()
-                                                        context.triggerHapticFeedback()
-                                                        isLongPressEngaged = true
-                                                }
-                                        } else {
-                                                longPressBuffer += 1
-                                        }
-                                } else if isInTheMediumOfDoubleTapping {
-                                        if doubleTappingBuffer > 2 {
-                                                doubleTappingBuffer = 0
-                                                isInTheMediumOfDoubleTapping = false
-                                        } else {
-                                                doubleTappingBuffer += 1
-                                        }
-                                }
+                .task(id: interactionDeadline) {
+                        guard let deadline = interactionDeadline else { return }
+                        do {
+                                try await clock.sleep(until: deadline)
+                        } catch {
+                                return
+                        }
+                        guard Task.isCancelled.negative else { return }
+                        if isTouching {
+                                guard longPressDeadline == deadline, isLongPressEngaged.negative else { return }
+                                AudioFeedback.modified()
+                                context.triggerHapticFeedback()
+                                isLongPressEngaged = true
+                        } else if doubleTappingDeadline == deadline {
+                                doubleTappingDeadline = nil
+                                isInTheMediumOfDoubleTapping = false
                         }
                 }
         }
