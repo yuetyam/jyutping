@@ -127,8 +127,8 @@ private struct GlassCantoneseNumericSymbolRow: View {
 private struct GlassCantoneseNumericPunctuationRow: View {
         var body: some View {
                 HStack(spacing: 0) {
-                        GlassTransformKey(.symbolic, coefficient: 1.3)
-                        Spacer()
+                        GlassTransformKey(.symbolic, coefficient: 1.35)
+                        Spacer().frame(minWidth: 0)
                         GlassEnhancedInputKey(
                                 side: .leading,
                                 unit: KeyUnit(primary: KeyElement("。"),
@@ -190,7 +190,7 @@ private struct GlassCantoneseNumericPunctuationRow: View {
                                                         KeyElement("\u{201C}", extras: [.init("左", alignment: .top), .init("201C", alignment: .bottom)])
                                                    ])
                         )
-                        Spacer()
+                        Spacer().frame(minWidth: 0)
                         GlassBackspaceKey()
                 }
         }

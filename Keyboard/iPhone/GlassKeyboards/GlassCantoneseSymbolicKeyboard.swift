@@ -212,8 +212,8 @@ private struct GlassCantoneseSecondSymbolRow: View {
 private struct GlassCantoneseThirdSymbolRow: View {
         var body: some View {
                 HStack(spacing: 0) {
-                        GlassTransformKey(.numeric, coefficient: 1.3)
-                        Spacer()
+                        GlassTransformKey(.numeric, coefficient: 1.35)
+                        Spacer().frame(minWidth: 0)
                         GlassEnhancedInputKey(
                                 side: .leading,
                                 unit: KeyUnit(primary: KeyElement("\u{2026}"),
@@ -238,7 +238,7 @@ private struct GlassCantoneseThirdSymbolRow: View {
                                                         KeyElement("\u{0060}", extras: [.init("重音符", alignment: .top), .init("0060", alignment: .bottom)])
                                                    ])
                         )
-                        Spacer()
+                        Spacer().frame(minWidth: 0)
                         GlassBackspaceKey()
                 }
         }

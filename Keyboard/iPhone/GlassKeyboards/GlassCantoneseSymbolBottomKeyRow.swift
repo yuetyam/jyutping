@@ -19,7 +19,7 @@ struct GlassCantoneseSymbolBottomKeyRow: View {
                         }
                 case (true, false):
                         HStack(spacing: 0) {
-                                GlassTransformKey(.primary, coefficient: 2)
+                                GlassTransformKey(.primary)
                                 GlassCantoneseSymbolCommaKey()
                                 SpaceKey()
                                 GlassCantoneseSymbolPeriodKey()
@@ -36,7 +36,7 @@ struct GlassCantoneseSymbolBottomKeyRow: View {
                         }
                 case (false, false):
                         HStack(spacing: 0) {
-                                GlassTransformKey(.primary, coefficient: 2)
+                                GlassTransformKey(.primary)
                                 GlassCantoneseSymbolCommaKey()
                                 SpaceKey()
                                 GlassCantoneseSymbolPeriodKey()

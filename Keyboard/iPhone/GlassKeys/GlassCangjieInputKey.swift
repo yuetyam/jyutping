@@ -2,13 +2,15 @@ import SwiftUI
 import CoreIME
 import CommonExtensions
 
-/// A Cangjie radical key that handles input as soon as the button is pressed.
+/// A glass-styled Cangjie radical key that handles input as soon as the button is pressed.
 ///
 /// Displays the radical with a letter caption that follows the lowercase-key preference and current keyboard case.
-/// Pressing shows a radical preview bubble when enabled, or changes the key's background color otherwise.
-struct CangjieInputKey: View {
+/// Pressing shows a radical preview bubble when enabled, or highlights and enlarges the glass key otherwise.
+@available(iOS 26.0, *)
+@available(iOSApplicationExtension 26.0, *)
+struct GlassCangjieInputKey: View {
 
-        /// Creates a Cangjie key for the given input event.
+        /// Creates a glass-styled Cangjie key for the given input event.
         ///
         /// - Parameter virtual: The key whose letter and corresponding radical are displayed and whose event is handled on press-down.
         init(_ virtual: VirtualInputKey) {
@@ -29,13 +31,13 @@ struct CangjieInputKey: View {
         /// Keyboard dimensions, case, input handling, and haptic feedback.
         @EnvironmentObject private var context: KeyboardViewController
 
-        /// Current color scheme used to choose the key and preview colors.
+        /// Current color scheme used to choose the pressed glass key's shadow color.
         @Environment(\.colorScheme) private var colorScheme
 
         /// Button press state reported by PressButtonStyle; may end when sliding outside the key.
         @State private var isTouching: Bool = false
 
-        /// Renders the radical, letter caption, and optional preview using the current keyboard interface's geometry.
+        /// Renders the glass key, radical, letter caption, and optional preview using the current keyboard interface's geometry.
         ///
         /// PressButtonStyle synchronizes the pressed state and immediately plays input audio, triggers haptic feedback, and sends the input event to the controller.
         var body: some View {
@@ -44,9 +46,7 @@ struct CangjieInputKey: View {
                 let keyboardInterface = context.keyboardInterface
                 let insets = keyboardInterface.keyShapeInsets
                 let previewBottomOffset = keyboardInterface.previewBottomOffset(keyWidth: keyWidth, keyHeight: keyHeight, insets: insets)
-                let shouldPreviewKey: Bool = Options.keyTextPreview
-                let activeColor: Color = shouldPreviewKey ? colorScheme.inputKeyColor : colorScheme.activeInputKeyColor
-                let displayForm = KeyDisplayForm.responsive(isInteracting: isTouching, isLongPressing: false, shouldPreview: shouldPreviewKey)
+                let displayForm = KeyDisplayForm.responsive(isInteracting: isTouching, isLongPressing: false, shouldPreview: Options.keyTextPreview)
                 let shouldShowLowercaseKeys: Bool = Options.showLowercaseKeys && context.keyboardCase.isLowercased
                 let textCase: Text.Case = shouldShowLowercaseKeys ? .lowercase : .uppercase
                 Button(action: {}) {
@@ -54,20 +54,20 @@ struct CangjieInputKey: View {
                                 Color.interactiveClear
                                 switch displayForm {
                                 case .previewing, .expanding:
-                                        BubbleShape()
-                                                .fill(colorScheme.previewBubbleColor)
-                                                .shadow(color: .shadowGray, radius: 1)
+                                        Color.clear
+                                                .glassEffect(.regular, in: BubbleShape())
                                                 .overlay {
                                                         Text(verbatim: radical)
+                                                                .textCase(textCase)
                                                                 .font(.largeTitle)
                                                                 .padding(.bottom, previewBottomOffset)
                                                 }
                                                 .padding(insets)
                                 case .normal, .reflecting:
-                                        RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
-                                                .fill(isTouching ? activeColor : colorScheme.inputKeyColor)
-                                                .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                                .padding(insets)
+                                        Color.clear
+                                                .glassEffect(displayForm.isReflecting ? .regular : .clear, in: .rect(cornerRadius: PresetConstant.keyCornerRadius))
+                                                .shadow(color: displayForm.isReflecting ? colorScheme.glassShadow : Color.clear, radius: 0.5)
+                                                .padding(displayForm.isReflecting ? insets.plused(-2) : insets)
                                         ZStack(alignment: .topTrailing) {
                                                 Color.clear
                                                 Text(verbatim: letter)

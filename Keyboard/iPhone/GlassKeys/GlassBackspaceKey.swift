@@ -9,7 +9,7 @@ struct GlassBackspaceKey: View {
         /// Creates a glass-styled backspace key.
         ///
         /// - Parameter coefficient: Multiplier applied to the keyboard's width unit.
-        init(coefficient: CGFloat = 1.3) {
+        init(coefficient: CGFloat = 1.35) {
                 self.coefficient = coefficient
         }
 
