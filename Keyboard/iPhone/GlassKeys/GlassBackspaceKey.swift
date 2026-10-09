@@ -20,7 +20,7 @@ struct GlassBackspaceKey: View {
         /// Keyboard properties and handlers.
         @EnvironmentObject private var context: KeyboardViewController
 
-        /// Retrieves the current system color scheme for the pressed-key shadow.
+        /// Retrieves the current system color scheme (light or dark mode) from the environment.
         @Environment(\.colorScheme) private var colorScheme
 
         /// Monotonic clock used to measure interaction deadlines independently of timer scheduling.

@@ -32,7 +32,7 @@ struct GlassCantoneseKeyboard: View {
                                 HiddenKey(key: .letterL)
                         }
                         HStack(spacing: 0) {
-                                ShiftKey()
+                                GlassShiftKey()
                                 HiddenKey(key: .letterZ)
                                 switch Options.inputKeyStyle {
                                 case .clear, .numbers:
