@@ -37,7 +37,7 @@ struct GlassMotherBoard: View {
                         case .cantonese:
                                 switch context.keyboardInterface {
                                 case .phonePortrait, .phoneLandscape, .phoneOnPadPortrait, .phoneOnPadLandscape, .padFloating:
-                                        CantoneseNumericKeyboard()
+                                        GlassCantoneseNumericKeyboard()
                                 case .padPortraitSmall, .padLandscapeSmall:
                                         PadCantoneseNumericKeyboard()
                                 case .padPortraitMedium, .padLandscapeMedium:
@@ -62,7 +62,7 @@ struct GlassMotherBoard: View {
                         case .cantonese:
                                 switch context.keyboardInterface {
                                 case .phonePortrait, .phoneLandscape, .phoneOnPadPortrait, .phoneOnPadLandscape, .padFloating:
-                                        CantoneseSymbolicKeyboard()
+                                        GlassCantoneseSymbolicKeyboard()
                                 case .padPortraitSmall, .padLandscapeSmall:
                                         PadCantoneseSymbolicKeyboard()
                                 case .padPortraitMedium, .padLandscapeMedium:

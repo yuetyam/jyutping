@@ -86,9 +86,10 @@ struct GlassRightKey: View {
                                                 .glassEffect(.regular, in: ExpansiveBubbleShape(side: .trailing, expansionCount: expansionCount))
                                                 .overlay {
                                                         HStack(spacing: 0) {
-                                                                ForEach(elements.reversed().enumerated(), id: \.element.text) { index, element in
-                                                                        let reversedIndex = (symbolCount - 1) - index
-                                                                        let isSelected: Bool = selectedIndex == reversedIndex
+                                                                ForEach(elements.reversed().enumerated(), id: \.element.text) { index, _ in
+                                                                        let elementIndex = (symbolCount - 1) - index
+                                                                        let element = elements[elementIndex]
+                                                                        let isSelected: Bool = selectedIndex == elementIndex
                                                                         ZStack {
                                                                                 RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
                                                                                         .fill(isSelected ? Color.accentColor : Color.clear)

@@ -104,8 +104,9 @@ struct GlassEnhancedInputKey: View {
                                                 .glassEffect(.regular, in: ExpansiveBubbleShape(side: side, expansionCount: expansionCount))
                                                 .overlay {
                                                         HStack(spacing: 0) {
-                                                                ForEach(unit.members.enumerated(), id: \.element.text) { index, element in
+                                                                ForEach(unit.members.enumerated(), id: \.element.text) { index, member in
                                                                         let elementIndex: Int = side.isLeading ? index : ((memberCount - 1) - index)
+                                                                        let element = side.isLeading ? member : unit.members[elementIndex]
                                                                         let isSelected: Bool = selectedIndex == elementIndex
                                                                         ZStack {
                                                                                 RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
