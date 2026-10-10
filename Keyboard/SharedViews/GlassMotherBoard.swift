@@ -109,7 +109,7 @@ struct GlassMotherBoard: View {
                                         case .primary:
                                                 switch context.keyboardLayout {
                                                 case .qwerty      : GlassCantoneseKeyboard()
-                                                case .tripleStroke: TripleStrokeKeyboard()
+                                                case .tripleStroke: GlassTripleStrokeKeyboard()
                                                 case .nineKey     : NineKeyKeyboard()
                                                 case .fourteenKey : FourteenKeyKeyboard()
                                                 case .fifteenKey  : FifteenKeyKeyboard()
