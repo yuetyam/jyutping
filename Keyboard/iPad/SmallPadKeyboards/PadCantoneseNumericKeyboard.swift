@@ -183,8 +183,8 @@ struct PadCantoneseNumericKeyboard: View {
                                                         members: [
                                                                 KeyElement("'"),
                                                                 KeyElement("\""),
-                                                                KeyElement("\u{2019}", extras: [.init("右", alignment: .top), .init("2019", alignment: .bottom)]),
-                                                                KeyElement("\u{2018}", extras: [.init("左", alignment: .top), .init("2018", alignment: .bottom)]),
+                                                                KeyElement("\u{2019}", extras: [.init(PresetConstant.right, alignment: .top), .init("2019", alignment: .bottom)]),
+                                                                KeyElement("\u{2018}", extras: [.init(PresetConstant.left, alignment: .top), .init("2018", alignment: .bottom)]),
                                                                 KeyElement("\u{FF07}", extras: [.init(PresetConstant.fullWidth, alignment: .top), .init("FF07", alignment: .bottom)]),
                                                                 KeyElement("\u{0060}", extras: [.init("重音符", alignment: .top), .init("0060", alignment: .bottom)])
                                                         ]

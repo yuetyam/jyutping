@@ -82,11 +82,11 @@ struct SecondEnhancedLetterKeyRow: View {
                                         members: [
                                                 KeyElement("l"),
                                                 KeyElement("'", extras: [.init("0027", alignment: .bottom)]),
-                                                KeyElement("’", extras: [.init("右", alignment: .top), .init("2019", alignment: .bottom)]),
-                                                KeyElement("‘", extras: [.init("左", alignment: .top), .init("2018", alignment: .bottom)]),
+                                                KeyElement("’", extras: [.init(PresetConstant.right, alignment: .top), .init("2019", alignment: .bottom)]),
+                                                KeyElement("‘", extras: [.init(PresetConstant.left, alignment: .top), .init("2018", alignment: .bottom)]),
                                                 KeyElement("\"", extras: [.init("0022", alignment: .bottom)]),
-                                                KeyElement("”", extras: [.init("右", alignment: .top), .init("201D", alignment: .bottom)]),
-                                                KeyElement("“", extras: [.init("左", alignment: .top), .init("201C", alignment: .bottom)])
+                                                KeyElement("”", extras: [.init(PresetConstant.right, alignment: .top), .init("201D", alignment: .bottom)]),
+                                                KeyElement("“", extras: [.init(PresetConstant.left, alignment: .top), .init("201C", alignment: .bottom)])
                                         ]
                                 )
                         )

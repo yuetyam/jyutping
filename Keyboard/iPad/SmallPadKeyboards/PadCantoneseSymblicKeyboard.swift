@@ -39,8 +39,8 @@ struct PadCantoneseSymbolicKeyboard: View {
                                                         primary: KeyElement("\""),
                                                         members: [
                                                                 KeyElement("\"", extras: [.init("0022", alignment: .bottom)]),
-                                                                KeyElement("\u{201D}", extras: [.init("右", alignment: .top), .init("201D", alignment: .bottom)]),
-                                                                KeyElement("\u{201C}", extras: [.init("左", alignment: .top), .init("201C", alignment: .bottom)]),
+                                                                KeyElement("\u{201D}", extras: [.init(PresetConstant.right, alignment: .top), .init("201D", alignment: .bottom)]),
+                                                                KeyElement("\u{201C}", extras: [.init(PresetConstant.left, alignment: .top), .init("201C", alignment: .bottom)]),
                                                                 KeyElement("\u{FF02}", extras: [.init(PresetConstant.fullWidth, alignment: .top), .init("FF02", alignment: .bottom)])
                                                         ]
                                                 )

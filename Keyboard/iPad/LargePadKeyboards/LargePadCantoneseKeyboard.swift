@@ -389,7 +389,7 @@ struct LargePadCantoneseKeyboard: View {
                                 }
                                 if context.keyboardCase.isUppercased {
                                         LargePadExpansibleInputKey(side: .trailing, unit: KeyUnit(primary: KeyElement("："), members: [KeyElement("："), KeyElement(":", extras: [.init(PresetConstant.halfWidth, alignment: .top)])]))
-                                        LargePadExpansibleInputKey(side: .trailing, unit: KeyUnit(primary: KeyElement("\""), members: [KeyElement("\""), KeyElement("\u{201D}", extras: [.init("右", alignment: .top), .init("201D", alignment: .bottom)]), KeyElement("\u{201C}", extras: [.init("左", alignment: .top), .init("201C", alignment: .bottom)])]))
+                                        LargePadExpansibleInputKey(side: .trailing, unit: KeyUnit(primary: KeyElement("\""), members: [KeyElement("\""), KeyElement("\u{201D}", extras: [.init(PresetConstant.right, alignment: .top), .init("201D", alignment: .bottom)]), KeyElement("\u{201C}", extras: [.init(PresetConstant.left, alignment: .top), .init("201C", alignment: .bottom)])]))
                                 } else {
                                         LargePadUpperLowerInputKey(side: .trailing, upper: "：", lower: "；", unit: KeyUnit(primary: KeyElement("；"), members: [KeyElement("；"), KeyElement("："), KeyElement(";", extras: [.init(PresetConstant.halfWidth, alignment: .top)]), KeyElement(":", extras: [.init(PresetConstant.halfWidth, alignment: .top)])]))
                                         LargePadUpperLowerInputKey(
@@ -401,8 +401,8 @@ struct LargePadCantoneseKeyboard: View {
                                                         members: [
                                                                 KeyElement("'"),
                                                                 KeyElement("\""),
-                                                                KeyElement("\u{2019}", extras: [.init("右", alignment: .top), .init("2019", alignment: .bottom)]),
-                                                                KeyElement("\u{2018}", extras: [.init("左", alignment: .top), .init("2018", alignment: .bottom)])
+                                                                KeyElement("\u{2019}", extras: [.init(PresetConstant.right, alignment: .top), .init("2019", alignment: .bottom)]),
+                                                                KeyElement("\u{2018}", extras: [.init(PresetConstant.left, alignment: .top), .init("2018", alignment: .bottom)])
                                                         ]
                                                 )
                                         )
