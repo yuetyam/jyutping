@@ -2,14 +2,16 @@ import SwiftUI
 import CoreIME
 import CommonExtensions
 
-/// A stroke key that handles input as soon as the button is pressed.
+/// A glass-styled stroke key that handles input as soon as the button is pressed.
 ///
 /// Displays a mapped stroke with a key-text caption, or the key text alone when no display stroke is available.
 /// Key text follows the lowercase-key preference and current keyboard case.
-/// Pressing shows a stroke or key-text preview bubble when enabled, or changes the key's background color otherwise.
-struct StrokeInputKey: View {
+/// Pressing shows a stroke or key-text preview bubble when enabled, or highlights and enlarges the glass key otherwise.
+@available(iOS 26.0, *)
+@available(iOSApplicationExtension 26.0, *)
+struct GlassStrokeInputKey: View {
 
-        /// Creates a stroke key for the given input event.
+        /// Creates a glass-styled stroke key for the given input event.
         ///
         /// - Parameter virtual: The key whose text and optional display stroke are shown and whose event is handled on press-down.
         init(_ virtual: VirtualInputKey) {
@@ -26,13 +28,13 @@ struct StrokeInputKey: View {
         /// Keyboard dimensions, case, input handling, and haptic feedback.
         @EnvironmentObject private var context: KeyboardViewController
 
-        /// Current color scheme used to choose the key and preview colors.
+        /// Current color scheme used to choose the pressed glass key's shadow color.
         @Environment(\.colorScheme) private var colorScheme
 
         /// Button press state reported by PressButtonStyle; may end when sliding outside the key.
         @State private var isTouching: Bool = false
 
-        /// Renders the stroke or fallback text, optional caption, and preview using the current keyboard interface's geometry.
+        /// Renders the glass key, stroke or fallback text, optional caption, and preview using the current keyboard interface's geometry.
         ///
         /// PressButtonStyle synchronizes the pressed state and immediately plays input audio, triggers haptic feedback, and sends the input event to the controller.
         var body: some View {
@@ -41,9 +43,7 @@ struct StrokeInputKey: View {
                 let keyboardInterface = context.keyboardInterface
                 let insets = keyboardInterface.keyShapeInsets
                 let previewBottomOffset = keyboardInterface.previewBottomOffset(keyWidth: keyWidth, keyHeight: keyHeight, insets: insets)
-                let shouldPreviewKey: Bool = Options.keyTextPreview
-                let activeColor: Color = shouldPreviewKey ? colorScheme.inputKeyColor : colorScheme.activeInputKeyColor
-                let displayForm = KeyDisplayForm.responsive(isInteracting: isTouching, isLongPressing: false, shouldPreview: shouldPreviewKey)
+                let displayForm = KeyDisplayForm.responsive(isInteracting: isTouching, isLongPressing: false, shouldPreview: Options.keyTextPreview)
                 let shouldShowLowercaseKeys: Bool = Options.showLowercaseKeys && context.keyboardCase.isLowercased
                 let textCase: Text.Case = shouldShowLowercaseKeys ? .lowercase : .uppercase
                 Button(action: {}) {
@@ -51,9 +51,8 @@ struct StrokeInputKey: View {
                                 Color.interactiveClear
                                 switch displayForm {
                                 case .previewing, .expanding:
-                                        BubbleShape()
-                                                .fill(colorScheme.previewBubbleColor)
-                                                .shadow(color: .shadowGray, radius: 1)
+                                        Color.clear
+                                                .glassEffect(.regular, in: BubbleShape())
                                                 .overlay {
                                                         Text(verbatim: strokeText ?? virtual.text)
                                                                 .textCase(textCase)
@@ -62,10 +61,10 @@ struct StrokeInputKey: View {
                                                 }
                                                 .padding(insets)
                                 case .normal, .reflecting:
-                                        RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
-                                                .fill(isTouching ? activeColor : colorScheme.inputKeyColor)
-                                                .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                                .padding(insets)
+                                        Color.clear
+                                                .glassEffect(displayForm.isReflecting ? .regular : .clear, in: .rect(cornerRadius: PresetConstant.keyCornerRadius))
+                                                .shadow(color: displayForm.isReflecting ? colorScheme.glassShadow : Color.clear, radius: 0.5)
+                                                .padding(displayForm.isReflecting ? insets.plused(-2) : insets)
                                         if let strokeText {
                                                 ZStack(alignment: .topTrailing) {
                                                         Color.clear

@@ -105,7 +105,7 @@ struct GlassMotherBoard: View {
                                         switch context.compositionType {
                                         case .pinyin : PinyinKeyboard()
                                         case .cangjie: GlassCangjieKeyboard()
-                                        case .stroke : StrokeKeyboard()
+                                        case .stroke : GlassStrokeKeyboard()
                                         case .primary:
                                                 switch context.keyboardLayout {
                                                 case .qwerty      : GlassCantoneseKeyboard()
