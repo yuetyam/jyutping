@@ -26,7 +26,7 @@ struct GlassMotherBoard: View {
                         case .abc:
                                 switch context.keyboardInterface {
                                 case .phonePortrait, .phoneLandscape, .phoneOnPadPortrait, .phoneOnPadLandscape, .padFloating:
-                                        NumericKeyboard()
+                                        GlassNumericKeyboard()
                                 case .padPortraitSmall, .padLandscapeSmall:
                                         PadNumericKeyboard()
                                 case .padPortraitMedium, .padLandscapeMedium:
@@ -51,7 +51,7 @@ struct GlassMotherBoard: View {
                         case .abc:
                                 switch context.keyboardInterface {
                                 case .phonePortrait, .phoneLandscape, .phoneOnPadPortrait, .phoneOnPadLandscape, .padFloating:
-                                        SymbolicKeyboard()
+                                        GlassSymbolicKeyboard()
                                 case .padPortraitSmall, .padLandscapeSmall:
                                         PadSymbolicKeyboard()
                                 case .padPortraitMedium, .padLandscapeMedium:
@@ -91,7 +91,7 @@ struct GlassMotherBoard: View {
                         case .abc:
                                 switch context.keyboardInterface {
                                 case .phonePortrait, .phoneLandscape, .phoneOnPadPortrait, .phoneOnPadLandscape, .padFloating:
-                                        ABCKeyboard()
+                                        GlassABCKeyboard()
                                 case .padPortraitSmall, .padLandscapeSmall:
                                         PadABCKeyboard()
                                 case .padPortraitMedium, .padLandscapeMedium:
@@ -101,7 +101,7 @@ struct GlassMotherBoard: View {
                                 }
                         case .cantonese:
                                 switch context.keyboardInterface {
-                                case .phonePortrait, .phoneLandscape:
+                                case .phonePortrait, .phoneLandscape, .phoneOnPadPortrait, .phoneOnPadLandscape, .padFloating:
                                         switch context.compositionType {
                                         case .pinyin : GlassPinyinKeyboard()
                                         case .cangjie: GlassCangjieKeyboard()
@@ -116,18 +116,6 @@ struct GlassMotherBoard: View {
                                                 case .eighteenKey : EighteenKeyKeyboard()
                                                 case .nineteenKey : NineteenKeyKeyboard()
                                                 case .twentyOneKey: TwentyOneKeyKeyboard()
-                                                }
-                                        }
-                                case .phoneOnPadPortrait, .phoneOnPadLandscape, .padFloating:
-                                        switch context.compositionType {
-                                        case .pinyin : PinyinKeyboard()
-                                        case .cangjie: CangjieKeyboard()
-                                        case .stroke : StrokeKeyboard()
-                                        case .primary:
-                                                switch context.keyboardLayout {
-                                                case .tripleStroke: TripleStrokeKeyboard()
-                                                case .nineKey: NineKeyKeyboard()
-                                                default: CantoneseKeyboard()
                                                 }
                                         }
                                 case .padPortraitSmall, .padLandscapeSmall:
