@@ -29,7 +29,7 @@ struct TwentyOneKeyKeyboard: View {
                                 SecondEnhancedLetterRow()
                         }
                         HStack(spacing: 0) {
-                                ShiftKey(coefficient: 1.6)
+                                ShiftKey(coefficient: 1.65)
                                 HiddenKey(key: .letterZ)
                                 switch Options.inputKeyStyle {
                                 case .clear, .numbers:
@@ -38,7 +38,7 @@ struct TwentyOneKeyKeyboard: View {
                                         ThirdEnhancedLetterRow()
                                 }
                                 HiddenKey(key: .letterM)
-                                BackspaceKey(coefficient: 1.6)
+                                BackspaceKey(coefficient: 1.65)
                         }
                         CantoneseBottomKeyRow()
                 }
