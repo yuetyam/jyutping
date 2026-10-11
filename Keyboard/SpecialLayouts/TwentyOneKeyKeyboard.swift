@@ -182,7 +182,7 @@ private struct SecondLetterRow: View {
                 HStack(spacing: 0 ) {
                         if needsNumbers {
                                 T21EnhancedInputKey(
-                                        side: .trailing,
+                                        side: .leading,
                                         virtual: .letterA,
                                         unit: KeyUnit(
                                                 primary: KeyElement("a", extras: [.init("9", alignment: .topTrailing)]),
@@ -193,7 +193,7 @@ private struct SecondLetterRow: View {
                                         )
                                 )
                                 T21EnhancedInputKey(
-                                        side: .trailing,
+                                        side: .leading,
                                         virtual: .letterS,
                                         unit: KeyUnit(
                                                 primary: KeyElement("s", extras: [.init("0", alignment: .topTrailing)]),
