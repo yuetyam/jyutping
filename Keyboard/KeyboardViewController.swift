@@ -974,7 +974,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 }
         }
 
-        /// 拆字、兩分反查. 例如 木 + 木 = 林: mukmuk
+        /// 拆字反查. 例如 木 + 木 = 林: mukmuk
         private func structureReverseLookup() {
                 suggestionTask?.cancel()
                 let allKeys = bufferEvents.compactMap(\.keys.first)
@@ -1322,9 +1322,14 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         return viewWidth < (screenSize.width * 0.75)
                 }()
                 guard isFloatingOnPad.negative else { return .padFloating }
-                switch (isRunningOnPad, isPadInterface) {
-                case (true, true):
-                        // iPad
+                let isPhoneAppOnPad: Bool = isRunningOnPad && isPadInterface.negative
+                if isPhoneAppOnPad {
+                        if #unavailable(iOS 27.0, iOSApplicationExtension 27.0) {
+                                let isCompactVertical: Bool = traitCollection.verticalSizeClass == .compact
+                                return isCompactVertical ? .phoneOnPadLandscape : .phoneOnPadPortrait
+                        }
+                }
+                if isRunningOnPad {
                         let screenSize: CGSize = screenSize ?? fetchAvailableSize()
                         let minDimension: CGFloat = min(screenSize.width, screenSize.height)
                         let isPortrait: Bool = screenSize.width < (minDimension + 2)
@@ -1335,12 +1340,18 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         } else {
                                 return isPortrait ? .padPortraitSmall : .padLandscapeSmall
                         }
-                case (true, false):
-                        // iPhone app running on iPad
-                        let isCompactVertical: Bool = traitCollection.verticalSizeClass == .compact
-                        return isCompactVertical ? .phoneOnPadLandscape : .phoneOnPadPortrait
-                case (false, _):
-                        // iPhone
+                } else if isRunningOnFoldablePhone {
+                        let screenSize: CGSize = screenSize ?? fetchAvailableSize()
+                        let minDimension: CGFloat = min(screenSize.width, screenSize.height)
+                        let isFolded: Bool = minDimension < 500
+                        if isFolded {
+                                let isCompactHorizontal: Bool = traitCollection.horizontalSizeClass == .compact
+                                return isCompactHorizontal ? .foldableOuterPortrait : .foldableOuterLandscape
+                        } else {
+                                let isPortrait: Bool = screenSize.width < (minDimension + 2)
+                                return isPortrait ? .foldableInnerPortrait : .foldableInnerLandscape
+                        }
+                } else {
                         let isCompactVertical: Bool = traitCollection.verticalSizeClass == .compact
                         return isCompactVertical ? .phoneLandscape : .phonePortrait
                 }

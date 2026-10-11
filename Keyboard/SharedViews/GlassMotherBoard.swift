@@ -24,63 +24,62 @@ struct GlassMotherBoard: View {
                 case .numeric:
                         switch context.inputMethodMode {
                         case .abc:
-                                switch context.keyboardInterface {
-                                case .phonePortrait, .phoneLandscape, .phoneOnPadPortrait, .phoneOnPadLandscape, .padFloating:
-                                        GlassNumericKeyboard()
-                                case .padPortraitSmall, .padLandscapeSmall:
+                                switch context.keyboardInterface {                                case .padPortraitSmall, .padLandscapeSmall:
                                         PadNumericKeyboard()
                                 case .padPortraitMedium, .padLandscapeMedium:
                                         MediumPadNumericKeyboard()
                                 case .padPortraitLarge, .padLandscapeLarge:
                                         LargePadNumericKeyboard()
+                                default:
+                                        GlassNumericKeyboard()
                                 }
                         case .cantonese:
                                 switch context.keyboardInterface {
-                                case .phonePortrait, .phoneLandscape, .phoneOnPadPortrait, .phoneOnPadLandscape, .padFloating:
-                                        GlassCantoneseNumericKeyboard()
                                 case .padPortraitSmall, .padLandscapeSmall:
                                         PadCantoneseNumericKeyboard()
                                 case .padPortraitMedium, .padLandscapeMedium:
                                         MediumPadCantoneseNumericKeyboard()
                                 case .padPortraitLarge, .padLandscapeLarge:
                                         LargePadCantoneseNumericKeyboard()
+                                default:
+                                        GlassCantoneseNumericKeyboard()
                                 }
                         }
                 case .symbolic:
                         switch context.inputMethodMode {
                         case .abc:
                                 switch context.keyboardInterface {
-                                case .phonePortrait, .phoneLandscape, .phoneOnPadPortrait, .phoneOnPadLandscape, .padFloating:
-                                        GlassSymbolicKeyboard()
                                 case .padPortraitSmall, .padLandscapeSmall:
                                         PadSymbolicKeyboard()
                                 case .padPortraitMedium, .padLandscapeMedium:
                                         MediumPadSymbolicKeyboard()
                                 case .padPortraitLarge, .padLandscapeLarge:
                                         LargePadNumericKeyboard()
+                                default:
+                                        GlassSymbolicKeyboard()
                                 }
                         case .cantonese:
                                 switch context.keyboardInterface {
-                                case .phonePortrait, .phoneLandscape, .phoneOnPadPortrait, .phoneOnPadLandscape, .padFloating:
-                                        GlassCantoneseSymbolicKeyboard()
                                 case .padPortraitSmall, .padLandscapeSmall:
                                         PadCantoneseSymbolicKeyboard()
                                 case .padPortraitMedium, .padLandscapeMedium:
                                         MediumPadCantoneseSymbolicKeyboard()
                                 case .padPortraitLarge, .padLandscapeLarge:
                                         LargePadCantoneseNumericKeyboard()
+                                default:
+                                        GlassCantoneseSymbolicKeyboard()
                                 }
                         }
                 case .numberPad, .decimalPad:
                         switch context.keyboardInterface {
-                        case .phonePortrait, .phoneLandscape, .phoneOnPadPortrait, .phoneOnPadLandscape, .padFloating:
-                                GlassNumberPad(isDecimalPad: context.keyboardForm.isDecimalPad)
                         case .padPortraitSmall, .padLandscapeSmall:
                                 PadNumericKeyboard()
                         case .padPortraitMedium, .padLandscapeMedium:
                                 MediumPadNumericKeyboard()
                         case .padPortraitLarge, .padLandscapeLarge:
                                 LargePadNumericKeyboard()
+                        default:
+                                GlassNumberPad(isDecimalPad: context.keyboardForm.isDecimalPad)
                         }
                 case .dedicatedNumbers:
                         GlassTailoredNumericKeyboard()
@@ -90,34 +89,17 @@ struct GlassMotherBoard: View {
                         switch context.inputMethodMode {
                         case .abc:
                                 switch context.keyboardInterface {
-                                case .phonePortrait, .phoneLandscape, .phoneOnPadPortrait, .phoneOnPadLandscape, .padFloating:
-                                        GlassABCKeyboard()
                                 case .padPortraitSmall, .padLandscapeSmall:
                                         PadABCKeyboard()
                                 case .padPortraitMedium, .padLandscapeMedium:
                                         MediumPadABCKeyboard()
                                 case .padPortraitLarge, .padLandscapeLarge:
                                         LargePadABCKeyboard()
+                                default:
+                                        GlassABCKeyboard()
                                 }
                         case .cantonese:
                                 switch context.keyboardInterface {
-                                case .phonePortrait, .phoneLandscape, .phoneOnPadPortrait, .phoneOnPadLandscape, .padFloating:
-                                        switch context.compositionType {
-                                        case .pinyin : GlassPinyinKeyboard()
-                                        case .cangjie: GlassCangjieKeyboard()
-                                        case .stroke : GlassStrokeKeyboard()
-                                        case .primary:
-                                                switch context.keyboardLayout {
-                                                case .qwerty      : GlassCantoneseKeyboard()
-                                                case .tripleStroke: GlassTripleStrokeKeyboard()
-                                                case .nineKey     : NineKeyKeyboard()
-                                                case .fourteenKey : FourteenKeyKeyboard()
-                                                case .fifteenKey  : FifteenKeyKeyboard()
-                                                case .eighteenKey : EighteenKeyKeyboard()
-                                                case .nineteenKey : NineteenKeyKeyboard()
-                                                case .twentyOneKey: TwentyOneKeyKeyboard()
-                                                }
-                                        }
                                 case .padPortraitSmall, .padLandscapeSmall:
                                         switch context.compositionType {
                                         case .pinyin : PadCantoneseKeyboard()
@@ -152,6 +134,23 @@ struct GlassMotherBoard: View {
                                                 case .tripleStroke: LargePadTripleStrokeKeyboard()
                                                 case .nineKey: NineKeyKeyboard()
                                                 default: LargePadCantoneseKeyboard()
+                                                }
+                                        }
+                                default:
+                                        switch context.compositionType {
+                                        case .pinyin : GlassPinyinKeyboard()
+                                        case .cangjie: GlassCangjieKeyboard()
+                                        case .stroke : GlassStrokeKeyboard()
+                                        case .primary:
+                                                switch context.keyboardLayout {
+                                                case .qwerty      : GlassCantoneseKeyboard()
+                                                case .tripleStroke: GlassTripleStrokeKeyboard()
+                                                case .nineKey     : NineKeyKeyboard()
+                                                case .fourteenKey : FourteenKeyKeyboard()
+                                                case .fifteenKey  : FifteenKeyKeyboard()
+                                                case .eighteenKey : EighteenKeyKeyboard()
+                                                case .nineteenKey : NineteenKeyKeyboard()
+                                                case .twentyOneKey: TwentyOneKeyKeyboard()
                                                 }
                                         }
                                 }

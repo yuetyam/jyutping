@@ -5,10 +5,26 @@ enum KeyboardInterface: Int {
         case phonePortrait
         case phoneLandscape
 
+        /// iPhone Duo, folded, portrait
+        case foldableOuterPortrait
+
+        /// iPhone Duo, folded, landscape
+        case foldableOuterLandscape
+
+        /// iPhone Duo, unfolded, portrait
+        case foldableInnerPortrait
+
+        /// iPhone Duo, unfolded, landscape
+        case foldableInnerLandscape
+
         /// Portrait iPhone app running on iPad
+        @available(iOS, introduced: 16.0, deprecated: 27.0, message: "Use iPad interfaces for iPadOS 27+")
+        @available(iOSApplicationExtension, introduced: 16.0, deprecated: 27.0, message: "Use iPad interfaces for iPadOS 27+")
         case phoneOnPadPortrait
 
         /// Landscape iPhone app running on iPad
+        @available(iOS, introduced: 16.0, deprecated: 27.0, message: "Use iPad interfaces for iPadOS 27+")
+        @available(iOSApplicationExtension, introduced: 16.0, deprecated: 27.0, message: "Use iPad interfaces for iPadOS 27+")
         case phoneOnPadLandscape
 
         /// Keyboard floating on iPad
@@ -29,29 +45,35 @@ extension KeyboardInterface {
         /// Phone, PhoneOnPad, PadFloating
         var isCompact: Bool {
                 switch self {
-                case .phonePortrait, .phoneLandscape, .phoneOnPadPortrait, .phoneOnPadLandscape, .padFloating:
-                        return true
-                default:
-                        return false
+                case .phonePortrait,
+                .phoneLandscape,
+                .phoneOnPadPortrait,
+                .phoneOnPadLandscape,
+                .padFloating,
+                .foldableOuterPortrait,
+                .foldableOuterLandscape: true
+                default: false
                 }
         }
         var isPhonePortrait: Bool {
                 switch self {
-                case .phonePortrait, .phoneOnPadPortrait:
-                        return true
-                default:
-                        return false
+                case .phonePortrait,
+                .phoneOnPadPortrait,
+                .foldableOuterPortrait: true
+                default: false
                 }
         }
         var isPhoneLandscape: Bool {
                 switch self {
-                case .phoneLandscape, .phoneOnPadLandscape:
-                        return true
-                default:
-                        return false
+                case .phoneLandscape,
+                .phoneOnPadLandscape,
+                .foldableOuterLandscape: true
+                default: false
                 }
         }
+
         var isPadFloating: Bool { self == .padFloating }
+
         var isPadPortrait: Bool {
                 switch self {
                 case .padPortraitSmall, .padPortraitMedium, .padPortraitLarge:
@@ -91,14 +113,13 @@ extension KeyboardInterface {
                         return 76
                 case .padFloating:
                         return 48
+                case .phoneLandscape, .phoneOnPadLandscape, .foldableOuterLandscape:
+                        return 36
                 case .phoneOnPadPortrait:
-                        // TODO: Handle Larger Text mode Display Zoom
                         let isLargeScreenPad: Bool = min(screenSize.width, screenSize.height) > 840
                         return isLargeScreenPad ? 54 : 53
-                case .phoneOnPadLandscape:
-                        return 36
-                case .phoneLandscape:
-                        return 36
+                case .foldableOuterPortrait, .foldableInnerPortrait, .foldableInnerLandscape:
+                        return 56
                 case .phonePortrait:
                         let minDimension: CGFloat = min(screenSize.width, screenSize.height)
                         if minDimension < 355 {
@@ -114,24 +135,16 @@ extension KeyboardInterface {
                                 // iPhone 16 Pro, 17, 17 Pro, 18 Pro (402 x 874)
                                 return 54
                         } else {
-                                return 56
-                        }
-                        /*
-                        else if minDimension < 425 {
                                 // iPhone 8 Plus (414 x 836)
                                 // iPhone Xr, Xs Max, 11, 11 Pro Max (414 x 896)
                                 // iPhone Air (420 x 912)
-                                return 56
-                        } else if minDimension < 445 {
                                 // iPhone 12 Pro Max, 13 Pro Max, 14 Plus (428 x 926)
                                 // iPhone 14 Pro Max, 15 Plus, 15 Pro Max, 16 Plus (430 x 932)
                                 // iPhone 16 Pro Max, 17 Pro Max, 18 Pro Max (440 x 956)
                                 return 56
-                        } else {
-                                let extra: Int = Int(minDimension - 300) / 20
-                                return CGFloat(50 + extra)
                         }
-                        */
+                        // let extra: Int = Int(minDimension - 300) / 20
+                        // return CGFloat(50 + extra)
                 }
         }
 }
@@ -141,17 +154,13 @@ extension KeyboardInterface {
         /// Key count per row; multiplier to the `widthUnit`
         var coefficient: CGFloat {
                 switch self {
-                case .phonePortrait      : 10
-                case .phoneLandscape     : 10
-                case .phoneOnPadPortrait : 10
-                case .phoneOnPadLandscape: 10
-                case .padFloating        : 10
                 case .padPortraitSmall   : 11
                 case .padPortraitMedium  : 12
                 case .padPortraitLarge   : 14.5
                 case .padLandscapeSmall  : 11
                 case .padLandscapeMedium : 12
                 case .padLandscapeLarge  : 14.5
+                default: 10
                 }
         }
 }
@@ -159,9 +168,15 @@ extension KeyboardInterface {
 extension KeyboardInterface {
         var editingKeyInset: CGFloat {
                 switch self {
-                case .padFloating: 2
-                case .phoneLandscape, .phoneOnPadLandscape: 2
-                case .phonePortrait, .phoneOnPadPortrait: 3
+                case .padFloating,
+                .phoneLandscape,
+                .phoneOnPadLandscape,
+                .foldableOuterLandscape: 2
+                case .phonePortrait,
+                .phoneOnPadPortrait,
+                .foldableOuterPortrait,
+                .foldableInnerPortrait,
+                .foldableInnerLandscape: 3
                 case .padPortraitSmall,
                 .padLandscapeSmall,
                 .padPortraitMedium,
@@ -172,10 +187,14 @@ extension KeyboardInterface {
         }
         var keyShapeInsets: EdgeInsets {
                 switch self {
-                case .phonePortrait, .phoneOnPadPortrait, .padFloating:
+                case .phonePortrait, .phoneOnPadPortrait, .padFloating, .foldableOuterPortrait:
                         EdgeInsets(top: 6, leading: 3, bottom: 6, trailing: 3)
-                case .phoneLandscape, .phoneOnPadLandscape:
+                case .phoneLandscape, .phoneOnPadLandscape, .foldableOuterLandscape:
                         EdgeInsets(top: 3, leading: 6, bottom: 3, trailing: 6)
+                case .foldableInnerPortrait:
+                        EdgeInsets(top: 6, leading: 6, bottom: 6, trailing: 6)
+                case .foldableInnerLandscape:
+                        EdgeInsets(top: 6, leading: 8, bottom: 6, trailing: 8)
                 case .padPortraitSmall, .padPortraitMedium:
                         EdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
                 case .padLandscapeSmall, .padLandscapeMedium:

@@ -23,62 +23,62 @@ struct MotherBoard: View {
                         switch context.inputMethodMode {
                         case .abc:
                                 switch context.keyboardInterface {
-                                case .phonePortrait, .phoneLandscape, .phoneOnPadPortrait, .phoneOnPadLandscape, .padFloating:
-                                        NumericKeyboard()
                                 case .padPortraitSmall, .padLandscapeSmall:
                                         PadNumericKeyboard()
                                 case .padPortraitMedium, .padLandscapeMedium:
                                         MediumPadNumericKeyboard()
                                 case .padPortraitLarge, .padLandscapeLarge:
                                         LargePadNumericKeyboard()
+                                default:
+                                        NumericKeyboard()
                                 }
                         case .cantonese:
                                 switch context.keyboardInterface {
-                                case .phonePortrait, .phoneLandscape, .phoneOnPadPortrait, .phoneOnPadLandscape, .padFloating:
-                                        CantoneseNumericKeyboard()
                                 case .padPortraitSmall, .padLandscapeSmall:
                                         PadCantoneseNumericKeyboard()
                                 case .padPortraitMedium, .padLandscapeMedium:
                                         MediumPadCantoneseNumericKeyboard()
                                 case .padPortraitLarge, .padLandscapeLarge:
                                         LargePadCantoneseNumericKeyboard()
+                                default:
+                                        CantoneseNumericKeyboard()
                                 }
                         }
                 case .symbolic:
                         switch context.inputMethodMode {
                         case .abc:
                                 switch context.keyboardInterface {
-                                case .phonePortrait, .phoneLandscape, .phoneOnPadPortrait, .phoneOnPadLandscape, .padFloating:
-                                        SymbolicKeyboard()
                                 case .padPortraitSmall, .padLandscapeSmall:
                                         PadSymbolicKeyboard()
                                 case .padPortraitMedium, .padLandscapeMedium:
                                         MediumPadSymbolicKeyboard()
                                 case .padPortraitLarge, .padLandscapeLarge:
                                         LargePadNumericKeyboard()
+                                default:
+                                        SymbolicKeyboard()
                                 }
                         case .cantonese:
                                 switch context.keyboardInterface {
-                                case .phonePortrait, .phoneLandscape, .phoneOnPadPortrait, .phoneOnPadLandscape, .padFloating:
-                                        CantoneseSymbolicKeyboard()
                                 case .padPortraitSmall, .padLandscapeSmall:
                                         PadCantoneseSymbolicKeyboard()
                                 case .padPortraitMedium, .padLandscapeMedium:
                                         MediumPadCantoneseSymbolicKeyboard()
                                 case .padPortraitLarge, .padLandscapeLarge:
                                         LargePadCantoneseNumericKeyboard()
+                                default:
+                                        CantoneseSymbolicKeyboard()
                                 }
                         }
                 case .numberPad, .decimalPad:
                         switch context.keyboardInterface {
-                        case .phonePortrait, .phoneLandscape, .phoneOnPadPortrait, .phoneOnPadLandscape, .padFloating:
-                                NumberPad(isDecimalPad: context.keyboardForm.isDecimalPad)
                         case .padPortraitSmall, .padLandscapeSmall:
                                 PadNumericKeyboard()
                         case .padPortraitMedium, .padLandscapeMedium:
                                 MediumPadNumericKeyboard()
                         case .padPortraitLarge, .padLandscapeLarge:
                                 LargePadNumericKeyboard()
+                        default:
+                                NumberPad(isDecimalPad: context.keyboardForm.isDecimalPad)
                         }
                 case .dedicatedNumbers:
                         TailoredNumericKeyboard()
@@ -88,46 +88,17 @@ struct MotherBoard: View {
                         switch context.inputMethodMode {
                         case .abc:
                                 switch context.keyboardInterface {
-                                case .phonePortrait, .phoneLandscape, .phoneOnPadPortrait, .phoneOnPadLandscape, .padFloating:
-                                        ABCKeyboard()
                                 case .padPortraitSmall, .padLandscapeSmall:
                                         PadABCKeyboard()
                                 case .padPortraitMedium, .padLandscapeMedium:
                                         MediumPadABCKeyboard()
                                 case .padPortraitLarge, .padLandscapeLarge:
                                         LargePadABCKeyboard()
+                                default:
+                                        ABCKeyboard()
                                 }
                         case .cantonese:
                                 switch context.keyboardInterface {
-                                case .phonePortrait, .phoneLandscape:
-                                        switch context.compositionType {
-                                        case .pinyin : PinyinKeyboard()
-                                        case .cangjie: CangjieKeyboard()
-                                        case .stroke : StrokeKeyboard()
-                                        case .primary:
-                                                switch context.keyboardLayout {
-                                                case .qwerty      : CantoneseKeyboard()
-                                                case .tripleStroke: TripleStrokeKeyboard()
-                                                case .nineKey     : NineKeyKeyboard()
-                                                case .fourteenKey : FourteenKeyKeyboard()
-                                                case .fifteenKey  : FifteenKeyKeyboard()
-                                                case .eighteenKey : EighteenKeyKeyboard()
-                                                case .nineteenKey : NineteenKeyKeyboard()
-                                                case .twentyOneKey: TwentyOneKeyKeyboard()
-                                                }
-                                        }
-                                case .phoneOnPadPortrait, .phoneOnPadLandscape, .padFloating:
-                                        switch context.compositionType {
-                                        case .pinyin : PinyinKeyboard()
-                                        case .cangjie: CangjieKeyboard()
-                                        case .stroke : StrokeKeyboard()
-                                        case .primary:
-                                                switch context.keyboardLayout {
-                                                case .tripleStroke: TripleStrokeKeyboard()
-                                                case .nineKey: NineKeyKeyboard()
-                                                default: CantoneseKeyboard()
-                                                }
-                                        }
                                 case .padPortraitSmall, .padLandscapeSmall:
                                         switch context.compositionType {
                                         case .pinyin : PadCantoneseKeyboard()
@@ -164,7 +135,25 @@ struct MotherBoard: View {
                                                 default: LargePadCantoneseKeyboard()
                                                 }
                                         }
+                                default:
+                                        switch context.compositionType {
+                                        case .pinyin : PinyinKeyboard()
+                                        case .cangjie: CangjieKeyboard()
+                                        case .stroke : StrokeKeyboard()
+                                        case .primary:
+                                                switch context.keyboardLayout {
+                                                case .qwerty      : CantoneseKeyboard()
+                                                case .tripleStroke: TripleStrokeKeyboard()
+                                                case .nineKey     : NineKeyKeyboard()
+                                                case .fourteenKey : FourteenKeyKeyboard()
+                                                case .fifteenKey  : FifteenKeyKeyboard()
+                                                case .eighteenKey : EighteenKeyKeyboard()
+                                                case .nineteenKey : NineteenKeyKeyboard()
+                                                case .twentyOneKey: TwentyOneKeyKeyboard()
+                                                }
+                                        }
                                 }
+
                         }
                 }
         }
