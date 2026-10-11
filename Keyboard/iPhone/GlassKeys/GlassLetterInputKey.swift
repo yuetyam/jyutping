@@ -12,14 +12,19 @@ struct GlassLetterInputKey: View {
 
         /// Creates a glass-styled letter key for the given input event.
         ///
-        /// - Parameter virtual: The key whose text is displayed and whose event is handled on press-down.
-        init(_ virtual: VirtualInputKey) {
+        /// - Parameters:
+        ///   - virtual: The key whose text is displayed and whose event is handled on press-down.
+        ///   - coefficient: Key width as a multiple of the keyboard's width unit.
+        init(_ virtual: VirtualInputKey, coefficient: CGFloat = 1) {
                 self.virtual = virtual
+                self.coefficient = coefficient
         }
 
         /// Input event handled on press-down; its text supplies the key label and preview.
         private let virtual: VirtualInputKey
 
+        /// Key width as a multiple of the keyboard's width unit.
+        private let coefficient: CGFloat
 
         /// Keyboard properties and handlers.
         @EnvironmentObject private var context: KeyboardViewController
@@ -34,7 +39,7 @@ struct GlassLetterInputKey: View {
         ///
         /// PressButtonStyle synchronizes the pressed state and plays sound feedback, triggers haptic feedback, and sends the event to the controller, which applies the keyboard case.
         var body: some View {
-                let keyWidth: CGFloat = context.widthUnit
+                let keyWidth: CGFloat = context.widthUnit * coefficient
                 let keyHeight: CGFloat = context.heightUnit
                 let keyboardInterface = context.keyboardInterface
                 let insets = keyboardInterface.keyShapeInsets

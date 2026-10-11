@@ -64,11 +64,14 @@ struct KeyElement: Hashable {
                 self.extras = extras
         }
 
-        /// Creates an element from a virtual key's text, without supplementary labels.
+        /// Creates an element from a virtual key's text, with optional supplementary labels.
         ///
-        /// - Parameter virtual: The virtual key supplying the main text.
-        init(virtual: VirtualInputKey) {
-                self.init(virtual.text)
+        /// - Parameters:
+        ///   - virtual: The virtual key supplying the main text.
+        ///   - extras: Supplementary labels and their placements. Defaults to no labels.
+        init(virtual: VirtualInputKey, extras: [Extra] = []) {
+                self.text = virtual.text
+                self.extras = extras
         }
 
         /// Compares the main text only, ignoring supplementary labels.
