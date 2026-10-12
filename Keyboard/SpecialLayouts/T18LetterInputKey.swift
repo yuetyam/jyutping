@@ -4,21 +4,25 @@ import CommonExtensions
 
 struct T18LetterInputKey: View {
 
-        init(_ virtualKey: VirtualInputKey) {
-                self.virtualKey = virtualKey
+        init(_ virtual: VirtualInputKey, coefficient: CGFloat = 1.42) {
+                self.virtual = virtual
+                self.coefficient = coefficient
         }
-        private let virtualKey: VirtualInputKey
+
+        private let virtual: VirtualInputKey
+
+        private let coefficient: CGFloat
 
         @EnvironmentObject private var context: KeyboardViewController
+
         @Environment(\.colorScheme) private var colorScheme
+
         @State private var isTouching: Bool = false
 
         var body: some View {
-                let keyWidth: CGFloat = context.widthUnit * 1.42
+                let keyWidth: CGFloat = context.widthUnit * coefficient
                 let keyHeight: CGFloat = context.heightUnit
-                let isPhoneLandscape: Bool = context.keyboardInterface.isPhoneLandscape
-                let verticalPadding: CGFloat = isPhoneLandscape ? 3 : 6
-                let horizontalPadding: CGFloat = isPhoneLandscape ? 6 : 3
+                let insets = context.keyboardInterface.keyShapeInsets
                 let shouldShowLowercaseKeys: Bool = Options.showLowercaseKeys && context.keyboardCase.isLowercased
                 let textCase: Text.Case = shouldShowLowercaseKeys ? .lowercase : .uppercase
                 let keyTextBottomInset: CGFloat = shouldShowLowercaseKeys ? 3 : 0
@@ -28,9 +32,8 @@ struct T18LetterInputKey: View {
                                 RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
                                         .fill(isTouching ? colorScheme.activeInputKeyColor : colorScheme.inputKeyColor)
                                         .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                        .padding(.vertical, verticalPadding)
-                                        .padding(.horizontal, horizontalPadding)
-                                Text(verbatim: virtualKey.text)
+                                        .padding(insets)
+                                Text(verbatim: virtual.text)
                                         .textCase(textCase)
                                         .font(.letterCompact)
                                         .padding(.bottom, keyTextBottomInset)
@@ -40,7 +43,7 @@ struct T18LetterInputKey: View {
                 .buttonStyle(PressButtonStyle($isTouching) {
                         AudioFeedback.inputed()
                         context.triggerHapticFeedback()
-                        context.handle(virtualKey)
+                        context.handle(virtual)
                 })
         }
 }
