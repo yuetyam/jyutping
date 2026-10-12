@@ -22,28 +22,22 @@ struct GlassT19Keyboard: View {
                         case .numbers, .symbols:
                                 GlassT18T19FirstEnhancedKeyRow()
                         }
-                        HStack(spacing: 0) {
-                                HiddenKey(key: .letterA)
-                                switch Options.inputKeyStyle {
-                                case .clear:
-                                        GlassT19SecondKeyRow()
-                                case .numbers:
-                                        GlassT19AltSecondKeyRow()
-                                case .symbols:
-                                        GlassT19SecondEnhancedKeyRow()
-                                }
-                                HiddenKey(key: .letterL)
+                        switch Options.inputKeyStyle {
+                        case .clear:
+                                GlassT19SecondKeyRow()
+                        case .numbers:
+                                GlassT19AltSecondKeyRow()
+                        case .symbols:
+                                GlassT19SecondEnhancedKeyRow()
                         }
                         HStack(spacing: 0) {
                                 GlassShiftKey(coefficient: 1.42)
-                                HiddenKey(key: .letterZ)
                                 switch Options.inputKeyStyle {
                                 case .clear, .numbers:
                                         GlassT18T19ThirdKeyRow()
                                 case .symbols:
                                         GlassT18T19ThirdEnhancedKeyRow()
                                 }
-                                HiddenKey(key: .backspace)
                                 GlassBackspaceKey(coefficient: 1.42)
                         }
                         GlassCantoneseBottomKeyRow()

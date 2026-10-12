@@ -2,6 +2,8 @@ import SwiftUI
 import CommonExtensions
 import CoreIME
 
+// TODO: Rename to GlassEnhancedAltInputKey
+
 /// A glass-styled input key for eighteen- and nineteen-key layouts supporting vertical pulls and long-press alternative selection.
 ///
 /// A primary element can represent a single character or combined letters, such as `io` or `sd`.

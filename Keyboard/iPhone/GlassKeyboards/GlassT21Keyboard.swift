@@ -21,17 +21,13 @@ struct GlassT21Keyboard: View {
                         case .numbers, .symbols:
                                 FirstT21GlassEnhancedKeyRow()
                         }
-                        HStack(spacing: 0) {
-                                HiddenKey(key: .letterA)
-                                switch Options.inputKeyStyle {
-                                case .clear:
-                                        SecondT21GlassKeyRow(needsNumbers: false)
-                                case .numbers:
-                                        SecondT21GlassKeyRow(needsNumbers: true)
-                                case .symbols:
-                                        SecondT21GlassEnhancedKeyRow()
-                                }
-                                HiddenKey(key: .letterL)
+                        switch Options.inputKeyStyle {
+                        case .clear:
+                                SecondT21GlassKeyRow(needsNumbers: false)
+                        case .numbers:
+                                SecondT21GlassKeyRow(needsNumbers: true)
+                        case .symbols:
+                                SecondT21GlassEnhancedKeyRow()
                         }
                         HStack(spacing: 0) {
                                 GlassShiftKey(coefficient: 1.65)

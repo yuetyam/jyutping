@@ -4,9 +4,7 @@ import CoreIME
 @available(iOS 26.0, *)
 @available(iOSApplicationExtension 26.0, *)
 struct GlassT18Keyboard: View {
-
         @EnvironmentObject private var context: KeyboardViewController
-
         var body: some View {
                 VStack(spacing: 0) {
                         if context.inputStage.isBuffering {
