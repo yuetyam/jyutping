@@ -22,10 +22,7 @@ struct ABCGlassNumberRow: View {
                                 virtual: .number0,
                                 unit: KeyUnit(
                                         primary: KeyElement(virtual: .number0),
-                                        members: [
-                                                KeyElement(virtual: .number0),
-                                                KeyElement("°"),
-                                        ]
+                                        members: [KeyElement(virtual: .number0), KeyElement("°")]
                                 )
                         )
                 }
@@ -36,24 +33,21 @@ struct ABCGlassNumberRow: View {
 struct ABCNumberRow: View {
     var body: some View {
             HStack(spacing: 0) {
-                    NumberInputKey(.number1)
-                    NumberInputKey(.number2)
-                    NumberInputKey(.number3)
-                    NumberInputKey(.number4)
-                    NumberInputKey(.number5)
-                    NumberInputKey(.number6)
-                    NumberInputKey(.number7)
-                    NumberInputKey(.number8)
-                    NumberInputKey(.number9)
+                    SymbolInputKey(virtual: .number1)
+                    SymbolInputKey(virtual: .number2)
+                    SymbolInputKey(virtual: .number3)
+                    SymbolInputKey(virtual: .number4)
+                    SymbolInputKey(virtual: .number5)
+                    SymbolInputKey(virtual: .number6)
+                    SymbolInputKey(virtual: .number7)
+                    SymbolInputKey(virtual: .number8)
+                    SymbolInputKey(virtual: .number9)
                     EnhancedInputKey(
                         side: .trailing,
                         virtual: .number0,
                         unit: KeyUnit(
                                 primary: KeyElement(virtual: .number0),
-                                members: [
-                                        KeyElement(virtual: .number0),
-                                        KeyElement("°")
-                                ]
+                                members: [KeyElement(virtual: .number0), KeyElement("°")]
                         )
                     )
             }
