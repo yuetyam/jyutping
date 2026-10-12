@@ -2,9 +2,7 @@ import SwiftUI
 import CommonExtensions
 import CoreIME
 
-// TODO: Rename to GlassEnhancedAltInputKey
-
-/// A glass-styled input key for eighteen- and nineteen-key layouts supporting vertical pulls and long-press alternative selection.
+/// A glass-styled input key for special layouts supporting vertical pulls and long-press alternative selection.
 ///
 /// A primary element can represent a single character or combined letters, such as `io` or `sd`.
 /// Combined letters are spaced for display without changing the text sent to the controller.
@@ -12,7 +10,7 @@ import CoreIME
 /// Drag tracking keeps the expanded selector active when the finger moves outside the original button.
 @available(iOS 26.0, *)
 @available(iOSApplicationExtension 26.0, *)
-struct GlassT18EnhancedInputKey: View {
+struct GlassEnhancedAltInputKey: View {
 
         /// Creates a glass-styled key with primary content and selectable alternatives.
         ///

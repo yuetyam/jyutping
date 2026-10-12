@@ -48,7 +48,7 @@ struct GlassT14Keyboard: View {
 private struct GlassT14FirstKeyRow: View {
         var body: some View {
                 HStack(spacing: 0 ) {
-                        GlassT18EnhancedInputKey(
+                        GlassEnhancedAltInputKey(
                                 side: .leading,
                                 coefficient: 2,
                                 virtual: .letterW,
@@ -57,7 +57,7 @@ private struct GlassT14FirstKeyRow: View {
                                         members: [KeyElement(virtual: .letterQ), KeyElement(virtual: .letterW)]
                                 )
                         )
-                        GlassT18EnhancedInputKey(
+                        GlassEnhancedAltInputKey(
                                 side: .leading,
                                 coefficient: 2,
                                 virtual: .letterE,
@@ -66,7 +66,7 @@ private struct GlassT14FirstKeyRow: View {
                                         members: [KeyElement(virtual: .letterE), KeyElement(virtual: .letterR)]
                                 )
                         )
-                        GlassT18EnhancedInputKey(
+                        GlassEnhancedAltInputKey(
                                 side: .leading,
                                 coefficient: 2,
                                 unit: KeyUnit(
@@ -74,7 +74,7 @@ private struct GlassT14FirstKeyRow: View {
                                         members: [KeyElement(virtual: .letterT), KeyElement(virtual: .letterY)]
                                 )
                         )
-                        GlassT18EnhancedInputKey(
+                        GlassEnhancedAltInputKey(
                                 side: .leading,
                                 coefficient: 2,
                                 unit: KeyUnit(
@@ -82,7 +82,7 @@ private struct GlassT14FirstKeyRow: View {
                                         members: [KeyElement(virtual: .letterU), KeyElement(virtual: .letterI)]
                                 )
                         )
-                        GlassT18EnhancedInputKey(
+                        GlassEnhancedAltInputKey(
                                 side: .trailing,
                                 coefficient: 2,
                                 unit: KeyUnit(
@@ -99,7 +99,7 @@ private struct GlassT14FirstKeyRow: View {
 private struct GlassT14SecondKeyRow: View {
         var body: some View {
                 HStack(spacing: 0 ) {
-                        GlassT18EnhancedInputKey(
+                        GlassEnhancedAltInputKey(
                                 side: .leading,
                                 coefficient: 2,
                                 unit: KeyUnit(
@@ -107,7 +107,7 @@ private struct GlassT14SecondKeyRow: View {
                                         members: [KeyElement(virtual: .letterA), KeyElement(virtual: .letterS)]
                                 )
                         )
-                        GlassT18EnhancedInputKey(
+                        GlassEnhancedAltInputKey(
                                 side: .leading,
                                 coefficient: 2,
                                 unit: KeyUnit(
@@ -115,7 +115,7 @@ private struct GlassT14SecondKeyRow: View {
                                         members: [KeyElement(virtual: .letterD), KeyElement(virtual: .letterF)]
                                 )
                         )
-                        GlassT18EnhancedInputKey(
+                        GlassEnhancedAltInputKey(
                                 side: .leading,
                                 coefficient: 2,
                                 unit: KeyUnit(
@@ -123,7 +123,7 @@ private struct GlassT14SecondKeyRow: View {
                                         members: [KeyElement(virtual: .letterG), KeyElement(virtual: .letterN)]
                                 )
                         )
-                        GlassT18EnhancedInputKey(
+                        GlassEnhancedAltInputKey(
                                 side: .leading,
                                 coefficient: 2,
                                 unit: KeyUnit(
@@ -141,7 +141,7 @@ private struct GlassT14SecondKeyRow: View {
 private struct GlassT14ThirdKeyRow: View {
         var body: some View {
                 HStack(spacing: 0 ) {
-                        GlassT18EnhancedInputKey(
+                        GlassEnhancedAltInputKey(
                                 side: .leading,
                                 coefficient: 1.85,
                                 virtual: .letterZ,
@@ -150,7 +150,7 @@ private struct GlassT14ThirdKeyRow: View {
                                         members: [KeyElement(virtual: .letterZ), KeyElement(virtual: .letterX)]
                                 )
                         )
-                        GlassT18EnhancedInputKey(
+                        GlassEnhancedAltInputKey(
                                 side: .leading,
                                 coefficient: 1.85,
                                 virtual: .letterC,
@@ -159,7 +159,7 @@ private struct GlassT14ThirdKeyRow: View {
                                         members: [KeyElement(virtual: .letterC), KeyElement(virtual: .letterV)]
                                 )
                         )
-                        GlassT18EnhancedInputKey(
+                        GlassEnhancedAltInputKey(
                                 side: .leading,
                                 coefficient: 1.85,
                                 unit: KeyUnit(
