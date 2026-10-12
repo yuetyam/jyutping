@@ -12,12 +12,12 @@ struct EnhancedInputKey: View {
         ///
         /// - Parameters:
         ///   - side: Key location in the leading or trailing half of the keyboard. Alternatives expand toward the opposite side.
-        ///   - widthCoefficient: Key width as a multiple of the keyboard's width unit.
+        ///   - coefficient: Key width as a multiple of the keyboard's width unit.
         ///   - virtual: Optional event handled on an ordinary release. When nil, the primary text is processed instead.
         ///   - unit: Primary content, vertical-pull extras, and alternatives for long-press selection.
-        init(side: HorizontalEdge, widthCoefficient: CGFloat = 1, virtual: VirtualInputKey? = nil, unit: KeyUnit) {
+        init(side: HorizontalEdge, coefficient: CGFloat = 1, virtual: VirtualInputKey? = nil, unit: KeyUnit) {
                 self.side = side
-                self.widthCoefficient = widthCoefficient
+                self.coefficient = coefficient
                 self.virtual = virtual
                 self.unit = unit
         }
@@ -26,7 +26,7 @@ struct EnhancedInputKey: View {
         private let side: HorizontalEdge
 
         /// Key width as a multiple of the keyboard's width unit.
-        private let widthCoefficient: CGFloat
+        private let coefficient: CGFloat
 
         /// Event handled on release when no alternative or pulled text is selected.
         private let virtual: VirtualInputKey?
@@ -57,7 +57,7 @@ struct EnhancedInputKey: View {
         @State private var pulled: String? = nil
 
         var body: some View {
-                let keyWidth: CGFloat = context.widthUnit * widthCoefficient
+                let keyWidth: CGFloat = context.widthUnit * coefficient
                 let keyHeight: CGFloat = context.heightUnit
                 let keyboardInterface = context.keyboardInterface
                 let insets = keyboardInterface.keyShapeInsets

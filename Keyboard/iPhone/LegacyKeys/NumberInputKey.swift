@@ -2,35 +2,35 @@ import SwiftUI
 import CoreIME
 import CommonExtensions
 
-/// iPhone number row key view (ABC keyboards)
+/// iPhone key view for the Number Rows (ABC keyboards)
 struct NumberInputKey: View {
 
         init(_ virtual: VirtualInputKey) {
                 self.virtual = virtual
         }
+
         private let virtual: VirtualInputKey
 
         @EnvironmentObject private var context: KeyboardViewController
+
         @Environment(\.colorScheme) private var colorScheme
+
         @State private var isTouching: Bool = false
 
         var body: some View {
                 let keyWidth: CGFloat = context.widthUnit
                 let keyHeight: CGFloat = context.heightUnit
-                let isPhoneLandscape: Bool = context.keyboardInterface.isPhoneLandscape
-                let verticalPadding: CGFloat = isPhoneLandscape ? 3 : 6
-                let horizontalPadding: CGFloat = isPhoneLandscape ? 6 : 3
-                // let baseWidth: CGFloat = keyWidth - (horizontalPadding * 2)
-                let baseHeight: CGFloat = keyHeight - (verticalPadding * 2)
-                let shapeHeight: CGFloat = isPhoneLandscape ? (baseHeight / (2 / 6.0)) : baseHeight / ((2.5 / 6.0))
-                let curveHeight: CGFloat = isPhoneLandscape ? (shapeHeight / 3.0) : (shapeHeight / 6.0)
-                let previewBottomOffset: CGFloat = (baseHeight * 2) + (curveHeight * 1.5)
+                let keyboardInterface = context.keyboardInterface
+                let insets = keyboardInterface.keyShapeInsets
+                let previewBottomOffset: CGFloat = keyboardInterface.previewBottomOffset(keyWidth: keyWidth, keyHeight: keyHeight, insets: insets)
                 let shouldPreviewKey: Bool = Options.keyTextPreview
+                let displayForm: KeyDisplayForm = KeyDisplayForm.responsive(isInteracting: isTouching, isLongPressing: false, shouldPreview: shouldPreviewKey)
                 let activeColor: Color = shouldPreviewKey ? colorScheme.inputKeyColor : colorScheme.activeInputKeyColor
                 Button(action: {}) {
                         ZStack {
                                 Color.interactiveClear
-                                if (shouldPreviewKey && isTouching) {
+                                switch displayForm {
+                                case .previewing, .expanding:
                                         BubbleShape()
                                                 .fill(colorScheme.previewBubbleColor)
                                                 .shadow(color: .shadowGray, radius: 1)
@@ -39,16 +39,13 @@ struct NumberInputKey: View {
                                                                 .font(.largeTitle)
                                                                 .padding(.bottom, previewBottomOffset)
                                                 }
-                                                .padding(.vertical, verticalPadding)
-                                                .padding(.horizontal, horizontalPadding)
-                                } else {
+                                                .padding(insets)
+                                case .normal, .reflecting:
                                         RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
                                                 .fill(isTouching ? activeColor : colorScheme.inputKeyColor)
                                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                                .padding(.vertical, verticalPadding)
-                                                .padding(.horizontal, horizontalPadding)
-                                        Text(verbatim: virtual.text)
-                                                .font(.letterCompact)
+                                                .padding(insets)
+                                        Text(verbatim: virtual.text).font(.letterCompact)
                                 }
                         }
                         .frame(width: keyWidth, height: keyHeight)

@@ -14,8 +14,8 @@ struct GlassLetterAltInputKey: View {
         ///
         /// - Parameters:
         ///   - virtual: The key whose text is displayed and whose event is handled on press-down.
-        ///   - coefficient: Key width as a multiple of the keyboard's width unit.
-        init(_ virtual: VirtualInputKey, coefficient: CGFloat = 1) {
+        ///   - coefficient: Key width as a multiple of the keyboard's width unit. Defaults to 1.42 for eighteen- and nineteen-key layouts.
+        init(_ virtual: VirtualInputKey, coefficient: CGFloat = 1.42) {
                 self.virtual = virtual
                 self.coefficient = coefficient
         }
