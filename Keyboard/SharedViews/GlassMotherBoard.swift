@@ -24,7 +24,8 @@ struct GlassMotherBoard: View {
                 case .numeric:
                         switch context.inputMethodMode {
                         case .abc:
-                                switch context.keyboardInterface {                                case .padPortraitSmall, .padLandscapeSmall:
+                                switch context.keyboardInterface {
+                                case .padPortraitSmall, .padLandscapeSmall:
                                         PadNumericKeyboard()
                                 case .padPortraitMedium, .padLandscapeMedium:
                                         MediumPadNumericKeyboard()
@@ -149,7 +150,7 @@ struct GlassMotherBoard: View {
                                                 case .fourteenKey : FourteenKeyKeyboard()
                                                 case .fifteenKey  : FifteenKeyKeyboard()
                                                 case .eighteenKey : EighteenKeyKeyboard()
-                                                case .nineteenKey : NineteenKeyKeyboard()
+                                                case .nineteenKey : GlassT19Keyboard()
                                                 case .twentyOneKey: GlassT21Keyboard()
                                                 }
                                         }
