@@ -26,7 +26,7 @@ struct GlassT14Keyboard: View {
                         case .clear:
                                 GlassT14SecondKeyRow()
                         case .numbers, .symbols:
-                                GlassT14SecondKeyRow()
+                                GlassT14SecondEnhancedKeyRow()
                         }
                         HStack(spacing: 0) {
                                 GlassShiftKey(coefficient: 1.3)
@@ -34,7 +34,7 @@ struct GlassT14Keyboard: View {
                                 case .clear, .numbers:
                                         GlassT14ThirdKeyRow()
                                 case .symbols:
-                                        GlassT14ThirdKeyRow()
+                                        GlassT14ThirdEnhancedKeyRow()
                                 }
                                 GlassBackspaceKey(coefficient: 1.3)
                         }
@@ -170,8 +170,8 @@ private struct GlassT14SecondKeyRow: View {
                                 side: .leading,
                                 coefficient: 2,
                                 unit: KeyUnit(
-                                        primary: KeyElement("gn"),
-                                        members: [KeyElement(virtual: .letterG), KeyElement(virtual: .letterN)]
+                                        primary: KeyElement("gh"),
+                                        members: [KeyElement(virtual: .letterG), KeyElement(virtual: .letterH)]
                                 )
                         )
                         GlassEnhancedAltInputKey(
@@ -183,6 +183,56 @@ private struct GlassT14SecondKeyRow: View {
                                 )
                         )
                         GlassLetterAltInputKey(.letterL, coefficient: 2)
+                }
+        }
+}
+
+@available(iOS 26.0, *)
+@available(iOSApplicationExtension 26.0, *)
+private struct GlassT14SecondEnhancedKeyRow: View {
+        var body: some View {
+                HStack(spacing: 0 ) {
+                        GlassEnhancedAltInputKey(
+                                side: .leading,
+                                coefficient: 2,
+                                unit: KeyUnit(
+                                        primary: KeyElement("as", extras: [.init(VirtualInputKey.number6.text, alignment: .topTrailing)]),
+                                        members: [KeyElement(virtual: .letterA), KeyElement(virtual: .letterS), KeyElement(virtual: .number6)]
+                                )
+                        )
+                        GlassEnhancedAltInputKey(
+                                side: .leading,
+                                coefficient: 2,
+                                unit: KeyUnit(
+                                        primary: KeyElement("df", extras: [.init(VirtualInputKey.number7.text, alignment: .topTrailing)]),
+                                        members: [KeyElement(virtual: .letterD), KeyElement(virtual: .letterF), KeyElement(virtual: .number7)]
+                                )
+                        )
+                        GlassEnhancedAltInputKey(
+                                side: .leading,
+                                coefficient: 2,
+                                unit: KeyUnit(
+                                        primary: KeyElement("gh", extras: [.init(VirtualInputKey.number8.text, alignment: .topTrailing)]),
+                                        members: [KeyElement(virtual: .letterG), KeyElement(virtual: .letterH), KeyElement(virtual: .number8)]
+                                )
+                        )
+                        GlassEnhancedAltInputKey(
+                                side: .leading,
+                                coefficient: 2,
+                                unit: KeyUnit(
+                                        primary: KeyElement("jk", extras: [.init(VirtualInputKey.number9.text, alignment: .topTrailing)]),
+                                        members: [KeyElement(virtual: .letterJ), KeyElement(virtual: .letterK), KeyElement(virtual: .number9)]
+                                )
+                        )
+                        GlassEnhancedAltInputKey(
+                                side: .trailing,
+                                coefficient: 2,
+                                virtual: .letterL,
+                                unit: KeyUnit(
+                                        primary: KeyElement(virtual: .letterL, extras: [.init(VirtualInputKey.number0.text, alignment: .topTrailing)]),
+                                        members: [KeyElement(virtual: .letterL), KeyElement(virtual: .number0)]
+                                )
+                        )
                 }
         }
 }
@@ -219,6 +269,50 @@ private struct GlassT14ThirdKeyRow: View {
                                 )
                         )
                         GlassLetterAltInputKey(.letterM, coefficient: 1.85)
+                }
+        }
+}
+
+@available(iOS 26.0, *)
+@available(iOSApplicationExtension 26.0, *)
+private struct GlassT14ThirdEnhancedKeyRow: View {
+        var body: some View {
+                HStack(spacing: 0 ) {
+                        GlassEnhancedAltInputKey(
+                                side: .leading,
+                                coefficient: 1.85,
+                                virtual: .letterZ,
+                                unit: KeyUnit(
+                                        primary: KeyElement("zx", extras: [.init("～", alignment: .topTrailing)]),
+                                        members: [KeyElement(virtual: .letterZ), KeyElement(virtual: .letterX), KeyElement("～"), KeyElement("~", extras: [.init(PresetConstant.halfWidth, alignment: .top)])]
+                                )
+                        )
+                        GlassEnhancedAltInputKey(
+                                side: .leading,
+                                coefficient: 1.85,
+                                virtual: .letterC,
+                                unit: KeyUnit(
+                                        primary: KeyElement("cv", extras: [.init("、", alignment: .topTrailing)]),
+                                        members: [KeyElement(virtual: .letterC), KeyElement(virtual: .letterV), KeyElement("、")]
+                                )
+                        )
+                        GlassEnhancedAltInputKey(
+                                side: .leading,
+                                coefficient: 1.85,
+                                unit: KeyUnit(
+                                        primary: KeyElement("bn", extras: [.init("；", alignment: .topTrailing)]),
+                                        members: [KeyElement(virtual: .letterB), KeyElement(virtual: .letterN), KeyElement("；")]
+                                )
+                        )
+                        GlassEnhancedAltInputKey(
+                                side: .trailing,
+                                coefficient: 1.85,
+                                virtual: .letterM,
+                                unit: KeyUnit(
+                                        primary: KeyElement(virtual: .letterM, extras: [.init("：", alignment: .topTrailing)]),
+                                        members: [KeyElement(virtual: .letterM), KeyElement("：")]
+                                )
+                        )
                 }
         }
 }
