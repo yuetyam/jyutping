@@ -20,7 +20,7 @@ struct GlassT14Keyboard: View {
                         case .clear:
                                 GlassT14FirstKeyRow()
                         case .numbers, .symbols:
-                                GlassT14FirstKeyRow()
+                                GlassT14FirstEnhancedKeyRow()
                         }
                         switch Options.inputKeyStyle {
                         case .clear:
@@ -88,6 +88,57 @@ private struct GlassT14FirstKeyRow: View {
                                 unit: KeyUnit(
                                         primary: KeyElement("op"),
                                         members: [KeyElement(virtual: .letterP), KeyElement(virtual: .letterO)]
+                                )
+                        )
+                }
+        }
+}
+
+@available(iOS 26.0, *)
+@available(iOSApplicationExtension 26.0, *)
+private struct GlassT14FirstEnhancedKeyRow: View {
+        var body: some View {
+                HStack(spacing: 0 ) {
+                        GlassEnhancedAltInputKey(
+                                side: .leading,
+                                coefficient: 2,
+                                virtual: .letterW,
+                                unit: KeyUnit(
+                                        primary: KeyElement("qw", extras: [.init(VirtualInputKey.number1.text, alignment: .topTrailing)]),
+                                        members: [KeyElement(virtual: .letterQ), KeyElement(virtual: .letterW), KeyElement(virtual: .number1)]
+                                )
+                        )
+                        GlassEnhancedAltInputKey(
+                                side: .leading,
+                                coefficient: 2,
+                                virtual: .letterE,
+                                unit: KeyUnit(
+                                        primary: KeyElement("er", extras: [.init(VirtualInputKey.number2.text, alignment: .topTrailing)]),
+                                        members: [KeyElement(virtual: .letterE), KeyElement(virtual: .letterR), KeyElement(virtual: .number2)]
+                                )
+                        )
+                        GlassEnhancedAltInputKey(
+                                side: .leading,
+                                coefficient: 2,
+                                unit: KeyUnit(
+                                        primary: KeyElement("ty", extras: [.init(VirtualInputKey.number3.text, alignment: .topTrailing)]),
+                                        members: [KeyElement(virtual: .letterT), KeyElement(virtual: .letterY), KeyElement(virtual: .number3)]
+                                )
+                        )
+                        GlassEnhancedAltInputKey(
+                                side: .leading,
+                                coefficient: 2,
+                                unit: KeyUnit(
+                                        primary: KeyElement("ui", extras: [.init(VirtualInputKey.number4.text, alignment: .topTrailing)]),
+                                        members: [KeyElement(virtual: .letterU), KeyElement(virtual: .letterI), KeyElement(virtual: .number4)]
+                                )
+                        )
+                        GlassEnhancedAltInputKey(
+                                side: .trailing,
+                                coefficient: 2,
+                                unit: KeyUnit(
+                                        primary: KeyElement("op", extras: [.init(VirtualInputKey.number5.text, alignment: .topTrailing)]),
+                                        members: [KeyElement(virtual: .letterP), KeyElement(virtual: .letterO), KeyElement(virtual: .number5)]
                                 )
                         )
                 }
