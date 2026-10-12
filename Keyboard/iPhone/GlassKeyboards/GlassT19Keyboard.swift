@@ -39,9 +39,9 @@ struct GlassT19Keyboard: View {
                                 HiddenKey(key: .letterZ)
                                 switch Options.inputKeyStyle {
                                 case .clear, .numbers:
-                                        GlassT19ThirdKeyRow()
+                                        GlassT18T19ThirdKeyRow()
                                 case .symbols:
-                                        GlassT19ThirdEnhancedKeyRow()
+                                        GlassT18T19ThirdEnhancedKeyRow()
                                 }
                                 HiddenKey(key: .backspace)
                                 GlassBackspaceKey(coefficient: 1.42)
@@ -295,7 +295,7 @@ private struct GlassT19SecondEnhancedKeyRow: View {
 
 @available(iOS 26.0, *)
 @available(iOSApplicationExtension 26.0, *)
-private struct GlassT19ThirdKeyRow: View {
+struct GlassT18T19ThirdKeyRow: View {
         var body: some View {
                 HStack(spacing: 0 ) {
                         GlassT18EnhancedInputKey(
@@ -323,7 +323,7 @@ private struct GlassT19ThirdKeyRow: View {
 
 @available(iOS 26.0, *)
 @available(iOSApplicationExtension 26.0, *)
-private struct GlassT19ThirdEnhancedKeyRow: View {
+struct GlassT18T19ThirdEnhancedKeyRow: View {
         var body: some View {
                 HStack(spacing: 0 ) {
                         GlassT18EnhancedInputKey(

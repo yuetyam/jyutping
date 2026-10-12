@@ -149,7 +149,7 @@ struct GlassMotherBoard: View {
                                                 case .nineKey     : NineKeyKeyboard()
                                                 case .fourteenKey : FourteenKeyKeyboard()
                                                 case .fifteenKey  : FifteenKeyKeyboard()
-                                                case .eighteenKey : EighteenKeyKeyboard()
+                                                case .eighteenKey : GlassT18Keyboard()
                                                 case .nineteenKey : GlassT19Keyboard()
                                                 case .twentyOneKey: GlassT21Keyboard()
                                                 }
