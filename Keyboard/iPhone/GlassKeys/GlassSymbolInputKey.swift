@@ -1,25 +1,41 @@
 import SwiftUI
 import CommonExtensions
+import CoreIME
 
-/// A glass-styled iPhone symbol key that processes its text on press-down.
+/// A glass-styled iPhone symbol key that processes text or handles an input event on press-down.
 ///
 /// Pressing shows a text preview bubble when enabled, or highlights and enlarges the glass key otherwise.
 @available(iOS 26.0, *)
 @available(iOSApplicationExtension 26.0, *)
 struct GlassSymbolInputKey: View {
 
-        /// Creates a glass-styled key for the given symbol text.
+        /// Creates a glass-styled key that processes the given symbol text.
         ///
         /// - Parameters:
         ///   - text: The text displayed in the key and preview, and processed on press-down.
-        ///   - coefficient: A multiplier for the keyboard's width unit. Defaults to one unit.
+        ///   - coefficient: Key width as a multiple of the keyboard's width unit. Defaults to one unit.
         init(_ text: String, coefficient: CGFloat = 1) {
-                self.text = text
+                self.virtual = nil
+                self.keyText = text
                 self.coefficient = coefficient
         }
 
-        /// Symbol text shared by the key label, preview, and input operation.
-        private let text: String
+        /// Creates a glass-styled key that handles the given input event.
+        ///
+        /// - Parameters:
+        ///   - virtual: The key whose text is displayed and whose event is handled on press-down.
+        ///   - coefficient: Key width as a multiple of the keyboard's width unit. Defaults to one unit.
+        init(virtual: VirtualInputKey, coefficient: CGFloat = 1) {
+                self.virtual = virtual
+                self.keyText = virtual.text
+                self.coefficient = coefficient
+        }
+
+        /// Optional input event handled on press-down; when nil, keyText is processed instead.
+        private let virtual: VirtualInputKey?
+
+        /// Text displayed in the key and preview, taken from the symbol text or input event.
+        private let keyText: String
 
         /// Key width as a multiple of the keyboard's width unit.
         private let coefficient: CGFloat
@@ -36,7 +52,7 @@ struct GlassSymbolInputKey: View {
 
         /// Renders the glass key and optional preview using the current keyboard interface's insets and preview offset.
         ///
-        /// PressButtonStyle synchronizes the pressed state and plays audio feedback, triggers haptic feedback, and sends a text-processing operation to the controller on press-down.
+        /// PressButtonStyle synchronizes the pressed state, plays audio feedback, triggers haptic feedback, and sends the input event or text-processing operation to the controller on press-down.
         var body: some View {
                 let keyWidth = context.widthUnit * coefficient
                 let keyHeight = context.heightUnit
@@ -52,7 +68,7 @@ struct GlassSymbolInputKey: View {
                                         Color.clear
                                                 .glassEffect(.regular, in: BubbleShape())
                                                 .overlay {
-                                                        Text(verbatim: text)
+                                                        Text(verbatim: keyText)
                                                                 .font(.largeTitle)
                                                                 .padding(.bottom, previewBottomOffset)
                                                 }
@@ -60,7 +76,7 @@ struct GlassSymbolInputKey: View {
                                 case .normal, .reflecting:
                                         ZStack {
                                                 Color.clear
-                                                Text(verbatim: text).font(.letterCompact)
+                                                Text(verbatim: keyText).font(.letterCompact)
                                         }
                                         .glassEffect(displayForm.isReflecting ? .regular : .clear, in: .rect(cornerRadius: PresetConstant.keyCornerRadius))
                                         .shadow(color: displayForm.isReflecting ? colorScheme.glassShadow : Color.clear, radius: 0.5)
@@ -72,7 +88,11 @@ struct GlassSymbolInputKey: View {
                 .buttonStyle(PressButtonStyle($isTouching) {
                         AudioFeedback.inputed()
                         context.triggerHapticFeedback()
-                        context.operate(.process(text))
+                        if let virtual {
+                                context.handle(virtual)
+                        } else {
+                                context.operate(.process(keyText))
+                        }
                 })
         }
 }

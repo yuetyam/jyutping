@@ -8,15 +8,15 @@ import CoreIME
 struct ABCGlassNumberRow: View {
         var body: some View {
                 HStack(spacing: 0) {
-                        GlassNumberInputKey(.number1)
-                        GlassNumberInputKey(.number2)
-                        GlassNumberInputKey(.number3)
-                        GlassNumberInputKey(.number4)
-                        GlassNumberInputKey(.number5)
-                        GlassNumberInputKey(.number6)
-                        GlassNumberInputKey(.number7)
-                        GlassNumberInputKey(.number8)
-                        GlassNumberInputKey(.number9)
+                        GlassSymbolInputKey(virtual: .number1)
+                        GlassSymbolInputKey(virtual: .number2)
+                        GlassSymbolInputKey(virtual: .number3)
+                        GlassSymbolInputKey(virtual: .number4)
+                        GlassSymbolInputKey(virtual: .number5)
+                        GlassSymbolInputKey(virtual: .number6)
+                        GlassSymbolInputKey(virtual: .number7)
+                        GlassSymbolInputKey(virtual: .number8)
+                        GlassSymbolInputKey(virtual: .number9)
                         GlassEnhancedInputKey(
                                 side: .trailing,
                                 virtual: .number0,
