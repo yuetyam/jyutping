@@ -35,17 +35,18 @@ struct InputMemorySettingsView: View {
                                                                         isClearInputMemoryConfirmDialogPresented = false
                                                                 }
                                                         }
-                                                        .task {
-                                                                while Task.isCancelled.negative {
-                                                                        try? await Task.sleep(for: .milliseconds(100)) // 0.1s
-                                                                        if isPerformingClearInputMemory {
-                                                                                if clearInputMemoryProgress > 1 {
-                                                                                        isPerformingClearInputMemory = false
-                                                                                } else {
-                                                                                        clearInputMemoryProgress += 0.1
-                                                                                }
+                                                        .task(id: isPerformingClearInputMemory) {
+                                                                guard isPerformingClearInputMemory else { return }
+                                                                for step in 1...10 {
+                                                                        do {
+                                                                                try await Task.sleep(for: .milliseconds(100))
+                                                                        } catch {
+                                                                                return
                                                                         }
+                                                                        guard Task.isCancelled.negative else { return }
+                                                                        clearInputMemoryProgress = Double(step) / 10.0
                                                                 }
+                                                                isPerformingClearInputMemory = false
                                                         }
                                                         ProgressView(value: clearInputMemoryProgress)
                                                                 .progressViewStyle(.linear)

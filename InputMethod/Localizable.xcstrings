@@ -13728,55 +13728,55 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "取消"
+            "value" : "罷就"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "取消"
+            "value" : "罷就"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "取消"
+            "value" : "罷就"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "取消"
+            "value" : "罷就"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "取消"
+            "value" : "罷就"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "取消"
+            "value" : "罷就"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "取消"
+            "value" : "罷就"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "取消"
+            "value" : "罷就"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "取消"
+            "value" : "罷就"
           }
         }
       }
