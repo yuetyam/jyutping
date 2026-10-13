@@ -20,10 +20,23 @@ struct InputMemorySettingsView: View {
                                                                 AppSettings.updateInputMemoryState(to: newState)
                                                         }
                                                 HStack {
+                                                        Button {
+                                                                // TODO: Implement exportation
+                                                        } label: {
+                                                                Label("InputMemorySettingsView.ExportInputMemory.ButtonTitle", systemImage: "square.and.arrow.up")
+                                                        }
+                                                        Button {
+                                                                // TODO: Implement importation
+                                                        } label: {
+                                                                Label("InputMemorySettingsView.ImportInputMemory.ButtonTitle", systemImage: "square.and.arrow.down")
+                                                        }
+                                                }
+                                                HStack {
                                                         Button(role: .destructive) {
                                                                 isClearInputMemoryConfirmDialogPresented = true
                                                         } label: {
-                                                                Text("InputMemorySettingsView.ClearInputMemory.ButtonTitle").foregroundStyle(Color.red)
+                                                                Label("InputMemorySettingsView.ClearInputMemory.ButtonTitle", systemImage: "trash")
+                                                                        .labelStyle(.colorTint(titleColor: .red, iconColor: .red))
                                                         }
                                                         .confirmationDialog("InputMemorySettingsView.ClearInputMemory.ConfirmationDialog.Title", isPresented: $isClearInputMemoryConfirmDialogPresented) {
                                                                 Button("InputMemorySettingsView.ClearInputMemory.ConfirmationDialog.Confirm", role: .destructive) {
@@ -62,5 +75,31 @@ struct InputMemorySettingsView: View {
                         .padding(8)
                 }
                 .navigationTitle("InputMemorySettingsView.NavigationTitle.TitleKey")
+        }
+}
+
+private extension LabelStyle where Self == ColorLabelStyle {
+
+        static func colorTint(titleColor: Color = Color.primary, iconColor: Color = Color.accentColor) -> Self {
+                return ColorLabelStyle(titleColor: titleColor, iconColor: iconColor)
+        }
+}
+
+private struct ColorLabelStyle: LabelStyle {
+
+        init(titleColor: Color, iconColor: Color) {
+                self.titleColor = titleColor
+                self.iconColor = iconColor
+        }
+
+        private let titleColor: Color
+
+        private let iconColor: Color
+
+        func makeBody(configuration: Configuration) -> some View {
+                Label(
+                        title: { configuration.title.foregroundStyle(titleColor) },
+                        icon: { configuration.icon.foregroundStyle(iconColor) }
+                )
         }
 }
