@@ -349,6 +349,7 @@
         "ENABLE_RESOURCE_ACCESS_PHOTO_LIBRARY": "NO",
         "ENABLE_RESOURCE_ACCESS_PRINTING": "NO",
         "ENABLE_RESOURCE_ACCESS_USB": "NO",
+        "ENABLE_USER_SELECTED_FILES": "readwrite",
         "FRAMEWORK_SEARCH_PATHS": [
           "$(inherited)",
           "$(PROJECT_DIR)",

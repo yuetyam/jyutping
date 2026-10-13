@@ -22,6 +22,7 @@ struct SettingsContentView: View {
                                         Label("SettingsView.NavigationTitle.ReverseLookup", systemImage: "doc.text.magnifyingglass").tag(SettingsSidebarRow.reverseLookup)
                                         Label("SettingsView.NavigationTitle.TonesInput", systemImage: "bell").tag(SettingsSidebarRow.tonesInput)
                                         Label("SettingsView.NavigationTitle.Fonts", systemImage: characterImageName).tag(SettingsSidebarRow.fonts)
+                                        Label("SettingsView.NavigationTitle.InputMemory", systemImage: "sparkles.rectangle.stack").tag(SettingsSidebarRow.memory)
                                 } header: {
                                         Text("SettingsView.SectionHeader.Candidates").textCase(nil)
                                 }
@@ -50,6 +51,8 @@ struct SettingsContentView: View {
                                 ReverseLookupView()
                         case .fonts:
                                 FontSettingsView()
+                        case .memory:
+                                InputMemorySettingsView()
                         case .hotkeys:
                                 HotkeysView()
                         case .about:
@@ -66,6 +69,7 @@ enum SettingsSidebarRow: Int, Identifiable {
         case reverseLookup
         case tonesInput
         case fonts
+        case memory
         case hotkeys
         case about
         var id: Int {

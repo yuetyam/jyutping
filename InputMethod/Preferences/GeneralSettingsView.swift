@@ -22,11 +22,6 @@ struct GeneralSettingsView: View {
         @State private var isTextReplacementsOn: Bool = AppSettings.isTextReplacementsOn
         @State private var isCompatibleModeOn: Bool = AppSettings.isCompatibleModeOn
 
-        @State private var isInputMemoryOn: Bool = AppSettings.isInputMemoryOn
-        @State private var isClearInputMemoryConfirmDialogPresented: Bool = false
-        @State private var isPerformingClearInputMemory: Bool = false
-        @State private var clearInputMemoryProgress: Double = 0
-
         var body: some View {
                 ScrollView {
                         LazyVStack(alignment: .leading) {
@@ -162,45 +157,6 @@ struct GeneralSettingsView: View {
                                                         }
                                         } footer: {
                                                 Text("GeneralSettingsView.SchemeRules.CompatibleMode.SectionFooter").textCase(nil)
-                                        }
-                                        Section {
-                                                Toggle("GeneralSettingsView.InputMemory.ToggleTitle", isOn: $isInputMemoryOn)
-                                                        .toggleStyle(.switch)
-                                                        .onChange(of: isInputMemoryOn) { newState in
-                                                                AppSettings.updateInputMemoryState(to: newState)
-                                                        }
-                                                HStack {
-                                                        Button(role: .destructive) {
-                                                                isClearInputMemoryConfirmDialogPresented = true
-                                                        } label: {
-                                                                Text("GeneralSettingsView.InputMemory.Clear.ButtonTitle").foregroundStyle(Color.red)
-                                                        }
-                                                        .confirmationDialog("GeneralSettingsView.InputMemory.Clear.ConfirmationDialog.Title", isPresented: $isClearInputMemoryConfirmDialogPresented) {
-                                                                Button("GeneralSettingsView.InputMemory.Clear.ConfirmationDialog.Confirm", role: .destructive) {
-                                                                        clearInputMemoryProgress = 0
-                                                                        isPerformingClearInputMemory = true
-                                                                        InputMemory.deleteAll()
-                                                                }
-                                                                Button("GeneralSettingsView.InputMemory.Clear.ConfirmationDialog.Cancel", role: .cancel) {
-                                                                        isClearInputMemoryConfirmDialogPresented = false
-                                                                }
-                                                        }
-                                                        .task {
-                                                                while Task.isCancelled.negative {
-                                                                        try? await Task.sleep(for: .milliseconds(100)) // 0.1s
-                                                                        if isPerformingClearInputMemory {
-                                                                                if clearInputMemoryProgress > 1 {
-                                                                                        isPerformingClearInputMemory = false
-                                                                                } else {
-                                                                                        clearInputMemoryProgress += 0.1
-                                                                                }
-                                                                        }
-                                                                }
-                                                        }
-                                                        ProgressView(value: clearInputMemoryProgress)
-                                                                .progressViewStyle(.linear)
-                                                                .opacity(isPerformingClearInputMemory ? 1 : 0)
-                                                }
                                         }
                                 }
                                 .formStyle(.grouped)
