@@ -1,4 +1,5 @@
 import SwiftUI
+import CoreIME
 import CommonExtensions
 
 struct RightStackRomanizationLabel: View {
@@ -96,35 +97,3 @@ private extension ToneDisplayStyle {
                 }
         }
 }
-
-private extension String {
-        var compatibleTransformed: String {
-                guard self != "jyu" else { return "yu" }
-                guard !hasPrefix("jyu") else { return "yue" + dropFirst(3) }
-                var modified: String = hasSuffix("oeng") ? (dropLast(4) + "eung") : self
-                guard !hasPrefix("j") else { return "y" + modified.dropFirst() }
-                modified = modified.replacingOccurrences(of: "^(.+)yu", with: "$1ue", options: .regularExpression)
-                if modified.hasPrefix("z") {
-                        return "zh" + modified.dropFirst()
-                } else if modified.hasPrefix("c") {
-                        return "ch" + modified.dropFirst()
-                } else if modified.hasPrefix("s") {
-                        return "sh" + modified.dropFirst()
-                } else {
-                        return modified
-                }
-        }
-}
-
-/*
-private extension StringProtocol {
-        var altTransformed: String {
-                replacingOccurrences(of: "^jyu$", with: "yu", options: .regularExpression)
-                .replacingOccurrences(of: "jyu", with: "yue", options: .anchored)
-                .replacingOccurrences(of: "(.+)yu", with: "$1ue", options: .regularExpression)
-                .replacingOccurrences(of: "j", with: "y", options: .anchored)
-                .replacingOccurrences(of: "^(z|c|s)", with: "$1h", options: .regularExpression)
-                .replacingOccurrences(of: "oeng", with: "eung", options: [.anchored, .backwards])
-        }
-}
-*/
