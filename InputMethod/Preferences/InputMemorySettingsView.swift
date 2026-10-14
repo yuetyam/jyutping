@@ -55,7 +55,7 @@ struct InputMemorySettingsView: View {
                                                                 }
                                                         }
                                                 }
-                                                .alert("InputMemorySettingsView.ImportInputMemory.ButtonTitle", isPresented: Binding(get: { importer.feedback != nil }, set: { if $0.negative { importer.feedback = nil } }), presenting: importer.feedback) { _ in
+                                                .alert("InputMemorySettingsView.ImportInputMemory.ButtonTitle", isPresented: Binding(isNonNil: $importer.feedback), presenting: importer.feedback) { _ in
                                                         Button("InputMemorySettingsView.ExportInputMemory.Dismiss", role: .cancel) { importer.feedback = nil }
                                                 } message: { feedback in
                                                         Text(feedback.message)
@@ -107,11 +107,19 @@ struct InputMemorySettingsView: View {
                         .padding(8)
                 }
                 .navigationTitle("InputMemorySettingsView.NavigationTitle.TitleKey")
-                .alert("InputMemorySettingsView.ExportInputMemory.ButtonTitle", isPresented: Binding(get: { exporter.feedback != nil }, set: { if $0.negative { exporter.feedback = nil } }), presenting: exporter.feedback) { _ in
+                .alert("InputMemorySettingsView.ExportInputMemory.ButtonTitle", isPresented: Binding(isNonNil: $exporter.feedback), presenting: exporter.feedback) { _ in
                         Button("InputMemorySettingsView.ExportInputMemory.Dismiss", role: .cancel) { exporter.feedback = nil }
                 } message: { feedback in
                         Text(feedback.message)
                 }
+        }
+}
+
+private extension Binding where Value == Bool {
+
+        /// A Boolean binding that is `true` while the source value is non-nil. Setting it to `false` resets the source value to `nil`.
+        init<Wrapped: Sendable>(isNonNil source: Binding<Wrapped?>) {
+                self.init(get: { source.wrappedValue != nil }, set: { if $0.negative { source.wrappedValue = nil } })
         }
 }
 
