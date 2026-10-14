@@ -78,9 +78,10 @@
     },
     { "path": "Modules/CommonExtensions" },
     { "path": "Modules/AboutKit" },
-    { "path": "Modules/Linguistics" },
     { "path": "Modules/AppDataSource" },
     { "path": "Modules/CoreIME" },
+    { "path": "Modules/Linguistics" },
+    { "path": "Modules/SQLiteWrapper" },
     { "kind": "group", "name": "Frameworks" },
     {
       "path": "Sparkle.framework",
@@ -258,6 +259,9 @@
         }, {
           "product-name": "CoreIME",
           "build-phase": { "build-phase": "frameworks" },
+        }, {
+          "product-name": "SQLiteWrapper",
+          "build-phase": { "build-phase": "frameworks" },
         },
       ],
       "build-settings": {
@@ -319,6 +323,9 @@
           "build-phase": { "build-phase": "frameworks" },
         }, {
           "product-name": "CoreIME",
+          "build-phase": { "build-phase": "frameworks" },
+        }, {
+          "product-name": "SQLiteWrapper",
           "build-phase": { "build-phase": "frameworks" },
         },
       ],
