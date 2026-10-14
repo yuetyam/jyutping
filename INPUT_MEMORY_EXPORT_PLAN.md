@@ -1,6 +1,6 @@
 # macOS Input Memory Export Roadmap
 
-Status: approved implementation plan; preferences controls and localization exist, but export and import actions remain TODOs. Updated against the codebase on 2026-10-14.
+Status: export code implemented on 2026-10-14; automated validation passed. The developer reports successful export with the new InputMethod build on a Mac. Import remains a TODO.
 
 ## Goal
 
@@ -10,15 +10,15 @@ The first release covers export from `InputMethod`. Import and export from other
 
 ## Current integration points
 
-- `InputMethod/InputMemory/InputMemory.swift` manages `memory2608` in `URL.libraryDirectory.appending(path: "memory.sqlite3", directoryHint: .notDirectory)`. Its private, lazily opened connection uses `SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE | SQLITE_OPEN_FULLMUTEX`.
+- `InputMethod/InputMemory/InputMemory.swift` exposes the live database URL and readiness API for `memory2608` in `URL.libraryDirectory.appending(path: "memory.sqlite3", directoryHint: .notDirectory)`. `InputMemoryPreparation.swift` owns its shared preparation task, migration, and `SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE | SQLITE_OPEN_FULLMUTEX` connection.
 - `InputMethod/InputMemory/MemoryLexicon.swift` defines the stored values. `latest` is Unix time in milliseconds, and `frequency` and `latest` use `Int64`. The macOS table also stores `id`, `char_count`, `letter_count`, `complexity`, `anchors`, and `spell` for internal use.
-- `InputMethod/Preferences/InputMemorySettingsView.swift` contains the input-memory toggle, Export and Import buttons with TODO actions, and Clear with confirmation and a simulated one-second progress display. Clear currently calls the synchronous, nonthrowing `InputMemory.deleteAll()` immediately after confirmation.
+- `InputMethod/Preferences/InputMemorySettingsView.swift` contains the input-memory toggle, the implemented Export button, an Import button with a TODO action, and Clear with confirmation and a simulated one-second progress display. `InputMemoryExportController.swift` retains export state across sidebar navigation and preferences dismissal. Clear currently calls the synchronous, nonthrowing `InputMemory.deleteAll()` immediately after confirmation.
 - `InputMethod/Preferences/SettingsContentView.swift` routes the `.memory` sidebar selection to `InputMemorySettingsView`; these controls are no longer in `GeneralSettingsView`.
 - `SettingsWindow.shared`, defined in `InputMethod/CandidateWindow.swift`, is the preferences `NSPanel` and can serve as the parent of the save sheet.
 - `InputMethod/Localizable.xcstrings` already contains the `InputMemorySettingsView.ExportInputMemory.ButtonTitle` and `InputMemorySettingsView.ImportInputMemory.ButtonTitle` keys, along with the toggle, Clear, and page-title strings.
 - `Jyutping.xcodeproj/project.xcproj` already sets `ENABLE_APP_SANDBOX = YES` and `ENABLE_USER_SELECTED_FILES = readwrite` for `InputMethod`, with `InputMethod/InputMethod.entitlements` as its entitlement source. Verify the resulting signed entitlements rather than adding duplicate configuration.
 
-Memory preparation currently begins when `JyutpingInputController.bufferEvents` transitions from empty to nonempty. `@MainActor InputMemory.prepare()` ensures the table and indexes, then starts an unretained migration task when needed; it does not await completion or report failures. The private `nonisolated(unsafe) isMigrating` flag gates learning, suggestions, forgetting, and clearing during migration. Opening preferences before typing must still allow a complete export.
+Memory preparation begins when `JyutpingInputController.bufferEvents` transitions from empty to nonempty, or when export calls `InputMemory.waitUntilReady()`. When migration is already complete, `@MainActor InputMemory.prepare()` opens the database and ensures its table and indexes synchronously so memory is available to the first typing session, matching the prior startup behavior. If migration is still required, it starts the same retained background preparation task used by export. Readiness and connection ownership are protected by a lock; learning, suggestions, forgetting, and clearing require successful readiness. Export awaits completion and receives initialization or migration errors, including before typing has begun.
 
 Migration uses the `Migration2608` key with completion value `2608`. Until complete, `InputMemoryMigration2026 == 2026` selects `core_memory` as the legacy source; otherwise it selects `memory`. Progress is persisted by frequency band: first `frequency > 20 AND frequency <= 100000`, then the remaining positive frequencies down to 1. Successful completion removes obsolete migration keys and attempts to remove `userlexicon.sqlite3`. Preserve this selection, resume, and frequency policy when exposing readiness.
 
@@ -36,8 +36,12 @@ CREATE TABLE input_memory (
     latest INTEGER NOT NULL,
     UNIQUE (word, romanization)
 );
+CREATE INDEX ix_input_memory_frequency ON input_memory (frequency);
+CREATE INDEX ix_input_memory_latest ON input_memory (latest);
 PRAGMA user_version = 1;
 ```
+
+The unique constraint provides an implicit index for `word` and `(word, romanization)` lookups. The two explicit indexes support ordering and filtering by usage frequency or latest update time. Build them after copying rows, within the destination transaction. Indexes are an additive optimization; version-1 readers must also accept earlier exports without these explicit indexes.
 
 Export every row from `memory2608`, preserving the four values exactly. Preserve Unicode text, tone digits, romanization spacing, and 64-bit integers. Internal IDs, derived lookup fields, legacy tables, and settings are outside the export format. Future importers can reconstruct the derived fields.
 
@@ -51,7 +55,7 @@ Add a narrow asynchronous readiness API to `InputMemory` that prepares the store
 
 Centralize the live database URL in `InputMemory` so preparation, export, and destination protection use the same source location. Keep the controller's existing preparation entry point compatible with the shared readiness work. Export must await readiness even when learning is disabled.
 
-The current database open, table/index creation, legacy reads, and migration writes return silently or ignore some SQLite results. Make these preparation and migration paths report errors before using them as an export prerequisite. Distinguish an absent or empty legacy table from a failed query; only persist a frequency-band checkpoint after its transaction commits, and only mark migration complete and perform cleanup after all required work succeeds. Clear the in-progress state on failure and retain enough state for a later retry.
+Preparation must report database-open, table/index creation, legacy-read, and migration-write errors rather than silently treating them as success. Distinguish an absent or empty legacy table from a failed query; only persist a frequency-band checkpoint after its transaction commits, and only mark migration complete and perform cleanup after all required work succeeds. Clear the in-progress state on failure and retain enough state for a later retry.
 
 Export must not read a partially migrated table or mistake a failed database open for an empty store. Preserve the existing migration guards and normal learning behavior; polling `isMigrating` or checking the saved completion marker alone is insufficient to establish successful readiness.
 
@@ -94,6 +98,14 @@ Reuse the existing export string and add strings to `InputMethod/Localizable.xcs
 ### 5. Validate and release
 
 Use an unhosted test harness for the SQLite exporter and publication logic. The current `InputMethodTests` target uses `InputMethod` as its test host; do not launch it as part of these checks. The repository requires the input method to be archived and installed by the developer rather than run directly.
+
+The implemented harness compiles the actual storage, migration, lexicon, and exporter sources into a temporary Swift Testing package, using isolated databases and preferences. Run it from the repository root:
+
+```bash
+python3 tests/test_input_memory_export.py
+```
+
+The automated tests in `tests/InputMemoryExportTests.swift` cover WAL snapshots, exact text and 64-bit values, migration rollback/retry, shared readiness cancellation, concurrent learning, brief read-lock contention, locked sources, aliases, publication failures, and indexed queries. The runner lives alongside them in `tests/`; `ci_scripts/` is reserved for Xcode Cloud. Successful installed export on this Mac mini is developer-reported runtime evidence; individual scenarios and supported macOS versions still need the checks below where not already exercised.
 
 Automated coverage should verify:
 

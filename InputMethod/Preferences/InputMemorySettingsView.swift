@@ -5,9 +5,12 @@ import CommonExtensions
 struct InputMemorySettingsView: View {
 
         @State private var isInputMemoryOn: Bool = AppSettings.isInputMemoryOn
+
         @State private var isClearInputMemoryConfirmDialogPresented: Bool = false
         @State private var isPerformingClearInputMemory: Bool = false
         @State private var clearInputMemoryProgress: Double = 0
+
+        @ObservedObject private var exporter = InputMemoryExportController.shared
 
         var body: some View {
                 ScrollView {
@@ -21,10 +24,20 @@ struct InputMemorySettingsView: View {
                                                         }
                                                 HStack {
                                                         Button {
-                                                                // TODO: Implement exportation
+                                                                guard isPerformingClearInputMemory.negative else { return }
+                                                                exporter.start()
                                                         } label: {
                                                                 Label("InputMemorySettingsView.ExportInputMemory.ButtonTitle", systemImage: "square.and.arrow.up")
                                                         }
+                                                        .disabled(exporter.isExporting || isPerformingClearInputMemory)
+                                                        if exporter.isExporting {
+                                                                Text("InputMemorySettingsView.ExportInputMemory.Progress")
+                                                                if #available(macOS 15.0, *) {
+                                                                        Image(systemName: "progress.indicator").symbolEffect(.variableColor, options: .repeat(.continuous))
+                                                                }
+                                                        }
+                                                }
+                                                HStack {
                                                         Button {
                                                                 // TODO: Implement importation
                                                         } label: {
@@ -33,13 +46,16 @@ struct InputMemorySettingsView: View {
                                                 }
                                                 HStack {
                                                         Button(role: .destructive) {
+                                                                guard exporter.isExporting.negative else { return }
                                                                 isClearInputMemoryConfirmDialogPresented = true
                                                         } label: {
                                                                 Label("InputMemorySettingsView.ClearInputMemory.ButtonTitle", systemImage: "trash")
                                                                         .labelStyle(.colorTint(titleColor: .red, iconColor: .red))
                                                         }
+                                                        .disabled(exporter.isExporting || isPerformingClearInputMemory)
                                                         .confirmationDialog("InputMemorySettingsView.ClearInputMemory.ConfirmationDialog.Title", isPresented: $isClearInputMemoryConfirmDialogPresented) {
                                                                 Button("InputMemorySettingsView.ClearInputMemory.ConfirmationDialog.Confirm", role: .destructive) {
+                                                                        guard exporter.isExporting.negative else { return }
                                                                         clearInputMemoryProgress = 0
                                                                         isPerformingClearInputMemory = true
                                                                         InputMemory.deleteAll()
@@ -75,6 +91,11 @@ struct InputMemorySettingsView: View {
                         .padding(8)
                 }
                 .navigationTitle("InputMemorySettingsView.NavigationTitle.TitleKey")
+                .alert("InputMemorySettingsView.ExportInputMemory.ButtonTitle", isPresented: Binding(get: { exporter.feedback != nil }, set: { if $0.negative { exporter.feedback = nil } }), presenting: exporter.feedback) { _ in
+                        Button("InputMemorySettingsView.ExportInputMemory.Dismiss", role: .cancel) { exporter.feedback = nil }
+                } message: { feedback in
+                        Text(feedback.message)
+                }
         }
 }
 
