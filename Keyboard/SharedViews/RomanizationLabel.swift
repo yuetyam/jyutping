@@ -60,7 +60,6 @@ private extension CommentToneStyle {
         }
 }
 
-// TODO: Maybe we should use a database or a dictionary to query it
 private extension String {
         var compatibleTransformed: String {
                 guard self != "jyu" else { return "yu" }

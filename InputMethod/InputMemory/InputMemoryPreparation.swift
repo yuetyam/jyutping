@@ -123,7 +123,7 @@ final class InputMemoryPreparation: @unchecked Sendable {
         private func cleanupObsoleteObjects() {
                 let previousMigrationKeys: [String] = ["InputMemoryMigration2026", "InputMemoryVersion"]
                 previousMigrationKeys.forEach(defaults.removeObject(forKey:))
-                let previousDatabase = URL.libraryDirectory.appending(path: "userlexicon.sqlite3", directoryHint: .notDirectory)
+                let previousDatabase = databaseURL.deletingLastPathComponent().appending(path: "userlexicon.sqlite3", directoryHint: .notDirectory)
                 try? FileManager.default.removeItem(at: previousDatabase)
         }
 

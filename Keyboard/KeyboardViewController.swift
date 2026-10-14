@@ -17,7 +17,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let board = if #available(iOSApplicationExtension 26.0, *) {
                         UIHostingController(rootView: GlassMotherBoard().environmentObject(self))
                 } else {
-                        UIHostingController(rootView: MotherBoard().environmentObject(self))
+                        UIHostingController(rootView: LegacyMotherBoard().environmentObject(self))
                 }
                 board.view.translatesAutoresizingMaskIntoConstraints = false
                 addChild(board)

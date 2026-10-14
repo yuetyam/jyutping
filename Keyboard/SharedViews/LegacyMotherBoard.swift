@@ -1,7 +1,7 @@
 import SwiftUI
 import CommonExtensions
 
-struct MotherBoard: View {
+struct LegacyMotherBoard: View {
         @EnvironmentObject private var context: KeyboardViewController
         var body: some View {
                 switch context.keyboardForm {
