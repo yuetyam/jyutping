@@ -96,11 +96,16 @@ struct InputMemory {
 
         // MARK: - Database preparation
 
+        static let databaseURL: URL = URL.libraryDirectory.appending(path: "memory.sqlite3", directoryHint: .notDirectory)
         nonisolated(unsafe) private static let database: SQLiteDatabase? = {
-                let url: URL = URL.libraryDirectory.appending(path: "memory.sqlite3", directoryHint: .notDirectory)
-                return try? SQLiteDatabase(url: url, flags: [.readWrite, .create, .fullMutex])
+                return try? SQLiteDatabase(url: databaseURL, flags: [.readWrite, .create, .fullMutex])
         }()
         nonisolated(unsafe) private static var isMigrating: Bool = false
+
+        /// The store exists and its migration has completed, so it can be exported or imported into.
+        static var isReady: Bool {
+                return database != nil && isMigrating.negative && savedInputMemoryMigration == definedMigrationValue
+        }
         @MainActor static func prepare() {
                 ensureTable()
                 ensureIndexes()

@@ -39,6 +39,8 @@ struct SettingsView: View {
         @State private var isPerformingClearInputMemory: Bool = false
         @State private var clearInputMemoryProgress: Double = 0
 
+        @ObservedObject private var transfer = InputMemoryTransferController.shared
+
         var body: some View {
                 VStack(spacing: 0) {
                         ZStack {
@@ -325,15 +327,37 @@ struct SettingsView: View {
                                                 }
 
                                         Button {
-                                                // TODO: Implement input memory exportation
+                                                guard isPerformingClearInputMemory.negative else { return }
+                                                AudioFeedback.modified()
+                                                transfer.startExport()
                                         } label: {
-                                                Label("SettingsView.ExportInputMemory.ButtonTitle", systemImage: "square.and.arrow.up")
+                                                HStack {
+                                                        Label("SettingsView.ExportInputMemory.ButtonTitle", systemImage: "square.and.arrow.up")
+                                                        Spacer()
+                                                        if transfer.isExporting {
+                                                                ProgressView()
+                                                        }
+                                                }
                                         }
+                                        .disabled(transfer.isTransferring || isPerformingClearInputMemory)
 
                                         Button {
-                                                // TODO: Implement input memory importation
+                                                guard isPerformingClearInputMemory.negative else { return }
+                                                AudioFeedback.modified()
+                                                transfer.presentImporter()
                                         } label: {
-                                                Label("SettingsView.ImportInputMemory.ButtonTitle", systemImage: "square.and.arrow.down")
+                                                HStack {
+                                                        Label("SettingsView.ImportInputMemory.ButtonTitle", systemImage: "square.and.arrow.down")
+                                                        Spacer()
+                                                        if transfer.isImporting {
+                                                                ProgressView()
+                                                        }
+                                                }
+                                        }
+                                        .disabled(transfer.isTransferring || isPerformingClearInputMemory)
+
+                                        if let feedback = transfer.feedback {
+                                                Text(feedback).font(.footnote).foregroundStyle(Color.secondary)
                                         }
 
                                         ZStack {
@@ -364,6 +388,7 @@ struct SettingsView: View {
                                                         }
                                                         .foregroundStyle(Color.red)
                                                 }
+                                                .disabled(transfer.isTransferring)
                                                 .opacity(isPerformingClearInputMemory ? 0.5 : 1)
                                                 ProgressView(value: clearInputMemoryProgress).opacity(isPerformingClearInputMemory ? 1 : 0)
                                         }
@@ -403,6 +428,13 @@ struct SettingsView: View {
                         }
                         .scrollContentBackground(.hidden)
                         .background(Color.interactiveClear)
+                        .fileMover(isPresented: Binding(get: { transfer.exportedFile != nil }, set: { if $0.negative { transfer.dismissExport() } }), file: transfer.exportedFile, onCompletion: transfer.completeExport)
+                }
+                .fileImporter(isPresented: $transfer.isImporterPresented, allowedContentTypes: [InputMemoryTransferController.contentType], onCompletion: transfer.completeImport)
+                .onDisappear {
+                        if transfer.isTransferring.negative {
+                                transfer.feedback = nil
+                        }
                 }
         }
 }
