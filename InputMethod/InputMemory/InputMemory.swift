@@ -1,19 +1,15 @@
 import Foundation
-import SQLite3
 import CoreIME
 import CommonExtensions
+import SQLiteWrapper
 
 struct InputMemory {
-
-        /// SQLITE_TRANSIENT replacement
-        private static let DEFINED_SQLITE_TRANSIENT = unsafeBitCast(-1, to: sqlite3_destructor_type.self)
-
 
         // MARK: - Database preparation
 
         static let databaseURL: URL = URL.libraryDirectory.appending(path: "memory.sqlite3", directoryHint: .notDirectory)
         private static let store = InputMemoryPreparation(databaseURL: databaseURL)
-        private static var database: OpaquePointer? { store.connection }
+        private static var database: SQLiteDatabase? { store.database }
 
         @MainActor static func prepare() {
                 store.prepareForTyping()
@@ -38,42 +34,16 @@ struct InputMemory {
         }
         private static func find(word: String, romanization: String) -> (id: Int64, frequency: Int64)? {
                 let command: String = "SELECT id, frequency FROM memory2608 WHERE word = ? AND romanization = ? LIMIT 1;"
-                var statement: OpaquePointer? = nil
-                defer { sqlite3_finalize(statement) }
-                guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return nil }
-                guard sqlite3_bind_text(statement, 1, (word as NSString).utf8String, -1, DEFINED_SQLITE_TRANSIENT) == SQLITE_OK else { return nil }
-                guard sqlite3_bind_text(statement, 2, (romanization as NSString).utf8String, -1, DEFINED_SQLITE_TRANSIENT) == SQLITE_OK else { return nil }
-                guard sqlite3_step(statement) == SQLITE_ROW else { return nil }
-                let id: Int64 = sqlite3_column_int64(statement, 0)
-                let frequency: Int64 = sqlite3_column_int64(statement, 1)
-                return (id, frequency)
+                return try? database?.first(command, word, romanization, transform: { ($0.int64(at: 0), $0.int64(at: 1)) })
         }
         private static func update(id: Int64, frequency: Int64) {
                 let latest: Int64 = Int64(Date.now.timeIntervalSince1970 * 1000)
                 let command: String = "UPDATE memory2608 SET frequency = ?, latest = ? WHERE id = ?;"
-                var statement: OpaquePointer?
-                defer { sqlite3_finalize(statement) }
-                guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return }
-                sqlite3_bind_int64(statement, 1, frequency)
-                sqlite3_bind_int64(statement, 2, latest)
-                sqlite3_bind_int64(statement, 3, id)
-                guard sqlite3_step(statement) == SQLITE_DONE else { return }
+                try? database?.run(command, frequency, latest, id)
         }
         private static func insert(entry: MemoryLexicon) {
                 let command: String = "INSERT INTO memory2608 (word, romanization, frequency, latest, char_count, letter_count, complexity, anchors, spell) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);"
-                var statement: OpaquePointer? = nil
-                defer { sqlite3_finalize(statement) }
-                guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return }
-                sqlite3_bind_text(statement, 1, (entry.word as NSString).utf8String, -1, DEFINED_SQLITE_TRANSIENT)
-                sqlite3_bind_text(statement, 2, (entry.romanization as NSString).utf8String, -1, DEFINED_SQLITE_TRANSIENT)
-                sqlite3_bind_int64(statement, 3, entry.frequency)
-                sqlite3_bind_int64(statement, 4, entry.latest)
-                sqlite3_bind_int64(statement, 5, entry.charCount.toInt64())
-                sqlite3_bind_int64(statement, 6, entry.letterCount.toInt64())
-                sqlite3_bind_int64(statement, 7, entry.complexity.toInt64())
-                sqlite3_bind_int64(statement, 8, entry.anchors.toInt64())
-                sqlite3_bind_int64(statement, 9, entry.spell.toInt64())
-                guard sqlite3_step(statement) == SQLITE_DONE else { return }
+                try? database?.run(command, entry.word, entry.romanization, entry.frequency, entry.latest, entry.charCount, entry.letterCount, entry.complexity, entry.anchors, entry.spell)
         }
 
         /// Delete the given Lexicon from the InputMemory
@@ -81,22 +51,14 @@ struct InputMemory {
                 guard store.isReady else { return }
                 guard lexicon.isCantonese else { return }
                 let command: String = "DELETE FROM memory2608 WHERE word = ? AND romanization = ?;"
-                var statement: OpaquePointer? = nil
-                defer { sqlite3_finalize(statement) }
-                guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return }
-                sqlite3_bind_text(statement, 1, (lexicon.text as NSString).utf8String, -1, DEFINED_SQLITE_TRANSIENT)
-                sqlite3_bind_text(statement, 2, (lexicon.romanization as NSString).utf8String, -1, DEFINED_SQLITE_TRANSIENT)
-                guard sqlite3_step(statement) == SQLITE_DONE else { return }
+                try? database?.run(command, lexicon.text, lexicon.romanization)
         }
 
         /// Clear Input Memory
         static func deleteAll() {
                 guard store.isReady else { return }
                 let command: String = "DELETE FROM memory2608;"
-                var statement: OpaquePointer? = nil
-                defer { sqlite3_finalize(statement) }
-                guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return }
-                guard sqlite3_step(statement) == SQLITE_DONE else { return }
+                try? database?.run(command)
         }
 
 
@@ -211,12 +173,8 @@ struct InputMemory {
                 }
         }
         private static func search<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T, segmentation: Segmentation) -> [Lexicon] {
-                lazy var anchorsStatement = prepareAnchorsStatement()
-                lazy var spellStatement = prepareSpellStatement()
-                defer {
-                        sqlite3_finalize(anchorsStatement)
-                        sqlite3_finalize(spellStatement)
-                }
+                lazy var anchorsStatement = try? database?.prepare(anchorsQuery)
+                lazy var spellStatement = try? database?.prepare(spellQuery)
                 let inputLength = keys.count
                 let idealSchemes = segmentation.filter({ $0.length == inputLength })
                 let queried = query(inputLength: inputLength, segmentation: segmentation, idealSchemes: idealSchemes, statement: spellStatement)
@@ -290,7 +248,7 @@ struct InputMemory {
                         .map({ Lexicon(text: $0.word, romanization: $0.romanization, input: text, mark: $0.mark, number: -1) })
                 return partialMatched + notIdealQueried
         }
-        private static func query(inputLength: Int, segmentation: Segmentation, idealSchemes: [Scheme], statement: OpaquePointer?) -> [InternalLexicon] {
+        private static func query(inputLength: Int, segmentation: Segmentation, idealSchemes: [Scheme], statement: SQLiteStatement?) -> [InternalLexicon] {
                 if idealSchemes.isEmpty {
                         return segmentation.flatMap({ perform(scheme: $0, statement: statement) })
                 } else {
@@ -299,68 +257,40 @@ struct InputMemory {
                         })
                 }
         }
-        private static func perform<T: RandomAccessCollection<Syllable>>(scheme: T, limit: Int64 = 5, statement: OpaquePointer?) -> [InternalLexicon] {
+        private static func perform<T: RandomAccessCollection<Syllable>>(scheme: T, limit: Int64 = 5, statement: SQLiteStatement?) -> [InternalLexicon] {
                 guard Task.isCancelled.negative else { return [] }
                 return spellMatch(keys: scheme.originKeys, complexity: scheme.complexity, input: scheme.aliasText, mark: scheme.mark, limit: limit, statement: statement)
         }
 
-        private static func anchorsMatch<T: RandomAccessCollection<VirtualInputKey>>(keys: T, input: String? = nil, limit: Int64? = nil, statement: OpaquePointer?) -> [InternalLexicon] {
-                sqlite3_reset(statement)
+        private static func anchorsMatch<T: RandomAccessCollection<VirtualInputKey>>(keys: T, input: String? = nil, limit: Int64? = nil, statement: SQLiteStatement?) -> [InternalLexicon] {
+                guard let statement else { return [] }
                 let anchorsCode: Int64 = keys.anchorNormalized.conjoinedCode.toInt64()
                 let charCount: Int64 = keys.count.toInt64()
                 let limit: Int64 = limit ?? 100
-                sqlite3_bind_int64(statement, 1, anchorsCode)
-                sqlite3_bind_int64(statement, 2, charCount)
-                sqlite3_bind_int64(statement, 3, limit)
                 let input: String = input ?? keys.map(\.text).joined()
-                var items: [InternalLexicon] = []
-                while sqlite3_step(statement) == SQLITE_ROW {
-                        guard let word = sqlite3_column_text(statement, 0) else { continue }
-                        guard let romanizationText = sqlite3_column_text(statement, 1) else { continue }
-                        let frequency = sqlite3_column_int64(statement, 2)
-                        let latest = sqlite3_column_int64(statement, 3)
-                        let instance = InternalLexicon(word: String(cString: word), romanization: String(cString: romanizationText), frequency: frequency, latest: latest, input: input, mark: input)
-                        items.append(instance)
-                }
-                return items
+                let items = try? statement.query(anchorsCode, charCount, limit, transform: { row -> InternalLexicon? in
+                        guard let word = row.text(at: 0), let romanization = row.text(at: 1) else { return nil }
+                        return InternalLexicon(word: word, romanization: romanization, frequency: row.int64(at: 2), latest: row.int64(at: 3), input: input, mark: input)
+                })
+                return items ?? []
         }
-        private static func spellMatch<T: RandomAccessCollection<VirtualInputKey>>(keys: T, complexity: Int, input: String? = nil, mark: String? = nil, limit: Int64? = nil, statement: OpaquePointer?) -> [InternalLexicon] {
-                sqlite3_reset(statement)
+        private static func spellMatch<T: RandomAccessCollection<VirtualInputKey>>(keys: T, complexity: Int, input: String? = nil, mark: String? = nil, limit: Int64? = nil, statement: SQLiteStatement?) -> [InternalLexicon] {
+                guard let statement else { return [] }
                 let spell: Int64 = keys.conjoinedCode.toInt64()
                 let letterCount: Int64 = keys.count.toInt64()
                 let complexity: Int64 = complexity.toInt64()
                 let limit: Int64 = limit ?? 100
-                sqlite3_bind_int64(statement, 1, spell)
-                sqlite3_bind_int64(statement, 2, letterCount)
-                sqlite3_bind_int64(statement, 3, complexity)
-                sqlite3_bind_int64(statement, 4, limit)
                 let input: String = input ?? keys.map(\.text).joined()
-                var items: [InternalLexicon] = []
-                while sqlite3_step(statement) == SQLITE_ROW {
-                        guard let word = sqlite3_column_text(statement, 0) else { continue }
-                        guard let romanizationText = sqlite3_column_text(statement, 1) else { continue }
-                        let frequency = sqlite3_column_int64(statement, 2)
-                        let latest = sqlite3_column_int64(statement, 3)
-                        let romanization: String = String(cString: romanizationText)
+                let items = try? statement.query(spell, letterCount, complexity, limit, transform: { row -> InternalLexicon? in
+                        guard let word = row.text(at: 0), let romanization = row.text(at: 1) else { return nil }
                         let mark: String = mark ?? romanization.strippedTones()
-                        let instance = InternalLexicon(word: String(cString: word), romanization: romanization, frequency: frequency, latest: latest, input: input, mark: mark)
-                        items.append(instance)
-                }
-                return items
+                        return InternalLexicon(word: word, romanization: romanization, frequency: row.int64(at: 2), latest: row.int64(at: 3), input: input, mark: mark)
+                })
+                return items ?? []
         }
 
         private static let anchorsQuery: String = "SELECT word, romanization, frequency, latest FROM memory2608 WHERE anchors = ? AND char_count = ? ORDER BY frequency DESC LIMIT ?;"
-        private static func prepareAnchorsStatement() -> OpaquePointer? {
-                var statement: OpaquePointer?
-                guard sqlite3_prepare_v2(database, anchorsQuery, -1, &statement, nil) == SQLITE_OK else { return nil }
-                return statement
-        }
         private static let spellQuery: String = "SELECT word, romanization, frequency, latest FROM memory2608 WHERE spell = ? AND letter_count = ? AND complexity = ? ORDER BY frequency DESC LIMIT ?;"
-        private static func prepareSpellStatement() -> OpaquePointer? {
-                var statement: OpaquePointer?
-                guard sqlite3_prepare_v2(database, spellQuery, -1, &statement, nil) == SQLITE_OK else { return nil }
-                return statement
-        }
 }
 
 private struct InternalLexicon: Hashable, Comparable {

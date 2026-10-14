@@ -18,21 +18,22 @@ def main():
         package = Path(directory)
         sources = package / "Sources" / "InputMemoryExportSupport"
         sources.mkdir(parents=True)
-        for name in ["MemorySQLite", "MemoryLexicon", "InputMemoryPreparation", "InputMemoryExporter"]:
+        for name in ["MemoryLexicon", "InputMemoryPreparation", "InputMemoryExporter"]:
             shutil.copy2(root / "InputMethod" / "InputMemory" / (name + ".swift"), sources)
         tests = package / "Tests" / "InputMemoryExportSupportTests"
         tests.mkdir(parents=True)
         shutil.copy2(root / "tests" / "InputMemoryExportTests.swift", tests)
-        dependency = json.dumps(str(root / "Modules" / "CommonExtensions"))
+        extensions = json.dumps(str(root / "Modules" / "CommonExtensions"))
+        wrapper = json.dumps(str(root / "Modules" / "SQLiteWrapper"))
         (package / "Package.swift").write_text(f'''// swift-tools-version: 6.4
 import PackageDescription
 let package = Package(
         name: "InputMemoryExportSupport",
         platforms: [.macOS(.v13)],
-        dependencies: [.package(path: {dependency})],
+        dependencies: [.package(path: {extensions}), .package(path: {wrapper})],
         targets: [
-                .target(name: "InputMemoryExportSupport", dependencies: [.product(name: "CommonExtensions", package: "CommonExtensions")]),
-                .testTarget(name: "InputMemoryExportSupportTests", dependencies: ["InputMemoryExportSupport"])
+                .target(name: "InputMemoryExportSupport", dependencies: [.product(name: "CommonExtensions", package: "CommonExtensions"), .product(name: "SQLiteWrapper", package: "SQLiteWrapper")]),
+                .testTarget(name: "InputMemoryExportSupportTests", dependencies: ["InputMemoryExportSupport", .product(name: "SQLiteWrapper", package: "SQLiteWrapper")])
         ],
         swiftLanguageModes: [.v6]
 )

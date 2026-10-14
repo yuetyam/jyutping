@@ -61,6 +61,7 @@ Under `Modules/`, the local Swift packages are:
 4. `AppDataSource`: searchable reference datasets used by the app
 5. `AboutKit`: about/info UI support
 6. `Preparing`: a SwiftPM-only build-time executable that generates data used by other modules
+7. `SQLiteWrapper`: a thin, dependency-free wrapper over the system SQLite3 library (`SQLiteDatabase`, `SQLiteStatement`, `SQLiteBindable`, `SQLiteError`)
 
 ## Build requirements and environments
 
@@ -195,9 +196,11 @@ From the package manifests and import graph:
 - `AppDataSource` depends on `CommonExtensions`.
 - `Preparing` depends on `CommonExtensions`.
 - `AboutKit` currently has no local package dependencies.
+- `SQLiteWrapper` has no local package dependencies.
 - `Jyutping` primarily uses `AppDataSource`, `Linguistics`, `CommonExtensions`, and `AboutKit`.
 - `Keyboard` primarily uses `CoreIME` and `CommonExtensions`.
-- `InputMethod` primarily uses `CoreIME`, `CommonExtensions`, `AboutKit`, and Sparkle-backed update support.
+- `InputMethod` primarily uses `CoreIME`, `CommonExtensions`, `SQLiteWrapper`, `AboutKit`, and Sparkle-backed update support.
+- `Keyboard` and `InputMethod` link `SQLiteWrapper`. The macOS input memory (`InputMethod/InputMemory/`) uses it; other SQLite code still calls the SQLite3 C API directly.
 
 When a change belongs in a reusable module, prefer editing the package instead of duplicating logic in an app target.
 
@@ -214,6 +217,7 @@ There are two test layers in this repo:
 2. Swift package tests:
    - `Modules/CommonExtensions/Tests/CommonExtensionsTests`
    - `Modules/CoreIME/Tests/CoreIMETests`
+   - `Modules/SQLiteWrapper/Tests/SQLiteWrapperTests`
 
 The package suites use Swift Testing. CoreIME has coverage for candidate generation, segmentation, reverse lookup, nine-key input, conversion, and packaged database schemas. `Tests/CoreIMETests/TestSupport.swift` loads the generated mobile database explicitly, so macOS tests can exercise nine-key behavior; `DatabaseTests.swift` checks both mobile and desktop schemas. The Xcode unit-test files currently contain placeholder example tests; the UI-test targets use XCTest.
 
@@ -223,6 +227,7 @@ Run package checks from the repository root after generating databases where req
 
 ```bash
 swift test --package-path Modules/CommonExtensions --enable-code-coverage
+swift test --package-path Modules/SQLiteWrapper --enable-code-coverage
 swift test --package-path Modules/CoreIME --enable-code-coverage
 swift run --package-path Modules/CoreIME -c release CoreIMEBenchmarks
 ```

@@ -3,6 +3,7 @@ import SwiftUI
 import Combine
 import UniformTypeIdentifiers
 import CommonExtensions
+import SQLiteWrapper
 
 /// Retained independently of the selected preferences page, including on macOS 13.
 @MainActor
@@ -46,11 +47,11 @@ final class InputMemoryExportController: ObservableObject {
                                 feedback = Feedback(message: LocalizedStringResource("InputMemorySettingsView.ExportInputMemory.Success \(count)", comment: "Export confirmation; the variable is the number of learned entries saved."))
                         } catch is CancellationError {
                                 // Cancellation does not report a failure or publish a partial file.
-                        } catch MemorySQLiteError.protectedDestination {
+                        } catch InputMemoryExportError.protectedDestination {
                                 feedback = Feedback(message: "InputMemorySettingsView.ExportInputMemory.ProtectedDestination")
-                        } catch MemorySQLiteError.timedOut {
+                        } catch SQLiteError.timedOut {
                                 feedback = Feedback(message: "InputMemorySettingsView.ExportInputMemory.SourceBusy")
-                        } catch MemorySQLiteError.invalidFormat where phase == .export {
+                        } catch SQLiteError.invalidFormat where phase == .export {
                                 feedback = Feedback(message: "InputMemorySettingsView.ExportInputMemory.ValidationFailed")
                         } catch {
                                 switch phase {

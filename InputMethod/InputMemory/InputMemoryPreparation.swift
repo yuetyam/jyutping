@@ -1,5 +1,5 @@
 import Foundation
-import SQLite3
+import SQLiteWrapper
 
 /// The lock protects readiness and connection ownership; only the shared preparation task
 /// uses the connection until ready. Subsequent callers use SQLite's FULLMUTEX connection.
@@ -8,7 +8,7 @@ final class InputMemoryPreparation: @unchecked Sendable {
         let databaseURL: URL
         private let defaults: UserDefaults
         private let lock = NSLock()
-        private var database: MemorySQLite?
+        private var connection: SQLiteDatabase?
         private var preparation: Task<Void, Error>?
         private var ready: Bool = false
 
@@ -17,8 +17,8 @@ final class InputMemoryPreparation: @unchecked Sendable {
                 self.defaults = defaults
         }
 
-        var connection: OpaquePointer? {
-                lock.withLock { ready ? database?.connection : nil }
+        var database: SQLiteDatabase? {
+                lock.withLock { ready ? connection : nil }
         }
 
         var isReady: Bool {
@@ -38,11 +38,11 @@ final class InputMemoryPreparation: @unchecked Sendable {
                 }
                 do {
                         let database = try openDatabase()
-                        try MemorySQLite.check(sqlite3_busy_timeout(database.connection, 100))
-                        self.database = database
+                        try database.setBusyTimeout(milliseconds: 100)
+                        connection = database
                         ready = true
                 } catch {
-                        database = nil
+                        connection = nil
                 }
                 lock.unlock()
         }
@@ -55,12 +55,12 @@ final class InputMemoryPreparation: @unchecked Sendable {
                                 do {
                                         let database = try prepareDatabase()
                                         lock.withLock {
-                                                self.database = database
+                                                connection = database
                                                 ready = true
                                         }
                                 } catch {
                                         lock.withLock {
-                                                database = nil
+                                                connection = nil
                                                 preparation = nil
                                         }
                                         throw error
@@ -77,20 +77,20 @@ final class InputMemoryPreparation: @unchecked Sendable {
                 try Task.checkCancellation()
         }
 
-        private func prepareDatabase() throws -> MemorySQLite {
+        private func prepareDatabase() throws -> SQLiteDatabase {
                 let db = try openDatabase()
                 try migrateDatabase(db)
                 // Backup steps briefly hold a read lock in DELETE journal mode. Give learning
                 // writes a short bounded wait instead of immediately dropping them as busy.
-                try MemorySQLite.check(sqlite3_busy_timeout(db.connection, 100))
+                try db.setBusyTimeout(milliseconds: 100)
                 return db
         }
 
-        private func openDatabase() throws -> MemorySQLite {
-                let db = try MemorySQLite(url: databaseURL, flags: SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE | SQLITE_OPEN_FULLMUTEX)
-                try MemorySQLite.check(sqlite3_busy_timeout(db.connection, 1000))
+        private func openDatabase() throws -> SQLiteDatabase {
+                let db = try SQLiteDatabase(url: databaseURL, flags: [.readWrite, .create, .fullMutex])
+                try db.setBusyTimeout(milliseconds: 1000)
                 try db.execute("CREATE TABLE IF NOT EXISTS memory2608 (id INTEGER PRIMARY KEY AUTOINCREMENT, word TEXT NOT NULL, romanization TEXT NOT NULL, frequency INTEGER NOT NULL, latest INTEGER NOT NULL, char_count INTEGER NOT NULL, letter_count INTEGER NOT NULL, complexity INTEGER NOT NULL, anchors INTEGER NOT NULL, spell INTEGER NOT NULL, UNIQUE (word, romanization));")
-                for command in Self.indexCommands { try db.execute(command) }
+                try db.execute(Self.indexCommands)
                 return db
         }
 
@@ -100,11 +100,10 @@ final class InputMemoryPreparation: @unchecked Sendable {
                 defaults.integer(forKey: Self.kMigrationKey)
         }
 
-        private func migrateDatabase(_ db: MemorySQLite) throws {
+        private func migrateDatabase(_ db: SQLiteDatabase) throws {
                 guard savedInputMemoryMigration != Self.definedMigrationValue else { return }
                 let table = defaults.integer(forKey: "InputMemoryMigration2026") == 2026 ? "core_memory" : "memory"
-                let exists = try db.integer("SELECT COUNT(*) FROM sqlite_master WHERE type = 'table' AND name = '\(table)';") != 0
-                if exists {
+                if try db.tableExists(table) {
                         let saved = savedInputMemoryMigration
                         if saved == 0 {
                                 try migrate(db, table: table, lower: 20, upper: 100000)
@@ -128,37 +127,19 @@ final class InputMemoryPreparation: @unchecked Sendable {
                 try? FileManager.default.removeItem(at: previousDatabase)
         }
 
-        private func migrate(_ db: MemorySQLite, table: String, lower: Int, upper: Int) throws {
+        private func migrate(_ db: SQLiteDatabase, table: String, lower: Int, upper: Int) throws {
                 // Checkpoints advance only after the entire frequency band commits.
-                try db.execute("BEGIN IMMEDIATE;")
-                do {
+                try db.transaction(.immediate) {
                         try copyLegacyEntries(db, table: table, lower: lower, upper: upper)
-                        try db.execute("COMMIT;")
-                } catch {
-                        try? db.execute("ROLLBACK;")
-                        throw error
                 }
         }
 
-        private func copyLegacyEntries(_ db: MemorySQLite, table: String, lower: Int, upper: Int) throws {
-                let query = try db.prepare("SELECT word, romanization, frequency, latest FROM \(table) WHERE frequency > \(lower) AND frequency <= \(upper) ORDER BY frequency DESC;")
-                defer { sqlite3_finalize(query) }
+        private func copyLegacyEntries(_ db: SQLiteDatabase, table: String, lower: Int, upper: Int) throws {
+                let query = try db.prepare("SELECT word, romanization, frequency, latest FROM \(table) WHERE frequency > ? AND frequency <= ? ORDER BY frequency DESC;").bind(lower, upper)
                 let insert = try db.prepare("INSERT OR IGNORE INTO memory2608 (word, romanization, frequency, latest, char_count, letter_count, complexity, anchors, spell) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);")
-                defer { sqlite3_finalize(insert) }
-                while true {
-                        let result = sqlite3_step(query)
-                        if result == SQLITE_DONE { break }
-                        try MemorySQLite.check(result, expected: SQLITE_ROW)
-                        guard sqlite3_column_type(query, 2) == SQLITE_INTEGER, sqlite3_column_type(query, 3) == SQLITE_INTEGER else { throw MemorySQLiteError.invalidFormat }
-                        let entry = MemoryLexicon(word: try MemorySQLite.text(query, column: 0), romanization: try MemorySQLite.text(query, column: 1), frequency: sqlite3_column_int64(query, 2), latest: sqlite3_column_int64(query, 3))
-                        try MemorySQLite.check(sqlite3_reset(insert))
-                        try MemorySQLite.bind(entry.word, to: insert, at: 1)
-                        try MemorySQLite.bind(entry.romanization, to: insert, at: 2)
-                        let values: [Int64] = [entry.frequency, entry.latest, Int64(entry.charCount), Int64(entry.letterCount), Int64(entry.complexity), Int64(entry.anchors), Int64(entry.spell)]
-                        for (index, value) in values.enumerated() {
-                                try MemorySQLite.check(sqlite3_bind_int64(insert, Int32(index + 3), value))
-                        }
-                        try MemorySQLite.check(sqlite3_step(insert), expected: SQLITE_DONE)
+                while try query.step() {
+                        let entry = MemoryLexicon(word: try query.requireText(at: 0), romanization: try query.requireText(at: 1), frequency: try query.requireInt64(at: 2), latest: try query.requireInt64(at: 3))
+                        try insert.run(entry.word, entry.romanization, entry.frequency, entry.latest, entry.charCount, entry.letterCount, entry.complexity, entry.anchors, entry.spell)
                 }
         }
 

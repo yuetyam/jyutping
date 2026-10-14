@@ -22,6 +22,14 @@ jobs:
       - name: CommonExtensions SwiftTest
         run: swift test
         working-directory: ./Modules/CommonExtensions
+  test_sqlite_wrapper:
+    name: SQLiteWrapper Tests
+    runs-on: xcode-27
+    steps:
+      - uses: actions/checkout@v7
+      - name: SQLiteWrapper SwiftTest
+        run: swift test
+        working-directory: ./Modules/SQLiteWrapper
   prepare_databases:
     name: Prepare Databases
     needs: [build_common_extensions]
