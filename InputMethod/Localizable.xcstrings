@@ -15054,6 +15054,112 @@
         }
       }
     },
+    "InputMemorySettingsView.ImportInputMemory.Busy" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The input memory database is busy. Wait a moment and try importing again."
+          }
+        },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The input memory database is busy. Wait a moment and try importing again."
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The input memory database is busy. Wait a moment and try importing again."
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The input memory database is busy. Wait a moment and try importing again."
+          }
+        },
+        "en-NZ" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The input memory database is busy. Wait a moment and try importing again."
+          }
+        },
+        "en-US" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The input memory database is busy. Wait a moment and try importing again."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La base de données de mémoire de saisie est occupée. Patientez un instant, puis réessayez."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "入力メモリのデータベースは使用中です。少し待ってから再度インポートしてください。"
+          }
+        },
+        "yue" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "輸入記憶資料庫正忙。請稍後再試。"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "輸入記憶資料庫正忙。請稍後再試。"
+          }
+        },
+        "zh-Hans-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "輸入記憶資料庫正忙。請稍後再試。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "輸入記憶資料庫正忙。請稍後再試。"
+          }
+        },
+        "zh-Hant-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "輸入記憶資料庫正忙。請稍後再試。"
+          }
+        },
+        "zh-Hant-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "輸入記憶資料庫正忙。請稍後再試。"
+          }
+        },
+        "zh-Hant-MO" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "輸入記憶資料庫正忙。請稍後再試。"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "輸入記憶資料庫正忙。請稍後再試。"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "輸入記憶資料庫正忙。請稍後再試。"
+          }
+        }
+      }
+    },
     "InputMemorySettingsView.ImportInputMemory.ButtonTitle" : {
       "localizations" : {
         "en" : {
@@ -15156,6 +15262,431 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "導入輸入記憶"
+          }
+        }
+      }
+    },
+    "InputMemorySettingsView.ImportInputMemory.ImportFailed" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Input memory could not be imported. No entries were changed. Try again."
+          }
+        },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Input memory could not be imported. No entries were changed. Try again."
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Input memory could not be imported. No entries were changed. Try again."
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Input memory could not be imported. No entries were changed. Try again."
+          }
+        },
+        "en-NZ" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Input memory could not be imported. No entries were changed. Try again."
+          }
+        },
+        "en-US" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Input memory could not be imported. No entries were changed. Try again."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossible d’importer la mémoire de saisie. Aucune entrée n’a été modifiée. Réessayez."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "入力メモリをインポートできませんでした。変更は行われていません。再度お試しください。"
+          }
+        },
+        "yue" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "未能導入輸入記憶，現有記錄未有更改。請再試一次。"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "未能導入輸入記憶，現有記錄未有更改。請再試一次。"
+          }
+        },
+        "zh-Hans-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "未能導入輸入記憶，現有記錄未有更改。請再試一次。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "未能導入輸入記憶，現有記錄未有更改。請再試一次。"
+          }
+        },
+        "zh-Hant-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "未能導入輸入記憶，現有記錄未有更改。請再試一次。"
+          }
+        },
+        "zh-Hant-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "未能導入輸入記憶，現有記錄未有更改。請再試一次。"
+          }
+        },
+        "zh-Hant-MO" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "未能導入輸入記憶，現有記錄未有更改。請再試一次。"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "未能導入輸入記憶，現有記錄未有更改。請再試一次。"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "未能導入輸入記憶，現有記錄未有更改。請再試一次。"
+          }
+        }
+      }
+    },
+    "InputMemorySettingsView.ImportInputMemory.Progress" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importing input memory…"
+          }
+        },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importing input memory…"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importing input memory…"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importing input memory…"
+          }
+        },
+        "en-NZ" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importing input memory…"
+          }
+        },
+        "en-US" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importing input memory…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importation de la mémoire de saisie…"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "入力メモリをインポート中…"
+          }
+        },
+        "yue" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "導入緊輸入記憶…"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "導入緊輸入記憶…"
+          }
+        },
+        "zh-Hans-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "導入緊輸入記憶…"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "導入緊輸入記憶…"
+          }
+        },
+        "zh-Hant-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "導入緊輸入記憶…"
+          }
+        },
+        "zh-Hant-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "導入緊輸入記憶…"
+          }
+        },
+        "zh-Hant-MO" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "導入緊輸入記憶…"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "導入緊輸入記憶…"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "導入緊輸入記憶…"
+          }
+        }
+      }
+    },
+    "InputMemorySettingsView.ImportInputMemory.Success %lld" : {
+      "comment" : "Import confirmation; the variable is the number of learned entries merged.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Input memory import complete. Entries imported: %lld."
+          }
+        },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Input memory import complete. Entries imported: %lld."
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Input memory import complete. Entries imported: %lld."
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Input memory import complete. Entries imported: %lld."
+          }
+        },
+        "en-NZ" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Input memory import complete. Entries imported: %lld."
+          }
+        },
+        "en-US" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Input memory import complete. Entries imported: %lld."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld entrées de mémoire de saisie importées."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "入力メモリを %lld 件インポートしました。"
+          }
+        },
+        "yue" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "導入𠶧當，一共 %lld 條。"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "導入𠶧當，一共 %lld 條。"
+          }
+        },
+        "zh-Hans-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "導入𠶧當，一共 %lld 條。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "導入𠶧當，一共 %lld 條。"
+          }
+        },
+        "zh-Hant-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "導入𠶧當，一共 %lld 條。"
+          }
+        },
+        "zh-Hant-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "導入𠶧當，一共 %lld 條。"
+          }
+        },
+        "zh-Hant-MO" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "導入𠶧當，一共 %lld 條。"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "導入𠶧當，一共 %lld 條。"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "導入𠶧當，一共 %lld 條。"
+          }
+        }
+      }
+    },
+    "InputMemorySettingsView.ImportInputMemory.UnsupportedFile" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The selected file could not be read as an input memory export. Choose a valid export file and try again."
+          }
+        },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The selected file could not be read as an input memory export. Choose a valid export file and try again."
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The selected file could not be read as an input memory export. Choose a valid export file and try again."
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The selected file could not be read as an input memory export. Choose a valid export file and try again."
+          }
+        },
+        "en-NZ" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The selected file could not be read as an input memory export. Choose a valid export file and try again."
+          }
+        },
+        "en-US" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The selected file could not be read as an input memory export. Choose a valid export file and try again."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossible de lire le fichier sélectionné comme exportation de mémoire de saisie. Choisissez un fichier d’exportation valide, puis réessayez."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "選択したファイルを入力メモリのエクスポートとして読み込めませんでした。有効なエクスポートファイルを選んで再度お試しください。"
+          }
+        },
+        "yue" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "未能讀取所選檔案，或該檔案並非有效嘅輸入記憶導出檔案。請選擇有效嘅導出檔案，然後再試。"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "未能讀取所選檔案，或該檔案並非有效嘅輸入記憶導出檔案。請選擇有效嘅導出檔案，然後再試。"
+          }
+        },
+        "zh-Hans-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "未能讀取所選檔案，或該檔案並非有效嘅輸入記憶導出檔案。請選擇有效嘅導出檔案，然後再試。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "未能讀取所選檔案，或該檔案並非有效嘅輸入記憶導出檔案。請選擇有效嘅導出檔案，然後再試。"
+          }
+        },
+        "zh-Hant-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "未能讀取所選檔案，或該檔案並非有效嘅輸入記憶導出檔案。請選擇有效嘅導出檔案，然後再試。"
+          }
+        },
+        "zh-Hant-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "未能讀取所選檔案，或該檔案並非有效嘅輸入記憶導出檔案。請選擇有效嘅導出檔案，然後再試。"
+          }
+        },
+        "zh-Hant-MO" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "未能讀取所選檔案，或該檔案並非有效嘅輸入記憶導出檔案。請選擇有效嘅導出檔案，然後再試。"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "未能讀取所選檔案，或該檔案並非有效嘅輸入記憶導出檔案。請選擇有效嘅導出檔案，然後再試。"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "未能讀取所選檔案，或該檔案並非有效嘅輸入記憶導出檔案。請選擇有效嘅導出檔案，然後再試。"
           }
         }
       }

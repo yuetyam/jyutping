@@ -27,7 +27,7 @@ final class InputMemoryExportController: ObservableObject {
         private init() {}
 
         func start() {
-                guard isExporting.negative else { return }
+                guard isExporting.negative && InputMemoryImportController.shared.isImporting.negative else { return }
                 isExporting = true
                 feedback = nil
                 operation = Task {

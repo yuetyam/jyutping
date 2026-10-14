@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run the real memory storage/export sources in an unhosted Swift Testing package.
+"""Run the real memory storage/export/import sources in an unhosted Swift Testing package.
 
 Usage: python3 tests/test_input_memory_export.py
 No InputMethodKit executable is launched and no user memory database is opened.
@@ -18,11 +18,12 @@ def main():
         package = Path(directory)
         sources = package / "Sources" / "InputMemoryExportSupport"
         sources.mkdir(parents=True)
-        for name in ["MemoryLexicon", "InputMemoryPreparation", "InputMemoryExporter"]:
+        for name in ["MemoryLexicon", "InputMemoryPreparation", "InputMemoryExporter", "InputMemoryImporter"]:
             shutil.copy2(root / "InputMethod" / "InputMemory" / (name + ".swift"), sources)
         tests = package / "Tests" / "InputMemoryExportSupportTests"
         tests.mkdir(parents=True)
-        shutil.copy2(root / "tests" / "InputMemoryExportTests.swift", tests)
+        for name in ["InputMemoryExportTests", "InputMemoryImportTests"]:
+            shutil.copy2(root / "tests" / (name + ".swift"), tests)
         extensions = json.dumps(str(root / "Modules" / "CommonExtensions"))
         wrapper = json.dumps(str(root / "Modules" / "SQLiteWrapper"))
         (package / "Package.swift").write_text(f'''// swift-tools-version: 6.4

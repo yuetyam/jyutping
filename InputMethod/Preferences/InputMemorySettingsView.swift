@@ -11,6 +11,9 @@ struct InputMemorySettingsView: View {
         @State private var clearInputMemoryProgress: Double = 0
 
         @ObservedObject private var exporter = InputMemoryExportController.shared
+        @ObservedObject private var importer = InputMemoryImportController.shared
+
+        private var isTransferring: Bool { exporter.isExporting || importer.isImporting }
 
         var body: some View {
                 ScrollView {
@@ -29,7 +32,7 @@ struct InputMemorySettingsView: View {
                                                         } label: {
                                                                 Label("InputMemorySettingsView.ExportInputMemory.ButtonTitle", systemImage: "square.and.arrow.up")
                                                         }
-                                                        .disabled(exporter.isExporting || isPerformingClearInputMemory)
+                                                        .disabled(isTransferring || isPerformingClearInputMemory)
                                                         if exporter.isExporting {
                                                                 Text("InputMemorySettingsView.ExportInputMemory.Progress")
                                                                 if #available(macOS 15.0, *) {
@@ -39,23 +42,36 @@ struct InputMemorySettingsView: View {
                                                 }
                                                 HStack {
                                                         Button {
-                                                                // TODO: Implement importation
+                                                                guard isPerformingClearInputMemory.negative else { return }
+                                                                importer.start()
                                                         } label: {
                                                                 Label("InputMemorySettingsView.ImportInputMemory.ButtonTitle", systemImage: "square.and.arrow.down")
                                                         }
+                                                        .disabled(isTransferring || isPerformingClearInputMemory)
+                                                        if importer.isImporting {
+                                                                Text("InputMemorySettingsView.ImportInputMemory.Progress")
+                                                                if #available(macOS 15.0, *) {
+                                                                        Image(systemName: "progress.indicator").symbolEffect(.variableColor, options: .repeat(.continuous))
+                                                                }
+                                                        }
+                                                }
+                                                .alert("InputMemorySettingsView.ImportInputMemory.ButtonTitle", isPresented: Binding(get: { importer.feedback != nil }, set: { if $0.negative { importer.feedback = nil } }), presenting: importer.feedback) { _ in
+                                                        Button("InputMemorySettingsView.ExportInputMemory.Dismiss", role: .cancel) { importer.feedback = nil }
+                                                } message: { feedback in
+                                                        Text(feedback.message)
                                                 }
                                                 HStack {
                                                         Button(role: .destructive) {
-                                                                guard exporter.isExporting.negative else { return }
+                                                                guard isTransferring.negative else { return }
                                                                 isClearInputMemoryConfirmDialogPresented = true
                                                         } label: {
                                                                 Label("InputMemorySettingsView.ClearInputMemory.ButtonTitle", systemImage: "trash")
                                                                         .labelStyle(.colorTint(titleColor: .red, iconColor: .red))
                                                         }
-                                                        .disabled(exporter.isExporting || isPerformingClearInputMemory)
+                                                        .disabled(isTransferring || isPerformingClearInputMemory)
                                                         .confirmationDialog("InputMemorySettingsView.ClearInputMemory.ConfirmationDialog.Title", isPresented: $isClearInputMemoryConfirmDialogPresented) {
                                                                 Button("InputMemorySettingsView.ClearInputMemory.ConfirmationDialog.Confirm", role: .destructive) {
-                                                                        guard exporter.isExporting.negative else { return }
+                                                                        guard isTransferring.negative else { return }
                                                                         clearInputMemoryProgress = 0
                                                                         isPerformingClearInputMemory = true
                                                                         InputMemory.deleteAll()
