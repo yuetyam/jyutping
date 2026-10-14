@@ -323,6 +323,19 @@ struct SettingsView: View {
                                                 .onChange(of: isInputMemoryOn) { newState in
                                                         Options.updateInputMemory(to: newState)
                                                 }
+
+                                        Button {
+                                                // TODO: Implement input memory exportation
+                                        } label: {
+                                                Label("SettingsView.ExportInputMemory.ButtonTitle", systemImage: "square.and.arrow.up")
+                                        }
+
+                                        Button {
+                                                // TODO: Implement input memory importation
+                                        } label: {
+                                                Label("SettingsView.ImportInputMemory.ButtonTitle", systemImage: "square.and.arrow.down")
+                                        }
+
                                         ZStack {
                                                 if #available(iOSApplicationExtension 17.0, *) {
                                                         Color.clear
@@ -346,7 +359,7 @@ struct SettingsView: View {
                                                         }
                                                 } label: {
                                                         HStack {
-                                                                Text("SettingsView.InputMemory.ClearInputMemory.ButtonTitle")
+                                                                Label("SettingsView.InputMemory.ClearInputMemory.ButtonTitle", systemImage: "trash")
                                                                 Spacer()
                                                         }
                                                         .foregroundStyle(Color.red)
