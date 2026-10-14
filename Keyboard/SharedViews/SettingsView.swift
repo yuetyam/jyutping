@@ -326,40 +326,6 @@ struct SettingsView: View {
                                                         Options.updateInputMemory(to: newState)
                                                 }
 
-                                        Button {
-                                                guard isPerformingClearInputMemory.negative else { return }
-                                                AudioFeedback.modified()
-                                                transfer.startExport()
-                                        } label: {
-                                                HStack {
-                                                        Label("SettingsView.ExportInputMemory.ButtonTitle", systemImage: "square.and.arrow.up")
-                                                        Spacer()
-                                                        if transfer.isExporting {
-                                                                ProgressView()
-                                                        }
-                                                }
-                                        }
-                                        .disabled(transfer.isTransferring || isPerformingClearInputMemory)
-
-                                        Button {
-                                                guard isPerformingClearInputMemory.negative else { return }
-                                                AudioFeedback.modified()
-                                                transfer.presentImporter()
-                                        } label: {
-                                                HStack {
-                                                        Label("SettingsView.ImportInputMemory.ButtonTitle", systemImage: "square.and.arrow.down")
-                                                        Spacer()
-                                                        if transfer.isImporting {
-                                                                ProgressView()
-                                                        }
-                                                }
-                                        }
-                                        .disabled(transfer.isTransferring || isPerformingClearInputMemory)
-
-                                        if let feedback = transfer.feedback {
-                                                Text(feedback).font(.footnote).foregroundStyle(Color.secondary)
-                                        }
-
                                         ZStack {
                                                 if #available(iOSApplicationExtension 17.0, *) {
                                                         Color.clear
@@ -406,6 +372,42 @@ struct SettingsView: View {
                                                                 }
                                                         }
                                                 }
+                                        }
+                                }
+
+                                Section {
+                                        Button {
+                                                guard isPerformingClearInputMemory.negative else { return }
+                                                AudioFeedback.modified()
+                                                transfer.startExport()
+                                        } label: {
+                                                HStack {
+                                                        Label("SettingsView.ExportInputMemory.ButtonTitle", systemImage: "square.and.arrow.up")
+                                                        Spacer()
+                                                        if transfer.isExporting {
+                                                                ProgressView()
+                                                        }
+                                                }
+                                        }
+                                        .disabled(transfer.isTransferring || isPerformingClearInputMemory)
+
+                                        Button {
+                                                guard isPerformingClearInputMemory.negative else { return }
+                                                AudioFeedback.modified()
+                                                transfer.presentImporter()
+                                        } label: {
+                                                HStack {
+                                                        Label("SettingsView.ImportInputMemory.ButtonTitle", systemImage: "square.and.arrow.down")
+                                                        Spacer()
+                                                        if transfer.isImporting {
+                                                                ProgressView()
+                                                        }
+                                                }
+                                        }
+                                        .disabled(transfer.isTransferring || isPerformingClearInputMemory)
+                                } footer: {
+                                        if let feedback = transfer.feedback {
+                                                Text(feedback).textCase(nil)
                                         }
                                 }
 

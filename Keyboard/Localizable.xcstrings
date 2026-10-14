@@ -4671,37 +4671,37 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Input memory export complete. Entries saved: %lld."
+            "value" : "Successfully exported %lld entries from the input memory."
           }
         },
         "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Input memory export complete. Entries saved: %lld."
+            "value" : "Successfully exported %lld entries from the input memory."
           }
         },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Input memory export complete. Entries saved: %lld."
+            "value" : "Successfully exported %lld entries from the input memory."
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Input memory export complete. Entries saved: %lld."
+            "value" : "Successfully exported %lld entries from the input memory."
           }
         },
         "en-NZ" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Input memory export complete. Entries saved: %lld."
+            "value" : "Successfully exported %lld entries from the input memory."
           }
         },
         "en-US" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Input memory export complete. Entries saved: %lld."
+            "value" : "Successfully exported %lld entries from the input memory."
           }
         },
         "fr" : {
@@ -5308,37 +5308,37 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Input memory import complete. Entries imported: %lld."
+            "value" : "Successfully imported %lld entries to the input memory."
           }
         },
         "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Input memory import complete. Entries imported: %lld."
+            "value" : "Successfully imported %lld entries to the input memory."
           }
         },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Input memory import complete. Entries imported: %lld."
+            "value" : "Successfully imported %lld entries to the input memory."
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Input memory import complete. Entries imported: %lld."
+            "value" : "Successfully imported %lld entries to the input memory."
           }
         },
         "en-NZ" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Input memory import complete. Entries imported: %lld."
+            "value" : "Successfully imported %lld entries to the input memory."
           }
         },
         "en-US" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Input memory import complete. Entries imported: %lld."
+            "value" : "Successfully imported %lld entries to the input memory."
           }
         },
         "fr" : {
