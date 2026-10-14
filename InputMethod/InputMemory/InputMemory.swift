@@ -26,7 +26,8 @@ struct InputMemory {
                 guard store.isReady else { return }
                 guard lexicon.isCantonese else { return }
                 if let found = find(word: lexicon.text, romanization: lexicon.romanization) {
-                        update(id: found.id, frequency: found.frequency + 1)
+                        let updatedFrequency: Int64 = (found.frequency < Int64.max) ? (found.frequency + 1) : Int64.max
+                        update(id: found.id, frequency: updatedFrequency)
                 } else {
                         let newEntry = MemoryLexicon(word: lexicon.text, romanization: lexicon.romanization)
                         insert(entry: newEntry)
