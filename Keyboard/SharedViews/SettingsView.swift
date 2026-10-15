@@ -379,7 +379,7 @@ struct SettingsView: View {
                                         Button {
                                                 guard isPerformingClearInputMemory.negative else { return }
                                                 AudioFeedback.modified()
-                                                transfer.startExport()
+                                                transfer.presentExportDestinationPicker()
                                         } label: {
                                                 HStack {
                                                         Label("SettingsView.ExportInputMemory.ButtonTitle", systemImage: "square.and.arrow.up")
@@ -430,10 +430,10 @@ struct SettingsView: View {
                         }
                         .scrollContentBackground(.hidden)
                         .background(Color.interactiveClear)
-                        .fileMover(isPresented: Binding(get: { transfer.exportedFile != nil }, set: { if $0.negative { transfer.dismissExport() } }), file: transfer.exportedFile, onCompletion: transfer.completeExport)
                 }
-                .fileImporter(isPresented: $transfer.isImporterPresented, allowedContentTypes: [InputMemoryTransferController.contentType], onCompletion: transfer.completeImport)
+                .fileImporter(isPresented: $transfer.isPickerPresented, allowedContentTypes: transfer.pickerContentTypes, onCompletion: transfer.completePicker)
                 .onDisappear {
+                        transfer.cancelExport()
                         if transfer.isTransferring.negative {
                                 transfer.feedback = nil
                         }

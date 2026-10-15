@@ -110,6 +110,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         override func viewWillDisappear(_ animated: Bool) {
                 super.viewWillDisappear(animated)
                 isKeyboardPrepared = false
+                InputMemoryTransferController.shared.cancelExport()
                 releaseHapticFeedbacks()
                 view.subviews.forEach({ $0.removeFromSuperview() })
                 children.forEach({ $0.removeFromParent() })

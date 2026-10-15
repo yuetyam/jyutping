@@ -5,7 +5,8 @@ import SQLite3
 import CommonExtensions
 import SQLiteWrapper
 
-/// Retained independently of the SettingsView, so leaving the settings does not interrupt a transfer.
+/// Retained independently of the SettingsView, so leaving the settings does not interrupt an import.
+/// An export is cancelled when the SettingsView disappears or the keyboard is dismissed.
 @MainActor
 final class InputMemoryTransferController: ObservableObject {
 
@@ -13,13 +14,28 @@ final class InputMemoryTransferController: ObservableObject {
         @Published private(set) var isExporting: Bool = false
         @Published private(set) var isImporting: Bool = false
 
-        /// The prepared export file, waiting for the file mover. Non-nil while the file mover is presented.
-        @Published private(set) var exportedFile: URL?
-        @Published var isImporterPresented: Bool = false
+        /// Both directions use the document picker in open mode.
+        /// The export mode picker has a filename field, which can not lay out within the keyboard's own window.
+        enum PickerPurpose {
+                case exportDestination
+                case importSource
+        }
+
+        /// One file importer serves both purposes, because multiple file importers in one view hierarchy can conflict.
+        @Published var isPickerPresented: Bool = false
+        /// Kept after dismissal, because the presentation binding can reset before the completion arrives.
+        @Published private(set) var pickerPurpose: PickerPurpose = .importSource
+        var pickerContentTypes: [UTType] {
+                switch pickerPurpose {
+                case .exportDestination:
+                        return [.folder]
+                case .importSource:
+                        return [Self.contentType]
+                }
+        }
         @Published var feedback: LocalizedStringKey?
 
-        private var exportedCount: Int64 = 0
-        private var exportWorkspace: URL?
+        private var exportTask: Task<Void, Never>?
 
         var isTransferring: Bool { isExporting || isImporting }
 
@@ -27,73 +43,137 @@ final class InputMemoryTransferController: ObservableObject {
 
         private init() {}
 
+        func completePicker(_ result: Result<URL, Error>) {
+                switch pickerPurpose {
+                case .exportDestination:
+                        completeExportDestination(result)
+                case .importSource:
+                        completeImport(result)
+                }
+        }
+
 
         // MARK: - Export
 
-        func startExport() {
-                guard isTransferring.negative && isImporterPresented.negative else { return }
+        func presentExportDestinationPicker() {
+                guard isTransferring.negative && isPickerPresented.negative else { return }
                 feedback = nil
-                guard InputMemory.isReady else {
-                        feedback = "SettingsView.ExportInputMemory.SourceBusy"
-                        return
-                }
-                isExporting = true
-                removeExportWorkspace()
-                Task {
-                        do {
-                                let workspace = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString, isDirectory: true)
-                                try FileManager.default.createDirectory(at: workspace, withIntermediateDirectories: false)
-                                exportWorkspace = workspace
-                                let output = workspace.appendingPathComponent("memory-\(Self.dateText()).sqlite3")
-                                let source = InputMemory.databaseURL
-                                let exportTask = Task.detached(priority: .utility) {
-                                        try InputMemoryExporter.export(source: source, output: output)
-                                }
-                                exportedCount = try await exportTask.value
-                                exportedFile = output
-                        } catch SQLiteError.timedOut {
-                                feedback = "SettingsView.ExportInputMemory.SourceBusy"
-                                finishExport()
-                        } catch SQLiteError.invalidFormat {
-                                feedback = "SettingsView.ExportInputMemory.ValidationFailed"
-                                finishExport()
-                        } catch {
-                                feedback = "SettingsView.ExportInputMemory.ExportFailed"
-                                finishExport()
-                        }
-                }
+                pickerPurpose = .exportDestination
+                isPickerPresented = true
         }
 
-        /// The file mover was dismissed. The workspace is kept, because the move can still be in progress.
-        func dismissExport() {
-                exportedFile = nil
-                isExporting = false
-        }
-
-        func completeExport(_ result: Result<URL, Error>) {
+        private func completeExportDestination(_ result: Result<URL, Error>) {
+                let folder: URL
                 switch result {
-                case .success:
-                        let count = exportedCount
-                        feedback = "SettingsView.ExportInputMemory.Success \(count)"
+                case .success(let url):
+                        folder = url
                 case .failure(let error):
                         // Cancellation reports nothing.
                         if (error as? CocoaError)?.code != .userCancelled {
                                 feedback = "SettingsView.ExportInputMemory.WriteFailed"
                         }
+                        return
                 }
-                finishExport()
+                guard isTransferring.negative else { return }
+                guard InputMemory.isReady else {
+                        feedback = "SettingsView.ExportInputMemory.SourceBusy"
+                        return
+                }
+                isExporting = true
+                let filename = "memory-\(Self.dateText())"
+                exportTask = Task {
+                        let workspace = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString, isDirectory: true)
+                        defer { try? FileManager.default.removeItem(at: workspace) }
+                        do {
+                                try FileManager.default.createDirectory(at: workspace, withIntermediateDirectories: false)
+                                let output = workspace.appendingPathComponent("export.sqlite3")
+                                let source = InputMemory.databaseURL
+                                let export = Task.detached(priority: .utility) {
+                                        let count = try InputMemoryExporter.export(source: source, output: output)
+                                        try Task.checkCancellation()
+                                        do {
+                                                try Self.publish(output: output, folder: folder, filename: filename)
+                                        } catch {
+                                                throw ExportWriteError(underlying: error)
+                                        }
+                                        return count
+                                }
+                                let count = try await withTaskCancellationHandler {
+                                        try await export.value
+                                } onCancel: {
+                                        export.cancel()
+                                }
+                                // cancelExport() has already reset the state.
+                                guard Task.isCancelled.negative else { return }
+                                feedback = "SettingsView.ExportInputMemory.Success \(count)"
+                        } catch {
+                                // cancelExport() has already reset the state.
+                                guard Task.isCancelled.negative else { return }
+                                if error is ExportWriteError {
+                                        feedback = "SettingsView.ExportInputMemory.WriteFailed"
+                                } else {
+                                        switch error as? SQLiteError {
+                                        case .timedOut:
+                                                feedback = "SettingsView.ExportInputMemory.SourceBusy"
+                                        case .invalidFormat:
+                                                feedback = "SettingsView.ExportInputMemory.ValidationFailed"
+                                        default:
+                                                feedback = "SettingsView.ExportInputMemory.ExportFailed"
+                                        }
+                                }
+                        }
+                        exportTask = nil
+                        isExporting = false
+                }
         }
 
-        private func finishExport() {
-                exportedFile = nil
-                removeExportWorkspace()
+        /// Called when the SettingsView disappears or the keyboard is dismissed. Reports nothing.
+        func cancelExport() {
+                if isPickerPresented && pickerPurpose == .exportDestination {
+                        isPickerPresented = false
+                }
+                guard isExporting else { return }
+                exportTask?.cancel()
+                exportTask = nil
                 isExporting = false
         }
 
-        private func removeExportWorkspace() {
-                guard let exportWorkspace else { return }
-                try? FileManager.default.removeItem(at: exportWorkspace)
-                self.exportWorkspace = nil
+        private struct ExportWriteError: Error {
+                let underlying: Error
+        }
+
+        /// Copies the validated output into the selected folder under a new, unused name.
+        nonisolated private static func publish(output: URL, folder: URL, filename: String) throws {
+                let isScoped = folder.startAccessingSecurityScopedResource()
+                defer { if isScoped { folder.stopAccessingSecurityScopedResource() } }
+                var coordinationError: NSError?
+                var copyError: Error?
+                NSFileCoordinator().coordinate(writingItemAt: folder, options: [], error: &coordinationError) { directory in
+                        do {
+                                try copy(output: output, directory: directory, filename: filename)
+                        } catch {
+                                copyError = error
+                        }
+                }
+                if let error = coordinationError ?? copyError { throw error }
+        }
+
+        /// Never replaces an existing file. Example names: memory-20261016-054500.sqlite3, memory-20261016-054500-2.sqlite3
+        nonisolated private static func copy(output: URL, directory: URL, filename: String) throws {
+                for index in 1...99 {
+                        let name = (index == 1) ? filename : "\(filename)-\(index)"
+                        let destination = directory.appendingPathComponent(name).appendingPathExtension("sqlite3")
+                        do {
+                                try FileManager.default.copyItem(at: output, to: destination)
+                                return
+                        } catch CocoaError.fileWriteFileExists {
+                                continue
+                        } catch {
+                                try? FileManager.default.removeItem(at: destination)
+                                throw error
+                        }
+                }
+                throw CocoaError(.fileWriteFileExists)
         }
 
         private static func dateText() -> String {
@@ -109,12 +189,13 @@ final class InputMemoryTransferController: ObservableObject {
         // MARK: - Import
 
         func presentImporter() {
-                guard isTransferring.negative && exportedFile == nil else { return }
+                guard isTransferring.negative && isPickerPresented.negative else { return }
                 feedback = nil
-                isImporterPresented = true
+                pickerPurpose = .importSource
+                isPickerPresented = true
         }
 
-        func completeImport(_ result: Result<URL, Error>) {
+        private func completeImport(_ result: Result<URL, Error>) {
                 let file: URL
                 switch result {
                 case .success(let url):
