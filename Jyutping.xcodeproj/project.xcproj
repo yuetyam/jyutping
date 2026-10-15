@@ -131,7 +131,7 @@
         "CODE_SIGN_ENTITLEMENTS": "Jyutping/Jyutping.entitlements",
         "CODE_SIGN_IDENTITY[sdk=macosx*]": "-",
         "CODE_SIGN_STYLE": "Automatic",
-        "CURRENT_PROJECT_VERSION": "178",
+        "CURRENT_PROJECT_VERSION": "179",
         "DEAD_CODE_STRIPPING": "YES",
         "DEVELOPMENT_TEAM": "",
         "ENABLE_APP_SANDBOX": "YES",
@@ -188,7 +188,7 @@
       "build-settings": {
         "BUNDLE_LOADER": "$(TEST_HOST)",
         "CODE_SIGN_STYLE": "Automatic",
-        "CURRENT_PROJECT_VERSION": "178",
+        "CURRENT_PROJECT_VERSION": "179",
         "DEAD_CODE_STRIPPING": "YES",
         "GENERATE_INFOPLIST_FILE": "YES",
         "IPHONEOS_DEPLOYMENT_TARGET": "16.0",
@@ -223,7 +223,7 @@
       ],
       "build-settings": {
         "CODE_SIGN_STYLE": "Automatic",
-        "CURRENT_PROJECT_VERSION": "178",
+        "CURRENT_PROJECT_VERSION": "179",
         "DEAD_CODE_STRIPPING": "YES",
         "GENERATE_INFOPLIST_FILE": "YES",
         "IPHONEOS_DEPLOYMENT_TARGET": "16.0",
@@ -267,7 +267,7 @@
       "build-settings": {
         "CODE_SIGN_ENTITLEMENTS": "Keyboard/Keyboard.entitlements",
         "CODE_SIGN_STYLE": "Automatic",
-        "CURRENT_PROJECT_VERSION": "178",
+        "CURRENT_PROJECT_VERSION": "179",
         "DEVELOPMENT_TEAM": "",
         "ENABLE_ENHANCED_SECURITY": "YES",
         "ENABLE_POINTER_AUTHENTICATION": "NO",
@@ -337,7 +337,7 @@
         "CODE_SIGN_IDENTITY[sdk=macosx*]": "-",
         "CODE_SIGN_STYLE": "Automatic",
         "COMBINE_HIDPI_IMAGES": "YES",
-        "CURRENT_PROJECT_VERSION": "178",
+        "CURRENT_PROJECT_VERSION": "179",
         "DEAD_CODE_STRIPPING": "YES",
         "DEVELOPMENT_TEAM": "",
         "ENABLE_APP_SANDBOX": "YES",
@@ -410,7 +410,7 @@
       "build-settings": {
         "BUNDLE_LOADER": "$(TEST_HOST)",
         "CODE_SIGN_STYLE": "Automatic",
-        "CURRENT_PROJECT_VERSION": "178",
+        "CURRENT_PROJECT_VERSION": "179",
         "DEAD_CODE_STRIPPING": "YES",
         "GENERATE_INFOPLIST_FILE": "YES",
         "MACOSX_DEPLOYMENT_TARGET": "13.0",
@@ -441,7 +441,7 @@
       ],
       "build-settings": {
         "CODE_SIGN_STYLE": "Automatic",
-        "CURRENT_PROJECT_VERSION": "178",
+        "CURRENT_PROJECT_VERSION": "179",
         "DEAD_CODE_STRIPPING": "YES",
         "GENERATE_INFOPLIST_FILE": "YES",
         "MACOSX_DEPLOYMENT_TARGET": "13.0",
