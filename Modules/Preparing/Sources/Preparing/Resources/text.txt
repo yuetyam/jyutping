@@ -60,8 +60,6 @@ cafe	cafe
 callkit	CallKit
 canon	Canon
 cantoboard	Cantoboard
-canton	Canton
-cantonese	Cantonese
 capslock	Caps Lock
 capslock	CapsLock
 carplay	CarPlay
@@ -72,8 +70,6 @@ chat	chat
 chatgpt	ChatGPT
 chatgpt	chatgpt.com
 chevrolet	Chevrolet
-china	China
-chinese	Chinese
 chrome	Chrome
 chromeos	ChromeOS
 chromium	Chromium
@@ -89,6 +85,8 @@ cmake	CMake
 code	code
 codex	codex
 coloros	ColorOS
+com	com
+com	.com
 compose	Compose
 copilot	Copilot
 coretext	Core Text
@@ -201,7 +199,7 @@ homebrew	Homebrew
 homekit	HomeKit
 homepod	HomePod
 homepodmini	HomePod mini
-honda	Honda
+homeview	HomeView
 html	HTML
 http	http
 https	https
@@ -363,6 +361,7 @@ oppo	OPPO
 oracle	Oracle
 originos	OriginOS
 osx	OS X
+ota	OTA
 outlook	Outlook
 outlook	outlook.com
 page	page
@@ -508,10 +507,12 @@ ux	UX
 ventura	Ventura
 vercel	Vercel
 vim	vim
+virtualbox	VirtualBox
 visionkit	VisionKit
 visionos	visionOS
 visionpro	Vision Pro
 vivo	vivo
+vmware	VMware
 vpn	VPN
 vscode	VSCode
 vulkan	Vulkan
@@ -610,6 +611,7 @@ auth	auth
 bb	BB
 bbc	BBC
 bbq	BBQ
+bgm	BGM
 boomer	boomer
 boomers	boomers
 cnn	CNN
@@ -684,6 +686,7 @@ canada	Canada
 centralafrica	Central Africa
 chad	Chad
 chile	Chile
+china	China
 colombia	Colombia
 comoros	Comoros
 congo	Congo
@@ -910,6 +913,7 @@ westvirginia	West Virginia
 wisconsin	Wisconsin
 wyoming	Wyoming
 adelaide	Adelaide
+amoy	Amoy
 amsterdam	Amsterdam
 bakerloo	Bakerloo
 bangkok	Bangkok
@@ -922,24 +926,33 @@ budapest	Budapest
 cairo	Cairo
 cambridge	Cambridge
 canberra	Canberra
+canton	Canton
+cantonese	Cantonese
 chicago	Chicago
+chinese	Chinese
 copenhagen	Copenhagen
 dublin	Dublin
 edinburgh	Edinburgh
+foochow	Foochow
+hakka	Hakka
 hammersmith	Hammersmith
 helsinki	Helsinki
 houston	Houston
 jubilee	Jubilee
+kochow	Kochow
 lisbon	Lisbon
 liverpool	Liverpool
 london	London
 losangeles	Los Angeles
 madrid	Madrid
 manchester	Manchester
+mandarin	Mandarin
 melbourne	Melbourne
 metropolitan	Metropolitan
+nanking	Nanking
 oslo	Oslo
 paris	Paris
+peking	Peking
 perth	Perth
 piccadilly	Piccadilly
 prague	Prague
@@ -947,6 +960,9 @@ roma	Roma
 rome	Rome
 sanjose	San Jose
 seoul	Seoul
+shanghai	Shanghai
+shanghainese	Shanghainese
+soochow	Soochow
 stockholm	Stockholm
 sydney	Sydney
 tokyo	Tokyo
@@ -958,6 +974,8 @@ york	York
 abc	🔤
 and	and
 and	&
+asir	阿sir
+aasir	阿sir
 atm	ATM
 atm	🏧
 back	back
@@ -2380,7 +2398,6 @@ union	union
 jewelry	jewelry
 according	according
 clothing	clothing
-com	com
 particular	particular
 fine	fine
 names	names
@@ -4832,6 +4849,7 @@ innovation	innovation
 employers	employers
 grey	grey
 parallel	parallel
+honda	honda
 amended	amended
 operate	operate
 bills	bills
@@ -7831,7 +7849,6 @@ projectors	projectors
 inappropriate	inappropriate
 exhaust	exhaust
 comparing	comparing
-shanghai	shanghai
 speaks	speaks
 burton	burton
 vocational	vocational
@@ -14227,7 +14244,6 @@ fearing	fearing
 fluffy	fluffy
 fundraiser	fundraiser
 funniest	funniest
-gaga	gaga
 garment	garment
 geometric	geometric
 gestures	gestures
@@ -14257,7 +14273,6 @@ mackenzie	mackenzie
 madam	madam
 marital	marital
 mayer	mayer
-meds	meds
 multitude	multitude
 muse	muse
 nanny	nanny
@@ -15273,6 +15288,7 @@ disconnected	disconnected
 dishonest	dishonest
 doubtful	doubtful
 dysfunction	dysfunction
+ecosystems	ecosystems
 padding	padding
 cameraman	cameraman
 trillionaire	trillionaire
@@ -15280,4 +15296,7 @@ yosemite	yosemite
 mavericks	mavericks
 astral	astral
 fuckable	fuckable
-ecosystems	ecosystems
+fable	fable
+opus	opus
+sonnet	sonnet
+otter	otter

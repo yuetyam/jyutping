@@ -431,7 +431,7 @@
 㘥	U+3625	to inveigle; to decoy, a decoy-bird; a go-between; a medium
 㘦	U+3626	wall made of soil, used in name of places
 㘧	U+3627	(same as 序) precedence, order, orderly, the east and west walls of the parlor
-㘨	U+3628	deep; profound, empty; hollow, quite; peaceful
+㘨	U+3628	deep; profound, empty; hollow, quiet; peaceful
 㘩	U+3629	to mate; to pair
 㘪	U+362A	(same as 耗) to waste, to destroy, to diminish; hence it came to mean, a rat, heedless; careless; inattentive; rough and coarse
 㘫	U+362B	(a variant of 阱) to fall into a well, a pit; a pitfall; a hole; a gully, to involve; to entrap
@@ -717,7 +717,7 @@
 㝩	U+3769	spaciously rooms, emptiness
 㝪	U+376A	a slanting house, nightmare
 㝫	U+376B	shape of the sky
-㝭	U+376D	(non-classical form) to awake (from errors, illusions, etc. to come to one's sense, (interchangeable 惺) clever; wise, wavering; indecisive
+㝭	U+376D	(non-classical form) to awake (from errors, illusions, etc.), to come to one's sense, (interchangeable 惺) clever; wise, wavering; indecisive
 㝮	U+376E	to exile; to banish, beyond the borders
 㝯	U+376F	to sojourn; sojourn, a sojourner; a visitor
 㝰	U+3770	unable to meet, empty room
@@ -975,7 +975,7 @@
 㡿	U+387F	(standard form of 斥) to accuse; to blame, to expel; to drive off; to reject
 㢀	U+3880	side room
 㢁	U+3881	(same as 㢋) vast, to open up, enlarge or expand, the blot of a door; door latch, name of a person
-㢂	U+3882	(terrains) of highly strategic; precipitous (hill, etc. a big mound; (same as 㢈) a collapsed house, to hit, to catch something
+㢂	U+3882	(terrains) of highly strategic; precipitous (hill, etc.); a big mound; (same as 㢈) a collapsed house, to hit, to catch something
 㢃	U+3883	high, magnanimity
 㢄	U+3884	a kind of utensil; implement; tool, a place of worship; a place where to honor by a service or rite; a place to offer sacrifices; a kitchen
 㢅	U+3885	a shield; a screen, a tall building; an edifice, (same as 弄) an alley; a lane
@@ -1638,7 +1638,7 @@
 㭟	U+3B5F	torture used in ancient times
 㭡	U+3B61	name of a mountain, a component parts of a loom
 㭢	U+3B62	mechanics, opportunity, urgent
-㭤	U+3B64	(simplified form) (same as 蔦) the convolvulus; a kind of creeping plant, partridge; francolin, in Japan, the pole out side of a building used to post the public notice
+㭤	U+3B64	(simplified form) (same as 蔦) the convolvulus; a kind of creeping plant, partridge; francolin, in Japan, the pole outside of a building used to post the public notice
 㭨	U+3B68	(same as 椰) the cocoa-nut palm
 㭩	U+3B69	a kind of tree can be used as dye-stuff, the mast of a boat
 㭪	U+3B6A	a shrub (plant); dense growth of trees
@@ -1666,7 +1666,7 @@
 㮄	U+3B84	(non-classical form of 榜) publicly posted roll of successful examinees
 㮅	U+3B85	a kind of tree
 㮆	U+3B86	(an ancient form) (same as 𣡌) leaves sprouting from the stump of a tree; shoots from an old stump, a large (a species of oak) from the bark of which a yellow dye is produced
-㮇	U+3B87	(standard form of 掭) (same as 栝) a builder's frame for measuring, juniper, a poker (for stirring fire, a cylinder part on the old style of wooden doors
+㮇	U+3B87	(standard form of 掭) (same as 栝) a builder's frame for measuring, juniper, a poker (for stirring fire), a cylinder part on the old style of wooden doors
 㮈	U+3B88	(non-classical form of 奈) but; how; what, a remedy; a resource, to bear, to endure
 㮋	U+3B8B	(non-classical form of 栯) a kind of tree, a fruit tree
 㮌	U+3B8C	(same as 棉) cotton; a kind of fruit
@@ -2218,7 +2218,7 @@
 㷷	U+3DF7	(same as 臇) thick soup; broth, fat; rich, a stew of fish
 㷸	U+3DF8	(a variant of 燁) blaze of fire, splendid, glorious
 㷹	U+3DF9	intense heat, to fry in intensive fire
-㷻	U+3DFB	(same as 無) without, none, a negative (a variant 嬭) to burn food in cocking; singed; burnt
+㷻	U+3DFB	(same as 無) without, none, a negative (a variant 嬭) to burn food in cooking; singed; burnt
 㷼	U+3DFC	(standard form of 燕) a swallow, comfort; ease; to soothe (interchangeable 晏) to feast; to enjoy, name of a certain feudal States
 㷾	U+3DFE	blaze of fire; burning vigorously
 㷿	U+3DFF	flame; fire, bitter; acrid taste
@@ -2535,7 +2535,7 @@
 㽢	U+3F62	to plough the fields
 㽣	U+3F63	(ancient form of 域) a frontier; a boundary; a region; a country, to keep within bounds
 㽤	U+3F64	a small plot of land
-㽥	U+3F65	fertile fields; good land (during the Epoch of Spring and Autumn) name of a place in Zheng Guo (today's Henan Province LuShan Xian
+㽥	U+3F65	fertile fields; good land (during the Epoch of Spring and Autumn) name of a place in Zheng Guo (today's Henan Province LuShan Xian)
 㽦	U+3F66	reclaimed land; flat and in even level
 㽧	U+3F67	name of a place
 㽨	U+3F68	fragmented; uncultivated and desolated fields, to eliminate; remove, to clean (interchangeable 瘥) an epidemic; a plague
@@ -3098,7 +3098,7 @@
 䆸	U+41B8	spacious; capacious, sound (of the house), a picture (on silk) scroll
 䆹	U+41B9	empty; hollow, dark; obscure
 䆺	U+41BA	whirling of the flowing water, (interchangeable 潘) water in which rice has been washed
-䆻	U+41BB	(corrupted form of 竅) a hole; a cavity; (the mind's pores, the crux; key points
+䆻	U+41BB	(corrupted form of 竅) a hole; a cavity; the mind's pores, the crux; key points
 䆼	U+41BC	a nest; den, burrow; a dwelling for people
 䆽	U+41BD	a hole; an opening, a cave, empty; hollow
 䆾	U+41BE	big; large; thin; light, rugged; uneven, a deep cave
@@ -3144,7 +3144,7 @@
 䇨	U+41E8	a bamboo basket for food containers (such as cup; plate; dish and bowl, etc.) used in ancient times, a basket for chopsticks, bamboo basket used to filter or to strain out the wine, a sail made of a thin and long strip of bamboo
 䇩	U+41E9	long, a big raft, a kind of equipment made of bamboo used to catch fishes
 䇪	U+41EA	name of a variety of bamboo
-䇫	U+41EB	bamboo-splints; laths, to plait, (same as 篦) a comb; especially a fine-toothed one)
+䇫	U+41EB	bamboo-splints; laths, to plait, (same as 篦) a comb; especially a fine-toothed one
 䇬	U+41EC	thin bamboo laths knitted sail, a thin and long strip of bamboo; books in ancient style, to set sail; to depart
 䇭	U+41ED	containers made of thin and long strip of bamboo or willow branches
 䇮	U+41EE	a bamboo mat used in ancient times, (interchangeable 衽) a sleeping mat
@@ -3289,7 +3289,7 @@
 䉾	U+427E	bad; poor quality of rice
 䉿	U+427F	(same as 糊) paste; to paste, sticky; glutinous, to stick
 䊀	U+4280	(same as 䉿 糊) paste; to paste, sticky; glutinous, to stick
-䊁	U+4281	(same as 籸) leavings; refuse (from foodstuff, petroleum, oil, etc.; siftings, congee; rice gruel (the surface part); a kind of cooked rice
+䊁	U+4281	(same as 籸) leavings; refuse (from foodstuff, petroleum, oil, etc.); siftings, congee; rice gruel (the surface part); a kind of cooked rice
 䊂	U+4282	poor quality of rice; bad rice cakes stick to each other
 䊃	U+4283	mixing rice with broth, a grain of rice
 䊄	U+4284	polished rice
@@ -3306,7 +3306,7 @@
 䊐	U+4290	(same as 餛) fluffy stuffed dumplings; stuffed dumpling with delicate flour wrapping; ravioli
 䊑	U+4291	(same as 餉 饟) pay, provisions, etc. for military or police, to entertain with food; to feast
 䊒	U+4292	(same as 精) refined; polished (rice); unmixed, the essence, fine and delicate, keen; sharp
-䊓	U+4293	to paste up; to attach to; to stickup; to glue
+䊓	U+4293	to paste up; to attach to; to stick up; to glue
 䊔	U+4294	polished rice; refined rice
 䊕	U+4295	(same as 饘) well-boiled congee or gruel, thick, rich
 䊖	U+4296	to eat rice-gruel mixed with meat
@@ -3325,7 +3325,7 @@
 䊣	U+42A3	light yellow dust-like fungoid growth on wine, etc., barley, chaff or husks of wheat (non-classical form of 餭) fried puffy shredded, sugar-plums; sweetmeats
 䊤	U+42A4	vegetable mixed with thick soup (broth), congee; gruel
 䊥	U+42A5	congee; porridge; rice gruel, mashed; rotten
-䊦	U+42A6	food (some food as glutinous rice tamale—made by wrapping the rice in broad leaves of reeds and boiled for a few hours—usually with other ingredients, as dates, meat, oyster, beams, etc.
+䊦	U+42A6	food (some food as glutinous rice tamale—made by wrapping the rice in broad leaves of reeds and boiled for a few hours—usually with other ingredients, as dates, meat, oyster, beams, etc.)
 䊧	U+42A7	(same as 屁) a fart; to break wind
 䊨	U+42A8	storing grains; to store up food
 䊩	U+42A9	rice gravy
@@ -3465,7 +3465,7 @@
 䌳	U+4333	a kind of unrefined or unpolished silken textiles; silken goods; silken fabrics
 䌴	U+4334	uneven; silk with knots; unpolished
 䌵	U+4335	lapel and belt
-䌶	U+4336	(simplified form of 䊷) (same as 緇)) black silk; a dark, drab colour, used for Buddhists, from the dark colour of their robes (same as 純) pure, honest
+䌶	U+4336	(simplified form of 䊷) (same as 緇) black silk; a dark, drab colour, used for Buddhists, from the dark colour of their robes (same as 純) pure, honest
 䌷	U+4337	(simplified form of 紬) a thread; a clue
 䌸	U+4338	(simplified form of 縳) fine silk fabric of bright white colour, to tie up, (interchangeable 卷) a book or painting which can be easily folded or rolled up, a division of a book, files
 䌹	U+4339	(simplified form of 絅) (same as 褧) a garment of one colour with no lining, a dust coat
@@ -3681,7 +3681,7 @@
 䐏	U+440F	fat; plump
 䐐	U+4410	curved part of the knee, between the thigh and calf
 䐑	U+4411	thin cut of the sliced meat
-䐒	U+4412	not fine; coarse, to stickup; to paste up; to attach to; to glue, scar
+䐒	U+4412	not fine; coarse, to stick up; to paste up; to attach to; to glue, scar
 䐓	U+4413	soft, (same as 脜) gentle; mild; temperate facial expression
 䐔	U+4414	muscle of the calf (of the leg), tendon (of meat animals), stopping and rising of the pulse like a plaited ropes
 䐕	U+4415	oil and grease; fats, the bursting of a wound
@@ -3833,7 +3833,7 @@
 䒭	U+44AD	(same as 等) rank; grade, same; equal, to wait, and so on; etc.
 䒰	U+44B0	to follow; to trace, to submit; to accord with, to accompany, a kind of grass
 䒱	U+44B1	(same as 蒸) twigs of hemp used for fuel; to rise, as steam, steam
-䒲	U+44B2	another name for 黃岑 (Scutellaria baikalensis)
+䒲	U+44B2	another name for 黃岑 (Scutellaria baicalensis)
 䒳	U+44B3	(same as 朵) a flower; a cluster of flowers; a bud, lobe of the ear
 䒴	U+44B4	name of a variety of grass
 䒵	U+44B5	name of a variety of grass
@@ -4143,7 +4143,7 @@
 䗺	U+45FA	creeping; wriggly, (same as 蜑), the boat people in the coastal areas of Fukien (Fugian) and Kwangtung (Guangdong); Southern tribes
 䗻	U+45FB	a kind of sea crab
 䗼	U+45FC	a kind of insect
-䗽	U+45FD	a small gadfly that suck blood of horse or cow; weevil found in rice, etc.
+䗽	U+45FD	a small gadfly that sucks blood of horse or cow; weevil found in rice, etc.
 䗾	U+45FE	(same as 蜆) Corbicula leana, a variety of bivalves
 䗿	U+45FF	a kind of insect; mole cricket
 䘀	U+4600	(same as 蛗) grasshoppers
@@ -4270,7 +4270,7 @@
 䚁	U+4681	(same as 䚀) to see, to see stealthily; to peek
 䚂	U+4682	to see; to observe or examine
 䚃	U+4683	to realize fully, to make a thorough examination
-䚄	U+4684	to make fun of, to having the same idea, feeling, etc.
+䚄	U+4684	to make fun of, to have the same idea, feeling, etc.
 䚅	U+4685	to look after home or domestic affairs, to search one's own soul, to see; to observe
 䚆	U+4686	to see; to look at, to examine
 䚇	U+4687	to observe; to inspect carefully, leaking out, a measurement, (non-classical of 省) economical, a province, to save; to avoid
@@ -4408,7 +4408,7 @@
 䜑	U+4711	(same as 䛩) to slander; to defame; (same as 惡) to hate; to hold a grudge against
 䜒	U+4712	expression; sentence, speech, to tell; to inform; to accuse; to report
 䜓	U+4713	a slip of the tongue
-䜔	U+4714	to speak on the ideas of someone else; to speak without much thought of ones own, to obey
+䜔	U+4714	to speak on the ideas of someone else; to speak without much thought of one's own, to obey
 䜕	U+4715	to exaggerate; exaggeration, arrogant; to boast, to dispute with anger
 䜖	U+4716	(non-classical form) (same as 談) to talk; to converse; to chat
 䜗	U+4717	angry words
@@ -4966,12 +4966,12 @@
 䥤	U+4964	the neck of a pestle; the neck part of a baton used to pound clothes in washing
 䥥	U+4965	a sickle, a reaping-hook, an angle of the arrowhead, medical instrument used in old times
 䥧	U+4967	(same as 璿 璇) a fine kind of jade
-䥨	U+4968	a file; a rasp; a polishing tool, to burnish, to polish, the handle of a lances and spear
+䥨	U+4968	a file; a rasp; a polishing tool, to burnish, to polish, the handle of a lance and spear
 䥩	U+4969	hooks to hang; to suspend something
 䥪	U+496A	to cup; to pare; to trim; to shave
 䥫	U+496B	(ancient form of 鐵) iron, strong; firm
 䥬	U+496C	(interchangeable 鎛) a musical instrument in old times, a large bell suspended from a frame; a kind of ancient bell, a variety of hoe
-䥭	U+496D	(same as 證) evidence, proof, to give evidence, to testify)
+䥭	U+496D	(same as 證) evidence, proof, to give evidence, to testify
 䥮	U+496E	to beat; to strike
 䥯	U+496F	a farm tool to crush the clod of earth into pieces and make the land flat, a big iron stick, to till lands; to plough; to cultivate; to harrow
 䥰	U+4970	to melt, to sell, to fling a lance or a spear; to brandish spears as if they were flying
@@ -5442,7 +5442,7 @@
 䭙	U+4B59	exquisite; fine, sweet; taste a little sweet, to taste, diseases (of the lips)
 䭚	U+4B5A	(same as standard form 噇) to eat, to eat heavily; to eat without limits
 䭛	U+4B5B	(same as 饏) tasteless; without enough salt; insipid; dull, (non-classical of standard form 澉) to wash
-䭝	U+4B5D	to eat, ((non-classical form of 膾) minced meat
+䭝	U+4B5D	to eat, (non-classical form of 膾) minced meat
 䭞	U+4B5E	(same as 繹) a kind of sacrifice offered to gods or the deceased; rotten food; food; cakes and biscuits
 䭟	U+4B5F	(same as 䭎) cakes
 䭠	U+4B60	a snack, supplementary dishes, (corrupted form of 䭑) incorruptible; honest; clean, (same as 歉) deficient, poor crop or harvest, to regret; sorry; (same as 餡) anything serving as stuffing for dumplings, etc.
@@ -5549,7 +5549,7 @@
 䯆	U+4BC6	(same as 骮) small and thin piece of bones
 䯇	U+4BC7	to exert oneself; to make an effort; diligent; sedulous
 䯈	U+4BC8	the pelvis (髂=䯊)
-䯉	U+4BC9	to choke; the throat chocked and unable to breath smoothly
+䯉	U+4BC9	to choke; the throat choked and unable to breathe smoothly
 䯊	U+4BCA	the pelvis, bone stuck in the throat, the kneecap; patella; the five lowest pieces of bone of the spinal column
 䯋	U+4BCB	the shoulder blade; scapula
 䯌	U+4BCC	the sacrum; the coccyx; the end of the spine; the rump; the buttocks
@@ -5650,7 +5650,7 @@
 䰭	U+4C2D	(same as 䰰) dreary cries of ghosts; sound of monsters
 䰯	U+4C2F	to fear; to dread; to be afraid of
 䰰	U+4C30	(same as 䰭) dreary cries of ghosts; sound of monsters
-䰱	U+4C31	name of a god; a legendary spirits having the face of a man and the body of a beast
+䰱	U+4C31	name of a god; a legendary spirit having the face of a man and the body of a beast
 䰲	U+4C32	the sheatfish
 䰴	U+4C34	a wafting fish, a fish, to cut a fish
 䰵	U+4C35	blackfish or mullet; anchovy
@@ -5809,7 +5809,7 @@
 䳗	U+4CD7	(ancient form of 鵝) goose; gander
 䳘	U+4CD8	goose
 䳙	U+4CD9	an egret-like bird, a kind of water bird
-䳚	U+4CDA	a sort of nightingale which is said to sing for the dawn; also the name for a large bat with awing-spread of two feet, a sort of pheasant
+䳚	U+4CDA	a sort of nightingale which is said to sing for the dawn; also the name for a large bat with a wingspread of two feet, a sort of pheasant
 䳛	U+4CDB	(same as 鷃) a small brown speckled bird like the quail
 䳜	U+4CDC	(same as 鵌) a kind of bird which shares its nest with rats
 䳝	U+4CDD	a kind of small birds, a kind of bird
@@ -5891,7 +5891,7 @@
 䴫	U+4D2B	(same as 羚) antelope
 䴬	U+4D2C	crumbs of barley; bran; chaff
 䴭	U+4D2D	distiller's grains or yeast; ferment for brewing
-䴮	U+4D2E	cakes pf leaven; yeast, ferment for brewing, crumbs of barley
+䴮	U+4D2E	cakes of leaven; yeast, ferment for brewing, crumbs of barley
 䴯	U+4D2F	a kind of cake
 䴰	U+4D30	a family name, (same as 䴬) crumbs of barley; bran; chaff
 䴱	U+4D31	cakes and biscuits
@@ -5941,7 +5941,7 @@
 䵝	U+4D5D	dark black, black
 䵞	U+4D5E	(ancient form of 黥) ancient punishment of tattooing the face
 䵟	U+4D5F	(same as 皯) black, black moles or black birthmarks on the face
-䵠	U+4D60	rushes used form making mats, face decorations (for women), to ornament on the face of a woman
+䵠	U+4D60	rushes used for making mats, face decorations (for women), to ornament on the face of a woman
 䵡	U+4D61	(non-classical form of 䵤) to crack or chap; (cracked) black skin
 䵢	U+4D62	light black, dark black
 䵣	U+4D63	white with black; black and beautiful, name of a county in ancient times
@@ -6228,7 +6228,7 @@
 他	U+4ED6	other, another; he, she, it
 仗	U+4ED7	rely upon; protector; fight; war, weaponry
 付	U+4ED8	give, deliver, pay, hand over; entrust
-仙	U+4ED9	Taoist super-being, transcendent, immortal
+仙	U+4ED9	Taoist super-being, transcendent, immortal; cent
 仚	U+4EDA	to fly
 仛	U+4EDB	young girl; strange, different
 仝	U+4EDD	together, same; surname
@@ -6694,7 +6694,7 @@
 兝	U+515D	decigram
 兞	U+515E	milligram
 兟	U+515F	to advance
-兡	U+5161	mercury (chemical element)
+兡	U+5161	mercury (chemical element); hectogram
 兢	U+5162	fearful, cautious, wary
 兣	U+5163	decigram; centigram
 入	U+5165	enter, come in(to), join
@@ -7281,7 +7281,7 @@
 吩	U+5429	order, command, instruct
 吪	U+542A	move
 含	U+542B	hold in mouth; cherish; contain
-听	U+542C	hear; understand; obey, comply
+听	U+542C	hear; understand; obey, comply; one pound
 吭	U+542D	throat
 吮	U+542E	suck with mouth, sip, lick
 启	U+542F	open; begin, commence; explain
@@ -7312,7 +7312,7 @@
 呋	U+544B	(呋喃) furan (C₄H₄O)
 呌	U+544C	to call; to summon
 呍	U+544D	phonetic
-呎	U+544E	foot
+呎	U+544E	foot, twelve inches
 呏	U+544F	gallon; quart
 呐	U+5450	raise voice, yell out loud, shout; stammer
 呑	U+5451	swallow; absorb
@@ -7702,6 +7702,7 @@
 嘘	U+5618	exhale; blow out; deep sigh; hiss; praise
 嘛	U+561B	final exclamatory particle
 嘜	U+561C	mark
+嘝	U+561D	bushel (unit of measure)
 嘞	U+561E	final particle used for polite refusal
 嘟	U+561F	sound of horn tooting
 嘠	U+5620	the chirping of birds loud laughter
@@ -8680,7 +8681,7 @@
 対	U+5BFE	correct, right; facing, opposed
 寿	U+5BFF	old age, long life; lifespan
 尀	U+5C00	cannot; thereupon
-封	U+5C01	letter, envelope; feudal
+封	U+5C01	letter, envelope; feudal; one pound
 専	U+5C02	monopolize, take sole possession
 尃	U+5C03	to state to, to announce
 射	U+5C04	shoot, eject, issue forth, emit
@@ -9226,7 +9227,7 @@
 弔	U+5F14	condole, mourn, pity; hang
 引	U+5F15	to pull, draw out, attract; to stretch
 弖	U+5F16	phonetic for 'te' (Japanese)
-弗	U+5F17	not, negative
+弗	U+5F17	not, negative; dollar
 弘	U+5F18	enlarge, expand; liberal, great
 弛	U+5F1B	loosen, relax, unstring a bow
 弝	U+5F1D	the part of a bow grasped when shooting
@@ -11255,7 +11256,7 @@
 樟	U+6A1F	camphor tree
 樠	U+6A20	elm; gum
 模	U+6A21	model, standard, pattern; copy
-樢	U+6A22	(simplified form) (same as 蔦) the convolvulus; a kind of creeping plant, partridge; francolin, in Japan, the pole out side of a building used to post the public notice
+樢	U+6A22	(simplified form) (same as 蔦) the convolvulus; a kind of creeping plant, partridge; francolin, in Japan, the pole outside of a building used to post the public notice
 樣	U+6A23	shape, form, pattern, style
 樨	U+6A28	scrambled eggs
 権	U+6A29	power, right, authority
@@ -11553,7 +11554,7 @@
 氇	U+6C07	thick rough serge from Tibet
 氈	U+6C08	felt; rug, carpet
 氉	U+6C09	restless, melancholy
-氊	U+6C0A	felt; coarse fabrics use for rugs, carpets, wrappers etc.
+氊	U+6C0A	felt; coarse fabrics used for rugs, carpets, wrappers, etc.
 氌	U+6C0C	thick rough serge from Tibet
 氍	U+6C0D	fine woollen cloth; a mat used by the emperor in worshipping god
 氎	U+6C0E	fine cotton cloth
@@ -11810,7 +11811,7 @@
 浦	U+6D66	bank of river, shore; surname
 浩	U+6D69	great, numerous, vast, abundant
 浪	U+6D6A	wave; wasteful, reckless
-浬	U+6D6C	nautical mile
+浬	U+6D6C	nautical mile; knot, nautical mile per hour
 浭	U+6D6D	river in Hebei province; a ford; to wade
 浮	U+6D6E	to float, drift, waft; to exceed; superfluous
 浯	U+6D6F	name of a river in Shandong
@@ -12987,6 +12988,7 @@
 瓯	U+74EF	bowl, cup; small tray
 瓰	U+74F0	a decigram, one-tenth of a gram
 瓱	U+74F1	milligram
+瓲	U+74F2	ton
 瓴	U+74F4	concave channels of tiling a long-necked jar
 瓶	U+74F6	jug, pitcher, vase, jar, bottle
 瓷	U+74F7	crockery, porcelain, chinaware
@@ -13985,7 +13987,7 @@
 窺	U+7ABA	peep, watch, spy on, pry
 窻	U+7ABB	window
 窽	U+7ABD	empty; vacant
-窾	U+7ABE	hole; hallow; empty
+窾	U+7ABE	hole; hollow; empty
 窿	U+7ABF	mine shaft; cavity, hole
 竁	U+7AC1	bore
 竃	U+7AC3	furnace; kitchen range
@@ -13998,7 +14000,7 @@
 竊	U+7ACA	secretly, stealthily; steal; thief
 立	U+7ACB	stand; let stand; establish, set
 竍	U+7ACD	decaliter
-竏	U+7ACF	kiloliter
+竏	U+7ACF	kiloliter, cubic meter
 竑	U+7AD1	be vast and endless; broad
 竒	U+7AD2	strange, unusual, uncanny, occult
 竓	U+7AD3	milliliter
@@ -14276,13 +14278,15 @@
 籲	U+7C72	appeal; request; implore
 米	U+7C73	hulled or husked uncooked rice
 籴	U+7C74	purchase grains; store grain
-籵	U+7C75	decimeter
+籵	U+7C75	decameter, ten meters
 籸	U+7C78	powdery substance
 籹	U+7C79	cake
 类	U+7C7B	class, group, kind, category
 籼	U+7C7C	non-glutinous long grain rice
 籽	U+7C7D	seed, pip, pit, stone
 籾	U+7C7E	unhulled rice
+籿	U+7C7F	decimeter, one tenth of a meter
+粀	U+7C80	decameter, ten meters
 粁	U+7C81	kilometer
 粂	U+7C82	surname
 粃	U+7C83	empty husks of grain
@@ -14290,6 +14294,7 @@
 粇	U+7C87	chaff, bran, husks
 粉	U+7C89	powder, face powder; plaster
 粋	U+7C8B	pure; unadulterated; select
+粌	U+7C8C	hectometer
 粍	U+7C8D	millimetre
 粎	U+7C8E	meter
 粑	U+7C91	bread, cake; tsamba (Tibetan barley bread)
@@ -14315,6 +14320,7 @@
 粱	U+7CB1	better varieties of millet
 粲	U+7CB2	polish; bright, radiant; smiling
 粳	U+7CB3	non-glutinous rice
+粴	U+7CB4	kilometer
 粵	U+7CB5	Guangdong and Guangxi provinces; initial particle
 粹	U+7CB9	pure; unadulterated; select
 粺	U+7CBA	polished rice or millet
@@ -15021,7 +15027,7 @@
 聍	U+804D	earwax
 聒	U+8052	clamor, din, hubbub
 联	U+8054	connect, join; associate, ally
-聖	U+8056	holy, sacred; sage
+聖	U+8056	holy, sacred; sage, saint
 聘	U+8058	engage, employ; betroth
 聚	U+805A	assemble, meet together, collect
 聝	U+805D	to cut the left ears of the slain
@@ -15620,7 +15626,7 @@
 荵	U+8375	various species of the genus Polemonium
 荷	U+8377	lotus, water lily; Holland
 荸	U+8378	water chestnut
-荻	U+837B	reed, Miscanthus saccariflorus
+荻	U+837B	reed, Miscanthus sacchariflorus
 荼	U+837C	thistle, sowthistle; bitter
 荽	U+837D	coriander
 莀	U+8380	to farm; a farmer; agriculture
@@ -15769,7 +15775,7 @@
 葱	U+8471	scallions, leeks, green onions
 葳	U+8473	luxuriant, flourishing; used for various plants
 葵	U+8475	sunflower; measure
-葶	U+8476	Draba nemerosa
+葶	U+8476	Draba nemorosa
 葷	U+8477	meat diet; strong smelling
 葸	U+8478	afraid, bashful
 葹	U+8479	kind of chrysanthemum, xanthium
@@ -16168,7 +16174,7 @@
 蜔	U+8714	inlaid shell-work
 蜕	U+8715	molt
 蜖	U+8716	tapeworm
-蜗	U+8717	a snail, Eulota callizoma
+蜗	U+8717	a snail, Euhadra callizona
 蜘	U+8718	spider
 蜚	U+871A	cockroach
 蜜	U+871C	honey; sweet; nectar
@@ -18272,6 +18278,7 @@
 銻	U+92BB	antimony (element 51, Sb)
 銼	U+92BC	carpenter's file, file smooth
 銾	U+92BE	mercury (element 80, Hg)
+鋁	U+92C1	aluminium/aluminum (element 13, Al)
 鋂	U+92C2	bit cup
 鋃	U+92C3	lock
 鋅	U+92C5	zinc (element 30, Zn)
@@ -18618,6 +18625,7 @@
 铚	U+94DA	a sickle
 铛	U+94DB	frying pan; warming vessel
 铜	U+94DC	copper, brass, bronze
+铝	U+94DD	aluminium/aluminum (element 13, Al)
 铞	U+94DE	hasp and staple
 铟	U+94DF	indium (element 49, In)
 铠	U+94E0	armor, chain mail
@@ -18635,7 +18643,7 @@
 铬	U+94EC	chromium (element 24, Cr)
 铭	U+94ED	inscribe, engrave
 铮	U+94EE	clanging sound; small gong
-铯	U+94EF	cesium
+铯	U+94EF	caesium/cesium (element 55, Cs)
 铰	U+94F0	hinge; shears, scissors
 铱	U+94F1	iridium (element 77, Ir)
 铲	U+94F2	spade, shovel, trowel, scoop
@@ -18666,7 +18674,7 @@
 锋	U+950B	point of spear, sharp point
 锌	U+950C	zinc (element 30, Zn)
 锍	U+950D	matte, a crude mixture of sulfides formed in smelting sulfide ores
-锎	U+950E	caesium/cesium (element 55, Cs)
+锎	U+950E	californium (element 98, Cf)
 锏	U+950F	kind of rapier
 锐	U+9510	sharp, keen, acute, pointed
 锑	U+9511	antimony (element 51, Sb)
@@ -19163,7 +19171,7 @@
 鞡	U+97A1	leg warmer
 鞣	U+97A3	tan; soften
 鞥	U+97A5	reins
-鞦	U+97A6	leather stap; swing
+鞦	U+97A6	leather strap; swing
 鞧	U+97A7	a leather strap
 鞨	U+97A8	tribe
 鞫	U+97AB	interrogate, question
@@ -20187,7 +20195,7 @@
 鵀	U+9D40	hoopoe
 鵁	U+9D41	the fishing cormorant
 鵂	U+9D42	owl; bird of ill omen
-鵃	U+9D43	ancient name for a bird with black featers and a short tail
+鵃	U+9D43	ancient name for a bird with black feathers and a short tail
 鵄	U+9D44	(variant of 鴟) kite, horned owl; wine cups
 鵑	U+9D51	cuckoo
 鵒	U+9D52	mynah bird; Acridotheres tristis
@@ -20328,7 +20336,7 @@
 鸹	U+9E39	the crow
 鸺	U+9E3A	horned owl, scops chinensis
 鸻	U+9E3B	plover
-鸼	U+9E3C	ancient name for a bird with black featers and a short tail
+鸼	U+9E3C	ancient name for a bird with black feathers and a short tail
 鸽	U+9E3D	pigeon, dove; Columba species (various)
 鸾	U+9E3E	fabulous bird
 鸿	U+9E3F	species of wild swan; vast
@@ -20377,7 +20385,7 @@
 鹫	U+9E6B	condor, vulture
 鹬	U+9E6C	snipe, kingfisher
 鹭	U+9E6D	heron, egret; Ardea species (various)
-鹮	U+9E6E	spoonbill; ibis; family Threskiornidae
+鹮	U+9E6E	spoonbill; ibis; family Threskiornithidae
 鹯	U+9E6F	hawk; Butastur indicus
 鹰	U+9E70	falcon; Accipiter species (various)
 鹳	U+9E73	crane, Grus japonensis; stork; Ciconia species (various)
@@ -20487,7 +20495,7 @@
 鼅	U+9F05	spider
 鼇	U+9F07	huge sea turtle
 鼈	U+9F08	a fresh-water turtle, Trionyx sinensis
-鼉	U+9F09	Chinese allegator (Alligator sinensis)
+鼉	U+9F09	Chinese alligator (Alligator sinensis)
 鼋	U+9F0B	large turtle, sea turtle
 鼍	U+9F0D	large reptile, water lizard
 鼎	U+9F0E	large, three-legged bronze caldron; Kangxi radical 206; hexagram ䷱
@@ -20607,7 +20615,7 @@
 鿒	U+9FD2	caraway
 鿓	U+9FD3	caraway
 鿔	U+9FD4	copernicium (element 112, Cn)
-鿕	U+9FD5	Danio chrysotaeniata
+鿕	U+9FD5	Devario chrysotaeniatus
 鿫	U+9FEB	oganesson (element 118)
 鿬	U+9FEC	tennessine (element 117)
 鿭	U+9FED	nihonium (element 113)
@@ -20933,7 +20941,12 @@
 𠌥	U+20325	to bow, stoop
 𠍁	U+20341	an undesirable situation
 𠍽	U+2037D	to pull up; tear
-𠒲	U+204B2	Dg
+𠒐	U+20490	milligram
+𠒘	U+20498	hectogram
+𠒙	U+20499	kilogram
+𠒭	U+204AD	milligram
+𠒲	U+204B2	decagram, ten grams
+𠓈	U+204C8	myriagram, ten kilograms
 𠓎	U+204CE	ton
 𠓏	U+204CF	quintal
 𠓼	U+204FC	a wedge; to thrust in
@@ -21174,6 +21187,8 @@
 𡨄	U+21A04	to stop up
 𡨴	U+21A34	rather; it is better; it is easier
 𡩋	U+21A4B	repose, serenity, peace; peaceful; Nanking
+𡩛	U+21A5B	hectare
+𡪸	U+21AB8	square meter, centiare
 𡬙	U+21B19	to wake from sleep
 𡬶	U+21B36	to look for; ordinary
 𡭴	U+21B74	fissure
@@ -21457,6 +21472,7 @@
 𤱈	U+24C48	a mǔ (畝), a unit of area roughly equal to 600 square meters
 𤱝	U+24C5D	hamlet; area outside city
 𤱬	U+24C6C	to clear land
+𤲾	U+24CBE	are, one hundredth of a hectare
 𤳈	U+24CC8	wet, cultivated land
 𤴐	U+24D10	thunder
 𤴔	U+24D14	foot (obs.); bale
@@ -21543,8 +21559,11 @@
 𥤛	U+2591B	autumn
 𥥅	U+25945	a hole, hollow; cavity
 𥧹	U+259F9	puddle
+𥩘	U+25A58	centiliter
 𥩲	U+25A72	a god; to raise
-𥪕	U+25A95	classifier
+𥩻	U+25A7B	deciliter
+𥪕	U+25A95	kiloliter, cubic meter; classifier
+𥪳	U+25AB3	milliliter
 𥫗	U+25AD7	bamboo; surname
 𥫱	U+25AF1	to hoard
 𥬀	U+25B00	name of a variety of bamboo; big bamboo
@@ -21559,6 +21578,7 @@
 𥴧	U+25D27	rough mat; ugly
 𥵚	U+25D5A	thorns, brambles
 𥵜	U+25D5C	(same as 攴) to tap; to rap, (same as 撲) to pat; to beat; to strike; to dash; to smash
+𥸯	U+25E2F	myriameter, ten kilometers, Swedish mile
 𥹉	U+25E49	sticky
 𥺅	U+25E85	to overturn; to pour out, to respond, to examine carefully, to stick, thick congee
 𥻚	U+25EDA	agreeable
@@ -21998,7 +22018,7 @@
 𫄤	U+2B124	a knot (of a rope)
 𫄥	U+2B125	long; dangling; kerchief; rope
 𫄧	U+2B127	the hanging flap in the front of a hat
-𫄨	U+2B128	fine linen, fine help cloth
+𫄨	U+2B128	fine linen, fine hemp cloth
 𫄩	U+2B129	ravelled silk
 𫄬	U+2B12C	cord
 𫄮	U+2B12E	slow; leisurely, to delay; to slacken, silk ribbons
@@ -22145,6 +22165,7 @@
 𫘭	U+2B62D	horse
 𫘮	U+2B62E	a kind of beast, a kind of mule
 𫘽	U+2B63D	to make a top knot; 鬅鬠, to be slovenly dressed
+𫙹	U+2B679	blizzard
 𫚈	U+2B688	silver carp (Hypophthalmichthys molitrix); bream
 𫚉	U+2B689	a ray, skate
 𫚋	U+2B68B	anchovy
@@ -22219,6 +22240,7 @@
 𫠜	U+2B81C	teeth grown in old age
 𫠥	U+2B825	to retire into obscurity
 𫡒	U+2B852	to loose, take off, get rid of
+𫡷	U+2B877	hectare
 𫢊	U+2B88A	money, currency, coins
 𫢒	U+2B892	rude; barbarous
 𫢙	U+2B899	labor; work
@@ -22522,7 +22544,7 @@
 𬩽	U+2CA7D	county in Shandong province
 𬪨	U+2CAA8	wine cup; muddy wine
 𬪩	U+2CAA9	strong wine; dense, thick
-𬪿	U+2CABF	a square meter; one hundredth of a 公畝
+𬪿	U+2CABF	square meter, centiare; one hundredth of a 公畝
 𬬧	U+2CB27	solder
 𬬪	U+2CB2A	button; buckle, clasp; engrave
 𬬫	U+2CB2B	an ancient type of arrow
@@ -22672,6 +22694,7 @@
 𬺜	U+2CE9C	a cage, a pen, a grating, bars, window; window frame
 𬼁	U+2CF01	dram (apothecary symbol ʒ)
 𬼄	U+2CF04	ounce (apothecary symbol ℥)
+𬼗	U+2CF17	grain (unit of weight)
 𭀖	U+2D016	manage, control; thousandth part of tael
 𭄛	U+2D11B	to cut, clip
 𭇜	U+2D1DC	to expel the breath
@@ -22683,6 +22706,8 @@
 𭎜	U+2D39C	a mound, a tumulus
 𭏦	U+2D3E6	dust
 𭏸	U+2D3F8	a mound, an embankment the earthen altar to the god of the soil
+𭔅	U+2D505	hectare
+𭔖	U+2D516	square meter, centiare
 𭕆	U+2D546	fragments
 𭘓	U+2D613	cover
 𭚦	U+2D6A6	to draw a bow to the full
@@ -22697,7 +22722,7 @@
 𭫙	U+2DAD9	(same as 樀) eaves of a house; brim, part of a loom, the cross beams on the frame on which silkworms spin, a bookcase, to abandon or give up
 𭭈	U+2DB48	asses braying, shortwindedness; hiccough, asthmatic breathing, supposed upward motion of the spirit (in Chinese herb medicine), to exhaust; extreme
 𭱊	U+2DC4A	vast
-𭴊	U+2DD0A	(same as 無) without, none, a negative (a variant 嬭) to burn food in cocking; singed; burnt
+𭴊	U+2DD0A	(same as 無) without, none, a negative (a variant 嬭) to burn food in cooking; singed; burnt
 𭹜	U+2DE5C	珂㼈版, collotype
 𮆏	U+2E18F	bow case
 𮉠	U+2E260	young and small, (same as 絿) rash and impatient
@@ -22965,7 +22990,7 @@
 𰲯	U+30CAF	the solitary wasp, lice on cattle, a kind of gad-fly
 𰲳	U+30CB3	the millipede, a kind of cicada; big and with black color
 𰲹	U+30CB9	ant
-𰳚	U+30CDA	a small gadfly that suck blood of horse or cow; weevil found in rice, etc.
+𰳚	U+30CDA	a small gadfly that sucks blood of horse or cow; weevil found in rice, etc.
 𰳲	U+30CF2	legs of trousers; overalls worn by workmen
 𰳵	U+30CF5	'kimono' sleeve
 𰳺	U+30CFA	fine clothes
@@ -23176,7 +23201,7 @@
 𱆈	U+31188	fine hair; luster of hair; smooth and glossy of the hair, the woman's hair in a knot on the top of the head, hairy
 𱆙	U+31199	nimble and active ghost, to move swiftly, strong, crafty; cunning; wily, smart; clever; shrewd
 𱆚	U+3119A	a wry neck, a large head
-𱆥	U+311A5	Danio chrysotaeniata
+𱆥	U+311A5	Devario chrysotaeniatus
 𱇍	U+311CD	the sheatfish
 𱇑	U+311D1	the globefish, blowfish, puffer
 𱇕	U+311D5	(same as 漁) to catch fish, to fish, to seize
@@ -23230,7 +23255,7 @@
 𱉬	U+3126C	long-tailed pheasant
 𱉰	U+31270	eastern jackdaw; Corvus monedula
 𱉲	U+31272	a crested ibis
-𱉶	U+31276	a sort of nightingale which is said to sing for the dawn; also the name for a large bat with awing-spread of two feet, a sort of pheasant
+𱉶	U+31276	a sort of nightingale which is said to sing for the dawn; also the name for a large bat with a wingspread of two feet, a sort of pheasant
 𱉺	U+3127A	the pigeon, the turtle dove
 𱉼	U+3127C	wagtail
 𱊂	U+31282	a legendary bird, divine birds; the phoenix
@@ -23251,7 +23276,7 @@
 𱊭	U+312AD	eastern jackdaw; Corvus monedula
 𱊰	U+312B0	swallow
 𱊼	U+312BC	salt, soybean sauce; soy
-𱋆	U+312C6	cakes pf leaven; yeast, ferment for brewing, crumbs of barley
+𱋆	U+312C6	cakes of leaven; yeast, ferment for brewing, crumbs of barley
 𱋊	U+312CA	flour, rice flour
 𱋋	U+312CB	porridge
 𱋎	U+312CE	distiller's grains or yeast

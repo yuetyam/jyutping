@@ -773,7 +773,6 @@
 1	110000	270C.FE0F	和平手勢	wo4 ping4 sau2 sai3
 1	110000	270C.FE0F	勝利手勢	sing3 lei6 sau2 sai3
 1	110000	270C.FE0F	勝利	sing3 lei6
-1	110000	270C.FE0F	好嘢	hou2 je5
 1	110000	270C.FE0F	手勢二	sau2 sai3 ji6
 1	110000	270C.FE0F	㖿	je1
 1	140000	1FAF0	錢銀	cin2 ngan2
@@ -1431,7 +1430,7 @@
 1	110000	1F9DC.200D.2640.FE0F	人魚	jan4 jyu4
 1	110000	1F9DC.200D.2640.FE0F	魚人	jyu4 jan4
 1	110000	1F9DC	中性人魚	zung1 sing3 jan4 jyu4
-1	110000	1F9DC.200D.2642.FE0F	男人魚	naam4 jan2 jyu4
+1	110000	1F9DC.200D.2642.FE0F	男人魚	naam4 jan4 jyu4
 1	110000	1F9DA.200D.2640.FE0F	仙女	sin1 neoi2
 1	110000	1F9DA.200D.2640.FE0F	仙女	sin1 neoi5
 1	110000	1F9DA.200D.2640.FE0F	女仙人	neoi5 sin1 jan4
@@ -2548,10 +2547,10 @@
 2	110000	1F33E	五穀	ng5 guk1
 2	110000	1F33E	糧食	loeng4 sik6
 2	110000	1F33E	食糧	sik6 loeng4
-2	110000	1F33E	糧	loeng4
 2	110000	1F33E	稻穗	dou6 seoi6
 2	110000	1F33E	穀穗	guk1 seoi6
 2	110000	1F33E	米穗	mai5 seoi6
+2	110000	1F33E	禾穗	wo4 seoi6
 2	110000	1F33E	穗	seoi6
 2	110000	1F33E	金穗	gam1 seoi6
 2	110000	1F490	花束	faa1 cuk1
@@ -3059,8 +3058,10 @@
 3	140000	1FAD9	空樽	hung1 zeon1
 3	140000	1FAD9	吉樽	gat1 zeon1
 3	140000	1FAD9	玻璃樽	bo1 lei1 zeon1
+3	140000	1FAD9	樽仔	zeon1 zai2
 3	140000	1FAD9	瓶	ping4
 3	140000	1FAD9	罐	gun3
+3	140000	1FAD9	瓶罐	ping4 gun3
 3	140000	1FAD9	空瓶	hung1 ping4
 3	140000	1FAD9	空罐	hung1 gun3
 3	140000	1FAD9	玻璃瓶	bo1 lei1 ping4
@@ -4030,13 +4031,13 @@
 5	110000	1F307	日暮	jat6 mou6
 5	110000	1F307	落日	lok6 jat6
 5	110000	1F307	日落	jat6 lok6
-5	110000	1F307	傍晚	pong4 maan5
+5	110000	1F307	傍晚	bong6 maan5
 5	110000	1F306	夕陽	zik6 joeng4
 5	110000	1F306	黃昏	wong4 fan1
 5	110000	1F306	日暮	jat6 mou6
 5	110000	1F306	落日	lok6 jat6
 5	110000	1F306	日落	jat6 lok6
-5	110000	1F306	傍晚	pong4 maan5
+5	110000	1F306	傍晚	bong6 maan5
 5	110000	1F3D9	夜晚	je6 maan5
 5	110000	1F3D9	夜晚黑	je6 maan5 hak1
 5	110000	1F3D9	晚黑	maan5 hak1
@@ -4332,6 +4333,8 @@
 6	110000	1F52B	武器	mou5 hei3
 6	110000	1F52B	水槍	seoi2 coeng1
 6	110000	1F4A3	炸彈	zaa3 daan2
+6	110000	1F4A3	手雷	sau2 leoi4
+6	110000	1F4A3	彈	daan6
 6	110000	1F9E8	爆竹	baau3 zuk1
 6	110000	1F9E8	炮仗	paau3 zoeng2
 6	110000	1F9E8	鞭炮	bin1 paau3
@@ -5619,8 +5622,8 @@
 8	110000	1F1E8.1F1E9	剛果	gong1 gwo2
 8	110000	1F1E8.1F1F0	庫克羣島	fu3 hak1 kwan4 dou2
 8	110000	1F1E8.1F1F7	哥斯達黎加	go1 si1 daat6 lai4 gaa1
-8	110000	1F1E8.1F1EE	科特迪瓦	fo1 dak6 dik6 ngaa5
 8	110000	1F1E8.1F1EE	象牙海岸	zoeng6 ngaa4 hoi2 ngon6
+8	110000	1F1E8.1F1EE	科特迪瓦	fo1 dak6 dik6 ngaa5
 8	110000	1F1ED.1F1F7	克羅地亞	hak1 lo4 dei6 aa3
 8	110000	1F1E8.1F1FA	古巴	gu2 baa1
 8	110000	1F1E8.1F1FC	庫拉索	fu3 laai1 sok3
@@ -5825,6 +5828,7 @@
 8	110000	1F1F8.1F1F8	南蘇丹	naam4 sou1 daan1
 8	110000	1F1EA.1F1F8	西班牙	sai1 baan1 ngaa4
 8	110000	1F1F1.1F1F0	斯里蘭卡	si1 lei5 laan4 kaa1
+8	110000	1F1F1.1F1F0	錫蘭	sek3 laan4
 8	110000	1F1E7.1F1F1	聖巴泰勒米島	sing3 baa1 taai3 lak6 mai5 dou2
 8	110000	1F1F8.1F1ED	聖赫勒拿	sing3 hak1 lak6 naa4
 8	110000	1F1F0.1F1F3	聖基茨及尼維斯	sing3 gei1 ci4 kap6 nei4 wai4 si1
@@ -5954,10 +5958,8 @@
 10	110000	2F04	彎鉤	waan1 ngau1
 10	110000	4E5B	折	zit3
 10	110000	4E5B	彎鉤	waan1 ngau1
-10	110000	4EBB	企人邊	kei5 jan2 bin1
 10	110000	4EBB	企人邊	kei5 jan4 bin1
 10	110000	4EBB	企人旁	kei5 jan4 pong4
-10	110000	4EBB	單企人	daan1 kei5 jan2
 10	110000	4EBB	單企人	daan1 kei5 jan4
 10	110000	4EBB	單人旁	daan1 jan4 pong4
 10	110000	4EBB	單立人	daan1 lap6 jan4
@@ -5978,7 +5980,6 @@
 10	110000	5202	刀字邊	dou1 zi6 bin1
 10	110000	5202	刀字旁	dou1 zi6 pong4
 10	110000	5202	立刀旁	lap6 dou1 pong4
-10	110000	5F73	雙企人	soeng1 kei5 jan2
 10	110000	5F73	雙企人	soeng1 kei5 jan4
 10	110000	5F73	雙人旁	soeng1 jan4 pong4
 10	110000	5F73	雙人邊	soeng1 jan4 bin1
@@ -6331,6 +6332,7 @@
 10	110000	26A0.FE0E	小心	siu2 sam1
 10	110000	26A0.FE0E	當心	dong1 sam1
 10	110000	26A0.FE0E	因住	jan1 zyu6
+10	110000	26A0.FE0E	留意	lau4 ji3
 10	110000	2630	乾	kin4
 10	110000	2630	乾卦	kin4 gwaa3
 10	110000	2631	兌	deoi3
