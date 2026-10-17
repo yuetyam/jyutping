@@ -95,17 +95,26 @@ struct TailoredStrokeKeyboard: View {
 @available(iOS 26.0, *)
 @available(iOSApplicationExtension 26.0, *)
 private struct GlassStrokeKey: View {
+
         init(_ stroke: StrokeVirtualKey) {
                 self.stroke = stroke
                 self.keyText = stroke.strokeText
-                self.keyComment = stroke.strokeName
+                self.keyDigit = stroke.virtualInputKey.text
+                self.keyName = stroke.strokeName
         }
+
         private let stroke: StrokeVirtualKey
+
         private let keyText: String
-        private let keyComment: String
+
+        private let keyDigit: String
+
+        private let keyName: String
 
         @EnvironmentObject private var context: KeyboardViewController
+
         @Environment(\.colorScheme) private var colorScheme
+
         @State private var isTouching: Bool = false
 
         var body: some View {
@@ -114,15 +123,24 @@ private struct GlassStrokeKey: View {
                                 Color.interactiveClear
                                 ZStack {
                                         Color.clear
-                                        ZStack(alignment: .topTrailing) {
+                                        ZStack(alignment: .top) {
                                                 Color.clear
-                                                Text(verbatim: keyComment)
+                                                Text(verbatim: keyDigit)
                                                         .font(.labelCaption)
                                                         .shallow()
-                                                        .padding(.vertical, 1)
-                                                        .padding(.horizontal, 3)
                                         }
-                                        Text(verbatim: keyText).font(.letterCompact)
+                                        .padding(1)
+                                        ZStack(alignment: .bottomTrailing) {
+                                                Color.clear
+                                                Text(verbatim: keyName)
+                                                        .font(.labelCaption)
+                                                        .shallow()
+                                                        .padding(.horizontal, 2)
+                                        }
+                                        .padding(1)
+                                        Text(verbatim: keyText)
+                                                .font(isTouching ? .letterCompact : .adjustedLetterCompact)
+                                                .padding(.top, 4)
                                 }
                                 .glassEffect(isTouching ? .regular : .clear, in: .rect(cornerRadius: PresetConstant.largeKeyCornerRadius))
                                 .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
@@ -143,34 +161,53 @@ private struct LegacyStrokeKey: View {
         init(_ stroke: StrokeVirtualKey) {
                 self.stroke = stroke
                 self.keyText = stroke.strokeText
-                self.keyComment = stroke.strokeName
+                self.keyDigit = stroke.virtualInputKey.text
+                self.keyName = stroke.strokeName
         }
+
         private let stroke: StrokeVirtualKey
+
         private let keyText: String
-        private let keyComment: String
+
+        private let keyDigit: String
+
+        private let keyName: String
 
         @EnvironmentObject private var context: KeyboardViewController
+
         @Environment(\.colorScheme) private var colorScheme
+
         @State private var isTouching: Bool = false
 
         var body: some View {
                 Button(action: {}) {
                         ZStack {
                                 Color.interactiveClear
-                                RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius)
-                                        .fill(isTouching ? colorScheme.activeInputKeyColor : colorScheme.inputKeyColor)
-                                        .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                        .padding(isTouching ? 1 : 3)
-                                ZStack(alignment: .topTrailing) {
+                                ZStack {
                                         Color.clear
-                                        Text(verbatim: keyComment)
-                                                .font(.labelCaption)
-                                                .shallow()
-                                                .padding(.vertical, 1)
-                                                .padding(.horizontal, 3)
+                                        RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius)
+                                                .fill(isTouching ? colorScheme.activeInputKeyColor : colorScheme.inputKeyColor)
+                                                .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
+                                        ZStack(alignment: .top) {
+                                                Color.clear
+                                                Text(verbatim: keyDigit)
+                                                        .font(.labelCaption)
+                                                        .shallow()
+                                        }
+                                        .padding(1)
+                                        ZStack(alignment: .bottomTrailing) {
+                                                Color.clear
+                                                Text(verbatim: keyName)
+                                                        .font(.labelCaption)
+                                                        .shallow()
+                                                        .padding(.horizontal, 2)
+                                        }
+                                        .padding(1)
                                 }
-                                .padding(3)
-                                Text(verbatim: keyText).font(.letterCompact)
+                                .padding(isTouching ? 1 : 3)
+                                Text(verbatim: keyText)
+                                        .font(isTouching ? .letterCompact : .adjustedLetterCompact)
+                                        .padding(.top, 4)
                         }
                         .frame(width: context.nineKeyWidthUnit * 1.06, height: context.heightUnit)
                 }
