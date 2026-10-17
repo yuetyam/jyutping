@@ -85,7 +85,7 @@ struct GlassMotherBoard: View {
                 case .dedicatedNumbers:
                         GlassTailoredNumericKeyboard()
                 case .dedicatedStroke:
-                        GlassTailoredStrokeKeyboard()
+                        TailoredGlassStrokeReverseLookupKeyboard()
                 default:
                         switch context.inputMethodMode {
                         case .abc:

@@ -83,7 +83,7 @@ struct LegacyMotherBoard: View {
                 case .dedicatedNumbers:
                         TailoredNumericKeyboard()
                 case .dedicatedStroke:
-                        TailoredStrokeKeyboard()
+                        TailoredStrokeReverseLookupKeyboard()
                 default:
                         switch context.inputMethodMode {
                         case .abc:
