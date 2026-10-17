@@ -23,7 +23,7 @@ struct GlassTailoredBackspaceKey: View {
                                 .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
                                 .padding(isTouching ? 1 : 3)
                         }
-                        .frame(width: context.nineKeyWidthUnit * 0.91, height: context.heightUnit)
+                        .frame(width: context.nineKeyWidthUnit * PresetConstant.tailoredActionKeyWidthCoefficient, height: context.heightUnit)
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
                         buffer = 0
@@ -76,7 +76,7 @@ struct TailoredBackspaceKey: View {
                                         .padding(isTouching ? 1 : 3)
                                 Image.backspace.symbolVariant(isTouching ? .fill : .none).font(.symbol)
                         }
-                        .frame(width: context.nineKeyWidthUnit * 0.91, height: context.heightUnit)
+                        .frame(width: context.nineKeyWidthUnit * PresetConstant.tailoredActionKeyWidthCoefficient, height: context.heightUnit)
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
                         buffer = 0

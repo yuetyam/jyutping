@@ -24,7 +24,7 @@ struct GlassSidebarPanel: View {
                 .clipShape(.rect(cornerRadius: PresetConstant.largeKeyCornerRadius))
                 .glassEffect(.clear, in: .rect(cornerRadius: PresetConstant.largeKeyCornerRadius))
                 .padding(3)
-                .frame(width: context.nineKeyWidthUnit * 0.91, height: context.heightUnit * 3)
+                .frame(width: context.nineKeyWidthUnit * PresetConstant.tailoredActionKeyWidthCoefficient, height: context.heightUnit * 3)
         }
 }
 
@@ -65,6 +65,6 @@ struct SidebarPanel: View {
                 }
                 .clipShape(.rect(cornerRadius: PresetConstant.largeKeyCornerRadius))
                 .padding(3)
-                .frame(width: context.nineKeyWidthUnit * 0.91, height: context.heightUnit * 3)
+                .frame(width: context.nineKeyWidthUnit * PresetConstant.tailoredActionKeyWidthCoefficient, height: context.heightUnit * 3)
         }
 }

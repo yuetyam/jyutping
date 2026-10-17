@@ -71,7 +71,7 @@ struct TailoredStrokeInputKey: View {
                                         .font(isTouching ? .letterCompact : .adjustedLetterCompact)
                                         .padding(.top, 4)
                         }
-                        .frame(width: context.nineKeyWidthUnit * 1.06, height: context.heightUnit)
+                        .frame(width: context.nineKeyWidthUnit * PresetConstant.tailoredInputKeyWidthCoefficient, height: context.heightUnit)
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
                         AudioFeedback.inputed()

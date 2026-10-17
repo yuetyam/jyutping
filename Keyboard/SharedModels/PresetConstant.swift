@@ -28,6 +28,9 @@ struct PresetConstant {
         /// Rounded rectangle for CardView, BlockView, StackView, etc.
         static let sectionCornerRadius: CGFloat = 20
 
+        static let tailoredInputKeyWidthCoefficient: CGFloat = 1.06
+        static let tailoredActionKeyWidthCoefficient: CGFloat = 0.91
+
         static let halfWidth: String = "半寬"
         static let fullWidth: String = "全寬"
 

@@ -27,7 +27,7 @@ struct GlassTailoredNumberKey: View {
                                 .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
                                 .padding(isTouching ? 1 : 3)
                         }
-                        .frame(width: context.nineKeyWidthUnit * 1.06, height: context.heightUnit)
+                        .frame(width: context.nineKeyWidthUnit * PresetConstant.tailoredInputKeyWidthCoefficient, height: context.heightUnit)
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
                         AudioFeedback.inputed()
@@ -58,7 +58,7 @@ struct TailoredNumberKey: View {
                                         .padding(isTouching ? 1 : 3)
                                 Text(verbatim: virtual.text).font(.letterCompact)
                         }
-                        .frame(width: context.nineKeyWidthUnit * 1.06, height: context.heightUnit)
+                        .frame(width: context.nineKeyWidthUnit * PresetConstant.tailoredInputKeyWidthCoefficient, height: context.heightUnit)
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
                         AudioFeedback.inputed()

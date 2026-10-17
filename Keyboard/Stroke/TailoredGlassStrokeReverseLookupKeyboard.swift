@@ -19,7 +19,7 @@ struct TailoredGlassStrokeReverseLookupKeyboard: View {
                         HStack(spacing: 0) {
                                 VStack(spacing: 0) {
                                         HStack(spacing: 0) {
-                                                PlaceholderView(widthCoefficient: 0.91, heightCoefficient: 3).disabled(true)
+                                                PlaceholderView(widthCoefficient: PresetConstant.tailoredActionKeyWidthCoefficient, heightCoefficient: 3).disabled(true)
                                                 VStack(spacing: 0) {
                                                         HStack(spacing: 0) {
                                                                 TailoredGlassStrokeInputKey(.horizontal)
@@ -39,13 +39,13 @@ struct TailoredGlassStrokeReverseLookupKeyboard: View {
                                                 }
                                         }
                                         HStack(spacing: 0) {
-                                                PlaceholderView(widthCoefficient: 0.91).disabled(true)
+                                                PlaceholderView(widthCoefficient: PresetConstant.tailoredActionKeyWidthCoefficient).disabled(true)
                                                 TailoredSpaceKey()
                                         }
                                 }
                                 VStack(spacing: 0) {
                                         GlassTailoredBackspaceKey()
-                                        PlaceholderView(widthCoefficient: 0.91).disabled(true)
+                                        PlaceholderView(widthCoefficient: PresetConstant.tailoredActionKeyWidthCoefficient).disabled(true)
                                         TailoredReturnKey()
                                 }
                         }
@@ -68,7 +68,7 @@ private struct PlaceholderView: View {
         /// - Parameters:
         ///   - widthCoefficient: Width as a multiple of the nine-key width unit; defaults to the stroke key width of 1.06.
         ///   - heightCoefficient: Height as a multiple of the keyboard height unit; defaults to one row.
-        init(widthCoefficient: CGFloat = 1.06, heightCoefficient: CGFloat = 1) {
+        init(widthCoefficient: CGFloat = PresetConstant.tailoredInputKeyWidthCoefficient, heightCoefficient: CGFloat = 1) {
                 self.widthCoefficient = widthCoefficient
                 self.heightCoefficient = heightCoefficient
         }

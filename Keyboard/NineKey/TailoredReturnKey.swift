@@ -87,7 +87,7 @@ struct TailoredReturnKey: View {
                                         .foregroundStyle(foreColor)
                                 }
                         }
-                        .frame(width: context.nineKeyWidthUnit * 0.91, height: context.heightUnit * 2)
+                        .frame(width: context.nineKeyWidthUnit * PresetConstant.tailoredActionKeyWidthCoefficient, height: context.heightUnit * 2)
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
                         AudioFeedback.modified()

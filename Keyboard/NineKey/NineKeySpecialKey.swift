@@ -28,7 +28,7 @@ struct GlassNineKeySpecialKey: View {
                                 Text(verbatim: isBuffering ? String.apostrophe : Combo.special.text)
                                         .opacity(isBuffering ? 0 : 1)
                         }
-                        .frame(width: context.nineKeyWidthUnit * 1.06, height: context.heightUnit)
+                        .frame(width: context.nineKeyWidthUnit * PresetConstant.tailoredInputKeyWidthCoefficient, height: context.heightUnit)
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
                         AudioFeedback.inputed()
@@ -64,7 +64,7 @@ struct NineKeySpecialKey: View {
                                 Text(verbatim: isBuffering ? String.apostrophe : Combo.special.text)
                                         .opacity(isBuffering ? 0 : 1)
                         }
-                        .frame(width: context.nineKeyWidthUnit * 1.06, height: context.heightUnit)
+                        .frame(width: context.nineKeyWidthUnit * PresetConstant.tailoredInputKeyWidthCoefficient, height: context.heightUnit)
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
                         AudioFeedback.inputed()
