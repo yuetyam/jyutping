@@ -30,7 +30,7 @@ enum KeyboardLayout: Int, CaseIterable {
 
         /// Read KeyboardLayout from UserDefaults
         static func fetchSavedLayout() -> KeyboardLayout {
-                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.KeyboardLayout)
+                let savedValue: Int = UserDefaults.standard.integer(forKey: UserSettingsKey.KeyboardLayout)
                 return allCases.first(where: { $0.rawValue == savedValue }) ?? .qwerty
         }
 
@@ -81,7 +81,7 @@ enum NumericLayout: Int, CaseIterable {
 
         /// Read NumericLayout from UserDefaults
         static func fetchSavedLayout() -> NumericLayout {
-                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.NumericLayout)
+                let savedValue: Int = UserDefaults.standard.integer(forKey: UserSettingsKey.NumericLayout)
                 return allCases.first(where: { $0.rawValue == savedValue }) ?? .default
         }
 
@@ -100,7 +100,7 @@ enum StrokeLayout: Int, CaseIterable {
 
         /// Read StrokeLayout from UserDefaults
         static func fetchSavedLayout() -> StrokeLayout {
-                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.StrokeLayout)
+                let savedValue: Int = UserDefaults.standard.integer(forKey: UserSettingsKey.StrokeLayout)
                 return allCases.first(where: { $0.rawValue == savedValue }) ?? .default
         }
 

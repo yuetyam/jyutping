@@ -4,217 +4,185 @@ import CommonExtensions
 
 struct Options {
         nonisolated(unsafe) private(set) static var isAudioFeedbackOn: Bool = {
-                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.AudioFeedback)
+                let savedValue: Int = UserDefaults.standard.integer(forKey: UserSettingsKey.AudioFeedback)
                 return savedValue == 1
         }()
         static func updateAudioFeedbackStatus(isOn: Bool) {
                 isAudioFeedbackOn = isOn
                 let value: Int = isOn ? 1 : 0
-                UserDefaults.standard.set(value, forKey: OptionsKey.AudioFeedback)
+                UserDefaults.standard.set(value, forKey: UserSettingsKey.AudioFeedback)
         }
 
         nonisolated(unsafe) private(set) static var preferredInputMode: PreferredInputMode = {
-                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.PreferredInputMethodMode)
+                let savedValue: Int = UserDefaults.standard.integer(forKey: UserSettingsKey.PreferredInputMethodMode)
                 return PreferredInputMode.mode(of: savedValue)
         }()
         static func updatePreferredInputMode(to mode: PreferredInputMode) {
                 preferredInputMode = mode
                 let value: Int = mode.rawValue
-                UserDefaults.standard.set(value, forKey: OptionsKey.PreferredInputMethodMode)
+                UserDefaults.standard.set(value, forKey: UserSettingsKey.PreferredInputMethodMode)
         }
 
         nonisolated(unsafe) private(set) static var needsNumberRow: Bool = {
-                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.NumberRow)
+                let savedValue: Int = UserDefaults.standard.integer(forKey: UserSettingsKey.NumberRow)
                 return savedValue == 1
         }()
         static func updateNumberRowState(to isOn: Bool) {
                 needsNumberRow = isOn
                 let value: Int = isOn ? 1 : 2
-                UserDefaults.standard.set(value, forKey: OptionsKey.NumberRow)
+                UserDefaults.standard.set(value, forKey: UserSettingsKey.NumberRow)
         }
 
         nonisolated(unsafe) private(set) static var showLowercaseKeys: Bool = {
-                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.KeyCase)
+                let savedValue: Int = UserDefaults.standard.integer(forKey: UserSettingsKey.KeyCase)
                 return savedValue != 2
         }()
         static func updateShowLowercaseKeys(to state: Bool) {
                 showLowercaseKeys = state
                 let value: Int = state ? 1 : 2
-                UserDefaults.standard.set(value, forKey: OptionsKey.KeyCase)
+                UserDefaults.standard.set(value, forKey: UserSettingsKey.KeyCase)
         }
         nonisolated(unsafe) private(set) static var keyTextPreview: Bool = {
-                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.KeyTextPreview)
+                let savedValue: Int = UserDefaults.standard.integer(forKey: UserSettingsKey.KeyTextPreview)
                 return savedValue != 2
         }()
         static func updateKeyTextPreview(to state: Bool) {
                 keyTextPreview = state
                 let value: Int = state ? 1 : 2
-                UserDefaults.standard.set(value, forKey: OptionsKey.KeyTextPreview)
+                UserDefaults.standard.set(value, forKey: UserSettingsKey.KeyTextPreview)
         }
 
         static func fetchKeyHeightOffset() -> CGFloat {
-                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.KeyHeightOffset)
+                let savedValue: Int = UserDefaults.standard.integer(forKey: UserSettingsKey.KeyHeightOffset)
                 return CGFloat(savedValue)
         }
 
         nonisolated(unsafe) private(set) static var inputKeyStyle: InputKeyStyle = {
-                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.InputKeyStyle)
+                let savedValue: Int = UserDefaults.standard.integer(forKey: UserSettingsKey.InputKeyStyle)
                 return InputKeyStyle.style(of: savedValue)
         }()
         static func updateInputKeyStyle(to style: InputKeyStyle) {
                 inputKeyStyle = style
                 let value: Int = style.rawValue
-                UserDefaults.standard.set(value, forKey: OptionsKey.InputKeyStyle)
+                UserDefaults.standard.set(value, forKey: UserSettingsKey.InputKeyStyle)
         }
 
         nonisolated(unsafe) private(set) static var commentStyle: CommentStyle = {
-                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.CommentStyle)
+                let savedValue: Int = UserDefaults.standard.integer(forKey: UserSettingsKey.CommentStyle)
                 return CommentStyle.style(of: savedValue)
         }()
         static func updateCommentStyle(to style: CommentStyle) {
                 commentStyle = style
                 let value: Int = style.rawValue
-                UserDefaults.standard.set(value, forKey: OptionsKey.CommentStyle)
+                UserDefaults.standard.set(value, forKey: UserSettingsKey.CommentStyle)
         }
 
         nonisolated(unsafe) private(set) static var commentScene: CommentScene = {
-                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.CommentScene)
+                let savedValue: Int = UserDefaults.standard.integer(forKey: UserSettingsKey.CommentScene)
                 return CommentScene.scene(of: savedValue)
         }()
         static func updateCommentScene(to scene: CommentScene) {
                 commentScene = scene
                 let value: Int = scene.rawValue
-                UserDefaults.standard.set(value, forKey: OptionsKey.CommentScene)
+                UserDefaults.standard.set(value, forKey: UserSettingsKey.CommentScene)
         }
 
         nonisolated(unsafe) private(set) static var commentToneStyle: CommentToneStyle = {
-                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.CommentToneStyle)
+                let savedValue: Int = UserDefaults.standard.integer(forKey: UserSettingsKey.CommentToneStyle)
                 return CommentToneStyle.style(of: savedValue)
         }()
         static func updateCommentToneStyle(to style: CommentToneStyle) {
                 commentToneStyle = style
                 let value: Int = style.rawValue
-                UserDefaults.standard.set(value, forKey: OptionsKey.CommentToneStyle)
+                UserDefaults.standard.set(value, forKey: UserSettingsKey.CommentToneStyle)
         }
 
         nonisolated(unsafe) private(set) static var traditionalCharacterStandard: CharacterStandard = {
-                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.TraditionalCharacterStandard)
+                let savedValue: Int = UserDefaults.standard.integer(forKey: UserSettingsKey.TraditionalCharacterStandard)
                 return CharacterStandard.standard(of: savedValue)
         }()
         static func updateTraditionalCharacterStandard(to standard: CharacterStandard) {
                 traditionalCharacterStandard = standard
                 let value: Int = standard.rawValue
-                UserDefaults.standard.set(value, forKey: OptionsKey.TraditionalCharacterStandard)
+                UserDefaults.standard.set(value, forKey: UserSettingsKey.TraditionalCharacterStandard)
         }
 
         nonisolated(unsafe) private(set) static var cangjieVariant: CangjieVariant = {
-                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.CangjieVariant)
+                let savedValue: Int = UserDefaults.standard.integer(forKey: UserSettingsKey.CangjieVariant)
                 return CangjieVariant.variant(of: savedValue)
         }()
         static func updateCangjieVariant(to variant: CangjieVariant) {
                 cangjieVariant = variant
                 let value: Int = variant.rawValue
-                UserDefaults.standard.set(value, forKey: OptionsKey.CangjieVariant)
+                UserDefaults.standard.set(value, forKey: UserSettingsKey.CangjieVariant)
         }
 
         nonisolated(unsafe) private(set) static var isEmojiSuggestionsOn: Bool = {
-                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.EmojiSuggestions)
+                let savedValue: Int = UserDefaults.standard.integer(forKey: UserSettingsKey.EmojiSuggestions)
                 return savedValue != 2
         }()
         static func updateEmojiSuggestions(to isOn: Bool) {
                 isEmojiSuggestionsOn = isOn
                 let value: Int = isOn ? 1 : 2
-                UserDefaults.standard.set(value, forKey: OptionsKey.EmojiSuggestions)
+                UserDefaults.standard.set(value, forKey: UserSettingsKey.EmojiSuggestions)
         }
 
         nonisolated(unsafe) private(set) static var isEnglishSuggestionsOn: Bool = {
-                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.EnglishSuggestions)
+                let savedValue: Int = UserDefaults.standard.integer(forKey: UserSettingsKey.EnglishSuggestions)
                 return savedValue != 2
         }()
         static func updateEnglishSuggestions(to isOn: Bool) {
                 isEnglishSuggestionsOn = isOn
                 let value: Int = isOn ? 1 : 2
-                UserDefaults.standard.set(value, forKey: OptionsKey.EnglishSuggestions)
+                UserDefaults.standard.set(value, forKey: UserSettingsKey.EnglishSuggestions)
         }
 
         nonisolated(unsafe) private(set) static var isTextReplacementsOn: Bool = {
-                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.SystemLexicon)
+                let savedValue: Int = UserDefaults.standard.integer(forKey: UserSettingsKey.SystemLexicon)
                 return savedValue != 2
         }()
         static func updateTextReplacementsMode(to isOn: Bool) {
                 isTextReplacementsOn = isOn
                 let value: Int = isOn ? 1 : 2
-                UserDefaults.standard.set(value, forKey: OptionsKey.SystemLexicon)
+                UserDefaults.standard.set(value, forKey: UserSettingsKey.SystemLexicon)
         }
 
         nonisolated(unsafe) private(set) static var isCompatibleModeOn: Bool = {
-                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.SchemeRules)
+                let savedValue: Int = UserDefaults.standard.integer(forKey: UserSettingsKey.SchemeRules)
                 return savedValue == 1
         }()
         static func updateCompatibleMode(to isOn: Bool) {
                 isCompatibleModeOn = isOn
                 let value: Int = isOn ? 1 : 0
-                UserDefaults.standard.set(value, forKey: OptionsKey.SchemeRules)
+                UserDefaults.standard.set(value, forKey: UserSettingsKey.SchemeRules)
         }
 
         nonisolated(unsafe) private(set) static var preferredLanguage: KeyboardDisplayLanguage = {
-                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.KeyboardDisplayLanguage)
+                let savedValue: Int = UserDefaults.standard.integer(forKey: UserSettingsKey.KeyboardDisplayLanguage)
                 return KeyboardDisplayLanguage.language(of: savedValue)
         }()
         static func updatePreferredLanguage(to language: KeyboardDisplayLanguage) {
                 preferredLanguage = language
-                UserDefaults.standard.set(language.rawValue, forKey: OptionsKey.KeyboardDisplayLanguage)
+                UserDefaults.standard.set(language.rawValue, forKey: UserSettingsKey.KeyboardDisplayLanguage)
                 guard let languageCode = language.languageCode else {
-                        UserDefaults.standard.removeObject(forKey: OptionsKey.AppleLanguages)
+                        UserDefaults.standard.removeObject(forKey: UserSettingsKey.AppleLanguages)
                         return
                 }
                 let preferredCodes: [String] = [languageCode, "yue-Hant-HK", "zh-Hant-HK"]
                 let oldCodes: [String] = Locale.preferredLanguages
                 let newCodes: [String] = (preferredCodes + oldCodes).distinct()
-                UserDefaults.standard.set(newCodes, forKey: OptionsKey.AppleLanguages)
+                UserDefaults.standard.set(newCodes, forKey: UserSettingsKey.AppleLanguages)
         }
 
         nonisolated(unsafe) private(set) static var isInputMemoryOn: Bool = {
-                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.UserLexiconInputMemory)
+                let savedValue: Int = UserDefaults.standard.integer(forKey: UserSettingsKey.UserLexiconInputMemory)
                 return savedValue != 2
         }()
         static func updateInputMemory(to isOn: Bool) {
                 isInputMemoryOn = isOn
                 let value: Int = isOn ? 1 : 2
-                UserDefaults.standard.set(value, forKey: OptionsKey.UserLexiconInputMemory)
+                UserDefaults.standard.set(value, forKey: UserSettingsKey.UserLexiconInputMemory)
         }
-}
-
-struct OptionsKey {
-        static let AppleLanguages: String = "AppleLanguages"
-        static let KeyboardDisplayLanguage: String = "KeyboardDisplayLanguage"
-        static let TraditionalCharacterStandard: String = "TraditionalCharacterStandard"
-        static let CharacterScriptVariant: String = "CharacterScriptVariant"
-        static let AudioFeedback: String = "AudioFeedback"
-        static let HapticFeedback: String = "HapticFeedback"
-        static let PreferredInputMethodMode: String = "PreferredInputMethodMode"
-        static let LatestInputMethodMode: String = "LatestInputMethodMode"
-        static let KeyboardLayout: String = "KeyboardLayout"
-        static let NumericLayout: String = "NumericLayout"
-        static let StrokeLayout: String = "StrokeLayout"
-        static let NumberRow: String = "NumberRow"
-        static let KeyCase: String = "KeyCase"
-        static let KeyTextPreview: String = "KeyPreview"
-        static let KeyHeightOffset: String = "KeyHeightOffset"
-        static let InputKeyStyle: String = "InputKeyStyle"
-        static let AppearanceStyle: String = "AppearanceStyle"
-        static let CommentStyle: String = "CommentStyle"
-        static let CommentScene: String = "CommentDisplayScene"
-        static let CommentToneStyle: String = "CommentToneStyle"
-        static let CangjieVariant: String = "CangjieVariant"
-        static let EmojiSuggestions: String = "EmojiSuggestions"
-        static let EnglishSuggestions: String = "EnglishSuggestions"
-        static let SchemeRules: String = "SchemeRules"
-        static let SystemLexicon: String = "SystemLexicon"
-        static let UserLexiconInputMemory: String = "UserLexiconInputMemory"
-
-        // @available(*, deprecated)
-        // static let PasteButtonStyle: String = "PasteButtonStyle"
 }
 
 enum PreferredInputMode: Int, CaseIterable {

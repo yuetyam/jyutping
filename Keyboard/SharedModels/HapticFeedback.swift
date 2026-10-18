@@ -12,7 +12,7 @@ extension HapticFeedback {
 
         /// Read HapticFeedback mode from UserDefaults
         static func fetchSavedMode() -> HapticFeedback {
-                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.HapticFeedback)
+                let savedValue: Int = UserDefaults.standard.integer(forKey: UserSettingsKey.HapticFeedback)
                 return allCases.first(where: { $0.rawValue == savedValue }) ?? .disabled
         }
 }

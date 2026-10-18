@@ -55,7 +55,7 @@ extension AppearanceStyle {
 
         /// Reads the style from standard user defaults, falling back to Liquid Glass if absent or unrecognized.
         static func fetchSavedStyle() -> AppearanceStyle {
-                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.AppearanceStyle)
+                let savedValue: Int = UserDefaults.standard.integer(forKey: UserSettingsKey.AppearanceStyle)
                 return AppearanceStyle.style(of: savedValue)
         }
 
@@ -63,6 +63,6 @@ extension AppearanceStyle {
         /// - Parameter style: The keyboard appearance style to save.
         static func save(style: AppearanceStyle) {
                 let value: Int = style.rawValue
-                UserDefaults.standard.set(value, forKey: OptionsKey.AppearanceStyle)
+                UserDefaults.standard.set(value, forKey: UserSettingsKey.AppearanceStyle)
         }
 }

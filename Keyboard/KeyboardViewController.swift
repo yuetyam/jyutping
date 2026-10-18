@@ -1140,7 +1140,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 case .cantonese: return .cantonese
                 case .abc: return .abc
                 case .previous:
-                        let savedValue = UserDefaults.standard.integer(forKey: OptionsKey.LatestInputMethodMode)
+                        let savedValue = UserDefaults.standard.integer(forKey: UserSettingsKey.LatestInputMethodMode)
                         return InputMethodMode.mode(of: savedValue)
                 }
         }()
@@ -1152,7 +1152,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 updateSpaceKeyForm()
                 updateReturnKey()
                 let value: Int = inputMethodMode.rawValue
-                UserDefaults.standard.set(value, forKey: OptionsKey.LatestInputMethodMode)
+                UserDefaults.standard.set(value, forKey: UserSettingsKey.LatestInputMethodMode)
         }
 
         private lazy var sequencedKeyboardForms: [KeyboardForm] = []
@@ -1363,7 +1363,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         func updateKeyboardLayout(to layout: KeyboardLayout) {
                 keyboardLayout = layout
                 let value: Int = layout.rawValue
-                UserDefaults.standard.set(value, forKey: OptionsKey.KeyboardLayout)
+                UserDefaults.standard.set(value, forKey: UserSettingsKey.KeyboardLayout)
         }
 
         // @Published private(set) var numericLayout: NumericLayout = NumericLayout.fetchSavedLayout()
@@ -1371,7 +1371,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 // numericLayout = layout
                 preferredNumericForm = layout.isDedicated ? .dedicatedNumbers : .numeric
                 let value: Int = layout.rawValue
-                UserDefaults.standard.set(value, forKey: OptionsKey.NumericLayout)
+                UserDefaults.standard.set(value, forKey: UserSettingsKey.NumericLayout)
         }
         @Published private(set) var preferredNumericForm: KeyboardForm = NumericLayout.fetchSavedLayout().isDedicated ? .dedicatedNumbers : .numeric
 
@@ -1380,7 +1380,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         func updateStrokeLayout(to layout: StrokeLayout) {
                 strokeLayout = layout
                 let value: Int = layout.rawValue
-                UserDefaults.standard.set(value, forKey: OptionsKey.StrokeLayout)
+                UserDefaults.standard.set(value, forKey: UserSettingsKey.StrokeLayout)
         }
 
         func updateNumberRowState(to isOn: Bool) {
@@ -1401,7 +1401,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 cachedKeyboardHeight = keyboardHeight
                 updateViewHeightConstraint()
                 let valueToSaved: Int = Int(offset)
-                UserDefaults.standard.set(valueToSaved, forKey: OptionsKey.KeyHeightOffset)
+                UserDefaults.standard.set(valueToSaved, forKey: UserSettingsKey.KeyHeightOffset)
         }
         @Published private(set) var topBarHeight: CGFloat = PresetConstant.toolBarHeight
         private func updateTopBarHeight() {
@@ -1418,13 +1418,13 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         // MARK: - CharacterStandard
 
         @Published private(set) var characterStandard: CharacterStandard = {
-                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.CharacterScriptVariant)
+                let savedValue: Int = UserDefaults.standard.integer(forKey: UserSettingsKey.CharacterScriptVariant)
                 return (savedValue == 2) ? .mutilated : Options.traditionalCharacterStandard
         }()
         func toggleCharacterScriptVariant() {
                 let newStandard: CharacterStandard = characterStandard.isMutilated ? Options.traditionalCharacterStandard : .mutilated
                 let value: Int = newStandard.isMutilated ? 2 : 1
-                UserDefaults.standard.set(value, forKey: OptionsKey.CharacterScriptVariant)
+                UserDefaults.standard.set(value, forKey: UserSettingsKey.CharacterScriptVariant)
                 characterStandard = newStandard
                 updateSpaceKeyForm()
                 updateReturnKey()
@@ -1484,7 +1484,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         func updateHapticFeedbackMode(to mode: HapticFeedback) {
                 hapticFeedbackMode = mode
                 let value: Int = mode.rawValue
-                UserDefaults.standard.set(value, forKey: OptionsKey.HapticFeedback)
+                UserDefaults.standard.set(value, forKey: UserSettingsKey.HapticFeedback)
                 instantiateHapticFeedbacks()
         }
 
