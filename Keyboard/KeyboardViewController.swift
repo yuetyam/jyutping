@@ -1408,6 +1408,12 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 topBarHeight = PresetConstant.toolBarHeight + (max(0, keyHeightOffset) * 3)
         }
 
+        @Published private(set) var appearanceStyle: AppearanceStyle = AppearanceStyle.fetchSavedStyle()
+        func updateAppearanceStyle(to style: AppearanceStyle) {
+                appearanceStyle = style
+                AppearanceStyle.save(style: style)
+        }
+
 
         // MARK: - CharacterStandard
 

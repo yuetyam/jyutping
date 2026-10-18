@@ -22,6 +22,7 @@ struct SettingsView: View {
         @State private var keyTextPreview: Bool = Options.keyTextPreview
         @State private var keyHeightOffset: CGFloat = Options.fetchKeyHeightOffset()
         @State private var inputKeyStyle: InputKeyStyle = Options.inputKeyStyle
+        @State private var appearanceStyle: AppearanceStyle = AppearanceStyle.fetchSavedStyle()
         @State private var preferredInputMode: PreferredInputMode = Options.preferredInputMode
         @State private var commentStyle: CommentStyle = Options.commentStyle
         @State private var commentScene: CommentScene = Options.commentScene
@@ -155,6 +156,44 @@ struct SettingsView: View {
                                                                 AudioFeedback.modified()
                                                                 context.triggerSelectionHapticFeedback()
                                                                 Options.updateInputKeyStyle(to: newStyle)
+                                                        }
+                                                }
+                                        }
+                                        if #available(iOSApplicationExtension 28.0, *) {
+                                                Section {
+                                                        Picker("SettingsView.AppearanceStyle.PickerTitle", selection: $appearanceStyle) {
+                                                                Text("SettingsView.AppearanceStyle.Option1.Glass").tag(AppearanceStyle.glass)
+                                                                Text("SettingsView.AppearanceStyle.Option2.Clean").tag(AppearanceStyle.clean)
+                                                                Text("SettingsView.AppearanceStyle.Option3.Classic").tag(AppearanceStyle.classic)
+                                                        }
+                                                        .pickerStyle(.inline)
+                                                        .labelsHidden()
+                                                        .onChange(of: appearanceStyle) { newOption in
+                                                                AudioFeedback.modified()
+                                                                context.triggerSelectionHapticFeedback()
+                                                                context.updateAppearanceStyle(to: newOption)
+                                                        }
+                                                } header: {
+                                                        Text("SettingsView.AppearanceStyle.PickerTitle").textCase(nil)
+                                                }
+                                        } else if #available(iOSApplicationExtension 26.0, *) {
+                                                Section {
+                                                        HStack(spacing: 0) {
+                                                                Text("SettingsView.AppearanceStyle.PickerTitle").minimumScaleFactor(0.4).lineLimit(1)
+                                                                Spacer()
+                                                                Picker("SettingsView.AppearanceStyle.PickerTitle", selection: $appearanceStyle) {
+                                                                        Text("SettingsView.AppearanceStyle.Option1.Glass").tag(AppearanceStyle.glass)
+                                                                        Text("SettingsView.AppearanceStyle.Option2.Clean").tag(AppearanceStyle.clean)
+                                                                        Text("SettingsView.AppearanceStyle.Option3.Classic").tag(AppearanceStyle.classic)
+                                                                }
+                                                                .pickerStyle(.segmented)
+                                                                .labelsHidden()
+                                                                .fixedSize()
+                                                                .onChange(of: appearanceStyle) { newOption in
+                                                                        AudioFeedback.modified()
+                                                                        context.triggerSelectionHapticFeedback()
+                                                                        context.updateAppearanceStyle(to: newOption)
+                                                                }
                                                         }
                                                 }
                                         }
