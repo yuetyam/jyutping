@@ -148,7 +148,7 @@ struct EnhancedInputKey: View {
                                         }
                                         Text(verbatim: unit.primary.text)
                                                 .textCase(textCase)
-                                                .font(unit.primary.isTextSingular ? .letterCompact : .dualLettersCompact)
+                                                .font(unit.primary.isTextSingular ? .compactKeyLabel : .tenseKeyLabel)
                                                 .padding(.bottom, keyTextBottomInset)
                                 }
                         }

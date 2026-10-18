@@ -135,7 +135,7 @@ struct GlassRightKey: View {
                                                         Text(verbatim: PresetConstant.separate).font(.labelCaption).padding(2)
                                                 }
                                                 .opacity(context.inputStage.isBuffering ? 0.5 : 0)
-                                                Text(verbatim: context.inputStage.isBuffering ? String.apostrophe : String.cantonesePeriod).font(.letterCompact)
+                                                Text(verbatim: context.inputStage.isBuffering ? String.apostrophe : String.cantonesePeriod).font(.compactKeyLabel)
                                         }
                                         .glassEffect(displayForm.isReflecting ? .regular : .clear, in: .rect(cornerRadius: PresetConstant.keyCornerRadius))
                                         .shadow(color: displayForm.isReflecting ? colorScheme.glassShadow : Color.clear, radius: 0.5)

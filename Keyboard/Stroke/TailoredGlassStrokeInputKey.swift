@@ -65,7 +65,7 @@ struct TailoredGlassStrokeInputKey: View {
                                         }
                                         .padding(1)
                                         Text(verbatim: keyText)
-                                                .font(isTouching ? .letterCompact : .adjustedLetterCompact)
+                                                .font(isTouching ? .compactKeyLabel : .adjustedKeyLabel)
                                                 .padding(.top, 4)
                                 }
                                 .glassEffect(isTouching ? .regular : .clear, in: .rect(cornerRadius: PresetConstant.largeKeyCornerRadius))

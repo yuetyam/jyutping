@@ -78,7 +78,7 @@ struct SymbolInputKey: View {
                                                 .fill(isTouching ? activeColor : colorScheme.inputKeyColor)
                                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                                 .padding(insets)
-                                        Text(verbatim: keyText).font(.letterCompact)
+                                        Text(verbatim: keyText).font(.compactKeyLabel)
                                 }
                         }
                         .frame(width: keyWidth, height: keyHeight)

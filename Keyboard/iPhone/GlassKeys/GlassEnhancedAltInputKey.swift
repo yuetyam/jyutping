@@ -175,7 +175,7 @@ struct GlassEnhancedAltInputKey: View {
                                                 }
                                                 Text(verbatim: isPrimaryTextSingular ? unit.primary.text : unit.primary.text.spaceSeparated())
                                                         .textCase(textCase)
-                                                        .font(isPrimaryTextSingular ? .letterCompact : .adjustedLetterCompact)
+                                                        .font(isPrimaryTextSingular ? .compactKeyLabel : .adjustedKeyLabel)
                                                         .padding(.bottom, keyTextBottomInset)
                                         }
                                         .glassEffect(displayForm.isReflecting ? .regular : .clear, in: .rect(cornerRadius: PresetConstant.keyCornerRadius))

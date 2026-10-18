@@ -121,7 +121,7 @@ struct LeftKey: View {
                                         }
                                         .padding(insets.plused(vertical: 2))
                                         .opacity(context.inputStage.isBuffering ? 0.5 : 0)
-                                        Text(verbatim: context.inputStage.isBuffering ? String.apostrophe : String.cantoneseComma).font(.letterCompact)
+                                        Text(verbatim: context.inputStage.isBuffering ? String.apostrophe : String.cantoneseComma).font(.compactKeyLabel)
                                 }
                         }
                         .frame(width: keyWidth, height: keyHeight)

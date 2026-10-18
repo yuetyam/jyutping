@@ -52,7 +52,7 @@ struct GlassLetterAltInputKey: View {
                                         Color.clear
                                         Text(verbatim: virtual.text)
                                                 .textCase(textCase)
-                                                .font(.letterCompact)
+                                                .font(.compactKeyLabel)
                                                 .padding(.bottom, keyTextBottomInset)
                                 }
                                 .glassEffect(isTouching ? .regular : .clear, in: .rect(cornerRadius: PresetConstant.keyCornerRadius))

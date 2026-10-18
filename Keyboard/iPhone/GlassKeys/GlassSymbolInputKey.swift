@@ -76,7 +76,7 @@ struct GlassSymbolInputKey: View {
                                 case .normal, .reflecting:
                                         ZStack {
                                                 Color.clear
-                                                Text(verbatim: keyText).font(.letterCompact)
+                                                Text(verbatim: keyText).font(.compactKeyLabel)
                                         }
                                         .glassEffect(displayForm.isReflecting ? .regular : .clear, in: .rect(cornerRadius: PresetConstant.keyCornerRadius))
                                         .shadow(color: displayForm.isReflecting ? colorScheme.glassShadow : Color.clear, radius: 0.5)

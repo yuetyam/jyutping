@@ -68,7 +68,7 @@ struct TailoredStrokeInputKey: View {
                                 }
                                 .padding(isTouching ? 1 : 3)
                                 Text(verbatim: keyText)
-                                        .font(isTouching ? .letterCompact : .adjustedLetterCompact)
+                                        .font(isTouching ? .compactKeyLabel : .adjustedKeyLabel)
                                         .padding(.top, 4)
                         }
                         .frame(width: context.nineKeyWidthUnit * PresetConstant.tailoredInputKeyWidthCoefficient, height: context.heightUnit)

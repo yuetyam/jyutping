@@ -97,7 +97,7 @@ struct ABCLeftKey: View {
                                         }
                                         .padding(insets.plused(horizontal: 2))
                                         .opacity(shouldShowExtraSymbols ? 0.5 : 0)
-                                        Text(verbatim: String.comma).font(.letterCompact)
+                                        Text(verbatim: String.comma).font(.compactKeyLabel)
                                 }
                         }
                         .frame(width: keyWidth, height: keyHeight)

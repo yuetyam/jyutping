@@ -144,7 +144,7 @@ struct T21EnhancedInputKey: View {
                                         }
                                         Text(verbatim: unit.primary.text)
                                                 .textCase(textCase)
-                                                .font(.letterCompact)
+                                                .font(.compactKeyLabel)
                                                 .padding(.bottom, keyTextBottomInset)
                                 }
                         }

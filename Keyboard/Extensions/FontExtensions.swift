@@ -3,19 +3,32 @@ import CommonExtensions
 import CoreIME
 
 extension Font {
+
+        /// CandidateBar and CandidateBoard
         static let candidate: Font = Font.system(size: 20)
+
+        /// CandidateBar and CandidateBoard on iPad
         static let iPadCandidate: Font = Font.system(size: 22)
+
+        /// Candidate comment texts (Jyutping syllables)
         static let romanization: Font = Font.system(size: 12)
+
+        /// Jyutping tones in candidate comment texts
         static let tone: Font = Font.system(size: 10)
 
-        static let letterCompact: Font = Font.system(size: 24)
-        static let adjustedLetterCompact: Font = Font.system(size: 22)
-        static let dualLettersCompact: Font = Font.system(size: 18)
+        /// iPhone input keys
+        static let compactKeyLabel: Font = Font.system(size: 24)
+
+        /// iPhone input keys with complicated key texts
+        static let adjustedKeyLabel: Font = Font.system(size: 22)
+
+        /// iPhone dual-letters input keys
+        static let tenseKeyLabel: Font = Font.system(size: 18)
 
         /// EmojiBoard emoji view
         static let emoji: Font = Font.system(size: 34)
 
-        /// compact keyboard action keys
+        /// Compact keyboard's action keys
         static let symbol: Font = Font.system(size: 19)
 
         static let staticBody: Font = Font.system(size: 17)

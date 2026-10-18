@@ -65,7 +65,7 @@ struct GlassPinyinSpecialLetterKey: View {
                                                 .padding(.horizontal, 2)
                                                 Text(verbatim: virtual.text)
                                                         .textCase(textCase)
-                                                        .font(.letterCompact)
+                                                        .font(.compactKeyLabel)
                                                         .padding(.bottom, keyTextBottomInset)
                                         }
                                         .glassEffect(displayForm.isReflecting ? .regular : .clear, in: .rect(cornerRadius: PresetConstant.keyCornerRadius))

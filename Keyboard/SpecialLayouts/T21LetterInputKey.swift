@@ -64,7 +64,7 @@ struct T21LetterInputKey: View {
                                                 .padding(insets)
                                         Text(verbatim: virtual.text)
                                                 .textCase(textCase)
-                                                .font(.letterCompact)
+                                                .font(.compactKeyLabel)
                                                 .padding(.bottom, keyTextBottomInset)
                                 }
                         }

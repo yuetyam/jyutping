@@ -130,12 +130,12 @@ struct T14InputKey: View {
                                         if unit.primary.isTextSingular {
                                                 Text(verbatim: unit.primary.text)
                                                         .textCase(textCase)
-                                                        .font(.letterCompact)
+                                                        .font(.compactKeyLabel)
                                                         .padding(.bottom, keyTextBottomInset)
                                         } else {
                                                 Text(verbatim: unit.primary.text.spaceSeparated())
                                                         .textCase(textCase)
-                                                        .font(.adjustedLetterCompact)
+                                                        .font(.adjustedKeyLabel)
                                                         .padding(.bottom, keyTextBottomInset)
                                         }
                                 }

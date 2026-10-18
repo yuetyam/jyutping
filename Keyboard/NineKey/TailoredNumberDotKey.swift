@@ -15,7 +15,7 @@ struct GlassTailoredNumberDotKey: View {
                                 Color.interactiveClear
                                 ZStack {
                                         Color.clear
-                                        Text(verbatim: keyText).font(.letterCompact)
+                                        Text(verbatim: keyText).font(.compactKeyLabel)
                                 }
                                 .glassEffect(isTouching ? .regular : .clear, in: .rect(cornerRadius: PresetConstant.largeKeyCornerRadius))
                                 .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
@@ -44,7 +44,7 @@ struct TailoredNumberDotKey: View {
                                         .fill(isTouching ? colorScheme.activeInputKeyColor : colorScheme.inputKeyColor)
                                         .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                         .padding(isTouching ? 1 : 3)
-                                Text(verbatim: keyText).font(.letterCompact)
+                                Text(verbatim: keyText).font(.compactKeyLabel)
                         }
                         .frame(width: context.nineKeyWidthUnit * PresetConstant.tailoredInputKeyWidthCoefficient, height: context.heightUnit)
                 }

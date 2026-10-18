@@ -118,7 +118,7 @@ struct PinyinSpecialInputKey: View {
                                         .padding(insets.plused(horizontal: 2))
                                         Text(verbatim: unit.primary.text)
                                                 .textCase(textCase)
-                                                .font(.letterCompact)
+                                                .font(.compactKeyLabel)
                                                 .padding(.bottom, keyTextBottomInset)
                                 }
                         }
