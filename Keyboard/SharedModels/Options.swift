@@ -4,21 +4,8 @@ import CommonExtensions
 
 struct Options {
         nonisolated(unsafe) private(set) static var isAudioFeedbackOn: Bool = {
-                let hasSavedValue: Bool = UserDefaults.standard.object(forKey: OptionsKey.AudioFeedback).isNotNil
-                let hasLegacySavedValue: Bool = UserDefaults.standard.object(forKey: LegacyOptionsKey.AudioFeedback).isNotNil
-                defer {
-                        if hasLegacySavedValue {
-                                UserDefaults.standard.removeObject(forKey: LegacyOptionsKey.AudioFeedback)
-                        }
-                }
-                if hasSavedValue.negative && hasLegacySavedValue {
-                        let savedValue: Int = UserDefaults.standard.integer(forKey: LegacyOptionsKey.AudioFeedback)
-                        UserDefaults.standard.set(savedValue, forKey: OptionsKey.AudioFeedback)
-                        return savedValue == 1
-                } else {
-                        let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.AudioFeedback)
-                        return savedValue == 1
-                }
+                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.AudioFeedback)
+                return savedValue == 1
         }()
         static func updateAudioFeedbackStatus(isOn: Bool) {
                 isAudioFeedbackOn = isOn
@@ -81,21 +68,8 @@ struct Options {
         }
 
         nonisolated(unsafe) private(set) static var commentStyle: CommentStyle = {
-                let hasSavedValue: Bool = UserDefaults.standard.object(forKey: OptionsKey.CommentStyle).isNotNil
-                let hasLegacySavedValue: Bool = UserDefaults.standard.object(forKey: LegacyOptionsKey.CommentStyle).isNotNil
-                defer {
-                        if hasLegacySavedValue {
-                                UserDefaults.standard.removeObject(forKey: LegacyOptionsKey.CommentStyle)
-                        }
-                }
-                if hasSavedValue.negative && hasLegacySavedValue {
-                        let savedValue: Int = UserDefaults.standard.integer(forKey: LegacyOptionsKey.CommentStyle)
-                        UserDefaults.standard.set(savedValue, forKey: OptionsKey.CommentStyle)
-                        return CommentStyle.style(of: savedValue)
-                } else {
-                        let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.CommentStyle)
-                        return CommentStyle.style(of: savedValue)
-                }
+                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.CommentStyle)
+                return CommentStyle.style(of: savedValue)
         }()
         static func updateCommentStyle(to style: CommentStyle) {
                 commentStyle = style
@@ -114,21 +88,8 @@ struct Options {
         }
 
         nonisolated(unsafe) private(set) static var commentToneStyle: CommentToneStyle = {
-                let hasSavedValue: Bool = UserDefaults.standard.object(forKey: OptionsKey.CommentToneStyle).isNotNil
-                let hasLegacySavedValue: Bool = UserDefaults.standard.object(forKey: LegacyOptionsKey.CommentToneStyle).isNotNil
-                defer {
-                        if hasLegacySavedValue {
-                                UserDefaults.standard.removeObject(forKey: LegacyOptionsKey.CommentToneStyle)
-                        }
-                }
-                if hasSavedValue.negative && hasLegacySavedValue {
-                        let savedValue: Int = UserDefaults.standard.integer(forKey: LegacyOptionsKey.CommentToneStyle)
-                        UserDefaults.standard.set(savedValue, forKey: OptionsKey.CommentToneStyle)
-                        return CommentToneStyle.style(of: savedValue)
-                } else {
-                        let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.CommentToneStyle)
-                        return CommentToneStyle.style(of: savedValue)
-                }
+                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.CommentToneStyle)
+                return CommentToneStyle.style(of: savedValue)
         }()
         static func updateCommentToneStyle(to style: CommentToneStyle) {
                 commentToneStyle = style
@@ -137,26 +98,8 @@ struct Options {
         }
 
         nonisolated(unsafe) private(set) static var traditionalCharacterStandard: CharacterStandard = {
-                let hasSavedValue: Bool = UserDefaults.standard.object(forKey: OptionsKey.TraditionalCharacterStandard).isNotNil
-                let hasLegacySavedValue: Bool = UserDefaults.standard.object(forKey: LegacyOptionsKey.CharacterStandard).isNotNil
-                defer {
-                        if hasLegacySavedValue {
-                                UserDefaults.standard.removeObject(forKey: LegacyOptionsKey.CharacterStandard)
-                        }
-                }
-                if hasSavedValue.negative && hasLegacySavedValue {
-                        let savedValue: Int = UserDefaults.standard.integer(forKey: LegacyOptionsKey.CharacterStandard)
-                        let standard: CharacterStandard = switch savedValue {
-                        case 2: .hongkong
-                        case 3: .taiwan
-                        default: .preset
-                        }
-                        UserDefaults.standard.set(standard.rawValue, forKey: OptionsKey.TraditionalCharacterStandard)
-                        return standard
-                } else {
-                        let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.TraditionalCharacterStandard)
-                        return CharacterStandard.standard(of: savedValue)
-                }
+                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.TraditionalCharacterStandard)
+                return CharacterStandard.standard(of: savedValue)
         }()
         static func updateTraditionalCharacterStandard(to standard: CharacterStandard) {
                 traditionalCharacterStandard = standard
@@ -175,21 +118,8 @@ struct Options {
         }
 
         nonisolated(unsafe) private(set) static var isEmojiSuggestionsOn: Bool = {
-                let hasSavedValue: Bool = UserDefaults.standard.object(forKey: OptionsKey.EmojiSuggestions).isNotNil
-                let hasLegacySavedValue: Bool = UserDefaults.standard.object(forKey: LegacyOptionsKey.EmojiSuggestions).isNotNil
-                defer {
-                        if hasLegacySavedValue {
-                                UserDefaults.standard.removeObject(forKey: LegacyOptionsKey.EmojiSuggestions)
-                        }
-                }
-                if hasSavedValue.negative && hasLegacySavedValue {
-                        let savedValue: Int = UserDefaults.standard.integer(forKey: LegacyOptionsKey.EmojiSuggestions)
-                        UserDefaults.standard.set(savedValue, forKey: OptionsKey.EmojiSuggestions)
-                        return savedValue != 2
-                } else {
-                        let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.EmojiSuggestions)
-                        return savedValue != 2
-                }
+                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.EmojiSuggestions)
+                return savedValue != 2
         }()
         static func updateEmojiSuggestions(to isOn: Bool) {
                 isEmojiSuggestionsOn = isOn
@@ -285,16 +215,6 @@ struct OptionsKey {
 
         // @available(*, deprecated)
         // static let PasteButtonStyle: String = "PasteButtonStyle"
-}
-
-struct LegacyOptionsKey {
-        static let CharacterStandard: String = "logogram"
-        static let AudioFeedback: String = "audio_feedback"
-        static let HapticFeedback: String = "haptic_feedback"
-        static let KeyboardLayout: String = "keyboard_layout"
-        static let CommentStyle: String = "jyutping_display"
-        static let CommentToneStyle: String = "tone_style"
-        static let EmojiSuggestions: String = "emoji"
 }
 
 enum PreferredInputMode: Int, CaseIterable {
