@@ -1,7 +1,8 @@
 import SwiftUI
 
 extension View {
-        /// Apply half opacity
+
+        /// Apply half opacity to the view
         func shallow() -> some View {
                 opacity(0.5)
         }

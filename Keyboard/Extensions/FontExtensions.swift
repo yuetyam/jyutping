@@ -2,37 +2,43 @@ import SwiftUI
 import CommonExtensions
 import CoreIME
 
+/// Shared system fonts with fixed point sizes for keyboard labels, candidates, and emoji.
 extension Font {
 
-        /// CandidateBar and CandidateBoard
+        /// Candidate text in the candidate bar and expanded candidate board of compact keyboards.
         static let candidate: Font = Font.system(size: 20)
 
-        /// CandidateBar and CandidateBoard on iPad
+        /// Larger candidate text in the candidate bar and expanded candidate board of iPad keyboards.
         static let iPadCandidate: Font = Font.system(size: 22)
 
-        /// Candidate comment texts (Jyutping syllables)
+        /// Syllable letters in Jyutping candidate annotations, excluding tone digits.
         static let romanization: Font = Font.system(size: 12)
 
-        /// Jyutping tones in candidate comment texts
+        /// Tone digits in Jyutping candidate annotations; baseline offsets are applied separately.
         static let tone: Font = Font.system(size: 10)
 
-        /// iPhone input keys
+        /// Primary input-key labels on compact keyboards, including letters, numbers, and symbols.
         static let compactKeyLabel: Font = Font.system(size: 24)
 
-        /// iPhone input keys with complicated key texts
+        /// Smaller input-key labels for multiple characters or visually dense glyphs, such as strokes.
         static let adjustedKeyLabel: Font = Font.system(size: 22)
 
-        /// iPhone dual-letters input keys
+        /// Compact input-key labels for multiple letters sharing a single key.
         static let tenseKeyLabel: Font = Font.system(size: 18)
 
-        /// EmojiBoard emoji view
+        /// Emoji glyphs in the emoji board.
         static let emoji: Font = Font.system(size: 34)
 
-        /// Compact keyboard's action keys
+        /// Action-key icons on compact keyboards, such as shift, backspace, and globe.
         static let symbol: Font = Font.system(size: 19)
 
+        /// Text labels on keys such as space, return, and keyboard-layout switches.
         static let staticBody: Font = Font.system(size: 17)
+
+        /// Small secondary key labels, including alternate inputs and editing-panel captions.
         static let labelCaption: Font = Font.system(size: 11)
+
+        /// Larger alternate-input captions used by special keyboard layouts.
         static let labelLargerCaption: Font = Font.system(size: 14)
 }
 
