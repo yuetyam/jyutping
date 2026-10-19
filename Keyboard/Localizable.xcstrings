@@ -2333,7 +2333,7 @@
         }
       }
     },
-    "SettingsView.AppearanceStyle.Option1.Glass" : {
+    "SettingsView.AppearanceStyle.Option2.Glass" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2439,7 +2439,7 @@
         }
       }
     },
-    "SettingsView.AppearanceStyle.Option2.Clean" : {
+    "SettingsView.AppearanceStyle.Option1.Clean" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {

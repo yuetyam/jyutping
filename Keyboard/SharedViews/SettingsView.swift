@@ -162,8 +162,8 @@ struct SettingsView: View {
                                         if #available(iOSApplicationExtension 28.0, *) {
                                                 Section {
                                                         Picker("SettingsView.AppearanceStyle.PickerTitle", selection: $appearanceStyle) {
-                                                                Text("SettingsView.AppearanceStyle.Option1.Glass").tag(AppearanceStyle.glass)
-                                                                Text("SettingsView.AppearanceStyle.Option2.Clean").tag(AppearanceStyle.clean)
+                                                                Text("SettingsView.AppearanceStyle.Option1.Clean").tag(AppearanceStyle.clean)
+                                                                Text("SettingsView.AppearanceStyle.Option2.Glass").tag(AppearanceStyle.glass)
                                                                 Text("SettingsView.AppearanceStyle.Option3.Classic").tag(AppearanceStyle.classic)
                                                         }
                                                         .pickerStyle(.inline)
@@ -182,8 +182,8 @@ struct SettingsView: View {
                                                                 Text("SettingsView.AppearanceStyle.PickerTitle").minimumScaleFactor(0.4).lineLimit(1)
                                                                 Spacer()
                                                                 Picker("SettingsView.AppearanceStyle.PickerTitle", selection: $appearanceStyle) {
-                                                                        Text("SettingsView.AppearanceStyle.Option1.Glass").tag(AppearanceStyle.glass)
-                                                                        Text("SettingsView.AppearanceStyle.Option2.Clean").tag(AppearanceStyle.clean)
+                                                                        Text("SettingsView.AppearanceStyle.Option1.Clean").tag(AppearanceStyle.clean)
+                                                                        Text("SettingsView.AppearanceStyle.Option2.Glass").tag(AppearanceStyle.glass)
                                                                         Text("SettingsView.AppearanceStyle.Option3.Classic").tag(AppearanceStyle.classic)
                                                                 }
                                                                 .pickerStyle(.segmented)

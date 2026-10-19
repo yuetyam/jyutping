@@ -57,14 +57,10 @@ struct Options {
                 return CGFloat(savedValue)
         }
 
-        nonisolated(unsafe) private(set) static var inputKeyStyle: InputKeyStyle = {
-                let savedValue: Int = UserDefaults.standard.integer(forKey: UserSettingsKey.InputKeyStyle)
-                return InputKeyStyle.style(of: savedValue)
-        }()
+        nonisolated(unsafe) private(set) static var inputKeyStyle: InputKeyStyle = InputKeyStyle.fetchSavedStyle()
         static func updateInputKeyStyle(to style: InputKeyStyle) {
                 inputKeyStyle = style
-                let value: Int = style.rawValue
-                UserDefaults.standard.set(value, forKey: UserSettingsKey.InputKeyStyle)
+                InputKeyStyle.save(style: style)
         }
 
         nonisolated(unsafe) private(set) static var commentStyle: CommentStyle = {
@@ -195,32 +191,6 @@ enum PreferredInputMode: Int, CaseIterable {
         static func mode(of value: Int) -> PreferredInputMode {
                 return allCases.first(where: { $0.rawValue == value }) ?? .cantonese
         }
-}
-
-/// Letter input key style
-enum InputKeyStyle: Int, CaseIterable {
-
-        /// Letters only
-        case clear = 1
-
-        /// Letters with extra digits (number row)
-        case numbers = 2
-
-        /// Letters with extra symbols
-        case symbols = 3
-
-        static func style(of value: Int) -> InputKeyStyle {
-                return allCases.first(where: { $0.rawValue == value }) ?? .clear
-        }
-
-        /// Letters only
-        var isClear: Bool { self == .clear }
-
-        /// Letters with extra digits (number row)
-        var isNumberApplied: Bool { self == .numbers }
-
-        /// Letters with extra symbols
-        var isSymbolApplied: Bool { self == .symbols }
 }
 
 enum CommentScene: Int, CaseIterable {

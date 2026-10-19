@@ -1,15 +1,16 @@
 import Foundation
 
-/// Visual themes for the keyboard's keys.
+/// Defines the visual themes for the keyboard's keys.
 ///
-/// Raw values identify styles in saved preferences and should remain stable.
+/// The selected theme is persisted as an integer under `UserSettingsKey.AppearanceStyle`.
+/// An absent or unrecognized preference resolves to `.clean`.
 enum AppearanceStyle: Int, CaseIterable {
 
-        /// Translucent keys with the Liquid Glass appearance. (液態玻璃)
-        case glass = 1
+        /// The default minimal style, with a uniform key color and shallow shadows. (平白簡約)
+        case clean = 1
 
-        /// A minimal style with a uniform key color and shallow shadows. (平白簡約)
-        case clean = 2
+        /// Translucent keys with the Liquid Glass appearance. (液態玻璃)
+        case glass = 2
 
         /// A classic style with distinct colors for input keys and action keys. (經典)
         case classic = 3
@@ -26,7 +27,7 @@ enum AppearanceStyle: Int, CaseIterable {
 
 extension AppearanceStyle {
 
-        /// Whether this style is Liquid Glass. (液態玻璃)
+        /// Whether this style uses the translucent Liquid Glass appearance. (液態玻璃)
         var isGlass: Bool { self == .glass }
 
         /// Whether this style uses a uniform key color and shallow shadows. (平白簡約)
@@ -47,22 +48,27 @@ extension AppearanceStyle {
 
 extension AppearanceStyle {
 
-        /// Resolves a saved raw value, falling back to Liquid Glass for an unrecognized value.
+        /// Resolves a saved raw value, falling back to `.clean` for an unrecognized value.
         /// - Parameter value: The integer identifying a style in saved preferences.
+        /// - Returns: The matching style, or `.clean` if the value is not defined.
         static func style(of value: Int) -> AppearanceStyle {
-                return allCases.first(where: { $0.rawValue == value }) ?? .glass
+                return allCases.first(where: { $0.rawValue == value }) ?? .clean
         }
 
-        /// Reads the style from standard user defaults, falling back to Liquid Glass if absent or unrecognized.
+        /// User-defaults key storing the selected theme's integer raw value.
+        private static let settingsKey: String = UserSettingsKey.AppearanceStyle
+
+        /// Reads the style from standard user defaults, falling back to `.clean` if absent or unrecognized.
+        /// - Returns: The saved theme, or the default Clean style.
         static func fetchSavedStyle() -> AppearanceStyle {
-                let savedValue: Int = UserDefaults.standard.integer(forKey: UserSettingsKey.AppearanceStyle)
-                return AppearanceStyle.style(of: savedValue)
+                let savedValue: Int = UserDefaults.standard.integer(forKey: settingsKey)
+                return style(of: savedValue)
         }
 
         /// Stores the style's raw value in standard user defaults.
         /// - Parameter style: The keyboard appearance style to save.
         static func save(style: AppearanceStyle) {
                 let value: Int = style.rawValue
-                UserDefaults.standard.set(value, forKey: UserSettingsKey.AppearanceStyle)
+                UserDefaults.standard.set(value, forKey: settingsKey)
         }
 }
