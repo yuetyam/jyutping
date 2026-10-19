@@ -72,8 +72,8 @@ Under `Modules/`, the local Swift packages are:
 
 Targeted platforms:
 
-- iOS/iPadOS 16.0+
-- macOS 13+ (Ventura or above)
+- iOS/iPadOS 17.0+
+- macOS 14+ (Sonoma or above)
 - The reference app also declares visionOS 1.0+ in the Xcode project; the keyboard and macOS input method have separate platform targets.
 
 ## First build step: generate databases

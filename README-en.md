@@ -68,12 +68,12 @@ See also:
 </a>
 <br>
 <br>
-Compatibility: iOS / iPadOS 16.0+
+Compatibility: iOS / iPadOS 17.0+
 
 ## macOS
 Due to [limitations imposed by the Mac App Store on third-party input methods](https://developer.apple.com/forums/thread/134115) , it's impossible to distribute this input method through the Mac App Store. Please visit our [website](https://jyutping.app) to download it or install it via [Homebrew](https://jyutping.app/mac/homebrew) .
 
-Compatibility: macOS 13 Ventura or higher.  
+Compatibility: macOS 14 Sonoma or higher.\
 Options: Press <kbd>Control</kbd> + <kbd>Shift</kbd> + <kbd>`</kbd> (below the esc key) will display an options window.  
 FAQ: [FAQ](https://jyutping.app/faq)
 

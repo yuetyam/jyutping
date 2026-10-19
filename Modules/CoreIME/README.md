@@ -8,8 +8,8 @@ The package includes a generated, read-only SQLite database containing the Canto
 
 - Swift tools 6.3 or newer
 - Swift 6 language mode
-- iOS 16 or newer
-- macOS 13 or newer
+- iOS 17 or newer
+- macOS 14 or newer
 
 `CoreIME` is a local package in the Jyutping workspace and depends on the sibling [`CommonExtensions`](../CommonExtensions) package.
 

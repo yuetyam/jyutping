@@ -30,7 +30,7 @@ def main():
 import PackageDescription
 let package = Package(
         name: "InputMemoryExportSupport",
-        platforms: [.macOS(.v13)],
+        platforms: [.macOS(.v14)],
         dependencies: [.package(path: {extensions}), .package(path: {wrapper})],
         targets: [
                 .target(name: "InputMemoryExportSupport", dependencies: [.product(name: "CommonExtensions", package: "CommonExtensions"), .product(name: "SQLiteWrapper", package: "SQLiteWrapper")]),
