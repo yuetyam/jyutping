@@ -61,7 +61,7 @@ private struct ScrollViewButtonStyle: ButtonStyle {
 
         func makeBody(configuration: Configuration) -> some View {
                 configuration.label
-                        .onChange(of: configuration.isPressed) { isPressed in
+                        .onChange(of: configuration.isPressed) { _, isPressed in
                                 longPressDate = .now
                                 if isPressed {
                                         tryTriggerLongPressAfterDelay(triggered: longPressDate)

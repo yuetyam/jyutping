@@ -26,9 +26,6 @@ struct PressButtonStyle: ButtonStyle {
                 self.action = action
         }
 
-
-        // TODO: - Use the new `onChange` when increasing the minSDK to iOS 17
-
         /// Creates the view representing the styled button.
         ///
         /// The label supplied by the button is returned without additional visual modifications. Changes to the button's pressed state are observed to keep `isTouching` synchronized with `configuration.isPressed`.
@@ -40,7 +37,7 @@ struct PressButtonStyle: ButtonStyle {
         /// - Returns: The view used to render the button.
         func makeBody(configuration: Configuration) -> some View {
                 configuration.label
-                        .onChange(of: configuration.isPressed) { isPressed in
+                        .onChange(of: configuration.isPressed) { _, isPressed in
                                 isTouching = isPressed
                                 if isPressed {
                                         action()
