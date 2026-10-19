@@ -55,6 +55,15 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 }
         }
         private lazy var isKeyboardPrepared: Bool = false
+        override func viewDidLoad() {
+                super.viewDidLoad()
+                registerForTraitChanges([UITraitHorizontalSizeClass.self, UITraitVerticalSizeClass.self, UITraitUserInterfaceIdiom.self]) { (controller: KeyboardViewController, _: UITraitCollection) in
+                        guard controller.isKeyboardPrepared else { return }
+                        controller.adoptKeyboardInterface()
+                        controller.updateKeyboardSize()
+                        controller.updateGlobeKeyState()
+                }
+        }
         override func viewWillAppear(_ animated: Bool) {
                 super.viewWillAppear(animated)
                 if isKeyboardPrepared.negative {
@@ -97,14 +106,6 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         guard hasText != oldValue else { return }
                         updateReturnKey()
                 }
-        }
-
-        override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-                super.traitCollectionDidChange(previousTraitCollection)
-                guard isKeyboardPrepared else { return }
-                adoptKeyboardInterface()
-                updateKeyboardSize()
-                updateGlobeKeyState()
         }
 
         override func viewWillDisappear(_ animated: Bool) {
