@@ -12,7 +12,7 @@ struct GlassABCSymbolBottomKeyRow: View {
                                 GlassGlobeKey()
                                 GlassTransformKey(.primary, coefficient: 1.5)
                                 GlassABCSymbolCommaKey()
-                                SpaceKey()
+                                GlassSpaceKey()
                                 GlassABCSymbolPeriodKey()
                                 GlassEnterKey()
                         }
@@ -20,7 +20,7 @@ struct GlassABCSymbolBottomKeyRow: View {
                         HStack(spacing: 0) {
                                 GlassTransformKey(.primary)
                                 GlassABCSymbolCommaKey()
-                                SpaceKey()
+                                GlassSpaceKey()
                                 GlassABCSymbolPeriodKey()
                                 GlassEnterKey()
                         }
@@ -29,7 +29,7 @@ struct GlassABCSymbolBottomKeyRow: View {
                                 GlassTransformKey(.primary, coefficient: 1.5)
                                 GlassGlobeKey()
                                 GlassABCSymbolCommaKey()
-                                SpaceKey()
+                                GlassSpaceKey()
                                 GlassABCSymbolPeriodKey()
                                 GlassEnterKey()
                         }
@@ -37,7 +37,7 @@ struct GlassABCSymbolBottomKeyRow: View {
                         HStack(spacing: 0) {
                                 GlassTransformKey(.primary)
                                 GlassABCSymbolCommaKey()
-                                SpaceKey()
+                                GlassSpaceKey()
                                 GlassABCSymbolPeriodKey()
                                 GlassEnterKey()
                         }

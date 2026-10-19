@@ -6,54 +6,48 @@ import CommonExtensions
 /// Taps send space operations on release. A 400 ms hold enables cursor dragging, and successive taps use a 300 ms second-tap window.
 struct SpaceKey: View {
 
-        /// Keyboard properties and handlers.
+        /// Supplies keyboard geometry, the space-key label, composition state, and input and feedback handlers.
         @EnvironmentObject private var context: KeyboardViewController
 
-        /// Retrieves the current system color scheme (light or dark mode) from the environment.
+        /// Selects the idle and pressed input-key colors for the current light or dark appearance.
         @Environment(\.colorScheme) private var colorScheme
 
-        /// Monotonic clock used to measure interaction deadlines independently of timer scheduling.
+        /// Monotonic clock used to schedule the hold threshold and second-tap expiry without idle polling.
         private let clock = ContinuousClock()
 
-        /// Button press state reported by PressButtonStyle; may end when sliding outside the key.
+        /// Press state reported by `PressButtonStyle`, controlling the key highlight and active interaction deadline; may end when sliding outside the key.
         @State private var isTouching: Bool = false
 
-        /// Whether the current hold has enabled cursor dragging and suppressed the release's space operation.
+        /// Whether the hold threshold has been reached, showing cursor arrows and suppressing the space operation on release.
         @State private var isLongPressEngaged: Bool = false
 
-        /// Deadline for enabling cursor dragging during the current press.
+        /// Deadline set 400 ms after press-down to enable cursor dragging; cleared when the drag gesture ends.
         @State private var longPressDeadline: ContinuousClock.Instant?
 
-        /// Horizontal translation at the last cursor operation; each subsequent operation requires more than 10 points of movement.
+        /// Horizontal translation at the last handled drag step; each subsequent step requires more than 10 points of movement.
         @State private var previousDraggingDistance: CGFloat = 0
 
-        /// Whether a preceding tap is awaiting a second tap; the window pauses while the key is pressed.
+        /// Whether a preceding tap is awaiting a second tap, whose release sends `.doubleSpace`; expiry pauses while the key is pressed.
         @State private var isInTheMediumOfDoubleTapping: Bool = false
 
-        /// Deadline for expiring a pending second tap while the key is released.
+        /// Deadline set 300 ms after a first tap's release; cleared on press-down to suspend expiry during the next press.
         @State private var doubleTappingDeadline: ContinuousClock.Instant?
 
-        /// Renders the dedicated background and current space-key label, replacing the label with cursor arrows during a long press.
+        /// Renders a rounded input-key background and the current space-key label, replacing the label with cursor arrows during a long press.
         ///
-        /// Press-down provides audio and haptic feedback. A simultaneous drag handles cursor movement and release operations.
-        /// One task sleeps until the active interaction deadline, returns immediately on cancellation, and performs no timed work while idle.
+        /// Press-down provides audio and haptic feedback. A simultaneous drag sends `.space` or `.doubleSpace` on release unless a long press was engaged.
+        /// After the hold threshold, horizontal drag steps move the cursor, or clear the composition buffer when text is being composed.
+        /// One task sleeps until the active hold or second-tap deadline, exits on cancellation, and checks that the deadline is still current before updating state.
         var body: some View {
                 let insets = context.keyboardInterface.keyShapeInsets
                 let interactionDeadline = isTouching ? longPressDeadline : doubleTappingDeadline
                 Button(action: {}) {
                         ZStack {
                                 Color.interactiveClear
-                                if #available(iOSApplicationExtension 26.0, *) {
-                                        Color.clear
-                                                .glassEffect(isTouching ? .regular : .clear, in: .rect(cornerRadius: PresetConstant.keyCornerRadius))
-                                                .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
-                                                .padding(isTouching ? insets.plused(-2) : insets)
-                                } else {
-                                        RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
-                                                .fill(isTouching ? colorScheme.activeInputKeyColor : colorScheme.inputKeyColor)
-                                                .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                                .padding(insets)
-                                }
+                                RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
+                                        .fill(isTouching ? colorScheme.activeInputKeyColor : colorScheme.inputKeyColor)
+                                        .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
+                                        .padding(insets)
                                 Text(isLongPressEngaged ? PresetConstant.spaceKeyLongPressHint : context.spaceKeyForm.attributedText).font(.staticBody)
                         }
                         .frame(height: context.heightUnit)

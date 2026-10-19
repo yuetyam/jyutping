@@ -56,7 +56,7 @@ struct GlassStrokeKeyboard: View {
                         }
                         HStack(spacing: 0) {
                                 GlassTransformKey(context.preferredNumericForm)
-                                SpaceKey()
+                                GlassSpaceKey()
                                 GlassEnterKey()
                         }
                 }

@@ -2386,55 +2386,55 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "簡約"
+            "value" : "簡白"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "簡約"
+            "value" : "簡白"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "簡約"
+            "value" : "簡白"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "簡約"
+            "value" : "簡白"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "簡約"
+            "value" : "簡白"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "簡約"
+            "value" : "簡白"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "簡約"
+            "value" : "簡白"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "簡約"
+            "value" : "簡白"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "簡約"
+            "value" : "簡白"
           }
         }
       }

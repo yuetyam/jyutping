@@ -57,7 +57,7 @@ struct GlassPinyinKeyboard: View {
                         HStack(spacing: 0) {
                                 GlassTransformKey(context.preferredNumericForm)
                                 GlassLeftKey()
-                                SpaceKey()
+                                GlassSpaceKey()
                                 GlassRightKey()
                                 GlassEnterKey()
                         }

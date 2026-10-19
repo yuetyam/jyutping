@@ -13,7 +13,7 @@ struct GlassCantoneseSymbolBottomKeyRow: View {
                                 GlassGlobeKey()
                                 GlassTransformKey(.primary, coefficient: 1.5)
                                 GlassCantoneseSymbolCommaKey()
-                                SpaceKey()
+                                GlassSpaceKey()
                                 GlassCantoneseSymbolPeriodKey()
                                 GlassEnterKey()
                         }
@@ -21,7 +21,7 @@ struct GlassCantoneseSymbolBottomKeyRow: View {
                         HStack(spacing: 0) {
                                 GlassTransformKey(.primary)
                                 GlassCantoneseSymbolCommaKey()
-                                SpaceKey()
+                                GlassSpaceKey()
                                 GlassCantoneseSymbolPeriodKey()
                                 GlassEnterKey()
                         }
@@ -30,7 +30,7 @@ struct GlassCantoneseSymbolBottomKeyRow: View {
                                 GlassTransformKey(.primary, coefficient: 1.5)
                                 GlassGlobeKey()
                                 GlassCantoneseSymbolCommaKey()
-                                SpaceKey()
+                                GlassSpaceKey()
                                 GlassCantoneseSymbolPeriodKey()
                                 GlassEnterKey()
                         }
@@ -38,7 +38,7 @@ struct GlassCantoneseSymbolBottomKeyRow: View {
                         HStack(spacing: 0) {
                                 GlassTransformKey(.primary)
                                 GlassCantoneseSymbolCommaKey()
-                                SpaceKey()
+                                GlassSpaceKey()
                                 GlassCantoneseSymbolPeriodKey()
                                 GlassEnterKey()
                         }
