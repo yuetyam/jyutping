@@ -6,7 +6,7 @@ import SQLite3
 import CommonExtensions
 import SQLiteWrapper
 
-/// Retained independently of the selected preferences page, including on macOS 13.
+/// Retained independently of the selected preferences page to preserve import state across sidebar navigation.
 @MainActor
 final class InputMemoryImportController: ObservableObject {
 

@@ -366,11 +366,9 @@ struct SettingsView: View {
                                                 }
 
                                         ZStack {
-                                                if #available(iOSApplicationExtension 17.0, *) {
-                                                        Color.clear
-                                                                .sensoryFeedback(.warning, trigger: isTryingToClearInputMemory, condition: { $0.negative && $1 })
-                                                                .sensoryFeedback(.success, trigger: isPerformingClearInputMemory, condition: { $0 && $1.negative })
-                                                }
+                                                Color.clear
+                                                        .sensoryFeedback(.warning, trigger: isTryingToClearInputMemory, condition: { $0.negative && $1 })
+                                                        .sensoryFeedback(.success, trigger: isPerformingClearInputMemory, condition: { $0 && $1.negative })
                                                 Menu {
                                                         Button(role: .destructive) {
                                                                 AudioFeedback.modified()

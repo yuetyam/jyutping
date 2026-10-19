@@ -53,11 +53,7 @@ private struct YingWaaPronunciationUnitView: View {
                                         HStack(alignment: .firstTextBaseline, spacing: 2) {
                                                 Text(verbatim: "釋義").font(.copilot).shallow()
                                                 Text.separator
-                                                if #available(iOS 16.1, *) {
-                                                        Text(verbatim: interpretation).font(.callout).fontDesign(.serif)
-                                                } else {
-                                                        Text(verbatim: interpretation).font(.callout)
-                                                }
+                                                Text(verbatim: interpretation).font(.callout).fontDesign(.serif)
                                         }
                                 }
                         }

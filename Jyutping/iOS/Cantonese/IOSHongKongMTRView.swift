@@ -10,38 +10,21 @@ struct IOSHongKongMTRView: View {
         @State private var expanded: [Bool] = Array(repeating: false, count: 50)
 
         var body: some View {
-                if #available(iOS 17.0, *) {
-                        List {
-                                ForEach(lines.indices, id: \.self) { index in
-                                        Section {
-                                                MTRLineView(line: lines[index], isExpanded: $expanded[index])
-                                        }
+                List {
+                        ForEach(lines.indices, id: \.self) { index in
+                                Section {
+                                        MTRLineView(line: lines[index], isExpanded: $expanded[index])
                                 }
                         }
-                        .listSectionSpacing(12)
-                        .animation(.default, value: expanded)
-                        .task {
-                                guard lines.isEmpty else { return }
-                                lines = HongKongMTR.lines
-                        }
-                        .navigationTitle("IOSCantoneseTab.NavigationTitle.HongKongMTR")
-                        .navigationBarTitleDisplayMode(.inline)
-                } else {
-                        List {
-                                ForEach(lines.indices, id: \.self) { index in
-                                        Section {
-                                                MTRLineView(line: lines[index], isExpanded: $expanded[index])
-                                        }
-                                }
-                        }
-                        .animation(.default, value: expanded)
-                        .task {
-                                guard lines.isEmpty else { return }
-                                lines = HongKongMTR.lines
-                        }
-                        .navigationTitle("IOSCantoneseTab.NavigationTitle.HongKongMTR")
-                        .navigationBarTitleDisplayMode(.inline)
                 }
+                .listSectionSpacing(12)
+                .animation(.default, value: expanded)
+                .task {
+                        guard lines.isEmpty else { return }
+                        lines = HongKongMTR.lines
+                }
+                .navigationTitle("IOSCantoneseTab.NavigationTitle.HongKongMTR")
+                .navigationBarTitleDisplayMode(.inline)
         }
 }
 

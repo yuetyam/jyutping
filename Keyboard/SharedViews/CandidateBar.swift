@@ -10,10 +10,8 @@ struct CandidateBar: View {
                                 CandidateBarScrollView().scrollEdgeEffectHidden()
                         } else if #available(iOSApplicationExtension 18.0, *) {
                                 CandidateBarScrollView()
-                        } else if #available(iOSApplicationExtension 17.0, *) {
-                                CandidateBarScrollViewIOS17()
                         } else {
-                                CandidateBarScrollViewIOS16()
+                                CandidateBarScrollViewIOS17()
                         }
                         Button {
                                 AudioFeedback.modified()

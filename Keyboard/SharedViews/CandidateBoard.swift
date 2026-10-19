@@ -72,10 +72,8 @@ struct CandidateBoard: View {
                                 CandidateBoardScrollView().scrollEdgeEffectHidden()
                         } else if #available(iOSApplicationExtension 18.0, *) {
                                 CandidateBoardScrollView()
-                        } else if #available(iOSApplicationExtension 17.0, *) {
-                                CandidateBoardScrollViewIOS17()
                         } else {
-                                CandidateBoardScrollViewIOS16()
+                                CandidateBoardScrollViewIOS17()
                         }
                         if #available(iOSApplicationExtension 26.0, *) {
                                 Button(action: back) {

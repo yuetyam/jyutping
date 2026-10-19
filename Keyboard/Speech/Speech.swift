@@ -91,23 +91,12 @@ struct Speech {
                                 case (_, _):
                                         return false
                                 }
-                        } else if #available(iOSApplicationExtension 17.0, *) {
+                        } else {
                                 // Premium Cantonese voices are broken in iOS 17
                                 switch (lhs.quality, rhs.quality) {
                                 case (.premium, _):
                                         return false
                                 case (_, .premium):
-                                        return true
-                                case (.enhanced, .default):
-                                        return true
-                                case (_, _):
-                                        return false
-                                }
-                        } else {
-                                switch (lhs.quality, rhs.quality) {
-                                case (.premium, .enhanced):
-                                        return true
-                                case (.premium, .default):
                                         return true
                                 case (.enhanced, .default):
                                         return true

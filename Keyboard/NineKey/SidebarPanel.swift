@@ -49,17 +49,11 @@ struct SidebarPanel: View {
                                 } else {
                                         SymbolSidebarScrollView(texts: texts)
                                 }
-                        } else if #available(iOSApplicationExtension 17.0, *) {
+                        } else {
                                 if context.inputStage.isBuffering {
                                         SidebarScrollViewIOS17()
                                 } else {
                                         SymbolSidebarScrollViewIOS17(texts: texts)
-                                }
-                        } else {
-                                if context.inputStage.isBuffering {
-                                        SidebarScrollViewIOS16()
-                                } else {
-                                        SymbolSidebarScrollViewIOS16(texts: texts)
                                 }
                         }
                 }

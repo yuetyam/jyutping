@@ -4,20 +4,8 @@ import CommonExtensions
 /// Toggle keyboard height
 struct NavigationTrailingExpansionButton: View {
         @EnvironmentObject private var context: KeyboardViewController
-        private let expandImageName: String = {
-                if #available(iOSApplicationExtension 17.0, *) {
-                        return "arrow.down.backward.and.arrow.up.forward"
-                } else {
-                        return "arrow.up.and.line.horizontal.and.arrow.down"
-                }
-        }()
-        private let collapseImageName: String = {
-                if #available(iOSApplicationExtension 17.0, *) {
-                        return "arrow.up.forward.and.arrow.down.backward"
-                } else {
-                        return "arrow.down.and.line.horizontal.and.arrow.up"
-                }
-        }()
+        private let expandImageName: String = "arrow.down.backward.and.arrow.up.forward"
+        private let collapseImageName: String = "arrow.up.forward.and.arrow.down.backward"
         var body: some View {
                 HStack(spacing: 0) {
                         TransparentButton(width: 12, height: PresetConstant.buttonLength, action: action)
