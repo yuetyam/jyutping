@@ -22,26 +22,15 @@ struct Speaker: View {
         var body: some View {
                 Button(action: handleTap) {
                         ZStack {
-                                if #available(iOSApplicationExtension 17.0, *) {
-                                        Circle().fill(colorScheme.isDark ? Color.black : Color.white)
-                                        Image.speaking
-                                                .resizable()
-                                                .scaledToFit()
-                                                .symbolEffect(.variableColor.iterative, isActive: isSpeaking)
-                                                .foregroundStyle(Color.accentColor)
-                                                .padding(.leading, speakingLeadingPadding)
-                                                .padding(.trailing, speakingTrailingPadding)
-                                                .opacity(isSpeaking ? 1 : 0)
-                                } else {
-                                        Circle().fill(colorScheme.isDark ? Color.black : Color.white)
-                                                .opacity(isSpeaking ? 0 : 1)
-                                        Image.speaking
-                                                .resizable()
-                                                .scaledToFit()
-                                                .foregroundStyle(Color.accentColor)
-                                                .padding(.leading, speakingLeadingPadding)
-                                                .opacity(isSpeaking ? 1 : 0)
-                                }
+                                Circle().fill(colorScheme.isDark ? Color.black : Color.white)
+                                Image.speaking
+                                        .resizable()
+                                        .scaledToFit()
+                                        .symbolEffect(.variableColor.iterative, isActive: isSpeaking)
+                                        .foregroundStyle(Color.accentColor)
+                                        .padding(.leading, speakingLeadingPadding)
+                                        .padding(.trailing, speakingTrailingPadding)
+                                        .opacity(isSpeaking ? 1 : 0)
                                 Image.speaker
                                         .resizable()
                                         .scaledToFit()

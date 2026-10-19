@@ -7,7 +7,7 @@ APP_VERSION='0.85.0'
 INSTALL_LOCATION='/Library/Input Methods'
 
 pkgbuild \
-    --min-os-version 13.0 \
+    --min-os-version 14.0 \
     --compression latest \
     --identifier "${BUNDLE_IDENTIFIER}" \
     --version "${APP_VERSION}" \

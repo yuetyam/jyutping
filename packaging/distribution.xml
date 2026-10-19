@@ -8,7 +8,7 @@
         <pkg-ref id="org.jyutping.inputmethod.Jyutping" />
         <options customize="never" hostArchitectures="arm64,x86_64" require-scripts="false" rootVolumeOnly="true" />
         <allowed-os-versions>
-                <os-version min="13.0" />
+                <os-version min="14.0" />
         </allowed-os-versions>
         <choices-outline>
                 <line choice="default">
