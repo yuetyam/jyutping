@@ -27,7 +27,7 @@ struct AppearanceSettingsView: View {
                                                         }
                                                 }
                                                 .pickerStyle(.menu)
-                                                .onChange(of: lineSpacing) { newLineSpacing in
+                                                .onChange(of: lineSpacing) { _, newLineSpacing in
                                                         AppSettings.updateCandidateLineSpacing(to: newLineSpacing)
                                                 }
                                                 Picker("AppearanceSettingsView.CandidatePageCornerRadius.PickerTitle", selection: $pageCornerRadius) {
@@ -36,7 +36,7 @@ struct AppearanceSettingsView: View {
                                                         }
                                                 }
                                                 .pickerStyle(.menu)
-                                                .onChange(of: pageCornerRadius) { newValue in
+                                                .onChange(of: pageCornerRadius) { _, newValue in
                                                         AppSettings.updatePageCornerRadius(to: newValue)
                                                 }
                                                 Picker("AppearanceSettingsView.CandidatePageInsets.PickerTitle", selection: $contentInsets) {
@@ -45,7 +45,7 @@ struct AppearanceSettingsView: View {
                                                         }
                                                 }
                                                 .pickerStyle(.menu)
-                                                .onChange(of: contentInsets) { newValue in
+                                                .onChange(of: contentInsets) { _, newValue in
                                                         AppSettings.updateContentInsets(to: newValue)
                                                 }
                                                 Picker("AppearanceSettingsView.CandidateCornerRadius.PickerTitle", selection: $innerCornerRadius) {
@@ -54,7 +54,7 @@ struct AppearanceSettingsView: View {
                                                         }
                                                 }
                                                 .pickerStyle(.menu)
-                                                .onChange(of: innerCornerRadius) { newValue in
+                                                .onChange(of: innerCornerRadius) { _, newValue in
                                                         AppSettings.updateInnerCornerRadius(to: newValue)
                                                 }
                                         }
@@ -62,7 +62,7 @@ struct AppearanceSettingsView: View {
                                                 Section {
                                                         Toggle("AppearanceSettingsView.EnhancedGlass.Thicker.ToggleTitle", isOn: $isThickerGlassPreferred)
                                                                 .toggleStyle(.switch)
-                                                                .onChange(of: isThickerGlassPreferred) { isOn in
+                                                                .onChange(of: isThickerGlassPreferred) { _, isOn in
                                                                         AppSettings.updatePreferredThickerGlass(to: isOn)
                                                                 }
                                                 }
@@ -84,7 +84,7 @@ struct AppearanceSettingsView: View {
                                         } header: {
                                                 Text("AccentColor.AppearanceSettingsView.SectionHeader").textCase(nil)
                                         }
-                                        .onChange(of: preferredAccentColor) { newOption in
+                                        .onChange(of: preferredAccentColor) { _, newOption in
                                                 AppSettings.updatePreferredAccentColor(to: newOption)
                                         }
                                 }

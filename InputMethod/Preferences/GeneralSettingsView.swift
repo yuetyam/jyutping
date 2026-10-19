@@ -33,7 +33,7 @@ struct GeneralSettingsView: View {
                                                         }
                                                 }
                                                 .pickerStyle(.menu)
-                                                .onChange(of: pageSize) { newPageSize in
+                                                .onChange(of: pageSize) { _, newPageSize in
                                                         AppSettings.updateDisplayCandidatePageSize(to: newPageSize)
                                                 }
                                                 Picker("GeneralSettingsView.CandidatePageOrientation", selection: $orientation) {
@@ -41,7 +41,7 @@ struct GeneralSettingsView: View {
                                                         Text("GeneralSettingsView.CandidatePageOrientation.Vertical").tag(CandidatePageOrientation.vertical)
                                                 }
                                                 .pickerStyle(.menu)
-                                                .onChange(of: orientation) { newOption in
+                                                .onChange(of: orientation) { _, newOption in
                                                         AppSettings.updateCandidatePageOrientation(to: newOption)
                                                 }
                                         }
@@ -52,7 +52,7 @@ struct GeneralSettingsView: View {
                                                         Text("GeneralSettingsView.CommentScene.None").tag(CommentDisplayScene.noneOfAll)
                                                 }
                                                 .pickerStyle(.menu)
-                                                .onChange(of: commentDisplayScene) { scene in
+                                                .onChange(of: commentDisplayScene) { _, scene in
                                                         AppSettings.updateCommentDisplayScene(to: scene)
                                                 }
                                                 Picker("GeneralSettingsView.CommentStyle", selection: $commentDisplayStyle) {
@@ -61,7 +61,7 @@ struct GeneralSettingsView: View {
                                                         Text("GeneralSettingsView.CommentStyle.Right").tag(CommentDisplayStyle.right)
                                                 }
                                                 .pickerStyle(.menu)
-                                                .onChange(of: commentDisplayStyle) { newStyle in
+                                                .onChange(of: commentDisplayStyle) { _, newStyle in
                                                         AppSettings.updateCommentDisplayStyle(to: newStyle)
                                                 }
                                                 Picker("GeneralSettingsView.CommentToneStyle", selection: $toneDisplayStyle) {
@@ -71,7 +71,7 @@ struct GeneralSettingsView: View {
                                                         Text("GeneralSettingsView.CommentToneStyle.Subscript").tag(ToneDisplayStyle.subscript)
                                                 }
                                                 .pickerStyle(.menu)
-                                                .onChange(of: toneDisplayStyle) { newStyle in
+                                                .onChange(of: toneDisplayStyle) { _, newStyle in
                                                         AppSettings.updateToneDisplayStyle(to: newStyle)
                                                 }
                                                 Picker("GeneralSettingsView.CommentToneColor", selection: $toneDisplayColor) {
@@ -79,7 +79,7 @@ struct GeneralSettingsView: View {
                                                         Text("GeneralSettingsView.CommentToneColor.Shallow").tag(ToneDisplayColor.shallow)
                                                 }
                                                 .pickerStyle(.menu)
-                                                .onChange(of: toneDisplayColor) { newOption in
+                                                .onChange(of: toneDisplayColor) { _, newOption in
                                                         AppSettings.updateToneDisplayColor(to: newOption)
                                                 }
                                         }
@@ -99,12 +99,12 @@ struct GeneralSettingsView: View {
                                                         Text("GeneralSettingsView.LabelSet.Branches").tag(LabelSet.branches)
                                                 }
                                                 .pickerStyle(.menu)
-                                                .onChange(of: labelSet) { newOption in
+                                                .onChange(of: labelSet) { _, newOption in
                                                         AppSettings.updateLabelSet(to: newOption)
                                                 }
                                                 Toggle("GeneralSettingsView.LabelLastZero.ToggleTitle", isOn: $isLabelLastZero)
                                                         .toggleStyle(.switch)
-                                                        .onChange(of: isLabelLastZero) { newState in
+                                                        .onChange(of: isLabelLastZero) { _, newState in
                                                                 AppSettings.updateLabelLastState(to: newState)
                                                         }
                                         }
@@ -116,7 +116,7 @@ struct GeneralSettingsView: View {
                                                         Text("GeneralSettingsView.CharacterStandard.Simplified").tag(CharacterStandard.mutilated)
                                                 }
                                                 .pickerStyle(.menu)
-                                                .onChange(of: legacyCharacterStandard) { newStandard in
+                                                .onChange(of: legacyCharacterStandard) { _, newStandard in
                                                         Options.updateLegacyCharacterStandard(to: newStandard)
                                                 }
                                                 Picker("GeneralSettingsView.TraditionalCharacterStandard.PickerTitle", selection: $traditionalCharacterStandard) {
@@ -128,7 +128,7 @@ struct GeneralSettingsView: View {
                                                         Text("GeneralSettingsView.TraditionalCharacterStandard.Option3.Inherited").tag(CharacterStandard.inherited)
                                                 }
                                                 .pickerStyle(.menu)
-                                                .onChange(of: traditionalCharacterStandard) { newStandard in
+                                                .onChange(of: traditionalCharacterStandard) { _, newStandard in
                                                         Options.updateTraditionalCharacterStandard(to: newStandard)
                                                 }
                                         } footer: {
@@ -137,22 +137,22 @@ struct GeneralSettingsView: View {
                                         Section {
                                                 Toggle("GeneralSettingsView.EmojiSuggestions.ToggleTitle", isOn: $isEmojiSuggestionsOn)
                                                         .toggleStyle(.switch)
-                                                        .onChange(of: isEmojiSuggestionsOn) { newState in
+                                                        .onChange(of: isEmojiSuggestionsOn) { _, newState in
                                                                 AppSettings.updateEmojiSuggestions(to: newState)
                                                         }
                                                 Toggle("GeneralSettingsView.EnglishSuggestions.ToggleTitle", isOn: $isEnglishSuggestionsOn)
                                                         .toggleStyle(.switch)
-                                                        .onChange(of: isEnglishSuggestionsOn) { newState in
+                                                        .onChange(of: isEnglishSuggestionsOn) { _, newState in
                                                                 AppSettings.updateEnglishSuggestions(to: newState)
                                                         }
                                                 Toggle("GeneralSettingsView.SystemLexicon.ToggleTitle", isOn: $isTextReplacementsOn)
                                                         .toggleStyle(.switch)
-                                                        .onChange(of: isTextReplacementsOn) { newState in
+                                                        .onChange(of: isTextReplacementsOn) { _, newState in
                                                                 AppSettings.updateTextReplacementsState(to: newState)
                                                         }
                                                 Toggle("GeneralSettingsView.SchemeRules.CompatibleMode.ToggleTitle", isOn: $isCompatibleModeOn)
                                                         .toggleStyle(.switch)
-                                                        .onChange(of: isCompatibleModeOn) { newState in
+                                                        .onChange(of: isCompatibleModeOn) { _, newState in
                                                                 AppSettings.updateCompatibleMode(to: newState)
                                                         }
                                         } footer: {

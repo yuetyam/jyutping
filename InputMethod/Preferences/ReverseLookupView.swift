@@ -42,7 +42,7 @@ struct ReverseLookupView: View {
                                                 }
                                                 .pickerStyle(.menu)
                                                 .fixedSize()
-                                                .onChange(of: cangjieVariant) { newVariant in
+                                                .onChange(of: cangjieVariant) { _, newVariant in
                                                         AppSettings.updateCangjieVariant(to: newVariant)
                                                 }
                                                 Spacer()

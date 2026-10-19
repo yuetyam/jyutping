@@ -56,7 +56,7 @@ struct SettingsView: View {
                         List {
                                 Section {
                                         Toggle("SettingsView.KeyboardFeedback.Sound.ToggleTitle", isOn: $isAudioFeedbackOn)
-                                                .onChange(of: isAudioFeedbackOn) { newState in
+                                                .onChange(of: isAudioFeedbackOn) { _, newState in
                                                         Options.updateAudioFeedbackStatus(isOn: newState)
                                                 }
                                         if context.isRunningOnPhone {
@@ -72,7 +72,7 @@ struct SettingsView: View {
                                                         .pickerStyle(.segmented)
                                                         .labelsHidden()
                                                         .fixedSize()
-                                                        .onChange(of: hapticFeedback) { newMode in
+                                                        .onChange(of: hapticFeedback) { _, newMode in
                                                                 AudioFeedback.modified()
                                                                 context.triggerSelectionHapticFeedback()
                                                                 context.updateHapticFeedbackMode(to: newMode)
@@ -89,30 +89,30 @@ struct SettingsView: View {
                                 Section {
                                         if context.isRunningOnPhone {
                                                 Toggle("SettingsView.NumericLayout.ToggleTitle", isOn: $useKeyPadNumericLayout)
-                                                        .onChange(of: useKeyPadNumericLayout) { isOn in
+                                                        .onChange(of: useKeyPadNumericLayout) { _, isOn in
                                                                 AudioFeedback.modified()
                                                                 let newLayout: NumericLayout = isOn ? .dedicated : .default
                                                                 context.updateNumericLayout(to: newLayout)
                                                         }
                                                 Toggle("SettingsView.StrokeLayout.ToggleTitle", isOn: $useDedicatedStrokeLayout)
-                                                        .onChange(of: useDedicatedStrokeLayout) { isOn in
+                                                        .onChange(of: useDedicatedStrokeLayout) { _, isOn in
                                                                 AudioFeedback.modified()
                                                                 let newLayout: StrokeLayout = isOn ? .dedicated : .default
                                                                 context.updateStrokeLayout(to: newLayout)
                                                         }
                                                 Toggle("SettingsView.NumberRow.ToggleTitle", isOn: $needsNumberRow)
-                                                        .onChange(of: needsNumberRow) { isOn in
+                                                        .onChange(of: needsNumberRow) { _, isOn in
                                                                 AudioFeedback.modified()
                                                                 context.updateNumberRowState(to: isOn)
                                                         }
                                         }
                                         Toggle("SettingsView.ShowLowercaseKeys.ToggleTitle", isOn: $showLowercaseKeys)
-                                                .onChange(of: showLowercaseKeys) { newState in
+                                                .onChange(of: showLowercaseKeys) { _, newState in
                                                         AudioFeedback.modified()
                                                         Options.updateShowLowercaseKeys(to: newState)
                                                 }
                                         Toggle("SettingsView.KeyTextPreview.ToggleTitle", isOn: $keyTextPreview)
-                                                .onChange(of: keyTextPreview) { newState in
+                                                .onChange(of: keyTextPreview) { _, newState in
                                                         AudioFeedback.modified()
                                                         Options.updateKeyTextPreview(to: newState)
                                                 }
@@ -152,7 +152,7 @@ struct SettingsView: View {
                                                         .pickerStyle(.segmented)
                                                         .labelsHidden()
                                                         .fixedSize()
-                                                        .onChange(of: inputKeyStyle) { newStyle in
+                                                        .onChange(of: inputKeyStyle) { _, newStyle in
                                                                 AudioFeedback.modified()
                                                                 context.triggerSelectionHapticFeedback()
                                                                 Options.updateInputKeyStyle(to: newStyle)
@@ -168,7 +168,7 @@ struct SettingsView: View {
                                                         }
                                                         .pickerStyle(.inline)
                                                         .labelsHidden()
-                                                        .onChange(of: appearanceStyle) { newOption in
+                                                        .onChange(of: appearanceStyle) { _, newOption in
                                                                 AudioFeedback.modified()
                                                                 context.triggerSelectionHapticFeedback()
                                                                 context.updateAppearanceStyle(to: newOption)
@@ -189,7 +189,7 @@ struct SettingsView: View {
                                                                 .pickerStyle(.segmented)
                                                                 .labelsHidden()
                                                                 .fixedSize()
-                                                                .onChange(of: appearanceStyle) { newOption in
+                                                                .onChange(of: appearanceStyle) { _, newOption in
                                                                         AudioFeedback.modified()
                                                                         context.triggerSelectionHapticFeedback()
                                                                         context.updateAppearanceStyle(to: newOption)
@@ -211,7 +211,7 @@ struct SettingsView: View {
                                                 .pickerStyle(.segmented)
                                                 .labelsHidden()
                                                 .fixedSize()
-                                                .onChange(of: preferredInputMode) { newMode in
+                                                .onChange(of: preferredInputMode) { _, newMode in
                                                         AudioFeedback.modified()
                                                         context.triggerSelectionHapticFeedback()
                                                         Options.updatePreferredInputMode(to: newMode)
@@ -230,7 +230,7 @@ struct SettingsView: View {
                                                 .pickerStyle(.segmented)
                                                 .labelsHidden()
                                                 .fixedSize()
-                                                .onChange(of: commentStyle) { newStyle in
+                                                .onChange(of: commentStyle) { _, newStyle in
                                                         AudioFeedback.modified()
                                                         context.triggerSelectionHapticFeedback()
                                                         Options.updateCommentStyle(to: newStyle)
@@ -247,7 +247,7 @@ struct SettingsView: View {
                                                 .pickerStyle(.segmented)
                                                 .labelsHidden()
                                                 .fixedSize()
-                                                .onChange(of: commentScene) { scene in
+                                                .onChange(of: commentScene) { _, scene in
                                                         AudioFeedback.modified()
                                                         context.triggerSelectionHapticFeedback()
                                                         Options.updateCommentScene(to: scene)
@@ -264,7 +264,7 @@ struct SettingsView: View {
                                         }
                                         .pickerStyle(.inline)
                                         .labelsHidden()
-                                        .onChange(of: commentToneStyle) { newStyle in
+                                        .onChange(of: commentToneStyle) { _, newStyle in
                                                 AudioFeedback.modified()
                                                 context.triggerSelectionHapticFeedback()
                                                 Options.updateCommentToneStyle(to: newStyle)
@@ -284,7 +284,7 @@ struct SettingsView: View {
                                         }
                                         .pickerStyle(.inline)
                                         .labelsHidden()
-                                        .onChange(of: traditionalCharacterStandard) { newStandard in
+                                        .onChange(of: traditionalCharacterStandard) { _, newStandard in
                                                 AudioFeedback.modified()
                                                 context.triggerSelectionHapticFeedback()
                                                 context.syncTraditionalCharacterStandard(to: newStandard)
@@ -306,7 +306,7 @@ struct SettingsView: View {
                                         }
                                         .pickerStyle(.inline)
                                         .labelsHidden()
-                                        .onChange(of: cangjieVariant) { newVariant in
+                                        .onChange(of: cangjieVariant) { _, newVariant in
                                                 AudioFeedback.modified()
                                                 context.triggerSelectionHapticFeedback()
                                                 Options.updateCangjieVariant(to: newVariant)
@@ -317,22 +317,22 @@ struct SettingsView: View {
 
                                 Section {
                                         Toggle("SettingsView.EmojiSuggestions.ToggleTitle", isOn: $isEmojiSuggestionsOn)
-                                                .onChange(of: isEmojiSuggestionsOn) { newState in
+                                                .onChange(of: isEmojiSuggestionsOn) { _, newState in
                                                         AudioFeedback.modified()
                                                         Options.updateEmojiSuggestions(to: newState)
                                                 }
                                         Toggle("SettingsView.EnglishSuggestions.ToggleTitle", isOn: $isEnglishSuggestionsOn)
-                                                .onChange(of: isEnglishSuggestionsOn) { newState in
+                                                .onChange(of: isEnglishSuggestionsOn) { _, newState in
                                                         AudioFeedback.modified()
                                                         Options.updateEnglishSuggestions(to: newState)
                                                 }
                                         Toggle("SettingsView.SystemLexicon.ToggleTitle", isOn: $isTextReplacementsOn)
-                                                .onChange(of: isTextReplacementsOn) { newState in
+                                                .onChange(of: isTextReplacementsOn) { _, newState in
                                                         AudioFeedback.modified()
                                                         Options.updateTextReplacementsMode(to: newState)
                                                 }
                                         Toggle("SettingsView.SchemeRules.CompatibleMode.ToggleTitle", isOn: $isCompatibleModeOn)
-                                                .onChange(of: isCompatibleModeOn) { newState in
+                                                .onChange(of: isCompatibleModeOn) { _, newState in
                                                         AudioFeedback.modified()
                                                         Options.updateCompatibleMode(to: newState)
                                                 }
@@ -350,7 +350,7 @@ struct SettingsView: View {
                                         }
                                         .pickerStyle(.menu)
                                         .textCase(nil)
-                                        .onChange(of: preferredLanguage) { newOption in
+                                        .onChange(of: preferredLanguage) { _, newOption in
                                                 AudioFeedback.modified()
                                                 context.triggerSelectionHapticFeedback()
                                                 Options.updatePreferredLanguage(to: newOption)
@@ -361,7 +361,7 @@ struct SettingsView: View {
 
                                 Section {
                                         Toggle("SettingsView.InputMemory.ToggleTitle", isOn: $isInputMemoryOn)
-                                                .onChange(of: isInputMemoryOn) { newState in
+                                                .onChange(of: isInputMemoryOn) { _, newState in
                                                         Options.updateInputMemory(to: newState)
                                                 }
 

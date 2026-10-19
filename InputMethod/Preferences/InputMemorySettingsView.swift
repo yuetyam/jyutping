@@ -22,7 +22,7 @@ struct InputMemorySettingsView: View {
                                         Section {
                                                 Toggle("InputMemorySettingsView.InputMemory.ToggleTitle", isOn: $isInputMemoryOn)
                                                         .toggleStyle(.switch)
-                                                        .onChange(of: isInputMemoryOn) { newState in
+                                                        .onChange(of: isInputMemoryOn) { _, newState in
                                                                 AppSettings.updateInputMemoryState(to: newState)
                                                         }
                                                 HStack {

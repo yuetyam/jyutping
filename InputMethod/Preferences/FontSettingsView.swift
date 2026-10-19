@@ -34,7 +34,7 @@ struct FontSettingsView: View {
                                                         }
                                                 }
                                                 .pickerStyle(.menu)
-                                                .onChange(of: candidateFontSize) { newFontSize in
+                                                .onChange(of: candidateFontSize) { _, newFontSize in
                                                         AppSettings.updateCandidateFontSize(to: newFontSize)
                                                 }
                                                 Picker("FontSettingsView.FontModePicker.Candidate", selection: $candidateFontMode) {
@@ -43,7 +43,7 @@ struct FontSettingsView: View {
                                                         Text("FontSettingsView.FontMode.Custom").tag(FontMode.custom)
                                                 }
                                                 .pickerStyle(.menu)
-                                                .onChange(of: candidateFontMode) { newMode in
+                                                .onChange(of: candidateFontMode) { _, newMode in
                                                         AppSettings.updateCandidateFontMode(to: newMode)
                                                         triggerAnimation()
                                                 }
@@ -79,7 +79,7 @@ struct FontSettingsView: View {
                                                                         .frame(width: buttonLength, height: buttonLength)
                                                         }
                                                         .buttonStyle(.plain)
-                                                        .onChange(of: customCandidateFonts) { newFontNames in
+                                                        .onChange(of: customCandidateFonts) { _, newFontNames in
                                                                 AppSettings.updateCustomCandidateFonts(to: newFontNames)
                                                         }
                                                 }
@@ -91,7 +91,7 @@ struct FontSettingsView: View {
                                                         }
                                                 }
                                                 .pickerStyle(.menu)
-                                                .onChange(of: commentFontSize) { newFontSize in
+                                                .onChange(of: commentFontSize) { _, newFontSize in
                                                         AppSettings.updateCommentFontSize(to: newFontSize)
                                                 }
                                                 Picker("FontSettingsView.FontModePicker.Comment", selection: $commentFontMode) {
@@ -100,7 +100,7 @@ struct FontSettingsView: View {
                                                         Text("FontSettingsView.FontMode.Custom").tag(FontMode.custom)
                                                 }
                                                 .pickerStyle(.menu)
-                                                .onChange(of: commentFontMode) { newMode in
+                                                .onChange(of: commentFontMode) { _, newMode in
                                                         AppSettings.updateCommentFontMode(to: newMode)
                                                         triggerAnimation()
                                                 }
@@ -136,7 +136,7 @@ struct FontSettingsView: View {
                                                                         .frame(width: buttonLength, height: buttonLength)
                                                         }
                                                         .buttonStyle(.plain)
-                                                        .onChange(of: customCommentFonts) { newFontNames in
+                                                        .onChange(of: customCommentFonts) { _, newFontNames in
                                                                 AppSettings.updateCustomCommentFonts(to: newFontNames)
                                                         }
                                                 }
@@ -148,7 +148,7 @@ struct FontSettingsView: View {
                                                         }
                                                 }
                                                 .pickerStyle(.menu)
-                                                .onChange(of: labelFontSize) { newFontSize in
+                                                .onChange(of: labelFontSize) { _, newFontSize in
                                                         AppSettings.updateLabelFontSize(to: newFontSize)
                                                 }
                                                 Picker("FontSettingsView.FontModePicker.SerialNumber", selection: $labelFontMode) {
@@ -157,7 +157,7 @@ struct FontSettingsView: View {
                                                         Text("FontSettingsView.FontMode.Custom").tag(FontMode.custom)
                                                 }
                                                 .pickerStyle(.menu)
-                                                .onChange(of: labelFontMode) { newMode in
+                                                .onChange(of: labelFontMode) { _, newMode in
                                                         AppSettings.updateLabelFontMode(to: newMode)
                                                         triggerAnimation()
                                                 }
@@ -193,7 +193,7 @@ struct FontSettingsView: View {
                                                                         .frame(width: buttonLength, height: buttonLength)
                                                         }
                                                         .buttonStyle(.plain)
-                                                        .onChange(of: customLabelFonts) { newFontNames in
+                                                        .onChange(of: customLabelFonts) { _, newFontNames in
                                                                 AppSettings.updateCustomLabelFonts(to: newFontNames)
                                                         }
                                                 }

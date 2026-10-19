@@ -71,7 +71,7 @@ struct MacSearchView: View {
                                 .onReceive(NotificationCenter.default.publisher(for: .focusSearch)) { _ in
                                         focusedField = .searchField
                                 }
-                                .onChange(of: submittedText) { newText in
+                                .onChange(of: submittedText) { _, newText in
                                         withAnimation {
                                                 proxy.scrollTo(topID)
                                         }

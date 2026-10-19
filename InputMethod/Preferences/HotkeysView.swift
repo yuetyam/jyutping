@@ -21,7 +21,7 @@ struct HotkeysView: View {
                                                 .pickerStyle(.menu)
                                                 .labelsHidden()
                                                 .fixedSize()
-                                                .onChange(of: pressShiftOnce) { newOption in
+                                                .onChange(of: pressShiftOnce) { _, newOption in
                                                         AppSettings.updatePressShiftOnce(to: newOption)
                                                 }
                                                 Spacer()
@@ -36,7 +36,7 @@ struct HotkeysView: View {
                                                 .pickerStyle(.menu)
                                                 .labelsHidden()
                                                 .fixedSize()
-                                                .onChange(of: shiftSpaceCombination) { newOption in
+                                                .onChange(of: shiftSpaceCombination) { _, newOption in
                                                         AppSettings.updateShiftSpaceCombination(to: newOption)
                                                 }
                                                 Spacer()
@@ -55,7 +55,7 @@ struct HotkeysView: View {
                                                 .pickerStyle(.menu)
                                                 .labelsHidden()
                                                 .fixedSize()
-                                                .onChange(of: bracketKeysMode) { newOption in
+                                                .onChange(of: bracketKeysMode) { _, newOption in
                                                         AppSettings.updateBracketKeysMode(to: newOption)
                                                 }
                                                 Spacer()
@@ -71,7 +71,7 @@ struct HotkeysView: View {
                                                 .pickerStyle(.menu)
                                                 .labelsHidden()
                                                 .fixedSize()
-                                                .onChange(of: commaPeriodKeysMode) { newOption in
+                                                .onChange(of: commaPeriodKeysMode) { _, newOption in
                                                         AppSettings.updateCommaPeriodKeysMode(to: newOption)
                                                 }
                                                 Spacer()
