@@ -16,7 +16,6 @@ struct SettingsView: View {
         @State private var isAudioFeedbackOn: Bool = Options.isAudioFeedbackOn
         @State private var hapticFeedback: HapticFeedback = HapticFeedback.fetchSavedMode()
         @State private var useKeyPadNumericLayout: Bool = NumericLayout.fetchSavedLayout().isDedicated
-        @State private var useDedicatedStrokeLayout: Bool = StrokeLayout.fetchSavedLayout().isDedicated
         @State private var needsNumberRow: Bool = Options.needsNumberRow
         @State private var showLowercaseKeys: Bool = Options.showLowercaseKeys
         @State private var keyTextPreview: Bool = Options.keyTextPreview
@@ -28,6 +27,7 @@ struct SettingsView: View {
         @State private var commentScene: CommentScene = Options.commentScene
         @State private var commentToneStyle: CommentToneStyle = Options.commentToneStyle
         @State private var traditionalCharacterStandard: CharacterStandard = Options.traditionalCharacterStandard
+        @State private var useDedicatedStrokeLayout: Bool = StrokeLayout.fetchSavedLayout().isDedicated
         @State private var cangjieVariant: CangjieVariant = Options.cangjieVariant
         @State private var isEmojiSuggestionsOn: Bool = Options.isEmojiSuggestionsOn
         @State private var isEnglishSuggestionsOn: Bool = Options.isEnglishSuggestionsOn
@@ -94,12 +94,6 @@ struct SettingsView: View {
                                                                 let newLayout: NumericLayout = isOn ? .dedicated : .default
                                                                 context.updateNumericLayout(to: newLayout)
                                                         }
-                                                Toggle("SettingsView.StrokeLayout.ToggleTitle", isOn: $useDedicatedStrokeLayout)
-                                                        .onChange(of: useDedicatedStrokeLayout) { _, isOn in
-                                                                AudioFeedback.modified()
-                                                                let newLayout: StrokeLayout = isOn ? .dedicated : .default
-                                                                context.updateStrokeLayout(to: newLayout)
-                                                        }
                                                 Toggle("SettingsView.NumberRow.ToggleTitle", isOn: $needsNumberRow)
                                                         .onChange(of: needsNumberRow) { _, isOn in
                                                                 AudioFeedback.modified()
@@ -159,24 +153,7 @@ struct SettingsView: View {
                                                         }
                                                 }
                                         }
-                                        if #available(iOSApplicationExtension 28.0, *) {
-                                                Section {
-                                                        Picker("SettingsView.AppearanceStyle.PickerTitle", selection: $appearanceStyle) {
-                                                                Text("SettingsView.AppearanceStyle.Option1.Clean").tag(AppearanceStyle.clean)
-                                                                Text("SettingsView.AppearanceStyle.Option2.Glass").tag(AppearanceStyle.glass)
-                                                                Text("SettingsView.AppearanceStyle.Option3.Classic").tag(AppearanceStyle.classic)
-                                                        }
-                                                        .pickerStyle(.inline)
-                                                        .labelsHidden()
-                                                        .onChange(of: appearanceStyle) { _, newOption in
-                                                                AudioFeedback.modified()
-                                                                context.triggerSelectionHapticFeedback()
-                                                                context.updateAppearanceStyle(to: newOption)
-                                                        }
-                                                } header: {
-                                                        Text("SettingsView.AppearanceStyle.PickerTitle").textCase(nil)
-                                                }
-                                        } else if #available(iOSApplicationExtension 26.0, *) {
+                                        if #available(iOSApplicationExtension 26.0, *) {
                                                 Section {
                                                         HStack(spacing: 0) {
                                                                 Text("SettingsView.AppearanceStyle.PickerTitle").minimumScaleFactor(0.4).lineLimit(1)
@@ -297,6 +274,17 @@ struct SettingsView: View {
                                 }
 
                                 Section {
+                                        Toggle("SettingsView.StrokeLayout.ToggleTitle", isOn: $useDedicatedStrokeLayout)
+                                                .onChange(of: useDedicatedStrokeLayout) { _, isOn in
+                                                        AudioFeedback.modified()
+                                                        let newLayout: StrokeLayout = isOn ? .dedicated : .default
+                                                        context.updateStrokeLayout(to: newLayout)
+                                                }
+                                } header: {
+                                        Text("SettingsView.StrokeLayout.SectionHeader").textCase(nil)
+                                }
+
+                                Section {
                                         Picker("SettingsView.CangjieVariant.PickerTitle", selection: $cangjieVariant) {
                                                 Text("SettingsView.CangjieVariant.PickerOption1").tag(CangjieVariant.cangjie5)
                                                 Text("SettingsView.CangjieVariant.PickerOption2").tag(CangjieVariant.cangjie3)
@@ -304,8 +292,9 @@ struct SettingsView: View {
                                                 Text("SettingsView.CangjieVariant.PickerOption4").tag(CangjieVariant.quick3)
 
                                         }
-                                        .pickerStyle(.inline)
+                                        .pickerStyle(.segmented)
                                         .labelsHidden()
+                                        .fixedSize()
                                         .onChange(of: cangjieVariant) { _, newVariant in
                                                 AudioFeedback.modified()
                                                 context.triggerSelectionHapticFeedback()

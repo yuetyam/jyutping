@@ -2333,112 +2333,6 @@
         }
       }
     },
-    "SettingsView.AppearanceStyle.Option2.Glass" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Glass"
-          }
-        },
-        "en-AU" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Glass"
-          }
-        },
-        "en-CA" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Glass"
-          }
-        },
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Glass"
-          }
-        },
-        "en-NZ" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Glass"
-          }
-        },
-        "en-US" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Glass"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Verre"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ガラス"
-          }
-        },
-        "yue" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "玻璃"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "玻璃"
-          }
-        },
-        "zh-Hans-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "玻璃"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "玻璃"
-          }
-        },
-        "zh-Hant-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "玻璃"
-          }
-        },
-        "zh-Hant-HK" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "玻璃"
-          }
-        },
-        "zh-Hant-MO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "玻璃"
-          }
-        },
-        "zh-Hant-TW" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "玻璃"
-          }
-        },
-        "zh-HK" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "玻璃"
-          }
-        }
-      }
-    },
     "SettingsView.AppearanceStyle.Option1.Clean" : {
       "localizations" : {
         "en" : {
@@ -2541,6 +2435,112 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "簡約"
+          }
+        }
+      }
+    },
+    "SettingsView.AppearanceStyle.Option2.Glass" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Glass"
+          }
+        },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Glass"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Glass"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Glass"
+          }
+        },
+        "en-NZ" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Glass"
+          }
+        },
+        "en-US" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Glass"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verre"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ガラス"
+          }
+        },
+        "yue" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "玻璃"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "玻璃"
+          }
+        },
+        "zh-Hans-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "玻璃"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "玻璃"
+          }
+        },
+        "zh-Hant-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "玻璃"
+          }
+        },
+        "zh-Hant-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "玻璃"
+          }
+        },
+        "zh-Hant-MO" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "玻璃"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "玻璃"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "玻璃"
           }
         }
       }
@@ -2762,43 +2762,43 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cangjie5 (倉頡五代)"
+            "value" : "Cangjie 5"
           }
         },
         "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cangjie5 (倉頡五代)"
+            "value" : "Cangjie 5"
           }
         },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cangjie5 (倉頡五代)"
+            "value" : "Cangjie 5"
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cangjie5 (倉頡五代)"
+            "value" : "Cangjie 5"
           }
         },
         "en-NZ" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cangjie5 (倉頡五代)"
+            "value" : "Cangjie 5"
           }
         },
         "en-US" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cangjie5 (倉頡五代)"
+            "value" : "Cangjie 5"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cangjie5 (倉頡五代)"
+            "value" : "Cangjie 5"
           }
         },
         "ja" : {
@@ -2868,43 +2868,43 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cangjie3 (倉頡三代)"
+            "value" : "Cangjie 3"
           }
         },
         "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cangjie3 (倉頡三代)"
+            "value" : "Cangjie 3"
           }
         },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cangjie3 (倉頡三代)"
+            "value" : "Cangjie 3"
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cangjie3 (倉頡三代)"
+            "value" : "Cangjie 3"
           }
         },
         "en-NZ" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cangjie3 (倉頡三代)"
+            "value" : "Cangjie 3"
           }
         },
         "en-US" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cangjie3 (倉頡三代)"
+            "value" : "Cangjie 3"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cangjie3 (倉頡三代)"
+            "value" : "Cangjie 3"
           }
         },
         "ja" : {
@@ -2974,43 +2974,43 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Quick5 (速成五代)"
+            "value" : "Quick 5"
           }
         },
         "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Quick5 (速成五代)"
+            "value" : "Quick 5"
           }
         },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Quick5 (速成五代)"
+            "value" : "Quick 5"
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Quick5 (速成五代)"
+            "value" : "Quick 5"
           }
         },
         "en-NZ" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Quick5 (速成五代)"
+            "value" : "Quick 5"
           }
         },
         "en-US" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Quick5 (速成五代)"
+            "value" : "Quick 5"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Quick5 (速成五代)"
+            "value" : "Quick 5"
           }
         },
         "ja" : {
@@ -3080,43 +3080,43 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Quick3 (速成三代)"
+            "value" : "Quick 3"
           }
         },
         "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Quick3 (速成三代)"
+            "value" : "Quick 3"
           }
         },
         "en-CA" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Quick3 (速成三代)"
+            "value" : "Quick 3"
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Quick3 (速成三代)"
+            "value" : "Quick 3"
           }
         },
         "en-NZ" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Quick3 (速成三代)"
+            "value" : "Quick 3"
           }
         },
         "en-US" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Quick3 (速成三代)"
+            "value" : "Quick 3"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Quick3 (速成三代)"
+            "value" : "Quick 3"
           }
         },
         "ja" : {
@@ -9751,6 +9751,112 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "鍵文字母小寫顯示"
+          }
+        }
+      }
+    },
+    "SettingsView.StrokeLayout.SectionHeader" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stroke Reverse Lookup"
+          }
+        },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stroke Reverse Lookup"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stroke Reverse Lookup"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stroke Reverse Lookup"
+          }
+        },
+        "en-NZ" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stroke Reverse Lookup"
+          }
+        },
+        "en-US" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stroke Reverse Lookup"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recherche inversée par traits"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "筆画入力による逆引き"
+          }
+        },
+        "yue" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "筆畫輸入反查粵拼"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "筆畫輸入反查粵拼"
+          }
+        },
+        "zh-Hans-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "筆畫輸入反查粵拼"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "筆畫輸入反查粵拼"
+          }
+        },
+        "zh-Hant-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "筆畫輸入反查粵拼"
+          }
+        },
+        "zh-Hant-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "筆畫輸入反查粵拼"
+          }
+        },
+        "zh-Hant-MO" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "筆畫輸入反查粵拼"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "筆畫輸入反查粵拼"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "筆畫輸入反查粵拼"
           }
         }
       }
