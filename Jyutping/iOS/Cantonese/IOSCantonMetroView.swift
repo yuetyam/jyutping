@@ -16,7 +16,7 @@ struct IOSCantonMetroView: View {
                                 }
                         }
                 }
-                .listSectionSpacing(12)
+                .listSectionSpacing(.compact)
                 .animation(.default, value: expanded)
                 .task {
                         guard lines.isEmpty else { return }

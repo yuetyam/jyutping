@@ -465,6 +465,7 @@ struct SettingsView: View {
                                         }
                                 }
                         }
+                        .listSectionSpacing(.compact)
                         .scrollContentBackground(.hidden)
                         .background(Color.interactiveClear)
                 }
