@@ -422,7 +422,7 @@
         "SWIFT_APPROACHABLE_CONCURRENCY": "YES",
         "SWIFT_EMIT_LOC_STRINGS": "NO",
         "SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY": "YES",
-        "SWIFT_VERSION": "5.0",
+        "SWIFT_VERSION": "6.0",
         "TEST_HOST": "$(BUILT_PRODUCTS_DIR)/InputMethod.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/InputMethod",
       },
     }, {
@@ -453,7 +453,7 @@
         "SWIFT_APPROACHABLE_CONCURRENCY": "YES",
         "SWIFT_EMIT_LOC_STRINGS": "NO",
         "SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY": "YES",
-        "SWIFT_VERSION": "5.0",
+        "SWIFT_VERSION": "6.0",
         "TEST_TARGET_NAME": "InputMethod",
       },
     },
