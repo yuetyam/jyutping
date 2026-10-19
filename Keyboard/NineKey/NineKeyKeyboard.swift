@@ -58,29 +58,29 @@ private struct GlassNineKeyCoreKeyboard: View {
                                         HStack(spacing: 0) {
                                                 GlassTailoredNavigateKey(destination: context.preferredNumericForm)
                                                 GlassTailoredGlobeKey()
-                                                TailoredSpaceKey()
+                                                GlassTailoredSpaceKey()
                                         }
                                 case (true, false):
                                         HStack(spacing: 0) {
                                                 GlassTailoredNavigateKey(destination: context.preferredNumericForm)
-                                                TailoredSpaceKey()
+                                                GlassTailoredSpaceKey()
                                         }
                                 case (false, true) where context.keyboardInterface.isPadFloating:
                                         HStack(spacing: 0) {
                                                 GlassTailoredGlobeKey()
                                                 GlassTailoredNavigateKey(destination: context.preferredNumericForm)
-                                                TailoredSpaceKey()
+                                                GlassTailoredSpaceKey()
                                         }
                                 case (false, true):
                                         HStack(spacing: 0) {
                                                 GlassTailoredGlobeKey()
                                                 GlassTailoredNavigateKey(destination: context.preferredNumericForm)
-                                                TailoredSpaceKey()
+                                                GlassTailoredSpaceKey()
                                         }
                                 case (false, false):
                                         HStack(spacing: 0) {
                                                 GlassTailoredNavigateKey(destination: context.preferredNumericForm)
-                                                TailoredSpaceKey()
+                                                GlassTailoredSpaceKey()
                                         }
                                 }
                         }

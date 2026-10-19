@@ -40,7 +40,7 @@ struct TailoredGlassStrokeReverseLookupKeyboard: View {
                                         }
                                         HStack(spacing: 0) {
                                                 PlaceholderView(widthCoefficient: PresetConstant.tailoredActionKeyWidthCoefficient).disabled(true)
-                                                TailoredSpaceKey()
+                                                GlassTailoredSpaceKey()
                                         }
                                 }
                                 VStack(spacing: 0) {

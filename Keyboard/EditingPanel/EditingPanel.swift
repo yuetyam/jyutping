@@ -30,7 +30,7 @@ struct GlassEditingPanel: View {
                                         EditingPanelGlassJump2TailKey().frame(maxWidth: .infinity)
                                 }
                                 .frame(maxHeight: .infinity)
-                                EditingPanelSpaceKey().frame(maxWidth: .infinity, maxHeight: .infinity)
+                                EditingPanelGlassSpaceKey().frame(maxWidth: .infinity, maxHeight: .infinity)
                         }
                         .frame(maxWidth: .infinity)
                         VStack(spacing: 0) {
