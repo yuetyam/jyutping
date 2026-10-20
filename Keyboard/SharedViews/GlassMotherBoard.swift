@@ -109,7 +109,7 @@ struct GlassMotherBoard: View {
                                         case .primary:
                                                 switch context.keyboardLayout {
                                                 case .tripleStroke: PadTripleStrokeKeyboard()
-                                                case .nineKey: NineKeyKeyboard()
+                                                case .nineKey: GlassNineKeyKeyboard()
                                                 default: PadCantoneseKeyboard()
                                                 }
                                         }
@@ -121,7 +121,7 @@ struct GlassMotherBoard: View {
                                         case .primary:
                                                 switch context.keyboardLayout {
                                                 case .tripleStroke: MediumPadTripleStrokeKeyboard()
-                                                case .nineKey: NineKeyKeyboard()
+                                                case .nineKey: GlassNineKeyKeyboard()
                                                 default: MediumPadCantoneseKeyboard()
                                                 }
                                         }
@@ -133,7 +133,7 @@ struct GlassMotherBoard: View {
                                         case .primary:
                                                 switch context.keyboardLayout {
                                                 case .tripleStroke: LargePadTripleStrokeKeyboard()
-                                                case .nineKey: NineKeyKeyboard()
+                                                case .nineKey: GlassNineKeyKeyboard()
                                                 default: LargePadCantoneseKeyboard()
                                                 }
                                         }
@@ -146,7 +146,7 @@ struct GlassMotherBoard: View {
                                                 switch context.keyboardLayout {
                                                 case .qwerty      : GlassCantoneseKeyboard()
                                                 case .tripleStroke: GlassTripleStrokeKeyboard()
-                                                case .nineKey     : NineKeyKeyboard()
+                                                case .nineKey     : GlassNineKeyKeyboard()
                                                 case .fourteenKey : GlassT14Keyboard()
                                                 case .fifteenKey  : GlassT15Keyboard()
                                                 case .eighteenKey : GlassT18Keyboard()

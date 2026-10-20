@@ -1,7 +1,7 @@
 import SwiftUI
 import CommonExtensions
 
-struct TailoredReturnKey: View {
+struct TailoredEnterKey: View {
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme

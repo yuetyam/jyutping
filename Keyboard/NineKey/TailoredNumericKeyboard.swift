@@ -98,7 +98,7 @@ struct TailoredNumericKeyboard: View {
                                 VStack(spacing: 0) {
                                         TailoredBackspaceKey()
                                         TailoredNavigateKey(destination: .numeric)
-                                        TailoredReturnKey()
+                                        TailoredEnterKey()
                                 }
                         }
                 }
