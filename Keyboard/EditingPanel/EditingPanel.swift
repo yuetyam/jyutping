@@ -37,7 +37,7 @@ struct GlassEditingPanel: View {
                                 EditingPanelGlassBackKey().frame(maxHeight: .infinity)
                                 EditingPanelGlassBackspaceKey().frame(maxHeight: .infinity)
                                 EditingPanelGlassForwardDeleteKey().frame(maxHeight: .infinity)
-                                EditingPanelReturnKey().frame(maxHeight: .infinity)
+                                EditingPanelGlassEnterKey().frame(maxHeight: .infinity)
                         }
                         .frame(width: edgeKeyWidth)
                 }
@@ -76,14 +76,10 @@ struct EditingPanel: View {
                         }
                         .frame(maxWidth: .infinity)
                         VStack(spacing: 0) {
-                                if #available(iOSApplicationExtension 26.0, *) {
-                                        EditingPanelGlassBackKey().frame(maxHeight: .infinity)
-                                } else {
-                                        EditingPanelBackKey().frame(maxHeight: .infinity)
-                                }
+                                EditingPanelBackKey().frame(maxHeight: .infinity)
                                 EditingPanelBackspaceKey().frame(maxHeight: .infinity)
                                 EditingPanelForwardDeleteKey().frame(maxHeight: .infinity)
-                                EditingPanelReturnKey().frame(maxHeight: .infinity)
+                                EditingPanelEnterKey().frame(maxHeight: .infinity)
                         }
                         .frame(width: edgeKeyWidth)
                 }
