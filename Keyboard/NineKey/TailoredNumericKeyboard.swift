@@ -47,7 +47,7 @@ struct GlassTailoredNumericKeyboard: View {
                                 VStack(spacing: 0) {
                                         GlassTailoredBackspaceKey()
                                         GlassTailoredNavigateKey(destination: .numeric)
-                                        TailoredReturnKey()
+                                        GlassTailoredEnterKey()
                                 }
                         }
                 }

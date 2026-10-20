@@ -87,7 +87,7 @@ private struct GlassNineKeyCoreKeyboard: View {
                         VStack(spacing: 0) {
                                 GlassTailoredBackspaceKey()
                                 GlassTailoredNavigateKey(destination: context.preferredNumericForm.isDedicatedNumbers ? .numeric : .symbolic)
-                                TailoredReturnKey()
+                                GlassTailoredEnterKey()
                         }
                 }
         }

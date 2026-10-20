@@ -46,7 +46,7 @@ struct TailoredGlassStrokeReverseLookupKeyboard: View {
                                 VStack(spacing: 0) {
                                         GlassTailoredBackspaceKey()
                                         PlaceholderView(widthCoefficient: PresetConstant.tailoredActionKeyWidthCoefficient).disabled(true)
-                                        TailoredReturnKey()
+                                        GlassTailoredEnterKey()
                                 }
                         }
                 }

@@ -8,17 +8,10 @@ struct TailoredReturnKey: View {
         @State private var isTouching: Bool = false
 
         var body: some View {
+                let keyWidth: CGFloat = context.nineKeyWidthUnit * PresetConstant.tailoredActionKeyWidthCoefficient
+                let keyHeight: CGFloat = context.heightUnit * 2
                 let isDefaultReturn: Bool = context.returnKeyType.isDefaultReturn
                 let keyState: ReturnKeyState = context.returnKeyState
-                let glassBackColor: Color = {
-                        guard isTouching.negative else { return Color.clear }
-                        switch keyState {
-                        case .standbyABC, .standbyMutilated, .standbyTraditional:
-                                return isDefaultReturn ? Color.clear : Color.accentColor
-                        default:
-                                return Color.clear
-                        }
-                }()
                 let backColor: Color = {
                         guard isTouching.negative else { return colorScheme.activeActionKeyColor }
                         switch keyState {
@@ -44,19 +37,11 @@ struct TailoredReturnKey: View {
                 Button(action: {}) {
                         ZStack {
                                 Color.interactiveClear
-                                if #available(iOSApplicationExtension 26.0, *) {
-                                        glassBackColor
-                                                .clipShape(.rect(cornerRadius: PresetConstant.largeKeyCornerRadius))
-                                                .glassEffect(isTouching ? .regular : .clear, in: .rect(cornerRadius: PresetConstant.largeKeyCornerRadius))
-                                                .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
-                                                .padding(isTouching ? 1 : 3)
-                                } else {
-                                        RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius)
-                                                .fill(backColor)
-                                                .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                                .padding(isTouching ? 1 : 3)
-                                }
-                                switch (context.returnKeyState.isBuffering, isDefaultReturn) {
+                                RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius)
+                                        .fill(backColor)
+                                        .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
+                                        .padding(isTouching ? 1 : 3)
+                                switch (keyState.isBuffering, isDefaultReturn) {
                                 case (true, _):
                                         Text(context.returnKeyText)
                                                 .font(.staticBody)
@@ -87,7 +72,7 @@ struct TailoredReturnKey: View {
                                         .foregroundStyle(foreColor)
                                 }
                         }
-                        .frame(width: context.nineKeyWidthUnit * PresetConstant.tailoredActionKeyWidthCoefficient, height: context.heightUnit * 2)
+                        .frame(width: keyWidth, height: keyHeight)
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
                         AudioFeedback.modified()
