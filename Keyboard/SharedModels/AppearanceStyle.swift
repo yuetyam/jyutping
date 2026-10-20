@@ -51,7 +51,7 @@ extension AppearanceStyle {
         /// Resolves a saved raw value, falling back to `.clean` for an unrecognized value.
         /// - Parameter value: The integer identifying a style in saved preferences.
         /// - Returns: The matching style, or `.clean` if the value is not defined.
-        static func style(of value: Int) -> AppearanceStyle {
+        private static func style(of value: Int) -> AppearanceStyle {
                 return allCases.first(where: { $0.rawValue == value }) ?? .clean
         }
 

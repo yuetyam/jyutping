@@ -13,16 +13,6 @@ struct Options {
                 UserDefaults.standard.set(value, forKey: UserSettingsKey.AudioFeedback)
         }
 
-        nonisolated(unsafe) private(set) static var preferredInputMode: PreferredInputMode = {
-                let savedValue: Int = UserDefaults.standard.integer(forKey: UserSettingsKey.PreferredInputMethodMode)
-                return PreferredInputMode.mode(of: savedValue)
-        }()
-        static func updatePreferredInputMode(to mode: PreferredInputMode) {
-                preferredInputMode = mode
-                let value: Int = mode.rawValue
-                UserDefaults.standard.set(value, forKey: UserSettingsKey.PreferredInputMethodMode)
-        }
-
         nonisolated(unsafe) private(set) static var needsNumberRow: Bool = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: UserSettingsKey.NumberRow)
                 return savedValue == 1
@@ -178,18 +168,6 @@ struct Options {
                 isInputMemoryOn = isOn
                 let value: Int = isOn ? 1 : 2
                 UserDefaults.standard.set(value, forKey: UserSettingsKey.UserLexiconInputMemory)
-        }
-}
-
-enum PreferredInputMode: Int, CaseIterable {
-
-        // case auto = 0
-        case cantonese = 1
-        case abc = 2
-        case previous = 3
-
-        static func mode(of value: Int) -> PreferredInputMode {
-                return allCases.first(where: { $0.rawValue == value }) ?? .cantonese
         }
 }
 

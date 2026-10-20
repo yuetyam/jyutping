@@ -1132,24 +1132,20 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 updateKeyboardForm(to: .detailInspecting)
         }
 
-        @Published private(set) var inputMethodMode: InputMethodMode = {
-                switch Options.preferredInputMode {
-                case .cantonese: return .cantonese
-                case .abc: return .abc
-                case .previous:
-                        let savedValue = UserDefaults.standard.integer(forKey: UserSettingsKey.LatestInputMethodMode)
-                        return InputMethodMode.mode(of: savedValue)
-                }
-        }()
+        @Published private(set) var inputMethodMode: InputMethodMode = switch PreferredInputMode.saved {
+        case .cantonese: .cantonese
+        case .abc: .abc
+        case .previous: InputMethodMode.fetchSavedLatestInputMode()
+        }
         func toggleInputMethodMode() {
                 if inputMethodMode.isCantonese && inputStage.isBuffering {
                         inputBufferText()
                 }
-                inputMethodMode = inputMethodMode.isABC ? .cantonese : .abc
+                let newMode: InputMethodMode = inputMethodMode.isABC ? .cantonese : .abc
+                inputMethodMode = newMode
                 updateSpaceKeyForm()
                 refreshEnterKey()
-                let value: Int = inputMethodMode.rawValue
-                UserDefaults.standard.set(value, forKey: UserSettingsKey.LatestInputMethodMode)
+                InputMethodMode.saveLatestInputMode(mode: newMode)
         }
 
         private lazy var sequencedKeyboardForms: [KeyboardForm] = []

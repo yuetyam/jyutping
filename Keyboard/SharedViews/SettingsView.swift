@@ -22,7 +22,7 @@ struct SettingsView: View {
         @State private var keyHeightOffset: CGFloat = Options.fetchKeyHeightOffset()
         @State private var inputKeyStyle: InputKeyStyle = Options.inputKeyStyle
         @State private var appearanceStyle: AppearanceStyle = AppearanceStyle.fetchSavedStyle()
-        @State private var preferredInputMode: PreferredInputMode = Options.preferredInputMode
+        @State private var preferredInputMode: PreferredInputMode = PreferredInputMode.saved
         @State private var commentStyle: CommentStyle = Options.commentStyle
         @State private var commentScene: CommentScene = Options.commentScene
         @State private var commentToneStyle: CommentToneStyle = Options.commentToneStyle
@@ -191,7 +191,7 @@ struct SettingsView: View {
                                                 .onChange(of: preferredInputMode) { _, newMode in
                                                         AudioFeedback.modified()
                                                         context.triggerSelectionHapticFeedback()
-                                                        Options.updatePreferredInputMode(to: newMode)
+                                                        PreferredInputMode.updateSaved(mode: newMode)
                                                 }
                                         }
                                 }

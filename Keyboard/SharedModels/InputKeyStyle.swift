@@ -33,7 +33,7 @@ extension InputKeyStyle {
         /// Resolves a saved raw value, falling back to `.clear` for an unrecognized value.
         /// - Parameter value: The integer identifying a style in saved preferences.
         /// - Returns: The matching style, or `.clear` if the value is not defined.
-        static func style(of value: Int) -> InputKeyStyle {
+        private static func style(of value: Int) -> InputKeyStyle {
                 return allCases.first(where: { $0.rawValue == value }) ?? .clear
         }
 
