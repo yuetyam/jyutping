@@ -1,51 +1,7 @@
 import SwiftUI
 import CommonExtensions
 
-enum ReturnKeyState: Int {
-
-        case bufferingMutilated
-        case bufferingTraditional
-        case standbyABC
-        case standbyMutilated
-        case standbyTraditional
-        case unavailableABC
-        case unavailableMutilated
-        case unavailableTraditional
-
-        var isAvailable: Bool {
-                switch self {
-                case .unavailableABC, .unavailableMutilated, .unavailableTraditional:
-                        return false
-                default:
-                        return true
-                }
-        }
-
-        var isBuffering: Bool {
-                switch self {
-                case .bufferingMutilated, .bufferingTraditional:
-                        return true
-                default:
-                        return false
-                }
-        }
-
-        static func state(isAvailable: Bool, isABC: Bool, isMutilated: Bool, isBuffering: Bool) -> ReturnKeyState {
-                guard isBuffering.negative else {
-                        return isMutilated ? .bufferingMutilated : .bufferingTraditional
-                }
-                guard isABC.negative else {
-                        return isAvailable ? .standbyABC : .unavailableABC
-                }
-                guard isMutilated.negative else {
-                        return isAvailable ? .standbyMutilated : .unavailableMutilated
-                }
-                return isAvailable ? .standbyTraditional : .unavailableTraditional
-        }
-}
-
-enum EnhancedReturnKeyType: Int {
-
+enum EnterKeyType: Int {
         case `continue`
         case `default`
         case done
@@ -60,19 +16,21 @@ enum EnhancedReturnKeyType: Int {
         case unknown
         case unspecified
         case yahoo
+}
 
+extension EnterKeyType {
         var isDefaultReturn: Bool {
                 switch self {
-                case .default, .unknown, .unspecified:
-                        return true
-                default:
-                        return false
+                case .default,
+                .unknown,
+                .unspecified: true
+                default: false
                 }
         }
 }
 
 extension Optional where Wrapped == UIReturnKeyType {
-        var enhancedReturnKeyType: EnhancedReturnKeyType {
+        var enterKeyType: EnterKeyType {
                 guard let type = self else { return .unspecified }
                 switch type {
                 case .continue:
@@ -105,9 +63,8 @@ extension Optional where Wrapped == UIReturnKeyType {
         }
 }
 
-extension EnhancedReturnKeyType {
-
-        func attributedText(of state: ReturnKeyState) -> AttributedString {
+extension EnterKeyType {
+        func attributedText(of state: EnterKeyState) -> AttributedString {
                 let language: LanguageAttribute = {
                         switch state {
                         case .standbyABC, .unavailableABC:
@@ -120,28 +77,28 @@ extension EnhancedReturnKeyType {
                 }()
                 return text(of: state).languageAttributed(for: language)
         }
-        func text(of state: ReturnKeyState) -> String {
+        func text(of state: EnterKeyState) -> String {
                 switch state {
                 case .bufferingMutilated:
                         return Self.confirmMutilated
                 case .bufferingTraditional:
-                        return Self.confirm
+                        return Self.confirmTraditional
                 case .standbyABC, .unavailableABC:
-                        return Self.abcMap[self] ?? Self.returnABC
+                        return Self.abcMap[self] ?? Self.defaultABC
                 case .standbyMutilated, .unavailableMutilated:
-                        return Self.mutilatedMap[self] ?? Self.returnMutilated
+                        return Self.mutilatedMap[self] ?? Self.defaultMutilated
                 case .standbyTraditional, .unavailableTraditional:
-                        return Self.traditionalMap[self] ?? Self.returnTraditional
+                        return Self.traditionalMap[self] ?? Self.defaultTraditional
                 }
         }
 
-        private static let confirm          : String = "確認"
-        private static let confirmMutilated : String = "确认"
-        private static let returnABC        : String = "return"
-        private static let returnTraditional: String = "換行"
-        private static let returnMutilated  : String = "换行"
+        private static let confirmTraditional: String = "確認"
+        private static let confirmMutilated  : String = "确认"
+        private static let defaultABC        : String = "return"
+        private static let defaultTraditional: String = "換行"
+        private static let defaultMutilated  : String = "换行"
 
-        private static let abcMap: [EnhancedReturnKeyType: String] = [
+        private static let abcMap: [EnterKeyType: String] = [
                 .continue     : "continue",
                 .default      : "return",
                 .done         : "done",
@@ -157,7 +114,7 @@ extension EnhancedReturnKeyType {
                 .unspecified  : "return",
                 .yahoo        : "yahoo"
         ]
-        private static let mutilatedMap: [EnhancedReturnKeyType: String] = [
+        private static let mutilatedMap: [EnterKeyType: String] = [
                 .continue     : "继续",
                 .default      : "换行",
                 .done         : "完成",
@@ -173,7 +130,7 @@ extension EnhancedReturnKeyType {
                 .unspecified  : "换行",
                 .yahoo        : "雅虎"
         ]
-        private static let traditionalMap: [EnhancedReturnKeyType: String] = [
+        private static let traditionalMap: [EnterKeyType: String] = [
                 .continue     : "繼續",
                 .default      : "換行",
                 .done         : "完成",

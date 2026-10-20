@@ -56,7 +56,7 @@ struct CangjieKeyboard: View {
                         HStack(spacing: 0) {
                                 TransformKey(destination: context.preferredNumericForm, coefficient: 2)
                                 SpaceKey()
-                                ReturnKey()
+                                EnterReturnKey()
                         }
                 }
         }

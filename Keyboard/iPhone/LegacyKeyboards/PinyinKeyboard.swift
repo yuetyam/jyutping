@@ -53,7 +53,7 @@ struct PinyinKeyboard: View {
                                 LeftKey()
                                 SpaceKey()
                                 RightKey()
-                                ReturnKey()
+                                EnterReturnKey()
                         }
                 }
         }

@@ -16,8 +16,8 @@ struct LargePadReturnKey: View {
                 let isLandscape: Bool = context.keyboardInterface.isPadLandscape
                 let verticalPadding: CGFloat = isLandscape ? 5 : 4
                 let horizontalPadding: CGFloat = isLandscape ? 5 : 4
-                let isDefaultReturn: Bool = context.returnKeyType.isDefaultReturn
-                let keyState: ReturnKeyState = context.returnKeyState
+                let isDefaultReturn: Bool = context.enterKeyType.isDefaultReturn
+                let keyState: EnterKeyState = context.enterKeyState
                 let backColor: Color = {
                         guard isTouching.negative else { return colorScheme.activeActionKeyColor }
                         switch keyState {
@@ -52,7 +52,7 @@ struct LargePadReturnKey: View {
                                 case (true, _):
                                         ZStack(alignment: .bottomTrailing) {
                                                 Color.clear
-                                                Text(context.returnKeyText).foregroundStyle(foreColor)
+                                                Text(context.enterKeyText).foregroundStyle(foreColor)
                                         }
                                         .padding(.vertical, verticalPadding + 7)
                                         .padding(.horizontal, horizontalPadding + 7)
@@ -66,13 +66,13 @@ struct LargePadReturnKey: View {
                                 default:
                                         ZStack(alignment: .bottomTrailing) {
                                                 Color.clear
-                                                Text(context.returnKeyText).foregroundStyle(foreColor)
+                                                Text(context.enterKeyText).foregroundStyle(foreColor)
                                         }
                                         .padding(.vertical, verticalPadding + 7)
                                         .padding(.horizontal, horizontalPadding + 7)
                                         ZStack(alignment: .topTrailing) {
                                                 Color.clear
-                                                switch context.returnKeyType {
+                                                switch context.enterKeyType {
                                                 case .continue, .next:
                                                         Image.chevronForward.foregroundStyle(foreColor)
                                                 case .done:

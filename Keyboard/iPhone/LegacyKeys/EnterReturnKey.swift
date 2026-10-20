@@ -1,14 +1,12 @@
 import SwiftUI
 import CommonExtensions
 
-struct ReturnKey: View {
+struct EnterReturnKey: View {
 
         init(coefficient: CGFloat = 2) {
                 self.coefficient = coefficient
         }
-
         private let coefficient: CGFloat
-
 
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
@@ -18,8 +16,8 @@ struct ReturnKey: View {
                 let keyWidth: CGFloat = context.widthUnit * coefficient
                 let keyHeight: CGFloat = context.heightUnit
                 let insets = context.keyboardInterface.keyShapeInsets
-                let isDefaultReturn: Bool = context.returnKeyType.isDefaultReturn
-                let keyState: ReturnKeyState = context.returnKeyState
+                let isDefaultReturn: Bool = context.enterKeyType.isDefaultReturn
+                let keyState: EnterKeyState = context.enterKeyState
                 let backColor: Color = {
                         guard isTouching.negative else { return colorScheme.activeActionKeyColor }
                         switch keyState {
@@ -51,16 +49,16 @@ struct ReturnKey: View {
                                         .padding(insets)
                                 switch (keyState.isBuffering, isDefaultReturn) {
                                 case (true, _):
-                                        Text(context.returnKeyText).font(.staticBody)
+                                        Text(context.enterKeyText).font(.staticBody)
                                 case (false, true):
                                         Image.return
                                 default:
                                         ZStack(alignment: .bottomTrailing) {
                                                 Color.clear
-                                                Text(context.returnKeyText).font(.labelCaption)
+                                                Text(context.enterKeyText).font(.labelCaption)
                                         }
                                         .padding(insets.plused(1))
-                                        switch context.returnKeyType {
+                                        switch context.enterKeyType {
                                         case .continue, .next:
                                                 Image.chevronForward
                                         case .done:

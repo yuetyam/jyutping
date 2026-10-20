@@ -184,7 +184,7 @@ struct CantoneseNumericKeyboard: View {
                                         SharedBottomKeys.cantoneseComma
                                         SpaceKey()
                                         SharedBottomKeys.cantonesePeriod
-                                        ReturnKey()
+                                        EnterReturnKey()
                                 }
                         case (true, false):
                                 HStack(spacing: 0) {
@@ -192,7 +192,7 @@ struct CantoneseNumericKeyboard: View {
                                         SharedBottomKeys.cantoneseComma
                                         SpaceKey()
                                         SharedBottomKeys.cantonesePeriod
-                                        ReturnKey()
+                                        EnterReturnKey()
                                 }
                         case (false, true):
                                 HStack(spacing: 0) {
@@ -201,7 +201,7 @@ struct CantoneseNumericKeyboard: View {
                                         SharedBottomKeys.cantoneseComma
                                         SpaceKey()
                                         SharedBottomKeys.cantonesePeriod
-                                        ReturnKey()
+                                        EnterReturnKey()
                                 }
                         case (false, false):
                                 HStack(spacing: 0) {
@@ -209,7 +209,7 @@ struct CantoneseNumericKeyboard: View {
                                         SharedBottomKeys.cantoneseComma
                                         SpaceKey()
                                         SharedBottomKeys.cantonesePeriod
-                                        ReturnKey()
+                                        EnterReturnKey()
                                 }
                         }
                 }

@@ -96,7 +96,7 @@ struct NumericKeyboard: View {
                                         SharedBottomKeys.comma
                                         SpaceKey()
                                         SharedBottomKeys.period
-                                        ReturnKey()
+                                        EnterReturnKey()
                                 }
                         case (true, false):
                                 HStack(spacing: 0) {
@@ -104,7 +104,7 @@ struct NumericKeyboard: View {
                                         SharedBottomKeys.comma
                                         SpaceKey()
                                         SharedBottomKeys.period
-                                        ReturnKey()
+                                        EnterReturnKey()
                                 }
                         case (false, true):
                                 HStack(spacing: 0) {
@@ -113,7 +113,7 @@ struct NumericKeyboard: View {
                                         SharedBottomKeys.comma
                                         SpaceKey()
                                         SharedBottomKeys.period
-                                        ReturnKey()
+                                        EnterReturnKey()
                                 }
                         case (false, false):
                                 HStack(spacing: 0) {
@@ -121,7 +121,7 @@ struct NumericKeyboard: View {
                                         SharedBottomKeys.comma
                                         SpaceKey()
                                         SharedBottomKeys.period
-                                        ReturnKey()
+                                        EnterReturnKey()
                                 }
                         }
                 }

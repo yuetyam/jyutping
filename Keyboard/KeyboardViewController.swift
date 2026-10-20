@@ -100,7 +100,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 didSet {
                         guard oldValue.isNotNil else { return }
                         guard hasText != oldValue else { return }
-                        updateReturnKey()
+                        refreshEnterKey()
                 }
         }
 
@@ -203,7 +203,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 inputStage = .standby
                         case (true, false):
                                 inputStage = .starting
-                                updateReturnKey()
+                                refreshEnterKey()
                         case (false, false):
                                 inputStage = .ongoing
                         case (false, true):
@@ -215,7 +215,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                         updateKeyboardForm(to: .primary)
                                 }
                                 ensureCompositionType(to: .primary)
-                                updateReturnKey()
+                                refreshEnterKey()
                                 if Options.isInputMemoryOn && selectedLexicons.isNotEmpty {
                                         let concatenated = selectedLexicons.filter(\.isCantonese).joined()
                                         concatenated.flatMap(InputMemory.handle(_:))
@@ -347,7 +347,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 inputStage = .standby
                         case (true, false):
                                 inputStage = .starting
-                                updateReturnKey()
+                                refreshEnterKey()
                         case (false, false):
                                 inputStage = .ongoing
                                 if bufferCombos.count == (oldValue.count - 1) {
@@ -364,7 +364,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 candidates = []
                                 text2mark = String.empty
                                 clearSidebarSyllables()
-                                updateReturnKey()
+                                refreshEnterKey()
                         }
                         switch bufferCombos.first {
                         case .none:
@@ -476,7 +476,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 aftercareSelected(candidate)
                         } else {
                                 inputBufferText()
-                                updateReturnKey()
+                                refreshEnterKey()
                         }
                 case .doubleSpace:
                         if inputStage.isBuffering {
@@ -485,7 +485,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                         aftercareSelected(candidate)
                                 } else {
                                         inputBufferText()
-                                        updateReturnKey()
+                                        refreshEnterKey()
                                 }
                         } else {
                                 // TODO: Double-space shortcut
@@ -525,7 +525,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 aftercareSelected(candidate)
                         } else if inputStage.isBuffering {
                                 inputBufferText()
-                                updateReturnKey()
+                                refreshEnterKey()
                         } else {
                                 textDocumentProxy.insertText(String.newLine)
                         }
@@ -1147,7 +1147,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 }
                 inputMethodMode = inputMethodMode.isABC ? .cantonese : .abc
                 updateSpaceKeyForm()
-                updateReturnKey()
+                refreshEnterKey()
                 let value: Int = inputMethodMode.rawValue
                 UserDefaults.standard.set(value, forKey: UserSettingsKey.LatestInputMethodMode)
         }
@@ -1169,7 +1169,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 }
                 sequencedKeyboardForms.append(keyboardForm)
                 keyboardForm = form
-                updateReturnKey()
+                refreshEnterKey()
                 updateSpaceKeyForm()
                 if isKeyboardHeightExpanded {
                         toggleKeyboardHeight()
@@ -1198,22 +1198,22 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 updateSpaceKeyForm()
         }
 
-        @Published private(set) var returnKeyType: EnhancedReturnKeyType = .default
-        @Published private(set) var returnKeyState: ReturnKeyState = .standbyTraditional
-        @Published private(set) var returnKeyText: AttributedString = EnhancedReturnKeyType.default.attributedText(of: .standbyTraditional)
-        private func updateReturnKey() {
-                let newType: EnhancedReturnKeyType = textDocumentProxy.returnKeyType.enhancedReturnKeyType
+        @Published private(set) var enterKeyType: EnterKeyType = .default
+        @Published private(set) var enterKeyState: EnterKeyState = .standbyTraditional
+        @Published private(set) var enterKeyText: AttributedString = EnterKeyType.default.attributedText(of: .standbyTraditional)
+        private func refreshEnterKey() {
+                let newType: EnterKeyType = textDocumentProxy.returnKeyType.enterKeyType
                 let enablesReturnKeyAutomatically: Bool = textDocumentProxy.enablesReturnKeyAutomatically ?? false
                 let isAvailable: Bool = enablesReturnKeyAutomatically.negative || textDocumentProxy.hasText
-                let newState: ReturnKeyState = ReturnKeyState.state(isAvailable: isAvailable, isABC: inputMethodMode.isABC, isMutilated: characterStandard.isMutilated, isBuffering: inputStage.isBuffering)
-                let shouldUpdateKey: Bool = (returnKeyType != newType) || (returnKeyState != newState)
+                let newState: EnterKeyState = EnterKeyState.responsive(isAvailable: isAvailable, isABC: inputMethodMode.isABC, isMutilated: characterStandard.isMutilated, isBuffering: inputStage.isBuffering)
+                let shouldUpdateKey: Bool = (enterKeyType != newType) || (enterKeyState != newState)
                 guard shouldUpdateKey else { return }
-                returnKeyText = newType.attributedText(of: newState)
-                if returnKeyType != newType {
-                        returnKeyType = newType
+                enterKeyText = newType.attributedText(of: newState)
+                if enterKeyType != newType {
+                        enterKeyType = newType
                 }
-                if returnKeyState != newState {
-                        returnKeyState = newState
+                if enterKeyState != newState {
+                        enterKeyState = newState
                 }
         }
         @Published private(set) var spaceKeyForm: SpaceKeyForm = .fallback
@@ -1424,7 +1424,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 UserDefaults.standard.set(value, forKey: UserSettingsKey.CharacterScriptVariant)
                 characterStandard = newStandard
                 updateSpaceKeyForm()
-                updateReturnKey()
+                refreshEnterKey()
         }
         func syncTraditionalCharacterStandard(to standard: CharacterStandard) {
                 if characterStandard.isTraditional {

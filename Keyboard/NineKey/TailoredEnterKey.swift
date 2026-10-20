@@ -10,8 +10,8 @@ struct TailoredEnterKey: View {
         var body: some View {
                 let keyWidth: CGFloat = context.nineKeyWidthUnit * PresetConstant.tailoredActionKeyWidthCoefficient
                 let keyHeight: CGFloat = context.heightUnit * 2
-                let isDefaultReturn: Bool = context.returnKeyType.isDefaultReturn
-                let keyState: ReturnKeyState = context.returnKeyState
+                let isDefaultReturn: Bool = context.enterKeyType.isDefaultReturn
+                let keyState: EnterKeyState = context.enterKeyState
                 let backColor: Color = {
                         guard isTouching.negative else { return colorScheme.activeActionKeyColor }
                         switch keyState {
@@ -43,7 +43,7 @@ struct TailoredEnterKey: View {
                                         .padding(isTouching ? 1 : 3)
                                 switch (keyState.isBuffering, isDefaultReturn) {
                                 case (true, _):
-                                        Text(context.returnKeyText)
+                                        Text(context.enterKeyText)
                                                 .font(.staticBody)
                                                 .foregroundStyle(foreColor)
                                 case (false, true):
@@ -52,7 +52,7 @@ struct TailoredEnterKey: View {
                                                 .foregroundStyle(foreColor)
                                 default:
                                         VStack(spacing: 5) {
-                                                switch context.returnKeyType {
+                                                switch context.enterKeyType {
                                                 case .continue, .next:
                                                         Image.chevronForward
                                                 case .done:
@@ -66,7 +66,7 @@ struct TailoredEnterKey: View {
                                                 default:
                                                         Image.return
                                                 }
-                                                Text(context.returnKeyText).font(.footnote)
+                                                Text(context.enterKeyText).font(.footnote)
                                         }
                                         .font(.symbol)
                                         .foregroundStyle(foreColor)

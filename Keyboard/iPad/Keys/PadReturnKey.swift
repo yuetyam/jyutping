@@ -16,8 +16,8 @@ struct PadReturnKey: View {
                 let isLandscape: Bool = context.keyboardInterface.isPadLandscape
                 let verticalPadding: CGFloat = isLandscape ? 7 : 5
                 let horizontalPadding: CGFloat = isLandscape ? 7 : 5
-                let isDefaultReturn: Bool = context.returnKeyType.isDefaultReturn
-                let keyState: ReturnKeyState = context.returnKeyState
+                let isDefaultReturn: Bool = context.enterKeyType.isDefaultReturn
+                let keyState: EnterKeyState = context.enterKeyState
                 let backColor: Color = {
                         guard isTouching.negative else { return colorScheme.activeActionKeyColor }
                         switch keyState {
@@ -50,19 +50,19 @@ struct PadReturnKey: View {
                                         .padding(.horizontal, horizontalPadding)
                                 switch (keyState.isBuffering, isDefaultReturn) {
                                 case (true, _):
-                                        Text(context.returnKeyText).foregroundStyle(foreColor)
+                                        Text(context.enterKeyText).foregroundStyle(foreColor)
                                 case (false, true):
                                         Image.return.foregroundStyle(foreColor)
                                 default:
                                         ZStack(alignment: .bottomTrailing) {
                                                 Color.clear
-                                                Text(context.returnKeyText)
+                                                Text(context.enterKeyText)
                                                         .font(.labelCaption)
                                                         .foregroundStyle(foreColor)
                                         }
                                         .padding(.vertical, verticalPadding + 2)
                                         .padding(.horizontal, horizontalPadding + 4)
-                                        switch context.returnKeyType {
+                                        switch context.enterKeyType {
                                         case .continue, .next:
                                                 Image.chevronForward.foregroundStyle(foreColor)
                                         case .done:

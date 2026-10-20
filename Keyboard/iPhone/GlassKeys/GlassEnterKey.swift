@@ -37,8 +37,8 @@ struct GlassEnterKey: View {
                 let keyWidth: CGFloat = context.widthUnit * coefficient
                 let keyHeight: CGFloat = context.heightUnit
                 let insets = context.keyboardInterface.keyShapeInsets
-                let isDefaultReturn: Bool = context.returnKeyType.isDefaultReturn
-                let keyState: ReturnKeyState = context.returnKeyState
+                let isDefaultReturn: Bool = context.enterKeyType.isDefaultReturn
+                let keyState: EnterKeyState = context.enterKeyState
                 let glassBackColor: Color = {
                         guard isTouching.negative else { return Color.clear }
                         switch keyState {
@@ -69,16 +69,16 @@ struct GlassEnterKey: View {
                                         .padding(isTouching ? insets.plused(-2) : insets)
                                 switch (keyState.isBuffering, isDefaultReturn) {
                                 case (true, _):
-                                        Text(context.returnKeyText).font(.staticBody)
+                                        Text(context.enterKeyText).font(.staticBody)
                                 case (false, true):
                                         Image.return
                                 default:
                                         ZStack(alignment: .bottomTrailing) {
                                                 Color.clear
-                                                Text(context.returnKeyText).font(.labelCaption)
+                                                Text(context.enterKeyText).font(.labelCaption)
                                         }
                                         .padding(insets.plused(1))
-                                        switch context.returnKeyType {
+                                        switch context.enterKeyType {
                                         case .continue, .next:
                                                 Image.chevronForward
                                         case .done:

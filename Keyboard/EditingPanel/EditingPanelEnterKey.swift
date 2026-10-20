@@ -11,8 +11,8 @@ struct EditingPanelGlassEnterKey: View {
 
         var body: some View {
                 let inset = context.keyboardInterface.editingKeyInset
-                let isDefaultReturn: Bool = context.returnKeyType.isDefaultReturn
-                let keyState: ReturnKeyState = context.returnKeyState
+                let isDefaultReturn: Bool = context.enterKeyType.isDefaultReturn
+                let keyState: EnterKeyState = context.enterKeyState
                 let glassBackColor: Color = {
                         guard isTouching.negative else { return Color.clear }
                         switch keyState {
@@ -42,7 +42,7 @@ struct EditingPanelGlassEnterKey: View {
                                         .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
                                         .padding(isTouching ? (inset - 2) : inset)
                                 VStack(spacing: 4) {
-                                        switch context.returnKeyType {
+                                        switch context.enterKeyType {
                                         case .continue, .next:
                                                 Image.chevronForward
                                         case .done:
@@ -56,7 +56,7 @@ struct EditingPanelGlassEnterKey: View {
                                         default:
                                                 Image.return
                                         }
-                                        Text(context.returnKeyText).font(.labelCaption)
+                                        Text(context.enterKeyText).font(.labelCaption)
                                 }
                                 .foregroundStyle(foreColor)
                         }
@@ -77,8 +77,8 @@ struct EditingPanelEnterKey: View {
 
         var body: some View {
                 let inset = context.keyboardInterface.editingKeyInset
-                let isDefaultReturn: Bool = context.returnKeyType.isDefaultReturn
-                let keyState: ReturnKeyState = context.returnKeyState
+                let isDefaultReturn: Bool = context.enterKeyType.isDefaultReturn
+                let keyState: EnterKeyState = context.enterKeyState
                 let backColor: Color = {
                         guard isTouching.negative else { return colorScheme.activeActionKeyColor }
                         switch keyState {
@@ -109,7 +109,7 @@ struct EditingPanelEnterKey: View {
                                         .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                         .padding(isTouching ? (inset - 2) : inset)
                                 VStack(spacing: 4) {
-                                        switch context.returnKeyType {
+                                        switch context.enterKeyType {
                                         case .continue, .next:
                                                 Image.chevronForward
                                         case .done:
@@ -123,7 +123,7 @@ struct EditingPanelEnterKey: View {
                                         default:
                                                 Image.return
                                         }
-                                        Text(context.returnKeyText).font(.labelCaption)
+                                        Text(context.enterKeyText).font(.labelCaption)
                                 }
                                 .foregroundStyle(foreColor)
                         }

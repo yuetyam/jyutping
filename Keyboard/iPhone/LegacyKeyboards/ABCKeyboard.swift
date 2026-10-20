@@ -47,7 +47,7 @@ struct ABCKeyboard: View {
                                         ABCLeftKey()
                                         SpaceKey()
                                         ABCRightKey()
-                                        ReturnKey()
+                                        EnterReturnKey()
                                 }
                         case (true, false):
                                 HStack(spacing: 0) {
@@ -55,7 +55,7 @@ struct ABCKeyboard: View {
                                         ABCLeftKey()
                                         SpaceKey()
                                         ABCRightKey()
-                                        ReturnKey()
+                                        EnterReturnKey()
                                 }
                         case (false, true):
                                 HStack(spacing: 0) {
@@ -64,7 +64,7 @@ struct ABCKeyboard: View {
                                         ABCLeftKey()
                                         SpaceKey()
                                         ABCRightKey()
-                                        ReturnKey()
+                                        EnterReturnKey()
                                 }
                         case (false, false):
                                 HStack(spacing: 0) {
@@ -72,7 +72,7 @@ struct ABCKeyboard: View {
                                         ABCLeftKey()
                                         SpaceKey()
                                         ABCRightKey()
-                                        ReturnKey()
+                                        EnterReturnKey()
                                 }
                         }
                 }
