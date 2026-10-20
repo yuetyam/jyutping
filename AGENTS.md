@@ -170,7 +170,7 @@ swift run --package-path Modules/CoreIME -c release CoreIMEBenchmarks
 Input method memory export/import tests:
 
 ```bash
-python3 tests/test_input_memory_export.py
+zsh tests/test_input_memory_export.sh
 ```
 
 The script copies the real `InputMethod/InputMemory/` sources and `tests/*.swift` into a temporary Swift Testing package that depends on `CommonExtensions` and `SQLiteWrapper`, then runs `swift test` with scratch path `.build/input-memory-export-tests`. It launches no InputMethodKit process and opens no user database.
