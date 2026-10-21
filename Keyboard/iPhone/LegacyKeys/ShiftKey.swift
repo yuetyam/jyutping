@@ -4,9 +4,7 @@ import CoreIME
 
 struct ShiftKey: View {
 
-        /// Create a Shift key
-        /// - Parameter coefficient: Multiplier to the `widthUnit`
-        init(coefficient: CGFloat = 1.3) {
+        init(coefficient: CGFloat = 1.35) {
                 self.coefficient = coefficient
         }
         private let coefficient: CGFloat
@@ -14,7 +12,6 @@ struct ShiftKey: View {
         @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
 
-        /// From idle to the very first touch
         @State private var isInteracted: Bool = false
 
         @State private var isTouching: Bool = false

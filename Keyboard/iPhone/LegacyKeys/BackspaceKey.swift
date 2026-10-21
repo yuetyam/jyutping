@@ -3,7 +3,7 @@ import CommonExtensions
 
 struct BackspaceKey: View {
 
-        init(coefficient: CGFloat = 1.3) {
+        init(coefficient: CGFloat = 1.35) {
                 self.coefficient = coefficient
         }
         private let coefficient: CGFloat

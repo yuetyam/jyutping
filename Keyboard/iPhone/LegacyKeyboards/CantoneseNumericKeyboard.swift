@@ -110,8 +110,8 @@ struct CantoneseNumericKeyboard: View {
                                 )
                         }
                         HStack(spacing: 0) {
-                                TransformKey(destination: .symbolic, coefficient: 1.3)
-                                Spacer()
+                                TransformKey(destination: .symbolic, coefficient: 1.35)
+                                Spacer().frame(minWidth: 0)
                                 EnhancedInputKey(
                                         side: .leading,
                                         unit: KeyUnit(primary: KeyElement("。"),
@@ -173,7 +173,7 @@ struct CantoneseNumericKeyboard: View {
                                                                 KeyElement("\u{201C}", extras: [.init(PresetConstant.left, alignment: .top), .init("201C", alignment: .bottom)])
                                                            ])
                                 )
-                                Spacer()
+                                Spacer().frame(minWidth: 0)
                                 BackspaceKey()
                         }
                         switch (context.keyboardInterface.isPadFloating, context.needsGlobeKey) {

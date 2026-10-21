@@ -65,8 +65,8 @@ struct NumericKeyboard: View {
                                 )
                         }
                         HStack(spacing: 0) {
-                                TransformKey(destination: .symbolic, coefficient: 1.3)
-                                Spacer()
+                                TransformKey(destination: .symbolic, coefficient: 1.35)
+                                Spacer().frame(minWidth: 0)
                                 EnhancedInputKey(side: .leading, unit: KeyUnit(primary: KeyElement("."), members: [KeyElement("."), KeyElement("…")]))
                                 SymbolInputKey(",")
                                 EnhancedInputKey(side: .leading, unit: KeyUnit(primary: KeyElement("?"), members: [KeyElement("?"), KeyElement("¿")]))
@@ -85,7 +85,7 @@ struct NumericKeyboard: View {
                                                 ]
                                         )
                                 )
-                                Spacer()
+                                Spacer().frame(minWidth: 0)
                                 BackspaceKey()
                         }
                         switch (context.keyboardInterface.isPadFloating, context.needsGlobeKey) {
