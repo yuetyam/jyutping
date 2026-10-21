@@ -41,11 +41,17 @@ struct EnhancedInputKey: View {
         /// Retrieves the current system color scheme (light or dark mode) from the environment.
         @Environment(\.colorScheme) private var colorScheme
 
+        /// Monotonic clock used to measure held time independently of task scheduling.
+        private let clock = ContinuousClock()
+
         /// Button press state reported by PressButtonStyle; may end when sliding outside the key.
         @State private var isTouching: Bool = false
 
-        /// Number of elapsed 100 ms checkpoints used for pull and long-press thresholds.
-        @State private var buffer: Int = 0
+        /// Start of the current uninterrupted button press.
+        @State private var pressStartedAt: ContinuousClock.Instant?
+
+        /// Held time accumulated before sliding outside the button; resumes on reentry.
+        @State private var heldDuration: Duration = .zero
 
         /// Indicates that the expanded alternative selector has been activated.
         @State private var isLongPressing: Bool = false
@@ -55,6 +61,18 @@ struct EnhancedInputKey: View {
 
         /// Extra text selected by a vertical pull before long-press expansion.
         @State private var pulled: String? = nil
+
+        /// Expansion occurs after 300 ms of held time, or 600 ms when a vertical pull selected text.
+        private var longPressDeadline: ContinuousClock.Instant? {
+                guard isTouching, isLongPressing.negative, let pressStartedAt else { return nil }
+                let threshold: Duration = pulled.isNil ? .milliseconds(300) : .milliseconds(600)
+                return pressStartedAt.advanced(by: threshold - heldDuration)
+        }
+
+        /// Includes the active press interval without counting time spent outside the button.
+        private func elapsedPressDuration(at instant: ContinuousClock.Instant) -> Duration {
+                heldDuration + (pressStartedAt?.duration(to: instant) ?? .zero)
+        }
 
         var body: some View {
                 let keyWidth: CGFloat = context.widthUnit * coefficient
@@ -73,6 +91,7 @@ struct EnhancedInputKey: View {
                 let textCase: Text.Case = shouldShowLowercaseKeys ? .lowercase : .uppercase
                 let shouldAdjustKeyTextPosition: Bool = shouldShowLowercaseKeys && context.keyboardForm.isPrimary && (virtual?.isNumber.negative ?? true)
                 let keyTextBottomInset: CGFloat = shouldAdjustKeyTextPosition ? 3 : 0
+                let interactionDeadline = longPressDeadline
                 Button(action: {}) {
                         ZStack {
                                 Color.interactiveClear
@@ -157,9 +176,15 @@ struct EnhancedInputKey: View {
                         .frame(width: keyWidth, height: keyHeight)
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
+                        pressStartedAt = clock.now
                         AudioFeedback.inputed()
                         context.triggerHapticFeedback()
                 })
+                .onChange(of: isTouching) { _, touching in
+                        guard touching.negative, let pressStartedAt else { return }
+                        heldDuration += pressStartedAt.duration(to: clock.now)
+                        self.pressStartedAt = nil
+                }
                 .simultaneousGesture(DragGesture(minimumDistance: 0)
                         .onChanged { state in
                                 if isLongPressing {
@@ -181,7 +206,7 @@ struct EnhancedInputKey: View {
                                         }
                                 } else if pulled.isNil {
                                         let distance: CGFloat = state.translation.height
-                                        let isSatisfied: Bool = abs(distance) > 36 || (buffer > 1 && abs(distance) > 24)
+                                        let isSatisfied: Bool = abs(distance) > 36 || (elapsedPressDuration(at: clock.now) >= .milliseconds(200) && abs(distance) > 24)
                                         guard isSatisfied else { return }
                                         if distance > 0 {
                                                 // swipe from top to bottom
@@ -193,7 +218,8 @@ struct EnhancedInputKey: View {
                                 }
                         }
                         .onEnded { _ in
-                                buffer = 0
+                                pressStartedAt = nil
+                                heldDuration = .zero
                                 defer {
                                         selectedIndex = 0
                                         isLongPressing = false
@@ -216,18 +242,16 @@ struct EnhancedInputKey: View {
                                 }
                         }
                 )
-                .task(id: isTouching) {
-                        guard isTouching else { return }
-                        while isLongPressing.negative {
-                                try? await Task.sleep(for: .milliseconds(100))
-                                guard Task.isCancelled.negative else { break }
-                                let shouldTriggerLongPress: Bool = (buffer >= 6) || (buffer >= 3 && pulled.isNil)
-                                if shouldTriggerLongPress {
-                                        isLongPressing = true
-                                } else {
-                                        buffer += 1
-                                }
+                .task(id: interactionDeadline) {
+                        guard let deadline = interactionDeadline else { return }
+                        do {
+                                try await clock.sleep(until: deadline)
+                        } catch {
+                                return
                         }
+                        guard Task.isCancelled.negative else { return }
+                        guard longPressDeadline == deadline else { return }
+                        isLongPressing = true
                 }
         }
 }
