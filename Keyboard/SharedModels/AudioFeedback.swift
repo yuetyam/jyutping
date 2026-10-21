@@ -1,3 +1,4 @@
+import Foundation
 import AudioToolbox
 
 enum AudioFeedback: SystemSoundID {
@@ -7,19 +8,36 @@ enum AudioFeedback: SystemSoundID {
         case modify = 1156
 
         static func perform(_ feedback: AudioFeedback) {
-                guard Options.isAudioFeedbackOn else { return }
                 AudioServicesPlaySystemSound(feedback.rawValue)
         }
+
+        @available(*, deprecated, message: "Use context.performAudioFeedback(.input) instead")
         static func inputed() {
-                guard Options.isAudioFeedbackOn else { return }
                 AudioServicesPlaySystemSound(input.rawValue)
         }
+
+        @available(*, deprecated, message: "Use context.performAudioFeedback(.delete) instead")
         static func deleted() {
-                guard Options.isAudioFeedbackOn else { return }
                 AudioServicesPlaySystemSound(delete.rawValue)
         }
+
+        @available(*, deprecated, message: "Use context.performAudioFeedback(.modify) instead")
         static func modified() {
-                guard Options.isAudioFeedbackOn else { return }
                 AudioServicesPlaySystemSound(modify.rawValue)
+        }
+}
+
+extension AudioFeedback {
+
+        private static let settingsKey: String = UserSettingsKey.AudioFeedback
+
+        static func fetchSavedState() -> Bool {
+                let savedValue: Int = UserDefaults.standard.integer(forKey: settingsKey)
+                return savedValue == 1
+        }
+
+        static func savedState(isOn: Bool) {
+                let value: Int = isOn ? 1 : 0
+                UserDefaults.standard.set(value, forKey: settingsKey)
         }
 }

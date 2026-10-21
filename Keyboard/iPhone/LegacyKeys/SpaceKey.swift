@@ -39,13 +39,14 @@ struct SpaceKey: View {
         /// After the hold threshold, horizontal drag steps move the cursor, or clear the composition buffer when text is being composed.
         /// One task sleeps until the active hold or second-tap deadline, exits on cancellation, and checks that the deadline is still current before updating state.
         var body: some View {
+                let keyColor = colorScheme.inputKeyBackground(style: context.appearanceStyle, isPreviewEnabled: false, isInteracting: isTouching)
                 let insets = context.keyboardInterface.keyShapeInsets
                 let interactionDeadline = isTouching ? longPressDeadline : doubleTappingDeadline
                 Button(action: {}) {
                         ZStack {
                                 Color.interactiveClear
                                 RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
-                                        .fill(colorScheme.inputKeyBackground(style: context.appearanceStyle, isPreviewEnabled: false, isInteracting: isTouching))
+                                        .fill(keyColor)
                                         .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                         .padding(insets)
                                 Text(isLongPressEngaged ? PresetConstant.spaceKeyLongPressHint : context.spaceKeyForm.attributedText).font(.staticBody)

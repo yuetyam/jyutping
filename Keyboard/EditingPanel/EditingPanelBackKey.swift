@@ -30,7 +30,7 @@ struct EditingPanelGlassBackKey: View {
                         }
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
-                        AudioFeedback.modified()
+                        context.performAudioFeedback(.modify)
                         context.triggerHapticFeedback()
                         context.routeBackKeyboardForm()
                 })
@@ -64,7 +64,7 @@ struct EditingPanelBackKey: View {
                         }
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
-                        AudioFeedback.modified()
+                        context.performAudioFeedback(.modify)
                         context.triggerHapticFeedback()
                         context.routeBackKeyboardForm()
                 })

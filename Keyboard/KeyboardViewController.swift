@@ -1226,12 +1226,9 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 }
                         } else {
                                 switch keyboardCase {
-                                case .lowercased:
-                                        return isMutilated ? .lowercasedMutilated : .lowercased
-                                case .uppercased:
-                                        return isMutilated ? .uppercasedMutilated : .uppercased
-                                case .capsLocked:
-                                        return isMutilated ? .capsLockedMutilated : .capsLocked
+                                case .lowercased: return isMutilated ? .lowercasedMutilated : .lowercased
+                                case .uppercased: return isMutilated ? .uppercasedMutilated : .uppercased
+                                case .capsLocked: return isMutilated ? .capsLockedMutilated : .capsLocked
                                 }
                         }
                 }()
@@ -1441,7 +1438,17 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         }
 
 
-        // MARK: - Haptic Feedback
+        // MARK: - Audio and Haptic Feedback
+
+        @Published private(set) var isAudioFeedbackOn: Bool = AudioFeedback.fetchSavedState()
+        func updateAudioFeedbackState(to isOn: Bool) {
+                isAudioFeedbackOn = isOn
+                AudioFeedback.savedState(isOn: isOn)
+        }
+        func performAudioFeedback(_ feedback: AudioFeedback) {
+                guard isAudioFeedbackOn else { return }
+                AudioFeedback.perform(feedback)
+        }
 
         private lazy var selectionHapticFeedback: UISelectionFeedbackGenerator? = nil
         private lazy var hapticFeedback: UIImpactFeedbackGenerator? = nil

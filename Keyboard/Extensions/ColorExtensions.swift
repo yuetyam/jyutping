@@ -73,18 +73,3 @@ private extension Color {
         static let solidShallowDark   : Color = Color(white: 0.45, opacity: 0.95)
         static let solidEmphaticDark  : Color = Color(white: 0.3, opacity: 0.95)
 }
-
-/*
-oldKeyboardLightBackground
-Color(.displayP3, red: 208.0 / 255.0, green: 212.0 / 255.0, blue: 216.0 / 255.0)
-
-oldKeyboardDarkBackground
-Color(.displayP3, red: 50.0 / 255.0, green: 50.0 / 255.0, blue: 50.0 / 255.0)
-
-oldEmphaticLight
-Color(.displayP3, red: 172.0 / 255.0, green: 176.0 / 255.0, blue: 186.0 / 255.0)
-
-newEmphaticLight
-Color(.displayP3, red: 188.0 / 255.0, green: 190.0 / 255.0, blue: 194.0 / 255.0)
-*/
-

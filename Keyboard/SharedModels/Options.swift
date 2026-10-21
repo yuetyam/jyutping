@@ -3,15 +3,6 @@ import CoreIME
 import CommonExtensions
 
 struct Options {
-        nonisolated(unsafe) private(set) static var isAudioFeedbackOn: Bool = {
-                let savedValue: Int = UserDefaults.standard.integer(forKey: UserSettingsKey.AudioFeedback)
-                return savedValue == 1
-        }()
-        static func updateAudioFeedbackStatus(isOn: Bool) {
-                isAudioFeedbackOn = isOn
-                let value: Int = isOn ? 1 : 0
-                UserDefaults.standard.set(value, forKey: UserSettingsKey.AudioFeedback)
-        }
 
         nonisolated(unsafe) private(set) static var needsNumberRow: Bool = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: UserSettingsKey.NumberRow)

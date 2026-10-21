@@ -13,7 +13,7 @@ struct SettingsView: View {
                 return marketingVersion + " (" + currentProjectVersion + ")"
         }()
 
-        @State private var isAudioFeedbackOn: Bool = Options.isAudioFeedbackOn
+        @State private var isAudioFeedbackOn: Bool = AudioFeedback.fetchSavedState()
         @State private var hapticFeedback: HapticFeedback = HapticFeedback.fetchSavedMode()
         @State private var useKeyPadNumericLayout: Bool = NumericLayout.fetchSavedLayout().isDedicated
         @State private var needsNumberRow: Bool = Options.needsNumberRow
@@ -57,7 +57,7 @@ struct SettingsView: View {
                                 Section {
                                         Toggle("SettingsView.KeyboardFeedback.Sound.ToggleTitle", isOn: $isAudioFeedbackOn)
                                                 .onChange(of: isAudioFeedbackOn) { _, newState in
-                                                        Options.updateAudioFeedbackStatus(isOn: newState)
+                                                        context.updateAudioFeedbackState(to: newState)
                                                 }
                                         if context.isRunningOnPhone {
                                                 HStack(spacing: 0) {
