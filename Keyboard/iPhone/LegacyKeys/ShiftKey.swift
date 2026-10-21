@@ -28,14 +28,20 @@ struct ShiftKey: View {
         var body: some View {
                 let keyWidth: CGFloat = context.widthUnit * coefficient
                 let keyHeight: CGFloat = context.heightUnit
-                let keyboardInterface = context.keyboardInterface
+                let appearanceStyle = context.appearanceStyle
+                let isInteracting: Bool = switch appearanceStyle {
+                case .classic: (isTouching || context.keyboardCase.isCapitalized)
+                default: isTouching
+                }
+                let keyColor = colorScheme.actionKeyBackground(style: appearanceStyle, isInteracting: isInteracting)
+                let insets = context.keyboardInterface.keyShapeInsets
                 Button(action: {}) {
                         ZStack {
                                 Color.interactiveClear
                                 RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
-                                        .fill(isTouching ? colorScheme.activeActionKeyColor : colorScheme.actionKeyColor)
+                                        .fill(keyColor)
                                         .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                        .padding(keyboardInterface.keyShapeInsets)
+                                        .padding(insets)
                                 switch context.keyboardCase {
                                 case .lowercased: Image.shiftLowercased
                                 case .uppercased: Image.shiftUppercased

@@ -23,14 +23,15 @@ struct TransformKey: View {
         var body: some View {
                 let keyWidth: CGFloat = context.widthUnit * coefficient
                 let keyHeight: CGFloat = context.heightUnit
-                let keyboardInterface = context.keyboardInterface
+                let keyColor = colorScheme.actionKeyBackground(style: context.appearanceStyle, isInteracting: isTouching)
+                let insets = context.keyboardInterface.keyShapeInsets
                 Button(action: {}) {
                         ZStack {
                                 Color.interactiveClear
                                 RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
-                                        .fill(isTouching ? colorScheme.activeActionKeyColor : colorScheme.actionKeyColor)
+                                        .fill(keyColor)
                                         .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                        .padding(keyboardInterface.keyShapeInsets)
+                                        .padding(insets)
                                 Text(verbatim: destination.compactTransformKeyTex).font(.staticBody)
                         }
                         .frame(width: keyWidth, height: keyHeight)

@@ -17,12 +17,13 @@ struct BackspaceKey: View {
         var body: some View {
                 let keyWidth: CGFloat = context.widthUnit * coefficient
                 let keyHeight: CGFloat = context.heightUnit
+                let keyColor = colorScheme.actionKeyBackground(style: context.appearanceStyle, isInteracting: isTouching)
                 let insets = context.keyboardInterface.keyShapeInsets
                 Button(action: {}) {
                         ZStack {
                                 Color.interactiveClear
                                 RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
-                                        .fill(isTouching ? colorScheme.activeActionKeyColor : colorScheme.actionKeyColor)
+                                        .fill(keyColor)
                                         .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                         .padding(insets)
                                 Image.backspace.symbolVariant(isTouching ? .fill : .none).font(.symbol)

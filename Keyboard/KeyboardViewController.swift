@@ -1382,6 +1382,12 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 updateViewHeightConstraint()
         }
 
+        @Published private(set) var isKeyTextPreviewEnabled: Bool = Options.fetchKeyTextPreviewState()
+        func updateKeyTextPreview(to isOn: Bool) {
+                isKeyTextPreviewEnabled = isOn
+                Options.saveKeyTextPreview(state: isOn)
+        }
+
         @Published private(set) var keyHeightOffset: CGFloat = Options.fetchKeyHeightOffset()
         func updateKeyHeightOffset(to offset: CGFloat) {
                 keyHeightOffset = offset

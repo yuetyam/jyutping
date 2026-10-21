@@ -5,27 +5,76 @@ extension ColorScheme {
         var isLight: Bool { self == .light }
         var isDark: Bool { self == .dark }
 
+        func inputKeyBackground(style: AppearanceStyle, isPreviewEnabled: Bool, isInteracting: Bool) -> Color {
+                switch (isPreviewEnabled, isInteracting) {
+                case (true, true): inputBackground(style: style)
+                case (true, false): inputBackground(style: style)
+                case (false, true): inputReflection(style: style)
+                case (false, false): inputBackground(style: style)
+                }
+        }
+        private func inputBackground(style: AppearanceStyle) -> Color {
+                switch style {
+                case .classic: return isDark ? .shallowDark : .white
+                default: return isDark ? .emphaticDark : .shallowLight
+                }
+        }
+        private func inputReflection(style: AppearanceStyle) -> Color {
+                switch style {
+                case .classic: return isDark ? .emphaticDark : .legacyEmphaticLight
+                default: return isDark ? .shallowDark : .emphaticLight
+                }
+        }
+
+        func actionKeyBackground(style: AppearanceStyle, isPreviewEnabled: Bool = false, isInteracting: Bool) -> Color {
+                return isInteracting ? actionReflection(style: style) : actionBackground(style: style)
+        }
+        private func actionBackground(style: AppearanceStyle) -> Color {
+                switch style {
+                case .classic: return isDark ? .emphaticDark : .legacyEmphaticLight
+                default: return isDark ? .emphaticDark : .shallowLight
+                }
+        }
+        private func actionReflection(style: AppearanceStyle) -> Color {
+                switch style {
+                case .classic: return isDark ? .shallowDark : .shallowLight
+                default: return isDark ? .shallowDark : .emphaticLight
+                }
+        }
+
+        func bubbleBackground(style: AppearanceStyle) -> Color {
+                switch style {
+                case .classic: return isDark ? .solidShallowDark : .white
+                default: return isDark ? .solidEmphaticDark : .shallowLight
+                }
+        }
+
         /// Input key background color
+        @available(*, deprecated, message: "Use inputKeyBackground(style:, isPreviewEnabled:, isInteracting:) instead")
         var inputKeyColor: Color {
                 return isDark ? .darkInput : .lightInput
         }
 
         /// Input key tapping / highlighting background color
+        @available(*, deprecated, message: "Use inputKeyBackground(style:, isPreviewEnabled:, isInteracting:) instead")
         var activeInputKeyColor: Color {
                 return isDark ? .activeDarkInput : .activeLightInput
         }
 
         /// Action (modifier) key background color
+        @available(*, deprecated, message: "Use actionKeyBackground(style:, isInteracting:) instead")
         var actionKeyColor: Color {
                 return isDark ? .darkAction : .lightAction
         }
 
         /// Action (modifier) key tapping / highlighting background color
+        @available(*, deprecated, message: "Use actionKeyBackground(style:, isInteracting:) instead")
         var activeActionKeyColor: Color {
                 return isDark ? .activeDarkAction : .activeLightAction
         }
 
         /// Input key bubble preview background color
+        @available(*, deprecated, message: "Use bubbleBackground(style:) instead")
         var previewBubbleColor: Color {
                 return isDark ? .solidDarkInput : .solidLightInput
         }
@@ -50,16 +99,20 @@ extension Color {
                         return false
                 }
         }()
+}
 
-        private static let shallowLight       : Color = Color.white.opacity(0.95)
-        private static let legacyEmphaticLight: Color = Color(.displayP3, red: 104.0 / 255.0, green: 110.0 / 255.0, blue: 128.0 / 255.0, opacity: 0.25)
-        private static let emphaticLight      : Color = Color(white: 0.62, opacity: 0.35)
+private extension Color {
+        static let shallowLight       : Color = Color.white.opacity(0.95)
+        static let legacyEmphaticLight: Color = Color(.displayP3, red: 104.0 / 255.0, green: 110.0 / 255.0, blue: 128.0 / 255.0, opacity: 0.25)
+        static let emphaticLight      : Color = Color(white: 0.62, opacity: 0.35)
 
-        private static let shallowDark        : Color = Color(white: 1, opacity: 0.3)
-        private static let emphaticDark       : Color = Color(white: 1, opacity: 0.15)
-        private static let solidShallowDark   : Color = Color(white: 0.45, opacity: 0.95)
-        private static let solidEmphaticDark  : Color = Color(white: 0.3, opacity: 0.95)
+        static let shallowDark        : Color = Color(white: 1, opacity: 0.3)
+        static let emphaticDark       : Color = Color(white: 1, opacity: 0.15)
+        static let solidShallowDark   : Color = Color(white: 0.45, opacity: 0.95)
+        static let solidEmphaticDark  : Color = Color(white: 0.3, opacity: 0.95)
+}
 
+private extension Color {
         static let lightInput       : Color = isLiquidGlassPreferred ? shallowLight : white
         static let lightAction      : Color = isLiquidGlassPreferred ? shallowLight : legacyEmphaticLight
         static let activeLightInput : Color = isLiquidGlassPreferred ? emphaticLight : legacyEmphaticLight

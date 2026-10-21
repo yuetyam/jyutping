@@ -34,12 +34,14 @@ struct LetterInputKey: View {
         var body: some View {
                 let keyWidth: CGFloat = context.widthUnit
                 let keyHeight: CGFloat = context.heightUnit
+                let appearanceStyle = context.appearanceStyle
+                let isPreviewEnabled = context.isKeyTextPreviewEnabled
+                let displayForm = KeyDisplayForm.responsive(isInteracting: isTouching, isPreviewEnabled: isPreviewEnabled)
+                let keyColor = colorScheme.inputKeyBackground(style: appearanceStyle, isPreviewEnabled: isPreviewEnabled, isInteracting: isTouching)
+                let bubbleColor = colorScheme.bubbleBackground(style: appearanceStyle)
                 let keyboardInterface = context.keyboardInterface
                 let insets = keyboardInterface.keyShapeInsets
                 let previewBottomOffset = keyboardInterface.previewBottomOffset(keyWidth: keyWidth, keyHeight: keyHeight, insets: insets)
-                let shouldPreviewKey: Bool = Options.keyTextPreview
-                let activeColor: Color = shouldPreviewKey ? colorScheme.inputKeyColor : colorScheme.activeInputKeyColor
-                let displayForm = KeyDisplayForm.responsive(isInteracting: isTouching, isLongPressing: false, shouldPreview: shouldPreviewKey)
                 let shouldShowLowercaseKeys: Bool = Options.showLowercaseKeys && context.keyboardCase.isLowercased
                 let textCase: Text.Case = shouldShowLowercaseKeys ? .lowercase : .uppercase
                 let keyTextBottomInset: CGFloat = shouldShowLowercaseKeys ? 3 : 0
@@ -49,7 +51,7 @@ struct LetterInputKey: View {
                                 switch displayForm {
                                 case .previewing, .expanding:
                                         BubbleShape()
-                                                .fill(colorScheme.previewBubbleColor)
+                                                .fill(bubbleColor)
                                                 .shadow(color: .shadowGray, radius: 1)
                                                 .overlay {
                                                         Text(verbatim: virtual.text)
@@ -60,7 +62,7 @@ struct LetterInputKey: View {
                                                 .padding(insets)
                                 case .normal, .reflecting:
                                         RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
-                                                .fill(isTouching ? activeColor : colorScheme.inputKeyColor)
+                                                .fill(keyColor)
                                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                                 .padding(insets)
                                         Text(verbatim: virtual.text)

@@ -52,7 +52,12 @@ extension AppearanceStyle {
         /// - Parameter value: The integer identifying a style in saved preferences.
         /// - Returns: The matching style, or `.clean` if the value is not defined.
         private static func style(of value: Int) -> AppearanceStyle {
-                return allCases.first(where: { $0.rawValue == value }) ?? .clean
+                if let matched = allCases.first(where: { $0.rawValue == value }) { return matched }
+                if #available(iOSApplicationExtension 26.0, *) {
+                        return AppearanceStyle.clean
+                } else {
+                        return AppearanceStyle.classic
+                }
         }
 
         /// User-defaults key storing the selected theme's integer raw value.

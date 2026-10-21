@@ -109,6 +109,7 @@ struct SettingsView: View {
                                                 .onChange(of: keyTextPreview) { _, newState in
                                                         AudioFeedback.modified()
                                                         Options.updateKeyTextPreview(to: newState)
+                                                        context.updateKeyTextPreview(to: newState)
                                                 }
                                 }
 

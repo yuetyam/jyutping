@@ -22,6 +22,15 @@ extension EnterKeyState {
                 }
         }
 
+        var isStandby: Bool {
+                switch self {
+                case .standbyABC,
+                .standbyMutilated,
+                .standbyTraditional: true
+                default: false
+                }
+        }
+
         var isBuffering: Bool {
                 switch self {
                 case .bufferingMutilated,
