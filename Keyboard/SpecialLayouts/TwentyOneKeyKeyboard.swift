@@ -14,13 +14,13 @@ struct TwentyOneKeyKeyboard: View {
                         if Options.needsNumberRow {
                                 CantoneseNumberRow()
                         }
-                        switch Options.inputKeyStyle {
+                        switch context.inputKeyStyle {
                         case .clear:
                                 FirstLetterRow()
                         case .numbers, .symbols:
                                 FirstEnhancedLetterRow()
                         }
-                        switch Options.inputKeyStyle {
+                        switch context.inputKeyStyle {
                         case .clear:
                                 SecondLetterRow(needsNumbers: false)
                         case .numbers:
@@ -31,7 +31,7 @@ struct TwentyOneKeyKeyboard: View {
                         HStack(spacing: 0) {
                                 ShiftKey(coefficient: 1.65)
                                 HiddenKey(key: .letterZ)
-                                switch Options.inputKeyStyle {
+                                switch context.inputKeyStyle {
                                 case .clear, .numbers:
                                         ThirdLetterRow()
                                 case .symbols:

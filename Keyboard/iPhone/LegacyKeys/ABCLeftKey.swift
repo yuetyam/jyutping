@@ -64,7 +64,7 @@ struct ABCLeftKey: View {
                 let keyColor = colorScheme.inputKeyBackground(style: context.appearanceStyle, isPreviewEnabled: isPreviewEnabled, isInteracting: isTouching)
                 let bubbleColor = colorScheme.bubbleBackground(style: context.appearanceStyle)
                 let displayForm = KeyDisplayForm.responsive(isInteracting: isTouching, isLongPressEngaged: isLongPressing, isPreviewEnabled: isPreviewEnabled)
-                let shouldShowExtraSymbols: Bool = Options.inputKeyStyle.isSymbolApplied
+                let shouldShowExtraSymbols: Bool = context.inputKeyStyle.isSymbolApplied
                 let interactionDeadline = longPressDeadline
                 Button(action: {}) {
                         ZStack {

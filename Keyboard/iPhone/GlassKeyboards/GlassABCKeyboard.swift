@@ -5,13 +5,15 @@ import CoreIME
 @available(iOSApplicationExtension 26.0, *)
 struct GlassABCKeyboard: View {
 
+        @EnvironmentObject private var context: KeyboardViewController
+
         var body: some View {
                 VStack(spacing: 0) {
                         ToolBar()
                         if Options.needsNumberRow {
                                 ABCGlassNumberRow()
                         }
-                        switch Options.inputKeyStyle {
+                        switch context.inputKeyStyle {
                         case .clear:
                                 GlassABCFirstInputKeyRow()
                         case .numbers, .symbols:
@@ -19,7 +21,7 @@ struct GlassABCKeyboard: View {
                         }
                         HStack(spacing: 0) {
                                 HiddenKey(key: .letterA)
-                                switch Options.inputKeyStyle {
+                                switch context.inputKeyStyle {
                                 case .clear, .numbers:
                                         GlassABCSecondInputKeyRow()
                                 case .symbols:
@@ -30,7 +32,7 @@ struct GlassABCKeyboard: View {
                         HStack(spacing: 0) {
                                 GlassShiftKey()
                                 HiddenKey(key: .letterZ)
-                                switch Options.inputKeyStyle {
+                                switch context.inputKeyStyle {
                                 case .clear, .numbers:
                                         GlassABCThirdInputKeyRow()
                                 case .symbols:

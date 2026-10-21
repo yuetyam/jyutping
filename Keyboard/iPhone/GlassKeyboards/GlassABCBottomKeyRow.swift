@@ -49,8 +49,9 @@ struct GlassABCBottomKeyRow: View {
 @available(iOS 26.0, *)
 @available(iOSApplicationExtension 26.0, *)
 private struct GlassABCLeftKey: View {
+        @EnvironmentObject private var context: KeyboardViewController
         var body: some View {
-                let primaryExtras: [KeyElement.Extra] = Options.inputKeyStyle.isSymbolApplied ? [.init("!", alignment: .topTrailing)] : []
+                let primaryExtras: [KeyElement.Extra] = context.inputKeyStyle.isSymbolApplied ? [.init("!", alignment: .topTrailing)] : []
                 GlassEnhancedInputKey(
                         side: .leading,
                         unit: KeyUnit(
@@ -70,8 +71,9 @@ private struct GlassABCLeftKey: View {
 @available(iOS 26.0, *)
 @available(iOSApplicationExtension 26.0, *)
 private struct GlassABCRightKey: View {
+        @EnvironmentObject private var context: KeyboardViewController
         var body: some View {
-                let primaryExtras: [KeyElement.Extra] = Options.inputKeyStyle.isSymbolApplied ? [.init("?", alignment: .topTrailing)] : []
+                let primaryExtras: [KeyElement.Extra] = context.inputKeyStyle.isSymbolApplied ? [.init("?", alignment: .topTrailing)] : []
                 GlassEnhancedInputKey(
                         side: .trailing,
                         unit: KeyUnit(

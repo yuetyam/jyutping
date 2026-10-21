@@ -32,7 +32,7 @@ struct TransformKey: View {
                                         .fill(keyColor)
                                         .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                         .padding(insets)
-                                Text(verbatim: destination.compactTransformKeyTex).font(.staticBody)
+                                Text(verbatim: destination.compactTransformKeyText).font(.staticBody)
                         }
                         .frame(width: keyWidth, height: keyHeight)
                 }

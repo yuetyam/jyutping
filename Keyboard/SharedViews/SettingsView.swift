@@ -20,7 +20,7 @@ struct SettingsView: View {
         @State private var showLowercaseKeys: Bool = Options.showLowercaseKeys
         @State private var keyTextPreview: Bool = Options.fetchKeyTextPreviewState()
         @State private var keyHeightOffset: CGFloat = Options.fetchKeyHeightOffset()
-        @State private var inputKeyStyle: InputKeyStyle = Options.inputKeyStyle
+        @State private var inputKeyStyle: InputKeyStyle = InputKeyStyle.fetchSavedStyle()
         @State private var appearanceStyle: AppearanceStyle = AppearanceStyle.fetchSavedStyle()
         @State private var preferredInputMode: PreferredInputMode = PreferredInputMode.saved
         @State private var commentStyle: CommentStyle = Options.commentStyle
@@ -149,7 +149,7 @@ struct SettingsView: View {
                                                         .onChange(of: inputKeyStyle) { _, newStyle in
                                                                 AudioFeedback.modified()
                                                                 context.triggerSelectionHapticFeedback()
-                                                                Options.updateInputKeyStyle(to: newStyle)
+                                                                context.updateInputKeyStyle(to: newStyle)
                                                         }
                                                 }
                                         }

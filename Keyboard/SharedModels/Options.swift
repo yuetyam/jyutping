@@ -47,12 +47,6 @@ struct Options {
                 return CGFloat(savedValue)
         }
 
-        nonisolated(unsafe) private(set) static var inputKeyStyle: InputKeyStyle = InputKeyStyle.fetchSavedStyle()
-        static func updateInputKeyStyle(to style: InputKeyStyle) {
-                inputKeyStyle = style
-                InputKeyStyle.save(style: style)
-        }
-
         nonisolated(unsafe) private(set) static var commentStyle: CommentStyle = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: UserSettingsKey.CommentStyle)
                 return CommentStyle.style(of: savedValue)

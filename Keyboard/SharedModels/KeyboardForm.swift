@@ -113,7 +113,7 @@ extension KeyboardForm {
         }
 
         /// Phone, PhoneOnPad, PadFloating
-        var compactTransformKeyTex: String {
+        var compactTransformKeyText: String {
                 switch self {
                 case .primary    : "ABC"
                 case .numeric,

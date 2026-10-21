@@ -15,13 +15,13 @@ struct FifteenKeyKeyboard: View {
                         if Options.needsNumberRow {
                                 CantoneseNumberRow()
                         }
-                        switch Options.inputKeyStyle {
+                        switch context.inputKeyStyle {
                         case .clear:
                                 FirstLetterRow()
                         case .numbers, .symbols:
                                 FirstEnhancedLetterRow()
                         }
-                        switch Options.inputKeyStyle {
+                        switch context.inputKeyStyle {
                         case .clear:
                                 SecondLetterRow()
                         case .numbers, .symbols:
@@ -30,7 +30,7 @@ struct FifteenKeyKeyboard: View {
                         HStack(spacing: 0) {
                                 ShiftKey(coefficient: 1.66)
                                 Spacer().frame(minWidth: 0, maxWidth: .infinity)
-                                switch Options.inputKeyStyle {
+                                switch context.inputKeyStyle {
                                 case .clear, .numbers:
                                         ThirdLetterRow()
                                 case .symbols:

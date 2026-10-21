@@ -12,7 +12,7 @@ struct PinyinKeyboard: View {
                                 CantoneseNumberRow()
                         }
                         /*
-                        switch Options.inputKeyStyle {
+                        switch context.inputKeyStyle {
                         case .clear:
                                 FirstLetterKeyRow()
                         case .numbers, .symbols:
@@ -23,7 +23,7 @@ struct PinyinKeyboard: View {
                         HStack(spacing: 0) {
                                 HiddenKey(key: .letterA)
                                 /*
-                                switch Options.inputKeyStyle {
+                                switch context.inputKeyStyle {
                                 case .clear, .numbers:
                                         SecondLetterKeyRow()
                                 case .symbols:
@@ -37,7 +37,7 @@ struct PinyinKeyboard: View {
                                 ShiftKey()
                                 HiddenKey(key: .letterZ)
                                 /*
-                                switch Options.inputKeyStyle {
+                                switch context.inputKeyStyle {
                                 case .clear, .numbers:
                                         PinyinThirdLetterKeyRow()
                                 case .symbols:

@@ -15,7 +15,7 @@ struct GlassT18Keyboard: View {
                         if Options.needsNumberRow {
                                 CantoneseGlassNumberRow()
                         }
-                        switch Options.inputKeyStyle {
+                        switch context.inputKeyStyle {
                         case .clear:
                                 GlassT18T19FirstKeyRow()
                         case .numbers, .symbols:
@@ -23,7 +23,7 @@ struct GlassT18Keyboard: View {
                         }
                         HStack(spacing: 0) {
                                 HiddenKey(key: .letterA)
-                                switch Options.inputKeyStyle {
+                                switch context.inputKeyStyle {
                                 case .clear:
                                         GlassT18SecondKeyRow()
                                 case .numbers:
@@ -35,7 +35,7 @@ struct GlassT18Keyboard: View {
                         }
                         HStack(spacing: 0) {
                                 GlassShiftKey(coefficient: 1.42)
-                                switch Options.inputKeyStyle {
+                                switch context.inputKeyStyle {
                                 case .clear, .numbers:
                                         GlassT18T19ThirdKeyRow()
                                 case .symbols:

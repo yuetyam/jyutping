@@ -46,7 +46,7 @@ struct GlassTransformKey: View {
                                 Color.interactiveClear
                                 ZStack {
                                         Color.clear
-                                        Text(verbatim: destination.compactTransformKeyTex).font(.staticBody)
+                                        Text(verbatim: destination.compactTransformKeyText).font(.staticBody)
                                 }
                                 .glassEffect(isTouching ? .regular : .clear, in: .rect(cornerRadius: PresetConstant.keyCornerRadius))
                                 .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)

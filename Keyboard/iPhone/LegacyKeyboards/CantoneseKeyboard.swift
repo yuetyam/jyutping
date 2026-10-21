@@ -15,7 +15,7 @@ struct CantoneseKeyboard: View {
                         if Options.needsNumberRow {
                                 CantoneseNumberRow()
                         }
-                        switch Options.inputKeyStyle {
+                        switch context.inputKeyStyle {
                         case .clear:
                                 FirstLetterKeyRow()
                         case .numbers, .symbols:
@@ -23,7 +23,7 @@ struct CantoneseKeyboard: View {
                         }
                         HStack(spacing: 0) {
                                 HiddenKey(key: .letterA)
-                                switch Options.inputKeyStyle {
+                                switch context.inputKeyStyle {
                                 case .clear, .numbers:
                                         SecondLetterKeyRow()
                                 case .symbols:
@@ -34,7 +34,7 @@ struct CantoneseKeyboard: View {
                         HStack(spacing: 0) {
                                 ShiftKey()
                                 HiddenKey(key: .letterZ)
-                                switch Options.inputKeyStyle {
+                                switch context.inputKeyStyle {
                                 case .clear, .numbers:
                                         ThirdLetterKeyRow()
                                 case .symbols:

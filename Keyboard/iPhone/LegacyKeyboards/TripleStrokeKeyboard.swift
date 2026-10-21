@@ -16,7 +16,7 @@ struct TripleStrokeKeyboard: View {
                         if Options.needsNumberRow {
                                 CantoneseNumberRow()
                         }
-                        switch Options.inputKeyStyle {
+                        switch context.inputKeyStyle {
                         case .clear:
                                 FirstKeyRow()
                         case .numbers, .symbols:
@@ -24,7 +24,7 @@ struct TripleStrokeKeyboard: View {
                         }
                         HStack(spacing: 0) {
                                 HiddenKey(key: .letterA)
-                                switch Options.inputKeyStyle {
+                                switch context.inputKeyStyle {
                                 case .clear, .numbers:
                                         SecondKeyRow()
                                 case .symbols:
@@ -35,7 +35,7 @@ struct TripleStrokeKeyboard: View {
                         HStack(spacing: 0) {
                                 ShiftKey()
                                 HiddenKey(key: .letterZ)
-                                switch Options.inputKeyStyle {
+                                switch context.inputKeyStyle {
                                 case .clear, .numbers:
                                         ThirdKeyRow()
                                 case .symbols:

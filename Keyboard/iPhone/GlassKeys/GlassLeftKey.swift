@@ -72,7 +72,7 @@ struct GlassLeftKey: View {
                 let previewBottomOffset: CGFloat = keyboardInterface.previewBottomOffset(keyWidth: keyWidth, keyHeight: keyHeight, insets: insets)
                 let isPreviewEnabled: Bool = context.isKeyTextPreviewEnabled
                 let displayForm = KeyDisplayForm.responsive(isInteracting: isTouching, isLongPressEngaged: isLongPressing, isPreviewEnabled: isPreviewEnabled)
-                let shouldShowExtraSymbols: Bool = Options.inputKeyStyle.isSymbolApplied
+                let shouldShowExtraSymbols: Bool = context.inputKeyStyle.isSymbolApplied
                 let interactionDeadline = longPressDeadline
                 Button(action: {}) {
                         ZStack {

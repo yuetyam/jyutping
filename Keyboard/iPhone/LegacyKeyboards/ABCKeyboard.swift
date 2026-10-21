@@ -11,7 +11,7 @@ struct ABCKeyboard: View {
                         if Options.needsNumberRow {
                                 ABCNumberRow()
                         }
-                        switch Options.inputKeyStyle {
+                        switch context.inputKeyStyle {
                         case .clear:
                                 FirstInputKeyRow()
                         case .numbers, .symbols:
@@ -19,7 +19,7 @@ struct ABCKeyboard: View {
                         }
                         HStack(spacing: 0) {
                                 HiddenKey(key: .letterA)
-                                switch Options.inputKeyStyle {
+                                switch context.inputKeyStyle {
                                 case .clear, .numbers:
                                         SecondInputKeyRow()
                                 case .symbols:
@@ -30,7 +30,7 @@ struct ABCKeyboard: View {
                         HStack(spacing: 0) {
                                 ShiftKey()
                                 HiddenKey(key: .letterZ)
-                                switch Options.inputKeyStyle {
+                                switch context.inputKeyStyle {
                                 case .clear, .numbers:
                                         ThirdInputKeyRow()
                                 case .symbols:
