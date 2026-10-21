@@ -36,7 +36,7 @@ struct GlassTailoredNavigateKey: View {
                         .frame(width: context.nineKeyWidthUnit * PresetConstant.tailoredActionKeyWidthCoefficient, height: context.heightUnit)
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
-                        AudioFeedback.modified()
+                        context.performAudioFeedback(.modify)
                         context.triggerHapticFeedback()
                         context.updateKeyboardForm(to: destination)
                 })
@@ -74,7 +74,7 @@ struct TailoredNavigateKey: View {
                         .frame(width: context.nineKeyWidthUnit * PresetConstant.tailoredActionKeyWidthCoefficient, height: context.heightUnit)
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
-                        AudioFeedback.modified()
+                        context.performAudioFeedback(.modify)
                         context.triggerHapticFeedback()
                         context.updateKeyboardForm(to: destination)
                 })

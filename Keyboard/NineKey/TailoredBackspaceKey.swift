@@ -27,7 +27,7 @@ struct GlassTailoredBackspaceKey: View {
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
                         buffer = 0
-                        AudioFeedback.deleted()
+                        context.performAudioFeedback(.delete)
                         context.triggerHapticFeedback()
                         context.operate(.backspace)
                 })
@@ -35,7 +35,7 @@ struct GlassTailoredBackspaceKey: View {
                         .onEnded { value in
                                 buffer = 0
                                 guard (value.translation.width < -44) || (value.translation.height < -44) else { return }
-                                AudioFeedback.deleted()
+                                context.performAudioFeedback(.delete)
                                 context.triggerHapticFeedback()
                                 context.operate(.clearBuffer)
                         }
@@ -46,7 +46,7 @@ struct GlassTailoredBackspaceKey: View {
                                 try? await Task.sleep(for: .milliseconds(100)) // 0.1s
                                 if isTouching {
                                         if buffer > 3 {
-                                                AudioFeedback.deleted()
+                                                context.performAudioFeedback(.delete)
                                                 context.triggerHapticFeedback()
                                                 context.operate(.backspace)
                                         } else {
@@ -80,7 +80,7 @@ struct TailoredBackspaceKey: View {
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
                         buffer = 0
-                        AudioFeedback.deleted()
+                        context.performAudioFeedback(.delete)
                         context.triggerHapticFeedback()
                         context.operate(.backspace)
                 })
@@ -88,7 +88,7 @@ struct TailoredBackspaceKey: View {
                         .onEnded { value in
                                 buffer = 0
                                 guard (value.translation.width < -44) || (value.translation.height < -44) else { return }
-                                AudioFeedback.deleted()
+                                context.performAudioFeedback(.delete)
                                 context.triggerHapticFeedback()
                                 context.operate(.clearBuffer)
                         }
@@ -99,7 +99,7 @@ struct TailoredBackspaceKey: View {
                                 try? await Task.sleep(for: .milliseconds(100)) // 0.1s
                                 if isTouching {
                                         if buffer > 3 {
-                                                AudioFeedback.deleted()
+                                                context.performAudioFeedback(.delete)
                                                 context.triggerHapticFeedback()
                                                 context.operate(.backspace)
                                         } else {

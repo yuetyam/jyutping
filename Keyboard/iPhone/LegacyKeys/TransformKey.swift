@@ -37,7 +37,7 @@ struct TransformKey: View {
                         .frame(width: keyWidth, height: keyHeight)
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
-                        AudioFeedback.modified()
+                        context.performAudioFeedback(.modify)
                         context.triggerHapticFeedback()
                         context.updateKeyboardForm(to: destination)
                 })

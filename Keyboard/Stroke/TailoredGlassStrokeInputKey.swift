@@ -75,7 +75,7 @@ struct TailoredGlassStrokeInputKey: View {
                         .frame(width: context.nineKeyWidthUnit * PresetConstant.tailoredInputKeyWidthCoefficient, height: context.heightUnit)
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
-                        AudioFeedback.inputed()
+                        context.performAudioFeedback(.input)
                         context.triggerHapticFeedback()
                         context.handle(stroke.virtualInputKey)
                 })

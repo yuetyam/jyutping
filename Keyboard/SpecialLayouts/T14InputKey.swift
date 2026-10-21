@@ -143,7 +143,7 @@ struct T14InputKey: View {
                         .frame(width: keyWidth, height: keyHeight)
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
-                        AudioFeedback.inputed()
+                        context.performAudioFeedback(.input)
                         context.triggerHapticFeedback()
                 })
                 .simultaneousGesture(DragGesture(minimumDistance: 0)
@@ -189,7 +189,7 @@ struct T14InputKey: View {
                                 }
                                 if isLongPressing {
                                         guard let selectedElement = unit.members.fetch(selectedIndex) else { return }
-                                        AudioFeedback.inputed()
+                                        context.performAudioFeedback(.input)
                                         context.triggerSelectionHapticFeedback()
                                         let text: String = context.keyboardCase.isLowercased ? selectedElement.text : selectedElement.text.uppercased()
                                         context.operate(.process(text))

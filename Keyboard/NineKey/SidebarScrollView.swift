@@ -22,7 +22,7 @@ struct SidebarScrollView: View {
                                 ForEach(context.sidebarSyllables.indices, id: \.self) { index in
                                         let item = context.sidebarSyllables[index]
                                         ScrollViewButton {
-                                                AudioFeedback.inputed()
+                                                context.performAudioFeedback(.input)
                                                 sensoryFeedbackTrigger.toggle()
                                                 context.handleSidebarTapping(at: index)
                                         } label: {

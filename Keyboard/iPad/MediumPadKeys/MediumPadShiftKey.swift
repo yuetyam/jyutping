@@ -69,7 +69,7 @@ struct MediumPadShiftKey: View {
                 .buttonStyle(PressButtonStyle($isTouching) {
                         longPressBuffer = 0
                         doubleTappingBuffer = 0
-                        AudioFeedback.modified()
+                        context.performAudioFeedback(.modify)
                         context.triggerHapticFeedback()
                         isLongPressEngaged = false
                         if isInteracted.negative {
@@ -96,7 +96,7 @@ struct MediumPadShiftKey: View {
                                                 if isLongPressEngaged.negative {
                                                         isLongPressEngaged = true
                                                         isInTheMediumOfDoubleTapping = false
-                                                        AudioFeedback.modified()
+                                                        context.performAudioFeedback(.modify)
                                                         context.triggerHapticFeedback()
                                                         context.operate(.doubleShift)
                                                 }

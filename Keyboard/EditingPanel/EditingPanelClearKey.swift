@@ -30,7 +30,7 @@ struct EditingPanelGlassClearKey: View {
                         }
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
-                        AudioFeedback.deleted()
+                        context.performAudioFeedback(.delete)
                         context.triggerHapticFeedback()
                         context.operate(.clearAllText)
                 })
@@ -64,7 +64,7 @@ struct EditingPanelClearKey: View {
                         }
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
-                        AudioFeedback.deleted()
+                        context.performAudioFeedback(.delete)
                         context.triggerHapticFeedback()
                         context.operate(.clearAllText)
                 })

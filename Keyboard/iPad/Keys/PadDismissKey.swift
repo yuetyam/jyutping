@@ -29,7 +29,7 @@ struct PadDismissKey: View {
                         .frame(width: keyWidth, height: keyHeight)
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
-                        AudioFeedback.modified()
+                        context.performAudioFeedback(.modify)
                         context.operate(.dismiss)
                 })
         }

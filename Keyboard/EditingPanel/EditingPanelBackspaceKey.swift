@@ -32,7 +32,7 @@ struct EditingPanelGlassBackspaceKey: View {
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
                         buffer = 0
-                        AudioFeedback.deleted()
+                        context.performAudioFeedback(.delete)
                         context.triggerHapticFeedback()
                         context.operate(.backspace)
                 })
@@ -42,7 +42,7 @@ struct EditingPanelGlassBackspaceKey: View {
                                 try? await Task.sleep(for: .milliseconds(100)) // 0.1s
                                 if isTouching {
                                         if buffer > 3 {
-                                                AudioFeedback.deleted()
+                                                context.performAudioFeedback(.delete)
                                                 context.triggerHapticFeedback()
                                                 context.operate(.backspace)
                                         } else {
@@ -83,7 +83,7 @@ struct EditingPanelBackspaceKey: View {
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
                         buffer = 0
-                        AudioFeedback.deleted()
+                        context.performAudioFeedback(.delete)
                         context.triggerHapticFeedback()
                         context.operate(.backspace)
                 })
@@ -93,7 +93,7 @@ struct EditingPanelBackspaceKey: View {
                                 try? await Task.sleep(for: .milliseconds(100)) // 0.1s
                                 if isTouching {
                                         if buffer > 3 {
-                                                AudioFeedback.deleted()
+                                                context.performAudioFeedback(.delete)
                                                 context.triggerHapticFeedback()
                                                 context.operate(.backspace)
                                         } else {

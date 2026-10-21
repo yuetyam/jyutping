@@ -22,7 +22,7 @@ struct EditingPanelGlassJump2TailKey: View {
                         }
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
-                        AudioFeedback.modified()
+                        context.performAudioFeedback(.modify)
                         context.triggerHapticFeedback()
                         context.operate(.jumpToTail)
                 })
@@ -48,7 +48,7 @@ struct EditingPanelJump2TailKey: View {
                         }
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
-                        AudioFeedback.modified()
+                        context.performAudioFeedback(.modify)
                         context.triggerHapticFeedback()
                         context.operate(.jumpToTail)
                 })

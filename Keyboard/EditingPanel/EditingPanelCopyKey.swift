@@ -30,7 +30,7 @@ struct EditingPanelGlassCopyKey: View {
                         }
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
-                        AudioFeedback.modified()
+                        context.performAudioFeedback(.modify)
                         context.triggerHapticFeedback()
                         context.operate(.copyAllText)
                 })
@@ -64,7 +64,7 @@ struct EditingPanelCopyKey: View {
                         }
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
-                        AudioFeedback.modified()
+                        context.performAudioFeedback(.modify)
                         context.triggerHapticFeedback()
                         context.operate(.copyAllText)
                 })

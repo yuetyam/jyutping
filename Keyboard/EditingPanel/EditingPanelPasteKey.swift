@@ -28,7 +28,7 @@ private struct EditingPanelGlassSystemPasteKey: View {
                                                 }
                                         }
                                 }
-                                AudioFeedback.inputed()
+                                context.performAudioFeedback(.input)
                                 context.triggerHapticFeedback()
                                 if let text = strings.first, text.isNotEmpty {
                                         context.operate(.input(text))
@@ -71,7 +71,7 @@ struct EditingPanelGlassPasteKey: View {
                         }
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
-                        AudioFeedback.inputed()
+                        context.performAudioFeedback(.input)
                         context.triggerHapticFeedback()
                         context.operate(.paste)
                 })
@@ -103,7 +103,7 @@ struct EditingPanelPasteKey: View {
                         }
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
-                        AudioFeedback.inputed()
+                        context.performAudioFeedback(.input)
                         context.triggerHapticFeedback()
                         context.operate(.paste)
                 })

@@ -177,7 +177,7 @@ struct EnhancedInputKey: View {
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
                         pressStartedAt = clock.now
-                        AudioFeedback.inputed()
+                        context.performAudioFeedback(.input)
                         context.triggerHapticFeedback()
                 })
                 .onChange(of: isTouching) { _, touching in
@@ -227,7 +227,7 @@ struct EnhancedInputKey: View {
                                 }
                                 if isLongPressing {
                                         guard let selectedElement = unit.members.fetch(selectedIndex) else { return }
-                                        AudioFeedback.inputed()
+                                        context.performAudioFeedback(.input)
                                         context.triggerSelectionHapticFeedback()
                                         let text: String = context.keyboardCase.isLowercased ? selectedElement.text : selectedElement.text.uppercased()
                                         context.operate(.process(text))

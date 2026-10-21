@@ -30,7 +30,7 @@ struct EditingPanelGlassConversionKey: View {
                         }
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
-                        AudioFeedback.modified()
+                        context.performAudioFeedback(.modify)
                         context.triggerHapticFeedback()
                         context.operate(.convertAllText)
                 })
@@ -64,7 +64,7 @@ struct EditingPanelConversionKey: View {
                         }
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
-                        AudioFeedback.modified()
+                        context.performAudioFeedback(.modify)
                         context.triggerHapticFeedback()
                         context.operate(.convertAllText)
                 })

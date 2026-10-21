@@ -25,7 +25,7 @@ struct EditingPanelGlassMoveBackwardKey: View {
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
                         buffer = 0
-                        AudioFeedback.modified()
+                        context.performAudioFeedback(.modify)
                         context.triggerHapticFeedback()
                         context.operate(.moveCursorBackward)
                 })
@@ -35,7 +35,7 @@ struct EditingPanelGlassMoveBackwardKey: View {
                                 try? await Task.sleep(for: .milliseconds(100)) // 0.1s
                                 if isTouching {
                                         if buffer > 3 {
-                                                AudioFeedback.modified()
+                                                context.performAudioFeedback(.modify)
                                                 context.triggerHapticFeedback()
                                                 context.operate(.moveCursorBackward)
                                         } else {
@@ -69,7 +69,7 @@ struct EditingPanelMoveBackwardKey: View {
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
                         buffer = 0
-                        AudioFeedback.modified()
+                        context.performAudioFeedback(.modify)
                         context.triggerHapticFeedback()
                         context.operate(.moveCursorBackward)
                 })
@@ -79,7 +79,7 @@ struct EditingPanelMoveBackwardKey: View {
                                 try? await Task.sleep(for: .milliseconds(100)) // 0.1s
                                 if isTouching {
                                         if buffer > 3 {
-                                                AudioFeedback.modified()
+                                                context.performAudioFeedback(.modify)
                                                 context.triggerHapticFeedback()
                                                 context.operate(.moveCursorBackward)
                                         } else {

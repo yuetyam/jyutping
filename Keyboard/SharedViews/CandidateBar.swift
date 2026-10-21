@@ -14,7 +14,7 @@ struct CandidateBar: View {
                                 CandidateBarScrollViewIOS17()
                         }
                         Button {
-                                AudioFeedback.modified()
+                                context.performAudioFeedback(.modify)
                                 context.triggerHapticFeedback()
                                 context.updateKeyboardForm(to: .candidateBoard)
                         } label: {

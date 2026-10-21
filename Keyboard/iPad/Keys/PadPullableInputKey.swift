@@ -82,7 +82,7 @@ struct PadPullableInputKey: View {
                         .frame(width: keyWidth, height: keyHeight)
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
-                        AudioFeedback.inputed()
+                        context.performAudioFeedback(.input)
                 })
                 .simultaneousGesture(DragGesture(minimumDistance: 0)
                         .onChanged { state in

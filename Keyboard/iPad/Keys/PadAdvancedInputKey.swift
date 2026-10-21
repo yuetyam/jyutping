@@ -153,7 +153,7 @@ struct PadAdvancedInputKey: View {
                         .frame(width: keyWidth, height: keyHeight)
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
-                        AudioFeedback.inputed()
+                        context.performAudioFeedback(.input)
                 })
                 .simultaneousGesture(DragGesture(minimumDistance: 0)
                         .onChanged { state in
@@ -191,7 +191,7 @@ struct PadAdvancedInputKey: View {
                                 if isLongPressing {
                                         guard let selectedElement = unit.members.fetch(selectedIndex) else { return }
                                         let text: String = context.keyboardCase.isLowercased ? selectedElement.text : selectedElement.text.uppercased()
-                                        AudioFeedback.inputed()
+                                        context.performAudioFeedback(.input)
                                         context.operate(.process(text))
                                 } else if isPullingDown {
                                         let text: String = upper

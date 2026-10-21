@@ -33,7 +33,7 @@ struct PadBackspaceKey: View {
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
                         buffer = 0
-                        AudioFeedback.deleted()
+                        context.performAudioFeedback(.delete)
                         context.triggerHapticFeedback()
                         context.operate(.backspace)
                 })
@@ -41,7 +41,7 @@ struct PadBackspaceKey: View {
                         .onEnded { value in
                                 buffer = 0
                                 guard (value.translation.width < -44) || (value.translation.height < -44) else { return }
-                                AudioFeedback.deleted()
+                                context.performAudioFeedback(.delete)
                                 context.triggerHapticFeedback()
                                 context.operate(.clearBuffer)
                         }
@@ -52,7 +52,7 @@ struct PadBackspaceKey: View {
                                 try? await Task.sleep(for: .milliseconds(100)) // 0.1s
                                 if isTouching {
                                         if buffer > 3 {
-                                                AudioFeedback.deleted()
+                                                context.performAudioFeedback(.delete)
                                                 context.triggerHapticFeedback()
                                                 context.operate(.backspace)
                                         } else {

@@ -69,7 +69,7 @@ private struct GlassNumberPadKey: View {
                         .frame(width: width, height: height)
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
-                        AudioFeedback.inputed()
+                        context.performAudioFeedback(.input)
                         context.triggerHapticFeedback()
                         context.operate(.input(digit))
                 })
@@ -141,7 +141,7 @@ private struct LegacyNumberPadKey: View {
                         .frame(width: width, height: height)
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
-                        AudioFeedback.inputed()
+                        context.performAudioFeedback(.input)
                         context.triggerHapticFeedback()
                         context.operate(.input(digit))
                 })
@@ -158,7 +158,7 @@ private struct DecimalPadPointKey: View {
 
         var body: some View {
                 Button {
-                        AudioFeedback.inputed()
+                        context.performAudioFeedback(.input)
                         context.triggerHapticFeedback()
                         context.operate(.input(keyText))
                 } label: {
@@ -199,7 +199,7 @@ private struct NumberPadBackspaceKey: View {
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
                         buffer = 0
-                        AudioFeedback.deleted()
+                        context.performAudioFeedback(.delete)
                         context.triggerHapticFeedback()
                         context.operate(.backspace)
                 })
@@ -209,7 +209,7 @@ private struct NumberPadBackspaceKey: View {
                                 try? await Task.sleep(for: .milliseconds(100)) // 0.1s
                                 if isTouching {
                                         if buffer > 3 {
-                                                AudioFeedback.deleted()
+                                                context.performAudioFeedback(.delete)
                                                 context.triggerHapticFeedback()
                                                 context.operate(.backspace)
                                         } else {

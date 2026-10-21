@@ -133,7 +133,7 @@ struct PadUpperLowerInputKey: View {
                         .frame(width: keyWidth, height: keyHeight)
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
-                        AudioFeedback.inputed()
+                        context.performAudioFeedback(.input)
                 })
                 .simultaneousGesture(DragGesture(minimumDistance: 0)
                         .onChanged { state in
@@ -171,7 +171,7 @@ struct PadUpperLowerInputKey: View {
                                 if isLongPressing {
                                         guard let selectedElement = unit.members.fetch(selectedIndex) else { return }
                                         let text: String = selectedElement.text
-                                        AudioFeedback.inputed()
+                                        context.performAudioFeedback(.input)
                                         context.operate(.process(text))
                                 } else if isPullingDown {
                                         let text: String = upper

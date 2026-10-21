@@ -149,7 +149,7 @@ struct RightKey: View {
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
                         pressStartedAt = clock.now
-                        AudioFeedback.inputed()
+                        context.performAudioFeedback(.input)
                         context.triggerHapticFeedback()
                 })
                 .onChange(of: isTouching) { _, touching in
@@ -194,7 +194,7 @@ struct RightKey: View {
                                 }
                                 if isLongPressing {
                                         guard let selectedSymbol: String = elements.fetch(selectedIndex)?.text else { return }
-                                        AudioFeedback.inputed()
+                                        context.performAudioFeedback(.input)
                                         context.triggerSelectionHapticFeedback()
                                         context.operate(.input(selectedSymbol))
                                 } else if let pulledText = pulled {

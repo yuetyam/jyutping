@@ -32,7 +32,7 @@ struct EditingPanelGlassForwardDeleteKey: View {
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
                         buffer = 0
-                        AudioFeedback.deleted()
+                        context.performAudioFeedback(.delete)
                         context.triggerHapticFeedback()
                         context.operate(.forwardDelete)
                 })
@@ -42,7 +42,7 @@ struct EditingPanelGlassForwardDeleteKey: View {
                                 try? await Task.sleep(for: .milliseconds(100)) // 0.1s
                                 if isTouching {
                                         if buffer > 3 {
-                                                AudioFeedback.deleted()
+                                                context.performAudioFeedback(.delete)
                                                 context.triggerHapticFeedback()
                                                 context.operate(.forwardDelete)
                                         } else {
@@ -83,7 +83,7 @@ struct EditingPanelForwardDeleteKey: View {
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
                         buffer = 0
-                        AudioFeedback.deleted()
+                        context.performAudioFeedback(.delete)
                         context.triggerHapticFeedback()
                         context.operate(.forwardDelete)
                 })
@@ -93,7 +93,7 @@ struct EditingPanelForwardDeleteKey: View {
                                 try? await Task.sleep(for: .milliseconds(100)) // 0.1s
                                 if isTouching {
                                         if buffer > 3 {
-                                                AudioFeedback.deleted()
+                                                context.performAudioFeedback(.delete)
                                                 context.triggerHapticFeedback()
                                                 context.operate(.forwardDelete)
                                         } else {

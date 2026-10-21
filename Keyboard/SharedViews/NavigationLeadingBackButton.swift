@@ -36,7 +36,7 @@ struct NavigationLeadingBackButton: View {
                 }
         }
         private func action() {
-                AudioFeedback.modified()
+                context.performAudioFeedback(.modify)
                 context.triggerHapticFeedback()
                 context.routeBackKeyboardForm()
         }

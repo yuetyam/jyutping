@@ -39,7 +39,7 @@ struct DetailInspectingView: View {
                                                 if inputFrequency > 0 {
                                                         Menu {
                                                                 Button(role: .destructive) {
-                                                                        AudioFeedback.deleted()
+                                                                        context.performAudioFeedback(.delete)
                                                                         context.triggerHapticFeedback()
                                                                         InputMemory.forget(candidate.lexicon)
                                                                         inputFrequency = 0

@@ -43,7 +43,7 @@ struct CandidateBarScrollViewIOS17: View {
                                                 longPressAction: {
                                                         guard isReleaseActionTriggered.negative else { return }
                                                         defer { isLongPressActionTriggered = true }
-                                                        AudioFeedback.modified()
+                                                        context.performAudioFeedback(.modify)
                                                         // context.triggerHapticFeedback()
                                                         context.inspect(candidate)
                                                 },
@@ -57,7 +57,7 @@ struct CandidateBarScrollViewIOS17: View {
                                                 releaseAction: {
                                                         guard isLongPressActionTriggered.negative else { return }
                                                         defer { isReleaseActionTriggered = true }
-                                                        AudioFeedback.inputed()
+                                                        context.performAudioFeedback(.input)
                                                         // context.triggerSelectionHapticFeedback()
                                                         context.operate(.select(candidate))
                                                 }

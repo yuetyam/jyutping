@@ -63,7 +63,7 @@ struct SpaceKey: View {
                         doubleTappingDeadline = nil
                         longPressDeadline = now.advanced(by: .milliseconds(400))
                         previousDraggingDistance = 0
-                        AudioFeedback.modified()
+                        context.performAudioFeedback(.modify)
                         context.triggerHapticFeedback()
                         isLongPressEngaged = false
                 })
@@ -79,7 +79,7 @@ struct SpaceKey: View {
                                         // TODO: Dragging in markedText
                                         context.operate(.clearBuffer)
                                 } else {
-                                        AudioFeedback.modified()
+                                        context.performAudioFeedback(.modify)
                                         context.triggerHapticFeedback()
                                         context.operate(extra > 0 ? .moveCursorForward : .moveCursorBackward)
                                 }
@@ -109,7 +109,7 @@ struct SpaceKey: View {
                         guard Task.isCancelled.negative else { return }
                         if isTouching {
                                 guard longPressDeadline == deadline, isLongPressEngaged.negative else { return }
-                                AudioFeedback.modified()
+                                context.performAudioFeedback(.modify)
                                 context.triggerHapticFeedback()
                                 isLongPressEngaged = true
                         } else if doubleTappingDeadline == deadline {

@@ -23,7 +23,7 @@ struct SymbolSidebarScrollViewIOS17: View {
                                 ForEach(texts.indices, id: \.self) { index in
                                         let symbol: String = texts[index]
                                         ScrollViewButton {
-                                                AudioFeedback.inputed()
+                                                context.performAudioFeedback(.input)
                                                 context.triggerHapticFeedback()
                                                 context.operate(.input(symbol))
                                                 withAnimation {

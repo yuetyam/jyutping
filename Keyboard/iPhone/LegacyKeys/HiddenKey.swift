@@ -11,11 +11,11 @@ struct HiddenKey: View {
         var body: some View {
                 Button {
                         if key == .backspace {
-                                AudioFeedback.deleted()
+                                context.performAudioFeedback(.delete)
                                 context.triggerHapticFeedback()
                                 context.operate(.backspace)
                         } else if let virtualKey = key.virtualKey {
-                                AudioFeedback.inputed()
+                                context.performAudioFeedback(.input)
                                 context.triggerHapticFeedback()
                                 context.handle(virtualKey)
                         }

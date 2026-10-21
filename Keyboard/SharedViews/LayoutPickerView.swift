@@ -54,7 +54,7 @@ private struct LayoutOptionView: View {
         let isSelected: Bool
         var body: some View {
                 Button {
-                        AudioFeedback.modified()
+                        context.performAudioFeedback(.modify)
                         context.triggerSelectionHapticFeedback()
                         context.updateKeyboardLayout(to: layout)
                 } label: {

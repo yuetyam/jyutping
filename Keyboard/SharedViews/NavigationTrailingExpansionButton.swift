@@ -39,7 +39,7 @@ struct NavigationTrailingExpansionButton: View {
                 }
         }
         private func action() {
-                AudioFeedback.modified()
+                context.performAudioFeedback(.modify)
                 context.triggerHapticFeedback()
                 context.toggleKeyboardHeight()
         }

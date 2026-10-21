@@ -27,7 +27,7 @@ struct ToolBar: View {
                                 height: height,
                                 insets: EdgeInsets(top: 17 - extra, leading: 0, bottom: 17 - extra, trailing: 0)
                         ) {
-                                AudioFeedback.modified()
+                                context.performAudioFeedback(.modify)
                                 context.triggerHapticFeedback()
                                 context.updateKeyboardForm(to: .settings)
                         }
@@ -39,14 +39,14 @@ struct ToolBar: View {
                                 height: height,
                                 insets: EdgeInsets(top: 19 - extra, leading: 0, bottom: 20 - extra, trailing: 0)
                         ) {
-                                AudioFeedback.modified()
+                                context.performAudioFeedback(.modify)
                                 context.triggerHapticFeedback()
                                 context.updateKeyboardForm(to: .layoutPicker)
                         }
 
                         Spacer().frame(minWidth: 0, maxWidth: .infinity)
                         Button {
-                                AudioFeedback.modified()
+                                context.performAudioFeedback(.modify)
                                 context.triggerHapticFeedback()
                                 context.updateKeyboardForm(to: .emojiBoard)
                         } label: {
@@ -63,7 +63,7 @@ struct ToolBar: View {
 
                         Spacer().frame(minWidth: 0, maxWidth: .infinity)
                         Button {
-                                AudioFeedback.modified()
+                                context.performAudioFeedback(.modify)
                                 context.triggerSelectionHapticFeedback()
                                 context.toggleInputMethodMode()
                         } label: {
@@ -86,14 +86,14 @@ struct ToolBar: View {
                                 height: height,
                                 insets: EdgeInsets(top: 20 - extra, leading: 0, bottom: 19 - extra, trailing: 0)
                         ) {
-                                AudioFeedback.modified()
+                                context.performAudioFeedback(.modify)
                                 context.triggerHapticFeedback()
                                 context.updateKeyboardForm(to: .editingPanel)
                         }
 
                         Spacer().frame(minWidth: 0, maxWidth: .infinity)
                         Button {
-                                AudioFeedback.modified()
+                                context.performAudioFeedback(.modify)
                                 context.triggerSelectionHapticFeedback()
                                 context.toggleCharacterScriptVariant()
                         } label: {
@@ -116,7 +116,7 @@ struct ToolBar: View {
                                 height: height,
                                 insets: EdgeInsets(top: 19 - extra, leading: 0, bottom: 18 - extra, trailing: 0)
                         ) {
-                                AudioFeedback.modified()
+                                context.performAudioFeedback(.modify)
                                 context.triggerHapticFeedback()
                                 context.dismissKeyboard()
                         }

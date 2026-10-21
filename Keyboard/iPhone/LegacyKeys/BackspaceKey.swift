@@ -53,7 +53,7 @@ struct BackspaceKey: View {
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
                         repeatDeadline = clock.now.advanced(by: .milliseconds(400))
-                        AudioFeedback.deleted()
+                        context.performAudioFeedback(.delete)
                         context.triggerHapticFeedback()
                         context.operate(.backspace)
                 })
@@ -61,7 +61,7 @@ struct BackspaceKey: View {
                         .onEnded { value in
                                 repeatDeadline = nil
                                 guard (value.translation.width < -44) || (value.translation.height < -44) else { return }
-                                AudioFeedback.deleted()
+                                context.performAudioFeedback(.delete)
                                 context.triggerHapticFeedback()
                                 context.operate(.clearBuffer)
                         }
@@ -75,7 +75,7 @@ struct BackspaceKey: View {
                         }
                         guard Task.isCancelled.negative else { return }
                         guard isTouching, repeatDeadline == deadline else { return }
-                        AudioFeedback.deleted()
+                        context.performAudioFeedback(.delete)
                         context.triggerHapticFeedback()
                         context.operate(.backspace)
                         repeatDeadline = clock.now.advanced(by: .milliseconds(100))

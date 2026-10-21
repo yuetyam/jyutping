@@ -25,7 +25,7 @@ struct EditingPanelGlassMoveForwardKey: View {
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
                         buffer = 0
-                        AudioFeedback.modified()
+                        context.performAudioFeedback(.modify)
                         context.triggerHapticFeedback()
                         context.operate(.moveCursorForward)
                 })
@@ -35,7 +35,7 @@ struct EditingPanelGlassMoveForwardKey: View {
                                 try? await Task.sleep(for: .milliseconds(100)) // 0.1s
                                 if isTouching {
                                         if buffer > 3 {
-                                                AudioFeedback.modified()
+                                                context.performAudioFeedback(.modify)
                                                 context.triggerHapticFeedback()
                                                 context.operate(.moveCursorForward)
                                         } else {
@@ -69,7 +69,7 @@ struct EditingPanelMoveForwardKey: View {
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
                         buffer = 0
-                        AudioFeedback.modified()
+                        context.performAudioFeedback(.modify)
                         context.triggerHapticFeedback()
                         context.operate(.moveCursorForward)
                 })
@@ -79,7 +79,7 @@ struct EditingPanelMoveForwardKey: View {
                                 try? await Task.sleep(for: .milliseconds(100)) // 0.1s
                                 if isTouching {
                                         if buffer > 3 {
-                                                AudioFeedback.modified()
+                                                context.performAudioFeedback(.modify)
                                                 context.triggerHapticFeedback()
                                                 context.operate(.moveCursorForward)
                                         } else {

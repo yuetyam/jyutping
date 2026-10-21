@@ -1501,7 +1501,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         }
 
         @objc func globeKeyFeedback() {
-                AudioFeedback.modified()
+                performAudioFeedback(.modify)
                 triggerHapticFeedback()
         }
 }

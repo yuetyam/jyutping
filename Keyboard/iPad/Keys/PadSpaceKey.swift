@@ -60,7 +60,7 @@ struct PadSpaceKey: View {
                         doubleTappingDeadline = nil
                         longPressDeadline = now.advanced(by: .milliseconds(400))
                         previousDraggingDistance = 0
-                        AudioFeedback.modified()
+                        context.performAudioFeedback(.modify)
                         isLongPressEngaged = false
                 })
                 .simultaneousGesture(DragGesture(minimumDistance: 0)
@@ -74,7 +74,7 @@ struct PadSpaceKey: View {
                                         // TODO: Dragging in markedText
                                         context.operate(.clearBuffer)
                                 } else {
-                                        AudioFeedback.modified()
+                                        context.performAudioFeedback(.modify)
                                         context.operate(extra > 0 ? .moveCursorForward : .moveCursorBackward)
                                 }
                         }
@@ -103,7 +103,7 @@ struct PadSpaceKey: View {
                         guard Task.isCancelled.negative else { return }
                         if isTouching {
                                 guard longPressDeadline == deadline, isLongPressEngaged.negative else { return }
-                                AudioFeedback.modified()
+                                context.performAudioFeedback(.modify)
                                 isLongPressEngaged = true
                         } else if doubleTappingDeadline == deadline {
                                 doubleTappingDeadline = nil

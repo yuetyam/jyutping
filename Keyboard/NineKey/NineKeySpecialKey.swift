@@ -31,7 +31,7 @@ struct GlassNineKeySpecialKey: View {
                         .frame(width: context.nineKeyWidthUnit * PresetConstant.tailoredInputKeyWidthCoefficient, height: context.heightUnit)
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
-                        AudioFeedback.inputed()
+                        context.performAudioFeedback(.input)
                         context.triggerHapticFeedback()
                         if context.inputStage.isBuffering.negative {
                                 context.nineKeyProcess(.special)
@@ -67,7 +67,7 @@ struct NineKeySpecialKey: View {
                         .frame(width: context.nineKeyWidthUnit * PresetConstant.tailoredInputKeyWidthCoefficient, height: context.heightUnit)
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
-                        AudioFeedback.inputed()
+                        context.performAudioFeedback(.input)
                         context.triggerHapticFeedback()
                         if context.inputStage.isBuffering.negative {
                                 context.nineKeyProcess(.special)

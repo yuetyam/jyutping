@@ -80,7 +80,7 @@ struct ShiftKey: View {
                         // Suspend second-tap expiry during the press, even if the previous expiry task has not resumed yet.
                         doubleTappingDeadline = nil
                         longPressDeadline = now.advanced(by: .milliseconds(400))
-                        AudioFeedback.modified()
+                        context.performAudioFeedback(.modify)
                         context.triggerHapticFeedback()
                         let currentKeyboardCase = context.keyboardCase
                         let didKeyboardCaseSwitchBack: Bool = (currentKeyboardCase == previousKeyboardCase)
@@ -111,7 +111,7 @@ struct ShiftKey: View {
                                 guard longPressDeadline == deadline else { return }
                                 longPressDeadline = nil
                                 isInTheMediumOfDoubleTapping = false
-                                AudioFeedback.modified()
+                                context.performAudioFeedback(.modify)
                                 context.triggerHapticFeedback()
                                 context.operate(.doubleShift)
                         } else if doubleTappingDeadline == deadline {
