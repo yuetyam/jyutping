@@ -72,7 +72,7 @@ struct T18EnhancedInputKey: View {
                                         let leadingOffset: CGFloat = side.isLeading ? offsetX : 0
                                         let trailingOffset: CGFloat = side.isTrailing ? offsetX : 0
                                         ExpansiveBubbleShape(side: side, expansionCount: expansionCount)
-                                                .fill(colorScheme.previewBubbleColor)
+                                                .fill(colorScheme.bubbleBackground(style: context.appearanceStyle))
                                                 .shadow(color: .shadowGray, radius: 1)
                                                 .overlay {
                                                         HStack(spacing: 0) {
@@ -108,7 +108,7 @@ struct T18EnhancedInputKey: View {
                                                 .padding(insets)
                                 } else {
                                         RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
-                                                .fill(isTouching ? colorScheme.activeInputKeyColor : colorScheme.inputKeyColor)
+                                                .fill(colorScheme.inputKeyBackground(style: context.appearanceStyle, isPreviewEnabled: false, isInteracting: isTouching))
                                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                                 .padding(insets)
                                         ForEach(unit.primary.extras.indices, id: \.self) { index in

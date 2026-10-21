@@ -21,6 +21,7 @@ struct LegacyInputModeSwitch: View {
         private let partialWidth: CGFloat
         private let characterOffset: CGFloat
 
+        @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
 
         var body: some View {
@@ -32,7 +33,7 @@ struct LegacyInputModeSwitch: View {
                                         .font(isCantoneseMode ? .staticBody : .mini)
                                         .padding(.trailing, isCantoneseMode ? 0 : characterOffset)
                                         .frame(width: partialWidth, height: height)
-                                        .background(isCantoneseMode ? colorScheme.inputKeyColor : Color.clear, in: .capsule)
+                                        .background(isCantoneseMode ? colorScheme.inputKeyBackground(style: context.appearanceStyle, isPreviewEnabled: false, isInteracting: false) : Color.clear, in: .capsule)
                         }
                         ZStack(alignment: .trailing) {
                                 Color.clear
@@ -40,11 +41,11 @@ struct LegacyInputModeSwitch: View {
                                         .font(isCantoneseMode ? .mini : .staticBody)
                                         .padding(.leading, isCantoneseMode ? characterOffset : 0)
                                         .frame(width: partialWidth, height: height)
-                                        .background(isCantoneseMode ? Color.clear : colorScheme.inputKeyColor, in: .capsule)
+                                        .background(isCantoneseMode ? Color.clear : colorScheme.inputKeyBackground(style: context.appearanceStyle, isPreviewEnabled: false, isInteracting: false), in: .capsule)
                         }
                 }
                 .frame(width: width, height: height)
-                .background(colorScheme.activeInputKeyColor, in: .capsule)
+                .background(colorScheme.inputKeyBackground(style: context.appearanceStyle, isPreviewEnabled: false, isInteracting: true), in: .capsule)
         }
 }
 

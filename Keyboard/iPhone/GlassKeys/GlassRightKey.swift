@@ -70,8 +70,8 @@ struct GlassRightKey: View {
                 let baseWidth: CGFloat = keyWidth - insets.horizontalTotal
                 let baseHeight: CGFloat = keyHeight - insets.verticalTotal
                 let previewBottomOffset: CGFloat = keyboardInterface.previewBottomOffset(keyWidth: keyWidth, keyHeight: keyHeight, insets: insets)
-                let shouldPreviewKey: Bool = Options.keyTextPreview
-                let displayForm = KeyDisplayForm.responsive(isInteracting: isTouching, isLongPressing: isLongPressing, shouldPreview: shouldPreviewKey)
+                let isPreviewEnabled: Bool = context.isKeyTextPreviewEnabled
+                let displayForm = KeyDisplayForm.responsive(isInteracting: isTouching, isLongPressEngaged: isLongPressing, isPreviewEnabled: isPreviewEnabled)
                 let shouldShowExtraSymbols: Bool = Options.inputKeyStyle.isSymbolApplied
                 let interactionDeadline = longPressDeadline
                 Button(action: {}) {

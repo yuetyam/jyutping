@@ -56,16 +56,17 @@ struct SymbolInputKey: View {
                 let keyboardInterface = context.keyboardInterface
                 let insets = keyboardInterface.keyShapeInsets
                 let previewBottomOffset: CGFloat = keyboardInterface.previewBottomOffset(keyWidth: keyWidth, keyHeight: keyHeight, insets: insets)
-                let shouldPreviewKey: Bool = Options.keyTextPreview
-                let displayForm: KeyDisplayForm = KeyDisplayForm.responsive(isInteracting: isTouching, isLongPressing: false, shouldPreview: shouldPreviewKey)
-                let activeColor: Color = shouldPreviewKey ? colorScheme.inputKeyColor : colorScheme.activeInputKeyColor
+                let isPreviewEnabled: Bool = context.isKeyTextPreviewEnabled
+                let displayForm: KeyDisplayForm = KeyDisplayForm.responsive(isInteracting: isTouching, isLongPressEngaged: false, isPreviewEnabled: isPreviewEnabled)
+                let keyColor = colorScheme.inputKeyBackground(style: context.appearanceStyle, isPreviewEnabled: isPreviewEnabled, isInteracting: isTouching)
+                let bubbleColor = colorScheme.bubbleBackground(style: context.appearanceStyle)
                 Button(action: {}) {
                         ZStack {
                                 Color.interactiveClear
                                 switch displayForm {
                                 case .previewing, .expanding:
                                         BubbleShape()
-                                                .fill(colorScheme.previewBubbleColor)
+                                                .fill(bubbleColor)
                                                 .shadow(color: .shadowGray, radius: 1)
                                                 .overlay {
                                                         Text(verbatim: keyText)
@@ -75,7 +76,7 @@ struct SymbolInputKey: View {
                                                 .padding(insets)
                                 case .normal, .reflecting:
                                         RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
-                                                .fill(isTouching ? activeColor : colorScheme.inputKeyColor)
+                                                .fill(keyColor)
                                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                                 .padding(insets)
                                         Text(verbatim: keyText).font(.compactKeyLabel)

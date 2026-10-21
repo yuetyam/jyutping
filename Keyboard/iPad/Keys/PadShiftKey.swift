@@ -15,11 +15,12 @@ struct PadShiftKey: View {
         @Environment(\.colorScheme) private var colorScheme
 
         private var backColor: Color {
-                if #available(iOSApplicationExtension 26.0, *) {
-                        return isTouching ? colorScheme.activeActionKeyColor : colorScheme.actionKeyColor
-                } else {
-                        return context.keyboardCase.isLowercased ? colorScheme.actionKeyColor : colorScheme.activeActionKeyColor
+                let appearanceStyle = context.appearanceStyle
+                let isInteracting: Bool = switch appearanceStyle {
+                case .classic: (isTouching || context.keyboardCase.isCapitalized)
+                default: isTouching
                 }
+                return colorScheme.actionKeyBackground(style: appearanceStyle, isInteracting: isInteracting)
         }
 
         /// From idle to the very first touch

@@ -19,6 +19,7 @@ struct LegacyCharacterSetSwitch: View {
         private let partialWidth: CGFloat
         private let characterOffset: CGFloat
 
+        @EnvironmentObject private var context: KeyboardViewController
         @Environment(\.colorScheme) private var colorScheme
 
         var body: some View {
@@ -30,7 +31,7 @@ struct LegacyCharacterSetSwitch: View {
                                         .font(isMutilatedMode ? .small : .large)
                                         .padding(.trailing, isMutilatedMode ? characterOffset : 0)
                                         .frame(width: partialWidth, height: height)
-                                        .background(isMutilatedMode ? Color.clear : colorScheme.inputKeyColor, in: .capsule)
+                                        .background(isMutilatedMode ? Color.clear : colorScheme.inputKeyBackground(style: context.appearanceStyle, isPreviewEnabled: false, isInteracting: false), in: .capsule)
                         }
                         ZStack(alignment: .trailing) {
                                 Color.clear
@@ -38,11 +39,11 @@ struct LegacyCharacterSetSwitch: View {
                                         .font(isMutilatedMode ? .large : .small)
                                         .padding(.leading, isMutilatedMode ? 0 : characterOffset)
                                         .frame(width: partialWidth, height: height)
-                                        .background(isMutilatedMode ? colorScheme.inputKeyColor : Color.clear, in: .capsule)
+                                        .background(isMutilatedMode ? colorScheme.inputKeyBackground(style: context.appearanceStyle, isPreviewEnabled: false, isInteracting: false) : Color.clear, in: .capsule)
                         }
                 }
                 .frame(width: width, height: height)
-                .background(colorScheme.activeInputKeyColor, in: .capsule)
+                .background(colorScheme.inputKeyBackground(style: context.appearanceStyle, isPreviewEnabled: false, isInteracting: true), in: .capsule)
         }
 }
 

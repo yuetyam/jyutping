@@ -26,7 +26,7 @@ extension ColorScheme {
                 }
         }
 
-        func actionKeyBackground(style: AppearanceStyle, isPreviewEnabled: Bool = false, isInteracting: Bool) -> Color {
+        func actionKeyBackground(style: AppearanceStyle, isInteracting: Bool) -> Color {
                 return isInteracting ? actionReflection(style: style) : actionBackground(style: style)
         }
         private func actionBackground(style: AppearanceStyle) -> Color {
@@ -49,36 +49,6 @@ extension ColorScheme {
                 }
         }
 
-        /// Input key background color
-        @available(*, deprecated, message: "Use inputKeyBackground(style:, isPreviewEnabled:, isInteracting:) instead")
-        var inputKeyColor: Color {
-                return isDark ? .darkInput : .lightInput
-        }
-
-        /// Input key tapping / highlighting background color
-        @available(*, deprecated, message: "Use inputKeyBackground(style:, isPreviewEnabled:, isInteracting:) instead")
-        var activeInputKeyColor: Color {
-                return isDark ? .activeDarkInput : .activeLightInput
-        }
-
-        /// Action (modifier) key background color
-        @available(*, deprecated, message: "Use actionKeyBackground(style:, isInteracting:) instead")
-        var actionKeyColor: Color {
-                return isDark ? .darkAction : .lightAction
-        }
-
-        /// Action (modifier) key tapping / highlighting background color
-        @available(*, deprecated, message: "Use actionKeyBackground(style:, isInteracting:) instead")
-        var activeActionKeyColor: Color {
-                return isDark ? .activeDarkAction : .activeLightAction
-        }
-
-        /// Input key bubble preview background color
-        @available(*, deprecated, message: "Use bubbleBackground(style:) instead")
-        var previewBubbleColor: Color {
-                return isDark ? .solidDarkInput : .solidLightInput
-        }
-
         var glassShadow: Color {
                 return isDark ? Color.clear : Color.black.opacity(0.66)
         }
@@ -91,14 +61,6 @@ extension Color {
 
         /// KeyView shadow color
         static let shadowGray: Color = Color.gray.opacity(0.35)
-
-        private static let isLiquidGlassPreferred: Bool = {
-                if #available(iOSApplicationExtension 26.0, *) {
-                        return true
-                } else {
-                        return false
-                }
-        }()
 }
 
 private extension Color {
@@ -111,22 +73,6 @@ private extension Color {
         static let solidShallowDark   : Color = Color(white: 0.45, opacity: 0.95)
         static let solidEmphaticDark  : Color = Color(white: 0.3, opacity: 0.95)
 }
-
-private extension Color {
-        static let lightInput       : Color = isLiquidGlassPreferred ? shallowLight : white
-        static let lightAction      : Color = isLiquidGlassPreferred ? shallowLight : legacyEmphaticLight
-        static let activeLightInput : Color = isLiquidGlassPreferred ? emphaticLight : legacyEmphaticLight
-        static let activeLightAction: Color = isLiquidGlassPreferred ? emphaticLight : shallowLight
-
-        static let darkInput        : Color = isLiquidGlassPreferred ? emphaticDark : shallowDark
-        static let darkAction       : Color = emphaticDark
-        static let activeDarkInput  : Color = isLiquidGlassPreferred ? shallowDark : emphaticDark
-        static let activeDarkAction : Color = shallowDark
-
-        static let solidLightInput  : Color = isLiquidGlassPreferred ? shallowLight : white
-        static let solidDarkInput   : Color = isLiquidGlassPreferred ? solidEmphaticDark : solidShallowDark
-}
-
 
 /*
 oldKeyboardLightBackground

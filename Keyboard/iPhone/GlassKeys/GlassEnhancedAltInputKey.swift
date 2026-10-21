@@ -111,7 +111,7 @@ struct GlassEnhancedAltInputKey: View {
                 let baseWidth: CGFloat = keyWidth - insets.horizontalTotal  // The visual width of the key shape in `KeyDisplayForm.normal` form
                 let baseHeight: CGFloat = keyHeight - insets.verticalTotal  // The visual height of the key shape in `KeyDisplayForm.normal` form
                 let previewBottomOffset = keyboardInterface.previewBottomOffset(keyWidth: keyWidth, keyHeight: keyHeight, insets: insets)
-                let displayForm = KeyDisplayForm.responsive(isInteracting: isTouching, isLongPressing: isLongPressing, shouldPreview: false)
+                let displayForm = KeyDisplayForm.responsive(isInteracting: isTouching, isLongPressEngaged: isLongPressing, isPreviewEnabled: false)
                 let shouldShowLowercaseKeys: Bool = Options.showLowercaseKeys && context.keyboardCase.isLowercased
                 let textCase: Text.Case = shouldShowLowercaseKeys ? .lowercase : .uppercase
                 let shouldAdjustKeyTextPosition: Bool = shouldShowLowercaseKeys && context.keyboardForm.isPrimary && (virtual?.isNumber.negative ?? true)

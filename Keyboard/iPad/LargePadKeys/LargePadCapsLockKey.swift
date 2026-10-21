@@ -10,11 +10,12 @@ struct LargePadCapsLockKey: View {
         @Environment(\.colorScheme) private var colorScheme
 
         private var backColor: Color {
-                if #available(iOSApplicationExtension 26.0, *) {
-                        return isTouching ? colorScheme.activeActionKeyColor : colorScheme.actionKeyColor
-                } else {
-                        return context.keyboardCase.isCapsLocked ? colorScheme.activeActionKeyColor : colorScheme.actionKeyColor
+                let appearanceStyle = context.appearanceStyle
+                let isInteracting: Bool = switch appearanceStyle {
+                case .classic: (isTouching || context.keyboardCase.isCapsLocked)
+                default: isTouching
                 }
+                return colorScheme.actionKeyBackground(style: appearanceStyle, isInteracting: isInteracting)
         }
 
         @State private var isTouching: Bool = false
@@ -36,7 +37,7 @@ struct LargePadCapsLockKey: View {
                                 ZStack(alignment: .topLeading) {
                                         Color.clear
                                         Circle()
-                                                .fill(context.keyboardCase.isCapsLocked ? Color.green : colorScheme.activeActionKeyColor.opacity(0.75))
+                                                .fill(context.keyboardCase.isCapsLocked ? Color.green : colorScheme.actionKeyBackground(style: context.appearanceStyle, isInteracting: true).opacity(0.75))
                                                 .frame(width: 5, height: 5)
                                 }
                                 .padding(.vertical, verticalPadding + 8)

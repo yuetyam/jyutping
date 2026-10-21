@@ -53,7 +53,7 @@ struct NineKeySpecialKey: View {
                                 Color.interactiveClear
                                 ZStack(alignment: .bottom) {
                                         RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius)
-                                                .fill(isTouching ? colorScheme.activeInputKeyColor : colorScheme.inputKeyColor)
+                                                .fill(colorScheme.inputKeyBackground(style: context.appearanceStyle, isPreviewEnabled: false, isInteracting: isTouching))
                                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                         Text(verbatim: isBuffering ? PresetConstant.separate : PresetConstant.reverseLookup)
                                                 .font(.labelCaption)

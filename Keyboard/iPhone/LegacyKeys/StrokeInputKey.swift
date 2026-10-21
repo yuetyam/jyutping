@@ -41,9 +41,10 @@ struct StrokeInputKey: View {
                 let keyboardInterface = context.keyboardInterface
                 let insets = keyboardInterface.keyShapeInsets
                 let previewBottomOffset = keyboardInterface.previewBottomOffset(keyWidth: keyWidth, keyHeight: keyHeight, insets: insets)
-                let shouldPreviewKey: Bool = Options.keyTextPreview
-                let activeColor: Color = shouldPreviewKey ? colorScheme.inputKeyColor : colorScheme.activeInputKeyColor
-                let displayForm = KeyDisplayForm.responsive(isInteracting: isTouching, isLongPressing: false, shouldPreview: shouldPreviewKey)
+                let isPreviewEnabled: Bool = context.isKeyTextPreviewEnabled
+                let keyColor = colorScheme.inputKeyBackground(style: context.appearanceStyle, isPreviewEnabled: isPreviewEnabled, isInteracting: isTouching)
+                let bubbleColor = colorScheme.bubbleBackground(style: context.appearanceStyle)
+                let displayForm = KeyDisplayForm.responsive(isInteracting: isTouching, isLongPressEngaged: false, isPreviewEnabled: isPreviewEnabled)
                 let shouldShowLowercaseKeys: Bool = Options.showLowercaseKeys && context.keyboardCase.isLowercased
                 let textCase: Text.Case = shouldShowLowercaseKeys ? .lowercase : .uppercase
                 Button(action: {}) {
@@ -52,7 +53,7 @@ struct StrokeInputKey: View {
                                 switch displayForm {
                                 case .previewing, .expanding:
                                         BubbleShape()
-                                                .fill(colorScheme.previewBubbleColor)
+                                                .fill(bubbleColor)
                                                 .shadow(color: .shadowGray, radius: 1)
                                                 .overlay {
                                                         Text(verbatim: strokeText ?? virtual.text)
@@ -63,7 +64,7 @@ struct StrokeInputKey: View {
                                                 .padding(insets)
                                 case .normal, .reflecting:
                                         RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
-                                                .fill(isTouching ? activeColor : colorScheme.inputKeyColor)
+                                                .fill(keyColor)
                                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                                 .padding(insets)
                                         if let strokeText {

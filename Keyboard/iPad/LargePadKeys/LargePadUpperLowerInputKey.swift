@@ -78,7 +78,7 @@ struct LargePadUpperLowerInputKey: View {
                                         let leadingOffset: CGFloat = side.isLeading ? offsetX : 0
                                         let trailingOffset: CGFloat = side.isTrailing ? offsetX : 0
                                         PadExpansiveBubbleShape(side: side, expansionCount: expansionCount)
-                                                .fill(colorScheme.previewBubbleColor)
+                                                .fill(colorScheme.bubbleBackground(style: context.appearanceStyle))
                                                 .shadow(color: .shadowGray, radius: 1)
                                                 .overlay {
                                                         HStack(spacing: 0) {
@@ -115,7 +115,7 @@ struct LargePadUpperLowerInputKey: View {
                                                 .padding(insets)
                                 } else {
                                         RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius)
-                                                .fill(isTouching ? colorScheme.activeInputKeyColor : colorScheme.inputKeyColor)
+                                                .fill(colorScheme.inputKeyBackground(style: context.appearanceStyle, isPreviewEnabled: false, isInteracting: isTouching))
                                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                                 .padding(insets)
                                         if isPullingDown {

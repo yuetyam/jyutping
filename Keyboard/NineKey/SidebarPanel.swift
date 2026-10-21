@@ -41,7 +41,7 @@ struct SidebarPanel: View {
                 let texts: [String] = context.keyboardForm.isDedicatedNumbers ? symbols : punctuation
                 ZStack {
                         RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius)
-                                .fill(colorScheme.actionKeyColor)
+                                .fill(colorScheme.actionKeyBackground(style: context.appearanceStyle, isInteracting: false))
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                         if #available(iOSApplicationExtension 18.0, *) {
                                 if context.inputStage.isBuffering {

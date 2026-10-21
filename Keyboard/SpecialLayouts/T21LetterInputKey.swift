@@ -36,9 +36,10 @@ struct T21LetterInputKey: View {
                 let keyboardInterface = context.keyboardInterface
                 let insets = keyboardInterface.keyShapeInsets
                 let previewBottomOffset = keyboardInterface.previewBottomOffset(keyWidth: keyWidth, keyHeight: keyHeight, insets: insets)
-                let shouldPreviewKey: Bool = Options.keyTextPreview
-                let activeColor: Color = shouldPreviewKey ? colorScheme.inputKeyColor : colorScheme.activeInputKeyColor
-                let displayForm = KeyDisplayForm.responsive(isInteracting: isTouching, isLongPressing: false, shouldPreview: shouldPreviewKey)
+                let isPreviewEnabled: Bool = context.isKeyTextPreviewEnabled
+                let keyColor = colorScheme.inputKeyBackground(style: context.appearanceStyle, isPreviewEnabled: isPreviewEnabled, isInteracting: isTouching)
+                let bubbleColor = colorScheme.bubbleBackground(style: context.appearanceStyle)
+                let displayForm = KeyDisplayForm.responsive(isInteracting: isTouching, isLongPressEngaged: false, isPreviewEnabled: isPreviewEnabled)
                 let shouldShowLowercaseKeys: Bool = Options.showLowercaseKeys && context.keyboardCase.isLowercased
                 let textCase: Text.Case = shouldShowLowercaseKeys ? .lowercase : .uppercase
                 let keyTextBottomInset: CGFloat = shouldShowLowercaseKeys ? 3 : 0
@@ -48,7 +49,7 @@ struct T21LetterInputKey: View {
                                 switch displayForm {
                                 case .previewing, .expanding:
                                         BubbleShape()
-                                                .fill(colorScheme.previewBubbleColor)
+                                                .fill(bubbleColor)
                                                 .shadow(color: .shadowGray, radius: 1)
                                                 .overlay {
                                                         Text(verbatim: virtual.text)
@@ -59,7 +60,7 @@ struct T21LetterInputKey: View {
                                                 .padding(insets)
                                 case .normal, .reflecting:
                                         RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
-                                                .fill(isTouching ? activeColor : colorScheme.inputKeyColor)
+                                                .fill(keyColor)
                                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                                 .padding(insets)
                                         Text(verbatim: virtual.text)

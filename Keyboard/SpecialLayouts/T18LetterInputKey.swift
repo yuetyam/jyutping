@@ -30,7 +30,7 @@ struct T18LetterInputKey: View {
                         ZStack {
                                 Color.interactiveClear
                                 RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
-                                        .fill(isTouching ? colorScheme.activeInputKeyColor : colorScheme.inputKeyColor)
+                                        .fill(colorScheme.inputKeyBackground(style: context.appearanceStyle, isPreviewEnabled: false, isInteracting: isTouching))
                                         .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                         .padding(insets)
                                 Text(verbatim: virtual.text)

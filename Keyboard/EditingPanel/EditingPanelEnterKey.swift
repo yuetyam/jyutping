@@ -79,17 +79,10 @@ struct EditingPanelEnterKey: View {
                 let inset = context.keyboardInterface.editingKeyInset
                 let isDefaultReturn: Bool = context.enterKeyType.isDefaultReturn
                 let keyState: EnterKeyState = context.enterKeyState
-                let backColor: Color = {
-                        guard isTouching.negative else { return colorScheme.activeActionKeyColor }
-                        switch keyState {
-                        case .bufferingMutilated, .bufferingTraditional:
-                                return colorScheme.actionKeyColor
-                        case .standbyABC, .standbyMutilated, .standbyTraditional:
-                                return isDefaultReturn ? colorScheme.actionKeyColor : Color.accentColor
-                        case .unavailableABC, .unavailableMutilated, .unavailableTraditional:
-                                return colorScheme.actionKeyColor
-                        }
-                }()
+                let backColor: Color = switch (isDefaultReturn, keyState.isStandby) {
+                case (false, true): Color.accentColor
+                default: colorScheme.actionKeyBackground(style: context.appearanceStyle, isInteracting: isTouching)
+                }
                 let foreColor: Color = {
                         guard isTouching.negative else { return Color.primary }
                         switch keyState {

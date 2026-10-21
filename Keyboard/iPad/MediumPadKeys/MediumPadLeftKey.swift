@@ -21,7 +21,7 @@ struct MediumPadLeftKey: View {
                         ZStack {
                                 Color.interactiveClear
                                 RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius)
-                                        .fill(isTouching ? colorScheme.activeActionKeyColor : colorScheme.actionKeyColor)
+                                        .fill(colorScheme.actionKeyBackground(style: context.appearanceStyle, isInteracting: isTouching))
                                         .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                         .padding(.vertical, verticalPadding)
                                         .padding(.horizontal, horizontalPadding)

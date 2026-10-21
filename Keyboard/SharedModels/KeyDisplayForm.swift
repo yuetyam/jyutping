@@ -31,19 +31,9 @@ enum KeyDisplayForm: Int, CaseIterable {
         ///
         /// - Parameters:
         ///   - isInteracting: Whether the key is currently being interacted with, such as its button being pressed.
-        ///   - isLongPressing: Whether the long-press alternative selector has been activated.
-        ///   - shouldPreview: Whether an ordinary interaction shows a text preview.
+        ///   - isLongPressEngaged: Whether the long-press alternative selector has been activated.
+        ///   - isPreviewEnabled: Whether an ordinary interaction shows a text preview.
         /// - Returns: The responsive display form.
-        @available(*, deprecated, message: "Use responsive(isInteracting:, isLongPressEngaged:, isPreviewEnabled:) instead")
-        static func responsive(isInteracting: Bool, isLongPressing: Bool = false, shouldPreview: Bool = true) -> KeyDisplayForm {
-                switch (isInteracting, isLongPressing, shouldPreview) {
-                case (_, true, _): .expanding
-                case (true, false, true): .previewing
-                case (true, false, false): .reflecting
-                default: .normal
-                }
-        }
-
         static func responsive(isInteracting: Bool, isLongPressEngaged: Bool = false, isPreviewEnabled: Bool = true) -> KeyDisplayForm {
                 switch (isInteracting, isLongPressEngaged, isPreviewEnabled) {
                 case (_, true, _): .expanding

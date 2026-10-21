@@ -42,19 +42,6 @@ struct Options {
                 UserDefaults.standard.set(value, forKey: UserSettingsKey.KeyTextPreview)
         }
 
-        @available(*, deprecated, message: "Use context.isKeyTextPreviewEnabled instead")
-        nonisolated(unsafe) private(set) static var keyTextPreview: Bool = {
-                let savedValue: Int = UserDefaults.standard.integer(forKey: UserSettingsKey.KeyTextPreview)
-                return savedValue != 2
-        }()
-
-        @available(*, deprecated, message: "Use context.updateKeyTextPreview(to:) instead")
-        static func updateKeyTextPreview(to state: Bool) {
-                keyTextPreview = state
-                let value: Int = state ? 1 : 2
-                UserDefaults.standard.set(value, forKey: UserSettingsKey.KeyTextPreview)
-        }
-
         static func fetchKeyHeightOffset() -> CGFloat {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: UserSettingsKey.KeyHeightOffset)
                 return CGFloat(savedValue)

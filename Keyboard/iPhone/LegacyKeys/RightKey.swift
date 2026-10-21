@@ -50,9 +50,10 @@ struct RightKey: View {
                 let baseWidth: CGFloat = keyWidth - insets.horizontalTotal
                 let baseHeight: CGFloat = keyHeight - insets.verticalTotal
                 let previewBottomOffset: CGFloat = keyboardInterface.previewBottomOffset(keyWidth: keyWidth, keyHeight: keyHeight, insets: insets)
-                let shouldPreviewKey: Bool = Options.keyTextPreview
-                let activeColor: Color = shouldPreviewKey ? colorScheme.inputKeyColor : colorScheme.activeInputKeyColor
-                let displayForm = KeyDisplayForm.responsive(isInteracting: isTouching, isLongPressing: isLongPressing, shouldPreview: shouldPreviewKey)
+                let isPreviewEnabled: Bool = context.isKeyTextPreviewEnabled
+                let keyColor = colorScheme.inputKeyBackground(style: context.appearanceStyle, isPreviewEnabled: isPreviewEnabled, isInteracting: isTouching)
+                let bubbleColor = colorScheme.bubbleBackground(style: context.appearanceStyle)
+                let displayForm = KeyDisplayForm.responsive(isInteracting: isTouching, isLongPressEngaged: isLongPressing, isPreviewEnabled: isPreviewEnabled)
                 let shouldShowExtraSymbols: Bool = Options.inputKeyStyle.isSymbolApplied
                 Button(action: {}) {
                         ZStack {
@@ -63,7 +64,7 @@ struct RightKey: View {
                                         let expansionCount: Int = symbolCount - 1
                                         let trailingOffset: CGFloat = baseWidth * CGFloat(expansionCount)
                                         ExpansiveBubbleShape(side: .trailing, expansionCount: expansionCount)
-                                                .fill(colorScheme.previewBubbleColor)
+                                                .fill(bubbleColor)
                                                 .shadow(color: .shadowGray, radius: 1)
                                                 .overlay {
                                                         HStack(spacing: 0) {
@@ -97,7 +98,7 @@ struct RightKey: View {
                                                 .padding(insets)
                                 case .previewing:
                                         BubbleShape()
-                                                .fill(colorScheme.previewBubbleColor)
+                                                .fill(bubbleColor)
                                                 .shadow(color: .shadowGray, radius: 1)
                                                 .overlay {
                                                         Text(verbatim: pulled ?? (context.inputStage.isBuffering ? String.apostrophe : String.cantonesePeriod))
@@ -107,7 +108,7 @@ struct RightKey: View {
                                                 .padding(insets)
                                 case .normal, .reflecting:
                                         RoundedRectangle(cornerRadius: PresetConstant.keyCornerRadius)
-                                                .fill(isTouching ? activeColor : colorScheme.inputKeyColor)
+                                                .fill(keyColor)
                                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                                 .padding(insets)
                                         ZStack(alignment: .topTrailing) {

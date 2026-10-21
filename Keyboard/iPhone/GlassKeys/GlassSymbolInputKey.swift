@@ -59,7 +59,7 @@ struct GlassSymbolInputKey: View {
                 let keyboardInterface = context.keyboardInterface
                 let insets = keyboardInterface.keyShapeInsets
                 let previewBottomOffset = keyboardInterface.previewBottomOffset(keyWidth: keyWidth, keyHeight: keyHeight, insets: insets)
-                let displayForm = KeyDisplayForm.responsive(isInteracting: isTouching, shouldPreview: Options.keyTextPreview)
+                let displayForm = KeyDisplayForm.responsive(isInteracting: isTouching, isPreviewEnabled: context.isKeyTextPreviewEnabled)
                 Button(action: {}) {
                         ZStack {
                                 Color.interactiveClear

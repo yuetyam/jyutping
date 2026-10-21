@@ -18,7 +18,7 @@ struct SettingsView: View {
         @State private var useKeyPadNumericLayout: Bool = NumericLayout.fetchSavedLayout().isDedicated
         @State private var needsNumberRow: Bool = Options.needsNumberRow
         @State private var showLowercaseKeys: Bool = Options.showLowercaseKeys
-        @State private var keyTextPreview: Bool = Options.keyTextPreview
+        @State private var keyTextPreview: Bool = Options.fetchKeyTextPreviewState()
         @State private var keyHeightOffset: CGFloat = Options.fetchKeyHeightOffset()
         @State private var inputKeyStyle: InputKeyStyle = Options.inputKeyStyle
         @State private var appearanceStyle: AppearanceStyle = AppearanceStyle.fetchSavedStyle()
@@ -108,7 +108,6 @@ struct SettingsView: View {
                                         Toggle("SettingsView.KeyTextPreview.ToggleTitle", isOn: $keyTextPreview)
                                                 .onChange(of: keyTextPreview) { _, newState in
                                                         AudioFeedback.modified()
-                                                        Options.updateKeyTextPreview(to: newState)
                                                         context.updateKeyTextPreview(to: newState)
                                                 }
                                 }

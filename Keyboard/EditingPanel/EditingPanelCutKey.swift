@@ -50,7 +50,7 @@ struct EditingPanelCutKey: View {
                         ZStack {
                                 Color.interactiveClear
                                 RoundedRectangle(cornerRadius: PresetConstant.ultraKeyCornerRadius)
-                                        .fill(isTouching ? colorScheme.activeActionKeyColor : colorScheme.actionKeyColor)
+                                        .fill(colorScheme.actionKeyBackground(style: context.appearanceStyle, isInteracting: isTouching))
                                         .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                         .padding(isTouching ? (inset - 2) : inset)
                                 VStack(spacing: 4) {
