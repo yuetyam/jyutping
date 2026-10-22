@@ -66,28 +66,13 @@ extension Notification.Name {
         static let focusSearch = Notification.Name("JyutpingApp.Mac.Notification.Name.focusSearch")
 }
 
-#elseif os(iOS)
-
-@main
-struct JyutpingApp: App {
-        var body: some Scene {
-                WindowGroup {
-                        if #available(iOS 18.0, *) {
-                                IOSContentView()
-                        } else {
-                                IOSLegacyContentView()
-                        }
-                }
-        }
-}
-
 #else
 
 @main
 struct JyutpingApp: App {
         var body: some Scene {
                 WindowGroup {
-                        Text(verbatim: "This app can not run on this unsupported platform.\nPlease reach the developer of this app for help.")
+                        ContentView()
                 }
         }
 }

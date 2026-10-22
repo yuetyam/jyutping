@@ -1,4 +1,4 @@
-#if os(iOS)
+#if canImport(UIKit)
 
 import SwiftUI
 import CommonExtensions
