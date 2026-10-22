@@ -1,11 +1,23 @@
 import SwiftUI
 import CommonExtensions
 
-/// Toggle keyboard height
+/// A button for the trailing edge of a keyboard panel's navigation bar that toggles the keyboard's expanded height.
+///
+/// The symbol reflects the next action: expand the keyboard or restore its cached height.
 struct NavigationTrailingExpansionButton: View {
+
+        /// Supplies the expansion state, height updates, and audio and haptic feedback.
         @EnvironmentObject private var context: KeyboardViewController
+
+        /// The SF Symbol displayed when the keyboard can be expanded.
         private let expandImageName: String = "arrow.down.backward.and.arrow.up.forward"
+
+        /// The SF Symbol displayed when the keyboard can be restored to its cached height.
         private let collapseImageName: String = "arrow.up.forward.and.arrow.down.backward"
+
+        /// Renders a circular glass button on iOS 26 and later, or a regular-material circle on earlier systems.
+        ///
+        /// Transparent buttons extend the tappable area by 12 points on the leading side and 4 points on the trailing side, sharing the height-toggle action.
         var body: some View {
                 HStack(spacing: 0) {
                         TransparentButton(width: 12, height: PresetConstant.buttonLength, action: action)
@@ -18,14 +30,18 @@ struct NavigationTrailingExpansionButton: View {
                                                         .scaledToFit()
                                                         .padding(13)
                                         }
+                                        .glassEffect(.clear, in: .circle)
+                                        .padding(1)
                                         .frame(width: PresetConstant.buttonLength, height: PresetConstant.buttonLength)
                                 }
                                 .buttonStyle(.plain)
-                                .glassEffect(.clear, in: .circle)
                         } else {
                                 Button(action: action) {
                                         ZStack {
                                                 Color.interactiveClear
+                                                Circle()
+                                                        .fill(Material.regular)
+                                                        .padding(1)
                                                 Image(systemName: context.isKeyboardHeightExpanded ? collapseImageName : expandImageName)
                                                         .resizable()
                                                         .scaledToFit()
@@ -38,6 +54,8 @@ struct NavigationTrailingExpansionButton: View {
                         TransparentButton(width: 4, height: PresetConstant.buttonLength, action: action)
                 }
         }
+
+        /// Plays modification feedback and toggles between expanded and cached keyboard heights.
         private func action() {
                 context.performAudioFeedback(.modify)
                 context.triggerHapticFeedback()

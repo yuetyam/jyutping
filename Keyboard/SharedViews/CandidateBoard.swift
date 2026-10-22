@@ -84,17 +84,17 @@ struct CandidateBoard: View {
                                                         .scaledToFit()
                                                         .padding(11)
                                         }
+                                        .glassEffect(.clear, in: .circle)
                                         .frame(width: buttonLength, height: buttonLength)
                                 }
                                 .buttonStyle(.plain)
-                                .glassEffect(.clear, in: .circle)
                                 .padding(.trailing, 1)
                                 .padding(.top, context.keyboardInterface.isCompact ? 1 : 3)
                         } else {
                                 Button(action: back) {
                                         ZStack {
                                                 Color.interactiveClear
-                                                Circle().fill(Material.ultraThin)
+                                                Circle().fill(Material.thin)
                                                 Image.chevronUp
                                                         .resizable()
                                                         .scaledToFit()

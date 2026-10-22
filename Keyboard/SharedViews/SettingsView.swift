@@ -153,24 +153,27 @@ struct SettingsView: View {
                                                         }
                                                 }
                                         }
-                                        if #available(iOSApplicationExtension 26.0, *) {
-                                                Section {
-                                                        HStack(spacing: 0) {
-                                                                Text("SettingsView.AppearanceStyle.PickerTitle").minimumScaleFactor(0.4).lineLimit(1)
-                                                                Spacer()
-                                                                Picker("SettingsView.AppearanceStyle.PickerTitle", selection: $appearanceStyle) {
+                                        Section {
+                                                HStack(spacing: 0) {
+                                                        Text("SettingsView.AppearanceStyle.PickerTitle").minimumScaleFactor(0.4).lineLimit(1)
+                                                        Spacer()
+                                                        Picker("SettingsView.AppearanceStyle.PickerTitle", selection: $appearanceStyle) {
+                                                                if #available(iOSApplicationExtension 26.0, *) {
                                                                         Text("SettingsView.AppearanceStyle.Option1.Clean").tag(AppearanceStyle.clean)
                                                                         Text("SettingsView.AppearanceStyle.Option2.Glass").tag(AppearanceStyle.glass)
                                                                         Text("SettingsView.AppearanceStyle.Option3.Classic").tag(AppearanceStyle.classic)
+                                                                } else {
+                                                                        Text("SettingsView.AppearanceStyle.Option3.Classic").tag(AppearanceStyle.classic)
+                                                                        Text("SettingsView.AppearanceStyle.Option1.Clean").tag(AppearanceStyle.clean)
                                                                 }
-                                                                .pickerStyle(.segmented)
-                                                                .labelsHidden()
-                                                                .fixedSize()
-                                                                .onChange(of: appearanceStyle) { _, newOption in
-                                                                        context.performAudioFeedback(.modify)
-                                                                        context.triggerSelectionHapticFeedback()
-                                                                        context.updateAppearanceStyle(to: newOption)
-                                                                }
+                                                        }
+                                                        .pickerStyle(.segmented)
+                                                        .labelsHidden()
+                                                        .fixedSize()
+                                                        .onChange(of: appearanceStyle) { _, newOption in
+                                                                context.performAudioFeedback(.modify)
+                                                                context.triggerSelectionHapticFeedback()
+                                                                context.updateAppearanceStyle(to: newOption)
                                                         }
                                                 }
                                         }
