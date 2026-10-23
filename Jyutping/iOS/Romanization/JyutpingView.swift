@@ -39,6 +39,7 @@ struct JyutpingView: View {
                                         ExtendedLinkLabel(title: "翻轉粵語教室 - PolyU", footnote: "polyu.edu.hk/clc/cantonese/home", address: "https://www.polyu.edu.hk/clc/cantonese/home")
                                         ExtendedLinkLabel(title: "Zidou - 粵拼版 Wordle", footnote: "chaaklau.github.io/zidou", address: "https://chaaklau.github.io/zidou")
                                         ExtendedLinkLabel(title: "六合 | 粵拼版 Wordle", footnote: "lukhap.jonathanl.dev", address: "https://lukhap.jonathanl.dev")
+                                        ExtendedLinkLabel(title: "香港 MTR 粵拼打字遊戲", footnote: "norushbequick.cantomore.com", address: "https://norushbequick.cantomore.com")
                                 }
                         }
                         .animation(.default, value: animationState)

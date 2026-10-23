@@ -26,6 +26,7 @@ struct MacResourcesView: View {
                                         LinkView(icon: globeIcon, title: "翻轉粵語教室 - PolyU", url: "https://www.polyu.edu.hk/clc/cantonese/home")
                                         LinkView(icon: globeIcon, title: "Zidou - 粵拼版 Wordle", url: "https://chaaklau.github.io/zidou")
                                         LinkView(icon: globeIcon, title: "六合 | 粵拼版 Wordle", url: "https://lukhap.jonathanl.dev")
+                                        LinkView(icon: globeIcon, title: "No Rush Be Quick｜香港 MTR 粵拼打字遊戲", url: "https://norushbequick.cantomore.com")
                                 }
                                 .block()
 
