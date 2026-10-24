@@ -1,10 +1,10 @@
-// swift-tools-version: 6.4
+// swift-tools-version: 6.3
 
 import PackageDescription
 
 let package = Package(
         name: "Preparing",
-        platforms: [.macOS(.v27)],
+        platforms: [.macOS(.v14)],
         products: [.executable(name: "Preparing", targets: ["Preparing"])],
         dependencies: [
                 .package(path: "../CommonExtensions")
