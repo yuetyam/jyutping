@@ -66,25 +66,35 @@ final class JyutpingUITests: XCTestCase {
 
         @MainActor
         func testTypeShuangpinLyricsInInputTest() throws {
-                let safari = XCUIApplication(bundleIdentifier: "com.apple.mobilesafari")
-                safari.launch()
+                let messages = XCUIApplication(bundleIdentifier: "com.apple.MobileSMS")
+                messages.launch()
 
-                let addressField = safari.textFields.firstMatch
-                XCTAssertTrue(addressField.waitForExistence(timeout: 15), "Safari address field not found")
-                addressField.tap()
+                for buttonName in ["Not Now", "Cancel"] {
+                        let button = messages.buttons[buttonName]
+                        if button.waitForExistence(timeout: 2) {
+                                button.tap()
+                        }
+                }
 
-                let nextKeyboard = safari.buttons["Next keyboard"]
+                var inputField = messages.searchFields.firstMatch
+                if !inputField.waitForExistence(timeout: 5) {
+                        inputField = messages.textFields.firstMatch
+                }
+                XCTAssertTrue(inputField.waitForExistence(timeout: 15), "Messages input field not found")
+                inputField.tap()
+
+                let nextKeyboard = messages.buttons["Next keyboard"]
                 for _ in 0..<6 where nextKeyboard.exists {
                         nextKeyboard.tap()
                         Thread.sleep(forTimeInterval: 0.3)
                 }
 
                 let inputCode = UITestLyrics.shuangpinInput.replacingOccurrences(of: ";", with: "'")
-                addressField.typeText(inputCode)
+                inputField.typeText(inputCode)
                 Thread.sleep(forTimeInterval: 3.0)
 
-                let attachment = XCTAttachment(screenshot: safari.screenshot())
-                attachment.name = "SafariShuangpinLyrics"
+                let attachment = XCTAttachment(screenshot: messages.screenshot())
+                attachment.name = "MessagesShuangpinLyrics"
                 attachment.lifetime = .keepAlways
                 add(attachment)
         }
