@@ -61,4 +61,37 @@ final class JyutpingUITests: XCTestCase {
                 add(attachment)
         }
 
+        @MainActor
+        func testTypeShuangpinLyricsIntoNotes() throws {
+                let notes = XCUIApplication(bundleIdentifier: "com.apple.mobilenotes")
+                notes.launch()
+
+                let continueButton = notes.buttons["Continue"]
+                if continueButton.waitForExistence(timeout: 3) {
+                        continueButton.tap()
+                }
+
+                let newNoteButton = notes.buttons["New Note"]
+                XCTAssertTrue(newNoteButton.waitForExistence(timeout: 10), "New Note button not found")
+                newNoteButton.tap()
+
+                let noteText = notes.textViews.firstMatch
+                XCTAssertTrue(noteText.waitForExistence(timeout: 10), "Note text view not found")
+                noteText.tap()
+
+                let nextKeyboard = notes.buttons["Next keyboard"]
+                for _ in 0..<6 where nextKeyboard.exists {
+                        nextKeyboard.tap()
+                        Thread.sleep(forTimeInterval: 0.3)
+                }
+
+                noteText.typeText(UITestLyrics.shuangpinInput)
+                Thread.sleep(forTimeInterval: 2.0)
+
+                let attachment = XCTAttachment(screenshot: notes.screenshot())
+                attachment.name = "NotesShuangpinLyrics"
+                attachment.lifetime = .keepAlways
+                add(attachment)
+        }
+
 }

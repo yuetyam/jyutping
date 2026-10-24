@@ -2,6 +2,12 @@ import Foundation
 
 enum UITestLyrics {
 
+        static let shuangpinInput = """
+cxsxz`zid`zpsiwlsyt`lk
+sibfsiwovoyfyxllzxbfzk
+nzsrgusiyig`gtcrhfgk
+"""
+
         static let jayChou = """
 牆上靜止的鐘是爲誰停留
 是不是和我一樣賴着不走

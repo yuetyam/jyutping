@@ -67,7 +67,7 @@ enum ShuangpinEngine {
                 let shuangpinText: String = keyArray.compactMap({ key -> Character? in
                         if key.isLetter {
                                 return key.character
-                        } else if key.isApostrophe {
+                        } else if key.isApostrophe || key.isGrave {
                                 return Character(";")
                         } else {
                                 return nil

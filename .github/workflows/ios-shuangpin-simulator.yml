@@ -56,10 +56,13 @@ jobs:
           echo "FullAccessWasGranted:"
           xcrun simctl spawn booted defaults read "${KEYBOARD_ID}" FullAccessWasGranted || true
 
-      - name: Type lyrics in InputTest and capture screenshot
+      - name: Record shuangpin input in Notes
         run: |
-          set -o pipefail
-          rm -rf TestResults.xcresult TestResults-attachments
+          set +e
+          rm -rf TestResults.xcresult TestResults-attachments jyutping-notes.mp4
+          xcrun simctl io booted recordVideo --codec h264 jyutping-notes.mp4 &
+          RECORD_PID=$!
+          sleep 2
           xcodebuild test \
             -project Jyutping.xcodeproj \
             -scheme Jyutping \
@@ -69,35 +72,21 @@ jobs:
             CODE_SIGN_IDENTITY="" \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGNING_ALLOWED=NO \
-            -only-testing:JyutpingUITests/JyutpingUITests/testTypeLyricsInInputTest
-          xcrun xcresulttool export attachments --path TestResults.xcresult --output-path TestResults-attachments || true
-          find TestResults-attachments -maxdepth 2 -type f -print || true
-
-      - name: Install and launch app
-        run: |
-          APP_PATH="DerivedData/Build/Products/Debug-iphonesimulator/Jyutping.app"
-          test -d "$APP_PATH"
-          xcrun simctl install booted "$APP_PATH"
-          xcrun simctl launch booted im.cantonese.CantoneseIM
-          sleep 5
-
-      - name: Capture screenshot and recording
-        run: |
-          xcrun simctl io booted recordVideo --codec h264 jyutping-simulator.mp4 &
-          RECORD_PID=$!
-          sleep 10
-          xcrun simctl io booted screenshot jyutping-simulator.png
+            -only-testing:JyutpingUITests/JyutpingUITests/testTypeShuangpinLyricsIntoNotes
+          TEST_STATUS=$?
           kill -INT "$RECORD_PID" || true
           wait "$RECORD_PID" || true
-          ls -lh jyutping-simulator.png jyutping-simulator.mp4
+          xcrun xcresulttool export attachments --path TestResults.xcresult --output-path TestResults-attachments || true
+          find TestResults-attachments -maxdepth 2 -type f -print || true
+          ls -lh jyutping-notes.mp4 || true
+          exit "$TEST_STATUS"
 
       - name: Upload preview artifacts
         uses: actions/upload-artifact@v7
         with:
           name: jyutping-simulator-preview
           path: |
-            jyutping-simulator.png
-            jyutping-simulator.mp4
+            jyutping-notes.mp4
             TestResults-attachments/**
           if-no-files-found: error
           retention-days: 7
