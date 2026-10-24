@@ -128,6 +128,15 @@ struct Options {
                 UserDefaults.standard.set(value, forKey: UserSettingsKey.SchemeRules)
         }
 
+        nonisolated(unsafe) private(set) static var spellingMode: JyutpingSpellingMode = {
+                let savedValue: Int = UserDefaults.standard.integer(forKey: UserSettingsKey.JyutpingSpellingMode)
+                return JyutpingSpellingMode.mode(of: savedValue)
+        }()
+        static func updateSpellingMode(to mode: JyutpingSpellingMode) {
+                spellingMode = mode
+                UserDefaults.standard.set(mode.rawValue, forKey: UserSettingsKey.JyutpingSpellingMode)
+        }
+
         nonisolated(unsafe) private(set) static var preferredLanguage: KeyboardDisplayLanguage = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: UserSettingsKey.KeyboardDisplayLanguage)
                 return KeyboardDisplayLanguage.language(of: savedValue)

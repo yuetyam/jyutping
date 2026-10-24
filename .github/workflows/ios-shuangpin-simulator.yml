@@ -1,0 +1,93 @@
+name: Shuangpin Simulator Preview
+
+on:
+  push:
+    branches: [ "feat/jyutping-shuangpin" ]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  simulator-preview:
+    name: Simulator screenshot and recording
+    runs-on: xcode-27
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Prepare databases
+        run: swift run -c release
+        working-directory: ./Modules/Preparing
+
+      - name: Build iOS simulator app
+        run: |
+          set -o pipefail
+          xcodebuild clean build \
+            -project Jyutping.xcodeproj \
+            -scheme Jyutping \
+            -configuration Debug \
+            -sdk iphonesimulator \
+            -derivedDataPath DerivedData \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO \
+            ONLY_ACTIVE_ARCH=NO
+
+      - name: Boot simulator
+        run: |
+          DEVICE_NAME=$(xcrun simctl list devices available | grep -m1 -E "iPhone [0-9]" | sed -E 's/^[[:space:]]*//; s/[[:space:]]*\(.*//' | sed -E 's/[[:space:]]*$//')
+          echo "Using simulator: ${DEVICE_NAME}"
+          echo "DEVICE_NAME=${DEVICE_NAME}" >> "$GITHUB_ENV"
+          xcrun simctl boot "${DEVICE_NAME}" || true
+          xcrun simctl bootstatus "${DEVICE_NAME}" -b
+
+      - name: Enable Jyutping keyboard and Full Access
+        run: |
+          set -euo pipefail
+          KEYBOARD_ID="im.cantonese.CantoneseIM.Keyboard"
+          xcrun simctl spawn booted defaults write com.apple.Preferences AppleKeyboards -array "en_US@sw=QWERTY;hw=Automatic" "${KEYBOARD_ID}"
+          xcrun simctl spawn booted defaults write com.apple.Preferences AppleKeyboardsCurrent -string "${KEYBOARD_ID}"
+          xcrun simctl spawn booted defaults write "${KEYBOARD_ID}" FullAccessWasGranted -bool YES
+          xcrun simctl spawn booted defaults write com.apple.Preferences FullAccess -dict "${KEYBOARD_ID}" YES
+          xcrun simctl spawn booted killall Preferences || true
+          xcrun simctl spawn booted killall SpringBoard || true
+          sleep 5
+          echo "AppleKeyboards:"
+          xcrun simctl spawn booted defaults read com.apple.Preferences AppleKeyboards || true
+          echo "FullAccessWasGranted:"
+          xcrun simctl spawn booted defaults read "${KEYBOARD_ID}" FullAccessWasGranted || true
+
+      - name: Record shuangpin input in Notes
+        run: |
+          set +e
+          rm -rf TestResults.xcresult TestResults-attachments jyutping-notes.mp4
+          xcrun simctl io booted recordVideo --codec h264 jyutping-notes.mp4 &
+          RECORD_PID=$!
+          sleep 2
+          xcodebuild test \
+            -project Jyutping.xcodeproj \
+            -scheme Jyutping \
+            -destination "platform=iOS Simulator,name=${DEVICE_NAME}" \
+            -derivedDataPath DerivedData \
+            -resultBundlePath TestResults.xcresult \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO \
+            -only-testing:JyutpingUITests/JyutpingUITests/testTypeShuangpinLyricsInInputTest
+          TEST_STATUS=$?
+          kill -INT "$RECORD_PID" || true
+          wait "$RECORD_PID" || true
+          xcrun xcresulttool export attachments --path TestResults.xcresult --output-path TestResults-attachments || true
+          find TestResults-attachments -maxdepth 2 -type f -print || true
+          ls -lh jyutping-notes.mp4 || true
+          exit "$TEST_STATUS"
+
+      - name: Upload preview artifacts
+        uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: jyutping-simulator-preview
+          path: |
+            jyutping-notes.mp4
+            TestResults-attachments/**
+          if-no-files-found: error
+          retention-days: 7

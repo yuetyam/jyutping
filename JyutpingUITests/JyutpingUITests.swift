@@ -38,4 +38,61 @@ final class JyutpingUITests: XCTestCase {
                         XCUIApplication().launch()
                 }
         }
+
+        @MainActor
+        func testTypeLyricsInInputTest() throws {
+                let app = XCUIApplication()
+                app.launch()
+
+                let inputTestLink = app.buttons["InputTestLink"].firstMatch
+                for _ in 0..<6 where !inputTestLink.exists {
+                        app.swipeUp()
+                }
+                XCTAssertTrue(inputTestLink.waitForExistence(timeout: 12), "Input Test link not found")
+                inputTestLink.tap()
+
+                let inputField = app.textFields["InputTextField"]
+                XCTAssertTrue(inputField.waitForExistence(timeout: 12), "Input text field not found")
+                inputField.tap()
+
+                let singleLineText = UITestLyrics.jayChou.replacingOccurrences(of: "\n", with: " ")
+                inputField.typeText(singleLineText)
+
+                let attachment = XCTAttachment(screenshot: app.screenshot())
+                attachment.name = "LyricsInputTest"
+                attachment.lifetime = .keepAlways
+                add(attachment)
+        }
+
+        @MainActor
+        func testTypeShuangpinLyricsInInputTest() throws {
+                let app = XCUIApplication()
+                app.launch()
+
+                let inputTestLink = app.buttons["InputTestLink"].firstMatch
+                for _ in 0..<6 where !inputTestLink.exists {
+                        app.swipeUp()
+                }
+                XCTAssertTrue(inputTestLink.waitForExistence(timeout: 12), "Input Test link not found")
+                inputTestLink.tap()
+
+                let inputField = app.textFields["InputTextField"]
+                XCTAssertTrue(inputField.waitForExistence(timeout: 12), "Input text field not found")
+                inputField.tap()
+
+                let nextKeyboard = app.buttons["Next keyboard"]
+                for _ in 0..<6 where nextKeyboard.exists {
+                        nextKeyboard.tap()
+                        Thread.sleep(forTimeInterval: 0.3)
+                }
+
+                inputField.typeText(UITestLyrics.shuangpinInput)
+                Thread.sleep(forTimeInterval: 2.0)
+
+                let attachment = XCTAttachment(screenshot: app.screenshot())
+                attachment.name = "InputTestShuangpinLyrics"
+                attachment.lifetime = .keepAlways
+                add(attachment)
+        }
+
 }

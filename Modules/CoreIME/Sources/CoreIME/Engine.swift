@@ -79,6 +79,10 @@ public struct Engine {
 // MARK: - Suggestions
 
 extension Engine {
+        public static func shuangpinSuggest<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T, deepSearch: Bool = true) -> [Lexicon] {
+                return ShuangpinEngine.suggest(keys, deepSearch: deepSearch)
+        }
+
         public static func suggest<T: RandomAccessCollection<VirtualInputKey>>(_ keys: T, segmentation: Segmentation, deepSearch: Bool = true) -> [Lexicon] {
                 switch keys.count {
                 case 0: return []

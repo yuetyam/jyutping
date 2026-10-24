@@ -23,6 +23,7 @@ struct SettingsView: View {
         @State private var inputKeyStyle: InputKeyStyle = InputKeyStyle.fetchSavedStyle()
         @State private var appearanceStyle: AppearanceStyle = AppearanceStyle.fetchSavedStyle()
         @State private var preferredInputMode: PreferredInputMode = PreferredInputMode.saved
+        @State private var spellingMode: JyutpingSpellingMode = Options.spellingMode
         @State private var commentStyle: CommentStyle = Options.commentStyle
         @State private var commentScene: CommentScene = Options.commentScene
         @State private var commentToneStyle: CommentToneStyle = Options.commentToneStyle
@@ -195,6 +196,27 @@ struct SettingsView: View {
                                                         PreferredInputMode.updateSaved(mode: newMode)
                                                 }
                                         }
+                                }
+
+                                Section {
+                                        HStack(spacing: 0) {
+                                                Text(verbatim: "粵拼拼式").minimumScaleFactor(0.4).lineLimit(1)
+                                                Spacer()
+                                                Picker("JyutpingSpellingMode", selection: $spellingMode) {
+                                                        Text(verbatim: "單拼").tag(JyutpingSpellingMode.full)
+                                                        Text(verbatim: "雙拼").tag(JyutpingSpellingMode.shuangpin)
+                                                }
+                                                .pickerStyle(.segmented)
+                                                .labelsHidden()
+                                                .fixedSize()
+                                                .onChange(of: spellingMode) { _, newMode in
+                                                        context.performAudioFeedback(.modify)
+                                                        context.triggerSelectionHapticFeedback()
+                                                        Options.updateSpellingMode(to: newMode)
+                                                }
+                                        }
+                                } footer: {
+                                        Text(verbatim: "雙拼每音節固定兩鍵；`ing`/`ik` 可用 `'` 鍵代替 `;`。").textCase(nil)
                                 }
 
                                 Section {
