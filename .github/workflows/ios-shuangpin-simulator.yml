@@ -83,6 +83,7 @@ jobs:
 
       - name: Upload preview artifacts
         uses: actions/upload-artifact@v7
+        if: always()
         with:
           name: jyutping-simulator-preview
           path: |
