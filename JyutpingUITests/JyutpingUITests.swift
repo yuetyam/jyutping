@@ -38,4 +38,50 @@ final class JyutpingUITests: XCTestCase {
                         XCUIApplication().launch()
                 }
         }
+
+        @MainActor
+        func testEnableJyutpingKeyboardAndFullAccess() throws {
+                let settings = XCUIApplication(bundleIdentifier: "com.apple.Preferences")
+                settings.launchArguments = ["-AppleLanguages", "(en)", "-AppleLocale", "en_US"]
+                settings.launch()
+
+                let general = settings.cells.staticTexts["General"]
+                XCTAssertTrue(general.waitForExistence(timeout: 8), "General row not found")
+                general.tap()
+
+                let keyboard = settings.cells.staticTexts["Keyboard"]
+                XCTAssertTrue(keyboard.waitForExistence(timeout: 8), "Keyboard row not found")
+                keyboard.tap()
+
+                let keyboards = settings.cells.staticTexts["Keyboards"]
+                XCTAssertTrue(keyboards.waitForExistence(timeout: 8), "Keyboards row not found")
+                keyboards.tap()
+
+                let addNewKeyboard = settings.cells.staticTexts["Add New Keyboard…"]
+                if addNewKeyboard.waitForExistence(timeout: 4) {
+                        addNewKeyboard.tap()
+                        let jyutpingToAdd = settings.cells.staticTexts["Jyutping"]
+                        if jyutpingToAdd.waitForExistence(timeout: 8) {
+                                jyutpingToAdd.tap()
+                        } else {
+                                settings.navigationBars.buttons.element(boundBy: 0).tap()
+                        }
+                }
+
+                let jyutpingRow = settings.cells.staticTexts["Jyutping"]
+                XCTAssertTrue(jyutpingRow.waitForExistence(timeout: 8), "Jyutping row not found after enabling")
+                jyutpingRow.tap()
+
+                let allowFullAccess = settings.switches["Allow Full Access"]
+                XCTAssertTrue(allowFullAccess.waitForExistence(timeout: 8), "Allow Full Access switch not found")
+                let value: String? = allowFullAccess.value as? String
+                if value == "0" || value == "false" {
+                        allowFullAccess.tap()
+                }
+
+                let attachment = XCTAttachment(screenshot: settings.screenshot())
+                attachment.name = "Keyboard-Settings"
+                attachment.lifetime = .keepAlways
+                add(attachment)
+        }
 }

@@ -40,6 +40,19 @@ jobs:
           xcrun simctl boot "${DEVICE_NAME}" || true
           xcrun simctl bootstatus "${DEVICE_NAME}" -b
 
+      - name: Enable Jyutping keyboard and Full Access
+        run: |
+          set -o pipefail
+          xcodebuild test \
+            -project Jyutping.xcodeproj \
+            -scheme Jyutping \
+            -destination "platform=iOS Simulator,name=${DEVICE_NAME}" \
+            -derivedDataPath DerivedData \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO \
+            -only-testing:JyutpingUITests/JyutpingUITests/testEnableJyutpingKeyboardAndFullAccess
+
       - name: Install and launch app
         run: |
           APP_PATH="DerivedData/Build/Products/Debug-iphonesimulator/Jyutping.app"
