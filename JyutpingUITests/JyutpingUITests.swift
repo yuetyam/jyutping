@@ -66,31 +66,25 @@ final class JyutpingUITests: XCTestCase {
 
         @MainActor
         func testTypeShuangpinLyricsInInputTest() throws {
-                let app = XCUIApplication()
-                app.launch()
+                let safari = XCUIApplication(bundleIdentifier: "com.apple.mobilesafari")
+                safari.launch()
 
-                let inputTestLink = app.buttons["InputTestLink"].firstMatch
-                for _ in 0..<6 where !inputTestLink.exists {
-                        app.swipeUp()
-                }
-                XCTAssertTrue(inputTestLink.waitForExistence(timeout: 12), "Input Test link not found")
-                inputTestLink.tap()
+                let addressField = safari.textFields.firstMatch
+                XCTAssertTrue(addressField.waitForExistence(timeout: 15), "Safari address field not found")
+                addressField.tap()
 
-                let inputField = app.textFields["InputTextField"]
-                XCTAssertTrue(inputField.waitForExistence(timeout: 12), "Input text field not found")
-                inputField.tap()
-
-                let nextKeyboard = app.buttons["Next keyboard"]
+                let nextKeyboard = safari.buttons["Next keyboard"]
                 for _ in 0..<6 where nextKeyboard.exists {
                         nextKeyboard.tap()
                         Thread.sleep(forTimeInterval: 0.3)
                 }
 
-                inputField.typeText(UITestLyrics.shuangpinInput)
-                Thread.sleep(forTimeInterval: 2.0)
+                let inputCode = UITestLyrics.shuangpinInput.replacingOccurrences(of: ";", with: "'")
+                addressField.typeText(inputCode)
+                Thread.sleep(forTimeInterval: 3.0)
 
-                let attachment = XCTAttachment(screenshot: app.screenshot())
-                attachment.name = "InputTestShuangpinLyrics"
+                let attachment = XCTAttachment(screenshot: safari.screenshot())
+                attachment.name = "SafariShuangpinLyrics"
                 attachment.lifetime = .keepAlways
                 add(attachment)
         }

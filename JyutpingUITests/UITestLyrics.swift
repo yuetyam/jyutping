@@ -3,9 +3,7 @@ import Foundation
 enum UITestLyrics {
 
         static let shuangpinInput = """
-cxsxz`zid`zpsiwlsyt`lk
-sibfsiwovoyfyxllzxbfzk
-nzsrgusiyig`gtcrhfgk
+cxsxz;zid;zpsiwlsyt;lk
 """
 
         static let jayChou = """
