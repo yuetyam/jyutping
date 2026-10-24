@@ -1,0 +1,69 @@
+name: Shuangpin Simulator Preview
+
+on:
+  push:
+    branches: [ "feat/jyutping-shuangpin" ]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  simulator-preview:
+    name: Simulator screenshot and recording
+    runs-on: xcode-27
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Prepare databases
+        run: swift run -c release
+        working-directory: ./Modules/Preparing
+
+      - name: Build iOS simulator app
+        run: |
+          set -o pipefail
+          xcodebuild clean build \
+            -project Jyutping.xcodeproj \
+            -scheme Jyutping \
+            -configuration Debug \
+            -sdk iphonesimulator \
+            -derivedDataPath DerivedData \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO \
+            ONLY_ACTIVE_ARCH=NO
+
+      - name: Boot simulator
+        run: |
+          DEVICE_NAME=$(xcrun simctl list devices available | grep -m1 -E "iPhone [0-9]" | sed -E 's/^[[:space:]]*//; s/ \([^)]*\)$//')
+          echo "Using simulator: ${DEVICE_NAME}"
+          echo "DEVICE_NAME=${DEVICE_NAME}" >> "$GITHUB_ENV"
+          xcrun simctl boot "${DEVICE_NAME}" || true
+          xcrun simctl bootstatus "${DEVICE_NAME}" -b
+
+      - name: Install and launch app
+        run: |
+          APP_PATH="DerivedData/Build/Products/Debug-iphonesimulator/Jyutping.app"
+          test -d "$APP_PATH"
+          xcrun simctl install booted "$APP_PATH"
+          xcrun simctl launch booted im.cantonese.CantoneseIM
+          sleep 5
+
+      - name: Capture screenshot and recording
+        run: |
+          xcrun simctl io booted recordVideo --codec h264 jyutping-simulator.mp4 &
+          RECORD_PID=$!
+          sleep 10
+          xcrun simctl io booted screenshot jyutping-simulator.png
+          kill -INT "$RECORD_PID" || true
+          wait "$RECORD_PID" || true
+          ls -lh jyutping-simulator.png jyutping-simulator.mp4
+
+      - name: Upload preview artifacts
+        uses: actions/upload-artifact@v7
+        with:
+          name: jyutping-simulator-preview
+          path: |
+            jyutping-simulator.png
+            jyutping-simulator.mp4
+          if-no-files-found: error
+          retention-days: 7
