@@ -56,6 +56,23 @@ jobs:
           echo "FullAccessWasGranted:"
           xcrun simctl spawn booted defaults read "${KEYBOARD_ID}" FullAccessWasGranted || true
 
+      - name: Type lyrics in InputTest and capture screenshot
+        run: |
+          set -o pipefail
+          rm -rf TestResults.xcresult TestResults-attachments
+          xcodebuild test \
+            -project Jyutping.xcodeproj \
+            -scheme Jyutping \
+            -destination "platform=iOS Simulator,name=${DEVICE_NAME}" \
+            -derivedDataPath DerivedData \
+            -resultBundlePath TestResults.xcresult \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO \
+            -only-testing:JyutpingUITests/JyutpingUITests/testTypeLyricsInInputTest
+          xcrun xcresulttool export attachments --path TestResults.xcresult --output-path TestResults-attachments || true
+          find TestResults-attachments -maxdepth 2 -type f -print || true
+
       - name: Install and launch app
         run: |
           APP_PATH="DerivedData/Build/Products/Debug-iphonesimulator/Jyutping.app"
@@ -81,5 +98,6 @@ jobs:
           path: |
             jyutping-simulator.png
             jyutping-simulator.mp4
+            TestResults-attachments/**
           if-no-files-found: error
           retention-days: 7

@@ -31,6 +31,7 @@ struct InputTestView: View {
                                         .keyboardType(requestedKeyboardType)
                                         .submitLabel(returnKeyType.submitLabel)
                                         .preferredColorScheme(colorScheme)
+                                        .accessibilityIdentifier("InputTextField")
                         }
                         Section {
                                 Picker(AutoCapitalizationPickerTitle, selection: $autoCapitalization) {

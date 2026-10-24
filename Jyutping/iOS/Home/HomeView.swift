@@ -133,6 +133,7 @@ struct HomeView: View {
                                         NavigationLink(destination: InputTestView()) {
                                                 Label("IOSHomeTab.LabelTitle.InputTest", systemImage: "keyboard")
                                         }
+                                        .accessibilityIdentifier("InputTestLink")
                                 }
                         }
                         .animation(.default, value: animationState)

@@ -39,4 +39,26 @@ final class JyutpingUITests: XCTestCase {
                 }
         }
 
+        @MainActor
+        func testTypeLyricsInInputTest() throws {
+                let app = XCUIApplication()
+                app.launch()
+
+                let inputTestLink = app.buttons["InputTestLink"]
+                XCTAssertTrue(inputTestLink.waitForExistence(timeout: 12), "Input Test link not found")
+                inputTestLink.tap()
+
+                let inputField = app.textFields["InputTextField"]
+                XCTAssertTrue(inputField.waitForExistence(timeout: 12), "Input text field not found")
+                inputField.tap()
+
+                let singleLineText = UITestLyrics.jayChou.replacingOccurrences(of: "\n", with: " ")
+                inputField.typeText(singleLineText)
+
+                let attachment = XCTAttachment(screenshot: app.screenshot())
+                attachment.name = "LyricsInputTest"
+                attachment.lifetime = .keepAlways
+                add(attachment)
+        }
+
 }
