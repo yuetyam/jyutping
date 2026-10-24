@@ -44,7 +44,7 @@ final class JyutpingUITests: XCTestCase {
                 let app = XCUIApplication()
                 app.launch()
 
-                let inputTestLink = app.buttons["InputTestLink"]
+                let inputTestLink = app.descendants(matching: .any)["InputTestLink"].firstMatch
                 XCTAssertTrue(inputTestLink.waitForExistence(timeout: 12), "Input Test link not found")
                 inputTestLink.tap()
 
