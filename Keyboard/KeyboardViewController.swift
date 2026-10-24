@@ -827,6 +827,8 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let isInputMemoryOn: Bool = Options.isInputMemoryOn
                 let isEmojiSuggestionsOn: Bool = Options.isEmojiSuggestionsOn
                 let isEnglishSuggestionsOn: Bool = Options.isEnglishSuggestionsOn
+                let spellingMode: JyutpingSpellingMode = Options.spellingMode
+                let isShuangpin: Bool = spellingMode.isShuangpin
                 let commentForm: RomanizationForm = {
                         guard Options.commentScene == .all else { return .nothing }
                         return (Options.commentToneStyle == .noTones) ? .toneless : .full
@@ -835,15 +837,19 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         guard let self else { return }
                         async let defined: [Lexicon] = searchDefinedCandidates(for: keys)
                         async let texts: [Lexicon] = isEnglishSuggestionsOn ? Engine.searchPlainTexts(for: keys) : []
-                        let segmentation = Segmenter.segment(keys)
-                        async let memory: [Lexicon] = isInputMemoryOn ? InputMemory.suggest(keys, segmentation: segmentation) : []
-                        async let symbols: [Lexicon] = isEmojiSuggestionsOn ? Engine.searchSymbols(for: keys, segmentation: segmentation) : []
-                        async let queried: [Lexicon] = Engine.suggest(keys, segmentation: segmentation)
+                        let segmentation: Segmentation = isShuangpin ? [] : Segmenter.segment(keys)
+                        async let memory: [Lexicon] = isShuangpin ? [] : (isInputMemoryOn ? InputMemory.suggest(keys, segmentation: segmentation) : [])
+                        async let symbols: [Lexicon] = isShuangpin ? [] : (isEmojiSuggestionsOn ? Engine.searchSymbols(for: keys, segmentation: segmentation) : [])
+                        async let queried: [Lexicon] = isShuangpin ? Engine.shuangpinSuggest(keys) : Engine.suggest(keys, segmentation: segmentation)
                         let suggestions = await Converter.dispatch(memory: memory, defined: defined, texts: texts, symbols: symbols, queried: queried, commentForm: commentForm, charset: characterStandard)
                         if Task.isCancelled.negative {
                                 await MainActor.run { [weak self] in
                                         guard let self else { return }
                                         text2mark = {
+                                                if isShuangpin {
+                                                        guard let firstCandidate = suggestions.first else { return joinedBufferTexts() }
+                                                        return firstCandidate.lexicon.inputCount == keys.count ? firstCandidate.lexicon.mark : joinedBufferTexts()
+                                                }
                                                 guard (suggestions.first?.isCantonese ?? false) else { return joinedBufferTexts() }
                                                 let isPeculiar: Bool = events.contains(where: { $0.isCapitalized || $0.key.isSyllableLetter.negative })
                                                 guard isPeculiar.negative else { return events.normalizedPreviewMark() }

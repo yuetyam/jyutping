@@ -27,6 +27,9 @@ struct UserSettingsKey {
         /// Integer raw value of the last `InputMethodMode`, restored when the startup preference is previous mode.
         static let LatestInputMethodMode: String = "LatestInputMethodMode"
 
+        /// Integer raw value of the selected `JyutpingSpellingMode`.
+        static let JyutpingSpellingMode: String = "JyutpingSpellingMode"
+
         /// Integer raw value of the selected `KeyboardLayout`.
         static let KeyboardLayout: String = "KeyboardLayout"
 

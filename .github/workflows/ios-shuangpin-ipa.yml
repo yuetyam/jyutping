@@ -1,0 +1,49 @@
+name: Build Shuangpin IPA
+
+on:
+  push:
+    branches: [ "feat/jyutping-shuangpin" ]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build-ipa:
+    name: Build unsigned iOS IPA
+    runs-on: xcode-27
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Prepare databases
+        run: swift run -c release
+        working-directory: ./Modules/Preparing
+
+      - name: Build iOS app
+        run: |
+          set -o pipefail
+          xcodebuild clean build \
+            -project Jyutping.xcodeproj \
+            -scheme Jyutping \
+            -configuration Debug \
+            -destination "generic/platform=iOS" \
+            -derivedDataPath DerivedData \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO \
+            ONLY_ACTIVE_ARCH=NO
+
+      - name: Package IPA
+        run: |
+          APP_PATH="DerivedData/Build/Products/Debug-iphoneos/Jyutping.app"
+          test -d "$APP_PATH"
+          mkdir -p Payload
+          cp -R "$APP_PATH" Payload/
+          zip -r Jyutping-Shuangpin.ipa Payload
+
+      - name: Upload IPA
+        uses: actions/upload-artifact@v7
+        with:
+          name: Jyutping-Shuangpin.ipa
+          path: Jyutping-Shuangpin.ipa
+          if-no-files-found: error
+          retention-days: 7
