@@ -42,16 +42,19 @@ jobs:
 
       - name: Enable Jyutping keyboard and Full Access
         run: |
-          set -o pipefail
-          xcodebuild test \
-            -project Jyutping.xcodeproj \
-            -scheme Jyutping \
-            -destination "platform=iOS Simulator,name=${DEVICE_NAME}" \
-            -derivedDataPath DerivedData \
-            CODE_SIGN_IDENTITY="" \
-            CODE_SIGNING_REQUIRED=NO \
-            CODE_SIGNING_ALLOWED=NO \
-            -only-testing:JyutpingUITests/JyutpingUITests/testEnableJyutpingKeyboardAndFullAccess
+          set -euo pipefail
+          KEYBOARD_ID="im.cantonese.CantoneseIM.Keyboard"
+          xcrun simctl spawn booted defaults write com.apple.Preferences AppleKeyboards -array "en_US@sw=QWERTY;hw=Automatic" "${KEYBOARD_ID}"
+          xcrun simctl spawn booted defaults write com.apple.Preferences AppleKeyboardsCurrent -string "${KEYBOARD_ID}"
+          xcrun simctl spawn booted defaults write "${KEYBOARD_ID}" FullAccessWasGranted -bool YES
+          xcrun simctl spawn booted defaults write com.apple.Preferences FullAccess -dict "${KEYBOARD_ID}" YES
+          xcrun simctl spawn booted killall Preferences || true
+          xcrun simctl spawn booted killall SpringBoard || true
+          sleep 5
+          echo "AppleKeyboards:"
+          xcrun simctl spawn booted defaults read com.apple.Preferences AppleKeyboards || true
+          echo "FullAccessWasGranted:"
+          xcrun simctl spawn booted defaults read "${KEYBOARD_ID}" FullAccessWasGranted || true
 
       - name: Install and launch app
         run: |
