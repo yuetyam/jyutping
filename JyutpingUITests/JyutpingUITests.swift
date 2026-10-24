@@ -62,34 +62,29 @@ final class JyutpingUITests: XCTestCase {
         }
 
         @MainActor
-        func testTypeShuangpinLyricsIntoNotes() throws {
-                let notes = XCUIApplication(bundleIdentifier: "com.apple.mobilenotes")
-                notes.launch()
+        func testTypeShuangpinLyricsInInputTest() throws {
+                let app = XCUIApplication()
+                app.launch()
 
-                let continueButton = notes.buttons["Continue"]
-                if continueButton.waitForExistence(timeout: 3) {
-                        continueButton.tap()
-                }
+                let inputTestLink = app.buttons["InputTestLink"]
+                XCTAssertTrue(inputTestLink.waitForExistence(timeout: 12), "Input Test link not found")
+                inputTestLink.tap()
 
-                let newNoteButton = notes.buttons["New Note"]
-                XCTAssertTrue(newNoteButton.waitForExistence(timeout: 10), "New Note button not found")
-                newNoteButton.tap()
+                let inputField = app.textFields["InputTextField"]
+                XCTAssertTrue(inputField.waitForExistence(timeout: 12), "Input text field not found")
+                inputField.tap()
 
-                let noteText = notes.textViews.firstMatch
-                XCTAssertTrue(noteText.waitForExistence(timeout: 10), "Note text view not found")
-                noteText.tap()
-
-                let nextKeyboard = notes.buttons["Next keyboard"]
+                let nextKeyboard = app.buttons["Next keyboard"]
                 for _ in 0..<6 where nextKeyboard.exists {
                         nextKeyboard.tap()
                         Thread.sleep(forTimeInterval: 0.3)
                 }
 
-                noteText.typeText(UITestLyrics.shuangpinInput)
+                inputField.typeText(UITestLyrics.shuangpinInput)
                 Thread.sleep(forTimeInterval: 2.0)
 
-                let attachment = XCTAttachment(screenshot: notes.screenshot())
-                attachment.name = "NotesShuangpinLyrics"
+                let attachment = XCTAttachment(screenshot: app.screenshot())
+                attachment.name = "InputTestShuangpinLyrics"
                 attachment.lifetime = .keepAlways
                 add(attachment)
         }
