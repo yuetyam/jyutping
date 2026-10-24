@@ -69,7 +69,7 @@ final class JyutpingUITests: XCTestCase {
                 let app = XCUIApplication()
                 app.launch()
 
-                let inputTestLink = app.buttons["Input Test"].firstMatch
+                let inputTestLink = app.buttons["InputTestLink"].firstMatch
                 for _ in 0..<6 where !inputTestLink.exists {
                         app.swipeUp()
                 }
