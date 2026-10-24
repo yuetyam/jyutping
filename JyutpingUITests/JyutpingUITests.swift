@@ -66,41 +66,25 @@ final class JyutpingUITests: XCTestCase {
 
         @MainActor
         func testTypeShuangpinLyricsInInputTest() throws {
-                let messages = XCUIApplication(bundleIdentifier: "com.apple.MobileSMS")
-                messages.launch()
+                let safari = XCUIApplication(bundleIdentifier: "com.apple.mobilesafari")
+                safari.launch()
 
-                for buttonName in ["Not Now", "Cancel"] {
-                        let button = messages.buttons[buttonName]
-                        if button.waitForExistence(timeout: 2) {
-                                button.tap()
-                        }
-                }
-
-                let firstConversation = messages.cells.firstMatch
-                if firstConversation.waitForExistence(timeout: 8) {
-                        firstConversation.tap()
-                } else {
-                        let newMessageButton = messages.buttons["New Message"].firstMatch
-                        XCTAssertTrue(newMessageButton.waitForExistence(timeout: 10), "New Message button not found")
-                        newMessageButton.tap()
-                }
-
-                let inputField = messages.textViews.firstMatch
-                XCTAssertTrue(inputField.waitForExistence(timeout: 15), "Messages text view not found")
+                let inputField = safari.textFields.firstMatch
+                XCTAssertTrue(inputField.waitForExistence(timeout: 15), "Safari address field not found")
                 inputField.tap()
 
-                let nextKeyboard = messages.buttons["Next keyboard"]
+                let nextKeyboard = safari.buttons["Next keyboard"]
                 for _ in 0..<6 where nextKeyboard.exists {
                         nextKeyboard.tap()
                         Thread.sleep(forTimeInterval: 0.3)
                 }
 
                 let inputCode = UITestLyrics.shuangpinInput.replacingOccurrences(of: ";", with: "'")
-                inputField.typeText(inputCode)
-                Thread.sleep(forTimeInterval: 3.0)
+                inputField.typeText(inputCode + " ")
+                Thread.sleep(forTimeInterval: 4.0)
 
-                let attachment = XCTAttachment(screenshot: messages.screenshot())
-                attachment.name = "MessagesShuangpinLyrics"
+                let attachment = XCTAttachment(screenshot: safari.screenshot())
+                attachment.name = "SafariShuangpinLyrics"
                 attachment.lifetime = .keepAlways
                 add(attachment)
         }
