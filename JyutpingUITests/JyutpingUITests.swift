@@ -76,11 +76,18 @@ final class JyutpingUITests: XCTestCase {
                         }
                 }
 
-                var inputField = messages.searchFields.firstMatch
-                if !inputField.waitForExistence(timeout: 5) {
-                        inputField = messages.textFields.firstMatch
+                let newMessageButton = messages.buttons["New Message"].firstMatch
+                XCTAssertTrue(newMessageButton.waitForExistence(timeout: 10), "New Message button not found")
+                newMessageButton.tap()
+
+                let toField = messages.textFields["To:"].firstMatch
+                if toField.waitForExistence(timeout: 5) {
+                        toField.tap()
+                        toField.typeText("12345678\n")
                 }
-                XCTAssertTrue(inputField.waitForExistence(timeout: 15), "Messages input field not found")
+
+                let inputField = messages.textViews.firstMatch
+                XCTAssertTrue(inputField.waitForExistence(timeout: 15), "Messages text view not found")
                 inputField.tap()
 
                 let nextKeyboard = messages.buttons["Next keyboard"]
