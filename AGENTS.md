@@ -53,7 +53,7 @@ The keyboard chooses its UI at runtime: `GlassMotherBoard` on iOS 26+ and `Legac
 
 ## Xcode project
 
-Targets: `Jyutping`, `JyutpingTests`, `JyutpingUITests`, `Keyboard`, `InputMethod`, `InputMethodTests`, `InputMethodUITests`.
+Targets: `Jyutping`, `JyutpingTests`, `JyutpingUITests`, `Keyboard`, `InputMethod`.
 
 The project references every local package except `Preparing`, so `xcodebuild -project Jyutping.xcodeproj -list` shows the shared target schemes (`InputMethod`, `Jyutping`, `Keyboard`) alongside the package schemes (`AboutKit`, `AppDataSource`, `CommonExtensions`, `CoreIME`, `CoreIMEBenchmarks`, `Linguistics`, `SQLiteWrapper`). Use SwiftPM commands (`--package-path`) for package builds and tests.
 
@@ -175,7 +175,7 @@ zsh tests/test_input_memory_export.sh
 
 The script copies the real `InputMethod/InputMemory/` sources and `tests/*.swift` into a temporary Swift Testing package that depends on `CommonExtensions` and `SQLiteWrapper`, then runs `swift test` with scratch path `.build/input-memory-export-tests`. It launches no InputMethodKit process and opens no user database.
 
-Xcode test targets: `JyutpingTests` and `InputMethodTests` currently contain placeholder example tests; `JyutpingUITests` and `InputMethodUITests` use XCTest.
+Xcode test targets: `JyutpingTests` currently contains a placeholder example test; `JyutpingUITests` uses XCTest.
 
 Compilation checks — pick the affected target, an explicit destination, and a writable DerivedData directory:
 
