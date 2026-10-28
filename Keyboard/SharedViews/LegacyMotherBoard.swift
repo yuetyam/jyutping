@@ -16,7 +16,11 @@ struct LegacyMotherBoard: View {
                 case .editingPanel:
                         EditingPanel().frame(height: context.keyboardHeight)
                 case .layoutPicker:
-                        LayoutPickerView().frame(height: context.keyboardHeight)
+                        if #available(iOS 26.0, *) {
+                                LayoutPickerView().scrollEdgeEffectHidden().frame(height: context.keyboardHeight)
+                        } else {
+                                LayoutPickerView().frame(height: context.keyboardHeight)
+                        }
                 case .detailInspecting:
                         if #available(iOSApplicationExtension 26.0, *) {
                                 DetailInspectingView().scrollEdgeEffectHidden().frame(height: context.keyboardHeight)

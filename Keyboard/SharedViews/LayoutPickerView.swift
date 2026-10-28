@@ -7,15 +7,7 @@ struct LayoutPickerView: View {
                 let selectedLayout = context.keyboardLayout
                 let isRunningOnPhone = context.isRunningOnPhone
                 VStack(spacing: 0) {
-                        ZStack {
-                                Text("SettingsView.NavigationBar.HintText").font(.footnote).shallow()
-                                HStack {
-                                        NavigationLeadingBackButton()
-                                        Spacer()
-                                        NavigationTrailingExpansionButton().hidden()
-                                }
-                        }
-                        .frame(height: context.keyboardInterface.isCompact ? PresetConstant.buttonLength : PresetConstant.buttonLengthXL)
+                        NavigationBar()
                         ScrollView(.vertical) {
                                 LazyVStack(spacing: 0) {
                                         ZStack {

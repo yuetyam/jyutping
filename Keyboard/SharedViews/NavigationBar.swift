@@ -6,7 +6,7 @@ struct NavigationBar: View {
 
         var body: some View {
                 ZStack {
-                        Text("SettingsView.NavigationBar.HintText").font(.footnote).shallow()
+                        Text("NavigationBar.HintText.Scrollable").font(.footnote).shallow()
                         HStack {
                                 NavigationLeadingBackButton()
                                 Spacer()

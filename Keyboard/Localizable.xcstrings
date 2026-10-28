@@ -8695,7 +8695,7 @@
         }
       }
     },
-    "SettingsView.NavigationBar.HintText" : {
+    "NavigationBar.HintText.Scrollable" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
