@@ -16,9 +16,9 @@ struct GlassSidebarPanel: View {
                 ZStack {
                         Color.clear
                         if context.inputStage.isBuffering {
-                                SidebarScrollView()
+                                SidebarScrollView().scrollEdgeEffectHidden()
                         } else {
-                                SymbolSidebarScrollView(texts: texts)
+                                SymbolSidebarScrollView(texts: texts).scrollEdgeEffectHidden()
                         }
                 }
                 .clipShape(.rect(cornerRadius: PresetConstant.largeKeyCornerRadius))
@@ -43,7 +43,13 @@ struct SidebarPanel: View {
                         RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius)
                                 .fill(colorScheme.actionKeyBackground(style: context.appearanceStyle, isInteracting: false))
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                        if #available(iOSApplicationExtension 18.0, *) {
+                        if #available(iOSApplicationExtension 26.0, *) {
+                                if context.inputStage.isBuffering {
+                                        SidebarScrollView().scrollEdgeEffectHidden()
+                                } else {
+                                        SymbolSidebarScrollView(texts: texts).scrollEdgeEffectHidden()
+                                }
+                        } else if #available(iOSApplicationExtension 18.0, *) {
                                 if context.inputStage.isBuffering {
                                         SidebarScrollView()
                                 } else {

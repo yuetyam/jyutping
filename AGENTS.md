@@ -23,6 +23,7 @@ Read `.editorconfig` before editing. It sets UTF-8 and LF for all files; Swift f
 - Do not wrap long single-line code unless necessary.
 - Preserve unrelated worktree changes.
 - Do not commit, revert, or push changes unless the user explicitly asks.
+- In the iOS `Keyboard` target, always apply `.scrollEdgeEffectHidden()` to `ScrollView` and `List` views on iOS 26 and later. Guard the modifier with an availability check when the surrounding code also supports earlier iOS versions.
 
 ## Localization and translation rules
 
@@ -34,6 +35,7 @@ Read `.editorconfig` before editing. It sets UTF-8 and LF for all files; Swift f
 
 - Changes under `Modules/Preparing/Sources/Preparing/Resources/` should usually be excluded from code review unless the user specifically asks to review those resource files.
 - Code-signing settings in `Jyutping.xcodeproj/project.xcproj` are temporarily configured for local development. Do not report those settings as a review finding by themselves unless the user specifically asks about them or they cause a concrete issue within the requested scope.
+- When reviewing the iOS `Keyboard` target, verify that `ScrollView` and `List` views hide scroll edge effects with `.scrollEdgeEffectHidden()` on iOS 26 and later, with appropriate availability checks.
 
 ## Toolchain and platforms
 
