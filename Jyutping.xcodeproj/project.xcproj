@@ -60,8 +60,7 @@
           ],
         },
       ],
-    },
-    {
+    }, {
       "kind": "group",
       "name": "Products",
       "children": [

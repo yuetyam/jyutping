@@ -44,15 +44,7 @@ struct SettingsView: View {
 
         var body: some View {
                 VStack(spacing: 0) {
-                        ZStack {
-                                Text("SettingsView.NavigationBar.HintText").font(.footnote).shallow()
-                                HStack {
-                                        NavigationLeadingBackButton()
-                                        Spacer()
-                                        NavigationTrailingExpansionButton()
-                                }
-                        }
-                        .frame(height: context.keyboardInterface.isCompact ? PresetConstant.buttonLength : PresetConstant.buttonLengthXL)
+                        NavigationBar()
                         List {
                                 Section {
                                         Toggle("SettingsView.KeyboardFeedback.Sound.ToggleTitle", isOn: $isAudioFeedbackOn)

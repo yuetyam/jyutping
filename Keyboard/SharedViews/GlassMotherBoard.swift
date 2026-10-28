@@ -10,13 +10,13 @@ struct GlassMotherBoard: View {
                 case .placeholder:
                         Color.clear.frame(height: context.keyboardHeight)
                 case .settings:
-                        SettingsView().frame(height: context.keyboardHeight)
+                        SettingsView().scrollEdgeEffectHidden().frame(height: context.keyboardHeight)
                 case .editingPanel:
                         GlassEditingPanel().frame(height: context.keyboardHeight)
                 case .layoutPicker:
                         LayoutPickerView().scrollEdgeEffectHidden().frame(height: context.keyboardHeight)
                 case .detailInspecting:
-                        DetailInspectingView().scrollEdgeEffectHidden().frame(height: context.keyboardHeight)
+                        GlassDetailInspectingView().frame(height: context.keyboardHeight)
                 case .emojiBoard:
                         EmojiBoard().scrollEdgeEffectHidden().frame(height: context.keyboardHeight)
                 case .candidateBoard:
