@@ -65,7 +65,6 @@ extension Array where Element == Candidate {
 
 struct CandidateBoard: View {
         @EnvironmentObject private var context: KeyboardViewController
-        private let buttonLength = PresetConstant.buttonLength - 1
         var body: some View {
                 ZStack(alignment: .topTrailing) {
                         if #available(iOSApplicationExtension 26.0, *) {
@@ -75,39 +74,42 @@ struct CandidateBoard: View {
                         } else {
                                 CandidateBoardScrollViewIOS17()
                         }
-                        if #available(iOSApplicationExtension 26.0, *) {
-                                Button(action: back) {
-                                        ZStack {
-                                                Color.interactiveClear
-                                                Image.chevronUp
-                                                        .resizable()
-                                                        .scaledToFit()
-                                                        .padding(11)
-                                        }
-                                        .glassEffect(.clear, in: .circle)
-                                        .frame(width: buttonLength, height: buttonLength)
-                                }
-                                .buttonStyle(.plain)
-                                .padding(.trailing, 1)
-                                .padding(.top, context.keyboardInterface.isCompact ? 1 : 3)
-                        } else {
-                                Button(action: back) {
-                                        ZStack {
-                                                Color.interactiveClear
-                                                Circle().fill(Material.thin)
-                                                Image.chevronUp
-                                                        .resizable()
-                                                        .scaledToFit()
-                                                        .padding(11)
-                                        }
-                                        .frame(width: buttonLength, height: buttonLength)
-                                }
-                                .buttonStyle(.plain)
-                                .padding(.trailing, 1)
-                                .padding(.top, context.keyboardInterface.isCompact ? 1 : 3)
-                        }
+                        BackButton()
                 }
         }
+}
+
+private struct BackButton: View {
+        @EnvironmentObject private var context: KeyboardViewController
+        var body: some View {
+                Button(action: back) {
+                        if #available(iOS 26.0, *), context.appearanceStyle.isGlass {
+                                ZStack {
+                                        Color.interactiveClear
+                                        Image.chevronUp
+                                                .resizable()
+                                                .scaledToFit()
+                                                .padding(11)
+                                }
+                                .glassEffect(.clear, in: .circle)
+                                .frame(width: PresetConstant.buttonLength, height: PresetConstant.buttonLength)
+                        } else {
+                                ZStack {
+                                        Color.interactiveClear
+                                        Circle().fill(Material.thin)
+                                        Image.chevronUp
+                                                .resizable()
+                                                .scaledToFit()
+                                                .padding(11)
+                                }
+                                .frame(width: PresetConstant.buttonLength, height: PresetConstant.buttonLength)
+                        }
+                }
+                .buttonStyle(.plain)
+                .padding(2)
+                .padding(.top, context.keyboardInterface.isCompact ? 0 : 2)
+        }
+
         private func back() {
                 context.performAudioFeedback(.modify)
                 context.triggerHapticFeedback()
