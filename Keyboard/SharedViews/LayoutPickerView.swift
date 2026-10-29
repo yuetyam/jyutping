@@ -53,7 +53,7 @@ private struct LayoutOptionView: View {
                         ZStack {
                                 Color.interactiveClear
                                 VStack(spacing: 2) {
-                                        if #available(iOSApplicationExtension 26.0, *) {
+                                        if #available(iOSApplicationExtension 26.0, *), context.appearanceStyle.isGlass {
                                                 ZStack {
                                                         Color.clear
                                                         ZStack(alignment: .bottomTrailing) {
@@ -73,8 +73,8 @@ private struct LayoutOptionView: View {
                                                                 .foregroundStyle(isSelected ? Color.accentColor : Color.primary)
                                                                 .padding(.horizontal, layout.isNineKey ? 14 : 8)
                                                 }
-                                                .frame(width: 50, height: 50)
                                                 .glassEffect(isSelected ? .regular : .clear, in: .circle)
+                                                .frame(width: 50, height: 50)
                                         } else {
                                                 ZStack {
                                                         Circle().fill(isSelected ? Material.regular : Material.ultraThick)
@@ -110,7 +110,7 @@ private struct LayoutOptionView: View {
 
 private extension KeyboardLayout {
         var labelName: String {
-                return Self.nameMap[self] ?? "?"
+                return Self.nameMap[self] ?? String.questionMark
         }
         private static let nameMap: [KeyboardLayout: String] = [
                 .qwerty       : String(localized: "SettingsView.KeyboardLayout.Option.QWERTY"),

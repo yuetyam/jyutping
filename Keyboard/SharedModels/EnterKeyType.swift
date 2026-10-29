@@ -72,7 +72,7 @@ extension EnterKeyType {
                         case .bufferingMutilated, .standbyMutilated, .unavailableMutilated:
                                 return .zhHansCN
                         case .bufferingTraditional, .standbyTraditional, .unavailableTraditional:
-                                return .zhHantHK
+                                return .jaJP
                         }
                 }()
                 return text(of: state).languageAttributed(for: language)
