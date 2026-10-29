@@ -1,6 +1,7 @@
 import SwiftUI
+import CommonExtensions
 
-enum SpaceKeyForm: Int {
+enum SpaceKeyForm: Int, CaseIterable {
 
         case english
         case fallback
@@ -16,44 +17,36 @@ enum SpaceKeyForm: Int {
         case confirmMutilated
         case select
         case selectMutilated
+}
+
+extension SpaceKeyForm {
+
+        private static let formTexts: [SpaceKeyForm : String] = [
+                .english            : "space",
+                .fallback           : "空格",
+                .lowercased         : "粵拼",
+                .lowercasedMutilated: "粤拼",
+                .uppercased         : "全寬空格",
+                .uppercasedMutilated: "全宽空格",
+                .capsLocked         : "大寫鎖定",
+                .capsLockedMutilated: "大写锁定",
+                .confirm            : "確認",
+                .confirmMutilated   : "确认",
+                .select             : "選定",
+                .selectMutilated    : "选定",
+        ]
 
         var text: String {
-                switch self {
-                case .english:
-                        return "space"
-                case .fallback:
-                        return "空格"
-                case .lowercased:
-                        return "粵拼"
-                case .lowercasedMutilated:
-                        return "粤拼"
-                case .uppercased:
-                        return "全寬空格"
-                case .uppercasedMutilated:
-                        return "全宽空格"
-                case .capsLocked:
-                        return "大寫鎖定"
-                case .capsLockedMutilated:
-                        return "大写锁定"
-                case .confirm:
-                        return "確認"
-                case .confirmMutilated:
-                        return "确认"
-                case .select:
-                        return "選定"
-                case .selectMutilated:
-                        return "选定"
-                }
+                Self.formTexts[self] ?? PresetConstant.spaceKeyFallbackText
         }
+
         var attributedText: AttributedString {
                 let language: LanguageAttribute = {
                         switch self {
                         case .english:
                                 return .enUS
-                        case .fallback:
-                                return .unspecified
-                        case .lowercased, .uppercased, .capsLocked, .confirm, .select:
-                                return .zhHantHK
+                        case .fallback, .lowercased, .uppercased, .capsLocked, .confirm, .select:
+                                return .jaJP
                         case .lowercasedMutilated, .uppercasedMutilated, .capsLockedMutilated, .confirmMutilated, .selectMutilated:
                                 return .zhHansCN
                         }
