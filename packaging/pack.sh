@@ -3,7 +3,7 @@
 set -euo pipefail
 
 BUNDLE_IDENTIFIER='org.jyutping.inputmethod.Jyutping'
-APP_VERSION='0.86.0'
+APP_VERSION='0.87.0'
 INSTALL_LOCATION='/Library/Input Methods'
 
 pkgbuild \

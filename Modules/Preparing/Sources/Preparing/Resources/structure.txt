@@ -8643,6 +8643,9 @@
 旎	方丿一尼	fong1 pit3 jat1 nei4
 怩	忄尼	sam1 nei4
 怩	心尼	sam1 nei4
+沒	氵又	seoi2 jau6
+沒	水勹又	seoi2 baau1 jau6
+沒	氵勹又	seoi2 baau1 jau6
 咯	口各	hau2 gok3
 崑	山昆	saan1 kwan1
 崑	山昆	saan1 gwan1
@@ -8746,9 +8749,6 @@
 裡	衤里	ji1 lei5
 裡	衣里	ji1 lei5
 裡	衣里	ji3 lei5
-沒	氵又	seoi2 jau6
-沒	水勹又	seoi2 baau1 jau6
-沒	氵勹又	seoi2 baau1 jau6
 舖	舍甫	se3 fu2
 舖	舍甫	se3 pou2
 們	亻門	jan4 mun4
@@ -52576,11 +52576,11 @@
 饂	食昷	sik6 wan1
 鰛	魚昷	jyu4 wan1
 鰛	魚昷	jyu2 wan1
+揾	扌昷	sau2 wan1
 穏	禾急	wo4 gap1
 穏	禾爪彐心	wo4 zaau2 gai3 sam1
 穏	禾爫彐心	wo4 zaau2 gai3 sam1
 愠	忄昷	sam1 wan1
-揾	扌昷	sau2 wan1
 藴	艹昷	cou2 wan1
 藴	草縕	cou2 wan1
 藴	草縕	cou2 wan3

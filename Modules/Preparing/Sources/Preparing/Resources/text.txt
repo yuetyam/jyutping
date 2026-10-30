@@ -6684,7 +6684,6 @@ stayed	stayed
 civic	civic
 assignments	assignments
 manuals	manuals
-doug	doug
 sees	sees
 termination	termination
 watched	watched
