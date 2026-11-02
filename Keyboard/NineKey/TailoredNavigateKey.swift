@@ -22,6 +22,8 @@ struct GlassTailoredNavigateKey: View {
         }
 
         var body: some View {
+                let keyWidth: CGFloat = context.nineKeyWidthUnit * PresetConstant.tailoredActionKeyWidthCoefficient
+                let keyHeight: CGFloat = context.heightUnit
                 Button(action: {}) {
                         ZStack {
                                 Color.interactiveClear
@@ -33,7 +35,7 @@ struct GlassTailoredNavigateKey: View {
                                 .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
                                 .padding(isTouching ? 1 : 3)
                         }
-                        .frame(width: context.nineKeyWidthUnit * PresetConstant.tailoredActionKeyWidthCoefficient, height: context.heightUnit)
+                        .frame(width: keyWidth, height: keyHeight)
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
                         context.performAudioFeedback(.modify)
@@ -62,6 +64,8 @@ struct TailoredNavigateKey: View {
         }
 
         var body: some View {
+                let keyWidth: CGFloat = context.nineKeyWidthUnit * PresetConstant.tailoredActionKeyWidthCoefficient
+                let keyHeight: CGFloat = context.heightUnit
                 Button(action: {}) {
                         ZStack {
                                 Color.interactiveClear
@@ -71,7 +75,7 @@ struct TailoredNavigateKey: View {
                                         .padding(isTouching ? 1 : 3)
                                 Text(verbatim: keyText).font(.staticBody)
                         }
-                        .frame(width: context.nineKeyWidthUnit * PresetConstant.tailoredActionKeyWidthCoefficient, height: context.heightUnit)
+                        .frame(width: keyWidth, height: keyHeight)
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
                         context.performAudioFeedback(.modify)

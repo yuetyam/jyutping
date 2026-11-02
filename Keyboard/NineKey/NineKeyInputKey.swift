@@ -16,6 +16,8 @@ struct GlassNineKeyInputKey: View {
         @State private var isTouching: Bool = false
 
         var body: some View {
+                let keyWidth: CGFloat = context.nineKeyWidthUnit * PresetConstant.tailoredInputKeyWidthCoefficient
+                let keyHeight: CGFloat = context.heightUnit
                 Button(action: {}) {
                         ZStack {
                                 Color.interactiveClear
@@ -27,7 +29,7 @@ struct GlassNineKeyInputKey: View {
                                 .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
                                 .padding(isTouching ? 1 : 3)
                         }
-                        .frame(width: context.nineKeyWidthUnit * PresetConstant.tailoredInputKeyWidthCoefficient, height: context.heightUnit)
+                        .frame(width: keyWidth, height: keyHeight)
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
                         context.performAudioFeedback(.input)
@@ -49,6 +51,8 @@ struct NineKeyInputKey: View {
         @State private var isTouching: Bool = false
 
         var body: some View {
+                let keyWidth: CGFloat = context.nineKeyWidthUnit * PresetConstant.tailoredInputKeyWidthCoefficient
+                let keyHeight: CGFloat = context.heightUnit
                 Button(action: {}) {
                         ZStack {
                                 Color.interactiveClear
@@ -58,7 +62,7 @@ struct NineKeyInputKey: View {
                                         .padding(isTouching ? 1 : 3)
                                 Text(verbatim: combo.text)
                         }
-                        .frame(width: context.nineKeyWidthUnit * PresetConstant.tailoredInputKeyWidthCoefficient, height: context.heightUnit)
+                        .frame(width: keyWidth, height: keyHeight)
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
                         context.performAudioFeedback(.input)

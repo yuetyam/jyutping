@@ -11,6 +11,8 @@ struct GlassNineKeySpecialKey: View {
         @State private var isTouching: Bool = false
 
         var body: some View {
+                let keyWidth: CGFloat = context.nineKeyWidthUnit * PresetConstant.tailoredInputKeyWidthCoefficient
+                let keyHeight: CGFloat = context.heightUnit
                 let isBuffering: Bool = context.inputStage.isBuffering
                 Button(action: {}) {
                         ZStack {
@@ -28,12 +30,12 @@ struct GlassNineKeySpecialKey: View {
                                 Text(verbatim: isBuffering ? String.apostrophe : Combo.special.text)
                                         .opacity(isBuffering ? 0 : 1)
                         }
-                        .frame(width: context.nineKeyWidthUnit * PresetConstant.tailoredInputKeyWidthCoefficient, height: context.heightUnit)
+                        .frame(width: keyWidth, height: keyHeight)
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
                         context.performAudioFeedback(.input)
                         context.triggerHapticFeedback()
-                        if context.inputStage.isBuffering.negative {
+                        if isBuffering.negative {
                                 context.nineKeyProcess(.special)
                         }
                 })
@@ -47,6 +49,8 @@ struct NineKeySpecialKey: View {
         @State private var isTouching: Bool = false
 
         var body: some View {
+                let keyWidth: CGFloat = context.nineKeyWidthUnit * PresetConstant.tailoredInputKeyWidthCoefficient
+                let keyHeight: CGFloat = context.heightUnit
                 let isBuffering: Bool = context.inputStage.isBuffering
                 Button(action: {}) {
                         ZStack {
@@ -64,12 +68,12 @@ struct NineKeySpecialKey: View {
                                 Text(verbatim: isBuffering ? String.apostrophe : Combo.special.text)
                                         .opacity(isBuffering ? 0 : 1)
                         }
-                        .frame(width: context.nineKeyWidthUnit * PresetConstant.tailoredInputKeyWidthCoefficient, height: context.heightUnit)
+                        .frame(width: keyWidth, height: keyHeight)
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
                         context.performAudioFeedback(.input)
                         context.triggerHapticFeedback()
-                        if context.inputStage.isBuffering.negative {
+                        if isBuffering.negative {
                                 context.nineKeyProcess(.special)
                         }
                 })

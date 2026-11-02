@@ -12,6 +12,8 @@ struct GlassTailoredBackspaceKey: View {
         @State private var buffer: Int = 0
 
         var body: some View {
+                let keyWidth: CGFloat = context.nineKeyWidthUnit * PresetConstant.tailoredActionKeyWidthCoefficient
+                let keyHeight: CGFloat = context.heightUnit
                 Button(action: {}) {
                         ZStack {
                                 Color.interactiveClear
@@ -23,7 +25,7 @@ struct GlassTailoredBackspaceKey: View {
                                 .shadow(color: isTouching ? colorScheme.glassShadow : Color.clear, radius: 0.5)
                                 .padding(isTouching ? 1 : 3)
                         }
-                        .frame(width: context.nineKeyWidthUnit * PresetConstant.tailoredActionKeyWidthCoefficient, height: context.heightUnit)
+                        .frame(width: keyWidth, height: keyHeight)
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
                         buffer = 0
@@ -67,6 +69,8 @@ struct TailoredBackspaceKey: View {
         @State private var buffer: Int = 0
 
         var body: some View {
+                let keyWidth: CGFloat = context.nineKeyWidthUnit * PresetConstant.tailoredActionKeyWidthCoefficient
+                let keyHeight: CGFloat = context.heightUnit
                 Button(action: {}) {
                         ZStack {
                                 Color.interactiveClear
@@ -76,7 +80,7 @@ struct TailoredBackspaceKey: View {
                                         .padding(isTouching ? 1 : 3)
                                 Image.backspace.symbolVariant(isTouching ? .fill : .none).font(.symbol)
                         }
-                        .frame(width: context.nineKeyWidthUnit * PresetConstant.tailoredActionKeyWidthCoefficient, height: context.heightUnit)
+                        .frame(width: keyWidth, height: keyHeight)
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
                         buffer = 0
