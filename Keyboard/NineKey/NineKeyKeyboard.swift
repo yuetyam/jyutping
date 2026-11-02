@@ -20,7 +20,7 @@ struct NineKeyKeyboard: View {
                                                 SidebarPanel()
                                                 VStack(spacing: 0) {
                                                         HStack(spacing: 0) {
-                                                                NineKeySpecialKey()
+                                                                SpecialKey()
                                                                 NineKeyInputKey(.ABC)
                                                                 NineKeyInputKey(.DEF)
                                                         }

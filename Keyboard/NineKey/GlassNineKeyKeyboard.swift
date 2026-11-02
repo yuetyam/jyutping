@@ -22,7 +22,7 @@ struct GlassNineKeyKeyboard: View {
                                                 GlassSidebarPanel()
                                                 VStack(spacing: 0) {
                                                         HStack(spacing: 0) {
-                                                                GlassNineKeySpecialKey()
+                                                                GlassSpecialKey()
                                                                 GlassNineKeyInputKey(.ABC)
                                                                 GlassNineKeyInputKey(.DEF)
                                                         }

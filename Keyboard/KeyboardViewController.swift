@@ -381,6 +381,17 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         func nineKeyProcess(_ combo: Combo) {
                 bufferCombos.append(combo)
         }
+        func nineKeyHandle(_ virtual: VirtualInputKey? = nil) {
+                let virtual: VirtualInputKey = virtual ?? VirtualInputKey.letterR
+                switch virtual {
+                case .apostrophe:
+                        break
+                case .letterR:
+                        bufferCombos.append(.special)
+                default:
+                        break
+                }
+        }
 
         @Published private(set) var sidebarSyllables: [SidebarSyllable] = []
         private lazy var selectedSyllables: [SidebarSyllable] = []
