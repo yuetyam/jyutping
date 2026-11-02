@@ -35,11 +35,17 @@ struct LargePadExpansibleInputKey: View {
         /// Retrieves the current system color scheme (light or dark mode) from the environment.
         @Environment(\.colorScheme) private var colorScheme
 
+        /// Monotonic clock used to measure held time independently of task scheduling.
+        private let clock = ContinuousClock()
+
         /// Button press state reported by PressButtonStyle; may end when sliding outside the key.
         @State private var isTouching: Bool = false
 
-        /// Number of elapsed 100 ms checkpoints used for long-press thresholds.
-        @State private var buffer: Int = 0
+        /// Start of the current uninterrupted button press.
+        @State private var pressStartedAt: ContinuousClock.Instant?
+
+        /// Held time accumulated before sliding outside the button; resumes on reentry.
+        @State private var heldDuration: Duration = .zero
 
         /// Indicates that the expanded alternative selector has been activated.
         @State private var isLongPressing: Bool = false
@@ -47,9 +53,16 @@ struct LargePadExpansibleInputKey: View {
         /// Selected index in unit.members, independent of the visual expansion direction.
         @State private var selectedIndex: Int = 0
 
+        /// Expansion occurs after 300 ms of held time, excluding time spent outside the button.
+        private var longPressDeadline: ContinuousClock.Instant? {
+                guard isTouching, isLongPressing.negative, let pressStartedAt else { return nil }
+                return pressStartedAt.advanced(by: .milliseconds(300) - heldDuration)
+        }
+
         var body: some View {
                 let keyWidth: CGFloat = context.widthUnit
                 let keyHeight: CGFloat = context.heightUnit
+                let displayForm = KeyDisplayForm.responsive(isInteracting: isTouching, isLongPressEngaged: isLongPressing, isPreviewEnabled: false)
                 let insets = context.keyboardInterface.keyShapeInsets
                 let baseWidth: CGFloat = keyWidth - insets.horizontalTotal
                 let baseHeight: CGFloat = keyHeight - insets.verticalTotal
@@ -57,10 +70,12 @@ struct LargePadExpansibleInputKey: View {
                 let previewBottomOffset: CGFloat = (baseHeight + extraHeight) * 2
                 let shouldShowLowercaseKeys: Bool = Options.showLowercaseKeys && context.keyboardCase.isLowercased
                 let textCase: Text.Case = shouldShowLowercaseKeys ? .lowercase : .uppercase
+                let interactionDeadline = longPressDeadline
                 Button(action: {}) {
                         ZStack {
                                 Color.interactiveClear
-                                if isLongPressing {
+                                switch displayForm {
+                                case .previewing, .expanding:
                                         let memberCount: Int = unit.members.count
                                         let expansionCount: Int = memberCount - 1
                                         let offsetX: CGFloat = baseWidth * CGFloat(expansionCount)
@@ -103,7 +118,7 @@ struct LargePadExpansibleInputKey: View {
                                                         .padding(.trailing, trailingOffset)
                                                 }
                                                 .padding(insets)
-                                } else {
+                                case .normal, .reflecting:
                                         RoundedRectangle(cornerRadius: PresetConstant.largeKeyCornerRadius)
                                                 .fill(colorScheme.inputKeyBackground(style: context.appearanceStyle, isPreviewEnabled: false, isInteracting: isTouching))
                                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
@@ -127,8 +142,15 @@ struct LargePadExpansibleInputKey: View {
                         .frame(width: keyWidth, height: keyHeight)
                 }
                 .buttonStyle(PressButtonStyle($isTouching) {
+                        pressStartedAt = clock.now
                         context.performAudioFeedback(.input)
+                        context.triggerHapticFeedback()
                 })
+                .onChange(of: isTouching) { _, touching in
+                        guard touching.negative, let pressStartedAt else { return }
+                        heldDuration += pressStartedAt.duration(to: clock.now)
+                        self.pressStartedAt = nil
+                }
                 .simultaneousGesture(DragGesture(minimumDistance: 0)
                         .onChanged { state in
                                 guard isLongPressing else { return }
@@ -150,15 +172,17 @@ struct LargePadExpansibleInputKey: View {
                                 }
                         }
                         .onEnded { _ in
-                                buffer = 0
+                                pressStartedAt = nil
+                                heldDuration = .zero
                                 defer {
                                         selectedIndex = 0
                                         isLongPressing = false
                                 }
                                 if isLongPressing {
                                         guard let selectedElement = unit.members.fetch(selectedIndex) else { return }
-                                        let text: String = context.keyboardCase.isLowercased ? selectedElement.text : selectedElement.text.uppercased()
                                         context.performAudioFeedback(.input)
+                                        context.triggerSelectionHapticFeedback()
+                                        let text: String = context.keyboardCase.isLowercased ? selectedElement.text : selectedElement.text.uppercased()
                                         context.operate(.process(text))
                                 } else if let virtual {
                                         context.handle(virtual)
@@ -168,17 +192,16 @@ struct LargePadExpansibleInputKey: View {
                                 }
                         }
                 )
-                .task(id: isTouching) {
-                        guard isTouching else { return }
-                        while isLongPressing.negative {
-                                try? await Task.sleep(for: .milliseconds(100))
-                                guard Task.isCancelled.negative else { break }
-                                if buffer >= 3 {
-                                        isLongPressing = true
-                                } else {
-                                        buffer += 1
-                                }
+                .task(id: interactionDeadline) {
+                        guard let deadline = interactionDeadline else { return }
+                        do {
+                                try await clock.sleep(until: deadline)
+                        } catch {
+                                return
                         }
+                        guard Task.isCancelled.negative else { return }
+                        guard longPressDeadline == deadline else { return }
+                        isLongPressing = true
                 }
         }
 }
