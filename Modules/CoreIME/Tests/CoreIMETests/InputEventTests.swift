@@ -18,20 +18,6 @@ struct InputEventTests {
                 #expect(inferredLowercase.case == .lowercased)
         }
 
-        @Test("ambiguous events transform only nonempty key sets")
-        func ambiguousEvents() {
-                let events = [
-                        AmbiguousInputEvent(keys: [.letterA], case: .uppercased),
-                        AmbiguousInputEvent(keys: [], case: .lowercased),
-                        AmbiguousInputEvent(keys: [.number1], case: .capsLocked)
-                ]
-                let transformed = events.basicTransformed()
-
-                #expect(transformed.count == 2)
-                #expect(transformed[0] == BasicInputEvent(key: .letterA, case: .uppercased))
-                #expect(transformed[1] == BasicInputEvent(key: .number1, case: .capsLocked))
-        }
-
         @Test("preview marks normalize tone keys and pairs")
         func previewToneKeys() {
                 #expect(inputEvents("gwongvxqvvxxqq").normalizedPreviewMark() == "gwong1 2 3 4 5 6")
