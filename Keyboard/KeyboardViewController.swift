@@ -144,7 +144,6 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 performInput(text)
         }
         private func inputBufferText(followedBy text2insert: String? = nil) {
-                bufferCombos = []
                 let text: String = {
                         guard let text2insert, text2insert.isNotEmpty else { return joinedBufferTexts() }
                         return joinedBufferTexts() + text2insert
@@ -196,9 +195,9 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         }
 
         private lazy var inputLengthSequence: [Int] = []
-        private lazy var bufferEvents: [AmbiguousInputEvent] = [] {
+        private lazy var pulses: [InputPulse] = [] {
                 didSet {
-                        switch (oldValue.isEmpty, bufferEvents.isEmpty) {
+                        switch (oldValue.isEmpty, pulses.isEmpty) {
                         case (true, true):
                                 inputStage = .standby
                         case (true, false):
@@ -206,11 +205,17 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 refreshEnterKey()
                         case (false, false):
                                 inputStage = .ongoing
+                                if keyboardLayout.isNineKey &&
+                                        selectedSyllables.isNotEmpty &&
+                                        pulses.count == (oldValue.count - 1) {
+                                        selectedSyllables = []
+                                }
                         case (false, true):
                                 inputStage = .ending
                                 suggestionTask?.cancel()
                                 candidates = []
                                 text2mark = String.empty
+                                clearSidebarSyllables()
                                 if keyboardForm.isDedicatedStroke {
                                         updateKeyboardForm(to: .primary)
                                 }
@@ -222,44 +227,73 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 }
                                 selectedLexicons = []
                         }
-                        switch bufferEvents.first?.keys.first {
+                        switch pulses.first {
                         case .none:
                                 updateReverseLookupState(to: false)
-                        case .letterR:
-                                ensureCompositionType(to: .pinyin)
+                        case .basic(let event) where event.key.isReverseLookupTrigger:
                                 updateReverseLookupState(to: true)
-                                pinyinReverseLookup()
-                        case .letterV:
-                                ensureCompositionType(to: .cangjie)
-                                updateReverseLookupState(to: true)
-                                cangjieReverseLookup()
-                        case .letterX:
-                                if strokeLayout.isDedicated && keyboardForm.isDedicatedStroke.negative {
-                                        updateKeyboardForm(to: .dedicatedStroke)
-                                } else {
-                                        ensureCompositionType(to: .stroke)
+                                switch event.key {
+                                case .letterR:
+                                        updateReverseLookupState(to: true)
+                                        if keyboardLayout.isNineKey {
+                                                nineKeyPinyinReverseLookup()
+                                        } else {
+                                                ensureCompositionType(to: .pinyin)
+                                                pinyinReverseLookup()
+                                        }
+                                case .letterV:
+                                        updateReverseLookupState(to: true)
+                                        ensureCompositionType(to: .cangjie)
+                                        cangjieReverseLookup()
+                                case .letterX:
+                                        updateReverseLookupState(to: true)
+                                        if strokeLayout.isDedicated && keyboardForm.isDedicatedStroke.negative {
+                                                updateKeyboardForm(to: .dedicatedStroke)
+                                        } else {
+                                                ensureCompositionType(to: .stroke)
+                                        }
+                                        strokeReverseLookup()
+                                case .letterQ:
+                                        updateReverseLookupState(to: true)
+                                        if keyboardLayout.isNineKey {
+                                                // TODO: Implement structure reverse lookup for NineKey Keyboards
+                                        } else if keyboardLayout.isAmbiguous {
+                                                structureAmbiguouslyReverseLookup()
+                                        } else {
+                                                structureReverseLookup()
+                                        }
+                                default:
+                                        break
                                 }
-                                updateReverseLookupState(to: true)
-                                strokeReverseLookup()
-                        case .letterQ:
-                                updateReverseLookupState(to: true)
-                                if keyboardLayout.isAmbiguous {
-                                        structureAmbiguouslyReverseLookup()
-                                } else {
-                                        structureReverseLookup()
-                                }
-                        default:
+                        case .basic, .ambiguous:
                                 updateReverseLookupState(to: false)
                                 if keyboardLayout.isAmbiguous {
                                         ambiguouslySuggest()
                                 } else {
                                         suggest()
                                 }
+                        case .combined:
+                                updateReverseLookupState(to: false)
+                                nineKeySuggest()
                         }
                 }
         }
         private func joinedBufferTexts() -> String {
-                return bufferEvents.compactMap({ $0.case.isLowercased ? $0.keys.first?.text : $0.keys.first?.text.uppercased() }).joined()
+                return pulses.map({ pulse -> String in
+                        switch pulse {
+                        case .basic(let event):
+                                return event.isCapitalized ? event.key.text.uppercased() : event.key.text
+                        case .ambiguous(let event):
+                                let firstText = event.keys.first?.text ?? String.empty
+                                return event.case.isCapitalized ? firstText.uppercased() : firstText
+                        case .combined(let combo):
+                                return combo.letters.first ?? String.empty
+                        }
+                }).joined()
+        }
+        private func clearBuffer() {
+                inputLengthSequence = []
+                pulses = []
         }
 
         func handle(_ key: VirtualInputKey, isCapitalized: Bool? = nil) {
@@ -283,8 +317,8 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         return
                 }
                 inputLengthSequence.append(1)
-                let newEvent = AmbiguousInputEvent(keys: [key], case: keyboardCase)
-                bufferEvents.append(newEvent)
+                let newEvent = BasicInputEvent(key: key, case: keyboardCase)
+                pulses.append(.basic(newEvent))
         }
         private func process(keys: [VirtualInputKey], isCapitalized: Bool) {
                 guard let firstKey = keys.first else { return }
@@ -309,18 +343,24 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 guard keyboardLayout.isAmbiguous.negative else {
                         inputLengthSequence.append(1)
                         let newEvent = AmbiguousInputEvent(keys: Set(keys), case: keyboardCase)
-                        bufferEvents.append(newEvent)
+                        pulses.append(.ambiguous(newEvent))
                         return
                 }
                 let keyCase = keyboardCase
-                let shouldConvertKeys: Bool = keyboardLayout.isTripleStroke && (keys == VirtualInputKey.GWInputKeys) && (inputLengthSequence.last == 2) && (bufferEvents.last?.keys.first == .letterW)
+                let isTrailingLetterW: Bool = switch pulses.last {
+                case .basic(let event) where (event.key == .letterW): true
+                default: false
+                }
+                let shouldConvertKeys: Bool = keyboardLayout.isTripleStroke && (keys == VirtualInputKey.GWInputKeys) && (inputLengthSequence.last == 2) && isTrailingLetterW
                 if shouldConvertKeys {
                         let newEvents = VirtualInputKey.KWInputKeys.map({ AmbiguousInputEvent(keys: [$0], case: keyCase) })
-                        bufferEvents = bufferEvents.dropLast(2) + newEvents
+                        let newPulses = newEvents.map({ InputPulse.ambiguous($0) })
+                        pulses = pulses.dropLast(2) + newPulses
                 } else {
                         inputLengthSequence.append(keys.count)
-                        let newEvents = keys.map({ AmbiguousInputEvent(keys: [$0], case: keyCase) })
-                        bufferEvents += newEvents
+                        let newEvents = keys.map({ BasicInputEvent(key: $0, case: keyCase) })
+                        let newPulses = newEvents.map({ InputPulse.basic($0) })
+                        pulses += newPulses
                 }
         }
         private func appendBufferText(_ text: String) {
@@ -333,64 +373,14 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 }
         }
 
-        private func clearBuffer() {
-                bufferCombos = []
-                inputLengthSequence = []
-                bufferEvents = []
+        func nineKeyHandle(_ combo: KeypadCombo) {
+                pulses.append(.combined(combo))
         }
-
-        /// Cantonese 10-Key / T9 layout
-        private lazy var bufferCombos: [Combo] = [] {
-                didSet {
-                        switch (oldValue.isEmpty, bufferCombos.isEmpty) {
-                        case (true, true):
-                                inputStage = .standby
-                        case (true, false):
-                                inputStage = .starting
-                                refreshEnterKey()
-                        case (false, false):
-                                inputStage = .ongoing
-                                if bufferCombos.count == (oldValue.count - 1) {
-                                        selectedSyllables = []
-                                }
-                        case (false, true):
-                                inputStage = .ending
-                                suggestionTask?.cancel()
-                                if Options.isInputMemoryOn && selectedLexicons.isNotEmpty {
-                                        let concatenated = selectedLexicons.filter(\.isCantonese).joined()
-                                        concatenated.flatMap(InputMemory.handle(_:))
-                                }
-                                selectedLexicons = []
-                                candidates = []
-                                text2mark = String.empty
-                                clearSidebarSyllables()
-                                refreshEnterKey()
-                        }
-                        switch bufferCombos.first {
-                        case .none:
-                                updateReverseLookupState(to: false)
-                        case .special:
-                                updateReverseLookupState(to: true)
-                                nineKeyPinyinReverseLookup()
-                        default:
-                                updateReverseLookupState(to: false)
-                                nineKeySuggest()
-                        }
-                }
-        }
-        func nineKeyProcess(_ combo: Combo) {
-                bufferCombos.append(combo)
-        }
-        func nineKeyHandle(_ virtual: VirtualInputKey? = nil) {
+        func nineKeyProcess(_ virtual: VirtualInputKey? = nil) {
                 let virtual: VirtualInputKey = virtual ?? VirtualInputKey.letterR
-                switch virtual {
-                case .apostrophe:
-                        break
-                case .letterR:
-                        bufferCombos.append(.special)
-                default:
-                        break
-                }
+                guard virtual.isApostrophe.negative else { return } // Apostrophe support is not yet implemented
+                let event = BasicInputEvent(key: virtual, case: .lowercased)
+                pulses.append(.basic(event))
         }
 
         @Published private(set) var sidebarSyllables: [SidebarSyllable] = []
@@ -424,12 +414,12 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         return (syllables.count < selectedCount) ? selected.starts(with: syllables) : syllables.starts(with: selected)
                 })
                 if let firstLexicon = candidates.first?.lexicon,
-                   firstLexicon.inputCount == bufferCombos.count,
+                   firstLexicon.inputCount == pulses.count,
                    firstLexicon.mark != text2mark {
                         text2mark = firstLexicon.mark
                 }
                 let selectedLength = selected.reduce(0, { $0 + $1.count })
-                guard selectedLength < bufferCombos.count else {
+                guard selectedLength < pulses.count else {
                         sidebarSyllables = selectedSyllables
                         return
                 }
@@ -517,13 +507,13 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 switch keyboardLayout {
                                 case .qwerty, .fourteenKey, .fifteenKey, .eighteenKey, .nineteenKey, .twentyOneKey:
                                         inputLengthSequence = inputLengthSequence.dropLast()
-                                        bufferEvents = bufferEvents.dropLast()
+                                        pulses = pulses.dropLast()
                                 case .tripleStroke:
                                         guard let lastInputLength = inputLengthSequence.last else { return }
                                         inputLengthSequence = inputLengthSequence.dropLast()
-                                        bufferEvents = bufferEvents.dropLast(lastInputLength)
+                                        pulses = pulses.dropLast(lastInputLength)
                                 case .nineKey:
-                                        bufferCombos = bufferCombos.dropLast()
+                                        pulses = pulses.dropLast()
                                 }
                         } else {
                                 textDocumentProxy.deleteBackward()
@@ -629,46 +619,53 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 } else {
                         selectedLexicons = []
                 }
+                func isApostrophe(_ pulse: InputPulse?) -> Bool {
+                        guard let pulse else { return false }
+                        switch pulse {
+                        case .basic(let event) where event.key.isApostrophe: return true
+                        default: return false
+                        }
+                }
                 switch keyboardLayout {
                 case .qwerty, .tripleStroke, .fourteenKey, .fifteenKey, .eighteenKey, .nineteenKey, .twentyOneKey:
                         if isReverseLookup {
-                                var tail = bufferEvents.dropFirst(candidate.lexicon.inputCount + 1)
-                                while (tail.first?.keys.first?.isApostrophe ?? false) {
+                                var tail = pulses.dropFirst(candidate.lexicon.inputCount + 1)
+                                while isApostrophe(tail.first) {
                                         tail = tail.dropFirst()
                                 }
                                 let tailLength = tail.count
                                 if tailLength > 0 {
                                         inputLengthSequence = inputLengthSequence.prefix(1) + inputLengthSequence.suffix(tailLength)
-                                        bufferEvents = bufferEvents.prefix(1) + bufferEvents.suffix(tailLength)
+                                        pulses = pulses.prefix(1) + pulses.suffix(tailLength)
                                 } else {
                                         clearBuffer()
                                 }
                         } else {
-                                var tail = bufferEvents.dropFirst(candidate.lexicon.inputCount)
-                                while (tail.first?.keys.first?.isApostrophe ?? false) {
+                                var tail = pulses.dropFirst(candidate.lexicon.inputCount)
+                                while isApostrophe(tail.first) {
                                         tail = tail.dropFirst()
                                 }
                                 let tailLength = tail.count
                                 if tailLength > 0 {
                                         inputLengthSequence = inputLengthSequence.suffix(tailLength)
-                                        bufferEvents = bufferEvents.suffix(tailLength)
+                                        pulses = pulses.suffix(tailLength)
                                 } else {
                                         clearBuffer()
                                 }
                         }
                 case .nineKey:
                         if isReverseLookup {
-                                let tailCount: Int = (bufferCombos.count - 1) - candidate.lexicon.inputCount
+                                let tailCount: Int = (pulses.count - 1) - candidate.lexicon.inputCount
                                 if tailCount > 0 {
-                                        bufferCombos = bufferCombos.prefix(1) + bufferCombos.suffix(tailCount)
+                                        pulses = pulses.prefix(1) + pulses.suffix(tailCount)
                                 } else {
                                         clearBuffer()
                                 }
                         } else {
                                 selectedSyllables = []
-                                let tailCount: Int = bufferCombos.count - candidate.lexicon.inputCount
+                                let tailCount: Int = pulses.count - candidate.lexicon.inputCount
                                 if tailCount > 0 {
-                                        bufferCombos = bufferCombos.suffix(tailCount)
+                                        pulses = pulses.suffix(tailCount)
                                 } else {
                                         clearBuffer()
                                 }
@@ -701,7 +698,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         private lazy var suggestionTask: Task<Void, Never>? = nil
         private func nineKeySuggest() {
                 suggestionTask?.cancel()
-                let combos = bufferCombos
+                let combos = pulses.keypadCombos
                 let isInputMemoryOn: Bool = Options.isInputMemoryOn
                 let isEmojiSuggestionsOn: Bool = Options.isEmojiSuggestionsOn
                 let isEnglishSuggestionsOn: Bool = Options.isEnglishSuggestionsOn
@@ -738,7 +735,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         }
         private func nineKeyPinyinReverseLookup() {
                 suggestionTask?.cancel()
-                let keys = bufferCombos.dropFirst()
+                let keys = pulses.dropFirst().keypadCombos
                 guard keys.isNotEmpty else {
                         text2mark = VirtualInputKey.letterR.text
                         candidates = []
@@ -773,9 +770,10 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
 
         private func ambiguouslySuggest() {
                 suggestionTask?.cancel()
-                let inputLength = bufferEvents.count
-                let isPeculiar: Bool = bufferEvents.contains(where: \.case.isCapitalized) || bufferEvents.contains(where: { $0.keys.contains(where: \.isSyllableLetter.negative) })
-                let keySetArray: Array<Set<VirtualInputKey>> = bufferEvents.map(\.keys)
+                let events = pulses.ambiguousEvents
+                let inputLength = pulses.count
+                let isPeculiar: Bool = events.contains(where: \.case.isCapitalized) || events.contains(where: { $0.keys.contains(where: \.isSyllableLetter.negative) })
+                let keySetArray: Array<Set<VirtualInputKey>> = events.map(\.keys)
                 let isInputMemoryOn: Bool = Options.isInputMemoryOn
                 let isEmojiSuggestionsOn: Bool = Options.isEmojiSuggestionsOn
                 let isEnglishSuggestionsOn: Bool = Options.isEnglishSuggestionsOn
@@ -833,7 +831,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
 
         private func suggest() {
                 suggestionTask?.cancel()
-                let events = bufferEvents.basicTransformed()
+                let events = pulses.basicEvents
                 let keys = events.map(\.key)
                 let isInputMemoryOn: Bool = Options.isInputMemoryOn
                 let isEmojiSuggestionsOn: Bool = Options.isEmojiSuggestionsOn
@@ -872,7 +870,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         }
         private func pinyinReverseLookup() {
                 suggestionTask?.cancel()
-                let events = bufferEvents.basicTransformed()
+                let events = pulses.basicEvents
                 let allKeys = events.map(\.key)
                 guard allKeys.count > 1 else {
                         text2mark = joinedBufferTexts()
@@ -919,7 +917,8 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         }
         private func cangjieReverseLookup() {
                 suggestionTask?.cancel()
-                let allKeys = bufferEvents.compactMap(\.keys.first)
+                let events = pulses.basicEvents
+                let allKeys = events.map(\.key)
                 let keys = allKeys.dropFirst()
                 let cangjieRadicals = keys.compactMap(Converter.cangjie(of:))
                 let isValidSequence: Bool = cangjieRadicals.isNotEmpty && (cangjieRadicals.count == keys.count)
@@ -953,7 +952,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         }
         private func strokeReverseLookup() {
                 suggestionTask?.cancel()
-                let allKeys = bufferEvents.compactMap(\.keys.first)
+                let allKeys = pulses.basicEvents.map(\.key)
                 let keys = allKeys.dropFirst()
                 if keys.isEmpty || StrokeVirtualKey.isValidStrokes(keys).negative {
                         text2mark = joinedBufferTexts()
@@ -986,7 +985,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         /// 拆字反查. 例如 木 + 木 = 林: mukmuk
         private func structureReverseLookup() {
                 suggestionTask?.cancel()
-                let allKeys = bufferEvents.compactMap(\.keys.first)
+                let allKeys = pulses.basicEvents.map(\.key)
                 let keys = allKeys.dropFirst()
                 if keys.isEmpty {
                         text2mark = joinedBufferTexts()
@@ -1030,12 +1029,12 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         }
         private func structureAmbiguouslyReverseLookup() {
                 suggestionTask?.cancel()
-                guard bufferEvents.count > 1 else {
+                guard pulses.count > 1 else {
                         text2mark = joinedBufferTexts()
                         candidates = []
                         return
                 }
-                let events = bufferEvents.dropFirst()
+                let events = pulses.dropFirst().ambiguousEvents
                 let inputLength = events.count
                 let isPeculiar: Bool = events.contains(where: \.case.isCapitalized) || events.contains(where: { $0.keys.contains(where: \.isSyllableLetter.negative) })
                 let keySetArray: Array<Set<VirtualInputKey>> = events.map(\.keys)

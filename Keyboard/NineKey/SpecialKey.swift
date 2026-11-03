@@ -183,11 +183,11 @@ struct SpecialKey: View {
                                         context.performAudioFeedback(.input)
                                         context.triggerSelectionHapticFeedback()
                                         let selected = triggers.fetch(selectedIndex)
-                                        context.nineKeyHandle(selected)
+                                        context.nineKeyProcess(selected)
                                 } else if isBuffering {
-                                        context.nineKeyHandle(.apostrophe)
+                                        context.nineKeyProcess(.apostrophe)
                                 } else {
-                                        context.nineKeyHandle()
+                                        context.nineKeyProcess()
                                 }
                         }
                 )

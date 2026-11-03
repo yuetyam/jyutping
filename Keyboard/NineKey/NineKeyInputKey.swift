@@ -34,7 +34,7 @@ struct GlassNineKeyInputKey: View {
                 .buttonStyle(PressButtonStyle($isTouching) {
                         context.performAudioFeedback(.input)
                         context.triggerHapticFeedback()
-                        context.nineKeyProcess(combo)
+                        context.nineKeyHandle(combo)
                 })
         }
 }
@@ -67,7 +67,7 @@ struct NineKeyInputKey: View {
                 .buttonStyle(PressButtonStyle($isTouching) {
                         context.performAudioFeedback(.input)
                         context.triggerHapticFeedback()
-                        context.nineKeyProcess(combo)
+                        context.nineKeyHandle(combo)
                 })
         }
 }

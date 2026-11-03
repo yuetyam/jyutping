@@ -2,6 +2,7 @@ import SwiftUI
 import CommonExtensions
 import CoreIME
 
+@available(*, deprecated, message: "Use GlassSpecialKey instead")
 @available(iOS 26.0, *)
 @available(iOSApplicationExtension 26.0, *)
 struct GlassNineKeySpecialKey: View {
@@ -36,12 +37,13 @@ struct GlassNineKeySpecialKey: View {
                         context.performAudioFeedback(.input)
                         context.triggerHapticFeedback()
                         if isBuffering.negative {
-                                context.nineKeyProcess(.special)
+                                context.nineKeyHandle(.special)
                         }
                 })
         }
 }
 
+@available(*, deprecated, message: "Use SpecialKey instead")
 struct NineKeySpecialKey: View {
 
         @EnvironmentObject private var context: KeyboardViewController
@@ -74,7 +76,7 @@ struct NineKeySpecialKey: View {
                         context.performAudioFeedback(.input)
                         context.triggerHapticFeedback()
                         if isBuffering.negative {
-                                context.nineKeyProcess(.special)
+                                context.nineKeyHandle(.special)
                         }
                 })
         }
