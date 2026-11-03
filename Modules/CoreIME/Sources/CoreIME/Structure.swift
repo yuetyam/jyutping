@@ -61,6 +61,36 @@ extension Engine {
                 }
         }
 
+        /// Character components reverse lookup from complete nine-key syllable schemes.
+        /// - Parameters:
+        ///   - combos: Keypad input without the reverse-lookup trigger.
+        ///   - segmentation: Possible component syllable schemes for the input.
+        /// - Returns: Composed characters with their Jyutping and component pre-edit marks.
+        public static func structureNineKeyReverseLookup<T: RandomAccessCollection<Combo>>(combos: T, segmentation: NineKeySegmentation) -> [Lexicon] {
+                guard combos.isNotEmpty else { return [] }
+                let command: String = "SELECT word, romanization FROM structure_table WHERE spell_9key = ? AND complexity = ? ORDER BY rowid LIMIT ?;"
+                var statement: OpaquePointer?
+                guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return [] }
+                defer { sqlite3_finalize(statement) }
+                let input = combos.compactMap(\.letters.first).joined()
+                return segmentation.filter({ $0.length == combos.count })
+                        .flatMap({ scheme -> [Lexicon] in
+                                guard Task.isCancelled.negative else { return [] }
+                                if scheme.contains(where: \.isIrregular) {
+                                        let serialCommand: String = "SELECT word, romanization FROM structure_table WHERE spell = ? AND complexity = ? ORDER BY rowid LIMIT ?;"
+                                        var serialStatement: OpaquePointer?
+                                        guard sqlite3_prepare_v2(database, serialCommand, -1, &serialStatement, nil) == SQLITE_OK else { return [] }
+                                        defer { sqlite3_finalize(serialStatement) }
+                                        return match(keys: scheme.serialOriginKeys, complexity: scheme.complexity, input: input, statement: serialStatement)
+                                } else {
+                                        return match(code: scheme.originCombos.decimalCombinedCode, complexity: scheme.complexity, input: input, statement: statement)
+                                }
+                        })
+                        .distinct()
+                        .flatMap({ Engine.reveresLookup(text: $0.text, input: input, mark: $0.romanization.strippedTones()) })
+                        .distinct()
+        }
+
         private static func search<T: RandomAccessCollection<VirtualInputKey>>(keys: T, segmentation: Segmentation) -> [Lexicon] {
                 let command: String = "SELECT word, romanization FROM structure_table WHERE spell = ? AND complexity = ? ORDER BY rowid LIMIT ?;"
                 var statement: OpaquePointer?
@@ -73,14 +103,17 @@ extension Engine {
                         .distinct()
         }
         private static func match<T: RandomAccessCollection<VirtualInputKey>>(keys: T, complexity: Int, input: String? = nil, limit: Int64? = nil, statement: OpaquePointer?) -> [Lexicon] {
+                let input: String = input ?? keys.map(\.text).joined()
+                return match(code: keys.conjoinedCode, complexity: complexity, input: input, limit: limit, statement: statement)
+        }
+        private static func match(code: Int, complexity: Int, input: String, limit: Int64? = nil, statement: OpaquePointer?) -> [Lexicon] {
                 sqlite3_reset(statement)
-                let spell: Int64 = keys.conjoinedCode.toInt64()
+                let code: Int64 = code.toInt64()
                 let complexity: Int64 = complexity.toInt64()
                 let limit: Int64 = limit ?? -1
-                sqlite3_bind_int64(statement, 1, spell)
+                sqlite3_bind_int64(statement, 1, code)
                 sqlite3_bind_int64(statement, 2, complexity)
                 sqlite3_bind_int64(statement, 3, limit)
-                let input: String = input ?? keys.map(\.text).joined()
                 var items: [Lexicon] = []
                 while sqlite3_step(statement) == SQLITE_ROW {
                         let word: String = String(cString: sqlite3_column_text(statement, 0))

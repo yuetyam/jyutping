@@ -262,7 +262,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 case .letterQ:
                                         updateReverseLookupState(to: true)
                                         if keyboardLayout.isNineKey {
-                                                // TODO: Implement structure reverse lookup for NineKey Keyboards
+                                                nineKeyStructureReverseLookup()
                                         } else if keyboardLayout.isAmbiguous {
                                                 structureAmbiguouslyReverseLookup()
                                         } else {
@@ -773,6 +773,34 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                                 return firstCandidate.lexicon.mark + String.space + tailText
                                         }()
                                         text2mark = VirtualInputKey.letterR.text + String.space + tailMark
+                                        candidates = suggestions
+                                }
+                        }
+                }
+        }
+
+        /// 拆字反查 using component syllables entered on the nine-key keypad.
+        private func nineKeyStructureReverseLookup() {
+                suggestionTask?.cancel()
+                let combos = pulses.dropFirst().keypadCombos
+                guard combos.isNotEmpty else {
+                        text2mark = VirtualInputKey.letterQ.text
+                        candidates = []
+                        return
+                }
+                let commentForm: RomanizationForm = {
+                        guard Options.commentScene != .noneOfAll else { return .nothing }
+                        return (Options.commentToneStyle == .noTones) ? .toneless : .full
+                }()
+                suggestionTask = Task.detached(priority: .high) { [weak self] in
+                        guard let self else { return }
+                        let segmentation = NineKeySegmenter.segment(combos)
+                        let suggestions = await Engine.structureNineKeyReverseLookup(combos: combos, segmentation: segmentation).transformed(commentForm: commentForm, charset: characterStandard)
+                        if Task.isCancelled.negative {
+                                await MainActor.run { [weak self] in
+                                        guard let self else { return }
+                                        let tailMark = suggestions.first?.lexicon.mark ?? combos.compactMap(\.letters.first).joined()
+                                        text2mark = VirtualInputKey.letterQ.text + String.space + tailMark
                                         candidates = suggestions
                                 }
                         }
