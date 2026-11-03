@@ -230,9 +230,15 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         switch pulses.first {
                         case .none:
                                 updateReverseLookupState(to: false)
-                        case .basic(let event) where event.key.isReverseLookupTrigger:
+                        case .some(let pulse) where pulse.isReverseLookupTrigger:
                                 updateReverseLookupState(to: true)
-                                switch event.key {
+                                let trigger: VirtualInputKey? = switch pulse {
+                                case .basic(let event): event.key
+                                case .ambiguous(let event): event.keys.first
+                                case .combined: nil
+                                }
+                                guard let trigger else { return }
+                                switch trigger {
                                 case .letterR:
                                         updateReverseLookupState(to: true)
                                         if keyboardLayout.isNineKey {
@@ -317,8 +323,13 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         return
                 }
                 inputLengthSequence.append(1)
-                let newEvent = BasicInputEvent(key: key, case: keyboardCase)
-                pulses.append(.basic(newEvent))
+                if keyboardLayout.isAmbiguous {
+                        let newEvent = AmbiguousInputEvent(keys: [key], case: keyboardCase)
+                        pulses.append(.ambiguous(newEvent))
+                } else {
+                        let newEvent = BasicInputEvent(key: key, case: keyboardCase)
+                        pulses.append(.basic(newEvent))
+                }
         }
         private func process(keys: [VirtualInputKey], isCapitalized: Bool) {
                 guard let firstKey = keys.first else { return }
@@ -347,14 +358,14 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         return
                 }
                 let keyCase = keyboardCase
-                let isTrailingLetterW: Bool = switch pulses.last {
+                lazy var isTrailingLetterW: Bool = switch pulses.last {
                 case .basic(let event) where (event.key == .letterW): true
                 default: false
                 }
-                let shouldConvertKeys: Bool = keyboardLayout.isTripleStroke && (keys == VirtualInputKey.GWInputKeys) && (inputLengthSequence.last == 2) && isTrailingLetterW
-                if shouldConvertKeys {
-                        let newEvents = VirtualInputKey.KWInputKeys.map({ AmbiguousInputEvent(keys: [$0], case: keyCase) })
-                        let newPulses = newEvents.map({ InputPulse.ambiguous($0) })
+                let isDoubleTappingKeyGW: Bool = keyboardLayout.isTripleStroke && (keys == VirtualInputKey.GWInputKeys) && (inputLengthSequence.last == 2) && isTrailingLetterW
+                if isDoubleTappingKeyGW {
+                        let newEvents = VirtualInputKey.KWInputKeys.map({ BasicInputEvent(key: $0, case: keyCase) })
+                        let newPulses = newEvents.map({ InputPulse.basic($0) })
                         pulses = pulses.dropLast(2) + newPulses
                 } else {
                         inputLengthSequence.append(keys.count)
