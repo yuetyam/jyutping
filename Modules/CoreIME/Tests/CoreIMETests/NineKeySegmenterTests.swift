@@ -39,9 +39,8 @@ struct NineKeySegmenterTests {
                 expectSegmentationOrder(schemes, length: \.length, count: \.count)
         }
 
-        @Test("nine-key segmenter handles empty and unmatched input")
+        @Test("nine-key segmenter handles empty input")
         func edgeCases() {
                 #expect(NineKeySegmenter.segment([Combo]()).isEmpty)
-                #expect(NineKeySegmenter.segment([.special]).isEmpty)
         }
 }

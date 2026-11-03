@@ -70,6 +70,5 @@ struct EmojiTests {
                 #expect(nineKeySymbols.contains(where: { $0.attached == "好" }))
                 #expect(nineKeySymbols.allSatisfy({ $0.isEmojiOrSymbol }))
                 #expect(Engine.searchSymbols(for: inputKeys("zzzz"), segmentation: []).isEmpty)
-                #expect(Engine.nineKeySearchSymbols(combos: [.special], segmentation: []).isEmpty)
         }
 }

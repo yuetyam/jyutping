@@ -7,8 +7,6 @@ public enum InputPulse: Hashable, Sendable {
         case combined(KeypadCombo)
 }
 
-public typealias KeypadCombo = Combo
-
 public extension Collection where Element == InputPulse {
 
         var basicEvents: [BasicInputEvent] {

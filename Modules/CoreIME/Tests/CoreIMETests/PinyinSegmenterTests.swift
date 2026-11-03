@@ -50,7 +50,6 @@ struct PinyinSegmenterTests {
                 #expect(schemes.first?.combos == combos)
                 expectSegmentationOrder(schemes, length: \.length, count: \.count)
                 #expect(PinyinNineKeySegmenter.segment([Combo]()).isEmpty)
-                #expect(PinyinNineKeySegmenter.segment([.special]).isEmpty)
         }
 
         @Test("nine-key Pinyin syllables decode and hash keypad codes")

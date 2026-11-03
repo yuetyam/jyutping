@@ -20,12 +20,8 @@ struct NineKeyEngineTests {
         func fallbacks() async {
                 let anchors = inputCombos([6, 4])
                 let anchorSuggestions = await NineKeyEngine.suggest(combos: anchors, segmentation: NineKeySegmenter.segment(anchors))
-                let unmatched = [Combo.special]
-
                 #expect(anchorSuggestions.isNotEmpty)
-                let unmatchedSuggestions = await NineKeyEngine.suggest(combos: unmatched, segmentation: [])
                 let emptySuggestions = await NineKeyEngine.suggest(combos: [Combo](), segmentation: [])
-                #expect(unmatchedSuggestions.isEmpty)
                 #expect(emptySuggestions.isEmpty)
         }
 

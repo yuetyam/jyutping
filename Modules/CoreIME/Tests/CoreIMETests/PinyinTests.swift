@@ -48,8 +48,6 @@ struct PinyinTests {
 
                 #expect(suggestions.contains(where: { $0.text == "西安市" && $0.mark == "xi an shi" }))
                 #expect(suggestions.contains(where: { $0.text == "現實" && $0.mark == "xian shi" }))
-                let unmatched = await Engine.pinyinNineKeyReverseLookup(combos: [.special], segmentation: [])
-                #expect(unmatched.isEmpty)
         }
 
         @Test("Pinyin separators cover leading trailing and partial boundaries")

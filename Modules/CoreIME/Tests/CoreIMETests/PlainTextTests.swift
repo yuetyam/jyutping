@@ -22,6 +22,5 @@ struct PlainTextTests {
                 let marks = Engine.queryPlainTexts(for: inputCombos([2, 2, 2]))
 
                 #expect(marks.contains(where: { $0.text == "ABC" && $0.input == "abc" }))
-                #expect(Engine.queryPlainTexts(for: [.special]).isEmpty)
         }
 }

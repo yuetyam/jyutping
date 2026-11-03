@@ -1,7 +1,5 @@
-/// 9-key / T9 keypad element
-public enum Combo: Int, CaseIterable, Sendable {
+public enum KeypadCombo: Int, CaseIterable, Sendable {
 
-        case special = 1
         case ABC  = 2
         case DEF  = 3
         case GHI  = 4
@@ -18,8 +16,7 @@ public enum Combo: Int, CaseIterable, Sendable {
         public var text: String {
                 return Self.textMap[self]!
         }
-        private static let textMap: [Combo: String] = [
-                special: "R",
+        private static let textMap: [KeypadCombo: String] = [
                 ABC : "ABC",
                 DEF : "DEF",
                 GHI : "GHI",
@@ -34,8 +31,7 @@ public enum Combo: Int, CaseIterable, Sendable {
         public var letters: [String] {
                 return Self.letterMap[self]!
         }
-        private static let letterMap: [Combo: [String]] = [
-                special: ["r"],
+        private static let letterMap: [KeypadCombo: [String]] = [
                 ABC : ["a", "b", "c"],
                 DEF : ["d", "e", "f"],
                 GHI : ["g", "h", "i"],
@@ -47,9 +43,11 @@ public enum Combo: Int, CaseIterable, Sendable {
         ]
 }
 
-extension RandomAccessCollection where Element == Combo {
+extension RandomAccessCollection where Element == KeypadCombo {
         /// Combines the decimal digit codes using wrapping arithmetic.
         public var decimalCombinedCode: Int {
                 return reduce(0, { $0 &* 10 &+ $1.digit })
         }
 }
+
+public typealias Combo = KeypadCombo
