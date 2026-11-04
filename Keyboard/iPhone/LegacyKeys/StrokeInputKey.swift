@@ -45,7 +45,7 @@ struct StrokeInputKey: View {
                 let keyColor = colorScheme.inputKeyBackground(style: context.appearanceStyle, isPreviewEnabled: isPreviewEnabled, isInteracting: isTouching)
                 let bubbleColor = colorScheme.bubbleBackground(style: context.appearanceStyle)
                 let displayForm = KeyDisplayForm.responsive(isInteracting: isTouching, isLongPressEngaged: false, isPreviewEnabled: isPreviewEnabled)
-                let shouldShowLowercaseKeys: Bool = Options.showLowercaseKeys && context.keyboardCase.isLowercased
+                let shouldShowLowercaseKeys: Bool = context.isLowercaseKeysPreferred && context.keyboardCase.isLowercased
                 let textCase: Text.Case = shouldShowLowercaseKeys ? .lowercase : .uppercase
                 Button(action: {}) {
                         ZStack {

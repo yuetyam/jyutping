@@ -63,7 +63,7 @@ struct T14InputKey: View {
                 let baseWidth: CGFloat = keyWidth - insets.horizontalTotal
                 let baseHeight: CGFloat = keyHeight - insets.verticalTotal
                 let previewBottomOffset = keyboardInterface.previewBottomOffset(keyWidth: keyWidth, keyHeight: keyHeight, insets: insets)
-                let shouldShowLowercaseKeys: Bool = Options.showLowercaseKeys && context.keyboardCase.isLowercased
+                let shouldShowLowercaseKeys: Bool = context.isLowercaseKeysPreferred && context.keyboardCase.isLowercased
                 let textCase: Text.Case = shouldShowLowercaseKeys ? .lowercase : .uppercase
                 let shouldAdjustKeyTextPosition: Bool = shouldShowLowercaseKeys && context.keyboardForm.isPrimary && (virtual?.isNumber.negative ?? true)
                 let keyTextBottomInset: CGFloat = shouldAdjustKeyTextPosition ? 3 : 0

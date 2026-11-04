@@ -72,7 +72,7 @@ struct GlassSpecialKey: View {
                                         let memberCount: Int = triggers.count
                                         let expansionCount: Int = memberCount - 1
                                         let offsetX: CGFloat = baseWidth * CGFloat(expansionCount)
-                                        let gap: CGFloat = 2
+                                        let gap: CGFloat = 3
                                         Color.clear
                                                 .glassEffect(.regular, in: ExpansiveLargeBubbleShape(side: .leading, expansionCount: expansionCount))
                                                 .overlay {

@@ -26,7 +26,7 @@ struct PadCangjieInputKey: View {
                 let isLandscape: Bool = context.keyboardInterface.isPadLandscape
                 let verticalPadding: CGFloat = isLandscape ? 7 : 5
                 let horizontalPadding: CGFloat = isLandscape ? 7 : 5
-                let shouldShowLowercaseKeys: Bool = Options.showLowercaseKeys && context.keyboardCase.isLowercased
+                let shouldShowLowercaseKeys: Bool = context.isLowercaseKeysPreferred && context.keyboardCase.isLowercased
                 let textCase: Text.Case = shouldShowLowercaseKeys ? .lowercase : .uppercase
                 Button(action: {}) {
                         ZStack {

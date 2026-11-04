@@ -17,8 +17,8 @@ struct SettingsView: View {
         @State private var hapticFeedback: HapticFeedback = HapticFeedback.fetchSavedMode()
         @State private var useKeyPadNumericLayout: Bool = NumericLayout.fetchSavedLayout().isDedicated
         @State private var needsNumberRow: Bool = Options.needsNumberRow
-        @State private var showLowercaseKeys: Bool = Options.showLowercaseKeys
-        @State private var keyTextPreview: Bool = Options.fetchKeyTextPreviewState()
+        @State private var isLowercaseKeysPreferred: Bool = Options.fetchLowercaseKeysState()
+        @State private var isKeyTextPreviewEnabled: Bool = Options.fetchKeyTextPreviewState()
         @State private var keyHeightOffset: CGFloat = Options.fetchKeyHeightOffset()
         @State private var inputKeyStyle: InputKeyStyle = InputKeyStyle.fetchSavedStyle()
         @State private var appearanceStyle: AppearanceStyle = AppearanceStyle.fetchSavedStyle()
@@ -92,13 +92,13 @@ struct SettingsView: View {
                                                                 context.updateNumberRowState(to: isOn)
                                                         }
                                         }
-                                        Toggle("SettingsView.ShowLowercaseKeys.ToggleTitle", isOn: $showLowercaseKeys)
-                                                .onChange(of: showLowercaseKeys) { _, newState in
+                                        Toggle("SettingsView.ShowLowercaseKeys.ToggleTitle", isOn: $isLowercaseKeysPreferred)
+                                                .onChange(of: isLowercaseKeysPreferred) { _, newState in
                                                         context.performAudioFeedback(.modify)
-                                                        Options.updateShowLowercaseKeys(to: newState)
+                                                        context.updateLowercaseKeysState(to: newState)
                                                 }
-                                        Toggle("SettingsView.KeyTextPreview.ToggleTitle", isOn: $keyTextPreview)
-                                                .onChange(of: keyTextPreview) { _, newState in
+                                        Toggle("SettingsView.KeyTextPreview.ToggleTitle", isOn: $isKeyTextPreviewEnabled)
+                                                .onChange(of: isKeyTextPreviewEnabled) { _, newState in
                                                         context.performAudioFeedback(.modify)
                                                         context.updateKeyTextPreview(to: newState)
                                                 }

@@ -23,7 +23,7 @@ struct LargePadInstantInputKey: View {
                 let isLandscape: Bool = context.keyboardInterface.isPadLandscape
                 let verticalPadding: CGFloat = isLandscape ? 5 : 4
                 let horizontalPadding: CGFloat = isLandscape ? 5 : 4
-                let shouldShowLowercaseKeys: Bool = Options.showLowercaseKeys && context.keyboardCase.isLowercased
+                let shouldShowLowercaseKeys: Bool = context.isLowercaseKeysPreferred && context.keyboardCase.isLowercased
                 let textCase: Text.Case = shouldShowLowercaseKeys ? .lowercase : .uppercase
                 Button(action: {}) {
                         ZStack {

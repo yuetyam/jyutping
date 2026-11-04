@@ -14,13 +14,12 @@ struct Options {
                 UserDefaults.standard.set(value, forKey: UserSettingsKey.NumberRow)
         }
 
-        nonisolated(unsafe) private(set) static var showLowercaseKeys: Bool = {
+        static func fetchLowercaseKeysState() -> Bool {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: UserSettingsKey.KeyCase)
                 return savedValue != 2
-        }()
-        static func updateShowLowercaseKeys(to state: Bool) {
-                showLowercaseKeys = state
-                let value: Int = state ? 1 : 2
+        }
+        static func saveLowercaseKeysState(to isOn: Bool) {
+                let value: Int = isOn ? 1 : 2
                 UserDefaults.standard.set(value, forKey: UserSettingsKey.KeyCase)
         }
 

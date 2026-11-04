@@ -92,7 +92,7 @@ struct SpecialKey: View {
                                         let memberCount: Int = triggers.count
                                         let expansionCount: Int = memberCount - 1
                                         let offsetX: CGFloat = baseWidth * CGFloat(expansionCount)
-                                        let gap: CGFloat = 2
+                                        let gap: CGFloat = 3
                                         ExpansiveLargeBubbleShape(side: .leading, expansionCount: expansionCount)
                                                 .fill(colorScheme.bubbleBackground(style: context.appearanceStyle))
                                                 .shadow(color: .shadowGray, radius: 1)

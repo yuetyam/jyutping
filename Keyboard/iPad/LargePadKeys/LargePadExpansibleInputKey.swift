@@ -68,7 +68,7 @@ struct LargePadExpansibleInputKey: View {
                 let baseHeight: CGFloat = keyHeight - insets.verticalTotal
                 let extraHeight: CGFloat = 4
                 let previewBottomOffset: CGFloat = (baseHeight + extraHeight) * 2
-                let shouldShowLowercaseKeys: Bool = Options.showLowercaseKeys && context.keyboardCase.isLowercased
+                let shouldShowLowercaseKeys: Bool = context.isLowercaseKeysPreferred && context.keyboardCase.isLowercased
                 let textCase: Text.Case = shouldShowLowercaseKeys ? .lowercase : .uppercase
                 let interactionDeadline = longPressDeadline
                 Button(action: {}) {

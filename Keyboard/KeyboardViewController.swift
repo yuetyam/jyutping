@@ -1428,6 +1428,12 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 updateViewHeightConstraint()
         }
 
+        @Published private(set) var isLowercaseKeysPreferred: Bool = Options.fetchLowercaseKeysState()
+        func updateLowercaseKeysState(to isOn: Bool) {
+                isLowercaseKeysPreferred = isOn
+                Options.saveLowercaseKeysState(to: isOn)
+        }
+
         @Published private(set) var isKeyTextPreviewEnabled: Bool = Options.fetchKeyTextPreviewState()
         func updateKeyTextPreview(to isOn: Bool) {
                 isKeyTextPreviewEnabled = isOn
