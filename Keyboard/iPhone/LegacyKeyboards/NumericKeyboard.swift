@@ -10,7 +10,7 @@ struct NumericKeyboard: View {
         var body: some View {
                 VStack(spacing: 0) {
                         ToolBar()
-                        if Options.needsNumberRow {
+                        if context.needsNumberRow {
                                 ABCNumberRow()
                         }
                         ABCNumberRow()

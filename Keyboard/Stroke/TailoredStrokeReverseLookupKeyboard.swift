@@ -7,11 +7,13 @@ import CoreIME
 /// Arranges the stroke keys in two rows of three, with disabled placeholders preserving the surrounding layout.
 struct TailoredStrokeReverseLookupKeyboard: View {
 
+        @EnvironmentObject private var context: KeyboardViewController
+
         /// Renders the candidate bar, optional number row, stroke grid, space key, and trailing backspace and return keys.
         var body: some View {
                 VStack(spacing: 0) {
                         CandidateBar()
-                        if Options.needsNumberRow {
+                        if context.needsNumberRow {
                                 CantoneseNumberRow()
                         }
                         HStack(spacing: 0) {

@@ -10,7 +10,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 adoptKeyboardInterface(screenSize: screenSize)
                 updateTopBarHeight()
                 let rowHeight: CGFloat = keyboardInterface.keyHeightUnit(of: screenSize) + keyHeightOffset
-                let rowCount: CGFloat = (keyboardInterface.isLargePad || Options.needsNumberRow) ? 5 : 4
+                let rowCount: CGFloat = (keyboardInterface.isLargePad || needsNumberRow) ? 5 : 4
                 keyboardHeight = (rowHeight * rowCount) + topBarHeight
                 view.subviews.forEach({ $0.removeFromSuperview() })
                 children.forEach({ $0.removeFromParent() })
@@ -1315,7 +1315,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
 
                 let baseHeight = keyboardInterface.keyHeightUnit(of: screenSize)
                 heightUnit = baseHeight + keyHeightOffset
-                let rowCount: CGFloat = (keyboardInterface.isLargePad || Options.needsNumberRow) ? 5 : 4
+                let rowCount: CGFloat = (keyboardInterface.isLargePad || needsNumberRow) ? 5 : 4
                 keyboardHeight = (heightUnit * rowCount) + topBarHeight
                 cachedKeyboardHeight = keyboardHeight
                 updateViewHeightConstraint()
@@ -1422,8 +1422,10 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 UserDefaults.standard.set(value, forKey: UserSettingsKey.StrokeLayout)
         }
 
+        @Published private(set) var needsNumberRow: Bool = Options.fetchNumberRowState()
         func updateNumberRowState(to isOn: Bool) {
-                Options.updateNumberRowState(to: isOn)
+                needsNumberRow = isOn
+                Options.saveNumberRowState(to: isOn)
                 updateKeyboardSize()
                 updateViewHeightConstraint()
         }
@@ -1447,7 +1449,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let screenSize: CGSize = fetchAvailableSize()
                 let baseHeight = keyboardInterface.keyHeightUnit(of: screenSize)
                 heightUnit = baseHeight + offset
-                let rowCount: CGFloat = (keyboardInterface.isLargePad || Options.needsNumberRow) ? 5 : 4
+                let rowCount: CGFloat = (keyboardInterface.isLargePad || needsNumberRow) ? 5 : 4
                 keyboardHeight = (heightUnit * rowCount) + topBarHeight
                 cachedKeyboardHeight = keyboardHeight
                 updateViewHeightConstraint()

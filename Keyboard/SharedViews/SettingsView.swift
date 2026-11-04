@@ -16,7 +16,7 @@ struct SettingsView: View {
         @State private var isAudioFeedbackOn: Bool = AudioFeedback.fetchSavedState()
         @State private var hapticFeedback: HapticFeedback = HapticFeedback.fetchSavedMode()
         @State private var useKeyPadNumericLayout: Bool = NumericLayout.fetchSavedLayout().isDedicated
-        @State private var needsNumberRow: Bool = Options.needsNumberRow
+        @State private var needsNumberRow: Bool = Options.fetchNumberRowState()
         @State private var isLowercaseKeysPreferred: Bool = Options.fetchLowercaseKeysState()
         @State private var isKeyTextPreviewEnabled: Bool = Options.fetchKeyTextPreviewState()
         @State private var keyHeightOffset: CGFloat = Options.fetchKeyHeightOffset()
@@ -87,9 +87,9 @@ struct SettingsView: View {
                                                                 context.updateNumericLayout(to: newLayout)
                                                         }
                                                 Toggle("SettingsView.NumberRow.ToggleTitle", isOn: $needsNumberRow)
-                                                        .onChange(of: needsNumberRow) { _, isOn in
+                                                        .onChange(of: needsNumberRow) { _, newState in
                                                                 context.performAudioFeedback(.modify)
-                                                                context.updateNumberRowState(to: isOn)
+                                                                context.updateNumberRowState(to: newState)
                                                         }
                                         }
                                         Toggle("SettingsView.ShowLowercaseKeys.ToggleTitle", isOn: $isLowercaseKeysPreferred)

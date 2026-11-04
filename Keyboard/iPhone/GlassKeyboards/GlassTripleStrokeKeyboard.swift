@@ -13,7 +13,7 @@ struct GlassTripleStrokeKeyboard: View {
                         } else {
                                 ToolBar()
                         }
-                        if Options.needsNumberRow {
+                        if context.needsNumberRow {
                                 CantoneseGlassNumberRow()
                         }
                         switch context.inputKeyStyle {

@@ -12,7 +12,7 @@ struct FifteenKeyKeyboard: View {
                         } else {
                                 ToolBar()
                         }
-                        if Options.needsNumberRow {
+                        if context.needsNumberRow {
                                 CantoneseNumberRow()
                         }
                         switch context.inputKeyStyle {

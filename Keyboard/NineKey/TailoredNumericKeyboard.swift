@@ -8,7 +8,7 @@ struct GlassTailoredNumericKeyboard: View {
         var body: some View {
                 VStack(spacing: 0) {
                         ToolBar()
-                        if Options.needsNumberRow {
+                        if context.needsNumberRow {
                                 if context.inputMethodMode.isABC {
                                         ABCGlassNumberRow()
                                 } else {
@@ -59,7 +59,7 @@ struct TailoredNumericKeyboard: View {
         var body: some View {
                 VStack(spacing: 0) {
                         ToolBar()
-                        if Options.needsNumberRow {
+                        if context.needsNumberRow {
                                 if context.inputMethodMode.isABC {
                                         ABCNumberRow()
                                 } else {

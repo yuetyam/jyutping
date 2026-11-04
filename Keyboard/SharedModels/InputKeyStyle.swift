@@ -2,7 +2,7 @@ import Foundation
 
 /// Controls the extra digit and symbol alternatives offered by supported letter keys.
 ///
-/// This setting is independent of the optional number row controlled by `Options.needsNumberRow`.
+/// This setting is independent of the optional number row controlled by `KeyboardViewController.needsNumberRow`.
 /// The selected style is persisted as an integer under `UserSettingsKey.InputKeyStyle`.
 enum InputKeyStyle: Int, CaseIterable {
 

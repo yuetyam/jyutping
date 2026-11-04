@@ -13,7 +13,7 @@ struct GlassNineKeyKeyboard: View {
                         } else {
                                 ToolBar()
                         }
-                        if Options.needsNumberRow {
+                        if context.needsNumberRow {
                                 CantoneseGlassNumberRow()
                         }
                         HStack(spacing: 0) {

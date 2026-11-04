@@ -9,7 +9,7 @@ struct GlassPinyinKeyboard: View {
         var body: some View {
                 VStack(spacing: 0) {
                         CandidateBar()
-                        if Options.needsNumberRow {
+                        if context.needsNumberRow {
                                 CantoneseGlassNumberRow()
                         }
                         HStack(spacing: 0) {

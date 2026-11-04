@@ -4,12 +4,11 @@ import CommonExtensions
 
 struct Options {
 
-        nonisolated(unsafe) private(set) static var needsNumberRow: Bool = {
+        static func fetchNumberRowState() -> Bool {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: UserSettingsKey.NumberRow)
                 return savedValue == 1
-        }()
-        static func updateNumberRowState(to isOn: Bool) {
-                needsNumberRow = isOn
+        }
+        static func saveNumberRowState(to isOn: Bool) {
                 let value: Int = isOn ? 1 : 2
                 UserDefaults.standard.set(value, forKey: UserSettingsKey.NumberRow)
         }

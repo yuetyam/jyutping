@@ -11,7 +11,7 @@ struct NineKeyKeyboard: View {
                         } else {
                                 ToolBar()
                         }
-                        if Options.needsNumberRow {
+                        if context.needsNumberRow {
                                 CantoneseNumberRow()
                         }
                         HStack(spacing: 0) {

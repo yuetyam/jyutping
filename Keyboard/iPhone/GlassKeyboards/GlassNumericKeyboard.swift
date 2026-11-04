@@ -6,10 +6,11 @@ import CommonExtensions
 @available(iOS 26.0, *)
 @available(iOSApplicationExtension 26.0, *)
 struct GlassNumericKeyboard: View {
+        @EnvironmentObject private var context: KeyboardViewController
         var body: some View {
                 VStack(spacing: 0) {
                         ToolBar()
-                        if Options.needsNumberRow {
+                        if context.needsNumberRow {
                                 ABCGlassNumberRow()
                         }
                         ABCGlassNumberRow()

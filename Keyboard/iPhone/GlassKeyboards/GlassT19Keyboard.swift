@@ -13,7 +13,7 @@ struct GlassT19Keyboard: View {
                         } else {
                                 ToolBar()
                         }
-                        if Options.needsNumberRow {
+                        if context.needsNumberRow {
                                 CantoneseGlassNumberRow()
                         }
                         switch context.inputKeyStyle {

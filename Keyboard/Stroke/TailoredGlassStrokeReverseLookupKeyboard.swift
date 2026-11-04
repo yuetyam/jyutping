@@ -9,11 +9,13 @@ import CommonExtensions
 @available(iOSApplicationExtension 26.0, *)
 struct TailoredGlassStrokeReverseLookupKeyboard: View {
 
+        @EnvironmentObject private var context: KeyboardViewController
+
         /// Renders the candidate bar, optional glass number row, stroke grid, space key, and trailing backspace and return keys.
         var body: some View {
                 VStack(spacing: 0) {
                         CandidateBar()
-                        if Options.needsNumberRow {
+                        if context.needsNumberRow {
                                 CantoneseGlassNumberRow()
                         }
                         HStack(spacing: 0) {
