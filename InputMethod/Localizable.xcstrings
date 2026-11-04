@@ -584,55 +584,55 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "QQ 交流羣"
+            "value" : "QQ 交流群"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "QQ 交流羣"
+            "value" : "QQ 交流群"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "QQ 交流羣"
+            "value" : "QQ 交流群"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "QQ 交流羣"
+            "value" : "QQ 交流群"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "QQ 交流羣"
+            "value" : "QQ 交流群"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "QQ 交流羣"
+            "value" : "QQ 交流群"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "QQ 交流羣"
+            "value" : "QQ 交流群"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "QQ 交流羣"
+            "value" : "QQ 交流群"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "QQ 交流羣"
+            "value" : "QQ 交流群"
           }
         }
       }
@@ -902,55 +902,55 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Telegram 交流羣"
+            "value" : "Telegram 交流群"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Telegram 交流羣"
+            "value" : "Telegram 交流群"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Telegram 交流羣"
+            "value" : "Telegram 交流群"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Telegram 交流羣"
+            "value" : "Telegram 交流群"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Telegram 交流羣"
+            "value" : "Telegram 交流群"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Telegram 交流羣"
+            "value" : "Telegram 交流群"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Telegram 交流羣"
+            "value" : "Telegram 交流群"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Telegram 交流羣"
+            "value" : "Telegram 交流群"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Telegram 交流羣"
+            "value" : "Telegram 交流群"
           }
         }
       }
@@ -1163,112 +1163,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Threads"
-          }
-        }
-      }
-    },
-    "AboutView.Twitter" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "X (Twitter)"
-          }
-        },
-        "en-AU" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "X (Twitter)"
-          }
-        },
-        "en-CA" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "X (Twitter)"
-          }
-        },
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "X (Twitter)"
-          }
-        },
-        "en-NZ" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "X (Twitter)"
-          }
-        },
-        "en-US" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "X (Twitter)"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "X (Twitter)"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "X (旧Twitter)"
-          }
-        },
-        "yue" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "X (Twitter)"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "X (Twitter)"
-          }
-        },
-        "zh-Hans-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "X (Twitter)"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "X (Twitter)"
-          }
-        },
-        "zh-Hant-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "X (Twitter)"
-          }
-        },
-        "zh-Hant-HK" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "X (Twitter)"
-          }
-        },
-        "zh-Hant-MO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "X (Twitter)"
-          }
-        },
-        "zh-Hant-TW" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "X (Twitter)"
-          }
-        },
-        "zh-HK" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "X (Twitter)"
           }
         }
       }

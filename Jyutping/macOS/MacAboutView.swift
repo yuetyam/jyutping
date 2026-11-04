@@ -32,7 +32,6 @@ struct MacAboutView: View {
                                         LinkLabel(icon: "book", title: "Shared.About.RedNote", link: About.RedNoteAddress)
                                         LinkLabel(icon: "circle.square", title: "Shared.About.Instagram", link: About.InstagramAddress)
                                         LinkLabel(icon: "at", title: "Shared.About.Threads", link: About.ThreadsAddress)
-                                        LinkLabel(icon: "at", title: "Shared.About.Twitter", link: About.TwitterAddress)
                                 }
                                 .block()
                                 VStack {

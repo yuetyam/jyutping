@@ -32,7 +32,6 @@ struct AboutView: View {
                                         LinkLabel(icon: "book", title: "AboutView.RedNote", link: About.RedNoteAddress)
                                         LinkLabel(icon: "circle.square", title: "AboutView.Instagram", link: About.InstagramAddress)
                                         LinkLabel(icon: "at", title: "AboutView.Threads", link: About.ThreadsAddress)
-                                        LinkLabel(icon: "at", title: "AboutView.Twitter", link: About.TwitterAddress)
                                 }
                                 .block()
 

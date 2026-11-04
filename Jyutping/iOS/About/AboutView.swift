@@ -87,15 +87,6 @@ struct AboutView: View {
                                                 UsernameCopyButton(About.ThreadsUsername)
                                                 URLCopyButton(About.ThreadsAddress)
                                         }
-
-                                        // Twitter App supports Universal Links
-                                        Link(destination: URL(string: About.TwitterAddress)!) {
-                                                EnhancedLabel("Shared.About.Twitter", icon: "at", symbol: .arrowUpForward)
-                                        }
-                                        .contextMenu {
-                                                UsernameCopyButton(About.TwitterUsername)
-                                                URLCopyButton(About.TwitterAddress)
-                                        }
                                 }
                                 Section {
                                         Link(destination: URL(string: About.GoogleFormsAddress)!) {
