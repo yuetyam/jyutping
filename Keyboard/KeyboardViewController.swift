@@ -971,7 +971,6 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 guard Options.commentScene != .noneOfAll else { return .nothing }
                                 return (Options.commentToneStyle == .noTones) ? .toneless : .full
                         }()
-                        let cangjieVariant = Options.cangjieVariant
                         let isEnglishSuggestionsOn: Bool = Options.isEnglishSuggestionsOn
                         suggestionTask = Task.detached(priority: .high) { [weak self] in
                                 guard let self else { return }
@@ -1471,6 +1470,12 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         func updateAppearanceStyle(to style: AppearanceStyle) {
                 appearanceStyle = style
                 AppearanceStyle.save(style: style)
+        }
+
+        @Published private(set) var cangjieVariant: CangjieVariant = Options.fetchCangjieVariant()
+        func updateCangjieVariant(to variant: CangjieVariant) {
+                cangjieVariant = variant
+                Options.saveCangjieVariant(to: variant)
         }
 
 

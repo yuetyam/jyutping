@@ -83,7 +83,7 @@ struct GlassSpecialKey: View {
                                                                                         .fill((selectedIndex == index) ? Color.accentColor : Color.clear)
                                                                                 VStack(spacing: 0) {
                                                                                         Text(verbatim: trigger.text).textCase(.uppercase).font(.title2)
-                                                                                        Text(verbatim: trigger.lookupFootnote(Options.cangjieVariant)).font(.labelCaption).shallow()
+                                                                                        Text(verbatim: trigger.lookupFootnote(context.cangjieVariant)).font(.labelCaption).shallow()
                                                                                 }
                                                                         }
                                                                         .foregroundStyle((selectedIndex == index) ? Color.white : Color.primary)

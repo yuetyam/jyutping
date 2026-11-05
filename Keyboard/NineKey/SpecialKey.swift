@@ -106,7 +106,7 @@ struct SpecialKey: View {
                                                                                         .fill(isSelected ? Color.accentColor : Color.clear)
                                                                                 VStack(spacing: 0) {
                                                                                         Text(verbatim: element.text).textCase(.uppercase).font(.title2)
-                                                                                        Text(verbatim: element.lookupFootnote(Options.cangjieVariant)).font(.labelCaption).shallow()
+                                                                                        Text(verbatim: element.lookupFootnote(context.cangjieVariant)).font(.labelCaption).shallow()
                                                                                 }
                                                                         }
                                                                         .foregroundStyle(isSelected ? Color.white : Color.primary)

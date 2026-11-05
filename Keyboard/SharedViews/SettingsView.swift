@@ -28,7 +28,7 @@ struct SettingsView: View {
         @State private var commentToneStyle: CommentToneStyle = Options.commentToneStyle
         @State private var traditionalCharacterStandard: CharacterStandard = Options.traditionalCharacterStandard
         @State private var useDedicatedStrokeLayout: Bool = StrokeLayout.fetchSavedLayout().isDedicated
-        @State private var cangjieVariant: CangjieVariant = Options.cangjieVariant
+        @State private var cangjieVariant: CangjieVariant = Options.fetchCangjieVariant()
         @State private var isEmojiSuggestionsOn: Bool = Options.isEmojiSuggestionsOn
         @State private var isEnglishSuggestionsOn: Bool = Options.isEnglishSuggestionsOn
         @State private var isTextReplacementsOn: Bool = Options.isTextReplacementsOn
@@ -288,10 +288,10 @@ struct SettingsView: View {
                                         .pickerStyle(.segmented)
                                         .labelsHidden()
                                         .fixedSize()
-                                        .onChange(of: cangjieVariant) { _, newVariant in
+                                        .onChange(of: cangjieVariant) { _, newOption in
                                                 context.performAudioFeedback(.modify)
                                                 context.triggerSelectionHapticFeedback()
-                                                Options.updateCangjieVariant(to: newVariant)
+                                                context.updateCangjieVariant(to: newOption)
                                         }
                                 } header: {
                                         Text("SettingsView.CangjieVariant.PickerTitle").textCase(nil)

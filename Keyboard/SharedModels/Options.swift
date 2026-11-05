@@ -76,12 +76,11 @@ struct Options {
                 UserDefaults.standard.set(value, forKey: UserSettingsKey.TraditionalCharacterStandard)
         }
 
-        nonisolated(unsafe) private(set) static var cangjieVariant: CangjieVariant = {
+        static func fetchCangjieVariant() -> CangjieVariant {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: UserSettingsKey.CangjieVariant)
                 return CangjieVariant.variant(of: savedValue)
-        }()
-        static func updateCangjieVariant(to variant: CangjieVariant) {
-                cangjieVariant = variant
+        }
+        static func saveCangjieVariant(to variant: CangjieVariant) {
                 let value: Int = variant.rawValue
                 UserDefaults.standard.set(value, forKey: UserSettingsKey.CangjieVariant)
         }
