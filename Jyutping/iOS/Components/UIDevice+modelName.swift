@@ -14,9 +14,6 @@ extension UIDevice {
                         return identifier + String(UnicodeScalar(UInt8(value)))
                 }
                 switch identifier {
-                case "iPhone10,1", "iPhone10,4":    return "iPhone 8"
-                case "iPhone10,2", "iPhone10,5":    return "iPhone 8 Plus"
-                case "iPhone10,3", "iPhone10,6":    return "iPhone X"
                 case "iPhone11,2":                  return "iPhone XS"
                 case "iPhone11,4", "iPhone11,6":    return "iPhone XS Max"
                 case "iPhone11,8":                  return "iPhone XR"
@@ -55,7 +52,6 @@ extension UIDevice {
                 case "iPhone19,3", "iPhone19,7":    return "iPhone 18 Pro Max"
                 case "iPhone19,4":                  return "iPhone Duo"
 
-                case "iPad6,11", "iPad6,12":        return "iPad (5th generation)"
                 case "iPad7,5", "iPad7,6":          return "iPad (6th generation)"
                 case "iPad7,11", "iPad7,12":        return "iPad (7th generation)"
                 case "iPad11,6", "iPad11,7":        return "iPad (8th generation)"
@@ -73,16 +69,17 @@ extension UIDevice {
                 case "iPad11,1", "iPad11,2":        return "iPad mini (5th generation)"
                 case "iPad14,1", "iPad14,2":        return "iPad mini (6th generation)"
                 case "iPad16,1", "iPad16,2":        return "iPad mini (A17 Pro)"
+                case "iPad19,1", "iPad19,2":        return "iPad mini (A20 Pro)"
 
-                case "iPad6,3", "iPad6,4":          return "iPad Pro 9.7-inch"
                 case "iPad7,3", "iPad7,4":          return "iPad Pro 10.5-inch"
+
                 case "iPad8,1", "iPad8,2",
                      "iPad8,3", "iPad8,4":          return "iPad Pro 11-inch (1st generation)"
                 case "iPad8,9", "iPad8,10":         return "iPad Pro 11-inch (2nd generation)"
                 case "iPad13,4", "iPad13,5",
                      "iPad13,6", "iPad13,7":        return "iPad Pro 11-inch (3rd generation)"
                 case "iPad14,3", "iPad14,4":        return "iPad Pro 11-inch (4th generation)"
-                case "iPad6,7", "iPad6,8":          return "iPad Pro 12.9-inch (1st generation)"
+
                 case "iPad7,1", "iPad7,2":          return "iPad Pro 12.9-inch (2nd generation)"
                 case "iPad8,5", "iPad8,6",
                      "iPad8,7", "iPad8,8":          return "iPad Pro 12.9-inch (3rd generation)"
