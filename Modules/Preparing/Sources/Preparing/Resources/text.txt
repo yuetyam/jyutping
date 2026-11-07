@@ -1003,6 +1003,7 @@ wifi	🛜
 wlan	🛜
 wc	WC
 wc	🚾
+zzz	😴
 tm	™
 sm	℠
 command	Command
@@ -14845,7 +14846,6 @@ insisting	insisting
 intricate	intricate
 irvine	irvine
 jensen	jensen
-kang	kang
 kara	kara
 karate	karate
 kingdoms	kingdoms
